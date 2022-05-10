@@ -9,12 +9,12 @@ import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.wood_good.modules.CompatModule;
 import net.mehvahdjukaar.wood_good.modules.deco_block.DecoBlocksModule;
 import net.mehvahdjukaar.wood_good.modules.quark.QuarkModule;
+import net.mehvahdjukaar.wood_good.modules.twigs.TwigsModule;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -50,15 +50,16 @@ public class WoodGood {
 
     public static final List<String> COMPETITOR_MODS = new ArrayList<>();
 
-    public static void forAllModules(Consumer<CompatModule> action){
+    public static void forAllModules(Consumer<CompatModule> action) {
         ACTIVE_MODULES.forEach(action);
     }
 
     public WoodGood() {
 
-        addCompetitorMods("much_more_mod_compat");
+        addCompetitorMods("much_more_mod_compat", "compatoplenty");
 
         addModule("decorative_blocks", DecoBlocksModule::new);
+        addModule("twigs", TwigsModule::new);
         addModule("quark", QuarkModule::new);
 
         BlockSetManager.addBlockSetRegistrationCallback(this::registerWoodStuff, Block.class, WoodType.class);
@@ -82,10 +83,9 @@ public class WoodGood {
     }
 
 
-
-    private void addCompetitorMods(String ...mods) {
-        Arrays.stream(mods).forEach(m->{
-            if(ModList.get().isLoaded(m)) COMPETITOR_MODS.add(m);
+    private void addCompetitorMods(String... mods) {
+        Arrays.stream(mods).forEach(m -> {
+            if (ModList.get().isLoaded(m)) COMPETITOR_MODS.add(m);
         });
     }
 

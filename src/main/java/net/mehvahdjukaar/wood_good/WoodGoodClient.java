@@ -18,7 +18,7 @@ public class WoodGoodClient {
 
     @SubscribeEvent
     public static void init(final FMLClientSetupEvent event) {
-
+        WoodGood.forAllModules(m->m.onClientSetup(event));
     }
 
     @SubscribeEvent

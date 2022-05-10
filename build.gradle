@@ -138,6 +138,12 @@ dependencies {
     implementation fg.deobf("curse.maven:quark-243121:3708587")
     implementation fg.deobf("curse.maven:autoreglib-250363:3642382")
     implementation fg.deobf("curse.maven:decorativeblocks-362528:3681919")
+    implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
+    implementation fg.deobf("curse.maven:twigs-496913:3756844")
+    implementation fg.deobf("curse.maven:malum-484064:3768401")
+    implementation fg.deobf("curse.maven:curios-309927:3670447")
+    implementation fg.deobf("curse.maven:configured-457570:3640884")
+    implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
 
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
 }

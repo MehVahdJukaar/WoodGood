@@ -2,6 +2,7 @@ package net.mehvahdjukaar.wood_good.modules;
 
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.resourcepack.StaticResource;
 import net.mehvahdjukaar.selene.resourcepack.asset_generators.LangBuilder;
 import net.mehvahdjukaar.wood_good.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
@@ -15,7 +16,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 
 public abstract class CompatModule {
@@ -26,12 +32,16 @@ public abstract class CompatModule {
         this.modId = modId;
     }
 
+    public String getModId() {
+        return modId;
+    }
+
     @Override
     public String toString() {
         return "GoodWood " + modId + " Module";
     }
 
-    public ResourceLocation modRes(String string){
+    public ResourceLocation modRes(String string) {
         return new ResourceLocation(modId, string);
     }
 
@@ -70,6 +80,8 @@ public abstract class CompatModule {
     }
 
     protected final boolean shouldRegisterEntry(String name, IForgeRegistry<?> registry) {
+        //discards one from this mod
+        if (name.startsWith(modId + "/")) return false;
         return !registry.containsKey(new ResourceLocation(modId, name));
     }
 
@@ -92,5 +104,45 @@ public abstract class CompatModule {
 
     }
 
+
+    //utility functions
+
+    @FunctionalInterface
+    protected interface IdModifier extends BiFunction<String, String, String> {
+        @Override
+        String apply(String original, String id);
+    }
+
+    protected final void addBlockResources(ResourceManager manager, ClientDynamicResourcesHandler handler,
+                                           Map<WoodType, Block> blocks,
+                                           IdModifier textTransform,
+                                           IdModifier pathTransform,
+                                           ResourceLocation... jsonsLocations) {
+        List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
+
+        blocks.forEach((wood, value) -> {
+            String id = value.getRegistryName().getPath();
+            for (var res : original) {
+                try {
+
+                    handler.dynamicPack.addSimilarJsonResource(res,
+                            s -> textTransform.apply(s, id),
+                            s -> pathTransform.apply(s, id)
+                    );
+                } catch (Exception e) {
+                    handler.getLogger().error("Failed to generate model from {}", res.location);
+                }
+            }
+        });
+    }
+
+    protected final void addBlockResources(ResourceManager manager, ClientDynamicResourcesHandler handler,
+                                           Map<WoodType, Block> blocks, String defaultName, ResourceLocation... jsonsLocations) {
+        addBlockResources(manager, handler, blocks,
+
+                (s, id) -> s.replace(modId + ":block/" + defaultName, "wood_good:block/" + id),
+                (s, id) -> s.replace(defaultName, id),
+                jsonsLocations);
+    }
 
 }

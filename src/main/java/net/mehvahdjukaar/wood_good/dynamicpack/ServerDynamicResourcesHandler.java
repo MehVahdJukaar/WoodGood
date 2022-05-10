@@ -2,15 +2,23 @@ package net.mehvahdjukaar.wood_good.dynamicpack;
 
 import net.mehvahdjukaar.selene.resourcepack.DynamicDataPack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicDataProvider;
+import net.mehvahdjukaar.selene.resourcepack.StaticResource;
 import net.mehvahdjukaar.wood_good.WoodGood;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
+
+import java.nio.charset.StandardCharsets;
+import java.util.NoSuchElementException;
+import java.util.function.Function;
 
 public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
 
     public ServerDynamicResourcesHandler() {
         super(new DynamicDataPack(WoodGood.res("generated_pack")));
         this.dynamicPack.generateDebugResources = true;
+        //needed for tags
+        WoodGood.forAllModules(m->getPack().addNamespaces(m.getModId()));
     }
 
     @Override
@@ -46,5 +54,7 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
             }
         });
     }
+
+
 
 }
