@@ -1,0 +1,16 @@
+
+{
+  "minVersion": "0.8",
+  "required": true,
+  "compatibilityLevel": "JAVA_16",
+  "refmap": "wood_good.refmap.json",
+  "package": "net.mehvahdjukaar.wood_good.mixins",
+  "mixins": [
+
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
