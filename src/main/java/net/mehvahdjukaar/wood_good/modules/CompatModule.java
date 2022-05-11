@@ -12,6 +12,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -36,6 +37,8 @@ public abstract class CompatModule {
         return modId;
     }
 
+    public abstract String shortenedId();
+
     @Override
     public String toString() {
         return "GoodWood " + modId + " Module";
@@ -43,6 +46,10 @@ public abstract class CompatModule {
 
     public ResourceLocation modRes(String string) {
         return new ResourceLocation(modId, string);
+    }
+
+    public String makeBlockId(WoodType type, String blockName) {
+        return this.shortenedId() + "/" + type.getVariantId(blockName, false);
     }
 
     public void onModSetup(FMLCommonSetupEvent event) {
@@ -79,10 +86,16 @@ public abstract class CompatModule {
 
     }
 
+    public void registerTileRenderers(IForgeRegistry<EntityType<?>> registry) {
+
+    }
+
     protected final boolean shouldRegisterEntry(String name, IForgeRegistry<?> registry) {
         //discards one from this mod
         if (name.startsWith(modId + "/")) return false;
-        return !registry.containsKey(new ResourceLocation(modId, name));
+        String name2 = name.replace(this.shortenedId()+"/","").replace("/", "_");
+        return !registry.containsKey(new ResourceLocation(modId, name)) &&
+                !registry.containsKey(new ResourceLocation(modId, name2));
     }
 
     //resource pack stuff
@@ -103,6 +116,10 @@ public abstract class CompatModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
 
     }
+
+    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event){
+
+    };
 
 
     //utility functions

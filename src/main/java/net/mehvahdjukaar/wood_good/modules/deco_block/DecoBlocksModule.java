@@ -8,7 +8,6 @@ import lilypuree.decorative_blocks.items.SupportItem;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.selene.resourcepack.StaticResource;
 import net.mehvahdjukaar.selene.resourcepack.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.Respriter;
@@ -27,8 +26,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 public class DecoBlocksModule extends CompatModule {
 
@@ -36,23 +33,28 @@ public class DecoBlocksModule extends CompatModule {
         super(modId);
     }
 
+    @Override
+    public String shortenedId() {
+        return "db";
+    }
+
     private final Map<WoodType, DBWoodType> DB_WOOD_TYPES = new HashMap<>();
 
-    private static final String PALISADE_NAME = "palisade";
-    public Map<WoodType, Block> PALISADES = new HashMap<>();
-    public Map<WoodType, Item> PALISADE_ITEMS = new HashMap<>();
+    public static final String PALISADE_NAME = "palisade";
+    public static final Map<WoodType, Block> PALISADES = new HashMap<>();
+    public static final Map<WoodType, Item> PALISADE_ITEMS = new HashMap<>();
 
-    private static final String BEAM_NAME = "beam";
-    public Map<WoodType, Block> BEAMS = new HashMap<>();
-    public Map<WoodType, Item> BEAM_ITEMS = new HashMap<>();
+    public static final String BEAM_NAME = "beam";
+    public static final Map<WoodType, Block> BEAMS = new HashMap<>();
+    public static final Map<WoodType, Item> BEAM_ITEMS = new HashMap<>();
 
-    private static final String SUPPORT_NAME = "support";
-    public Map<WoodType, Block> SUPPORTS = new HashMap<>();
-    public Map<WoodType, Item> SUPPORTS_ITEMS = new HashMap<>();
+    public static final String SUPPORT_NAME = "support";
+    public static final Map<WoodType, Block> SUPPORTS = new HashMap<>();
+    public static final Map<WoodType, Item> SUPPORTS_ITEMS = new HashMap<>();
 
-    private static final String SEAT_NAME = "seat";
-    public Map<WoodType, Block> SEATS = new HashMap<>();
-    public Map<WoodType, Item> SEAT_ITEMS = new HashMap<>();
+    public static final String SEAT_NAME = "seat";
+    public static final Map<WoodType, Block> SEATS = new HashMap<>();
+    public static final Map<WoodType, Item> SEAT_ITEMS = new HashMap<>();
 
     @Override
     public void registerWoodBlocks(IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
@@ -60,7 +62,7 @@ public class DecoBlocksModule extends CompatModule {
 
         //beams
         for (WoodType w : woodTypes) {
-            String name = w.getVariantId(BEAM_NAME, false);
+            String name = makeBlockId(w, BEAM_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
@@ -70,7 +72,7 @@ public class DecoBlocksModule extends CompatModule {
         }
         //palisades
         for (WoodType w : woodTypes) {
-            String name = w.getVariantId(PALISADE_NAME, false);
+            String name = makeBlockId(w, PALISADE_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
@@ -80,7 +82,7 @@ public class DecoBlocksModule extends CompatModule {
         }
         //supports
         for (WoodType w : woodTypes) {
-            String name = w.getVariantId(SUPPORT_NAME, false);
+            String name = makeBlockId(w, SUPPORT_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
@@ -90,7 +92,7 @@ public class DecoBlocksModule extends CompatModule {
         }
         //seats
         for (WoodType w : woodTypes) {
-            String name = w.getVariantId(SEAT_NAME, false);
+            String name = makeBlockId(w, SEAT_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
@@ -152,7 +154,7 @@ public class DecoBlocksModule extends CompatModule {
         pack.addTag(modRes("supports"), supports, Registry.ITEM_REGISTRY);
 
         List<ResourceLocation> seats = new ArrayList<>();
-        SUPPORTS.forEach((wood, value) -> {
+        SEATS.forEach((wood, value) -> {
             pack.addSimpleBlockLootTable(value);
             seats.add(value.getRegistryName());
         });
@@ -188,11 +190,11 @@ public class DecoBlocksModule extends CompatModule {
         SUPPORTS.forEach((w, v) -> langBuilder.addEntry(v, w.getNameForTranslation(SUPPORT_NAME)));
 
         this.addBlockResources(manager, handler, SUPPORTS,
-                (s, id) -> s.replace("decorative_blocks:block/","wood_good:block/")
+                (s, id) -> s.replace("decorative_blocks:block/", "wood_good:block/")
                         .replace("oak_support", id)
                         .replace("oak_upside_down_support",
-                        id.replace("support", "upside_down_support")),
-                (s, id) -> s.replace("oak_support",  id),
+                                id.replace("support", "upside_down_support")),
+                (s, id) -> s.replace("oak_support", id),
                 ResType.ITEM_MODELS.getPath(modRes("oak_support")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_big")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_small")),

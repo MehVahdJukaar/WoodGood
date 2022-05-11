@@ -25,7 +25,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.moddingplayground.twigs.Twigs;
 import net.moddingplayground.twigs.block.TableBlock;
+import net.moddingplayground.twigs.init.TwigsBlocks;
+import net.moddingplayground.twigs.init.TwigsItems;
 import vazkii.quark.content.building.module.WoodenPostsModule;
 
 import java.util.*;
@@ -36,16 +39,21 @@ public class TwigsModule extends CompatModule {
         super(modId);
     }
 
-    private static final String TABLE_NAME = "table";
-    public Map<WoodType, Block> TABLES = new HashMap<>();
-    public Map<WoodType, Item> TABLE_TIMES = new HashMap<>();
+    @Override
+    public String shortenedId() {
+        return "tw";
+    }
+
+    public static final String TABLE_NAME = "table";
+    public static final Map<WoodType, Block> TABLES = new HashMap<>();
+    public static final Map<WoodType, Item> TABLE_TIMES = new HashMap<>();
 
     @Override
     public void registerWoodBlocks(IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
 
         //tables
         for (WoodType w : woodTypes) {
-            String name = w.getVariantId(TABLE_NAME, false);
+            String name = makeBlockId(w, TABLE_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
 
             Block block = new TableBlock(BlockBehaviour.Properties.copy(w.planks).instabreak());
@@ -57,7 +65,7 @@ public class TwigsModule extends CompatModule {
     @Override
     public void registerItems(IForgeRegistry<Item> registry) {
         TABLES.forEach((key, value) -> {
-            Item i = new BlockItem(value, DBItems.modItemProperties);
+            Item i = new BlockItem(value, new Item.Properties().tab(Twigs.ITEM_GROUP));
             TABLE_TIMES.put(key, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });

@@ -12,8 +12,7 @@ public class WoodGoodClient {
 
     @SubscribeEvent
     public static void entityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-
-
+        WoodGood.forAllModules(m->m.registerEntityRenderers(event));
     }
 
     @SubscribeEvent

@@ -7,10 +7,12 @@ import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.wood_good.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.wood_good.modules.CompatModule;
+import net.mehvahdjukaar.wood_good.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.wood_good.modules.deco_block.DecoBlocksModule;
 import net.mehvahdjukaar.wood_good.modules.quark.QuarkModule;
 import net.mehvahdjukaar.wood_good.modules.twigs.TwigsModule;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -61,6 +63,7 @@ public class WoodGood {
         addModule("decorative_blocks", DecoBlocksModule::new);
         addModule("twigs", TwigsModule::new);
         addModule("quark", QuarkModule::new);
+        addModule("another_furniture", AnotherFurnitureModule::new);
 
         BlockSetManager.addBlockSetRegistrationCallback(this::registerWoodStuff, Block.class, WoodType.class);
         BlockSetManager.addBlockSetRegistrationCallback(this::registerLeavesStuff, Block.class, LeavesType.class);
@@ -121,8 +124,8 @@ public class WoodGood {
     }
 
     @SubscribeEvent
-    public void registerEntities(RegistryEvent.Register<BlockEntityType<?>> event) {
-        ACTIVE_MODULES.forEach(m -> m.registerTiles(event.getRegistry()));
+    public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
+        ACTIVE_MODULES.forEach(m -> m.registerEntities(event.getRegistry()));
     }
 
 }
