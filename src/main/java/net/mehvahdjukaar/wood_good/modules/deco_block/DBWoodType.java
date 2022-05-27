@@ -28,17 +28,17 @@ public class DBWoodType implements IWoodType {
 
     @Override
     public Block getStrippedLog() {
-        return woodType.strippedLog;
+        return woodType.getBlockOfThis("stripped_log");
     }
 
     @Override
     public Block getSlab() {
-        return woodType.slab;
+        return woodType.getBlockOfThis("slab");
     }
 
     @Override
     public Block getFence() {
-        return woodType.fence;
+        return woodType.getBlockOfThis("fence");
     }
 
     @Override

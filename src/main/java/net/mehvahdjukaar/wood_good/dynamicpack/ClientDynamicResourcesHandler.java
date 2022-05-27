@@ -1,11 +1,12 @@
 package net.mehvahdjukaar.wood_good.dynamicpack;
 
+import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.DynamicTexturePack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicTextureProvider;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.LangBuilder;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.Palette;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.Respriter;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.wood_good.WoodGood;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -32,20 +33,21 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     @Override
     public void generateStaticAssetsOnStartup(ResourceManager manager) {
-        LangBuilder langBuilder = new LangBuilder();
-
         WoodGood.forAllModules(m -> {
             try {
-                m.addStaticClientResources(this, manager, langBuilder);
+                m.addStaticClientResources(this, manager);
             } catch (Exception e) {
                 getLogger().error("Failed to generate client static assets for module: {}", m);
             }
         });
-
-        dynamicPack.addLang(WoodGood.res("en_us"), langBuilder.build());
-
     }
 
+    @Override
+    public void addDynamicTranslations(DynamicLanguageManager.LanguageAccessor lang) {
+        WoodGood.forAllModules(m->{
+            m.addTranslations(this,lang);
+        });
+    }
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {

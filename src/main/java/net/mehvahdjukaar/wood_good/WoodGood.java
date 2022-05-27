@@ -11,6 +11,7 @@ import net.mehvahdjukaar.wood_good.modules.another_furniture.AnotherFurnitureMod
 import net.mehvahdjukaar.wood_good.modules.deco_block.DecoBlocksModule;
 import net.mehvahdjukaar.wood_good.modules.quark.QuarkModule;
 import net.mehvahdjukaar.wood_good.modules.twigs.TwigsModule;
+import net.mehvahdjukaar.wood_good.modules.twilightforest.TwilightForestModule;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -61,9 +62,10 @@ public class WoodGood {
         addCompetitorMods("much_more_mod_compat", "compatoplenty");
 
         addModule("decorative_blocks", DecoBlocksModule::new);
-        addModule("twigs", TwigsModule::new);
-        addModule("quark", QuarkModule::new);
+         addModule("twigs", TwigsModule::new);
+       // addModule("quark", QuarkModule::new);
         addModule("another_furniture", AnotherFurnitureModule::new);
+        addModule("twilightforest", TwilightForestModule::new);
 
         BlockSetManager.addBlockSetRegistrationCallback(this::registerWoodStuff, Block.class, WoodType.class);
         BlockSetManager.addBlockSetRegistrationCallback(this::registerLeavesStuff, Block.class, LeavesType.class);
@@ -116,6 +118,11 @@ public class WoodGood {
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
         ACTIVE_MODULES.forEach(m -> m.registerItems(event.getRegistry()));
+    }
+
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event) {
+
     }
 
     @SubscribeEvent

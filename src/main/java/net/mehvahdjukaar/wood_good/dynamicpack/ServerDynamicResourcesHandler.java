@@ -2,15 +2,9 @@ package net.mehvahdjukaar.wood_good.dynamicpack;
 
 import net.mehvahdjukaar.selene.resourcepack.DynamicDataPack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicDataProvider;
-import net.mehvahdjukaar.selene.resourcepack.StaticResource;
 import net.mehvahdjukaar.wood_good.WoodGood;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
-
-import java.nio.charset.StandardCharsets;
-import java.util.NoSuchElementException;
-import java.util.function.Function;
 
 public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
 
@@ -18,7 +12,7 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
         super(new DynamicDataPack(WoodGood.res("generated_pack")));
         this.dynamicPack.generateDebugResources = true;
         //needed for tags
-        WoodGood.forAllModules(m->getPack().addNamespaces(m.getModId()));
+        WoodGood.forAllModules(m -> getPack().addNamespaces(m.getModId()));
     }
 
     @Override
@@ -28,7 +22,7 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
 
     @Override
     public boolean dependsOnLoadedPacks() {
-        return false;
+        return true;
     }
 
     @Override
@@ -36,9 +30,9 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
 
         WoodGood.forAllModules(m -> {
             try {
-                m.addStaticServerResources(this, manager);
+                m.addDynamicServerResources(this, manager);
             } catch (Exception e) {
-                getLogger().error("Failed to generate server static assets for module: {}", m);
+                getLogger().error("Failed to generate server dynamic assets for module {}: {}", m, e);
             }
         });
     }
@@ -50,11 +44,10 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
             try {
                 m.addStaticServerResources(this, manager);
             } catch (Exception e) {
-                getLogger().error("Failed to generate server static assets for module: {}", m);
+                getLogger().error("Failed to generate server static assets for module {} : {}", m, e);
             }
         });
     }
-
 
 
 }

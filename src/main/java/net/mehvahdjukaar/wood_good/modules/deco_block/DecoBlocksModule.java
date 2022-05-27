@@ -6,13 +6,14 @@ import lilypuree.decorative_blocks.core.DBItems;
 import lilypuree.decorative_blocks.items.SeatItem;
 import lilypuree.decorative_blocks.items.SupportItem;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.LangBuilder;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.Palette;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.Respriter;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.SpriteUtils;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.wood_good.WoodGood;
 import net.mehvahdjukaar.wood_good.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
@@ -61,6 +62,7 @@ public class DecoBlocksModule extends CompatModule {
         woodTypes.forEach(w -> DB_WOOD_TYPES.put(w, new DBWoodType(w)));
 
         //beams
+        addChildToOak(shortenedId() + "/beam", "oak_beam");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, BEAM_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
@@ -69,8 +71,10 @@ public class DecoBlocksModule extends CompatModule {
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.BEAM);
             BEAMS.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
+            w.addChild(this.shortenedId() + "/beam", block);
         }
         //palisades
+        addChildToOak(shortenedId() + "/palisade", "oak_palisade");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, PALISADE_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
@@ -79,8 +83,10 @@ public class DecoBlocksModule extends CompatModule {
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.PALISADE);
             PALISADES.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
+            w.addChild(this.shortenedId() + "/palisade", block);
         }
         //supports
+        addChildToOak(shortenedId() + "/support", "oak_support");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, SUPPORT_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
@@ -89,8 +95,10 @@ public class DecoBlocksModule extends CompatModule {
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.SUPPORT);
             SUPPORTS.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
+            w.addChild(this.shortenedId() + "/support", block);
         }
         //seats
+        addChildToOak(shortenedId() + "/seat", "oak_seat");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, SEAT_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
@@ -99,6 +107,7 @@ public class DecoBlocksModule extends CompatModule {
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.SEAT);
             SEATS.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
+            w.addChild(this.shortenedId() + "/seat", block);
         }
     }
 
@@ -163,10 +172,15 @@ public class DecoBlocksModule extends CompatModule {
     }
 
     @Override
-    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, LangBuilder langBuilder) {
-        //beams
-        BEAMS.forEach((w, v) -> langBuilder.addEntry(v, w.getNameForTranslation(BEAM_NAME)));
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        this.addBlocksRecipes(manager, handler, BEAMS, "oak_beam");
+        this.addBlocksRecipes(manager, handler, PALISADES, "oak_palisade");
+        this.addBlocksRecipes(manager, handler, SUPPORTS, "oak_support");
+        this.addBlocksRecipes(manager, handler, SEATS, "oak_seat");
+    }
 
+    @Override
+    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         this.addBlockResources(manager, handler, BEAMS, "oak_beam",
                 ResType.ITEM_MODELS.getPath(modRes("oak_beam")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_beam_y")),
@@ -174,10 +188,6 @@ public class DecoBlocksModule extends CompatModule {
                 ResType.BLOCK_MODELS.getPath(modRes("oak_beam_z")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_beam"))
         );
-
-        //palisades
-        PALISADES.forEach((w, v) -> langBuilder.addEntry(v, w.getNameForTranslation(PALISADE_NAME)));
-
         this.addBlockResources(manager, handler, PALISADES, "oak_palisade",
                 ResType.ITEM_MODELS.getPath(modRes("oak_palisade")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_palisade_inventory")),
@@ -185,16 +195,10 @@ public class DecoBlocksModule extends CompatModule {
                 ResType.BLOCK_MODELS.getPath(modRes("oak_palisade_side")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_palisade"))
         );
-
-        //supports
-        SUPPORTS.forEach((w, v) -> langBuilder.addEntry(v, w.getNameForTranslation(SUPPORT_NAME)));
-
         this.addBlockResources(manager, handler, SUPPORTS,
-                (s, id) -> s.replace("decorative_blocks:block/", "wood_good:block/")
-                        .replace("oak_support", id)
-                        .replace("oak_upside_down_support",
-                                id.replace("support", "upside_down_support")),
-                (s, id) -> s.replace("oak_support", id),
+                WoodJsonTransformation.create(modId, manager)
+                        .replaceWoodInPath("oak")
+                        .replaceSimpleBlock(modId, "oak_support"),
                 ResType.ITEM_MODELS.getPath(modRes("oak_support")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_big")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_small")),
@@ -210,10 +214,6 @@ public class DecoBlocksModule extends CompatModule {
                 ResType.BLOCK_MODELS.getPath(modRes("oak_upside_down_support_vertical_big")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_support"))
         );
-
-        //seats
-        SEATS.forEach((w, v) -> langBuilder.addEntry(v, w.getNameForTranslation(SEAT_NAME)));
-
         this.addBlockResources(manager, handler, SEATS, "oak_seat",
                 ResType.ITEM_MODELS.getPath(modRes("oak_seat")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_seat")),
@@ -223,7 +223,14 @@ public class DecoBlocksModule extends CompatModule {
                 ResType.BLOCK_MODELS.getPath(modRes("oak_seat_top_post")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_seat"))
         );
+    }
 
+    @Override
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
+        BEAMS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.beam", w, v));
+        SUPPORTS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.support", w, v));
+        PALISADES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.palisade", w, v));
+        SEATS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.seat", w, v));
     }
 
     @Override

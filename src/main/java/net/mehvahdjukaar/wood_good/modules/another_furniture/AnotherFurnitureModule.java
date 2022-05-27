@@ -3,20 +3,15 @@ package net.mehvahdjukaar.wood_good.modules.another_furniture;
 import com.crispytwig.another_furniture.AnotherFurnitureMod;
 import com.crispytwig.another_furniture.block.ChairBlock;
 import com.crispytwig.another_furniture.block.TableBlock;
-import com.crispytwig.another_furniture.block.entity.ShelfBlockEntity;
-import com.crispytwig.another_furniture.init.ModBlockEntities;
-import com.crispytwig.another_furniture.init.ModBlocks;
-import com.crispytwig.another_furniture.init.ModItems;
 import com.crispytwig.another_furniture.render.ShelfRenderer;
-import com.mojang.datafixers.types.Type;
-import lilypuree.decorative_blocks.core.DBItems;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.LangBuilder;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.Palette;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.Respriter;
-import net.mehvahdjukaar.selene.resourcepack.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.wood_good.WoodGood;
 import net.mehvahdjukaar.wood_good.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
@@ -26,7 +21,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -67,6 +61,7 @@ public class AnotherFurnitureModule extends CompatModule {
     public void registerWoodBlocks(IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
 
         //tables
+        addChildToOak(shortenedId() + "/table", "oak_table");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, TABLE_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
@@ -74,8 +69,10 @@ public class AnotherFurnitureModule extends CompatModule {
             Block block = new TableBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F));
             TABLES.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
+            w.addChild(shortenedId() + "/table", block);
         }
         //chair
+        addChildToOak(shortenedId() + "/chair", "oak_chair");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, CHAIR_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
@@ -83,8 +80,10 @@ public class AnotherFurnitureModule extends CompatModule {
             Block block = new ChairBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F));
             CHAIRS.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
+            w.addChild(shortenedId() + "/chair", block);
         }
         //shelf
+        addChildToOak(shortenedId() + "/shelf", "oak_shelf");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, SHELF_NAME);
             if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
@@ -92,6 +91,7 @@ public class AnotherFurnitureModule extends CompatModule {
             Block block = new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F));
             SHELVES.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
+            w.addChild(shortenedId() + "/shelf", block);
         }
     }
 
@@ -123,7 +123,7 @@ public class AnotherFurnitureModule extends CompatModule {
 
     @Override
     public void onClientSetup(FMLClientSetupEvent event) {
-         CHAIRS.values().forEach(t-> ItemBlockRenderTypes.setRenderLayer(t, RenderType.cutout()));
+        CHAIRS.values().forEach(t -> ItemBlockRenderTypes.setRenderLayer(t, RenderType.cutout()));
     }
 
     @Override
@@ -160,72 +160,70 @@ public class AnotherFurnitureModule extends CompatModule {
     }
 
     @Override
-    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, LangBuilder langBuilder) {
-        //beams
-        TABLES.forEach((w, v) -> langBuilder.addEntry(v, w.getNameForTranslation(TABLE_NAME)));
-        CHAIRS.forEach((w, v) -> langBuilder.addEntry(v, w.getNameForTranslation(CHAIR_NAME)));
-        SHELVES.forEach((w, v) -> langBuilder.addEntry(v, w.getNameForTranslation(SHELF_NAME)));
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        this.addBlocksRecipes(manager, handler, TABLES, "oak_table");
+        this.addBlocksRecipes(manager, handler, TABLES, "oak_shelf");
+        this.addBlocksRecipes(manager, handler, TABLES, "oak_chair");
+    }
 
+    @Override
+    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
 
-        this.addBlockResources(manager, handler, TABLES, (s, id) ->
-                        s.replace("another_furniture:block/table", "wood_good:block/table")
-                                .replace("another_furniture:textures", "wood_good:textures")
-                                .replace("table/oak", id.replace("_table", "")),
-                (s, id) -> s.replace("oak", id.replace("_table", "")),
+        this.addBlockResources(manager, handler, TABLES,
+                WoodJsonTransformation.create(modId, manager)
+                        .replaceWoodInPath("table/oak")
+                        .replaceWoodBlock("table/oak"),
                 ResType.BLOCK_MODELS.getPath(modRes("table/oak_leg")),
-                ResType.BLOCK_MODELS.getPath(modRes("table/oak_top")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_table"))
-
+                ResType.BLOCK_MODELS.getPath(modRes("table/oak_top"))
         );
-
-        this.addBlockResources(manager, handler, TABLES, (s, id) ->
-                        s.replace("another_furniture", "wood_good")
-                                .replace("table/oak", "table/"+id.replace("_table", "")),
-                (s, id) -> s.replace("oak", id.replace("_table", "")),
+        this.addBlockResources(manager, handler, TABLES,
+                WoodJsonTransformation.create(modId, manager)
+                        .replaceWoodInPath("oak")
+                        .replaceWoodBlock("table/oak"),
+                ResType.ITEM_MODELS.getPath(modRes("oak_table")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_table"))
         );
 
-        //chairs
-        this.addBlockResources(manager, handler, CHAIRS, (s, id) ->
-                        s.replace("another_furniture:block/chair", "wood_good:block/chair")
-                                .replace("another_furniture:textures", "wood_good:textures")
-                                .replace("chair/oak", id.replace("_chair", "")),
-                (s, id) -> s.replace("oak", id.replace("_chair", "")),
-                ResType.BLOCK_MODELS.getPath(modRes("chair/oak")),
+
+        this.addBlockResources(manager, handler, CHAIRS,
+                WoodJsonTransformation.create(modId, manager)
+                        .replaceWoodInPath("chair/oak")
+                        .replaceWoodBlock("chair/oak"),
+                ResType.BLOCK_MODELS.getPath(modRes("chair/oak"))
+        );
+        this.addBlockResources(manager, handler, CHAIRS,
+                WoodJsonTransformation.create(modId, manager)
+                        .replaceWoodInPath("oak")
+                        .replaceWoodBlock("chair/oak"),
+                ResType.BLOCKSTATES.getPath(modRes("oak_chair")),
                 ResType.ITEM_MODELS.getPath(modRes("oak_chair"))
-
         );
 
-        this.addBlockResources(manager, handler, CHAIRS, (s, id) ->
-                        s.replace("another_furniture", "wood_good")
-                                .replace("chair/oak", "chair/"+id.replace("_chair", "")),
-                (s, id) -> s.replace("oak", id.replace("_chair", "")),
-                ResType.BLOCKSTATES.getPath(modRes("oak_chair"))
-        );
-
-
-        //shelves
-        this.addBlockResources(manager, handler, CHAIRS, (s, id) ->
-                        s.replace("another_furniture:block/shelf", "wood_good:block/chair")
-                                .replace("another_furniture:textures", "wood_good:textures")
-                                .replace("shelf/oak", id.replace("_shelf", "")),
-                (s, id) -> s.replace("oak", id.replace("_chair", "")),
+        this.addBlockResources(manager, handler, SHELVES,
+                WoodJsonTransformation.create(modId, manager)
+                        .replaceWoodInPath("shelf/oak")
+                        .replaceWoodBlock("shelf/oak"),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_full")),
-                ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_f")),
+                ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_r")),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_l")),
+                ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_top"))
+        );
+        this.addBlockResources(manager, handler, SHELVES,
+                WoodJsonTransformation.create(modId, manager)
+                        .replaceWoodInPath("oak")
+                        .replaceWoodBlock("shelf/oak"),
+                ResType.BLOCKSTATES.getPath(modRes("oak_shelf")),
                 ResType.ITEM_MODELS.getPath(modRes("oak_shelf"))
-
         );
-
-        this.addBlockResources(manager, handler, CHAIRS, (s, id) ->
-                        s.replace("another_furniture", "wood_good")
-                                .replace("shelf/oak", "shelf/"+id.replace("_shelf", "")),
-                (s, id) -> s.replace("oak", id.replace("_shelf", "")),
-                ResType.BLOCKSTATES.getPath(modRes("oak_shelf"))
-        );
-
-
     }
+
+    @Override
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
+        TABLES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.table", w, v));
+        CHAIRS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.chair", w, v));
+        SHELVES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.shelf", w, v));
+    }
+
 
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
@@ -300,6 +298,31 @@ public class AnotherFurnitureModule extends CompatModule {
             });
         } catch (Exception ex) {
             handler.getLogger().error("Could not generate any Chair block texture : ", ex);
+        }
+        //shelves
+        try (TextureImage supports = TextureImage.open(manager,
+                modRes("block/shelf/oak_supports"))) {
+
+            Respriter respriter = Respriter.of(supports);
+
+            SHELVES.forEach((wood, table) -> {
+
+                String id = table.getRegistryName().getPath();
+
+                try (TextureImage plankTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
+
+                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+
+                    handler.addTextureIfNotPresent(manager, "block/" + id.replace("shelf", "supports"), () ->
+                            respriter.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
+
+                } catch (Exception ex) {
+                    handler.getLogger().error("Failed to generate Shelf block texture for for {} : {}", table, ex);
+                }
+            });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Shelf block texture : ", ex);
         }
     }
 }
