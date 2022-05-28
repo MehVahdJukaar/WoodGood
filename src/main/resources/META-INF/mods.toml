@@ -5,11 +5,11 @@ loaderVersion="[39,)" #mandatory This is typically bumped every Minecraft versio
 
 license="All rights reserved"
 
-issueTrackerURL="https://github.com/MehVahdJukaar/wood_good/issues" #optional
+issueTrackerURL="https://github.com/MehVahdJukaar/every_compat/issues" #optional
 
 [[mods]] #mandatory
 
-modId="wood_good" #mandatory
+modId="everycomp" #mandatory
 
 version="${file.jarVersion}" #mandatory
 
@@ -17,7 +17,7 @@ displayName="Wood Good" #mandatory
 
 updateJSONURL="http://myurl.me/" #optional
 
-displayURL="https://www.curseforge.com/minecraft/mc-mods/wood_good" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/every_compat" #optional
 
 logoFile="logo.png" #optional
 
@@ -30,7 +30,7 @@ description='''Ultimate Wood Compat Mod'''
 itemIcon="minecraft:oak_planks" #catalogue icon
 
 
-[[dependencies.furniture_thingy]] #optional
+[[dependencies.everycomp]] #optional
 
     modId="forge" #mandatory
     mandatory=true #mandatory
@@ -38,7 +38,7 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.furniture_thingy]]
+[[dependencies.everycomp]]
 
     modId="minecraft"
     mandatory=true
@@ -46,11 +46,11 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.furniture_thingy]]
+[[dependencies.everycomp]]
 
     modId="selene"
     mandatory=true
-    versionRange="[1.18.2-1.15.6,]"
+    versionRange="[1.18.2-1.16.3,]"
     ordering="AFTER"
     side="BOTH"
 

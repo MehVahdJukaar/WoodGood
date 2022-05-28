@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.wood_good.modules.twigs;
+package net.mehvahdjukaar.every_compat.modules.twigs;
 
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
@@ -8,10 +8,10 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.wood_good.WoodGood;
-import net.mehvahdjukaar.wood_good.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.wood_good.modules.CompatModule;
+import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;

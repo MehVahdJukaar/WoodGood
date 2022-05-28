@@ -1,17 +1,17 @@
-package net.mehvahdjukaar.wood_good;
+package net.mehvahdjukaar.every_compat;
 
 
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
-import net.mehvahdjukaar.wood_good.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.wood_good.modules.CompatModule;
-import net.mehvahdjukaar.wood_good.modules.another_furniture.AnotherFurnitureModule;
-import net.mehvahdjukaar.wood_good.modules.deco_block.DecoBlocksModule;
-import net.mehvahdjukaar.wood_good.modules.quark.QuarkModule;
-import net.mehvahdjukaar.wood_good.modules.twigs.TwigsModule;
-import net.mehvahdjukaar.wood_good.modules.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
+import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.deco_block.DecoBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
+import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -35,13 +35,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Author: MehVahdJukaar
  */
 @Mod(WoodGood.MOD_ID)
 public class WoodGood {
-    public static final String MOD_ID = "wood_good";
+    public static final String MOD_ID = "everycomp";
 
     public static ResourceLocation res(String name) {
         return new ResourceLocation(MOD_ID, name);
@@ -61,11 +62,11 @@ public class WoodGood {
 
         addCompetitorMods("much_more_mod_compat", "compatoplenty");
 
-        addModule("decorative_blocks", DecoBlocksModule::new);
-         addModule("twigs", TwigsModule::new);
-       // addModule("quark", QuarkModule::new);
-        addModule("another_furniture", AnotherFurnitureModule::new);
-        addModule("twilightforest", TwilightForestModule::new);
+        addModule("decorative_blocks",()-> DecoBlocksModule::new);
+        addModule("twigs", ()-> TwigsModule::new);
+        addModule("quark",()->  QuarkModule::new);
+        addModule("another_furniture", ()-> AnotherFurnitureModule::new);
+        addModule("twilightforest", ()-> TwilightForestModule::new);
 
         BlockSetManager.addBlockSetRegistrationCallback(this::registerWoodStuff, Block.class, WoodType.class);
         BlockSetManager.addBlockSetRegistrationCallback(this::registerLeavesStuff, Block.class, LeavesType.class);
@@ -94,8 +95,8 @@ public class WoodGood {
         });
     }
 
-    private void addModule(String modId, Function<String, CompatModule> moduleFactory) {
-        if (ModList.get().isLoaded(modId)) ACTIVE_MODULES.add(moduleFactory.apply(modId));
+    private void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
+        if (ModList.get().isLoaded(modId)) ACTIVE_MODULES.add(moduleFactory.get().apply(modId));
     }
 
     @SubscribeEvent

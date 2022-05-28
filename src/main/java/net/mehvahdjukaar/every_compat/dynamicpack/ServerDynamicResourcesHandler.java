@@ -1,8 +1,8 @@
-package net.mehvahdjukaar.wood_good.dynamicpack;
+package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.selene.resourcepack.DynamicDataPack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicDataProvider;
-import net.mehvahdjukaar.wood_good.WoodGood;
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +13,8 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
         this.dynamicPack.generateDebugResources = true;
         //needed for tags
         WoodGood.forAllModules(m -> getPack().addNamespaces(m.getModId()));
+        getPack().addNamespaces("minecraft");
+        getPack().addNamespaces("supplementaries");
     }
 
     @Override

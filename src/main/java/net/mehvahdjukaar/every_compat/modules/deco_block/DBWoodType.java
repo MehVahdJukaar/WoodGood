@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.wood_good.modules.deco_block;
+package net.mehvahdjukaar.every_compat.modules.deco_block;
 
 import lilypuree.decorative_blocks.blocks.types.IWoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;

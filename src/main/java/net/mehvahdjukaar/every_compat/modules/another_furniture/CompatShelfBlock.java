@@ -1,7 +1,6 @@
-package net.mehvahdjukaar.wood_good.modules.another_furniture;
+package net.mehvahdjukaar.every_compat.modules.another_furniture;
 
 import com.crispytwig.another_furniture.block.ShelfBlock;
-import com.crispytwig.another_furniture.block.entity.ShelfBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

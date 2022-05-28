@@ -3,8 +3,8 @@
   "minVersion": "0.8",
   "required": true,
   "compatibilityLevel": "JAVA_16",
-  "refmap": "wood_good.refmap.json",
-  "package": "net.mehvahdjukaar.wood_good.mixins",
+  "refmap": "everycomp.refmap.json",
+  "package": "net.mehvahdjukaar.every_compat.mixins",
   "mixins": [
   ],
   "client": [

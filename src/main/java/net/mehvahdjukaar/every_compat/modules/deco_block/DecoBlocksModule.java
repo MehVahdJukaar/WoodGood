@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.wood_good.modules.deco_block;
+package net.mehvahdjukaar.every_compat.modules.deco_block;
 
 import lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes;
 import lilypuree.decorative_blocks.core.DBBlocks;
@@ -11,13 +11,15 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.wood_good.WoodGood;
-import net.mehvahdjukaar.wood_good.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.wood_good.modules.CompatModule;
+import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
+
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -196,8 +198,8 @@ public class DecoBlocksModule extends CompatModule {
                 ResType.BLOCKSTATES.getPath(modRes("oak_palisade"))
         );
         this.addBlockResources(manager, handler, SUPPORTS,
-                WoodJsonTransformation.create(modId, manager)
-                        .replaceWoodInPath("oak")
+                BlockTypeResourceTransform.wood(modId, manager)
+                        .idReplaceType("oak")
                         .replaceSimpleBlock(modId, "oak_support"),
                 ResType.ITEM_MODELS.getPath(modRes("oak_support")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_big")),

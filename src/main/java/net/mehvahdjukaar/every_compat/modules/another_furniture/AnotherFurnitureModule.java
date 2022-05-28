@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.wood_good.modules.another_furniture;
+package net.mehvahdjukaar.every_compat.modules.another_furniture;
 
 import com.crispytwig.another_furniture.AnotherFurnitureMod;
 import com.crispytwig.another_furniture.block.ChairBlock;
@@ -9,13 +9,14 @@ import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.wood_good.WoodGood;
-import net.mehvahdjukaar.wood_good.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.wood_good.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.wood_good.modules.CompatModule;
+import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
@@ -170,48 +171,48 @@ public class AnotherFurnitureModule extends CompatModule {
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
 
         this.addBlockResources(manager, handler, TABLES,
-                WoodJsonTransformation.create(modId, manager)
-                        .replaceWoodInPath("table/oak")
-                        .replaceWoodBlock("table/oak"),
+                BlockTypeResourceTransform.wood(modId, manager)
+                        .idReplaceType("table/oak")
+                        .replaceBlockType("table/oak"),
                 ResType.BLOCK_MODELS.getPath(modRes("table/oak_leg")),
                 ResType.BLOCK_MODELS.getPath(modRes("table/oak_top"))
         );
         this.addBlockResources(manager, handler, TABLES,
-                WoodJsonTransformation.create(modId, manager)
-                        .replaceWoodInPath("oak")
-                        .replaceWoodBlock("table/oak"),
+                BlockTypeResourceTransform.wood(modId, manager)
+                        .idReplaceType("oak")
+                        .replaceBlockType("table/oak"),
                 ResType.ITEM_MODELS.getPath(modRes("oak_table")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_table"))
         );
 
 
         this.addBlockResources(manager, handler, CHAIRS,
-                WoodJsonTransformation.create(modId, manager)
-                        .replaceWoodInPath("chair/oak")
-                        .replaceWoodBlock("chair/oak"),
+                BlockTypeResourceTransform.wood(modId, manager)
+                        .idReplaceType("chair/oak")
+                        .replaceBlockType("chair/oak"),
                 ResType.BLOCK_MODELS.getPath(modRes("chair/oak"))
         );
         this.addBlockResources(manager, handler, CHAIRS,
-                WoodJsonTransformation.create(modId, manager)
-                        .replaceWoodInPath("oak")
-                        .replaceWoodBlock("chair/oak"),
+                BlockTypeResourceTransform.wood(modId, manager)
+                        .idReplaceType("oak")
+                        .replaceBlockType("chair/oak"),
                 ResType.BLOCKSTATES.getPath(modRes("oak_chair")),
                 ResType.ITEM_MODELS.getPath(modRes("oak_chair"))
         );
 
         this.addBlockResources(manager, handler, SHELVES,
-                WoodJsonTransformation.create(modId, manager)
-                        .replaceWoodInPath("shelf/oak")
-                        .replaceWoodBlock("shelf/oak"),
+                BlockTypeResourceTransform.wood(modId, manager)
+                        .idReplaceType("shelf/oak")
+                        .replaceBlockType("shelf/oak"),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_full")),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_r")),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_l")),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_top"))
         );
         this.addBlockResources(manager, handler, SHELVES,
-                WoodJsonTransformation.create(modId, manager)
-                        .replaceWoodInPath("oak")
-                        .replaceWoodBlock("shelf/oak"),
+                BlockTypeResourceTransform.wood(modId, manager)
+                        .idReplaceType("oak")
+                        .replaceBlockType("shelf/oak"),
                 ResType.BLOCKSTATES.getPath(modRes("oak_shelf")),
                 ResType.ITEM_MODELS.getPath(modRes("oak_shelf"))
         );
