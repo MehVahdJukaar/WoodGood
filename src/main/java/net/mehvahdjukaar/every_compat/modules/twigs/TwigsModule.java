@@ -18,7 +18,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -49,7 +48,7 @@ public class TwigsModule extends CompatModule {
         addChildToOak(shortenedId() + "/table", "oak_table");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, TABLE_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             Block block = new TableBlock(BlockBehaviour.Properties.copy(w.planks).instabreak());
             TABLES.put(w, block);

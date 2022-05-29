@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.deco_block;
 
-import com.crispytwig.another_furniture.AnotherFurnitureMod;
 import lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes;
 import lilypuree.decorative_blocks.core.DBBlocks;
 import lilypuree.decorative_blocks.core.DBItems;
@@ -25,13 +24,8 @@ import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FurnaceBlock;
-import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.*;
@@ -73,7 +67,7 @@ public class DecoBlocksModule extends CompatModule {
         addChildToOak(shortenedId() + "/beam", "oak_beam");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, BEAM_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.BEAM);
@@ -85,7 +79,7 @@ public class DecoBlocksModule extends CompatModule {
         addChildToOak(shortenedId() + "/palisade", "oak_palisade");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, PALISADE_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.PALISADE);
@@ -97,7 +91,7 @@ public class DecoBlocksModule extends CompatModule {
         addChildToOak(shortenedId() + "/support", "oak_support");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, SUPPORT_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.SUPPORT);
@@ -109,7 +103,7 @@ public class DecoBlocksModule extends CompatModule {
         addChildToOak(shortenedId() + "/seat", "oak_seat");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, SEAT_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.SEAT);

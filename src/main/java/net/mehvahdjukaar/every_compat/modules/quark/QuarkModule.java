@@ -15,7 +15,6 @@ import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -93,7 +92,7 @@ public class QuarkModule extends CompatModule {
                 boolean nether = !w.canBurn();
                 String name = w.getVariantId(POST_NAME, false);
                 String strippedName = makeBlockId(w, STRIPPED_POST);
-                if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+                if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
                 var module = ModuleLoader.INSTANCE.getModuleInstance(WoodenPostsModule.class);
                 String prefix = shortenedId() + "/" + w.getNamespace() + "/";
@@ -138,7 +137,7 @@ public class QuarkModule extends CompatModule {
         LeavesType.OAK_LEAVES_TYPE.addChild(shortenedId() + "/hedge", ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")));
         for (LeavesType l : leavesTypes) {
             String name = makeBlockId(l, HEDGE_NAME);
-            if (l.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (l.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
             if (l.woodType != null) {
                 Block fence = l.woodType.getBlockOfThis("fence");
                 if (fence != null) {

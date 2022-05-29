@@ -1,9 +1,6 @@
 package net.mehvahdjukaar.every_compat;
 
 
-import net.mehvahdjukaar.selene.block_set.BlockSetManager;
-import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
-import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
@@ -12,6 +9,9 @@ import net.mehvahdjukaar.every_compat.modules.deco_block.DecoBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.selene.block_set.BlockSetManager;
+import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
+import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -30,7 +30,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -52,7 +51,7 @@ public class WoodGood {
 
     public static final List<CompatModule> ACTIVE_MODULES = new ArrayList<>();
 
-    public static final List<String> COMPETITOR_MODS = new ArrayList<>();
+    public static final List<CompatMod> COMPETITOR_MODS = new ArrayList<>();
 
     public static void forAllModules(Consumer<CompatModule> action) {
         ACTIVE_MODULES.forEach(action);
@@ -60,13 +59,16 @@ public class WoodGood {
 
     public WoodGood() {
 
-        addCompetitorMods("much_more_mod_compat", "compatoplenty");
+        //addCompetitorMod("much_more_mod_compat");
+        addCompetitorMod("compatoplenty", List.of("biomesoplenty"));
+        addCompetitorMod("decorative_compat", List.of("biomesoplenty"));
+        addCompetitorMod("compat_makeover", List.of("biomemakeover"));
 
-        addModule("decorative_blocks",()-> DecoBlocksModule::new);
-        addModule("twigs", ()-> TwigsModule::new);
-        addModule("quark",()->  QuarkModule::new);
-        addModule("another_furniture", ()-> AnotherFurnitureModule::new);
-        addModule("twilightforest", ()-> TwilightForestModule::new);
+        addModule("decorative_blocks", () -> DecoBlocksModule::new);
+        addModule("twigs", () -> TwigsModule::new);
+        addModule("quark", () -> QuarkModule::new);
+        addModule("another_furniture", () -> AnotherFurnitureModule::new);
+        addModule("twilightforest", () -> TwilightForestModule::new);
 
         BlockSetManager.addBlockSetRegistrationCallback(this::registerWoodStuff, Block.class, WoodType.class);
         BlockSetManager.addBlockSetRegistrationCallback(this::registerLeavesStuff, Block.class, LeavesType.class);
@@ -89,10 +91,8 @@ public class WoodGood {
     }
 
 
-    private void addCompetitorMods(String... mods) {
-        Arrays.stream(mods).forEach(m -> {
-            if (ModList.get().isLoaded(m)) COMPETITOR_MODS.add(m);
-        });
+    private void addCompetitorMod(String modId, List<String> supportedMods) {
+        if (ModList.get().isLoaded(modId)) COMPETITOR_MODS.add(new CompatMod(modId, supportedMods));
     }
 
     private void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
@@ -135,5 +135,10 @@ public class WoodGood {
     public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
         ACTIVE_MODULES.forEach(m -> m.registerEntities(event.getRegistry()));
     }
+
+    public record CompatMod(String modId, List<String> supportedMods) {
+    }
+
+    ;
 
 }

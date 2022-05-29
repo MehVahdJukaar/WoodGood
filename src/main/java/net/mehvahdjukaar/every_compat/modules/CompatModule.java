@@ -1,13 +1,14 @@
 package net.mehvahdjukaar.every_compat.modules;
 
+import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.IBlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.resourcepack.*;
 import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
-import net.mehvahdjukaar.every_compat.WoodGood;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -53,7 +54,7 @@ public abstract class CompatModule {
         return new ResourceLocation(modId, string);
     }
 
-    public String makeBlockId(IBlockType type, String blockName) {
+    public String makeBlockId(BlockType type, String blockName) {
         return this.shortenedId() + "/" + type.getVariantId(blockName, false);
     }
 
@@ -70,7 +71,7 @@ public abstract class CompatModule {
         String test = "aa";
         for (WoodType w : woodTypes) {
             String name = w.getVariantId(test, true);
-            if (!shouldRegisterEntry(name, registry) || w.isVanilla()) continue;
+            if (isEntryAlreadyRegistered(name, registry) || w.isVanilla()) continue;
 
         }
     }
@@ -95,17 +96,24 @@ public abstract class CompatModule {
 
     }
 
-    protected final boolean shouldRegisterEntry(String name, IForgeRegistry<?> registry) {
-        name = name.replace(this.shortenedId() + "/", ""); //db/quark/blossom_chair
-        if (name.startsWith(modId + "/")) return false;        //discards one from this mod
-        String name2 = name.replace("/", "_");
+    protected final boolean isEntryAlreadyRegistered(String name, IForgeRegistry<?> registry) {
+        name = name.replace(this.shortenedId() + "/", ""); //af/quark/blossom_chair
+        if (name.startsWith(modId + "/")) return true;        //discards one from this mod
+        String name2 = name.replace("/", "_"); //quark_blossom_chair
+        String name3 = name.substring(name.lastIndexOf("/") + 1); //blossom_chair
         if (registry.containsKey(new ResourceLocation(modId, name)) ||
-                registry.containsKey(new ResourceLocation(modId, name2))) return false;
-        for (String m : WoodGood.COMPETITOR_MODS) {
-            if (registry.containsKey(new ResourceLocation(m, name)) ||
-                    registry.containsKey(new ResourceLocation(m, name2))) return false;
+                registry.containsKey(new ResourceLocation(modId, name2))) return true;
+        if (this.shortenedId().equals("af")) return false; //hardcoding
+        for (var c : WoodGood.COMPETITOR_MODS) {
+            String id = c.modId();
+            String woodFrom = name.replace("/"+name3, "");
+            for (var s : c.supportedMods()) {
+                if (s.equals(woodFrom) && registry.containsKey(new ResourceLocation(id, name3))) return true;
+            }
+            if (registry.containsKey(new ResourceLocation(id, name)) ||
+                    registry.containsKey(new ResourceLocation(id, name2))) return true;
         }
-        return true;
+        return false;
     }
 
     //resource pack stuff
@@ -146,7 +154,7 @@ public abstract class CompatModule {
     }
 
     @Deprecated
-    protected final <T extends IBlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
+    protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
                                                                   Map<T, Block> blocks,
                                                                   IdModifier textTransform,
                                                                   IdModifier pathTransform,
@@ -170,7 +178,7 @@ public abstract class CompatModule {
     }
 
     //creates and add new jsons based off the ones at the given resources with the provided modifiers
-    protected final <T extends IBlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
+    protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
                                                                   Map<T, Block> blocks, String replaceTarget, ResourceLocation... jsonsLocations) {
         addBlockResources(manager, handler, blocks,
                 BlockTypeResourceTransform.<T>create(modId, manager)
@@ -179,7 +187,7 @@ public abstract class CompatModule {
                 jsonsLocations);
     }
 
-    protected final <T extends IBlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
+    protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
                                                                   Map<T, Block> blocks,
                                                                   BlockTypeResourceTransform<T> modifier, ResourceLocation... jsonsLocations) {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());

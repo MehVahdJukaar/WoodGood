@@ -1,15 +1,15 @@
 package net.mehvahdjukaar.every_compat.modules.twilightforest;
 
+import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.every_compat.WoodGood;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -63,7 +62,7 @@ public class TwilightForestModule extends CompatModule {
         addChildToOak(shortenedId() + "/" + BANISTER_NAME, "oak_banister");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, BANISTER_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             Block block = new BanisterBlock(BlockBehaviour.Properties.copy(w.planks));
             BANISTERS.put(w, block);
@@ -78,7 +77,9 @@ public class TwilightForestModule extends CompatModule {
 
             ResourceLocation verticalRes = WoodGood.res(name + "_vertical");
 
-            if (w.isVanilla() || !shouldRegisterEntry(verticalRes.getPath(), registry)) continue;
+            if (w.getChild("stripped_log") == null) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(verticalRes.getPath(), registry)) continue;
+
 
             ResourceLocation horizontalRes = WoodGood.res(name + "_horizontal");
             ResourceLocation climbableRes = WoodGood.res(name + "_climbable");

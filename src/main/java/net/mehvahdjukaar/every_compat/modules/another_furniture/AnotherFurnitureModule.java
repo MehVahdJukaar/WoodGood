@@ -23,7 +23,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -66,7 +65,7 @@ public class AnotherFurnitureModule extends CompatModule {
         addChildToOak(shortenedId() + "/table", "oak_table");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, TABLE_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             Block block = new TableBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F));
             TABLES.put(w, block);
@@ -77,7 +76,7 @@ public class AnotherFurnitureModule extends CompatModule {
         addChildToOak(shortenedId() + "/chair", "oak_chair");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, CHAIR_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             Block block = new ChairBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F));
             CHAIRS.put(w, block);
@@ -88,7 +87,7 @@ public class AnotherFurnitureModule extends CompatModule {
         addChildToOak(shortenedId() + "/shelf", "oak_shelf");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, SHELF_NAME);
-            if (w.isVanilla() || !shouldRegisterEntry(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
 
             Block block = new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F));
             SHELVES.put(w, block);
