@@ -4,6 +4,10 @@ import com.crispytwig.another_furniture.AnotherFurnitureMod;
 import com.crispytwig.another_furniture.block.ChairBlock;
 import com.crispytwig.another_furniture.block.TableBlock;
 import com.crispytwig.another_furniture.render.ShelfRenderer;
+import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
@@ -14,10 +18,6 @@ import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.every_compat.WoodGood;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
@@ -248,10 +248,10 @@ public class AnotherFurnitureModule extends CompatModule {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id.replace("table", "sides"), () ->
+                    addWoodTexture(wood, handler, manager, "block/" + id.replace("table", "sides"), () ->
                             respriterSides.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id.replace("table", "top"), () ->
+                    addWoodTexture(wood, handler, manager, "block/" + id.replace("table", "top"), () ->
                             respriterTop.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
 
 
@@ -284,14 +284,15 @@ public class AnotherFurnitureModule extends CompatModule {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id.replace("chair", "back"), () ->
+                    addWoodTexture(wood, handler, manager, "block/" + id.replace("chair", "back"), () ->
                             respriterBack.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id.replace("chair", "bottom"), () ->
+                    addWoodTexture(wood, handler, manager, "block/" + id.replace("chair", "bottom"), () ->
                             respriterBottom.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id.replace("chair", "seat"), () ->
-                            respriterSeat.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
+                    addWoodTexture(wood, handler, manager, "block/" + id.replace("chair", "seat"), () ->
+                            respriterSeat.recolorWithAnimation(targetPalette, plankTexture.getMetadata())
+                    );
 
                 } catch (Exception ex) {
                     handler.getLogger().error("Failed to generate Chair block texture for for {} : {}", table, ex);
@@ -315,8 +316,11 @@ public class AnotherFurnitureModule extends CompatModule {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id.replace("shelf", "supports"), () ->
-                            respriter.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
+
+                    addWoodTexture(wood, handler, manager, "block/" + id.replace("shelf", "supports"), () ->
+                            respriter.recolorWithAnimation(targetPalette, plankTexture.getMetadata())
+                    );
+
 
                 } catch (Exception ex) {
                     handler.getLogger().error("Failed to generate Shelf block texture for for {} : {}", table, ex);

@@ -172,7 +172,7 @@ public class TwilightForestModule extends CompatModule {
         pack.addTag(modRes("hollow_logs_vertical"), hollow_logs_vertical, Registry.BLOCK_REGISTRY);
         pack.addTag(modRes("hollow_logs_climbable"), hollow_logs_climbable, Registry.BLOCK_REGISTRY);
         pack.addTag(modRes("hollow_logs_horizontal"), hollow_logs_horizontal, Registry.BLOCK_REGISTRY);
-        //pack.addTag(modRes("hollow_logs"), hollow_logs_vertical, Registry.ITEM_REGISTRY);
+        pack.addTag(new ResourceLocation("climbable"), hollow_logs_climbable, Registry.BLOCK_REGISTRY);
     }
 
     //recipes

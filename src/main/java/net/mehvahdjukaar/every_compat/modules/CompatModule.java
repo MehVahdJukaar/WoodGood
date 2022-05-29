@@ -4,9 +4,11 @@ import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.selene.block_set.BlockType;
-import net.mehvahdjukaar.selene.block_set.IBlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.*;
 import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -28,6 +30,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 
@@ -104,14 +107,17 @@ public abstract class CompatModule {
         if (registry.containsKey(new ResourceLocation(modId, name)) ||
                 registry.containsKey(new ResourceLocation(modId, name2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
+
+        String woodFrom = name.replace("/" + name3, "");
+        if (registry.containsKey(new ResourceLocation(woodFrom, name3))) return true;
+
         for (var c : WoodGood.COMPETITOR_MODS) {
-            String id = c.modId();
-            String woodFrom = name.replace("/"+name3, "");
+            String compatModId = c.modId();
             for (var s : c.supportedMods()) {
-                if (s.equals(woodFrom) && registry.containsKey(new ResourceLocation(id, name3))) return true;
+                if (s.equals(woodFrom) && registry.containsKey(new ResourceLocation(compatModId, name3))) return true;
             }
-            if (registry.containsKey(new ResourceLocation(id, name)) ||
-                    registry.containsKey(new ResourceLocation(id, name2))) return true;
+            if (registry.containsKey(new ResourceLocation(compatModId, name)) ||
+                    registry.containsKey(new ResourceLocation(compatModId, name2))) return true;
         }
         return false;
     }
@@ -155,10 +161,10 @@ public abstract class CompatModule {
 
     @Deprecated
     protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
-                                                                  Map<T, Block> blocks,
-                                                                  IdModifier textTransform,
-                                                                  IdModifier pathTransform,
-                                                                  ResourceLocation... jsonsLocations) {
+                                                                 Map<T, Block> blocks,
+                                                                 IdModifier textTransform,
+                                                                 IdModifier pathTransform,
+                                                                 ResourceLocation... jsonsLocations) {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
 
         blocks.forEach((wood, value) -> {
@@ -179,7 +185,7 @@ public abstract class CompatModule {
 
     //creates and add new jsons based off the ones at the given resources with the provided modifiers
     protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
-                                                                  Map<T, Block> blocks, String replaceTarget, ResourceLocation... jsonsLocations) {
+                                                                 Map<T, Block> blocks, String replaceTarget, ResourceLocation... jsonsLocations) {
         addBlockResources(manager, handler, blocks,
                 BlockTypeResourceTransform.<T>create(modId, manager)
                         .replaceSimpleBlock(modId, replaceTarget)
@@ -188,8 +194,8 @@ public abstract class CompatModule {
     }
 
     protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
-                                                                  Map<T, Block> blocks,
-                                                                  BlockTypeResourceTransform<T> modifier, ResourceLocation... jsonsLocations) {
+                                                                 Map<T, Block> blocks,
+                                                                 BlockTypeResourceTransform<T> modifier, ResourceLocation... jsonsLocations) {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
 
         blocks.forEach((wood, value) -> {
@@ -236,4 +242,35 @@ public abstract class CompatModule {
         WoodType.OAK_WOOD_TYPE.addChild(category, ForgeRegistries.BLOCKS.getValue(modRes(oakBlockName)));
     }
 
+
+    //post process some textures. currently only ecologics azalea
+    protected void addWoodTexture(WoodType wood, ClientDynamicResourcesHandler handler, ResourceManager manager,
+                                  String path, Supplier<TextureImage> textureSupplier){
+        handler.addTextureIfNotPresent(manager, path, ()->{
+            var t = textureSupplier.get();
+             maybeFlowerAzalea(t,   manager,   wood);
+             return t;
+        });
+    }
+
+    //for ecologics
+    protected void maybeFlowerAzalea(TextureImage image, ResourceManager manager, WoodType woodType) {
+        if (woodType.getId().toString().equals("ecologics:flowering_azalea")) {
+            WoodType azalea = WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("ecologics:azalea"));
+            if (azalea != null) {
+                try (TextureImage mask = TextureImage.open(manager,
+                        WoodGood.res("blocks/ecologics_overlay"));
+                     TextureImage plankTexture = TextureImage.open(manager,
+                             RPUtils.findFirstBlockTextureLocation(manager, azalea.planks))) {
+
+                    Respriter respriter = Respriter.of(image);
+                    respriter.recolorWithAnimationOf(plankTexture);
+                    image.applyOverlay(mask);
+
+                } catch (Exception e) {
+                    WoodGood.LOGGER.warn("failed to apply azalea overlay: ", e);
+                }
+            }
+        }
+    }
 }

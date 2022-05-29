@@ -131,13 +131,13 @@ public class TwigsModule extends CompatModule {
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                     targetPalette.forEach(p -> p.remove(p.getDarkest()));
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id, () ->
+                    addWoodTexture(wood, handler, manager, "block/" + id, () ->
                             respriterMain.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id + "_top", () ->
+                    addWoodTexture(wood, handler, manager, "block/" + id + "_top", () ->
                             respriterTop.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
 
-                    handler.addTextureIfNotPresent(manager, "block/" + id + "_bottom", () ->
+                    addWoodTexture(wood, handler, manager, "block/" + id + "_bottom", () ->
                             respriterBottom.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
 
                 } catch (Exception ex) {

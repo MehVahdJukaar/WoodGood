@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecoBlocksModule;
@@ -12,12 +13,15 @@ import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModul
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.fluids.SoftFluidRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,6 +30,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import org.apache.commons.compress.archivers.sevenz.CLI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -57,6 +62,9 @@ public class WoodGood {
         ACTIVE_MODULES.forEach(action);
     }
 
+    public static ServerDynamicResourcesHandler SERVER_RESOURCES = null;
+    public static ClientDynamicResourcesHandler CLIENT_RESOURCES = null;
+
     public WoodGood() {
 
         //addCompetitorMod("much_more_mod_compat");
@@ -78,17 +86,18 @@ public class WoodGood {
         //bus.addListener(WoodGood::init);
         bus.register(this);
 
-        // MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::register);
 
-        var serverRes = new ServerDynamicResourcesHandler();
-        serverRes.register(bus);
+        SERVER_RESOURCES = new ServerDynamicResourcesHandler();
+        SERVER_RESOURCES.register(bus);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            var clientRes = new ClientDynamicResourcesHandler();
-            clientRes.register(bus);
-        }
+            CLIENT_RESOURCES = new ClientDynamicResourcesHandler();
+            CLIENT_RESOURCES.register(bus);
+        }else CLIENT_RESOURCES = null;
 
     }
+
 
 
     private void addCompetitorMod(String modId, List<String> supportedMods) {

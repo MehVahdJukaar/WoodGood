@@ -200,7 +200,9 @@ public class DecoBlocksModule extends CompatModule {
         this.addBlockResources(manager, handler, SUPPORTS,
                 BlockTypeResourceTransform.wood(modId, manager)
                         .idReplaceType("oak")
-                        .replaceSimpleBlock(modId, "oak_support"),
+                        .replaceSimpleBlock(modId, "oak_support")
+                        .addModifier((s, id, w) -> s.replace("decorative_blocks:block/oak_upside_down_support",
+                                id.getNamespace() + ":block/" + id.getPath().replace("support","upside_down_support"))),
                 ResType.ITEM_MODELS.getPath(modRes("oak_support")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_big")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_small")),
