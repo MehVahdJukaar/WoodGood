@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
+import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
@@ -164,19 +165,19 @@ public class QuarkModule extends CompatModule {
     public void registerItems(IForgeRegistry<Item> registry) {
         CreativeModeTab tab = CreativeModeTab.TAB_DECORATIONS;
 
-        POSTS.forEach((key, value) -> {
-            Item i = new BlockItem(value, new Item.Properties().tab(tab));
-            POST_ITEMS.put(key, i);
+        POSTS.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), w);
+            POST_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
-        STRIPPED_POSTS.forEach((key, value) -> {
-            Item i = new BlockItem(value, new Item.Properties().tab(tab));
-            STRIPPED_POST_ITEMS.put(key, i);
+        STRIPPED_POSTS.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab),w);
+            STRIPPED_POST_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
 
         HEDGES.forEach((key, value) -> {
-            Item i = new BlockItem(value, new Item.Properties().tab(tab));
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), 200);
             HEDGE_ITEMS.put(key, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
 

@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.twilightforest;
 
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
+import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
@@ -98,15 +99,14 @@ public class TwilightForestModule extends CompatModule {
             HOLLOW_LOGS_VERTICAL.put(w, vertical);
             w.addChild(this.shortenedId() + "/hollow_log", vertical);
 
-
         }
     }
 
     @Override
     public void registerItems(IForgeRegistry<Item> registry) {
-        BANISTERS.forEach((key, value) -> {
-            Item i = new BlockItem(value, new Item.Properties().tab(TFItems.creativeTab));
-            BANISTER_ITEMS.put(key, i);
+        BANISTERS.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(TFItems.creativeTab), w);
+            BANISTER_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
         HOLLOW_LOGS_VERTICAL.forEach((w, b) -> {

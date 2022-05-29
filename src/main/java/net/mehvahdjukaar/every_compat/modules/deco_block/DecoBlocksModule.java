@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.deco_block;
 
+import com.crispytwig.another_furniture.AnotherFurnitureMod;
 import lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes;
 import lilypuree.decorative_blocks.core.DBBlocks;
 import lilypuree.decorative_blocks.core.DBItems;
@@ -11,6 +12,7 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
@@ -25,7 +27,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FurnaceBlock;
+import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.*;
@@ -115,24 +121,24 @@ public class DecoBlocksModule extends CompatModule {
 
     @Override
     public void registerItems(IForgeRegistry<Item> registry) {
-        BEAMS.forEach((key, value) -> {
-            Item i = new BlockItem(value, DBItems.modItemProperties);
-            BEAM_ITEMS.put(key, i);
+        BEAMS.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, DBItems.modItemProperties, w);
+            BEAM_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
-        PALISADES.forEach((key, value) -> {
-            Item i = new BlockItem(value, DBItems.modItemProperties);
-            PALISADE_ITEMS.put(key, i);
+        PALISADES.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, DBItems.modItemProperties, w);
+            PALISADE_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
-        SUPPORTS.forEach((key, value) -> {
+        SUPPORTS.forEach((w, value) -> {
             Item i = new SupportItem(value, DBItems.modItemProperties);
-            SUPPORTS_ITEMS.put(key, i);
+            SUPPORTS_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
-        SEATS.forEach((key, value) -> {
+        SEATS.forEach((w, value) -> {
             Item i = new SeatItem(value, DBItems.modItemProperties);
-            SEAT_ITEMS.put(key, i);
+            SEAT_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
     }

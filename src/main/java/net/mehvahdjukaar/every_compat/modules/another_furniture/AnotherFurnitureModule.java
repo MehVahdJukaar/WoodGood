@@ -9,6 +9,7 @@ import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
@@ -98,19 +99,19 @@ public class AnotherFurnitureModule extends CompatModule {
 
     @Override
     public void registerItems(IForgeRegistry<Item> registry) {
-        TABLES.forEach((key, value) -> {
-            Item i = new BlockItem(value, new Item.Properties().tab(AnotherFurnitureMod.TAB));
-            TABLE_TIMES.put(key, i);
+        TABLES.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(AnotherFurnitureMod.TAB), w);
+            TABLE_TIMES.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
-        CHAIRS.forEach((key, value) -> {
-            Item i = new BlockItem(value, new Item.Properties().tab(AnotherFurnitureMod.TAB));
-            CHAIR_ITEMS.put(key, i);
+        CHAIRS.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(AnotherFurnitureMod.TAB), w);
+            CHAIR_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
-        SHELVES.forEach((key, value) -> {
-            Item i = new BlockItem(value, new Item.Properties().tab(AnotherFurnitureMod.TAB));
-            SHELF_ITEMS.put(key, i);
+        SHELVES.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(AnotherFurnitureMod.TAB), w);
+            SHELF_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
     }

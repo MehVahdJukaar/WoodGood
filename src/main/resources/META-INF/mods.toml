@@ -13,7 +13,7 @@ modId="everycomp" #mandatory
 
 version="${file.jarVersion}" #mandatory
 
-displayName="Wood Good" #mandatory
+displayName="Every Compat" #mandatory
 
 updateJSONURL="http://myurl.me/" #optional
 

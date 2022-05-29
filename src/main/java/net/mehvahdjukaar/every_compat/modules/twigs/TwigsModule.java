@@ -5,6 +5,7 @@ import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
@@ -59,9 +60,9 @@ public class TwigsModule extends CompatModule {
 
     @Override
     public void registerItems(IForgeRegistry<Item> registry) {
-        TABLES.forEach((key, value) -> {
-            Item i = new BlockItem(value, new Item.Properties().tab(Twigs.ITEM_GROUP));
-            TABLE_TIMES.put(key, i);
+        TABLES.forEach((w, value) -> {
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(Twigs.ITEM_GROUP),w);
+            TABLE_TIMES.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
     }
