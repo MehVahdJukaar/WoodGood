@@ -8,18 +8,12 @@ import net.mehvahdjukaar.selene.Selene;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
-import net.mehvahdjukaar.selene.resourcepack.recipe.ShapedRecipeTemplate;
-import net.mehvahdjukaar.selene.resourcepack.recipe.ShapelessRecipeTemplate;
-import net.mehvahdjukaar.selene.resourcepack.recipe.StoneCutterRecipeTemplate;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Map;
 
@@ -39,7 +33,7 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
         for (var j : jsons.entrySet()) {
             try {
                 if (j.getValue() instanceof JsonObject jo) {
-                    IRecipeTemplate<?> template = readRecipeAsTemplate(jo);
+                    IRecipeTemplate<?> template = IRecipeTemplate.read(jo);
                     boolean ad = false;
                     for (var w : WoodTypeRegistry.WOOD_TYPES.values()) {
                         FinishedRecipe newR;
@@ -47,9 +41,10 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
                             //not adding oak for now //TODO: remove
                             continue;
                         }
-                        newR = template.createSimilar(WoodType.OAK_WOOD_TYPE, w, w.planks.asItem());
-                        //TODO: add
                         ResourceLocation res = WoodGood.res(w.getAppendableId() + j.getKey().getPath());
+
+                        newR = template.createSimilar(WoodType.OAK_WOOD_TYPE, w, w.planks.asItem(), res.toString());
+
                         WoodGood.SERVER_RESOURCES.getPack().addRecipe(newR);
                         if (!ad) {
                             ad = true;
@@ -62,24 +57,9 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
             }
         }
         if (added != 0)
-            Selene.LOGGER.info("Added {} Custom Recipes for all {} wood types", added, WoodTypeRegistry.WOOD_TYPES.size());
+            WoodGood.LOGGER.info("Added {} Custom Recipes for all {} wood types", added, WoodTypeRegistry.WOOD_TYPES.size());
     }
 
-
-    //TODO: replace with lib
-    @Deprecated
-    public static IRecipeTemplate<?> readRecipeAsTemplate(JsonObject recipe) {
-        String type = GsonHelper.getAsString(recipe, "type");
-        RecipeSerializer<?> s = ForgeRegistries.RECIPE_SERIALIZERS.getValue(new ResourceLocation(type));
-        if (s == RecipeSerializer.SHAPED_RECIPE) {
-            return ShapedRecipeTemplate.fromJson(recipe);
-        } else if (s == RecipeSerializer.SHAPELESS_RECIPE) {
-            return ShapelessRecipeTemplate.fromJson(recipe);
-        } else if (s == RecipeSerializer.STONECUTTER) {
-            return StoneCutterRecipeTemplate.fromJson(recipe);
-        }
-        throw new UnsupportedOperationException(String.format("Invalid recipe serializer: %s. Must be either shaped, shapeless or stonecutting", s));
-    }
 
 }
 

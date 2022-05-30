@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +23,11 @@ public class WoodGoodClient {
     @SubscribeEvent
     public static void entityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         WoodGood.forAllModules(m -> m.registerEntityRenderers(event));
+    }
+
+    @SubscribeEvent
+    public static void stitchTextures(TextureStitchEvent.Pre event) {
+        WoodGood.forAllModules(m -> m.onTextureStitch(event));
     }
 
     @SubscribeEvent

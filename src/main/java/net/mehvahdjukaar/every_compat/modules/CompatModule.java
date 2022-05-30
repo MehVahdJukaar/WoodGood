@@ -7,6 +7,7 @@ import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.*;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -50,7 +52,7 @@ public abstract class CompatModule {
 
     @Override
     public String toString() {
-        return "GoodWood " + modId + " Module";
+        return "EveryCompat " + LangBuilder.getReadableName(modId) + " Module";
     }
 
     public ResourceLocation modRes(String string) {
@@ -151,6 +153,8 @@ public abstract class CompatModule {
     public void registerColors(ColorHandlerEvent.Item event) {
     }
 
+    public void onTextureStitch(TextureStitchEvent.Pre event){};
+
     //utility functions
 
     @FunctionalInterface
@@ -219,10 +223,15 @@ public abstract class CompatModule {
     //creates and add new recipes based off the one at the given resource
     protected final void addBlocksRecipes(ResourceManager manager, RPAwareDynamicDataProvider handler,
                                           Map<WoodType, Block> blocks, String oakRecipe) {
+        addBlocksRecipes(manager, handler, blocks, oakRecipe, WoodType.OAK_WOOD_TYPE);
+    }
+
+    protected final void addBlocksRecipes(ResourceManager manager, RPAwareDynamicDataProvider handler,
+                                          Map<WoodType, Block> blocks, String oakRecipe, WoodType fromType) {
         IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager, ResType.RECIPES.getPath(modRes(oakRecipe)));
 
         blocks.forEach((w, b) -> {
-            FinishedRecipe newR = template.createSimilar(WoodType.OAK_WOOD_TYPE, w, w.planks.asItem());
+            FinishedRecipe newR = template.createSimilar(fromType, w, w.planks.asItem());
             handler.getPack().addRecipe(newR);
         });
     }
@@ -259,7 +268,7 @@ public abstract class CompatModule {
             WoodType azalea = WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("ecologics:azalea"));
             if (azalea != null) {
                 try (TextureImage mask = TextureImage.open(manager,
-                        WoodGood.res("blocks/ecologics_overlay"));
+                        WoodGood.res("block/ecologics_overlay"));
                      TextureImage plankTexture = TextureImage.open(manager,
                              RPUtils.findFirstBlockTextureLocation(manager, azalea.planks))) {
 

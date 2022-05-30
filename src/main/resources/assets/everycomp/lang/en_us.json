@@ -7,8 +7,13 @@
   "block.wood_good.beam": "%s Beam",
   "block.wood_good.seat": "%s Seat",
   "block.wood_good.post": "%s post",
-  "block.wood_good.stripped_post": "%s Stripped Post",
+  "block.wood_good.stripped_post": "Stripped %s Post",
+  "block.wood_good.bookshelf": "%s Bookshelf",
   "block.wood_good.hedge": "%s Leaf Hedge",
   "block.wood_good.hollow_log": "Hollow %s Log",
+  "block.wood_good.vertical_planks": "Vertical %s Planks",
+  "block.wood_good.cabinet": "%s Cabinet",
+  "block.wood_good.window": "%s Window",
+  "block.wood_good.window_pane": "%s Window Pane",
   "block.wood_good.banister": "%s Banister"
 }

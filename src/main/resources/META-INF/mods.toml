@@ -50,7 +50,7 @@ itemIcon="minecraft:oak_planks" #catalogue icon
 
     modId="selene"
     mandatory=true
-    versionRange="[1.18.2-1.16.4,]"
+    versionRange="[1.18.2-1.16.3,]"
     ordering="AFTER"
     side="BOTH"
 

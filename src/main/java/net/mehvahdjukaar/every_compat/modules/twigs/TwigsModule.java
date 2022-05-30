@@ -141,11 +141,11 @@ public class TwigsModule extends CompatModule {
                             respriterBottom.recolorWithAnimation(targetPalette, plankTexture.getMetadata()));
 
                 } catch (Exception ex) {
-                    handler.getLogger().error("Failed to generate Beam block texture for for {} : {}", table, ex);
+                    handler.getLogger().error("Failed to generate Table block texture for for {} : {}", table, ex);
                 }
             });
         } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Beam block texture : ", ex);
+            handler.getLogger().error("Could not generate any Table block texture : ", ex);
         }
     }
 

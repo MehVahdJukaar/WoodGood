@@ -15,6 +15,7 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
         WoodGood.forAllModules(m -> getPack().addNamespaces(m.getModId()));
         getPack().addNamespaces("minecraft");
         getPack().addNamespaces("supplementaries");
+        getPack().addNamespaces("forge");
     }
 
     @Override
