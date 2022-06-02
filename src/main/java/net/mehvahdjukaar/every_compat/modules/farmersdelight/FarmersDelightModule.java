@@ -3,17 +3,21 @@ package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.CompatShelfBlockTile;
+import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
+import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
+import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -77,25 +81,22 @@ public class FarmersDelightModule extends CompatModule {
     @Override
     public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         var pack = handler.dynamicPack;
-        List<ResourceLocation> beams = new ArrayList<>();
-        CABINETS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            beams.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("cabinets"), beams, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("cabinets"), beams, Registry.ITEM_REGISTRY);
+        CABINETS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder cabinets = TagBuilder.of(modRes("cabinets")).addEntries(CABINETS.values());
+        pack.addTag(cabinets, Registry.BLOCK_REGISTRY);
+        pack.addTag(cabinets, Registry.ITEM_REGISTRY);
     }
 
     //recipes
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlocksRecipes(manager, handler, CABINETS, "oak_cabinet");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, CABINETS, "oak_cabinet");
     }
 
     //models
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlockResources(manager, handler, CABINETS, "oak_cabinet",
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, CABINETS, "oak_cabinet",
                 ResType.ITEM_MODELS.getPath(modRes("oak_cabinet")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_cabinet")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_cabinet_open")),
@@ -105,8 +106,8 @@ public class FarmersDelightModule extends CompatModule {
 
     //translations
     @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
-        CABINETS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.cabinet", w, v));
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
+        CABINETS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.cabinet",(BlockType) w, v));
     }
 
     //textures

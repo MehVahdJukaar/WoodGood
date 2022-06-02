@@ -1,10 +1,13 @@
 package net.mehvahdjukaar.every_compat.modules.deco_block;
 
+import com.google.common.base.Stopwatch;
 import lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes;
 import lilypuree.decorative_blocks.core.DBBlocks;
 import lilypuree.decorative_blocks.core.DBItems;
 import lilypuree.decorative_blocks.items.SeatItem;
 import lilypuree.decorative_blocks.items.SupportItem;
+import net.mehvahdjukaar.every_compat.misc.Utils;
+import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
@@ -12,17 +15,15 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
-import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
-import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
-import net.mehvahdjukaar.selene.resourcepack.RPUtils;
-import net.mehvahdjukaar.selene.resourcepack.ResType;
+import net.mehvahdjukaar.selene.resourcepack.*;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 
+import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
+import net.minecraft.client.renderer.block.model.BlockModelDefinition;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -140,69 +141,69 @@ public class DecoBlocksModule extends CompatModule {
     @Override
     public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         var pack = handler.dynamicPack;
-        List<ResourceLocation> beams = new ArrayList<>();
-        BEAMS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            beams.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("beams"), beams, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("beams"), beams, Registry.ITEM_REGISTRY);
+        BEAMS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder beams = TagBuilder.of(modRes("beams")).addEntries(BEAMS.values());
+        pack.addTag(beams, Registry.BLOCK_REGISTRY);
+        pack.addTag(beams, Registry.ITEM_REGISTRY);
 
-        List<ResourceLocation> palisades = new ArrayList<>();
-        PALISADES.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            palisades.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("palisades"), palisades, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("palisades"), palisades, Registry.ITEM_REGISTRY);
+        PALISADES.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder palisades = TagBuilder.of(modRes("palisades")).addEntries(PALISADES.values());
+        pack.addTag(palisades, Registry.BLOCK_REGISTRY);
+        pack.addTag(palisades, Registry.ITEM_REGISTRY);
 
-        List<ResourceLocation> supports = new ArrayList<>();
-        SUPPORTS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            supports.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("supports"), supports, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("supports"), supports, Registry.ITEM_REGISTRY);
+        SUPPORTS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder supports = TagBuilder.of(modRes("supports")).addEntries(SUPPORTS.values());
+        pack.addTag(supports, Registry.BLOCK_REGISTRY);
+        pack.addTag(supports, Registry.ITEM_REGISTRY);
 
-        List<ResourceLocation> seats = new ArrayList<>();
-        SEATS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            seats.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("seats"), seats, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("seats"), seats, Registry.ITEM_REGISTRY);
+        SEATS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder seats = TagBuilder.of(modRes("seats")).addEntries(SEATS.values());
+        pack.addTag(seats, Registry.BLOCK_REGISTRY);
+        pack.addTag(seats, Registry.ITEM_REGISTRY);
     }
 
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlocksRecipes(manager, handler, BEAMS, "oak_beam");
-        this.addBlocksRecipes(manager, handler, PALISADES, "oak_palisade");
-        this.addBlocksRecipes(manager, handler, SUPPORTS, "oak_support");
-        this.addBlocksRecipes(manager, handler, SEATS, "oak_seat");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, BEAMS, "oak_beam");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, PALISADES, "oak_palisade");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, SUPPORTS, "oak_support");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, SEATS, "oak_seat");
     }
 
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlockResources(manager, handler, BEAMS, "oak_beam",
+        Stopwatch wa = Stopwatch.createStarted();
+        /*
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, BEAMS, "oak_beam",
                 ResType.ITEM_MODELS.getPath(modRes("oak_beam")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_beam_y")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_beam_x")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_beam_z")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_beam"))
         );
-        this.addBlockResources(manager, handler, PALISADES, "oak_palisade",
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, PALISADES, "oak_palisade",
                 ResType.ITEM_MODELS.getPath(modRes("oak_palisade")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_palisade_inventory")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_palisade_post")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_palisade_side")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_palisade"))
         );
-        this.addBlockResources(manager, handler, SUPPORTS,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceType("oak")
-                        .replaceSimpleBlock(modId, "oak_support")
-                        .addModifier((s, id, w) -> s.replace("decorative_blocks:block/oak_upside_down_support",
-                                id.getNamespace() + ":block/" + id.getPath().replace("support","upside_down_support"))),
+
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, SEATS, "oak_seat",
+                ResType.ITEM_MODELS.getPath(modRes("oak_seat")),
+                ResType.BLOCK_MODELS.getPath(modRes("oak_seat")),
+                ResType.BLOCK_MODELS.getPath(modRes("oak_seat_inventory")),
+                ResType.BLOCK_MODELS.getPath(modRes("oak_seat_post")),
+                ResType.BLOCK_MODELS.getPath(modRes("oak_seat_post_inventory")),
+                ResType.BLOCK_MODELS.getPath(modRes("oak_seat_top_post")),
+                ResType.BLOCKSTATES.getPath(modRes("oak_seat"))
+        );
+
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, SUPPORTS,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceType("oak")
+                        .replaceBlockType("oak")
+                        .addModifier((s, id, w) -> s),
                 ResType.ITEM_MODELS.getPath(modRes("oak_support")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_big")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_support_horizontal_small")),
@@ -215,26 +216,27 @@ public class DecoBlocksModule extends CompatModule {
                 ResType.BLOCK_MODELS.getPath(modRes("oak_upside_down_support_inventory")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_upside_down_support_post")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_upside_down_support_vertical_small")),
-                ResType.BLOCK_MODELS.getPath(modRes("oak_upside_down_support_vertical_big")),
-                ResType.BLOCKSTATES.getPath(modRes("oak_support"))
-        );
-        this.addBlockResources(manager, handler, SEATS, "oak_seat",
-                ResType.ITEM_MODELS.getPath(modRes("oak_seat")),
-                ResType.BLOCK_MODELS.getPath(modRes("oak_seat")),
-                ResType.BLOCK_MODELS.getPath(modRes("oak_seat_inventory")),
-                ResType.BLOCK_MODELS.getPath(modRes("oak_seat_post")),
-                ResType.BLOCK_MODELS.getPath(modRes("oak_seat_post_inventory")),
-                ResType.BLOCK_MODELS.getPath(modRes("oak_seat_top_post")),
-                ResType.BLOCKSTATES.getPath(modRes("oak_seat"))
-        );
+                ResType.BLOCK_MODELS.getPath(modRes("oak_upside_down_support_vertical_big"))
+        );*/
+        long l = wa.elapsed().toMillis();
+        Stopwatch wa2 = Stopwatch.createStarted();
+
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, SUPPORTS);
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, SEATS);
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, PALISADES);
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, BEAMS);
+
+        long l1 = wa2.elapsed().toMillis();
+
+        int a = 1;
     }
 
     @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
-        BEAMS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.beam", w, v));
-        SUPPORTS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.support", w, v));
-        PALISADES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.palisade", w, v));
-        SEATS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.seat", w, v));
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
+        BEAMS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.beam", (BlockType)w, v));
+        SUPPORTS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.support",(BlockType) w, v));
+        PALISADES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.palisade",(BlockType) w, v));
+        SEATS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.seat",(BlockType) w, v));
     }
 
     @Override

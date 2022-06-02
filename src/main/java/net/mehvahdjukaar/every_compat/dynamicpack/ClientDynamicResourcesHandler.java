@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.DynamicTexturePack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicTextureProvider;
@@ -36,13 +37,13 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
             try {
                 m.addStaticClientResources(this, manager);
             } catch (Exception e) {
-                getLogger().error("Failed to generate client static assets for module: {}", m);
+                getLogger().error("Failed to generate client static assets for module {}: {}", m, e);
             }
         });
     }
 
     @Override
-    public void addDynamicTranslations(DynamicLanguageManager.LanguageAccessor lang) {
+    public void addDynamicTranslations(AfterLanguageLoadEvent lang) {
         WoodGood.forAllModules(m->{
             m.addTranslations(this,lang);
         });
@@ -54,7 +55,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
             try {
                 m.addDynamicClientResources(this, manager);
             } catch (Exception e) {
-                getLogger().error("Failed to generate client dynamic assets for module: {}", m);
+                getLogger().error("Failed to generate client dynamic assets for module {}:", m, e);
             }
         });
     }

@@ -1,11 +1,17 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
+import com.google.common.base.Stopwatch;
+import com.google.gson.JsonElement;
+import com.mojang.datafixers.util.Pair;
+import net.mehvahdjukaar.every_compat.misc.Utils;
+import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
+import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
@@ -13,18 +19,24 @@ import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
+import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.moddingplayground.twigs.Twigs;
 import net.moddingplayground.twigs.block.TableBlock;
+import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
 
@@ -67,7 +79,7 @@ public class TwigsModule extends CompatModule {
     }
 
     @Override
-    public void onClientSetup(FMLClientSetupEvent event) {
+    public void onClientSetup() {
         TABLES.values().forEach(t -> ItemBlockRenderTypes.setRenderLayer(t, RenderType.cutout()));
     }
 
@@ -75,40 +87,47 @@ public class TwigsModule extends CompatModule {
     @Override
     public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         var pack = handler.dynamicPack;
-        List<ResourceLocation> beams = new ArrayList<>();
-        TABLES.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            beams.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("tables"), beams, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("tables"), beams, Registry.ITEM_REGISTRY);
+        TABLES.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder tables = TagBuilder.of(modRes("tables")).addEntries(TABLES.values());
+        pack.addTag(tables, Registry.BLOCK_REGISTRY);
+        pack.addTag(tables, Registry.ITEM_REGISTRY);
+    }
+
+    @Override
+    public String getModId() {
+        return super.getModId();
     }
 
     //recipes
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlocksRecipes(manager, handler, TABLES, "table/oak_table");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, TABLES, "table/oak_table");
     }
 
     //models
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlockResources(manager, handler, TABLES, "oak_table",
+
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, TABLES);
+        /*
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, TABLES, "oak_table",
                 ResType.ITEM_MODELS.getPath(modRes("oak_table")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_table")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_table"))
         );
+        */
     }
 
     //translations
     @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
-        TABLES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.table", w, v));
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
+        TABLES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.table",(BlockType) w, v));
     }
 
     //textures
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+
 
         try (TextureImage main = TextureImage.open(manager,
                 modRes("block/oak_table"));

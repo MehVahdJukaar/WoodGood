@@ -1,26 +1,28 @@
 package net.mehvahdjukaar.every_compat;
 
 
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.api.WoodGoodAPI;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
-import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
-import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
+import net.mehvahdjukaar.every_compat.modules.another_furniture.AFMS;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecoBlocksModule;
-import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
-import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
-import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
-import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModuleS;
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.resourcepack.RPUtils;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.SimpleReloadInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -31,6 +33,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.moddingplayground.twigs.Twigs;
+import net.moddingplayground.twigs.block.TableBlock;
+import net.moddingplayground.twigs.init.TwigsBlocks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -72,13 +77,16 @@ public class WoodGood {
         addCompetitorMod("decorative_compat", List.of("biomesoplenty"));
         addCompetitorMod("compat_makeover", List.of("biomemakeover"));
 
-        addModule("decorative_blocks", () -> DecoBlocksModule::new);
-        addModule("twigs", () -> TwigsModule::new);
-        addModule("quark", () -> QuarkModule::new);
-        addModule("another_furniture", () -> AnotherFurnitureModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
-        addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("create", () -> CreateModule::new);
+        //addModule("decorative_blocks", () -> DecoBlocksModule::new);
+        // addModule("twigs", () -> TwigsModuleS::new);
+         addModule("another_furniture", () -> AFMS::new);
+
+
+        //  addModule("quark", () -> QuarkModule::new);
+        //  addModule("another_furniture", () -> AnotherFurnitureModule::new);
+        //   addModule("twilightforest", () -> TwilightForestModule::new);
+        //  addModule("farmersdelight", () -> FarmersDelightModule::new);
+        //   addModule("create", () -> CreateModule::new);
 
         ACTIVE_MODULES.forEach(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
 
@@ -90,7 +98,7 @@ public class WoodGood {
         //bus.addListener(WoodGood::init);
         bus.register(this);
 
-         MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::register);
+        MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::onEarlyPackLoad);
 
         SERVER_RESOURCES = new ServerDynamicResourcesHandler();
         SERVER_RESOURCES.register(bus);
@@ -114,7 +122,7 @@ public class WoodGood {
     @SubscribeEvent
     public void init(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            ACTIVE_MODULES.forEach(m -> m.onModSetup(event));
+            ACTIVE_MODULES.forEach(CompatModule::onModSetup);
         });
     }
 

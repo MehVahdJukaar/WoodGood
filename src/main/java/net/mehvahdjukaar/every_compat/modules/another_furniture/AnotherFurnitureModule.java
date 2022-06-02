@@ -7,6 +7,7 @@ import com.crispytwig.another_furniture.render.ShelfRenderer;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
@@ -14,10 +15,8 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
-import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
-import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
-import net.mehvahdjukaar.selene.resourcepack.RPUtils;
-import net.mehvahdjukaar.selene.resourcepack.ResType;
+import net.mehvahdjukaar.selene.resourcepack.*;
+import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
@@ -28,7 +27,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.*;
@@ -123,7 +121,7 @@ public class AnotherFurnitureModule extends CompatModule {
     }
 
     @Override
-    public void onClientSetup(FMLClientSetupEvent event) {
+    public void onClientSetup() {
         CHAIRS.values().forEach(t -> ItemBlockRenderTypes.setRenderLayer(t, RenderType.cutout()));
     }
 
@@ -135,83 +133,75 @@ public class AnotherFurnitureModule extends CompatModule {
     @Override
     public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         var pack = handler.dynamicPack;
-        List<ResourceLocation> tables = new ArrayList<>();
-        TABLES.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            tables.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("tables"), tables, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("tables"), tables, Registry.ITEM_REGISTRY);
 
-        List<ResourceLocation> chairs = new ArrayList<>();
-        CHAIRS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            chairs.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("chairs"), chairs, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("chairs"), chairs, Registry.ITEM_REGISTRY);
+        TABLES.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder tables = TagBuilder.of(modRes("tables")).addEntries(TABLES.values());
+        pack.addTag(tables, Registry.BLOCK_REGISTRY);
+        pack.addTag(tables, Registry.ITEM_REGISTRY);
 
-        List<ResourceLocation> shelves = new ArrayList<>();
-        SHELVES.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            shelves.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("shelves"), shelves, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("shelves"), shelves, Registry.ITEM_REGISTRY);
+        CHAIRS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder chairs = TagBuilder.of(modRes("chairs")).addEntries(CHAIRS.values());
+        pack.addTag(chairs, Registry.BLOCK_REGISTRY);
+        pack.addTag(chairs, Registry.ITEM_REGISTRY);
+
+        SHELVES.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder shelves = TagBuilder.of(modRes("shelves")).addEntries(SHELVES.values());
+        pack.addTag(shelves, Registry.BLOCK_REGISTRY);
+        pack.addTag(shelves, Registry.ITEM_REGISTRY);
     }
 
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlocksRecipes(manager, handler, TABLES, "oak_table");
-        this.addBlocksRecipes(manager, handler, TABLES, "oak_shelf");
-        this.addBlocksRecipes(manager, handler, TABLES, "oak_chair");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, TABLES, "oak_table");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, TABLES, "oak_shelf");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, TABLES, "oak_chair");
     }
 
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
 
-        this.addBlockResources(manager, handler, TABLES,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceType("table/oak")
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, TABLES,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceType("table/oak")
                         .replaceBlockType("table/oak"),
                 ResType.BLOCK_MODELS.getPath(modRes("table/oak_leg")),
                 ResType.BLOCK_MODELS.getPath(modRes("table/oak_top"))
         );
-        this.addBlockResources(manager, handler, TABLES,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceType("oak")
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, TABLES,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceType("oak")
                         .replaceBlockType("table/oak"),
                 ResType.ITEM_MODELS.getPath(modRes("oak_table")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_table"))
         );
 
 
-        this.addBlockResources(manager, handler, CHAIRS,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceType("chair/oak")
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, CHAIRS,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceType("chair/oak")
                         .replaceBlockType("chair/oak"),
                 ResType.BLOCK_MODELS.getPath(modRes("chair/oak"))
         );
-        this.addBlockResources(manager, handler, CHAIRS,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceType("oak")
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, CHAIRS,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceType("oak")
                         .replaceBlockType("chair/oak"),
                 ResType.BLOCKSTATES.getPath(modRes("oak_chair")),
                 ResType.ITEM_MODELS.getPath(modRes("oak_chair"))
         );
 
-        this.addBlockResources(manager, handler, SHELVES,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceType("shelf/oak")
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, SHELVES,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceType("shelf/oak")
                         .replaceBlockType("shelf/oak"),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_full")),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_r")),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_l")),
                 ResType.BLOCK_MODELS.getPath(modRes("shelf/oak_top"))
         );
-        this.addBlockResources(manager, handler, SHELVES,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceType("oak")
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, SHELVES,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceType("oak")
                         .replaceBlockType("shelf/oak"),
                 ResType.BLOCKSTATES.getPath(modRes("oak_shelf")),
                 ResType.ITEM_MODELS.getPath(modRes("oak_shelf"))
@@ -219,7 +209,7 @@ public class AnotherFurnitureModule extends CompatModule {
     }
 
     @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
         TABLES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.table", w, v));
         CHAIRS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.chair", w, v));
         SHELVES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.shelf", w, v));

@@ -3,7 +3,9 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
+import net.mehvahdjukaar.every_compat.modules.farmersdelight.CompatCabinetBlockTile;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
@@ -12,22 +14,23 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
-import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
-import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
-import net.mehvahdjukaar.selene.resourcepack.RPUtils;
-import net.mehvahdjukaar.selene.resourcepack.ResType;
+import net.mehvahdjukaar.selene.resourcepack.*;
+import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -78,7 +81,7 @@ public class QuarkModule extends CompatModule {
     public static final String HEDGE_NAME = "hedge";
     public static final Map<LeavesType, Block> HEDGES = new HashMap<>();
     public static final Map<LeavesType, Item> HEDGE_ITEMS = new HashMap<>();
-
+    public static BlockEntityType<CompatChestBlockTile> COMPAT_CHEST_TILE = null;
 
     @Override
     public void registerWoodBlocks(IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
@@ -250,103 +253,90 @@ public class QuarkModule extends CompatModule {
     @Override
     public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         var pack = handler.dynamicPack;
-        List<ResourceLocation> posts = new ArrayList<>();
-        List<ResourceLocation> hedges = new ArrayList<>();
-        List<ResourceLocation> bookshelves = new ArrayList<>();
-        List<ResourceLocation> verticalPlanks = new ArrayList<>();
-        POSTS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            posts.add(value.getRegistryName());
-        });
-        STRIPPED_POSTS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            posts.add(value.getRegistryName());
-        });
-        BOOKSHELVES.forEach((wood, value) -> {
-            //pack.addSimpleBlockLootTable(value);
-            bookshelves.add(value.getRegistryName());
-        });
-        VERTICAL_PLANKS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            verticalPlanks.add(value.getRegistryName());
-        });
-        HEDGES.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            hedges.add(value.getRegistryName());
-        });
-        pack.addTag(new ResourceLocation("forge","bookshelves"), bookshelves, Registry.BLOCK_REGISTRY);
-        pack.addTag(new ResourceLocation("forge","bookshelves"), bookshelves, Registry.ITEM_REGISTRY);
-        pack.addTag(new ResourceLocation("planks"), verticalPlanks, Registry.BLOCK_REGISTRY);
-        pack.addTag(new ResourceLocation("supplementaries", "posts"), posts, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("hedges"), hedges, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("hedges"), hedges, Registry.ITEM_REGISTRY);
-        posts.addAll(hedges);
-        posts.addAll(bookshelves);
-        pack.addTag(new ResourceLocation("minecraft:mineable/axe"), posts, Registry.BLOCK_REGISTRY);
+
+        TagBuilder bookshelves = TagBuilder.of(Tags.Items.BOOKSHELVES).addEntries(BOOKSHELVES.values());
+        pack.addTag(bookshelves, Registry.BLOCK_REGISTRY);
+        pack.addTag(bookshelves, Registry.ITEM_REGISTRY);
+
+        POSTS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        STRIPPED_POSTS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder posts = TagBuilder.of(modRes("posts")).addEntries(POSTS.values()).addEntries(STRIPPED_POSTS.values());
+        pack.addTag(posts, Registry.BLOCK_REGISTRY);
+
+        VERTICAL_PLANKS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder verticalPlanks = TagBuilder.of(BlockTags.PLANKS).addEntries(VERTICAL_PLANKS.values());
+        pack.addTag(verticalPlanks, Registry.BLOCK_REGISTRY);
+
+        HEDGES.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder hedges = TagBuilder.of(modRes("hedges")).addEntries(HEDGES.values());
+        pack.addTag(hedges, Registry.BLOCK_REGISTRY);
+        pack.addTag(hedges, Registry.ITEM_REGISTRY);
+
+        pack.addTag(TagBuilder.of(BlockTags.MINEABLE_WITH_AXE).addTag(posts).addTag(hedges).addTag(bookshelves), Registry.BLOCK_REGISTRY);
     }
 
     //models
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         //posts
-        this.addBlockResources(manager, handler, POSTS, "oak_post",
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, POSTS, "oak_post",
                 ResType.ITEM_MODELS.getPath(modRes("oak_post")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_post"))
         );
-        this.addBlockResources(manager, handler, POSTS,
-                BlockTypeResourceTransform.wood(modId, manager)
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, POSTS,
+                BlockTypeResTransformer.wood(modId, manager)
                         .replaceWithTextureFromChild("minecraft:block/oak_log",
                                 "log", s -> !s.contains("top"))
-                        .idReplaceBlock("oak_post"),
+                        .IDReplaceBlock("oak_post"),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_post"))
         );
         //stripped posts
-        this.addBlockResources(manager, handler, STRIPPED_POSTS, "stripped_oak_post",
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, STRIPPED_POSTS, "stripped_oak_post",
                 ResType.ITEM_MODELS.getPath(modRes("stripped_oak_post")),
                 ResType.BLOCKSTATES.getPath(modRes("stripped_oak_post"))
         );
-        this.addBlockResources(manager, handler, STRIPPED_POSTS,
-                BlockTypeResourceTransform.wood(modId, manager)
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, STRIPPED_POSTS,
+                BlockTypeResTransformer.wood(modId, manager)
                         .replaceWithTextureFromChild("minecraft:block/stripped_oak_log",
                                 "stripped_log", s -> !s.contains("top"))
-                        .idReplaceBlock("stripped_oak_post"),
+                        .IDReplaceBlock("stripped_oak_post"),
                 ResType.BLOCK_MODELS.getPath(modRes("stripped_oak_post"))
         );
         //hedges
-        this.addBlockResources(manager, handler, HEDGES, "oak_hedge",
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, HEDGES, "oak_hedge",
                 ResType.ITEM_MODELS.getPath(modRes("oak_hedge")),
                 ResType.BLOCKSTATES.getPath(modRes("oak_hedge"))
         );
-        this.addBlockResources(manager, handler, HEDGES,
-                BlockTypeResourceTransform.leaves(modId, manager)
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, HEDGES,
+                BlockTypeResTransformer.leaves(modId, manager)
                         .replaceWithTextureFromChild("minecraft:block/oak_log",
                                 l -> l.woodType.log, s -> !s.contains("top"))
                         .replaceWithTextureFromChild("minecraft:block/oak_leaves", "leaves")
-                        .idReplaceBlock("oak_hedge"),
+                        .IDReplaceBlock("oak_hedge"),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_hedge_side")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_hedge_post")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_hedge_extend"))
         );
 
         //bookshelves
-        this.addBlockResources(manager, handler, BOOKSHELVES, "acacia_bookshelf",
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, BOOKSHELVES, "acacia_bookshelf",
                 ResType.ITEM_MODELS.getPath(modRes("acacia_bookshelf")),
                 ResType.BLOCKSTATES.getPath(modRes("acacia_bookshelf"))
         );
-        this.addBlockResources(manager, handler, BOOKSHELVES,
-                BlockTypeResourceTransform.wood(modId, manager)
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, BOOKSHELVES,
+                BlockTypeResTransformer.wood(modId, manager)
                         .replaceSimpleBlock(modId, "acacia_bookshelf")
                         .replaceWithTextureFromChild("block/acacia_planks", "planks")
-                        .idReplaceBlock("acacia_bookshelf"),
+                        .IDReplaceBlock("acacia_bookshelf"),
                 ResType.BLOCK_MODELS.getPath(modRes("acacia_bookshelf"))
         );
 
         //vertical planks
-        this.addBlockResources(manager, handler, VERTICAL_PLANKS,
-                BlockTypeResourceTransform.wood(modId, manager)
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, VERTICAL_PLANKS,
+                BlockTypeResTransformer.wood(modId, manager)
                         .replaceSimpleBlock(modId, "vertical_oak_planks")
                         .replaceWithTextureFromChild("block/oak_planks", "planks")
-                        .idReplaceBlock("vertical_oak_planks"),
+                        .IDReplaceBlock("vertical_oak_planks"),
                 ResType.ITEM_MODELS.getPath(modRes("vertical_oak_planks")),
                 ResType.BLOCKSTATES.getPath(modRes("vertical_oak_planks")),
                 ResType.BLOCK_MODELS.getPath(modRes("vertical_oak_planks"))
@@ -356,21 +346,21 @@ public class QuarkModule extends CompatModule {
     //recipes
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlocksRecipesL(manager, handler, HEDGES, "building/crafting/oak_hedge");
-        this.addBlocksRecipes(manager, handler, BOOKSHELVES, "building/crafting/acacia_bookshelf",
+        Utils.addLeavesRecipes(modId, manager, handler.dynamicPack, HEDGES, "building/crafting/oak_hedge");
+        Utils.addBlocksRecipes(modId, manager, handler.dynamicPack, BOOKSHELVES, "building/crafting/acacia_bookshelf",
                 WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("acacia")));
-        this.addBlocksRecipes(manager, handler, POSTS, "building/crafting/oak_post");
-        this.addBlocksRecipes(manager, handler, STRIPPED_POSTS, "building/crafting/stripped_oak_post");
-        this.addBlocksRecipes(manager, handler, VERTICAL_PLANKS, "building/crafting/vertplanks/vertical_oak_planks");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, POSTS, "building/crafting/oak_post");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, STRIPPED_POSTS, "building/crafting/stripped_oak_post");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, VERTICAL_PLANKS, "building/crafting/vertplanks/vertical_oak_planks");
 
-        this.addBlockResources(manager, handler, BOOKSHELVES, "acacia_bookshelf",
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, BOOKSHELVES, "acacia_bookshelf",
                 ResType.BLOCK_LOOT_TABLES.getPath(modRes("acacia_bookshelf"))
         );
     }
 
     //translations
     @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
         POSTS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.post", w, v));
         STRIPPED_POSTS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.stripped_post", w, v));
         HEDGES.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.hedge", w, v));
@@ -393,9 +383,12 @@ public class QuarkModule extends CompatModule {
 
                     List<Palette> palette = Palette.fromAnimatedImage(plankTexture);
                     for (var p : palette) {
+                        var l0 = p.getDarkest();
                         p.increaseDown();
                         p.increaseDown();
                         p.increaseDown();
+                        p.increaseDown();
+                        p.remove(l0);
                     }
 
                     addWoodTexture(wood, handler, manager, "block/" + id, () ->

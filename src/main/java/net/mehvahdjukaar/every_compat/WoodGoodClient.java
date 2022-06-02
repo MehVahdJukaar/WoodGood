@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat;
 
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.client.texture_renderer.RenderedTexturesManager;
 import net.minecraft.resources.ResourceLocation;
@@ -32,7 +33,9 @@ public class WoodGoodClient {
 
     @SubscribeEvent
     public static void init(final FMLClientSetupEvent event) {
-        WoodGood.forAllModules(m -> m.onClientSetup(event));
+        event.enqueueWork(()->{
+            WoodGood.forAllModules(CompatModule::onClientSetup);
+        });
     }
 
     @SubscribeEvent

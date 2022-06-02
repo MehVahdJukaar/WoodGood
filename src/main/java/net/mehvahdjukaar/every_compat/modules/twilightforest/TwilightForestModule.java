@@ -3,13 +3,16 @@ package net.mehvahdjukaar.every_compat.modules.twilightforest;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
-import net.mehvahdjukaar.selene.resourcepack.BlockTypeResourceTransform;
+import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
+import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
 import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.ResType;
+import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -124,7 +127,7 @@ public class TwilightForestModule extends CompatModule {
     }
 
     @Override
-    public void onClientSetup(FMLClientSetupEvent event) {
+    public void onClientSetup() {
         HOLLOW_LOGS_CLIMBABLE.values().forEach(t -> ItemBlockRenderTypes.setRenderLayer(t, RenderType.cutout()));
         HOLLOW_LOGS_HORIZONTAL.values().forEach(t -> ItemBlockRenderTypes.setRenderLayer(t, RenderType.cutout()));
     }
@@ -147,46 +150,36 @@ public class TwilightForestModule extends CompatModule {
     public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         var pack = handler.dynamicPack;
         //banisters
-        List<ResourceLocation> beams = new ArrayList<>();
-        List<ResourceLocation> hollow_logs_vertical = new ArrayList<>();
-        List<ResourceLocation> hollow_logs_horizontal = new ArrayList<>();
-        List<ResourceLocation> hollow_logs_climbable = new ArrayList<>();
-        BANISTERS.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            beams.add(value.getRegistryName());
-        });
-        HOLLOW_LOGS_CLIMBABLE.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            hollow_logs_climbable.add(value.getRegistryName());
-        });
-        HOLLOW_LOGS_VERTICAL.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            hollow_logs_vertical.add(value.getRegistryName());
-        });
-        HOLLOW_LOGS_HORIZONTAL.forEach((wood, value) -> {
-            pack.addSimpleBlockLootTable(value);
-            hollow_logs_horizontal.add(value.getRegistryName());
-        });
-        pack.addTag(modRes("banisters"), beams, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("banisters"), beams, Registry.ITEM_REGISTRY);
-        pack.addTag(modRes("hollow_logs_vertical"), hollow_logs_vertical, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("hollow_logs_climbable"), hollow_logs_climbable, Registry.BLOCK_REGISTRY);
-        pack.addTag(modRes("hollow_logs_horizontal"), hollow_logs_horizontal, Registry.BLOCK_REGISTRY);
-        pack.addTag(new ResourceLocation("climbable"), hollow_logs_climbable, Registry.BLOCK_REGISTRY);
+        BANISTERS.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder banisters = TagBuilder.of(modRes("banisters")).addEntries(BANISTERS.values());
+        pack.addTag(banisters, Registry.BLOCK_REGISTRY);
+        pack.addTag(banisters, Registry.ITEM_REGISTRY);
+
+        HOLLOW_LOGS_CLIMBABLE.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder hollow_logs_climbable = TagBuilder.of(modRes("hollow_logs_climbable")).addEntries(HOLLOW_LOGS_CLIMBABLE.values());
+        pack.addTag(hollow_logs_climbable, Registry.BLOCK_REGISTRY);
+
+        HOLLOW_LOGS_VERTICAL.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder hollow_logs_vertical = TagBuilder.of(modRes("hollow_logs_vertical")).addEntries(HOLLOW_LOGS_VERTICAL.values());
+        pack.addTag(hollow_logs_vertical, Registry.BLOCK_REGISTRY);
+
+        HOLLOW_LOGS_HORIZONTAL.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+        TagBuilder hollow_logs_horizontal = TagBuilder.of(modRes("hollow_logs_horizontal")).addEntries(HOLLOW_LOGS_HORIZONTAL.values());
+        pack.addTag(hollow_logs_horizontal, Registry.BLOCK_REGISTRY);
     }
 
     //recipes
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlocksRecipes(manager, handler, BANISTERS, "wood/oak_banister");
-        this.addBlocksRecipes(manager, handler, HOLLOW_LOGS_VERTICAL, "stonecutting/oak_log/hollow_oak_log");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, BANISTERS, "wood/oak_banister");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, HOLLOW_LOGS_VERTICAL, "stonecutting/oak_log/hollow_oak_log");
     }
 
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        this.addBlockResources(manager, handler, BANISTERS,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceBlock("oak_banister")
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, BANISTERS,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceBlock("oak_banister")
                         .replaceOakPlanks(),
                 ResType.ITEM_MODELS.getPath(modRes("oak_banister")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_banister_connected")),
@@ -196,7 +189,7 @@ public class TwilightForestModule extends CompatModule {
                 ResType.BLOCK_MODELS.getPath(modRes("oak_banister_tall")),
                 ResType.BLOCK_MODELS.getPath(modRes("oak_banister_tall_extended"))
         );
-        this.addBlockResources(manager, handler, BANISTERS, "oak_banister",
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, BANISTERS, "oak_banister",
                 ResType.BLOCKSTATES.getPath(modRes("oak_banister"))
         );
 
@@ -205,21 +198,21 @@ public class TwilightForestModule extends CompatModule {
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         //hollow logs
-        this.addBlockResources(manager, handler, HOLLOW_LOGS_VERTICAL,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .replaceBlockType("hollow_oak")
-                        .idReplaceType("hollow_oak"),
+        //Utils.addStandardResources(modId, manager, handler.dynamicPack);
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, HOLLOW_LOGS_VERTICAL,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .replaceBlockType("oak")
+                        .IDReplaceType("oak"),
                 ResType.BLOCKSTATES.getPath(modRes("hollow_oak_log_horizontal")),
                 ResType.BLOCKSTATES.getPath(modRes("hollow_oak_log_vertical")),
                 ResType.BLOCKSTATES.getPath(modRes("hollow_oak_log_climbable")),
                 ResType.ITEM_MODELS.getPath(modRes("hollow_oak_log"))
         );
-        this.addBlockResources(manager, handler, HOLLOW_LOGS_VERTICAL,
-                BlockTypeResourceTransform.wood(modId, manager)
-                        .idReplaceType("hollow_oak")
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, HOLLOW_LOGS_VERTICAL,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .IDReplaceType("oak")
                         .replaceOakBark()
-                        .replaceWithTextureFromChild("minecraft:block/stripped_oak_log",
-                                "stripped_log", s -> !s.contains("top")),
+                        .replaceOakStripped(),
                 ResType.BLOCK_MODELS.getPath(modRes("hollow_oak_log_climbable_ladder")),
                 ResType.BLOCK_MODELS.getPath(modRes("hollow_oak_log_climbable_vine")),
                 ResType.BLOCK_MODELS.getPath(modRes("hollow_oak_log_horizontal")),
@@ -232,7 +225,7 @@ public class TwilightForestModule extends CompatModule {
 
     //translations
     @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
         BANISTERS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.banister", w, v));
         HOLLOW_LOGS_VERTICAL.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.hollow_log", w, v));
     }

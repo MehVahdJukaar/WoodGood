@@ -19,6 +19,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -63,22 +65,15 @@ public abstract class CompatModule {
         return this.shortenedId() + "/" + type.getVariantId(blockName, false);
     }
 
-    public void onModSetup(FMLCommonSetupEvent event) {
-
+    public void onModSetup() {
     }
-
-
-    public void onClientSetup(FMLClientSetupEvent event) {
+    
+    public void onClientSetup() {
 
     }
 
     public void registerWoodBlocks(IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
-        String test = "aa";
-        for (WoodType w : woodTypes) {
-            String name = w.getVariantId(test, true);
-            if (isEntryAlreadyRegistered(name, registry) || w.isVanilla()) continue;
 
-        }
     }
 
     public void registerLeavesBlocks(IForgeRegistry<Block> registry, Collection<LeavesType> leavesTypes) {
@@ -101,7 +96,7 @@ public abstract class CompatModule {
 
     }
 
-    protected final boolean isEntryAlreadyRegistered(String name, IForgeRegistry<?> registry) {
+    public final boolean isEntryAlreadyRegistered(String name, IForgeRegistry<?> registry) {
         name = name.replace(this.shortenedId() + "/", ""); //af/quark/blossom_chair
         if (name.startsWith(modId + "/")) return true;        //discards one from this mod
         String name2 = name.replace("/", "_"); //quark_blossom_chair
@@ -147,105 +142,16 @@ public abstract class CompatModule {
 
     }
 
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, DynamicLanguageManager.LanguageAccessor lang) {
+    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
     }
 
     public void registerColors(ColorHandlerEvent.Item event) {
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void onTextureStitch(TextureStitchEvent.Pre event){};
 
     //utility functions
-
-    @FunctionalInterface
-    protected interface IdModifier extends BiFunction<String, String, String> {
-        @Override
-        String apply(String original, String id);
-    }
-
-    @Deprecated
-    protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
-                                                                 Map<T, Block> blocks,
-                                                                 IdModifier textTransform,
-                                                                 IdModifier pathTransform,
-                                                                 ResourceLocation... jsonsLocations) {
-        List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
-
-        blocks.forEach((wood, value) -> {
-            String id = value.getRegistryName().getPath();
-            for (var res : original) {
-                try {
-
-                    handler.getPack().addSimilarJsonResource(res,
-                            s -> textTransform.apply(s, id),
-                            s -> pathTransform.apply(s, id)
-                    );
-                } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate model from {}", res.location);
-                }
-            }
-        });
-    }
-
-    //creates and add new jsons based off the ones at the given resources with the provided modifiers
-    protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
-                                                                 Map<T, Block> blocks, String replaceTarget, ResourceLocation... jsonsLocations) {
-        addBlockResources(manager, handler, blocks,
-                BlockTypeResourceTransform.<T>create(modId, manager)
-                        .replaceSimpleBlock(modId, replaceTarget)
-                        .idReplaceBlock(replaceTarget),
-                jsonsLocations);
-    }
-
-    protected final <T extends BlockType> void addBlockResources(ResourceManager manager, RPAwareDynamicResourceProvider<?> handler,
-                                                                 Map<T, Block> blocks,
-                                                                 BlockTypeResourceTransform<T> modifier, ResourceLocation... jsonsLocations) {
-        List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
-
-        blocks.forEach((wood, value) -> {
-
-            for (var res : original) {
-                try {
-                    StaticResource newRes = modifier.transform(res, value.getRegistryName(), wood);
-
-                    assert newRes.location != res.location : "ids cant be the same";
-
-                    handler.dynamicPack.addResource(newRes);
-                } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate model from {}", res.location);
-                }
-            }
-        });
-    }
-
-
-    //TODO: generalize
-    //creates and add new recipes based off the one at the given resource
-    protected final void addBlocksRecipes(ResourceManager manager, RPAwareDynamicDataProvider handler,
-                                          Map<WoodType, Block> blocks, String oakRecipe) {
-        addBlocksRecipes(manager, handler, blocks, oakRecipe, WoodType.OAK_WOOD_TYPE);
-    }
-
-    protected final void addBlocksRecipes(ResourceManager manager, RPAwareDynamicDataProvider handler,
-                                          Map<WoodType, Block> blocks, String oakRecipe, WoodType fromType) {
-        IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager, ResType.RECIPES.getPath(modRes(oakRecipe)));
-
-        blocks.forEach((w, b) -> {
-            FinishedRecipe newR = template.createSimilar(fromType, w, w.planks.asItem());
-            handler.getPack().addRecipe(newR);
-        });
-    }
-
-    //creates and add new recipes based off the one at the given resource
-    protected final void addBlocksRecipesL(ResourceManager manager, RPAwareDynamicDataProvider handler,
-                                           Map<LeavesType, Block> blocks, String oakRecipe) {
-        IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager, ResType.RECIPES.getPath(modRes(oakRecipe)));
-
-        blocks.forEach((w, b) -> {
-            FinishedRecipe newR = template.createSimilar(LeavesType.OAK_LEAVES_TYPE, w, w.leaves.asItem());
-            handler.getPack().addRecipe(newR);
-        });
-    }
 
     protected final void addChildToOak(String category, String oakBlockName) {
         WoodType.OAK_WOOD_TYPE.addChild(category, ForgeRegistries.BLOCKS.getValue(modRes(oakBlockName)));
@@ -253,7 +159,7 @@ public abstract class CompatModule {
 
 
     //post process some textures. currently only ecologics azalea
-    protected void addWoodTexture(WoodType wood, ClientDynamicResourcesHandler handler, ResourceManager manager,
+    public void addWoodTexture(WoodType wood, RPAwareDynamicTextureProvider handler, ResourceManager manager,
                                   String path, Supplier<TextureImage> textureSupplier){
         handler.addTextureIfNotPresent(manager, path, ()->{
             var t = textureSupplier.get();
