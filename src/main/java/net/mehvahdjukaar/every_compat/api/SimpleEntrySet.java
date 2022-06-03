@@ -33,6 +33,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -55,6 +56,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     protected final Function<T, B> blockFactory;
     @Nullable
     protected final TileHolder<?> tileHolder;
+    @Nullable
+    protected final TriFunction<T, B, Item.Properties, Item> itemFactory;
 
     protected final CreativeModeTab tab;
     private final boolean copyLoot;
@@ -70,6 +73,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     private SimpleEntrySet(String name, @Nullable String prefix, Function<T, B> blockSupplier,
                            Supplier<B> baseBlock, Supplier<T> baseType,
                            CreativeModeTab tab, boolean copyLoot,
+                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                            @Nullable TileHolder<?> tileFactory,
                            @Nullable Supplier<Supplier<RenderType>> renderType,
                            @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier) {
@@ -83,6 +87,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.formattedName = (prefix == null ? "" : prefix + "_") + "%s_" + name;
         this.baseBlock = baseBlock;
         this.baseType = baseType;
+        this.itemFactory = itemFactory;
 
         this.renderType = renderType;
         this.paletteSupplier = paletteSupplier;
@@ -93,7 +98,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     public void addTranslations(AfterLanguageLoadEvent lang) {
-        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good." + name, (BlockType) w, v));
+        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block." + WoodGood.MOD_ID + "." + name, (BlockType) w, v));
     }
 
     public void registerWoodBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
@@ -110,7 +115,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void registerBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<T> woodTypes) {
-        baseType.get().addChild(module.shortenedId() + "/" + baseName, baseBlock.get());
+        Block base = baseBlock.get();
+        if (base == null)
+            throw new UnsupportedOperationException("Base block cant be null");
+        baseType.get().addChild(module.shortenedId() + "/" + baseName, base);
 
         for (T w : woodTypes) {
             String name = module.makeBlockId(w, this.name);
@@ -127,7 +135,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public void registerItems(CompatModule module, IForgeRegistry<Item> registry) {
         blocks.forEach((w, value) -> {
             Item i;
-            if (w.getClass() == WoodType.class) {
+            if (itemFactory != null) {
+                i = itemFactory.apply(w, value, new Item.Properties().tab(tab));
+            } else if (w.getClass() == WoodType.class) {
                 i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), (WoodType) w);
             } else {
                 int burn = baseBlock.get().asItem().getBurnTime(baseBlock.get().asItem().getDefaultInstance(), null);
@@ -137,6 +147,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                     i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), burn);
                 }
             }
+
             this.items.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
@@ -146,7 +157,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public void registerTiles(CompatModule module, IForgeRegistry<BlockEntityType<?>> registry) {
         if (tileHolder != null) {
             var tile = this.tileHolder.createInstance(blocks.values().toArray(Block[]::new));
-            registry.register(tile.setRegistryName(module.modRes(this.getName())));
+            registry.register(tile.setRegistryName(WoodGood.res(module.shortenedId() + "_" + this.getName())));
         }
     }
 
@@ -179,11 +190,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Override
     public void addLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         if (copyLoot) {
-            blocks.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
-        } else {
             ResourceLocation reg = baseBlock.get().getRegistryName();
             Utils.addBlockResources(module.getModId(), manager, pack, blocks, reg.getPath(),
                     ResType.BLOCK_LOOT_TABLES.getPath(reg));
+
+        } else {
+            //drop self
+            blocks.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
         }
     }
 
@@ -305,7 +318,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         @Nullable
         private final String prefix;
         private CreativeModeTab tab = CreativeModeTab.TAB_DECORATIONS;
+        private boolean copyLoot = false;
         private final Function<T, B> blockFactory;
+        @Nullable
+        private TriFunction<T, B, Item.Properties, Item> itemFactory;
         @Nullable
         private TileHolder<?> tileFactory;
         @Nullable
@@ -315,7 +331,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         private final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         private final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
         private final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
-        private boolean copyLoot;
 
         private Builder(String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
             this.baseType = baseType;
@@ -326,7 +341,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         }
 
         public SimpleEntrySet<T, B> build() {
-            var e = new SimpleEntrySet<>(name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot, tileFactory, renderType, palette);
+            var e = new SimpleEntrySet<>(name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot,
+                    itemFactory, tileFactory, renderType, palette);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
@@ -348,6 +364,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return this;
         }
 
+        public Builder<T, B> addCustomItem(TriFunction<T, B, Item.Properties, Item> itemFactory) {
+            this.itemFactory = itemFactory;
+            return this;
+        }
+
         public Builder<T, B> setTab(CreativeModeTab tab) {
             this.tab = tab;
             return this;
@@ -359,7 +380,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         }
 
         public Builder<T, B> setRenderType(Supplier<Supplier<RenderType>> renderType) {
-            //this.renderType = renderType;
+            this.renderType = renderType;
             return this;
         }
 
@@ -414,6 +435,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 }
             });
         }
+
+
     }
 
 

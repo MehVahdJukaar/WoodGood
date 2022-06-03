@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.moddingplayground.twigs.Twigs;
 import net.moddingplayground.twigs.block.TableBlock;
@@ -12,15 +13,16 @@ import net.moddingplayground.twigs.init.TwigsBlocks;
 
 public class TwigsModuleS extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> TABLES;
+
     public TwigsModuleS(String modId) {
         super(modId, "tw");
 
-        SimpleEntrySet<?, ?> tables = SimpleEntrySet.builder("table",
+        TABLES = SimpleEntrySet.builder("table",
                         TwigsBlocks.OAK_TABLE, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new TableBlock(BlockBehaviour.Properties.copy(w.planks).instabreak()))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
-                .useLootFromBase()
                 .setTab(Twigs.ITEM_GROUP)
                 .setRenderType(()->RenderType::cutout)
                 .createPaletteFromOak((p)-> p.remove(p.getDarkest()))
@@ -29,6 +31,6 @@ public class TwigsModuleS extends SimpleModule {
                 .addTexture(modRes("block/oak_table_bottom"))
                 .build();
 
-        this.addEntry(tables);
+        this.addEntry(TABLES);
     }
 }

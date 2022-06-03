@@ -4,6 +4,7 @@ import com.crispytwig.another_furniture.block.entity.ShelfBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.ObjectHolder;
 
 public class CompatShelfBlockTile extends ShelfBlockEntity {
 
@@ -13,6 +14,10 @@ public class CompatShelfBlockTile extends ShelfBlockEntity {
 
     @Override
     public BlockEntityType<?> getType() {
-        return AnotherFurnitureModule.COMPAT_SHELF_TILE;
+        return TYPE;
     }
+
+    @ObjectHolder("everycomp:af_shelf")
+    public static BlockEntityType<?> TYPE = null;
+
 }

@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 
+import architectspalette.core.ArchitectsPalette;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.WoodGoodAPI;
@@ -9,7 +10,11 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AFMS;
+import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
+import net.mehvahdjukaar.every_compat.modules.create.CrS;
+import net.mehvahdjukaar.every_compat.modules.deco_block.DBS;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecoBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.farmersdelight.FDS;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModuleS;
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
@@ -80,6 +85,10 @@ public class WoodGood {
         //addModule("decorative_blocks", () -> DecoBlocksModule::new);
         // addModule("twigs", () -> TwigsModuleS::new);
          addModule("another_furniture", () -> AFMS::new);
+         addModule("farmersdelight", () -> FDS::new);
+         addModule("decorative_blocks", () -> DBS::new);
+         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+         addModule("create", () -> CrS::new);
 
 
         //  addModule("quark", () -> QuarkModule::new);
