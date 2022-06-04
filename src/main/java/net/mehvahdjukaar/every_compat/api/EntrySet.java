@@ -6,6 +6,7 @@ import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.resourcepack.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -56,16 +57,17 @@ public abstract class EntrySet<T extends BlockType, B extends Block> {
 
     public abstract void setRenderLayer();
 
-    public abstract void addTags(CompatModule module, DynamicDataPack pack, ResourceManager manager);
+    public abstract void generateTags(CompatModule module, DynamicDataPack pack, ResourceManager manager);
 
-    public abstract void addLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager);
+    public abstract void generateLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager);
 
-    public abstract void addRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager);
+    public abstract void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager);
 
-    public abstract void addModels(CompatModule module, DynamicTexturePack pack, ResourceManager manager);
+    public abstract void generateModels(CompatModule module, DynamicTexturePack pack, ResourceManager manager);
 
-    public abstract void addTextures(CompatModule module, RPAwareDynamicTextureProvider handler, ResourceManager manager);
+    public abstract void generateTextures(CompatModule module, RPAwareDynamicTextureProvider handler, ResourceManager manager);
 
 
     public abstract void registerEntityRenderers(CompatModule simpleModule, EntityRenderersEvent.RegisterRenderers event);
+
 }

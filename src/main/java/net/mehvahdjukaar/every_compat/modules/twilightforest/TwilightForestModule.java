@@ -226,8 +226,8 @@ public class TwilightForestModule extends CompatModule {
     //translations
     @Override
     public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
-        BANISTERS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.banister", w, v));
-        HOLLOW_LOGS_VERTICAL.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.wood_good.hollow_log", w, v));
+        BANISTERS.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.banister", w, v));
+        HOLLOW_LOGS_VERTICAL.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.hollow_log", w, v));
     }
 
 }

@@ -66,6 +66,7 @@ public abstract class CompatModule {
     }
 
     public void onModSetup() {
+
     }
     
     public void onClientSetup() {
@@ -179,8 +180,10 @@ public abstract class CompatModule {
                              RPUtils.findFirstBlockTextureLocation(manager, azalea.planks))) {
 
                     Respriter respriter = Respriter.of(image);
-                    respriter.recolorWithAnimationOf(plankTexture);
-                    image.applyOverlay(mask);
+                    var temp = respriter.recolorWithAnimationOf(plankTexture);
+
+                    image.applyOverlay(temp, mask);
+                    temp.close();
 
                 } catch (Exception e) {
                     WoodGood.LOGGER.warn("failed to apply azalea overlay: ", e);

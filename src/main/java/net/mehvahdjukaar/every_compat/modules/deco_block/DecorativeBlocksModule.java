@@ -20,13 +20,12 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DBS extends SimpleModule {
+public class DecorativeBlocksModule extends SimpleModule {
 
     public final Map<WoodType, DBWoodType> WT_CONVERSION = new HashMap<>();
     public final SimpleEntrySet<WoodType, Block> BEAMS;
@@ -34,7 +33,7 @@ public class DBS extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> SUPPORTS;
     public final SimpleEntrySet<WoodType, Block> SEATS;
 
-    public DBS(String modId) {
+    public DecorativeBlocksModule(String modId) {
         super(modId, "db");
 
 
@@ -107,7 +106,7 @@ public class DBS extends SimpleModule {
 
             List<Palette> targetPalette = SpriteUtils.extrapolateSignBlockPalette(plankTexture);
             return Pair.of(targetPalette, plankTexture.getMetadata());
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

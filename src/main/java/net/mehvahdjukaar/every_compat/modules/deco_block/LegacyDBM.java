@@ -31,9 +31,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.*;
 
-public class DecoBlocksModule extends CompatModule {
+@Deprecated
+public class LegacyDBM extends CompatModule {
 
-    public DecoBlocksModule(String modId) {
+    public LegacyDBM(String modId) {
         super(modId);
     }
 
@@ -221,10 +222,10 @@ public class DecoBlocksModule extends CompatModule {
         long l = wa.elapsed().toMillis();
         Stopwatch wa2 = Stopwatch.createStarted();
 
-        Utils.addStandardResources(modId, manager, handler.dynamicPack, SUPPORTS);
-        Utils.addStandardResources(modId, manager, handler.dynamicPack, SEATS);
-        Utils.addStandardResources(modId, manager, handler.dynamicPack, PALISADES);
-        Utils.addStandardResources(modId, manager, handler.dynamicPack, BEAMS);
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, SUPPORTS,WoodType.OAK_WOOD_TYPE);
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, SEATS,WoodType.OAK_WOOD_TYPE);
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, PALISADES,WoodType.OAK_WOOD_TYPE);
+        Utils.addStandardResources(modId, manager, handler.dynamicPack, BEAMS,WoodType.OAK_WOOD_TYPE);
 
         long l1 = wa2.elapsed().toMillis();
 

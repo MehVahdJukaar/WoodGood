@@ -9,6 +9,7 @@ import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.PaletteColor;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -24,7 +25,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
         RAILINGS = SimpleEntrySet.builder("railing",
                         APBlocks.OAK_RAILING, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new RailingBlock(BlockBehaviour.Properties.copy(w.planks)))
-                .addTag(new ResourceLocation("mineable/axe"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
                 .setTab(CreativeModeTab.TAB_DECORATIONS)
                 .build();
@@ -34,12 +35,13 @@ public class ArchitectsPaletteModule extends SimpleModule {
         BOARDS = SimpleEntrySet.builder("boards",
                         APBlocks.OAK_BOARDS, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new BoardBlock(BlockBehaviour.Properties.copy(w.planks)))
-                .addTag(new ResourceLocation("mineable/axe"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
                 .setTab(CreativeModeTab.TAB_DECORATIONS)
                 .createPaletteFromOak(p -> {
+
                     while (p.size() > 7) {
-                        p.remove(p.size() - 1);
+                        p.remove(0);
                     }
 
                     var col = p.getColorAtSlope(0.5f);
@@ -55,6 +57,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                                 (before.luminance() * 0.6f + (newC.luminance() + dl) * 0.4f)));
                         p.set(ind - 1, newBefore);
                     }
+
                 })
                 .addTexture(modRes("block/oak_boards"))
                 .addTexture(modRes("block/oak_boards_odd"))

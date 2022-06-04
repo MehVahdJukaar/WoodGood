@@ -74,25 +74,25 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> e.addTags(this, handler.dynamicPack, manager));
+        getEntries().forEach(e -> e.generateTags(this, handler.dynamicPack, manager));
     }
 
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         getEntries().forEach(e -> {
-            e.addLootTables(this, handler.dynamicPack, manager);
-            e.addRecipes(this, handler.dynamicPack, manager);
+            e.generateLootTables(this, handler.dynamicPack, manager);
+            e.generateRecipes(this, handler.dynamicPack, manager);
         });
     }
 
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> e.addModels(this, handler.dynamicPack, manager));
+        getEntries().forEach(e -> e.generateModels(this, handler.dynamicPack, manager));
     }
 
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> e.addTextures(this, handler, manager));
+        getEntries().forEach(e -> e.generateTextures(this, handler, manager));
     }
 
     @Override

@@ -53,24 +53,24 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public final String prefix;
 
     protected final String formattedName;
-    protected final Function<T, B> blockFactory;
+    protected final Function<T, @Nullable B> blockFactory;
     @Nullable
     protected final TileHolder<?> tileHolder;
     @Nullable
-    protected final TriFunction<T, B, Item.Properties, Item> itemFactory;
+    protected final TriFunction<T, B, Item.Properties,@Nullable Item> itemFactory;
 
     protected final CreativeModeTab tab;
-    private final boolean copyLoot;
-    private final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
-    private final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
-    private final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
+    protected final boolean copyLoot;
+    protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
+    protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
+    protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
     @Nullable
-    private final BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier;
+    protected final BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier;
     @Nullable
-    private final Supplier<Supplier<RenderType>> renderType;
+    protected final Supplier<Supplier<RenderType>> renderType;
 
 
-    private SimpleEntrySet(String name, @Nullable String prefix, Function<T, B> blockSupplier,
+    public SimpleEntrySet(String name, @Nullable String prefix, Function<T, B> blockSupplier,
                            Supplier<B> baseBlock, Supplier<T> baseType,
                            CreativeModeTab tab, boolean copyLoot,
                            @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
@@ -91,6 +91,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
         this.renderType = renderType;
         this.paletteSupplier = paletteSupplier;
+    }
+
+    public TileHolder<?> getTileHolder() {
+        return tileHolder;
     }
 
     public Class<T> getType() {
@@ -125,9 +129,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             if (w.isVanilla() || module.isEntryAlreadyRegistered(name, registry)) continue;
 
             B block = blockFactory.apply(w);
-            this.blocks.put(w, block);
-            registry.register(block.setRegistryName(WoodGood.res(name)));
-            w.addChild(module.shortenedId() + "/" + baseName, block);
+            //for blocks that fail
+            if(block != null) {
+                this.blocks.put(w, block);
+                registry.register(block.setRegistryName(WoodGood.res(name)));
+                w.addChild(module.shortenedId() + "/" + baseName, block);
+            }
         }
     }
 
@@ -147,9 +154,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                     i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), burn);
                 }
             }
-
-            this.items.put(w, i);
-            registry.register(i.setRegistryName(value.getRegistryName()));
+            //for ones that dont have item
+            if(i != null) {
+                this.items.put(w, i);
+                registry.register(i.setRegistryName(value.getRegistryName()));
+            }
         });
     }
 
@@ -176,7 +185,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     @Override
-    public void addTags(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
+    public void generateTags(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         if (!tags.isEmpty()) {
             for (var tb : tags.entrySet()) {
                 TagBuilder builder = TagBuilder.of(tb.getKey()).addEntries(blocks.values());
@@ -188,7 +197,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     @Override
-    public void addLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
+    public void generateLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         if (copyLoot) {
             ResourceLocation reg = baseBlock.get().getRegistryName();
             Utils.addBlockResources(module.getModId(), manager, pack, blocks, reg.getPath(),
@@ -201,7 +210,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     @Override
-    public void addRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
+    public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         this.recipeLocations.forEach(r -> {
             Utils.addBlocksRecipes(manager, pack, blocks, r.get(), baseType.get());
         });
@@ -209,12 +218,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     @Override
-    public void addModels(CompatModule module, DynamicTexturePack pack, ResourceManager manager) {
-        Utils.addStandardResources(module.getModId(), manager, pack, blocks);
+    public void generateModels(CompatModule module, DynamicTexturePack pack, ResourceManager manager) {
+        Utils.addStandardResources(module.getModId(), manager, pack, blocks, baseType.get());
     }
 
     @Override
-    public void addTextures(CompatModule module, RPAwareDynamicTextureProvider handler, ResourceManager manager) {
+    public void generateTextures(CompatModule module, RPAwareDynamicTextureProvider handler, ResourceManager manager) {
         if (textures.isEmpty()) return;
         boolean isWood = this.getType() == WoodType.class;
         if (paletteSupplier == null && !isWood) {
@@ -369,6 +378,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return this;
         }
 
+        public Builder<T, B> noItem(TriFunction<T, B, Item.Properties, Item> itemFactory) {
+            this.itemFactory = (a,b,c)->null;
+            return this;
+        }
+
         public Builder<T, B> setTab(CreativeModeTab tab) {
             this.tab = tab;
             return this;
@@ -440,7 +454,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
 
-    private static class TileHolder<H extends BlockEntity> {
+    public static class TileHolder<H extends BlockEntity> {
 
         protected final BlockEntityType.BlockEntitySupplier<H> tileFactory;
         protected Supplier<BlockEntityRendererProvider<H>> renderer = null;
