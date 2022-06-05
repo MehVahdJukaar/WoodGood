@@ -147,8 +147,10 @@ public abstract class CompatModule {
     public void onTextureStitch(TextureStitchEvent.Pre event) {
     }
 
-    ;
 
+    protected final Block getOwnBlock(String id){
+        return ForgeRegistries.BLOCKS.getValue(modRes(id));
+    }
     //utility functions
 
     protected final void addChildToOak(String category, String oakBlockName) {

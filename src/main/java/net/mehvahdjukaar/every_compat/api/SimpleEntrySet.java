@@ -370,7 +370,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return this;
         }
 
-        //currently it seems not to be server safe. Register it in onClientInit instead
+        //currently, it seems not to be server safe. Register it in onClientInit instead
         public <H extends BlockEntity> Builder<T, B> addTile(BlockEntityType.BlockEntitySupplier<H> tileFactory,
                                                              Supplier<BlockEntityRendererProvider<H>> renderer) {
             if (FMLEnvironment.dist == Dist.CLIENT) {

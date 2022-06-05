@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,15 +24,15 @@ import net.minecraftforge.common.Tags;
 
 public class CreateModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, WindowBlock> WINDOWS;
-    public final SimpleEntrySet<WoodType, ConnectedGlassPaneBlock> WINDOW_PANES;
+    public final SimpleEntrySet<WoodType, Block> WINDOWS;
+    public final SimpleEntrySet<WoodType, Block> WINDOW_PANES;
 
 
     public CreateModule(String modId) {
         super(modId, "c");
 
         WINDOWS = SimpleEntrySet.builder("window",
-                        AllPaletteBlocks.OAK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
+                        () -> getOwnBlock("oak_window"), () -> WoodType.OAK_WOOD_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         this::makeWindow)
                 .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
                 .setTab(Create.PALETTES_CREATIVE_TAB)
@@ -46,7 +47,7 @@ public class CreateModule extends SimpleModule {
 
 
         WINDOW_PANES = SimpleEntrySet.builder("window_pane",
-                        AllPaletteBlocks.OAK_WINDOW_PANE, () -> WoodType.OAK_WOOD_TYPE,
+                        () -> getOwnBlock("oak_window_pane"), () -> WoodType.OAK_WOOD_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(BlockBehaviour.Properties.copy(Blocks.GLASS_PANE)))
                 .addTag(Tags.Items.GLASS_PANES, Registry.BLOCK_REGISTRY)
                 .setTab(Create.PALETTES_CREATIVE_TAB)

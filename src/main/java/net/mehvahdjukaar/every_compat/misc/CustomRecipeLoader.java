@@ -13,11 +13,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.server.packs.resources.SimpleReloadInstance;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
@@ -57,8 +59,8 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
                         }
                     }
                 }
-            } catch (IllegalArgumentException | IOException | JsonParseException jsonparseexception) {
-                WoodGood.LOGGER.error("Couldn't parse data file {} from {}", location, resourcelocation, jsonparseexception);
+            } catch (IllegalArgumentException | IOException | JsonParseException exception) {
+                WoodGood.LOGGER.error("Couldn't parse data file {} from {}", location, resourcelocation, exception);
             }
         }
         loadRecipes(map);

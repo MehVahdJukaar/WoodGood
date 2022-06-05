@@ -132,11 +132,13 @@ public class WoodGood {
 
     public void registerWoodStuff(RegistryEvent.Register<Block> event, Collection<WoodType> woods) {
         EarlyConfigs.init();
+        LOGGER.info("Registering Compat Wood Blocks");
         var reg = event.getRegistry();
         ACTIVE_MODULES.forEach(m -> m.registerWoodBlocks(reg, woods));
     }
 
     public void registerLeavesStuff(RegistryEvent.Register<Block> event, Collection<LeavesType> leaves) {
+        LOGGER.info("Registering Compat Leaves Blocks");
         var reg = event.getRegistry();
         ACTIVE_MODULES.forEach(m -> m.registerLeavesBlocks(reg, leaves));
     }
@@ -144,11 +146,6 @@ public class WoodGood {
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
         ACTIVE_MODULES.forEach(m -> m.registerItems(event.getRegistry()));
-    }
-
-    @SubscribeEvent
-    public void registerBlocks(RegistryEvent.Register<Block> event) {
-
     }
 
     @SubscribeEvent
