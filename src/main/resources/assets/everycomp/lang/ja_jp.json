@@ -1,0 +1,23 @@
+{
+  "block.everycomp.table": "%の机",
+  "block.everycomp.chair": "%の椅子",
+  "block.everycomp.palisade": "%の囲い",
+  "block.everycomp.support": "%の支え",
+  "block.everycomp.shelf": "%の棚",
+  "block.everycomp.beam": "%の梁",
+  "block.everycomp.seat": "%の座席",
+  "block.everycomp.post": "%の杭",
+  "block.everycomp.stripped_post": "樹皮を剥いだ%の杭",
+  "block.everycomp.bookshelf": "%の本棚",
+  "block.everycomp.hedge": "%の生垣",
+  "block.everycomp.hollow_log": "空洞のある%の原木",
+  "block.everycomp.vertical_planks": "%の縦板材",
+  "block.everycomp.cabinet": "%の食品庫",
+  "block.everycomp.window": "%の窓",
+  "block.everycomp.window_pane": "%の板窓",
+  "block.everycomp.railing": "%の垣",
+  "block.everycomp.boards": "%の板",
+  "block.everycomp.banister": "%sの手すり",
+  "block.everycomp.cut_post": "切り分けられた%の杭",
+  "wood_type.twilightforest.dark": "ダークウッド"
+}
