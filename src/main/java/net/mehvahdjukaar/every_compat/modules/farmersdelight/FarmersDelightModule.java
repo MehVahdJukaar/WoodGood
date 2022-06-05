@@ -5,19 +5,27 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.block.CabinetBlock;
+import vectorwing.farmersdelight.common.block.entity.CabinetBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 public class FarmersDelightModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> CABINETS;
+
     public FarmersDelightModule(String modId) {
         super(modId, "fd");
 
-        SimpleEntrySet<?, ?> cabinets = SimpleEntrySet.builder("cabinet",
+        CABINETS = SimpleEntrySet.builder("cabinet",
                         ModBlocks.OAK_CABINET, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatCabinetBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.5F)))
                 .addTag(modRes("cabinets"), Registry.BLOCK_REGISTRY)
@@ -33,6 +41,30 @@ public class FarmersDelightModule extends SimpleModule {
                 .addMaskedTexture(WoodGood.res("block/oak_cabinet_front_open"), WoodGood.res("block/oak_cabinet_front_open_m"))
                 .build();
 
-        this.addEntry(cabinets);
+        this.addEntry(CABINETS);
     }
+
+    class CompatCabinetBlockTile extends CabinetBlockEntity {
+
+        public CompatCabinetBlockTile(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public BlockEntityType<?> getType() {
+            return CABINETS.getTileHolder().tile;
+        }
+
+    }
+
+    private class CompatCabinetBlock extends CabinetBlock {
+        public CompatCabinetBlock(Properties properties) {
+            super(properties);
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new CompatCabinetBlockTile(pos, state);
+        }
+    }
+
 }

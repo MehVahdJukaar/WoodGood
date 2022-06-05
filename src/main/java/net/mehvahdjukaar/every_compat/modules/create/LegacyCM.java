@@ -5,7 +5,6 @@ import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.palettes.WindowBlock;
 import com.simibubi.create.foundation.block.connected.*;
-import com.simibubi.create.foundation.data.WindowGen;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -43,7 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Deprecated
 public class LegacyCM extends CompatModule {
 
     public LegacyCM(String modId) {
@@ -146,8 +145,8 @@ public class LegacyCM extends CompatModule {
         Utils.addBlockResources(modId, manager, handler.dynamicPack, WINDOW_PANES, "oak_window_pane",
                 ResType.BLOCK_LOOT_TABLES.getPath(modRes("oak_window_pane"))
         );
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, WINDOWS, "oak_window");
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, WINDOW_PANES, "oak_window_pane");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, WINDOW_ITEMS, "oak_window");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, WINDOW_PANE_ITEMS, "oak_window_pane");
     }
 
     @Override

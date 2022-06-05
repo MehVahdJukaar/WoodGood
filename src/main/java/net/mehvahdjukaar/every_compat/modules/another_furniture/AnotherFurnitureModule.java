@@ -11,11 +11,13 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 
 public class AnotherFurnitureModule extends SimpleModule {
@@ -58,7 +60,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         SHELVES = SimpleEntrySet.builder("shelf",
                         ModBlocks.OAK_SHELF, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new ShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(modRes("shelves"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shelves"), Registry.ITEM_REGISTRY)
                 .addTile(CompatShelfBlockTile::new)
@@ -70,12 +72,37 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .build();
 
         this.addEntry(SHELVES);
+
     }
 
     //TODO: fix renderer
     @Override
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType<CompatShelfBlockTile>) (SHELVES.getTileHolder().tile),ShelfRenderer::new );
+        event.registerBlockEntityRenderer((BlockEntityType<CompatShelfBlockTile>) (SHELVES.getTileHolder().tile), ShelfRenderer::new);
+    }
+
+
+    //idk why but object holder class loader thingie keeps trying to load this if its not inner private like this
+    class CompatShelfBlockTile extends ShelfBlockEntity {
+
+        public CompatShelfBlockTile(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public BlockEntityType<?> getType() {
+            return SHELVES.getTileHolder().tile;
+        }
+    }
+
+    private class CompatShelfBlock extends ShelfBlock {
+        public CompatShelfBlock(Properties properties) {
+            super(properties);
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new CompatShelfBlockTile(pos, state);
+        }
     }
 
 }

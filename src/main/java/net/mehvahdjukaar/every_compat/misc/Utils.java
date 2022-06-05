@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import com.google.gson.JsonElement;
 import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.configs.WoodEnabledCondition;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -10,8 +11,11 @@ import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.crafting.ConditionalRecipe;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,35 +45,40 @@ public class Utils {
 
         BlockTypeResTransformer<T> modelModifier = BlockTypeResTransformer.create(modId, manager);
         modelModifier.IDReplaceType(baseBlockName);
-        modelModifier.replaceBlockType(baseBlockName);
         if (baseType instanceof WoodType woodType) {
             modelModifier.replaceWoodTextures(woodType);
         }
-
+        modelModifier.replaceBlockType(baseBlockName);
 
         Set<String> modelsLoc = new HashSet<>();
 
-        //item model
-        try {
-            StaticResource oakItemModel = StaticResource.getOrFail(manager, ResType.ITEM_MODELS.getPath(oakId));
-            JsonElement json = RPUtils.deserializeJson(oakItemModel.getInputStream());
-            //adds models referenced from here. not recursive
-            modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
+        Item oakItem = oakBlock.asItem();
 
-            blocks.forEach((w, b) -> {
-                ResourceLocation id = b.getRegistryName();
-                try {
-                    StaticResource newRes = modelModifier.transform(oakItemModel, id, w);
-                    assert newRes.location != oakItemModel.location : "ids cant be the same";
-                    pack.addResource(newRes);
-                } catch (Exception e) {
-                    WoodGood.LOGGER.error("Failed to add {} item model json file:", b, e);
-                }
-            });
-        } catch (Exception e) {
-            WoodGood.LOGGER.error("Could not find item model for {}", oakBlock);
+        //if it has an item
+        if (oakItem != Items.AIR) {
+            //item model
+            try {
+                StaticResource oakItemModel = StaticResource.getOrFail(manager,
+                        ResType.ITEM_MODELS.getPath(oakItem.getRegistryName()));
+
+                JsonElement json = RPUtils.deserializeJson(oakItemModel.getInputStream());
+                //adds models referenced from here. not recursive
+                modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
+
+                blocks.forEach((w, b) -> {
+                    ResourceLocation id = b.getRegistryName();
+                    try {
+                        StaticResource newRes = modelModifier.transform(oakItemModel, id, w);
+                        assert newRes.location != oakItemModel.location : "ids cant be the same";
+                        pack.addResource(newRes);
+                    } catch (Exception e) {
+                        WoodGood.LOGGER.error("Failed to add {} item model json file:", b, e);
+                    }
+                });
+            } catch (Exception e) {
+                WoodGood.LOGGER.error("Could not find item model for {}", oakBlock);
+            }
         }
-
 
 
         //blockstate
@@ -152,34 +161,47 @@ public class Utils {
      * Adds recipes based off an oak leaves based one
      */
     public static void addLeavesRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
-                                        Map<LeavesType, Block> blocks, String oakRecipe) {
+                                        Map<LeavesType, Item> blocks, String oakRecipe) {
         addBlocksRecipes(modId, manager, pack, blocks, oakRecipe, LeavesType.OAK_LEAVES_TYPE);
     }
 
     /**
      * Adds recipes based off an oak planks based one
      */
-    public static <B extends Block> void addWoodRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
-                                                        Map<WoodType, B> blocks, String oakRecipe) {
+    public static <B extends Item> void addWoodRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
+                                                       Map<WoodType, B> blocks, String oakRecipe) {
         addBlocksRecipes(modId, manager, pack, blocks, oakRecipe, WoodType.OAK_WOOD_TYPE);
     }
 
     /**
      * Adds recipes based off a given one
      */
-    public static <B extends Block, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
-                                                                               Map<T, B> blocks, String oakRecipe, T fromType) {
+    public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
+                                                                              Map<T, B> blocks, String oakRecipe, T fromType) {
         addBlocksRecipes(manager, pack, blocks, new ResourceLocation(modId, oakRecipe), fromType);
     }
 
-    public static <B extends Block, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,
-                                                                               Map<T, B> blocks, ResourceLocation oakRecipe, T fromType) {
+    public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,
+                                                                              Map<T, B> items, ResourceLocation oakRecipe, T fromType) {
         IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
                 ResType.RECIPES.getPath(oakRecipe));
 
-        blocks.forEach((w, b) -> {
-            FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
-            pack.addRecipe(newR);
+        items.forEach((w, i) -> {
+            //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
+            if (i.getItemCategory() != null) {
+                FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
+                //TODO: generalize to work with all block types
+                if (fromType instanceof WoodType) {
+                    ConditionalRecipe.builder()
+                            .addCondition(new WoodEnabledCondition(w.getId().toString()))
+                            .addRecipe(newR)
+                            .build(pack::addRecipe, newR.getId());
+                } else {
+                    pack.addRecipe(newR);
+                }
+            }
         });
     }
+
+
 }

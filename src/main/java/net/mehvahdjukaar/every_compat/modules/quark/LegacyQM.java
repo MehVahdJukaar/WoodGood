@@ -5,7 +5,6 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
-import net.mehvahdjukaar.every_compat.modules.farmersdelight.CompatCabinetBlockTile;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
@@ -14,7 +13,10 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
-import net.mehvahdjukaar.selene.resourcepack.*;
+import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
+import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
+import net.mehvahdjukaar.selene.resourcepack.RPUtils;
+import net.mehvahdjukaar.selene.resourcepack.ResType;
 import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.core.Registry;
@@ -28,7 +30,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
@@ -49,7 +50,10 @@ import vazkii.quark.content.building.module.VerticalPlanksModule;
 import vazkii.quark.content.building.module.WoodenPostsModule;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class LegacyQM extends CompatModule {
@@ -347,12 +351,12 @@ public class LegacyQM extends CompatModule {
     //recipes
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        Utils.addLeavesRecipes(modId, manager, handler.dynamicPack, HEDGES, "building/crafting/oak_hedge");
-        Utils.addBlocksRecipes(modId, manager, handler.dynamicPack, BOOKSHELVES, "building/crafting/acacia_bookshelf",
+        Utils.addLeavesRecipes(modId, manager, handler.dynamicPack, HEDGE_ITEMS, "building/crafting/oak_hedge");
+        Utils.addBlocksRecipes(modId, manager, handler.dynamicPack, BOOKSHELF_ITEMS, "building/crafting/acacia_bookshelf",
                 WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("acacia")));
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, POSTS, "building/crafting/oak_post");
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, STRIPPED_POSTS, "building/crafting/stripped_oak_post");
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, VERTICAL_PLANKS, "building/crafting/vertplanks/vertical_oak_planks");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, POST_ITEMS, "building/crafting/oak_post");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, STRIPPED_POST_ITEMS, "building/crafting/stripped_oak_post");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, VERTICAL_PLANK_ITEMS, "building/crafting/vertplanks/vertical_oak_planks");
 
         Utils.addBlockResources(modId, manager, handler.dynamicPack, BOOKSHELVES, "acacia_bookshelf",
                 ResType.BLOCK_LOOT_TABLES.getPath(modRes("acacia_bookshelf"))

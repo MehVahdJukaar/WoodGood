@@ -1,6 +1,9 @@
 package net.mehvahdjukaar.every_compat;
 
 
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.configs.WoodEnabledCondition;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
@@ -8,13 +11,12 @@ import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
-import net.mehvahdjukaar.every_compat.modules.create.LegacyCM;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.quark.LegacyQM;
-import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -25,6 +27,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -81,10 +84,10 @@ public class WoodGood {
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("create", () -> CreateModule::new);
-        //addModule("quark", () -> QuarkModule::new);
-
-        addModule("quark", () -> LegacyQM::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
+        addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
+        addModule("quark", () -> LegacyQM::new);
+        // addModule("quark", () -> QuarkModule::new);
 
 
         ACTIVE_MODULES.forEach(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
@@ -107,6 +110,8 @@ public class WoodGood {
             CLIENT_RESOURCES.register(bus);
         } else CLIENT_RESOURCES = null;
 
+        CraftingHelper.register(new WoodEnabledCondition.Serializer());
+
     }
 
 
@@ -126,6 +131,7 @@ public class WoodGood {
     }
 
     public void registerWoodStuff(RegistryEvent.Register<Block> event, Collection<WoodType> woods) {
+        EarlyConfigs.init();
         var reg = event.getRegistry();
         ACTIVE_MODULES.forEach(m -> m.registerWoodBlocks(reg, woods));
     }

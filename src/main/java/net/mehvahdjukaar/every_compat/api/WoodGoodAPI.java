@@ -13,6 +13,7 @@ public class WoodGoodAPI {
         WoodGood.ACTIVE_MODULES.add(module);
     }
 
+    //for each entry that you register you will need to add "block_type.everycomp.your_type" translation string to your lang file
 
     //example using simple module class
     /*

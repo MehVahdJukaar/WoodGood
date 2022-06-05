@@ -1,13 +1,12 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
-import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.DynamicTexturePack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicTextureProvider;
-import net.mehvahdjukaar.every_compat.WoodGood;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;

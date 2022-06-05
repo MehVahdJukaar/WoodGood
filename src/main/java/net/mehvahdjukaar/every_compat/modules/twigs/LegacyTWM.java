@@ -1,9 +1,10 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
-import com.google.common.base.Stopwatch;
-import com.google.gson.JsonElement;
-import com.mojang.datafixers.util.Pair;
+import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.Utils;
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
@@ -12,33 +13,23 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
-import net.mehvahdjukaar.selene.resourcepack.DynamicLanguageManager;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
-import net.mehvahdjukaar.selene.resourcepack.ResType;
-import net.mehvahdjukaar.every_compat.WoodGood;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.moddingplayground.twigs.Twigs;
 import net.moddingplayground.twigs.block.TableBlock;
-import org.apache.commons.lang3.time.StopWatch;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Deprecated
 public class LegacyTWM extends CompatModule {
@@ -54,7 +45,7 @@ public class LegacyTWM extends CompatModule {
 
     public static final String TABLE_NAME = "table";
     public static final Map<WoodType, Block> TABLES = new HashMap<>();
-    public static final Map<WoodType, Item> TABLE_TIMES = new HashMap<>();
+    public static final Map<WoodType, Item> TABLE_ITEMS = new HashMap<>();
 
     @Override
     public void registerWoodBlocks(IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
@@ -74,7 +65,7 @@ public class LegacyTWM extends CompatModule {
     public void registerItems(IForgeRegistry<Item> registry) {
         TABLES.forEach((w, value) -> {
             Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(Twigs.ITEM_GROUP),w);
-            TABLE_TIMES.put(w, i);
+            TABLE_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
     }
@@ -102,7 +93,7 @@ public class LegacyTWM extends CompatModule {
     //recipes
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, TABLES, "table/oak_table");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, TABLE_ITEMS, "table/oak_table");
     }
 
     //models

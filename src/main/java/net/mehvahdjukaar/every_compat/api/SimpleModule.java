@@ -15,12 +15,13 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SimpleModule extends CompatModule {
 
     private final String shortId;
-    private final Map<String, EntrySet<?, ?>> entries = new HashMap<>();
+    private final Map<String, EntrySet<?, ?>> entries = new LinkedHashMap<>();
 
     public SimpleModule(String modId, String shortId) {
         super(modId);

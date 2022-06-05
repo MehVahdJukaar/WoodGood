@@ -10,9 +10,9 @@ import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
-import net.mehvahdjukaar.selene.resourcepack.*;
-import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
+import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicTextureProvider;
+import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
@@ -24,18 +24,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 
 public abstract class CompatModule {
@@ -68,7 +61,7 @@ public abstract class CompatModule {
     public void onModSetup() {
 
     }
-    
+
     public void onClientSetup() {
 
     }
@@ -102,9 +95,10 @@ public abstract class CompatModule {
         if (name.startsWith(modId + "/")) return true;        //discards one from this mod
         String name2 = name.replace("/", "_"); //quark_blossom_chair
         String name3 = name.substring(name.lastIndexOf("/") + 1); //blossom_chair
-        if (registry.containsKey(new ResourceLocation(modId, name)) ||
+        if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types
                 registry.containsKey(new ResourceLocation(modId, name2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
+        if (this.shortenedId().equals("vs")) return false; //we always register everything for these
 
         String woodFrom = name.replace("/" + name3, "");
         if (registry.containsKey(new ResourceLocation(woodFrom, name3))) return true;
@@ -150,7 +144,10 @@ public abstract class CompatModule {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void onTextureStitch(TextureStitchEvent.Pre event){};
+    public void onTextureStitch(TextureStitchEvent.Pre event) {
+    }
+
+    ;
 
     //utility functions
 
@@ -161,11 +158,11 @@ public abstract class CompatModule {
 
     //post process some textures. currently only ecologics azalea
     public void addWoodTexture(WoodType wood, RPAwareDynamicTextureProvider handler, ResourceManager manager,
-                                  String path, Supplier<TextureImage> textureSupplier){
-        handler.addTextureIfNotPresent(manager, path, ()->{
+                               String path, Supplier<TextureImage> textureSupplier) {
+        handler.addTextureIfNotPresent(manager, path, () -> {
             var t = textureSupplier.get();
-             maybeFlowerAzalea(t,   manager,   wood);
-             return t;
+            maybeFlowerAzalea(t, manager, wood);
+            return t;
         });
     }
 

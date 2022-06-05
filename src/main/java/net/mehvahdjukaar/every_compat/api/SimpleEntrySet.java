@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.api;
 
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.BlockType;
@@ -52,12 +53,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Nullable
     public final String prefix;
 
-    protected final String formattedName;
     protected final Function<T, @Nullable B> blockFactory;
     @Nullable
     protected final TileHolder<?> tileHolder;
     @Nullable
-    protected final TriFunction<T, B, Item.Properties,@Nullable Item> itemFactory;
+    protected final TriFunction<T, B, Item.Properties, @Nullable Item> itemFactory;
 
     protected final CreativeModeTab tab;
     protected final boolean copyLoot;
@@ -71,12 +71,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
 
     public SimpleEntrySet(String name, @Nullable String prefix, Function<T, B> blockSupplier,
-                           Supplier<B> baseBlock, Supplier<T> baseType,
-                           CreativeModeTab tab, boolean copyLoot,
-                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
-                           @Nullable TileHolder<?> tileFactory,
-                           @Nullable Supplier<Supplier<RenderType>> renderType,
-                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier) {
+                          Supplier<B> baseBlock, Supplier<T> baseType,
+                          CreativeModeTab tab, boolean copyLoot,
+                          @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
+                          @Nullable TileHolder<?> tileFactory,
+                          @Nullable Supplier<Supplier<RenderType>> renderType,
+                          @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier) {
         super((prefix == null ? "" : prefix + "_") + name);
         this.name = name;
         this.blockFactory = blockSupplier;
@@ -84,7 +84,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.tileHolder = tileFactory;
         this.tab = tab;
         this.copyLoot = copyLoot;
-        this.formattedName = (prefix == null ? "" : prefix + "_") + "%s_" + name;
         this.baseBlock = baseBlock;
         this.baseType = baseType;
         this.itemFactory = itemFactory;
@@ -125,12 +124,18 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         baseType.get().addChild(module.shortenedId() + "/" + baseName, base);
 
         for (T w : woodTypes) {
-            String name = module.makeBlockId(w, this.name);
+            String name;
+            if(prefix != null){
+                name = module.shortenedId() + "/" + w.getVariantId(this.name, this.prefix);
+            }
+            else{
+                name = module.shortenedId() + "/" + w.getVariantId(this.name, false);
+            }
             if (w.isVanilla() || module.isEntryAlreadyRegistered(name, registry)) continue;
 
             B block = blockFactory.apply(w);
             //for blocks that fail
-            if(block != null) {
+            if (block != null) {
                 this.blocks.put(w, block);
                 registry.register(block.setRegistryName(WoodGood.res(name)));
                 w.addChild(module.shortenedId() + "/" + baseName, block);
@@ -142,6 +147,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public void registerItems(CompatModule module, IForgeRegistry<Item> registry) {
         blocks.forEach((w, value) -> {
             Item i;
+            CreativeModeTab tab = EarlyConfigs.isTypeEnabled(w) ? this.tab : null;
+
             if (itemFactory != null) {
                 i = itemFactory.apply(w, value, new Item.Properties().tab(tab));
             } else if (w.getClass() == WoodType.class) {
@@ -155,7 +162,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 }
             }
             //for ones that dont have item
-            if(i != null) {
+            if (i != null) {
                 this.items.put(w, i);
                 registry.register(i.setRegistryName(value.getRegistryName()));
             }
@@ -212,7 +219,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Override
     public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         this.recipeLocations.forEach(r -> {
-            Utils.addBlocksRecipes(manager, pack, blocks, r.get(), baseType.get());
+            Utils.addBlocksRecipes(manager, pack, items, r.get(), baseType.get());
         });
 
     }
@@ -363,6 +370,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return this;
         }
 
+        //currently it seems not to be server safe. Register it in onClientInit instead
         public <H extends BlockEntity> Builder<T, B> addTile(BlockEntityType.BlockEntitySupplier<H> tileFactory,
                                                              Supplier<BlockEntityRendererProvider<H>> renderer) {
             if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -378,8 +386,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return this;
         }
 
-        public Builder<T, B> noItem(TriFunction<T, B, Item.Properties, Item> itemFactory) {
-            this.itemFactory = (a,b,c)->null;
+        public Builder<T, B> noItem() {
+            this.itemFactory = (a, b, c) -> null;
             return this;
         }
 
@@ -388,6 +396,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return this;
         }
 
+        /**
+         * As opposed to just dropping itself
+         */
         public Builder<T, B> useLootFromBase() {
             this.copyLoot = true;
             return this;

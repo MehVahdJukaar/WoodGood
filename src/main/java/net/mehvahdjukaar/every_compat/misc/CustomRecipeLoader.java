@@ -7,6 +7,7 @@ import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.resourcepack.EarlyPackReloadEvent;
 import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
+import net.mehvahdjukaar.selene.resourcepack.recipe.TemplateRecipeManager;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
@@ -75,7 +76,7 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
         for (var j : jsons.entrySet()) {
             try {
                 if (j.getValue() instanceof JsonObject jo) {
-                    IRecipeTemplate<?> template = IRecipeTemplate.read(jo);
+                    IRecipeTemplate<?> template = TemplateRecipeManager.read(jo);
                     boolean ad = false;
                     for (var w : WoodTypeRegistry.WOOD_TYPES.values()) {
                         FinishedRecipe newR;

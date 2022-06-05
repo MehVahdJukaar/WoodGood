@@ -6,7 +6,11 @@ import lilypuree.decorative_blocks.core.DBBlocks;
 import lilypuree.decorative_blocks.core.DBItems;
 import lilypuree.decorative_blocks.items.SeatItem;
 import lilypuree.decorative_blocks.items.SupportItem;
+import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.Utils;
+import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
@@ -15,21 +19,19 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
-import net.mehvahdjukaar.selene.resourcepack.*;
-import net.mehvahdjukaar.every_compat.WoodGood;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.modules.CompatModule;
-
+import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
+import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
-import net.minecraft.client.renderer.block.model.BlockModelDefinition;
 import net.minecraft.core.Registry;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Deprecated
 public class LegacyDBM extends CompatModule {
@@ -55,7 +57,7 @@ public class LegacyDBM extends CompatModule {
 
     public static final String SUPPORT_NAME = "support";
     public static final Map<WoodType, Block> SUPPORTS = new HashMap<>();
-    public static final Map<WoodType, Item> SUPPORTS_ITEMS = new HashMap<>();
+    public static final Map<WoodType, Item> SUPPORT_ITEMS = new HashMap<>();
 
     public static final String SEAT_NAME = "seat";
     public static final Map<WoodType, Block> SEATS = new HashMap<>();
@@ -129,7 +131,7 @@ public class LegacyDBM extends CompatModule {
         });
         SUPPORTS.forEach((w, value) -> {
             Item i = new SupportItem(value, DBItems.modItemProperties);
-            SUPPORTS_ITEMS.put(w, i);
+            SUPPORT_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
         SEATS.forEach((w, value) -> {
@@ -165,10 +167,10 @@ public class LegacyDBM extends CompatModule {
 
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, BEAMS, "oak_beam");
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, PALISADES, "oak_palisade");
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, SUPPORTS, "oak_support");
-        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, SEATS, "oak_seat");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, BEAM_ITEMS, "oak_beam");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, PALISADE_ITEMS, "oak_palisade");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, SUPPORT_ITEMS, "oak_support");
+        Utils.addWoodRecipes(modId, manager, handler.dynamicPack, SEAT_ITEMS, "oak_seat");
     }
 
     @Override
