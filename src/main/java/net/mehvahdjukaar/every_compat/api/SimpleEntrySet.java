@@ -49,7 +49,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     protected final Supplier<T> baseType;
     protected final Supplier<B> baseBlock;
 
-    public final String name;
+    public final String postfix;
     @Nullable
     public final String prefix;
 
@@ -78,7 +78,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                           @Nullable Supplier<Supplier<RenderType>> renderType,
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier) {
         super((prefix == null ? "" : prefix + "_") + name);
-        this.name = name;
+        this.postfix = name;
         this.blockFactory = blockSupplier;
         this.prefix = prefix;
         this.tileHolder = tileFactory;
@@ -101,7 +101,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     public void addTranslations(AfterLanguageLoadEvent lang) {
-        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block." + WoodGood.MOD_ID + "." + name, (BlockType) w, v));
+        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block." + WoodGood.MOD_ID + "." + typeName, (BlockType) w, v));
     }
 
     public void registerWoodBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
@@ -121,15 +121,15 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         Block base = baseBlock.get();
         if (base == null)
             throw new UnsupportedOperationException("Base block cant be null");
-        baseType.get().addChild(module.shortenedId() + "/" + baseName, base);
+        baseType.get().addChild(module.shortenedId() + "/" + typeName, base);
 
         for (T w : woodTypes) {
             String name;
             if(prefix != null){
-                name = module.shortenedId() + "/" + w.getVariantId(this.name, this.prefix);
+                name = module.shortenedId() + "/" + w.getVariantId(this.postfix, this.prefix);
             }
             else{
-                name = module.shortenedId() + "/" + w.getVariantId(this.name, false);
+                name = module.shortenedId() + "/" + w.getVariantId(this.postfix, false);
             }
             if (w.isVanilla() || module.isEntryAlreadyRegistered(name, registry)) continue;
 
@@ -138,7 +138,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             if (block != null) {
                 this.blocks.put(w, block);
                 registry.register(block.setRegistryName(WoodGood.res(name)));
-                w.addChild(module.shortenedId() + "/" + baseName, block);
+                w.addChild(module.shortenedId() + "/" + typeName, block);
             }
         }
     }

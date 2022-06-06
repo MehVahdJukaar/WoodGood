@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -63,9 +64,10 @@ public class MacawWindowsModule extends SimpleModule {
         WINDOWS = SimpleEntrySet.builder("window",
                         BlockInit.OAK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .setTab(MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
+                .setRenderType(()-> RenderType::cutout)
                 .build();
 
         this.addEntry(WINDOWS);
@@ -73,9 +75,10 @@ public class MacawWindowsModule extends SimpleModule {
         PLANK_WINDOWS = SimpleEntrySet.builder("plank_window",
                         BlockInit.OAK_PLANK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .setTab(MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
+                .setRenderType(()-> RenderType::cutout)
                 .build();
 
         this.addEntry(PLANK_WINDOWS);
@@ -83,19 +86,21 @@ public class MacawWindowsModule extends SimpleModule {
         WINDOWS2 = SimpleEntrySet.builder("window2",
                         BlockInit.OAK_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .setTab(MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
+                .setRenderType(()-> RenderType::cutout)
                 .build();
 
         this.addEntry(WINDOWS2);
 
-        PLANK_WINDOWS2 = SimpleEntrySet.builder("plank_parapet",
+        PLANK_WINDOWS2 = SimpleEntrySet.builder("plank_window2",
                         BlockInit.OAK_PLANK_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .setTab(MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
+                .setRenderType(()-> RenderType::cutout)
                 .build();
 
         this.addEntry(PLANK_WINDOWS2);
@@ -103,9 +108,10 @@ public class MacawWindowsModule extends SimpleModule {
         STRIPPED_LOG_WINDOW = SimpleEntrySet.builder("log_window", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .setTab(MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
+                .setRenderType(()-> RenderType::cutout)
                 .build();
 
         this.addEntry(STRIPPED_LOG_WINDOW);
@@ -113,9 +119,10 @@ public class MacawWindowsModule extends SimpleModule {
         STRIPPED_LOG_WINDOW2 = SimpleEntrySet.builder("log_window2", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .setTab(MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
+                .setRenderType(()-> RenderType::cutout)
                 .build();
 
         this.addEntry(STRIPPED_LOG_WINDOW2);

@@ -12,7 +12,6 @@ import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
@@ -22,10 +21,12 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
-import net.moddingplayground.twigs.init.TwigsBlocks;
+import org.jetbrains.annotations.Nullable;
 import twilightforest.block.*;
 import twilightforest.item.HollowLogItem;
 import twilightforest.item.TFItems;
+
+import java.util.function.Supplier;
 
 public class TwilightForestModule extends SimpleModule {
 
@@ -52,7 +53,7 @@ public class TwilightForestModule extends SimpleModule {
 
         HOLLOW_LOGS_HORIZONTAL = SimpleEntrySet.builder("log_horizontal", "hollow",
                         TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> regIfPossible(w, () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(w.planks))))
                 .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
                 .noItem()
                 .setRenderType(() -> RenderType::cutout)
@@ -65,7 +66,7 @@ public class TwilightForestModule extends SimpleModule {
                         TFBlocks.HOLLOW_OAK_LOG_VERTICAL, () -> WoodType.OAK_WOOD_TYPE,
                         w -> {
                             var id = WoodGood.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
-                            return new HollowLogVertical(BlockBehaviour.Properties.copy(w.planks), RegistryObject.create(id, ForgeRegistries.BLOCKS));
+                            return regIfPossible(w, () -> new HollowLogVertical(BlockBehaviour.Properties.copy(w.planks), RegistryObject.create(id, ForgeRegistries.BLOCKS)));
                         })
                 .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
                 .noItem()
@@ -76,8 +77,8 @@ public class TwilightForestModule extends SimpleModule {
 
         HOLLOW_LOGS_CLIMBABLE = SimpleEntrySet.builder("log_climbable", "hollow",
                         TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new HollowLogClimbable(BlockBehaviour.Properties.copy(w.planks),
-                                RegistryObject.create(HOLLOW_LOGS_VERTICAL.blocks.get(w).getRegistryName(), ForgeRegistries.BLOCKS)))
+                        w -> regIfPossible(w, () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(w.planks),
+                                RegistryObject.create(HOLLOW_LOGS_VERTICAL.blocks.get(w).getRegistryName(), ForgeRegistries.BLOCKS))))
                 .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)
                 .noItem()
                 .setRenderType(() -> RenderType::cutout)
@@ -119,11 +120,19 @@ public class TwilightForestModule extends SimpleModule {
     @Override
     public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
         super.addTranslations(clientDynamicResourcesHandler, lang);
-          HOLLOW_LOGS_VERTICAL.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.hollow_log",(BlockType) w, v));
+        HOLLOW_LOGS_VERTICAL.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.hollow_log", (BlockType) w, v));
     }
 
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
+    }
+
+    @Nullable
+    private <B extends Block> B regIfPossible(WoodType woodType, Supplier<B> supplier) {
+        if (woodType.getChild("stripped_log") != null) {
+            return supplier.get();
+        }
+        return null;
     }
 }

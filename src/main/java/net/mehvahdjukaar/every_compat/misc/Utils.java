@@ -99,9 +99,9 @@ public class Utils {
             blocks.forEach((w, b) -> {
                 ResourceLocation id = b.getRegistryName();
                 try {
-                    StaticResource newRes = modifier.transform(oakBlockstate, id, w);
-                    assert newRes.location != oakBlockstate.location : "ids cant be the same";
-                    pack.addResource(newRes);
+                    StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
+                    assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
+                    pack.addResource(newBlockState);
 
                     for (StaticResource model : oakModels) {
                         try {

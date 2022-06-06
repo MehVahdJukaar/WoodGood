@@ -23,6 +23,7 @@ import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStru
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -40,6 +41,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -143,6 +146,10 @@ public class WoodGood {
 
     public void registerWoodStuff(RegistryEvent.Register<Block> event, Collection<WoodType> woods) {
         EarlyConfigs.init();
+        //TODO: remove
+        var fa = WoodTypeRegistry.fromNBT("ecologics:flowering_azalea");
+        if(fa != null)fa.addChild("stripped_log", ForgeRegistries.BLOCKS.getValue(new ResourceLocation("ecologics:stripped_azalea_log")));
+
         LOGGER.info("Registering Compat Wood Blocks");
         var reg = event.getRegistry();
         ACTIVE_MODULES.forEach(m -> m.registerWoodBlocks(reg, woods));

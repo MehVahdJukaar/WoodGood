@@ -21,17 +21,17 @@ import java.util.Map;
 
 public abstract class EntrySet<T extends BlockType, B extends Block> {
 
-    public final String baseName;
+    public final String typeName;
     public final Map<T, B> blocks = new HashMap<>();
     public final Map<T, Item> items = new HashMap<>();
 
 
     public EntrySet(String baseName) {
-        this.baseName = baseName;
+        this.typeName = baseName;
     }
 
     public String getName() {
-        return baseName;
+        return typeName;
     }
 
     protected abstract Class<T> getType();

@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 
+//credit to WenXin2
 public class BackpackedModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> SHELF;
@@ -27,13 +28,13 @@ public class BackpackedModule extends SimpleModule {
         super(modId, "bp");
 
         SHELF = SimpleEntrySet.builder("backpack_shelf",
-                        ModBlocks.OAK_BACKPACK_SHELF, ()-> WoodType.OAK_WOOD_TYPE,
+                        ModBlocks.OAK_BACKPACK_SHELF, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(Backpacked.TAB)
                 .addRecipe(modRes("oak_backpack_shelf"))
                 .addTile(CompatShelfBlockEntity::new)
-                .setRenderType(()->RenderType::cutout)
+                .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(SHELF);
