@@ -28,7 +28,7 @@ public class BackpackedModule extends SimpleModule {
 
         SHELF = SimpleEntrySet.builder("backpack_shelf",
                         ModBlocks.OAK_BACKPACK_SHELF, ()-> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks).instabreak()))
+                        w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(Backpacked.TAB)
                 .addRecipe(modRes("oak_backpack_shelf"))
