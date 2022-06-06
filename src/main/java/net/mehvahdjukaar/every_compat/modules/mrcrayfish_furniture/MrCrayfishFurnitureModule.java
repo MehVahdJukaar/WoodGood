@@ -35,6 +35,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> KITCHEN_SINK_DARK;
     public final SimpleEntrySet<WoodType, Block> KITCHEN_SINK_LIGHT;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_BENCHES;
+    public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_COUNTERS;
+    public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_SINK_DARK;
+    public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_SINK_LIGHT;
     public final SimpleEntrySet<WoodType, Block> TABLES;
     public final SimpleEntrySet<WoodType, Block> UPGRADED_FENCES;
     public final SimpleEntrySet<WoodType, Block> UPGRADED_GATES;
@@ -105,7 +108,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         this.addEntry(DESKS);
 
-        KITCHEN_COUNTERS = SimpleEntrySet.builder("kitchen_counter",
+        KITCHEN_COUNTERS = SimpleEntrySet.builder("kitchen_counter", "stripped",
                         ModBlocks.KITCHEN_COUNTER_OAK, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new KitchenCounterBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -117,31 +120,69 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         this.addEntry(KITCHEN_COUNTERS);
 
-        KITCHEN_SINK_DARK = SimpleEntrySet.builder("kitchen_sink_dark",
+        KITCHEN_SINK_DARK = SimpleEntrySet.builder("kitchen_sink_dark", "stripped",
                         ModBlocks.KITCHEN_SINK_DARK_OAK, ()-> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatKitchenSinkDarkBlock(BlockBehaviour.Properties.copy(w.planks), true))
+                        w -> new CompatKitchenSinkBlock(BlockBehaviour.Properties.copy(w.planks), true))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(FurnitureMod.GROUP)
                 .addRecipe(modRes("oak_kitchen_sink_dark"))
-                .addTile(CompatKitchenSinkDarkBlockEntity::new)
+                .addTile(CompatKitchenSinkBlockEntity::new)
                 .setRenderType(()->RenderType::cutout)
                 .build();
 
         this.addEntry(KITCHEN_SINK_DARK);
 
-        KITCHEN_SINK_LIGHT = SimpleEntrySet.builder("kitchen_sink_light",
+        KITCHEN_SINK_LIGHT = SimpleEntrySet.builder("kitchen_sink_light", "stripped",
                         ModBlocks.KITCHEN_SINK_LIGHT_OAK, ()-> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatKitchenSinkLightBlock(BlockBehaviour.Properties.copy(w.planks), true))
+                        w -> new CompatKitchenSinkBlock(BlockBehaviour.Properties.copy(w.planks), true))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(FurnitureMod.GROUP)
                 .addRecipe(modRes("oak_kitchen_sink_light"))
-                .addTile(CompatKitchenSinkLightBlockEntity::new)
+                .addTile(CompatKitchenSinkBlockEntity::new)
                 .setRenderType(()->RenderType::cutout)
                 .build();
 
         this.addEntry(KITCHEN_SINK_LIGHT);
+
+        STRIPPED_KITCHEN_COUNTERS = SimpleEntrySet.builder("kitchen_counter",
+                        ModBlocks.KITCHEN_COUNTER_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new KitchenCounterBlock(BlockBehaviour.Properties.copy(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .addRecipe(modRes("oak_kitchen_counter"))
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(STRIPPED_KITCHEN_COUNTERS);
+
+        STRIPPED_KITCHEN_SINK_DARK = SimpleEntrySet.builder("kitchen_sink_dark",
+                        ModBlocks.KITCHEN_SINK_DARK_STRIPPED_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new CompatKitchenSinkBlock(BlockBehaviour.Properties.copy(w.planks), true))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .addRecipe(modRes("oak_kitchen_sink_dark"))
+                .addTile(CompatKitchenSinkBlockEntity::new)
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(STRIPPED_KITCHEN_SINK_DARK);
+
+        STRIPPED_KITCHEN_SINK_LIGHT = SimpleEntrySet.builder("kitchen_sink_light",
+                        ModBlocks.KITCHEN_SINK_LIGHT_STRIPPED_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new CompatKitchenSinkBlock(BlockBehaviour.Properties.copy(w.planks), true))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .addRecipe(modRes("oak_kitchen_sink_light"))
+                .addTile(CompatKitchenSinkBlockEntity::new)
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(STRIPPED_KITCHEN_SINK_LIGHT);
 
         TABLES = SimpleEntrySet.builder("table",
                         ModBlocks.TABLE_OAK, ()-> WoodType.OAK_WOOD_TYPE,
@@ -212,11 +253,15 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 KitchenSinkBlockEntityRenderer::new);
         event.registerBlockEntityRenderer((BlockEntityType<KitchenSinkBlockEntity>) (KITCHEN_SINK_LIGHT.getTileHolder().tile),
                 KitchenSinkBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<KitchenSinkBlockEntity>) (STRIPPED_KITCHEN_SINK_DARK.getTileHolder().tile),
+                KitchenSinkBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<KitchenSinkBlockEntity>) (STRIPPED_KITCHEN_SINK_LIGHT.getTileHolder().tile),
+                KitchenSinkBlockEntityRenderer::new);
     }
 
-    class CompatKitchenSinkDarkBlockEntity extends KitchenSinkBlockEntity {
+    class CompatKitchenSinkBlockEntity extends KitchenSinkBlockEntity {
 
-        public CompatKitchenSinkDarkBlockEntity(BlockPos pos, BlockState state) {
+        public CompatKitchenSinkBlockEntity(BlockPos pos, BlockState state) {
             super(pos, state);
         }
 
@@ -226,39 +271,39 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
         }
     }
 
-    private class CompatKitchenSinkDarkBlock extends KitchenSinkBlock {
+    private class CompatKitchenSinkBlock extends KitchenSinkBlock {
         private boolean bigSink;
-        public CompatKitchenSinkDarkBlock(Properties properties, boolean bigSink) {
+        public CompatKitchenSinkBlock(Properties properties, boolean bigSink) {
             super(properties, bigSink);
             this.bigSink = bigSink;
         }
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new CompatKitchenSinkDarkBlockEntity(pos, state);
+            return new CompatKitchenSinkBlockEntity(pos, state);
         }
     }
 
-    class CompatKitchenSinkLightBlockEntity extends KitchenSinkBlockEntity {
-
-        public CompatKitchenSinkLightBlockEntity(BlockPos pos, BlockState state) {
-            super(pos, state);
-        }
-
-        @Override
-        public BlockEntityType<?> getType() {
-            return KITCHEN_SINK_LIGHT.getTileHolder().tile;
-        }
-    }
-
-    private class CompatKitchenSinkLightBlock extends KitchenSinkBlock {
-        private boolean bigSink;
-        public CompatKitchenSinkLightBlock(Properties properties, boolean bigSink) {
-            super(properties, bigSink);
-            this.bigSink = bigSink;
-        }
-
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new CompatKitchenSinkLightBlockEntity(pos, state);
-        }
-    }
+//    class CompatKitchenSinkLightBlockEntity extends KitchenSinkBlockEntity {
+//
+//        public CompatKitchenSinkLightBlockEntity(BlockPos pos, BlockState state) {
+//            super(pos, state);
+//        }
+//
+//        @Override
+//        public BlockEntityType<?> getType() {
+//            return KITCHEN_SINK_LIGHT.getTileHolder().tile;
+//        }
+//    }
+//
+//    private class CompatKitchenSinkLightBlock extends KitchenSinkBlock {
+//        private boolean bigSink;
+//        public CompatKitchenSinkLightBlock(Properties properties, boolean bigSink) {
+//            super(properties, bigSink);
+//            this.bigSink = bigSink;
+//        }
+//
+//        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+//            return new CompatKitchenSinkLightBlockEntity(pos, state);
+//        }
+//    }
 }
