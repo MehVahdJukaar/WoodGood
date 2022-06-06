@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPalett
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.LegacyQM;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
@@ -79,6 +80,7 @@ public class WoodGood {
 
 
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);

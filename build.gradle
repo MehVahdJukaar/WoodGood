@@ -154,6 +154,7 @@ dependencies {
     implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
     implementation fg.deobf("curse.maven:selene-499980:3816884")
+    implementation fg.deobf("curse.maven:mrcrayfish-furniture-mod-55438:3683524")
 
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
 }
