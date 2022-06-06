@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
 import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.Utils;
@@ -213,34 +214,40 @@ public class LegacyQM extends CompatModule {
 
     @Override
     public void registerItems(IForgeRegistry<Item> registry) {
-        CreativeModeTab tab = CreativeModeTab.TAB_DECORATIONS;
+        CreativeModeTab tab = WoodGood.MOD_TAB != null ? WoodGood.MOD_TAB :
+                CreativeModeTab.TAB_DECORATIONS;
 
         POSTS.forEach((w, value) -> {
-            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), w);
+            var t = EarlyConfigs.isTypeEnabled(w) ? tab : null;
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(t), w);
             POST_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
         STRIPPED_POSTS.forEach((w, value) -> {
-            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), w);
+            var t = EarlyConfigs.isTypeEnabled(w) ? tab : null;
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(t), w);
             STRIPPED_POST_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
 
         BOOKSHELVES.forEach((w, value) -> {
-            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), w);
+            var t = EarlyConfigs.isTypeEnabled(w) ? tab : null;
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(t), w);
             BOOKSHELF_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
 
         VERTICAL_PLANKS.forEach((w, value) -> {
-            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), w);
+            var t = EarlyConfigs.isTypeEnabled(w) ? tab : null;
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(t), w);
             VERTICAL_PLANK_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
 
-        HEDGES.forEach((key, value) -> {
-            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), 200);
-            HEDGE_ITEMS.put(key, i);
+        HEDGES.forEach((leavesType, value) -> {
+            var t = EarlyConfigs.isTypeEnabled(leavesType) ? tab : null;
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(t), 200);
+            HEDGE_ITEMS.put(leavesType, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
     }

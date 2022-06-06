@@ -154,6 +154,9 @@ dependencies {
     implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
     implementation fg.deobf("curse.maven:selene-499980:3816884")
+    implementation fg.deobf("curse.maven:macaws-fences-and-walls-453925:3817472")
+    implementation fg.deobf("curse.maven:macaws-windows-363569:3712019")
+    implementation fg.deobf("curse.maven:macaws-bridges-351725:3793697")
 
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
 }

@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -35,7 +36,7 @@ public class CreateModule extends SimpleModule {
                         () -> getOwnBlock("oak_window"), () -> WoodType.OAK_WOOD_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         this::makeWindow)
                 .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
-                .setTab(Create.PALETTES_CREATIVE_TAB)
+                .setTab(CreativeModeTab.TAB_DECORATIONS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
@@ -50,7 +51,7 @@ public class CreateModule extends SimpleModule {
                         () -> getOwnBlock("oak_window_pane"), () -> WoodType.OAK_WOOD_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(BlockBehaviour.Properties.copy(Blocks.GLASS_PANE)))
                 .addTag(Tags.Items.GLASS_PANES, Registry.BLOCK_REGISTRY)
-                .setTab(Create.PALETTES_CREATIVE_TAB)
+                .setTab(CreativeModeTab.TAB_DECORATIONS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();

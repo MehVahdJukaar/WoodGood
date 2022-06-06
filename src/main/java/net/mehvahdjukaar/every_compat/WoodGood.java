@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat;
 
 
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.configs.WoodEnabledCondition;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -13,6 +12,9 @@ import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPalett
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.mcaw.MacawBridgesModule;
+import net.mehvahdjukaar.every_compat.modules.mcaw.MacawFencesModule;
+import net.mehvahdjukaar.every_compat.modules.mcaw.MacawWindowsModule;
 import net.mehvahdjukaar.every_compat.modules.quark.LegacyQM;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
@@ -22,6 +24,7 @@ import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -70,12 +73,15 @@ public class WoodGood {
     public static ServerDynamicResourcesHandler SERVER_RESOURCES = null;
     public static ClientDynamicResourcesHandler CLIENT_RESOURCES = null;
 
+    public static CreativeModeTab MOD_TAB = null;
+
     public WoodGood() {
 
         //addCompetitorMod("much_more_mod_compat");
         addCompetitorMod("compatoplenty", List.of("biomesoplenty"));
         addCompetitorMod("decorative_compat", List.of("biomesoplenty"));
         addCompetitorMod("compat_makeover", List.of("biomemakeover"));
+        addCompetitorMod("blocksplus", List.of("quark"));
 
 
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
@@ -86,6 +92,9 @@ public class WoodGood {
         addModule("create", () -> CreateModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
+        addModule("mcwfences", () -> MacawFencesModule::new);
+        addModule("mcwbridges", () -> MacawBridgesModule::new);
+        addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("quark", () -> LegacyQM::new);
         // addModule("quark", () -> QuarkModule::new);
 
