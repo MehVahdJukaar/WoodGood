@@ -147,7 +147,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public void registerItems(CompatModule module, IForgeRegistry<Item> registry) {
         blocks.forEach((w, value) -> {
             Item i;
-            CreativeModeTab tab = EarlyConfigs.isTypeEnabled(w) ? this.tab : null;
+            CreativeModeTab tab = EarlyConfigs.isTypeEnabled(w) ?
+                    (WoodGood.MOD_TAB != null ? WoodGood.MOD_TAB : this.tab) : null;
 
             if (itemFactory != null) {
                 i = itemFactory.apply(w, value, new Item.Properties().tab(tab));

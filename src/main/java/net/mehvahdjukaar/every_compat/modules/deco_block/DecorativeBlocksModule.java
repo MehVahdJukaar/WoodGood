@@ -17,6 +17,7 @@ import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
 

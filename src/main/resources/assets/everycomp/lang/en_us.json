@@ -23,11 +23,40 @@
   "block.everycomp.stripped_post": "Stripped %s Post",
   "block.everycomp.support": "%s Support",
   "block.everycomp.table": "%s Table",
-  "block.everycomp.upgraded_fence": "%s Upgraded Fence",
-  "block.everycomp.upgraded_gate": "%s Upgraded Gate",
   "block.everycomp.vertical_planks": "Vertical %s Planks",
-  "block.everycomp.white_sofa": "%s White Sofa",
   "block.everycomp.window": "%s Window",
   "block.everycomp.window_pane": "%s Window Pane",
+  
+  "block.everycomp.railing": "%s Railing",
+  "block.everycomp.boards": "%s Boards",
+  "block.everycomp.banister": "%s Banister",
+  "block.everycomp.cut_post": "Cut %s Post",
+  "block.everycomp.backpack_shelf": "%s Backpack Shelf",
+
+  "block.everycomp.picket_fence": "%s Picket Fence",
+  "block.everycomp.stockade_fence": "%s Stockade Fence",
+  "block.everycomp.horse_fence": "%s Horse Fence",
+  "block.everycomp.wired_fence": "%s Wired Fence",
+  "block.everycomp.pyramid_gate": "%s Pyramid Fence",
+  "block.everycomp.highley_gate": "%s Highley Fence",
+  "block.everycomp.upgraded_fence": "%s Upgraded Fence",
+  "block.everycomp.upgraded_gate": "%s Upgraded Gate",
+
+  "block.everycomp.rail_bridge": "%s Rail Bridge",
+  "block.everycomp.bridge_pier": "%s Bridge Pier",
+  "block.everycomp.log_bridge_middle": "%s Bridge",
+  "block.everycomp.log_bridge_stair": "%s Bridge Stair",
+  "block.everycomp.rope_bridge_stair": "Rope %s Bridge Stair",
+  "block.everycomp.rope_bridge": "Rope %s Bridge",
+  "block.everycomp.bridge_rope": "Rope %s Bridge",
+
+  "block.everycomp.plank_window": "%s Plank Window",
+  "block.everycomp.plank_window2": "%s Plank Grille Window",
+  "block.everycomp.window2": "%s Grille Window",
+  "block.everycomp.stripped_log_window": "Stripped %s Window",
+  "block.everycomp.stripped_log_window2": "Stripped %s Grille Window",
+  "block.everycomp.log_parapet": "%s Parapet",
+  "block.everycomp.plank_parapet": "%s Plank Parapet",
+
   "wood_type.twilightforest.dark": "Darkwood"
 }
