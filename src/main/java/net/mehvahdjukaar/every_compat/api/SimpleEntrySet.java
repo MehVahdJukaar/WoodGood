@@ -329,27 +329,27 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     public static class Builder<T extends BlockType, B extends Block> {
 
-        private final Supplier<T> baseType;
-        private final Supplier<B> baseBlock;
-        private final String name;
+        protected final Supplier<T> baseType;
+        protected final Supplier<B> baseBlock;
+        protected final String name;
         @Nullable
-        private final String prefix;
-        private CreativeModeTab tab = CreativeModeTab.TAB_DECORATIONS;
-        private boolean copyLoot = false;
-        private final Function<T, B> blockFactory;
+        protected final String prefix;
+        protected CreativeModeTab tab = CreativeModeTab.TAB_DECORATIONS;
+        protected boolean copyLoot = false;
+        protected final Function<T, B> blockFactory;
         @Nullable
-        private TriFunction<T, B, Item.Properties, Item> itemFactory;
+        protected TriFunction<T, B, Item.Properties, Item> itemFactory;
         @Nullable
-        private TileHolder<?> tileFactory;
+        protected TileHolder<?> tileFactory;
         @Nullable
-        private Supplier<Supplier<RenderType>> renderType = null;
+        protected Supplier<Supplier<RenderType>> renderType = null;
         @Nullable
-        private BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
-        private final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
-        private final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
-        private final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
+        protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
+        protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
+        protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
+        protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
 
-        private Builder(String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
+        protected Builder(String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
             this.baseType = baseType;
             this.baseBlock = baseBlock;
             this.name = name;
@@ -436,7 +436,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return this;
         }
 
-        public Builder<T, B> addMaskedTexture(ResourceLocation textureLocation, ResourceLocation maskLocation) {
+        public Builder<T, B> addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
             this.textures.add(Pair.of(textureLocation, maskLocation));
             return this;
         }

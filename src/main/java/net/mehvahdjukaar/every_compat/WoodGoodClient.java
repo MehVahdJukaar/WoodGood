@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
+import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;

@@ -16,6 +16,7 @@ import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -101,7 +102,8 @@ public abstract class CompatModule {
         if (this.shortenedId().equals("af")) return false; //hardcoding
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
 
-        String woodFrom = name.replace("/" + name3, "");
+        String woodFrom = name.substring(0,name.indexOf("/"));
+
         if (registry.containsKey(new ResourceLocation(woodFrom, name3))) return true;
 
         for (var c : WoodGood.COMPETITOR_MODS) {

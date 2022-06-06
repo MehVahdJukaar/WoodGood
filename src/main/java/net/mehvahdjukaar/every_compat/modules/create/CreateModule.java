@@ -1,8 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.create;
 
-import com.simibubi.create.Create;
 import com.simibubi.create.CreateClient;
-import com.simibubi.create.content.palettes.AllPaletteBlocks;
 import com.simibubi.create.content.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.palettes.WindowBlock;
 import com.simibubi.create.foundation.block.connected.*;
@@ -40,8 +38,8 @@ public class CreateModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
-                .addMaskedTexture(WoodGood.res("block/palettes/oak_window"), WoodGood.res("block/palettes/oak_window_m"))
-                .addMaskedTexture(WoodGood.res("block/palettes/oak_window_connected"), WoodGood.res("block/palettes/oak_window_connected_m"))
+                .addTextureM(WoodGood.res("block/palettes/oak_window"), WoodGood.res("block/palettes/oak_window_m"))
+                .addTextureM(WoodGood.res("block/palettes/oak_window_connected"), WoodGood.res("block/palettes/oak_window_connected_m"))
                 .build();
 
         this.addEntry(WINDOWS);

@@ -38,7 +38,7 @@ public class FarmersDelightModule extends SimpleModule {
                 .addTexture(WoodGood.res("block/oak_cabinet_front"))
                 .addTexture(WoodGood.res("block/oak_cabinet_side"))
                 .addTexture(WoodGood.res("block/oak_cabinet_top"))
-                .addMaskedTexture(WoodGood.res("block/oak_cabinet_front_open"), WoodGood.res("block/oak_cabinet_front_open_m"))
+                .addTextureM(WoodGood.res("block/oak_cabinet_front_open"), WoodGood.res("block/oak_cabinet_front_open_m"))
                 .build();
 
         this.addEntry(CABINETS);

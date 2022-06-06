@@ -56,7 +56,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Deprecated
 public class LegacyQM extends CompatModule {
 
     public LegacyQM(String modId) {
@@ -338,7 +338,7 @@ public class LegacyQM extends CompatModule {
         Utils.addBlockResources(modId, manager, handler.dynamicPack, BOOKSHELVES,
                 BlockTypeResTransformer.wood(modId, manager)
                         .replaceSimpleBlock(modId, "acacia_bookshelf")
-                        .replaceWithTextureFromChild("block/acacia_planks", "planks")
+                        .replaceWithTextureFromChild("minecraft:block/acacia_planks", "planks")
                         .IDReplaceBlock("acacia_bookshelf"),
                 ResType.BLOCK_MODELS.getPath(modRes("acacia_bookshelf"))
         );
@@ -347,7 +347,7 @@ public class LegacyQM extends CompatModule {
         Utils.addBlockResources(modId, manager, handler.dynamicPack, VERTICAL_PLANKS,
                 BlockTypeResTransformer.wood(modId, manager)
                         .replaceSimpleBlock(modId, "vertical_oak_planks")
-                        .replaceWithTextureFromChild("block/oak_planks", "planks")
+                        .replaceWithTextureFromChild("minecraft:block/oak_planks", "planks")
                         .IDReplaceBlock("vertical_oak_planks"),
                 ResType.ITEM_MODELS.getPath(modRes("vertical_oak_planks")),
                 ResType.BLOCKSTATES.getPath(modRes("vertical_oak_planks")),

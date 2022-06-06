@@ -51,18 +51,22 @@ public class AxeCraftingRecipeTemplate implements IRecipeTemplate<AxeCraftingRec
         if (newOutput == null)
             throw new UnsupportedOperationException(String.format("Could not convert output item %s", output));
 
+        boolean atLeastOneChanged = false;
         Ingredient newInput = input;
         for (var in : newInput.getItems()) {
             Item it = in.getItem();
             if (it != Items.BARRIER) {
                 ItemLike i = BlockType.changeItemBlockType(it, originalMat, destinationMat);
                 if (i != null) {
+                    atLeastOneChanged = true;
                     //converts first ingredient it finds
                     newInput = Ingredient.of(i);
                     break;
                 }
             }
         }
+        //if recipe fails
+        if (!atLeastOneChanged) return null;
 
         AxeCraftingRecipeBuilder builder = new AxeCraftingRecipeBuilder(newInput, newOutput.asItem(), count);
         //builder.group(group);

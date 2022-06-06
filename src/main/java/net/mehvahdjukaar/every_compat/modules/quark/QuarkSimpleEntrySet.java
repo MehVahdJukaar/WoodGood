@@ -5,14 +5,9 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
-import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicTextureProvider;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +18,6 @@ import vazkii.quark.base.module.ModuleLoader;
 import vazkii.quark.base.module.QuarkModule;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
@@ -59,28 +53,6 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         this.quarkModule = module;
     }
 
-    public void texture(ResourceLocation main, ResourceLocation mask) {
-        this.textures.add(Pair.of(main, mask));
-    }
-
-    public void recipe(ResourceLocation modRes) {
-        this.recipeLocations.add(() -> modRes);
-    }
-
-    public void simpleRecipe() {
-        this.recipeLocations.add(() -> this.baseBlock.get().getRegistryName());
-    }
-
-    public void tag(TagKey<B> key, ResourceKey<Registry<B>> registry) {
-        var s = this.tags.computeIfAbsent(key.location(), b -> new HashSet<>());
-        s.add(registry);
-    }
-
-    @Override
-    public void generateTextures(CompatModule module, RPAwareDynamicTextureProvider handler, ResourceManager manager) {
-        super.generateTextures(module, handler, manager);
-    }
-
     @Override
     public void registerBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<T> woodTypes) {
         Block base = baseBlock.get();
@@ -93,11 +65,54 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
             if (w.isVanilla() || module.isEntryAlreadyRegistered(name, registry)) continue;
             var m = ModuleLoader.INSTANCE.getModuleInstance(quarkModule);
             B block = blockSupplier.apply(w, m);
-            this.blocks.put(w, block);
-            registry.register(block); //does not set registry name
-            w.addChild(module.shortenedId() + "/" + typeName, block);
+            if (block != null) {
+                this.blocks.put(w, block);
+
+                registry.register(block); //does not set registry name
+                w.addChild(module.shortenedId() + "/" + typeName, block);
+            }
         }
     }
 
+    public static <T extends BlockType, B extends Block> QuarkSimpleEntrySet.Builder<T, B> builder(
+            String name,
+            Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule,
+            Supplier<B> baseBlock, Supplier<T> baseType,
+            BiFunction<T, QuarkModule, B> factory) {
+        return new QuarkSimpleEntrySet.Builder<>(name, null, quarkModule, baseType, baseBlock, factory);
+    }
+
+    public static <T extends BlockType, B extends Block> QuarkSimpleEntrySet.Builder<T, B> builder(
+            String name, String prefix,
+            Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule,
+            Supplier<B> baseBlock, Supplier<T> baseType,
+            BiFunction<T, QuarkModule, B> factory) {
+        return new QuarkSimpleEntrySet.Builder<>(name, prefix, quarkModule, baseType, baseBlock, factory);
+    }
+
+    public static class Builder<T extends BlockType, B extends Block> extends SimpleEntrySet.Builder<T, B> {
+
+        private final BiFunction<T, QuarkModule, B> blockSupplier;
+        private final Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule;
+
+        protected Builder(String name, @Nullable String prefix,
+                          Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule,
+                          Supplier<T> baseType, Supplier<B> baseBlock, BiFunction<T, QuarkModule, B> factory) {
+            super(name, prefix, baseType, baseBlock, null);
+            this.quarkModule = quarkModule;
+            this.blockSupplier = factory;
+        }
+
+        @Override
+        public QuarkSimpleEntrySet<T, B> build() {
+            var e = new QuarkSimpleEntrySet<>(name, prefix, quarkModule,
+                    baseBlock, baseType, blockSupplier, tab, copyLoot,
+                    itemFactory, tileFactory, renderType, palette);
+            e.recipeLocations.addAll(this.recipes);
+            e.tags.putAll(this.tags);
+            e.textures.addAll(textures);
+            return e;
+        }
+    }
 
 }

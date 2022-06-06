@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.mcaw.MacawBridgesModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawFencesModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawWindowsModule;
 import net.mehvahdjukaar.every_compat.modules.quark.LegacyQM;
+import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
@@ -100,8 +101,8 @@ public class WoodGood {
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-        addModule("quark", () -> LegacyQM::new);
-        // addModule("quark", () -> QuarkModule::new);
+        //addModule("quark", () -> LegacyQM::new);
+         addModule("quark", () -> QuarkModule::new);
 
 
         ACTIVE_MODULES.forEach(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
@@ -146,9 +147,6 @@ public class WoodGood {
 
     public void registerWoodStuff(RegistryEvent.Register<Block> event, Collection<WoodType> woods) {
         EarlyConfigs.init();
-        //TODO: remove
-        var fa = WoodTypeRegistry.fromNBT("ecologics:flowering_azalea");
-        if(fa != null)fa.addChild("stripped_log", ForgeRegistries.BLOCKS.getValue(new ResourceLocation("ecologics:stripped_azalea_log")));
 
         LOGGER.info("Registering Compat Wood Blocks");
         var reg = event.getRegistry();
@@ -177,6 +175,7 @@ public class WoodGood {
     }
 
     public record CompatMod(String modId, List<String> supportedMods) {
+
     }
 
 

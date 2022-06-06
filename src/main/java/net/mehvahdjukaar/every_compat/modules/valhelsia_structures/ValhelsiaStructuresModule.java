@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.common.item.ModCreativeModeTabs;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -17,9 +18,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ValhelsiaStructuresModule extends SimpleModule {
 
@@ -114,10 +121,9 @@ public class ValhelsiaStructuresModule extends SimpleModule {
             } else if (localY >= 14 && localX > 0 && localX <= 7) {
                 newImage.getImage().setPixelRGBA(x, y - 6, original.getImage().getPixelRGBA(x, y));
                 newImage.getImage().setPixelRGBA(x, y, 0);
-            }else if(localX >= 14 && localY >= 14){
-                newImage.getImage().setPixelRGBA(x-6, y - 6, original.getImage().getPixelRGBA(x, y));
-            }
-            else if (localX >= 10 || localY >= 10) {
+            } else if (localX >= 14 && localY >= 14) {
+                newImage.getImage().setPixelRGBA(x - 6, y - 6, original.getImage().getPixelRGBA(x, y));
+            } else if (localX >= 10 || localY >= 10) {
                 newImage.getImage().setPixelRGBA(x, y, 0);
             }
         });

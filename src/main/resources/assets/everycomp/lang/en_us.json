@@ -26,8 +26,8 @@
   "block.everycomp.stockade_fence": "%s Stockade Fence",
   "block.everycomp.horse_fence": "%s Horse Fence",
   "block.everycomp.wired_fence": "%s Wired Fence",
-  "block.everycomp.pyramid_gate": "%s Pyramid Fence",
-  "block.everycomp.highley_gate": "%s Highley Fence",
+  "block.everycomp.pyramid_gate": "%s Pyramid Gate",
+  "block.everycomp.highley_gate": "%s Highley Gate",
 
   "block.everycomp.rail_bridge": "%s Rail Bridge",
   "block.everycomp.bridge_pier": "%s Bridge Pier",
