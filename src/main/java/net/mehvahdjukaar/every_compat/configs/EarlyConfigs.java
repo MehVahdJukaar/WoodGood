@@ -75,11 +75,11 @@ public class EarlyConfigs {
     }
 
     public static boolean isWoodEnabled(String wood) {
-        return BLOCK_TYPE_CONFIGS.get(WoodType.class).get(wood).get();
+        return true;
     }
 
 
     public static <T extends BlockType> boolean isTypeEnabled(T w) {
-        return BLOCK_TYPE_CONFIGS.get(w.getClass()).get(w.getId().toString()).get();
+        return true;
     }
 }
