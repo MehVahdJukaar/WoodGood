@@ -44,22 +44,28 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> CABINETS;
     public final SimpleEntrySet<WoodType, Block> CHAIRS;
     public final SimpleEntrySet<WoodType, Block> COFFEE_TABLES;
+    public final SimpleEntrySet<WoodType, Block> CRATES;
     public final SimpleEntrySet<WoodType, Block> DESKS;
     public final SimpleEntrySet<WoodType, Block> DESK_CABINETS;
     public final SimpleEntrySet<WoodType, Block> KITCHEN_COUNTERS;
+    public final SimpleEntrySet<WoodType, Block> KITCHEN_DRAWERS;
     public final SimpleEntrySet<WoodType, Block> KITCHEN_SINK_DARK;
     public final SimpleEntrySet<WoodType, Block> KITCHEN_SINK_LIGHT;
+    public final SimpleEntrySet<WoodType, Block> MAIL_BOXES;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_BEDSIDE_CABINETS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_BENCHES;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_BLINDS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_CABINETS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_CHAIRS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_COFFEE_TABLES;
+    public final SimpleEntrySet<WoodType, Block> STRIPPED_CRATES;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_DESKS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_DESK_CABINETS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_COUNTERS;
+    public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_DRAWERS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_SINK_DARK;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_SINK_LIGHT;
+    public final SimpleEntrySet<WoodType, Block> STRIPPED_MAIL_BOXES;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_TABLES;
     public final SimpleEntrySet<WoodType, Block> TABLES;
     public final SimpleEntrySet<WoodType, Block> UPGRADED_FENCES;
@@ -216,6 +222,30 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         this.addEntry(STRIPPED_COFFEE_TABLES);
 
+        CRATES = SimpleEntrySet.builder("crate",
+                        ModBlocks.CRATE_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new CrateBlock(BlockBehaviour.Properties.copy(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .defaultRecipe()
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(CRATES);
+
+        STRIPPED_CRATES = SimpleEntrySet.builder("crate", "stripped",
+                        ModBlocks.CRATE_STRIPPED_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new CrateBlock(BlockBehaviour.Properties.copy(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .defaultRecipe()
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(STRIPPED_CRATES);
+
         DESKS = SimpleEntrySet.builder("desk",
                         ModBlocks.DESK_OAK, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new DeskBlock(BlockBehaviour.Properties.copy(w.planks), DeskBlock.MaterialType.OAK))
@@ -290,6 +320,32 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         this.addEntry(STRIPPED_KITCHEN_COUNTERS);
 
+        KITCHEN_DRAWERS = SimpleEntrySet.builder("kitchen_drawer",
+                        ModBlocks.KITCHEN_DRAWER_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new KitchenDrawerBlock(BlockBehaviour.Properties.copy(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
+                .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .defaultRecipe()
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(KITCHEN_DRAWERS);
+
+        STRIPPED_KITCHEN_DRAWERS = SimpleEntrySet.builder("kitchen_drawer", "stripped",
+                        ModBlocks.KITCHEN_DRAWER_STRIPPED_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new KitchenDrawerBlock(BlockBehaviour.Properties.copy(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
+                .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .defaultRecipe()
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(STRIPPED_KITCHEN_DRAWERS);
+
         KITCHEN_SINK_DARK = SimpleEntrySet.builder("kitchen_sink_dark",
                         ModBlocks.KITCHEN_SINK_DARK_OAK, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatKitchenSinkBlock(BlockBehaviour.Properties.copy(w.planks), true))
@@ -338,6 +394,32 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .build();
 
         this.addEntry(STRIPPED_KITCHEN_SINK_LIGHT);
+
+        MAIL_BOXES = SimpleEntrySet.builder("mail_box",
+                        ModBlocks.MAIL_BOX_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new MailBoxBlock(BlockBehaviour.Properties.copy(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .defaultRecipe()
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(MAIL_BOXES);
+
+        STRIPPED_MAIL_BOXES = SimpleEntrySet.builder("mail_box", "stripped",
+                        ModBlocks.MAIL_BOX_STRIPPED_OAK, ()-> WoodType.OAK_WOOD_TYPE,
+                        w -> new MailBoxBlock(BlockBehaviour.Properties.copy(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
+                .setTab(FurnitureMod.GROUP)
+                .defaultRecipe()
+                .setRenderType(()->RenderType::cutout)
+                .build();
+
+        this.addEntry(STRIPPED_MAIL_BOXES);
 
         STRIPPED_TABLES = SimpleEntrySet.builder("table", "stripped",
                         ModBlocks.TABLE_STRIPPED_OAK, ()-> WoodType.OAK_WOOD_TYPE,
@@ -413,16 +495,20 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
     @Override
     public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
         HEDGES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.cfm_hedge",(BlockType) w, v));
+        STRIPPED_BEDSIDE_CABINETS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_bedside_cabinet",(BlockType) w, v));
         STRIPPED_BENCHES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_park_bench",(BlockType) w, v));
         STRIPPED_BLINDS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_blinds",(BlockType) w, v));
         STRIPPED_CABINETS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_cabinet",(BlockType) w, v));
         STRIPPED_CHAIRS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_chair",(BlockType) w, v));
         STRIPPED_COFFEE_TABLES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_coffee_table",(BlockType) w, v));
+        STRIPPED_CRATES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_crates",(BlockType) w, v));
         STRIPPED_DESKS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_desk",(BlockType) w, v));
         STRIPPED_DESK_CABINETS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_desk_cabinet",(BlockType) w, v));
-        STRIPPED_KITCHEN_COUNTERS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_counters",(BlockType) w, v));
-        STRIPPED_KITCHEN_SINK_DARK.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_sink",(BlockType) w, v));
-        STRIPPED_KITCHEN_SINK_LIGHT.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_sink",(BlockType) w, v));
+        STRIPPED_KITCHEN_COUNTERS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_counter",(BlockType) w, v));
+        STRIPPED_KITCHEN_DRAWERS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_drawer",(BlockType) w, v));
+        STRIPPED_KITCHEN_SINK_DARK.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_sink_dark",(BlockType) w, v));
+        STRIPPED_KITCHEN_SINK_LIGHT.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_sink_light",(BlockType) w, v));
+        STRIPPED_MAIL_BOXES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_mail_box",(BlockType) w, v));
         STRIPPED_TABLES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_table",(BlockType) w, v));
         super.addTranslations(clientDynamicResourcesHandler, lang);
     }
