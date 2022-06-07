@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import com.google.gson.JsonElement;
 import net.mehvahdjukaar.every_compat.WoodGood;
-import net.mehvahdjukaar.every_compat.configs.WoodEnabledCondition;
+import net.mehvahdjukaar.every_compat.configs.BlockTypeEnabledCondition;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -47,6 +47,12 @@ public class Utils {
         modelModifier.IDReplaceType(baseBlockName);
         if (baseType instanceof WoodType woodType) {
             modelModifier.replaceWoodTextures(woodType);
+        } else if(baseType instanceof LeavesType leavesType){
+            modelModifier.replaceLeavesTextures(leavesType);
+            var woodT = leavesType.woodType;
+            if(woodT != null){
+                modelModifier.replaceWoodTextures(woodT);
+            }
         }
         modelModifier.replaceBlockType(baseBlockName);
 
@@ -191,15 +197,10 @@ public class Utils {
             if (i.getItemCategory() != null) {
                 FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
                 if (newR == null) return;
-                //TODO: generalize to work with all block types
-                if (fromType instanceof WoodType) {
-                    ConditionalRecipe.builder()
-                            .addCondition(new WoodEnabledCondition(w.getId().toString()))
-                            .addRecipe(newR)
-                            .build(pack::addRecipe, newR.getId());
-                } else {
-                    pack.addRecipe(newR);
-                }
+                ConditionalRecipe.builder()
+                        .addCondition(new BlockTypeEnabledCondition(w))
+                        .addRecipe(newR)
+                        .build(pack::addRecipe, newR.getId());
             }
         });
     }

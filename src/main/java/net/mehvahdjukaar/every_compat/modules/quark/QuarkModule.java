@@ -13,6 +13,7 @@ import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
+import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
@@ -20,8 +21,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -70,7 +73,7 @@ public class QuarkModule extends SimpleModule {
                 .setPalette(this::bookshelfPalette)
                 .build();
 
-        this.addEntry(BOOKSHELVES);
+   //     this.addEntry(BOOKSHELVES);
 
         POSTS = QuarkSimpleEntrySet.builder("post",
                         VariantBookshelvesModule.class,
@@ -88,7 +91,7 @@ public class QuarkModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(POSTS);
+     //   this.addEntry(POSTS);
 
         STRIPPED_POSTS = QuarkSimpleEntrySet.builder("post", "stripped",
                 VariantBookshelvesModule.class,
@@ -108,7 +111,7 @@ public class QuarkModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_POSTS);
+    //    this.addEntry(STRIPPED_POSTS);
 
         VERTICAL_PLANKS = QuarkSimpleEntrySet.builder("planks", "vertical",
                 VerticalPlanksModule.class,
@@ -122,7 +125,7 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
 
-        this.addEntry(VERTICAL_PLANKS);
+    //    this.addEntry(VERTICAL_PLANKS);
 
 
         HEDGES = QuarkSimpleEntrySet.builder("hedge",
@@ -230,8 +233,13 @@ public class QuarkModule extends SimpleModule {
         ARLModData.remove(WoodGood.MOD_ID);
     }
 
+
     @Override
-    public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addStaticServerResources(handler, manager);
+    public void registerColors(ColorHandlerEvent.Item event) {
+        HEDGES.blocks.forEach((l, h) -> {
+            ItemColors colors = event.getItemColors();
+            ItemStack leafStack = new ItemStack(l.leaves);
+            colors.register((stack, tintIndex) -> colors.getColor(leafStack, tintIndex), h.asItem());
+        });
     }
 }

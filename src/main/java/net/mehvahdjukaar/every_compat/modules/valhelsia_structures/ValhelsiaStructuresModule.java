@@ -14,6 +14,7 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.mehvahdjukaar.selene.resourcepack.recipe.TemplateRecipeManager;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -55,6 +56,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .setTab(ModCreativeModeTabs.MAIN)
                 .defaultRecipe()
                 .useLootFromBase()
+                .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(CUT_POSTS);

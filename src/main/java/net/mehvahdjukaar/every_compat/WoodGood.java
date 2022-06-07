@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat;
 
 
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
-import net.mehvahdjukaar.every_compat.configs.WoodEnabledCondition;
+import net.mehvahdjukaar.every_compat.configs.BlockTypeEnabledCondition;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
@@ -13,11 +13,10 @@ import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
-import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawBridgesModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawFencesModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawWindowsModule;
-import net.mehvahdjukaar.every_compat.modules.quark.LegacyQM;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
@@ -25,7 +24,6 @@ import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStru
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
-import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -43,8 +41,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -89,9 +85,8 @@ public class WoodGood {
         addCompetitorMod("compat_makeover", List.of("biomemakeover"));
         addCompetitorMod("blocksplus", List.of("quark"));
 
-/*
-        addModule("another_furniture", () -> AnotherFurnitureModule::new);
 
+        addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
@@ -103,10 +98,8 @@ public class WoodGood {
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-*/
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
-        //addModule("quark", () -> LegacyQM::new);
-         addModule("quark", () -> QuarkModule::new);
+        addModule("quark", () -> QuarkModule::new);
 
 
         ACTIVE_MODULES.forEach(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
@@ -129,7 +122,7 @@ public class WoodGood {
             CLIENT_RESOURCES.register(bus);
         } else CLIENT_RESOURCES = null;
 
-        CraftingHelper.register(new WoodEnabledCondition.Serializer());
+        CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
     }
 

@@ -16,9 +16,7 @@ import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -28,8 +26,10 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 
@@ -102,9 +102,8 @@ public abstract class CompatModule {
                 registry.containsKey(new ResourceLocation(modId, name2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
-        if (this.shortenedId().equals("cfm")) return false; //we always register everything for these
 
-        String woodFrom = name.substring(0,name.indexOf("/"));
+        String woodFrom = name.substring(0, name.indexOf("/"));
 
         if (registry.containsKey(new ResourceLocation(woodFrom, name3))) return true;
 
@@ -153,7 +152,7 @@ public abstract class CompatModule {
     }
 
 
-    protected final Block getOwnBlock(String id){
+    protected final Block getOwnBlock(String id) {
         return ForgeRegistries.BLOCKS.getValue(modRes(id));
     }
     //utility functions
@@ -196,6 +195,14 @@ public abstract class CompatModule {
         }
     }
 
+    public <T extends BlockType, B extends Block> Function<T, @Nullable B> ifHasChild(Function<T, B> supplier, String... children) {
+        return w -> {
+            for (var v : children) {
+                if (w.getChild(v) == null) return null;
+            }
+            return supplier.apply(w);
+        };
+    }
 
 
 }

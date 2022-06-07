@@ -45,6 +45,7 @@
   "block_type.mcwbridges.rope_bridge_stair": "Rope %s Bridge Stair",
   "block_type.mcwbridges.rope_bridge": "Rope %s Bridge",
   "block_type.mcwbridges.bridge_rope": "Rope %s Bridge",
+  "block_type.mcwbridges.wired_fence": "%s Wired Fence",
 
   "block_type.mcwwindows.window": "%s Window",
   "block_type.mcwwindows.window_pane": "%s Window Pane",
@@ -55,15 +56,16 @@
   "block_type.mcwwindows.stripped_log_window2": "Stripped %s Grille Window",
   "block_type.mcwwindows.log_parapet": "%s Parapet",
   "block_type.mcwwindows.plank_parapet": "%s Plank Parapet",
-  
+  "block_type.mcwwindows.window": "%s Window",
+  "block_type.mcwwindows.window2": "%s Grille Window",
+  "block_type.mcwwindows.window_pane": "%s Window Pane",
+
+
+  "block_type.cfm.window": "%s Window",
   "block_type.cfm.backpack_shelf": "%s Backpack Shelf",
-  "block_type.cfm.banister": "%s Banister",
-  "block_type.cfm.beam": "%s Beam",
   "block_type.cfm.bedside_cabinet": "%s Bedside Cabinet",
   "block_type.cfm.blinds": "%s Blinds",
-  "block_type.cfm.bookshelf": "%s Bookshelf",
   "block_type.cfm.cabinet": "%s Cabinet",
-  "block_type.cfm.cfm_hedge": "%s Hedge",
   "block_type.cfm.chair": "%s Chair",
   "block_type.cfm.coffee_table": "%s Coffee Table",
   "block_type.cfm.crate": "%s Crate",
@@ -115,10 +117,7 @@
   "block_type.cfm.upgraded_fence": "%s Upgraded Fence",
   "block_type.cfm.upgraded_gate": "%s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
-  "block_type.cfm.window": "%s Window",
-  "block_type.cfm.window2": "%s Grille Window",
-  "block_type.cfm.window_pane": "%s Window Pane",
-  "block_type.cfm.wired_fence": "%s Wired Fence",
+
 
 
   "wood_type.twilightforest.dark": "Darkwood"
