@@ -36,7 +36,7 @@ public abstract class EntrySet<T extends BlockType, B extends Block> {
 
     protected abstract Class<T> getType();
 
-    public abstract void addTranslations(AfterLanguageLoadEvent lang);
+    public abstract void addTranslations(CompatModule module, AfterLanguageLoadEvent lang);
 
     public void registerWoodBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
         if (WoodType.class == getType()) {

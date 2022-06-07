@@ -92,6 +92,7 @@ public abstract class CompatModule {
 
     }
 
+    //TODO: improve
     public final boolean isEntryAlreadyRegistered(String name, IForgeRegistry<?> registry) {
         name = name.replace(this.shortenedId() + "/", ""); //af/quark/blossom_chair
         if (name.startsWith(modId + "/")) return true;        //discards one from this mod
@@ -101,6 +102,7 @@ public abstract class CompatModule {
                 registry.containsKey(new ResourceLocation(modId, name2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
+        if (this.shortenedId().equals("cfm")) return false; //we always register everything for these
 
         String woodFrom = name.substring(0,name.indexOf("/"));
 

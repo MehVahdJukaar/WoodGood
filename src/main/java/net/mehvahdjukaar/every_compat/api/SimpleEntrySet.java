@@ -100,8 +100,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         return (Class<T>) this.baseType.get().getClass();
     }
 
-    public void addTranslations(AfterLanguageLoadEvent lang) {
-        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block." + WoodGood.MOD_ID + "." + typeName, (BlockType) w, v));
+    public void addTranslations(CompatModule module, AfterLanguageLoadEvent lang) {
+        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block_type." + module.getModId() +"." + typeName, (BlockType) w, v));
     }
 
     public void registerWoodBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {

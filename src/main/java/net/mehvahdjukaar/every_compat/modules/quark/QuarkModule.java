@@ -4,6 +4,8 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -228,5 +230,8 @@ public class QuarkModule extends SimpleModule {
         ARLModData.remove(WoodGood.MOD_ID);
     }
 
-
+    @Override
+    public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addStaticServerResources(handler, manager);
+    }
 }

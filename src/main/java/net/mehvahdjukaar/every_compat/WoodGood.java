@@ -89,9 +89,9 @@ public class WoodGood {
         addCompetitorMod("compat_makeover", List.of("biomemakeover"));
         addCompetitorMod("blocksplus", List.of("quark"));
 
-
+/*
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
-        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
@@ -103,6 +103,8 @@ public class WoodGood {
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
+*/
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         //addModule("quark", () -> LegacyQM::new);
          addModule("quark", () -> QuarkModule::new);
 

@@ -161,6 +161,7 @@ dependencies {
     implementation fg.deobf("curse.maven:backpacked-352835:3755666")
     implementation fg.deobf("curse.maven:mrcrayfish-furniture-mod-55438:3683524")
 
+
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
 }
 

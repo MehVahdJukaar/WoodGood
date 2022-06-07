@@ -14,7 +14,6 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -50,7 +49,7 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
-        getEntries().forEach(e -> e.addTranslations(lang));
+        getEntries().forEach(e -> e.addTranslations(this, lang));
     }
 
     @Override
