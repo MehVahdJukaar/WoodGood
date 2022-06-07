@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawBridgesModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawFencesModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawWindowsModule;
@@ -86,6 +87,7 @@ public class WoodGood {
 
 
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);

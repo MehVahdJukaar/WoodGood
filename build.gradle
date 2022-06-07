@@ -153,11 +153,13 @@ dependencies {
     implementation fg.deobf("curse.maven:create-328085:3737418")
     implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
+    implementation fg.deobf("curse.maven:selene-499980:3819295")
+    implementation fg.deobf("curse.maven:mrcrayfish-furniture-mod-55438:3683524")
     implementation fg.deobf("curse.maven:macaws-fences-and-walls-453925:3817472")
     implementation fg.deobf("curse.maven:macaws-windows-363569:3712019")
     implementation fg.deobf("curse.maven:macaws-bridges-351725:3793697")
-    implementation fg.deobf("curse.maven:selene-499980:3818470")
     implementation fg.deobf("curse.maven:backpacked-352835:3755666")
+    implementation fg.deobf("curse.maven:mrcrayfish-furniture-mod-55438:3683524")
 
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
 }
