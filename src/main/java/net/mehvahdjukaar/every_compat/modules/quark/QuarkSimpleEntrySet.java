@@ -62,7 +62,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
 
         for (T w : woodTypes) {
             String name = module.makeBlockId(w, this.postfix);
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || module.isEntryAlreadyRegistered(name,w, registry)) continue;
             var m = ModuleLoader.INSTANCE.getModuleInstance(quarkModule);
             B block = blockSupplier.apply(w, m);
             if (block != null) {

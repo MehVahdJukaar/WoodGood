@@ -210,7 +210,7 @@ public class QuarkModule extends SimpleModule {
         LeavesType.OAK_LEAVES_TYPE.addChild(shortenedId() + "/hedge", ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")));
         for (LeavesType l : leavesTypes) {
             String name = makeBlockId(l, "hedge");
-            if (l.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (l.isVanilla() || isEntryAlreadyRegistered(name, l,registry)) continue;
             if (l.woodType != null) {
                 Block fence = l.woodType.getBlockOfThis("fence");
                 if (fence != null) {

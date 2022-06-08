@@ -67,7 +67,7 @@ public class LegacyTFM extends CompatModule {
         addChildToOak(shortenedId() + "/" + BANISTER_NAME, "oak_banister");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, BANISTER_NAME);
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name,w, registry)) continue;
 
             Block block = new BanisterBlock(BlockBehaviour.Properties.copy(w.planks));
             BANISTERS.put(w, block);
@@ -85,7 +85,7 @@ public class LegacyTFM extends CompatModule {
             ResourceLocation verticalRes = WoodGood.res(name + "_vertical");
 
             if (w.getChild("stripped_log") == null) continue;
-            if (w.isVanilla() || isEntryAlreadyRegistered(verticalRes.getPath(), registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(verticalRes.getPath(),w, registry)) continue;
 
 
             ResourceLocation horizontalRes = WoodGood.res(name + "_horizontal");

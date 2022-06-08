@@ -6,12 +6,13 @@
   "block_type.another_furniture.table": "%s Table",
   "block_type.another_furniture.chair": "%s Chair",
   "block_type.another_furniture.shelf": "%s Shelf",
+  "block_type.another_furniture.shutter": "%s Shutter",
+  "block_type.another_furniture.planter_box": "%s Planter Box",
 
-  "block_type.quark.palisade": "%s Palisade",
+  "block_type.decorative_blocks.palisade": "%s Palisade",
   "block_type.decorative_blocks.support": "%s Support",
   "block_type.decorative_blocks.beam": "%s Beam",
   "block_type.decorative_blocks.seat": "%s Seat",
-
 
   "block_type.farmersdelight.cabinet": "%s Cabinet",
   "block_type.twilightforest.hollow_log": "Hollow %s Log",
@@ -56,9 +57,9 @@
   "block_type.mcwwindows.stripped_log_window2": "Stripped %s Grille Window",
   "block_type.mcwwindows.log_parapet": "%s Parapet",
   "block_type.mcwwindows.plank_parapet": "%s Plank Parapet",
-  "block_type.mcwwindows.window": "%s Window",
-  "block_type.mcwwindows.window2": "%s Grille Window",
-  "block_type.mcwwindows.window_pane": "%s Window Pane",
+
+  "block_type.create.window": "%s Window",
+  "block_type.create.window_pane": "%s Window Pane",
 
 
   "block_type.cfm.window": "%s Window",
@@ -82,7 +83,6 @@
   "block_type.cfm.kitchen_sink_light": "%s Kitchen Sink (Light)",
   "block_type.cfm.log_parapet": "%s Parapet",
   "block_type.cfm.mail_box": "%s Mail Box",
-  "block_type.cfm.palisade": "%s Palisade",
   "block_type.cfm.park_bench": "%s Park Bench",
   "block_type.cfm.picket_fence": "%s Picket Fence",
   "block_type.cfm.plank_parapet": "%s Plank Parapet",

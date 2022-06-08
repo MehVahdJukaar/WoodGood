@@ -68,7 +68,7 @@ public class LegacyCM extends CompatModule {
         addChildToOak(shortenedId() + "/window_pane", "oak_window_pane");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, WINDOW_NAME);
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name,w, registry)) continue;
 
             WindowBlock block = new WindowBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)
                     .isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)

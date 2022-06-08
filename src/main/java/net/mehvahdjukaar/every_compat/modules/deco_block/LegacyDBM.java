@@ -71,7 +71,7 @@ public class LegacyDBM extends CompatModule {
         addChildToOak(shortenedId() + "/beam", "oak_beam");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, BEAM_NAME);
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name,w, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.BEAM);
@@ -83,7 +83,7 @@ public class LegacyDBM extends CompatModule {
         addChildToOak(shortenedId() + "/palisade", "oak_palisade");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, PALISADE_NAME);
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, w,registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.PALISADE);
@@ -95,7 +95,7 @@ public class LegacyDBM extends CompatModule {
         addChildToOak(shortenedId() + "/support", "oak_support");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, SUPPORT_NAME);
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name,w, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.SUPPORT);
@@ -107,7 +107,7 @@ public class LegacyDBM extends CompatModule {
         addChildToOak(shortenedId() + "/seat", "oak_seat");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, SEAT_NAME);
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name,w, registry)) continue;
 
             DBWoodType wood = DB_WOOD_TYPES.get(w);
             Block block = DBBlocks.createDecorativeBlock(wood, WoodDecorativeBlockTypes.SEAT);

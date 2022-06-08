@@ -112,7 +112,7 @@ public class LegacyQM extends CompatModule {
                 boolean nether = !w.canBurn();
                 String name = w.getVariantId(POST_NAME, false);
                 String strippedName = makeBlockId(w, STRIPPED_POST_NAME);
-                if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+                if (w.isVanilla() || isEntryAlreadyRegistered(name, w,registry)) continue;
 
                 var module = ModuleLoader.INSTANCE.getModuleInstance(WoodenPostsModule.class);
                 String prefix = shortenedId() + "/" + w.getNamespace() + "/";
@@ -141,7 +141,7 @@ public class LegacyQM extends CompatModule {
             boolean nether = !w.canBurn();
             String name = w.getVariantId(BOOKSHELF_NAME, false);
 
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name,w, registry)) continue;
 
             var module = ModuleLoader.INSTANCE.getModuleInstance(VariantBookshelvesModule.class);
             String prefix = shortenedId() + "/" + w.getAppendableId();
@@ -156,7 +156,7 @@ public class LegacyQM extends CompatModule {
         for (WoodType w : woodTypes) {
 
             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, w,registry)) continue;
             var module = ModuleLoader.INSTANCE.getModuleInstance(VerticalPlanksModule.class);
 
             Block block = new QuarkBlock(name, module, CreativeModeTab.TAB_BUILDING_BLOCKS, BlockBehaviour.Properties.copy(w.planks));
@@ -189,7 +189,7 @@ public class LegacyQM extends CompatModule {
         LeavesType.OAK_LEAVES_TYPE.addChild(shortenedId() + "/hedge", ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")));
         for (LeavesType l : leavesTypes) {
             String name = makeBlockId(l, HEDGE_NAME);
-            if (l.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (l.isVanilla() || isEntryAlreadyRegistered(name,l, registry)) continue;
             if (l.woodType != null) {
                 Block fence = l.woodType.getBlockOfThis("fence");
                 if (fence != null) {

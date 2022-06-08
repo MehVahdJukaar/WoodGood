@@ -120,7 +120,7 @@ public class TwilightForestModule extends SimpleModule {
     @Override
     public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
         super.addTranslations(clientDynamicResourcesHandler, lang);
-        HOLLOW_LOGS_VERTICAL.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.hollow_log", (BlockType) w, v));
+       // HOLLOW_LOGS_VERTICAL.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block_type.twilightforest.hollow_log", (BlockType) w, v));
     }
 
     @Override

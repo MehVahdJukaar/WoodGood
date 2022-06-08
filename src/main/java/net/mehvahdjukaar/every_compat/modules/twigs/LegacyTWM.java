@@ -52,7 +52,7 @@ public class LegacyTWM extends CompatModule {
         addChildToOak(shortenedId() + "/table", "oak_table");
         for (WoodType w : woodTypes) {
             String name = makeBlockId(w, TABLE_NAME);
-            if (w.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (w.isVanilla() || isEntryAlreadyRegistered(name, w,registry)) continue;
 
             Block block = new TableBlock(BlockBehaviour.Properties.copy(w.planks).instabreak());
             TABLES.put(w, block);
