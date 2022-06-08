@@ -47,6 +47,11 @@
   "block_type.mcwbridges.bridge_rope": "Rope %s Bridge",
   "block_type.mcwbridges.wired_fence": "%s Wired Fence",
 
+  "block_type.mcwlights.soul_tiki_torch": "Soul %s Tiki Torch",
+  "block_type.mcwlights.tiki_torch": "%s Tiki Torch",
+
+  "block_type.mcwpaths.planks_path": "%s Planks Path",
+
   "block_type.mcwwindows.window": "%s Window",
   "block_type.mcwwindows.window_pane": "%s Window Pane",
   "block_type.mcwwindows.plank_window": "%s Plank Window",
@@ -72,7 +77,7 @@
   "block_type.cfm.cut_post": "Cut %s Post",
   "block_type.cfm.desk": "%s Desk",
   "block_type.cfm.desk_cabinet": "%s Desk Cabinet",
-  "block_type.cfm.hedge": "%s Leaf Hedge",
+  "block_type.cfm.hedge": "%s Hedge",
   "block_type.cfm.highley_gate": "%s Highley Gate",
   "block_type.cfm.hollow_log": "Hollow %s Log",
   "block_type.cfm.horse_fence": "%s Horse Fence",
