@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat;
 
 
-import com.starfish_studios.another_furniture.client.renderer.blockentity.PlanterBoxRenderer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.BlockTypeEnabledCondition;
@@ -20,7 +19,6 @@ import net.mehvahdjukaar.every_compat.modules.mcaw.MacawBridgesModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawFencesModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.MacawWindowsModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
-import net.mehvahdjukaar.every_compat.modules.quark.LegacyQM;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
@@ -29,7 +27,6 @@ import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.network.LegacyQueryHandler;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -96,7 +93,6 @@ public class WoodGood {
         addCompetitorMod("mcwfencesbyg", "mcwfences", List.of("byg"));
 
 
-
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
@@ -108,7 +104,7 @@ public class WoodGood {
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("quark", () -> QuarkModule::new);
-       // addModule("quark", () -> LegacyQM::new);
+        // addModule("quark", () -> LegacyQM::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
 
         addModule("mcwfences", () -> MacawFencesModule::new);
@@ -200,6 +196,7 @@ public class WoodGood {
     }
 
     private static <T extends IForgeRegistryEntry<T>> void remapEntries(RegistryEvent.MissingMappings<T> event, IForgeRegistry<T> blockReg) {
+        if (!EarlyConfigs.REMAP_COMPAT.get()) return;
         for (var compatMod : COMPAT_MODS) {
             String woodFrom = compatMod.woodFrom; //ie bop
             label:

@@ -25,11 +25,15 @@ public class EarlyConfigs {
     public static ForgeConfigSpec REGISTRY_CONFIG;
 
     public static ForgeConfigSpec.BooleanValue TAB_ENABLED;
+    public static ForgeConfigSpec.BooleanValue REMAP_COMPAT;
 
     public static void init() {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.push("general");
-        TAB_ENABLED = builder.define("creative_tab", true);
+        TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
+                .define("creative_tab", true);
+        REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
+                .define("remap_other_mods", true);
         builder.pop();
         for (var reg : BlockSetManager.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));
