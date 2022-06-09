@@ -133,7 +133,6 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
-    implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:flywheel-486392:3737402")
     implementation fg.deobf("curse.maven:create-328085:3737418")
     implementation fg.deobf("curse.maven:farmersdelight-398521:3739914")
@@ -145,10 +144,7 @@ dependencies {
     implementation fg.deobf("curse.maven:create-328085:3737418")
     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     //implementation fg.deobf("curse.maven:twigs-496913:3756844")
-    implementation fg.deobf("curse.maven:malum-484064:3768401")
-    implementation fg.deobf("curse.maven:curios-309927:3670447")
     implementation fg.deobf("curse.maven:configured-457570:3640884")
-    implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
     //implementation fg.deobf("curse.maven:another-furniture-610492:3784455")
     implementation fg.deobf("curse.maven:farmersdelight-398521:3739914")
     implementation fg.deobf("curse.maven:flywheel-486392:3737402")
@@ -160,13 +156,15 @@ dependencies {
     implementation fg.deobf("curse.maven:macaws-paths-and-pavings-629153:3810627")
     implementation fg.deobf("curse.maven:macaws-trapdoors-400933:3682901")
     implementation fg.deobf("curse.maven:macaws-windows-363569:3712019")
-    implementation fg.deobf("curse.maven:malum-484064:3768401")
     implementation fg.deobf("curse.maven:mrcrayfish-furniture-mod-55438:3683524")
-    implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
+    //implementation fg.deobf("curse.maven:malum-484064:3768401")
+    //implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
+    //implementation fg.deobf("curse.maven:curios-309927:3670447")
     implementation fg.deobf("curse.maven:quark-243121:3800462")
     implementation fg.deobf("curse.maven:selene-499980:3823491")
     implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
+    implementation fg.deobf("curse.maven:decorativeblocks-362528:3681919")
 
 
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
