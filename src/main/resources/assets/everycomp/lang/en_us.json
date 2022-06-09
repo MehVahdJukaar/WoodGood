@@ -13,6 +13,7 @@
   "block_type.decorative_blocks.support": "%s Support",
   "block_type.decorative_blocks.beam": "%s Beam",
   "block_type.decorative_blocks.seat": "%s Seat",
+  "block_type.decorative_winter.snowy_palisade": "Snowy %s Palisade",
 
   "block_type.farmersdelight.cabinet": "%s Cabinet",
   "block_type.twilightforest.hollow_log": "Hollow %s Log",
@@ -32,6 +33,18 @@
 
   "block_type.backpacked.backpack_shelf": "%s Backpack Shelf",
 
+  "block_type.mcwdoors.bark_glass_door": "%s Bark Glass Door",
+  "block_type.mcwdoors.classic_door": "%s Classic Door",
+  "block_type.mcwdoors.glass_door": "%s Glass Door",
+  "block_type.mcwdoors.four_panel_door": "%s Four Panel Door",
+  "block_type.mcwdoors.mystic_door": "%s Mystic Door",
+  "block_type.mcwdoors.nether_door": "%s Nether Door",
+  "block_type.mcwdoors.paper_door": "%s Paper Door",
+  "block_type.mcwdoors.stable_door": "%s Stable Door",
+  "block_type.mcwdoors.stable_head_door": "%s Stable Horse Door",
+  "block_type.mcwdoors.tropical_door": "%s Tropical Door",
+  "block_type.mcwdoors.western_door": "%s Western Door",
+
   "block_type.mcwfences.picket_fence": "%s Picket Fence",
   "block_type.mcwfences.stockade_fence": "%s Stockade Fence",
   "block_type.mcwfences.horse_fence": "%s Horse Fence",
@@ -47,6 +60,23 @@
   "block_type.mcwbridges.rope_bridge": "Rope %s Bridge",
   "block_type.mcwbridges.bridge_rope": "Rope %s Bridge",
   "block_type.mcwbridges.wired_fence": "%s Wired Fence",
+
+  "block_type.mcwlights.soul_tiki_torch": "Soul %s Tiki Torch",
+  "block_type.mcwlights.tiki_torch": "%s Tiki Torch",
+
+  "block_type.mcwpaths.planks_path": "%s Planks Path",
+
+  "block_type.mcwtrpdoors.bark_trapdoor": "%s Bark Trapdoor",
+  "block_type.mcwtrpdoors.barn_trapdoor": "%s Barn Trapdoor",
+  "block_type.mcwtrpdoors.barred_trapdoor": "%s Barred Trapdoor",
+  "block_type.mcwtrpdoors.beach_trapdoor": "%s Beach Trapdoor",
+  "block_type.mcwtrpdoors.classic_trapdoor": "%s Classic Trapdoor",
+  "block_type.mcwtrpdoors.cottage_trapdoor": "%s Cottage Trapdoor",
+  "block_type.mcwtrpdoors.four_panel_trapdoor": "%s Four Panel Trapdoor",
+  "block_type.mcwtrpdoors.glass_trapdoor": "%s Glass Trapdoor",
+  "block_type.mcwtrpdoors.mystic_trapdoor": "%s Mystic Trapdoor",
+  "block_type.mcwtrpdoors.paper_trapdoor": "%s Paper Trapdoor",
+  "block_type.mcwtrpdoors.tropical_trapdoor": "%s Tropical Trapdoor",
 
   "block_type.mcwwindows.window": "%s Window",
   "block_type.mcwwindows.window_pane": "%s Window Pane",
@@ -74,7 +104,7 @@
   "block_type.cfm.cut_post": "Cut %s Post",
   "block_type.cfm.desk": "%s Desk",
   "block_type.cfm.desk_cabinet": "%s Desk Cabinet",
-  "block_type.cfm.hedge": "%s Leaf Hedge",
+  "block_type.cfm.hedge": "%s Hedge",
   "block_type.cfm.highley_gate": "%s Highley Gate",
   "block_type.cfm.hollow_log": "Hollow %s Log",
   "block_type.cfm.horse_fence": "%s Horse Fence",
