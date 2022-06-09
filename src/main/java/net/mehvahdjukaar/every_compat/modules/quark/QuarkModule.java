@@ -56,6 +56,7 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_POSTS;
     public final SimpleEntrySet<WoodType, Block> VERTICAL_PLANKS;
     public final SimpleEntrySet<WoodType, Block> LADDERS;
+    public final SimpleEntrySet<WoodType, Block> CHESTS;
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
 
     public QuarkModule(String modId) {
