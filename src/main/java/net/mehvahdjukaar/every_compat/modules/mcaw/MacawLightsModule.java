@@ -24,7 +24,7 @@ public class MacawLightsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> TIKI_TORCHES;
 
     public MacawLightsModule(String modId) {
-        super(modId, "mcp");
+        super(modId, "mcl");
         CreativeModeTab tab;
         try {
             var f = ObfuscationReflectionHelper.findField(MacawsLights.class, "LightsItemGroup");

@@ -93,10 +93,11 @@ public class WoodGood {
         addModule("create", () -> CreateModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-        addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
+        addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
+        addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("quark", () -> QuarkModule::new);

@@ -157,7 +157,7 @@ dependencies {
     implementation fg.deobf("curse.maven:mrcrayfish-furniture-mod-55438:3683524")
     implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
     implementation fg.deobf("curse.maven:quark-243121:3800462")
-    implementation fg.deobf("curse.maven:selene-499980:3819295")
+    implementation fg.deobf("curse.maven:selene-499980:3823491")
     implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
 
