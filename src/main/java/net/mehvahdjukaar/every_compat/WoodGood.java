@@ -94,6 +94,7 @@ public class WoodGood {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
+        addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
