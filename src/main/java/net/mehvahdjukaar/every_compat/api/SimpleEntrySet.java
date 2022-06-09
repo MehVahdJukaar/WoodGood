@@ -5,7 +5,9 @@ import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
+import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.BlockType;
+import net.mehvahdjukaar.selene.block_set.BlockTypeRegistry;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
@@ -29,12 +31,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.function.TriFunction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -45,6 +49,7 @@ import java.util.function.Supplier;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntrySet<T, B> {
+
 
     protected final Supplier<T> baseType;
     protected final Supplier<B> baseBlock;
@@ -100,8 +105,24 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         return (Class<T>) this.baseType.get().getClass();
     }
 
+    public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
+        //quark_blossom_table
+        //exit early if it just doesnt match
+        if (!oldName.contains(this.postfix)) return null;
+        for (var w : BlockSetManager.getBlockSet(this.getType()).getTypes().entrySet()) {
+            ResourceLocation typeId = w.getKey();
+            if (typeId.getNamespace().equals(woodFrom)) {
+                String blockName = this.getBlockName(w.getValue()); // blossom_table
+                if (blockName.equals(oldName)) {
+                    return module.shortenedId() + "/" + typeId.getNamespace() + "/" + oldName;
+                }
+            }
+        }
+        return null;
+    }
+
     public void addTranslations(CompatModule module, AfterLanguageLoadEvent lang) {
-        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block_type." + module.getModId() +"." + typeName, (BlockType) w, v));
+        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block_type." + module.getModId() + "." + typeName, (BlockType) w, v));
     }
 
     public void registerWoodBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
@@ -124,23 +145,29 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         baseType.get().addChild(module.shortenedId() + "/" + typeName, base);
 
         for (T w : woodTypes) {
-            String name;
-            if(prefix != null){
-                name = module.shortenedId() + "/" + w.getVariantId(this.postfix, this.prefix);
-            }
-            else{
-                name = module.shortenedId() + "/" + w.getVariantId(this.postfix, false);
-            }
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, registry)) continue;
+            String name = getBlockName(w);
+            String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
+            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, registry)) continue;
 
             B block = blockFactory.apply(w);
             //for blocks that fail
             if (block != null) {
                 this.blocks.put(w, block);
-                registry.register(block.setRegistryName(WoodGood.res(name)));
+                registry.register(block.setRegistryName(WoodGood.res(fullName)));
                 w.addChild(module.shortenedId() + "/" + typeName, block);
             }
         }
+    }
+
+    @NotNull
+    public String getBlockName(T w) {
+        String name;
+        if (prefix != null) {
+            name = this.prefix + "_" + w.getTypeName() + "_" + this.postfix;
+        } else {
+            name = w.getTypeName() + "_" + this.postfix;
+        }
+        return name;
     }
 
     @Override

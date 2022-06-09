@@ -37,9 +37,11 @@ import vazkii.quark.base.handler.ToolInteractionHandler;
 import vazkii.quark.base.module.ModuleLoader;
 import vazkii.quark.content.building.block.HedgeBlock;
 import vazkii.quark.content.building.block.VariantBookshelfBlock;
+import vazkii.quark.content.building.block.VariantLadderBlock;
 import vazkii.quark.content.building.block.WoodPostBlock;
 import vazkii.quark.content.building.module.HedgesModule;
 import vazkii.quark.content.building.module.VariantBookshelvesModule;
+import vazkii.quark.content.building.module.VariantLaddersModule;
 import vazkii.quark.content.building.module.VerticalPlanksModule;
 
 import java.lang.reflect.Field;
@@ -53,6 +55,7 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> POSTS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_POSTS;
     public final SimpleEntrySet<WoodType, Block> VERTICAL_PLANKS;
+    public final SimpleEntrySet<WoodType, Block> LADDERS;
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
 
     public QuarkModule(String modId) {
@@ -73,7 +76,7 @@ public class QuarkModule extends SimpleModule {
                 .setPalette(this::bookshelfPalette)
                 .build();
 
-   //     this.addEntry(BOOKSHELVES);
+        this.addEntry(BOOKSHELVES);
 
         POSTS = QuarkSimpleEntrySet.builder("post",
                         VariantBookshelvesModule.class,
@@ -91,7 +94,7 @@ public class QuarkModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-     //   this.addEntry(POSTS);
+        this.addEntry(POSTS);
 
         STRIPPED_POSTS = QuarkSimpleEntrySet.builder("post", "stripped",
                 VariantBookshelvesModule.class,
@@ -111,7 +114,7 @@ public class QuarkModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-    //    this.addEntry(STRIPPED_POSTS);
+        this.addEntry(STRIPPED_POSTS);
 
         VERTICAL_PLANKS = QuarkSimpleEntrySet.builder("planks", "vertical",
                 VerticalPlanksModule.class,
@@ -125,7 +128,24 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
 
-    //    this.addEntry(VERTICAL_PLANKS);
+        this.addEntry(VERTICAL_PLANKS);
+
+        LADDERS = QuarkSimpleEntrySet.builder("ladder",
+                        VariantLaddersModule.class,
+                        () -> ForgeRegistries.BLOCKS.getValue(modRes("spruce_ladder")),
+                        () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
+                        (w, m) -> {
+                            String name = shortenedId() + "/" + w.getTypeName();
+                            return new VariantLadderBlock(name, m, BlockBehaviour.Properties.copy(w.planks), w.canBurn());
+                        })
+                .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .addTag(modRes("ladders"),Registry.BLOCK_REGISTRY)
+                .addTag(modRes("ladders"),Registry.ITEM_REGISTRY)
+                .addRecipe(modRes("building/crafting/ladders/spruce_ladder"))
+                .addTexture(modRes("block/spruce_ladder"))
+                .build();
+
+        this.addEntry(LADDERS);
 
 
         HEDGES = QuarkSimpleEntrySet.builder("hedge",
@@ -210,7 +230,7 @@ public class QuarkModule extends SimpleModule {
         LeavesType.OAK_LEAVES_TYPE.addChild(shortenedId() + "/hedge", ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")));
         for (LeavesType l : leavesTypes) {
             String name = makeBlockId(l, "hedge");
-            if (l.isVanilla() || isEntryAlreadyRegistered(name, registry)) continue;
+            if (l.isVanilla() || isEntryAlreadyRegistered(name, l,registry)) continue;
             if (l.woodType != null) {
                 Block fence = l.woodType.getBlockOfThis("fence");
                 if (fence != null) {

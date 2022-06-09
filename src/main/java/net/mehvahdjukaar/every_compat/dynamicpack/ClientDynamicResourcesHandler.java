@@ -17,6 +17,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(WoodGood.res("generated_pack")));
+        //this.dynamicPack.generateDebugResources = false;
     }
 
     @Override
@@ -45,6 +46,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
         WoodGood.forAllModules(m->{
             m.addTranslations(this,lang);
         });
+        int a = 1;
     }
 
     @Override
@@ -56,6 +58,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
                 getLogger().error("Failed to generate client dynamic assets for module {}:", m, e);
             }
         });
+        int a = 1;
     }
 
 

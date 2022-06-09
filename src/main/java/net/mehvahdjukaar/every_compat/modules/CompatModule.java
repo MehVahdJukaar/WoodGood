@@ -93,27 +93,31 @@ public abstract class CompatModule {
     }
 
     //TODO: improve
-    public final boolean isEntryAlreadyRegistered(String name, IForgeRegistry<?> registry) {
-        name = name.replace(this.shortenedId() + "/", ""); //af/quark/blossom_chair
-        if (name.startsWith(modId + "/")) return true;        //discards one from this mod
-        String name2 = name.replace("/", "_"); //quark_blossom_chair
-        String name3 = name.substring(name.lastIndexOf("/") + 1); //blossom_chair
+    public final boolean isEntryAlreadyRegistered(String name, BlockType woodType, IForgeRegistry<?> registry) {
+        //ec:twigs/bop/willow_table
+        String woodFrom = woodType.getNamespace();
+        //discards wood types from this mod
+        if (woodFrom.equals(modId)) return true; //quark, blossom
+
+        String n1 = woodFrom + "/" + name; //quark/blossom_chair
+        String n2 = woodFrom + "_" + name; //quark_blossom_chair
+
         if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types
-                registry.containsKey(new ResourceLocation(modId, name2))) return true;
+                registry.containsKey(new ResourceLocation(modId, n2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
 
-        String woodFrom = name.substring(0, name.indexOf("/"));
 
-        if (registry.containsKey(new ResourceLocation(woodFrom, name3))) return true;
+        if (registry.containsKey(new ResourceLocation(woodFrom, n1))) return true;
 
-        for (var c : WoodGood.COMPETITOR_MODS) {
-            String compatModId = c.modId();
-            for (var s : c.supportedMods()) {
-                if (s.equals(woodFrom) && registry.containsKey(new ResourceLocation(compatModId, name3))) return true;
+        for (var c : WoodGood.COMPAT_MODS) {
+            String compatModId = c.modId();  //bopcomp : bop->quark, twigs
+            //if the wood is from the mod this adds compat for && it supports this block type
+            if(woodFrom.equals(c.woodFrom()) && c.blocksFrom().contains(modId)){
+                if (registry.containsKey(new ResourceLocation(compatModId, name))) return true;
+                if (registry.containsKey(new ResourceLocation(compatModId, n2))) return true;
+                if (registry.containsKey(new ResourceLocation(compatModId, n2))) return true;
             }
-            if (registry.containsKey(new ResourceLocation(compatModId, name)) ||
-                    registry.containsKey(new ResourceLocation(compatModId, name2))) return true;
         }
         return false;
     }

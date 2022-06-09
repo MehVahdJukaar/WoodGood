@@ -7,10 +7,11 @@ public class WoodGoodAPI {
 
     /**
      * Register a new compat module for your modded blocks
+     *
      * @param module your module instance. Can be a custom implementation
      */
-    public static void registerModule(CompatModule module){
-        WoodGood.ACTIVE_MODULES.add(module);
+    public static void registerModule(CompatModule module) {
+        WoodGood.ACTIVE_MODULES.put(module.getModId(), module);
     }
 
     //for each entry that you register you will need to add "block_type.everycomp.your_type" translation string to your lang file

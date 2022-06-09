@@ -39,7 +39,6 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
 
     @Override
     public void generateStaticAssetsOnStartup(ResourceManager manager) {
-
         WoodGood.forAllModules(m -> {
             try {
                 m.addStaticServerResources(this, manager);

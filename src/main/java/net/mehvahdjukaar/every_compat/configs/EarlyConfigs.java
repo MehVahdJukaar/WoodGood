@@ -2,22 +2,15 @@ package net.mehvahdjukaar.every_compat.configs;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import com.stal111.forbidden_arcanus.core.init.ModEnchantments;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.BlockType;
-import net.mehvahdjukaar.selene.block_set.BlockTypeRegistry;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
-import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,14 +25,18 @@ public class EarlyConfigs {
     public static ForgeConfigSpec REGISTRY_CONFIG;
 
     public static ForgeConfigSpec.BooleanValue TAB_ENABLED;
+    public static ForgeConfigSpec.BooleanValue REMAP_COMPAT;
 
     public static void init() {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.push("general");
-        TAB_ENABLED = builder.define("creative_tab", true);
+        TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
+                .define("creative_tab", true);
+        REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
+                .define("remap_other_mods", true);
         builder.pop();
-        for(var reg : BlockSetManager.getRegistries()) {
-            builder.push(reg.typeName().replace(" ","_"));
+        for (var reg : BlockSetManager.getRegistries()) {
+            builder.push(reg.typeName().replace(" ", "_"));
             for (var w : reg.getTypes().values()) {
                 String key = w.toString().replace(":", ".");
                 ForgeConfigSpec.BooleanValue config = builder.define(key, true);
@@ -82,8 +79,8 @@ public class EarlyConfigs {
     public static <T extends BlockType> boolean isTypeEnabled(T w) {
         try {
             return BLOCK_TYPE_CONFIGS.get(w.getClass()).get(w.getId().toString()).get();
-        }catch (Exception e){
-            int a =1;
+        } catch (Exception e) {
+            int a = 1;
         }
         return true;
     }

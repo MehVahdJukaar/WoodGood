@@ -60,10 +60,14 @@ public class Utils {
 
         Item oakItem = oakBlock.asItem();
 
+
         //if it has an item
         if (oakItem != Items.AIR) {
             //item model
             try {
+                //we cant use this since it might override partent too. Custom textured items need a custom model added manually with addBlockResources
+                // modelModifier.replaceItemType(baseBlockName);
+
                 StaticResource oakItemModel = StaticResource.getOrFail(manager,
                         ResType.ITEM_MODELS.getPath(oakItem.getRegistryName()));
 
@@ -85,7 +89,6 @@ public class Utils {
                 WoodGood.LOGGER.error("Could not find item model for {}", oakBlock);
             }
         }
-
 
         //blockstate
         try {
@@ -126,6 +129,9 @@ public class Utils {
         } catch (Exception e) {
             WoodGood.LOGGER.error("Could not find blockstate definition for {}", oakBlock);
         }
+
+
+
     }
 
 
