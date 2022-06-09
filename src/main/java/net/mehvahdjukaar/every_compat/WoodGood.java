@@ -89,12 +89,12 @@ public class WoodGood {
         addCompetitorMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark"));
         addCompetitorMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addCompetitorMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
-        addCompetitorMod("mcwbridgesbiomesoplenty", "mcwbridges", List.of("biomesoplenty"));
-        addCompetitorMod("mcwfencesbiomesoplenty", "mcwfences", List.of("biomesoplenty"));
-        addCompetitorMod("mcwwindowsbiomesoplenty", "mcwwindows", List.of("biomesoplenty"));
-        addCompetitorMod("mcwbridgesbyg", "mcwbridges", List.of("byg"));
+        addCompetitorMod("macawsbridgesbop", "mcwbridges", List.of("biomesoplenty"));
+        addCompetitorMod("macawbridgesbyg", "mcwbridges", List.of("byg"));
+
+        addCompetitorMod("mcwfencesbop", "mcwfences", List.of("biomesoplenty"));
         addCompetitorMod("mcwfencesbyg", "mcwfences", List.of("byg"));
-        addCompetitorMod("mcwwindowssbyg", "mcwwindows", List.of("byg"));
+
 
 
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
@@ -202,6 +202,7 @@ public class WoodGood {
     private static <T extends IForgeRegistryEntry<T>> void remapEntries(RegistryEvent.MissingMappings<T> event, IForgeRegistry<T> blockReg) {
         for (var compatMod : COMPAT_MODS) {
             String woodFrom = compatMod.woodFrom; //ie bop
+            label:
             for (var mapping : event.getMappings(compatMod.modId)) {
                 //ie: bopcomp:willow_table
 
@@ -220,8 +221,9 @@ public class WoodGood {
                                         var b = blockReg.getValue(WoodGood.res(s));
                                         mapping.remap(b);
                                         WoodGood.LOGGER.info("Remapping block '{}' to '{}'", mapping.key, b);
+                                        continue label;
                                     }
-                                    ;
+
                                 }
                             }
                         }

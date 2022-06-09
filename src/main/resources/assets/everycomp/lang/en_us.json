@@ -57,6 +57,7 @@
   "block_type.mcwwindows.stripped_log_window2": "Stripped %s Grille Window",
   "block_type.mcwwindows.log_parapet": "%s Parapet",
   "block_type.mcwwindows.plank_parapet": "%s Plank Parapet",
+  "block_type.mcwwindows.blinds": "%s Blinds",
 
   "block_type.create.window": "%s Window",
   "block_type.create.window_pane": "%s Window Pane",

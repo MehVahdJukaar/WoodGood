@@ -105,11 +105,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         return (Class<T>) this.baseType.get().getClass();
     }
 
-    @Nullable
-    public BlockTypeRegistry<T> getTypeRegistry() {
-        return BlockSetManager.getBlockSet(this.getType());
-    }
-
     public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
         //quark_blossom_table
         //exit early if it just doesnt match

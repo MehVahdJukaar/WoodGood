@@ -62,19 +62,19 @@ public class AnotherFurnitureModule extends SimpleModule {
                     float dl = p.getAverageLuminanceStep();
                     {
                         var c0 = p.get(0);
-                        var nc0 = new PaletteColor(c0.hcl().withLuminance(c0.hcl().luminance() - (dl * 0.3f)));
+                        var nc0 = new PaletteColor(c0.hcl().withLuminance(c0.hcl().luminance() - (dl * 0.35f)));
                         nc0.occurrence = c0.occurrence;
                         p.set(0, nc0);
                     }
                     {
                         var c1 = p.get(1);
-                        var nc1 = new PaletteColor(c1.hcl().withLuminance(c1.hcl().luminance() - (dl * 0.2f)));
+                        var nc1 = new PaletteColor(c1.hcl().withLuminance(c1.hcl().luminance() - (dl * 0.18f)));
                         nc1.occurrence = c1.occurrence;
                         p.set(1, nc1);
                     }
                     {
                         var c2 = p.get(2);
-                        var nc2 = new PaletteColor(c2.hcl().withLuminance(c2.hcl().luminance() - (dl * 0.1f)));
+                        var nc2 = new PaletteColor(c2.hcl().withLuminance(c2.hcl().luminance() - (dl * 0.05f)));
                         nc2.occurrence = c2.occurrence;
                         p.set(+2, nc2);
                     }

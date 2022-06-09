@@ -17,7 +17,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(WoodGood.res("generated_pack")));
-        this.dynamicPack.generateDebugResources = false;
+        //this.dynamicPack.generateDebugResources = false;
     }
 
     @Override
