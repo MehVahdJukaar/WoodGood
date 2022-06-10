@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import com.google.gson.JsonElement;
 import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.configs.BlockTypeEnabledCondition;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
@@ -210,6 +211,7 @@ public class Utils {
             }
         });
     }
+
 
 
 }

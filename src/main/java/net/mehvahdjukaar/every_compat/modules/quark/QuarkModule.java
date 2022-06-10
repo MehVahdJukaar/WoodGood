@@ -136,7 +136,7 @@ public class QuarkModule extends SimpleModule {
                         () -> ForgeRegistries.BLOCKS.getValue(modRes("spruce_ladder")),
                         () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
                         (w, m) -> {
-                            String name = shortenedId() + "/" + w.getTypeName();
+                            String name = shortenedId() + "/" + w.getId().toString();
                             return new VariantLadderBlock(name, m, BlockBehaviour.Properties.copy(w.planks), w.canBurn());
                         })
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
@@ -146,7 +146,7 @@ public class QuarkModule extends SimpleModule {
                 .addTexture(modRes("block/spruce_ladder"))
                 .build();
 
-        this.addEntry(LADDERS);
+      //  this.addEntry(LADDERS);
 
 
         HEDGES = QuarkSimpleEntrySet.builder("hedge",

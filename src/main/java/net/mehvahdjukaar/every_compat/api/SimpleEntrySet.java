@@ -313,7 +313,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 AnimationMetadataSection finalAnimation = animation;
                 List<Palette> finalTargetPalette = targetPalette;
 
+                //sanity check to verity that palette isnt changed
+                int oldSize = finalTargetPalette.get(0).size();
+
                 for (var re : respriters.entrySet()) {
+                    if(oldSize != finalTargetPalette.get(0).size()){
+                        throw new RuntimeException("This should not happen");
+                    }
                     String oldPath = re.getKey().getPath();
 
                     String newId = BlockTypeResTransformer.replaceType(oldPath, blockId, w, baseType.get().getTypeName());

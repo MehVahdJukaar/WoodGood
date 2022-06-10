@@ -103,16 +103,19 @@ public class WoodGood {
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         */
+        /*
         addModule("quark", () -> QuarkModule::new);
         // addModule("quark", () -> LegacyQM::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
 
-        addModule("mcwdoors", () -> MacawDoorsModule::new);
+
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
+        */
+        addModule("mcwdoors", () -> MacawDoorsModule::new);
 
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));

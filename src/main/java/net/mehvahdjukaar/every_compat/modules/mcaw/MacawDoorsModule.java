@@ -7,12 +7,16 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
+import net.mehvahdjukaar.selene.resourcepack.ResType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
@@ -60,7 +64,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_bark_glass_door"), WoodGood.res("block/mcaw/doors/oak_bark_glass_door_m"))
                 .build();
 
-        this.addEntry(BARK_DOORS);
+  //      this.addEntry(BARK_DOORS);
 
         CLASSIC_DOORS = SimpleEntrySet.builder("classic_door",
                         BlockInit.SPRUCE_CLASSIC_DOOR, () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
@@ -79,7 +83,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(ResourceLocation.tryParse("item/oak_door"), WoodGood.res("block/mcaw/doors/spruce_classic_door_m"))
                 .build();
 
-        this.addEntry(CLASSIC_DOORS);
+   //     this.addEntry(CLASSIC_DOORS);
 
         FOUR_PANEL_DOORS = SimpleEntrySet.builder("four_panel_door",
                         BlockInit.OAK_FOUR_PANEL_DOOR, () -> WoodType.OAK_WOOD_TYPE,
@@ -98,7 +102,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_four_panel_door"), WoodGood.res("block/mcaw/doors/oak_four_panel_door_m"))
                 .build();
 
-        this.addEntry(FOUR_PANEL_DOORS);
+     //   this.addEntry(FOUR_PANEL_DOORS);
 
         GLASS_DOORS = SimpleEntrySet.builder("glass_door",
                         BlockInit.OAK_GLASS_DOOR, () -> WoodType.OAK_WOOD_TYPE,
@@ -118,7 +122,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_glass_door"), WoodGood.res("block/mcaw/doors/oak_glass_door_m"))
                 .build();
 
-        this.addEntry(GLASS_DOORS);
+     //   this.addEntry(GLASS_DOORS);
 
         MYSTIC_DOORS = SimpleEntrySet.builder("mystic_door",
                         BlockInit.OAK_MYSTIC_DOOR, () -> WoodType.OAK_WOOD_TYPE,
@@ -137,7 +141,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_mystic_door"), WoodGood.res("block/mcaw/doors/oak_mystic_door_m"))
                 .build();
 
-        this.addEntry(MYSTIC_DOORS);
+    //    this.addEntry(MYSTIC_DOORS);
 
         NETHER_DOORS = SimpleEntrySet.builder("nether_door",
                         BlockInit.OAK_NETHER_DOOR, () -> WoodType.OAK_WOOD_TYPE,
@@ -156,7 +160,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_nether_door"), WoodGood.res("block/mcaw/doors/oak_nether_door_m"))
                 .build();
 
-        this.addEntry(NETHER_DOORS);
+     //   this.addEntry(NETHER_DOORS);
 
         PAPER_DOORS = SimpleEntrySet.builder("paper_door",
                         BlockInit.OAK_PAPER_DOOR, () -> WoodType.OAK_WOOD_TYPE,
@@ -175,7 +179,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_paper_door"), WoodGood.res("block/mcaw/doors/oak_paper_door_m"))
                 .build();
 
-        this.addEntry(PAPER_DOORS);
+    //    this.addEntry(PAPER_DOORS);
 
         STABLE_DOORS = SimpleEntrySet.builder("stable_door",
                         BlockInit.OAK_STABLE_DOOR, () -> WoodType.OAK_WOOD_TYPE,
@@ -195,7 +199,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_stable_door"), WoodGood.res("block/mcaw/doors/oak_stable_door_m"))
                 .build();
 
-        this.addEntry(STABLE_DOORS);
+   //     this.addEntry(STABLE_DOORS);
 
         STABLE_HEAD_DOORS = SimpleEntrySet.builder("stable_head_door",
                         BlockInit.OAK_STABLE_HEAD_DOOR, () -> WoodType.OAK_WOOD_TYPE,
@@ -215,7 +219,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_stable_head_door"), WoodGood.res("block/mcaw/doors/oak_stable_head_door_m"))
                 .build();
 
-        this.addEntry(STABLE_HEAD_DOORS);
+  //      this.addEntry(STABLE_HEAD_DOORS);
 
         TROPICAL_DOORS = SimpleEntrySet.builder("tropical_door",
                         BlockInit.OAK_TROPICAL_DOOR, () -> WoodType.OAK_WOOD_TYPE,
@@ -232,8 +236,8 @@ public class MacawDoorsModule extends SimpleModule {
 //                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
 //                .addTextureM(modRes("block/oak_tropical_door_lower"), WoodGood.res("block/mcaw/doors/oak_tropical_door_lower_m"))
 //                .addTextureM(modRes("block/oak_tropical_door_upper"), WoodGood.res("block/mcaw/doors/oak_tropical_door_upper_m"))
-                .addTexture(modRes("block/oak_tropical_door_lower"))
-                .addTexture(modRes("block/oak_tropical_door_upper"))
+                .addTextureM(modRes("block/oak_tropical_door_lower"),WoodGood.res("block/mcaw/doors/oak_tropical_door_lower_m"))
+                .addTextureM(modRes("block/oak_tropical_door_upper"),WoodGood.res("block/mcaw/doors/oak_tropical_door_upper_m"))
                 .addTextureM(modRes("item/oak_tropical_door"), WoodGood.res("block/mcaw/doors/oak_tropical_door_m"))
 //                .setPalette(this::doorPalette)
                 .build();
@@ -257,7 +261,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_western_door"), WoodGood.res("block/mcaw/doors/oak_western_door_m"))
                 .build();
 
-        this.addEntry(WESTERN_DOORS);
+  //      this.addEntry(WESTERN_DOORS);
     }
 
     public Pair<List<Palette>, AnimationMetadataSection> doorPalette(BlockType w, ResourceManager m) {
@@ -281,5 +285,22 @@ public class MacawDoorsModule extends SimpleModule {
         } catch (Exception e) {
             throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
         }
+    }
+
+    @Override
+    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addStaticClientResources(handler, manager);
+        Utils.addBlockResources(modId, manager, handler.dynamicPack, TROPICAL_DOORS.blocks,
+                BlockTypeResTransformer.wood(modId, manager)
+                        .replaceItemType("oak")
+                        .IDReplaceBlock("oak_tropical_door"),
+                ResType.ITEM_MODELS.getPath(modRes("oak_tropical_door"))
+        );
+    }
+
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
     }
 }
