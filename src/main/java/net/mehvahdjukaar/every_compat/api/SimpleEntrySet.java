@@ -46,10 +46,14 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntrySet<T, B> {
 
+
+    private final Pattern nameScheme;
 
     protected final Supplier<T> baseType;
     protected final Supplier<B> baseBlock;
@@ -95,6 +99,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
         this.renderType = renderType;
         this.paletteSupplier = paletteSupplier;
+
+        if(this.prefix != null){
+            nameScheme = Pattern.compile("^"+prefix+"_(.+?)_"+postfix+"$");
+        } else{
+            nameScheme = Pattern.compile("^(.+?)_"+postfix+"$");
+        }
     }
 
     public TileHolder<?> getTileHolder() {
@@ -108,6 +118,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
         //quark_blossom_table
         //exit early if it just doesnt match
+        /*
         if (!oldName.contains(this.postfix)) return null;
         for (var w : BlockSetManager.getBlockSet(this.getType()).getTypes().entrySet()) {
             ResourceLocation typeId = w.getKey();
@@ -117,6 +128,23 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                     return module.shortenedId() + "/" + typeId.getNamespace() + "/" + oldName;
                 }
             }
+        }*/
+        String wood = parseWoodType(oldName);
+        if(wood != null){
+            var w = BlockSetManager.getBlockSet(this.getType()).get(new ResourceLocation(woodFrom, wood));
+            if(w != null){
+                return module.shortenedId() + "/" + w.getNamespace() + "/" + oldName;
+            }
+        }
+        return null;
+    }
+
+    //gets the wood type of the given name if it is in this entry set name format
+    @Nullable
+    public String parseWoodType(String oldName){
+        Matcher m = nameScheme.matcher(oldName);
+        if(m.find()){
+            return  m.group(1);
         }
         return null;
     }

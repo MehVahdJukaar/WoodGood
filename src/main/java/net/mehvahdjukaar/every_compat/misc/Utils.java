@@ -1,8 +1,8 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.WoodGood;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.configs.BlockTypeEnabledCondition;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
@@ -17,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 public class Utils {
     public static <B extends Block, T extends BlockType> void addStandardResources(String modId, ResourceManager manager, DynamicResourcePack pack,
                                                                                    Map<T, B> blocks, T baseType) {
-        assert !blocks.isEmpty() : "Block map must not be empty";
+        if (blocks.isEmpty()) return;
         //finds one entry. used so we can grab the oak equivalent
         var first = blocks.entrySet().stream().findFirst().get();
         ItemLike oi = BlockType.changeItemBlockType(first.getValue(), first.getKey(), baseType);
@@ -43,23 +44,12 @@ public class Utils {
         BlockTypeResTransformer<T> modifier = BlockTypeResTransformer.create(modId, manager);
         modifier.IDReplaceType(baseBlockName).replaceBlockType(baseBlockName);
 
-
-        BlockTypeResTransformer<T> modelModifier = BlockTypeResTransformer.create(modId, manager);
-        modelModifier.IDReplaceType(baseBlockName);
-        if (baseType instanceof WoodType woodType) {
-            modelModifier.replaceWoodTextures(woodType);
-        } else if(baseType instanceof LeavesType leavesType){
-            modelModifier.replaceLeavesTextures(leavesType);
-            var woodT = leavesType.woodType;
-            if(woodT != null){
-                modelModifier.replaceWoodTextures(woodT);
-            }
-        }
-        modelModifier.replaceBlockType(baseBlockName);
+        BlockTypeResTransformer<T> modelModifier = standardModelTransformer(modId, manager, baseType, baseBlockName);
 
         Set<String> modelsLoc = new HashSet<>();
 
         Item oakItem = oakBlock.asItem();
+
 
 
         //if it has an item
@@ -69,17 +59,27 @@ public class Utils {
                 //we cant use this since it might override partent too. Custom textured items need a custom model added manually with addBlockResources
                 // modelModifier.replaceItemType(baseBlockName);
 
+                BlockTypeResTransformer<T> itemModifier = standardModelTransformer(modId, manager, baseType, baseBlockName);
+
+
                 StaticResource oakItemModel = StaticResource.getOrFail(manager,
                         ResType.ITEM_MODELS.getPath(oakItem.getRegistryName()));
 
-                JsonElement json = RPUtils.deserializeJson(oakItemModel.getInputStream());
+                JsonObject json = RPUtils.deserializeJson(oakItemModel.getInputStream());
                 //adds models referenced from here. not recursive
                 modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
+
+                if (json.has("parent")) {
+                    String parent = json.get("parent").getAsString();
+                    if (parent.contains("item/generated")) {
+                        itemModifier.replaceItemType(baseBlockName);
+                    }
+                }
 
                 blocks.forEach((w, b) -> {
                     ResourceLocation id = b.getRegistryName();
                     try {
-                        StaticResource newRes = modelModifier.transform(oakItemModel, id, w);
+                        StaticResource newRes = itemModifier.transform(oakItemModel, id, w);
                         assert newRes.location != oakItemModel.location : "ids cant be the same";
                         pack.addResource(newRes);
                     } catch (Exception e) {
@@ -102,8 +102,12 @@ public class Utils {
             List<StaticResource> oakModels = new ArrayList<>();
 
             for (var m : modelsLoc) {
-                StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(m));
-                if (model != null) oakModels.add(model);
+                //remove the ones from mc namespace
+                ResourceLocation modelRes = new ResourceLocation(m);
+                if (!modelRes.getNamespace().equals("minecraft")) {
+                    StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(m));
+                    if (model != null) oakModels.add(model);
+                }
             }
 
             blocks.forEach((w, b) -> {
@@ -132,7 +136,23 @@ public class Utils {
         }
 
 
+    }
 
+    @NotNull
+    private static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(String modId, ResourceManager manager, T baseType, String baseBlockName) {
+        BlockTypeResTransformer<T> modelModifier = BlockTypeResTransformer.create(modId, manager);
+        modelModifier.IDReplaceType(baseBlockName);
+        if (baseType instanceof WoodType woodType) {
+            modelModifier.replaceWoodTextures(woodType);
+        } else if (baseType instanceof LeavesType leavesType) {
+            modelModifier.replaceLeavesTextures(leavesType);
+            var woodT = leavesType.woodType;
+            if (woodT != null) {
+                modelModifier.replaceWoodTextures(woodT);
+            }
+        }
+        modelModifier.replaceBlockType(baseBlockName);
+        return modelModifier;
     }
 
 
@@ -211,7 +231,6 @@ public class Utils {
             }
         });
     }
-
 
 
 }

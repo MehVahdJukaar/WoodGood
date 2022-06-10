@@ -5,7 +5,6 @@ import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -84,6 +83,7 @@ public class QuarkModule extends SimpleModule {
                         () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_post")),
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
+                            if (w.getNamespace().equals("malum")) return null;
                             Block fence = w.getBlockOfThis("fence");
                             return fence == null ? null :
                                     new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/", w.canBurn());
@@ -98,16 +98,17 @@ public class QuarkModule extends SimpleModule {
         this.addEntry(POSTS);
 
         STRIPPED_POSTS = QuarkSimpleEntrySet.builder("post", "stripped",
-                VariantBookshelvesModule.class,
-                () -> ForgeRegistries.BLOCKS.getValue(modRes("stripped_oak_post")),
-                () -> WoodType.OAK_WOOD_TYPE,
-                (w, m) -> {
-                    if (w.getTypeName().contains("stripped")) return null;
-                    Block fence = w.getBlockOfThis("fence");
-                    Block stripped = w.getBlockOfThis("stripped_log");
-                    return (fence == null || stripped == null) ? null :
-                            new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_", w.canBurn());
-                })
+                        VariantBookshelvesModule.class,
+                        () -> ForgeRegistries.BLOCKS.getValue(modRes("stripped_oak_post")),
+                        () -> WoodType.OAK_WOOD_TYPE,
+                        (w, m) -> {
+                            if (w.getNamespace().equals("malum")) return null;
+                            if (w.getTypeName().contains("stripped")) return null;
+                            Block fence = w.getBlockOfThis("fence");
+                            Block stripped = w.getBlockOfThis("stripped_log");
+                            return (fence == null || stripped == null) ? null :
+                                    new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_", w.canBurn());
+                        })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
                 .setTab(CreativeModeTab.TAB_DECORATIONS)
@@ -118,13 +119,13 @@ public class QuarkModule extends SimpleModule {
         this.addEntry(STRIPPED_POSTS);
 
         VERTICAL_PLANKS = QuarkSimpleEntrySet.builder("planks", "vertical",
-                VerticalPlanksModule.class,
-                () -> ForgeRegistries.BLOCKS.getValue(modRes("vertical_oak_planks")),
-                () -> WoodType.OAK_WOOD_TYPE,
-                (w, m) -> {
-                    String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
-                    return new QuarkBlock(name, m, CreativeModeTab.TAB_BUILDING_BLOCKS, BlockBehaviour.Properties.copy(w.planks));
-                })
+                        VerticalPlanksModule.class,
+                        () -> ForgeRegistries.BLOCKS.getValue(modRes("vertical_oak_planks")),
+                        () -> WoodType.OAK_WOOD_TYPE,
+                        (w, m) -> {
+                            String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
+                            return new QuarkBlock(name, m, CreativeModeTab.TAB_BUILDING_BLOCKS, BlockBehaviour.Properties.copy(w.planks));
+                        })
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
@@ -140,25 +141,25 @@ public class QuarkModule extends SimpleModule {
                             return new VariantLadderBlock(name, m, BlockBehaviour.Properties.copy(w.planks), w.canBurn());
                         })
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(modRes("ladders"),Registry.BLOCK_REGISTRY)
-                .addTag(modRes("ladders"),Registry.ITEM_REGISTRY)
+                .addTag(modRes("ladders"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("ladders"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("building/crafting/ladders/spruce_ladder"))
                 .addTexture(modRes("block/spruce_ladder"))
                 .build();
 
-      //  this.addEntry(LADDERS);
+        //  this.addEntry(LADDERS);
 
 
         HEDGES = QuarkSimpleEntrySet.builder("hedge",
-                HedgesModule.class,
-                () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")),
-                () -> LeavesType.OAK_LEAVES_TYPE,
-                (l, m) -> null)//this wont run
-                .addTag(modRes("hedges"),Registry.BLOCK_REGISTRY)
-                .addTag(modRes("hedges"),Registry.ITEM_REGISTRY)
-                .setTab( CreativeModeTab.TAB_BUILDING_BLOCKS)
+                        HedgesModule.class,
+                        () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")),
+                        () -> LeavesType.OAK_LEAVES_TYPE,
+                        (l, m) -> null)//this wont run
+                .addTag(modRes("hedges"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hedges"), Registry.ITEM_REGISTRY)
+                .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/oak_hedge"))
-                .setRenderType(()->RenderType::cutout)
+                .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(HEDGES);
@@ -231,7 +232,7 @@ public class QuarkModule extends SimpleModule {
         LeavesType.OAK_LEAVES_TYPE.addChild(shortenedId() + "/hedge", ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")));
         for (LeavesType l : leavesTypes) {
             String name = makeBlockId(l, "hedge");
-            if (l.isVanilla() || isEntryAlreadyRegistered(name, l,registry)) continue;
+            if (l.isVanilla() || isEntryAlreadyRegistered(name, l, registry)) continue;
             if (l.woodType != null) {
                 Block fence = l.woodType.getBlockOfThis("fence");
                 if (fence != null) {
@@ -262,5 +263,10 @@ public class QuarkModule extends SimpleModule {
             ItemStack leafStack = new ItemStack(l.leaves);
             colors.register((stack, tintIndex) -> colors.getColor(leafStack, tintIndex), h.asItem());
         });
+    }
+
+    @Override
+    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addStaticClientResources(handler, manager);
     }
 }

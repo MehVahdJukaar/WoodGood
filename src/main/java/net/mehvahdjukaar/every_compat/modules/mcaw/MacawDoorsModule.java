@@ -290,17 +290,17 @@ public class MacawDoorsModule extends SimpleModule {
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addStaticClientResources(handler, manager);
+        /*
         Utils.addBlockResources(modId, manager, handler.dynamicPack, TROPICAL_DOORS.blocks,
                 BlockTypeResTransformer.wood(modId, manager)
                         .replaceItemType("oak")
                         .IDReplaceBlock("oak_tropical_door"),
                 ResType.ITEM_MODELS.getPath(modRes("oak_tropical_door"))
-        );
+        );*/
     }
 
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
-
     }
 }

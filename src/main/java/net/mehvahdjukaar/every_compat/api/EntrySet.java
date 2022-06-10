@@ -71,4 +71,5 @@ public abstract class EntrySet<T extends BlockType, B extends Block> {
 
     public abstract void registerEntityRenderers(CompatModule simpleModule, EntityRenderersEvent.RegisterRenderers event);
 
+
 }
