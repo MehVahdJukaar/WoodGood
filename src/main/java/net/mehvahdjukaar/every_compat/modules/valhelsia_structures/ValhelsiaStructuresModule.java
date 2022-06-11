@@ -5,7 +5,6 @@ import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.common.item.ModCreativeModeTabs;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
-import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -19,15 +18,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.registries.IForgeRegistry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ValhelsiaStructuresModule extends SimpleModule {
 
@@ -88,7 +81,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                      TextureImage topTexture = TextureImage.open(manager,
                              RPUtils.findFirstBlockTextureLocation(manager, w.log, s -> s.contains("_top") || s.contains("_end")))) {
 
-                    String newId = BlockTypeResTransformer.replaceType("block/post/oak_post", id, w, "oak");
+                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak");
 
                     var newTexture = logTexture.makeCopy();
 

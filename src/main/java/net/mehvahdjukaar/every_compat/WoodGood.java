@@ -95,29 +95,24 @@ public class WoodGood {
         addOtherCompatMod("macawsroofsbyg", "mcwroofs", List.of("byg"));
 
         addModule("mcwdoors", () -> MacawDoorsModule::new);
+        addModule("mcwlights", () -> MacawLightsModule::new);
+        addModule("mcwpaths", () -> MacawPathsModule::new);
+        addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
+        addModule("mcwwindows", () -> MacawWindowsModule::new);
+        addModule("mcwfences", () -> MacawFencesModule::new);
+        addModule("mcwbridges", () -> MacawBridgesModule::new);
 
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-    //    addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-
         addModule("quark", () -> QuarkModule::new);
-/*
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
-        addModule("mcwwindows", () -> MacawWindowsModule::new);
-        addModule("mcwfences", () -> MacawFencesModule::new);
-        addModule("mcwbridges", () -> MacawBridgesModule::new);
-        addModule("mcwlights", () -> MacawLightsModule::new);
-        addModule("mcwpaths", () -> MacawPathsModule::new);*/
-        /*
-        addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
-
-        */
 
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
@@ -162,9 +157,11 @@ public class WoodGood {
         });
     }
 
+    private int prevRegSize;
+
     public void registerWoodStuff(RegistryEvent.Register<Block> event, Collection<WoodType> woods) {
         EarlyConfigs.init();
-
+        this.prevRegSize = ForgeRegistries.BLOCKS.getValues().size();
         LOGGER.info("Registering Compat Wood Blocks");
         var reg = event.getRegistry();
         forAllModules(m -> m.registerWoodBlocks(reg, woods));
@@ -174,6 +171,10 @@ public class WoodGood {
         LOGGER.info("Registering Compat Leaves Blocks");
         var reg = event.getRegistry();
         forAllModules(m -> m.registerLeavesBlocks(reg, leaves));
+        int newSize = ForgeRegistries.BLOCKS.getValues().size();
+        int am = prevRegSize - newSize;
+        float p = (am / (float) newSize) * 100f;
+        WoodGood.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", am, p);
     }
 
     @SubscribeEvent
@@ -199,16 +200,20 @@ public class WoodGood {
     //this can be slow. doesn't matter since it only happens once on boot
     public static void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
         remapEntries(event, ForgeRegistries.BLOCKS);
-        for (var mapping : event.getMappings(MOD_ID)) {
-            mapping.remap(Blocks.AIR);
+        if (EarlyConfigs.REMAP_OWN.get()) {
+            for (var mapping : event.getMappings(MOD_ID)) {
+                mapping.remap(Blocks.OAK_WOOD);
+            }
         }
     }
 
     //this can be slow. doesn't matter since it only happens once on boot
     public static void remapItems(RegistryEvent.MissingMappings<Item> event) {
         remapEntries(event, ForgeRegistries.ITEMS);
-        for (var mapping : event.getMappings(MOD_ID)) {
-            mapping.remap(Items.AIR);
+        if (EarlyConfigs.REMAP_OWN.get()) {
+            for (var mapping : event.getMappings(MOD_ID)) {
+                mapping.remap(Items.AIR);
+            }
         }
     }
 

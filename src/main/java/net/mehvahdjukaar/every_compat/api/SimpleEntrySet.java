@@ -7,7 +7,6 @@ import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.BlockType;
-import net.mehvahdjukaar.selene.block_set.BlockTypeRegistry;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
@@ -31,7 +30,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -350,7 +348,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                     }
                     String oldPath = re.getKey().getPath();
 
-                    String newId = BlockTypeResTransformer.replaceType(oldPath, blockId, w, baseType.get().getTypeName());
+                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
 
                     Respriter respriter = re.getValue();
                     if (isWood) {

@@ -161,7 +161,7 @@ public class Utils {
                                                                                 Map<T, B> blocks, String typeName, ResourceLocation... jsonsLocations) {
         addBlockResources(modId, manager, pack, blocks,
                 BlockTypeResTransformer.<T>create(modId, manager)
-                        .replaceGenericType(typeName,"")
+                        .replaceSimpleType(typeName)
                         .IDReplaceType(typeName),
                 jsonsLocations);
     }

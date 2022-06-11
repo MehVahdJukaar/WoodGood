@@ -143,6 +143,7 @@ public class QuarkModule extends SimpleModule {
                             return new VariantLadderBlock(name, m, w.canBurn());
                         })
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("ladders"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("ladders"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("building/crafting/spruce_ladder"))

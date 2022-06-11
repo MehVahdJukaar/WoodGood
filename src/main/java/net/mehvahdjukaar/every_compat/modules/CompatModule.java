@@ -191,7 +191,7 @@ public abstract class CompatModule {
                     Respriter respriter = Respriter.of(image);
                     var temp = respriter.recolorWithAnimationOf(plankTexture);
 
-                    image.applyOverlay(temp, mask);
+                    image.applyOverlayOnExisting(temp, mask);
                     temp.close();
 
                 } catch (Exception e) {

@@ -6,11 +6,8 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.common.util.NonNullLazy;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -35,7 +32,7 @@ public class AllWoodItem extends Item {
 
     @Override
     public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-        registerISTER(consumer, DuplicateItemRenderer::new);
+        registerISTER(consumer, AllWoodItemRenderer::new);
     }
 
 }

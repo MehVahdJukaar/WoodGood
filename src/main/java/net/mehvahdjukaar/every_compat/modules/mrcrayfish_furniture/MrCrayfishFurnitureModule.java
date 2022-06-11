@@ -479,7 +479,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         HEDGES = SimpleEntrySet.builder("hedge",
                         ModBlocks.HEDGE_OAK, () -> LeavesType.OAK_LEAVES_TYPE,
-                        w -> new HedgeBlock(BlockBehaviour.Properties.copy(w.leaves)))
+                        w -> new HedgeBlock(BlockBehaviour.Properties.copy(w.leaves).lightLevel((s)->0)))
                 .addTag(ModTags.Blocks.HEDGES, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.HEDGES, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)

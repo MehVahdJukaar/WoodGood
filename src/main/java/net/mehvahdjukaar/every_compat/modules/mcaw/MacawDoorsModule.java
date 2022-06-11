@@ -61,10 +61,7 @@ public class MacawDoorsModule extends SimpleModule {
         BARK_DOORS = SimpleEntrySet.builder("bark_glass_door",
                         BlockInit.OAK_BARK_GLASS_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -78,10 +75,7 @@ public class MacawDoorsModule extends SimpleModule {
         BARN_DOORS = SimpleEntrySet.builder("barn_door",
                         BlockInit.OAK_BARN_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -97,10 +91,7 @@ public class MacawDoorsModule extends SimpleModule {
         BARN_GLASS_DOORS = SimpleEntrySet.builder("barn_glass_door",
                         BlockInit.OAK_BARN_GLASS_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -116,10 +107,7 @@ public class MacawDoorsModule extends SimpleModule {
         BEACH_DOORS = SimpleEntrySet.builder("beach_door",
                         BlockInit.OAK_BEACH_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -135,10 +123,7 @@ public class MacawDoorsModule extends SimpleModule {
         CLASSIC_DOORS = SimpleEntrySet.builder("classic_door",
                         BlockInit.SPRUCE_CLASSIC_DOOR, () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -146,7 +131,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(()-> RenderType::cutout)
                 .addTextureM(modRes("block/spruce_classic_door_lower"), WoodGood.res("block/mcaw/doors/spruce_classic_door_lower_m"))
                 .addTextureM(modRes("block/spruce_classic_door_upper"), WoodGood.res("block/mcaw/doors/spruce_classic_door_upper_m"))
-                .addTextureM(ResourceLocation.tryParse("item/oak_door"), WoodGood.res("block/mcaw/doors/spruce_classic_door_m"))
+                .addTextureM(modRes("item/spruce_classic_door"), WoodGood.res("block/mcaw/doors/spruce_classic_door_m"))
                 .build();
 
         this.addEntry(CLASSIC_DOORS);
@@ -154,10 +139,7 @@ public class MacawDoorsModule extends SimpleModule {
         COTTAGE_DOORS = SimpleEntrySet.builder("cottage_door",
                         BlockInit.OAK_COTTAGE_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -173,10 +155,7 @@ public class MacawDoorsModule extends SimpleModule {
         FOUR_PANEL_DOORS = SimpleEntrySet.builder("four_panel_door",
                         BlockInit.OAK_FOUR_PANEL_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -192,10 +171,7 @@ public class MacawDoorsModule extends SimpleModule {
         GLASS_DOORS = SimpleEntrySet.builder("glass_door",
                         BlockInit.OAK_GLASS_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -211,10 +187,7 @@ public class MacawDoorsModule extends SimpleModule {
         MODERN_DOORS = SimpleEntrySet.builder("modern_door",
                         BlockInit.OAK_MODERN_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -230,10 +203,7 @@ public class MacawDoorsModule extends SimpleModule {
         MYSTIC_DOORS = SimpleEntrySet.builder("mystic_door",
                         BlockInit.OAK_MYSTIC_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -249,10 +219,7 @@ public class MacawDoorsModule extends SimpleModule {
         NETHER_DOORS = SimpleEntrySet.builder("nether_door",
                         BlockInit.OAK_NETHER_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -268,10 +235,7 @@ public class MacawDoorsModule extends SimpleModule {
         PAPER_DOORS = SimpleEntrySet.builder("paper_door",
                         BlockInit.OAK_PAPER_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -287,10 +251,7 @@ public class MacawDoorsModule extends SimpleModule {
         SHOJI_DOORS = SimpleEntrySet.builder("japanese_door",
                         BlockInit.OAK_JAPANESE_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new JapaneseDoors(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion().sound(SoundType.SCAFFOLDING)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -306,10 +267,7 @@ public class MacawDoorsModule extends SimpleModule {
         SHOJI_WHOLE_DOORS = SimpleEntrySet.builder("japanese2_door",
                         BlockInit.OAK_JAPANESE2_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new JapaneseDoors(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion().sound(SoundType.SCAFFOLDING)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -325,10 +283,7 @@ public class MacawDoorsModule extends SimpleModule {
         STABLE_DOORS = SimpleEntrySet.builder("stable_door",
                         BlockInit.OAK_STABLE_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -345,10 +300,7 @@ public class MacawDoorsModule extends SimpleModule {
         STABLE_HEAD_DOORS = SimpleEntrySet.builder("stable_head_door",
                         BlockInit.OAK_STABLE_HEAD_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -365,10 +317,7 @@ public class MacawDoorsModule extends SimpleModule {
         TROPICAL_DOORS = SimpleEntrySet.builder("tropical_door",
                         BlockInit.OAK_TROPICAL_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -384,10 +333,7 @@ public class MacawDoorsModule extends SimpleModule {
         WESTERN_DOORS = SimpleEntrySet.builder("western_door",
                         BlockInit.OAK_WESTERN_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
                 .useLootFromBase()
@@ -401,42 +347,4 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(WESTERN_DOORS);
     }
 
-    @Override
-    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addStaticClientResources(handler, manager);
-        Utils.addBlockResources(modId, manager, handler.dynamicPack, TROPICAL_DOORS.blocks,
-                BlockTypeResTransformer.wood(modId, manager)
-                        .replaceItemType("oak")
-                        .IDReplaceType("oak"),
-                ResType.ITEM_MODELS.getPath(modRes("oak_bark_glass_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_barn_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_barn_glass_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_beach_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_cottage_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_four_panel_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_glass_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_japanese_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_japanese2_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_modern_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_mystic_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_nether_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_paper_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_stable_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_stable_head_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_tropical_door")),
-                ResType.ITEM_MODELS.getPath(modRes("oak_western_door"))
-        );
-        Utils.addBlockResources(modId, manager, handler.dynamicPack, CLASSIC_DOORS.blocks,
-                BlockTypeResTransformer.wood(modId, manager)
-                        .replaceItemType("spruce")
-                        .IDReplaceType("spruce"),
-                ResType.ITEM_MODELS.getPath(modRes("spruce_classic_door"))
-        );
-
-    }
-
-    @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-    }
 }

@@ -70,7 +70,7 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, JsonElement> jsons, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         loadRecipes(jsons);
     }
-
+//TODO:fix, this isnt loading anymore
     private static void loadRecipes(Map<ResourceLocation, JsonElement> jsons) {
         int added = 0;
         boolean oldStatus = WoodGood.SERVER_RESOURCES.getPack().generateDebugResources;
