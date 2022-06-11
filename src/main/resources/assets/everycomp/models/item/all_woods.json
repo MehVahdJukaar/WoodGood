@@ -1,15 +1,3 @@
 {
-  "parent": "builtin/entity",
-  "display": {
-    "ground": {
-    },
-    "head": {
-    },
-    "thirdperson_righthand": {
-    },
-    "firstperson_righthand": {
-    },
-    "fixed": {
-    }
-  }
+  "parent": "builtin/entity"
 }
