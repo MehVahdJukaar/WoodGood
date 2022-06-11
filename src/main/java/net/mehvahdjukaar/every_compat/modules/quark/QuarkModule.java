@@ -15,6 +15,7 @@ import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -23,6 +24,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
@@ -137,17 +139,17 @@ public class QuarkModule extends SimpleModule {
                         () -> ForgeRegistries.BLOCKS.getValue(modRes("spruce_ladder")),
                         () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
                         (w, m) -> {
-                            String name = shortenedId() + "/" + w.getId().toString();
-                            return new VariantLadderBlock(name, m, BlockBehaviour.Properties.copy(w.planks), w.canBurn());
+                            String name = shortenedId() + "/" + w.getAppendableId();
+                            return new VariantLadderBlock(name, m, w.canBurn());
                         })
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(modRes("ladders"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("ladders"), Registry.ITEM_REGISTRY)
-                .addRecipe(modRes("building/crafting/ladders/spruce_ladder"))
+                .addRecipe(modRes("building/crafting/spruce_ladder"))
                 .addTexture(modRes("block/spruce_ladder"))
                 .build();
 
-        //  this.addEntry(LADDERS);
+          this.addEntry(LADDERS);
 
 
         HEDGES = QuarkSimpleEntrySet.builder("hedge",

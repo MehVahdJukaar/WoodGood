@@ -158,11 +158,11 @@ public class Utils {
 
     //creates and add new jsons based off the ones at the given resources with the provided modifiers
     public static <B extends Block, T extends BlockType> void addBlockResources(String modId, ResourceManager manager, DynamicResourcePack pack,
-                                                                                Map<T, B> blocks, String replaceTarget, ResourceLocation... jsonsLocations) {
+                                                                                Map<T, B> blocks, String typeName, ResourceLocation... jsonsLocations) {
         addBlockResources(modId, manager, pack, blocks,
                 BlockTypeResTransformer.<T>create(modId, manager)
-                        .replaceSimpleBlock(modId, replaceTarget)
-                        .IDReplaceBlock(replaceTarget),
+                        .replaceGenericType(typeName,"")
+                        .IDReplaceType(typeName),
                 jsonsLocations);
     }
 
@@ -224,10 +224,13 @@ public class Utils {
             if (i.getItemCategory() != null) {
                 FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
                 if (newR == null) return;
-                ConditionalRecipe.builder()
-                        .addCondition(new BlockTypeEnabledCondition(w))
-                        .addRecipe(newR)
-                        .build(pack::addRecipe, newR.getId());
+                var builder = ConditionalRecipe.builder()
+                        .addCondition(new BlockTypeEnabledCondition(w));
+
+                template.getConditions().forEach(builder::addCondition);
+
+                builder.addRecipe(newR).build(pack::addRecipe, newR.getId());
+
             }
         });
     }

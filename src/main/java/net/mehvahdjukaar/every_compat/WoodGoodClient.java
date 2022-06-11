@@ -16,13 +16,11 @@ public class WoodGoodClient {
     @SubscribeEvent
     public static void entityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         WoodGood.forAllModules(m -> m.registerEntityRenderers(event));
-        int a = 1;
     }
 
     @SubscribeEvent
     public static void stitchTextures(TextureStitchEvent.Pre event) {
         WoodGood.forAllModules(m -> m.onTextureStitch(event));
-        int a = 1;
     }
 
     @SubscribeEvent
@@ -30,15 +28,14 @@ public class WoodGoodClient {
         event.enqueueWork(()->{
             WoodGood.forAllModules(CompatModule::onClientSetup);
         });
-        int a = 1;
     }
 
     @SubscribeEvent
     public static void registerBlockColors(ColorHandlerEvent.Item event) {
         WoodGood.forAllModules(m -> m.registerColors(event));
-        int a = 1;
     }
 
+    //prints all woods
     /*
     @Mod.EventBusSubscriber(modid = WoodGood.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class AA {

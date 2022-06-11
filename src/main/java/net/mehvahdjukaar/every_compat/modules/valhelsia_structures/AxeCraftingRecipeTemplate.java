@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.valhelsia_structures;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipeBuilder;
 import net.mehvahdjukaar.selene.block_set.BlockType;
@@ -16,8 +17,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class AxeCraftingRecipeTemplate implements IRecipeTemplate<AxeCraftingRecipeBuilder.Result> {
@@ -25,6 +29,8 @@ public class AxeCraftingRecipeTemplate implements IRecipeTemplate<AxeCraftingRec
     public final int count;
     public final String group;
     public final Ingredient input;
+
+    private List<ICondition> conditions = new ArrayList<>();
 
     public AxeCraftingRecipeTemplate(JsonObject json) {
 
@@ -84,5 +90,13 @@ public class AxeCraftingRecipeTemplate implements IRecipeTemplate<AxeCraftingRec
         return newRecipe.get();
     }
 
+    @Override
+    public List<ICondition> getConditions() {
+        return conditions;
+    }
 
+    @Override
+    public void addCondition(ICondition condition) {
+        this.conditions.add(condition);
+    }
 }

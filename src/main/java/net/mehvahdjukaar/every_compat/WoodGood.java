@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.configs.BlockTypeEnabledCondition;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
@@ -82,39 +83,40 @@ public class WoodGood {
 
     public WoodGood() {
 
-        //addCompetitorMod("much_more_mod_compat");
-        addCompetitorMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark"));
-        addCompetitorMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
-        addCompetitorMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
-        addCompetitorMod("macawsbridgesbop", "mcwbridges", List.of("biomesoplenty"));
-        addCompetitorMod("macawbridgesbyg", "mcwbridges", List.of("byg"));
+        addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark"));
+        addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
+        addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
 
-        addCompetitorMod("mcwfencesbop", "mcwfences", List.of("biomesoplenty"));
-        addCompetitorMod("mcwfencesbyg", "mcwfences", List.of("byg"));
+        addOtherCompatMod("macawsbridgesbop", "mcwbridges", List.of("biomesoplenty"));
+        addOtherCompatMod("macawbridgesbyg", "mcwbridges", List.of("byg"));
+        addOtherCompatMod("mcwfencesbop", "mcwfences", List.of("biomesoplenty"));
+        addOtherCompatMod("mcwfencesbyg", "mcwfences", List.of("byg"));
+        addOtherCompatMod("macawsroofsbop", "mcwroofs", List.of("biomesoplenty"));
+        addOtherCompatMod("macawsroofsbyg", "mcwroofs", List.of("byg"));
 
+        addModule("mcwdoors", () -> MacawDoorsModule::new);
 
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+    //    addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
 
         addModule("quark", () -> QuarkModule::new);
-
-
+/*
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
-        addModule("mcwpaths", () -> MacawPathsModule::new);
+        addModule("mcwpaths", () -> MacawPathsModule::new);*/
         /*
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
-        addModule("mcwdoors", () -> MacawDoorsModule::new);
+
         */
 
 
@@ -145,7 +147,7 @@ public class WoodGood {
 
     }
 
-    private void addCompetitorMod(String modId, String woodFrom, List<String> blocksFrom) {
+    private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
         COMPAT_MODS.add(new CompatMod(modId, woodFrom, blocksFrom));
     }
 
@@ -177,6 +179,7 @@ public class WoodGood {
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
         forAllModules(m -> m.registerItems(event.getRegistry()));
+        event.getRegistry().register(new AllWoodItem().setRegistryName(res("all_woods")));
     }
 
     @SubscribeEvent

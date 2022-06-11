@@ -91,7 +91,6 @@ public class CreateModule extends SimpleModule {
                 event.addSprite(WoodGood.res(path));
             });
         }
-        int a = 1;
     }
 
 }

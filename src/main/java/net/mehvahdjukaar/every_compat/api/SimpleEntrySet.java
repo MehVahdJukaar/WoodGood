@@ -263,7 +263,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public void generateLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         if (copyLoot) {
             ResourceLocation reg = baseBlock.get().getRegistryName();
-            Utils.addBlockResources(module.getModId(), manager, pack, blocks, reg.getPath(),
+            Utils.addBlockResources(module.getModId(), manager, pack, blocks, baseType.get().getTypeName(),
                     ResType.BLOCK_LOOT_TABLES.getPath(reg));
 
         } else {
@@ -385,7 +385,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public static <T extends BlockType, B extends Block> Builder<T, B> builder(
             String name, String prefix, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
 
-        return new Builder<T, B>(name, prefix, baseType, baseBlock, blockSupplier);
+        return new Builder<>(name, prefix, baseType, baseBlock, blockSupplier);
     }
 
     public static class Builder<T extends BlockType, B extends Block> {

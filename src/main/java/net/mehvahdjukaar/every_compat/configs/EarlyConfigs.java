@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,8 +64,9 @@ public class EarlyConfigs {
 
         if (TAB_ENABLED.get()) {
             WoodGood.MOD_TAB = new CreativeModeTab(WoodGood.MOD_ID) {
+
                 public ItemStack makeIcon() {
-                    return Items.OAK_PLANKS.getDefaultInstance();
+                    return ForgeRegistries.ITEMS.getValue(WoodGood.res("all_woods")).getDefaultInstance();
                 }
             };
         }
