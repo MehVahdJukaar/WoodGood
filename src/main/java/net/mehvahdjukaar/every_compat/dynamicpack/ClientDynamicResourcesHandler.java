@@ -7,6 +7,7 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.selene.resourcepack.DynamicTexturePack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicTextureProvider;
+import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;

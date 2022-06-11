@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class EarlyConfigs {
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .define("creative_tab", true);
         REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
-                .define("remap_other_mods", true);
+                .define("remap_other_mods", false);
         builder.pop();
         for (var reg : BlockSetManager.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));
@@ -63,8 +64,9 @@ public class EarlyConfigs {
 
         if (TAB_ENABLED.get()) {
             WoodGood.MOD_TAB = new CreativeModeTab(WoodGood.MOD_ID) {
+
                 public ItemStack makeIcon() {
-                    return Items.OAK_PLANKS.getDefaultInstance();
+                    return ForgeRegistries.ITEMS.getValue(WoodGood.res("all_woods")).getDefaultInstance();
                 }
             };
         }

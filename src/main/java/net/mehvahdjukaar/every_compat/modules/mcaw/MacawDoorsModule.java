@@ -432,6 +432,7 @@ public class MacawDoorsModule extends SimpleModule {
                         .IDReplaceType("spruce"),
                 ResType.ITEM_MODELS.getPath(modRes("spruce_classic_door"))
         );
+
     }
 
     @Override

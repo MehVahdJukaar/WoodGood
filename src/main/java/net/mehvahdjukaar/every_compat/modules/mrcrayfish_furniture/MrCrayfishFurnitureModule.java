@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
@@ -19,6 +20,7 @@ import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -487,30 +489,6 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .build();
 
         this.addEntry(HEDGES);
-    }
-
-
-    @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
-        /*
-        HEDGES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.cfm_hedge", (BlockType) w, v));
-        STRIPPED_BEDSIDE_CABINETS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_bedside_cabinet", (BlockType) w, v));
-        STRIPPED_BENCHES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_park_bench", (BlockType) w, v));
-        STRIPPED_BLINDS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_blinds", (BlockType) w, v));
-        STRIPPED_CABINETS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_cabinet", (BlockType) w, v));
-        STRIPPED_CHAIRS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_chair", (BlockType) w, v));
-        STRIPPED_COFFEE_TABLES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_coffee_table", (BlockType) w, v));
-        STRIPPED_CRATES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_crates", (BlockType) w, v));
-        STRIPPED_DESKS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_desk", (BlockType) w, v));
-        STRIPPED_DESK_CABINETS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_desk_cabinet", (BlockType) w, v));
-        STRIPPED_KITCHEN_COUNTERS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_counter", (BlockType) w, v));
-        STRIPPED_KITCHEN_DRAWERS.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_drawer", (BlockType) w, v));
-        STRIPPED_KITCHEN_SINK_DARK.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_sink_dark", (BlockType) w, v));
-        STRIPPED_KITCHEN_SINK_LIGHT.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_kitchen_sink_light", (BlockType) w, v));
-        STRIPPED_MAIL_BOXES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_mail_box", (BlockType) w, v));
-        STRIPPED_TABLES.items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block.everycomp.stripped_table", (BlockType) w, v));
-       */
-        super.addTranslations(clientDynamicResourcesHandler, lang);
     }
 
     public static BlockEntityType<?> COMPAT_SINK;

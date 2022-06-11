@@ -95,6 +95,8 @@ public abstract class CompatModule {
     //TODO: improve
     public final boolean isEntryAlreadyRegistered(String name, BlockType woodType, IForgeRegistry<?> registry) {
         //ec:twigs/bop/willow_table
+        name = name.substring(name.lastIndexOf("/")+1); //gets the base name
+
         String woodFrom = woodType.getNamespace();
         //discards wood types from this mod
         if (woodFrom.equals(modId)) return true; //quark, blossom
@@ -108,7 +110,7 @@ public abstract class CompatModule {
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
 
 
-        if (registry.containsKey(new ResourceLocation(woodFrom, n1))) return true;
+        if (registry.containsKey(new ResourceLocation(woodFrom, name))) return true;
 
         for (var c : WoodGood.COMPAT_MODS) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
