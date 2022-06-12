@@ -151,7 +151,7 @@ public class Utils {
                 modelModifier.replaceWoodTextures(woodT);
             }
         }
-        modelModifier.replaceBlockType(baseBlockName);
+        modelModifier.replaceGenericType(baseBlockName, "blocks").replaceBlockType(baseBlockName);
         return modelModifier;
     }
 
