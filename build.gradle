@@ -161,7 +161,7 @@ dependencies {
     implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
     implementation fg.deobf("curse.maven:curios-309927:3670447")
     implementation fg.deobf("curse.maven:quark-243121:3800462")
-    implementation fg.deobf("curse.maven:selene-499980:3826120")
+    implementation fg.deobf("curse.maven:selene-499980:3828175")
     implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
     implementation fg.deobf("curse.maven:decorativeblocks-362528:3681919")
