@@ -134,7 +134,6 @@ dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     implementation fg.deobf("curse.maven:flywheel-486392:3737402")
-    implementation fg.deobf("curse.maven:create-328085:3737418")
     implementation fg.deobf("curse.maven:farmersdelight-398521:3739914")
     implementation fg.deobf("curse.maven:jei-238222:3682513")
     implementation fg.deobf("curse.maven:quark-243121:3800462")
@@ -144,11 +143,7 @@ dependencies {
     implementation fg.deobf("curse.maven:create-328085:3737418")
     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     implementation fg.deobf("curse.maven:twigs-496913:3756844")
-    implementation fg.deobf("curse.maven:configured-457570:3640884")
     implementation fg.deobf("curse.maven:another-furniture-610492:3823382")
-    implementation fg.deobf("curse.maven:farmersdelight-398521:3739914")
-    implementation fg.deobf("curse.maven:flywheel-486392:3737402")
-    implementation fg.deobf("curse.maven:jei-238222:3682513")
     implementation fg.deobf("curse.maven:macaws-bridges-351725:3793697")
     implementation fg.deobf("curse.maven:macaws-doors-378646:3683708")
     implementation fg.deobf("curse.maven:macaws-fences-and-walls-453925:3817472")
@@ -160,7 +155,6 @@ dependencies {
     implementation fg.deobf("curse.maven:malum-484064:3768401")
     implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
     implementation fg.deobf("curse.maven:curios-309927:3670447")
-    implementation fg.deobf("curse.maven:quark-243121:3800462")
     implementation fg.deobf("curse.maven:selene-499980:3828175")
     implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
