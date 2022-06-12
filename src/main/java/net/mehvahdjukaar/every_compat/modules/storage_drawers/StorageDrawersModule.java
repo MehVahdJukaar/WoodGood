@@ -54,6 +54,7 @@ public class StorageDrawersModule extends SimpleModule {
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
         p.remove(p.getLightest());
+//        p.remove(p.getLightest());
     }
 
 //    @Override
@@ -73,45 +74,45 @@ public class StorageDrawersModule extends SimpleModule {
 //        }
 //    }
 
-//    private class CompatStandardDrawers extends BlockStandardDrawers {
-//        public CompatStandardDrawers(int drawerCount, boolean halfDepth, Properties properties) {
-//            super(drawerCount, halfDepth, properties);
-//        }
-//
-//        public TileEntityDrawers newBlockEntity(BlockPos pos, BlockState state) {
-//            return TileEntityDrawersStandard.createEntity(this.getDrawerCount(), pos, state);
-//        }
-//    }
+    private class CompatStandardDrawers extends BlockStandardDrawers {
+        public CompatStandardDrawers(int drawerCount, boolean halfDepth, Properties properties) {
+            super(drawerCount, halfDepth, properties);
+        }
+
+        public TileEntityDrawers newBlockEntity(BlockPos pos, BlockState state) {
+            return TileEntityDrawersStandard.createEntity(this.getDrawerCount(), pos, state);
+        }
+    }
 //
 //    @Override
 //    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 //        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
 //    }
 
-    @Override
-    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
-    }
-
-    class CompatStandardDrawersEntity extends TileEntityDrawersStandard {
-
-        public CompatStandardDrawersEntity(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
-            super(tileEntityType, pos, state);
-        }
-
-        @Override
-        public @NotNull BlockEntityType<?> getType() {
-            return DRAWERS.getTileHolder().tile;
-        }
-    }
-
-    private class CompatStandardDrawers extends BlockStandardDrawers {
-        public CompatStandardDrawers(int drawerCount, boolean halfDepth, Properties properties) {
-            super(drawerCount, halfDepth, properties);
-        }
-
-        public TileEntityDrawers newBlockEntity(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
-            return new CompatStandardDrawersEntity(tileEntityType, pos, state);
-        }
-    }
+//    @Override
+//    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+//        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
+//    }
+//
+//    class CompatStandardDrawersEntity extends TileEntityDrawersStandard {
+//
+//        public CompatStandardDrawersEntity(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
+//            super(tileEntityType, pos, state);
+//        }
+//
+//        @Override
+//        public @NotNull BlockEntityType<?> getType() {
+//            return DRAWERS.getTileHolder().tile;
+//        }
+//    }
+//
+//    private class CompatStandardDrawers extends BlockStandardDrawers {
+//        public CompatStandardDrawers(int drawerCount, boolean halfDepth, Properties properties) {
+//            super(drawerCount, halfDepth, properties);
+//        }
+//
+//        public TileEntityDrawers newBlockEntity(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
+//            return new CompatStandardDrawersEntity(tileEntityType, pos, state);
+//        }
+//    }
 }
