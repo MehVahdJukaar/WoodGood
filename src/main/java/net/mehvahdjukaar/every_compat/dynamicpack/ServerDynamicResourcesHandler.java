@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.selene.resourcepack.DynamicDataPack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicDataProvider;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -23,7 +24,7 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
 
     @Override
     public boolean dependsOnLoadedPacks() {
-        return true;
+        return EarlyConfigs.DEPEND_ON_PACKS.get();
     }
 
     @Override

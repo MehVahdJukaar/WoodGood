@@ -17,6 +17,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class AllWoodItemRenderer extends BlockEntityWithoutLevelRenderer {
@@ -45,6 +47,7 @@ public class AllWoodItemRenderer extends BlockEntityWithoutLevelRenderer {
         for (var w : WoodTypeRegistry.WOOD_TYPES.values()) {
             if (!w.isVanilla()) MODDED_WOOD_TYPES.add(w);
         }
+        Collections.shuffle(MODDED_WOOD_TYPES);
     }
 
     @Override

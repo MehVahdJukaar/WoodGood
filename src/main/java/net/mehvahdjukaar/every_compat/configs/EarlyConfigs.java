@@ -28,6 +28,7 @@ public class EarlyConfigs {
     public static ForgeConfigSpec.BooleanValue TAB_ENABLED;
     public static ForgeConfigSpec.BooleanValue REMAP_COMPAT;
     public static ForgeConfigSpec.BooleanValue REMAP_OWN;
+    public static ForgeConfigSpec.BooleanValue DEPEND_ON_PACKS;
 
     public static void init() {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -38,6 +39,8 @@ public class EarlyConfigs {
                 .define("remap_other_mods", false);
         REMAP_OWN = builder.comment("Clears out and remaps all blocks registered by this mod belonging to uninstalled wood types to air or oak wood")
                 .define("remap_self", true);
+        DEPEND_ON_PACKS = builder.comment("Makes dynamic assets that are generated depend on loaded resource packs. Turn off to make them just use vanilla assets")
+                        .define("assets_depend_on_loaded_packs", true);
         builder.pop();
         for (var reg : BlockSetManager.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));

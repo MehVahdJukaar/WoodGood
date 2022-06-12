@@ -51,7 +51,6 @@ public class Utils {
         Item oakItem = oakBlock.asItem();
 
 
-
         //if it has an item
         if (oakItem != Items.AIR) {
             //item model
@@ -139,9 +138,9 @@ public class Utils {
     }
 
     @NotNull
-    private static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(String modId, ResourceManager manager, T baseType, String baseBlockName) {
+    private static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(String modId, ResourceManager manager, T baseType, String oldTypeName) {
         BlockTypeResTransformer<T> modelModifier = BlockTypeResTransformer.create(modId, manager);
-        modelModifier.IDReplaceType(baseBlockName);
+        modelModifier.IDReplaceType(oldTypeName);
         if (baseType instanceof WoodType woodType) {
             modelModifier.replaceWoodTextures(woodType);
         } else if (baseType instanceof LeavesType leavesType) {
@@ -151,7 +150,11 @@ public class Utils {
                 modelModifier.replaceWoodTextures(woodT);
             }
         }
-        modelModifier.replaceBlockType(baseBlockName);
+
+        //for mods that do not follow convention...
+        modelModifier.replaceGenericType(oldTypeName,"blocks");
+        modelModifier.replaceGenericType(oldTypeName,"block");
+        //modelModifier.replaceBlockType(oldTypeName);
         return modelModifier;
     }
 
@@ -220,17 +223,22 @@ public class Utils {
                 ResType.RECIPES.getPath(oakRecipe));
 
         items.forEach((w, i) -> {
-            //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
-            if (i.getItemCategory() != null) {
-                FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
-                if (newR == null) return;
-                var builder = ConditionalRecipe.builder()
-                        .addCondition(new BlockTypeEnabledCondition(w));
 
-                template.getConditions().forEach(builder::addCondition);
+            try {
+                //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
+                if (i.getItemCategory() != null) {
+                    FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
+                    if (newR == null) return;
+                    var builder = ConditionalRecipe.builder()
+                            .addCondition(new BlockTypeEnabledCondition(w));
 
-                builder.addRecipe(newR).build(pack::addRecipe, newR.getId());
+                    template.getConditions().forEach(builder::addCondition);
 
+                    builder.addRecipe(newR).build(pack::addRecipe, newR.getId());
+
+                }
+            } catch (Exception e) {
+                WoodGood.LOGGER.error("Failed to generate recipe for {}:", i, e);
             }
         });
     }

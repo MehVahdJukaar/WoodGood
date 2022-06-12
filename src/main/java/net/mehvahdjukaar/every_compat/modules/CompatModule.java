@@ -88,10 +88,6 @@ public abstract class CompatModule {
 
     }
 
-    public void registerTileRenderers(IForgeRegistry<EntityType<?>> registry) {
-
-    }
-
     //TODO: improve
     public final boolean isEntryAlreadyRegistered(String name, BlockType woodType, IForgeRegistry<?> registry) {
         //ec:twigs/bop/willow_table
