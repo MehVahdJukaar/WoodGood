@@ -273,7 +273,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Override
     public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         this.recipeLocations.forEach(r -> {
-            Utils.addBlocksRecipes(manager, pack, items, r.get(), baseType.get());
+            try {
+                Utils.addBlocksRecipes(manager, pack, items, r.get(), baseType.get());
+            }catch (Exception e){
+                WoodGood.LOGGER.error("Failed to generate recipes for template at location {} ", r);
+            }
         });
 
     }

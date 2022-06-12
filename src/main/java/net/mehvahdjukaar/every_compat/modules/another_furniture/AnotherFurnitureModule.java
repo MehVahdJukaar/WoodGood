@@ -10,6 +10,7 @@ import com.starfish_studios.another_furniture.registry.AFBlocks;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.PaletteColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
@@ -58,27 +59,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/shutter/oak_middle"))
                 .addTexture(modRes("block/shutter/oak_none"))
                 .addTexture(modRes("block/shutter/oak_top"))
-                .createPaletteFromOak(p -> {
-                    float dl = p.getAverageLuminanceStep();
-                    {
-                        var c0 = p.get(0);
-                        var nc0 = new PaletteColor(c0.hcl().withLuminance(c0.hcl().luminance() - (dl * 0.35f)));
-                        nc0.occurrence = c0.occurrence;
-                        p.set(0, nc0);
-                    }
-                    {
-                        var c1 = p.get(1);
-                        var nc1 = new PaletteColor(c1.hcl().withLuminance(c1.hcl().luminance() - (dl * 0.18f)));
-                        nc1.occurrence = c1.occurrence;
-                        p.set(1, nc1);
-                    }
-                    {
-                        var c2 = p.get(2);
-                        var nc2 = new PaletteColor(c2.hcl().withLuminance(c2.hcl().luminance() - (dl * 0.05f)));
-                        nc2.occurrence = c2.occurrence;
-                        p.set(+2, nc2);
-                    }
-                })
+                .createPaletteFromOak(this::shuttersPalette)
                 .build();
 
         this.addEntry(SHUTTERS);
@@ -127,6 +108,28 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         this.addEntry(SHELVES);
 
+    }
+
+    private void shuttersPalette(Palette p) {
+        float dl = p.getAverageLuminanceStep();
+        {
+            var c0 = p.get(0);
+            var nc0 = new PaletteColor(c0.hcl().withLuminance(c0.hcl().luminance() - (dl * 0.35f)));
+            nc0.occurrence = c0.occurrence;
+            p.set(0, nc0);
+        }
+        {
+            var c1 = p.get(1);
+            var nc1 = new PaletteColor(c1.hcl().withLuminance(c1.hcl().luminance() - (dl * 0.18f)));
+            nc1.occurrence = c1.occurrence;
+            p.set(1, nc1);
+        }
+        {
+            var c2 = p.get(2);
+            var nc2 = new PaletteColor(c2.hcl().withLuminance(c2.hcl().luminance() - (dl * 0.05f)));
+            nc2.occurrence = c2.occurrence;
+            p.set(+2, nc2);
+        }
     }
 
     //TODO: fix renderer

@@ -1,15 +1,16 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.WoodGood;
+import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.selene.resourcepack.DynamicTexturePack;
 import net.mehvahdjukaar.selene.resourcepack.RPAwareDynamicTextureProvider;
-import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraftforge.fml.ModList;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,6 +19,8 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(WoodGood.res("generated_pack")));
+        //since we place chests textures in its namespace to use its renderer
+        if (ModList.get().isLoaded("quark")) getPack().addNamespaces("quark");
         //this.dynamicPack.generateDebugResources = false;
     }
 
@@ -28,7 +31,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     @Override
     public boolean dependsOnLoadedPacks() {
-        return true;
+        return EarlyConfigs.DEPEND_ON_PACKS.get();
     }
 
     @Override
@@ -44,8 +47,8 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     @Override
     public void addDynamicTranslations(AfterLanguageLoadEvent lang) {
-        WoodGood.forAllModules(m->{
-            m.addTranslations(this,lang);
+        WoodGood.forAllModules(m -> {
+            m.addTranslations(this, lang);
         });
         int a = 1;
     }

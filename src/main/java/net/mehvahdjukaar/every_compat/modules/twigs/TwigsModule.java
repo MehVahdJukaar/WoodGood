@@ -1,15 +1,24 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
+import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.moddingplayground.twigs.Twigs;
 import net.moddingplayground.twigs.block.TableBlock;
 import net.moddingplayground.twigs.init.TwigsBlocks;
+
+import java.util.List;
 
 public class TwigsModule extends SimpleModule {
 
@@ -34,4 +43,5 @@ public class TwigsModule extends SimpleModule {
 
         this.addEntry(TABLES);
     }
+
 }

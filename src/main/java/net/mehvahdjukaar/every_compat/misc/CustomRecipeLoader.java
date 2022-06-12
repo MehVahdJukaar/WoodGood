@@ -9,6 +9,7 @@ import net.mehvahdjukaar.selene.resourcepack.EarlyPackReloadEvent;
 import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.selene.resourcepack.recipe.TemplateRecipeManager;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;

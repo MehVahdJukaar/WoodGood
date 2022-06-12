@@ -10,12 +10,13 @@ import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -23,9 +24,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -40,15 +44,15 @@ import vazkii.quark.content.building.block.HedgeBlock;
 import vazkii.quark.content.building.block.VariantBookshelfBlock;
 import vazkii.quark.content.building.block.VariantLadderBlock;
 import vazkii.quark.content.building.block.WoodPostBlock;
-import vazkii.quark.content.building.module.HedgesModule;
-import vazkii.quark.content.building.module.VariantBookshelvesModule;
-import vazkii.quark.content.building.module.VariantLaddersModule;
-import vazkii.quark.content.building.module.VerticalPlanksModule;
+import vazkii.quark.content.building.client.render.be.VariantChestRenderer;
+import vazkii.quark.content.building.module.*;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class QuarkModule extends SimpleModule {
 
@@ -57,8 +61,9 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_POSTS;
     public final SimpleEntrySet<WoodType, Block> VERTICAL_PLANKS;
     public final SimpleEntrySet<WoodType, Block> LADDERS;
-    // public final SimpleEntrySet<WoodType, Block> CHESTS;
+    public final SimpleEntrySet<WoodType, Block> CHESTS;
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
+    public static BlockEntityType<? extends ChestBlockEntity> CHEST_TILE;
 
     public QuarkModule(String modId) {
         super(modId, "q");
@@ -147,10 +152,27 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("ladders"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("ladders"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("building/crafting/spruce_ladder"))
-                .addTexture(modRes("block/spruce_ladder"))
+                .addTexture(WoodGood.res("block/spruce_ladder"))
                 .build();
 
-          this.addEntry(LADDERS);
+        this.addEntry(LADDERS);
+
+        CHESTS = QuarkSimpleEntrySet.builder("chest",
+                        VariantChestsModule.class,
+                        () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_chest")),
+                        () -> WoodType.OAK_WOOD_TYPE,
+                        (w, m) -> {
+                            String name = shortenedId() + "/" + w.getAppendableId();
+                            return new CompatChestBlock(w, name, m, () -> CHEST_TILE, BlockBehaviour.Properties.copy(w.planks));
+                        })
+                .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
+                .addRecipe(modRes( "building/crafting/chests/oak_chest"))
+                .addCustomItem((w, b, p) -> new CompatChestItem(b, p))
+                .build();
+
+        this.addEntry(CHESTS);
 
 
         HEDGES = QuarkSimpleEntrySet.builder("hedge",
@@ -167,6 +189,7 @@ public class QuarkModule extends SimpleModule {
 
         this.addEntry(HEDGES);
     }
+
 
     public Pair<List<Palette>, AnimationMetadataSection> bookshelfPalette(BlockType w, ResourceManager m) {
         try (TextureImage plankTexture = TextureImage.open(m,
@@ -258,6 +281,13 @@ public class QuarkModule extends SimpleModule {
         ARLModData.remove(WoodGood.MOD_ID);
     }
 
+    @Override
+    public void registerTiles(IForgeRegistry<BlockEntityType<?>> registry) {
+
+        CHEST_TILE = BlockEntityType.Builder.of(CompatChestBlockTile::new,
+                CHESTS.blocks.values().toArray(Block[]::new)).build(null);
+        registry.register(CHEST_TILE.setRegistryName(WoodGood.res(this.shortenedId() + "_chest")));
+    }
 
     @Override
     public void registerColors(ColorHandlerEvent.Item event) {
@@ -269,7 +299,106 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
-    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addStaticClientResources(handler, manager);
+    public void onTextureStitch(TextureStitchEvent.Pre event) {
+        if (event.getAtlas().location().equals(Sheets.CHEST_SHEET)) {
+            CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
+        }
     }
+
+
+    @Override
+    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        super.registerEntityRenderers(event);
+        event.registerBlockEntityRenderer(CHEST_TILE, VariantChestRenderer::new);
+    }
+
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+        try (TextureImage normal = TextureImage.open(manager, modRes("model/chest/oak/normal"));
+             TextureImage normal_m = TextureImage.open(manager, WoodGood.res("model/oak_chest_normal_m"));
+             TextureImage normal_o = TextureImage.open(manager, WoodGood.res("model/oak_chest_normal_o"));
+             TextureImage left = TextureImage.open(manager, modRes("model/chest/oak/left"));
+             TextureImage left_m = TextureImage.open(manager, WoodGood.res("model/oak_chest_left_m"));
+             TextureImage left_o = TextureImage.open(manager, WoodGood.res("model/oak_chest_left_o"));
+             TextureImage right = TextureImage.open(manager, modRes("model/chest/oak/right"));
+             TextureImage right_m = TextureImage.open(manager, WoodGood.res("model/oak_chest_right_m"));
+             TextureImage right_o = TextureImage.open(manager, WoodGood.res("model/oak_chest_right_o"))
+        ) {
+
+            Respriter respriterNormal = Respriter.masked(normal, normal_m);
+            Respriter respriterLeft = Respriter.masked(left, left_m);
+            Respriter respriterRight = Respriter.masked(right, right_m);
+
+            Respriter respriterNormalO = Respriter.of(normal_o);
+            Respriter respriterLeftO = Respriter.of(left_o);
+            Respriter respriterRightO = Respriter.of(right_o);
+
+            CHESTS.blocks.forEach((wood, block) -> {
+
+                CompatChestBlock b = (CompatChestBlock) block;
+
+                try (TextureImage plankTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
+
+                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+
+                    List<Palette> overlayPalette = new ArrayList<>();
+                    for (var p : targetPalette) {
+                        var d = p.getDarkest();
+                        p.remove(d);
+                        var d2 = p.getDarkest();
+                        p.remove(d2);
+                        var pal = Palette.ofColors(List.of(d.lab().withLuminance(d.luminance() * 0.4f),
+                                d2.lab().withLuminance(d2.luminance() * 0.4f)));
+                        overlayPalette.add(pal);
+                    }
+
+                    addQuarkTexture(handler, manager, b.getChestTexturePath() + "normal", () -> {
+                        var img = respriterNormal.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
+                        img.applyOverlayOnExisting(respriterNormalO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
+                        return img;
+                    });
+
+                    addQuarkTexture(handler, manager, b.getChestTexturePath() + "left", () -> {
+                        var img = respriterLeft.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
+                        img.applyOverlayOnExisting(respriterLeftO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
+                        return img;
+                    });
+
+                    addQuarkTexture(handler, manager, b.getChestTexturePath() + "right", () -> {
+                        var img = respriterRight.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
+                        img.applyOverlayOnExisting(respriterRightO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
+                        return img;
+                    });
+
+                } catch (Exception ex) {
+                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", b, ex);
+                }
+            });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Chest block texture : ", ex);
+        }
+    }
+
+    private void addQuarkTexture(ClientDynamicResourcesHandler handler, ResourceManager manager,
+                                 String relativePath, Supplier<TextureImage> textureSupplier) {
+
+        ResourceLocation res = new ResourceLocation("quark", relativePath);
+        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+            TextureImage textureImage = null;
+            try {
+                textureImage = textureSupplier.get();
+            } catch (Exception e) {
+                handler.getLogger().error("Failed to generate texture {}: {}", res, e);
+            }
+            if (textureImage == null) {
+                handler.getLogger().warn("Could not generate texture {}", res);
+            } else {
+                handler.dynamicPack.addAndCloseTexture(res, textureImage);
+            }
+        }
+    }
+
 }
