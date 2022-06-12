@@ -99,7 +99,6 @@
   "block_type.create.window": "%s Window",
   "block_type.create.window_pane": "%s Window Pane",
 
-
   "block_type.cfm.window": "%s Window",
   "block_type.cfm.backpack_shelf": "%s Backpack Shelf",
   "block_type.cfm.bedside_cabinet": "%s Bedside Cabinet",
@@ -156,7 +155,7 @@
   "block_type.cfm.upgraded_gate": "%s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
-
+  "block_type.storagedrawers.full_drawers_1": "%s Storage Drawers 1x1",
 
   "wood_type.twilightforest.dark": "Darkwood"
 }
