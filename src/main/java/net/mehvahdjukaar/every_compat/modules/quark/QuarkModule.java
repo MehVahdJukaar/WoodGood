@@ -350,8 +350,8 @@ public class QuarkModule extends SimpleModule {
                         p.remove(d);
                         var d2 = p.getDarkest();
                         p.remove(d2);
-                        var pal = Palette.ofColors(List.of(d.lab().withLuminance(d.luminance() * 0.7f),
-                                d2.lab().withLuminance(d2.luminance() * 0.7f)));
+                        var pal = Palette.ofColors(List.of(d.lab().withLuminance(d.luminance() * 0.4f),
+                                d2.lab().withLuminance(d2.luminance() * 0.4f)));
                         overlayPalette.add(pal);
                     }
 

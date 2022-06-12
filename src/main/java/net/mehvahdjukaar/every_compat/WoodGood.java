@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.storage_drawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
@@ -112,6 +113,7 @@ public class WoodGood {
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
         //       addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+        addModule("storagedrawers", () -> StorageDrawersModule::new);
 
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));

@@ -6,8 +6,6 @@ import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawersStandar
 import com.jaquadro.minecraft.storagedrawers.client.renderer.TileEntityDrawersRenderer;
 import com.jaquadro.minecraft.storagedrawers.core.ModBlocks;
 import com.jaquadro.minecraft.storagedrawers.core.ModItemGroup;
-import com.simibubi.create.foundation.item.ItemDescription;
-import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -16,8 +14,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,9 +32,9 @@ public class StorageDrawersModule extends SimpleModule {
                         ModBlocks.OAK_FULL_DRAWERS_1, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatStandardDrawers(1, false, BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.3f)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
+                .addTile(CompatStandardDrawersEntity1::new)
                 .createPaletteFromOak(this::drawersPalette)
                 .setRenderType(()-> RenderType::cutout)
                 .addTexture(modRes("blocks/drawers_oak_front_1"))
@@ -51,28 +47,16 @@ public class StorageDrawersModule extends SimpleModule {
     }
 
     private void drawersPalette(Palette p) {
-        p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
+      //  p.remove(p.getDarkest());
+     //   p.remove(p.getDarkest());
+     //   p.remove(p.getLightest());
 //        p.remove(p.getLightest());
     }
 
-//    @Override
-//    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-//        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
-//    }
-
-//    class CompatStandardDrawersEntity extends TileEntityDrawersStandard {
-//
-//        public CompatStandardDrawersEntity(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
-//            super(tileEntityType, pos, state);
-//        }
-//
-//        @Override
-//        public @NotNull BlockEntityType<?> getType() {
-//            return DRAWERS.getTileHolder().tile;
-//        }
-//    }
+    @Override
+    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
+    }
 
     private class CompatStandardDrawers extends BlockStandardDrawers {
         public CompatStandardDrawers(int drawerCount, boolean halfDepth, Properties properties) {
@@ -80,39 +64,25 @@ public class StorageDrawersModule extends SimpleModule {
         }
 
         public TileEntityDrawers newBlockEntity(BlockPos pos, BlockState state) {
-            return TileEntityDrawersStandard.createEntity(this.getDrawerCount(), pos, state);
+            return switch (this.getDrawerCount()) {
+                case 1 -> new CompatStandardDrawersEntity1(pos, state);
+               // case 2 -> new CompatStandardDrawersEntity2(pos, state);
+                default -> null;
+             //   case 4 -> new CompatStandardDrawersEntity4(pos, state);
+                //add these^
+            };
         }
     }
-//
-//    @Override
-//    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-//        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
-//    }
 
-//    @Override
-//    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-//        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
-//    }
-//
-//    class CompatStandardDrawersEntity extends TileEntityDrawersStandard {
-//
-//        public CompatStandardDrawersEntity(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
-//            super(tileEntityType, pos, state);
-//        }
-//
-//        @Override
-//        public @NotNull BlockEntityType<?> getType() {
-//            return DRAWERS.getTileHolder().tile;
-//        }
-//    }
-//
-//    private class CompatStandardDrawers extends BlockStandardDrawers {
-//        public CompatStandardDrawers(int drawerCount, boolean halfDepth, Properties properties) {
-//            super(drawerCount, halfDepth, properties);
-//        }
-//
-//        public TileEntityDrawers newBlockEntity(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
-//            return new CompatStandardDrawersEntity(tileEntityType, pos, state);
-//        }
-//    }
+    class CompatStandardDrawersEntity1 extends TileEntityDrawersStandard.Slot1 {
+
+        public CompatStandardDrawersEntity1(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public @NotNull BlockEntityType<?> getType() {
+            return DRAWERS.getTileHolder().tile;
+        }
+    }
 }
