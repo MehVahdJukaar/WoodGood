@@ -14,6 +14,8 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.math.colors.HCLColor;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -39,6 +41,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import vazkii.arl.util.RegistryHelper;
 import vazkii.quark.base.block.QuarkBlock;
 import vazkii.quark.base.handler.ToolInteractionHandler;
+import vazkii.quark.base.module.ModuleLoader;
 import vazkii.quark.content.building.block.VariantBookshelfBlock;
 import vazkii.quark.content.building.block.VariantLadderBlock;
 import vazkii.quark.content.building.block.WoodPostBlock;
@@ -60,7 +63,7 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> VERTICAL_PLANKS;
     public final SimpleEntrySet<WoodType, Block> LADDERS;
     public final SimpleEntrySet<WoodType, Block> CHESTS;
-    public final SimpleEntrySet<LeavesType, Block> HEDGES;
+    public final SimpleEntrySet<WoodType, Block> HEDGES;
     public static BlockEntityType<? extends ChestBlockEntity> CHEST_TILE;
 
     public QuarkModule(String modId) {
@@ -160,11 +163,13 @@ public class QuarkModule extends SimpleModule {
                         () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_chest")),
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
+                            if (w.getId().toString().equals("twilightforest:dark")) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatChestBlock(w, name, m, () -> CHEST_TILE, BlockBehaviour.Properties.copy(w.planks));
                         })
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .addCustomItem((w, b, p) -> new CompatChestItem(b, p))
@@ -172,24 +177,24 @@ public class QuarkModule extends SimpleModule {
 
         this.addEntry(CHESTS);
 
-
-        HEDGES = QuarkSimpleEntrySet.builder("hedge",
-                        HedgesModule.class,
+        //doing it this way because for some reason its nuking whatever block item I throw in here
+        HEDGES = SimpleEntrySet.builder("hedge",
                         () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")),
-                        () -> LeavesType.OAK_LEAVES_TYPE,
-                        (l, m) -> {
-                            if (l.woodType != null) {
-                                Block fence = l.woodType.getBlockOfThis("fence");
-                                if (fence != null) {
-                                    String name = this.makeBlockId(l, "hedge");
-                                    return new CompatHedgeBlock(m, name, fence, l.leaves);
-                                }
+                        () -> WoodType.OAK_WOOD_TYPE,
+                        (w) -> {
+                            Block fence = w.getBlockOfThis("fence");
+                            Block leaves = w.getBlockOfThis("leaves");
+                            if (fence != null && leaves != null) {
+                                var mod = ModuleLoader.INSTANCE.getModuleInstance(HedgesModule.class);
+                                return new CompatHedgeBlock(mod, fence, leaves);
                             }
                             return null;
                         })
                 .addTag(modRes("hedges"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hedges"), Registry.ITEM_REGISTRY)
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .addModelTransform(m -> m.replaceLeavesTextures(LeavesType.OAK_LEAVES_TYPE))
                 .addRecipe(modRes("building/crafting/oak_hedge"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -252,12 +257,31 @@ public class QuarkModule extends SimpleModule {
         registry.register(CHEST_TILE.setRegistryName(WoodGood.res(this.shortenedId() + "_chest")));
     }
 
+
+    public void onFirstClientTick1() {
+        var ic = Minecraft.getInstance().getItemColors();
+        var bc = Minecraft.getInstance().getBlockColors();
+        HEDGES.blocks.forEach((t, b) -> {
+            var leaf = t.getChild("leaves");
+            if (leaf instanceof Block block) {
+                bc.register((s, l, p, i) -> bc.getColor(block.defaultBlockState(), l, p, i), b);
+                ic.register((stack, tintIndex) -> ic.getColor(new ItemStack(leaf.asItem()), tintIndex), b.asItem());
+            }
+        });
+    }
+
     @Override
     public void registerColors(ColorHandlerEvent.Item event) {
-        HEDGES.blocks.forEach((l, h) -> {
-            ItemColors colors = event.getItemColors();
-            ItemStack leafStack = new ItemStack(l.leaves);
-            colors.register((stack, tintIndex) -> colors.getColor(leafStack, tintIndex), h.asItem());
+        BlockColors blockColor = event.getBlockColors();
+        ItemColors colors = event.getItemColors();
+        HEDGES.blocks.forEach((t, b) -> {
+            var leaf = t.getChild("leaves");
+            if (leaf instanceof Block bl) {
+                colors.register((stack, tintIndex) -> colors.getColor(new ItemStack(leaf), tintIndex), b.asItem());
+
+
+                blockColor.register((s, l, p, i) -> blockColor.getColor(bl.defaultBlockState(), l, p, i), b);
+            }
         });
     }
 

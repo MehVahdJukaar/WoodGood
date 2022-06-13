@@ -87,12 +87,13 @@ public class WoodGood {
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
 
-        addOtherCompatMod("macawsbridgesbop", "mcwbridges", List.of("biomesoplenty"));
-        addOtherCompatMod("macawbridgesbyg", "mcwbridges", List.of("byg"));
-        addOtherCompatMod("mcwfencesbop", "mcwfences", List.of("biomesoplenty"));
-        addOtherCompatMod("mcwfencesbyg", "mcwfences", List.of("byg"));
-        addOtherCompatMod("macawsroofsbop", "mcwroofs", List.of("biomesoplenty"));
-        addOtherCompatMod("macawsroofsbyg", "mcwroofs", List.of("byg"));
+        addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
+        addOtherCompatMod("macawbridgesbyg", "byg", List.of("mcwbridges"));
+        addOtherCompatMod("mcwfencesbop", "biomesoplenty", List.of("mcwfences"));
+        addOtherCompatMod("mcwfencesbyg", "byg", List.of("mcwfences"));
+        addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
+        addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
+        addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
 
 
         addModule("mcwdoors", () -> MacawDoorsModule::new);
@@ -117,7 +118,7 @@ public class WoodGood {
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
 
-        //addModule("storagedrawers", () -> StorageDrawersModule::new);
+        // addModule("storagedrawers", () -> StorageDrawersModule::new);
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
 
@@ -126,13 +127,11 @@ public class WoodGood {
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        //bus.addListener(WoodGood::init);
         bus.register(this);
 
         MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::onEarlyPackLoad);
         MinecraftForge.EVENT_BUS.addGenericListener(Block.class, WoodGood::remapBlocks);
         MinecraftForge.EVENT_BUS.addGenericListener(Item.class, WoodGood::remapItems);
-        // MinecraftForge.EVENT_BUS.addGenericListener(WoodGood::remapBlocks);
 
         SERVER_RESOURCES = new ServerDynamicResourcesHandler();
         SERVER_RESOURCES.register(bus);

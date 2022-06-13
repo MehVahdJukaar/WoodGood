@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -14,12 +15,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.Nullable;
+import vazkii.quark.base.block.IQuarkBlock;
 import vazkii.quark.base.module.ModuleLoader;
 import vazkii.quark.base.module.QuarkModule;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEntrySet<T, B> {
@@ -35,8 +38,9 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.TileHolder<?> tileFactory,
                                @Nullable Supplier<Supplier<RenderType>> renderType,
-                               @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier) {
-        this(name, null, module, baseBlock, baseType, blockSupplier, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier);
+                               @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
+                               @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform){
+        this(name, null, module, baseBlock, baseType, blockSupplier, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform);
     }
 
     public QuarkSimpleEntrySet(String name, @Nullable String prefix,
@@ -47,8 +51,9 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.TileHolder<?> tileFactory,
                                @Nullable Supplier<Supplier<RenderType>> renderType,
-                               @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier) {
-        super(name, prefix, null, baseBlock, baseType, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier);
+                               @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
+                               @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
+        super(name, prefix, null, baseBlock, baseType, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier,extraTransform);
         this.blockSupplier = blockSupplier;
         this.quarkModule = module;
     }
@@ -62,7 +67,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
 
         for (T w : woodTypes) {
             String name = module.makeBlockId(w, this.postfix);
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name,w, registry)) continue;
+            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, registry)) continue;
             var m = ModuleLoader.INSTANCE.getModuleInstance(quarkModule);
             B block = blockSupplier.apply(w, m);
             if (block != null) {
@@ -73,6 +78,14 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
             }
         }
     }
+
+    //this does not work. all modules seem to be disabled here. why??
+    /*
+    @Override
+    protected CreativeModeTab getTab(T w, B b) {
+        boolean e = b instanceof IQuarkBlock qb ? qb.isEnabled() : ModuleLoader.INSTANCE.isModuleEnabled(quarkModule);
+        return e ? super.getTab(w, b) : null;
+    }*/
 
     public static <T extends BlockType, B extends Block> QuarkSimpleEntrySet.Builder<T, B> builder(
             String name,
@@ -107,7 +120,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         public QuarkSimpleEntrySet<T, B> build() {
             var e = new QuarkSimpleEntrySet<>(name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, copyLoot,
-                    itemFactory, tileFactory, renderType, palette);
+                    itemFactory, tileFactory, renderType, palette, extraModelTransform);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);

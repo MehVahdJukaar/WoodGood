@@ -75,15 +75,21 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     protected final BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier;
     @Nullable
     protected final Supplier<Supplier<RenderType>> renderType;
+    @Nullable
+    protected final Consumer<BlockTypeResTransformer<T>> extraTransform;
 
 
-    public SimpleEntrySet(String name, @Nullable String prefix, Function<T, B> blockSupplier,
-                          Supplier<B> baseBlock, Supplier<T> baseType,
-                          CreativeModeTab tab, boolean copyLoot,
+    public SimpleEntrySet(String name, @Nullable String prefix,
+                          Function<T, B> blockSupplier,
+                          Supplier<B> baseBlock,
+                          Supplier<T> baseType,
+                          CreativeModeTab tab,
+                          boolean copyLoot,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable TileHolder<?> tileFactory,
                           @Nullable Supplier<Supplier<RenderType>> renderType,
-                          @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier) {
+                          @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
+                          Consumer<BlockTypeResTransformer<T>> extraTransform) {
         super((prefix == null ? "" : prefix + "_") + name);
         this.postfix = name;
         this.blockFactory = blockSupplier;
@@ -95,13 +101,14 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.baseType = baseType;
         this.itemFactory = itemFactory;
 
+        this.extraTransform = extraTransform;
         this.renderType = renderType;
         this.paletteSupplier = paletteSupplier;
 
-        if(this.prefix != null){
-            nameScheme = Pattern.compile("^"+prefix+"_(.+?)_"+postfix+"$");
-        } else{
-            nameScheme = Pattern.compile("^(.+?)_"+postfix+"$");
+        if (this.prefix != null) {
+            nameScheme = Pattern.compile("^" + prefix + "_(.+?)_" + postfix + "$");
+        } else {
+            nameScheme = Pattern.compile("^(.+?)_" + postfix + "$");
         }
     }
 
@@ -128,9 +135,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             }
         }*/
         String wood = parseWoodType(oldName);
-        if(wood != null){
+        if (wood != null) {
             var w = BlockSetManager.getBlockSet(this.getType()).get(new ResourceLocation(woodFrom, wood));
-            if(w != null){
+            if (w != null) {
                 return module.shortenedId() + "/" + w.getNamespace() + "/" + oldName;
             }
         }
@@ -139,10 +146,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     //gets the wood type of the given name if it is in this entry set name format
     @Nullable
-    public String parseWoodType(String oldName){
+    public String parseWoodType(String oldName) {
         Matcher m = nameScheme.matcher(oldName);
-        if(m.find()){
-            return  m.group(1);
+        if (m.find()) {
+            return m.group(1);
         }
         return null;
     }
@@ -196,12 +203,16 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         return name;
     }
 
+    protected CreativeModeTab getTab(T w, B b) {
+        return EarlyConfigs.isTypeEnabled(w) ?
+                (WoodGood.MOD_TAB != null ? WoodGood.MOD_TAB : this.tab) : null;
+    }
+
     @Override
     public void registerItems(CompatModule module, IForgeRegistry<Item> registry) {
         blocks.forEach((w, value) -> {
             Item i;
-            CreativeModeTab tab = EarlyConfigs.isTypeEnabled(w) ?
-                    (WoodGood.MOD_TAB != null ? WoodGood.MOD_TAB : this.tab) : null;
+            CreativeModeTab tab = getTab(w, value);
 
             if (itemFactory != null) {
                 i = itemFactory.apply(w, value, new Item.Properties().tab(tab));
@@ -275,7 +286,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.recipeLocations.forEach(r -> {
             try {
                 Utils.addBlocksRecipes(manager, pack, items, r.get(), baseType.get());
-            }catch (Exception e){
+            } catch (Exception e) {
                 WoodGood.LOGGER.error("Failed to generate recipes for template at location {} ", r);
             }
         });
@@ -284,7 +295,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void generateModels(CompatModule module, DynamicTexturePack pack, ResourceManager manager) {
-        Utils.addStandardResources(module.getModId(), manager, pack, blocks, baseType.get());
+        Utils.addStandardResources(module.getModId(), manager, pack, blocks, baseType.get(), extraTransform);
     }
 
     @Override
@@ -347,7 +358,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 int oldSize = finalTargetPalette.get(0).size();
 
                 for (var re : respriters.entrySet()) {
-                    if(oldSize != finalTargetPalette.get(0).size()){
+                    if (oldSize != finalTargetPalette.get(0).size()) {
                         throw new RuntimeException("This should not happen");
                     }
                     String oldPath = re.getKey().getPath();
@@ -411,6 +422,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
         protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
+        protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
 
         protected Builder(String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
             this.baseType = baseType;
@@ -422,7 +434,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
         public SimpleEntrySet<T, B> build() {
             var e = new SimpleEntrySet<>(name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot,
-                    itemFactory, tileFactory, renderType, palette);
+                    itemFactory, tileFactory, renderType, palette, extraModelTransform);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
@@ -447,6 +459,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
         public Builder<T, B> addCustomItem(TriFunction<T, B, Item.Properties, Item> itemFactory) {
             this.itemFactory = itemFactory;
+            return this;
+        }
+        //adds an extra model transform
+        public Builder<T,B> addModelTransform(Consumer<BlockTypeResTransformer<T>> transform){
+            this.extraModelTransform = transform;
             return this;
         }
 
@@ -517,7 +534,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                         RPUtils.findFirstBlockTextureLocation(m, ((WoodType) w).planks))) {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-                    targetPalette.forEach(paletteTransform::accept);
+                    targetPalette.forEach(paletteTransform);
                     return Pair.of(targetPalette, plankTexture.getMetadata());
                 } catch (Exception e) {
                     throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));

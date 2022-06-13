@@ -19,12 +19,21 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Utils {
+
     public static <B extends Block, T extends BlockType> void addStandardResources(String modId, ResourceManager manager, DynamicResourcePack pack,
                                                                                    Map<T, B> blocks, T baseType) {
+        addStandardResources(modId, manager, pack, blocks, baseType, null);
+    }
+
+    public static <B extends Block, T extends BlockType> void addStandardResources(String modId, ResourceManager manager, DynamicResourcePack pack,
+                                                                                   Map<T, B> blocks, T baseType,
+                                                                                   @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
         if (blocks.isEmpty()) return;
         //finds one entry. used so we can grab the oak equivalent
         var first = blocks.entrySet().stream().findFirst().get();
@@ -44,7 +53,7 @@ public class Utils {
         BlockTypeResTransformer<T> modifier = BlockTypeResTransformer.create(modId, manager);
         modifier.IDReplaceType(baseBlockName).replaceBlockType(baseBlockName);
 
-        BlockTypeResTransformer<T> modelModifier = standardModelTransformer(modId, manager, baseType, baseBlockName);
+        BlockTypeResTransformer<T> modelModifier = standardModelTransformer(modId, manager, baseType, baseBlockName,extraTransform);
 
         Set<String> modelsLoc = new HashSet<>();
 
@@ -58,7 +67,7 @@ public class Utils {
                 //we cant use this since it might override partent too. Custom textured items need a custom model added manually with addBlockResources
                 // modelModifier.replaceItemType(baseBlockName);
 
-                BlockTypeResTransformer<T> itemModifier = standardModelTransformer(modId, manager, baseType, baseBlockName);
+                BlockTypeResTransformer<T> itemModifier = standardModelTransformer(modId, manager, baseType, baseBlockName, extraTransform);
 
 
                 StaticResource oakItemModel = StaticResource.getOrFail(manager,
@@ -81,10 +90,6 @@ public class Utils {
                         StaticResource newRes = itemModifier.transform(oakItemModel, id, w);
                         assert newRes.location != oakItemModel.location : "ids cant be the same";
                         pack.addResource(newRes);
-                        //TODO: remove
-                       // if(oakBlock.getRegistryName().getPath().contains("hedge")){
-                       //     WoodGood.LOGGER.info("aaaa, {}", newRes);
-                       // }
                     } catch (Exception e) {
                         WoodGood.LOGGER.error("Failed to add {} item model json file:", b, e);
                     }
@@ -144,21 +149,21 @@ public class Utils {
     }
 
     @NotNull
-    private static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(String modId, ResourceManager manager, T baseType, String oldTypeName) {
+    private static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(
+            String modId, ResourceManager manager, T baseType, String oldTypeName, @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
         BlockTypeResTransformer<T> modelModifier = BlockTypeResTransformer.create(modId, manager);
+        if(extraTransform != null)extraTransform.accept(modelModifier);
         modelModifier.IDReplaceType(oldTypeName);
-        if (baseType instanceof WoodType woodType) {
-            modelModifier.replaceWoodTextures(woodType);
-        } else if (baseType instanceof LeavesType leavesType) {
+        if (baseType instanceof LeavesType leavesType) {
             modelModifier.replaceLeavesTextures(leavesType);
             var woodT = leavesType.woodType;
             if (woodT != null) {
                 modelModifier.replaceWoodTextures(woodT);
             }
+        } else if (baseType instanceof WoodType woodType) {
+            modelModifier.replaceWoodTextures(woodType);
         }
 
-        //for mods that do not follow convention...
-        modelModifier.replaceGenericType(oldTypeName, "blocks");
         modelModifier.replaceGenericType(oldTypeName, "block");
         //modelModifier.replaceBlockType(oldTypeName);
         return modelModifier;

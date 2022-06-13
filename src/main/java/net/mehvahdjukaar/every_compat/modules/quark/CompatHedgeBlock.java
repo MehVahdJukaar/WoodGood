@@ -28,6 +28,7 @@ import vazkii.quark.base.block.IQuarkBlock;
 import vazkii.quark.base.module.QuarkModule;
 import vazkii.quark.content.building.block.HedgeBlock;
 import vazkii.quark.content.building.module.HedgesModule;
+import vazkii.quark.content.client.module.GreenerGrassModule;
 
 import javax.annotation.Nonnull;
 import java.util.function.BooleanSupplier;
@@ -37,18 +38,19 @@ import java.util.function.BooleanSupplier;
 /**
  * Credits to Vazkii and Quark
  */
-public class CompatHedgeBlock extends FenceBlock implements IQuarkBlock, IBlockColorProvider {
+public class CompatHedgeBlock extends FenceBlock  { //implements IQuarkBlock
     private final QuarkModule module;
     private final Block leaf;
     private BooleanSupplier enabledSupplier = () -> true;
-    public static final BooleanProperty EXTEND = BooleanProperty.create("extend");
+    public static final BooleanProperty EXTEND = HedgeBlock.EXTEND;
 
-    public CompatHedgeBlock(QuarkModule module, String id, Block fence, Block leaf) {
+    public CompatHedgeBlock(QuarkModule module, Block fence, Block leaf) {
         super(Properties.copy(fence));
         this.module = module;
         this.leaf = leaf;
         this.registerDefaultState(this.defaultBlockState().setValue(EXTEND, false));
-        this.setRegistryName(id);
+        //this.setRegistryName(id);
+
     }
 
     public boolean connectsTo(BlockState state, boolean isSideSolid, @Nonnull Direction direction) {
@@ -82,15 +84,13 @@ public class CompatHedgeBlock extends FenceBlock implements IQuarkBlock, IBlockC
     }
 
     @OnlyIn(Dist.CLIENT)
-    public BlockColor getBlockColor() {
-        BlockColors colors = Minecraft.getInstance().getBlockColors();
+    public BlockColor getBlockColor(BlockColors colors) {
         BlockState leafState = this.leaf.defaultBlockState();
         return (state, world, pos, tintIndex) -> colors.getColor(leafState, world, pos, tintIndex);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public ItemColor getItemColor() {
-        ItemColors colors = Minecraft.getInstance().getItemColors();
+    public ItemColor getItemColor(ItemColors colors) {
         ItemStack leafStack = new ItemStack(this.leaf);
         return (stack, tintIndex) -> colors.getColor(leafStack, tintIndex);
     }
@@ -100,6 +100,9 @@ public class CompatHedgeBlock extends FenceBlock implements IQuarkBlock, IBlockC
             super.fillItemCategory(group, items);
         }
 
+    }
+
+    private boolean isEnabled() {return true;
     }
 
     public QuarkModule getModule() {

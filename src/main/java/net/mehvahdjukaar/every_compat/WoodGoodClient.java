@@ -1,11 +1,12 @@
 package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
-import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -25,7 +26,7 @@ public class WoodGoodClient {
 
     @SubscribeEvent
     public static void init(final FMLClientSetupEvent event) {
-        event.enqueueWork(()->{
+        event.enqueueWork(() -> {
             WoodGood.forAllModules(CompatModule::onClientSetup);
         });
     }
@@ -34,6 +35,23 @@ public class WoodGoodClient {
     public static void registerBlockColors(ColorHandlerEvent.Item event) {
         WoodGood.forAllModules(m -> m.registerColors(event));
     }
+
+    /*
+    @Mod.EventBusSubscriber(modid = WoodGood.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class ClientTicker {
+
+        private static boolean clientTicked = false;
+
+        @SubscribeEvent
+        public static void firstClientTick(TickEvent.ClientTickEvent event) {
+            if (!clientTicked && event.phase == TickEvent.Phase.END) {
+                clientTicked = true;
+                // if(ModList.get().isLoaded("quark")) QuarkPlugin.onFirstClientTick();
+                WoodGood.forAllModules(CompatModule::onFirstClientTick);
+            }
+
+        }
+    }*/
 
     //prints all woods
     /*

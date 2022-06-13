@@ -30,13 +30,14 @@ public class StorageDrawersModule extends SimpleModule {
 
         DRAWERS = SimpleEntrySet.builder("full_drawers_1",
                         ModBlocks.OAK_FULL_DRAWERS_1, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatStandardDrawers(1, false, BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.3f)))
+                        w -> new CompatStandardDrawers(1, false, BlockBehaviour.Properties.copy(ModBlocks.OAK_FULL_DRAWERS_1.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity1::new)
                 .createPaletteFromOak(this::drawersPalette)
-                .setRenderType(()-> RenderType::cutout)
+                .setRenderType(() -> RenderType::cutout)
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .addTexture(modRes("blocks/drawers_oak_front_1"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
@@ -47,11 +48,11 @@ public class StorageDrawersModule extends SimpleModule {
     }
 
     private void drawersPalette(Palette p) {
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
         p.increaseDown();
-      //  p.remove(p.getDarkest());
-     //   p.remove(p.getDarkest());
-     //   p.remove(p.getLightest());
-//        p.remove(p.getLightest());
+        p.increaseInner();
+        p.increaseInner();
     }
 
     @Override
@@ -67,9 +68,9 @@ public class StorageDrawersModule extends SimpleModule {
         public TileEntityDrawers newBlockEntity(BlockPos pos, BlockState state) {
             return switch (this.getDrawerCount()) {
                 case 1 -> new CompatStandardDrawersEntity1(pos, state);
-               // case 2 -> new CompatStandardDrawersEntity2(pos, state);
+                // case 2 -> new CompatStandardDrawersEntity2(pos, state);
                 default -> null;
-             //   case 4 -> new CompatStandardDrawersEntity4(pos, state);
+                //   case 4 -> new CompatStandardDrawersEntity4(pos, state);
                 //add these^
             };
         }
@@ -85,5 +86,6 @@ public class StorageDrawersModule extends SimpleModule {
         public @NotNull BlockEntityType<?> getType() {
             return DRAWERS.getTileHolder().tile;
         }
+
     }
 }
