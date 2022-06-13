@@ -47,6 +47,7 @@ public class StorageDrawersModule extends SimpleModule {
     }
 
     private void drawersPalette(Palette p) {
+        p.increaseDown();
       //  p.remove(p.getDarkest());
      //   p.remove(p.getDarkest());
      //   p.remove(p.getLightest());
@@ -55,7 +56,7 @@ public class StorageDrawersModule extends SimpleModule {
 
     @Override
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity1>) (DRAWERS.getTileHolder().tile), TileEntityDrawersRenderer::new);
     }
 
     private class CompatStandardDrawers extends BlockStandardDrawers {

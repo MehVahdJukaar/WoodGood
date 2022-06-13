@@ -12,6 +12,7 @@ import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.math.colors.HCLColor;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.RenderType;
@@ -34,13 +35,10 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
 import vazkii.arl.util.RegistryHelper;
 import vazkii.quark.base.block.QuarkBlock;
 import vazkii.quark.base.handler.ToolInteractionHandler;
-import vazkii.quark.base.module.ModuleLoader;
-import vazkii.quark.content.building.block.HedgeBlock;
 import vazkii.quark.content.building.block.VariantBookshelfBlock;
 import vazkii.quark.content.building.block.VariantLadderBlock;
 import vazkii.quark.content.building.block.WoodPostBlock;
@@ -168,7 +166,7 @@ public class QuarkModule extends SimpleModule {
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
-                .addRecipe(modRes( "building/crafting/chests/oak_chest"))
+                .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .addCustomItem((w, b, p) -> new CompatChestItem(b, p))
                 .build();
 
@@ -179,7 +177,16 @@ public class QuarkModule extends SimpleModule {
                         HedgesModule.class,
                         () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")),
                         () -> LeavesType.OAK_LEAVES_TYPE,
-                        (l, m) -> null)//this wont run
+                        (l, m) -> {
+                            if (l.woodType != null) {
+                                Block fence = l.woodType.getBlockOfThis("fence");
+                                if (fence != null) {
+                                    String name = this.makeBlockId(l, "hedge");
+                                    return new CompatHedgeBlock(m, name, fence, l.leaves);
+                                }
+                            }
+                            return null;
+                        })
                 .addTag(modRes("hedges"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hedges"), Registry.ITEM_REGISTRY)
                 .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
@@ -233,50 +240,6 @@ public class QuarkModule extends SimpleModule {
         }
 
         super.registerWoodBlocks(registry, woodTypes);
-
-        ARLModData.remove(WoodGood.MOD_ID);
-    }
-
-    @Override
-    public void registerLeavesBlocks(IForgeRegistry<Block> registry, Collection<LeavesType> leavesTypes) {
-        //HAAAACK
-        //removes stuff from autoreglib since it's too late to let it register these and we are registering them manually
-        Field regName;
-        Map<String, ?> ARLModData;
-        try {
-            Field f = ObfuscationReflectionHelper.findField(RegistryHelper.class, "modData");
-            f.setAccessible(true);
-            ARLModData = (Map<String, ?>) f.get(null);
-
-            regName = ObfuscationReflectionHelper.findField(ForgeRegistryEntry.class, "registryName");
-            regName.setAccessible(true);
-        } catch (Exception e) {
-            WoodGood.LOGGER.error("Failed to setup Wood Good Quark Module");
-            return;
-        }
-        //hedges
-        LeavesType.OAK_LEAVES_TYPE.addChild(shortenedId() + "/hedge", ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")));
-        for (LeavesType l : leavesTypes) {
-            String name = makeBlockId(l, "hedge");
-            if (l.isVanilla() || isEntryAlreadyRegistered(name, l, registry)) continue;
-            if (l.woodType != null) {
-                Block fence = l.woodType.getBlockOfThis("fence");
-                if (fence != null) {
-                    var module = ModuleLoader.INSTANCE.getModuleInstance(HedgesModule.class);
-
-                    Block block = new HedgeBlock(module, fence, l.leaves);
-                    try {
-                        regName.set(block, WoodGood.res(name)); //wack
-                        HEDGES.blocks.put(l, block);
-                        registry.register(block);
-                        l.addChild(shortenedId() + "/hedge", block);
-
-                    } catch (Exception e) {
-                        throw new UnsupportedOperationException(String.format("Failed to set registry name for %s hedge", l));
-                    }
-                }
-            }
-        }
 
         ARLModData.remove(WoodGood.MOD_ID);
     }
@@ -346,12 +309,13 @@ public class QuarkModule extends SimpleModule {
 
                     List<Palette> overlayPalette = new ArrayList<>();
                     for (var p : targetPalette) {
-                        var d = p.getDarkest();
-                        p.remove(d);
+                        var d1 = p.getDarkest();
+                        p.remove(d1);
                         var d2 = p.getDarkest();
                         p.remove(d2);
-                        var pal = Palette.ofColors(List.of(d.lab().withLuminance(d.luminance() * 0.4f),
-                                d2.lab().withLuminance(d2.luminance() * 0.4f)));
+                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
+                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
+                        var pal = Palette.ofColors(List.of(n1, n2));
                         overlayPalette.add(pal);
                     }
 

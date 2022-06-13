@@ -81,6 +81,10 @@ public class Utils {
                         StaticResource newRes = itemModifier.transform(oakItemModel, id, w);
                         assert newRes.location != oakItemModel.location : "ids cant be the same";
                         pack.addResource(newRes);
+                        //TODO: remove
+                       // if(oakBlock.getRegistryName().getPath().contains("hedge")){
+                       //     WoodGood.LOGGER.info("aaaa, {}", newRes);
+                       // }
                     } catch (Exception e) {
                         WoodGood.LOGGER.error("Failed to add {} item model json file:", b, e);
                     }
@@ -88,6 +92,8 @@ public class Utils {
             } catch (Exception e) {
                 WoodGood.LOGGER.error("Could not find item model for {}", oakBlock);
             }
+        } else {
+            WoodGood.LOGGER.warn("Found block with no item {}, this could be a bug", oakBlock);
         }
 
         //blockstate
@@ -152,8 +158,8 @@ public class Utils {
         }
 
         //for mods that do not follow convention...
-        modelModifier.replaceGenericType(oldTypeName,"blocks");
-        modelModifier.replaceGenericType(oldTypeName,"block");
+        modelModifier.replaceGenericType(oldTypeName, "blocks");
+        modelModifier.replaceGenericType(oldTypeName, "block");
         //modelModifier.replaceBlockType(oldTypeName);
         return modelModifier;
     }
