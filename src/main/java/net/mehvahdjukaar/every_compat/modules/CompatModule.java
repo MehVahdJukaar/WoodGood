@@ -154,7 +154,7 @@ public abstract class CompatModule {
     }
 
 
-    protected final Block getOwnBlock(String id) {
+    protected final Block getModBlock(String id) {
         return ForgeRegistries.BLOCKS.getValue(modRes(id));
     }
     //utility functions

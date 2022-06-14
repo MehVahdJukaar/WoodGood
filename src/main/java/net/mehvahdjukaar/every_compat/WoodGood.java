@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
+import net.mehvahdjukaar.every_compat.misc.EntriesRemapper;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
@@ -102,7 +103,7 @@ public class WoodGood {
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
-        addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
+        addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);*/
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
@@ -112,7 +113,7 @@ public class WoodGood {
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
-        addModule("cfm", () -> MrCrayfishFurnitureModule::new);*/
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
@@ -130,8 +131,7 @@ public class WoodGood {
         bus.register(this);
 
         MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::onEarlyPackLoad);
-        MinecraftForge.EVENT_BUS.addGenericListener(Block.class, WoodGood::remapBlocks);
-        MinecraftForge.EVENT_BUS.addGenericListener(Item.class, WoodGood::remapItems);
+        MinecraftForge.EVENT_BUS.register(EntriesRemapper.class);
 
         SERVER_RESOURCES = new ServerDynamicResourcesHandler();
         SERVER_RESOURCES.register(bus);
@@ -151,13 +151,11 @@ public class WoodGood {
             public ItemStack makeIcon() {
                 return ForgeRegistries.ITEMS.getValue(WoodGood.res("all_woods")).getDefaultInstance();
             }
-
             @Override
             public boolean hasSearchBar() {
                 return true;
             }
-
-        };
+        }.setBackgroundSuffix("item_search.png");
     }
 
     private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
@@ -215,96 +213,6 @@ public class WoodGood {
 
     }
 
-    //this can be slow. doesn't matter since it only happens once on boot
-    public static void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
-        remapEntries(event, ForgeRegistries.BLOCKS);
-        if (EarlyConfigs.REMAP_OWN.get()) {
-            for (var mapping : event.getMappings(MOD_ID)) {
-                mapping.remap(Blocks.OAK_PLANKS);
-            }
-        }
-    }
-
-    //this can be slow. doesn't matter since it only happens once on boot
-    public static void remapItems(RegistryEvent.MissingMappings<Item> event) {
-        remapEntries(event, ForgeRegistries.ITEMS);
-        if (EarlyConfigs.REMAP_OWN.get()) {
-            for (var mapping : event.getMappings(MOD_ID)) {
-                mapping.remap(Items.AIR);
-            }
-        }
-    }
-
-    private static <T extends IForgeRegistryEntry<T>> void remapEntries(RegistryEvent.MissingMappings<T> event, IForgeRegistry<T> blockReg) {
-        if (!EarlyConfigs.REMAP_COMPAT.get()) return;
-        for (var compatMod : COMPAT_MODS) {
-            String woodFrom = compatMod.woodFrom; //ie bop
-            label:
-            for (var mapping : event.getMappings(compatMod.modId)) {
-                //ie: bopcomp:willow_table
-
-                for (String blockFrom : compatMod.blocksFrom) {
-                    CompatModule module = ACTIVE_MODULES.get(blockFrom); //if we have target mod
-                    // only works for simple modules
-                    if (module instanceof SimpleModule simpleModule) {
-                        //only works on simple entries
-                        for (var entry : simpleModule.getEntries()) {
-                            if (entry instanceof SimpleEntrySet se) {
-                                //find wood types from that mod id
-
-                                String s = se.getEquivalentBlock(module, mapping.key.getPath(), woodFrom);
-                                if (s != null) {
-                                    if (blockReg.containsKey(WoodGood.res(s))) {
-                                        var b = blockReg.getValue(WoodGood.res(s));
-                                        mapping.remap(b);
-                                        WoodGood.LOGGER.info("Remapping block '{}' to '{}'", mapping.key, b);
-                                        continue label;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-            /*
-    private static <T extends IForgeRegistryEntry<T>> void clearRemoved(RegistryEvent.MissingMappings<T> event, IForgeRegistry<T> blockReg) {
-
-        for (var mapping : event.getMappings(MOD_ID)) {
-            mapping.remap(Blocks.AIR);
-
-            String name = mapping.key.getPath();
-            String[] s = name.split("/");
-            if(s.length == 3){
-                String moduleId = s[0];
-                String namespace = s[1];
-                String oldName = s[2];
-                forAllModules(m->{
-                    if(m instanceof SimpleModule sm) {
-                        if (m.shortenedId().equals(moduleId)) {
-                            for (var entry : sm.getEntries()){
-                                if(entry instanceof SimpleEntrySet se){
-                                    String wood = se.parseWoodType(oldName);
-                                    if(wood != null){
-                                        for(var b : se.get.)){
-                                            ResourceLocation firstId = b.
-                                            mapping.remap(blockReg);
-                                            return;;
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                });
-            }
-
-        }
-    }*/
 
 
 }

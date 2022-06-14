@@ -63,9 +63,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     protected final Function<T, @Nullable B> blockFactory;
     @Nullable
-    protected final TileHolder<?> tileHolder;
-    @Nullable
     protected final TriFunction<T, B, Item.Properties, @Nullable Item> itemFactory;
+    @Nullable
+    protected final TileHolder<?> tileHolder;
 
     protected final CreativeModeTab tab;
     protected final boolean copyLoot;
@@ -132,19 +132,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
-        //quark_blossom_table
-        //exit early if it just doesnt match
-        /*
-        if (!oldName.contains(this.postfix)) return null;
-        for (var w : BlockSetManager.getBlockSet(this.getTypeClass()).getTypes().entrySet()) {
-            ResourceLocation typeId = w.getKey();
-            if (typeId.getNamespace().equals(woodFrom)) {
-                String blockName = this.getBlockName(w.getValue()); // blossom_table
-                if (blockName.equals(oldName)) {
-                    return module.shortenedId() + "/" + typeId.getNamespace() + "/" + oldName;
-                }
-            }
-        }*/
         String wood = parseWoodType(oldName);
         if (wood != null) {
             var w = BlockSetManager.getBlockSet(this.getTypeClass()).get(new ResourceLocation(woodFrom, wood));
@@ -228,7 +215,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             if (itemFactory != null) {
                 i = itemFactory.apply(w, value, new Item.Properties().tab(tab));
             } else {
-                i = new BlockTypeBasedBlockItem(value, new Item.Properties().tab(tab), w);
+                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties().tab(tab), w);
             }
             //for ones that don't have item
             if (i != null) {

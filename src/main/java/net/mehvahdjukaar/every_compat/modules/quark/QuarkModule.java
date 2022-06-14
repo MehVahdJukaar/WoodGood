@@ -15,7 +15,6 @@ import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.math.colors.HCLColor;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -37,7 +36,6 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
 import vazkii.arl.util.RegistryHelper;
@@ -55,7 +53,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class QuarkModule extends SimpleModule {
 
@@ -82,7 +79,7 @@ public class QuarkModule extends SimpleModule {
         try {
             f = ObfuscationReflectionHelper.findField(ForgeRegistryEntry.class, "registryName");
             f.setAccessible(true);
-              f2 = ObfuscationReflectionHelper.findField(RegistryHelper.class, "modData");
+            f2 = ObfuscationReflectionHelper.findField(RegistryHelper.class, "modData");
             f2.setAccessible(true);
         } catch (Exception e) {
             WoodGood.LOGGER.error("Failed to initialize {}: {}", this, e);
@@ -92,7 +89,7 @@ public class QuarkModule extends SimpleModule {
 
         BOOKSHELVES = QuarkSimpleEntrySet.builder(WoodType.class, "bookshelf",
                         VariantBookshelvesModule.class,
-                        () -> ForgeRegistries.BLOCKS.getValue(modRes("acacia_bookshelf")),
+                        () -> getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("acacia")),
                         (w, m) -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(), m, w.canBurn()))
                 .setTab(CreativeModeTab.TAB_DECORATIONS)
@@ -109,7 +106,7 @@ public class QuarkModule extends SimpleModule {
 
         POSTS = QuarkSimpleEntrySet.builder(WoodType.class, "post",
                         VariantBookshelvesModule.class,
-                        () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_post")),
+                        () -> getModBlock("oak_post"),
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
                             if (w.getNamespace().equals("malum")) return null;
@@ -128,7 +125,7 @@ public class QuarkModule extends SimpleModule {
 
         STRIPPED_POSTS = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         VariantBookshelvesModule.class,
-                        () -> ForgeRegistries.BLOCKS.getValue(modRes("stripped_oak_post")),
+                        () -> getModBlock("stripped_oak_post"),
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
                             if (w.getNamespace().equals("malum") || w.getNamespace().equals("twigs")) return null;
@@ -148,7 +145,7 @@ public class QuarkModule extends SimpleModule {
 
         VERTICAL_PLANKS = QuarkSimpleEntrySet.builder(WoodType.class, "planks", "vertical",
                         VerticalPlanksModule.class,
-                        () -> ForgeRegistries.BLOCKS.getValue(modRes("vertical_oak_planks")),
+                        () -> getModBlock("vertical_oak_planks"),
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
                             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
@@ -162,7 +159,7 @@ public class QuarkModule extends SimpleModule {
 
         LADDERS = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
                         VariantLaddersModule.class,
-                        () -> ForgeRegistries.BLOCKS.getValue(modRes("spruce_ladder")),
+                        () -> getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
                         (w, m) -> {
                             String name = shortenedId() + "/" + w.getAppendableId();
@@ -180,7 +177,7 @@ public class QuarkModule extends SimpleModule {
 
         CHESTS = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
                         VariantChestsModule.class,
-                        () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_chest")),
+                        () -> getModBlock("oak_chest"),
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
                             if (w.getId().toString().equals("twilightforest:dark")) return null;
@@ -200,7 +197,7 @@ public class QuarkModule extends SimpleModule {
 
         TRAPPED_CHESTS = QuarkSimpleEntrySet.builder(WoodType.class, "chest", "trapped",
                         VariantChestsModule.class,
-                        () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_trapped_chest")),
+                        () -> getModBlock("oak_trapped_chest"),
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
                             if (w.getId().toString().equals("twilightforest:dark")) return null;
@@ -222,7 +219,7 @@ public class QuarkModule extends SimpleModule {
         //doing it this way because for some reason its nuking whatever block item I throw in here
         HEDGES = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
                         HedgesModule.class,
-                        () -> ForgeRegistries.BLOCKS.getValue(modRes("oak_hedge")),
+                        () -> getModBlock("oak_hedge"),
                         () -> LeavesType.OAK_LEAVES_TYPE,
                         (w, m) -> {
                             var h = new HedgeBlock(m, Blocks.OAK_FENCE, w.leaves);
@@ -313,7 +310,7 @@ public class QuarkModule extends SimpleModule {
 
     @Override
     public void onTextureStitch(TextureStitchEvent.Pre event) {
-        var loc= event.getAtlas().location();
+        var loc = event.getAtlas().location();
         if (loc.equals(Sheets.CHEST_SHEET)) {
             CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
             TRAPPED_CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
@@ -387,9 +384,9 @@ public class QuarkModule extends SimpleModule {
                     }
 
                     {
-                        ResourceLocation res =  modRes( b.getChestTexturePath() + "normal");
+                        ResourceLocation res = modRes(b.getChestTexturePath() + "normal");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes =  modRes( b.getChestTexturePath() + "trap");
+                            ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap");
 
                             var img = respriterNormal.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
                             img.applyOverlayOnExisting(respriterNormalO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
@@ -403,9 +400,9 @@ public class QuarkModule extends SimpleModule {
                         }
                     }
                     {
-                        ResourceLocation res =  modRes(b.getChestTexturePath() + "left");
+                        ResourceLocation res = modRes(b.getChestTexturePath() + "left");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes =  modRes( b.getChestTexturePath() + "trap_left");
+                            ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap_left");
 
                             var img = respriterLeft.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
                             img.applyOverlayOnExisting(respriterLeftO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
@@ -420,7 +417,7 @@ public class QuarkModule extends SimpleModule {
                     {
                         ResourceLocation res = modRes(b.getChestTexturePath() + "right");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes =  modRes(b.getChestTexturePath() + "trap_right");
+                            ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap_right");
 
                             var img = respriterRight.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
                             img.applyOverlayOnExisting(respriterRightO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
