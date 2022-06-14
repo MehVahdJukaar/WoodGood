@@ -557,7 +557,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 //        }
 //
 //        @Override
-//        public BlockEntityType<?> getType() {
+//        public BlockEntityType<?> getTypeClass() {
 //            return KITCHEN_SINK_LIGHT.getTileHolder().tile;
 //        }
 //    }

@@ -34,18 +34,18 @@ public abstract class EntrySet<T extends BlockType, B extends Block> {
         return typeName;
     }
 
-    protected abstract Class<T> getType();
+    protected abstract Class<T> getTypeClass();
 
     public abstract void addTranslations(CompatModule module, AfterLanguageLoadEvent lang);
 
     public void registerWoodBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
-        if (WoodType.class == getType()) {
+        if (WoodType.class == getTypeClass()) {
             registerBlocks(module, registry, (Collection<T>) woodTypes);
         }
     }
 
     public void registerLeavesBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<LeavesType> leavesTypes) {
-        if (LeavesType.class == getType()) {
+        if (LeavesType.class == getTypeClass()) {
             registerBlocks(module, registry, (Collection<T>) leavesTypes);
         }
     }

@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.storage_drawers;
 
+import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockStandardDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawersStandard;
@@ -14,11 +15,16 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 
 public class StorageDrawersModule extends SimpleModule {
@@ -45,6 +51,23 @@ public class StorageDrawersModule extends SimpleModule {
                 .build();
 
         this.addEntry(DRAWERS);
+    }
+
+    @Override
+    public void onClientSetup() {
+        super.onClientSetup();
+        wasteSomeMemory(DRAWERS.blocks.values(), DRAWERS.getBaseBlock());
+
+    }
+
+    private void wasteSomeMemory(Collection<? extends BlockDrawers> drawers, BlockDrawers base){
+        drawers.forEach((b)->{
+            System.arraycopy(base.labelGeometry, 0, b.labelGeometry, 0, base.labelGeometry.length);
+            System.arraycopy(base.countGeometry, 0, b.countGeometry, 0, base.countGeometry.length);
+            System.arraycopy(base.indBaseGeometry, 0, b.indBaseGeometry, 0, base.indBaseGeometry.length);
+            System.arraycopy(base.slotGeometry, 0, b.slotGeometry, 0, base.slotGeometry.length);
+            System.arraycopy(base.indGeometry, 0, b.indGeometry, 0, base.indGeometry.length);
+        });
     }
 
     private void drawersPalette(Palette p) {

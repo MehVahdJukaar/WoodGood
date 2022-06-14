@@ -54,7 +54,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     private final Pattern nameScheme;
 
-
     protected final Supplier<T> baseType;
     protected final Supplier<B> baseBlock;
 
@@ -120,8 +119,16 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         return tileHolder;
     }
 
-    public Class<T> getType() {
+    public Class<T> getTypeClass() {
         return type;
+    }
+
+    public B getBaseBlock() {
+        return baseBlock.get();
+    }
+
+    public T getBaseType() {
+        return baseType.get();
     }
 
     public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
@@ -129,7 +136,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         //exit early if it just doesnt match
         /*
         if (!oldName.contains(this.postfix)) return null;
-        for (var w : BlockSetManager.getBlockSet(this.getType()).getTypes().entrySet()) {
+        for (var w : BlockSetManager.getBlockSet(this.getTypeClass()).getTypes().entrySet()) {
             ResourceLocation typeId = w.getKey();
             if (typeId.getNamespace().equals(woodFrom)) {
                 String blockName = this.getBlockName(w.getValue()); // blossom_table
@@ -140,7 +147,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         }*/
         String wood = parseWoodType(oldName);
         if (wood != null) {
-            var w = BlockSetManager.getBlockSet(this.getType()).get(new ResourceLocation(woodFrom, wood));
+            var w = BlockSetManager.getBlockSet(this.getTypeClass()).get(new ResourceLocation(woodFrom, wood));
             if (w != null) {
                 return module.shortenedId() + "/" + w.getNamespace() + "/" + oldName;
             }
@@ -163,13 +170,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     public void registerWoodBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
-        if (WoodType.class == getType()) {
+        if (WoodType.class == getTypeClass()) {
             registerBlocks(module, registry, (Collection<T>) woodTypes);
         }
     }
 
     public void registerLeavesBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<LeavesType> leavesTypes) {
-        if (LeavesType.class == getType()) {
+        if (LeavesType.class == getTypeClass()) {
             registerBlocks(module, registry, (Collection<T>) leavesTypes);
         }
     }
@@ -299,7 +306,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Override
     public void generateTextures(CompatModule module, RPAwareDynamicTextureProvider handler, ResourceManager manager) {
         if (textures.isEmpty()) return;
-        boolean isWood = this.getType() == WoodType.class;
+        boolean isWood = this.getTypeClass() == WoodType.class;
         if (paletteSupplier == null && !isWood) {
             throw new UnsupportedOperationException("You need to provide a palette supplier for non wood type based blocks");
         }
