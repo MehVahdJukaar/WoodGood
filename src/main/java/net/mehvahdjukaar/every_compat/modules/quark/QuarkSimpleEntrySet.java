@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.Nullable;
-import vazkii.quark.base.block.IQuarkBlock;
 import vazkii.quark.base.module.ModuleLoader;
 import vazkii.quark.base.module.QuarkModule;
 
@@ -30,20 +29,8 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
     private final BiFunction<T, QuarkModule, B> blockSupplier;
     private final Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule;
 
-    public QuarkSimpleEntrySet(String name,
-                               Class<? extends vazkii.quark.base.module.QuarkModule> module,
-                               Supplier<B> baseBlock, Supplier<T> baseType,
-                               BiFunction<T, vazkii.quark.base.module.QuarkModule, B> blockSupplier,
-                               CreativeModeTab tab, boolean copyLoot,
-                               @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
-                               @Nullable SimpleEntrySet.TileHolder<?> tileFactory,
-                               @Nullable Supplier<Supplier<RenderType>> renderType,
-                               @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
-                               @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform){
-        this(name, null, module, baseBlock, baseType, blockSupplier, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform);
-    }
-
-    public QuarkSimpleEntrySet(String name, @Nullable String prefix,
+    public QuarkSimpleEntrySet(Class<T> type,
+                               String name, @Nullable String prefix,
                                Class<? extends vazkii.quark.base.module.QuarkModule> module,
                                Supplier<B> baseBlock, Supplier<T> baseType,
                                BiFunction<T, vazkii.quark.base.module.QuarkModule, B> blockSupplier,
@@ -53,7 +40,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                @Nullable Supplier<Supplier<RenderType>> renderType,
                                @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
-        super(name, prefix, null, baseBlock, baseType, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier,extraTransform);
+        super(type, name, prefix, null, baseBlock, baseType, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform);
         this.blockSupplier = blockSupplier;
         this.quarkModule = module;
     }
@@ -88,19 +75,21 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
     }*/
 
     public static <T extends BlockType, B extends Block> QuarkSimpleEntrySet.Builder<T, B> builder(
+            Class<T> type,
             String name,
             Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule,
             Supplier<B> baseBlock, Supplier<T> baseType,
             BiFunction<T, QuarkModule, B> factory) {
-        return new QuarkSimpleEntrySet.Builder<>(name, null, quarkModule, baseType, baseBlock, factory);
+        return new QuarkSimpleEntrySet.Builder<>(type, name, null, quarkModule, baseType, baseBlock, factory);
     }
 
     public static <T extends BlockType, B extends Block> QuarkSimpleEntrySet.Builder<T, B> builder(
+            Class<T> type,
             String name, String prefix,
             Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule,
             Supplier<B> baseBlock, Supplier<T> baseType,
             BiFunction<T, QuarkModule, B> factory) {
-        return new QuarkSimpleEntrySet.Builder<>(name, prefix, quarkModule, baseType, baseBlock, factory);
+        return new QuarkSimpleEntrySet.Builder<>(type, name, prefix, quarkModule, baseType, baseBlock, factory);
     }
 
     public static class Builder<T extends BlockType, B extends Block> extends SimpleEntrySet.Builder<T, B> {
@@ -108,17 +97,17 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         private final BiFunction<T, QuarkModule, B> blockSupplier;
         private final Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule;
 
-        protected Builder(String name, @Nullable String prefix,
+        protected Builder(Class<T> type, String name, @Nullable String prefix,
                           Class<? extends vazkii.quark.base.module.QuarkModule> quarkModule,
                           Supplier<T> baseType, Supplier<B> baseBlock, BiFunction<T, QuarkModule, B> factory) {
-            super(name, prefix, baseType, baseBlock, null);
+            super(type, name, prefix, baseType, baseBlock, null);
             this.quarkModule = quarkModule;
             this.blockSupplier = factory;
         }
 
         @Override
         public QuarkSimpleEntrySet<T, B> build() {
-            var e = new QuarkSimpleEntrySet<>(name, prefix, quarkModule,
+            var e = new QuarkSimpleEntrySet<>(type,name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, copyLoot,
                     itemFactory, tileFactory, renderType, palette, extraModelTransform);
             e.recipeLocations.addAll(this.recipes);

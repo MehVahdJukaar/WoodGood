@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColor;
@@ -23,12 +22,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
-import vazkii.arl.interf.IBlockColorProvider;
-import vazkii.quark.base.block.IQuarkBlock;
 import vazkii.quark.base.module.QuarkModule;
 import vazkii.quark.content.building.block.HedgeBlock;
 import vazkii.quark.content.building.module.HedgesModule;
-import vazkii.quark.content.client.module.GreenerGrassModule;
 
 import javax.annotation.Nonnull;
 import java.util.function.BooleanSupplier;

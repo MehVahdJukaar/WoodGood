@@ -13,7 +13,7 @@ import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
-import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
+import net.mehvahdjukaar.selene.items.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.*;
 import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -24,10 +24,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -50,8 +50,10 @@ import java.util.regex.Pattern;
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntrySet<T, B> {
 
+    private final Class<T> type;
 
     private final Pattern nameScheme;
+
 
     protected final Supplier<T> baseType;
     protected final Supplier<B> baseBlock;
@@ -79,7 +81,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     protected final Consumer<BlockTypeResTransformer<T>> extraTransform;
 
 
-    public SimpleEntrySet(String name, @Nullable String prefix,
+    public SimpleEntrySet(Class<T> type,
+            String name, @Nullable String prefix,
                           Function<T, B> blockSupplier,
                           Supplier<B> baseBlock,
                           Supplier<T> baseType,
@@ -100,6 +103,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.baseBlock = baseBlock;
         this.baseType = baseType;
         this.itemFactory = itemFactory;
+        this.type = type;
 
         this.extraTransform = extraTransform;
         this.renderType = renderType;
@@ -117,7 +121,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     public Class<T> getType() {
-        return (Class<T>) this.baseType.get().getClass();
+        return type;
     }
 
     public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
@@ -173,7 +177,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Override
     public void registerBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<T> woodTypes) {
         Block base = baseBlock.get();
-        if (base == null)
+        if (base == null || base == Blocks.AIR)
             throw new UnsupportedOperationException("Base block cant be null");
         baseType.get().addChild(module.shortenedId() + "/" + typeName, base);
 
@@ -216,17 +220,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
             if (itemFactory != null) {
                 i = itemFactory.apply(w, value, new Item.Properties().tab(tab));
-            } else if (w.getClass() == WoodType.class) {
-                i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), (WoodType) w);
             } else {
-                int burn = baseBlock.get().asItem().getBurnTime(baseBlock.get().asItem().getDefaultInstance(), null);
-                if (burn == 0) {
-                    i = new BlockItem(value, new Item.Properties().tab(tab));
-                } else {
-                    i = new WoodBasedBlockItem(value, new Item.Properties().tab(tab), burn);
-                }
+                i = new BlockTypeBasedBlockItem(value, new Item.Properties().tab(tab), w);
             }
-            //for ones that dont have item
+            //for ones that don't have item
             if (i != null) {
                 this.items.put(w, i);
                 registry.register(i.setRegistryName(value.getRegistryName()));
@@ -284,10 +281,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Override
     public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         this.recipeLocations.forEach(r -> {
+            var res = r.get();
             try {
-                Utils.addBlocksRecipes(manager, pack, items, r.get(), baseType.get());
+                Utils.addBlocksRecipes(manager, pack, items,res , baseType.get());
             } catch (Exception e) {
-                WoodGood.LOGGER.error("Failed to generate recipes for template at location {} ", r);
+                WoodGood.LOGGER.error("Failed to generate recipes for template at location {} ", res);
             }
         });
 
@@ -331,6 +329,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             for (var entry : blocks.entrySet()) {
                 B b = entry.getValue();
                 T w = entry.getKey();
+                //skips disabled ones
+
+                if (!EarlyConfigs.isTypeEnabled(w)) continue;
+
                 ResourceLocation blockId = b.getRegistryName();
 
                 List<Palette> targetPalette = null;
@@ -354,7 +356,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 AnimationMetadataSection finalAnimation = animation;
                 List<Palette> finalTargetPalette = targetPalette;
 
-                //sanity check to verity that palette isnt changed
+                //sanity check to verity that palette isnt changed. can be removed
                 int oldSize = finalTargetPalette.get(0).size();
 
                 for (var re : respriters.entrySet()) {
@@ -389,20 +391,20 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     //ok...
-    public static <T extends BlockType, B extends Block> Builder<T, B> builder(
+    public static <T extends BlockType, B extends Block> Builder<T, B> builder(Class<T> type,
             String name, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
 
-        return new Builder<>(name, null, baseType, baseBlock, blockSupplier);
+        return new Builder<>(type, name, null, baseType, baseBlock, blockSupplier);
     }
 
-    public static <T extends BlockType, B extends Block> Builder<T, B> builder(
+    public static <T extends BlockType, B extends Block> Builder<T, B> builder(Class<T> type,
             String name, String prefix, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
 
-        return new Builder<>(name, prefix, baseType, baseBlock, blockSupplier);
+        return new Builder<>(type,name, prefix, baseType, baseBlock, blockSupplier);
     }
 
     public static class Builder<T extends BlockType, B extends Block> {
-
+        protected final Class<T> type;
         protected final Supplier<T> baseType;
         protected final Supplier<B> baseBlock;
         protected final String name;
@@ -424,16 +426,17 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
 
-        protected Builder(String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
+        protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
             this.baseType = baseType;
             this.baseBlock = baseBlock;
             this.name = name;
             this.prefix = prefix;
             this.blockFactory = blockFactory;
+            this.type = type;
         }
 
         public SimpleEntrySet<T, B> build() {
-            var e = new SimpleEntrySet<>(name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot,
+            var e = new SimpleEntrySet<>( type, name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot,
                     itemFactory, tileFactory, renderType, palette, extraModelTransform);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
@@ -461,8 +464,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             this.itemFactory = itemFactory;
             return this;
         }
+
         //adds an extra model transform
-        public Builder<T,B> addModelTransform(Consumer<BlockTypeResTransformer<T>> transform){
+        public Builder<T, B> addModelTransform(Consumer<BlockTypeResTransformer<T>> transform) {
             this.extraModelTransform = transform;
             return this;
         }

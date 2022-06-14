@@ -73,6 +73,7 @@ public class AllWoodItemRenderer extends BlockEntityWithoutLevelRenderer {
     //TODO: fix this
     public ItemStack getAnyItem() {
         int size = CHILD_KEYS.size();
+        if (size == 0) return Items.OAK_PLANKS.getDefaultInstance();
         int time = (int) (Util.getMillis() / 350L);
         int tm = time % size;
         if (tm != lastTime) {

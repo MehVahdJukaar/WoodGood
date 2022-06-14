@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.configs.BlockTypeEnabledCondition;
+import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -123,30 +124,37 @@ public class Utils {
             blocks.forEach((w, b) -> {
                 ResourceLocation id = b.getRegistryName();
                 try {
-                    StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
-                    assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
-                    pack.addResource(newBlockState);
+                    if(EarlyConfigs.isTypeEnabled(w)) {
+                        //creates blockstate
+                        StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
+                        assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
+                        pack.addResource(newBlockState);
 
-                    for (StaticResource model : oakModels) {
-                        try {
-                            StaticResource newModel = modelModifier.transform(model, id, w);
-                            assert newModel.location != model.location : "ids cant be the same";
-                            pack.addResource(newModel);
-                        } catch (Exception exception) {
-                            WoodGood.LOGGER.error("Failed to add {} model json file:", b, exception);
+                        //creates item model
+                        for (StaticResource model : oakModels) {
+                            try {
+                                StaticResource newModel = modelModifier.transform(model, id, w);
+                                assert newModel.location != model.location : "ids cant be the same";
+                                pack.addResource(newModel);
+                            } catch (Exception exception) {
+                                WoodGood.LOGGER.error("Failed to add {} model json file:", b, exception);
+                            }
                         }
+                    }else{
+                        //dummy blockstate so we dont generate models for this
+                        pack.addJson(b.getRegistryName(), DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
 
                 } catch (Exception e) {
                     WoodGood.LOGGER.error("Failed to add {} blockstate json file:", b, e);
                 }
             });
-        } catch (Exception e) {
-            WoodGood.LOGGER.error("Could not find blockstate definition for {}", oakBlock);
+        } catch (Exception e) {WoodGood.LOGGER.error("Could not find blockstate definition for {}", oakBlock);
         }
 
-
     }
+
+
 
     @NotNull
     private static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(
@@ -187,16 +195,17 @@ public class Utils {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
 
         blocks.forEach((wood, value) -> {
+            if(EarlyConfigs.isTypeEnabled(wood)) {
+                for (var res : original) {
+                    try {
+                        StaticResource newRes = modifier.transform(res, value.getRegistryName(), wood);
 
-            for (var res : original) {
-                try {
-                    StaticResource newRes = modifier.transform(res, value.getRegistryName(), wood);
+                        assert newRes.location != res.location : "ids cant be the same";
 
-                    assert newRes.location != res.location : "ids cant be the same";
-
-                    pack.addResource(newRes);
-                } catch (Exception e) {
-                    WoodGood.LOGGER.error("Failed to generate json resource from {}", res.location);
+                        pack.addResource(newRes);
+                    } catch (Exception e) {
+                        WoodGood.LOGGER.error("Failed to generate json resource from {}", res.location);
+                    }
                 }
             }
         });
@@ -235,24 +244,36 @@ public class Utils {
 
         items.forEach((w, i) -> {
 
-            try {
-                //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
-                if (i.getItemCategory() != null) {
-                    FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
-                    if (newR == null) return;
-                    var builder = ConditionalRecipe.builder()
-                            .addCondition(new BlockTypeEnabledCondition(w));
+            if(EarlyConfigs.isTypeEnabled(w)) {
+                try {
+                    //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
+                    if (i.getItemCategory() != null) {
+                        FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
+                        if (newR == null) return;
+                        var builder = ConditionalRecipe.builder()
+                                .addCondition(new BlockTypeEnabledCondition(w)); //not needed since we simply dont add the recipe if its disabled
 
-                    template.getConditions().forEach(builder::addCondition);
+                        template.getConditions().forEach(builder::addCondition);
 
-                    builder.addRecipe(newR).build(pack::addRecipe, newR.getId());
+                        builder.addRecipe(newR).build(pack::addRecipe, newR.getId());
 
+                    }
+                } catch (Exception e) {
+                    WoodGood.LOGGER.error("Failed to generate recipe for {}:", i, e);
                 }
-            } catch (Exception e) {
-                WoodGood.LOGGER.error("Failed to generate recipe for {}:", i, e);
             }
         });
     }
 
+
+    private static final JsonObject DUMMY_BLOCKSTATE;
+
+    static{
+        DUMMY_BLOCKSTATE = new JsonObject();
+        DUMMY_BLOCKSTATE.addProperty("parent","block/cube_all");
+        JsonObject t = new JsonObject();
+        t.addProperty("all","everycomp:block/disabled");
+        DUMMY_BLOCKSTATE.add("textures",t);
+    }
 
 }

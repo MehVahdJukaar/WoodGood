@@ -1,17 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.valhelsia_structures;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipeBuilder;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.Registry;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;

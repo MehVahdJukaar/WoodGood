@@ -4,9 +4,7 @@ import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
-import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
@@ -38,7 +36,7 @@ public class TwilightForestModule extends SimpleModule {
     public TwilightForestModule(String modId) {
         super(modId, "tf");
 
-        BANISTERS = SimpleEntrySet.builder("banister",
+        BANISTERS = SimpleEntrySet.builder(WoodType.class,"banister",
                         TFBlocks.OAK_BANISTER, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new BanisterBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
@@ -51,7 +49,7 @@ public class TwilightForestModule extends SimpleModule {
         this.addEntry(BANISTERS);
 
 
-        HOLLOW_LOGS_HORIZONTAL = SimpleEntrySet.builder("log_horizontal", "hollow",
+        HOLLOW_LOGS_HORIZONTAL = SimpleEntrySet.builder(WoodType.class,"log_horizontal", "hollow",
                         TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL, () -> WoodType.OAK_WOOD_TYPE,
                         w -> regIfPossible(w, () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(w.planks))))
                 .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
@@ -62,7 +60,7 @@ public class TwilightForestModule extends SimpleModule {
         this.addEntry(HOLLOW_LOGS_HORIZONTAL);
 
 
-        HOLLOW_LOGS_VERTICAL = SimpleEntrySet.builder("log_vertical", "hollow",
+        HOLLOW_LOGS_VERTICAL = SimpleEntrySet.builder(WoodType.class,"log_vertical", "hollow",
                         TFBlocks.HOLLOW_OAK_LOG_VERTICAL, () -> WoodType.OAK_WOOD_TYPE,
                         w -> {
                             var id = WoodGood.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
@@ -75,7 +73,7 @@ public class TwilightForestModule extends SimpleModule {
 
         this.addEntry(HOLLOW_LOGS_VERTICAL);
 
-        HOLLOW_LOGS_CLIMBABLE = SimpleEntrySet.builder("log_climbable", "hollow",
+        HOLLOW_LOGS_CLIMBABLE = SimpleEntrySet.builder(WoodType.class,"log_climbable", "hollow",
                         TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> regIfPossible(w, () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(w.planks),
                                 RegistryObject.create(HOLLOW_LOGS_VERTICAL.blocks.get(w).getRegistryName(), ForgeRegistries.BLOCKS))))

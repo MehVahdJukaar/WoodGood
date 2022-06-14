@@ -6,12 +6,8 @@ import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,15 +65,12 @@ public class EarlyConfigs {
         REGISTRY_CONFIG.setConfig(replacementConfig);
 
         if (TAB_ENABLED.get()) {
-            WoodGood.MOD_TAB = new CreativeModeTab(WoodGood.MOD_ID) {
-
-                public ItemStack makeIcon() {
-                    return ForgeRegistries.ITEMS.getValue(WoodGood.res("all_woods")).getDefaultInstance();
-                }
-            };
+            WoodGood.createModTab();
         }
 
     }
+
+
 
     public static boolean isWoodEnabled(String wood) {
         return BLOCK_TYPE_CONFIGS.get(WoodType.class).get(wood).get();

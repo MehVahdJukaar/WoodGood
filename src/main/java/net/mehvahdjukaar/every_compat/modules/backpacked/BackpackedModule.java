@@ -27,7 +27,7 @@ public class BackpackedModule extends SimpleModule {
     public BackpackedModule(String modId) {
         super(modId, "bp");
 
-        SHELF = SimpleEntrySet.builder("backpack_shelf",
+        SHELF = SimpleEntrySet.builder(WoodType.class,"backpack_shelf",
                         ModBlocks.OAK_BACKPACK_SHELF, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

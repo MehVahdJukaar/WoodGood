@@ -28,7 +28,7 @@ public class StorageDrawersModule extends SimpleModule {
     public StorageDrawersModule(String modId) {
         super(modId, "sd");
 
-        DRAWERS = SimpleEntrySet.builder("full_drawers_1",
+        DRAWERS = SimpleEntrySet.builder(WoodType.class,"full_drawers_1",
                         ModBlocks.OAK_FULL_DRAWERS_1, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatStandardDrawers(1, false, BlockBehaviour.Properties.copy(ModBlocks.OAK_FULL_DRAWERS_1.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

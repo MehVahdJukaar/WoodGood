@@ -30,7 +30,7 @@ public class CreateModule extends SimpleModule {
     public CreateModule(String modId) {
         super(modId, "c");
 
-        WINDOWS = SimpleEntrySet.builder("window",
+        WINDOWS = SimpleEntrySet.builder(WoodType.class,"window",
                         () -> getOwnBlock("oak_window"), () -> WoodType.OAK_WOOD_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         this::makeWindow)
                 .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
@@ -45,7 +45,7 @@ public class CreateModule extends SimpleModule {
         this.addEntry(WINDOWS);
 
 
-        WINDOW_PANES = SimpleEntrySet.builder("window_pane",
+        WINDOW_PANES = SimpleEntrySet.builder(WoodType.class,"window_pane",
                         () -> getOwnBlock("oak_window_pane"), () -> WoodType.OAK_WOOD_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(BlockBehaviour.Properties.copy(Blocks.GLASS_PANE)))
                 .addTag(Tags.Items.GLASS_PANES, Registry.BLOCK_REGISTRY)

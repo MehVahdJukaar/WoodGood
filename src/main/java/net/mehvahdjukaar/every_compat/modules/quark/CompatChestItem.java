@@ -18,8 +18,11 @@ import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
 public class CompatChestItem extends BlockItem {
-    public CompatChestItem(Block block, net.minecraft.world.item.Item.Properties props) {
+
+    private final boolean trapped;
+    public CompatChestItem(Block block, net.minecraft.world.item.Item.Properties props, boolean trapped) {
         super(block, props);
+        this.trapped = trapped;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -31,7 +34,8 @@ public class CompatChestItem extends BlockItem {
                     private final BlockEntity tile;
 
                     {
-                        this.tile = new CompatChestBlockTile(BlockPos.ZERO, CompatChestItem.this.getBlock().defaultBlockState());
+                        this.tile = trapped ? new CompatTrappedChestBlockTile(BlockPos.ZERO, CompatChestItem.this.getBlock().defaultBlockState()) :
+                                new CompatChestBlockTile(BlockPos.ZERO, CompatChestItem.this.getBlock().defaultBlockState());
                     }
 
                     public void renderByItem(@Nonnull ItemStack stack, @Nonnull ItemTransforms.TransformType transformType, @Nonnull PoseStack pose, @Nonnull MultiBufferSource buffer, int x, int y) {

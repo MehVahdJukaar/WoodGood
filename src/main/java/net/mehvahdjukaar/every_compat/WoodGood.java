@@ -29,6 +29,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -103,7 +104,6 @@ public class WoodGood {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
-
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
@@ -113,12 +113,11 @@ public class WoodGood {
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
 
-
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
 
-        // addModule("storagedrawers", () -> StorageDrawersModule::new);
+        //addModule("storagedrawers", () -> StorageDrawersModule::new);
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
 
@@ -143,6 +142,21 @@ public class WoodGood {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
+    }
+
+    public static void createModTab() {
+        MOD_TAB = new CreativeModeTab(WoodGood.MOD_ID) {
+
+            public ItemStack makeIcon() {
+                return ForgeRegistries.ITEMS.getValue(WoodGood.res("all_woods")).getDefaultInstance();
+            }
+
+            @Override
+            public boolean hasSearchBar() {
+                return true;
+            }
+
+        };
     }
 
     private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {

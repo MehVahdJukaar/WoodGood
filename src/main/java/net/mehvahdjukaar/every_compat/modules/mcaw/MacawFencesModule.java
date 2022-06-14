@@ -17,10 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 
@@ -52,7 +50,7 @@ public class MacawFencesModule extends SimpleModule {
             return;
         }
 
-        PICKET_FENCES = SimpleEntrySet.builder("picket_fence",
+        PICKET_FENCES = SimpleEntrySet.builder(WoodType.class,"picket_fence",
                         BlockInit.OAK_PICKET_FENCE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
@@ -62,7 +60,7 @@ public class MacawFencesModule extends SimpleModule {
 
         this.addEntry(PICKET_FENCES);
 
-        STOCKADE_FENCES = SimpleEntrySet.builder("stockade_fence",
+        STOCKADE_FENCES = SimpleEntrySet.builder(WoodType.class,"stockade_fence",
                         BlockInit.OAK_STOCKADE_FENCE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
@@ -72,7 +70,7 @@ public class MacawFencesModule extends SimpleModule {
 
         this.addEntry(STOCKADE_FENCES);
 
-        HORSE_FENCES = SimpleEntrySet.builder("horse_fence",
+        HORSE_FENCES = SimpleEntrySet.builder(WoodType.class,"horse_fence",
                         BlockInit.OAK_HORSE_FENCE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
@@ -82,7 +80,7 @@ public class MacawFencesModule extends SimpleModule {
 
         this.addEntry(HORSE_FENCES);
 
-        WIRED_FENCES = SimpleEntrySet.builder("wired_fence",
+        WIRED_FENCES = SimpleEntrySet.builder(WoodType.class,"wired_fence",
                         BlockInit.OAK_WIRED_FENCE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new WiredFence(BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.5f)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
@@ -94,7 +92,7 @@ public class MacawFencesModule extends SimpleModule {
         this.addEntry(WIRED_FENCES);
 
 
-        PYRAMID_GATES = SimpleEntrySet.builder("pyramid_gate",
+        PYRAMID_GATES = SimpleEntrySet.builder(WoodType.class,"pyramid_gate",
                         BlockInit.OAK_PYRAMID_GATE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceGateBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.FENCE_GATES, Registry.BLOCK_REGISTRY)
@@ -104,7 +102,7 @@ public class MacawFencesModule extends SimpleModule {
 
         this.addEntry(PYRAMID_GATES);
 
-        HIGHLEY_GATES = SimpleEntrySet.builder("highley_gate",
+        HIGHLEY_GATES = SimpleEntrySet.builder(WoodType.class,"highley_gate",
                         BlockInit.OAK_HIGHLEY_GATE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceGateBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)

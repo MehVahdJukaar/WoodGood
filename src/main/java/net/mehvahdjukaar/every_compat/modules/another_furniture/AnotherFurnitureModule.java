@@ -33,7 +33,7 @@ public class AnotherFurnitureModule extends SimpleModule {
     public AnotherFurnitureModule(String modId) {
         super(modId, "af");
 
-        PLANTER_BOXES = SimpleEntrySet.builder("planter_box",
+        PLANTER_BOXES = SimpleEntrySet.builder(WoodType.class, "planter_box",
                         AFBlocks.OAK_PLANTER_BOX, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatPlanterBoxBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F)))
                 .addTag(modRes("planter_boxes"), Registry.BLOCK_REGISTRY)
@@ -47,7 +47,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         this.addEntry(PLANTER_BOXES);
 
-        SHUTTERS = SimpleEntrySet.builder("shutter",
+        SHUTTERS = SimpleEntrySet.builder(WoodType.class, "shutter",
                         AFBlocks.OAK_SHUTTER, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new ShutterBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
@@ -64,7 +64,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         this.addEntry(SHUTTERS);
 
-        TABLES = SimpleEntrySet.builder("table",
+        TABLES = SimpleEntrySet.builder(WoodType.class, "table",
                         AFBlocks.OAK_TABLE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TableBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
@@ -78,7 +78,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         this.addEntry(TABLES);
 
-        CHAIRS = SimpleEntrySet.builder("chair",
+        CHAIRS = SimpleEntrySet.builder(WoodType.class, "chair",
                         AFBlocks.OAK_CHAIR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new ChairBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(modRes("chairs"), Registry.BLOCK_REGISTRY)
@@ -93,7 +93,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         this.addEntry(CHAIRS);
 
-        SHELVES = SimpleEntrySet.builder("shelf",
+        SHELVES = SimpleEntrySet.builder(WoodType.class, "shelf",
                         AFBlocks.OAK_SHELF, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(modRes("shelves"), Registry.BLOCK_REGISTRY)
