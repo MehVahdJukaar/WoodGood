@@ -10,23 +10,19 @@ import com.jaquadro.minecraft.storagedrawers.core.ModBlocks;
 import com.jaquadro.minecraft.storagedrawers.core.ModItemGroup;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 
@@ -53,7 +49,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity1::new)
                 .createPaletteFromOak(this::drawersPalette)
-                .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("blocks/drawers_oak_front_1"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
@@ -73,7 +68,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity2::new)
                 .createPaletteFromOak(this::drawersPalette)
-                .setRenderType(()-> RenderType::cutout)
                 .addTexture(modRes("blocks/drawers_oak_front_2"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
@@ -93,7 +87,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity4::new)
                 .createPaletteFromOak(this::drawersPalette)
-                .setRenderType(()-> RenderType::cutout)
                 .addTexture(modRes("blocks/drawers_oak_front_4"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
@@ -113,7 +106,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity1::new)
                 .createPaletteFromOak(this::drawersPalette)
-                .setRenderType(()-> RenderType::cutout)
                 .addTexture(modRes("blocks/drawers_oak_front_1"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_side_h"))
@@ -135,7 +127,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity2::new)
                 .createPaletteFromOak(this::drawersPalette)
-                .setRenderType(()-> RenderType::cutout)
                 .addTexture(modRes("blocks/drawers_oak_front_2"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_side_h"))
@@ -157,7 +148,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity4::new)
                 .createPaletteFromOak(this::drawersPalette)
-                .setRenderType(()-> RenderType::cutout)
                 .addTexture(modRes("blocks/drawers_oak_front_4"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_side_h"))
@@ -184,18 +174,17 @@ public class StorageDrawersModule extends SimpleModule {
     }
 
     @Override
-    public void onClientSetup() {
-        super.onClientSetup();
-        wasteSomeMemory(FULL_DRAWERS_1.blocks.values(), FULL_DRAWERS_1.getBaseBlock());
-        wasteSomeMemory(FULL_DRAWERS_2.blocks.values(), FULL_DRAWERS_2.getBaseBlock());
-        wasteSomeMemory(FULL_DRAWERS_4.blocks.values(), FULL_DRAWERS_4.getBaseBlock());
-        wasteSomeMemory(HALF_DRAWERS_1.blocks.values(), HALF_DRAWERS_1.getBaseBlock());
-        wasteSomeMemory(HALF_DRAWERS_2.blocks.values(), HALF_DRAWERS_2.getBaseBlock());
-        wasteSomeMemory(HALF_DRAWERS_4.blocks.values(), HALF_DRAWERS_4.getBaseBlock());
-
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+        initDrawerClientData(FULL_DRAWERS_1.blocks.values(), FULL_DRAWERS_1.getBaseBlock());
+        initDrawerClientData(FULL_DRAWERS_2.blocks.values(), FULL_DRAWERS_2.getBaseBlock());
+        initDrawerClientData(FULL_DRAWERS_4.blocks.values(), FULL_DRAWERS_4.getBaseBlock());
+        initDrawerClientData(HALF_DRAWERS_1.blocks.values(), HALF_DRAWERS_1.getBaseBlock());
+        initDrawerClientData(HALF_DRAWERS_2.blocks.values(), HALF_DRAWERS_2.getBaseBlock());
+        initDrawerClientData(HALF_DRAWERS_4.blocks.values(), HALF_DRAWERS_4.getBaseBlock());
     }
 
-    private void wasteSomeMemory(Collection<? extends BlockDrawers> drawers, BlockDrawers base){
+    private void initDrawerClientData(Collection<? extends BlockDrawers> drawers, BlockDrawers base){
         drawers.forEach((b)->{
             System.arraycopy(base.labelGeometry, 0, b.labelGeometry, 0, base.labelGeometry.length);
             System.arraycopy(base.countGeometry, 0, b.countGeometry, 0, base.countGeometry.length);
