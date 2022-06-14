@@ -13,9 +13,11 @@ import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.storage_drawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
@@ -93,26 +95,25 @@ public class WoodGood {
         addOtherCompatMod("macawsroofsbop", "mcwroofs", List.of("biomesoplenty"));
         addOtherCompatMod("macawsroofsbyg", "mcwroofs", List.of("byg"));
 
-        /*
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
-        //     addModule("mcwbridges", () -> MacawBridgesModule::new);
+        addModule("mcwbridges", () -> MacawBridgesModule::new);
 
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("architects_palette", () -> ArchitectsPaletteModule::new);*/
-        //   addModule("create", () -> CreateModule::new);
+        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+        addModule("create", () -> CreateModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
-        //       addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
 
 
