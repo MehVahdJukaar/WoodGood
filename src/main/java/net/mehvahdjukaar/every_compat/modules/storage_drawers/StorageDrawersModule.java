@@ -54,11 +54,11 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTile(CompatStandardDrawersEntity1::new)
                 .createPaletteFromOak(this::drawersPalette)
                 .setRenderType(() -> RenderType::cutout)
-                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .addTexture(modRes("blocks/drawers_oak_front_1"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
                 .addTexture(modRes("blocks/drawers_oak_trim"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .build();
 
         this.addEntry(FULL_DRAWERS_1);
@@ -78,6 +78,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
                 .addTexture(modRes("blocks/drawers_oak_trim"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .build();
 
         this.addEntry(FULL_DRAWERS_2);
@@ -97,6 +98,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
                 .addTexture(modRes("blocks/drawers_oak_trim"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .build();
 
         this.addEntry(FULL_DRAWERS_4);
@@ -118,6 +120,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTexture(modRes("blocks/drawers_oak_side_v"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
                 .addTexture(modRes("blocks/drawers_oak_trim"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .build();
 
         this.addEntry(HALF_DRAWERS_1);
@@ -139,6 +142,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTexture(modRes("blocks/drawers_oak_side_v"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
                 .addTexture(modRes("blocks/drawers_oak_trim"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .build();
 
         this.addEntry(HALF_DRAWERS_2);
@@ -160,6 +164,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTexture(modRes("blocks/drawers_oak_side_v"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
                 .addTexture(modRes("blocks/drawers_oak_trim"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .build();
 
         this.addEntry(HALF_DRAWERS_4);
@@ -172,6 +177,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .createPaletteFromOak(this::trimPalette)
                 .addTexture(modRes("blocks/drawers_oak_trim"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .build();
 
         this.addEntry(TRIMS);
@@ -181,6 +187,11 @@ public class StorageDrawersModule extends SimpleModule {
     public void onClientSetup() {
         super.onClientSetup();
         wasteSomeMemory(FULL_DRAWERS_1.blocks.values(), FULL_DRAWERS_1.getBaseBlock());
+        wasteSomeMemory(FULL_DRAWERS_2.blocks.values(), FULL_DRAWERS_2.getBaseBlock());
+        wasteSomeMemory(FULL_DRAWERS_4.blocks.values(), FULL_DRAWERS_4.getBaseBlock());
+        wasteSomeMemory(HALF_DRAWERS_1.blocks.values(), HALF_DRAWERS_1.getBaseBlock());
+        wasteSomeMemory(HALF_DRAWERS_2.blocks.values(), HALF_DRAWERS_2.getBaseBlock());
+        wasteSomeMemory(HALF_DRAWERS_4.blocks.values(), HALF_DRAWERS_4.getBaseBlock());
 
     }
 
@@ -206,10 +217,6 @@ public class StorageDrawersModule extends SimpleModule {
         p.remove(p.getLightest());
         p.increaseInner();
         p.increaseUp();
-    }
-
-    private static boolean isSuffocating(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return false;
     }
 
     @Override
