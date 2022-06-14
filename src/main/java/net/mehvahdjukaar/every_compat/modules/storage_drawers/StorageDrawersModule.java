@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.storage_drawers;
 
+import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockStandardDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
 import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
@@ -17,11 +18,16 @@ import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 
 public class StorageDrawersModule extends SimpleModule {
@@ -39,9 +45,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         FULL_DRAWERS_1 = SimpleEntrySet.builder("full_drawers_1",
                         ModBlocks.OAK_FULL_DRAWERS_1, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatStandardDrawers(1, false, BlockBehaviour.Properties.copy(w.planks)
-                                .strength(3.0F, 5.0F).sound(SoundType.WOOD).isSuffocating(StorageDrawersModule::isSuffocating)
-                                .isRedstoneConductor(StorageDrawersModule::isSuffocating)))
+                        w -> new CompatStandardDrawers(1, false, BlockBehaviour.Properties.copy(ModBlocks.OAK_FULL_DRAWERS_1.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
@@ -49,7 +53,8 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity1::new)
                 .createPaletteFromOak(this::drawersPalette)
-                .setRenderType(()-> RenderType::cutout)
+                .setRenderType(() -> RenderType::cutout)
+                .addModelTransform(m -> m.replaceGenericType("oak", "blocks"))
                 .addTexture(modRes("blocks/drawers_oak_front_1"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
                 .addTexture(modRes("blocks/drawers_oak_sort"))
@@ -60,9 +65,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         FULL_DRAWERS_2 = SimpleEntrySet.builder("full_drawers_2",
                         ModBlocks.OAK_FULL_DRAWERS_2, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatStandardDrawers(2, false, BlockBehaviour.Properties.copy(w.planks)
-                                .strength(3.0F, 5.0F).sound(SoundType.WOOD).isSuffocating(StorageDrawersModule::isSuffocating)
-                                .isRedstoneConductor(StorageDrawersModule::isSuffocating)))
+                        w -> new CompatStandardDrawers(2, false, BlockBehaviour.Properties.copy(ModBlocks.OAK_FULL_DRAWERS_2.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
@@ -81,9 +84,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         FULL_DRAWERS_4 = SimpleEntrySet.builder("full_drawers_4",
                         ModBlocks.OAK_FULL_DRAWERS_4, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatStandardDrawers(4, false, BlockBehaviour.Properties.copy(w.planks)
-                                .strength(3.0F, 5.0F).sound(SoundType.WOOD).isSuffocating(StorageDrawersModule::isSuffocating)
-                                .isRedstoneConductor(StorageDrawersModule::isSuffocating)))
+                        w -> new CompatStandardDrawers(4, false, BlockBehaviour.Properties.copy(ModBlocks.OAK_FULL_DRAWERS_4.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
@@ -102,9 +103,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         HALF_DRAWERS_1 = SimpleEntrySet.builder("half_drawers_1",
                         ModBlocks.OAK_HALF_DRAWERS_1, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatStandardDrawers(1, true, BlockBehaviour.Properties.copy(w.planks)
-                                .strength(3.0F, 5.0F).sound(SoundType.WOOD).isSuffocating(StorageDrawersModule::isSuffocating)
-                                .isRedstoneConductor(StorageDrawersModule::isSuffocating)))
+                        w -> new CompatStandardDrawers(1, true, BlockBehaviour.Properties.copy(ModBlocks.OAK_HALF_DRAWERS_1.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
@@ -125,9 +124,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         HALF_DRAWERS_2 = SimpleEntrySet.builder("half_drawers_2",
                         ModBlocks.OAK_HALF_DRAWERS_2, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatStandardDrawers(2, true, BlockBehaviour.Properties.copy(w.planks)
-                                .strength(3.0F, 5.0F).sound(SoundType.WOOD).isSuffocating(StorageDrawersModule::isSuffocating)
-                                .isRedstoneConductor(StorageDrawersModule::isSuffocating)))
+                        w -> new CompatStandardDrawers(2, true, BlockBehaviour.Properties.copy(ModBlocks.OAK_HALF_DRAWERS_2.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
@@ -148,9 +145,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         HALF_DRAWERS_4 = SimpleEntrySet.builder("half_drawers_4",
                         ModBlocks.OAK_HALF_DRAWERS_4, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatStandardDrawers(4, true, BlockBehaviour.Properties.copy(w.planks)
-                                .strength(3.0F, 5.0F).sound(SoundType.WOOD).isSuffocating(StorageDrawersModule::isSuffocating)
-                                .isRedstoneConductor(StorageDrawersModule::isSuffocating)))
+                        w -> new CompatStandardDrawers(4, true, BlockBehaviour.Properties.copy(ModBlocks.OAK_HALF_DRAWERS_4.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
@@ -171,7 +166,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         TRIMS = SimpleEntrySet.builder("trim",
                         ModBlocks.OAK_TRIM, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new BlockTrim(BlockBehaviour.Properties.copy(w.planks).sound(SoundType.WOOD).strength(5.0F)))
+                        w -> new BlockTrim(BlockBehaviour.Properties.copy(ModBlocks.OAK_TRIM.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
@@ -180,6 +175,23 @@ public class StorageDrawersModule extends SimpleModule {
                 .build();
 
         this.addEntry(TRIMS);
+    }
+
+    @Override
+    public void onClientSetup() {
+        super.onClientSetup();
+        wasteSomeMemory(FULL_DRAWERS_1.blocks.values(), FULL_DRAWERS_1.getBaseBlock());
+
+    }
+
+    private void wasteSomeMemory(Collection<? extends BlockDrawers> drawers, BlockDrawers base){
+        drawers.forEach((b)->{
+            System.arraycopy(base.labelGeometry, 0, b.labelGeometry, 0, base.labelGeometry.length);
+            System.arraycopy(base.countGeometry, 0, b.countGeometry, 0, base.countGeometry.length);
+            System.arraycopy(base.indBaseGeometry, 0, b.indBaseGeometry, 0, base.indBaseGeometry.length);
+            System.arraycopy(base.slotGeometry, 0, b.slotGeometry, 0, base.slotGeometry.length);
+            System.arraycopy(base.indGeometry, 0, b.indGeometry, 0, base.indGeometry.length);
+        });
     }
 
     private void drawersPalette(Palette p) {
@@ -202,12 +214,12 @@ public class StorageDrawersModule extends SimpleModule {
 
     @Override
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard.Slot1>) (FULL_DRAWERS_1.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard.Slot2>) (FULL_DRAWERS_2.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard.Slot4>) (FULL_DRAWERS_4.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard.Slot1>) (HALF_DRAWERS_1.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard.Slot2>) (HALF_DRAWERS_2.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<TileEntityDrawersStandard.Slot4>) (HALF_DRAWERS_4.getTileHolder().tile), TileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity1>) (FULL_DRAWERS_1.getTileHolder().tile), TileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity2>) (FULL_DRAWERS_2.getTileHolder().tile), TileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity4>) (FULL_DRAWERS_4.getTileHolder().tile), TileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity1>) (HALF_DRAWERS_1.getTileHolder().tile), TileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity2>) (HALF_DRAWERS_2.getTileHolder().tile), TileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity4>) (HALF_DRAWERS_4.getTileHolder().tile), TileEntityDrawersRenderer::new);
     }
 
     private class CompatStandardDrawers extends BlockStandardDrawers {
@@ -259,5 +271,6 @@ public class StorageDrawersModule extends SimpleModule {
         public @NotNull BlockEntityType<?> getType() {
             return FULL_DRAWERS_4.getTileHolder().tile;
         }
+
     }
 }

@@ -10,8 +10,6 @@ import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.items.WoodBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
-import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
-import net.mehvahdjukaar.selene.resourcepack.ResType;
 import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;

@@ -17,7 +17,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,8 +35,8 @@ public class AllWoodItemRenderer extends BlockEntityWithoutLevelRenderer {
         label:
         for (var c : WoodType.OAK_WOOD_TYPE.getChildren()) {
             if (c.getKey().contains("/")) {
-                for(var k : CHILD_KEYS){
-                    if(WoodType.OAK_WOOD_TYPE.getChild(k).asItem()== c.getValue().asItem()){
+                for (var k : CHILD_KEYS) {
+                    if (WoodType.OAK_WOOD_TYPE.getChild(k).asItem() == c.getValue().asItem()) {
                         continue label;
                     }
                 }
@@ -65,7 +64,7 @@ public class AllWoodItemRenderer extends BlockEntityWithoutLevelRenderer {
         matrixStack.popPose();
         if (!bakedmodel.isGui3d()) Lighting.setupForFlatItems();
         //forces rendering now with flat lighting
-        if(buffer instanceof MultiBufferSource.BufferSource bu){
+        if (buffer instanceof MultiBufferSource.BufferSource bu) {
             bu.endBatch();
         }
         Lighting.setupFor3DItems();
@@ -74,18 +73,20 @@ public class AllWoodItemRenderer extends BlockEntityWithoutLevelRenderer {
     //TODO: fix this
     public ItemStack getAnyItem() {
         int size = CHILD_KEYS.size();
+        if (size == 0) return Items.OAK_PLANKS.getDefaultInstance();
         int time = (int) (Util.getMillis() / 350L);
         int tm = time % size;
         if (tm != lastTime) {
 
             ItemLike v;
             do {
-                var l = (this.lastIndex+1) % size;
+                var l = (this.lastIndex + 1) % size;
                 // this.woodIndex = (this.woodIndex + 1);
                 if (l < lastIndex) this.woodIndex = (this.woodIndex + 1) % MODDED_WOOD_TYPES.size();
                 this.lastIndex = l;
                 String key = CHILD_KEYS.get(lastIndex);
                 v = MODDED_WOOD_TYPES.get(woodIndex % MODDED_WOOD_TYPES.size()).getChild(key);
+                if (v != null && v.asItem().getItemCategory() == null) v = null;
             } while (v == null);
 
             this.currentStack = v.asItem().getDefaultInstance();

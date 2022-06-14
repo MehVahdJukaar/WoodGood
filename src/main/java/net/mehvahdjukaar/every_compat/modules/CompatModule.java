@@ -207,4 +207,5 @@ public abstract class CompatModule {
     }
 
 
+    public void onFirstClientTick(){};
 }

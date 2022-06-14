@@ -36,7 +36,7 @@ public class MacawLightsModule extends SimpleModule {
             return;
         }
 
-        SOUL_TIKI_TORCHES = SimpleEntrySet.builder("tiki_torch", "soul",
+        SOUL_TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class,"tiki_torch", "soul",
                         BlockInit.SOUL_OAK_TIKI_TORCH, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new SoulTikiTorch(BlockBehaviour.Properties.copy(w.planks).strength(0.2f, 2.5f), (ParticleOptions)null))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -47,7 +47,7 @@ public class MacawLightsModule extends SimpleModule {
 
         this.addEntry(SOUL_TIKI_TORCHES);
 
-        TIKI_TORCHES = SimpleEntrySet.builder("tiki_torch",
+        TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class,"tiki_torch",
                         BlockInit.OAK_TIKI_TORCH, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TikiTorch(BlockBehaviour.Properties.copy(w.planks).strength(0.2f, 2.5f), (ParticleOptions)null))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

@@ -32,7 +32,7 @@ public class MacawPathsModule extends SimpleModule {
             return;
         }
 
-        PLANKS_PATHS = SimpleEntrySet.builder("planks_path",
+        PLANKS_PATHS = SimpleEntrySet.builder(WoodType.class,"planks_path",
                         BlockInit.OAK_PLANKS_PATH, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FacingPathBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.3f)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

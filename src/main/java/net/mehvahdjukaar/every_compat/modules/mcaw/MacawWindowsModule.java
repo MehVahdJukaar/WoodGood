@@ -5,11 +5,9 @@ import com.mcwwindows.kikoz.init.BlockInit;
 import com.mcwwindows.kikoz.objects.Blinds;
 import com.mcwwindows.kikoz.objects.Parapet;
 import com.mcwwindows.kikoz.objects.Window;
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
-import net.mehvahdjukaar.selene.resourcepack.AfterLanguageLoadEvent;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
@@ -31,7 +29,7 @@ public class MacawWindowsModule extends SimpleModule {
     public MacawWindowsModule(String modId) {
         super(modId, "mcw");
 
-        BLINDS = SimpleEntrySet.builder("blinds",
+        BLINDS = SimpleEntrySet.builder(WoodType.class,"blinds",
                         BlockInit.OAK_BLINDS, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Blinds())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -41,7 +39,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         this.addEntry(BLINDS);
 
-        LOG_PARAPETS = SimpleEntrySet.builder("log_parapet",
+        LOG_PARAPETS = SimpleEntrySet.builder(WoodType.class,"log_parapet",
                         BlockInit.OAK_LOG_PARAPET, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Parapet())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -51,7 +49,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         this.addEntry(LOG_PARAPETS);
 
-        PLANK_PARAPETS = SimpleEntrySet.builder("plank_parapet",
+        PLANK_PARAPETS = SimpleEntrySet.builder(WoodType.class,"plank_parapet",
                         BlockInit.OAK_PLANK_PARAPET, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Parapet())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -61,7 +59,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         this.addEntry(PLANK_PARAPETS);
 
-        WINDOWS = SimpleEntrySet.builder("window",
+        WINDOWS = SimpleEntrySet.builder(WoodType.class,"window",
                         BlockInit.OAK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
@@ -72,7 +70,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         this.addEntry(WINDOWS);
 
-        PLANK_WINDOWS = SimpleEntrySet.builder("plank_window",
+        PLANK_WINDOWS = SimpleEntrySet.builder(WoodType.class,"plank_window",
                         BlockInit.OAK_PLANK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
@@ -83,7 +81,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         this.addEntry(PLANK_WINDOWS);
 
-        WINDOWS2 = SimpleEntrySet.builder("window2",
+        WINDOWS2 = SimpleEntrySet.builder(WoodType.class,"window2",
                         BlockInit.OAK_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
@@ -94,7 +92,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         this.addEntry(WINDOWS2);
 
-        PLANK_WINDOWS2 = SimpleEntrySet.builder("plank_window2",
+        PLANK_WINDOWS2 = SimpleEntrySet.builder(WoodType.class,"plank_window2",
                         BlockInit.OAK_PLANK_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
@@ -105,7 +103,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         this.addEntry(PLANK_WINDOWS2);
 
-        STRIPPED_LOG_WINDOW = SimpleEntrySet.builder("log_window", "stripped",
+        STRIPPED_LOG_WINDOW = SimpleEntrySet.builder(WoodType.class,"log_window", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
@@ -116,7 +114,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         this.addEntry(STRIPPED_LOG_WINDOW);
 
-        STRIPPED_LOG_WINDOW2 = SimpleEntrySet.builder("log_window2", "stripped",
+        STRIPPED_LOG_WINDOW2 = SimpleEntrySet.builder(WoodType.class,"log_window2", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)

@@ -9,18 +9,15 @@ import net.mehvahdjukaar.selene.resourcepack.EarlyPackReloadEvent;
 import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.selene.resourcepack.recipe.TemplateRecipeManager;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraft.server.packs.resources.SimpleReloadInstance;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {

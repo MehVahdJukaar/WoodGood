@@ -25,7 +25,7 @@ public class FarmersDelightModule extends SimpleModule {
     public FarmersDelightModule(String modId) {
         super(modId, "fd");
 
-        CABINETS = SimpleEntrySet.builder("cabinet",
+        CABINETS = SimpleEntrySet.builder(WoodType.class,"cabinet",
                         ModBlocks.OAK_CABINET, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatCabinetBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.5F)))
                 .addTag(modRes("cabinets"), Registry.BLOCK_REGISTRY)

@@ -30,6 +30,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -88,13 +89,14 @@ public class WoodGood {
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
 
-        addOtherCompatMod("macawsbridgesbop", "mcwbridges", List.of("biomesoplenty"));
-        addOtherCompatMod("macawbridgesbyg", "mcwbridges", List.of("byg"));
-        addOtherCompatMod("mcwfencesbop", "mcwfences", List.of("biomesoplenty"));
-        addOtherCompatMod("mcwfencesbyg", "mcwfences", List.of("byg"));
-        addOtherCompatMod("macawsroofsbop", "mcwroofs", List.of("biomesoplenty"));
-        addOtherCompatMod("macawsroofsbyg", "mcwroofs", List.of("byg"));
-
+        addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
+        addOtherCompatMod("macawbridgesbyg", "byg", List.of("mcwbridges"));
+        addOtherCompatMod("mcwfencesbop", "biomesoplenty", List.of("mcwfences"));
+        addOtherCompatMod("mcwfencesbyg", "byg", List.of("mcwfences"));
+        addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
+        addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
+        addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
+        /*
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
@@ -102,20 +104,19 @@ public class WoodGood {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
-
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);*/
         addModule("create", () -> CreateModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
-
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
 
@@ -124,13 +125,11 @@ public class WoodGood {
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        //bus.addListener(WoodGood::init);
         bus.register(this);
 
         MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::onEarlyPackLoad);
         MinecraftForge.EVENT_BUS.addGenericListener(Block.class, WoodGood::remapBlocks);
         MinecraftForge.EVENT_BUS.addGenericListener(Item.class, WoodGood::remapItems);
-        // MinecraftForge.EVENT_BUS.addGenericListener(WoodGood::remapBlocks);
 
         SERVER_RESOURCES = new ServerDynamicResourcesHandler();
         SERVER_RESOURCES.register(bus);
@@ -142,6 +141,21 @@ public class WoodGood {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
+    }
+
+    public static void createModTab() {
+        MOD_TAB = new CreativeModeTab(WoodGood.MOD_ID) {
+
+            public ItemStack makeIcon() {
+                return ForgeRegistries.ITEMS.getValue(WoodGood.res("all_woods")).getDefaultInstance();
+            }
+
+            @Override
+            public boolean hasSearchBar() {
+                return true;
+            }
+
+        };
     }
 
     private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
@@ -204,7 +218,7 @@ public class WoodGood {
         remapEntries(event, ForgeRegistries.BLOCKS);
         if (EarlyConfigs.REMAP_OWN.get()) {
             for (var mapping : event.getMappings(MOD_ID)) {
-                mapping.remap(Blocks.OAK_WOOD);
+                mapping.remap(Blocks.OAK_PLANKS);
             }
         }
     }

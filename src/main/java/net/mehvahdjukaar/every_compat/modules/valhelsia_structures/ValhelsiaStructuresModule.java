@@ -30,7 +30,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     public ValhelsiaStructuresModule(String modId) {
         super(modId, "vs");
 
-        POSTS = SimpleEntrySet.builder("post",
+        POSTS = SimpleEntrySet.builder(WoodType.class,"post",
                         ModBlocks.OAK_POST, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new PostBlock(() -> w.log))
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
@@ -41,7 +41,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         this.addEntry(POSTS);
 
-        CUT_POSTS = SimpleEntrySet.builder("post", "cut",
+        CUT_POSTS = SimpleEntrySet.builder(WoodType.class,"post", "cut",
                         ModBlocks.CUT_OAK_POST, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registry.BLOCK_REGISTRY)

@@ -21,7 +21,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
     public ArchitectsPaletteModule(String modId) {
         super(modId, "ap");
 
-        RAILINGS = SimpleEntrySet.builder("railing",
+        RAILINGS = SimpleEntrySet.builder(WoodType.class,"railing",
                         APBlocks.OAK_RAILING, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new RailingBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -31,7 +31,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
 
         this.addEntry(RAILINGS);
 
-        BOARDS = SimpleEntrySet.builder("boards",
+        BOARDS = SimpleEntrySet.builder(WoodType.class,"boards",
                         APBlocks.OAK_BOARDS, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new BoardBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

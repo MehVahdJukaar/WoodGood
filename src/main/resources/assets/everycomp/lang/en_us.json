@@ -17,6 +17,9 @@
 
   "block_type.farmersdelight.cabinet": "%s Cabinet",
   "block_type.twilightforest.hollow_log": "Hollow %s Log",
+  "block_type.twilightforest.hollow_log_vertical": "Hollow %s Log",
+  "block_type.twilightforest.hollow_log_horizontal": "Hollow %s Log",
+  "block_type.twilightforest.hollow_log_climbable": "Hollow %s Log",
   "block_type.twilightforest.banister": "%s Banister",
 
   "block_type.quark.stripped_post": "Stripped %s Post",
@@ -24,6 +27,7 @@
   "block_type.quark.hedge": "%s Leaf Hedge",
   "block_type.quark.ladder": "%s Ladder",
   "block_type.quark.chest": "%s Chest",
+  "block_type.quark.trapped_chest": "Trapped %s Chest",
   "block_type.quark.bookshelf": "%s Bookshelf",
   "block_type.quark.vertical_planks": "Vertical %s Planks",
 

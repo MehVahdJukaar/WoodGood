@@ -34,7 +34,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
     public MacawTrapdoorsModule(String modId) {
         super(modId, "mct");
 
-        BARK_TRAPDOORS = SimpleEntrySet.builder("bark_trapdoor",
+        BARK_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"bark_trapdoor",
                         BlockInit.OAK_BARK_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -49,7 +49,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(BARK_TRAPDOORS);
 
-        BARN_TRAPDOORS = SimpleEntrySet.builder("barn_trapdoor",
+        BARN_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"barn_trapdoor",
                         BlockInit.OAK_BARN_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -65,7 +65,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(BARN_TRAPDOORS);
 
-        BARRED_TRAPDOORS = SimpleEntrySet.builder("barred_trapdoor",
+        BARRED_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"barred_trapdoor",
                         BlockInit.OAK_BARRED_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -81,7 +81,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(BARRED_TRAPDOORS);
 
-        BEACH_TRAPDOORS = SimpleEntrySet.builder("beach_trapdoor",
+        BEACH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"beach_trapdoor",
                         BlockInit.OAK_BEACH_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -97,7 +97,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(BEACH_TRAPDOORS);
 
-        CLASSIC_TRAPDOORS = SimpleEntrySet.builder("classic_trapdoor",
+        CLASSIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"classic_trapdoor",
                         BlockInit.SPRUCE_CLASSIC_TRAPDOOR, () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -113,7 +113,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(CLASSIC_TRAPDOORS);
 
-        COTTAGE_TRAPDOORS = SimpleEntrySet.builder("cottage_trapdoor",
+        COTTAGE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"cottage_trapdoor",
                         BlockInit.OAK_COTTAGE_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -129,7 +129,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(COTTAGE_TRAPDOORS);
 
-        FOUR_PANEL_TRAPDOORS = SimpleEntrySet.builder("four_panel_trapdoor",
+        FOUR_PANEL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"four_panel_trapdoor",
                         BlockInit.OAK_FOUR_PANEL_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -145,7 +145,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(FOUR_PANEL_TRAPDOORS);
 
-        GLASS_TRAPDOORS = SimpleEntrySet.builder("glass_trapdoor",
+        GLASS_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"glass_trapdoor",
                         BlockInit.OAK_GLASS_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -162,7 +162,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(GLASS_TRAPDOORS);
 
-        MYSTIC_TRAPDOORS = SimpleEntrySet.builder("mystic_trapdoor",
+        MYSTIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"mystic_trapdoor",
                         BlockInit.OAK_MYSTIC_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -178,7 +178,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(MYSTIC_TRAPDOORS);
 
-        PAPER_TRAPDOORS = SimpleEntrySet.builder("paper_trapdoor",
+        PAPER_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"paper_trapdoor",
                         BlockInit.OAK_PAPER_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -195,7 +195,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         this.addEntry(PAPER_TRAPDOORS);
 
-        TROPICAL_TRAPDOORS = SimpleEntrySet.builder("tropical_trapdoor",
+        TROPICAL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"tropical_trapdoor",
                         BlockInit.OAK_TROPICAL_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

@@ -17,7 +17,6 @@ import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -38,7 +37,7 @@ public class DecorativeBlocksModule extends SimpleModule {
         super(modId, "db");
 
 
-        BEAMS = SimpleEntrySet.builder("beam",
+        BEAMS = SimpleEntrySet.builder(WoodType.class,"beam",
                         () -> DBBlocks.BEAMS.get(VanillaWoodTypes.OAK), () -> WoodType.OAK_WOOD_TYPE,
                         w -> DBBlocks.createDecorativeBlock(WT_CONVERSION.get(w), WoodDecorativeBlockTypes.BEAM))
                 .addTag(modRes("beams"), Registry.BLOCK_REGISTRY)
@@ -53,7 +52,7 @@ public class DecorativeBlocksModule extends SimpleModule {
         this.addEntry(BEAMS);
 
 
-        PALISADES = SimpleEntrySet.builder("palisade",
+        PALISADES = SimpleEntrySet.builder(WoodType.class,"palisade",
                         () -> DBBlocks.PALISADES.get(VanillaWoodTypes.OAK), () -> WoodType.OAK_WOOD_TYPE,
                         w -> DBBlocks.createDecorativeBlock(WT_CONVERSION.get(w), WoodDecorativeBlockTypes.PALISADE))
                 .addTag(modRes("palisades"), Registry.BLOCK_REGISTRY)
@@ -68,7 +67,7 @@ public class DecorativeBlocksModule extends SimpleModule {
         this.addEntry(PALISADES);
 
 
-        SUPPORTS = SimpleEntrySet.builder("support",
+        SUPPORTS = SimpleEntrySet.builder(WoodType.class,"support",
                         () -> DBBlocks.SUPPORTS.get(VanillaWoodTypes.OAK), () -> WoodType.OAK_WOOD_TYPE,
                         w -> DBBlocks.createDecorativeBlock(WT_CONVERSION.get(w), WoodDecorativeBlockTypes.SUPPORT))
                 .addTag(modRes("supports"), Registry.BLOCK_REGISTRY)
@@ -85,7 +84,7 @@ public class DecorativeBlocksModule extends SimpleModule {
         this.addEntry(SUPPORTS);
 
 
-        SEATS = SimpleEntrySet.builder("seat",
+        SEATS = SimpleEntrySet.builder(WoodType.class,"seat",
                         () -> DBBlocks.SEATS.get(VanillaWoodTypes.OAK), () -> WoodType.OAK_WOOD_TYPE,
                         w -> DBBlocks.createDecorativeBlock(WT_CONVERSION.get(w), WoodDecorativeBlockTypes.SEAT))
                 .addTag(modRes("seats"), Registry.BLOCK_REGISTRY)

@@ -3,35 +3,20 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 import com.mcwdoors.kikoz.MacawsDoors;
 import com.mcwdoors.kikoz.init.BlockInit;
 import com.mcwdoors.kikoz.objects.JapaneseDoors;
-import com.mcwtrpdoors.kikoz.MacawsTrapdoors;
-import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.Utils;
-import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
-import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
-import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
-import net.mehvahdjukaar.selene.resourcepack.RPUtils;
-import net.mehvahdjukaar.selene.resourcepack.ResType;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-
-import java.util.List;
 
 
 public class MacawDoorsModule extends SimpleModule {
@@ -58,7 +43,7 @@ public class MacawDoorsModule extends SimpleModule {
     public MacawDoorsModule(String modId) {
         super(modId, "mcd");
 
-        BARK_DOORS = SimpleEntrySet.builder("bark_glass_door",
+        BARK_DOORS = SimpleEntrySet.builder(WoodType.class,"bark_glass_door",
                         BlockInit.OAK_BARK_GLASS_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -72,7 +57,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(BARK_DOORS);
 
-        BARN_DOORS = SimpleEntrySet.builder("barn_door",
+        BARN_DOORS = SimpleEntrySet.builder(WoodType.class,"barn_door",
                         BlockInit.OAK_BARN_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -88,7 +73,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(BARN_DOORS);
 
-        BARN_GLASS_DOORS = SimpleEntrySet.builder("barn_glass_door",
+        BARN_GLASS_DOORS = SimpleEntrySet.builder(WoodType.class,"barn_glass_door",
                         BlockInit.OAK_BARN_GLASS_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -104,7 +89,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(BARN_GLASS_DOORS);
 
-        BEACH_DOORS = SimpleEntrySet.builder("beach_door",
+        BEACH_DOORS = SimpleEntrySet.builder(WoodType.class,"beach_door",
                         BlockInit.OAK_BEACH_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -120,7 +105,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(BEACH_DOORS);
 
-        CLASSIC_DOORS = SimpleEntrySet.builder("classic_door",
+        CLASSIC_DOORS = SimpleEntrySet.builder(WoodType.class,"classic_door",
                         BlockInit.SPRUCE_CLASSIC_DOOR, () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -136,7 +121,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(CLASSIC_DOORS);
 
-        COTTAGE_DOORS = SimpleEntrySet.builder("cottage_door",
+        COTTAGE_DOORS = SimpleEntrySet.builder(WoodType.class,"cottage_door",
                         BlockInit.OAK_COTTAGE_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -152,7 +137,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(COTTAGE_DOORS);
 
-        FOUR_PANEL_DOORS = SimpleEntrySet.builder("four_panel_door",
+        FOUR_PANEL_DOORS = SimpleEntrySet.builder(WoodType.class,"four_panel_door",
                         BlockInit.OAK_FOUR_PANEL_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -168,7 +153,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(FOUR_PANEL_DOORS);
 
-        GLASS_DOORS = SimpleEntrySet.builder("glass_door",
+        GLASS_DOORS = SimpleEntrySet.builder(WoodType.class,"glass_door",
                         BlockInit.OAK_GLASS_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -184,7 +169,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(GLASS_DOORS);
 
-        MODERN_DOORS = SimpleEntrySet.builder("modern_door",
+        MODERN_DOORS = SimpleEntrySet.builder(WoodType.class,"modern_door",
                         BlockInit.OAK_MODERN_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -200,7 +185,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(MODERN_DOORS);
 
-        MYSTIC_DOORS = SimpleEntrySet.builder("mystic_door",
+        MYSTIC_DOORS = SimpleEntrySet.builder(WoodType.class,"mystic_door",
                         BlockInit.OAK_MYSTIC_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -216,7 +201,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(MYSTIC_DOORS);
 
-        NETHER_DOORS = SimpleEntrySet.builder("nether_door",
+        NETHER_DOORS = SimpleEntrySet.builder(WoodType.class,"nether_door",
                         BlockInit.OAK_NETHER_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -232,7 +217,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(NETHER_DOORS);
 
-        PAPER_DOORS = SimpleEntrySet.builder("paper_door",
+        PAPER_DOORS = SimpleEntrySet.builder(WoodType.class,"paper_door",
                         BlockInit.OAK_PAPER_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -248,7 +233,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(PAPER_DOORS);
 
-        SHOJI_DOORS = SimpleEntrySet.builder("japanese_door",
+        SHOJI_DOORS = SimpleEntrySet.builder(WoodType.class,"japanese_door",
                         BlockInit.OAK_JAPANESE_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new JapaneseDoors(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion().sound(SoundType.SCAFFOLDING)))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -264,7 +249,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(SHOJI_DOORS);
 
-        SHOJI_WHOLE_DOORS = SimpleEntrySet.builder("japanese2_door",
+        SHOJI_WHOLE_DOORS = SimpleEntrySet.builder(WoodType.class,"japanese2_door",
                         BlockInit.OAK_JAPANESE2_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new JapaneseDoors(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion().sound(SoundType.SCAFFOLDING)))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -280,7 +265,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(SHOJI_WHOLE_DOORS);
 
-        STABLE_DOORS = SimpleEntrySet.builder("stable_door",
+        STABLE_DOORS = SimpleEntrySet.builder(WoodType.class,"stable_door",
                         BlockInit.OAK_STABLE_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -297,7 +282,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(STABLE_DOORS);
 
-        STABLE_HEAD_DOORS = SimpleEntrySet.builder("stable_head_door",
+        STABLE_HEAD_DOORS = SimpleEntrySet.builder(WoodType.class,"stable_head_door",
                         BlockInit.OAK_STABLE_HEAD_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -314,7 +299,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(STABLE_HEAD_DOORS);
 
-        TROPICAL_DOORS = SimpleEntrySet.builder("tropical_door",
+        TROPICAL_DOORS = SimpleEntrySet.builder(WoodType.class,"tropical_door",
                         BlockInit.OAK_TROPICAL_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
@@ -330,7 +315,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(TROPICAL_DOORS);
 
-        WESTERN_DOORS = SimpleEntrySet.builder("western_door",
+        WESTERN_DOORS = SimpleEntrySet.builder(WoodType.class,"western_door",
                         BlockInit.OAK_WESTERN_DOOR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
