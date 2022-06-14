@@ -97,9 +97,7 @@ public class WoodGood {
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
-
         /*
-
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
@@ -118,7 +116,7 @@ public class WoodGood {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
-
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
