@@ -23,7 +23,8 @@ public class EntriesRemapper {
         remapEntries(event, ForgeRegistries.BLOCKS);
         if (EarlyConfigs.REMAP_OWN.get()) {
             for (var mapping : event.getMappings(WoodGood.MOD_ID)) {
-                mapping.remap(Blocks.OAK_PLANKS);
+                mapping.ignore();
+                //mapping.remap(Blocks.OAK_PLANKS);
             }
         }
     }
@@ -34,7 +35,8 @@ public class EntriesRemapper {
         remapEntries(event, ForgeRegistries.ITEMS);
         if (EarlyConfigs.REMAP_OWN.get()) {
             for (var mapping : event.getMappings(WoodGood.MOD_ID)) {
-                mapping.remap(Items.AIR);
+                mapping.ignore();
+              //  mapping.remap(Items.AIR);
             }
         }
     }

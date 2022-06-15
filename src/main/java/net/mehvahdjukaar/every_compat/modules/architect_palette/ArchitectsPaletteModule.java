@@ -40,7 +40,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .createPaletteFromOak(p -> {
 
                     while (p.size() > 7) {
-                        p.remove(0);
+                        p.remove(p.getDarkest());
                     }
 
                     var col = p.getColorAtSlope(0.5f);
