@@ -36,7 +36,7 @@ public class MacawPathsModule extends SimpleModule {
                         BlockInit.OAK_PLANKS_PATH, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FacingPathBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.3f)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(tab)
+                .setTab(()->tab)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .addTexture(modRes("block/oak_planks_path"))

@@ -67,7 +67,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Nullable
     protected final TileHolder<?> tileHolder;
 
-    protected final CreativeModeTab tab;
+    protected final Supplier<CreativeModeTab> tab;
     protected final boolean copyLoot;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
@@ -85,7 +85,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                           Function<T, B> blockSupplier,
                           Supplier<B> baseBlock,
                           Supplier<T> baseType,
-                          CreativeModeTab tab,
+                          Supplier<CreativeModeTab> tab,
                           boolean copyLoot,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable TileHolder<?> tileFactory,
@@ -203,7 +203,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     protected CreativeModeTab getTab(T w, B b) {
         return EarlyConfigs.isTypeEnabled(w) ?
-                (WoodGood.MOD_TAB != null ? WoodGood.MOD_TAB : this.tab) : null;
+                (WoodGood.MOD_TAB != null ? WoodGood.MOD_TAB : this.tab.get()) : null;
     }
 
     @Override
@@ -404,7 +404,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected CreativeModeTab tab = CreativeModeTab.TAB_DECORATIONS;
+        protected Supplier<CreativeModeTab> tab = ()->CreativeModeTab.TAB_DECORATIONS;
         protected boolean copyLoot = false;
         protected final Function<T, B> blockFactory;
         @Nullable
@@ -470,7 +470,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return this;
         }
 
-        public Builder<T, B> setTab(CreativeModeTab tab) {
+        public Builder<T, B> setTab(Supplier<CreativeModeTab> tab) {
             this.tab = tab;
             return this;
         }

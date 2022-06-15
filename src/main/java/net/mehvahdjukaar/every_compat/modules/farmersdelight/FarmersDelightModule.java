@@ -33,7 +33,7 @@ public class FarmersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
                 .addTile(CompatCabinetBlockTile::new)
-                .setTab(FarmersDelight.CREATIVE_TAB)
+                .setTab(()->FarmersDelight.CREATIVE_TAB)
                 .createPaletteFromOak(Palette::increaseDown)
                 .addTexture(WoodGood.res("block/oak_cabinet_front"))
                 .addTexture(WoodGood.res("block/oak_cabinet_side"))

@@ -42,7 +42,7 @@ public class MacawLightsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(()-> RenderType::cutout)
                 .defaultRecipe()
-                .setTab(tab)
+                .setTab(()->tab)
                 .build();
 
         this.addEntry(SOUL_TIKI_TORCHES);
@@ -53,7 +53,7 @@ public class MacawLightsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(()-> RenderType::cutout)
                 .defaultRecipe()
-                .setTab(tab)
+                .setTab(()->tab)
                 .build();
 
         this.addEntry(TIKI_TORCHES);

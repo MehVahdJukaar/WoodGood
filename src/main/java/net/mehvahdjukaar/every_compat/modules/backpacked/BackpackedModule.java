@@ -31,7 +31,7 @@ public class BackpackedModule extends SimpleModule {
                         ModBlocks.OAK_BACKPACK_SHELF, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(Backpacked.TAB)
+                .setTab(()->Backpacked.TAB)
                 .addRecipe(modRes("oak_backpack_shelf"))
                 .addTile(CompatShelfBlockEntity::new)
                 .setRenderType(() -> RenderType::cutout)

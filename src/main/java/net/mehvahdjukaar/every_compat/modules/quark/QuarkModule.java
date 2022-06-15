@@ -92,7 +92,7 @@ public class QuarkModule extends SimpleModule {
                         () -> getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("acacia")),
                         (w, m) -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(), m, w.canBurn()))
-                .setTab(CreativeModeTab.TAB_DECORATIONS)
+                .setTab(()->CreativeModeTab.TAB_DECORATIONS)
                 .useLootFromBase()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Items.BOOKSHELVES, Registry.BLOCK_REGISTRY)
@@ -116,7 +116,7 @@ public class QuarkModule extends SimpleModule {
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
-                .setTab(CreativeModeTab.TAB_DECORATIONS)
+                .setTab(()->CreativeModeTab.TAB_DECORATIONS)
                 .addRecipe(modRes("building/crafting/oak_post"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -136,7 +136,7 @@ public class QuarkModule extends SimpleModule {
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
-                .setTab(CreativeModeTab.TAB_DECORATIONS)
+                .setTab(()->CreativeModeTab.TAB_DECORATIONS)
                 .addRecipe(modRes("building/crafting/stripped_oak_post"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -151,7 +151,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
                             return new QuarkBlock(name, m, CreativeModeTab.TAB_BUILDING_BLOCKS, BlockBehaviour.Properties.copy(w.planks));
                         })
-                .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTab(()->CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
 
@@ -165,7 +165,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new VariantLadderBlock(name, m, w.canBurn());
                         })
-                .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTab(()->CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("ladders"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("ladders"), Registry.ITEM_REGISTRY)
@@ -184,7 +184,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatChestBlock(w, name, m, BlockBehaviour.Properties.copy(w.planks));
                         })
-                .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTab(()->CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
@@ -204,7 +204,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatTrappedChestBlock(w, name, m, BlockBehaviour.Properties.copy(w.planks));
                         })
-                .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTab(()->CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.ITEM_REGISTRY)
@@ -234,7 +234,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hedges"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hedges"), Registry.ITEM_REGISTRY)
-                .setTab(CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTab(()->CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/oak_hedge"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();

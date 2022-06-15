@@ -24,7 +24,7 @@ public class WoodGoodAPI {
                         w -> new TableBlock(BlockBehaviour.Properties.copy(w.planks).instabreak()))
                 .addTag(new ResourceLocation("twigs:tables"), Registry.BLOCK_REGISTRY)
                 .useLootFromBase()
-                .setTab(Twigs.ITEM_GROUP)
+                .setTab(()->Twigs.ITEM_GROUP)
                 .addTexture(new ResourceLocation("twigs:block/oak_table"))
                 .addTexture(new ResourceLocation("twigs:block/oak_table_top"))
                 .addTexture(new ResourceLocation("twigs:block/oak_table_bottom"))

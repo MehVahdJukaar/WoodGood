@@ -31,7 +31,7 @@ public class MacawBridgesModule extends SimpleModule {
                         BlockInit.OAK_BRIDGE_PIER, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new Support_Pillar(BlockBehaviour.Properties.copy(w.planks).strength(0.5F, 2.0F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsBridges.BridgesItemGroup)
+                .setTab(()->MacawsBridges.BridgesItemGroup)
                 .defaultRecipe()
                 .build();
 
@@ -41,7 +41,7 @@ public class MacawBridgesModule extends SimpleModule {
                         BlockInit.ROPE_OAK_BRIDGE, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new Log_Bridge(BlockBehaviour.Properties.copy(w.planks).strength(0.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsBridges.BridgesItemGroup)
+                .setTab(()->MacawsBridges.BridgesItemGroup)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
@@ -52,7 +52,7 @@ public class MacawBridgesModule extends SimpleModule {
                         BlockInit.OAK_LOG_BRIDGE_MIDDLE, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new Log_Bridge(BlockBehaviour.Properties.copy(w.planks).strength(0.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsBridges.BridgesItemGroup)
+                .setTab(()->MacawsBridges.BridgesItemGroup)
                 .defaultRecipe()
                 .build();
 
@@ -63,7 +63,7 @@ public class MacawBridgesModule extends SimpleModule {
                         BlockInit.OAK_RAIL_BRIDGE, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new Rail_Bridge(BlockBehaviour.Properties.copy(w.planks).noOcclusion().strength(0.8F, 3)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsBridges.BridgesItemGroup)
+                .setTab(()->MacawsBridges.BridgesItemGroup)
                 .defaultRecipe()
                 .build();
 
@@ -74,7 +74,7 @@ public class MacawBridgesModule extends SimpleModule {
                         BlockInit.OAK_LOG_BRIDGE_STAIR, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new Iron_Stair(BlockBehaviour.Properties.copy(w.planks).strength(0.8F, 2.0F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsBridges.BridgesItemGroup)
+                .setTab(()->MacawsBridges.BridgesItemGroup)
                 .defaultRecipe()
                 .build();
 
@@ -84,7 +84,7 @@ public class MacawBridgesModule extends SimpleModule {
                         BlockInit.OAK_ROPE_BRIDGE_STAIR, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new Iron_Stair(BlockBehaviour.Properties.copy(w.planks).strength(0.8F, 2.0F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsBridges.BridgesItemGroup)
+                .setTab(()->MacawsBridges.BridgesItemGroup)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();

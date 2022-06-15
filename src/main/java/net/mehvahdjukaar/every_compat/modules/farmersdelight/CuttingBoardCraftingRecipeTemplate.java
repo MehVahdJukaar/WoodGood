@@ -21,7 +21,7 @@ import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-
+/*
 public class CuttingBoardCraftingRecipeTemplate implements IRecipeTemplate<CuttingBoardRecipeBuilder.Result> {
 
     public final Ingredient tool;
@@ -128,4 +128,4 @@ public class CuttingBoardCraftingRecipeTemplate implements IRecipeTemplate<Cutti
     public void addCondition(ICondition condition) {
         this.conditions.add(condition);
     }
-}
+}*/
