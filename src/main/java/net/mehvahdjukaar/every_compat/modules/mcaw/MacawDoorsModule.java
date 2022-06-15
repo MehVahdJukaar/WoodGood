@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 import com.mcwdoors.kikoz.MacawsDoors;
 import com.mcwdoors.kikoz.init.BlockInit;
 import com.mcwdoors.kikoz.objects.JapaneseDoors;
+import com.mcwdoors.kikoz.objects.StableDoor;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -267,7 +268,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         STABLE_DOORS = SimpleEntrySet.builder(WoodType.class,"stable_door",
                         BlockInit.OAK_STABLE_DOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
+                        w -> new StableDoor(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
@@ -284,7 +285,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         STABLE_HEAD_DOORS = SimpleEntrySet.builder(WoodType.class,"stable_head_door",
                         BlockInit.OAK_STABLE_HEAD_DOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new DoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
+                        w -> new StableDoor(BlockBehaviour.Properties.copy(w.planks).strength(3.0F, 3.0F).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(MacawsDoors.DoorItemGroup)
