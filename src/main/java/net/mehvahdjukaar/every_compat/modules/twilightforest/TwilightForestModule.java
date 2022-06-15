@@ -43,7 +43,7 @@ public class TwilightForestModule extends SimpleModule {
                 .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("wood/oak_banister"))
                 .useLootFromBase()
-                .setTab(TFItems.creativeTab)
+                .setTab(()->TFItems.creativeTab)
                 .build();
 
         this.addEntry(BANISTERS);

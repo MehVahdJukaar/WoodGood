@@ -33,7 +33,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_BLINDS, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Blinds())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.Window2ItemGroup)
+                .setTab(()->MacawsWindows.Window2ItemGroup)
                 .defaultRecipe()
                 .build();
 
@@ -43,7 +43,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_LOG_PARAPET, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Parapet())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.Window2ItemGroup)
+                .setTab(()->MacawsWindows.Window2ItemGroup)
                 .defaultRecipe()
                 .build();
 
@@ -53,7 +53,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_PLANK_PARAPET, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Parapet())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.Window2ItemGroup)
+                .setTab(()->MacawsWindows.Window2ItemGroup)
                 .defaultRecipe()
                 .build();
 
@@ -63,7 +63,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.WindowItemGroup)
+                .setTab(()->MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
@@ -74,7 +74,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_PLANK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.WindowItemGroup)
+                .setTab(()->MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
@@ -85,7 +85,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.WindowItemGroup)
+                .setTab(()->MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
@@ -96,7 +96,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_PLANK_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.WindowItemGroup)
+                .setTab(()->MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
@@ -107,7 +107,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.WindowItemGroup)
+                .setTab(()->MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
@@ -118,7 +118,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Window())
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .setTab(MacawsWindows.WindowItemGroup)
+                .setTab(()->MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();

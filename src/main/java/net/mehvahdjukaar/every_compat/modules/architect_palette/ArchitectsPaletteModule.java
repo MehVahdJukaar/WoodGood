@@ -26,7 +26,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new RailingBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
-                .setTab(CreativeModeTab.TAB_DECORATIONS)
+                .setTab(()->CreativeModeTab.TAB_DECORATIONS)
                 .build();
 
         this.addEntry(RAILINGS);
@@ -36,7 +36,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new BoardBlock(BlockBehaviour.Properties.copy(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
-                .setTab(CreativeModeTab.TAB_DECORATIONS)
+                .setTab(()->CreativeModeTab.TAB_DECORATIONS)
                 .createPaletteFromOak(p -> {
 
                     while (p.size() > 7) {

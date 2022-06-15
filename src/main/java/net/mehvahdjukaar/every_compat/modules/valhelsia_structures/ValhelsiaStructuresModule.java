@@ -35,7 +35,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         w -> new PostBlock(() -> w.log))
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.ITEM_REGISTRY)
-                .setTab(ModCreativeModeTabs.MAIN)
+                .setTab(()->ModCreativeModeTabs.MAIN)
                 .defaultRecipe()
                 .build();
 
@@ -46,7 +46,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("cut_posts"), Registry.ITEM_REGISTRY)
-                .setTab(ModCreativeModeTabs.MAIN)
+                .setTab(()->ModCreativeModeTabs.MAIN)
                 .defaultRecipe()
                 .useLootFromBase()
                 .setRenderType(() -> RenderType::cutout)

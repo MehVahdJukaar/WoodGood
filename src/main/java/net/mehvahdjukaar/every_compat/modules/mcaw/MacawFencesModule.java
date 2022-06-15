@@ -54,7 +54,7 @@ public class MacawFencesModule extends SimpleModule {
                         BlockInit.OAK_PICKET_FENCE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
-                .setTab(tab)
+                .setTab(()->tab)
                 .defaultRecipe()
                 .build();
 
@@ -64,7 +64,7 @@ public class MacawFencesModule extends SimpleModule {
                         BlockInit.OAK_STOCKADE_FENCE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
-                .setTab(tab)
+                .setTab(()->tab)
                 .defaultRecipe()
                 .build();
 
@@ -74,7 +74,7 @@ public class MacawFencesModule extends SimpleModule {
                         BlockInit.OAK_HORSE_FENCE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
-                .setTab(tab)
+                .setTab(()->tab)
                 .defaultRecipe()
                 .build();
 
@@ -84,7 +84,7 @@ public class MacawFencesModule extends SimpleModule {
                         BlockInit.OAK_WIRED_FENCE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new WiredFence(BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.5f)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
-                .setTab(tab)
+                .setTab(()->tab)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
@@ -96,7 +96,7 @@ public class MacawFencesModule extends SimpleModule {
                         BlockInit.OAK_PYRAMID_GATE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceGateBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.FENCE_GATES, Registry.BLOCK_REGISTRY)
-                .setTab(tab)
+                .setTab(()->tab)
                 .defaultRecipe()
                 .build();
 
@@ -106,7 +106,7 @@ public class MacawFencesModule extends SimpleModule {
                         BlockInit.OAK_HIGHLEY_GATE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new FenceGateBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
-                .setTab(tab)
+                .setTab(()->tab)
                 .defaultRecipe()
                 .build();
 
