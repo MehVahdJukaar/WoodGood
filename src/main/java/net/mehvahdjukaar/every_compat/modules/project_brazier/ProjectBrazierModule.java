@@ -19,18 +19,19 @@ import net.minecraftforge.registries.RegistryObject;
 public class ProjectBrazierModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> FIREWOODS;
-    public static final RegistryObject<Block> FIREWOOD = null;
+//    public static final RegistryObject<Block> FIREWOOD = null;
 
     public ProjectBrazierModule(String modId) {
         super(modId, "pb");
 
         FIREWOODS = SimpleEntrySet.builder(WoodType.class,"firewood",
-                        FIREWOOD, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new HAxisDecoBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.3f), "full_block"))
+                        () -> this.getModBlock("oak_firewood"), () -> WoodType.OAK_WOOD_TYPE,
+                        w -> new HAxisDecoBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.3f).noOcclusion(), "full_block"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(BrazierCreativeTabs.DECORATION.get())
+//                .setTab(BrazierCreativeTabs.DECORATION.get())
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
+                .addTexture(modRes("block/oak_planks_path"))
                 .build();
 
         this.addEntry(FIREWOODS);

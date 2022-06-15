@@ -161,6 +161,8 @@
   "block_type.cfm.upgraded_gate": "%s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
+  "block_type.projectbrazier.firewood": "%s Firewood",
+
   "block_type.storagedrawers.full_drawers_1": "%s Storage Drawers 1x1",
   "block_type.storagedrawers.full_drawers_2": "%s Storage Drawers 1x2",
   "block_type.storagedrawers.full_drawers_4": "%s Storage Drawers 2x2",
