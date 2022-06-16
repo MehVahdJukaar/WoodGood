@@ -12,6 +12,7 @@ import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.benched.BenchedModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
@@ -93,6 +94,7 @@ public class WoodGood {
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
 
+        addModule("benched", () -> BenchedModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
