@@ -158,7 +158,7 @@ dependencies {
     implementation fg.deobf("curse.maven:malum-484064:3768401")
     implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
     implementation fg.deobf("curse.maven:marg-324494:3723497")
-    implementation fg.deobf("curse.maven:project-brazier-238326:3723511")
+    implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
     implementation fg.deobf("curse.maven:curios-309927:3670447")
     implementation fg.deobf("curse.maven:selene-499980:3828175")
     implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
@@ -167,7 +167,7 @@ dependencies {
     implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
     implementation fg.deobf("curse.maven:decorativeblocks-362528:3681919")
-    implementation fg.deobf("curse.maven:apple-crates-630726:3828943")
+    implementation fg.deobf("curse.maven:apple-crates-630726:3834400")
 
 
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
