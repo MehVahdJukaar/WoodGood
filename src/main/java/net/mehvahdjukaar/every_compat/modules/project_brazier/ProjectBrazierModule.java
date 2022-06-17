@@ -1,8 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.project_brazier;
 
-import com.mrcrayfish.backpacked.block.ShelfBlock;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
+import net.dark_roleplay.projectbrazier.feature.blockentities.BarrelBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blockentities.ZiplineBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blocks.*;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.AxisDecoBlock;
@@ -10,10 +10,10 @@ import net.dark_roleplay.projectbrazier.feature.blocks.templates.HAxisDecoBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.HFacedDecoBlock;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierCreativeTabs;
+import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.BarrelBlockEntityRenderer;
 import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.ZiplineBlockEntityRenderer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.minecraft.core.BlockPos;
@@ -25,8 +25,11 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Iterator;
 import java.util.function.Function;
 
 
@@ -88,7 +91,7 @@ public class ProjectBrazierModule extends SimpleModule {
 
         BENCHES = SimpleEntrySet.builder(WoodType.class, "bench",
                         () -> this.getModBlock("oak_bench"), () -> WoodType.OAK_WOOD_TYPE,
-                        ifCond(BrazierBlocks.WOOD_CHAIR_BENCH, w ->
+                        ifCond(BrazierBlocks.WOOD_CHAIR_BENCH_CON, w ->
                                 new WoodBenchBlock(BlockBehaviour.Properties.copy(w.planks)
                                         .strength(2.0F, 3.0F).noOcclusion(),
                                         "default_wood_bench", "positive_wood_bench",
@@ -103,10 +106,11 @@ public class ProjectBrazierModule extends SimpleModule {
         CLOSED_BARRELS = SimpleEntrySet.builder(WoodType.class, "closed_barrel",
                         () -> this.getModBlock("oak_closed_barrel"), () -> WoodType.OAK_WOOD_TYPE,
                         ifCond(BrazierBlocks.BARREL_CON, w ->
-                                new BarrelBlock(material, BlockBehaviour.Properties.copy(w.planks)
+                                new CompatBarrelBlock(material, BlockBehaviour.Properties.copy(w.planks)
                                         .strength(2.0F, 3.0F).noOcclusion(),
                                         "closed_barrel", true)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTile(CompatBarrelBlockEntity::new)
                 .setTab(BrazierCreativeTabs::decor)
                 .defaultRecipe()
                 .build();
@@ -302,10 +306,11 @@ public class ProjectBrazierModule extends SimpleModule {
         OPEN_BARRELS = SimpleEntrySet.builder(WoodType.class, "open_barrel",
                         () -> this.getModBlock("oak_open_barrel"), () -> WoodType.OAK_WOOD_TYPE,
                         ifCond(BrazierBlocks.BARREL_CON, w ->
-                                new BarrelBlock(material, BlockBehaviour.Properties.copy(w.planks)
+                                new CompatBarrelBlock(material, BlockBehaviour.Properties.copy(w.planks)
                                         .strength(2.0F, 3.0F).noOcclusion(),
                                         "open_barrel", false)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTile(CompatBarrelBlockEntity::new)
                 .setTab(BrazierCreativeTabs::decor)
                 .defaultRecipe()
                 .build();
@@ -395,7 +400,7 @@ public class ProjectBrazierModule extends SimpleModule {
 
         POLSTERED_BENCHES_ORANGE = SimpleEntrySet.builder(WoodType.class, "bench", "orange_polstered",
                         () -> this.getModBlock("orange_polstered_oak_bench"), () -> WoodType.OAK_WOOD_TYPE,
-                        ifCond(BrazierBlocks.WOOD_CHAIR_BENCH, w ->
+                        ifCond(BrazierBlocks.WOOD_CHAIR_BENCH_CON, w ->
                                 new WoodBenchBlock(BlockBehaviour.Properties.copy(w.planks)
                                         .strength(2.0F, 3.0F).noOcclusion(),
                                         "default_polstered_wood_bench", "positive_polstered_wood_bench",
@@ -409,7 +414,7 @@ public class ProjectBrazierModule extends SimpleModule {
 
         POLSTERED_BENCHES_WHITE = SimpleEntrySet.builder(WoodType.class, "bench", "white_polstered",
                         () -> this.getModBlock("white_polstered_oak_bench"), () -> WoodType.OAK_WOOD_TYPE,
-                        ifCond(BrazierBlocks.WOOD_CHAIR_BENCH, w ->
+                        ifCond(BrazierBlocks.WOOD_CHAIR_BENCH_CON, w ->
                                 new WoodBenchBlock(BlockBehaviour.Properties.copy(w.planks)
                                         .strength(2.0F, 3.0F).noOcclusion(),
                                         "default_polstered_wood_bench", "positive_polstered_wood_bench",
@@ -526,7 +531,7 @@ public class ProjectBrazierModule extends SimpleModule {
 
         this.addEntry(VERTICAL_LATTICES_CENTERED);
 
-        ZIPLINE_ANCHORS = SimpleEntrySet.builder(WoodType.class, "zipline_anchors",
+        ZIPLINE_ANCHORS = SimpleEntrySet.builder(WoodType.class, "zipline_anchor",
                         () -> this.getModBlock("oak_zipline_anchor"), () -> WoodType.OAK_WOOD_TYPE,
                         ifCond(BrazierBlocks.STRIPPED_LOG_CON, w ->
                                 new CompatZiplineBlock(BlockBehaviour.Properties.copy(w.planks)
@@ -539,28 +544,44 @@ public class ProjectBrazierModule extends SimpleModule {
                 .build();
 
         this.addEntry(ZIPLINE_ANCHORS);
+    }
 
-//        MargMaterial material;
-//        Iterator var4 = BrazierBlocks.WOOD_LATTICE_CON.iterator();
-//
-//        while(var4.hasNext()) {
-//            material = (MargMaterial)var4.next();
-//            ((FacedLatticeBlock)CROSS_LATTICES.blocks.get(material)).initOtherBlock((Block)CROSS_LATTICES_CENTERED.blocks.get(material));
-//            ((AxisLatticeBlock)CROSS_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((Block)CROSS_LATTICES.blocks.get(material));
-//            ((FacedLatticeBlock)DENSE_VERTICAL_LATTICES.blocks.get(material)).initOtherBlock((Block)DENSE_VERTICAL_LATTICES_CENTERED.blocks.get(material));
-//            ((AxisLatticeBlock)DENSE_VERTICAL_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((Block)DENSE_VERTICAL_LATTICES.blocks.get(material));
-//            ((FacedLatticeBlock)DIAMOND_LATTICES.blocks.get(material)).initOtherBlock((Block)DIAMOND_LATTICES_CENTERED.blocks.get(material));
-//            ((AxisLatticeBlock)DIAMOND_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((Block)DIAMOND_LATTICES.blocks.get(material));
-//            ((FacedLatticeBlock)GRID_LATTICES.blocks.get(material)).initOtherBlock((Block)GRID_LATTICES_CENTERED.blocks.get(material));
-//            ((AxisLatticeBlock)GRID_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((Block)GRID_LATTICES.blocks.get(material));
-//            ((FacedLatticeBlock)VERTICAL_LATTICES.blocks.get(material)).initOtherBlock((Block)VERTICAL_LATTICES_CENTERED.blocks.get(material));
-//            ((AxisLatticeBlock)VERTICAL_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((Block)VERTICAL_LATTICES.blocks.get(material));
-//        }
+    @SubscribeEvent
+    public void postRegistry(FMLCommonSetupEvent event) {
+
+        MargMaterial material;
+        Iterator var4 = BrazierBlocks.WOOD_LATTICE_CON.iterator();
+
+        while(var4.hasNext()) {
+            material = (MargMaterial)var4.next();
+            ((FacedLatticeBlock)CROSS_LATTICES.blocks.get(material)).initOtherBlock((AxisLatticeBlock)CROSS_LATTICES_CENTERED.blocks.get(material));
+            ((AxisLatticeBlock)CROSS_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((FacedLatticeBlock)CROSS_LATTICES.blocks.get(material));
+            ((FacedLatticeBlock)DENSE_VERTICAL_LATTICES.blocks.get(material)).initOtherBlock((AxisLatticeBlock)DENSE_VERTICAL_LATTICES_CENTERED.blocks.get(material));
+            ((AxisLatticeBlock)DENSE_VERTICAL_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((FacedLatticeBlock)DENSE_VERTICAL_LATTICES.blocks.get(material));
+            ((FacedLatticeBlock)DIAMOND_LATTICES.blocks.get(material)).initOtherBlock((AxisLatticeBlock)DIAMOND_LATTICES_CENTERED.blocks.get(material));
+            ((AxisLatticeBlock)DIAMOND_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((FacedLatticeBlock)DIAMOND_LATTICES.blocks.get(material));
+            ((FacedLatticeBlock)GRID_LATTICES.blocks.get(material)).initOtherBlock((AxisLatticeBlock)GRID_LATTICES_CENTERED.blocks.get(material));
+            ((AxisLatticeBlock)GRID_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((FacedLatticeBlock)GRID_LATTICES.blocks.get(material));
+            ((FacedLatticeBlock)VERTICAL_LATTICES.blocks.get(material)).initOtherBlock((AxisLatticeBlock)VERTICAL_LATTICES_CENTERED.blocks.get(material));
+            ((AxisLatticeBlock)VERTICAL_LATTICES_CENTERED.blocks.get(material)).initOtherBlock((FacedLatticeBlock)VERTICAL_LATTICES.blocks.get(material));
+        }
+
+        var4 = BrazierBlocks.BARREL_CON.iterator();
+
+        while(var4.hasNext()) {
+            material = (MargMaterial)var4.next();
+            CompatBarrelBlock openBarrel = (CompatBarrelBlock)OPEN_BARRELS.blocks.get(material);
+            CompatBarrelBlock closedBarrel = (CompatBarrelBlock)CLOSED_BARRELS.blocks.get(material);
+            openBarrel.setOtherBlock(closedBarrel);
+            closedBarrel.setOtherBlock(openBarrel);
+        }
     }
 
     @Override
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer((BlockEntityType<ZiplineBlockEntity>) (ZIPLINE_ANCHORS.getTileHolder().tile), ZiplineBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<BarrelBlockEntity>) (OPEN_BARRELS.getTileHolder().tile), BarrelBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<BarrelBlockEntity>) (CLOSED_BARRELS.getTileHolder().tile), BarrelBlockEntityRenderer::new);
     }
 
     class CompatZiplineBlockEntity extends ZiplineBlockEntity {
@@ -582,6 +603,28 @@ public class ProjectBrazierModule extends SimpleModule {
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new CompatZiplineBlockEntity(pos, state);
+        }
+    }
+
+    class CompatBarrelBlockEntity extends BarrelBlockEntity {
+
+        public CompatBarrelBlockEntity(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public BlockEntityType<?> getType() {
+            return OPEN_BARRELS.getTileHolder().tile;
+        }
+    }
+
+    private class CompatBarrelBlock extends BarrelBlock {
+        public CompatBarrelBlock(MargMaterial material, Properties properties, String shape, boolean isClosed) {
+            super(material, properties, shape, isClosed);
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new CompatBarrelBlockEntity(pos, state);
         }
     }
 
