@@ -51,7 +51,15 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     modId="selene"
     mandatory=true
     versionRange="[1.18.2-1.17.6,]"
-    ordering="AFTER"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.everycomp]]
+
+    modId="projectbrazier"
+    mandatory=false
+    versionRange="[0.6.2,]"
+    ordering="BEFORE"
     side="BOTH"
 
 

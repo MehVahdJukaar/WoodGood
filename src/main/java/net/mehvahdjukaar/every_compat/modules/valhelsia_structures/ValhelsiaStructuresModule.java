@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
@@ -77,9 +78,9 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 ResourceLocation id = block.getRegistryName();
 
                 try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, s -> !s.contains("_top") && !s.contains("_end")));
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteUtils::looksLikeSideLogTexture));
                      TextureImage topTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, w.log, s -> s.contains("_top") || s.contains("_end")))) {
+                             RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteUtils::looksLikeTopLogTexture))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak");
 

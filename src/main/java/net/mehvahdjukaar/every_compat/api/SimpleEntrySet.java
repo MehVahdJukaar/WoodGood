@@ -184,7 +184,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             //for blocks that fail
             if (block != null) {
                 this.blocks.put(w, block);
-                registry.register(block.setRegistryName(WoodGood.res(fullName)));
+                if(block.getRegistryName() == null) { //remember to register blocks yourself if they have a non-null registry name
+                    registry.register(block.setRegistryName(WoodGood.res(fullName)));
+                }
                 w.addChild(module.shortenedId() + "/" + typeName, block);
             }
         }

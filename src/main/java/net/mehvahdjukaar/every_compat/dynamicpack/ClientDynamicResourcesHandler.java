@@ -31,7 +31,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     @Override
     public boolean dependsOnLoadedPacks() {
-        return EarlyConfigs.DEPEND_ON_PACKS.get();
+        return EarlyConfigs.REGISTRY_CONFIG != null && EarlyConfigs.DEPEND_ON_PACKS.get();
     }
 
     @Override
