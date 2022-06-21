@@ -12,20 +12,21 @@ import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
+import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
-import net.mehvahdjukaar.every_compat.modules.project_brazier.ProjectBrazierModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
-import net.mehvahdjukaar.every_compat.modules.storage_drawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -108,12 +109,15 @@ public class WoodGood {
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
-        addModule("projectbrazier", () -> ProjectBrazierModule::new);
+
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+        addModule("campchair", () -> CampChairModule::new);
+        addModule("missingwilds", () -> MissingWildModule::new);
 
+        //addModule("projectbrazier", () -> ProjectBrazierModule::new);
         //addModule("storagedrawers", () -> StorageDrawersModule::new);
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
@@ -146,6 +150,7 @@ public class WoodGood {
             public ItemStack makeIcon() {
                 return ForgeRegistries.ITEMS.getValue(WoodGood.res("all_woods")).getDefaultInstance();
             }
+
             @Override
             public boolean hasSearchBar() {
                 return true;
@@ -207,7 +212,6 @@ public class WoodGood {
     public record CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
 
     }
-
 
 
 }
