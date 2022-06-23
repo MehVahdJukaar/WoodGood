@@ -31,7 +31,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     @Override
     public boolean dependsOnLoadedPacks() {
-        return EarlyConfigs.DEPEND_ON_PACKS.get();
+        return EarlyConfigs.REGISTRY_CONFIG != null && EarlyConfigs.DEPEND_ON_PACKS.get();
     }
 
     @Override
@@ -63,24 +63,6 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
             }
         });
         int a = 1;
-    }
-
-
-    /**
-     * helper method.
-     * recolors the template image with the color grabbed from the given image restrained to its mask, if possible
-     */
-    @Nullable
-    public static TextureImage recolorFromVanilla(ResourceManager manager, TextureImage vanillaTexture, ResourceLocation vanillaMask,
-                                                  ResourceLocation templateTexture) {
-        try (TextureImage scribbleMask = TextureImage.open(manager, vanillaMask);
-             TextureImage template = TextureImage.open(manager, templateTexture)) {
-            Respriter respriter = Respriter.of(template);
-            Palette palette = Palette.fromImage(vanillaTexture, scribbleMask);
-            return respriter.recolor(palette);
-        } catch (Exception ignored) {
-        }
-        return null;
     }
 
 }

@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.api;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
-import net.mehvahdjukaar.every_compat.misc.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.every_compat.misc.Utils;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
@@ -14,6 +13,7 @@ import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.items.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.selene.resourcepack.*;
 import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -81,7 +81,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
 
     public SimpleEntrySet(Class<T> type,
-            String name, @Nullable String prefix,
+                          String name, @Nullable String prefix,
                           Function<T, B> blockSupplier,
                           Supplier<B> baseBlock,
                           Supplier<T> baseType,
@@ -153,7 +153,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     public void addTranslations(CompatModule module, AfterLanguageLoadEvent lang) {
-        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block_type." + module.getModId() + "." + typeName, (BlockType) w, v));
+        blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block_type." + module.getModId() + "." + typeName, w, v));
     }
 
     public void registerWoodBlocks(CompatModule module, IForgeRegistry<Block> registry, Collection<WoodType> woodTypes) {
@@ -184,7 +184,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             //for blocks that fail
             if (block != null) {
                 this.blocks.put(w, block);
-                registry.register(block.setRegistryName(WoodGood.res(fullName)));
+                if (block.getRegistryName() == null) { //remember to register blocks yourself if they have a non-null registry name
+                    registry.register(block.setRegistryName(WoodGood.res(fullName)));
+                }
                 w.addChild(module.shortenedId() + "/" + typeName, block);
             }
         }
@@ -277,7 +279,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.recipeLocations.forEach(r -> {
             var res = r.get();
             try {
-                Utils.addBlocksRecipes(manager, pack, items,res , baseType.get());
+                Utils.addBlocksRecipes(manager, pack, items, res, baseType.get());
             } catch (Exception e) {
                 WoodGood.LOGGER.error("Failed to generate recipes for template at location {} ", res);
             }
@@ -386,15 +388,15 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     //ok...
     public static <T extends BlockType, B extends Block> Builder<T, B> builder(Class<T> type,
-            String name, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
+                                                                               String name, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
 
         return new Builder<>(type, name, null, baseType, baseBlock, blockSupplier);
     }
 
     public static <T extends BlockType, B extends Block> Builder<T, B> builder(Class<T> type,
-            String name, String prefix, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
+                                                                               String name, String prefix, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
 
-        return new Builder<>(type,name, prefix, baseType, baseBlock, blockSupplier);
+        return new Builder<>(type, name, prefix, baseType, baseBlock, blockSupplier);
     }
 
     public static class Builder<T extends BlockType, B extends Block> {
@@ -404,7 +406,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected Supplier<CreativeModeTab> tab = ()->CreativeModeTab.TAB_DECORATIONS;
+        protected Supplier<CreativeModeTab> tab = () -> CreativeModeTab.TAB_DECORATIONS;
         protected boolean copyLoot = false;
         protected final Function<T, B> blockFactory;
         @Nullable
@@ -430,7 +432,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         }
 
         public SimpleEntrySet<T, B> build() {
-            var e = new SimpleEntrySet<>( type, name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot,
+            var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot,
                     itemFactory, tileFactory, renderType, palette, extraModelTransform);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
