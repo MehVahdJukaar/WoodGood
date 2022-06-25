@@ -42,7 +42,6 @@ public class ProjectBrazierModule extends SimpleModule {
 
     public static Map<ResourceLocation, TextureGenerator> generators;
     private static List<MargMaterial> margMaterials = new ArrayList<>();
-    private boolean initialized = false;
 
     public final SimpleEntrySet<WoodType, Block> FIREWOODS;
 
