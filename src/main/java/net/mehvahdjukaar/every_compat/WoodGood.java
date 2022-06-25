@@ -145,11 +145,13 @@ public class WoodGood {
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
         BlockSetManager.addBlockTypeFinder(WoodType.class, WoodType.Finder.simple(new ResourceLocation("domum_ornamentum:cactus"),
-                new ResourceLocation("domum_ornamentum:green_cactus_extra"), new ResourceLocation("cactus")));
-        BlockSetManager.addBlockTypeFinder(WoodType.class, WoodType.Finder.simple(new ResourceLocation("domum_ornamentum:cactus"),
                 new ResourceLocation("domum_ornamentum:cactus_extra"), new ResourceLocation("cactus")));
+        BlockSetManager.addBlockTypeFinder(WoodType.class, WoodType.Finder.simple(new ResourceLocation("domum_ornamentum:green_cactus"),
+                new ResourceLocation("domum_ornamentum:green_cactus_extra"), new ResourceLocation("cactus")));
         BlockSetManager.addBlockTypeFinder(WoodType.class, WoodType.Finder.simple(
                 "darkerdepths", "petrified", "petrified_planks", "petrified_log"));
+//        BlockSetManager.addBlockTypeFinder(WoodType.class, WoodType.Finder.simple(
+//                "darkerdepths", "porous_petrified", "petrified_planks", "porous_petrified_log"));
 
     }
 
