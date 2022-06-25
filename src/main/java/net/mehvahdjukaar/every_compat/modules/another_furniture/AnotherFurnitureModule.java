@@ -9,6 +9,7 @@ import com.starfish_studios.another_furniture.client.renderer.blockentity.ShelfR
 import com.starfish_studios.another_furniture.registry.AFBlocks;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.PaletteColor;
@@ -35,7 +36,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         PLANTER_BOXES = SimpleEntrySet.builder(WoodType.class, "planter_box",
                         AFBlocks.OAK_PLANTER_BOX, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatPlanterBoxBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F)))
+                        w -> new CompatPlanterBoxBlock(WoodGood.copySafe(w.planks).strength(2.0F, 3.0F)))
                 .addTag(modRes("planter_boxes"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("planter_boxes"), Registry.ITEM_REGISTRY)
                 .useLootFromBase()
@@ -49,7 +50,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         SHUTTERS = SimpleEntrySet.builder(WoodType.class, "shutter",
                         AFBlocks.OAK_SHUTTER, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new ShutterBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3.0F).noOcclusion()))
+                        w -> new ShutterBlock(WoodGood.copySafe(w.planks).strength(2.0F, 3.0F).noOcclusion()))
                 .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shutters"), Registry.ITEM_REGISTRY)
                 .useLootFromBase()
@@ -66,7 +67,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         TABLES = SimpleEntrySet.builder(WoodType.class, "table",
                         AFBlocks.OAK_TABLE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TableBlock(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> new TableBlock(WoodGood.copySafe(w.planks)))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
                 .useLootFromBase()
@@ -80,7 +81,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         CHAIRS = SimpleEntrySet.builder(WoodType.class, "chair",
                         AFBlocks.OAK_CHAIR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new ChairBlock(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> new ChairBlock(WoodGood.copySafe(w.planks)))
                 .addTag(modRes("chairs"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("chairs"), Registry.ITEM_REGISTRY)
                 .defaultRecipe()
@@ -95,7 +96,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         SHELVES = SimpleEntrySet.builder(WoodType.class, "shelf",
                         AFBlocks.OAK_SHELF, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> new CompatShelfBlock(WoodGood.copySafe(w.planks)))
                 .addTag(modRes("shelves"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shelves"), Registry.ITEM_REGISTRY)
                 .addTile(CompatShelfBlockTile::new)

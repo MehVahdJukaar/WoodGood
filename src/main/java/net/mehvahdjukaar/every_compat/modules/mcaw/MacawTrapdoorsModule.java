@@ -36,7 +36,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         BARK_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"bark_trapdoor",
                         BlockInit.OAK_BARK_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -51,7 +51,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         BARN_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"barn_trapdoor",
                         BlockInit.OAK_BARN_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F)))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -67,7 +67,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         BARRED_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"barred_trapdoor",
                         BlockInit.OAK_BARRED_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -83,7 +83,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         BEACH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"beach_trapdoor",
                         BlockInit.OAK_BEACH_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -99,7 +99,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         CLASSIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"classic_trapdoor",
                         BlockInit.SPRUCE_CLASSIC_TRAPDOOR, () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -115,7 +115,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         COTTAGE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"cottage_trapdoor",
                         BlockInit.OAK_COTTAGE_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F)))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -131,7 +131,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         FOUR_PANEL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"four_panel_trapdoor",
                         BlockInit.OAK_FOUR_PANEL_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F)))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -147,7 +147,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         GLASS_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"glass_trapdoor",
                         BlockInit.OAK_GLASS_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -164,7 +164,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         MYSTIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"mystic_trapdoor",
                         BlockInit.OAK_MYSTIC_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -180,7 +180,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         PAPER_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"paper_trapdoor",
                         BlockInit.OAK_PAPER_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F)))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
@@ -197,7 +197,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         TROPICAL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class,"tropical_trapdoor",
                         BlockInit.OAK_TROPICAL_TRAPDOOR, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TrapDoorBlock(BlockBehaviour.Properties.copy(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                        w -> new TrapDoorBlock(WoodGood.copySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)

@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.architect_palette;
 import architectspalette.content.blocks.BoardBlock;
 import architectspalette.content.blocks.RailingBlock;
 import architectspalette.core.registry.APBlocks;
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -23,7 +24,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
 
         RAILINGS = SimpleEntrySet.builder(WoodType.class,"railing",
                         APBlocks.OAK_RAILING, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RailingBlock(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> new RailingBlock(WoodGood.copySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
                 .setTab(()->CreativeModeTab.TAB_DECORATIONS)
@@ -33,7 +34,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
 
         BOARDS = SimpleEntrySet.builder(WoodType.class,"boards",
                         APBlocks.OAK_BOARDS, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new BoardBlock(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> new BoardBlock(WoodGood.copySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
                 .setTab(()->CreativeModeTab.TAB_DECORATIONS)

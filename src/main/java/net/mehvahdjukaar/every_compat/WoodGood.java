@@ -26,7 +26,6 @@ import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStru
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
-import net.mehvahdjukaar.selene.resourcepack.BlockTypeResTransformer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -34,6 +33,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -142,6 +142,13 @@ public class WoodGood {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
+        BlockSetManager.addBlockTypeFinder(WoodType.class, WoodType.Finder.simple(new ResourceLocation("domum_ornamentum:cactus"),
+                new ResourceLocation("domum_ornamentum:green_cactus_extra"), new ResourceLocation("cactus")));
+        BlockSetManager.addBlockTypeFinder(WoodType.class, WoodType.Finder.simple(new ResourceLocation("domum_ornamentum:cactus"),
+                new ResourceLocation("domum_ornamentum:cactus_extra"), new ResourceLocation("cactus")));
+        BlockSetManager.addBlockTypeFinder(WoodType.class, WoodType.Finder.simple(
+                "darkerdepths", "petrified", "petrified_planks", "petrified_log"));
+
     }
 
     public static void createModTab() {
@@ -211,6 +218,20 @@ public class WoodGood {
 
     public record CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
 
+    }
+
+
+    //TODO: replace oak based with acacia based
+
+    /**
+     * Copies block properties without keeping stupid lambdas that could include references to the wrong blockstate properties
+     */
+    @Deprecated(since = "1.19")
+    public static BlockBehaviour.Properties copySafe(BlockBehaviour blockBehaviour) {
+        var p = BlockBehaviour.Properties.copy(blockBehaviour);
+        p.lightLevel(s -> 0);
+        p.color(blockBehaviour.defaultMaterialColor());
+        return p;
     }
 
 

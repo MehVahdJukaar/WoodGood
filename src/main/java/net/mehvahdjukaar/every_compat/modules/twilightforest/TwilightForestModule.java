@@ -38,7 +38,7 @@ public class TwilightForestModule extends SimpleModule {
 
         BANISTERS = SimpleEntrySet.builder(WoodType.class,"banister",
                         TFBlocks.OAK_BANISTER, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new BanisterBlock(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> new BanisterBlock(WoodGood.copySafe(w.planks)))
                 .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("wood/oak_banister"))
@@ -51,7 +51,7 @@ public class TwilightForestModule extends SimpleModule {
 
         HOLLOW_LOGS_HORIZONTAL = SimpleEntrySet.builder(WoodType.class,"log_horizontal", "hollow",
                         TFBlocks.HOLLOW_OAK_LOG_HORIZONTAL, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new HollowLogHorizontal(BlockBehaviour.Properties.copy(w.planks))))
+                        w -> regIfPossible(w, () -> new HollowLogHorizontal(WoodGood.copySafe(w.planks))))
                 .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
                 .noItem()
                 .setRenderType(() -> RenderType::cutout)
@@ -64,7 +64,7 @@ public class TwilightForestModule extends SimpleModule {
                         TFBlocks.HOLLOW_OAK_LOG_VERTICAL, () -> WoodType.OAK_WOOD_TYPE,
                         w -> {
                             var id = WoodGood.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
-                            return regIfPossible(w, () -> new HollowLogVertical(BlockBehaviour.Properties.copy(w.planks), RegistryObject.create(id, ForgeRegistries.BLOCKS)));
+                            return regIfPossible(w, () -> new HollowLogVertical(WoodGood.copySafe(w.planks), RegistryObject.create(id, ForgeRegistries.BLOCKS)));
                         })
                 .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
                 .noItem()
@@ -75,7 +75,7 @@ public class TwilightForestModule extends SimpleModule {
 
         HOLLOW_LOGS_CLIMBABLE = SimpleEntrySet.builder(WoodType.class,"log_climbable", "hollow",
                         TFBlocks.HOLLOW_OAK_LOG_CLIMBABLE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new HollowLogClimbable(BlockBehaviour.Properties.copy(w.planks),
+                        w -> regIfPossible(w, () -> new HollowLogClimbable(WoodGood.copySafe(w.planks),
                                 RegistryObject.create(HOLLOW_LOGS_VERTICAL.blocks.get(w).getRegistryName(), ForgeRegistries.BLOCKS))))
                 .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)
                 .noItem()

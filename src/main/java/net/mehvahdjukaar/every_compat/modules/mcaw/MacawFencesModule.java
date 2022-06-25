@@ -52,7 +52,7 @@ public class MacawFencesModule extends SimpleModule {
 
         PICKET_FENCES = SimpleEntrySet.builder(WoodType.class,"picket_fence",
                         BlockInit.OAK_PICKET_FENCE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
+                        w -> new FenceBlock(WoodGood.copySafe(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
                 .setTab(()->tab)
                 .defaultRecipe()
@@ -62,7 +62,7 @@ public class MacawFencesModule extends SimpleModule {
 
         STOCKADE_FENCES = SimpleEntrySet.builder(WoodType.class,"stockade_fence",
                         BlockInit.OAK_STOCKADE_FENCE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
+                        w -> new FenceBlock(WoodGood.copySafe(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
                 .setTab(()->tab)
                 .defaultRecipe()
@@ -72,7 +72,7 @@ public class MacawFencesModule extends SimpleModule {
 
         HORSE_FENCES = SimpleEntrySet.builder(WoodType.class,"horse_fence",
                         BlockInit.OAK_HORSE_FENCE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new FenceBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
+                        w -> new FenceBlock(WoodGood.copySafe(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
                 .setTab(()->tab)
                 .defaultRecipe()
@@ -82,7 +82,7 @@ public class MacawFencesModule extends SimpleModule {
 
         WIRED_FENCES = SimpleEntrySet.builder(WoodType.class,"wired_fence",
                         BlockInit.OAK_WIRED_FENCE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new WiredFence(BlockBehaviour.Properties.copy(w.planks).strength(1.5f, 2.5f)))
+                        w -> new WiredFence(WoodGood.copySafe(w.planks).strength(1.5f, 2.5f)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
                 .setTab(()->tab)
                 .defaultRecipe()
@@ -94,7 +94,7 @@ public class MacawFencesModule extends SimpleModule {
 
         PYRAMID_GATES = SimpleEntrySet.builder(WoodType.class,"pyramid_gate",
                         BlockInit.OAK_PYRAMID_GATE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new FenceGateBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
+                        w -> new FenceGateBlock(WoodGood.copySafe(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.FENCE_GATES, Registry.BLOCK_REGISTRY)
                 .setTab(()->tab)
                 .defaultRecipe()
@@ -104,7 +104,7 @@ public class MacawFencesModule extends SimpleModule {
 
         HIGHLEY_GATES = SimpleEntrySet.builder(WoodType.class,"highley_gate",
                         BlockInit.OAK_HIGHLEY_GATE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new FenceGateBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F, 3)))
+                        w -> new FenceGateBlock(WoodGood.copySafe(w.planks).strength(2.0F, 3)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
                 .setTab(()->tab)
                 .defaultRecipe()

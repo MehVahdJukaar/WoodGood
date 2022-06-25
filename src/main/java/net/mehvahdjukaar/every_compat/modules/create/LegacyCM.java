@@ -70,14 +70,14 @@ public class LegacyCM extends CompatModule {
             String name = makeBlockId(w, WINDOW_NAME);
             if (w.isVanilla() || isEntryAlreadyRegistered(name,w, registry)) continue;
 
-            WindowBlock block = new WindowBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)
+            WindowBlock block = new WindowBlock(WoodGood.copySafe(Blocks.GLASS)
                     .isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                     .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false));
             WINDOWS.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
             w.addChild(shortenedId() + "/window", block);
 
-            ConnectedGlassPaneBlock pane = new ConnectedGlassPaneBlock(BlockBehaviour.Properties.copy(Blocks.GLASS_PANE));
+            ConnectedGlassPaneBlock pane = new ConnectedGlassPaneBlock(WoodGood.copySafe(Blocks.GLASS_PANE));
             WINDOW_PANES.put(w, pane);
             registry.register(pane.setRegistryName(WoodGood.res(name + "_pane")));
             w.addChild(shortenedId() + "/window_pane", pane);

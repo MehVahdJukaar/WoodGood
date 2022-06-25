@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.missing_wilds;
 import me.ultrusmods.missingwilds.block.FallenLogBlock;
 import me.ultrusmods.missingwilds.item.MissingWildsItemGroup;
 import me.ultrusmods.missingwilds.register.MissingWildsBlocks;
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -20,7 +21,7 @@ public class MissingWildModule extends SimpleModule {
 
         FALLEN_LOGS = SimpleEntrySet.builder(WoodType.class, "log", "fallen",
                         MissingWildsBlocks.FALLEN_OAK_LOG, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new FallenLogBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.0F).noOcclusion()))
+                        w -> new FallenLogBlock(WoodGood.copySafe(w.planks).strength(2.0F).noOcclusion()))
                 .addTag(modRes("fallen_logs"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("fallen_logs"), Registry.ITEM_REGISTRY)
                 .setTab(() -> MissingWildsItemGroup.MISSING_WILDS)

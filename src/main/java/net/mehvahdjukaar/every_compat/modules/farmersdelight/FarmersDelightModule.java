@@ -27,7 +27,7 @@ public class FarmersDelightModule extends SimpleModule {
 
         CABINETS = SimpleEntrySet.builder(WoodType.class,"cabinet",
                         ModBlocks.OAK_CABINET, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatCabinetBlock(BlockBehaviour.Properties.copy(w.planks).strength(2.5F)))
+                        w -> new CompatCabinetBlock(WoodGood.copySafe(w.planks).strength(2.5F)))
                 .addTag(modRes("cabinets"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("cabinets"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

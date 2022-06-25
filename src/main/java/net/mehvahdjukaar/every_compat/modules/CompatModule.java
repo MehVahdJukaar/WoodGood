@@ -153,6 +153,9 @@ public abstract class CompatModule {
     public void onTextureStitch(TextureStitchEvent.Pre event) {
     }
 
+    protected final <T extends Block> T getModBlock(String id, Class<T> blockClass) {
+        return (T) ForgeRegistries.BLOCKS.getValue(modRes(id));
+    }
 
     protected final Block getModBlock(String id) {
         return ForgeRegistries.BLOCKS.getValue(modRes(id));

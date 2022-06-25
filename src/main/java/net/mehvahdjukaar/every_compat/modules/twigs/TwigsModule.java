@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -20,7 +21,7 @@ public class TwigsModule extends SimpleModule {
 
         TABLES = SimpleEntrySet.builder(WoodType.class, "table",
                         TwigsBlocks.OAK_TABLE, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TableBlock(BlockBehaviour.Properties.copy(w.planks).instabreak()))
+                        w -> new TableBlock(WoodGood.copySafe(w.planks).instabreak()))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
                 .setTab(()->Twigs.ITEM_GROUP)
