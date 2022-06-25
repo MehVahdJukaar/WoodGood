@@ -53,6 +53,7 @@ public class Utils {
 
         BlockTypeResTransformer<T> modifier = BlockTypeResTransformer.create(modId, manager);
         modifier.IDReplaceType(baseBlockName).replaceBlockType(baseBlockName);
+        if(extraTransform != null)extraTransform.accept(modifier); //idk about this
 
         BlockTypeResTransformer<T> modelModifier = standardModelTransformer(modId, manager, baseType, baseBlockName,extraTransform);
 
