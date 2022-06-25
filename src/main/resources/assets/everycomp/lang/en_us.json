@@ -106,6 +106,8 @@
   "block_type.mcwwindows.plank_parapet": "%s Plank Parapet",
   "block_type.mcwwindows.blinds": "%s Blinds",
 
+  "block_type.benched.bench": "%s Bench",
+
   "block_type.create.window": "%s Window",
   "block_type.create.window_pane": "%s Window Pane",
 
