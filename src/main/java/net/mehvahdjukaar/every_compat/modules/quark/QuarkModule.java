@@ -149,7 +149,7 @@ public class QuarkModule extends SimpleModule {
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
                             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
-                            return new QuarkBlock(name, m, CreativeModeTab.TAB_BUILDING_BLOCKS, BlockBehaviour.Properties.copy(w.planks));
+                            return new QuarkBlock(name, m, CreativeModeTab.TAB_BUILDING_BLOCKS, WoodGood.copySafe(w.planks));
                         })
                 .setTab(()->CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
@@ -182,7 +182,7 @@ public class QuarkModule extends SimpleModule {
                         (w, m) -> {
                             if (w.getId().toString().equals("twilightforest:dark")) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatChestBlock(w, name, m, BlockBehaviour.Properties.copy(w.planks));
+                            return new CompatChestBlock(w, name, m, WoodGood.copySafe(w.planks));
                         })
                 .setTab(()->CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
@@ -202,7 +202,7 @@ public class QuarkModule extends SimpleModule {
                         (w, m) -> {
                             if (w.getId().toString().equals("twilightforest:dark")) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatTrappedChestBlock(w, name, m, BlockBehaviour.Properties.copy(w.planks));
+                            return new CompatTrappedChestBlock(w, name, m, WoodGood.copySafe(w.planks));
                         })
                 .setTab(()->CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.BLOCK_REGISTRY)

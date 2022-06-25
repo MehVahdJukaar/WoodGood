@@ -67,7 +67,7 @@ public class LegacyTFM extends CompatModule {
             String name = makeBlockId(w, BANISTER_NAME);
             if (w.isVanilla() || isEntryAlreadyRegistered(name,w, registry)) continue;
 
-            Block block = new BanisterBlock(BlockBehaviour.Properties.copy(w.planks));
+            Block block = new BanisterBlock(WoodGood.copySafe(w.planks));
             BANISTERS.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
             w.addChild(shortenedId() + "/" + BANISTER_NAME, block);
@@ -89,17 +89,17 @@ public class LegacyTFM extends CompatModule {
             ResourceLocation horizontalRes = WoodGood.res(name + "_horizontal");
             ResourceLocation climbableRes = WoodGood.res(name + "_climbable");
 
-            Block horizontal = new HollowLogHorizontal(BlockBehaviour.Properties.copy(w.planks));
+            Block horizontal = new HollowLogHorizontal(WoodGood.copySafe(w.planks));
             registry.register(horizontal.setRegistryName(horizontalRes));
             HOLLOW_LOGS_HORIZONTAL.put(w, horizontal);
 
 
-            Block climbable = new HollowLogClimbable(BlockBehaviour.Properties.copy(w.planks),
+            Block climbable = new HollowLogClimbable(WoodGood.copySafe(w.planks),
                     RegistryObject.create(verticalRes, ForgeRegistries.BLOCKS));
             registry.register(climbable.setRegistryName(climbableRes));
             HOLLOW_LOGS_CLIMBABLE.put(w, climbable);
 
-            Block vertical = new HollowLogVertical(BlockBehaviour.Properties.copy(w.planks),
+            Block vertical = new HollowLogVertical(WoodGood.copySafe(w.planks),
                     RegistryObject.create(climbableRes, ForgeRegistries.BLOCKS));
             registry.register(vertical.setRegistryName(verticalRes));
             HOLLOW_LOGS_VERTICAL.put(w, vertical);

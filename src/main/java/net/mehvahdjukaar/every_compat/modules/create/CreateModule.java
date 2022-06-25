@@ -15,7 +15,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -30,11 +29,11 @@ public class CreateModule extends SimpleModule {
     public CreateModule(String modId) {
         super(modId, "c");
 
-        WINDOWS = SimpleEntrySet.builder(WoodType.class,"window",
+        WINDOWS = SimpleEntrySet.builder(WoodType.class, "window",
                         () -> getModBlock("oak_window"), () -> WoodType.OAK_WOOD_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         this::makeWindow)
                 .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
-                .setTab(()->CreativeModeTab.TAB_DECORATIONS)
+                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
@@ -45,11 +44,11 @@ public class CreateModule extends SimpleModule {
         this.addEntry(WINDOWS);
 
 
-        WINDOW_PANES = SimpleEntrySet.builder(WoodType.class,"window_pane",
+        WINDOW_PANES = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         () -> getModBlock("oak_window_pane"), () -> WoodType.OAK_WOOD_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
-                        s -> new ConnectedGlassPaneBlock(BlockBehaviour.Properties.copy(Blocks.GLASS_PANE)))
+                        s -> new ConnectedGlassPaneBlock(WoodGood.copySafe(Blocks.GLASS_PANE)))
                 .addTag(Tags.Items.GLASS_PANES, Registry.BLOCK_REGISTRY)
-                .setTab(()->CreativeModeTab.TAB_DECORATIONS)
+                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -59,7 +58,7 @@ public class CreateModule extends SimpleModule {
     }
 
     private WindowBlock makeWindow(WoodType w) {
-        return new WindowBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)
+        return new WindowBlock(WoodGood.copySafe(Blocks.GLASS)
                 .isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false));
     }

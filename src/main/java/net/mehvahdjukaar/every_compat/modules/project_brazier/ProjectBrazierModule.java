@@ -14,15 +14,19 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.quark.CompatChestBlock;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
 import net.mehvahdjukaar.selene.resourcepack.RPUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -33,10 +37,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/*
-public class ProjectBrazierModule extends SimpleModule {
 
-    private static ProjectBrazierModule INSTANCE;
+public class ProjectBrazierModule extends SimpleModule {
 
     public static Map<ResourceLocation, TextureGenerator> generators;
     private static List<MargMaterial> margMaterials = new ArrayList<>();
@@ -46,11 +48,11 @@ public class ProjectBrazierModule extends SimpleModule {
 
     public ProjectBrazierModule(String modId) {
         super(modId, "pb");
-        INSTANCE = this;
+
         FIREWOODS = SimpleEntrySet.builder(WoodType.class, "firewood",
                         () -> this.getModBlock("oak_firewood"), () -> WoodType.OAK_WOOD_TYPE,
                         ifCond(() -> BrazierBlocks.FIREWOOD_CON, w ->
-                                new HAxisDecoBlock(BlockBehaviour.Properties.copy(w.planks)
+                                new HAxisDecoBlock(WoodGood.copySafe(w.planks)
                                         .strength(2.0F, 3.0F)
                                         .noOcclusion(),
                                         "full_block")))
@@ -66,6 +68,7 @@ public class ProjectBrazierModule extends SimpleModule {
 
     public static void generateStuff(Map<ResourceLocation, TextureGenerator> gen, ResourceManager manager) {
         generators = gen;
+
         if(margMaterials.isEmpty()){
             WoodTypeRegistry.WOOD_TYPES.forEach((r,wood) -> {
                 if (!wood.isVanilla() && !wood.getNamespace().equals("projectbrazier")) {
@@ -89,13 +92,7 @@ public class ProjectBrazierModule extends SimpleModule {
     }
 
 
-
-    @Override
-    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addStaticClientResources(handler, manager);
-
-    }
-
+    /*
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
@@ -140,7 +137,7 @@ public class ProjectBrazierModule extends SimpleModule {
             handler.getLogger().error("Could not generate any Chest block texture : ", ex);
         }
     }
-
+    */
 
     public static MargMaterial makeWoodMaterial(WoodType wood, ResourceManager manager) {
 
@@ -195,4 +192,4 @@ public class ProjectBrazierModule extends SimpleModule {
                 textures,
                 blocks, items);
     }
-}*/
+}

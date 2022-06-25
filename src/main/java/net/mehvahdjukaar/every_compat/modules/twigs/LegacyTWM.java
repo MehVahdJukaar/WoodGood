@@ -54,7 +54,7 @@ public class LegacyTWM extends CompatModule {
             String name = makeBlockId(w, TABLE_NAME);
             if (w.isVanilla() || isEntryAlreadyRegistered(name, w,registry)) continue;
 
-            Block block = new TableBlock(BlockBehaviour.Properties.copy(w.planks).instabreak());
+            Block block = new TableBlock(WoodGood.copySafe(w.planks).instabreak());
             TABLES.put(w, block);
             registry.register(block.setRegistryName(WoodGood.res(name)));
             w.addChild(shortenedId() + "/table", block);

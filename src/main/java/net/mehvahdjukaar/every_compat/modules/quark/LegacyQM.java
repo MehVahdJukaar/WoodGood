@@ -159,7 +159,7 @@ public class LegacyQM extends CompatModule {
             if (w.isVanilla() || isEntryAlreadyRegistered(name, w,registry)) continue;
             var module = ModuleLoader.INSTANCE.getModuleInstance(VerticalPlanksModule.class);
 
-            Block block = new QuarkBlock(name, module, CreativeModeTab.TAB_BUILDING_BLOCKS, BlockBehaviour.Properties.copy(w.planks));
+            Block block = new QuarkBlock(name, module, CreativeModeTab.TAB_BUILDING_BLOCKS, WoodGood.copySafe(w.planks));
             VERTICAL_PLANKS.put(w, block);
             registry.register(block);
             w.addChild(shortenedId() + "/vertical_planks", block);

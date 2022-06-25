@@ -7,6 +7,9 @@ import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.util.HashMap;
@@ -53,6 +56,7 @@ public class EarlyConfigs {
         load();
     }
 
+    //TODO: move to lib
     private static void load() {
         CommentedFileConfig replacementConfig = CommentedFileConfig
                 .builder(FMLPaths.CONFIGDIR.get().resolve(FILE_NAME))
@@ -68,6 +72,9 @@ public class EarlyConfigs {
             WoodGood.createModTab();
         }
 
+        ModContainer modContainer = ModLoadingContext.get().getActiveContainer();
+        var REGISTRY_CONFIG_OBJECT = new ModConfig(ModConfig.Type.COMMON, REGISTRY_CONFIG, modContainer, FILE_NAME);
+        modContainer.addConfig(REGISTRY_CONFIG_OBJECT);
     }
 
 

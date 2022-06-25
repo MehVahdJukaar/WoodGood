@@ -5,6 +5,7 @@ import com.mrcrayfish.backpacked.block.ShelfBlock;
 import com.mrcrayfish.backpacked.client.renderer.entity.layers.ShelfRenderer;
 import com.mrcrayfish.backpacked.core.ModBlocks;
 import com.mrcrayfish.backpacked.tileentity.ShelfBlockEntity;
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -29,7 +30,7 @@ public class BackpackedModule extends SimpleModule {
 
         SHELF = SimpleEntrySet.builder(WoodType.class,"backpack_shelf",
                         ModBlocks.OAK_BACKPACK_SHELF, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new CompatShelfBlock(BlockBehaviour.Properties.copy(w.planks)))
+                        w -> new CompatShelfBlock(WoodGood.copySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(()->Backpacked.TAB)
                 .addRecipe(modRes("oak_backpack_shelf"))

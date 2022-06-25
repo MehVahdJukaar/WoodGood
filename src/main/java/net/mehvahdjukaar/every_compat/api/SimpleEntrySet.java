@@ -19,17 +19,28 @@ import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ConcretePowderBlock;
+import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.MineshaftFeature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -184,6 +195,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             //for blocks that fail
             if (block != null) {
                 this.blocks.put(w, block);
+
                 if (block.getRegistryName() == null) { //remember to register blocks yourself if they have a non-null registry name
                     block.setRegistryName((WoodGood.res(fullName)));
                 }
@@ -285,7 +297,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 WoodGood.LOGGER.error("Failed to generate recipes for template at location {} ", res);
             }
         });
-
     }
 
     @Override

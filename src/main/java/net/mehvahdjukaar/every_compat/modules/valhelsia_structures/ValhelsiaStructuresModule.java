@@ -19,35 +19,37 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ValhelsiaStructuresModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, PostBlock> POSTS;
-    public final SimpleEntrySet<WoodType, CutPostBlock> CUT_POSTS;
+    public final SimpleEntrySet<WoodType, Block> POSTS;
+    public final SimpleEntrySet<WoodType, Block> CUT_POSTS;
 
     public ValhelsiaStructuresModule(String modId) {
         super(modId, "vs");
 
-        POSTS = SimpleEntrySet.builder(WoodType.class,"post",
-                        ModBlocks.OAK_POST, () -> WoodType.OAK_WOOD_TYPE,
+        POSTS = SimpleEntrySet.builder(WoodType.class, "post",
+                        () -> getModBlock("oak_post"), () -> WoodType.OAK_WOOD_TYPE,
                         w -> new PostBlock(() -> w.log))
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.ITEM_REGISTRY)
-                .setTab(()->ModCreativeModeTabs.MAIN)
+                .setTab(() -> ModCreativeModeTabs.MAIN)
                 .defaultRecipe()
                 .build();
 
         this.addEntry(POSTS);
 
-        CUT_POSTS = SimpleEntrySet.builder(WoodType.class,"post", "cut",
-                        ModBlocks.CUT_OAK_POST, () -> WoodType.OAK_WOOD_TYPE,
+        CUT_POSTS = SimpleEntrySet.builder(WoodType.class, "post", "cut",
+                        () -> getModBlock("cut_oak_post"), () -> WoodType.OAK_WOOD_TYPE,
                         w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("cut_posts"), Registry.ITEM_REGISTRY)
-                .setTab(()->ModCreativeModeTabs.MAIN)
+                .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
                 .useLootFromBase()
                 .setRenderType(() -> RenderType::cutout)
