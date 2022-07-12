@@ -29,7 +29,7 @@ public class BenchedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> BENCHES;
 
     public BenchedModule(String modId) {
-        super(modId, "bnc");
+        super(modId, "bd");
 
         BENCHES = SimpleEntrySet.builder(WoodType.class, "bench",
                         () -> this.getModBlock("spruce_bench"), () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),

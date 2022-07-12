@@ -70,7 +70,7 @@ public class TwilightForestModule extends SimpleModule {
                         })
                 .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
                 .noItem()
-                .addRecipe(modRes("stonecutting/oak_log/hollow_oak_log"))
+                .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log"))
                 .build();
 
         this.addEntry(HOLLOW_LOGS_VERTICAL);

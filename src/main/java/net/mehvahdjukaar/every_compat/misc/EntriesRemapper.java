@@ -6,11 +6,10 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -36,14 +35,15 @@ public class EntriesRemapper {
         if (EarlyConfigs.REMAP_OWN.get()) {
             for (var mapping : event.getMappings(WoodGood.MOD_ID)) {
                 mapping.ignore();
-              //  mapping.remap(Items.AIR);
+                //  mapping.remap(Items.AIR);
             }
         }
     }
 
     private static <T extends IForgeRegistryEntry<T>> void remapEntries(RegistryEvent.MissingMappings<T> event, IForgeRegistry<T> blockReg) {
         if (!EarlyConfigs.REMAP_COMPAT.get()) return;
-        for (var compatMod : WoodGood. COMPAT_MODS) {
+        for (var compatMod : WoodGood.COMPAT_MODS) {
+            if (ModList.get().isLoaded(compatMod.modId())) continue;
             String woodFrom = compatMod.woodFrom(); //ie bop
             label:
             for (var mapping : event.getMappings(compatMod.modId())) {

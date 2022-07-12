@@ -95,7 +95,9 @@ public class WoodGood {
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
 
-        addModule("benched", () -> BenchedModule::new);
+        //TODO: add folwering azalea special textures, fix vertical planks not generating & add leaves to it. same for quark
+        //also fix that one crash that idk what was about
+
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
@@ -103,22 +105,26 @@ public class WoodGood {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+
+
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
-        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+
         addModule("create", () -> CreateModule::new);
+        addModule("campchair", () -> CampChairModule::new);
+        addModule("missingwilds", () -> MissingWildModule::new);
 
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
-        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
-        addModule("campchair", () -> CampChairModule::new);
-        addModule("missingwilds", () -> MissingWildModule::new);
 
+
+        //addModule("benched", () -> BenchedModule::new);
         //addModule("projectbrazier", () -> ProjectBrazierModule::new);
         //addModule("storagedrawers", () -> StorageDrawersModule::new);
 

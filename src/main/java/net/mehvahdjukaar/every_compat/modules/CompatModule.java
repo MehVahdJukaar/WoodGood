@@ -56,6 +56,7 @@ public abstract class CompatModule {
         return new ResourceLocation(modId, string);
     }
 
+    @Deprecated(forRemoval = true)
     public String makeBlockId(BlockType type, String blockName) {
         return this.shortenedId() + "/" + type.getVariantId(blockName, false);
     }

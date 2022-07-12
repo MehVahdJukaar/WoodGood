@@ -104,7 +104,7 @@ public class LegacyCM extends CompatModule {
         WINDOWS.forEach((w, b) -> {
             String path = "block/" + b.getRegistryName().getPath();
 
-            CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(CTSpriteShifter.CTType.VERTICAL,
+            CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
                     WoodGood.res(path), WoodGood.res(path + "_connected"));
 
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(b.delegate,

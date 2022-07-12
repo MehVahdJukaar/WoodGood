@@ -70,7 +70,7 @@ public class CreateModule extends SimpleModule {
         WINDOWS.blocks.forEach((w, b) -> {
             String path = "block/" + shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window";
 
-            CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(CTSpriteShifter.CTType.VERTICAL,
+            CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
                     WoodGood.res(path), WoodGood.res(path + "_connected"));
 
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(b.delegate,
