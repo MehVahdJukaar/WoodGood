@@ -199,7 +199,7 @@ public class QuarkModule extends SimpleModule {
                         () -> getModBlock("oak_trapped_chest"),
                         () -> WoodType.OAK_WOOD_TYPE,
                         (w, m) -> {
-                            if (w.getId().toString().equals("twilightforest:dark")) return null;
+                            if (!CHESTS.blocks.containsKey(w)) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatTrappedChestBlock(w, name, m, WoodGood.copySafe(w.planks));
                         })

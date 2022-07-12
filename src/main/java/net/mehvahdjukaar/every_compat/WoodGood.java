@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat;
 
 
-import com.finallion.graveyard.TheGraveyard;
 import net.mehvahdjukaar.every_compat.configs.BlockTypeEnabledCondition;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -13,7 +12,6 @@ import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
-import net.mehvahdjukaar.every_compat.modules.benched.BenchedModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
@@ -124,9 +122,8 @@ public class WoodGood {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
-        addModule("graveyard", () -> GraveyardModule::new);
 
-
+        //addModule("graveyard", () -> GraveyardModule::new);
         //addModule("benched", () -> BenchedModule::new);
         //addModule("projectbrazier", () -> ProjectBrazierModule::new);
         //addModule("storagedrawers", () -> StorageDrawersModule::new);
