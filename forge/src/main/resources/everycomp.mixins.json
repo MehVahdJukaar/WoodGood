@@ -1,0 +1,16 @@
+
+{
+  "minVersion": "0.8",
+  "required": true,
+  "compatibilityLevel": "JAVA_16",
+  "refmap": "everycomp.refmap.json",
+  "package": "net.mehvahdjukaar.every_compat.mixins.forge",
+  "mixins": [
+
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,69 @@
+package net.mehvahdjukaar.every_compat.configs;
+
+import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
+import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
+//loaded before registry
+public class EarlyConfigs {
+
+    public static final String FILE_NAME = EveryCompat.MOD_ID + "-registry.toml";
+
+    private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> BLOCK_TYPE_CONFIGS = new HashMap<>();
+
+    public static ConfigSpec SPEC;
+
+    public static Supplier<Boolean> TAB_ENABLED;
+    public static Supplier<Boolean> REMAP_COMPAT;
+    public static Supplier<Boolean> REMAP_OWN;
+    public static Supplier<Boolean> DEPEND_ON_PACKS;
+
+    public static void init() {
+        ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("registry"), ConfigType.COMMON);
+
+        builder.push("general");
+        TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
+                .define("creative_tab", true);
+        REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
+                .define("remap_other_mods", false);
+        REMAP_OWN = builder.comment("Clears out and remaps all blocks registered by this mod belonging to uninstalled wood types to air or oak wood")
+                .define("remap_self", true);
+        DEPEND_ON_PACKS = builder.comment("Makes dynamic assets that are generated depend on loaded resource packs. Turn off to make them just use vanilla assets")
+                .define("assets_depend_on_loaded_packs", true);
+        builder.pop();
+        for (var reg : BlockSetAPI.getRegistries()) {
+            builder.push(reg.typeName().replace(" ", "_"));
+            for (var w : reg.getValues()) {
+                String key = w.toString().replace(":", ".");
+                var config = builder.define(key, true);
+                var map = BLOCK_TYPE_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
+                map.put(w.toString(), config);
+            }
+            builder.pop();
+        }
+        SPEC = builder.buildAndRegister();
+
+        SPEC.loadFromFile(); //manually load early
+    }
+
+    public static boolean isWoodEnabled(String wood) {
+        return BLOCK_TYPE_CONFIGS.get(WoodType.class).get(wood).get();
+    }
+
+    public static <T extends BlockType> boolean isTypeEnabled(T w) {
+        try {
+            return BLOCK_TYPE_CONFIGS.get(w.getClass()).get(w.getId().toString()).get();
+        } catch (Exception e) {
+            int a = 1;
+        }
+        return true;
+    }
+}

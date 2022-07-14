@@ -1,0 +1,214 @@
+package net.mehvahdjukaar.every_compat.modules.mcaw;
+
+import net.kikoz.mcwtrpdoors.init.BlockInit;
+import net.kikoz.mcwtrpdoors.objects.TrapdoorGroup;
+import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.TrapDoorBlock;
+
+
+public class MacawTrapdoorsModule extends SimpleModule {
+
+    public final SimpleEntrySet<WoodType, Block> BARK_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> BARN_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> BARRED_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> BEACH_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> CLASSIC_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> COTTAGE_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> FOUR_PANEL_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> GLASS_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> MYSTIC_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> PAPER_TRAPDOORS;
+    public final SimpleEntrySet<WoodType, Block> TROPICAL_TRAPDOORS;
+
+    public MacawTrapdoorsModule(String modId) {
+        super(modId, "mct");
+
+        BARK_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bark_trapdoor",
+                        () -> BlockInit.OAK_BARK_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .build();
+
+        this.addEntry(BARK_TRAPDOORS);
+
+        BARN_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barn_trapdoor",
+                        () -> BlockInit.OAK_BARN_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/barn/oak_barn_trapdoor"))
+                .build();
+
+        this.addEntry(BARN_TRAPDOORS);
+
+        BARRED_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barred_trapdoor",
+                        () -> BlockInit.OAK_BARRED_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/barred/oak_barred_trapdoor"))
+                .build();
+
+        this.addEntry(BARRED_TRAPDOORS);
+
+        BEACH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "beach_trapdoor",
+                        () -> BlockInit.OAK_BEACH_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTextureM(modRes("block/beach/oak_beach_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_beach_trapdoor_m"))
+                .build();
+
+        this.addEntry(BEACH_TRAPDOORS);
+
+        CLASSIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "classic_trapdoor",
+                        () -> BlockInit.SPRUCE_CLASSIC_TRAPDOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/classic/spruce_classic_trapdoor"))
+                .build();
+
+        this.addEntry(CLASSIC_TRAPDOORS);
+
+        COTTAGE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "cottage_trapdoor",
+                        () -> BlockInit.OAK_COTTAGE_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTextureM(modRes("block/cottage/oak_cottage_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_cottage_trapdoor_m"))
+                .build();
+
+        this.addEntry(COTTAGE_TRAPDOORS);
+
+        FOUR_PANEL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "four_panel_trapdoor",
+                        () -> BlockInit.OAK_FOUR_PANEL_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/four_panel/oak_four_panel_trapdoor"))
+                .build();
+
+        this.addEntry(FOUR_PANEL_TRAPDOORS);
+
+        GLASS_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "glass_trapdoor",
+                        () -> BlockInit.OAK_GLASS_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .addTextureM(modRes("block/glass/oak_glass_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_glass_trapdoor_m"))
+                .build();
+
+        this.addEntry(GLASS_TRAPDOORS);
+
+        MYSTIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "mystic_trapdoor",
+                        () -> BlockInit.OAK_MYSTIC_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/mystic/oak_mystic_trapdoor"))
+                .build();
+
+        this.addEntry(MYSTIC_TRAPDOORS);
+
+        PAPER_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "paper_trapdoor",
+                        () -> BlockInit.OAK_PAPER_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .addTextureM(modRes("block/paper/oak_paper_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_paper_trapdoor_m"))
+                .build();
+
+        this.addEntry(PAPER_TRAPDOORS);
+
+        TROPICAL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "tropical_trapdoor",
+                        () -> BlockInit.OAK_TROPICAL_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).strength(1.5F, 2.5F).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.TRAPDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> TrapdoorGroup.TRAPDOORSGROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTextureM(modRes("block/tropical/oak_tropical_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_tropical_trapdoor_m"))
+                .build();
+
+        this.addEntry(TROPICAL_TRAPDOORS);
+    }
+}
