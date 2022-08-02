@@ -12,7 +12,7 @@
     "sources": "https://github.com/MehVahdJukaar/WoodGood"
   },
   "license": "ARR",
-  "icon": "icon.png",
+  "icon": "logo.png",
   "environment": "*",
   "entrypoints": {
     "main": [

@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.moonlight.api.platform.ForgeHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -148,7 +149,7 @@ public class ResourcesUtils {
                             }
                         }
                     } else {
-                        //dummy blockstate so we dont generate models for this
+                        //dummy blockstate so we don't generate models for this
                         pack.addJson(id, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
 
@@ -257,14 +258,9 @@ public class ResourcesUtils {
                     if (i.getItemCategory() != null) {
                         FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
                         if (newR == null) return;
-                        //var builder = ConditionalRecipe.builder()
-                        //        .addCondition(new BlockTypeEnabledCondition(w)); //not needed since we simply dont add the recipe if its disabled
-                        //TODO: add back
-                        // template.getConditions().forEach(builder::addCondition);
 
+                        newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
                         pack.addRecipe(newR);
-                        //newR.build(pack::addRecipe, newR.getId());
-
                     }
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate recipe for {}:", i, e);

@@ -61,6 +61,10 @@ public abstract class CompatModule {
 
     }
 
+    public void onClientInit() {
+
+    }
+
     public void onClientSetup() {
 
     }
@@ -143,7 +147,10 @@ public abstract class CompatModule {
     public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
     }
 
-    public void registerColors(ClientPlatformHelper.BlockColorEvent event) {
+    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    }
+
+    public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
     }
 
 

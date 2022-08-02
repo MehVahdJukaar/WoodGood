@@ -20,7 +20,7 @@ public class WoodGoodAPI {
 
         SimpleModule mod = new SimpleModule("twigs", "tw");
         SimpleEntrySet<?, ?> e = SimpleEntrySet.builder(WoodType.class,"table", TwigsBlocks.OAK_TABLE, ()->WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableBlock(WoodGood.copySafe(w.planks).instabreak()))
+                        w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
                 .addTag(new ResourceLocation("twigs:tables"), Registry.BLOCK_REGISTRY)
                 .useLootFromBase()
                 .setTab(()->Twigs.ITEM_GROUP)

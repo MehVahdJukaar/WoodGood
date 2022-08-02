@@ -8,6 +8,8 @@ import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -533,8 +535,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 }
             });
         }
-
-
     }
 
 
@@ -555,7 +555,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
         public BlockEntityType<? extends H> createInstance(Block... blocks) {
             if (tile != null) throw new UnsupportedOperationException("tile has already been created");
-            this.tile = BlockEntityType.Builder.of(tileFactory::apply, blocks).build(null);
+            this.tile = PlatformHelper.newBlockEntityType(tileFactory::apply, blocks);
             return tile;
         }
     }

@@ -6,9 +6,10 @@ import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
+import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.api.platform.registry.RegHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -104,10 +105,10 @@ public abstract class EveryCompat {
         MOD_TAB = PlatformHelper.createModTab(res(MOD_ID), () -> ALL_WOODS.get().getDefaultInstance(), true).setBackgroundSuffix("item_search.png");
     }
 
-    public static final Supplier<Item> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
+    public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
 
 
-    public void setup() {
+    public void commonSetup() {
         forAllModules(CompatModule::onModSetup);
     }
 
@@ -132,21 +133,22 @@ public abstract class EveryCompat {
     }
 
 
+    @EventCalled
     protected void registerItems(Registrator<Item> event) {
         forAllModules(m -> m.registerItems(event));
     }
-
+    @EventCalled
     protected void registerTiles(Registrator<BlockEntityType<?>> event) {
         forAllModules(m -> m.registerTiles(event));
     }
 
-
+    @EventCalled
     protected void registerEntities(Registrator<EntityType<?>> event) {
         forAllModules(m -> m.registerEntities(event));
     }
 
-    public record CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
 
+    public record CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
     }
 
 

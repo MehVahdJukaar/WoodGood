@@ -27,14 +27,14 @@ authors="MehVahdJukaar" #optional
 
 description='''Ultimate Wood Compat Mod'''
 
-itemIcon="minecraft:oak_planks" #catalogue icon
+itemIcon="everycomp:all_woods" #catalogue icon
 
 
 [[dependencies.everycomp]] #optional
 
 modId="forge" #mandatory
 mandatory=true #mandatory
-versionRange="[40.0.36,)" #mandatory
+versionRange="[41.0.100,)" #mandatory
 ordering="NONE"
 side="BOTH"
 
@@ -48,9 +48,9 @@ side="BOTH"
 
 [[dependencies.everycomp]]
 
-modId="selene"
+modId="moonlight"
 mandatory=true
-versionRange="[1.19-2.0.2,]"
+versionRange="[1.19-2.0.7,]"
 ordering="NONE"
 side="BOTH"
 

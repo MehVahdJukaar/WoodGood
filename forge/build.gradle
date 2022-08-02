@@ -105,7 +105,59 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    modImplementation("net.mehvahdjukaar:moonlight-forge:1.19-2.0.2")
+    modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
     modImplementation("curse.maven:jei-238222:3835406")
     modImplementation("curse.maven:configured-457570:3822820")
+
+
+
+
+
+
+
+
+    //implementation fg.deobf("curse.maven:farmersdelight-398521:3739914")
+    // implementation fg.deobf("curse.maven:flywheel-486392:3871082")
+    //implementation fg.deobf("curse.maven:create-328085:3871091")
+    // implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
+    //implementation fg.deobf("curse.maven:twigs-496913:3756844")
+    //modImplementation("curse.maven:benched-417063:3821546")
+    //architect palette
+    //twilight forest
+
+    modImplementation("curse.maven:quark-243121:3873471")
+    modImplementation("curse.maven:autoreglib-250363:3857246")
+    modImplementation("curse.maven:backpacked-352835:3834884")
+
+    modImplementation("curse.maven:camp-chair-531744:3879293")
+    modImplementation("curse.maven:another-furniture-610492:3901785")
+
+    modImplementation("curse.maven:macaws-bridges-351725:3827953")
+    modImplementation("curse.maven:macaws-doors-378646:3844125")
+    modImplementation("curse.maven:macaws-fences-and-walls-453925:3827696")
+    modImplementation("curse.maven:macaws-lights-and-lamps-502372:3828166")
+    modImplementation("curse.maven:macaws-paths-and-pavings-629153:3825282")
+    modImplementation("curse.maven:macaws-trapdoors-400933:3851698")
+    modImplementation("curse.maven:macaws-windows-363569:3830460")
+
+
+    modImplementation("curse.maven:missing-wilds-forge-634277:3840197")
+    modImplementation("curse.maven:mrcrayfish-furniture-mod-55438:3872133")
+
+    //modImplementation("curse.maven:malum-484064:3768401")
+   // implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
+   // implementation fg.deobf("curse.maven:marg-324494:3723497")
+   // implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
+   // implementation fg.deobf("curse.maven:curios-309927:3670447")
+
+   // implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
+   // implementation fg.deobf("curse.maven:supermartijn642s-config-lib-438332:3825116")
+   // implementation fg.deobf("curse.maven:supermartijn642s-core-lib-454372:3773952")
+  //  implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
+
+    // implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
+    //implementation fg.deobf("curse.maven:decorativeblocks-362528:3681919")
+  //  implementation fg.deobf("curse.maven:the-graveyard-forge-531188:3837172")
+   // implementation fg.deobf("curse.maven:geckolib-388172:3856641")
+
 }

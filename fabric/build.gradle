@@ -50,11 +50,11 @@ dependencies {
     modImplementation("curse.maven:camp-chair-531744:3835679")
     modImplementation("curse.maven:missing-wilds-622590:3838184")
     modImplementation("curse.maven:arrp-463113:3829389")
+    modImplementation("curse.maven:farmers-delight-fabric-482834:3833241")
 
+    modImplementation ("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 
-    modImplementation "net.moddingplayground.frame:frame-fabric:0.22.2+1.19"
-
-    modImplementation ("net.mehvahdjukaar:moonlight-fabric:1.19-2.0.2")
+    modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
 }
 
 

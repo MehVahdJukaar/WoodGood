@@ -1,13 +1,12 @@
 package net.mehvahdjukaar.every_compat.fabric;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
-import net.mehvahdjukaar.every_compat.misc.AllWoodItemRenderer;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
+import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
@@ -31,6 +30,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
 
         addModule("campchair", () -> CampChairModule::new);
+        addModule("farmersdelight", () -> FarmersDelightModule::new);
 
         this.commonInit();
 
@@ -39,18 +39,17 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 
     }
 
-    //equivalent of forge common setup
+    //equivalent of forge common onCommonSetup
     public void onCommonSetup() {
         this.registerItems((a, b) -> Registry.register(Registry.ITEM, a, b));
         this.registerTiles((a, b) -> Registry.register(Registry.BLOCK_ENTITY_TYPE, a, b));
         this.registerEntities((a, b) -> Registry.register(Registry.ENTITY_TYPE, a, b));
-        this.setup();
+        this.commonSetup();
     }
 
     public void onClientSetup() {
         EveryCompatClient.commonInit();
         EveryCompatClient.commonSetup();
-        BuiltinItemRendererRegistry.INSTANCE.register(EveryCompat.ALL_WOODS.get(),
-                (BuiltinItemRendererRegistry.DynamicItemRenderer) new AllWoodItemRenderer());
+        EveryCompat.ALL_WOODS.get().registerFabricRenderer();
     }
 }
