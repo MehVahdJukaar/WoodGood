@@ -2,20 +2,34 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 
 import com.mcwlights.kikoz.MacawsLights;
 import com.mcwlights.kikoz.init.BlockInit;
-import com.mcwlights.kikoz.objects.SoulTikiTorch;
 import com.mcwlights.kikoz.objects.TikiTorch;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.Utils;
+import net.mehvahdjukaar.every_compat.modules.quark.CompatChestBlock;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils;
+import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
+import net.mehvahdjukaar.selene.math.colors.HCLColor;
+import net.mehvahdjukaar.selene.resourcepack.RPUtils;
+import net.mehvahdjukaar.selene.resourcepack.ResType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
-import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MacawLightsModule extends SimpleModule {
@@ -25,37 +39,76 @@ public class MacawLightsModule extends SimpleModule {
 
     public MacawLightsModule(String modId) {
         super(modId, "mcl");
-        CreativeModeTab tab;
-        try {
-            var f = ObfuscationReflectionHelper.findField(MacawsLights.class, "LightsItemGroup");
-            tab = (CreativeModeTab) f.get(null);
-        } catch (Exception e) {
-            WoodGood.LOGGER.error("Failed to initialize {}", this);
-            SOUL_TIKI_TORCHES = null;
-            TIKI_TORCHES = null;
-            return;
-        }
 
-        SOUL_TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class,"tiki_torch", "soul",
+        CreativeModeTab tab = MacawsLights.LightsItemGroup;
+
+        SOUL_TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class, "tiki_torch", "soul",
                         BlockInit.SOUL_OAK_TIKI_TORCH, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new SoulTikiTorch(WoodGood.copySafe(w.planks).strength(0.2f, 2.5f), (ParticleOptions)null))
+                        w -> new TikiTorch(WoodGood.copySafe(w.planks).strength(0.2f, 2.5f), ParticleTypes.SOUL_FIRE_FLAME))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setRenderType(()-> RenderType::cutout)
+                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
-                .setTab(()->tab)
+                .setTab(() -> tab)
                 .build();
 
         this.addEntry(SOUL_TIKI_TORCHES);
 
-        TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class,"tiki_torch",
+        TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class, "tiki_torch",
                         BlockInit.OAK_TIKI_TORCH, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new TikiTorch(WoodGood.copySafe(w.planks).strength(0.2f, 2.5f), (ParticleOptions)null))
+                        w -> new TikiTorch(WoodGood.copySafe(w.planks).strength(0.2f, 2.5f), ParticleTypes.FLAME))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setRenderType(()-> RenderType::cutout)
+                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
-                .setTab(()->tab)
+                .setTab(() -> tab)
                 .build();
 
         this.addEntry(TIKI_TORCHES);
+    }
+
+
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+
+        try (TextureImage mask = TextureImage.open(manager, WoodGood.res("item/tiki_torch_mask"));
+             TextureImage overlay_soul = TextureImage.open(manager, WoodGood.res("item/tiki_torch_overlay"));
+             TextureImage overlay = TextureImage.open(manager, WoodGood.res("item/tiki_torch_soul_overlay"))
+        ) {
+
+
+            TIKI_TORCHES.blocks.forEach((wood, block) -> {
+                var id = block.getRegistryName();
+
+                try (TextureImage logTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteUtils::looksLikeSideLogTexture))) {
+
+                    var t = mask.makeCopy();
+                    t.applyOverlayOnExisting(logTexture.makeCopy(),overlay.makeCopy());
+
+                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
+                            "item/"+ id.getPath().replace("_torch","")), t);
+
+                } catch (Exception ignored) {
+                }
+            });
+            SOUL_TIKI_TORCHES.blocks.forEach((wood, block) -> {
+                var id = block.getRegistryName();
+
+                try (TextureImage logTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteUtils::looksLikeSideLogTexture))) {
+
+                    var t = mask.makeCopy();
+                    t.applyOverlayOnExisting(logTexture.makeCopy(),overlay_soul.makeCopy());
+
+                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
+                            "item/"+ id.getPath().replace("_torch","")), t);
+
+                } catch (Exception ignored) {
+                }
+            });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Tiki torch item texture : ", ex);
+        }
     }
 }

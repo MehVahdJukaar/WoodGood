@@ -98,8 +98,10 @@ public class WoodGood {
         //TODO: add folwering azalea special textures, fix vertical planks not generating & add leaves to it. same for quark
         //also fix that one crash that idk what was about
 
-        addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
+        /*
+        addModule("mcwdoors", () -> MacawDoorsModule::new);
+
         addModule("mcwpaths", () -> MacawPathsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
@@ -121,7 +123,7 @@ public class WoodGood {
 
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-        addModule("quark", () -> QuarkModule::new);
+        addModule("quark", () -> QuarkModule::new);*/
 
         //addModule("graveyard", () -> GraveyardModule::new);
         //addModule("benched", () -> BenchedModule::new);

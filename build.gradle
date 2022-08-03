@@ -150,13 +150,15 @@ dependencies {
     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     implementation fg.deobf("curse.maven:twigs-496913:3756844")
     implementation fg.deobf("curse.maven:another-furniture-610492:3823382")
+
     implementation fg.deobf("curse.maven:macaws-bridges-351725:3793697")
     implementation fg.deobf("curse.maven:macaws-doors-378646:3683708")
-    implementation fg.deobf("curse.maven:macaws-fences-and-walls-453925:3817472")
-    implementation fg.deobf("curse.maven:macaws-lights-and-lamps-502372:3683040")
+    implementation fg.deobf("curse.maven:macaws-fences-and-walls-453925:3913067")
+    implementation fg.deobf("curse.maven:macaws-lights-and-lamps-502372:3911490")
     implementation fg.deobf("curse.maven:macaws-paths-and-pavings-629153:3810627")
-    implementation fg.deobf("curse.maven:macaws-trapdoors-400933:3682901")
+    implementation fg.deobf("curse.maven:macaws-trapdoors-400933:3851696")
     implementation fg.deobf("curse.maven:macaws-windows-363569:3712019")
+
     implementation fg.deobf("curse.maven:missing-wilds-forge-634277:3835403")
     implementation fg.deobf("curse.maven:mrcrayfish-furniture-mod-55438:3683524")
     implementation fg.deobf("curse.maven:malum-484064:3768401")
