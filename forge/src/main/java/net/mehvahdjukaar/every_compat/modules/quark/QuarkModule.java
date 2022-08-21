@@ -451,29 +451,4 @@ public class QuarkModule extends SimpleModule {
             handler.getLogger().error("Could not generate any Chest block texture : ", ex);
         }
     }
-
-
-    public static class ChestItem extends BlockItem {
-        public ChestItem(Block block, net.minecraft.world.item.Item.Properties props) {
-            super(block, props);
-        }
-
-        @OnlyIn(Dist.CLIENT)
-        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-            consumer.accept(new IClientItemExtensions() {
-                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                    final Minecraft mc = Minecraft.getInstance();
-                    return new BlockEntityWithoutLevelRenderer(mc.getBlockEntityRenderDispatcher(), mc.getEntityModels()) {
-                        private final BlockEntity tile =
-                                new VariantChestBlockEntity(BlockPos.ZERO, ChestItem.this.getBlock().defaultBlockState());
-
-
-                        public void renderByItem(@Nonnull ItemStack stack, @Nonnull ItemTransforms.TransformType transformType, @Nonnull PoseStack pose, @Nonnull MultiBufferSource buffer, int x, int y) {
-                            mc.getBlockEntityRenderDispatcher().renderItem(this.tile, pose, buffer, x, y);
-                        }
-                    };
-                }
-            });
-        }
-    }
 }
