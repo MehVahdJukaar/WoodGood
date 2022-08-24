@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
+import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
@@ -56,7 +57,7 @@ public class EveryCompatForge extends EveryCompat {
 
         addModule("quark", () -> QuarkModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-
+        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();

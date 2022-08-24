@@ -59,7 +59,6 @@ public abstract class EveryCompat {
         SERVER_RESOURCES = new ServerDynamicResourcesHandler();
         SERVER_RESOURCES.register();
 
-
         if (PlatformHelper.getEnv().isClient()) {
             CLIENT_RESOURCES = new ClientDynamicResourcesHandler();
             CLIENT_RESOURCES.register();
@@ -91,8 +90,6 @@ public abstract class EveryCompat {
 
         BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
         BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
-
-
     }
 
     private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
