@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
+import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
+import vectorwing.farmersdelight.FarmersDelight;
 
 /**
  * Author: MehVahdJukaar
@@ -30,11 +32,11 @@ public class EveryCompatForge extends EveryCompat {
     public static final String MOD_ID = EveryCompat.MOD_ID;
 
     public EveryCompatForge() {
-        this.commonInit();
 
         // MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::onEarlyPackLoad);
         // MinecraftForge.EVENT_BUS.register(EntriesRemapper.class);
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
+
 
 
         addModule("mcwdoors", () -> MacawDoorsModule::new);
@@ -49,18 +51,23 @@ public class EveryCompatForge extends EveryCompat {
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
 
-        addModule("campchair", () -> CampChairModule::new);
+
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
-        addModule("quark", () -> QuarkModule::new);
 
+        addModule("campchair", () -> CampChairModule::new);
+
+        addModule("quark", () -> QuarkModule::new);
+        addModule("farmersdelight", () -> FarmersDelightModule::new);
+
+        //needs to run after modules
+        this.commonInit();
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();
         }
 
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
-
     }
 
     @SubscribeEvent

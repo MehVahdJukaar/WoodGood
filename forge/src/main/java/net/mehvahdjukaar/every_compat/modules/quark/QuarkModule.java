@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -21,40 +22,52 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import vazkii.arl.util.RegistryHelper;
 import vazkii.quark.base.block.QuarkBlock;
 import vazkii.quark.base.handler.ToolInteractionHandler;
-import vazkii.quark.content.building.block.HedgeBlock;
-import vazkii.quark.content.building.block.VariantBookshelfBlock;
-import vazkii.quark.content.building.block.VariantLadderBlock;
-import vazkii.quark.content.building.block.WoodPostBlock;
+import vazkii.quark.content.building.block.*;
+import vazkii.quark.content.building.block.be.VariantChestBlockEntity;
 import vazkii.quark.content.building.client.render.be.VariantChestRenderer;
 import vazkii.quark.content.building.module.*;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class QuarkModule extends SimpleModule {
 
@@ -63,8 +76,8 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_POSTS;
     public final SimpleEntrySet<WoodType, Block> VERTICAL_PLANKS;
     public final SimpleEntrySet<WoodType, Block> LADDERS;
-    public final SimpleEntrySet<WoodType, Block> CHESTS;
-    public final SimpleEntrySet<WoodType, Block> TRAPPED_CHESTS;
+    public final SimpleEntrySet<WoodType, ? extends VariantChestBlock> CHESTS;
+    public final SimpleEntrySet<WoodType, ? extends VariantTrappedChestBlock> TRAPPED_CHESTS;
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
 
     public static BlockEntityType<? extends ChestBlockEntity> CHEST_TILE;
@@ -174,7 +187,7 @@ public class QuarkModule extends SimpleModule {
 
         CHESTS = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
                         VariantChestsModule.class,
-                        () -> getModBlock("oak_chest"),
+                        () -> getModBlock("oak_chest", VariantChestBlock.class),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w, m) -> {
                             if (w.getId().toString().equals("twilightforest:dark")) return null;
@@ -185,28 +198,30 @@ public class QuarkModule extends SimpleModule {
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
+                .addTag(new ResourceLocation("quark:revertable_chests"), Registry.ITEM_REGISTRY)
                 .addTile(CompatChestBlockTile::new)
-                .addCustomItem((w, b, p) -> new CompatChestItem(b, p, false))
+                .addCustomItem((w, b, p) -> b.provideItemBlock(b, p))
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .build();
 
         this.addEntry(CHESTS);
 
-        TRAPPED_CHESTS = QuarkSimpleEntrySet.builder(WoodType.class, "chest", "trapped",
+        TRAPPED_CHESTS = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         VariantChestsModule.class,
-                        () -> getModBlock("oak_trapped_chest"),
+                        () -> getModBlock("oak_trapped_chest", VariantTrappedChestBlock.class),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w, m) -> {
                             if (!CHESTS.blocks.containsKey(w)) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatTrappedChestBlock(w, name, m, Utils.copyPropertySafe(w.planks));
                         })
+                .addCustomItem((w, b, p) -> b.provideItemBlock(b, p))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.ITEM_REGISTRY)
                 .addTile(CompatTrappedChestBlockTile::new)
-                .addCustomItem((w, b, p) -> new CompatChestItem(b, p, true))
+
                 .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
                 .build();
 
@@ -304,7 +319,7 @@ public class QuarkModule extends SimpleModule {
     }
 
     public void onClientInit(){
-        MinecraftForge.EVENT_BUS.addListener(this::onTextureStitch);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onTextureStitch);
     }
 
     @EventCalled

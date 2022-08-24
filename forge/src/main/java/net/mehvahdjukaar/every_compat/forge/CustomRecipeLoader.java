@@ -2,8 +2,8 @@ package net.mehvahdjukaar.every_compat.forge;
 
 import com.google.common.collect.Maps;
 import com.google.gson.*;
+import mezz.jei.forge.platform.PlatformHelper;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.moonlight.api.events.IEarlyPackReloadEvent;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
