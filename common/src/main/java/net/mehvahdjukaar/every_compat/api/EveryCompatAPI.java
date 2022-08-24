@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 
-public class WoodGoodAPI {
+public class EveryCompatAPI {
 
     /**
      * Register a new compat module for your modded blocks
@@ -11,14 +11,16 @@ public class WoodGoodAPI {
      */
     public static void registerModule(CompatModule module) {
         EveryCompat.ACTIVE_MODULES.put(module.getModId(), module);
+        EveryCompat.SERVER_RESOURCES.getPack().addNamespaces(module.getModId());
     }
 
     //for each entry that you register you will need to add "block_type.everycomp.your_type" translation string to your lang file
 
     //example using simple module class
-    /*
 
+    /*
         SimpleModule mod = new SimpleModule("twigs", "tw");
+
         SimpleEntrySet<?, ?> e = SimpleEntrySet.builder(WoodType.class,"table", TwigsBlocks.OAK_TABLE, ()->WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
                 .addTag(new ResourceLocation("twigs:tables"), Registry.BLOCK_REGISTRY)
@@ -28,10 +30,11 @@ public class WoodGoodAPI {
                 .addTexture(new ResourceLocation("twigs:block/oak_table_top"))
                 .addTexture(new ResourceLocation("twigs:block/oak_table_bottom"))
                 .build();
+
         mod.addEntry(e);
 
         WoodGoodAPI.registerModule(mod)
+    */
 
-     */
 
 }

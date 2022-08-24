@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -55,6 +56,16 @@ public abstract class EveryCompat {
 
     protected void commonInit() {
 
+        SERVER_RESOURCES = new ServerDynamicResourcesHandler();
+        SERVER_RESOURCES.register();
+
+
+        if (PlatformHelper.getEnv().isClient()) {
+            CLIENT_RESOURCES = new ClientDynamicResourcesHandler();
+            CLIENT_RESOURCES.register();
+        } else CLIENT_RESOURCES = null;
+
+
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
@@ -77,15 +88,6 @@ public abstract class EveryCompat {
 
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
-        SERVER_RESOURCES = new ServerDynamicResourcesHandler();
-        SERVER_RESOURCES.register();
-
-
-        if (PlatformHelper.getEnv().isClient()) {
-            CLIENT_RESOURCES = new ClientDynamicResourcesHandler();
-            CLIENT_RESOURCES.register();
-        } else CLIENT_RESOURCES = null;
-
 
         BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
         BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
@@ -98,7 +100,10 @@ public abstract class EveryCompat {
     }
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatformHelper.isModLoaded(modId)) ACTIVE_MODULES.put(modId, moduleFactory.get().apply(modId));
+        if (PlatformHelper.isModLoaded(modId)){
+            ACTIVE_MODULES.put(modId, moduleFactory.get().apply(modId));
+            SERVER_RESOURCES.getPack().addNamespaces(modId);
+        }
     }
 
     private void addTab() {

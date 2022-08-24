@@ -32,12 +32,9 @@ public class EveryCompatForge extends EveryCompat {
     public static final String MOD_ID = EveryCompat.MOD_ID;
 
     public EveryCompatForge() {
+        this.commonInit();
 
-        // MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::onEarlyPackLoad);
-        // MinecraftForge.EVENT_BUS.register(EntriesRemapper.class);
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
-
-
 
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
@@ -60,8 +57,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("quark", () -> QuarkModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
 
-        //needs to run after modules
-        this.commonInit();
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();

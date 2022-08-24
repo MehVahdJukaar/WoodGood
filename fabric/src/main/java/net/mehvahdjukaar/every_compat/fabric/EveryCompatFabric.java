@@ -15,6 +15,8 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        this.commonInit();
+
         addModule("twigs", () -> TwigsModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
@@ -31,7 +33,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("campchair", () -> CampChairModule::new);
         //addModule("farmersdelight", () -> FarmersDelightModule::new);
 
-        this.commonInit();
+
 
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
         FabricSetupCallbacks.COMMON_SETUP.add(this::onCommonSetup);

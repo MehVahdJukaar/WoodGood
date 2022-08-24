@@ -17,7 +17,6 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesProvider {
     public ServerDynamicResourcesHandler() {
         super(new DynamicDataPack(EveryCompat.res("generated_pack")));
         //needed for tags
-        EveryCompat.forAllModules(m -> getPack().addNamespaces(m.getModId()));
         getPack().addNamespaces("minecraft");
         getPack().addNamespaces("forge");
     }
