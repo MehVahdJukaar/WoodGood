@@ -106,8 +106,8 @@ dependencies {
     implementation 'org.jetbrains:annotations:22.0.0'
 
     modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
-    modImplementation("curse.maven:jei-238222:3835406")
-    modImplementation("curse.maven:configured-457570:3822820")
+    modImplementation("curse.maven:jei-238222:3905244")
+    //modImplementation("curse.maven:configured-457570:3822820")
 
 
 
@@ -125,9 +125,10 @@ dependencies {
     //architect palette
     //twilight forest
 
+    modImplementation("curse.maven:premium-wood-353515:3905203")
     modImplementation("curse.maven:quark-243121:3873471")
     modImplementation("curse.maven:autoreglib-250363:3857246")
-    modImplementation("curse.maven:backpacked-352835:3834884")
+    modImplementation("curse.maven:backpacked-352835:3873921")
 
     modImplementation("curse.maven:camp-chair-531744:3879293")
     modImplementation("curse.maven:another-furniture-610492:3901785")
