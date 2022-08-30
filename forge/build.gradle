@@ -118,9 +118,9 @@ dependencies {
     //implementation fg.deobf("curse.maven:twigs-496913:3756844")
     //modImplementation("curse.maven:benched-417063:3821546")
     //architect palette
-    //twilight forest
 
-    modImplementation ("curse.maven:quark-243121:3933816")
+    modImplementation ("curse.maven:quark-243121:3956195")
+    modImplementation ("curse.maven:the-twilight-forest-227639:3943940")
     modImplementation("curse.maven:autoreglib-250363:3857246")
     modImplementation("curse.maven:backpacked-352835:3923045")
 
@@ -138,7 +138,8 @@ dependencies {
 
 
     modImplementation("curse.maven:missing-wilds-forge-634277:3840197")
-    modImplementation("curse.maven:mrcrayfish-furniture-mod-55438:3872133")
+    modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:3872133")
+    modCompileOnly("curse.maven:terrablender-563928:3926355")
 
     //modImplementation("curse.maven:malum-484064:3768401")
    // implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
@@ -152,7 +153,6 @@ dependencies {
   //  implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
 
     // implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
-    //implementation fg.deobf("curse.maven:decorativeblocks-362528:3681919")
   //  implementation fg.deobf("curse.maven:the-graveyard-forge-531188:3837172")
    // implementation fg.deobf("curse.maven:geckolib-388172:3856641")
 
