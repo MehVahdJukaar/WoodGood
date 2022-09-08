@@ -123,6 +123,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds",
                         ModBlocks.BLINDS_OAK, () -> WoodTypeRegistry.OAK_TYPE,
+
                         w -> new BlindsBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)

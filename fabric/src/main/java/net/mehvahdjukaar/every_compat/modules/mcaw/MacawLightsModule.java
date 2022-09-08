@@ -61,8 +61,8 @@ public class MacawLightsModule extends SimpleModule {
 
 
         try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/tiki_torch_mask"));
-             TextureImage overlay_soul = TextureImage.open(manager, EveryCompat.res("item/tiki_torch_overlay"));
-             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/tiki_torch_soul_overlay"))
+             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/tiki_torch_overlay"));
+             TextureImage overlay_soul = TextureImage.open(manager, EveryCompat.res("item/tiki_torch_soul_overlay"))
         ) {
 
 

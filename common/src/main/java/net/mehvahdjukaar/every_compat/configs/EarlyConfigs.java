@@ -25,6 +25,7 @@ public class EarlyConfigs {
     public static Supplier<Boolean> REMAP_COMPAT;
     public static Supplier<Boolean> REMAP_OWN;
     public static Supplier<Boolean> DEPEND_ON_PACKS;
+    public static Supplier<Boolean> DEBUG_RESOURCES;
 
     public static void init() {
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("registry"), ConfigType.COMMON);
@@ -38,6 +39,8 @@ public class EarlyConfigs {
                 .define("remap_self", true);
         DEPEND_ON_PACKS = builder.comment("Makes dynamic assets that are generated depend on loaded resource packs. Turn off to make them just use vanilla assets")
                 .define("assets_depend_on_loaded_packs", true);
+        DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
+                        .define("debug_resources",true);
         builder.pop();
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));

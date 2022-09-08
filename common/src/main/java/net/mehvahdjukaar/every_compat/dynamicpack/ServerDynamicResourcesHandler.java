@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
@@ -19,6 +20,7 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesProvider {
         //needed for tags
         getPack().addNamespaces("minecraft");
         getPack().addNamespaces("forge");
+        this.dynamicPack.generateDebugResources = PlatformHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get();
     }
 
     @Override

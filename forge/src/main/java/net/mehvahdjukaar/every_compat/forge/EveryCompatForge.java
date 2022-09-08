@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -58,6 +59,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("quark", () -> QuarkModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
+        addModule("twilightforest", () -> TwilightForestModule::new);
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();

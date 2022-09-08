@@ -27,6 +27,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -200,7 +201,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
                 .addTag(new ResourceLocation("quark:revertable_chests"), Registry.ITEM_REGISTRY)
                 .addTile(CompatChestBlockTile::new)
-                .addCustomItem((w, b, p) -> b.provideItemBlock(b, p))
+                .addCustomItem((w, b, p) -> new VariantChestBlock.Item(b, p))
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .build();
 
@@ -215,7 +216,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatTrappedChestBlock(w, name, m, Utils.copyPropertySafe(w.planks));
                         })
-                .addCustomItem((w, b, p) -> b.provideItemBlock(b, p))
+                .addCustomItem((w, b, p) -> new VariantChestBlock.Item(b, p))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

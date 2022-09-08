@@ -139,7 +139,11 @@ dependencies {
 
     modImplementation("curse.maven:missing-wilds-forge-634277:3840197")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:3872133")
-    modCompileOnly("curse.maven:terrablender-563928:3926355")
+   // modImplementation("curse.maven:terrablender-563928:3925974")
+   // modImplementation("curse.maven:biomes-o-plenty-220318:3927361")
+
+
+
 
     //modImplementation("curse.maven:malum-484064:3768401")
    // implementation fg.deobf("curse.maven:ortuslib-616457:3768197")

@@ -16,7 +16,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
         super(new DynamicTexturePack(EveryCompat.res("generated_pack")));
         //since we place chests textures in its namespace to use its renderer
         if (PlatformHelper.isModLoaded("quark")) getPack().addNamespaces("quark");
-        //this.dynamicPack.generateDebugResources = false;
+        this.dynamicPack.generateDebugResources = PlatformHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get();
     }
 
     @Override
