@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFur
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -84,6 +85,4 @@ public class EveryCompatForge extends EveryCompat {
     public void commonSetup(FMLCommonSetupEvent event){
         this.commonSetup();
     }
-
-
 }

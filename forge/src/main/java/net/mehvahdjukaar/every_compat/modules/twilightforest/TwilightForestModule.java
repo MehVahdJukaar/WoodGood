@@ -40,9 +40,10 @@ public class TwilightForestModule extends SimpleModule {
     public TwilightForestModule(String modId) {
         super(modId, "tf");
 
+        //TODO: check face culling
         BANISTERS = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("wood/oak_banister"))

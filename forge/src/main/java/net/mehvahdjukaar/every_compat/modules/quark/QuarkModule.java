@@ -323,10 +323,13 @@ public class QuarkModule extends SimpleModule {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onTextureStitch);
     }
 
+    private static final ResourceLocation CHEST_SHEET = new ResourceLocation("textures/atlas/chest.png");
     @EventCalled
     public void onTextureStitch(TextureStitchEvent.Pre event) {
-        CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
-        TRAPPED_CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
+        if(event.getAtlas().location().equals(CHEST_SHEET)) {
+            CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
+            TRAPPED_CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
+        }
 
     }
 
