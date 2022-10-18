@@ -1,10 +1,12 @@
 package net.mehvahdjukaar.every_compat.forge;
 
+import com.simibubi.create.Create;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
+import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.graveyard.GraveyardModule;
@@ -15,6 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
+import net.mehvahdjukaar.moonlight.core.set.forge.BlockSetInternalImpl;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -52,7 +55,9 @@ public class EveryCompatForge extends EveryCompat {
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
 
-        addModule("graveyard", () -> GraveyardModule::new);
+        addModule("create", () -> CreateModule::new);
+
+        //addModule("graveyard", () -> GraveyardModule::new);
 
 
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);

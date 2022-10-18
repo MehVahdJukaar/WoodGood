@@ -118,7 +118,7 @@ dependencies {
     //modImplementation("curse.maven:benched-417063:3821546")
     //architect palette
 
-    modImplementation ("curse.maven:quark-243121:3956195")
+    modImplementation ("curse.maven:quark-243121:3961436")
     modImplementation ("curse.maven:the-twilight-forest-227639:3943940")
     modImplementation("curse.maven:autoreglib-250363:3857246")
     modImplementation("curse.maven:backpacked-352835:3923045")
@@ -141,7 +141,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:3851698")
     modCompileOnly("curse.maven:macaws-windows-363569:3830460")
 
-    modImplementation("curse.maven:the-graveyard-forge-531188:3837172")
+    modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
 
    // modImplementation("curse.maven:terrablender-563928:3925974")
    // modImplementation("curse.maven:biomes-o-plenty-220318:3927361")

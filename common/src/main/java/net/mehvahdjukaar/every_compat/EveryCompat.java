@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
@@ -13,6 +14,7 @@ import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.core.set.BlockSetInternal;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -119,11 +121,12 @@ public abstract class EveryCompat {
     private int prevRegSize;
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
-        EarlyConfigs.init(); // add wood stuff
+        WoodConfigs.init(); // add wood stuff once its ready
         if (EarlyConfigs.TAB_ENABLED.get()) this.addTab();
         this.prevRegSize = Registry.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");
         forAllModules(m -> m.registerWoodBlocks(event, woods));
+
     }
 
 

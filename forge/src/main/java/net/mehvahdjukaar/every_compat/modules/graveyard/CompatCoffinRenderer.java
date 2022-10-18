@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.graveyard;
 
 import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.finallion.graveyard.blockentities.enums.SarcophagusPart;
+import com.finallion.graveyard.blockentities.render.SarcophagusBlockEntityRenderer;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
 import com.finallion.graveyard.init.TGTileEntities;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -31,107 +32,84 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class CompatCoffinRenderer<T extends BlockEntity & LidBlockEntity> implements BlockEntityRenderer<GraveyardModule.CompatCoffinBlockTile> {
-    public static final ResourceLocation SARCOPHAGUS_FOOT = new ResourceLocation("graveyard", "block/sarcophagus_foot");
-    public static final ResourceLocation SARCOPHAGUS_FOOT_LID = new ResourceLocation("graveyard", "block/sarcophagus_foot_lid");
-    public static final ResourceLocation SARCOPHAGUS_HEAD_LID = new ResourceLocation("graveyard", "block/sarcophagus_head_lid");
-    public static final ResourceLocation SARCOPHAGUS_HEAD = new ResourceLocation("graveyard", "block/sarcophagus_head");
-    private final BakedModel sarcophagusModelHead;
-    private final BakedModel sarcophagusModelFoot;
-    private final BakedModel sarcophagusModelFootLid;
-    private final BakedModel sarcophagusModelHeadLid;
-
+public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<GraveyardModule.CompatCoffinBlockTile> {
     public CompatCoffinRenderer(BlockEntityRendererProvider.Context ctx) {
-        Minecraft client = Minecraft.getInstance();
-        this.sarcophagusModelHead = client.getModelManager().getModel(SARCOPHAGUS_HEAD);
-        this.sarcophagusModelFoot = client.getModelManager().getModel(SARCOPHAGUS_FOOT);
-        this.sarcophagusModelFootLid = client.getModelManager().getModel(SARCOPHAGUS_FOOT_LID);
-        this.sarcophagusModelHeadLid = client.getModelManager().getModel(SARCOPHAGUS_HEAD_LID);
+        super(ctx);
     }
 
-    public void render(GraveyardModule.CompatCoffinBlockTile entity, float tickDelta, PoseStack matrixStack, MultiBufferSource vertexConsumers, int light, int overlay) {
-        Level world = entity.getLevel();
+    public void render(SarcophagusBlockEntity entity, float tickDelta, PoseStack matrixStack, MultiBufferSource vertexConsumers, int light, int overlay) {
         BlockState blockState = entity.getBlockState();
-        String name = entity.getBlockState().getBlock().getDescriptionId();
-        boolean isCoffin = entity.isCoffin();
-        DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> propertySource = DoubleBlockCombiner.combineWithNeigbour((BlockEntityType) TGTileEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlock::getBlockType, SarcophagusBlock::getConnectedDirection, ChestBlock.FACING, blockState, world, entity.getBlockPos(), (worldx, pos) -> {
-            return false;
-        });
-        float g = ((Float2FloatFunction) propertySource.apply(SarcophagusBlock.opennessCombiner(entity))).get(tickDelta);
+        DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> propertySource = DoubleBlockCombiner.combineWithNeigbour(
+                (BlockEntityType)GraveyardModule.COFFIN_TILE,
+                SarcophagusBlock::getBlockType,
+                SarcophagusBlock::getConnectedDirection,
+                ChestBlock.FACING,
+                blockState,
+                entity.getLevel(),
+                entity.getBlockPos(),
+                (worldx, pos) -> false
+        );
+        float g = propertySource.apply(SarcophagusBlock.opennessCombiner(entity)).get(tickDelta);
         g = 1.0F - g;
         g = 1.0F - g * g * g;
-        WoodType wood = entity.getWoodType();
-        int k = ((Int2IntFunction) propertySource.apply(new BrightnessCombiner())).applyAsInt(light);
-        BakedModel footLid = this.getModel(wood, isCoffin, 0);
-        BakedModel headLid = this.getModel(wood, isCoffin, 1);
-        BakedModel head = this.getModel(wood, isCoffin, 2);
-        BakedModel foot = this.getModel(wood, isCoffin, 3);
-        if (world != null) {
-            if (isCoffin) {
-                this.renderPart(entity, matrixStack, vertexConsumers, blockState.getValue(SarcophagusBlock.PART) == SarcophagusPart.HEAD ? head : foot, (Direction) blockState.getValue(SarcophagusBlock.FACING), vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, false);
-                this.renderLid(entity, matrixStack, vertexConsumers, blockState.getValue(SarcophagusBlock.PART) == SarcophagusPart.HEAD ? headLid : footLid, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, false, g);
-            } else {
-                this.renderPart(entity, matrixStack, vertexConsumers, blockState.getValue(SarcophagusBlock.PART) == SarcophagusPart.HEAD ? this.sarcophagusModelHead : this.sarcophagusModelFoot, (Direction) blockState.getValue(SarcophagusBlock.FACING), vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, false);
-                this.renderLid(entity, matrixStack, vertexConsumers, blockState.getValue(SarcophagusBlock.PART) == SarcophagusPart.HEAD ? this.sarcophagusModelHeadLid : this.sarcophagusModelFootLid, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, false, g);
-            }
-        } else if (isCoffin) {
-            this.renderLid(entity, matrixStack, vertexConsumers, footLid, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, true, g);
-            this.renderPart(entity, matrixStack, vertexConsumers, foot, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, true);
-            this.renderLid(entity, matrixStack, vertexConsumers, headLid, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, false, g);
-            this.renderPart(entity, matrixStack, vertexConsumers, head, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, false);
-        } else {
-            this.renderLid(entity, matrixStack, vertexConsumers, this.sarcophagusModelFootLid, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, true, g);
-            this.renderPart(entity, matrixStack, vertexConsumers, this.sarcophagusModelFoot, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, true);
-            this.renderLid(entity, matrixStack, vertexConsumers, this.sarcophagusModelHeadLid, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, false, g);
-            this.renderPart(entity, matrixStack, vertexConsumers, this.sarcophagusModelHead, Direction.SOUTH, vertexConsumers.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), k, overlay, false);
+        String base = ((SarcophagusBlock)blockState.getBlock()).getBase();
+        String lid = ((SarcophagusBlock)blockState.getBlock()).getLid();
+        BakedModel baseModel = getCustomModel(base);
+        BakedModel lidModel = getCustomModel(lid);
+        if (entity.getLevel() != null && entity.getBlockState().getValue(SarcophagusBlock.PART) == SarcophagusPart.HEAD) {
+            this.render(entity, matrixStack, vertexConsumers, light, overlay, g, lidModel, true);
+            this.render(entity, matrixStack, vertexConsumers, light, overlay, g, baseModel, false);
         }
 
     }
 
-    private void renderPart(SarcophagusBlockEntity entity, PoseStack matrices, MultiBufferSource vertexConsumers, BakedModel model, Direction direction, VertexConsumer vertexConsumer, int light, int overlay, boolean isFoot) {
-        ModelBlockRenderer renderer = Minecraft.getInstance().getBlockRenderer().getModelRenderer();
-        Level world = entity.getLevel();
-        matrices.pushPose();
-        matrices.translate(0.0, 0.0, isFoot ? -1.0 : 0.0);
-        float f = ((Direction) entity.getBlockState().getValue(SarcophagusBlock.FACING)).getOpposite().toYRot();
-        matrices.translate(0.5, 0.5, 0.5);
-        matrices.mulPose(Vector3f.YP.rotationDegrees(-f));
-        matrices.translate(-0.5, -0.5, -0.5);
-        renderer.renderModel(matrices.last(), vertexConsumer, entity.getBlockState(), model, 1.0F, 1.0F, 1.0F, light, overlay);
-        matrices.popPose();
+    //TODO: this uses custom item models. adding is not trivial.
+    private BakedModel getCustomModel(String base) {
+        return null;
     }
 
-    private void renderLid(SarcophagusBlockEntity entity, PoseStack matrices, MultiBufferSource vertexConsumers, BakedModel model, Direction direction, VertexConsumer vertexConsumer, int light, int overlay, boolean isFoot, float openFactor) {
-        ModelBlockRenderer renderer = Minecraft.getInstance().getBlockRenderer().getModelRenderer();
-        Level world = entity.getLevel();
-        matrices.pushPose();
-        matrices.translate(0.0, 0.0, isFoot ? -1.0 : 0.0);
-        float f = ((Direction) entity.getBlockState().getValue(SarcophagusBlock.FACING)).getOpposite().toYRot();
-        matrices.translate(0.5, 0.5, 0.5);
-        matrices.mulPose(Vector3f.YP.rotationDegrees(-f));
-        matrices.mulPose(Vector3f.ZN.rotationDegrees(openFactor * 70.0F));
-        matrices.translate(isFoot ? -((double) openFactor * 0.25) : (double) openFactor * 0.25, (double) openFactor * 0.25, 0.0);
-        matrices.translate(-0.5, -0.5, -0.5);
-        renderer.renderModel(matrices.last(), vertexConsumer, entity.getBlockState(), model, 1.0F, 1.0F, 1.0F, light, overlay);
-        matrices.popPose();
-    }
 
-    private BakedModel getModel(WoodType w, boolean isCoffin, int part) {
-        Minecraft client = Minecraft.getInstance();
-        if (isCoffin) {
-            String woodType = w.getAppendableId() + "_coffin";
-            return switch (part) {
-                case 1 ->
-                        client.getModelManager().getModel(new ResourceLocation("everycomp", "block/gy/" + woodType + "_foot_lid"));
-                case 2 ->
-                        client.getModelManager().getModel(new ResourceLocation("everycomp", "block/gy/" + woodType + "_foot"));
-                case 3 ->
-                        client.getModelManager().getModel(new ResourceLocation("everycomp", "block/gy/" + woodType + "_head"));
-                default ->
-                        client.getModelManager().getModel(new ResourceLocation("everycomp", "block/gy/" + woodType + "_head_lid"));
-            };
-        } else {
-            return client.getModelManager().getModel(new ResourceLocation("graveyard", "block/oak_coffin_head"));
+    private void render(
+            SarcophagusBlockEntity entity,
+            PoseStack matrixStack,
+            MultiBufferSource vertexConsumer,
+            int light,
+            int overlay,
+            float g,
+            BakedModel model,
+            boolean isLid
+    ) {
+        matrixStack.pushPose();
+        Direction direction = ((Direction)entity.getBlockState().getValue(SarcophagusBlock.FACING)).getOpposite();
+        float f = direction.toYRot();
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(-f));
+        switch (direction) {
+            case EAST -> matrixStack.translate(-1.0, 0.0, 1.0);
+            case SOUTH -> matrixStack.translate(0.0, 0.0, 1.0);
+            case NORTH -> matrixStack.translate(-1.0, 0.0, 0.0);
         }
+
+        if (isLid) {
+            matrixStack.translate((double)g * 0.3, (double)g * 0.3, 0.0);
+            matrixStack.mulPose(Vector3f.ZN.rotationDegrees(g * 45.0F));
+        }
+
+        Minecraft.getInstance()
+                .getBlockRenderer()
+                .getModelRenderer()
+                .renderModel(
+                        matrixStack.last(),
+                        vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)),
+                        entity.getBlockState(),
+                        model,
+                        1.0F,
+                        1.0F,
+                        1.0F,
+                        light,
+                        overlay
+                );
+        matrixStack.popPose();
     }
+
+
 }

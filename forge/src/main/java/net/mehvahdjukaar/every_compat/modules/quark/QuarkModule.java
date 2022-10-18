@@ -299,6 +299,7 @@ public class QuarkModule extends SimpleModule {
         event.register(TRAPPED_CHEST_TILE, VariantChestRenderer::new);
     }
 
+    @Override
     public void onClientInit(){
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onTextureStitch);
     }

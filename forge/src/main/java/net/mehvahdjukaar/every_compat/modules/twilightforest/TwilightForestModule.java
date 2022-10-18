@@ -3,7 +3,10 @@ package net.mehvahdjukaar.every_compat.modules.twilightforest;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -14,6 +17,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -73,7 +77,7 @@ public class TwilightForestModule extends SimpleModule {
                         })
                 .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
                 .noItem()
-                .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log"))
+                .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log_vertical"))
                 .build();
 
         this.addEntry(HOLLOW_LOGS_VERTICAL);
@@ -101,10 +105,16 @@ public class TwilightForestModule extends SimpleModule {
                     RegistryObject.create(EveryCompat.res(itemName + "_horizontal"), ForgeRegistries.BLOCKS),
                     RegistryObject.create(Utils.getID(b), ForgeRegistries.BLOCKS),
                     RegistryObject.create(EveryCompat.res(itemName + "_climbable"), ForgeRegistries.BLOCKS),
-                    new Item.Properties().tab(TFItems.creativeTab));
+                    new Item.Properties().tab(getTab(w)));
             HOLLOW_LOGS_VERTICAL.items.put(w, i);
-            registry.register(EveryCompat.res(itemName), i);
+            w.addChild(this.shortenedId() + "/hollow_log", i);
+            registry.register(EveryCompat.res(itemName+"_vertical"), i);
         });
+    }
+
+    private static CreativeModeTab getTab(WoodType w) {
+        return WoodConfigs.isTypeEnabled(w) ?
+                (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : TFItems.creativeTab) : null;
     }
 
     @Override
@@ -120,8 +130,8 @@ public class TwilightForestModule extends SimpleModule {
     }
 
     @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
+    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addStaticClientResources(handler, manager);
     }
 
     @Nullable

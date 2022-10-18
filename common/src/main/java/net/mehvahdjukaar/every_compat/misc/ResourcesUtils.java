@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.ForgeHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -132,7 +133,7 @@ public class ResourcesUtils {
             blocks.forEach((w, b) -> {
                 ResourceLocation id = Utils.getID(b);
                 try {
-                    if (EarlyConfigs.isTypeEnabled(w)) {
+                    if (WoodConfigs.isTypeEnabled(w)) {
                         //creates blockstate
                         StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
                         assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
@@ -203,7 +204,7 @@ public class ResourcesUtils {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
 
         blocks.forEach((wood, value) -> {
-            if (EarlyConfigs.isTypeEnabled(wood)) {
+            if (WoodConfigs.isTypeEnabled(wood)) {
                 for (var res : original) {
                     try {
                         StaticResource newRes = modifier.transform(res, Utils.getID(value), wood);
@@ -252,7 +253,7 @@ public class ResourcesUtils {
 
         items.forEach((w, i) -> {
 
-            if (EarlyConfigs.isTypeEnabled(w)) {
+            if (WoodConfigs.isTypeEnabled(w)) {
                 try {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     if (i.getItemCategory() != null) {

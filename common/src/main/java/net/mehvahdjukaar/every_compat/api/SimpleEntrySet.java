@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.api;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
@@ -210,7 +211,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     protected CreativeModeTab getTab(T w, B b) {
-        return EarlyConfigs.isTypeEnabled(w) ?
+        return WoodConfigs.isTypeEnabled(w) ?
                 (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : this.tab.get()) : null;
     }
 
@@ -332,7 +333,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 T w = entry.getKey();
                 //skips disabled ones
 
-                if (!EarlyConfigs.isTypeEnabled(w)) continue;
+                if (!WoodConfigs.isTypeEnabled(w)) continue;
 
                 ResourceLocation blockId = Utils.getID(b);
 

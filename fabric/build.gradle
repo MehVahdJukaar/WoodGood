@@ -32,7 +32,9 @@ dependencies {
     modImplementation("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
         exclude group: 'net.fabricmc.fabric-api'
     }
-    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    modImplementation("curse.maven:modmenu-308702:3920481") {
+        exclude module: "fabric-api"
+    }
 
     //modImplementation(fileTree(dir: 'mods_fabric', include: '*.jar'))
     //modImplementation("curse.maven:selene-499980:3859239")
@@ -53,7 +55,7 @@ dependencies {
     modImplementation("curse.maven:decorative-blocks-362528:3941637")
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:3944580")
 
-    modImplementation ("curse.maven:the-twilight-forest-227639:4011850")
+    modCompileOnly ("curse.maven:the-twilight-forest-227639:4011850")
     modImplementation ("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 
     modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")

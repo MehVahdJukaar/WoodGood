@@ -15,8 +15,6 @@ import java.util.function.Supplier;
 //loaded before registry
 public class EarlyConfigs {
 
-    private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> BLOCK_TYPE_CONFIGS = new HashMap<>();
-
     public static ConfigSpec SPEC;
 
     public static Supplier<Boolean> TAB_ENABLED;
@@ -40,31 +38,10 @@ public class EarlyConfigs {
         DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
                         .define("debug_resources",true);
         builder.pop();
-        for (var reg : BlockSetAPI.getRegistries()) {
-            builder.push(reg.typeName().replace(" ", "_"));
-            for (var w : reg.getValues()) {
-                String key = w.toString().replace(":", ".");
-                var config = builder.define(key, true);
-                var map = BLOCK_TYPE_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
-                map.put(w.toString(), config);
-            }
-            builder.pop();
-        }
+
         SPEC = builder.buildAndRegister();
 
         SPEC.loadFromFile(); //manually load early
     }
 
-    public static boolean isWoodEnabled(String wood) {
-        return BLOCK_TYPE_CONFIGS.get(WoodType.class).get(wood).get();
-    }
-
-    public static <T extends BlockType> boolean isTypeEnabled(T w) {
-        try {
-            return BLOCK_TYPE_CONFIGS.get(w.getClass()).get(w.getId().toString()).get();
-        } catch (Exception e) {
-            int a = 1;
-        }
-        return true;
-    }
 }

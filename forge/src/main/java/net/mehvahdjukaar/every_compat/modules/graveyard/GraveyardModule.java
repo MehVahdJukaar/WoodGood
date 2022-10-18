@@ -8,6 +8,7 @@ import com.finallion.graveyard.blocks.SarcophagusBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -16,6 +17,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -24,6 +26,8 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 public class GraveyardModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> COFFINS;
+
+    public static BlockEntityType<? extends SarcophagusBlockEntity> COFFIN_TILE;
 
     public GraveyardModule(String modId) {
         super(modId, "gy");
@@ -49,6 +53,11 @@ public class GraveyardModule extends SimpleModule {
         event.register((BlockEntityType<CompatCoffinBlockTile>) (COFFINS.getTileHolder().tile), CompatCoffinRenderer::new);
     }
 
+    @Override
+    public void registerTiles(Registrator<BlockEntityType<?>> registry) {
+        super.registerTiles(registry);
+        COFFIN_TILE = (BlockEntityType<? extends SarcophagusBlockEntity>) COFFINS.getTileHolder().tile;
+    }
 
     //idk why but object holder class loader thingie keeps trying to load this if its not inner private like this
     class CompatCoffinBlockTile extends SarcophagusBlockEntity {
@@ -74,7 +83,7 @@ public class GraveyardModule extends SimpleModule {
         private final WoodType woodType;
 
         public CompatCoffinfBlock(Properties properties, WoodType woodType) {
-            super(properties, true);
+            super(properties, true, "lid", "base");
             this.woodType = woodType;
         }
 
