@@ -209,5 +209,15 @@ public class AnotherFurnitureModule extends SimpleModule {
             return PLANTER_BOXES.getTileHolder().tile;
         }
     }
+    
+    private class CompatPlanterBoxBlock extends PlanterBoxBlock {
+        public CompatPlanterBoxBlock(Properties properties) {
+            super(properties);
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new CompatPlanterBoxTile(pos, state);
+        }
+    }
 
 }
