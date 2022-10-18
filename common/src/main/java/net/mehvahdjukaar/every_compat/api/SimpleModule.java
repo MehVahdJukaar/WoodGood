@@ -101,7 +101,7 @@ public class SimpleModule extends CompatModule {
 
 
     @Override
-    public void registerEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
         getEntries().forEach(e -> e.registerEntityRenderers(this, event));
     }
 }

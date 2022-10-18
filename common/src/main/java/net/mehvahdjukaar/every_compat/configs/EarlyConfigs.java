@@ -15,8 +15,6 @@ import java.util.function.Supplier;
 //loaded before registry
 public class EarlyConfigs {
 
-    public static final String FILE_NAME = EveryCompat.MOD_ID + "-registry.toml";
-
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> BLOCK_TYPE_CONFIGS = new HashMap<>();
 
     public static ConfigSpec SPEC;

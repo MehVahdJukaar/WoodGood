@@ -56,6 +56,8 @@ public abstract class EveryCompat {
 
     protected void commonInit() {
 
+        EarlyConfigs.init();
+
         SERVER_RESOURCES = new ServerDynamicResourcesHandler();
         SERVER_RESOURCES.register();
 
@@ -117,7 +119,7 @@ public abstract class EveryCompat {
     private int prevRegSize;
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
-        EarlyConfigs.init();
+        EarlyConfigs.init(); // add wood stuff
         if (EarlyConfigs.TAB_ENABLED.get()) this.addTab();
         this.prevRegSize = Registry.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");

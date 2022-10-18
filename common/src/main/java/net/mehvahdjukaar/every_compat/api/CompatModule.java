@@ -140,7 +140,7 @@ public abstract class CompatModule {
 
     }
 
-    public void registerEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
 
     }
 

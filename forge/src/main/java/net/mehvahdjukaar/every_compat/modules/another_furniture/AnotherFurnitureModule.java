@@ -175,7 +175,7 @@ public class AnotherFurnitureModule extends SimpleModule {
     }
 
     @Override
-    public void registerEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
         event.register((BlockEntityType<CompatShelfBlockTile>) (SHELVES.getTileHolder().tile), ShelfRenderer::new);
         event.register((BlockEntityType<CompatPlanterBoxTile>) (PLANTER_BOXES.getTileHolder().tile), PlanterBoxRenderer::new);
     }

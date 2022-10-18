@@ -141,12 +141,14 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:3851698")
     modCompileOnly("curse.maven:macaws-windows-363569:3830460")
 
+    modImplementation("curse.maven:the-graveyard-forge-531188:3837172")
 
    // modImplementation("curse.maven:terrablender-563928:3925974")
    // modImplementation("curse.maven:biomes-o-plenty-220318:3927361")
 
 
-
+    modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
     //modImplementation("curse.maven:malum-484064:3768401")
    // implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
@@ -160,7 +162,6 @@ dependencies {
   //  implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
 
     // implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
-  //  implementation fg.deobf("curse.maven:the-graveyard-forge-531188:3837172")
    // implementation fg.deobf("curse.maven:geckolib-388172:3856641")
 
 }

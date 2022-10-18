@@ -494,7 +494,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
     public static BlockEntityType<?> COMPAT_SINK;
 
     @Override
-    public void registerEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
         event.register((BlockEntityType<KitchenSinkBlockEntity>) (KITCHEN_SINK_DARK.getTileHolder().tile),
                 KitchenSinkBlockEntityRenderer::new);
     }

@@ -42,7 +42,7 @@ public class BackpackedModule extends SimpleModule {
     }
 
     @Override
-    public void registerEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
         event.register((BlockEntityType<ShelfBlockEntity>) (SHELF.getTileHolder().tile), ShelfRenderer::new);
 
     }

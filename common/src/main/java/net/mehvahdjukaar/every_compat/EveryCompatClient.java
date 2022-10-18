@@ -22,7 +22,7 @@ public class EveryCompatClient {
     }
 
     private static void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        EveryCompat.forAllModules(m -> m.registerEntityRenderers(event));
+        EveryCompat.forAllModules(m -> m.registerBlockEntityRenderers(event));
     }
 
     public static void commonSetup() {
