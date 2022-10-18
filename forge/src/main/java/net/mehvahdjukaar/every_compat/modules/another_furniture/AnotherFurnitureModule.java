@@ -31,6 +31,8 @@ public class AnotherFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> SHELVES;
     public final SimpleEntrySet<WoodType, Block> PLANTER_BOXES;
     public final SimpleEntrySet<WoodType, Block> SHUTTERS;
+    public final SimpleEntrySet<WoodType, Block> DRAWERS;
+    public final SimpleEntrySet<WoodType, Block> BENCHES;
 
     public AnotherFurnitureModule(String modId) {
         super(modId, "af");
@@ -44,7 +46,9 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(CompatPlanterBoxTile::new)
                 .setTab(() -> AnotherFurniture.TAB)
-                .addTexture(modRes("block/planter_box/oak"))
+                .addTexture(modRes("block/planter_box/oak_bottom"))
+                .addTexture(modRes("block/planter_box/oak_supports"))
+                .addTexture(modRes("block/planter_box/top_sides"))
                 .build();
 
         this.addEntry(PLANTER_BOXES);
@@ -74,7 +78,9 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .useLootFromBase()
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
+                .addTexture(modRes("block/table/oak_bottom"))
                 .addTexture(modRes("block/table/oak_sides"))
+                .addTexture(modRes("block/table/oak_supports"))
                 .addTexture(modRes("block/table/oak_top"))
                 .build();
 
@@ -109,6 +115,35 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .build();
 
         this.addEntry(SHELVES);
+        
+        DRAWERS = SimpleEntrySet.builder(WoodType.class, "drawer",
+                        AFBlocks.OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DrawerBlock(Utils.copyPropertySafe(w.planks)))
+                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .defaultRecipe()
+                .setTab(() -> AnotherFurniture.TAB)
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/drawer/oak_front"))
+                .addTexture(modRes("block/drawer/oak_front_open"))
+                .addTexture(modRes("block/drawer/oak_side"))
+                .addTexture(modRes("block/drawer/oak_top"))
+                .build();
+
+        this.addEntry(DRAWERS);
+        
+        BENCHES = SimpleEntrySet.builder(WoodType.class, "bench",
+                        AFBlocks.OAK_BENCH, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BenchBlock(Utils.copyPropertySafe(w.planks)))
+                .addTag(modRes("benches"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("benches"), Registry.ITEM_REGISTRY)
+                .defaultRecipe()
+                .setTab(() -> AnotherFurniture.TAB)
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/bench/oak"))
+                .build();
+
+        this.addEntry(BENCHES);
 
     }
 
@@ -174,7 +209,7 @@ public class AnotherFurnitureModule extends SimpleModule {
             return PLANTER_BOXES.getTileHolder().tile;
         }
     }
-
+    
     private class CompatPlanterBoxBlock extends PlanterBoxBlock {
         public CompatPlanterBoxBlock(Properties properties) {
             super(properties);
