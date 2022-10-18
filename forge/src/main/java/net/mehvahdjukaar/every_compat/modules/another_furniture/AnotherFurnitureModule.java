@@ -2,11 +2,13 @@ package net.mehvahdjukaar.every_compat.modules.another_furniture;
 
 import com.starfish_studios.another_furniture.AnotherFurniture;
 import com.starfish_studios.another_furniture.block.*;
+import com.starfish_studios.another_furniture.block.entity.DrawerBlockEntity;
 import com.starfish_studios.another_furniture.block.entity.PlanterBoxBlockEntity;
 import com.starfish_studios.another_furniture.block.entity.ShelfBlockEntity;
 import com.starfish_studios.another_furniture.client.renderer.blockentity.PlanterBoxRenderer;
 import com.starfish_studios.another_furniture.client.renderer.blockentity.ShelfRenderer;
 import com.starfish_studios.another_furniture.registry.AFBlocks;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
@@ -48,7 +50,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .setTab(() -> AnotherFurniture.TAB)
                 .addTexture(modRes("block/planter_box/oak_bottom"))
                 .addTexture(modRes("block/planter_box/oak_supports"))
-                .addTexture(modRes("block/planter_box/top_sides"))
+                .addTextureM(modRes("block/planter_box/oak_top_sides"), EveryCompat.res("block/af/planter_box_top_sides_mask"))
                 .build();
 
         this.addEntry(PLANTER_BOXES);
@@ -78,6 +80,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .useLootFromBase()
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
+                .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/table/oak_bottom"))
                 .addTexture(modRes("block/table/oak_sides"))
                 .addTexture(modRes("block/table/oak_supports"))
@@ -111,6 +114,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .setTab(() -> AnotherFurniture.TAB)
                 .addTexture(modRes("block/shelf/oak_sides"))
                 .addTexture(modRes("block/shelf/oak_top"))
+                .addTexture(modRes("block/shelf/oak_bottom"))
                 .addTexture(modRes("block/shelf/oak_supports"))
                 .build();
 
@@ -121,6 +125,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                         w -> new DrawerBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTile(CompatDrawerBlockTile::new)
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
                 .setRenderType(() -> RenderType::cutout)
@@ -217,6 +222,18 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new CompatPlanterBoxTile(pos, state);
+        }
+    }
+
+    class CompatDrawerBlockTile extends DrawerBlockEntity {
+
+        public CompatDrawerBlockTile(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public BlockEntityType<?> getType() {
+            return DRAWERS.getTileHolder().tile;
         }
     }
 

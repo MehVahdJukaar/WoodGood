@@ -45,7 +45,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:3825284")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:3851702")
     modCompileOnly("curse.maven:macaws-windows-363569:3830462")
-    modImplementation("curse.maven:another-furniture-610492:3871328")
+    modImplementation("curse.maven:another-furniture-610492:4032093")
     modImplementation("curse.maven:twigs-496913:3865476")
     modImplementation("curse.maven:camp-chair-531744:3835679")
     modImplementation("curse.maven:missing-wilds-622590:3838184")
@@ -57,7 +57,7 @@ dependencies {
     modImplementation ("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 
     modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
-    modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
+    //modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 }
 
 
