@@ -125,7 +125,7 @@ dependencies {
     modImplementation("curse.maven:backpacked-352835:3923045")
 
     modImplementation("curse.maven:camp-chair-531744:3879293")
-    modImplementation("curse.maven:another-furniture-610492:3901785")
+    modImplementation("curse.maven:another-furniture-610492:4032092")
 
     modImplementation("curse.maven:macaws-bridges-351725:3827953")
     modCompileOnly("curse.maven:macaws-doors-378646:3844125")
