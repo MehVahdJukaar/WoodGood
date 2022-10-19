@@ -181,7 +181,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         Block base = baseBlock.get();
         if (base == null || base == Blocks.AIR)
             throw new UnsupportedOperationException("Base block cant be null");
-        baseType.get().addChild(module.shortenedId() + "/" + typeName, base);
+        baseType.get().addChild(module.getModId() + ":" + typeName, base);
 
         for (T w : woodTypes) {
             String name = getBlockName(w);
@@ -194,7 +194,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 this.blocks.put(w, block);
 
                 registry.register(EveryCompat.res(fullName), block);
-                w.addChild(module.shortenedId() + "/" + typeName, block);
+                w.addChild(module.getModId() + ":" + typeName, block);
             }
         }
     }

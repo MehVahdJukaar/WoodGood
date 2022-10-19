@@ -163,11 +163,6 @@ public abstract class CompatModule {
     }
     //utility functions
 
-    protected final void addChildToOak(String category, String oakBlockName) {
-        WoodTypeRegistry.OAK_TYPE.addChild(category, Registry.BLOCK.get(modRes(oakBlockName)));
-    }
-
-
     //post process some textures. currently only ecologics azalea
     public void addWoodTexture(WoodType wood, DynClientResourcesProvider handler, ResourceManager manager,
                                String path, Supplier<TextureImage> textureSupplier) {
@@ -214,5 +209,4 @@ public abstract class CompatModule {
     public void onFirstClientTick() {
     }
 
-    ;
 }
