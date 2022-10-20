@@ -33,14 +33,8 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
     }
 
     private void initialize() {
-        label:
         for (var c : WoodTypeRegistry.OAK_TYPE.getChildren()) {
-            if (c.getKey().contains("/")) {
-                for (var k : CHILD_KEYS) {
-                    if (WoodTypeRegistry.OAK_TYPE.getChild(k).asItem() == c.getValue().asItem()) {
-                        continue label;
-                    }
-                }
+            if (c.getKey().contains(":") && !CHILD_KEYS.contains(c.getKey()) && c.getValue() instanceof ItemLike) {
                 CHILD_KEYS.add(c.getKey());
             }
         }
@@ -84,15 +78,18 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
         int tm = time % size;
         if (tm != lastTime) {
 
-            ItemLike v;
+            ItemLike v = null;
             do {
                 var l = (this.lastIndex + 1) % size;
                 // this.woodIndex = (this.woodIndex + 1);
                 if (l < lastIndex) this.woodIndex = (this.woodIndex + 1) % MODDED_WOOD_TYPES.size();
                 this.lastIndex = l;
                 String key = CHILD_KEYS.get(lastIndex);
-                v = MODDED_WOOD_TYPES.get(woodIndex % MODDED_WOOD_TYPES.size()).getChild(key);
-                if (v != null && v.asItem().getItemCategory() == null) v = null;
+                var vv = MODDED_WOOD_TYPES.get(woodIndex % MODDED_WOOD_TYPES.size()).getChild(key);
+                if (vv instanceof ItemLike il) {
+                    if (il.asItem().getItemCategory() == null) v = null;
+                    else v = il;
+                }
             } while (v == null);
 
             this.currentStack = v.asItem().getDefaultInstance();

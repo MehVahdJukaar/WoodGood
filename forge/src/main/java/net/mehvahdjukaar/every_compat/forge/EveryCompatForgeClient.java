@@ -7,12 +7,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import vazkii.quark.integration.terrablender.TerraBlenderIntegration;
 
-@Mod.EventBusSubscriber(modid = EveryCompatForge.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = EveryCompatForge.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EveryCompatForgeClient {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event){
-        EveryCompatClient.commonSetup();
+       event.enqueueWork(EveryCompatClient::commonSetup);
     }
 
 }

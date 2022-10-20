@@ -274,7 +274,7 @@ public class QuarkModule extends SimpleModule {
             var leaf = t.getChild("leaves");
             if (leaf instanceof Block block) {
                 bc.register((s, l, p, i) -> bc.getColor(block.defaultBlockState(), l, p, i), b);
-                ic.register((stack, tintIndex) -> ic.getColor(new ItemStack(leaf.asItem()), tintIndex), b.asItem());
+                ic.register((stack, tintIndex) -> ic.getColor(new ItemStack(block.asItem()), tintIndex), b.asItem());
             }
         });
     }

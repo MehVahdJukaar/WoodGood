@@ -46,14 +46,11 @@ public class ResourcesUtils {
         if (blocks.isEmpty()) return;
         //finds one entry. used so we can grab the oak equivalent
         var first = blocks.entrySet().stream().findFirst().get();
-        ItemLike oi = BlockType.changeItemBlockType(first.getValue(), first.getKey(), baseType);
+        Block oakBlock = BlockType.changeBlockType(first.getValue(), first.getKey(), baseType);
 
         String baseBlockName = baseType.getTypeName();
 
-        Block oakBlock;
-        if (oi instanceof Block bl) {
-            oakBlock = bl;
-        } else {
+        if (oakBlock == null) {
             EveryCompat.LOGGER.error("Failed to generate some assets");
             return;
         }
