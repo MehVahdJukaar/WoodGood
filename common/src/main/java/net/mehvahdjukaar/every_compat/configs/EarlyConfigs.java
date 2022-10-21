@@ -36,7 +36,7 @@ public class EarlyConfigs {
         DEPEND_ON_PACKS = builder.comment("Makes dynamic assets that are generated depend on loaded resource packs. Turn off to make them just use vanilla assets")
                 .define("assets_depend_on_loaded_packs", true);
         DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
-                        .define("debug_resources",true);
+                        .define("debug_resources",false);
         builder.pop();
 
         SPEC = builder.buildAndRegister();
