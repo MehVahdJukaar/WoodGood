@@ -2,14 +2,15 @@ package net.mehvahdjukaar.every_compat.modules.another_furniture;
 
 import com.starfish_studios.another_furniture.AnotherFurniture;
 import com.starfish_studios.another_furniture.block.*;
+import com.starfish_studios.another_furniture.block.entity.DrawerBlockEntity;
 import com.starfish_studios.another_furniture.block.entity.PlanterBoxBlockEntity;
 import com.starfish_studios.another_furniture.block.entity.ShelfBlockEntity;
 import com.starfish_studios.another_furniture.client.renderer.blockentity.PlanterBoxRenderer;
 import com.starfish_studios.another_furniture.client.renderer.blockentity.ShelfRenderer;
 import com.starfish_studios.another_furniture.registry.AFBlocks;
+import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.PaletteColor;
@@ -19,7 +20,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 
@@ -30,6 +30,8 @@ public class AnotherFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> SHELVES;
     public final SimpleEntrySet<WoodType, Block> PLANTER_BOXES;
     public final SimpleEntrySet<WoodType, Block> SHUTTERS;
+    public final SimpleEntrySet<WoodType, Block> DRAWERS;
+    public final SimpleEntrySet<WoodType, Block> BENCHES;
 
     public AnotherFurnitureModule(String modId) {
         super(modId, "af");
@@ -44,6 +46,9 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTile(CompatPlanterBoxTile::new)
                 .setTab(()->AnotherFurniture.TAB)
                 .addTexture(modRes("block/planter_box/oak"))
+                .addTexture(modRes("block/planter_box/oak_bottom"))
+                .addTexture(modRes("block/planter_box/oak_supports"))
+                .addTextureM(modRes("block/planter_box/oak_top_sides"), WoodGood.res("block/af/planter_box_top_sides_mask"))
                 .build();
 
         this.addEntry(PLANTER_BOXES);
@@ -73,7 +78,10 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .useLootFromBase()
                 .defaultRecipe()
                 .setTab(()->AnotherFurniture.TAB)
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/table/oak_bottom"))
                 .addTexture(modRes("block/table/oak_sides"))
+                .addTexture(modRes("block/table/oak_supports"))
                 .addTexture(modRes("block/table/oak_top"))
                 .build();
 
@@ -104,10 +112,41 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .setTab(()->AnotherFurniture.TAB)
                 .addTexture(modRes("block/shelf/oak_sides"))
                 .addTexture(modRes("block/shelf/oak_top"))
+                .addTexture(modRes("block/shelf/oak_bottom"))
                 .addTexture(modRes("block/shelf/oak_supports"))
                 .build();
 
         this.addEntry(SHELVES);
+
+        DRAWERS = SimpleEntrySet.builder(WoodType.class, "drawer",
+                        AFBlocks.OAK_DRAWER, () -> WoodType.OAK_WOOD_TYPE,
+                        w -> new DrawerBlock(WoodGood.copySafe(w.planks)))
+                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTile(CompatDrawerBlockTile::new)
+                .defaultRecipe()
+                .setTab(() -> AnotherFurniture.TAB)
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/drawer/oak_front"))
+                .addTexture(modRes("block/drawer/oak_front_open"))
+                .addTexture(modRes("block/drawer/oak_side"))
+                .addTexture(modRes("block/drawer/oak_top"))
+                .build();
+
+        this.addEntry(DRAWERS);
+
+        BENCHES = SimpleEntrySet.builder(WoodType.class, "bench",
+                        AFBlocks.OAK_BENCH, () -> WoodType.OAK_WOOD_TYPE,
+                        w -> new BenchBlock(WoodGood.copySafe(w.planks)))
+                .addTag(modRes("benches"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("benches"), Registry.ITEM_REGISTRY)
+                .defaultRecipe()
+                .setTab(() -> AnotherFurniture.TAB)
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/bench/oak"))
+                .build();
+
+        this.addEntry(BENCHES);
 
     }
 
@@ -184,6 +223,18 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new CompatPlanterBoxTile(pos, state);
+        }
+    }
+
+    class CompatDrawerBlockTile extends DrawerBlockEntity {
+
+        public CompatDrawerBlockTile(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public BlockEntityType<?> getType() {
+            return DRAWERS.getTileHolder().tile;
         }
     }
 
