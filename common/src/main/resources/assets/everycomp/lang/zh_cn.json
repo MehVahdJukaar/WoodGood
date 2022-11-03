@@ -1,25 +1,36 @@
 {
   "itemGroup.everycomp": "泛用兼容",
+  "itemGroup.everycomp.everycomp": "泛用兼容",
+  
   "block_type.twigs.table": "%s桌",
+  
   "block_type.missingwilds.fallen_log": "倒下的%s原木",
+  
   "block_type.campchair.camp_chair": "%s小凳",
+  
   "block_type.another_furniture.table": "%s桌",
   "block_type.another_furniture.chair": "%s椅子",
   "block_type.another_furniture.shelf": "%s架子",
   "block_type.another_furniture.shutter": "%s窗扇",
   "block_type.another_furniture.planter_box": "%s花箱",
+  "block_type.another_furniture.drawer": "%s橱柜",
+  "block_type.another_furniture.bench": "%s长椅",
+  
   "block_type.graveyard.coffin": "%s棺材",
+  
   "block_type.decorative_blocks.palisade": "%s实心栅栏",
   "block_type.decorative_blocks.support": "%s支架",
   "block_type.decorative_blocks.beam": "%s支撑柱",
   "block_type.decorative_blocks.seat": "%s板凳",
   "block_type.decorative_winter.snowy_palisade": "覆雪的%s实心栅栏",
+  
   "block_type.farmersdelight.cabinet": "%s厨柜",
   "block_type.twilightforest.hollow_log": "空心%s",
   "block_type.twilightforest.hollow_log_vertical": "空心%s",
   "block_type.twilightforest.hollow_log_horizontal": "空心%s",
   "block_type.twilightforest.hollow_log_climbable": "空心%s",
   "block_type.twilightforest.banister": "%s栏杆",
+  
   "block_type.quark.stripped_post": "去皮%s杆",
   "block_type.quark.post": "%s杆",
   "block_type.quark.hedge": "%s树叶篱",
@@ -28,11 +39,15 @@
   "block_type.quark.trapped_chest": "%s陷阱箱",
   "block_type.quark.bookshelf": "%s书架",
   "block_type.quark.vertical_planks": "竖纹%s木板",
+  
   "block_type.architects_palette.railing": "%s扶手",
   "block_type.architects_palette.boards": "%s宽木板",
+  
   "block_type.valhelsia_structures.cut_post": "分割%s杆",
   "block_type.valhelsia_structures.post": "%s杆",
+  
   "block_type.backpacked.backpack_shelf": "%s背包架",
+  
   "block_type.mcwdoors.bark_glass_door": "%s树皮玻璃门",
   "block_type.mcwdoors.barn_door": "%s谷仓门",
   "block_type.mcwdoors.barn_glass_door": "%s玻璃谷仓门",
@@ -51,12 +66,14 @@
   "block_type.mcwdoors.stable_head_door": "%s有开口马厩门",
   "block_type.mcwdoors.tropical_door": "%s热带风格门",
   "block_type.mcwdoors.western_door": "%s西部百叶门",
+  
   "block_type.mcwfences.picket_fence": "%s篱栅",
   "block_type.mcwfences.stockade_fence": "%s栅栏墙",
   "block_type.mcwfences.horse_fence": "%s马场栅栏",
   "block_type.mcwfences.wired_fence": "%s铁丝栅栏",
   "block_type.mcwfences.pyramid_gate": "%s斜板栅栏门",
   "block_type.mcwfences.highley_gate": "%s海利栅栏门",
+  
   "block_type.mcwbridges.rail_bridge": "%s铁轨桥",
   "block_type.mcwbridges.bridge_pier": "%s桥梁支架",
   "block_type.mcwbridges.log_bridge_middle": "%s桥",
@@ -65,9 +82,12 @@
   "block_type.mcwbridges.rope_bridge": "%s索桥",
   "block_type.mcwbridges.bridge_rope": "%s索桥",
   "block_type.mcwbridges.wired_fence": "%s铁丝栅栏",
+  
   "block_type.mcwlights.soul_tiki_torch": "%s灵魂提基火把",
   "block_type.mcwlights.tiki_torch": "%s提基火把",
+  
   "block_type.mcwpaths.planks_path": "%s木板小径",
+  
   "block_type.mcwtrpdoors.bark_trapdoor": "%s树皮活板门",
   "block_type.mcwtrpdoors.barn_trapdoor": "%s谷仓活板门",
   "block_type.mcwtrpdoors.barred_trapdoor": "%s栅纹活板门",
@@ -79,6 +99,7 @@
   "block_type.mcwtrpdoors.mystic_trapdoor": "%s神秘活板门",
   "block_type.mcwtrpdoors.paper_trapdoor": "%s纸窗活板门",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s热带活板门",
+  
   "block_type.mcwwindows.window": "%s窗户",
   "block_type.mcwwindows.window_pane": "%s窗户板",
   "block_type.mcwwindows.plank_window": "%s木板窗户",
@@ -89,9 +110,12 @@
   "block_type.mcwwindows.log_parapet": "%s护台",
   "block_type.mcwwindows.plank_parapet": "%s木板护台",
   "block_type.mcwwindows.blinds": "%s百叶窗",
+  
   "block_type.benched.bench": "%s野餐桌",
+  
   "block_type.create.window": "%s窗户",
   "block_type.create.window_pane": "%s窗户板",
+  
   "block_type.cfm.window": "%s窗户",
   "block_type.cfm.backpack_shelf": "%s背包架",
   "block_type.cfm.bedside_cabinet": "%s床头柜",
@@ -147,6 +171,7 @@
   "block_type.cfm.upgraded_fence": "%s升级栅栏",
   "block_type.cfm.upgraded_gate": "%s升级门",
   "block_type.cfm.vertical_planks": "竖纹%s木板",
+  
   "block_type.projectbrazier.armrest_chair": "%s扶手椅",
   "block_type.projectbrazier.bench": "%s长凳",
   "block_type.projectbrazier.bottom_platform": "%s平台",
@@ -177,6 +202,7 @@
   "block_type.projectbrazier.top_platform_stairs": "%s台梯",
   "block_type.projectbrazier.vertical_lattice": "%s竖杆格栅",
   "block_type.projectbrazier.zipline_anchor": "%s滑索绳锚",
+  
   "block_type.storagedrawers.full_drawers_1": "1x1%s抽屉",
   "block_type.storagedrawers.full_drawers_2": "1x2%s抽屉",
   "block_type.storagedrawers.full_drawers_4": "2x2%s抽屉",
@@ -336,7 +362,7 @@
   "wood_type.byg.holly": "冬青木",
   "wood_type.byg.jacaranda": "蓝花楹木",
   "wood_type.byg.mahogany": "桃花心木",
-  "wood_type.byg.mangrove": "红木",
+  "wood_type.byg.mangrove": "红树木",
   "wood_type.byg.maple": "枫木",
   "wood_type.byg.pine": "松木",
   "wood_type.byg.rainbow_eucalyptus": "彩虹桉木",
@@ -555,6 +581,7 @@
   "wood_type.projectbrazier.orange": "橘木",
 
   "wood_type.pyromancer.pyrowood": "炽木",
+  "wood_type.pyromancer.rotten": "朽腐木",
   "leaves_type.pyromancer.pyrowood": "炽树",
 
   "wood_type.quark.blossom": "花木",
