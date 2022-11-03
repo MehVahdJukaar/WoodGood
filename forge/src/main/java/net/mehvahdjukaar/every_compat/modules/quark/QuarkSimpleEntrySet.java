@@ -52,7 +52,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         Block base = baseBlock.get();
         if (base == null)
             throw new UnsupportedOperationException("Base block cant be null");
-        baseType.get().addChild(module.getModId() + ":" + typeName, base);
+        baseType.get().addChild(module.getModId() + ":" + typeName,(Object) base);
 
         for (T w : woodTypes) {
             String n = getBlockName(w);
@@ -64,7 +64,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                 this.blocks.put(w, block);
 
                 registry.register(EveryCompat.res(name), block); //does not set registry name
-                w.addChild(module.getModId() + ":" + typeName, block);
+                w.addChild(module.getModId() + ":" + typeName,(Object) block);
             }
         }
     }

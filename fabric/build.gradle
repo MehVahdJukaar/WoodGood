@@ -58,7 +58,9 @@ dependencies {
     modCompileOnly ("curse.maven:the-twilight-forest-227639:4011850")
     modImplementation ("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 
-    modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
+    modImplementation("curse.maven:selene-499980:4059670")
+
+    // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     //modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 }
 

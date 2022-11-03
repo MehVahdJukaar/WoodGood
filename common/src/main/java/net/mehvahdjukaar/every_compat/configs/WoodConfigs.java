@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
@@ -20,15 +21,19 @@ public class WoodConfigs {
     public static ConfigSpec SPEC;
 
     public static void init() {
-        ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("wood_types"), ConfigType.COMMON);
+        String ss = PlatformHelper.isDev() && PlatformHelper.getEnv().isServer() ? "_s" : "";
+
+        ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("wood_types" + ss), ConfigType.COMMON);
 
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));
             for (var w : reg.getValues()) {
-                String key = w.toString().replace(":", ".");
-                var config = builder.define(key, true);
-                var map = BLOCK_TYPE_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
-                map.put(w.toString(), config);
+                if (!w.isVanilla()) {
+                    String key = w.toString().replace(":", ".");
+                    var config = builder.define(key, true);
+                    var map = BLOCK_TYPE_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
+                    map.put(w.toString(), config);
+                }
             }
             builder.pop();
         }
@@ -44,8 +49,7 @@ public class WoodConfigs {
     public static <T extends BlockType> boolean isTypeEnabled(T w) {
         try {
             return BLOCK_TYPE_CONFIGS.get(w.getClass()).get(w.getId().toString()).get();
-        } catch (Exception e) {
-            int a = 1;
+        } catch (Exception ignored) {
         }
         return true;
     }

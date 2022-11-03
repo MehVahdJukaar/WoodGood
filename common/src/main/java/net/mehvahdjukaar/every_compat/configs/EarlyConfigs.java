@@ -1,12 +1,15 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +27,8 @@ public class EarlyConfigs {
     public static Supplier<Boolean> DEBUG_RESOURCES;
 
     public static void init() {
-        ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("registry"), ConfigType.COMMON);
+        String s = PlatformHelper.isDev() && PlatformHelper.getEnv().isServer() ? "_s" : "";
+        ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("common"+s), ConfigType.COMMON);
 
         builder.push("general");
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")

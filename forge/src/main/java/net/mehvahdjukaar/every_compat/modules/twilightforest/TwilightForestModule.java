@@ -107,7 +107,7 @@ public class TwilightForestModule extends SimpleModule {
                     RegistryObject.create(EveryCompat.res(itemName + "_climbable"), ForgeRegistries.BLOCKS),
                     new Item.Properties().tab(getTab(w)));
             HOLLOW_LOGS_VERTICAL.items.put(w, i);
-            w.addChild(this.getModId() + ":hollow_log", i);
+            w.addChild(this.getModId() + ":hollow_log",(Object) i);
             registry.register(EveryCompat.res(itemName+"_vertical"), i);
         });
     }
