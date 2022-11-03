@@ -159,7 +159,7 @@ dependencies {
    // implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
    // implementation fg.deobf("curse.maven:curios-309927:3670447")
 
-   // implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
+    modImplementation("curse.maven:storage-drawers-223852:3884263")
    // implementation fg.deobf("curse.maven:supermartijn642s-config-lib-438332:3825116")
    // implementation fg.deobf("curse.maven:supermartijn642s-core-lib-454372:3773952")
   //  implementation fg.deobf("curse.maven:texture-dump-319039:3573998")
