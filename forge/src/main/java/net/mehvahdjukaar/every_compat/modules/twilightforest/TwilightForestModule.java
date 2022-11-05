@@ -3,10 +3,8 @@ package net.mehvahdjukaar.every_compat.modules.twilightforest;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -101,19 +99,20 @@ public class TwilightForestModule extends SimpleModule {
         super.registerItems(registry);
         HOLLOW_LOGS_VERTICAL.blocks.forEach((w, b) -> {
             String itemName = Utils.getID(b).getPath().replace("_vertical", "");
+            String childKey = this.getModId() + ":hollow_log";
             Item i = new HollowLogItem(
                     RegistryObject.create(EveryCompat.res(itemName + "_horizontal"), ForgeRegistries.BLOCKS),
                     RegistryObject.create(Utils.getID(b), ForgeRegistries.BLOCKS),
                     RegistryObject.create(EveryCompat.res(itemName + "_climbable"), ForgeRegistries.BLOCKS),
-                    new Item.Properties().tab(getTab(w)));
+                    new Item.Properties().tab(getTab(w, childKey + "_vertical")));
             HOLLOW_LOGS_VERTICAL.items.put(w, i);
-            w.addChild(this.getModId() + ":hollow_log",(Object) i);
-            registry.register(EveryCompat.res(itemName+"_vertical"), i);
+            w.addChild(childKey, (Object) i);
+            registry.register(EveryCompat.res(itemName + "_vertical"), i);
         });
     }
 
-    private static CreativeModeTab getTab(WoodType w) {
-        return WoodConfigs.isTypeEnabled(w) ?
+    private static CreativeModeTab getTab(WoodType w, String type) {
+        return WoodConfigs.isTypeEnabled(w, type) ?
                 (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : TFItems.creativeTab) : null;
     }
 

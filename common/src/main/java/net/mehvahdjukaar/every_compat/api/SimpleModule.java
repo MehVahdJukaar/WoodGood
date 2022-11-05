@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -28,6 +29,8 @@ public class SimpleModule extends CompatModule {
 
     public void addEntry(EntrySet<?, ?> entryHolder) {
         this.entries.put(entryHolder.getName(), entryHolder);
+
+        EveryCompat.addEntryType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
     }
 
     public Collection<EntrySet<?, ?>> getEntries() {

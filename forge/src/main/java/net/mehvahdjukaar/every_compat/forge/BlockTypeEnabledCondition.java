@@ -13,7 +13,7 @@ import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
 import java.util.Locale;
 
-//not even needed since we are not adding it if its not enable
+//not even needed since we are not adding it if it's not enable
 public record BlockTypeEnabledCondition(BlockType type) implements ICondition {
 
     private static final String CONDITION_NAME = "class";
