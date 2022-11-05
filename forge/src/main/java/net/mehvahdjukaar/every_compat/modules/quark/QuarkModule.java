@@ -143,6 +143,7 @@ public class QuarkModule extends SimpleModule {
                             return new QuarkBlock(name, m, CreativeModeTab.TAB_BUILDING_BLOCKS, Utils.copyPropertySafe(w.planks));
                         })
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
 
