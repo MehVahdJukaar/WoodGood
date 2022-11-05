@@ -100,7 +100,7 @@ public abstract class CompatModule {
 
         String n1 = woodFrom + "/" + name; //quark/blossom_chair
         String n2 = woodFrom + "_" + name; //quark_blossom_chair
-
+        if (woodFrom.equals("twilightforest")) return false; //mangrove waaa
         if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types
                 registry.containsKey(new ResourceLocation(modId, n2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
@@ -114,7 +114,7 @@ public abstract class CompatModule {
             //if the wood is from the mod this adds compat for && it supports this block type
             if (woodFrom.equals(c.woodFrom()) && c.blocksFrom().contains(modId)) {
                 if (registry.containsKey(new ResourceLocation(compatModId, name))) return true;
-                if (registry.containsKey(new ResourceLocation(compatModId, n2))) return true;
+                if (registry.containsKey(new ResourceLocation(compatModId, n1))) return true;
                 if (registry.containsKey(new ResourceLocation(compatModId, n2))) return true;
             }
         }
