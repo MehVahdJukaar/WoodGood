@@ -13,6 +13,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,12 +26,16 @@ public abstract class EntrySet<T extends BlockType, B extends Block> {
     public final Map<T, Item> items = new HashMap<>();
 
 
-    public EntrySet(String baseName) {
+    protected EntrySet(String baseName) {
         this.typeName = baseName;
     }
 
     public String getName() {
         return typeName;
+    }
+    @NotNull
+    public String getChildKey(CompatModule module) {
+        return module.getModId() + ":" + typeName;
     }
 
     protected abstract Class<T> getTypeClass();

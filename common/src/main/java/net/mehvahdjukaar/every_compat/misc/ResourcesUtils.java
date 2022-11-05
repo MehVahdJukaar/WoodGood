@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.misc;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.ForgeHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
@@ -24,7 +23,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
@@ -130,7 +128,7 @@ public class ResourcesUtils {
             blocks.forEach((w, b) -> {
                 ResourceLocation id = Utils.getID(b);
                 try {
-                    if (WoodConfigs.isTypeEnabled(w)) {
+                    if (WoodConfigs.isEntryEnabled(w, b)) {
                         //creates blockstate
                         StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
                         assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
@@ -201,7 +199,7 @@ public class ResourcesUtils {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
 
         blocks.forEach((wood, value) -> {
-            if (WoodConfigs.isTypeEnabled(wood)) {
+            if (WoodConfigs.isEntryEnabled(wood, value)) {
                 for (var res : original) {
                     try {
                         StaticResource newRes = modifier.transform(res, Utils.getID(value), wood);
@@ -250,13 +248,13 @@ public class ResourcesUtils {
 
         items.forEach((w, i) -> {
 
-            if (WoodConfigs.isTypeEnabled(w)) {
+            if (WoodConfigs.isEntryEnabled(w, i)) {
                 try {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     if (i.getItemCategory() != null) {
                         FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
                         if (newR == null) return;
-
+                        //not even needed
                         newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
                         pack.addRecipe(newR);
                     }

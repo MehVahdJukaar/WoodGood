@@ -12,9 +12,9 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.core.set.BlockSetInternal;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -47,6 +46,9 @@ public abstract class EveryCompat {
 
     public static final List<CompatMod> COMPAT_MODS = new ArrayList<>();
 
+    //these are the names of the block types we add wooden variants for
+    public static final Map<Class<? extends BlockType>, Set<String>> ENTRY_TYPES = new HashMap<>();
+
     public static void forAllModules(Consumer<CompatModule> action) {
         ACTIVE_MODULES.values().forEach(action);
     }
@@ -55,6 +57,7 @@ public abstract class EveryCompat {
     public static ClientDynamicResourcesHandler CLIENT_RESOURCES = null;
 
     public static CreativeModeTab MOD_TAB = null;
+
 
     protected void commonInit() {
 
@@ -96,12 +99,16 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
     }
 
+    public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
+        ENTRY_TYPES.computeIfAbsent(type, t -> new HashSet<>()).add(childId);
+    }
+
     private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
         COMPAT_MODS.add(new CompatMod(modId, woodFrom, blocksFrom));
     }
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatformHelper.isModLoaded(modId)){
+        if (PlatformHelper.isModLoaded(modId)) {
             ACTIVE_MODULES.put(modId, moduleFactory.get().apply(modId));
             SERVER_RESOURCES.getPack().addNamespaces(modId);
         }
@@ -144,6 +151,7 @@ public abstract class EveryCompat {
     protected void registerItems(Registrator<Item> event) {
         forAllModules(m -> m.registerItems(event));
     }
+
     @EventCalled
     protected void registerTiles(Registrator<BlockEntityType<?>> event) {
         forAllModules(m -> m.registerTiles(event));

@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.api;
 
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -10,7 +9,6 @@ import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -99,7 +97,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                           @Nullable TileHolder<?> tileFactory,
                           @Nullable Supplier<Supplier<RenderType>> renderType,
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
-                          Consumer<BlockTypeResTransformer<T>> extraTransform) {
+                          @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
         super((prefix == null ? "" : prefix + "_") + name);
         this.postfix = name;
         this.blockFactory = blockSupplier;
@@ -181,7 +179,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         Block base = baseBlock.get();
         if (base == null || base == Blocks.AIR)
             throw new UnsupportedOperationException("Base block cant be null");
-        baseType.get().addChild(module.getModId() + ":" + typeName,(Object) base);
+        baseType.get().addChild(getChildKey(module),(Object) base);
 
         for (T w : woodTypes) {
             String name = getBlockName(w);
@@ -194,7 +192,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 this.blocks.put(w, block);
 
                 registry.register(EveryCompat.res(fullName), block);
-                w.addChild(module.getModId() + ":" + typeName,(Object) block);
+                w.addChild(getChildKey(module),(Object) block);
             }
         }
     }
@@ -211,7 +209,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     protected CreativeModeTab getTab(T w, B b) {
-        return WoodConfigs.isTypeEnabled(w) ?
+        return WoodConfigs.isEntryEnabled(w, b) ?
                 (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : this.tab.get()) : null;
     }
 
@@ -333,7 +331,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 T w = entry.getKey();
                 //skips disabled ones
 
-                if (!WoodConfigs.isTypeEnabled(w)) continue;
+                if (!WoodConfigs.isEntryEnabled(w, b)) continue;
 
                 ResourceLocation blockId = Utils.getID(b);
 

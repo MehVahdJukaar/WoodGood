@@ -9,14 +9,18 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 //loaded before registry
 public class WoodConfigs {
 
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> BLOCK_TYPE_CONFIGS = new HashMap<>();
+    private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> CHILD_CONFIGS = new HashMap<>();
 
     public static ConfigSpec SPEC;
 
@@ -25,6 +29,7 @@ public class WoodConfigs {
 
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("wood_types" + ss), ConfigType.COMMON);
 
+        builder.push("types");
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));
             for (var w : reg.getValues()) {
@@ -37,6 +42,21 @@ public class WoodConfigs {
             }
             builder.pop();
         }
+        builder.pop();
+
+        builder.push("entries");
+        for (var reg : BlockSetAPI.getRegistries()) {
+            builder.push(reg.typeName().replace(" ", "_"));
+            for (var c : EveryCompat.ENTRY_TYPES.get(reg.getType())) {
+                String key = c.replace(":", ".");
+                var config = builder.define(key, true);
+                var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
+                map.put(c, config);
+            }
+            builder.pop();
+        }
+        builder.pop();
+
         SPEC = builder.buildAndRegister();
 
         SPEC.loadFromFile(); //manually load early
@@ -46,11 +66,21 @@ public class WoodConfigs {
         return BLOCK_TYPE_CONFIGS.get(WoodType.class).get(wood).get();
     }
 
+    public static <T extends BlockType> boolean isEntryEnabled(T w, Object o) {
+        return isTypeEnabled(w, w.getChildKey(o));
+    }
+
     public static <T extends BlockType> boolean isTypeEnabled(T w) {
+        return isTypeEnabled(w, null);
+    }
+
+    public static <T extends BlockType> boolean isTypeEnabled(T w,@Nullable String childType) {
         try {
+            if (childType != null && !CHILD_CONFIGS.get(w.getClass()).getOrDefault(childType, () -> true).get()) return false;
             return BLOCK_TYPE_CONFIGS.get(w.getClass()).get(w.getId().toString()).get();
         } catch (Exception ignored) {
         }
         return true;
     }
+
 }
