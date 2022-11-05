@@ -216,5 +216,6 @@
   "block_type.woodworks.boards": "%s Boards",
   "block_type.woodworks.bookshelf": "%s Bookshelf",
   "block_type.woodworks.ladder": "%s Ladder",
+  "block_type.woodworks.beehive": "%s Beehive",
   "block_type.woodworks.leaf_pile": "%s Pile of Leaves"
 }

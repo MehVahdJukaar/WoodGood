@@ -3,10 +3,17 @@ package net.mehvahdjukaar.every_compat.modules.teamabnormals;
 import com.mojang.datafixers.util.Pair;
 import com.starfish_studios.another_furniture.block.ChairBlock;
 import com.starfish_studios.another_furniture.registry.AFBlocks;
+import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
+import com.teamabnormals.blueprint.common.block.BlueprintLadderBlock;
 import com.teamabnormals.blueprint.common.block.BookshelfBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
+import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
+import com.teamabnormals.blueprint.common.block.entity.BlueprintChestBlockEntity;
+import com.teamabnormals.blueprint.common.block.entity.BlueprintTrappedChestBlockEntity;
+import com.teamabnormals.blueprint.common.item.BEWLRBlockItem;
 import com.teamabnormals.woodworks.core.Woodworks;
+import com.teamabnormals.woodworks.core.other.WoodworksClientCompat;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -30,17 +37,17 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -61,14 +68,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+
 public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> BOOKSHELVES;
     public final SimpleEntrySet<WoodType, Block> BOARDS;
     public final SimpleEntrySet<WoodType, Block> LADDERS;
-    public final SimpleEntrySet<WoodType, ? extends VariantChestBlock> CHESTS;
-    public final SimpleEntrySet<WoodType, ? extends VariantTrappedChestBlock> TRAPPED_CHESTS;
+    public final SimpleEntrySet<WoodType, Block> BEEHIVES;
+    public final SimpleEntrySet<WoodType, Block> CHESTS;
+    public final SimpleEntrySet<WoodType, Block> TRAPPED_CHESTS;
     public final SimpleEntrySet<LeavesType, Block> LEAF_PILES;
-    public final SimpleEntrySet<LeavesType, Block> BEEHIVE;
+
 
     public static BlockEntityType<? extends ChestBlockEntity> CHEST_TILE;
     public static BlockEntityType<? extends ChestBlockEntity> TRAPPED_CHEST_TILE;
@@ -94,7 +103,7 @@ public class WoodworksModule extends SimpleModule {
 
         BOARDS = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.planks()))
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .useLootFromBase()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -107,47 +116,58 @@ public class WoodworksModule extends SimpleModule {
         LADDERS = SimpleEntrySet.builder(WoodType.class, "ladder",
                         () -> getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new LadderBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.ladder()))
+                        w -> new BlueprintLadderBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.ladder()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark", "ladders"), Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark", "ladders"), Registry.ITEM_REGISTRY)
+                .addTag(new ResourceLocation("quark:ladders"), Registry.BLOCK_REGISTRY)
+                .addTag(new ResourceLocation("quark:ladders"), Registry.ITEM_REGISTRY)
                 .defaultRecipe()
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
 
         this.addEntry(LADDERS);
 
+        BEEHIVES = SimpleEntrySet.builder(WoodType.class, "beehive",
+                        () -> getModBlock("spruce_beehive"),
+                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
+                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
+                .defaultRecipe()
+                .addTexture(EveryCompat.res("block/spruce_beehive_front"))
+                .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
+                .addTexture(EveryCompat.res("block/spruce_beehive_side"))
+                .addTexture(EveryCompat.res("block/spruce_beehive_end"))
+                .build();
+
+        this.addEntry(BEEHIVES);
+
         CHESTS = SimpleEntrySet.builder(WoodType.class, "chest",
-                        () -> getModBlock("oak_chest", VariantChestBlock.class),
-                        () -> WoodTypeRegistry.OAK_TYPE,
-                        (w, m) -> {
-                            if (w.getId().toString().equals("twilightforest:dark")) return null;
-                            String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatChestBlock(w, name, m, Utils.copyPropertySafe(w.planks));
-                        })
+                        () -> getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BlueprintChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
+                .addTag(Tags.Items.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
                 .addTag(new ResourceLocation("quark:revertable_chests"), Registry.ITEM_REGISTRY)
-                .addTile(CompatChestBlockTile::new)
-                .addCustomItem((w, b, p) -> new VariantChestBlock.Item(b, p))
-                .addRecipe(modRes("building/crafting/chests/oak_chest"))
+                .addTag(new ResourceLocation("quark:boatable_chests"), Registry.ITEM_REGISTRY)
+                .addTile(BlueprintChestBlockEntity::new)
+                //.addCustomItem((w, b, p) -> new BEWLRBlockItem(b, p, null))
+                .defaultRecipe()
                 .build();
 
         this.addEntry(CHESTS);
 
         TRAPPED_CHESTS = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
-                        () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlueprintChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
+                        () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BlueprintTrappedChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.ITEM_REGISTRY)
-                .addTile(CompatTrappedChestBlockTile::new)
-
-                .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
+                .addTag(Tags.Items.CHESTS_TRAPPED, Registry.ITEM_REGISTRY)
+                .addTile(BlueprintTrappedChestBlockEntity::new)
+                .defaultRecipe()
                 .build();
 
         this.addEntry(TRAPPED_CHESTS);
@@ -190,6 +210,7 @@ public class WoodworksModule extends SimpleModule {
 //
     @Override
     public void registerLeavesBlocks(Registrator <Block> registry, Collection <LeavesType> leavesTypes){
+        // TODO uhh how do i register the leaf piles here
         super.registerLeavesBlocks(registry, leavesTypes);
     }
 
@@ -229,8 +250,8 @@ public class WoodworksModule extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers (ClientPlatformHelper.BlockEntityRendererEvent event){
         super.registerBlockEntityRenderers(event);
-        event.register(CHEST_TILE, VariantChestRenderer::new);
-        event.register(TRAPPED_CHEST_TILE, VariantChestRenderer::new);
+        event.register(CHEST_TILE, ChestRenderer::new);
+        event.register(TRAPPED_CHEST_TILE, ChestRenderer::new);
     }
 
     @Override
@@ -242,132 +263,133 @@ public class WoodworksModule extends SimpleModule {
     @EventCalled
     public void onTextureStitch (TextureStitchEvent.Pre event){
         if (event.getAtlas().location().equals(CHEST_SHEET)) {
-            CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
-            TRAPPED_CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
+            // TODO chest renderer stitch thing here instead of quarks. idk
+            //CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
+            //TRAPPED_CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
         }
 
     }
-//
-//    private Pair<List<Palette>, AnimationMetadataSection> bookshelfPalette (BlockType w, ResourceManager m){
-//        try (TextureImage plankTexture = TextureImage.open(m,
-//                RPUtils.findFirstBlockTextureLocation(m, ((WoodType) w).planks))) {
-//
-//            List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-//            targetPalette.forEach(p -> {
-//                var l0 = p.getDarkest();
-//                p.increaseDown();
-//                p.increaseDown();
-//                p.increaseDown();
-//                p.increaseDown();
-//                p.remove(l0);
-//            });
-//            return Pair.of(targetPalette, plankTexture.getMetadata());
-//        } catch (Exception e) {
-//            throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
-//        }
-//    }
-//
-//    @Override
-//    public void addDynamicClientResources (ClientDynamicResourcesHandler handler, ResourceManager manager){
-//        super.addDynamicClientResources(handler, manager);
-//
-//        try (TextureImage normal = TextureImage.open(manager, modRes("model/chest/oak/normal"));
-//             TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
-//             TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
-//             TextureImage left = TextureImage.open(manager, modRes("model/chest/oak/left"));
-//             TextureImage left_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_m"));
-//             TextureImage left_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_o"));
-//             TextureImage right = TextureImage.open(manager, modRes("model/chest/oak/right"));
-//             TextureImage right_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_m"));
-//             TextureImage right_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_o"));
-//             TextureImage left_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_left"));
-//             TextureImage right_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_right"));
-//             TextureImage normal_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_normal"))
-//        ) {
-//
-//            Respriter respriterNormal = Respriter.masked(normal, normal_m);
-//            Respriter respriterLeft = Respriter.masked(left, left_m);
-//            Respriter respriterRight = Respriter.masked(right, right_m);
-//
-//            Respriter respriterNormalO = Respriter.of(normal_o);
-//            Respriter respriterLeftO = Respriter.of(left_o);
-//            Respriter respriterRightO = Respriter.of(right_o);
-//
-//            CHESTS.blocks.forEach((wood, block) -> {
-//
-//                CompatChestBlock b = (CompatChestBlock) block;
-//
-//                try (TextureImage plankTexture = TextureImage.open(manager,
-//                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
-//
-//                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-//
-//                    List<Palette> overlayPalette = new ArrayList<>();
-//                    for (var p : targetPalette) {
-//                        var d1 = p.getDarkest();
-//                        p.remove(d1);
-//                        var d2 = p.getDarkest();
-//                        p.remove(d2);
-//                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
-//                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
-//                        var pal = Palette.ofColors(List.of(n1, n2));
-//                        overlayPalette.add(pal);
-//                    }
-//
-//                    {
-//                        ResourceLocation res = modRes(b.getChestTexturePath() + "normal");
-//                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-//                            ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap");
-//
-//                            var img = respriterNormal.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-//                            img.applyOverlayOnExisting(respriterNormalO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-//
-//                            var trapped = img.makeCopy();
-//
-//                            trapped.applyOverlayOnExisting(normal_t.makeCopy());
-//
-//                            handler.dynamicPack.addAndCloseTexture(res, img);
-//                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
-//                        }
-//                    }
-//                    {
-//                        ResourceLocation res = modRes(b.getChestTexturePath() + "left");
-//                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-//                            ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap_left");
-//
-//                            var img = respriterLeft.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-//                            img.applyOverlayOnExisting(respriterLeftO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-//
-//                            var trapped = img.makeCopy();
-//                            trapped.applyOverlayOnExisting(left_t.makeCopy());
-//
-//                            handler.dynamicPack.addAndCloseTexture(res, img);
-//                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
-//                        }
-//                    }
-//                    {
-//                        ResourceLocation res = modRes(b.getChestTexturePath() + "right");
-//                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-//                            ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap_right");
-//
-//                            var img = respriterRight.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-//                            img.applyOverlayOnExisting(respriterRightO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-//
-//                            var trapped = img.makeCopy();
-//                            trapped.applyOverlayOnExisting(right_t.makeCopy());
-//
-//                            handler.dynamicPack.addAndCloseTexture(res, img);
-//                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
-//                        }
-//                    }
-//
-//
-//                } catch (Exception ex) {
-//                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", b, ex);
-//                }
-//            });
-//        } catch (Exception ex) {
-//            handler.getLogger().error("Could not generate any Chest block texture : ", ex);
-//        }
-//
+
+    private Pair<List<Palette>, AnimationMetadataSection> bookshelfPalette (BlockType w, ResourceManager m){
+        try (TextureImage plankTexture = TextureImage.open(m,
+                RPUtils.findFirstBlockTextureLocation(m, ((WoodType) w).planks))) {
+
+            List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+            targetPalette.forEach(p -> {
+                var l0 = p.getDarkest();
+                p.increaseDown();
+                p.increaseDown();
+                p.increaseDown();
+                p.increaseDown();
+                p.remove(l0);
+            });
+            return Pair.of(targetPalette, plankTexture.getMetadata());
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
+        }
+    }
+
+    @Override
+    public void addDynamicClientResources (ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+        try (TextureImage normal = TextureImage.open(manager, modRes("entity/chest/oak/normal"));
+             TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
+             TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
+             TextureImage left = TextureImage.open(manager, modRes("entity/chest/oak/normal_left"));
+             TextureImage left_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_m"));
+             TextureImage left_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_o"));
+             TextureImage right = TextureImage.open(manager, modRes("entity/chest/oak/normal_right"));
+             TextureImage right_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_m"));
+             TextureImage right_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_o"));
+             TextureImage left_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_left"));
+             TextureImage right_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_right"));
+             TextureImage normal_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_normal"))
+        ) {
+
+            Respriter respriterNormal = Respriter.masked(normal, normal_m);
+            Respriter respriterLeft = Respriter.masked(left, left_m);
+            Respriter respriterRight = Respriter.masked(right, right_m);
+
+            Respriter respriterNormalO = Respriter.of(normal_o);
+            Respriter respriterLeftO = Respriter.of(left_o);
+            Respriter respriterRightO = Respriter.of(right_o);
+
+            CHESTS.blocks.forEach((wood, block) -> {
+
+                BlueprintChestBlock b = (BlueprintChestBlock) block;
+
+                try (TextureImage plankTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
+
+                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+
+                    List<Palette> overlayPalette = new ArrayList<>();
+                    for (var p : targetPalette) {
+                        var d1 = p.getDarkest();
+                        p.remove(d1);
+                        var d2 = p.getDarkest();
+                        p.remove(d2);
+                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
+                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
+                        var pal = Palette.ofColors(List.of(n1, n2));
+                        overlayPalette.add(pal);
+                    }
+
+                    {
+                        ResourceLocation res = modRes("entity/chest/" + b.getChestType() + "normal");
+                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                            ResourceLocation trappedRes = modRes("entity/chest/" + b.getChestType() + "trapped");
+
+                            var img = respriterNormal.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
+                            img.applyOverlayOnExisting(respriterNormalO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
+
+                            var trapped = img.makeCopy();
+
+                            trapped.applyOverlayOnExisting(normal_t.makeCopy());
+
+                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                        }
+                    }
+                    {
+                        ResourceLocation res = modRes("entity/chest/" + b.getChestType() + "normal_left");
+                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                            ResourceLocation trappedRes = modRes("entity/chest/" + b.getChestType() + "trapped_left");
+
+                            var img = respriterLeft.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
+                            img.applyOverlayOnExisting(respriterLeftO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
+
+                            var trapped = img.makeCopy();
+                            trapped.applyOverlayOnExisting(left_t.makeCopy());
+
+                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                        }
+                    }
+                    {
+                        ResourceLocation res = modRes("entity/chest/" + b.getChestType() + "normal_right");
+                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                            ResourceLocation trappedRes = modRes("entity/chest/" + b.getChestType() + "trapped_right");
+
+                            var img = respriterRight.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
+                            img.applyOverlayOnExisting(respriterRightO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
+
+                            var trapped = img.makeCopy();
+                            trapped.applyOverlayOnExisting(right_t.makeCopy());
+
+                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                        }
+                    }
+
+
+                } catch (Exception ex) {
+                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", b, ex);
+                }
+            });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Chest block texture : ", ex);
+        }
+    }
 }
