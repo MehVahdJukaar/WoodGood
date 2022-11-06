@@ -171,4 +171,7 @@ dependencies {
     // implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
    // implementation fg.deobf("curse.maven:geckolib-388172:3856641")
 
+    modImplementation("curse.maven:woodworks-543610:4023081")
+    modImplementation("curse.maven:blueprint-382216:4019850")
+
 }
