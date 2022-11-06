@@ -105,7 +105,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
-                .addTile(CompatStandardDrawersEntity1::new)
+                .addTile(CompatHalfDrawersEntity4::new)
                 .createPaletteFromOak(this::drawersPalette)
                 .addTexture(modRes("blocks/drawers_oak_front_1"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
@@ -126,7 +126,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
-                .addTile(CompatStandardDrawersEntity2::new)
+                .addTile(CompatHalfDrawersEntity4::new)
                 .createPaletteFromOak(this::drawersPalette)
                 .addTexture(modRes("blocks/drawers_oak_front_2"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
@@ -147,7 +147,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
-                .addTile(CompatStandardDrawersEntity4::new)
+                .addTile(CompatHalfDrawersEntity4::new)
                 .createPaletteFromOak(this::drawersPalette)
                 .addTexture(modRes("blocks/drawers_oak_front_4"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
@@ -214,9 +214,9 @@ public class StorageDrawersModule extends SimpleModule {
         event.register((BlockEntityType<CompatStandardDrawersEntity1>) (FULL_DRAWERS_1.getTileHolder().tile), BlockEntityDrawersRenderer::new);
         event.register((BlockEntityType<CompatStandardDrawersEntity2>) (FULL_DRAWERS_2.getTileHolder().tile), BlockEntityDrawersRenderer::new);
         event.register((BlockEntityType<CompatStandardDrawersEntity4>) (FULL_DRAWERS_4.getTileHolder().tile), BlockEntityDrawersRenderer::new);
-        event.register((BlockEntityType<CompatStandardDrawersEntity1>) (HALF_DRAWERS_1.getTileHolder().tile), BlockEntityDrawersRenderer::new);
-        event.register((BlockEntityType<CompatStandardDrawersEntity2>) (HALF_DRAWERS_2.getTileHolder().tile), BlockEntityDrawersRenderer::new);
-        event.register((BlockEntityType<CompatStandardDrawersEntity4>) (HALF_DRAWERS_4.getTileHolder().tile), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatHalfDrawersEntity1>) (HALF_DRAWERS_1.getTileHolder().tile), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatHalfDrawersEntity2>) (HALF_DRAWERS_2.getTileHolder().tile), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatHalfDrawersEntity4>) (HALF_DRAWERS_4.getTileHolder().tile), BlockEntityDrawersRenderer::new);
     }
 
     private class CompatStandardDrawers extends BlockStandardDrawers {
@@ -225,6 +225,14 @@ public class StorageDrawersModule extends SimpleModule {
         }
 
         public BlockEntityDrawers newBlockEntity(BlockPos pos, BlockState state) {
+            if (this.isHalfDepth()) {
+                return switch (this.getDrawerCount()) {
+                    case 1 -> new CompatHalfDrawersEntity1(pos, state);
+                    case 2 -> new CompatHalfDrawersEntity2(pos, state);
+                    case 4 -> new CompatHalfDrawersEntity4(pos, state);
+                    default -> null;
+                };
+            }
             return switch (this.getDrawerCount()) {
                 case 1 -> new CompatStandardDrawersEntity1(pos, state);
                 case 2 -> new CompatStandardDrawersEntity2(pos, state);
@@ -267,6 +275,43 @@ public class StorageDrawersModule extends SimpleModule {
         @Override
         public @NotNull BlockEntityType<?> getType() {
             return FULL_DRAWERS_4.getTileHolder().tile;
+        }
+
+    }
+
+    class CompatHalfDrawersEntity1 extends BlockEntityDrawersStandard.Slot1 {
+
+        public CompatHalfDrawersEntity1(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public @NotNull BlockEntityType<?> getType() {
+            return HALF_DRAWERS_1.getTileHolder().tile;
+        }
+    }
+
+    class CompatHalfDrawersEntity2 extends BlockEntityDrawersStandard.Slot2 {
+
+        public CompatHalfDrawersEntity2(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public @NotNull BlockEntityType<?> getType() {
+            return HALF_DRAWERS_2.getTileHolder().tile;
+        }
+    }
+
+    class CompatHalfDrawersEntity4 extends BlockEntityDrawersStandard.Slot4 {
+
+        public CompatHalfDrawersEntity4(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        public @NotNull BlockEntityType<?> getType() {
+            return HALF_DRAWERS_4.getTileHolder().tile;
         }
 
     }
