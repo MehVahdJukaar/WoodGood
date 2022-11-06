@@ -91,6 +91,10 @@ publishing {
 repositories{
     // Built mods
     mavenCentral()
+    maven {
+        name "tterrag maven"
+        url "https://maven.tterrag.com/"
+    }
 }
 
 dependencies {
