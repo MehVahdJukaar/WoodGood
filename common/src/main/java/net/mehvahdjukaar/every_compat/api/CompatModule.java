@@ -100,12 +100,16 @@ public abstract class CompatModule {
 
         String n1 = woodFrom + "/" + name; //quark/blossom_chair
         String n2 = woodFrom + "_" + name; //quark_blossom_chair
-        if (woodFrom.equals("twilightforest")) return false; //mangrove waaa
+        if(woodType.getId().toString().equals("ecologics:azalea")){
+            if(modId.equals("quark")) return false; //ecologics and quark azalea. tbh not sure why needed
+        }
+        if (woodType.getId().toString().equals("twilightforest:mangrove")){
+            return name.equals("mangrove_chest");//mangrove waaa so much pain
+        }
         if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types
                 registry.containsKey(new ResourceLocation(modId, n2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
-
 
         if (registry.containsKey(new ResourceLocation(woodFrom, name))) return true;
 

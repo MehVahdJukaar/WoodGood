@@ -1,8 +1,6 @@
-package net.mehvahdjukaar.every_compat.modules.teamabnormals;
+package net.mehvahdjukaar.every_compat.modules.abnormal;
 
 import com.mojang.datafixers.util.Pair;
-import com.starfish_studios.another_furniture.block.ChairBlock;
-import com.starfish_studios.another_furniture.registry.AFBlocks;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.BlueprintLadderBlock;
 import com.teamabnormals.blueprint.common.block.BookshelfBlock;
@@ -11,16 +9,11 @@ import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
 import com.teamabnormals.blueprint.common.block.entity.BlueprintChestBlockEntity;
 import com.teamabnormals.blueprint.common.block.entity.BlueprintTrappedChestBlockEntity;
-import com.teamabnormals.blueprint.common.item.BEWLRBlockItem;
-import com.teamabnormals.woodworks.core.Woodworks;
-import com.teamabnormals.woodworks.core.other.WoodworksClientCompat;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
-import net.mehvahdjukaar.every_compat.modules.quark.*;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
@@ -39,34 +32,34 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import vazkii.arl.util.RegistryHelper;
-import vazkii.quark.base.block.QuarkBlock;
-import vazkii.quark.base.handler.ToolInteractionHandler;
-import vazkii.quark.content.building.block.*;
-import vazkii.quark.content.building.client.render.be.VariantChestRenderer;
-import vazkii.quark.content.building.module.*;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 
 public class WoodworksModule extends SimpleModule {
@@ -157,7 +150,7 @@ public class WoodworksModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(CHESTS);
+        //this.addEntry(CHESTS);
 
         TRAPPED_CHESTS = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -170,13 +163,13 @@ public class WoodworksModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(TRAPPED_CHESTS);
+        //this.addEntry(TRAPPED_CHESTS);
 
 
         LEAF_PILES = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> LeavesTypeRegistry.OAK_TYPE,
                         (w) -> {
-                            if (w.woodType == null) return null;
+                            if (w.getWoodType() == null) return null;
                             return new LeafPileBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.leafPile());
                         })
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
@@ -188,37 +181,12 @@ public class WoodworksModule extends SimpleModule {
 
         this.addEntry(LEAF_PILES);
     }
-//
-//    @Override
-//    public void onModSetup () {
-//        POSTS.blocks.forEach((w, post) -> {
-//            Block stripped = STRIPPED_POSTS.blocks.get(w);
-//            if (stripped != null) ToolInteractionHandler.registerInteraction(ToolActions.AXE_STRIP, post, stripped);
-//        });
-//    }
-//
-//    @Override
-//    public void registerWoodBlocks (Registrator < Block > registry, Collection < WoodType > woodTypes){
-//        try { //ARL hax
-//            var data = (Map<String, ?>) ARLModData.get(null);
-//            super.registerWoodBlocks(registry, woodTypes);
-//            data.remove(EveryCompat.MOD_ID);
-//        } catch (IllegalAccessException e) {
-//            EveryCompat.LOGGER.error("Failed to onCommonSetup Wood Good Quark Module");
-//        }
-//    }
-//
-    @Override
-    public void registerLeavesBlocks(Registrator <Block> registry, Collection <LeavesType> leavesTypes){
-        // TODO uhh how do i register the leaf piles here
-        super.registerLeavesBlocks(registry, leavesTypes);
-    }
 
     @Override
     public void registerTiles (Registrator < BlockEntityType < ? >> registry){
         super.registerTiles(registry);
-        CHEST_TILE = (BlockEntityType<? extends ChestBlockEntity>) CHESTS.getTileHolder().tile;
-        TRAPPED_CHEST_TILE = (BlockEntityType<? extends ChestBlockEntity>) TRAPPED_CHESTS.getTileHolder().tile;
+        //CHEST_TILE = (BlockEntityType<? extends ChestBlockEntity>) CHESTS.getTileHolder().tile;
+        //TRAPPED_CHEST_TILE = (BlockEntityType<? extends ChestBlockEntity>) TRAPPED_CHESTS.getTileHolder().tile;
     }
 
 
@@ -250,8 +218,8 @@ public class WoodworksModule extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers (ClientPlatformHelper.BlockEntityRendererEvent event){
         super.registerBlockEntityRenderers(event);
-        event.register(CHEST_TILE, ChestRenderer::new);
-        event.register(TRAPPED_CHEST_TILE, ChestRenderer::new);
+        //event.register(CHEST_TILE, ChestRenderer::new);
+        //event.register(TRAPPED_CHEST_TILE, ChestRenderer::new);
     }
 
     @Override
@@ -270,25 +238,7 @@ public class WoodworksModule extends SimpleModule {
 
     }
 
-    private Pair<List<Palette>, AnimationMetadataSection> bookshelfPalette (BlockType w, ResourceManager m){
-        try (TextureImage plankTexture = TextureImage.open(m,
-                RPUtils.findFirstBlockTextureLocation(m, ((WoodType) w).planks))) {
-
-            List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-            targetPalette.forEach(p -> {
-                var l0 = p.getDarkest();
-                p.increaseDown();
-                p.increaseDown();
-                p.increaseDown();
-                p.increaseDown();
-                p.remove(l0);
-            });
-            return Pair.of(targetPalette, plankTexture.getMetadata());
-        } catch (Exception e) {
-            throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
-        }
-    }
-
+    //TODO: if this is to be added should be merge with quark module since textures are the same
     @Override
     public void addDynamicClientResources (ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);

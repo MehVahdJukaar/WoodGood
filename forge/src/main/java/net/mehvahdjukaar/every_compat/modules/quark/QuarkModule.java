@@ -30,6 +30,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -60,6 +61,7 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, ? extends VariantChestBlock> CHESTS;
     public final SimpleEntrySet<WoodType, ? extends VariantTrappedChestBlock> TRAPPED_CHESTS;
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
+    public final SimpleEntrySet<LeavesType, Block> LEAF_CARPETS;
 
     public static BlockEntityType<? extends ChestBlockEntity> CHEST_TILE;
     public static BlockEntityType<? extends ChestBlockEntity> TRAPPED_CHEST_TILE;
@@ -216,7 +218,7 @@ public class QuarkModule extends SimpleModule {
                         () -> getModBlock("oak_hedge"),
                         () -> LeavesTypeRegistry.OAK_TYPE,
                         (w, m) -> {
-                            if (w.woodType == null) return null;
+                            if (w.getWoodType() == null) return null;
                             return new HedgeBlock(m, Blocks.OAK_FENCE, w.leaves);
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -226,8 +228,26 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/oak_hedge"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(HEDGES);
+
+
+        //doing it this way because for some reason its nuking whatever block item I throw in here
+        LEAF_CARPETS = QuarkSimpleEntrySet.builder(LeavesType.class, "leaf_carpet",
+                        LeafCarpetModule.class,
+                        () -> getModBlock("oak_leaf_carpet"),
+                        () -> LeavesTypeRegistry.OAK_TYPE,
+                        (w, m) -> {
+                            String name = shortenedId() + "/" + w.getVariantId("%s_leaf_carpet");
+                            return new LeafCarpetBlock(name, w.leaves, m);
+                        })
+                .addTag(modRes("leaf_carpets"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("leaf_carpets"), Registry.ITEM_REGISTRY)
+                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+                .addRecipe(modRes("building/crafting/oak_leaf_carpet"))
+                .setRenderType(() -> RenderType::cutout)
+                .build();
+        this.addEntry(LEAF_CARPETS);
+
     }
 
     @Override
@@ -235,6 +255,9 @@ public class QuarkModule extends SimpleModule {
         POSTS.blocks.forEach((w, post) -> {
             Block stripped = STRIPPED_POSTS.blocks.get(w);
             if (stripped != null) ToolInteractionHandler.registerInteraction(ToolActions.AXE_STRIP, post, stripped);
+        });
+        LEAF_CARPETS.blocks.forEach((w, leaf) -> {
+            ComposterBlock.COMPOSTABLES.put(leaf, 0.2F);
         });
     }
 
@@ -301,14 +324,15 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
-    public void onClientInit(){
+    public void onClientInit() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onTextureStitch);
     }
 
     private static final ResourceLocation CHEST_SHEET = new ResourceLocation("textures/atlas/chest.png");
+
     @EventCalled
     public void onTextureStitch(TextureStitchEvent.Pre event) {
-        if(event.getAtlas().location().equals(CHEST_SHEET)) {
+        if (event.getAtlas().location().equals(CHEST_SHEET)) {
             CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
             TRAPPED_CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
         }
