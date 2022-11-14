@@ -57,6 +57,7 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> POSTS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_POSTS;
     public final SimpleEntrySet<WoodType, Block> VERTICAL_PLANKS;
+    public final SimpleEntrySet<WoodType, Block> VERTICAL_SLABS;
     public final SimpleEntrySet<WoodType, Block> LADDERS;
     public final SimpleEntrySet<WoodType, ? extends VariantChestBlock> CHESTS;
     public final SimpleEntrySet<WoodType, ? extends VariantTrappedChestBlock> TRAPPED_CHESTS;
@@ -151,6 +152,24 @@ public class QuarkModule extends SimpleModule {
                 .build();
 
         this.addEntry(VERTICAL_PLANKS);
+
+        VERTICAL_SLABS = QuarkSimpleEntrySet.builder(WoodType.class, "vertical_slab",
+                        VerticalSlabsModule.class,
+                        () -> getModBlock("oak_vertical_slab"),
+                        () -> WoodTypeRegistry.OAK_TYPE,
+                        (w, m) -> {
+                            Block slab = w.getBlockOfThis("slab");
+                            return (slab == null) ? null : new VerticalSlabBlock(slab, m);
+                        })
+                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("wooden_vertical_slabs"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("wooden_vertical_slabs"), Registry.ITEM_REGISTRY)
+                .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab"))
+                .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab_revert"))
+                .build();
+
+        this.addEntry(VERTICAL_SLABS);
 
         LADDERS = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
                         VariantLaddersModule.class,
