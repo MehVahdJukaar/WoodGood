@@ -40,6 +40,7 @@
   "block_type.quark.trapped_chest": "Trapped %s Chest",
   "block_type.quark.bookshelf": "%s Bookshelf",
   "block_type.quark.vertical_planks": "Vertical %s Planks",
+  "block_type.quark.vertical_slab": "%s Vertical Slab",
 
   "block_type.architects_palette.railing": "%s Railing",
   "block_type.architects_palette.boards": "%s Boards",
