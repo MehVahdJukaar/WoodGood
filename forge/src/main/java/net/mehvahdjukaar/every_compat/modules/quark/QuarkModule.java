@@ -312,7 +312,10 @@ public class QuarkModule extends SimpleModule {
     public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
         HEDGES.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-            //blockColor.register((s, l, p, i) -> blockColor.getColor(bl.defaultBlockState(), l, p, i), b);
+        });
+
+        LEAF_CARPETS.blocks.forEach((t, b) -> {
+            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         });
     }
 

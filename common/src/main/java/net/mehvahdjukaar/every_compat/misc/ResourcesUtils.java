@@ -168,7 +168,7 @@ public class ResourcesUtils {
         modelModifier.IDReplaceType(oldTypeName);
         if (baseType instanceof LeavesType leavesType) {
             modelModifier.replaceLeavesTextures(leavesType);
-            var woodT = leavesType.woodType;
+            var woodT = leavesType.getWoodType();
             if (woodT != null) {
                 modelModifier.replaceWoodTextures(woodT);
             }

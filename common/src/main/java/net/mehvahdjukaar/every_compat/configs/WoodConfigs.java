@@ -47,7 +47,7 @@ public class WoodConfigs {
         builder.push("entries");
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));
-            for (var c : EveryCompat.ENTRY_TYPES.get(reg.getType())) {
+            for (var c : EveryCompat.ENTRY_TYPES.getOrDefault(reg.getType(), Set.of())) {
                 String key = c.replace(":", ".");
                 var config = builder.define(key, true);
                 var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());

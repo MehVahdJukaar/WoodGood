@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -45,6 +46,11 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         super(type, name, prefix, null, baseBlock, baseType, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform);
         this.blockSupplier = blockSupplier;
         this.quarkModule = module;
+    }
+
+    @Override
+    public void addTranslations(CompatModule module, AfterLanguageLoadEvent lang) {
+        super.addTranslations(module, lang);
     }
 
     @Override

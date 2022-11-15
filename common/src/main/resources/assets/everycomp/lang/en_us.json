@@ -34,6 +34,7 @@
   "block_type.quark.stripped_post": "Stripped %s Post",
   "block_type.quark.post": "%s Post",
   "block_type.quark.hedge": "%s Leaf Hedge",
+  "block_type.quark.leaf_carpet": "%s Leaf Carpet",
   "block_type.quark.ladder": "%s Ladder",
   "block_type.quark.chest": "%s Chest",
   "block_type.quark.trapped_chest": "Trapped %s Chest",
@@ -212,7 +213,8 @@
   "block_type.storagedrawers.trim": "%s Trim",
 
   "wood_type.twilightforest.dark": "Darkwood",
-  
+
+
   "block_type.woodworks.boards": "%s Boards",
   "block_type.woodworks.bookshelf": "%s Bookshelf",
   "block_type.woodworks.ladder": "%s Ladder",

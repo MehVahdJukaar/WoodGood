@@ -101,13 +101,13 @@ public class MacawFencesModule extends SimpleModule {
     public static class WiredFence extends FenceBlock {
 
 
-        public WiredFence(Properties p_53302_) {
-            super(p_53302_);
+        public WiredFence(Properties properties) {
+            super(properties);
         }
 
         //changed. I couldn't help myself
         @Override
-        public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+        public void entityInside(BlockState state, Level level, BlockPos blockPos, Entity entityIn) {
             if (state.getValue(NORTH) || state.getValue(SOUTH) || state.getValue(EAST) || state.getValue(WEST))
                 entityIn.hurt(DamageSource.GENERIC, 2.0F);
         }
