@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat;
 
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -53,9 +54,6 @@ public abstract class EveryCompat {
         ACTIVE_MODULES.values().forEach(action);
     }
 
-    public static ServerDynamicResourcesHandler SERVER_RESOURCES = null;
-    public static ClientDynamicResourcesHandler CLIENT_RESOURCES = null;
-
     public static CreativeModeTab MOD_TAB = null;
 
 
@@ -63,14 +61,11 @@ public abstract class EveryCompat {
 
         EarlyConfigs.init();
 
-        SERVER_RESOURCES = new ServerDynamicResourcesHandler();
-        SERVER_RESOURCES.register();
+        ServerDynamicResourcesHandler.INSTANCE.register();
 
         if (PlatformHelper.getEnv().isClient()) {
-            CLIENT_RESOURCES = new ClientDynamicResourcesHandler();
-            CLIENT_RESOURCES.register();
-        } else CLIENT_RESOURCES = null;
-
+            ClientDynamicResourcesHandler.INSTANCE.register();
+        }
 
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
@@ -84,10 +79,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
 
-        //TODO: add folwering azalea special textures, fix vertical planks not generating & add leaves to it. same for quark
-        //also fix that one crash that idk what was about
-
-        //addModule("graveyard", () -> GraveyardModule::new);
+                //addModule("graveyard", () -> GraveyardModule::new);
         //addModule("benched", () -> BenchedModule::new);
         //addModule("projectbrazier", () -> ProjectBrazierModule::new);
         //addModule("storagedrawers", () -> StorageDrawersModule::new);
@@ -109,13 +101,14 @@ public abstract class EveryCompat {
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatformHelper.isModLoaded(modId)) {
-            ACTIVE_MODULES.put(modId, moduleFactory.get().apply(modId));
-            SERVER_RESOURCES.getPack().addNamespaces(modId);
+            var module = moduleFactory.get().apply(modId);
+            EveryCompatAPI.registerModule(module);
         }
     }
 
     private void addTab() {
-        MOD_TAB = PlatformHelper.createModTab(res(MOD_ID), () -> ALL_WOODS.get().getDefaultInstance(), true).setBackgroundSuffix("item_search.png");
+        MOD_TAB = PlatformHelper.createModTab(res(MOD_ID), () -> ALL_WOODS.get().getDefaultInstance(),
+                true).setBackgroundSuffix("item_search.png");
     }
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
@@ -133,7 +126,6 @@ public abstract class EveryCompat {
         this.prevRegSize = Registry.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");
         forAllModules(m -> m.registerWoodBlocks(event, woods));
-
     }
 
 

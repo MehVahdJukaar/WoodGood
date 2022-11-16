@@ -27,7 +27,6 @@ public class TwigsModule extends SimpleModule {
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
-               // .setTab(() -> TwigsItemGroups.ALL) //TODO: re add
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak((p) -> p.remove(p.getDarkest()))

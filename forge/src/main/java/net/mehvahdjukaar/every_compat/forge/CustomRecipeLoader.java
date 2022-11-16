@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.gson.*;
 import mezz.jei.forge.platform.PlatformHelper;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -72,8 +73,8 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
     //TODO:fix, this isnt loading anymore
     private static void loadRecipes(Map<ResourceLocation, JsonElement> jsons) {
         int added = 0;
-        boolean oldStatus = EveryCompat.SERVER_RESOURCES.getPack().generateDebugResources;
-        EveryCompat.SERVER_RESOURCES.getPack().generateDebugResources = true;
+        boolean oldStatus = ServerDynamicResourcesHandler.INSTANCE.getPack().generateDebugResources;
+        ServerDynamicResourcesHandler.INSTANCE.getPack().generateDebugResources = true;
         for (var j : jsons.entrySet()) {
             try {
                 if (j.getValue() instanceof JsonObject jo) {
@@ -89,7 +90,7 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
 
                         newR = template.createSimilar(WoodTypeRegistry.OAK_TYPE, w, w.planks.asItem(), res.toString());
 
-                        EveryCompat.SERVER_RESOURCES.getPack().addRecipe(newR);
+                        ServerDynamicResourcesHandler.INSTANCE.getPack().addRecipe(newR);
                         if (!ad) {
                             ad = true;
                             added++;
@@ -100,7 +101,7 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
                 EveryCompat.LOGGER.warn("Failed to add custom recipe for wood types. Be sure it is based off oak wood:", e);
             }
         }
-        EveryCompat.SERVER_RESOURCES.getPack().generateDebugResources = oldStatus;
+        ServerDynamicResourcesHandler.INSTANCE.getPack().generateDebugResources = oldStatus;
         if (added != 0)
             EveryCompat.LOGGER.info("Added {} Custom Recipes for all {} wood types", added, WoodTypeRegistry.getTypes().size());
     }

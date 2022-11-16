@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
 
+    public static ClientDynamicResourcesHandler INSTANCE = new ClientDynamicResourcesHandler();
+
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(EveryCompat.res("generated_pack")));
         //since we place chests textures in its namespace to use its renderer
