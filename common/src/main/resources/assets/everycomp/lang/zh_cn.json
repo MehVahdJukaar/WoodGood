@@ -39,6 +39,7 @@
   "block_type.quark.trapped_chest": "%s陷阱箱",
   "block_type.quark.bookshelf": "%s书架",
   "block_type.quark.vertical_planks": "竖纹%s木板",
+  "block_type.quark.vertical_slab": "%s竖直台阶",
   
   "block_type.architects_palette.railing": "%s扶手",
   "block_type.architects_palette.boards": "%s宽木板",
@@ -210,6 +211,12 @@
   "block_type.storagedrawers.half_drawers_2": "1x2小型%s抽屉",
   "block_type.storagedrawers.half_drawers_4": "2x2小型%s抽屉",
   "block_type.storagedrawers.trim": "%s桥接方块",
+  
+  "block_type.woodworks.boards": "%s直木板",
+  "block_type.woodworks.bookshelf": "%s书架",
+  "block_type.woodworks.ladder": "%s梯子",
+  "block_type.woodworks.beehive": "%s蜂箱",
+  "block_type.woodworks.leaf_pile": "%s树叶堆",
 
 
   "wood_type.minecraft.oak": "橡木",
