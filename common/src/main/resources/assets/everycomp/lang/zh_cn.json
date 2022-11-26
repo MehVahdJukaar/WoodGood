@@ -235,6 +235,11 @@
   "leaves_type.minecraft.acacia": "金合欢",
   "leaves_type.minecraft.azalea": "杜鹃",
   "leaves_type.minecraft.flowering_azalea": "盛开的杜鹃",
+
+  "wood_type.ad_astra.aeronos": "空果木",
+  "wood_type.ad_astra.strophar": "孑节木",
+  "wood_type.ad_astra.glacian": "融冰木",
+  "leaves_type.ad_astra.glacian": "融冰",
   
   "wood_type.aether.skyroot": "天根木",
   "leaves_type.aether.skyroot": "天根",
@@ -523,7 +528,10 @@
   "leaves_type.greekfantasy.pomegranate": "石榴",
   "leaves_type.greekfantasy.golden": "金苹果",
 
-  "wood_type.hexcasting.akashic": "启迪木",
+  "wood_type.hexcasting.edified": "启迪木",
+  "leaves_type.hexcasting.amethyst_edified": "晶紫启迪",
+  "leaves_type.hexcasting.aventurine_edified": "砂蓝启迪",
+  "leaves_type.hexcasting.citrine_edified": "晶黄启迪",
 
   "wood_type.hexerei.mahogany": "桃花心木",
   "wood_type.hexerei.willow": "柳木",
@@ -540,6 +548,8 @@
 
   "wood_type.morecraft.netherwood": "下界木",
   "leaves_type.morecraft.netherwood": "下界",
+
+  "leaves_type.mythicbotany.dreamwood": "梦之木",
 
   "wood_type.mysticalworld.charred": "烧焦的",
 
@@ -601,7 +611,7 @@
   "leaves_type.quark.red_blossom": "火热花",
 
   "wood_type.rankine.cedar": "雪松木",
-  "wood_type.rankine.balsam_fir": "胶枞",
+  "wood_type.rankine.balsam_fir": "胶枞木",
   "wood_type.rankine.eastern_hemlock": "东方铁杉木",
   "wood_type.rankine.western_hemlock": "西部铁杉木",
   "wood_type.rankine.pinyon_pine": "矮松木",
@@ -688,13 +698,14 @@
   "leaves_type.terraqueous.plum": "李树",
 
   "leaves_type.tofucraft.tofu": "豆腐",
+  "leaves_type.tofucraft.apricot": "杏树",
 
   "wood_type.twigs.bamboo": "竹",
   "leaves_type.twigs.bamboo": "竹叶",
 
   "wood_type.twilightforest.twilight_oak": "暮色橡木",
   "wood_type.twilightforest.canopy": "苍穹木",
-  "wood_type.twilightforest.mangrove": "红木",
+  "wood_type.twilightforest.mangrove": "红树木",
   "wood_type.twilightforest.dark": "黑木",
   "wood_type.twilightforest.time": "时光木",
   "wood_type.twilightforest.transformation": "变化木",
