@@ -5,6 +5,7 @@ import com.mcwwindows.kikoz.init.BlockInit;
 import com.mcwwindows.kikoz.objects.Blinds;
 import com.mcwwindows.kikoz.objects.Parapet;
 import com.mcwwindows.kikoz.objects.Window;
+import com.mcwwindows.kikoz.objects.WindowBarred;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -22,11 +23,14 @@ public class MacawWindowsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> LOG_PARAPETS;
     public final SimpleEntrySet<WoodType, Block> WINDOWS;
     public final SimpleEntrySet<WoodType, Block> WINDOWS2;
+    public final SimpleEntrySet<WoodType, Block> FOUR_WINDOW;
     public final SimpleEntrySet<WoodType, Block> PLANK_WINDOWS;
+    public final SimpleEntrySet<WoodType, Block> PLANK_FOUR_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> PLANK_PARAPETS;
     public final SimpleEntrySet<WoodType, Block> PLANK_WINDOWS2;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_WINDOW;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_WINDOW2;
+    public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_FOUR_WINDOW;
 
 
     public MacawWindowsModule(String modId) {
@@ -65,7 +69,7 @@ public class MacawWindowsModule extends SimpleModule {
         WINDOWS = SimpleEntrySet.builder(WoodType.class, "window",
                         BlockInit.OAK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -76,7 +80,7 @@ public class MacawWindowsModule extends SimpleModule {
         PLANK_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_window",
                         BlockInit.OAK_PLANK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -86,8 +90,8 @@ public class MacawWindowsModule extends SimpleModule {
 
         WINDOWS2 = SimpleEntrySet.builder(WoodType.class, "window2",
                         BlockInit.OAK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                        w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
+                .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -97,8 +101,8 @@ public class MacawWindowsModule extends SimpleModule {
 
         PLANK_WINDOWS2 = SimpleEntrySet.builder(WoodType.class, "plank_window2",
                         BlockInit.OAK_PLANK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                        w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
+                .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -109,7 +113,7 @@ public class MacawWindowsModule extends SimpleModule {
         STRIPPED_LOG_WINDOW = SimpleEntrySet.builder(WoodType.class, "log_window", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -119,13 +123,46 @@ public class MacawWindowsModule extends SimpleModule {
 
         STRIPPED_LOG_WINDOW2 = SimpleEntrySet.builder(WoodType.class, "log_window2", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                        w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
+                .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(STRIPPED_LOG_WINDOW2);
+
+        FOUR_WINDOW = SimpleEntrySet.builder(WoodType.class, "four_window",
+                        BlockInit.OAK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
+                .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
+                .setTab(() -> MacawsWindows.WindowItemGroup)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .build();
+
+        this.addEntry(FOUR_WINDOW);
+
+        PLANK_FOUR_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_four_window",
+                        BlockInit.OAK_PLANK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
+                .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
+                .setTab(() -> MacawsWindows.WindowItemGroup)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .build();
+
+        this.addEntry(PLANK_FOUR_WINDOWS);
+
+        STRIPPED_LOG_FOUR_WINDOW = SimpleEntrySet.builder(WoodType.class, "log_four_window", "stripped",
+                        BlockInit.STRIPPED_OAK_LOG_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
+                .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
+                .setTab(() -> MacawsWindows.WindowItemGroup)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .build();
+
+        this.addEntry(STRIPPED_LOG_FOUR_WINDOW);
     }
 }
