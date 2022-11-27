@@ -70,6 +70,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -81,6 +83,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_PLANK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -92,6 +96,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -103,6 +109,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_PLANK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -114,6 +122,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -125,6 +135,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -136,6 +148,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -147,6 +161,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_PLANK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -158,6 +174,8 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.STRIPPED_OAK_LOG_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
