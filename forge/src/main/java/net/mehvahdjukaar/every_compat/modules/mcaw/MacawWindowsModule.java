@@ -4,12 +4,15 @@ import com.mcwwindows.kikoz.MacawsWindows;
 import com.mcwwindows.kikoz.init.BlockInit;
 import com.mcwwindows.kikoz.objects.Blinds;
 import com.mcwwindows.kikoz.objects.Parapet;
+import com.mcwwindows.kikoz.objects.Shutter;
 import com.mcwwindows.kikoz.objects.Window;
 import com.mcwwindows.kikoz.objects.WindowBarred;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
@@ -24,10 +27,12 @@ public class MacawWindowsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> LOG_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> LOG_PANE_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> LOG_FOUR_WINDOWS;
+    public final SimpleEntrySet<WoodType, Block> LOUVERED_SHUTTERS;
     public final SimpleEntrySet<WoodType, Block> PLANKS_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> PLANKS_FOUR_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> PLANKS_PARAPETS;
     public final SimpleEntrySet<WoodType, Block> PLANKS_PANE_WINDOWS;
+    public final SimpleEntrySet<WoodType, Block> SHUTTERS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_PANE_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_FOUR_WINDOW;
@@ -182,5 +187,37 @@ public class MacawWindowsModule extends SimpleModule {
                 .build();
 
         this.addEntry(STRIPPED_LOG_FOUR_WINDOW);
+
+        LOUVERED_SHUTTERS = SimpleEntrySet.builder(WoodType.class, "louvered_shutter",
+                        BlockInit.OAK_LOUVERED_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Shutter(Utils.copyPropertySafe(w.planks).strength(0.5F, 2.0F)))
+                .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTexture(modRes("block/oak_louvered_shutter"))
+                .setTab(() -> MacawsWindows.WindowItemGroup)
+                .createPaletteFromOak(this::shutterPalette)
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(LOUVERED_SHUTTERS);
+
+        SHUTTERS = SimpleEntrySet.builder(WoodType.class, "shutter",
+                        BlockInit.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Shutter(Utils.copyPropertySafe(w.planks).strength(0.5F, 2.0F)))
+                .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTexture(modRes("block/oak_shutter"))
+                .setTab(() -> MacawsWindows.WindowItemGroup)
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(SHUTTERS);
+    }
+
+    private void shutterPalette(Palette p) {
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
     }
 }

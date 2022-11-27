@@ -105,10 +105,12 @@
   "block_type.mcwwindows.blinds": "%s Blinds",
   "block_type.mcwwindows.four_window": "%s Four Pane Window",
   "block_type.mcwwindows.log_parapet": "%s Parapet",
+  "block_type.mcwwindows.louvered_shutter": "%s Louvered Shutter",
   "block_type.mcwwindows.plank_four_window": "%s Plank Four Pane Window",
   "block_type.mcwwindows.plank_parapet": "%s Plank Parapet",
   "block_type.mcwwindows.plank_window": "%s Plank Window",
   "block_type.mcwwindows.plank_window2": "%s Plank Pane Window",
+  "block_type.mcwwindows.shutter": "%s Shutter",
   "block_type.mcwwindows.stripped_log_four_window": "Stripped %s Four Pane Window",
   "block_type.mcwwindows.stripped_log_window": "Stripped %s Window",
   "block_type.mcwwindows.stripped_log_window2": "Stripped %s Pane Window",
@@ -216,7 +218,6 @@
   "block_type.storagedrawers.trim": "%s Trim",
 
   "wood_type.twilightforest.dark": "Darkwood",
-
 
   "block_type.woodworks.boards": "%s Boards",
   "block_type.woodworks.bookshelf": "%s Bookshelf",
