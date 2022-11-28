@@ -7,12 +7,18 @@ import net.kikoz.mcwdoors.util.DoorItemGroup;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -38,6 +44,7 @@ public class MacawDoorsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> SHOJI_WHOLE_DOORS;
     public final SimpleEntrySet<WoodType, Block> STABLE_DOORS;
     public final SimpleEntrySet<WoodType, Block> STABLE_HEAD_DOORS;
+    public final SimpleEntrySet<WoodType, Block> SWAMP_DOORS;
     public final SimpleEntrySet<WoodType, Block> TROPICAL_DOORS;
     public final SimpleEntrySet<WoodType, Block> WESTERN_DOORS;
 
@@ -53,7 +60,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .useLootFromBase()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
-                .addTextureM(modRes("item/oak_bark_glass_door"), EveryCompat.res("block/mcaw/doors/oak_bark_glass_door_m"))
+                .addTextureM(modRes("item/oak_bark_glass_door"), EveryCompat.res("item/mcaw/doors/oak_bark_glass_door_m"))
                 .build();
 
         this.addEntry(BARK_DOORS);
@@ -69,7 +76,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_barn_door_lower"), EveryCompat.res("block/mcaw/doors/oak_barn_door_lower_m"))
                 .addTextureM(modRes("block/oak_barn_door_upper"), EveryCompat.res("block/mcaw/doors/oak_barn_door_upper_m"))
-                .addTextureM(modRes("item/oak_barn_door"), EveryCompat.res("block/mcaw/doors/oak_barn_door_m"))
+                .addTextureM(modRes("item/oak_barn_door"), EveryCompat.res("item/mcaw/doors/oak_barn_door_m"))
                 .build();
 
         this.addEntry(BARN_DOORS);
@@ -85,7 +92,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_barn_door_lower"), EveryCompat.res("block/mcaw/doors/oak_barn_door_lower_m"))
                 .addTextureM(modRes("block/oak_barn_glass_door_upper"), EveryCompat.res("block/mcaw/doors/oak_barn_glass_door_upper_m"))
-                .addTextureM(modRes("item/oak_barn_glass_door"), EveryCompat.res("block/mcaw/doors/oak_barn_glass_door_m"))
+                .addTextureM(modRes("item/oak_barn_glass_door"), EveryCompat.res("item/mcaw/doors/oak_barn_glass_door_m"))
                 .build();
 
         this.addEntry(BARN_GLASS_DOORS);
@@ -101,7 +108,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_beach_door_lower"), EveryCompat.res("block/mcaw/doors/oak_beach_door_lower_m"))
                 .addTextureM(modRes("block/oak_beach_door_upper"), EveryCompat.res("block/mcaw/doors/oak_beach_door_upper_m"))
-                .addTextureM(modRes("item/oak_beach_door"), EveryCompat.res("block/mcaw/doors/oak_beach_door_m"))
+                .addTextureM(modRes("item/oak_beach_door"), EveryCompat.res("item/mcaw/doors/oak_beach_door_m"))
                 .build();
 
         this.addEntry(BEACH_DOORS);
@@ -117,7 +124,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/spruce_classic_door_lower"), EveryCompat.res("block/mcaw/doors/spruce_classic_door_lower_m"))
                 .addTextureM(modRes("block/spruce_classic_door_upper"), EveryCompat.res("block/mcaw/doors/spruce_classic_door_upper_m"))
-                .addTextureM(modRes("item/spruce_classic_door"), EveryCompat.res("block/mcaw/doors/spruce_classic_door_m"))
+                .addTextureM(modRes("item/spruce_classic_door"), EveryCompat.res("item/mcaw/doors/spruce_classic_door_m"))
                 .build();
 
         this.addEntry(CLASSIC_DOORS);
@@ -133,7 +140,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_cottage_door_lower"), EveryCompat.res("block/mcaw/doors/oak_cottage_door_lower_m"))
                 .addTextureM(modRes("block/oak_cottage_door_upper"), EveryCompat.res("block/mcaw/doors/oak_cottage_door_upper_m"))
-                .addTextureM(modRes("item/oak_cottage_door"), EveryCompat.res("block/mcaw/doors/oak_cottage_door_m"))
+                .addTextureM(modRes("item/oak_cottage_door"), EveryCompat.res("item/mcaw/doors/oak_cottage_door_m"))
                 .build();
 
         this.addEntry(COTTAGE_DOORS);
@@ -149,7 +156,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_four_panel_door_lower"), EveryCompat.res("block/mcaw/doors/oak_four_panel_door_lower_m"))
                 .addTextureM(modRes("block/oak_four_panel_door_upper"), EveryCompat.res("block/mcaw/doors/oak_four_panel_door_upper_m"))
-                .addTextureM(modRes("item/oak_four_panel_door"), EveryCompat.res("block/mcaw/doors/oak_four_panel_door_m"))
+                .addTextureM(modRes("item/oak_four_panel_door"), EveryCompat.res("item/mcaw/doors/oak_four_panel_door_m"))
                 .build();
 
         this.addEntry(FOUR_PANEL_DOORS);
@@ -165,7 +172,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/glass/oak_glass_door_lower"), EveryCompat.res("block/mcaw/doors/oak_glass_door_lower_m"))
                 .addTextureM(modRes("block/glass/oak_glass_door_upper"), EveryCompat.res("block/mcaw/doors/oak_glass_door_upper_m"))
-                .addTextureM(modRes("item/oak_glass_door"), EveryCompat.res("block/mcaw/doors/oak_glass_door_m"))
+                .addTextureM(modRes("item/oak_glass_door"), EveryCompat.res("item/mcaw/doors/oak_glass_door_m"))
                 .build();
 
         this.addEntry(GLASS_DOORS);
@@ -181,7 +188,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_modern_door_lower"), EveryCompat.res("block/mcaw/doors/oak_modern_door_lower_m"))
                 .addTextureM(modRes("block/oak_modern_door_upper"), EveryCompat.res("block/mcaw/doors/oak_modern_door_upper_m"))
-                .addTextureM(modRes("item/oak_modern_door"), EveryCompat.res("block/mcaw/doors/oak_modern_door_m"))
+                .addTextureM(modRes("item/oak_modern_door"), EveryCompat.res("item/mcaw/doors/oak_modern_door_m"))
                 .build();
 
         this.addEntry(MODERN_DOORS);
@@ -197,7 +204,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_mystic_door_lower"), EveryCompat.res("block/mcaw/doors/oak_mystic_door_lower_m"))
                 .addTextureM(modRes("block/oak_mystic_door_upper"), EveryCompat.res("block/mcaw/doors/oak_mystic_door_upper_m"))
-                .addTextureM(modRes("item/oak_mystic_door"), EveryCompat.res("block/mcaw/doors/oak_mystic_door_m"))
+                .addTextureM(modRes("item/oak_mystic_door"), EveryCompat.res("item/mcaw/doors/oak_mystic_door_m"))
                 .build();
 
         this.addEntry(MYSTIC_DOORS);
@@ -213,7 +220,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_nether_door_lower"), EveryCompat.res("block/mcaw/doors/oak_nether_door_lower_m"))
                 .addTextureM(modRes("block/oak_nether_door_upper"), EveryCompat.res("block/mcaw/doors/oak_nether_door_upper_m"))
-                .addTextureM(modRes("item/oak_nether_door"), EveryCompat.res("block/mcaw/doors/oak_nether_door_m"))
+                .addTextureM(modRes("item/oak_nether_door"), EveryCompat.res("item/mcaw/doors/oak_nether_door_m"))
                 .build();
 
         this.addEntry(NETHER_DOORS);
@@ -229,7 +236,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_paper_door_lower"), EveryCompat.res("block/mcaw/doors/oak_paper_door_lower_m"))
                 .addTextureM(modRes("block/oak_paper_door_upper"), EveryCompat.res("block/mcaw/doors/oak_paper_door_upper_m"))
-                .addTextureM(modRes("item/oak_paper_door"), EveryCompat.res("block/mcaw/doors/oak_paper_door_m"))
+                .addTextureM(modRes("item/oak_paper_door"), EveryCompat.res("item/mcaw/doors/oak_paper_door_m"))
                 .build();
 
         this.addEntry(PAPER_DOORS);
@@ -245,7 +252,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/japanese_oak_lower"), EveryCompat.res("block/mcaw/doors/japanese_oak_lower_m"))
                 .addTextureM(modRes("block/japanese_oak_upper"), EveryCompat.res("block/mcaw/doors/japanese_oak_upper_m"))
-                .addTextureM(modRes("item/oak_japanese_door"), EveryCompat.res("block/mcaw/doors/oak_japanese_door_m"))
+                .addTextureM(modRes("item/oak_japanese_door"), EveryCompat.res("item/mcaw/doors/japanese_oak_door_m"))
                 .build();
 
         this.addEntry(SHOJI_DOORS);
@@ -259,9 +266,9 @@ public class MacawDoorsModule extends SimpleModule {
                 .useLootFromBase()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
-                .addTextureM(modRes("block/oak_japanese2_door_lower"), EveryCompat.res("block/mcaw/doors/oak_japanese2_door_lower_m"))
-                .addTextureM(modRes("block/oak_japanese2_door_upper"), EveryCompat.res("block/mcaw/doors/oak_japanese2_door_upper_m"))
-                .addTextureM(modRes("item/oak_japanese2_door"), EveryCompat.res("block/mcaw/doors/oak_japanese2_door_m"))
+                .addTextureM(modRes("block/oak_japanese_door_lower"), EveryCompat.res("block/mcaw/doors/oak_japanese_door_lower_m"))
+                .addTextureM(modRes("block/oak_japanese_door_upper"), EveryCompat.res("block/mcaw/doors/oak_japanese_door_upper_m"))
+                .addTextureM(modRes("item/oak_japanese2_door"), EveryCompat.res("item/mcaw/doors/oak_japanese_door_m"))
                 .build();
 
         this.addEntry(SHOJI_WHOLE_DOORS);
@@ -275,10 +282,10 @@ public class MacawDoorsModule extends SimpleModule {
                 .useLootFromBase()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
-                .addTexture(modRes("block/oak_barn_door_lower"))
+//                .addTexture(modRes("block/oak_barn_door_lower"))
                 .addTextureM(modRes("block/stable/oak_stable_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_door_lower_m"))
                 .addTextureM(modRes("block/stable/oak_stable_door_upper"), EveryCompat.res("block/mcaw/doors/oak_stable_door_upper_m"))
-                .addTextureM(modRes("item/oak_stable_door"), EveryCompat.res("block/mcaw/doors/oak_stable_door_m"))
+                .addTextureM(modRes("item/oak_stable_door"), EveryCompat.res("item/mcaw/doors/oak_stable_door_m"))
                 .build();
 
         this.addEntry(STABLE_DOORS);
@@ -292,13 +299,30 @@ public class MacawDoorsModule extends SimpleModule {
                 .useLootFromBase()
                 .addRecipe(modRes("oak_stable_head_door"))
                 .setRenderType(() -> RenderType::cutout)
-                .addTexture(modRes("block/oak_barn_door_lower"))
+//                .addTexture(modRes("block/oak_barn_door_lower"))
                 .addTextureM(modRes("block/stable_head/oak_stable_head_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_head_door_lower_m"))
                 .addTextureM(modRes("block/stable/oak_stable_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_door_lower_m"))
-                .addTextureM(modRes("item/oak_stable_head_door"), EveryCompat.res("block/mcaw/doors/oak_stable_head_door_m"))
+                .addTextureM(modRes("item/oak_stable_head_door"), EveryCompat.res("item/mcaw/doors/oak_stable_head_door_m"))
                 .build();
 
         this.addEntry(STABLE_HEAD_DOORS);
+
+        SWAMP_DOORS = SimpleEntrySet.builder(WoodType.class, "swamp_door",
+                        () -> BlockInit.OAK_SWAMP_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).strength(2.0F, 3.0F).noOcclusion()))
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .useLootFromBase()
+                .addRecipe(modRes("oak_swamp_door"))
+                .setRenderType(() -> RenderType::cutout)
+                .createPaletteFromOak(this::swampDoorPalette)
+                .addTextureM(EveryCompat.res("block/oak_swamp_door_lower"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_lower_m"))
+                .addTextureM(EveryCompat.res("block/oak_swamp_door_upper"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_upper_m"))
+                .addTextureM(modRes("item/oak_swamp_door"), EveryCompat.res("item/mcaw/doors/oak_swamp_door_m"))
+                .build();
+
+        this.addEntry(SWAMP_DOORS);
 
         TROPICAL_DOORS = SimpleEntrySet.builder(WoodType.class, "tropical_door",
                         () -> BlockInit.OAK_TROPICAL_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
@@ -311,7 +335,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/oak_tropical_door_lower"), EveryCompat.res("block/mcaw/doors/oak_tropical_door_lower_m"))
                 .addTextureM(modRes("block/oak_tropical_door_upper"), EveryCompat.res("block/mcaw/doors/oak_tropical_door_upper_m"))
-                .addTextureM(modRes("item/oak_tropical_door"), EveryCompat.res("block/mcaw/doors/oak_tropical_door_m"))
+                .addTextureM(modRes("item/oak_tropical_door"), EveryCompat.res("item/mcaw/doors/oak_tropical_door_m"))
                 .build();
 
         this.addEntry(TROPICAL_DOORS);
@@ -327,10 +351,45 @@ public class MacawDoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/western/oak_western_door_lower"), EveryCompat.res("block/mcaw/doors/oak_western_door_lower_m"))
                 .addTextureM(modRes("block/western/oak_western_door_upper"), EveryCompat.res("block/mcaw/doors/oak_western_door_upper_m"))
-                .addTextureM(modRes("item/oak_western_door"), EveryCompat.res("block/mcaw/doors/oak_western_door_m"))
+                .addTextureM(modRes("item/oak_western_door"), EveryCompat.res("item/mcaw/doors/oak_western_door_m"))
                 .build();
 
         this.addEntry(WESTERN_DOORS);
+    }
+
+    private void swampDoorPalette(Palette p) {
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
+    }
+
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+
+        try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_mask"));
+             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_overlay"));
+        ) {
+
+
+            BARK_DOORS.blocks.forEach((wood, block) -> {
+                var id = Utils.getID(block);
+
+                try (TextureImage logTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteUtils.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
+
+                    var t = mask.makeCopy();
+                    t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());
+
+                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
+                            "item/" + id.getPath().replace("_bark_door", "")), t);
+
+                } catch (Exception ignored) {
+                }
+            });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Bark Door item textures : ", ex);
+        }
     }
 
 }

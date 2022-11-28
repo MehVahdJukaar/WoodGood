@@ -66,6 +66,7 @@
   "block_type.mcwdoors.paper_door": "%s Paper Door",
   "block_type.mcwdoors.stable_door": "%s Stable Door",
   "block_type.mcwdoors.stable_head_door": "%s Stable Horse Door",
+  "block_type.mcwdoors.swamp_door": "%s Swamp Door",
   "block_type.mcwdoors.tropical_door": "%s Tropical Door",
   "block_type.mcwdoors.western_door": "%s Western Door",
 
@@ -100,6 +101,8 @@
   "block_type.mcwtrpdoors.glass_trapdoor": "%s Glass Trapdoor",
   "block_type.mcwtrpdoors.mystic_trapdoor": "%s Mystic Trapdoor",
   "block_type.mcwtrpdoors.paper_trapdoor": "%s Paper Trapdoor",
+  "block_type.mcwtrpdoors.ranch_trapdoor": "%s Ranch Trapdoor",
+  "block_type.mcwtrpdoors.swamp_trapdoor": "%s Swamp Trapdoor",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s Tropical Trapdoor",
 
   "block_type.mcwwindows.blinds": "%s Blinds",
