@@ -77,7 +77,7 @@
   "block_type.mcwfences.highley_gate": "%s Highley Gate",
 
   "block_type.mcwbridges.rail_bridge": "%s Rail Bridge",
-  "block_type.mcwbridges.bridge_pier": "%s Bridge Pier",
+  "block_type.mcwbridges.bridge_pier": "%s Bridge Support",
   "block_type.mcwbridges.log_bridge_middle": "%s Bridge",
   "block_type.mcwbridges.log_bridge_stair": "%s Bridge Stair",
   "block_type.mcwbridges.rope_bridge_stair": "Rope %s Bridge Stair",
