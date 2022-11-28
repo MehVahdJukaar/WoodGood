@@ -99,7 +99,7 @@ public class MacawLightsModule extends SimpleModule {
                 }
             });
         } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Tiki torch item texture : ", ex);
+            handler.getLogger().error("Could not generate any Tiki Torch item textures : ", ex);
         }
     }
 }
