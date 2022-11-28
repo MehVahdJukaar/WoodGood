@@ -101,6 +101,8 @@
   "block_type.mcwtrpdoors.glass_trapdoor": "%s Glass Trapdoor",
   "block_type.mcwtrpdoors.mystic_trapdoor": "%s Mystic Trapdoor",
   "block_type.mcwtrpdoors.paper_trapdoor": "%s Paper Trapdoor",
+  "block_type.mcwtrpdoors.ranch_trapdoor": "%s Ranch Trapdoor",
+  "block_type.mcwtrpdoors.swamp_trapdoor": "%s Swamp Trapdoor",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s Tropical Trapdoor",
 
   "block_type.mcwwindows.blinds": "%s Blinds",
