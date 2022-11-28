@@ -7,6 +7,7 @@ import com.mcwdoors.kikoz.objects.StableDoor;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -38,6 +39,7 @@ public class MacawDoorsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> SHOJI_WHOLE_DOORS;
     public final SimpleEntrySet<WoodType, Block> STABLE_DOORS;
     public final SimpleEntrySet<WoodType, Block> STABLE_HEAD_DOORS;
+    public final SimpleEntrySet<WoodType, Block> SWAMP_DOORS;
     public final SimpleEntrySet<WoodType, Block> TROPICAL_DOORS;
     public final SimpleEntrySet<WoodType, Block> WESTERN_DOORS;
 
@@ -300,6 +302,23 @@ public class MacawDoorsModule extends SimpleModule {
 
         this.addEntry(STABLE_HEAD_DOORS);
 
+        SWAMP_DOORS = SimpleEntrySet.builder(WoodType.class, "swamp_door",
+                        BlockInit.OAK_SWAMP_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).strength(2.0F, 3.0F).noOcclusion()))
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> MacawsDoors.DoorItemGroup)
+                .useLootFromBase()
+                .addRecipe(modRes("oak_swamp_door"))
+                .setRenderType(() -> RenderType::cutout)
+                .createPaletteFromOak(this::swampDoorPalette)
+                .addTextureM(EveryCompat.res("block/oak_swamp_door_lower"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_lower_m"))
+                .addTextureM(EveryCompat.res("block/oak_swamp_door_upper"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_upper_m"))
+                .addTextureM(modRes("item/oak_swamp_door"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_m"))
+                .build();
+
+        this.addEntry(SWAMP_DOORS);
+
         TROPICAL_DOORS = SimpleEntrySet.builder(WoodType.class, "tropical_door",
                         BlockInit.OAK_TROPICAL_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).strength(2.0F, 3.0F).noOcclusion()))
@@ -331,6 +350,11 @@ public class MacawDoorsModule extends SimpleModule {
                 .build();
 
         this.addEntry(WESTERN_DOORS);
+    }
+
+    private void swampDoorPalette(Palette p) {
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
     }
 
 }
