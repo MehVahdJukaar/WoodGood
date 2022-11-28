@@ -77,7 +77,7 @@
   "block_type.mcwfences.highley_gate": "%s Highley Gate",
 
   "block_type.mcwbridges.rail_bridge": "%s Rail Bridge",
-  "block_type.mcwbridges.bridge_pier": "%s Bridge Pier",
+  "block_type.mcwbridges.bridge_pier": "%s Bridge Support",
   "block_type.mcwbridges.log_bridge_middle": "%s Bridge",
   "block_type.mcwbridges.log_bridge_stair": "%s Bridge Stair",
   "block_type.mcwbridges.rope_bridge_stair": "Rope %s Bridge Stair",
@@ -102,16 +102,20 @@
   "block_type.mcwtrpdoors.paper_trapdoor": "%s Paper Trapdoor",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s Tropical Trapdoor",
 
-  "block_type.mcwwindows.window": "%s Window",
-  "block_type.mcwwindows.window_pane": "%s Window Pane",
-  "block_type.mcwwindows.plank_window": "%s Plank Window",
-  "block_type.mcwwindows.plank_window2": "%s Plank Grille Window",
-  "block_type.mcwwindows.window2": "%s Grille Window",
-  "block_type.mcwwindows.stripped_log_window": "Stripped %s Window",
-  "block_type.mcwwindows.stripped_log_window2": "Stripped %s Grille Window",
-  "block_type.mcwwindows.log_parapet": "%s Parapet",
-  "block_type.mcwwindows.plank_parapet": "%s Plank Parapet",
   "block_type.mcwwindows.blinds": "%s Blinds",
+  "block_type.mcwwindows.four_window": "%s Four Pane Window",
+  "block_type.mcwwindows.log_parapet": "%s Parapet",
+  "block_type.mcwwindows.louvered_shutter": "%s Louvered Shutter",
+  "block_type.mcwwindows.plank_four_window": "%s Plank Four Pane Window",
+  "block_type.mcwwindows.plank_parapet": "%s Plank Parapet",
+  "block_type.mcwwindows.plank_window": "%s Plank Window",
+  "block_type.mcwwindows.plank_window2": "%s Plank Pane Window",
+  "block_type.mcwwindows.shutter": "%s Shutter",
+  "block_type.mcwwindows.stripped_log_four_window": "Stripped %s Four Pane Window",
+  "block_type.mcwwindows.stripped_log_window": "Stripped %s Window",
+  "block_type.mcwwindows.stripped_log_window2": "Stripped %s Pane Window",
+  "block_type.mcwwindows.window": "%s Window",
+  "block_type.mcwwindows.window2": "%s Pane Window",
 
   "block_type.benched.bench": "%s Bench",
 
@@ -214,7 +218,6 @@
   "block_type.storagedrawers.trim": "%s Trim",
 
   "wood_type.twilightforest.dark": "Darkwood",
-
 
   "block_type.woodworks.boards": "%s Boards",
   "block_type.woodworks.bookshelf": "%s Bookshelf",
