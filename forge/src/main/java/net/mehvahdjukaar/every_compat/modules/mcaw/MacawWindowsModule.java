@@ -217,6 +217,7 @@ public class MacawWindowsModule extends SimpleModule {
     }
 
     private void shutterPalette(Palette p) {
+        p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
     }
