@@ -362,4 +362,34 @@ public class MacawDoorsModule extends SimpleModule {
         p.remove(p.getDarkest());
     }
 
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+
+        try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_mask"));
+             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_overlay"));
+        ) {
+
+
+            BARK_DOORS.blocks.forEach((wood, block) -> {
+                var id = Utils.getID(block);
+
+                try (TextureImage logTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteUtils.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
+
+                    var t = mask.makeCopy();
+                    t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());
+
+                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
+                            "item/" + id.getPath().replace("_bark_door", "")), t);
+
+                } catch (Exception ignored) {
+                }
+            });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Bark Door item textures : ", ex);
+        }
+    }
+
 }
