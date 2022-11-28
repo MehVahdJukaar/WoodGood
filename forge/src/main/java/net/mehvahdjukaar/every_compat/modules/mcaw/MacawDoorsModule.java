@@ -259,9 +259,9 @@ public class MacawDoorsModule extends SimpleModule {
                 .useLootFromBase()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
-                .addTextureM(modRes("block/oak_japanese2_door_lower"), EveryCompat.res("block/mcaw/doors/oak_japanese2_door_lower_m"))
-                .addTextureM(modRes("block/oak_japanese2_door_upper"), EveryCompat.res("block/mcaw/doors/oak_japanese2_door_upper_m"))
-                .addTextureM(modRes("item/oak_japanese2_door"), EveryCompat.res("block/mcaw/doors/oak_japanese2_door_m"))
+                .addTextureM(modRes("block/oak_japanese_door_lower"), EveryCompat.res("block/mcaw/doors/oak_japanese_door_lower_m"))
+                .addTextureM(modRes("block/oak_japanese_door_upper"), EveryCompat.res("block/mcaw/doors/oak_japanese_door_upper_m"))
+                .addTextureM(modRes("item/oak_japanese2_door"), EveryCompat.res("block/mcaw/doors/oak_japanese_door_m"))
                 .build();
 
         this.addEntry(SHOJI_WHOLE_DOORS);
