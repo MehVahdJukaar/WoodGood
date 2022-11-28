@@ -44,8 +44,8 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks).strength(0.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("rope_bridges"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -56,6 +56,7 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks).strength(0.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("log_bridges"), Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
@@ -68,6 +69,7 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Rail_Bridge(Utils.copyPropertySafe(w.planks).noOcclusion().strength(0.8F, 3)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("rail_bridges"), Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
@@ -80,6 +82,7 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Iron_Stair(Utils.copyPropertySafe(w.planks).strength(0.8F, 2.0F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("log_stairs"), Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
@@ -91,8 +94,8 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Iron_Stair(Utils.copyPropertySafe(w.planks).strength(0.8F, 2.0F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("rope_stairs"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 

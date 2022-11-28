@@ -57,6 +57,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("log_bridges"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsBridges.BridgesItemGroup)
+                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
 
@@ -69,6 +70,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("rail_bridges"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsBridges.BridgesItemGroup)
+                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
 
@@ -81,6 +83,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("log_stairs"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsBridges.BridgesItemGroup)
+                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
 
