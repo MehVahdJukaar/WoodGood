@@ -3,6 +3,8 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 import com.mcwfurnitures.kikoz.MacawsFurnitures;
 import com.mcwfurnitures.kikoz.init.BlockInit;
 import com.mcwfurnitures.kikoz.objects.TallFurniture;
+import com.mcwfurnitures.kikoz.objects.WideFurniture;
+import com.mcwfurnitures.kikoz.objects.bookshelves.BookCabinet;
 import com.mcwfurnitures.kikoz.objects.counters.StorageCounter;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -19,7 +21,13 @@ import net.minecraft.world.level.block.Blocks;
 
 public class MacawFurnitureModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> BOOKSHELF;
+    public final SimpleEntrySet<WoodType, Block> BOOKSHELF_DRAWER;
+    public final SimpleEntrySet<WoodType, Block> CUPBOARD_BOOKSHELF;
     public final SimpleEntrySet<WoodType, Block> CUPBOARD_COUNTER;
+    public final SimpleEntrySet<WoodType, Block> DOUBLE_DRAWER;
+    public final SimpleEntrySet<WoodType, Block> DOUBLE_WARDROBE;
+    public final SimpleEntrySet<WoodType, Block> DRAWER;
     public final SimpleEntrySet<WoodType, Block> MODERN_WARDROBE;
     public final SimpleEntrySet<WoodType, Block> WARDROBE;
 
@@ -27,18 +35,6 @@ public class MacawFurnitureModule extends SimpleModule {
         super(modId, "mcfur");
         CreativeModeTab tab = MacawsFurnitures.FURNITUREITEMGROUP;
 
-
-        CUPBOARD_COUNTER = SimpleEntrySet.builder(WoodType.class, "cupboard_counter",
-                        BlockInit.OAK_CUPBOARD_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("cupboard_counter"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setRenderType(() -> RenderType::solid)
-                .setTab(() -> tab)
-                .defaultRecipe()
-                .build();
-
-        this.addEntry(CUPBOARD_COUNTER);
 
         WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         BlockInit.OAK_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
@@ -51,15 +47,93 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(WARDROBE);
 
-        MODERN_WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe",
+        MODERN_WARDROBE = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe",
                         BlockInit.OAK_MODERN_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TallFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("modern_wardrobe"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
 
         this.addEntry(MODERN_WARDROBE);
+
+        DOUBLE_WARDROBE = SimpleEntrySet.builder(WoodType.class, "double_wardrobe",
+                        BlockInit.OAK_DOUBLE_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new TallFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                .addTag(modRes("double_wardrobe"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(DOUBLE_WARDROBE);
+
+        BOOKSHELF = SimpleEntrySet.builder(WoodType.class, "bookshelf",
+                        BlockInit.OAK_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new BookCabinet(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("bookshelf"), Registry.BLOCK_REGISTRY)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(BOOKSHELF);
+
+        CUPBOARD_BOOKSHELF = SimpleEntrySet.builder(WoodType.class, "bookshelf_cupboard",
+                        BlockInit.OAK_BOOKSHELF_CUPBOARD, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new BookCabinet(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                .addTag(modRes("bookshelf_cupboard"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(CUPBOARD_BOOKSHELF);
+
+        DRAWER = SimpleEntrySet.builder(WoodType.class, "drawer",
+                        BlockInit.OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("drawer"), Registry.BLOCK_REGISTRY)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(DRAWER);
+
+        DOUBLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "double_drawer",
+                        BlockInit.OAK_DOUBLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                .addTag(modRes("double_drawer"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(DOUBLE_DRAWER);
+
+        BOOKSHELF_DRAWER = SimpleEntrySet.builder(WoodType.class, "bookshelf_drawer",
+                        BlockInit.OAK_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                .addTag(modRes("bookshelf_drawer"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(BOOKSHELF_DRAWER);
+
+        CUPBOARD_COUNTER = SimpleEntrySet.builder(WoodType.class, "cupboard_counter",
+                        BlockInit.OAK_CUPBOARD_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)), "stripped_log"))
+                .addTag(modRes("cupboard_counter"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(CUPBOARD_COUNTER);
     }
 }

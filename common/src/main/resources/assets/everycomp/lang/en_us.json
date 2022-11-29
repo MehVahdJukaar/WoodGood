@@ -86,7 +86,13 @@
   "block_type.mcwfences.pyramid_gate": "%s Pyramid Gate",
   "block_type.mcwfences.highley_gate": "%s Highley Gate",
 
+  "block_type.mcwfurnitures.bookshelf": "%s Bookshelf",
+  "block_type.mcwfurnitures.bookshelf_drawer": "%s Bookshelf Drawer",
+  "block_type.mcwfurnitures.bookshelf_cupboard": "%s Cupboard Bookshelf",
   "block_type.mcwfurnitures.cupboard_counter": "%s Cupboard Counter",
+  "block_type.mcwfurnitures.double_drawer": "%s Double Drawer",
+  "block_type.mcwfurnitures.double_wardrobe": "%s Double Wardrobe",
+  "block_type.mcwfurnitures.drawer": "%s Drawer",
   "block_type.mcwfurnitures.modern_wardrobe": "%s Modern Wardrobe",
   "block_type.mcwfurnitures.wardrobe": "%s Wardrobe",
 
