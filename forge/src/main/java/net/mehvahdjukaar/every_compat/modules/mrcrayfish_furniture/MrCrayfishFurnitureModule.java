@@ -71,7 +71,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         BEDSIDE_CABINETS = SimpleEntrySet.builder(WoodType.class, "bedside_cabinet",
                         ModBlocks.BEDSIDE_CABINET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BedsideCabinetBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new BedsideCabinetBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
@@ -84,7 +84,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_BEDSIDE_CABINETS = SimpleEntrySet.builder(WoodType.class, "bedside_cabinet", "stripped",
                         ModBlocks.BEDSIDE_CABINET_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new BedsideCabinetBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new BedsideCabinetBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
@@ -110,7 +110,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_BENCHES = SimpleEntrySet.builder(WoodType.class, "park_bench", "stripped",
                         ModBlocks.PARK_BENCH_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new ParkBenchBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new ParkBenchBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
@@ -123,8 +123,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds",
                         ModBlocks.BLINDS_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-
-                        w -> new BlindsBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new BlindsBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -135,7 +134,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds", "stripped",
                         ModBlocks.BLINDS_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new BlindsBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new BlindsBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -170,7 +169,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         CHAIRS = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.CHAIR_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ChairBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new ChairBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.GENERAL, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -182,7 +181,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_CHAIRS = SimpleEntrySet.builder(WoodType.class, "chair", "stripped",
                         ModBlocks.CHAIR_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new ChairBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new ChairBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.GENERAL, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -194,7 +193,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         COFFEE_TABLES = SimpleEntrySet.builder(WoodType.class, "coffee_table",
                         ModBlocks.COFFEE_TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CoffeeTableBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new CoffeeTableBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.GENERAL, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -206,7 +205,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_COFFEE_TABLES = SimpleEntrySet.builder(WoodType.class, "coffee_table", "stripped",
                         ModBlocks.COFFEE_TABLE_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new CoffeeTableBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new CoffeeTableBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.GENERAL, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -218,7 +217,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         CRATES = SimpleEntrySet.builder(WoodType.class, "crate",
                         ModBlocks.CRATE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CrateBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new CrateBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -230,7 +229,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_CRATES = SimpleEntrySet.builder(WoodType.class, "crate", "stripped",
                         ModBlocks.CRATE_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new CrateBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new CrateBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -254,7 +253,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_DESKS = SimpleEntrySet.builder(WoodType.class, "desk", "stripped",
                         ModBlocks.DESK_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new DeskBlock(Utils.copyPropertySafe(w.planks), DeskBlock.MaterialType.STRIPPED_OAK), "stripped_log"))
+                        ifHasChild(w -> new DeskBlock(Utils.copyPropertySafe(w.log), DeskBlock.MaterialType.STRIPPED_OAK), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -266,7 +265,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         DESK_CABINETS = SimpleEntrySet.builder(WoodType.class, "desk_cabinet",
                         ModBlocks.DESK_CABINET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DeskCabinetBlock(Utils.copyPropertySafe(w.planks), DeskBlock.MaterialType.OAK))
+                        w -> new DeskCabinetBlock(Utils.copyPropertySafe(w.log), DeskBlock.MaterialType.OAK))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
@@ -279,7 +278,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_DESK_CABINETS = SimpleEntrySet.builder(WoodType.class, "desk_cabinet", "stripped",
                         ModBlocks.DESK_CABINET_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new DeskCabinetBlock(Utils.copyPropertySafe(w.planks), DeskBlock.MaterialType.STRIPPED_OAK), "stripped_log"))
+                        ifHasChild(w -> new DeskCabinetBlock(Utils.copyPropertySafe(w.log), DeskBlock.MaterialType.STRIPPED_OAK), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
@@ -304,7 +303,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_KITCHEN_COUNTERS = SimpleEntrySet.builder(WoodType.class, "kitchen_counter", "stripped",
                         ModBlocks.KITCHEN_COUNTER_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new KitchenCounterBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new KitchenCounterBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -329,7 +328,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_KITCHEN_DRAWERS = SimpleEntrySet.builder(WoodType.class, "kitchen_drawer", "stripped",
                         ModBlocks.KITCHEN_DRAWER_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new KitchenDrawerBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new KitchenDrawerBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
@@ -355,7 +354,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_KITCHEN_SINK_DARK = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_dark", "stripped",
                         ModBlocks.KITCHEN_SINK_DARK_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.planks), true))
+                        w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.log), true))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -379,7 +378,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_KITCHEN_SINK_LIGHT = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_light", "stripped",
                         ModBlocks.KITCHEN_SINK_LIGHT_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.planks), true), "stripped_log"))
+                        ifHasChild(w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.log), true), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -391,7 +390,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         MAIL_BOXES = SimpleEntrySet.builder(WoodType.class, "mail_box",
                         ModBlocks.MAIL_BOX_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new MailBoxBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new MailBoxBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
@@ -404,7 +403,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_MAIL_BOXES = SimpleEntrySet.builder(WoodType.class, "mail_box", "stripped",
                         ModBlocks.MAIL_BOX_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new MailBoxBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new MailBoxBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
@@ -417,7 +416,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_TABLES = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
                         ModBlocks.TABLE_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new TableBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
+                        ifHasChild(w -> new TableBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.GENERAL, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -430,7 +429,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         TABLES = SimpleEntrySet.builder(WoodType.class, "table",
                         ModBlocks.TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TableBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.GENERAL, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)

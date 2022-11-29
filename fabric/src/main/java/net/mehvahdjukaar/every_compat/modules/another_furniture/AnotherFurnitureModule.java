@@ -41,7 +41,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         PLANTER_BOXES = SimpleEntrySet.builder(WoodType.class, "planter_box",
                         AFBlocks.OAK_PLANTER_BOX, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatPlanterBoxBlock(Utils.copyPropertySafe(w.planks).strength(2.0F, 3.0F)))
+                        w -> new CompatPlanterBoxBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("planter_boxes"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("planter_boxes"), Registry.ITEM_REGISTRY)
@@ -58,7 +58,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         SHUTTERS = SimpleEntrySet.builder(WoodType.class, "shutter",
                         AFBlocks.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ShutterBlock(Utils.copyPropertySafe(w.planks).strength(2.0F, 3.0F).noOcclusion()))
+                        w -> new ShutterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shutters"), Registry.ITEM_REGISTRY)

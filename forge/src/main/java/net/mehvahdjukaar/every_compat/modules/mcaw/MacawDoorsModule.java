@@ -53,7 +53,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         BARK_DOORS = SimpleEntrySet.builder(WoodType.class, "bark_glass_door",
                         BlockInit.OAK_BARK_GLASS_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setTab(() -> MacawsDoors.DoorItemGroup)
