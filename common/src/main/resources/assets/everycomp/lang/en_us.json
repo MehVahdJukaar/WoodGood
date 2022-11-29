@@ -94,7 +94,10 @@
   "block_type.mcwroofs.attic_roof": "%s Attic Roof",
   "block_type.mcwroofs.lower_roof": "%s Lower Base Roof",
   "block_type.mcwroofs.roof": "%s Roof",
+  "block_type.mcwroofs.steep_roof": "%s Steep Roof",
   "block_type.mcwroofs.top_roof": "%s Top Roof",
+  "block_type.mcwroofs.upper_lower_roof": "%s Lower Top Roof",
+  "block_type.mcwroofs.upper_steep_roof": "%s Steep Top Roof",
 
   "block_type.mcwtrpdoors.bark_trapdoor": "%s Bark Trapdoor",
   "block_type.mcwtrpdoors.barn_trapdoor": "%s Barn Trapdoor",

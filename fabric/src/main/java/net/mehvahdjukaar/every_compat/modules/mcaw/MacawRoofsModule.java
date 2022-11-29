@@ -2,8 +2,11 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 
 import net.kikoz.mcwroofs.init.BlockInit;
 import net.kikoz.mcwroofs.objects.roofs.BaseRoof;
+import net.kikoz.mcwroofs.objects.roofs.Lower;
 import net.kikoz.mcwroofs.objects.roofs.RoofGlass;
 import net.kikoz.mcwroofs.objects.roofs.RoofTopNew;
+import net.kikoz.mcwroofs.objects.roofs.Steep;
+import net.kikoz.mcwroofs.objects.roofs.SteepRoof;
 import net.kikoz.mcwroofs.util.RoofGroup;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -23,7 +26,10 @@ public class MacawRoofsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> ATTIC_ROOFS;
     public final SimpleEntrySet<WoodType, Block> LOWER_ROOFS;
     public final SimpleEntrySet<WoodType, Block> ROOFS;
+    public final SimpleEntrySet<WoodType, Block> STEEP_ROOFS;
     public final SimpleEntrySet<WoodType, Block> TOP_ROOFS;
+    public final SimpleEntrySet<WoodType, Block> UPPER_LOWER_ROOFS;
+    public final SimpleEntrySet<WoodType, Block> UPPER_STEEP_ROOFS;
 
     public MacawRoofsModule(String modId) {
         super(modId, "mcr");
@@ -62,6 +68,17 @@ public class MacawRoofsModule extends SimpleModule {
 
         this.addEntry(ROOFS);
 
+        STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "steep_roof",
+                        () -> BlockInit.OAK_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new SteepRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(STEEP_ROOFS);
+
         TOP_ROOFS = SimpleEntrySet.builder(WoodType.class, "top_roof",
                         () -> BlockInit.OAK_TOP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RoofTopNew(Utils.copyPropertySafe(w.log)))
@@ -72,5 +89,27 @@ public class MacawRoofsModule extends SimpleModule {
                 .build();
 
         this.addEntry(TOP_ROOFS);
+
+        UPPER_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "upper_lower_roof",
+                        () -> BlockInit.OAK_UPPER_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Lower(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(UPPER_LOWER_ROOFS);
+
+        UPPER_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "upper_steep_roof",
+                        () -> BlockInit.OAK_UPPER_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Steep(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(UPPER_STEEP_ROOFS);
     }
 }
