@@ -92,6 +92,7 @@
   "block_type.mcwpaths.planks_path": "%s Planks Path",
 
   "block_type.mcwroofs.attic_roof": "%s Attic Roof",
+  "block_type.mcwroofs.lower_roof": "%s Lower Base Roof",
   "block_type.mcwroofs.roof": "%s Roof",
   "block_type.mcwroofs.top_roof": "%s Top Roof",
 
