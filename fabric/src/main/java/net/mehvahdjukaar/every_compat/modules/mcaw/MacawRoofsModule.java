@@ -31,6 +31,14 @@ public class MacawRoofsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> UPPER_LOWER_ROOFS;
     public final SimpleEntrySet<WoodType, Block> UPPER_STEEP_ROOFS;
 
+    public final SimpleEntrySet<WoodType, Block> PLANKS_ATTIC_ROOFS;
+    public final SimpleEntrySet<WoodType, Block> PLANKS_LOWER_ROOFS;
+    public final SimpleEntrySet<WoodType, Block> PLANKS_ROOFS;
+    public final SimpleEntrySet<WoodType, Block> PLANKS_STEEP_ROOFS;
+    public final SimpleEntrySet<WoodType, Block> PLANKS_TOP_ROOFS;
+    public final SimpleEntrySet<WoodType, Block> PLANKS_UPPER_LOWER_ROOFS;
+    public final SimpleEntrySet<WoodType, Block> PLANKS_UPPER_STEEP_ROOFS;
+
     public MacawRoofsModule(String modId) {
         super(modId, "mcr");
         CreativeModeTab tab = RoofGroup.ROOFGROUP;
@@ -111,5 +119,82 @@ public class MacawRoofsModule extends SimpleModule {
                 .build();
 
         this.addEntry(UPPER_STEEP_ROOFS);
+
+        PLANKS_ATTIC_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_attic_roof",
+                        () -> BlockInit.OAK_PLANKS_ATTIC_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RoofGlass(Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PLANKS_ATTIC_ROOFS);
+
+        PLANKS_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_lower_roof",
+                        () -> BlockInit.OAK_PLANKS_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PLANKS_LOWER_ROOFS);
+
+        PLANKS_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_roof",
+                        () -> BlockInit.OAK_PLANKS_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PLANKS_ROOFS);
+
+        PLANKS_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_steep_roof",
+                        () -> BlockInit.OAK_PLANKS_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new SteepRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PLANKS_STEEP_ROOFS);
+
+        PLANKS_TOP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_top_roof",
+                        () -> BlockInit.OAK_PLANKS_TOP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RoofTopNew(Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PLANKS_TOP_ROOFS);
+
+        PLANKS_UPPER_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_upper_lower_roof",
+                        () -> BlockInit.OAK_PLANKS_UPPER_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Lower(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PLANKS_UPPER_LOWER_ROOFS);
+
+        PLANKS_UPPER_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_upper_steep_roof",
+                        () -> BlockInit.OAK_PLANKS_UPPER_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Steep(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::solid)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PLANKS_UPPER_STEEP_ROOFS);
     }
 }
