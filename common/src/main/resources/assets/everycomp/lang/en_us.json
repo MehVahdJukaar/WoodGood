@@ -91,6 +91,8 @@
 
   "block_type.mcwpaths.planks_path": "%s Planks Path",
 
+  "block_type.mcwroofs.roof": "%s Roof",
+
   "block_type.mcwtrpdoors.bark_trapdoor": "%s Bark Trapdoor",
   "block_type.mcwtrpdoors.barn_trapdoor": "%s Barn Trapdoor",
   "block_type.mcwtrpdoors.barred_trapdoor": "%s Barred Trapdoor",

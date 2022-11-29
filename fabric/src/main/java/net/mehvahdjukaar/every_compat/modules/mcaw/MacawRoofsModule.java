@@ -26,7 +26,7 @@ public class MacawRoofsModule extends SimpleModule {
                         () -> BlockInit.OAK_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log).strength(2.0F, 2.3F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::cutoutMipped)
                 .setTab(() -> RoofGroup.ROOFGROUP)
                 .defaultRecipe()
                 .build();
