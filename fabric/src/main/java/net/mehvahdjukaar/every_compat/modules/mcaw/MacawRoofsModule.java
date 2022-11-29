@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 import net.kikoz.mcwroofs.init.BlockInit;
 import net.kikoz.mcwroofs.objects.roofs.BaseRoof;
 import net.kikoz.mcwroofs.objects.roofs.RoofGlass;
+import net.kikoz.mcwroofs.objects.roofs.RoofTopNew;
 import net.kikoz.mcwroofs.util.RoofGroup;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -21,6 +22,7 @@ public class MacawRoofsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> ATTIC_ROOFS;
     public final SimpleEntrySet<WoodType, Block> ROOFS;
+    public final SimpleEntrySet<WoodType, Block> TOP_ROOFS;
 
     public MacawRoofsModule(String modId) {
         super(modId, "mcr");
@@ -47,5 +49,16 @@ public class MacawRoofsModule extends SimpleModule {
                 .build();
 
         this.addEntry(ROOFS);
+
+        TOP_ROOFS = SimpleEntrySet.builder(WoodType.class, "top_roof",
+                        () -> BlockInit.OAK_TOP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RoofTopNew(Utils.copyPropertySafe(w.log)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutoutMipped)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(TOP_ROOFS);
     }
 }
