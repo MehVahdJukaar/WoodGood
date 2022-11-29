@@ -123,7 +123,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds",
                         ModBlocks.BLINDS_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlindsBlock(Utils.copyPropertySafe(w.log)))
+                        ifHasChild(w -> new BlindsBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
@@ -354,7 +354,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         STRIPPED_KITCHEN_SINK_DARK = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_dark", "stripped",
                         ModBlocks.KITCHEN_SINK_DARK_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.log), true))
+                        ifHasChild(w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.log), true), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
