@@ -46,6 +46,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
+        addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
 
 

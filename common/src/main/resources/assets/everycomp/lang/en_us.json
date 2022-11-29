@@ -50,6 +50,15 @@
 
   "block_type.backpacked.backpack_shelf": "%s Backpack Shelf",
 
+  "block_type.mcwbridges.rail_bridge": "%s Rail Bridge",
+  "block_type.mcwbridges.bridge_pier": "%s Bridge Support",
+  "block_type.mcwbridges.log_bridge_middle": "%s Bridge",
+  "block_type.mcwbridges.log_bridge_stair": "%s Bridge Stair",
+  "block_type.mcwbridges.rope_bridge_stair": "Rope %s Bridge Stair",
+  "block_type.mcwbridges.rope_bridge": "Rope %s Bridge",
+  "block_type.mcwbridges.bridge_rope": "Rope %s Bridge",
+  "block_type.mcwbridges.wired_fence": "%s Wired Fence",
+
   "block_type.mcwdoors.bark_glass_door": "%s Bark Glass Door",
   "block_type.mcwdoors.barn_door": "%s Barn Door",
   "block_type.mcwdoors.barn_glass_door": "%s Barn Glass Door",
@@ -77,14 +86,9 @@
   "block_type.mcwfences.pyramid_gate": "%s Pyramid Gate",
   "block_type.mcwfences.highley_gate": "%s Highley Gate",
 
-  "block_type.mcwbridges.rail_bridge": "%s Rail Bridge",
-  "block_type.mcwbridges.bridge_pier": "%s Bridge Support",
-  "block_type.mcwbridges.log_bridge_middle": "%s Bridge",
-  "block_type.mcwbridges.log_bridge_stair": "%s Bridge Stair",
-  "block_type.mcwbridges.rope_bridge_stair": "Rope %s Bridge Stair",
-  "block_type.mcwbridges.rope_bridge": "Rope %s Bridge",
-  "block_type.mcwbridges.bridge_rope": "Rope %s Bridge",
-  "block_type.mcwbridges.wired_fence": "%s Wired Fence",
+  "block_type.mcwfurnitures.cupboard_counter": "%s Cupboard Counter",
+  "block_type.mcwfurnitures.modern_wardrobe": "%s Modern Wardrobe",
+  "block_type.mcwfurnitures.wardrobe": "%s Wardrobe",
 
   "block_type.mcwlights.soul_tiki_torch": "Soul %s Tiki Torch",
   "block_type.mcwlights.tiki_torch": "%s Tiki Torch",
