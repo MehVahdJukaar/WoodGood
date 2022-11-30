@@ -136,7 +136,6 @@ dependencies {
     modImplementation("curse.maven:mrcrayfish-furniture-mod-55438:3872133")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modImplementation("curse.maven:quark-243121:3961436")
-    modImplementation("curse.maven:rubidium-574856:3973894")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modImplementation("curse.maven:the-twilight-forest-227639:3943940")
