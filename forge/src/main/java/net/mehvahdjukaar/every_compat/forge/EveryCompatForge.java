@@ -40,36 +40,35 @@ public class EveryCompatForge extends EveryCompat {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
+        addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
+        addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
+        addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
+
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
 
 
-        addModule("another_furniture", () -> AnotherFurnitureModule::new);
-        addModule("missingwilds", () -> MissingWildModule::new);
 
+        addModule("another_furniture", () -> AnotherFurnitureModule::new);
+        addModule("backpacked", () -> BackpackedModule::new);
+        addModule("campchair", () -> CampChairModule::new);
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
+        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
+        addModule("farmersdelight", () -> FarmersDelightModule::new);
+        addModule("missingwilds", () -> MissingWildModule::new);
+        addModule("quark", () -> QuarkModule::new);
+        addModule("storagedrawers", () -> StorageDrawersModule::new);
+        addModule("twilightforest", () -> TwilightForestModule::new);
+        addModule("woodworks", () -> WoodworksModule::new);
 
         //addModule("graveyard", () -> GraveyardModule::new);
-
-
-        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
-        addModule("backpacked", () -> BackpackedModule::new);
-
-        addModule("campchair", () -> CampChairModule::new);
-
-        addModule("quark", () -> QuarkModule::new);
-        addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
-        addModule("storagedrawers", () -> StorageDrawersModule::new);
-
-        addModule("woodworks", () -> WoodworksModule::new);
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();
