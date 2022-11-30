@@ -143,10 +143,6 @@ dependencies {
     modImplementation("curse.maven:twigs-496913:3943447")
     modCompileOnly("curse.maven:woodworks-543610:4023081")
 
-    modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
-    modCompileOnly("curse.maven:terraqueous-71738:4085848")
-    modCompileOnly("curse.maven:shetiphiancore-244870:4055971")
-
     modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
