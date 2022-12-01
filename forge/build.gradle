@@ -123,6 +123,7 @@ dependencies {
     modImplementation("curse.maven:domum-ornamentum-527361:4090940")
     modCompileOnly("curse.maven:farmersdelight-398521:3916069")
     modImplementation("curse.maven:jei-238222:3940099")
+    modImplementation("curse.maven:furnish-547069:4084047")
     modCompileOnly("curse.maven:macaws-bridges-351725:4018295")
     modImplementation("curse.maven:macaws-doors-378646:3930976")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:3923128")
