@@ -1,18 +1,22 @@
 package net.mehvahdjukaar.every_compat.modules.furnish;
 
+import io.github.wouink.furnish.block.Bench;
 import io.github.wouink.furnish.block.Cabinet;
 import io.github.wouink.furnish.block.Chair;
+import io.github.wouink.furnish.block.Coffin;
 import io.github.wouink.furnish.block.Crate;
 import io.github.wouink.furnish.block.InventoryFurniture;
+import io.github.wouink.furnish.block.Ladder;
 import io.github.wouink.furnish.block.LogBench;
+import io.github.wouink.furnish.block.Shelf;
 import io.github.wouink.furnish.block.Shutter;
 import io.github.wouink.furnish.block.SimpleFurniture;
 import io.github.wouink.furnish.block.Table;
 import io.github.wouink.furnish.block.Wardrobe;
+import io.github.wouink.furnish.block.util.VoxelShapeHelper;
 import io.github.wouink.furnish.setup.FurnishBlocks;
 import io.github.wouink.furnish.setup.FurnishData;
 import io.github.wouink.furnish.setup.FurnishItems;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -30,16 +34,29 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 
 public class FurnishModule extends SimpleModule {
 
+    public static final VoxelShape[] BACK_LEFT_LEG = VoxelShapeHelper.getRotatedShapes(Block.box(3D, 0D, 11D, 5D, 16D, 13D));
+    public static final VoxelShape[] BACK_RIGHT_LEG = VoxelShapeHelper.getRotatedShapes(Block.box(3D, 0D, 3D, 5D, 16D, 5D));
+    public static final VoxelShape[] CUSHION = VoxelShapeHelper.getRotatedShapes(Block.box(5D, 8D, 3D, 15D, 9D, 13D));
+    public static final VoxelShape[] FRONT_LEFT_LEG = VoxelShapeHelper.getRotatedShapes(Block.box(12D, 0D, 11D, 14D, 8D, 13D));
+    public static final VoxelShape[] FRONT_RIGHT_LEG = VoxelShapeHelper.getRotatedShapes(Block.box(12D, 0D, 3D, 14D, 8D, 5D));
+    public static final VoxelShape[] SEAT = VoxelShapeHelper.getRotatedShapes(Block.box(5D, 11D, 3D, 6D, 17D, 13D));
+
     public final SimpleEntrySet<WoodType, Block> BEDSIDE_TABLE;
+    public final SimpleEntrySet<WoodType, Block> BENCH;
     public final SimpleEntrySet<WoodType, Block> CABINET;
+    public final SimpleEntrySet<WoodType, Block> CHAIR;
+    public final SimpleEntrySet<WoodType, Block> COFFIN;
     public final SimpleEntrySet<WoodType, Block> CRATE;
     public final SimpleEntrySet<WoodType, Block> KITCHEN_CABINET;
+    public final SimpleEntrySet<WoodType, Block> LADDER;
     public final SimpleEntrySet<WoodType, Block> LOG_BENCHES;
     public final SimpleEntrySet<WoodType, Block> PEDESTAL_TABLE;
+    public final SimpleEntrySet<WoodType, Block> SHELF;
     public final SimpleEntrySet<WoodType, Block> SHUTTER;
     public final SimpleEntrySet<WoodType, Block> SQUARE_TABLE;
     public final SimpleEntrySet<WoodType, Block> STOOL;
@@ -153,6 +170,19 @@ public class FurnishModule extends SimpleModule {
 
         this.addEntry(STOOL);
 
+        CHAIR = SimpleEntrySet.builder(WoodType.class, "chair",
+                        FurnishBlocks.Oak_Chair, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log),
+                                VoxelShapeHelper.getMergedShapes(FRONT_LEFT_LEG, FRONT_RIGHT_LEG, BACK_LEFT_LEG, BACK_RIGHT_LEG, CUSHION, SEAT)), "stripped_log"))
+                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addRecipe(modRes("furniture_making/oak_chair"))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(CHAIR);
+
         SHUTTER = SimpleEntrySet.builder(WoodType.class, "shutter",
                         FurnishBlocks.Oak_Shutter, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
@@ -180,6 +210,30 @@ public class FurnishModule extends SimpleModule {
 
         this.addEntry(CRATE);
 
+        SHELF = SimpleEntrySet.builder(WoodType.class, "shelf",
+                        FurnishBlocks.Oak_Shelf, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Shelf(Utils.copyPropertySafe(w.planks)))
+                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addRecipe(modRes("furniture_making/oak_shelf"))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(SHELF);
+
+        BENCH = SimpleEntrySet.builder(WoodType.class, "bench",
+                        FurnishBlocks.Oak_Bench, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Bench(Utils.copyPropertySafe(w.planks)))
+                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addRecipe(modRes("furniture_making/oak_bench"))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(BENCH);
+
         LOG_BENCHES = SimpleEntrySet.builder(WoodType.class, "log_bench",
                         FurnishBlocks.Oak_Log_Bench, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new LogBench(Utils.copyPropertySafe(w.log)))
@@ -193,21 +247,73 @@ public class FurnishModule extends SimpleModule {
                 .build();
 
         this.addEntry(LOG_BENCHES);
+
+        LADDER = SimpleEntrySet.builder(WoodType.class, "ladder",
+                        FurnishBlocks.Oak_Ladder, () -> WoodTypeRegistry.OAK_TYPE,
+                        ifHasChild(w -> new Ladder(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
+                .addRecipe(modRes("furniture_making/oak_ladder"))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(LADDER);
+
+        COFFIN = SimpleEntrySet.builder(WoodType.class, "coffin",
+                        FurnishBlocks.Jungle_Coffin, () -> WoodTypeRegistry.getValue(new ResourceLocation("jungle")),
+                        w -> new Coffin(Utils.copyPropertySafe(w.planks)))
+                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addRecipe(modRes("furniture_making/jungle_coffin"))
+                .addTexture(modRes("block/jungle_coffin_sides"))
+//                .addTexture(modRes("block/oak_coffin_cover"))
+//                .addTexture(modRes("block/oak_coffin_side"))
+//                .addTexture(modRes("block/oak_coffin_side2"))
+//                .addTexture(modRes("block/oak_coffin_sides"))
+//                .addTexture(modRes("block/oak_coffin_sides_15"))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(COFFIN);
     }
 
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
-        try (
-            TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_overlay"));
-        )  {
+        try {
             LOG_BENCHES.blocks.forEach((w, block) -> {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteUtils.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteUtils.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/oak_log_bench_top", w, id, "oak");
+
+                    var newTexture = topTexture.makeCopy();
+
+                    handler.addTextureIfNotPresent(manager, newId, () -> newTexture);
+
+                    var newTop = topTexture.makeCopy();
+                    createTopTexture(topTexture, newTop);
+
+                    handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+
+                } catch (Exception e) {
+                    handler.getLogger().error("Failed to generate Log Bench block texture for for {} : {}", block, e);
+
+                }
+
+            });
+            COFFIN.blocks.forEach((w, block) -> {
+                var id = Utils.getID(block);
+
+                try (TextureImage topTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteUtils.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+
+                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/jungle_coffin_sides", w, id, "jungle");
 
                     var newTexture = topTexture.makeCopy();
 
