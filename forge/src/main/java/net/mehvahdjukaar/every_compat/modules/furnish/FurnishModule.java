@@ -269,11 +269,6 @@ public class FurnishModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addRecipe(modRes("furniture_making/jungle_coffin"))
                 .addTexture(modRes("block/jungle_coffin_sides"))
-//                .addTexture(modRes("block/oak_coffin_cover"))
-//                .addTexture(modRes("block/oak_coffin_side"))
-//                .addTexture(modRes("block/oak_coffin_side2"))
-//                .addTexture(modRes("block/oak_coffin_sides"))
-//                .addTexture(modRes("block/oak_coffin_sides_15"))
                 .setTab(() -> tab)
                 .build();
 
