@@ -2,23 +2,19 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 
 import com.mcwfences.kikoz.MacawsFences;
 import com.mcwfences.kikoz.init.BlockInit;
+import com.mcwfences.kikoz.objects.WiredFence;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
 
 public class MacawFencesModule extends SimpleModule {
@@ -99,22 +95,4 @@ public class MacawFencesModule extends SimpleModule {
 
         this.addEntry(HIGHLEY_GATES);
     }
-
-
-    public static class WiredFence extends FenceBlock {
-
-
-        public WiredFence(Properties p_53302_) {
-            super(p_53302_);
-        }
-
-        //changed. I couldn't help myself
-        @Override
-        public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
-            if (state.getValue(NORTH) || state.getValue(SOUTH) || state.getValue(EAST) || state.getValue(WEST)) {
-                entityIn.hurt(DamageSource.GENERIC, 2.0F);
-            }
-        }
-    }
-
 }
