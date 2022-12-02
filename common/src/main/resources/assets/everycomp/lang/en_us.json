@@ -26,9 +26,17 @@
 
   "block_type.farmersdelight.cabinet": "%s Cabinet",
 
+  "block_type.furnish.bedside_table": "%s Bedside Table",
+  "block_type.furnish.cabinet": "%s Cabinet",
   "block_type.furnish.crate": "%s Crate",
+  "block_type.furnish.kitchen_cabinet": "%s Kitchen Cabinet",
   "block_type.furnish.log_bench": "%s Log Bench",
+  "block_type.furnish.pedestal_table": "%s Pedestal Table",
   "block_type.furnish.shutter": "%s Shutter",
+  "block_type.furnish.square_table": "%s Square Table",
+  "block_type.furnish.stool": "%s Stool",
+  "block_type.furnish.table": "%s Table",
+  "block_type.furnish.wardrobe": "%s Wardrobe",
 
   "block_type.twilightforest.hollow_log": "Hollow %s Log",
   "block_type.twilightforest.hollow_log_vertical": "Hollow %s Log",
