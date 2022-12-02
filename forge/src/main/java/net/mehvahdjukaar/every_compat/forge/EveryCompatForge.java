@@ -36,6 +36,13 @@ import net.minecraftforge.registries.RegisterEvent;
 public class EveryCompatForge extends EveryCompat {
     public static final String MOD_ID = EveryCompat.MOD_ID;
 
+    /* To dos:
+    * Fix Recipes for Builders Addition & Furnish
+    * Add a way to generate tags similar to 'oak_furniture'
+    * Adjust log end textures for Furnish Log Bench & Coffin
+    * Fix ids for Builders Addition that use the format `bench_oak`
+    * */
+
     public EveryCompatForge() {
         this.commonInit();
 
