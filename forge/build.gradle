@@ -116,6 +116,7 @@ dependencies {
     modImplementation("curse.maven:autoreglib-250363:3857246")
     modImplementation("curse.maven:backpacked-352835:3923045")
     modCompileOnly("curse.maven:blueprint-382216:4019850")
+    modImplementation("curse.maven:buildersaddition-389697:4008246")
     modCompileOnly("curse.maven:camp-chair-531744:3879293")
     modImplementation("curse.maven:configured-457570:4011355")
     modCompileOnly("curse.maven:create-328085:4011414")
