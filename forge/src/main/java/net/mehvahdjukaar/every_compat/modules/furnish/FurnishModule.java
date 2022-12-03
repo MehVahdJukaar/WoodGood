@@ -39,12 +39,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FurnishModule extends SimpleModule {
 
-    public static final VoxelShape[] BACK_LEFT_LEG = VoxelShapeHelper.getRotatedShapes(Block.box(3D, 0D, 11D, 5D, 16D, 13D));
-    public static final VoxelShape[] BACK_RIGHT_LEG = VoxelShapeHelper.getRotatedShapes(Block.box(3D, 0D, 3D, 5D, 16D, 5D));
-    public static final VoxelShape[] CUSHION = VoxelShapeHelper.getRotatedShapes(Block.box(5D, 8D, 3D, 15D, 9D, 13D));
-    public static final VoxelShape[] FRONT_LEFT_LEG = VoxelShapeHelper.getRotatedShapes(Block.box(12D, 0D, 11D, 14D, 8D, 13D));
-    public static final VoxelShape[] FRONT_RIGHT_LEG = VoxelShapeHelper.getRotatedShapes(Block.box(12D, 0D, 3D, 14D, 8D, 5D));
-    public static final VoxelShape[] SEAT = VoxelShapeHelper.getRotatedShapes(Block.box(5D, 11D, 3D, 6D, 17D, 13D));
 
     public final SimpleEntrySet<WoodType, Block> BEDSIDE_TABLE;
     public final SimpleEntrySet<WoodType, Block> BENCH;
@@ -173,7 +167,7 @@ public class FurnishModule extends SimpleModule {
         CHAIR = SimpleEntrySet.builder(WoodType.class, "chair",
                         FurnishBlocks.Oak_Chair, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log),
-                                VoxelShapeHelper.getMergedShapes(FRONT_LEFT_LEG, FRONT_RIGHT_LEG, BACK_LEFT_LEG, BACK_RIGHT_LEG, CUSHION, SEAT)), "stripped_log"))
+                                VoxelShapeHelper.getMergedShapes(Chair.BASE_SHAPES, Chair.CHAIR_SEAT)), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

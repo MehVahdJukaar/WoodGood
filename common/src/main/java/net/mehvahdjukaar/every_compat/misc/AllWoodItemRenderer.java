@@ -70,7 +70,6 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
     }
 
 
-    //TODO: fix this
     public ItemStack getAnyItem() {
         int size = CHILD_KEYS.size();
         if (size == 0) return Items.OAK_PLANKS.getDefaultInstance();
