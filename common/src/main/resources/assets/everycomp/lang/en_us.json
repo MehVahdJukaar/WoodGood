@@ -63,6 +63,10 @@
   "block_type.furnish.table": "%s Table",
   "block_type.furnish.wardrobe": "%s Wardrobe",
 
+  "block_type.pokecube_legends.distortic_planks": "Distortic %s Planks",
+  "block_type.pokecube_legends.distortic_stairs": "Distortic %s Stairs",
+  "block_type.pokecube_legends.distortic_slab": "Distortic %s Slab",
+
   "block_type.twilightforest.hollow_log": "Hollow %s Log",
   "block_type.twilightforest.hollow_log_vertical": "Hollow %s Log",
   "block_type.twilightforest.hollow_log_horizontal": "Hollow %s Log",
