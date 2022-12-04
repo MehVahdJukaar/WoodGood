@@ -1,18 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.furnish;
 
-import io.github.wouink.furnish.block.Bench;
-import io.github.wouink.furnish.block.Cabinet;
-import io.github.wouink.furnish.block.Chair;
-import io.github.wouink.furnish.block.Coffin;
-import io.github.wouink.furnish.block.Crate;
-import io.github.wouink.furnish.block.InventoryFurniture;
-import io.github.wouink.furnish.block.Ladder;
-import io.github.wouink.furnish.block.LogBench;
-import io.github.wouink.furnish.block.Shelf;
-import io.github.wouink.furnish.block.Shutter;
-import io.github.wouink.furnish.block.SimpleFurniture;
-import io.github.wouink.furnish.block.Table;
-import io.github.wouink.furnish.block.Wardrobe;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
+import io.github.wouink.furnish.block.*;
 import io.github.wouink.furnish.block.util.VoxelShapeHelper;
 import io.github.wouink.furnish.setup.FurnishBlocks;
 import io.github.wouink.furnish.setup.FurnishData;
@@ -22,19 +12,38 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
+import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.mehvahdjukaar.moonlight.core.Moonlight;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FurnishModule extends SimpleModule {
@@ -61,6 +70,7 @@ public class FurnishModule extends SimpleModule {
         super(modId, "fur");
         CreativeModeTab tab = FurnishItems.Furnish_ItemGroup;
 
+        TemplateRecipeManager.registerTemplate(modRes("furniture_making"), FurnishRecipeTemplate::new);
 
         TABLE = SimpleEntrySet.builder(WoodType.class, "table",
                         FurnishBlocks.Oak_Table, () -> WoodTypeRegistry.OAK_TYPE,
@@ -343,4 +353,129 @@ public class FurnishModule extends SimpleModule {
             }
         });
     }
+
+    public static class FurnishFinishedRecipe implements FinishedRecipe {
+        protected final Ingredient ingredient;
+        protected final ItemStack result;
+        protected final ResourceLocation id;
+        protected final String group;
+        private final Advancement.Builder advancement;
+        protected final ResourceLocation advancementId;
+
+
+        public FurnishFinishedRecipe(
+                ResourceLocation resourceLocation,
+                String group,
+                Ingredient ingredient,
+                ItemStack result, Advancement.Builder advancement, ResourceLocation advancementId
+        ) {
+            this.id = resourceLocation;
+            this.group = group;
+            this.ingredient = ingredient;
+            this.result = result;
+            this.advancement = advancement;
+            this.advancementId = advancementId;
+        }
+
+
+        public void serializeRecipeData(JsonObject json) {
+            if (!this.group.isEmpty()) {
+                json.addProperty("group", this.group);
+            }
+            json.addProperty("id", this.id.toString());
+
+            json.add("ingredient", ingredient.toJson());
+
+            json.addProperty("result", Utils.getID(result.getItem()).toString());
+            json.addProperty("count", result.getCount());
+        }
+
+        @Override
+        public ResourceLocation getId() {
+            return id;
+        }
+
+        @Override
+        public RecipeSerializer<?> getType() {
+            return FurnishData.RecipeSerializers.Furniture_Recipe_Serializer.get();
+        }
+
+        @Nullable
+        @Override
+        public JsonObject serializeAdvancement() {
+            return advancement.serializeToJson();
+        }
+
+        @Nullable
+        @Override
+        public ResourceLocation getAdvancementId() {
+            return advancementId;
+        }
+    }
+
+    public class FurnishRecipeTemplate implements IRecipeTemplate<FurnishFinishedRecipe> {
+
+        private final List<Object> conditions = new ArrayList<>();
+
+        public final ItemStack result;
+        public final String group;
+        public final Ingredient ingredient;
+
+        public FurnishRecipeTemplate(JsonObject json) {
+            var g = json.get("group");
+            this.group = g == null ? "" : g.getAsString();
+
+            this.ingredient = Ingredient.fromJson(json.get("ingredient"));
+            String s1 = GsonHelper.getAsString(json, "result");
+            int i = GsonHelper.getAsInt(json, "count");
+            this.result = new ItemStack( Registry.ITEM.get(new ResourceLocation(s1)), i);
+        }
+
+        @Override
+        public <T extends BlockType> FurnishFinishedRecipe createSimilar(
+                T originalMat, T destinationMat, Item unlockItem, String id) {
+            ItemLike newRes = BlockType.changeItemType(this.result.getItem(), originalMat, destinationMat);
+            if (newRes == null) {
+                throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
+                        this.result, originalMat, destinationMat));
+            }
+            if (newRes.asItem().getItemCategory() == null) {
+                Moonlight.LOGGER.error("Failed to generate recipe for {} in block type {}: Output item {} cannot have empty creative tab, skipping", this.result, destinationMat, newRes);
+                return null;
+            }
+            ItemStack newResult = new ItemStack(newRes);
+            if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
+            if (id == null) id = Registry.ITEM.getKey(newRes.asItem()).toString();
+
+            Ingredient newIng = null;
+            for (var in : ingredient.getItems()) {
+                Item it = in.getItem();
+                if (it != Items.BARRIER) {
+                    ItemLike i = BlockType.changeItemType(it, originalMat, destinationMat);
+                    if (i != null) {
+                        //converts first ingredient it finds
+                        newIng = Ingredient.of(i);
+                        break;
+                    }
+                }
+            }
+            Advancement.Builder advancement = Advancement.Builder.advancement();
+
+            advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
+            var res = new ResourceLocation(id);
+            return new FurnishFinishedRecipe(res, group, newIng, newResult, advancement,
+                    modRes("recipes/" + "furnish" + "/" + res.getPath()));
+        }
+
+        @Override
+        public void addCondition(Object condition) {
+            this.conditions.add(condition);
+        }
+
+        @Override
+        public List<Object> getConditions() {
+            return conditions;
+        }
+    }
+
 }
