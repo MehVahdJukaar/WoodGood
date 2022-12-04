@@ -138,6 +138,7 @@ dependencies {
     modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:3872133")
     modImplementation("curse.maven:premium-wood-353515:3905203")
+    modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
 
     modImplementation("curse.maven:quark-243121:3961436")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")

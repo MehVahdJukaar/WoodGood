@@ -70,7 +70,8 @@ public abstract class EveryCompat {
 
             TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log_side", res("block/cactus_side"));
             TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log_top", res("block/cactus_top"));
-
+            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_side", res("block/stripped_cactus_side"));
+            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
         }
 
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
