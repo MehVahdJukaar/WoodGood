@@ -121,6 +121,8 @@ public class BuildersAdditionModule extends SimpleModule {
                         })
                 .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.LEAVES, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.LEAVES, Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("hedge/hedge_oak"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
