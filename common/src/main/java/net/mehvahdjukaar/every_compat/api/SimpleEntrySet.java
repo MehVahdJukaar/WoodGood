@@ -99,7 +99,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                           @Nullable Supplier<Supplier<RenderType>> renderType,
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
-        super((prefix == null ? "" : prefix + "_") + name);
+        super((prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name);
         this.postfix = name;
         this.blockFactory = blockSupplier;
         this.prefix = prefix;
