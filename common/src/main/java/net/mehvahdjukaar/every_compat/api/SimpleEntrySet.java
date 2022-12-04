@@ -206,7 +206,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public String getBlockName(T w) {
         String name;
         if (prefix != null) {
-            name = this.prefix + "_" + w.getTypeName() + "_" + this.postfix;
+            name = this.prefix + "_" + w.getTypeName();
+            if (!this.postfix.isEmpty()) name += "_" + this.postfix;
         } else {
             name = w.getTypeName() + "_" + this.postfix;
         }
