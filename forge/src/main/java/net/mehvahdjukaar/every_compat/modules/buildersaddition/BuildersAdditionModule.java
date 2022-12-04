@@ -16,20 +16,24 @@ import com.mrh0.buildersaddition.blocks.Stool;
 import com.mrh0.buildersaddition.blocks.SupportBracket;
 import com.mrh0.buildersaddition.blocks.Table;
 import com.mrh0.buildersaddition.blocks.VerticalSlab;
+import com.mrh0.buildersaddition.client.render.tileentity.ShelfRenderer;
 import com.mrh0.buildersaddition.itemgroup.ModGroup;
 import com.mrh0.buildersaddition.tileentity.ShelfTileEntity;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -122,7 +126,7 @@ public class BuildersAdditionModule extends SimpleModule {
                 .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.LEAVES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.LEAVES, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.LEAVES, Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("hedge/hedge_oak"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
@@ -278,6 +282,11 @@ public class BuildersAdditionModule extends SimpleModule {
             super("bookshelf_" + name);
         }
     }
+
+//    @Override
+//    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+//        event.register((BlockEntityType<CompatShelfTileEntity>) (SHELVES.getTileHolder().tile), ShelfRenderer::new);
+//    }
 
     class CompatShelfTileEntity extends ShelfTileEntity {
         public CompatShelfTileEntity(BlockPos pos, BlockState state) {
