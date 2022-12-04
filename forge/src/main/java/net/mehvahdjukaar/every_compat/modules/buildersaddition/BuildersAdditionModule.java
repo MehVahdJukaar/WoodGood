@@ -75,7 +75,7 @@ public class BuildersAdditionModule extends SimpleModule {
                 .addTag(new ResourceLocation("quark:vertical_slab"), Registry.BLOCK_REGISTRY)
                 .addTag(new ResourceLocation("quark:vertical_slab"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addRecipe(modRes("block/vertical_slab/oak_vertical_slab"))
+                .addRecipe(modRes("vertical_slab/oak_vertical_slab"))
                 .setRenderType(() -> RenderType::solid)
                 .setTab(() -> tab)
                 .build();
@@ -86,7 +86,7 @@ public class BuildersAdditionModule extends SimpleModule {
                         Index.TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Table(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addRecipe(modRes("block/table/table_oak"))
+                .addRecipe(modRes("table/table_oak"))
                 .setTab(() -> tab)
                 .build();
 
@@ -96,7 +96,7 @@ public class BuildersAdditionModule extends SimpleModule {
                         Index.STOOL_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Stool(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addRecipe(modRes("block/stool/stool_oak"))
+                .addRecipe(modRes("stool/stool_oak"))
                 .setTab(() -> tab)
                 .build();
 
@@ -106,7 +106,7 @@ public class BuildersAdditionModule extends SimpleModule {
                         Index.CHAIR_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Chair(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addRecipe(modRes("block/chair/chair_oak"))
+                .addRecipe(modRes("chair/chair_oak"))
                 .setTab(() -> tab)
                 .build();
 
@@ -121,7 +121,7 @@ public class BuildersAdditionModule extends SimpleModule {
                         })
                 .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
-                .addRecipe(modRes("block/hedge/hedge_oak"))
+                .addRecipe(modRes("hedge/hedge_oak"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -131,7 +131,7 @@ public class BuildersAdditionModule extends SimpleModule {
         COUNTERS_ANDESITE = SimpleEntrySet.builder(WoodType.class, "andesite",  "counter",
                         () -> getModBlock("counter_oak_andesite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("block/counter/counter_oak_andesite"))
+                .addRecipe(modRes("counter/counter_oak_andesite"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
                 .build();
@@ -141,7 +141,7 @@ public class BuildersAdditionModule extends SimpleModule {
         COUNTERS_DIORITE = SimpleEntrySet.builder(WoodType.class, "diorite",  "counter",
                         () -> getModBlock("counter_oak_diorite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("block/counter/counter_oak_diorite"))
+                .addRecipe(modRes("counter/counter_oak_diorite"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
                 .build();
@@ -151,7 +151,7 @@ public class BuildersAdditionModule extends SimpleModule {
         COUNTERS_GRANITE = SimpleEntrySet.builder(WoodType.class, "granite",  "counter",
                         () -> getModBlock("counter_oak_granite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("block/counter/counter_oak_granite"))
+                .addRecipe(modRes("counter/counter_oak_granite"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
                 .build();
