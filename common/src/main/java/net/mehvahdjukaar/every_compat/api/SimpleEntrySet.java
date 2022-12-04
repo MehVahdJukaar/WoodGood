@@ -116,7 +116,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.paletteSupplier = paletteSupplier;
 
         if (this.prefix != null) {
-            nameScheme = Pattern.compile("^" + prefix + "_(.+?)_" + postfix + "$");
+            if (postfix.isEmpty()) {
+                nameScheme = Pattern.compile("^" + prefix + "_(.+?)$");
+            } else {
+                nameScheme = Pattern.compile("^" + prefix + "_(.+?)_" + postfix + "$");
+            }
         } else {
             nameScheme = Pattern.compile("^(.+?)_" + postfix + "$");
         }
