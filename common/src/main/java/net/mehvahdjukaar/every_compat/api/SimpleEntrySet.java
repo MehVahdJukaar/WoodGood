@@ -34,6 +34,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -98,7 +99,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                           @Nullable Supplier<Supplier<RenderType>> renderType,
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
-        super((prefix == null ? "" : prefix + "_") + name);
+        super((prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name);
         this.postfix = name;
         this.blockFactory = blockSupplier;
         this.prefix = prefix;
@@ -115,7 +116,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.paletteSupplier = paletteSupplier;
 
         if (this.prefix != null) {
-            nameScheme = Pattern.compile("^" + prefix + "_(.+?)_" + postfix + "$");
+            if (postfix.isEmpty()) {
+                nameScheme = Pattern.compile("^" + prefix + "_(.+?)$");
+            } else {
+                nameScheme = Pattern.compile("^" + prefix + "_(.+?)_" + postfix + "$");
+            }
         } else {
             nameScheme = Pattern.compile("^(.+?)_" + postfix + "$");
         }
@@ -179,7 +184,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         Block base = baseBlock.get();
         if (base == null || base == Blocks.AIR)
             throw new UnsupportedOperationException("Base block cant be null");
-        baseType.get().addChild(getChildKey(module),(Object) base);
+        baseType.get().addChild(getChildKey(module), (Object) base);
 
         for (T w : woodTypes) {
             String name = getBlockName(w);
@@ -192,7 +197,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                 this.blocks.put(w, block);
 
                 registry.register(EveryCompat.res(fullName), block);
-                w.addChild(getChildKey(module),(Object) block);
+                w.addChild(getChildKey(module), (Object) block);
             }
         }
     }
@@ -201,7 +206,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public String getBlockName(T w) {
         String name;
         if (prefix != null) {
-            name = this.prefix + "_" + w.getTypeName() + "_" + this.postfix;
+            name = this.prefix + "_" + w.getTypeName();
+            if (!this.postfix.isEmpty()) name += "_" + this.postfix;
         } else {
             name = w.getTypeName() + "_" + this.postfix;
         }
@@ -299,10 +305,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Override
     public void generateTextures(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
         if (textures.isEmpty()) return;
-        boolean isWood = this.getTypeClass() == WoodType.class;
-        if (paletteSupplier == null && !isWood) {
-            throw new UnsupportedOperationException("You need to provide a palette supplier for non wood type based blocks");
-        }
+
         List<TextureImage> images = new ArrayList<>();
         try {
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
@@ -342,8 +345,16 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                     animation = pal.getSecond();
                     targetPalette = pal.getFirst();
                 } else {
+                    var m = w.mainChild();
+                    Block mainBlock = null;
+                    if (m instanceof Block bb) mainBlock = bb;
+                    else if (m instanceof BlockItem bii) mainBlock = bii.getBlock();
+                    if (mainBlock == null) {
+                        throw new UnsupportedOperationException("You need to provide a palette supplier for non wood type based blocks");
+                    }
+
                     try (TextureImage plankTexture = TextureImage.open(manager,
-                            RPUtils.findFirstBlockTextureLocation(manager, ((WoodType) w).planks))) {
+                            RPUtils.findFirstBlockTextureLocation(manager, mainBlock))) {
                         targetPalette = Palette.fromAnimatedImage(plankTexture);
                         animation = plankTexture.getMetadata();
                     } catch (Exception ignored) {
@@ -368,7 +379,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
 
                     Respriter respriter = re.getValue();
-                    if (isWood) {
+                    if (type == WoodType.class) {
                         module.addWoodTexture((WoodType) w, handler, manager, newId, () ->
                                 respriter.recolorWithAnimation(finalTargetPalette, finalAnimation));
 
@@ -444,7 +455,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             return e;
         }
 
-        public <H extends BlockEntity> Builder<T, B> addTile(BiFunction<BlockPos, BlockState,H> tileFactory) {
+        public <H extends BlockEntity> Builder<T, B> addTile(BiFunction<BlockPos, BlockState, H> tileFactory) {
             this.tileFactory = new TileHolder<>(tileFactory);
             return this;
         }
@@ -539,7 +550,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     public static class TileHolder<H extends BlockEntity> {
 
-        protected final BiFunction<BlockPos, BlockState,H> tileFactory;
+        protected final BiFunction<BlockPos, BlockState, H> tileFactory;
         protected Supplier<BlockEntityRendererProvider<H>> renderer = null;
         public BlockEntityType<? extends H> tile = null;
 

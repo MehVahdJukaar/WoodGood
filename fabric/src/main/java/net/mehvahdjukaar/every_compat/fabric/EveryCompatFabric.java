@@ -18,24 +18,22 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
     public void onInitialize() {
         this.commonInit();
 
-        addModule("twigs", () -> TwigsModule::new);
+        addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
+        addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
+        addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
-        addModule("mcwwindows", () -> MacawWindowsModule::new);
-        addModule("mcwfences", () -> MacawFencesModule::new);
-        addModule("mcwbridges", () -> MacawBridgesModule::new);
-
+        //addModule("mcwwindows", () -> MacawWindowsModule::new);
 
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
-        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
-
         addModule("campchair", () -> CampChairModule::new);
+        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
+        addModule("twigs", () -> TwigsModule::new);
+
         //addModule("farmersdelight", () -> FarmersDelightModule::new);
-
-
 
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
         FabricSetupCallbacks.COMMON_SETUP.add(this::onCommonSetup);

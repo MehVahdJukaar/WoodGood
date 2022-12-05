@@ -4,13 +4,17 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
+import net.mehvahdjukaar.every_compat.modules.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
@@ -35,40 +39,50 @@ import net.minecraftforge.registries.RegisterEvent;
 public class EveryCompatForge extends EveryCompat {
     public static final String MOD_ID = EveryCompat.MOD_ID;
 
+    /* To dos:
+    * Fix custom recipes that use modRes for Builders Addition & Furnish
+    * Add a way to generate tags similar to 'oak_furniture'
+    * Adjust log end textures for Furnish Log Bench & Coffin
+    * Fix ids for Builders Addition that use the format `bench_oak`
+    * */
+
     public EveryCompatForge() {
         this.commonInit();
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
+        addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
+        addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
+        addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
+        addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
 
 
-        addModule("another_furniture", () -> AnotherFurnitureModule::new);
-        addModule("missingwilds", () -> MissingWildModule::new);
 
+        addModule("another_furniture", () -> AnotherFurnitureModule::new);
+        addModule("backpacked", () -> BackpackedModule::new);
+        addModule("buildersaddition", () -> BuildersAdditionModule::new);
+        addModule("campchair", () -> CampChairModule::new);
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
+        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
+        addModule("farmersdelight", () -> FarmersDelightModule::new);
+        addModule("furnish", () -> FurnishModule::new);
+        addModule("missingwilds", () -> MissingWildModule::new);
+        addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+        addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
+        addModule("quark", () -> QuarkModule::new);
+        addModule("storagedrawers", () -> StorageDrawersModule::new);
+        addModule("twilightforest", () -> TwilightForestModule::new);
+        addModule("woodworks", () -> WoodworksModule::new);
 
         //addModule("graveyard", () -> GraveyardModule::new);
-
-
-        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
-        addModule("backpacked", () -> BackpackedModule::new);
-
-        addModule("campchair", () -> CampChairModule::new);
-
-        addModule("quark", () -> QuarkModule::new);
-        addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
-        addModule("storagedrawers", () -> StorageDrawersModule::new);
-
-        addModule("woodworks", () -> WoodworksModule::new);
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();

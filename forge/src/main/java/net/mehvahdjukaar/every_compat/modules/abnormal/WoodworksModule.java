@@ -176,6 +176,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(modRes("leaf_piles"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .defaultRecipe()
+                .useLootFromBase()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
