@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -33,7 +34,7 @@ public abstract class CompatModule {
 
     protected final String modId;
 
-    public CompatModule(String modId) {
+    protected CompatModule(String modId) {
         this.modId = modId;
     }
 
@@ -52,9 +53,8 @@ public abstract class CompatModule {
         return new ResourceLocation(modId, string);
     }
 
-    @Deprecated(forRemoval = true)
-    public String makeBlockId(BlockType type, String blockName) {
-        return this.shortenedId() + "/" + type.getVariantId(blockName, false);
+    public List<String> getAlreadySupportedMods() {
+        return List.of();
     }
 
     public void onModSetup() {
@@ -95,15 +95,18 @@ public abstract class CompatModule {
         name = name.substring(name.lastIndexOf("/") + 1); //gets the base name
 
         String woodFrom = woodType.getNamespace();
+
+        if (this.getAlreadySupportedMods().contains(woodFrom)) return true;
+
         //discards wood types from this mod
         if (woodFrom.equals(modId)) return true; //quark, blossom
 
         String n1 = woodFrom + "/" + name; //quark/blossom_chair
         String n2 = woodFrom + "_" + name; //quark_blossom_chair
-        if(woodType.getId().toString().equals("ecologics:azalea")){
-            if(modId.equals("quark")) return false; //ecologics and quark azalea. tbh not sure why needed
+        if (woodType.getId().toString().equals("ecologics:azalea")) {
+            if (modId.equals("quark")) return false; //ecologics and quark azalea. tbh not sure why needed
         }
-        if (woodType.getId().toString().equals("twilightforest:mangrove")){
+        if (woodType.getId().toString().equals("twilightforest:mangrove")) {
             return name.equals("mangrove_chest");//mangrove waaa so much pain
         }
         if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types

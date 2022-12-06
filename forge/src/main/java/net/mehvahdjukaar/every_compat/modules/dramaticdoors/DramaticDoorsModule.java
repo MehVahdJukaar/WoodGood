@@ -14,9 +14,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.List;
+
 public class DramaticDoorsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> TALL_DOORS;
+
     public DramaticDoorsModule(String modId) {
         super(modId, "dd");
 
@@ -25,8 +28,8 @@ public class DramaticDoorsModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new TallDoorBlock(Blocks.SPRUCE_DOOR))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("dramaticdoors", "tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("dramaticdoors", "tall_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTexture(modRes("item/tall_spruce_door"))
                 .addTexture(modRes("block/tall_spruce_door_bottom"))
                 .addTexture(modRes("block/tall_spruce_door_middle"))
@@ -38,5 +41,10 @@ public class DramaticDoorsModule extends SimpleModule {
                 .build();
 
         this.addEntry(TALL_DOORS);
+    }
+
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of("ecologics","byg","biomesoplenty");
     }
 }
