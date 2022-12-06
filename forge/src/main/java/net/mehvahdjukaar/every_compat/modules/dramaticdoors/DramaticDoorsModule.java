@@ -45,6 +45,8 @@ public class DramaticDoorsModule extends SimpleModule {
 
     @Override
     public List<String> getAlreadySupportedMods() {
-        return List.of("ecologics","byg","biomesoplenty");
+        return List.of("ecologics","byg","biomesoplenty","environmental","atmospheric","autumnity", "bambooblocks",
+                "caverns_and_chasms","buzzierbees","endergetic","environmental","upgrade_aquatic","abundance","bayou_blues",
+                "enhanced_mushrooms","darker_depths","dustial_decor","outer_end","outer_end","habitat");
     }
 }
