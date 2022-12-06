@@ -67,6 +67,10 @@
   "block_type.mosaic_carpentry.mosaic_stairs": "%s Mosaic Stairs",
   "block_type.mosaic_carpentry.mosaic_slab": "%s Mosaic Slab",
 
+  "block_type.friendsandfoes.beehive": "%s Beehive",
+
+  "block_type.dramaticdoors.tall_door": "Tall %s Door",
+
   "block_type.pokecube_legends.distortic_planks": "Distortic %s Planks",
   "block_type.pokecube_legends.distortic_stairs": "Distortic %s Stairs",
   "block_type.pokecube_legends.distortic_slab": "Distortic %s Slab",
