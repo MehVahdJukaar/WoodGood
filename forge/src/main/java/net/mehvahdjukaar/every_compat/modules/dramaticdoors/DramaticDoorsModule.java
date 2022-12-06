@@ -13,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-
 import java.util.List;
 
 public class DramaticDoorsModule extends SimpleModule {
@@ -45,6 +44,15 @@ public class DramaticDoorsModule extends SimpleModule {
 
     @Override
     public List<String> getAlreadySupportedMods() {
-        return List.of("ecologics","byg","biomesoplenty");
+        return List.of(
+            "biomesoplenty", "byg", "prehistoricfauna", "twilightforest", "tflostblocks",
+            "bamboo_blocks", "caverns_and_chasms", "endergetic", "environmental", "upgrade_aquatic",
+            "abundance", "atmospheric", "autumnity", "bayou_blues", "buzzier_bees",
+            "enhanced_mushrooms", "architects_palette", "ars_nouveau", "biomemakeover", "blocksplus",
+            "ceilands", "copperoverhaul", "alloyed", "createdeco", "darkerdepths",
+            "dustrial_decor", "ecologics", "phantasm", "nourished_end", "habitat",
+            "nethers_exoticism", "outer_end", "pokecube", "premium_wood", "quark",
+            "snowyspirit", "supplementaries", "twigs", "undergarden"
+        );
     }
 }
