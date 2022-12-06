@@ -21,9 +21,9 @@ public class DramaticDoorsModule extends SimpleModule {
         super(modId, "dd");
 
         TALL_DOORS = SimpleEntrySet.builder(WoodType.class, "door", "tall",
-                        DDBlocks.TALL_DARK_OAK_DOOR,
+                        DDBlocks.TALL_SPRUCE_DOOR,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new TallDoorBlock(Blocks.DARK_OAK_DOOR))
+                        w -> new TallDoorBlock(Blocks.SPRUCE_DOOR))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(new ResourceLocation("dramaticdoors", "tall_wooden_doors"), Registry.BLOCK_REGISTRY)
                 .addTag(new ResourceLocation("dramaticdoors", "tall_wooden_doors"), Registry.ITEM_REGISTRY)
