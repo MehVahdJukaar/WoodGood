@@ -8,7 +8,9 @@ import net.mehvahdjukaar.every_compat.modules.buildersaddition.BuildersAdditionM
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
@@ -81,6 +83,8 @@ public class EveryCompatForge extends EveryCompat {
         addModule("storagedrawers", () -> StorageDrawersModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
+        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
+        addModule("dramaticdoors", () -> DramaticDoorsModule::new);
 
         //addModule("graveyard", () -> GraveyardModule::new);
 

@@ -146,6 +146,9 @@ dependencies {
     modImplementation("curse.maven:the-twilight-forest-227639:3943940")
     modImplementation("curse.maven:twigs-496913:3943447")
     modCompileOnly("curse.maven:woodworks-543610:4023081")
+    modImplementation("curse.maven:mosaic-carpentry-690226:4068673")
+    modCompileOnly("curse.maven:dramatic-doors-380617:3944428")
+    //modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4133216")
 
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
