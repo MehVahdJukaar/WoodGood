@@ -85,6 +85,13 @@ public abstract class EveryCompat {
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
 
+        // Abnormals Delight
+        addOtherCompatMod("abnormals_delight", "atmospheric", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "autumnity", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "endergetic", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "environmental", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
+
 
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
