@@ -36,16 +36,8 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         //addModule("farmersdelight", () -> FarmersDelightModule::new);
 
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
-        FabricSetupCallbacks.COMMON_SETUP.add(this::onCommonSetup);
+        FabricSetupCallbacks.COMMON_SETUP.add(this::commonSetup);
 
-    }
-
-    //equivalent of forge common onCommonSetup
-    public void onCommonSetup() {
-        this.registerItems((a, b) -> Registry.register(Registry.ITEM, a, b));
-        this.registerTiles((a, b) -> Registry.register(Registry.BLOCK_ENTITY_TYPE, a, b));
-        this.registerEntities((a, b) -> Registry.register(Registry.ENTITY_TYPE, a, b));
-        this.commonSetup();
     }
 
     public void onClientSetup() {

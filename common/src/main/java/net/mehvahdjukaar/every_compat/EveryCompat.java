@@ -9,7 +9,6 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
-import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -92,6 +91,12 @@ public abstract class EveryCompat {
 
         BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
         BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
+
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, Registry.ITEM);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, Registry.BLOCK_ENTITY_TYPE);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, Registry.ENTITY_TYPE);
+
+
     }
 
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
@@ -141,18 +146,14 @@ public abstract class EveryCompat {
         EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", am, p);
     }
 
-
-    @EventCalled
     protected void registerItems(Registrator<Item> event) {
         forAllModules(m -> m.registerItems(event));
     }
 
-    @EventCalled
     protected void registerTiles(Registrator<BlockEntityType<?>> event) {
         forAllModules(m -> m.registerTiles(event));
     }
 
-    @EventCalled
     protected void registerEntities(Registrator<EntityType<?>> event) {
         forAllModules(m -> m.registerEntities(event));
     }

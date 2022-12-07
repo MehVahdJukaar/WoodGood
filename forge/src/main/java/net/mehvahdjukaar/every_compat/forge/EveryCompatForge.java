@@ -41,13 +41,6 @@ import net.minecraftforge.registries.RegisterEvent;
 public class EveryCompatForge extends EveryCompat {
     public static final String MOD_ID = EveryCompat.MOD_ID;
 
-    /* To dos:
-    * Fix custom recipes that use modRes for Builders Addition & Furnish
-    * Add a way to generate tags similar to 'oak_furniture'
-    * Adjust log end textures for Furnish Log Bench & Coffin
-    * Fix ids for Builders Addition that use the format `bench_oak`
-    * */
-
     public EveryCompatForge() {
         this.commonInit();
 
@@ -96,19 +89,7 @@ public class EveryCompatForge extends EveryCompat {
     }
 
     @SubscribeEvent
-    public void onRegister(RegisterEvent event) {
-        var key = event.getRegistryKey();
-        if (key == Registry.ITEM_REGISTRY) {
-            this.registerItems((ResourceLocation a, Item b) -> event.getForgeRegistry().register(a, b));
-        } else if (key == Registry.BLOCK_ENTITY_TYPE_REGISTRY) {
-            this.registerTiles((ResourceLocation a, BlockEntityType<?> b) -> event.getForgeRegistry().register(a, b));
-        } else if (key == Registry.ENTITY_TYPE_REGISTRY) {
-            this.registerEntities((ResourceLocation a, EntityType<?> b) -> event.getForgeRegistry().register(a, b));
-        }
-    }
-
-    @SubscribeEvent
-    public void commonSetup(FMLCommonSetupEvent event){
+    public void onCommonSetup(FMLCommonSetupEvent event){
         this.commonSetup();
     }
 }
