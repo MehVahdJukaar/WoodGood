@@ -41,7 +41,7 @@ public class EveryCompatAPI {
      */
 
 
-    //custom register a wood type
+    //register a custom non-detected wood type
 
     /*
     public static void init() {
