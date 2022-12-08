@@ -67,6 +67,10 @@
   "block_type.mosaic_carpentry.mosaic_stairs": "%s马赛克楼梯",
   "block_type.mosaic_carpentry.mosaic_slab": "%s马赛克台阶",
 
+  "block_type.friendsandfoes.beehive": "%s蜂箱",
+
+  "block_type.dramaticdoors.tall_door": "高%s门",
+
   "block_type.pokecube_legends.distortic_planks": "扭曲%s板",
   "block_type.pokecube_legends.distortic_stairs": "扭曲%s楼梯",
   "block_type.pokecube_legends.distortic_slab": "扭曲%s台阶",
