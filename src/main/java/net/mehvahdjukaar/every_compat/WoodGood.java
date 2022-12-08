@@ -99,7 +99,7 @@ public class WoodGood {
         //also fix that one crash that idk what was about
 
         addModule("mcwlights", () -> MacawLightsModule::new);
-        /*
+
         addModule("mcwdoors", () -> MacawDoorsModule::new);
 
         addModule("mcwpaths", () -> MacawPathsModule::new);
@@ -123,7 +123,7 @@ public class WoodGood {
 
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-        addModule("quark", () -> QuarkModule::new);*/
+        addModule("quark", () -> QuarkModule::new);
 
         //addModule("graveyard", () -> GraveyardModule::new);
         //addModule("benched", () -> BenchedModule::new);

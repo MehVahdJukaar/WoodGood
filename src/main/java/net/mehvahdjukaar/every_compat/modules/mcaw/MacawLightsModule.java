@@ -40,7 +40,7 @@ public class MacawLightsModule extends SimpleModule {
     public MacawLightsModule(String modId) {
         super(modId, "mcl");
 
-        CreativeModeTab tab = MacawsLights.LightsItemGroup;
+        CreativeModeTab tab = null;
 
         SOUL_TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class, "tiki_torch", "soul",
                         BlockInit.SOUL_OAK_TIKI_TORCH, () -> WoodType.OAK_WOOD_TYPE,
