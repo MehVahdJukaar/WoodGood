@@ -503,6 +503,7 @@
   "wood_type.byg.jacaranda": "蓝花楹木",
   "wood_type.byg.mahogany": "桃花心木",
   "wood_type.byg.mangrove": "红树木",
+  "wood_type.byg.white_mangrove": "白色红树木",
   "wood_type.byg.maple": "枫木",
   "wood_type.byg.pine": "松木",
   "wood_type.byg.rainbow_eucalyptus": "彩虹桉木",
@@ -530,6 +531,7 @@
   "leaves_type.byg.jacaranda": "蓝花楹",
   "leaves_type.byg.mahogany": "桃花心",
   "leaves_type.byg.mangrove": "红树",
+  "leaves_type.byg.white_mangrove": "白色红树",
   "leaves_type.byg.maple": "枫树",
   "leaves_type.byg.pine": "松树",
   "leaves_type.byg.rainbow_eucalyptus": "彩虹桉",
@@ -580,6 +582,11 @@
   "leaves_type.caupona.walnut": "核桃",
   "leaves_type.caupona.fig": "无花果",
   "leaves_type.caupona.wolfberry": "枸杞",
+  
+  "wood_type.ceilands.ceiltrunk": "垂顶木",
+  "wood_type.ceilands.luzawood": "蓝碧木",
+  "leaves_type.ceilands.ceiltrunk": "垂顶",
+  "leaves_type.ceilands.luzawood": "蓝碧",
 
   "wood_type.cinderscapes.scorched": "焦灼木",
   "wood_type.cinderscapes.umbral": "暗影木",
@@ -685,6 +692,9 @@
   "wood_type.nethers_exoticism.ramboutan": "红毛丹木",
   "leaves_type.nethers_exoticism.ramboutan": "红毛丹",
   "leaves_type.nethers_exoticism.jaboticaba": "嘉宝果",
+  
+  "wood_type.newworld.fir": "冷杉木",
+  "leaves_type.newworld.fir": "冷杉",
 
   "wood_type.nourished_end.verdant": "翠绿木",
   "wood_type.nourished_end.cerulean": "晶蓝木",
