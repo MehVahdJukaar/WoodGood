@@ -31,6 +31,7 @@ public class FarmersDelightModule extends SimpleModule {
                         w -> new CompatCabinetBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("cabinets"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("cabinets"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("cabinets/wooden"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
                 .addTile(CompatCabinetBlockTile::new)
