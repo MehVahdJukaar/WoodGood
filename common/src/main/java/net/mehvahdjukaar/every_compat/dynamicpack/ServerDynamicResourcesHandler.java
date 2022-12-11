@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ServerDynamicResourcesHandler extends DynServerResourcesProvider {
 
-    public static ServerDynamicResourcesHandler INSTANCE = new ServerDynamicResourcesHandler();
+    public static final ServerDynamicResourcesHandler INSTANCE = new ServerDynamicResourcesHandler();
 
     public ServerDynamicResourcesHandler() {
         super(new DynamicDataPack(EveryCompat.res("generated_pack")));

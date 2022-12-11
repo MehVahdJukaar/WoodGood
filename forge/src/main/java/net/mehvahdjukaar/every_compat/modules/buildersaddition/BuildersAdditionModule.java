@@ -57,7 +57,6 @@ public class BuildersAdditionModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> COUNTERS_GRANITE;
     public final SimpleEntrySet<WoodType, Block> CUPBOARDS;
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
-    public final SimpleEntrySet<WoodType, Block> PANELS;
     public final SimpleEntrySet<WoodType, Block> SHELVES;
     public final SimpleEntrySet<WoodType, Block> SMALL_CUPBOARDS;
     public final SimpleEntrySet<WoodType, Block> STOOLS;
@@ -67,24 +66,6 @@ public class BuildersAdditionModule extends SimpleModule {
     public BuildersAdditionModule(String modId) {
         super(modId, "bca");
         CreativeModeTab tab = ModGroup.MAIN;
-
-
-        PANELS = SimpleEntrySet.builder(WoodType.class, "vertical_slab",
-                        Index.OAK_VERTICAL_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addTag(new ResourceLocation("quark:wooden_vertical_slabs"), Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark:wooden_vertical_slabs"), Registry.ITEM_REGISTRY)
-                .addTag(new ResourceLocation("quark:planks_vertical_slab"), Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark:planks_vertical_slab"), Registry.ITEM_REGISTRY)
-                .addTag(new ResourceLocation("quark:vertical_slab"), Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark:vertical_slab"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addRecipe(modRes("vertical_slab/oak_vertical_slab"))
-                .setRenderType(() -> RenderType::solid)
-                .setTab(() -> tab)
-                .build();
-
-        this.addEntry(PANELS);
 
         TABLES = SimpleEntrySet.builder(WoodType.class, "", "table",
                         Index.TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,

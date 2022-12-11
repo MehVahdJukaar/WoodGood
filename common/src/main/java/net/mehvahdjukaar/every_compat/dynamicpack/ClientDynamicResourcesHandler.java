@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
 
-    public static ClientDynamicResourcesHandler INSTANCE = new ClientDynamicResourcesHandler();
+    public static final ClientDynamicResourcesHandler INSTANCE = new ClientDynamicResourcesHandler();
 
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(EveryCompat.res("generated_pack")));

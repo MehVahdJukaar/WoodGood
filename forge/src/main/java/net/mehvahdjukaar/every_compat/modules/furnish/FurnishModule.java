@@ -447,7 +447,7 @@ public class FurnishModule extends SimpleModule {
             if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
             if (id == null) id = Registry.ITEM.getKey(newRes.asItem()).toString();
 
-            Ingredient newIng = null;
+            Ingredient newIng = ingredient;
             for (var in : ingredient.getItems()) {
                 Item it = in.getItem();
                 if (it != Items.BARRIER) {
