@@ -98,7 +98,7 @@ public class TwilightForestModule extends SimpleModule {
                     RegistryObject.create(WoodGood.res(itemName + "_horizontal"), ForgeRegistries.BLOCKS),
                     RegistryObject.create(b.getRegistryName(), ForgeRegistries.BLOCKS),
                     RegistryObject.create(WoodGood.res(itemName + "_climbable"), ForgeRegistries.BLOCKS),
-                    new Item.Properties().tab(TFItems.creativeTab));
+                    new Item.Properties().tab(null));
             HOLLOW_LOGS_VERTICAL.items.put(w, i);
             registry.register(i.setRegistryName(WoodGood.res(itemName)));
         });

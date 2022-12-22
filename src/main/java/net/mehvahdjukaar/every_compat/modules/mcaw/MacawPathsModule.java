@@ -22,15 +22,8 @@ public class MacawPathsModule extends SimpleModule {
 
     public MacawPathsModule(String modId) {
         super(modId, "mcp");
-        CreativeModeTab tab;
-        try {
-            var f = ObfuscationReflectionHelper.findField(MacawsPaths.class, "PathsItemGroup");
-            tab = (CreativeModeTab) f.get(null);
-        } catch (Exception e) {
-            WoodGood.LOGGER.error("Failed to initialize {}", this);
-            PLANKS_PATHS = null;
-            return;
-        }
+        CreativeModeTab tab = null;
+
 
         PLANKS_PATHS = SimpleEntrySet.builder(WoodType.class,"planks_path",
                         BlockInit.OAK_PLANKS_PATH, () -> WoodType.OAK_WOOD_TYPE,

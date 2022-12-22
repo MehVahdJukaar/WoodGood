@@ -35,20 +35,7 @@ public class MacawFencesModule extends SimpleModule {
 
     public MacawFencesModule(String modId) {
         super(modId, "mcf");
-        CreativeModeTab tab;
-        try {
-            var f = ObfuscationReflectionHelper.findField(MacawsFences.class, "FencesItemGroup");
-            tab = (CreativeModeTab) f.get(null);
-        } catch (Exception e) {
-            WoodGood.LOGGER.error("Failed to initialize {}", this);
-            PICKET_FENCES = null;
-            HIGHLEY_GATES = null;
-            STOCKADE_FENCES = null;
-            WIRED_FENCES = null;
-            HORSE_FENCES = null;
-            PYRAMID_GATES = null;
-            return;
-        }
+        CreativeModeTab tab = null;
 
         PICKET_FENCES = SimpleEntrySet.builder(WoodType.class,"picket_fence",
                         BlockInit.OAK_PICKET_FENCE, () -> WoodType.OAK_WOOD_TYPE,
