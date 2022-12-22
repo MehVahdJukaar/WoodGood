@@ -363,6 +363,9 @@
   "leaves_type.minecraft.acacia": "金合欢",
   "leaves_type.minecraft.azalea": "杜鹃",
   "leaves_type.minecraft.flowering_azalea": "盛开的杜鹃",
+  
+  "wood_type.abundant_atmosphere.ash": "梣木",
+  "leaves_type.abundant_atmosphere.ash": "梣树",
 
   "wood_type.ad_astra.aeronos": "空果木",
   "wood_type.ad_astra.strophar": "孑节木",
@@ -605,6 +608,9 @@
   "leaves_type.culturaldelights.avocado": "牛油果",
 
   "wood_type.darkerdepths.petrified": "石化木",
+  
+  "wood_type.deeperdarker.echo": "回响木",
+  "leaves_type.deeperdarker.echo": "回响",
 
   "wood_type.domum_ornamentum.cactus": "仙人掌",
   "wood_type.domum_ornamentum.green_cactus": "绿色仙人掌",
@@ -671,6 +677,11 @@
   "leaves_type.greekfantasy.olive": "橄榄",
   "leaves_type.greekfantasy.pomegranate": "石榴",
   "leaves_type.greekfantasy.golden": "金苹果",
+  
+  "wood_type.goodending.cypress": "柏木",
+  "wood_type.goodending.muddy_oak": "泥浆橡木",
+  "leaves_type.goodending.cypress": "柏树",
+  "leaves_type.goodending.muddy_oak": "泥浆橡树",
 
   "wood_type.habitat.fairy_ring_mushroom": "仙环菇",
 
