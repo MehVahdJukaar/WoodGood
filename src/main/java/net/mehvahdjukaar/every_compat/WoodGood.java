@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.graveyard.GraveyardModule;
+import net.mehvahdjukaar.every_compat.modules.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
@@ -124,6 +125,7 @@ public class WoodGood {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
+        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
 
         //addModule("graveyard", () -> GraveyardModule::new);
         //addModule("benched", () -> BenchedModule::new);
