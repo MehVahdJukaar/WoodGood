@@ -179,6 +179,7 @@ dependencies {
     implementation fg.deobf("curse.maven:decorativeblocks-362528:3681919")
     implementation fg.deobf("curse.maven:the-graveyard-forge-531188:3837172")
     implementation fg.deobf("curse.maven:geckolib-388172:3856641")
+    implementation fg.deobf("curse.maven:infinity-buttons-661902:4259435")
    // implementation fg.deobf("curse.maven:apple-crates-630726:3834400")
 
 
