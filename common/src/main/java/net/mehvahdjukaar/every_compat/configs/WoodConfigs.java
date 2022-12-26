@@ -7,11 +7,10 @@ import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -62,11 +61,12 @@ public class WoodConfigs {
         SPEC.loadFromFile(); //manually load early
     }
 
-    public static boolean isWoodEnabled(String wood) {
-        return BLOCK_TYPE_CONFIGS.get(WoodType.class).get(wood).get();
+    public static <T extends BlockType> boolean isEntryEnabled(T w, Object o) {
+        return isTypeEnabled(w, w.getChildKey(o));
     }
 
-    public static <T extends BlockType> boolean isEntryEnabled(T w, Object o) {
+    public static <T extends BlockType> boolean isEntryEnabled(Class<T> typeClass, Object o) {
+        var w = BlockSetAPI.getBlockTypeOf((ItemLike) o, typeClass);
         return isTypeEnabled(w, w.getChildKey(o));
     }
 
@@ -74,9 +74,10 @@ public class WoodConfigs {
         return isTypeEnabled(w, null);
     }
 
-    public static <T extends BlockType> boolean isTypeEnabled(T w,@Nullable String childType) {
+    public static <T extends BlockType> boolean isTypeEnabled(T w, @Nullable String childType) {
         try {
-            if (childType != null && !CHILD_CONFIGS.get(w.getClass()).getOrDefault(childType, () -> true).get()) return false;
+            if (childType != null && !CHILD_CONFIGS.get(w.getClass()).getOrDefault(childType, () -> true).get())
+                return false;
             return BLOCK_TYPE_CONFIGS.get(w.getClass()).get(w.getId().toString()).get();
         } catch (Exception ignored) {
         }

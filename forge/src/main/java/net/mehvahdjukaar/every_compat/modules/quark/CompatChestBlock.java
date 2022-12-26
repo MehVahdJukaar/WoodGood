@@ -1,11 +1,17 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
+import net.mehvahdjukaar.moonlight.api.item.WoodBasedBlockItem;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import vazkii.quark.content.building.block.VariantChestBlock;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class CompatChestBlock extends VariantChestBlock {
 
@@ -27,4 +33,15 @@ public class CompatChestBlock extends VariantChestBlock {
     }
 
 
+    public static class Item extends VariantChestBlock.Item{
+
+        public Item(Block block, Properties props) {
+            super(block, props);
+        }
+
+        public final int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+            return 300;
+        }
+
+    }
 }

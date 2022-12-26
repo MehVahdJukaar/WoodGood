@@ -264,7 +264,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public void generateTags(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         if (!tags.isEmpty()) {
             for (var tb : tags.entrySet()) {
-                SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey()).addEntries(blocks.values());
+                SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
+                for(var b : blocks.entrySet()){
+                    if(WoodConfigs.isEntryEnabled(b.getKey(),b.getValue())){
+                        builder.addEntry(b.getValue());
+                    }
+                }
                 for (var t : tb.getValue()) {
                     pack.addTag(builder, t);
                 }
@@ -298,8 +303,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
     @Override
-    public void generateModels(CompatModule module, DynamicTexturePack pack, ResourceManager manager) {
-        ResourcesUtils.addStandardResources(module.getModId(), manager, pack, blocks, baseType.get(), extraTransform);
+    public void generateModels(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
+        ResourcesUtils.addStandardResources(module.getModId(), manager, handler, blocks, baseType.get(), extraTransform);
     }
 
     @Override

@@ -22,8 +22,6 @@ configurations {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
-    // Remove the next line if you don't want to depend on the API
-    //modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
@@ -35,8 +33,8 @@ dependencies {
     modImplementation("curse.maven:modmenu-308702:3920481") {
         exclude module: "fabric-api"
     }
-
-    //modImplementation(fileTree(dir: 'mods_fabric', include: '*.jar'))
+    modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
+    //modImplementation("curse.maven:selene-499980:4059670")
     //modImplementation("curse.maven:selene-499980:3859239")
 
     modImplementation("curse.maven:another-furniture-610492:4032093")
@@ -56,11 +54,8 @@ dependencies {
     modImplementation("curse.maven:missing-wilds-622590:3838184")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4011850")
     modImplementation("curse.maven:twigs-496913:3865476")
-
     modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
-    modImplementation("curse.maven:selene-499980:4059670")
 
-    // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     //modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 }
 

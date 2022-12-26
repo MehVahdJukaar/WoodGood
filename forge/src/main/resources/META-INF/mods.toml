@@ -50,16 +50,8 @@ side="BOTH"
 
 modId="moonlight"
 mandatory=true
-versionRange="[1.19-2.1.0,]"
+versionRange="[1.19-2.1.21,]"
 ordering="NONE"
-side="BOTH"
-
-[[dependencies.everycomp]]
-
-modId="projectbrazier"
-mandatory=false
-versionRange="[0.6.2,]"
-ordering="BEFORE"
 side="BOTH"
 
 

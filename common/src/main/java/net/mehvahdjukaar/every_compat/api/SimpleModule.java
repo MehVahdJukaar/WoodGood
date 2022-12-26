@@ -89,7 +89,7 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> e.generateModels(this, handler.dynamicPack, manager));
+        getEntries().forEach(e -> e.generateModels(this, handler, manager));
     }
 
     @Override

@@ -9,6 +9,8 @@ import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynResourceProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
@@ -33,15 +35,17 @@ import java.util.stream.Collectors;
 
 public class ResourcesUtils {
 
-    public static <B extends Block, T extends BlockType> void addStandardResources(String modId, ResourceManager manager, DynamicResourcePack pack,
-                                                                                   Map<T, B> blocks, T baseType) {
+    public static <B extends Block, T extends BlockType> void addStandardResources(
+            String modId, ResourceManager manager, DynClientResourcesProvider pack, Map<T, B> blocks, T baseType) {
         addStandardResources(modId, manager, pack, blocks, baseType, null);
     }
 
-    public static <B extends Block, T extends BlockType> void addStandardResources(String modId, ResourceManager manager, DynamicResourcePack pack,
-                                                                                   Map<T, B> blocks, T baseType,
-                                                                                   @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
+    public static <B extends Block, T extends BlockType> void addStandardResources(
+            String modId, ResourceManager manager, DynClientResourcesProvider d,
+            Map<T, B> blocks, T baseType, @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
+
         if (blocks.isEmpty()) return;
+
         //finds one entry. used so we can grab the oak equivalent
         var first = blocks.entrySet().stream().findFirst().get();
         Block oakBlock = BlockType.changeBlockType(first.getValue(), first.getKey(), baseType);
@@ -94,7 +98,7 @@ public class ResourcesUtils {
                     try {
                         StaticResource newRes = itemModifier.transform(oakItemModel, id, w);
                         assert newRes.location != oakItemModel.location : "ids cant be the same";
-                        pack.addResource(newRes);
+                        d.addResourceIfNotPresent(manager, newRes);
                     } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to add {} item model json file:", b, e);
                     }
@@ -132,21 +136,21 @@ public class ResourcesUtils {
                         //creates blockstate
                         StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
                         assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
-                        pack.addResource(newBlockState);
+                        d.addResourceIfNotPresent(manager, newBlockState);
 
                         //creates item model
                         for (StaticResource model : oakModels) {
                             try {
                                 StaticResource newModel = modelModifier.transform(model, id, w);
                                 assert newModel.location != model.location : "ids cant be the same";
-                                pack.addResource(newModel);
+                                d.addResourceIfNotPresent(manager, newModel);
                             } catch (Exception exception) {
                                 EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
                             }
                         }
                     } else {
                         //dummy blockstate so we don't generate models for this
-                        pack.addJson(id, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
+                        d.getPack().addJson(id, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
 
                 } catch (Exception e) {
