@@ -160,4 +160,5 @@ dependencies {
     // implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
     // modImplementation("curse.maven:benched-417063:3821546")
 
+    modImplementation("curse.maven:infinity-buttons-661902:4259442")
 }

@@ -56,6 +56,9 @@ dependencies {
     modImplementation("curse.maven:twigs-496913:3865476")
     modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 
+    modImplementation("curse.maven:infinity-buttons-661902:4259446")
+
+    // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     //modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 }
 

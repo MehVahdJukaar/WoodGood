@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurniture
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
@@ -32,6 +33,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("campchair", () -> CampChairModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
+        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
 
         //addModule("farmersdelight", () -> FarmersDelightModule::new);
 

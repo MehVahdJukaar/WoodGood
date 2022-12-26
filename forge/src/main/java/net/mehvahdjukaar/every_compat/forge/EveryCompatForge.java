@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.forge;
 
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
@@ -23,7 +22,6 @@ import net.mehvahdjukaar.every_compat.modules.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
-import net.mehvahdjukaar.every_compat.modules.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -82,6 +80,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("twigs", () -> TwigsModule::new);
+        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
 
         //addModule("graveyard", () -> GraveyardModule::new);
