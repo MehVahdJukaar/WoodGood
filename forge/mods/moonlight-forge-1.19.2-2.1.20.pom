@@ -9,7 +9,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.mehvahdjukaar</groupId>
   <artifactId>moonlight-forge</artifactId>
-  <version>1.19.2-2.0.37</version>
+  <version>1.19.2-2.1.20</version>
+  <packaging>pom</packaging>
   <dependencies>
     <dependency>
       <groupId>curse.maven</groupId>
