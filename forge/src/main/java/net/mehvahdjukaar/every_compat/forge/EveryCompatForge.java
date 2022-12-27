@@ -72,7 +72,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("furnish", () -> FurnishModule::new);
-        addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
@@ -85,7 +84,8 @@ public class EveryCompatForge extends EveryCompat {
         addModule("twigs", () -> TwigsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
 
-        //addModule("graveyard", () -> GraveyardModule::new);
+//        addModule("graveyard", () -> GraveyardModule::new);
+//        addModule("handcrafted", () -> HandcraftedModule::new);
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();
