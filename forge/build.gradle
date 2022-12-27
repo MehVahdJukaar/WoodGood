@@ -171,4 +171,5 @@ dependencies {
     // modImplementation("curse.maven:malum-484064:3768401")
     // modImplementation("curse.maven:terrablender-563928:3925974")
 
+    modImplementation("curse.maven:infinity-buttons-661902:4259442")
 }
