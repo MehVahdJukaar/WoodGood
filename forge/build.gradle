@@ -125,6 +125,7 @@ dependencies {
     modCompileOnly("curse.maven:farmersdelight-398521:3916069")
     modImplementation("curse.maven:jei-238222:3940099")
     modImplementation("curse.maven:furnish-547069:4084047")
+    modImplementation("curse.maven:handcrafted-538214:4215477")
     modCompileOnly("curse.maven:macaws-bridges-351725:4018295")
     modCompileOnly("curse.maven:macaws-doors-378646:3930976")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:3923128")
