@@ -194,17 +194,17 @@
   "block_type.mcwlights.soul_tiki_torch": "%s灵魂提基火把",
   "block_type.mcwlights.tiki_torch": "%s提基火把",
   
-  "block_type.mcwpaths.planks_path": "%s木板小径",
+  "block_type.mcwpaths.planks_path": "%s板小径",
 
   "block_type.mcwroofs.attic_roof": "%s天窗屋顶",
   "block_type.mcwroofs.lower_roof": "%s平缓屋顶底端",
-  "block_type.mcwroofs.planks_attic_roof": "%s木板天窗屋顶",
-  "block_type.mcwroofs.planks_lower_roof": "%s木板平缓屋顶底端",
-  "block_type.mcwroofs.planks_roof": "%s木板屋顶",
-  "block_type.mcwroofs.planks_steep_roof": "%s木板陡峭屋顶底端",
-  "block_type.mcwroofs.planks_top_roof": "%s木板屋顶顶端",
-  "block_type.mcwroofs.planks_upper_lower_roof": "%s木板平缓屋顶顶端",
-  "block_type.mcwroofs.planks_upper_steep_roof": "%s木板陡峭屋顶顶端",
+  "block_type.mcwroofs.planks_attic_roof": "%s板天窗屋顶",
+  "block_type.mcwroofs.planks_lower_roof": "%s板平缓屋顶底端",
+  "block_type.mcwroofs.planks_roof": "%s板屋顶",
+  "block_type.mcwroofs.planks_steep_roof": "%s板陡峭屋顶底端",
+  "block_type.mcwroofs.planks_top_roof": "%s板屋顶顶端",
+  "block_type.mcwroofs.planks_upper_lower_roof": "%s板平缓屋顶顶端",
+  "block_type.mcwroofs.planks_upper_steep_roof": "%s板陡峭屋顶顶端",
   "block_type.mcwroofs.roof": "%s屋顶",
   "block_type.mcwroofs.steep_roof": "%s陡峭屋顶底端",
   "block_type.mcwroofs.top_roof": "%s屋顶顶端",
@@ -229,10 +229,10 @@
   "block_type.mcwwindows.four_window": "%s四格窗户",
   "block_type.mcwwindows.log_parapet": "%s护台",
   "block_type.mcwwindows.louvered_shutter": "%s百叶窗扇",
-  "block_type.mcwwindows.plank_four_window": "%s木板四格窗户",
-  "block_type.mcwwindows.plank_parapet": "%s木板护台",
-  "block_type.mcwwindows.plank_window": "%s木板窗户",
-  "block_type.mcwwindows.plank_window2": "%s木板双格窗户",
+  "block_type.mcwwindows.plank_four_window": "%s板四格窗户",
+  "block_type.mcwwindows.plank_parapet": "%s板护台",
+  "block_type.mcwwindows.plank_window": "%s板窗户",
+  "block_type.mcwwindows.plank_window2": "%s板双格窗户",
   "block_type.mcwwindows.shutter": "%s窗扇",
   "block_type.mcwwindows.stripped_log_four_window": "去皮%s四格窗户",
   "block_type.mcwwindows.stripped_log_window": "去皮%s窗户",
@@ -268,9 +268,9 @@
   "block_type.cfm.mail_box": "%s信箱",
   "block_type.cfm.park_bench": "%s公园长椅",
   "block_type.cfm.picket_fence": "%s尖桩篱笆",
-  "block_type.cfm.plank_parapet": "%s木板护台",
-  "block_type.cfm.plank_window": "%s木板窗户",
-  "block_type.cfm.plank_window2": "%s木板窗棂窗户",
+  "block_type.cfm.plank_parapet": "%s板护台",
+  "block_type.cfm.plank_window": "%s板窗户",
+  "block_type.cfm.plank_window2": "%s板窗棂窗户",
   "block_type.cfm.post": "%s杆",
   "block_type.cfm.pyramid_gate": "%s斜板栅栏门",
   "block_type.cfm.railing": "%s扶手",
@@ -317,7 +317,7 @@
   "block_type.projectbrazier.log_bench": "%s原木长椅",
   "block_type.projectbrazier.log_chair": "%s原木椅",
   "block_type.projectbrazier.open_barrel": "敞口%s桶",
-  "block_type.projectbrazier.plank_chair": "%s木板椅",
+  "block_type.projectbrazier.plank_chair": "%s板椅",
   "block_type.projectbrazier.platform": "%s平台",
   "block_type.projectbrazier.white_polstered_bench": "带白色垫座的%s长凳",
   "block_type.projectbrazier.orange_polstered_bench": "带橙色垫座的%s长凳",
@@ -346,6 +346,9 @@
   "block_type.woodworks.beehive": "%s蜂箱",
   "block_type.woodworks.leaf_pile": "%s树叶堆",
 
+  "block_type.infinitybuttons.large_button": "%s大按钮",
+  "block_type.infinitybuttons.plank_secret_button": "%s板隐蔽按钮",
+
 
   "wood_type.minecraft.oak": "橡木",
   "wood_type.minecraft.spruce": "云杉木",
@@ -363,6 +366,9 @@
   "leaves_type.minecraft.acacia": "金合欢",
   "leaves_type.minecraft.azalea": "杜鹃",
   "leaves_type.minecraft.flowering_azalea": "盛开的杜鹃",
+  
+  "wood_type.abundant_atmosphere.ash": "梣木",
+  "leaves_type.abundant_atmosphere.ash": "梣树",
 
   "wood_type.ad_astra.aeronos": "空果木",
   "wood_type.ad_astra.strophar": "孑节木",
@@ -425,7 +431,7 @@
   "wood_type.architects_palette.twisted": "扭曲木",
   "leaves_type.architects_palette.twisted": "扭曲",
 
-  "leaves_type.ars_elemental.yellow_archwood": "闪熠至高",
+  "leaves_type.ars_elemental.yellow_archwood": "闪耀至高",
 
   "leaves_type.ars_nouveau.blue_archwood": "奔流至高",
   "leaves_type.ars_nouveau.red_archwood": "烈焰至高",
@@ -479,6 +485,9 @@
   "leaves_type.biomesoplenty.maple": "枫树",
   "leaves_type.biomesoplenty.white_cherry": "白色樱桃",
   "leaves_type.biomesoplenty.pink_cherry": "粉红色樱桃",
+
+  "wood_type.blocksplus.bamboo": "竹木",
+  "wood_type.blocksplus.mushroom": "蘑菇",
 
   "wood_type.blue_skies.bluebright": "蓝辉木",
   "wood_type.blue_skies.starlit": "星荧木",
@@ -605,6 +614,9 @@
   "leaves_type.culturaldelights.avocado": "牛油果",
 
   "wood_type.darkerdepths.petrified": "石化木",
+  
+  "wood_type.deeperdarker.echo": "回响木",
+  "leaves_type.deeperdarker.echo": "回响",
 
   "wood_type.domum_ornamentum.cactus": "仙人掌",
   "wood_type.domum_ornamentum.green_cactus": "绿色仙人掌",
@@ -671,6 +683,11 @@
   "leaves_type.greekfantasy.olive": "橄榄",
   "leaves_type.greekfantasy.pomegranate": "石榴",
   "leaves_type.greekfantasy.golden": "金苹果",
+  
+  "wood_type.goodending.cypress": "柏木",
+  "wood_type.goodending.muddy_oak": "泥浆橡木",
+  "leaves_type.goodending.cypress": "柏树",
+  "leaves_type.goodending.muddy_oak": "泥浆橡树",
 
   "wood_type.habitat.fairy_ring_mushroom": "仙环菇",
 
@@ -715,9 +732,9 @@
 
   "leaves_type.occultism.otherworld": "异界",
 
-  "wood_type.phantasm.pream": "虚兰木",
-  "wood_type.phantasm.ebony": "乌木",
-  "leaves_type.phantasm.pream": "虚兰",
+  "wood_type.phantasm.pream": "梦兰木",
+  "wood_type.phantasm.ebony": "黑漆木",
+  "leaves_type.phantasm.pream": "梦兰",
 
   "wood_type.pizzacraft.olive": "橄榄木",
   "leaves_type.pizzacraft.olive": "橄榄",
@@ -886,6 +903,35 @@
   "leaves_type.terraqueous.peach": "桃树",
   "leaves_type.terraqueous.pear": "梨树",
   "leaves_type.terraqueous.plum": "李树",
+  
+  "wood_type.terrestria.cypress": "柏木",
+  "wood_type.terrestria.hemlock": "铁杉木",
+  "wood_type.terrestria.japanese_maple": "日本红枫木",
+  "wood_type.terrestria.rainbow_eucalyptus": "彩虹桉木",
+  "wood_type.terrestria.redwood": "红杉木",
+  "wood_type.terrestria.rubber": "橡胶木",
+  "wood_type.terrestria.sakura": "樱花木",
+  "wood_type.terrestria.willow": "柳木",
+  "wood_type.terrestria.yucca_palm": "丝兰棕榈木",
+  "leaves_type.terrestria.cypress": "柏树",
+  "leaves_type.terrestria.hemlock": "铁杉",
+  "leaves_type.terrestria.japanese_maple": "日本红枫",
+  "leaves_type.terrestria.rainbow_eucalyptus": "彩虹桉",
+  "leaves_type.terrestria.redwood": "红杉",
+  "leaves_type.terrestria.rubber": "橡胶",
+  "leaves_type.terrestria.sakura": "樱花",
+  "leaves_type.terrestria.willow": "柳树",
+  "leaves_type.terrestria.yucca_palm": "丝兰棕榈",
+  "leaves_type.terrestria.jungle_palm": "丛林棕榈",
+  "leaves_type.terrestria.dark_japanese_maple": "暗色日本红枫",
+  "leaves_type.terrestria.japanese_maple_shrub": "日本红枫灌木",
+
+  "wood_type.traverse.fir": "冷杉木",
+  "leaves_type.traverse.fir": "冷杉",
+  "leaves_type.traverse.red_autumnal": "红色秋",
+  "leaves_type.traverse.brown_autumnal": "棕色秋",
+  "leaves_type.traverse.orange_autumnal": "橙色秋",
+  "leaves_type.traverse.yellow_autumnal": "黄色秋",
 
   "leaves_type.tofucraft.tofu": "豆腐",
   "leaves_type.tofucraft.apricot": "杏树",
