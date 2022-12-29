@@ -24,6 +24,7 @@ import net.mehvahdjukaar.every_compat.modules.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -83,6 +84,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("xercamod", () -> XercaModule::new);
 
 //        addModule("graveyard", () -> GraveyardModule::new);
 //        addModule("handcrafted", () -> HandcraftedModule::new);

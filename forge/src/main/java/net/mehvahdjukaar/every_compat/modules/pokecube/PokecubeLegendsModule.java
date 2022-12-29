@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
+import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -50,6 +52,7 @@ public class PokecubeLegendsModule extends SimpleModule {
         super(modId, "pcl");
         CreativeModeTab tab = PokecubeLegends.TAB_DECORATIONS;
 
+        TemplateRecipeManager.registerTemplate(modRes("legends_recipe"), MirrorRecipeTemplate::new);
 
         DISTORTIC_PLANKS = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
                         BlockInit.DISTORTIC_OAK_PLANKS, () -> WoodTypeRegistry.OAK_TYPE,

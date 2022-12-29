@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.furnish;
 
 import com.google.gson.JsonObject;
-import com.mojang.serialization.JsonOps;
 import io.github.wouink.furnish.block.*;
 import io.github.wouink.furnish.block.util.VoxelShapeHelper;
 import io.github.wouink.furnish.setup.FurnishBlocks;
