@@ -71,6 +71,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
+        addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("furnish", () -> FurnishModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
@@ -81,7 +82,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
-        addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
 
