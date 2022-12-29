@@ -84,10 +84,10 @@ public class EveryCompatForge extends EveryCompat {
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
-        addModule("xercamod", () -> XercaModule::new);
 
 //        addModule("graveyard", () -> GraveyardModule::new);
 //        addModule("handcrafted", () -> HandcraftedModule::new);
+//        addModule("xercamod", () -> XercaModule::new);
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();
