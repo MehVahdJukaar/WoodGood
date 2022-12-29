@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.dramaticdoors;
 import com.fizzware.dramaticdoors.DramaticDoors;
 import com.fizzware.dramaticdoors.blocks.DDBlocks;
 import com.fizzware.dramaticdoors.blocks.TallDoorBlock;
+import com.fizzware.dramaticdoors.blocks.TallStableDoorBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -65,7 +66,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 
         TALL_STABLE_DOORS = SimpleEntrySet.builder(WoodType.class, "stable_door", "tall_macaw",
                         DDBlocks.TALL_MACAW_OAK_STABLE_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_stable_door"))))
+                        w -> new TallStableDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_stable_door"))))
                 .addTextureM(modRes("block/macaw/tall_oak_stable_door_lower"), EveryCompat.res("block/ddm/tall_oak_stable_door_lower_m"))
                 .addTextureM(modRes("block/macaw/tall_oak_stable_door_middle"), EveryCompat.res("block/ddm/tall_oak_stable_door_middle_m"))
                 .addTextureM(modRes("block/macaw/tall_oak_stable_door_upper"), EveryCompat.res("block/ddm/tall_oak_stable_door_upper_m"))
@@ -84,7 +85,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 
         TALL_STABLE_HORSE_DOORS = SimpleEntrySet.builder(WoodType.class, "stable_head_door", "tall_macaw",
                         DDBlocks.TALL_MACAW_OAK_STABLE_HEAD_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_stable_head_door"))))
+                        w -> new TallStableDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_stable_head_door"))))
                 .addTextureM(modRes("block/macaw/tall_oak_stable_door_lower"), EveryCompat.res("block/ddm/tall_oak_stable_door_lower_m"))
                 .addTextureM(modRes("block/macaw/tall_oak_stable_head_door_middle"), EveryCompat.res("block/ddm/tall_oak_stable_head_door_middle_m"))
                 .addTextureM(modRes("block/macaw/tall_oak_stable_door_upper"), EveryCompat.res("block/ddm/tall_oak_stable_door_upper_m"))
