@@ -7,16 +7,23 @@ import com.fizzware.dramaticdoors.blocks.TallStableDoorBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 public class DramaticDoorsMacawModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> TALL_BARK_GLASS_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_BARN_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_BARN_GLASSED_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_BEACH_DOORS;
@@ -102,6 +109,22 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 
         this.addEntry(TALL_STABLE_HORSE_DOORS);
 
+        TALL_BARK_GLASS_DOORS = SimpleEntrySet.builder(WoodType.class, "bark_glass_door", "tall_macaw",
+                        DDBlocks.TALL_MACAW_OAK_BARK_GLASS_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_bark_glass_door"))))
+                .addTextureM(modRes("item/macaw/tall_oak_bark_glass_door"), EveryCompat.res("block/ddm/tall_oak_bark_glass_door_m"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
+                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .useLootFromBase()
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(TALL_BARK_GLASS_DOORS);
+
         TALL_BEACH_DOORS = SimpleEntrySet.builder(WoodType.class, "beach_door", "tall_macaw",
                         DDBlocks.TALL_MACAW_OAK_BEACH_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_beach_door"))))
@@ -120,5 +143,33 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .build();
 
         this.addEntry(TALL_BEACH_DOORS);
+    }
+
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+
+        try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/ddm/tall_bark_glass_door_mask"));
+             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/ddm/tall_bark_glass_door_overlay"));
+        ) {
+            TALL_BARK_GLASS_DOORS.blocks.forEach((wood, block) -> {
+                var id = Utils.getID(block);
+
+                try (TextureImage logTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteUtils.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
+
+                    var t = mask.makeCopy();
+                    t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());
+
+                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
+                            "item/macaw/" + id.getPath().replace("_macaw", "")), t);
+
+                } catch (Exception ignored) {
+                }
+            });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Tall Bark Door item textures : ", ex);
+        }
     }
 }
