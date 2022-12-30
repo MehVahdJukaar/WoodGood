@@ -27,7 +27,9 @@ public class DramaticDoorsMacawModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> TALL_BARN_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_BARN_GLASSED_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_BEACH_DOORS;
+    public final SimpleEntrySet<WoodType, Block> TALL_COTTAGE_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_GLASS_DOORS;
+    public final SimpleEntrySet<WoodType, Block> TALL_MODERN_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_STABLE_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_STABLE_HORSE_DOORS;
 
@@ -144,6 +146,44 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .build();
 
         this.addEntry(TALL_GLASS_DOORS);
+
+        TALL_MODERN_DOORS = SimpleEntrySet.builder(WoodType.class, "modern_door", "tall_macaw",
+                        DDBlocks.TALL_MACAW_OAK_MODERN_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_modern_door"))))
+                .addTextureM(modRes("block/macaw/tall_oak_modern_door_lower"), EveryCompat.res("block/ddm/tall_oak_modern_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_modern_door_middle"), EveryCompat.res("block/ddm/tall_oak_modern_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_modern_door_upper"), EveryCompat.res("block/ddm/tall_oak_modern_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_modern_door"), EveryCompat.res("item/ddm/tall_oak_modern_door_m"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
+                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .useLootFromBase()
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(TALL_MODERN_DOORS);
+
+        TALL_COTTAGE_DOORS = SimpleEntrySet.builder(WoodType.class, "cottage_door", "tall_macaw",
+                        DDBlocks.TALL_MACAW_OAK_COTTAGE_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_cottage_door"))))
+                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_lower"), EveryCompat.res("block/ddm/tall_oak_cottage_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_middle"), EveryCompat.res("block/ddm/tall_oak_cottage_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_upper"), EveryCompat.res("block/ddm/tall_oak_cottage_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_cottage_door"), EveryCompat.res("item/ddm/tall_oak_cottage_door_m"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
+                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .useLootFromBase()
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(TALL_COTTAGE_DOORS);
 
         TALL_BEACH_DOORS = SimpleEntrySet.builder(WoodType.class, "beach_door", "tall_macaw",
                         DDBlocks.TALL_MACAW_OAK_BEACH_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
