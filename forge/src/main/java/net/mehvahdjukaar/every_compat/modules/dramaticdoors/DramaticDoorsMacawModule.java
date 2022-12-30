@@ -29,6 +29,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> TALL_BARN_GLASSED_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_BEACH_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_COTTAGE_DOORS;
+    public final SimpleEntrySet<WoodType, Block> TALL_CLASSIC_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_GLASS_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_MODERN_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_SHOJI_DOORS;
@@ -206,6 +207,24 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .build();
 
         this.addEntry(TALL_SHOJI_WHOLE_DOORS);
+
+                        DDBlocks.TALL_MACAW_SPRUCE_CLASSIC_DOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "spruce_classic_door"))))
+                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_lower"), EveryCompat.res("block/ddm/tall_oak_classic_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_middle"), EveryCompat.res("block/ddm/tall_oak_classic_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_upper"), EveryCompat.res("block/ddm/tall_oak_classic_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_spruce_classic_door"), EveryCompat.res("item/ddm/tall_oak_classic_door_m"))
+                .addModelTransform(m -> m.replaceGenericType("spruce", "item/macaw"))
+                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .useLootFromBase()
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(TALL_CLASSIC_DOORS);
 
         TALL_COTTAGE_DOORS = SimpleEntrySet.builder(WoodType.class, "cottage_door", "tall_macaw",
                         DDBlocks.TALL_MACAW_OAK_COTTAGE_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
