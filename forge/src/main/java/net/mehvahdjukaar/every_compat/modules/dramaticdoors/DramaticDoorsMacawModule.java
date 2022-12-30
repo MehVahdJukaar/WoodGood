@@ -31,6 +31,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> TALL_COTTAGE_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_CLASSIC_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_GLASS_DOORS;
+    public final SimpleEntrySet<WoodType, Block> TALL_FOUR_PANEL_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_MODERN_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_PAPER_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_SHOJI_DOORS;
@@ -304,6 +305,25 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .build();
 
         this.addEntry(TALL_TROPICAL_DOORS);
+
+        TALL_FOUR_PANEL_DOORS = SimpleEntrySet.builder(WoodType.class, "four_panel_door", "tall_macaw",
+                        DDBlocks.TALL_MACAW_OAK_FOUR_PANEL_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_four_panel_door"))))
+                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_lower"), EveryCompat.res("block/ddm/tall_oak_four_panel_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_middle"), EveryCompat.res("block/ddm/tall_oak_four_panel_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_upper"), EveryCompat.res("block/ddm/tall_oak_four_panel_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_four_panel_door"), EveryCompat.res("item/ddm/tall_oak_four_panel_door_m"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
+                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .useLootFromBase()
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(TALL_FOUR_PANEL_DOORS);
     }
 
     @Override
@@ -312,7 +332,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 
 
         try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/ddm/tall_bark_glass_door_mask"));
-             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/ddm/tall_bark_glass_door_overlay"));
+             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/ddm/tall_bark_glass_door_overlay"))
         ) {
             TALL_BARK_GLASS_DOORS.blocks.forEach((wood, block) -> {
                 var id = Utils.getID(block);
