@@ -34,6 +34,8 @@ public class DramaticDoorsMacawModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> TALL_GLASS_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_FOUR_PANEL_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_MODERN_DOORS;
+    public final SimpleEntrySet<WoodType, Block> TALL_MYSTIC_DOORS;
+    public final SimpleEntrySet<WoodType, Block> TALL_NETHER_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_PAPER_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_SHOJI_DOORS;
     public final SimpleEntrySet<WoodType, Block> TALL_SHOJI_WHOLE_DOORS;
@@ -346,6 +348,44 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .build();
 
         this.addEntry(TALL_SWAMP_DOORS);
+
+        TALL_NETHER_DOORS = SimpleEntrySet.builder(WoodType.class, "nether_door", "tall_macaw",
+                        DDBlocks.TALL_MACAW_OAK_NETHER_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_nether_door"))))
+                .addTextureM(modRes("block/macaw/tall_oak_nether_door_lower"), EveryCompat.res("block/ddm/tall_oak_nether_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_nether_door_middle"), EveryCompat.res("block/ddm/tall_oak_nether_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_nether_door_upper"), EveryCompat.res("block/ddm/tall_oak_nether_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_nether_door"), EveryCompat.res("item/ddm/tall_oak_nether_door_m"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
+                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .useLootFromBase()
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(TALL_NETHER_DOORS);
+
+        TALL_MYSTIC_DOORS = SimpleEntrySet.builder(WoodType.class, "mystic_door", "tall_macaw",
+                        DDBlocks.TALL_MACAW_OAK_MYSTIC_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(DDBlocks.getBlockByKey(new ResourceLocation("mcwdoors", "oak_mystic_door"))))
+                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_lower"), EveryCompat.res("block/ddm/tall_oak_mystic_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_middle"), EveryCompat.res("block/ddm/tall_oak_mystic_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_upper"), EveryCompat.res("block/ddm/tall_oak_mystic_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_mystic_door"), EveryCompat.res("item/ddm/tall_oak_mystic_door_m"))
+                .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
+                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .useLootFromBase()
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(TALL_MYSTIC_DOORS);
     }
 
     private void swampDoorPalette(Palette p) {
