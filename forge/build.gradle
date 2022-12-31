@@ -110,7 +110,7 @@ dependencies {
     implementation 'org.jetbrains:annotations:22.0.0'
 
     // Dependencies
-    modImplementation("curse.maven:architectury-api-419699:4252901")
+    modImplementation("curse.maven:architectury-api-419699:4104616")
     modImplementation("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:4019850")
     modImplementation("curse.maven:cloth-config-348521:3972423")
@@ -161,7 +161,6 @@ dependencies {
 
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
-
 
     // implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     // implementation fg.deobf("curse.maven:curios-309927:3670447")
