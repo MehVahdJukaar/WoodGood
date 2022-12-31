@@ -60,14 +60,14 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4011850")
     modImplementation("curse.maven:twigs-496913:3865476")
 
-    modImplementation("curse.maven:macaws-bridges-351725:4018299")
+    modImplementation("curse.maven:macaws-bridges-351725:4178174")
     modImplementation("curse.maven:macaws-doors-378646:3930984")
-    modImplementation("curse.maven:macaws-fences-and-walls-453925:3923129")
+    modImplementation("curse.maven:macaws-fences-and-walls-453925:4203533")
     modImplementation("curse.maven:macaws-lights-and-lamps-502372:3923135")
     modImplementation("curse.maven:macaws-paths-and-pavings-629153:3923442")
-    modImplementation("curse.maven:macaws-roofs-352039:4028402")
-    modImplementation("curse.maven:macaws-trapdoors-400933:3923125")
-    modImplementation("curse.maven:macaws-windows-363569:3830462")
+    modImplementation("curse.maven:macaws-roofs-352039:4205640")
+    modImplementation("curse.maven:macaws-trapdoors-400933:4181463")
+    modImplementation("curse.maven:macaws-windows-363569:4271891")
 
 
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
