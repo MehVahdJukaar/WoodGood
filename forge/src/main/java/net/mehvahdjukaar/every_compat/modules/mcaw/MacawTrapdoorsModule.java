@@ -176,11 +176,12 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
                 .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
                 .addTexture(modRes("block/bamboo/oak_bamboo_trapdoor"))
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(GLASS_TRAPDOORS);
+        this.addEntry(MESH_TRAPDOORS);
 
         MYSTIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "mystic_trapdoor",
                         BlockInit.OAK_MYSTIC_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
