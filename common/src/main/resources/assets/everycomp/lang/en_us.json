@@ -151,6 +151,7 @@
 
   "block_type.mcwfences.picket_fence": "%s Picket Fence",
   "block_type.mcwfences.stockade_fence": "%s Stockade Fence",
+  "block_type.mcwfences.hedge": "%s Hedge",
   "block_type.mcwfences.horse_fence": "%s Horse Fence",
   "block_type.mcwfences.wired_fence": "%s Wired Fence",
   "block_type.mcwfences.pyramid_gate": "%s Pyramid Gate",
