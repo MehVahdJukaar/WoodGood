@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -114,7 +115,7 @@ public class MacawFencesModule extends SimpleModule {
                             if (l == null) return null;
                             return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
-                .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
+                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_hedge", "leaves", s -> !s.contains("_snow") || !s.contains("_snowy")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WALLS, Registry.ITEM_REGISTRY)
