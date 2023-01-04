@@ -222,6 +222,8 @@ public class QuarkModule extends SimpleModule {
                             if (w.getWoodType() == null) return null;
                             return new HedgeBlock(m, Blocks.OAK_FENCE, w.leaves);
                         })
+                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
+                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hedges"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hedges"), Registry.ITEM_REGISTRY)
@@ -241,6 +243,8 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getVariantId("%s_leaf_carpet");
                             return new LeafCarpetBlock(name, w.leaves, m);
                         })
+                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
+                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(modRes("leaf_carpets"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("leaf_carpets"), Registry.ITEM_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)

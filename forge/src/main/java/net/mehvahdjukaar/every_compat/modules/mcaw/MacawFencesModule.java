@@ -79,9 +79,9 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new WiredFence(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_FENCES, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(WIRED_FENCES);
@@ -115,7 +115,7 @@ public class MacawFencesModule extends SimpleModule {
                             if (l == null) return null;
                             return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
-                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_hedge", "leaves", s -> !s.contains("_snow") || !s.contains("_snowy")))
+                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_hedge", "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WALLS, Registry.ITEM_REGISTRY)
