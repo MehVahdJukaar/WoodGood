@@ -282,7 +282,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .useLootFromBase()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
-                .addTexture(modRes("block/oak_barn_door_lower"))
+                .addTextureM(modRes("block/oak_barn_door_lower"), EveryCompat.res("block/mcaw/doors/oak_barn_door_lower_m"))
                 .addTextureM(modRes("block/stable/oak_stable_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_door_lower_m"))
                 .addTextureM(modRes("block/stable/oak_stable_door_upper"), EveryCompat.res("block/mcaw/doors/oak_stable_door_upper_m"))
                 .addTextureM(modRes("item/oak_stable_door"), EveryCompat.res("item/mcaw/doors/oak_stable_door_m"))
@@ -299,7 +299,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .useLootFromBase()
                 .addRecipe(modRes("oak_stable_head_door"))
                 .setRenderType(() -> RenderType::cutout)
-                .addTexture(modRes("block/oak_barn_door_lower"))
+                .addTextureM(modRes("block/oak_barn_door_lower"), EveryCompat.res("block/mcaw/doors/oak_barn_door_lower_m"))
                 .addTextureM(modRes("block/stable_head/oak_stable_head_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_head_door_lower_m"))
                 .addTextureM(modRes("block/stable/oak_stable_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_door_lower_m"))
                 .addTextureM(modRes("item/oak_stable_head_door"), EveryCompat.res("item/mcaw/doors/oak_stable_head_door_m"))
@@ -370,8 +370,6 @@ public class MacawDoorsModule extends SimpleModule {
         try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_mask"));
              TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_overlay"));
         ) {
-
-
             BARK_DOORS.blocks.forEach((wood, block) -> {
                 var id = Utils.getID(block);
 
@@ -391,5 +389,4 @@ public class MacawDoorsModule extends SimpleModule {
             handler.getLogger().error("Could not generate any Bark Door item textures : ", ex);
         }
     }
-
 }

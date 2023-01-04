@@ -128,9 +128,9 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
-                .addTexture(EveryCompat.res("block/spruce_beehive_front"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
-                .addTexture(EveryCompat.res("block/spruce_beehive_side"))
+                .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .build();
 
@@ -172,12 +172,14 @@ public class WoodworksModule extends SimpleModule {
                             if (w.getWoodType() == null) return null;
                             return new LeafPileBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.leafPile());
                         })
+                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
+                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("leaf_piles"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .defaultRecipe()
-                .useLootFromBase()
                 .setRenderType(() -> RenderType::cutout)
+                .useLootFromBase()
+                .defaultRecipe()
                 .build();
 
         this.addEntry(LEAF_PILES);

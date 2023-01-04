@@ -33,33 +33,44 @@ dependencies {
     modImplementation("curse.maven:modmenu-308702:3920481") {
         exclude module: "fabric-api"
     }
-    modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
-    //modImplementation("curse.maven:selene-499980:4059670")
-    //modImplementation("curse.maven:selene-499980:3859239")
 
+    modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
+    // modImplementation(fileTree(dir: 'mods_fabric', include: '*.jar'))
+    // modImplementation("curse.maven:selene-499980:4059670")
+
+    // Dependencies
+    modImplementation("curse.maven:architectury-api-419699:4117956")
+    modImplementation("curse.maven:cloth-config-348521:3972420")
+    modImplementation("curse.maven:roughly-enough-items-310111:4119140")
+    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
+    modImplementation("curse.maven:selene-499980:4059670")
+
+    // Imports
     modImplementation("curse.maven:another-furniture-610492:4032093")
     modImplementation("curse.maven:architects-palette-fabric-487364:3845046")
     modImplementation("curse.maven:arrp-463113:3829389")
     modImplementation("curse.maven:camp-chair-531744:3835679")
+    modImplementation("curse.maven:cozy-625281:4171816")
     modImplementation("curse.maven:decorative-blocks-362528:3941637")
+    modImplementation("curse.maven:exlines-bark-carpets-527296:4062547")
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:3944580")
-    modImplementation("curse.maven:macaws-bridges-351725:4018299")
-    modImplementation("curse.maven:macaws-doors-378646:3930984")
-    modImplementation("curse.maven:macaws-fences-and-walls-453925:3923129")
-    modImplementation("curse.maven:macaws-lights-and-lamps-502372:3923135")
-    modImplementation("curse.maven:macaws-paths-and-pavings-629153:3923442")
-    modImplementation("curse.maven:macaws-roofs-352039:4028402")
-    modImplementation("curse.maven:macaws-trapdoors-400933:3923125")
-    modImplementation("curse.maven:macaws-windows-363569:3830462")
+    modCompileOnly("curse.maven:handcrafted-538214:4215478")
+    modImplementation("curse.maven:infinity-buttons-661902:4259446")
     modImplementation("curse.maven:missing-wilds-622590:3838184")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4011850")
     modImplementation("curse.maven:twigs-496913:3865476")
-    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 
-    modImplementation("curse.maven:infinity-buttons-661902:4259446")
+    modImplementation("curse.maven:macaws-bridges-351725:4178174")
+    modImplementation("curse.maven:macaws-doors-378646:3930984")
+    modImplementation("curse.maven:macaws-fences-and-walls-453925:4203533")
+    modImplementation("curse.maven:macaws-lights-and-lamps-502372:3923135")
+    modImplementation("curse.maven:macaws-paths-and-pavings-629153:3923442")
+    modImplementation("curse.maven:macaws-roofs-352039:4205640")
+    modImplementation("curse.maven:macaws-trapdoors-400933:4181463")
+    modImplementation("curse.maven:macaws-windows-363569:4271891")
 
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
-    //modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
+    // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 }
 
 

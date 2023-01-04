@@ -481,7 +481,8 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(ModTags.Blocks.HEDGES, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.HEDGES, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
-                .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
+                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
+                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .setTab(() -> FurnitureMod.GROUP)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
