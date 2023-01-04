@@ -26,15 +26,13 @@ import net.minecraft.world.level.block.WallBlock;
 
 public class MacawFencesModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> PICKET_FENCES;
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
+    public final SimpleEntrySet<WoodType, Block> HIGHLEY_GATES;
     public final SimpleEntrySet<WoodType, Block> HORSE_FENCES;
+    public final SimpleEntrySet<WoodType, Block> PICKET_FENCES;
+    public final SimpleEntrySet<WoodType, Block> PYRAMID_GATES;
     public final SimpleEntrySet<WoodType, Block> STOCKADE_FENCES;
     public final SimpleEntrySet<WoodType, Block> WIRED_FENCES;
-
-
-    public final SimpleEntrySet<WoodType, Block> PYRAMID_GATES;
-    public final SimpleEntrySet<WoodType, Block> HIGHLEY_GATES;
 
     public MacawFencesModule(String modId) {
         super(modId, "mcf");
@@ -115,7 +113,8 @@ public class MacawFencesModule extends SimpleModule {
                             if (l == null) return null;
                             return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
-                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_hedge", "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
+                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_hedge",
+                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WALLS, Registry.ITEM_REGISTRY)
