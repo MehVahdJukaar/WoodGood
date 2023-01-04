@@ -323,6 +323,8 @@
   "block_type.cfm.upgraded_gate": "%s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
+  "block_type.productivebees.advanced_beehive": "Advanced %s Beehive",
+
   "block_type.projectbrazier.armrest_chair": "%s Armrest Chair",
   "block_type.projectbrazier.bench": "%s Bench",
   "block_type.projectbrazier.bottom_platform": "%s Platform",
