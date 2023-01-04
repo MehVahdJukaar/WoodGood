@@ -29,17 +29,11 @@ import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.RegisterEvent;
 
 /**
  * Author: MehVahdJukaar
@@ -89,9 +83,13 @@ public class EveryCompatForge extends EveryCompat {
         addModule("twigs", () -> TwigsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
 
-//        addModule("graveyard", () -> GraveyardModule::new);
-//        addModule("handcrafted", () -> HandcraftedModule::new);
-//        addModule("xercamod", () -> XercaModule::new);
+        // addModule("graveyard", () -> GraveyardModule::new);
+
+        // Disabled due to block entity complications
+        // addModule("handcrafted", () -> HandcraftedModule::new);
+        
+        // Disabled until custom block models work
+        // addModule("xercamod", () -> XercaModule::new);
 
         if(PlatformHelper.getEnv().isClient()){
             EveryCompatClient.commonInit();

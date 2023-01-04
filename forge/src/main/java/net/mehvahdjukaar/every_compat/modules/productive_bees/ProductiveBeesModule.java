@@ -1,25 +1,18 @@
 package net.mehvahdjukaar.every_compat.modules.productive_bees;
 
-import com.mcwpaths.kikoz.MacawsPaths;
-import com.mcwpaths.kikoz.init.BlockInit;
-import com.mcwpaths.kikoz.objects.FacingPathBlock;
-import cy.jdkdigital.productivebees.ProductiveBees;
 import cy.jdkdigital.productivebees.common.block.AdvancedBeehive;
 import cy.jdkdigital.productivebees.common.block.ExpansionBox;
 import cy.jdkdigital.productivebees.init.ModBlocks;
 import cy.jdkdigital.productivebees.init.ModItemGroups;
-import cy.jdkdigital.productivebees.init.ModTags;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
@@ -37,6 +30,7 @@ public class ProductiveBeesModule extends SimpleModule {
         ADVANCED_BEEHIVES = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
                         ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new AdvancedBeehive(Utils.copyPropertySafe(w.planks)))
+                // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "everycomp:block/spruce"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_right_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_right_honey_m"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_left_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_left_honey_m"))
@@ -60,7 +54,8 @@ public class ProductiveBeesModule extends SimpleModule {
                 .addTag(modRes("advanced_beehives"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
-                .addRecipe(modRes("hives/advanced_spruce_beehive_clear"))
+                // Having two recipes overwrites each other
+//                .addRecipe(modRes("hives/advanced_spruce_beehive_clear"))
                 .addRecipe(modRes("hives/advanced_spruce_beehive"))
                 .setTab(() -> tab)
                 .build();
@@ -70,6 +65,7 @@ public class ProductiveBeesModule extends SimpleModule {
         EXPANSION_BOXES = SimpleEntrySet.builder(WoodType.class, "", "expansion_box",
                         ModBlocks.EXPANSION_BOX_SPRUCE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new ExpansionBox(Utils.copyPropertySafe(w.planks)))
+                // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "everycomp:block/spruce"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_right_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_right_honey_m"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_left_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_left_honey_m"))
