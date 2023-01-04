@@ -172,12 +172,14 @@ public class WoodworksModule extends SimpleModule {
                             if (w.getWoodType() == null) return null;
                             return new LeafPileBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.leafPile());
                         })
+                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
+                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("leaf_piles"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .defaultRecipe()
-                .useLootFromBase()
                 .setRenderType(() -> RenderType::cutout)
+                .useLootFromBase()
+                .defaultRecipe()
                 .build();
 
         this.addEntry(LEAF_PILES);
