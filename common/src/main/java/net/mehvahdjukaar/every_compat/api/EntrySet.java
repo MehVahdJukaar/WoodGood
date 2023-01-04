@@ -68,7 +68,7 @@ public abstract class EntrySet<T extends BlockType, B extends Block> {
 
     public abstract void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager);
 
-    public abstract void generateModels(CompatModule module, DynamicTexturePack pack, ResourceManager manager);
+    public abstract void generateModels(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager);
 
     public abstract void generateTextures(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager);
 

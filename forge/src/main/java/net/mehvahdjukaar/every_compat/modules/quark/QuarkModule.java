@@ -181,8 +181,9 @@ public class QuarkModule extends SimpleModule {
                         })
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
+                .addTag(modRes("revertable_chests"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(new ResourceLocation("quark:revertable_chests"), Registry.ITEM_REGISTRY)
                 .addTile(CompatChestBlockTile::new)
                 .addCustomItem((w, b, p) -> new VariantChestBlock.Item(b, p))
@@ -200,11 +201,14 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatTrappedChestBlock(w, name, m, Utils.copyPropertySafe(w.planks));
                         })
-                .addCustomItem((w, b, p) -> new VariantChestBlock.Item(b, p))
+                .addCustomItem((w, b, p) -> new CompatChestBlock.Item(b, p))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.ITEM_REGISTRY)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("revertable_trapped_chests"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTile(CompatTrappedChestBlockTile::new)
 
                 .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
