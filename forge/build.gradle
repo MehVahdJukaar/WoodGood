@@ -117,7 +117,7 @@ dependencies {
     modImplementation("curse.maven:configured-457570:4011355")
     modImplementation("curse.maven:jei-238222:3940099")
     modCompileOnly("curse.maven:roughly-enough-items-310111:4119141")
-    modImplementation("curse.maven:selene-499980:4040434")
+    modImplementation("curse.maven:selene-499980:4276493")
 //    modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
 
     // Imports
