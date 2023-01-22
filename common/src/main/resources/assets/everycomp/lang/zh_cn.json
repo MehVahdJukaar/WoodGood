@@ -730,7 +730,8 @@
   "wood_type.goodending.cypress": "柏木",
   "wood_type.goodending.muddy_oak": "泥浆橡木",
   "leaves_type.goodending.cypress": "柏树",
-  "leaves_type.goodending.muddy_oak": "泥浆橡树",
+  "leaves_type.goodending.dense_birch": "茂密白桦",
+  "leaves_type.goodending.dense_dark_oak": "茂密深色橡树",
 
   "wood_type.habitat.fairy_ring_mushroom": "仙环菇",
 
@@ -1058,6 +1059,8 @@
   "leaves_type.undergarden.smogstem": "烟梗",
   "leaves_type.undergarden.wigglewood": "摇蜿",
   "leaves_type.undergarden.grongle": "油绿",
+
+  "wood_type.valhelsia_structures.lapidified_jungle": "石化丛林木",
 
   "wood_type.wilds.baobab": "猴面包木",
   "wood_type.wilds.cypress": "柏木",
