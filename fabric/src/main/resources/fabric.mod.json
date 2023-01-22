@@ -22,10 +22,6 @@
       "net.mehvahdjukaar.every_compat.modMenu.ModMenuCompat"
     ]
   },
-  "mixins": [
-    "${mod_id}.mixins.json",
-    "${mod_id}-common.mixins.json"
-  ],
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.19",
