@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPalett
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
@@ -36,6 +37,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
 
         //addModule("farmersdelight", () -> FarmersDelightModule::new);
 

@@ -59,6 +59,7 @@ dependencies {
     modImplementation("curse.maven:missing-wilds-622590:3838184")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4011850")
     modImplementation("curse.maven:twigs-496913:3865476")
+    modImplementation("curse.maven:friends-and-foes-551364:4359130")
 
     modImplementation("curse.maven:macaws-bridges-351725:4178174")
     modImplementation("curse.maven:macaws-doors-378646:3930984")
