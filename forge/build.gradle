@@ -112,9 +112,9 @@ dependencies {
     modImplementation("curse.maven:cloth-config-348521:3972423")
     modImplementation("curse.maven:configured-457570:4011355")
     modImplementation("curse.maven:jei-238222:3940099")
-    modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
+    // modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
     modCompileOnly("curse.maven:roughly-enough-items-310111:4119141")
-    modImplementation("curse.maven:selene-499980:4276493")
+    modImplementation("curse.maven:selene-499980:4460382")
 
     // Imports
     modCompileOnly("curse.maven:another-furniture-610492:4032092")
