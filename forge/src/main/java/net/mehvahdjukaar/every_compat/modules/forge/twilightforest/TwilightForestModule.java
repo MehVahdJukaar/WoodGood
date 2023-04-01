@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.twilightforest;
+package net.mehvahdjukaar.every_compat.modules.forge.twilightforest;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -34,16 +34,16 @@ import java.util.function.Supplier;
 
 public class TwilightForestModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, BanisterBlock> BANISTERS;
-    public final SimpleEntrySet<WoodType, HollowLogVertical> HOLLOW_LOGS_VERTICAL;
-    public final SimpleEntrySet<WoodType, HollowLogHorizontal> HOLLOW_LOGS_HORIZONTAL;
-    public final SimpleEntrySet<WoodType, HollowLogClimbable> HOLLOW_LOGS_CLIMBABLE;
+    public final SimpleEntrySet<WoodType, BanisterBlock> banisters;
+    public final SimpleEntrySet<WoodType, HollowLogVertical> hollowLogsVertical;
+    public final SimpleEntrySet<WoodType, HollowLogHorizontal> hollowLogsHorizontal;
+    public final SimpleEntrySet<WoodType, HollowLogClimbable> hollowLogsClimbable;
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
 
         //TODO: check face culling
-        BANISTERS = SimpleEntrySet.builder(WoodType.class, "banister",
+        banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
@@ -53,10 +53,10 @@ public class TwilightForestModule extends SimpleModule {
                 .setTab(() -> TFItems.creativeTab)
                 .build();
 
-        this.addEntry(BANISTERS);
+        this.addEntry(banisters);
 
 
-        HOLLOW_LOGS_HORIZONTAL = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
+        hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> regIfPossible(w, () -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))))
                 .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
@@ -64,10 +64,10 @@ public class TwilightForestModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(HOLLOW_LOGS_HORIZONTAL);
+        this.addEntry(hollowLogsHorizontal);
 
 
-        HOLLOW_LOGS_VERTICAL = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
+        hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
@@ -78,18 +78,18 @@ public class TwilightForestModule extends SimpleModule {
                 .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log_vertical"))
                 .build();
 
-        this.addEntry(HOLLOW_LOGS_VERTICAL);
+        this.addEntry(hollowLogsVertical);
 
-        HOLLOW_LOGS_CLIMBABLE = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
+        hollowLogsClimbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> regIfPossible(w, () -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
-                                RegistryObject.create(Utils.getID(HOLLOW_LOGS_VERTICAL.blocks.get(w)), ForgeRegistries.BLOCKS))))
+                                RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS))))
                 .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)
                 .noItem()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(HOLLOW_LOGS_CLIMBABLE);
+        this.addEntry(hollowLogsClimbable);
 
 
     }
@@ -97,7 +97,7 @@ public class TwilightForestModule extends SimpleModule {
     @Override
     public void registerItems(Registrator<Item> registry) {
         super.registerItems(registry);
-        HOLLOW_LOGS_VERTICAL.blocks.forEach((w, b) -> {
+        hollowLogsVertical.blocks.forEach((w, b) -> {
             String itemName = Utils.getID(b).getPath().replace("_vertical", "");
             String childKey = this.getModId() + ":hollow_log";
             Item i = new HollowLogItem(
@@ -105,7 +105,7 @@ public class TwilightForestModule extends SimpleModule {
                     RegistryObject.create(Utils.getID(b), ForgeRegistries.BLOCKS),
                     RegistryObject.create(EveryCompat.res(itemName + "_climbable"), ForgeRegistries.BLOCKS),
                     new Item.Properties().tab(getTab(w, childKey + "_vertical")));
-            HOLLOW_LOGS_VERTICAL.items.put(w, i);
+            hollowLogsVertical.items.put(w, i);
             w.addChild(childKey, (Object) i);
             registry.register(EveryCompat.res(itemName + "_vertical"), i);
         });
@@ -121,11 +121,11 @@ public class TwilightForestModule extends SimpleModule {
         event.register(
                 (s, l, pos, i) -> l != null && pos != null ?
                         BiomeColors.getAverageFoliageColor(l, pos) : FoliageColor.getDefaultColor(),
-                HOLLOW_LOGS_CLIMBABLE.blocks.values().toArray(Block[]::new));
+                hollowLogsClimbable.blocks.values().toArray(Block[]::new));
         event.register(
                 (s, l, pos, i) -> l != null && pos != null ?
                         BiomeColors.getAverageGrassColor(l, pos) : -1,
-                HOLLOW_LOGS_HORIZONTAL.blocks.values().toArray(Block[]::new));
+                hollowLogsHorizontal.blocks.values().toArray(Block[]::new));
     }
 
     @Override

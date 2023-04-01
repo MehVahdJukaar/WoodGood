@@ -9,9 +9,21 @@ import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocks
 import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
+import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
+import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
+import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
+import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
+import net.mehvahdjukaar.every_compat.modules.forge.twigs.TwigsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
@@ -46,7 +58,8 @@ public class EveryCompatForge extends EveryCompat {
         addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("furnish", () -> FurnishModule::new);
-        /*
+        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
+
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
@@ -68,7 +81,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-        */
 
 
         // addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);

@@ -14,6 +14,7 @@ dependencies {
 
 
     //common. Fabric version that works on both
+    modCompileOnly("curse.maven:architectury-api-419699:4104616")
 
     modImplementation("curse.maven:another-furniture-610492:4034011")
     modImplementation("curse.maven:camp-chair-531744:3835679")

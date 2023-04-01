@@ -20,7 +20,7 @@ public class FriendsAndFoesModule extends SimpleModule {
     public FriendsAndFoesModule(String modId) {
         super(modId, "faf");
 
-        BEEHIVES = SimpleEntrySet.builder(WoodType.class, "beehive",
+        beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                 () -> getModBlock("spruce_beehive"),
                 () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                 w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE)))
@@ -34,6 +34,6 @@ public class FriendsAndFoesModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(BEEHIVES);
+        this.addEntry(beehives);
     }
 }

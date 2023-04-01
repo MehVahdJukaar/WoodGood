@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.twigs;
+package net.mehvahdjukaar.every_compat.modules.forge.twigs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -22,12 +22,12 @@ import net.moddingplayground.twigs.init.TwigsBlocks;
 
 public class TwigsModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> TABLES;
+    public final SimpleEntrySet<WoodType, Block> tables;
 
     public TwigsModule(String modId) {
         super(modId, "tw");
 
-        TABLES = SimpleEntrySet.builder(WoodType.class, "table",
+        tables = SimpleEntrySet.builder(WoodType.class, "table",
                         TwigsBlocks.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
@@ -40,7 +40,7 @@ public class TwigsModule extends SimpleModule {
                 .addTexture(modRes("block/oak_table_bottom"))
                 .build();
 
-        this.addEntry(TABLES);
+        this.addEntry(tables);
     }
 
     @Override

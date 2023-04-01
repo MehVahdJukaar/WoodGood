@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.missing_wilds;
+package net.mehvahdjukaar.every_compat.modules.forge.missing_wilds;
 
 import me.ultrusmods.missingwilds.MissingWildsForge;
 import me.ultrusmods.missingwilds.block.FallenLogBlock;

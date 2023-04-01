@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.quark;
+package net.mehvahdjukaar.every_compat.modules.forge.quark;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -13,6 +13,6 @@ public class CompatTrappedChestBlockTile extends VariantTrappedChestBlockEntity 
 
     @Override
     public BlockEntityType<?> getType() {
-        return QuarkModule.TRAPPED_CHEST_TILE;
+        return QuarkModule.trappedChestTile;
     }
 }

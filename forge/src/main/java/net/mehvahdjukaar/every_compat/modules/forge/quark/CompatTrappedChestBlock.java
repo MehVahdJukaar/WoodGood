@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.quark;
+package net.mehvahdjukaar.every_compat.modules.forge.quark;
 
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.BlockPos;
@@ -12,7 +12,7 @@ public class CompatTrappedChestBlock extends VariantTrappedChestBlock {
     private final WoodType woodType;
 
     public CompatTrappedChestBlock(WoodType woodType, String type, vazkii.quark.base.module.QuarkModule module, Properties props) {
-        super(type, module, () -> QuarkModule.TRAPPED_CHEST_TILE, props);
+        super(type, module, () -> QuarkModule.trappedChestTile, props);
         this.woodType = woodType;
     }
 

@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.quark;
+package net.mehvahdjukaar.every_compat.modules.forge.quark;
 
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -53,18 +53,19 @@ import java.util.Map;
 
 public class QuarkModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> BOOKSHELVES;
-    public final SimpleEntrySet<WoodType, Block> POSTS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_POSTS;
-    public final SimpleEntrySet<WoodType, Block> VERTICAL_PLANKS;
-    public final SimpleEntrySet<WoodType, Block> LADDERS;
-    public final SimpleEntrySet<WoodType, ? extends VariantChestBlock> CHESTS;
-    public final SimpleEntrySet<WoodType, ? extends VariantTrappedChestBlock> TRAPPED_CHESTS;
-    public final SimpleEntrySet<LeavesType, Block> HEDGES;
-    public final SimpleEntrySet<LeavesType, Block> LEAF_CARPETS;
+    public final SimpleEntrySet<WoodType, Block> bookshelves;
+    public final SimpleEntrySet<WoodType, Block> posts;
+    public final SimpleEntrySet<WoodType, Block> strippedPosts;
+    public final SimpleEntrySet<WoodType, Block> verticalPlanks;
+    public final SimpleEntrySet<WoodType, Block> ladders;
+    public final SimpleEntrySet<WoodType, Block> hollowLogs;
+    public final SimpleEntrySet<WoodType, ? extends VariantChestBlock> chests;
+    public final SimpleEntrySet<WoodType, ? extends VariantTrappedChestBlock> trappedChests;
+    public final SimpleEntrySet<LeavesType, Block> hedges;
+    public final SimpleEntrySet<LeavesType, Block> leafCarpets;
 
-    public static BlockEntityType<? extends ChestBlockEntity> CHEST_TILE;
-    public static BlockEntityType<? extends ChestBlockEntity> TRAPPED_CHEST_TILE;
+    public static BlockEntityType<? extends ChestBlockEntity> chestTile;
+    public static BlockEntityType<? extends ChestBlockEntity> trappedChestTile;
 
     public final Field ARLModData;
 
@@ -80,7 +81,7 @@ public class QuarkModule extends SimpleModule {
         }
         ARLModData = f2;
 
-        BOOKSHELVES = QuarkSimpleEntrySet.builder(WoodType.class, "bookshelf",
+        bookshelves = QuarkSimpleEntrySet.builder(WoodType.class, "bookshelf",
                         VariantBookshelvesModule.class,
                         () -> getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
@@ -95,9 +96,9 @@ public class QuarkModule extends SimpleModule {
                 .setPalette(this::bookshelfPalette)
                 .build();
 
-        this.addEntry(BOOKSHELVES);
+        this.addEntry(bookshelves);
 
-        POSTS = QuarkSimpleEntrySet.builder(WoodType.class, "post",
+        posts = QuarkSimpleEntrySet.builder(WoodType.class, "post",
                         VariantBookshelvesModule.class,
                         () -> getModBlock("oak_post"),
                         () -> WoodTypeRegistry.OAK_TYPE,
@@ -114,9 +115,9 @@ public class QuarkModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(POSTS);
+        this.addEntry(posts);
 
-        STRIPPED_POSTS = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
+        strippedPosts = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         VariantBookshelvesModule.class,
                         () -> getModBlock("stripped_oak_post"),
                         () -> WoodTypeRegistry.OAK_TYPE,
@@ -134,9 +135,9 @@ public class QuarkModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_POSTS);
+        this.addEntry(strippedPosts);
 
-        VERTICAL_PLANKS = QuarkSimpleEntrySet.builder(WoodType.class, "planks", "vertical",
+        verticalPlanks = QuarkSimpleEntrySet.builder(WoodType.class, "planks", "vertical",
                         VerticalPlanksModule.class,
                         () -> getModBlock("vertical_oak_planks"),
                         () -> WoodTypeRegistry.OAK_TYPE,
@@ -150,9 +151,9 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
 
-        this.addEntry(VERTICAL_PLANKS);
+        this.addEntry(verticalPlanks);
 
-        LADDERS = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
+        ladders = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
                         VariantLaddersModule.class,
                         () -> getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
@@ -168,9 +169,27 @@ public class QuarkModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
 
-        this.addEntry(LADDERS);
+        this.addEntry(ladders);
 
-        CHESTS = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
+        hollowLogs = QuarkSimpleEntrySet.builder(WoodType.class, "log", "hollow",
+                        HollowLogsModule.class,
+                        () -> getModBlock("hollow_oak_log"),
+                        () -> WoodTypeRegistry.OAK_TYPE,
+                        (w, m) -> {
+                            String name = shortenedId() + "/" + w.getAppendableId();
+                            if (w.id.getPath().equals("time_wood")) return null;
+                            return new HollowLogBlock(name, w.log, m, w.canBurn());
+                        })
+                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs"), Registry.ITEM_REGISTRY)
+                .addRecipe(modRes("building/crafting/hollow_oak_log"))
+                .build();
+
+        this.addEntry(hollowLogs);
+
+        chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
                         VariantChestsModule.class,
                         () -> getModBlock("oak_chest", VariantChestBlock.class),
                         () -> WoodTypeRegistry.OAK_TYPE,
@@ -190,14 +209,14 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .build();
 
-        this.addEntry(CHESTS);
+        this.addEntry(chests);
 
-        TRAPPED_CHESTS = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
+        trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         VariantChestsModule.class,
                         () -> getModBlock("oak_trapped_chest", VariantTrappedChestBlock.class),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w, m) -> {
-                            if (!CHESTS.blocks.containsKey(w)) return null;
+                            if (!chests.blocks.containsKey(w)) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatTrappedChestBlock(w, name, m, Utils.copyPropertySafe(w.planks));
                         })
@@ -214,11 +233,11 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
                 .build();
 
-        this.addEntry(TRAPPED_CHESTS);
+        this.addEntry(trappedChests);
 
 
         //doing it this way because for some reason its nuking whatever block item I throw in here
-        HEDGES = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
+        hedges = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
                         HedgesModule.class,
                         () -> getModBlock("oak_hedge"),
                         () -> LeavesTypeRegistry.OAK_TYPE,
@@ -235,11 +254,11 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/oak_hedge"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-        this.addEntry(HEDGES);
+        this.addEntry(hedges);
 
 
         //doing it this way because for some reason its nuking whatever block item I throw in here
-        LEAF_CARPETS = QuarkSimpleEntrySet.builder(LeavesType.class, "leaf_carpet",
+        leafCarpets = QuarkSimpleEntrySet.builder(LeavesType.class, "leaf_carpet",
                         LeafCarpetModule.class,
                         () -> getModBlock("oak_leaf_carpet"),
                         () -> LeavesTypeRegistry.OAK_TYPE,
@@ -255,17 +274,17 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/oak_leaf_carpet"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-        this.addEntry(LEAF_CARPETS);
+        this.addEntry(leafCarpets);
 
     }
 
     @Override
     public void onModSetup() {
-        POSTS.blocks.forEach((w, post) -> {
-            Block stripped = STRIPPED_POSTS.blocks.get(w);
+        posts.blocks.forEach((w, post) -> {
+            Block stripped = strippedPosts.blocks.get(w);
             if (stripped != null) ToolInteractionHandler.registerInteraction(ToolActions.AXE_STRIP, post, stripped);
         });
-        LEAF_CARPETS.blocks.forEach((w, leaf) -> {
+        leafCarpets.blocks.forEach((w, leaf) -> {
             ComposterBlock.COMPOSTABLES.put(leaf, 0.2F);
         });
     }
@@ -295,15 +314,15 @@ public class QuarkModule extends SimpleModule {
     @Override
     public void registerTiles(Registrator<BlockEntityType<?>> registry) {
         super.registerTiles(registry);
-        CHEST_TILE = (BlockEntityType<? extends ChestBlockEntity>) CHESTS.getTileHolder().tile;
-        TRAPPED_CHEST_TILE = (BlockEntityType<? extends ChestBlockEntity>) TRAPPED_CHESTS.getTileHolder().tile;
+        chestTile = (BlockEntityType<? extends ChestBlockEntity>) chests.getTileHolder().tile;
+        trappedChestTile = (BlockEntityType<? extends ChestBlockEntity>) trappedChests.getTileHolder().tile;
     }
 
 
     public void onFirstClientTick1() {
         var ic = Minecraft.getInstance().getItemColors();
         var bc = Minecraft.getInstance().getBlockColors();
-        HEDGES.blocks.forEach((t, b) -> {
+        hedges.blocks.forEach((t, b) -> {
             var leaf = t.getChild("leaves");
             if (leaf instanceof Block block) {
                 bc.register((s, l, p, i) -> bc.getColor(block.defaultBlockState(), l, p, i), b);
@@ -319,11 +338,11 @@ public class QuarkModule extends SimpleModule {
 
     @Override
     public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
-        HEDGES.blocks.forEach((t, b) -> {
+        hedges.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         });
 
-        LEAF_CARPETS.blocks.forEach((t, b) -> {
+        leafCarpets.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         });
     }
@@ -331,8 +350,8 @@ public class QuarkModule extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(CHEST_TILE, VariantChestRenderer::new);
-        event.register(TRAPPED_CHEST_TILE, VariantChestRenderer::new);
+        event.register(chestTile, VariantChestRenderer::new);
+        event.register(trappedChestTile, VariantChestRenderer::new);
     }
 
     @Override
@@ -345,8 +364,8 @@ public class QuarkModule extends SimpleModule {
     @EventCalled
     public void onTextureStitch(TextureStitchEvent.Pre event) {
         if (event.getAtlas().location().equals(CHEST_SHEET)) {
-            CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
-            TRAPPED_CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
+            chests.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
+            trappedChests.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
         }
 
     }
@@ -396,7 +415,7 @@ public class QuarkModule extends SimpleModule {
             Respriter respriterLeftO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            CHESTS.blocks.forEach((wood, block) -> {
+            chests.blocks.forEach((wood, block) -> {
 
                 CompatChestBlock b = (CompatChestBlock) block;
 

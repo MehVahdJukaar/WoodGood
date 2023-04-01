@@ -1,6 +1,5 @@
-package net.mehvahdjukaar.every_compat.modules.quark;
+package net.mehvahdjukaar.every_compat.modules.forge.quark;
 
-import net.mehvahdjukaar.moonlight.api.item.WoodBasedBlockItem;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -11,14 +10,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.quark.content.building.block.VariantChestBlock;
-import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class CompatChestBlock extends VariantChestBlock {
 
     private final WoodType woodType;
 
     public CompatChestBlock(WoodType woodType, String type, vazkii.quark.base.module.QuarkModule module, Properties props) {
-        super(type, module, () -> QuarkModule.CHEST_TILE, props);
+        super(type, module, () -> QuarkModule.chestTile, props);
         this.woodType = woodType;
     }
 

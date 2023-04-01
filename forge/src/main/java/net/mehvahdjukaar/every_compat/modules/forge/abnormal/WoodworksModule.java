@@ -1,6 +1,5 @@
-package net.mehvahdjukaar.every_compat.modules.abnormal;
+package net.mehvahdjukaar.every_compat.modules.forge.abnormal;
 
-import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.BlueprintLadderBlock;
 import com.teamabnormals.blueprint.common.block.BookshelfBlock;
@@ -21,7 +20,6 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -30,30 +28,15 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.ChestRenderer;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -63,13 +46,13 @@ import java.util.List;
 
 
 public class WoodworksModule extends SimpleModule {
-    public final SimpleEntrySet<WoodType, Block> BOOKSHELVES;
-    public final SimpleEntrySet<WoodType, Block> BOARDS;
-    public final SimpleEntrySet<WoodType, Block> LADDERS;
-    public final SimpleEntrySet<WoodType, Block> BEEHIVES;
-    public final SimpleEntrySet<WoodType, Block> CHESTS;
-    public final SimpleEntrySet<WoodType, Block> TRAPPED_CHESTS;
-    public final SimpleEntrySet<LeavesType, Block> LEAF_PILES;
+    public final SimpleEntrySet<WoodType, Block> bookshelves;
+    public final SimpleEntrySet<WoodType, Block> boards;
+    public final SimpleEntrySet<WoodType, Block> ladders;
+    public final SimpleEntrySet<WoodType, Block> beehives;
+    public final SimpleEntrySet<WoodType, Block> chests;
+    public final SimpleEntrySet<WoodType, Block> trappedChests;
+    public final SimpleEntrySet<LeavesType, Block> leafPiles;
 
 
     public static BlockEntityType<? extends ChestBlockEntity> CHEST_TILE;
@@ -79,7 +62,7 @@ public class WoodworksModule extends SimpleModule {
     public WoodworksModule(String modId) {
         super(modId, "abnww");
 
-        BOOKSHELVES = SimpleEntrySet.builder(WoodType.class, "bookshelf",
+        bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         () -> getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
@@ -91,10 +74,10 @@ public class WoodworksModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .build();
 
-        this.addEntry(BOOKSHELVES);
+        this.addEntry(bookshelves);
 
 
-        BOARDS = SimpleEntrySet.builder(WoodType.class, "boards",
+        boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
@@ -104,9 +87,9 @@ public class WoodworksModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(BOARDS);
+        this.addEntry(boards);
 
-        LADDERS = SimpleEntrySet.builder(WoodType.class, "ladder",
+        ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         () -> getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintLadderBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.ladder()))
@@ -118,9 +101,9 @@ public class WoodworksModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
 
-        this.addEntry(LADDERS);
+        this.addEntry(ladders);
 
-        BEEHIVES = SimpleEntrySet.builder(WoodType.class, "beehive",
+        beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                         () -> getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
@@ -134,9 +117,9 @@ public class WoodworksModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .build();
 
-        this.addEntry(BEEHIVES);
+        this.addEntry(beehives);
 
-        CHESTS = SimpleEntrySet.builder(WoodType.class, "chest",
+        chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         () -> getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
@@ -152,7 +135,7 @@ public class WoodworksModule extends SimpleModule {
 
         //this.addEntry(CHESTS);
 
-        TRAPPED_CHESTS = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
+        trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintTrappedChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
@@ -166,7 +149,7 @@ public class WoodworksModule extends SimpleModule {
         //this.addEntry(TRAPPED_CHESTS);
 
 
-        LEAF_PILES = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
+        leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> LeavesTypeRegistry.OAK_TYPE,
                         (w) -> {
                             if (w.getWoodType() == null) return null;
@@ -182,7 +165,7 @@ public class WoodworksModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(LEAF_PILES);
+        this.addEntry(leafPiles);
     }
 
     @Override
@@ -196,7 +179,7 @@ public class WoodworksModule extends SimpleModule {
     public void onFirstClientTick1 () {
         var ic = Minecraft.getInstance().getItemColors();
         var bc = Minecraft.getInstance().getBlockColors();
-        LEAF_PILES.blocks.forEach((t, b) -> {
+        leafPiles.blocks.forEach((t, b) -> {
             var leaf = t.getChild("leaves");
             if (leaf instanceof Block block) {
                 bc.register((s, l, p, i) -> bc.getColor(block.defaultBlockState(), l, p, i), b);
@@ -212,7 +195,7 @@ public class WoodworksModule extends SimpleModule {
 
     @Override
     public void registerItemColors (ClientPlatformHelper.ItemColorEvent event){
-        LEAF_PILES.blocks.forEach((t, b) -> {
+        leafPiles.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
             //blockColor.register((s, l, p, i) -> blockColor.getColor(bl.defaultBlockState(), l, p, i), b);
         });
@@ -268,7 +251,7 @@ public class WoodworksModule extends SimpleModule {
             Respriter respriterLeftO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            CHESTS.blocks.forEach((wood, block) -> {
+            chests.blocks.forEach((wood, block) -> {
 
                 BlueprintChestBlock b = (BlueprintChestBlock) block;
 

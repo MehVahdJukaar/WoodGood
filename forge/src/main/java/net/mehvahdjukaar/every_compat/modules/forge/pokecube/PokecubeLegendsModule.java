@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.pokecube;
+package net.mehvahdjukaar.every_compat.modules.forge.pokecube;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

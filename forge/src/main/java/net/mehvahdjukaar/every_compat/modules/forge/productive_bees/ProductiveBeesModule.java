@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.productive_bees;
+package net.mehvahdjukaar.every_compat.modules.forge.productive_bees;
 
 import cy.jdkdigital.productivebees.common.block.AdvancedBeehive;
 import cy.jdkdigital.productivebees.common.block.ExpansionBox;
@@ -19,15 +19,15 @@ import net.minecraft.world.level.block.Block;
 
 public class ProductiveBeesModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> ADVANCED_BEEHIVES;
-    public final SimpleEntrySet<WoodType, Block> EXPANSION_BOXES;
+    public final SimpleEntrySet<WoodType, Block> advancedBeehives;
+    public final SimpleEntrySet<WoodType, Block> expansionBoxes;
 
     public ProductiveBeesModule(String modId) {
         super(modId, "pb");
         CreativeModeTab tab = ModItemGroups.PRODUCTIVE_BEES;
 
 
-        ADVANCED_BEEHIVES = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
+        advancedBeehives = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
                         ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new AdvancedBeehive(Utils.copyPropertySafe(w.planks)))
                 // Textures are not generated for this, temporary until model overrides work
@@ -54,15 +54,15 @@ public class ProductiveBeesModule extends SimpleModule {
                 .addTag(modRes("advanced_beehives"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
-                // Having two recipes overwrites each other
-//                .addRecipe(modRes("hives/advanced_spruce_beehive_clear"))
+                // Having two recipes overwrites each other TODO: no actually it souldnt
+                .addRecipe(modRes("hives/advanced_spruce_beehive_clear"))
                 .addRecipe(modRes("hives/advanced_spruce_beehive"))
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(ADVANCED_BEEHIVES);
+        this.addEntry(advancedBeehives);
 
-        EXPANSION_BOXES = SimpleEntrySet.builder(WoodType.class, "", "expansion_box",
+        expansionBoxes = SimpleEntrySet.builder(WoodType.class, "", "expansion_box",
                         ModBlocks.EXPANSION_BOX_SPRUCE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new ExpansionBox(Utils.copyPropertySafe(w.planks)))
                 // Textures are not generated for this, temporary until model overrides work
@@ -93,6 +93,6 @@ public class ProductiveBeesModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(EXPANSION_BOXES);
+        this.addEntry(expansionBoxes);
     }
 }

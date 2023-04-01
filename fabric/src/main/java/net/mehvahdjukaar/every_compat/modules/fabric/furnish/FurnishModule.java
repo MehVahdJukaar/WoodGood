@@ -78,7 +78,7 @@ public class FurnishModule extends SimpleModule {
 
         TemplateRecipeManager.registerTemplate(modRes("furniture_making"), FurnishRecipeTemplate::new);
 
-        TABLE = SimpleEntrySet.builder(WoodType.class, "table",
+        table = SimpleEntrySet.builder(WoodType.class, "table",
                         FurnishBlocks.Oak_Table, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Table(Utils.copyPropertySafe(w.log)), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -88,9 +88,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(TABLE);
+        this.addEntry(table);
 
-        SQUARE_TABLE = SimpleEntrySet.builder(WoodType.class, "square_table",
+        squareTable = SimpleEntrySet.builder(WoodType.class, "square_table",
                         FurnishBlocks.Oak_Square_Table, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new SimpleFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -100,9 +100,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(SQUARE_TABLE);
+        this.addEntry(squareTable);
 
-        PEDESTAL_TABLE = SimpleEntrySet.builder(WoodType.class, "pedestal_table",
+        pedestalTable = SimpleEntrySet.builder(WoodType.class, "pedestal_table",
                         FurnishBlocks.Oak_Pedestal_Table, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new SimpleFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -112,9 +112,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(PEDESTAL_TABLE);
+        this.addEntry(pedestalTable);
 
-        BEDSIDE_TABLE = SimpleEntrySet.builder(WoodType.class, "bedside_table",
+        bedsideTable = SimpleEntrySet.builder(WoodType.class, "bedside_table",
                         FurnishBlocks.Oak_Bedside_Table, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new InventoryFurniture(Utils.copyPropertySafe(w.log), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -124,9 +124,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(BEDSIDE_TABLE);
+        this.addEntry(bedsideTable);
 
-        KITCHEN_CABINET = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinet",
+        kitchenCabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinet",
                         FurnishBlocks.Oak_Kitchen_Cabinet, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new InventoryFurniture(Utils.copyPropertySafe(w.planks), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -136,9 +136,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(KITCHEN_CABINET);
+        this.addEntry(kitchenCabinet);
 
-        CABINET = SimpleEntrySet.builder(WoodType.class, "cabinet",
+        cabinet = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         FurnishBlocks.Birch_Cabinet, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         ifHasChild(w -> new Cabinet(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -150,9 +150,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(CABINET);
+        this.addEntry(cabinet);
 
-        WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe",
+        wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         FurnishBlocks.Birch_Wardrobe, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         ifHasChild(w -> new Wardrobe(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -166,9 +166,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(WARDROBE);
+        this.addEntry(wardrobe);
 
-        STOOL = SimpleEntrySet.builder(WoodType.class, "stool",
+        stool = SimpleEntrySet.builder(WoodType.class, "stool",
                         FurnishBlocks.Oak_Stool, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log), Chair.BASE_SHAPES), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -178,9 +178,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(STOOL);
+        this.addEntry(stool);
 
-        CHAIR = SimpleEntrySet.builder(WoodType.class, "chair",
+        chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         FurnishBlocks.Oak_Chair, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log),
                                 VoxelShapeHelper.getMergedShapes(Chair.BASE_SHAPES, Chair.CHAIR_SEAT)), "stripped_log"))
@@ -191,9 +191,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(CHAIR);
+        this.addEntry(chair);
 
-        SHUTTER = SimpleEntrySet.builder(WoodType.class, "shutter",
+        shutter = SimpleEntrySet.builder(WoodType.class, "shutter",
                         FurnishBlocks.Oak_Shutter, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -204,9 +204,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(SHUTTER);
+        this.addEntry(shutter);
 
-        CRATE = SimpleEntrySet.builder(WoodType.class, "crate",
+        crate = SimpleEntrySet.builder(WoodType.class, "crate",
                         FurnishBlocks.Oak_Crate, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Crate(Utils.copyPropertySafe(w.planks)))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -218,9 +218,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(CRATE);
+        this.addEntry(crate);
 
-        SHELF = SimpleEntrySet.builder(WoodType.class, "shelf",
+        shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
                         FurnishBlocks.Oak_Shelf, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shelf(Utils.copyPropertySafe(w.planks)))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -230,9 +230,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(SHELF);
+        this.addEntry(shelf);
 
-        BENCH = SimpleEntrySet.builder(WoodType.class, "bench",
+        bench = SimpleEntrySet.builder(WoodType.class, "bench",
                         FurnishBlocks.Oak_Bench, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Bench(Utils.copyPropertySafe(w.planks)))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -242,9 +242,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(BENCH);
+        this.addEntry(bench);
 
-        LOG_BENCHES = SimpleEntrySet.builder(WoodType.class, "log_bench",
+        logBenches = SimpleEntrySet.builder(WoodType.class, "log_bench",
                         FurnishBlocks.Oak_Log_Bench, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new LogBench(Utils.copyPropertySafe(w.log)))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -256,9 +256,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(LOG_BENCHES);
+        this.addEntry(logBenches);
 
-        LADDER = SimpleEntrySet.builder(WoodType.class, "ladder",
+        ladder = SimpleEntrySet.builder(WoodType.class, "ladder",
                         FurnishBlocks.Oak_Ladder, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Ladder(Utils.copyPropertySafe(w.log)), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -269,9 +269,9 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(LADDER);
+        this.addEntry(ladder);
 
-        COFFIN = SimpleEntrySet.builder(WoodType.class, "coffin",
+        coffin = SimpleEntrySet.builder(WoodType.class, "coffin",
                         FurnishBlocks.Jungle_Coffin, () -> WoodTypeRegistry.getValue(new ResourceLocation("jungle")),
                         w -> new Coffin(Utils.copyPropertySafe(w.planks)))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
@@ -282,14 +282,14 @@ public class FurnishModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(COFFIN);
+        this.addEntry(coffin);
     }
 
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
         try {
-            LOG_BENCHES.blocks.forEach((w, block) -> {
+            logBenches.blocks.forEach((w, block) -> {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
@@ -312,7 +312,7 @@ public class FurnishModule extends SimpleModule {
                 }
 
             });
-            COFFIN.blocks.forEach((w, block) -> {
+            coffin.blocks.forEach((w, block) -> {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,

@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.mosaic_carpentry;
+package net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry;
 
 import caittastic.mosaiccarpentry.MosaicCarpentry;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
