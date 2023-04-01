@@ -41,9 +41,10 @@ dependencies {
     // Dependencies
     modImplementation("curse.maven:architectury-api-419699:4117956")
     modImplementation("curse.maven:cloth-config-348521:3972420")
+    modCompileOnly("curse.maven:resourceful-lib-570073:4434137")
     modImplementation("curse.maven:roughly-enough-items-310111:4119140")
-    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
     modImplementation("curse.maven:selene-499980:4460382")
+    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 
     // Imports
     modImplementation("curse.maven:another-furniture-610492:4032093")
@@ -61,7 +62,7 @@ dependencies {
     modImplementation("curse.maven:twigs-496913:3865476")
     modImplementation("curse.maven:friends-and-foes-551364:4429816")
 
-    modImplementation("curse.maven:macaws-bridges-351725:4446187")
+    modImplementation("curse.maven:macaws-bridges-351725:4446196")
     modImplementation("curse.maven:macaws-doors-378646:4446168")
     modImplementation("curse.maven:macaws-fences-and-walls-453925:4203533")
     modImplementation("curse.maven:macaws-lights-and-lamps-502372:4358250")
