@@ -16,6 +16,8 @@
   "block_type.another_furniture.drawer": "%s Drawer",
   "block_type.another_furniture.bench": "%s Bench",
 
+  "block_type.barkcarpets.bark_carpet": "%s Bark Carpet",
+
   "block_type.buildersaddition.arcade": "%s Arcade",
   "block_type.buildersaddition.bench": "%s Bench",
   "block_type.buildersaddition.bedside_table": "%s Bedside Table",
@@ -44,7 +46,29 @@
   "block_type.decorative_blocks.seat": "%s Seat",
   "block_type.decorative_winter.snowy_palisade": "Snowy %s Palisade",
 
+  "block_type.dramaticdoors.tall_door": "Tall %s Door",
+  "block_type.dramaticdoors.tall_macaw_bark_glass_door": "Tall %s Bark Glass Door",
+  "block_type.dramaticdoors.tall_macaw_barn_door": "Tall %s Barn Door",
+  "block_type.dramaticdoors.tall_macaw_barn_glass_door": "Tall %s Barn Glassed Door",
+  "block_type.dramaticdoors.tall_macaw_beach_door": "Tall %s Beach Door",
+  "block_type.dramaticdoors.tall_macaw_classic_door": "Tall %s Classic Door",
+  "block_type.dramaticdoors.tall_macaw_cottage_door": "Tall %s Cottage Door",
+  "block_type.dramaticdoors.tall_macaw_four_panel_door": "Tall %s Four Panel Door",
+  "block_type.dramaticdoors.tall_macaw_glass_door": "Tall %s Glass Door",
+  "block_type.dramaticdoors.tall_macaw_japanese2_door": "Tall %s Shoji Whole Door",
+  "block_type.dramaticdoors.tall_macaw_japanese_door": "Tall %s Shoji Door",
+  "block_type.dramaticdoors.tall_macaw_modern_door": "Tall %s Modern Door",
+  "block_type.dramaticdoors.tall_macaw_mystic_door": "Tall %s Mystic Door",
+  "block_type.dramaticdoors.tall_macaw_nether_door": "Tall %s Nether Door",
+  "block_type.dramaticdoors.tall_macaw_paper_door": "Tall %s Paper Door",
+  "block_type.dramaticdoors.tall_macaw_stable_door": "Tall %s Stable Door",
+  "block_type.dramaticdoors.tall_macaw_stable_head_door": "Tall %s Stable Horse Door",
+  "block_type.dramaticdoors.tall_macaw_swamp_door": "Tall %s Swamp Door",
+  "block_type.dramaticdoors.tall_macaw_tropical_door": "Tall %s Tropical Door",
+
   "block_type.farmersdelight.cabinet": "%s Cabinet",
+
+  "block_type.friendsandfoes.beehive": "%s Beehive",
 
   "block_type.furnish.bedside_table": "%s Bedside Table",
   "block_type.furnish.bench": "%s Bench",
@@ -66,10 +90,6 @@
   "block_type.mosaic_carpentry.mosaic": "%s Mosaic",
   "block_type.mosaic_carpentry.mosaic_stairs": "%s Mosaic Stairs",
   "block_type.mosaic_carpentry.mosaic_slab": "%s Mosaic Slab",
-
-  "block_type.friendsandfoes.beehive": "%s Beehive",
-
-  "block_type.dramaticdoors.tall_door": "Tall %s Door",
 
   "block_type.pokecube_legends.distortic_planks": "Distortic %s Planks",
   "block_type.pokecube_legends.distortic_stairs": "Distortic %s Stairs",
@@ -110,8 +130,9 @@
   "block_type.mcwbridges.wired_fence": "%s Wired Fence",
 
   "block_type.mcwdoors.bark_glass_door": "%s Bark Glass Door",
+  "block_type.mcwdoors.bamboo_door": "%s Mesh Door",
   "block_type.mcwdoors.barn_door": "%s Barn Door",
-  "block_type.mcwdoors.barn_glass_door": "%s Barn Glass Door",
+  "block_type.mcwdoors.barn_glass_door": "%s Barn Glassed Door",
   "block_type.mcwdoors.beach_door": "%s Beach Door",
   "block_type.mcwdoors.classic_door": "%s Classic Door",
   "block_type.mcwdoors.cottage_door": "%s Cottage Door",
@@ -131,6 +152,7 @@
 
   "block_type.mcwfences.picket_fence": "%s Picket Fence",
   "block_type.mcwfences.stockade_fence": "%s Stockade Fence",
+  "block_type.mcwfences.hedge": "%s Hedge",
   "block_type.mcwfences.horse_fence": "%s Horse Fence",
   "block_type.mcwfences.wired_fence": "%s Wired Fence",
   "block_type.mcwfences.pyramid_gate": "%s Pyramid Gate",
@@ -219,6 +241,7 @@
   "block_type.mcwtrpdoors.cottage_trapdoor": "%s Cottage Trapdoor",
   "block_type.mcwtrpdoors.four_panel_trapdoor": "%s Four Panel Trapdoor",
   "block_type.mcwtrpdoors.glass_trapdoor": "%s Glass Trapdoor",
+  "block_type.mcwtrpdoors.bamboo_trapdoor": "%s Mesh Trapdoor",
   "block_type.mcwtrpdoors.mystic_trapdoor": "%s Mystic Trapdoor",
   "block_type.mcwtrpdoors.paper_trapdoor": "%s Paper Trapdoor",
   "block_type.mcwtrpdoors.ranch_trapdoor": "%s Ranch Trapdoor",
@@ -301,6 +324,9 @@
   "block_type.cfm.upgraded_gate": "%s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
+  "block_type.productivebees.advanced_beehive": "Advanced %s Beehive",
+  "block_type.productivebees.expansion_box": "%s Expansion Box",
+
   "block_type.projectbrazier.armrest_chair": "%s Armrest Chair",
   "block_type.projectbrazier.bench": "%s Bench",
   "block_type.projectbrazier.bottom_platform": "%s Platform",
@@ -340,7 +366,20 @@
   "block_type.storagedrawers.half_drawers_4": "%s Half Drawers 2x2",
   "block_type.storagedrawers.trim": "%s Trim",
 
+  "block_type.xercamod.carved_1": "Carved %s",
+  "block_type.xercamod.carved_2": "Carved %s",
+  "block_type.xercamod.carved_3": "Carved %s",
+  "block_type.xercamod.carved_4": "Carved %s",
+  "block_type.xercamod.carved_5": "Carved %s",
+  "block_type.xercamod.carved_6": "Carved %s",
+  "block_type.xercamod.carved_7": "Carved %s",
+  "block_type.xercamod.carved_8": "Carved %s",
+
+  "wood_type.domum_ornamentum.cactus": "Green Cactus",
+  "wood_type.domum_ornamentum.cactus_extra": "Cactus",
   "wood_type.twilightforest.dark": "Darkwood",
+  "leaves_type.twilightforest.dark": "Darkwood",
+  "leaves_type.ulterlands.souldrained": "Petrified",
 
   "block_type.woodworks.boards": "%s Boards",
   "block_type.woodworks.bookshelf": "%s Bookshelf",

@@ -104,6 +104,8 @@ public class BuildersAdditionModule extends SimpleModule {
                             if (l == null) return null;
                             return new Hedge(shortenedId() + "/" + w.getAppendableId(), l);
                         })
+                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
+                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.LEAVES, Registry.BLOCK_REGISTRY)
@@ -228,7 +230,7 @@ public class BuildersAdditionModule extends SimpleModule {
 
         SUPPORTS_BRACKET = SimpleEntrySet.builder(WoodType.class, "",   "support_bracket",
                         Index.SUPPORT_BRACKET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SupportBracket(shortenedId() + "/" + w.getAppendableId(), w.planks))
+                ifHasChild(w -> new SupportBracket(shortenedId() + "/" + w.getAppendableId(), w.planks), "stripped_log"))
                 .addRecipe(modRes("support_bracket/support_bracket_oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)

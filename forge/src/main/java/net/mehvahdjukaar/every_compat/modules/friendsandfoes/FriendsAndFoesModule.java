@@ -24,12 +24,12 @@ public class FriendsAndFoesModule extends SimpleModule {
                         () -> getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE)))
+                .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
+                .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
+                .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
-                .addTexture(EveryCompat.res("block/spruce_beehive_front"))
-                .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
-                .addTexture(EveryCompat.res("block/spruce_beehive_side"))
-                .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .defaultRecipe()
                 .build();

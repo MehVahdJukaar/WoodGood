@@ -1,0 +1,7 @@
+{
+  "parent": "quark:block/hedge_post",
+  "textures": {
+    "log": "colorfulazaleas:block/azule_azalea_log_side",
+    "leaf": "colorfulazaleas:block/blue_blooming_azalea_leaves"
+  }
+}
