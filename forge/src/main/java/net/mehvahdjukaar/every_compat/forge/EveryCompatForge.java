@@ -82,7 +82,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
-        addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
+        // addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
 
         // addModule("graveyard", () -> GraveyardModule::new);
 

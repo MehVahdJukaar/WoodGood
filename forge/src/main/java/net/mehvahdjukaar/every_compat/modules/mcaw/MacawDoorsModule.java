@@ -4,6 +4,7 @@ import com.mcwdoors.kikoz.MacawsDoors;
 import com.mcwdoors.kikoz.init.BlockInit;
 import com.mcwdoors.kikoz.objects.JapaneseDoors;
 import com.mcwdoors.kikoz.objects.StableDoor;
+import com.mcwtrpdoors.kikoz.MacawsTrapdoors;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -24,6 +25,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.TrapDoorBlock;
 
 
 public class MacawDoorsModule extends SimpleModule {
@@ -36,6 +38,7 @@ public class MacawDoorsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> COTTAGE_DOORS;
     public final SimpleEntrySet<WoodType, Block> FOUR_PANEL_DOORS;
     public final SimpleEntrySet<WoodType, Block> GLASS_DOORS;
+    public final SimpleEntrySet<WoodType, Block> MESH_DOORS;
     public final SimpleEntrySet<WoodType, Block> MODERN_DOORS;
     public final SimpleEntrySet<WoodType, Block> MYSTIC_DOORS;
     public final SimpleEntrySet<WoodType, Block> NETHER_DOORS;
@@ -176,6 +179,25 @@ public class MacawDoorsModule extends SimpleModule {
                 .build();
 
         this.addEntry(GLASS_DOORS);
+
+        MESH_DOORS = SimpleEntrySet.builder(WoodType.class, "bamboo_door",
+                        BlockInit.OAK_BAMBOO_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> MacawsDoors.DoorItemGroup)
+                .addTextureM(modRes("block/oak_bamboo_door_lower"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_lower_m"))
+                .addTextureM(modRes("block/oak_bamboo_door_upper"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_upper_m"))
+                .addTextureM(modRes("item/oak_bamboo_door"), EveryCompat.res("item/mcaw/doors/oak_bamboo_door_m"))
+//                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(MESH_DOORS);
 
         MODERN_DOORS = SimpleEntrySet.builder(WoodType.class, "modern_door",
                         BlockInit.OAK_MODERN_DOOR, () -> WoodTypeRegistry.OAK_TYPE,

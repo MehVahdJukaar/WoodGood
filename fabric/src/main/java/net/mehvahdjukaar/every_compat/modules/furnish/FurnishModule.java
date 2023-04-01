@@ -2,10 +2,24 @@ package net.mehvahdjukaar.every_compat.modules.furnish;
 
 import com.google.gson.JsonObject;
 import io.github.wouink.furnish.Furnish;
-import io.github.wouink.furnish.block.*;
+import io.github.wouink.furnish.block.Bench;
+import io.github.wouink.furnish.block.Cabinet;
+import io.github.wouink.furnish.block.Chair;
+import io.github.wouink.furnish.block.Coffin;
+import io.github.wouink.furnish.block.Crate;
+import io.github.wouink.furnish.block.InventoryFurniture;
+import io.github.wouink.furnish.block.Ladder;
+import io.github.wouink.furnish.block.LogBench;
+import io.github.wouink.furnish.block.Shelf;
+import io.github.wouink.furnish.block.Shutter;
+import io.github.wouink.furnish.block.SimpleFurniture;
+import io.github.wouink.furnish.block.Table;
+import io.github.wouink.furnish.block.Wardrobe;
 import io.github.wouink.furnish.block.util.VoxelShapeHelper;
 import io.github.wouink.furnish.setup.FurnishBlocks;
 import io.github.wouink.furnish.setup.FurnishRegistries;
+import java.util.ArrayList;
+import java.util.List;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -35,15 +49,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class FurnishModule extends SimpleModule {
 

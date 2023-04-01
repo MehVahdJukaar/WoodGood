@@ -11,10 +11,10 @@ dependencies {
 
     // implementation fileTree(dir: 'mods', include: '*.jar')
 
-    modImplementation("net.mehvahdjukaar:moonlight:1.19.2-2.1.20")
-    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
+    // modImplementation("net.mehvahdjukaar:moonlight:1.19.2-2.1.20")
+    // modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
     // modImplementation("net.mehvahdjukaar:moonlight:1.19.2-2.1.4")
-    // modImplementation("curse.maven:selene-499980:3859470")
+     modImplementation("curse.maven:selene-499980:4460382")
 }
 
 publishing {

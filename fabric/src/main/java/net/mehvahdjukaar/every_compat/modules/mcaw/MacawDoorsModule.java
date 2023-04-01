@@ -36,6 +36,7 @@ public class MacawDoorsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> COTTAGE_DOORS;
     public final SimpleEntrySet<WoodType, Block> FOUR_PANEL_DOORS;
     public final SimpleEntrySet<WoodType, Block> GLASS_DOORS;
+    public final SimpleEntrySet<WoodType, Block> MESH_DOORS;
     public final SimpleEntrySet<WoodType, Block> MODERN_DOORS;
     public final SimpleEntrySet<WoodType, Block> MYSTIC_DOORS;
     public final SimpleEntrySet<WoodType, Block> NETHER_DOORS;
@@ -176,6 +177,25 @@ public class MacawDoorsModule extends SimpleModule {
                 .build();
 
         this.addEntry(GLASS_DOORS);
+
+        MESH_DOORS = SimpleEntrySet.builder(WoodType.class, "bamboo_door",
+                        () -> BlockInit.OAK_BAMBOO_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .addTextureM(modRes("block/oak_bamboo_door_lower"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_lower_m"))
+                .addTextureM(modRes("block/oak_bamboo_door_upper"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_upper_m"))
+                .addTextureM(modRes("item/oak_bamboo_door"), EveryCompat.res("item/mcaw/doors/oak_bamboo_door_m"))
+//                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(MESH_DOORS);
 
         MODERN_DOORS = SimpleEntrySet.builder(WoodType.class, "modern_door",
                         () -> BlockInit.OAK_MODERN_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
