@@ -1,14 +1,26 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.fabric.ClientPlatformHelperImpl;
 import net.mehvahdjukaar.moonlight.api.platform.fabric.PlatformHelperImpl;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.moddingplayground.twigs.api.block.TableBlock;
 import net.moddingplayground.twigs.api.block.TwigsBlocks;
@@ -37,5 +49,7 @@ public class TwigsModule extends SimpleModule {
 
         this.addEntry(TABLES);
     }
+
+
 
 }

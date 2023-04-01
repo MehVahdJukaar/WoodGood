@@ -76,6 +76,10 @@ public abstract class EveryCompat {
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
+        addOtherCompatMod("abnormals_delight", "autumnity", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "endergetic", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "atmospheric", List.of("farmersdelight"));
 
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
         addOtherCompatMod("macawbridgesbyg", "byg", List.of("mcwbridges"));

@@ -60,13 +60,14 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
         matrixStack.translate(0.5D, 0.5D, 0.5D);
         BakedModel bakedmodel = itemRenderer.getModel(item, null, null, 0);
         itemRenderer.render(item, transformType, false, matrixStack, buffer, combinedLight, combinedOverlay, bakedmodel);
-        matrixStack.popPose();
         if (!bakedmodel.isGui3d()) Lighting.setupForFlatItems();
         //forces rendering now with flat lighting
         if (buffer instanceof MultiBufferSource.BufferSource bu) {
             bu.endBatch();
         }
         Lighting.setupFor3DItems();
+        matrixStack.popPose();
+
     }
 
 

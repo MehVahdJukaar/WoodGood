@@ -1,12 +1,21 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.moddingplayground.twigs.block.TableBlock;
 import net.moddingplayground.twigs.init.TwigsBlocks;
@@ -34,4 +43,34 @@ public class TwigsModule extends SimpleModule {
         this.addEntry(TABLES);
     }
 
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+
+        try (TextureImage hammock = TextureImage.open(manager, EveryCompat.res("hammock"));
+             TextureImage mask = TextureImage.open(manager, EveryCompat.res("hammock_overlay"));
+             TextureImage bed_mask = TextureImage.open(manager, EveryCompat.res("bed_mask"))
+        ) {
+
+
+            for (var  d : DyeColor.values()                                   ) {
+                var r = Sheets.BED_TEXTURES[d.getId()];
+
+                try (TextureImage bedTexture = TextureImage.open(manager, r.texture())) {
+
+                    Palette p = Palette.fromImage(bedTexture, bed_mask);
+
+                    Respriter res = Respriter.of(hammock);
+
+                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation("hammocks",
+                            "item/" + d.getName()), res.recolor(p));
+
+                } catch (Exception ignored) {
+                }
+            }
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Tiki torch item texture : ", ex);
+        }
+    }
 }

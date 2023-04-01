@@ -37,7 +37,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         POSTS = SimpleEntrySet.builder(WoodType.class, "post",
                         () -> getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new PostBlock(() -> w.log))
+                        w -> new PostBlock(Utils.getID(w.log), Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.ITEM_REGISTRY)
                 .setTab(() -> ModCreativeModeTabs.MAIN)

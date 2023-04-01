@@ -7,6 +7,8 @@ import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
@@ -45,14 +47,16 @@ public class WoodConfigs {
 
         builder.push("entries");
         for (var reg : BlockSetAPI.getRegistries()) {
-            builder.push(reg.typeName().replace(" ", "_"));
-            for (var c : EveryCompat.ENTRY_TYPES.getOrDefault(reg.getType(), Set.of())) {
-                String key = c.replace(":", ".");
-                var config = builder.define(key, true);
-                var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
-                map.put(c, config);
+            if(reg.getType() == WoodType.class || reg.getType() == LeavesType.class) {
+                builder.push(reg.typeName().replace(" ", "_"));
+                for (var c : EveryCompat.ENTRY_TYPES.getOrDefault(reg.getType(), Set.of())) {
+                    String key = c.replace(":", ".");
+                    var config = builder.define(key, true);
+                    var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
+                    map.put(c, config);
+                }
+                builder.pop();
             }
-            builder.pop();
         }
         builder.pop();
 
