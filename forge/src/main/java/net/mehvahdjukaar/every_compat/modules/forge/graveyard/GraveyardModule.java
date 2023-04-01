@@ -1,5 +1,5 @@
 
-package net.mehvahdjukaar.every_compat.modules.graveyard;
+package net.mehvahdjukaar.every_compat.modules.forge.graveyard;
 
 import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;

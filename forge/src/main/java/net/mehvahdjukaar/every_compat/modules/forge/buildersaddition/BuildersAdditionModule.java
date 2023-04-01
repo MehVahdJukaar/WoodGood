@@ -1,37 +1,20 @@
-package net.mehvahdjukaar.every_compat.modules.buildersaddition;
+package net.mehvahdjukaar.every_compat.modules.forge.buildersaddition;
 
 import com.mrh0.buildersaddition.Index;
-import com.mrh0.buildersaddition.blocks.Arcade;
-import com.mrh0.buildersaddition.blocks.BedsideTable;
-import com.mrh0.buildersaddition.blocks.Bench;
-import com.mrh0.buildersaddition.blocks.Bookshelf;
-import com.mrh0.buildersaddition.blocks.Cabinet;
-import com.mrh0.buildersaddition.blocks.Chair;
-import com.mrh0.buildersaddition.blocks.Counter;
-import com.mrh0.buildersaddition.blocks.Cupboard;
-import com.mrh0.buildersaddition.blocks.Hedge;
-import com.mrh0.buildersaddition.blocks.Shelf;
-import com.mrh0.buildersaddition.blocks.SmallCupboard;
-import com.mrh0.buildersaddition.blocks.Stool;
-import com.mrh0.buildersaddition.blocks.SupportBracket;
-import com.mrh0.buildersaddition.blocks.Table;
-import com.mrh0.buildersaddition.blocks.VerticalSlab;
-import com.mrh0.buildersaddition.client.render.tileentity.ShelfRenderer;
+import com.mrh0.buildersaddition.blocks.*;
 import com.mrh0.buildersaddition.itemgroup.ModGroup;
 import com.mrh0.buildersaddition.tileentity.ShelfTileEntity;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
+import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -41,33 +24,47 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Collection;
+
 
 public class BuildersAdditionModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> ARCADES;
-    public final SimpleEntrySet<WoodType, Block> BEDSIDE_TABLES;
-    public final SimpleEntrySet<WoodType, Block> BENCHES;
-    public final SimpleEntrySet<WoodType, Block> BOOKSHELVES;
-    public final SimpleEntrySet<WoodType, Block> CABINETS;
-    public final SimpleEntrySet<WoodType, Block> CHAIRS;
-    public final SimpleEntrySet<WoodType, Block> COUNTERS_ANDESITE;
-    public final SimpleEntrySet<WoodType, Block> COUNTERS_BLACKSTONE;
-    public final SimpleEntrySet<WoodType, Block> COUNTERS_DEEPSLATE;
-    public final SimpleEntrySet<WoodType, Block> COUNTERS_DIORITE;
-    public final SimpleEntrySet<WoodType, Block> COUNTERS_GRANITE;
-    public final SimpleEntrySet<WoodType, Block> CUPBOARDS;
-    public final SimpleEntrySet<LeavesType, Block> HEDGES;
-    public final SimpleEntrySet<WoodType, Block> SHELVES;
-    public final SimpleEntrySet<WoodType, Block> SMALL_CUPBOARDS;
-    public final SimpleEntrySet<WoodType, Block> STOOLS;
-    public final SimpleEntrySet<WoodType, Block> SUPPORTS_BRACKET;
-    public final SimpleEntrySet<WoodType, Block> TABLES;
+    public final SimpleEntrySet<WoodType, Block> arcades;
+    public final SimpleEntrySet<WoodType, Block> bedsideTables;
+    public final SimpleEntrySet<WoodType, Block> benches;
+    public final SimpleEntrySet<WoodType, Block> bookshelves;
+    public final SimpleEntrySet<WoodType, Block> cabinets;
+    public final SimpleEntrySet<WoodType, Block> chairs;
+    public final SimpleEntrySet<WoodType, Block> countersAndesite;
+    public final SimpleEntrySet<WoodType, Block> countersBlackstone;
+    public final SimpleEntrySet<WoodType, Block> countersDeepslate;
+    public final SimpleEntrySet<WoodType, Block> countersDiorite;
+    public final SimpleEntrySet<WoodType, Block> countersGranite;
+    public final SimpleEntrySet<WoodType, Block> cupboards;
+    public final SimpleEntrySet<LeavesType, Block> hedges;
+    public final SimpleEntrySet<WoodType, Block> shelves;
+    public final SimpleEntrySet<WoodType, Block> smallCupboards;
+    public final SimpleEntrySet<WoodType, Block> stools;
+    public final SimpleEntrySet<WoodType, Block> supportsBracket;
+    public final SimpleEntrySet<WoodType, Block> tables;
+    //public final SimpleEntrySet<WoodType, Block> panels;
 
     public BuildersAdditionModule(String modId) {
         super(modId, "bca");
         CreativeModeTab tab = ModGroup.MAIN;
 
-        TABLES = SimpleEntrySet.builder(WoodType.class, "", "table",
+        /*
+        panels = SimpleEntrySet.builder(WoodType.class, "", "vertical_slab",
+                        Index.OAK_VERTICAL_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addRecipe(modRes("vertical_slab/vertical_slab_oak"))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(panels);*/
+
+        tables = SimpleEntrySet.builder(WoodType.class, "", "table",
                         Index.TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Table(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -75,9 +72,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(TABLES);
+        this.addEntry(tables);
 
-        STOOLS = SimpleEntrySet.builder(WoodType.class, "", "stool",
+        stools = SimpleEntrySet.builder(WoodType.class, "", "stool",
                         Index.STOOL_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Stool(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -85,9 +82,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(STOOLS);
+        this.addEntry(stools);
 
-        CHAIRS = SimpleEntrySet.builder(WoodType.class, "",  "chair",
+        chairs = SimpleEntrySet.builder(WoodType.class, "",  "chair",
                         Index.CHAIR_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Chair(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -95,9 +92,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(CHAIRS);
+        this.addEntry(chairs);
 
-        HEDGES = SimpleEntrySet.builder(LeavesType.class, "",  "hedge",
+        hedges = SimpleEntrySet.builder(LeavesType.class, "",  "hedge",
                         Index.HEDGE_OAK, () -> LeavesTypeRegistry.OAK_TYPE,
                         w -> {
                             var l = w.getBlockOfThis("leaves");
@@ -115,9 +112,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(HEDGES);
+        this.addEntry(hedges);
 
-        COUNTERS_ANDESITE = SimpleEntrySet.builder(WoodType.class, "andesite",  "counter",
+        countersAndesite = SimpleEntrySet.builder(WoodType.class, "andesite",  "counter",
                         () -> getModBlock("counter_oak_andesite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_andesite"))
@@ -125,9 +122,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(COUNTERS_ANDESITE);
+        this.addEntry(countersAndesite);
 
-        COUNTERS_DIORITE = SimpleEntrySet.builder(WoodType.class, "diorite",  "counter",
+        countersDiorite = SimpleEntrySet.builder(WoodType.class, "diorite",  "counter",
                         () -> getModBlock("counter_oak_diorite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_diorite"))
@@ -135,9 +132,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(COUNTERS_DIORITE);
+        this.addEntry(countersDiorite);
 
-        COUNTERS_GRANITE = SimpleEntrySet.builder(WoodType.class, "granite",  "counter",
+        countersGranite = SimpleEntrySet.builder(WoodType.class, "granite",  "counter",
                         () -> getModBlock("counter_oak_granite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_granite"))
@@ -145,9 +142,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(COUNTERS_GRANITE);
+        this.addEntry(countersGranite);
 
-        COUNTERS_BLACKSTONE = SimpleEntrySet.builder(WoodType.class, "blackstone",  "counter",
+        countersBlackstone = SimpleEntrySet.builder(WoodType.class, "blackstone",  "counter",
                         () -> getModBlock("counter_oak_blackstone"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_blackstone"))
@@ -155,9 +152,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(COUNTERS_BLACKSTONE);
+        this.addEntry(countersBlackstone);
 
-        COUNTERS_DEEPSLATE = SimpleEntrySet.builder(WoodType.class, "deepslate",  "counter",
+        countersDeepslate = SimpleEntrySet.builder(WoodType.class, "deepslate",  "counter",
                         () -> getModBlock("counter_oak_deepslate"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_deepslate"))
@@ -165,9 +162,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(COUNTERS_DEEPSLATE);
+        this.addEntry(countersDeepslate);
 
-        BOOKSHELVES = SimpleEntrySet.builder(WoodType.class, "",   "bookshelf",
+        bookshelves = SimpleEntrySet.builder(WoodType.class, "",   "bookshelf",
                         Index.BOOKSHELF_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatBookshelf(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -175,9 +172,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(BOOKSHELVES);
+        this.addEntry(bookshelves);
 
-        SHELVES = SimpleEntrySet.builder(WoodType.class, "",   "shelf",
+        shelves = SimpleEntrySet.builder(WoodType.class, "",   "shelf",
                         Index.SHELF_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatShelf(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -186,9 +183,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(SHELVES);
+        this.addEntry(shelves);
 
-        CABINETS = SimpleEntrySet.builder(WoodType.class, "",   "cabinet",
+        cabinets = SimpleEntrySet.builder(WoodType.class, "",   "cabinet",
                         Index.CABINET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatCabinet(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -196,9 +193,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(CABINETS);
+        this.addEntry(cabinets);
 
-        CUPBOARDS = SimpleEntrySet.builder(WoodType.class, "",  "cupboard",
+        cupboards = SimpleEntrySet.builder(WoodType.class, "",  "cupboard",
                         Index.CUPBOARD_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Cupboard(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -206,9 +203,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(CUPBOARDS);
+        this.addEntry(cupboards);
 
-        SMALL_CUPBOARDS = SimpleEntrySet.builder(WoodType.class, "",  "small_cupboard",
+        smallCupboards = SimpleEntrySet.builder(WoodType.class, "",  "small_cupboard",
                         Index.SMALL_CUPBOARD_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SmallCupboard(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("small_cupboard/small_cupboard_oak"))
@@ -216,9 +213,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(SMALL_CUPBOARDS);
+        this.addEntry(smallCupboards);
 
-        BENCHES = SimpleEntrySet.builder(WoodType.class, "", "bench",
+        benches = SimpleEntrySet.builder(WoodType.class, "", "bench",
                         Index.BENCH_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Bench(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -226,9 +223,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(BENCHES);
+        this.addEntry(benches);
 
-        SUPPORTS_BRACKET = SimpleEntrySet.builder(WoodType.class, "",   "support_bracket",
+        supportsBracket = SimpleEntrySet.builder(WoodType.class, "",   "support_bracket",
                         Index.SUPPORT_BRACKET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                 ifHasChild(w -> new SupportBracket(shortenedId() + "/" + w.getAppendableId(), w.planks), "stripped_log"))
                 .addRecipe(modRes("support_bracket/support_bracket_oak"))
@@ -236,9 +233,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(SUPPORTS_BRACKET);
+        this.addEntry(supportsBracket);
 
-        BEDSIDE_TABLES = SimpleEntrySet.builder(WoodType.class, "",   "bedside_table",
+        bedsideTables = SimpleEntrySet.builder(WoodType.class, "",   "bedside_table",
                         () -> getModBlock("bedside_table_oak"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BedsideTable(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("bedside_table/bedside_table_oak"))
@@ -246,9 +243,9 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(BEDSIDE_TABLES);
+        this.addEntry(bedsideTables);
 
-        ARCADES = SimpleEntrySet.builder(WoodType.class, "", "arcade",
+        arcades = SimpleEntrySet.builder(WoodType.class, "", "arcade",
                         Index.ARCADE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatArcade(shortenedId() + "/" + w.getAppendableId(), w.log))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
@@ -257,7 +254,7 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(ARCADES);
+        this.addEntry(arcades);
     }
 
     private static class CompatBookshelf extends Bookshelf {
@@ -278,7 +275,7 @@ public class BuildersAdditionModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return SHELVES.getTileHolder().tile;
+            return shelves.getTileHolder().tile;
         }
     }
 
@@ -308,7 +305,7 @@ public class BuildersAdditionModule extends SimpleModule {
     @Override
     public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
-        HEDGES.blocks.forEach((t, b) -> {
+        hedges.blocks.forEach((t, b) -> {
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
         });
     }
@@ -316,8 +313,15 @@ public class BuildersAdditionModule extends SimpleModule {
     @Override
     public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
         super.registerItemColors(event);
-        HEDGES.blocks.forEach((t, b) -> {
+        hedges.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         });
+    }
+
+    @Override
+    public void registerWoodBlocks(Registrator<Block> registry, Collection<WoodType> woodTypes) {
+
+
+        super.registerWoodBlocks(registry, woodTypes);
     }
 }

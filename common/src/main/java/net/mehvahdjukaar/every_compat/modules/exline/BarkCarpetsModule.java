@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.exline;
+package net.mehvahdjukaar.every_compat.modules.exline;
 
 import com.exline.barkcarpets.BarkCarpets;
 import com.exline.barkcarpets.BlockInit;

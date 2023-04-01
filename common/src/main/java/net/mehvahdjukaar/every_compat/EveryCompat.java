@@ -155,6 +155,9 @@ public abstract class EveryCompat {
         int am = newSize - prevRegSize;
         float p = (am / (float) newSize) * 100f;
         EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", am, p);
+        if (p > 33) {
+            EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time. You might want to uninstall some furniture mod");
+        }
     }
 
     protected void registerItems(Registrator<Item> event) {

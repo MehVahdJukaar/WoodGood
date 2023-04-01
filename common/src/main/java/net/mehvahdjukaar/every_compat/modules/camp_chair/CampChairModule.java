@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.camp_chair;
 
 import dlovin.smalls.campchair.core.blocks.CampChairBlock;
-import dlovin.smalls.campchair.core.init.BlockInit;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -14,13 +13,13 @@ import net.minecraft.world.level.material.Material;
 
 public class CampChairModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, CampChairBlock> CAMP_CHAIRS;
+    public final SimpleEntrySet<WoodType, CampChairBlock> campChairs;
 
     public CampChairModule(String modId) {
         super(modId, "cc");
 
-        CAMP_CHAIRS = SimpleEntrySet.builder(WoodType.class, "camp_chair",
-                        BlockInit.OAK_CAMP_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
+        campChairs = SimpleEntrySet.builder(WoodType.class, "camp_chair",
+                        () -> getModBlock("oak_camp_chair", CampChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CampChairBlock(BlockBehaviour.Properties.of(Material.CAKE, w.material.getColor())
                                 .strength(2.0F, 3.0F).sound(SoundType.WOOD)))
                 .addTag(modRes("camp_chairs"), Registry.BLOCK_REGISTRY)
@@ -29,7 +28,7 @@ public class CampChairModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(CAMP_CHAIRS);
+        this.addEntry(campChairs);
     }
 
 

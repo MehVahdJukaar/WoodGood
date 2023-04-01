@@ -21,7 +21,6 @@ import net.minecraft.client.resources.metadata.animation.AnimationMetadataSectio
 import net.minecraft.core.Registry;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -30,19 +29,19 @@ import java.util.Map;
 
 public class DecorativeBlocksModule extends SimpleModule {
 
-    public final Map<WoodType, DBWoodType> WT_CONVERSION = new HashMap<>();
-    public final SimpleEntrySet<WoodType, Block> BEAMS;
-    public final SimpleEntrySet<WoodType, Block> PALISADES;
-    public final SimpleEntrySet<WoodType, Block> SUPPORTS;
-    public final SimpleEntrySet<WoodType, Block> SEATS;
+    public final Map<WoodType, DBWoodType> wtConversion = new HashMap<>();
+    public final SimpleEntrySet<WoodType, Block> beams;
+    public final SimpleEntrySet<WoodType, Block> palisades;
+    public final SimpleEntrySet<WoodType, Block> supports;
+    public final SimpleEntrySet<WoodType, Block> seats;
 
     public DecorativeBlocksModule(String modId) {
         super(modId, "db");
 
 
-        BEAMS = SimpleEntrySet.builder(WoodType.class, "beam",
+        beams = SimpleEntrySet.builder(WoodType.class, "beam",
                         () -> DBBlocks.BEAMS.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> DBBlocks.createDecorativeBlock(WT_CONVERSION.get(w), WoodDecorativeBlockTypes.BEAM))
+                        w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.BEAM))
                 .addTag(modRes("beams"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("beams"), Registry.ITEM_REGISTRY)
                 .defaultRecipe()
@@ -52,12 +51,12 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTexture(modRes("block/oak_beam_side"))
                 .build();
 
-        this.addEntry(BEAMS);
+        this.addEntry(beams);
 
 
-        PALISADES = SimpleEntrySet.builder(WoodType.class, "palisade",
+        palisades = SimpleEntrySet.builder(WoodType.class, "palisade",
                         () -> DBBlocks.PALISADES.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> DBBlocks.createDecorativeBlock(WT_CONVERSION.get(w), WoodDecorativeBlockTypes.PALISADE))
+                        w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.PALISADE))
                 .addTag(modRes("palisades"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("palisades"), Registry.ITEM_REGISTRY)
                 .defaultRecipe()
@@ -67,12 +66,12 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTexture(modRes("block/oak_palisade_side"))
                 .build();
 
-        this.addEntry(PALISADES);
+        this.addEntry(palisades);
 
 
-        SUPPORTS = SimpleEntrySet.builder(WoodType.class, "support",
+        supports = SimpleEntrySet.builder(WoodType.class, "support",
                         () -> DBBlocks.SUPPORTS.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> DBBlocks.createDecorativeBlock(WT_CONVERSION.get(w), WoodDecorativeBlockTypes.SUPPORT))
+                        w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.SUPPORT))
                 .addTag(modRes("supports"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("supports"), Registry.ITEM_REGISTRY)
                 .addCustomItem((w, b, p) -> new SupportItem(b, p))
@@ -84,12 +83,12 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .build();
 
 
-        this.addEntry(SUPPORTS);
+        this.addEntry(supports);
 
 
-        SEATS = SimpleEntrySet.builder(WoodType.class, "seat",
+        seats = SimpleEntrySet.builder(WoodType.class, "seat",
                         () -> DBBlocks.SEATS.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> DBBlocks.createDecorativeBlock(WT_CONVERSION.get(w), WoodDecorativeBlockTypes.SEAT))
+                        w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.SEAT))
                 .addTag(modRes("seats"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("seats"), Registry.ITEM_REGISTRY)
                 .defaultRecipe()
@@ -99,7 +98,7 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTexture(modRes("block/oak_seat"))
                 .build();
 
-        this.addEntry(SEATS);
+        this.addEntry(seats);
 
     }
 
@@ -116,7 +115,7 @@ public class DecorativeBlocksModule extends SimpleModule {
 
     @Override
     public void registerWoodBlocks(Registrator<Block> registry, Collection<WoodType> woodTypes) {
-        woodTypes.forEach(w -> WT_CONVERSION.put(w, new DBWoodType(w)));
+        woodTypes.forEach(w -> wtConversion.put(w, new DBWoodType(w)));
         super.registerWoodBlocks(registry, woodTypes);
     }
 

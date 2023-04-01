@@ -2,51 +2,40 @@ package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwwindows.kikoz.MacawsWindows;
 import com.mcwwindows.kikoz.init.BlockInit;
-import com.mcwwindows.kikoz.objects.Blinds;
-import com.mcwwindows.kikoz.objects.Parapet;
-import com.mcwwindows.kikoz.objects.Shutter;
-import com.mcwwindows.kikoz.objects.Window;
-import com.mcwwindows.kikoz.objects.WindowBarred;
-import com.mrcrayfish.backpacked.block.ShelfBlock;
+import com.mcwwindows.kikoz.objects.*;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class MacawWindowsModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> BLINDS;
-    public final SimpleEntrySet<WoodType, Block> LOG_PARAPETS;
-    public final SimpleEntrySet<WoodType, Block> LOG_WINDOWS;
-    public final SimpleEntrySet<WoodType, Block> LOG_PANE_WINDOWS;
-    public final SimpleEntrySet<WoodType, Block> LOG_FOUR_WINDOWS;
-    public final SimpleEntrySet<WoodType, Block> LOUVERED_SHUTTERS;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_WINDOWS;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_FOUR_WINDOWS;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_PARAPETS;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_PANE_WINDOWS;
-    public final SimpleEntrySet<WoodType, Block> SHUTTERS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_WINDOWS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_PANE_WINDOWS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_FOUR_WINDOW;
+    public final SimpleEntrySet<WoodType, Block> blinds;
+    public final SimpleEntrySet<WoodType, Block> logParapets;
+    public final SimpleEntrySet<WoodType, Block> logWindows;
+    public final SimpleEntrySet<WoodType, Block> logPaneWindows;
+    public final SimpleEntrySet<WoodType, Block> logFourWindows;
+    public final SimpleEntrySet<WoodType, Block> louveredShutters;
+    public final SimpleEntrySet<WoodType, Block> planksWindows;
+    public final SimpleEntrySet<WoodType, Block> planksFourWindows;
+    public final SimpleEntrySet<WoodType, Block> planksParapets;
+    public final SimpleEntrySet<WoodType, Block> planksPaneWindows;
+    public final SimpleEntrySet<WoodType, Block> shutters;
+    public final SimpleEntrySet<WoodType, Block> strippedLogWindows;
+    public final SimpleEntrySet<WoodType, Block> strippedLogPaneWindows;
+    public final SimpleEntrySet<WoodType, Block> strippedLogFourWindow;
 
 
     public MacawWindowsModule(String modId) {
         super(modId, "mcw");
 
-        BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds",
+        blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
                         BlockInit.OAK_BLINDS, () -> WoodTypeRegistry.OAK_TYPE, w -> new Blinds())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.Window2ItemGroup)
@@ -54,9 +43,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(BLINDS);
+        this.addEntry(blinds);
 
-        LOG_PARAPETS = SimpleEntrySet.builder(WoodType.class, "log_parapet",
+        logParapets = SimpleEntrySet.builder(WoodType.class, "log_parapet",
                         BlockInit.OAK_LOG_PARAPET, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Parapet(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -64,9 +53,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(LOG_PARAPETS);
+        this.addEntry(logParapets);
 
-        PLANKS_PARAPETS = SimpleEntrySet.builder(WoodType.class, "plank_parapet",
+        planksParapets = SimpleEntrySet.builder(WoodType.class, "plank_parapet",
                         BlockInit.OAK_PLANK_PARAPET, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Parapet(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -74,9 +63,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(PLANKS_PARAPETS);
+        this.addEntry(planksParapets);
 
-        LOG_WINDOWS = SimpleEntrySet.builder(WoodType.class, "window",
+        logWindows = SimpleEntrySet.builder(WoodType.class, "window",
                         BlockInit.OAK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
@@ -87,9 +76,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(LOG_WINDOWS);
+        this.addEntry(logWindows);
 
-        PLANKS_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_window",
+        planksWindows = SimpleEntrySet.builder(WoodType.class, "plank_window",
                         BlockInit.OAK_PLANK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
@@ -100,9 +89,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(PLANKS_WINDOWS);
+        this.addEntry(planksWindows);
 
-        LOG_PANE_WINDOWS = SimpleEntrySet.builder(WoodType.class, "window2",
+        logPaneWindows = SimpleEntrySet.builder(WoodType.class, "window2",
                         BlockInit.OAK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
@@ -113,9 +102,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(LOG_PANE_WINDOWS);
+        this.addEntry(logPaneWindows);
 
-        PLANKS_PANE_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_window2",
+        planksPaneWindows = SimpleEntrySet.builder(WoodType.class, "plank_window2",
                         BlockInit.OAK_PLANK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
@@ -126,9 +115,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(PLANKS_PANE_WINDOWS);
+        this.addEntry(planksPaneWindows);
 
-        STRIPPED_LOG_WINDOWS = SimpleEntrySet.builder(WoodType.class, "log_window", "stripped",
+        strippedLogWindows = SimpleEntrySet.builder(WoodType.class, "log_window", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
@@ -139,9 +128,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_LOG_WINDOWS);
+        this.addEntry(strippedLogWindows);
 
-        STRIPPED_LOG_PANE_WINDOWS = SimpleEntrySet.builder(WoodType.class, "log_window2", "stripped",
+        strippedLogPaneWindows = SimpleEntrySet.builder(WoodType.class, "log_window2", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
@@ -152,9 +141,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_LOG_PANE_WINDOWS);
+        this.addEntry(strippedLogPaneWindows);
 
-        LOG_FOUR_WINDOWS = SimpleEntrySet.builder(WoodType.class, "four_window",
+        logFourWindows = SimpleEntrySet.builder(WoodType.class, "four_window",
                         BlockInit.OAK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
@@ -165,9 +154,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(LOG_FOUR_WINDOWS);
+        this.addEntry(logFourWindows);
 
-        PLANKS_FOUR_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_four_window",
+        planksFourWindows = SimpleEntrySet.builder(WoodType.class, "plank_four_window",
                         BlockInit.OAK_PLANK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
@@ -178,9 +167,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(PLANKS_FOUR_WINDOWS);
+        this.addEntry(planksFourWindows);
 
-        STRIPPED_LOG_FOUR_WINDOW = SimpleEntrySet.builder(WoodType.class, "log_four_window", "stripped",
+        strippedLogFourWindow = SimpleEntrySet.builder(WoodType.class, "log_four_window", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
@@ -191,9 +180,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_LOG_FOUR_WINDOW);
+        this.addEntry(strippedLogFourWindow);
 
-        LOUVERED_SHUTTERS = SimpleEntrySet.builder(WoodType.class, "louvered_shutter",
+        louveredShutters = SimpleEntrySet.builder(WoodType.class, "louvered_shutter",
                         BlockInit.OAK_LOUVERED_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
@@ -205,9 +194,9 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(LOUVERED_SHUTTERS);
+        this.addEntry(louveredShutters);
 
-        SHUTTERS = SimpleEntrySet.builder(WoodType.class, "shutter",
+        shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
                         BlockInit.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
@@ -218,7 +207,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(SHUTTERS);
+        this.addEntry(shutters);
     }
 
     private void shutterPalette(Palette p) {

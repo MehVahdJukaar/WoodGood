@@ -19,7 +19,7 @@ public class CampChairModule extends SimpleModule {
     public CampChairModule(String modId) {
         super(modId, "cc");
 
-        CAMP_CHAIRS = SimpleEntrySet.builder(WoodType.class, "camp_chair",
+        campChairs = SimpleEntrySet.builder(WoodType.class, "camp_chair",
                         () -> BlockInit.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CampChairBlock(BlockBehaviour.Properties.of(Material.CAKE, w.material.getColor())
                                 .strength(2.0F, 3.0F).sound(SoundType.WOOD)))
@@ -29,7 +29,7 @@ public class CampChairModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(CAMP_CHAIRS);
+        this.addEntry(campChairs);
     }
 
 

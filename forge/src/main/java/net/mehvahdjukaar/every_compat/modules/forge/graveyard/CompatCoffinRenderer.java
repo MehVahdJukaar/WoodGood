@@ -1,32 +1,20 @@
-package net.mehvahdjukaar.every_compat.modules.graveyard;
+package net.mehvahdjukaar.every_compat.modules.forge.graveyard;
 
 import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.finallion.graveyard.blockentities.enums.SarcophagusPart;
 import com.finallion.graveyard.blockentities.render.SarcophagusBlockEntityRenderer;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
-import com.finallion.graveyard.init.TGTileEntities;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
-import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
-import it.unimi.dsi.fastutil.ints.Int2IntFunction;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.ModelBlockRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -40,7 +28,7 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
     public void render(SarcophagusBlockEntity entity, float tickDelta, PoseStack matrixStack, MultiBufferSource vertexConsumers, int light, int overlay) {
         BlockState blockState = entity.getBlockState();
         DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> propertySource = DoubleBlockCombiner.combineWithNeigbour(
-                (BlockEntityType)GraveyardModule.COFFIN_TILE,
+                (BlockEntityType) GraveyardModule.COFFIN_TILE,
                 SarcophagusBlock::getBlockType,
                 SarcophagusBlock::getConnectedDirection,
                 ChestBlock.FACING,
@@ -52,8 +40,8 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
         float g = propertySource.apply(SarcophagusBlock.opennessCombiner(entity)).get(tickDelta);
         g = 1.0F - g;
         g = 1.0F - g * g * g;
-        String base = ((SarcophagusBlock)blockState.getBlock()).getBase();
-        String lid = ((SarcophagusBlock)blockState.getBlock()).getLid();
+        String base = ((SarcophagusBlock) blockState.getBlock()).getBase();
+        String lid = ((SarcophagusBlock) blockState.getBlock()).getLid();
         BakedModel baseModel = getCustomModel(base);
         BakedModel lidModel = getCustomModel(lid);
         if (entity.getLevel() != null && entity.getBlockState().getValue(SarcophagusBlock.PART) == SarcophagusPart.HEAD) {
@@ -80,7 +68,7 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
             boolean isLid
     ) {
         matrixStack.pushPose();
-        Direction direction = ((Direction)entity.getBlockState().getValue(SarcophagusBlock.FACING)).getOpposite();
+        Direction direction = ((Direction) entity.getBlockState().getValue(SarcophagusBlock.FACING)).getOpposite();
         float f = direction.toYRot();
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(-f));
         switch (direction) {
@@ -90,7 +78,7 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
         }
 
         if (isLid) {
-            matrixStack.translate((double)g * 0.3, (double)g * 0.3, 0.0);
+            matrixStack.translate((double) g * 0.3, (double) g * 0.3, 0.0);
             matrixStack.mulPose(Vector3f.ZN.rotationDegrees(g * 45.0F));
         }
 

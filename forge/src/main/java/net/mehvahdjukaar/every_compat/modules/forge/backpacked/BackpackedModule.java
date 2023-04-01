@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.backpacked;
+package net.mehvahdjukaar.every_compat.modules.forge.backpacked;
 
 import com.mrcrayfish.backpacked.Backpacked;
 import com.mrcrayfish.backpacked.block.ShelfBlock;
@@ -23,12 +23,12 @@ import net.minecraft.world.level.block.state.BlockState;
 //credit to WenXin2
 public class BackpackedModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> SHELF;
+    public final SimpleEntrySet<WoodType, Block> shelves;
 
     public BackpackedModule(String modId) {
         super(modId, "bp");
 
-        SHELF = SimpleEntrySet.builder(WoodType.class, "backpack_shelf",
+        shelves = SimpleEntrySet.builder(WoodType.class, "backpack_shelf",
                         ModBlocks.OAK_BACKPACK_SHELF, () -> WoodTypeRegistry.OAK_TYPE,
                 ifHasChild(w -> new CompatShelfBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -38,12 +38,12 @@ public class BackpackedModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(SHELF);
+        this.addEntry(shelves);
     }
 
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register((BlockEntityType<ShelfBlockEntity>) (SHELF.getTileHolder().tile), ShelfRenderer::new);
+        event.register((BlockEntityType<ShelfBlockEntity>) (shelves.getTileHolder().tile), ShelfRenderer::new);
 
     }
 
@@ -55,7 +55,7 @@ public class BackpackedModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return SHELF.getTileHolder().tile;
+            return shelves.getTileHolder().tile;
         }
     }
 
