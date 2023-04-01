@@ -20,11 +20,11 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 
 public class AnotherFurnitureModule extends SimpleModule {
 
@@ -39,9 +39,10 @@ public class AnotherFurnitureModule extends SimpleModule {
     public AnotherFurnitureModule(String modId) {
         super(modId, "af");
 
-        PLANTER_BOXES = SimpleEntrySet.builder(WoodType.class, "planter_box",
+        planterBoxes = SimpleEntrySet.builder(WoodType.class, "planter_box",
                         AFBlocks.OAK_PLANTER_BOX, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatPlanterBoxBlock(Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("planter_boxes"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("planter_boxes"), Registry.ITEM_REGISTRY)
                 .useLootFromBase()
@@ -53,12 +54,13 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTextureM(modRes("block/planter_box/oak_top_sides"), EveryCompat.res("block/af/planter_box_top_sides_mask"))
                 .build();
 
-        this.addEntry(PLANTER_BOXES);
+        this.addEntry(planterBoxes);
 
-        SHUTTERS = SimpleEntrySet.builder(WoodType.class, "shutter",
+        shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
                         AFBlocks.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ShutterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shutters"), Registry.ITEM_REGISTRY)
                 .useLootFromBase()
                 .defaultRecipe()
@@ -70,12 +72,13 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .createPaletteFromOak(this::shuttersPalette)
                 .build();
 
-        this.addEntry(SHUTTERS);
+        this.addEntry(shutters);
 
-        TABLES = SimpleEntrySet.builder(WoodType.class, "table",
+        tables = SimpleEntrySet.builder(WoodType.class, "table",
                         AFBlocks.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
                 .useLootFromBase()
                 .defaultRecipe()
@@ -87,12 +90,13 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/table/oak_top"))
                 .build();
 
-        this.addEntry(TABLES);
+        this.addEntry(tables);
 
-        CHAIRS = SimpleEntrySet.builder(WoodType.class, "chair",
+        chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         AFBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("chairs"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("chairs"), Registry.ITEM_REGISTRY)
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
@@ -102,12 +106,13 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/chair/oak_seat"))
                 .build();
 
-        this.addEntry(CHAIRS);
+        this.addEntry(chairs);
 
-        SHELVES = SimpleEntrySet.builder(WoodType.class, "shelf",
+        shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
                         AFBlocks.OAK_SHELF, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatShelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("shelves"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shelves"), Registry.ITEM_REGISTRY)
                 .addTile(CompatShelfBlockTile::new)
                 .defaultRecipe()
@@ -118,9 +123,9 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/shelf/oak_supports"))
                 .build();
 
-        this.addEntry(SHELVES);
-        
-        DRAWERS = SimpleEntrySet.builder(WoodType.class, "drawer",
+        this.addEntry(shelves);
+
+        drawers = SimpleEntrySet.builder(WoodType.class, "drawer",
                         AFBlocks.OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DrawerBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
@@ -135,9 +140,9 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/drawer/oak_top"))
                 .build();
 
-        this.addEntry(DRAWERS);
-        
-        BENCHES = SimpleEntrySet.builder(WoodType.class, "bench",
+        this.addEntry(drawers);
+
+        benches = SimpleEntrySet.builder(WoodType.class, "bench",
                         AFBlocks.OAK_BENCH, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BenchBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("benches"), Registry.BLOCK_REGISTRY)
@@ -148,7 +153,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/bench/oak"))
                 .build();
 
-        this.addEntry(BENCHES);
+        this.addEntry(benches);
 
     }
 
@@ -174,11 +179,14 @@ public class AnotherFurnitureModule extends SimpleModule {
         }
     }
 
+    //TODO: fix renderer
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register((BlockEntityType<CompatShelfBlockTile>) (SHELVES.getTileHolder().tile), ShelfRenderer::new);
-        event.register((BlockEntityType<CompatPlanterBoxTile>) (PLANTER_BOXES.getTileHolder().tile), PlanterBoxRenderer::new);
+        event.register((BlockEntityType<CompatShelfBlockTile>) (shelves.getTileHolder().tile), ShelfRenderer::new);
+        event.register((BlockEntityType<CompatPlanterBoxTile>) (planterBoxes.getTileHolder().tile), PlanterBoxRenderer::new);
+
     }
+
 
     //idk why but object holder class loader thingie keeps trying to load this if its not inner private like this
     class CompatShelfBlockTile extends ShelfBlockEntity {
@@ -189,7 +197,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return SHELVES.getTileHolder().tile;
+            return shelves.getTileHolder().tile;
         }
     }
 
@@ -211,10 +219,10 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return PLANTER_BOXES.getTileHolder().tile;
+            return planterBoxes.getTileHolder().tile;
         }
     }
-    
+
     private class CompatPlanterBoxBlock extends PlanterBoxBlock {
         public CompatPlanterBoxBlock(Properties properties) {
             super(properties);
@@ -233,7 +241,7 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return DRAWERS.getTileHolder().tile;
+            return drawers.getTileHolder().tile;
         }
     }
 

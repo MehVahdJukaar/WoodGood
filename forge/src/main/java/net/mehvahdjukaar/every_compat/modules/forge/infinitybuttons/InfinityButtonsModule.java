@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.infinitybuttons;
+package net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons;
 
 import net.larsmans.infinitybuttons.block.InfinityButtonsBlocks;
 import net.larsmans.infinitybuttons.block.custom.largebutton.WoodenLargeButton;

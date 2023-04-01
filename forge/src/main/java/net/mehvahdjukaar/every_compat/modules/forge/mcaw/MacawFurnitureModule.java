@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.mcaw;
+package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwfurnitures.kikoz.MacawsFurnitures;
 import com.mcwfurnitures.kikoz.init.BlockInit;

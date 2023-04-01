@@ -112,9 +112,13 @@ dependencies {
     modImplementation("curse.maven:cloth-config-348521:3972423")
     modImplementation("curse.maven:jei-238222:3940099")
     modImplementation("curse.maven:configured-457570:4462837")
+    modImplementation("curse.maven:resourceful-lib-570073:4458392")
+
     // modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
     modImplementation("curse.maven:roughly-enough-items-310111:4119141")
     modImplementation("curse.maven:selene-499980:4467602")
+    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
+    modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
 
     // Imports
     modImplementation("curse.maven:another-furniture-610492:4034009")
@@ -125,11 +129,12 @@ dependencies {
     modImplementation("curse.maven:decorative-blocks-362528:3941638")
     modImplementation("curse.maven:dramatic-doors-380617:4444997")
     modImplementation("curse.maven:domum-ornamentum-527361:4174257")
-    modImplementation("curse.maven:exlines-bark-carpets-527296:4062547")
+    modImplementation("curse.maven:exlines-bark-carpets-527296:4094399")
     modImplementation("curse.maven:farmersdelight-398521:3999157")
     modImplementation("curse.maven:furnish-547069:4449620")
     modImplementation("curse.maven:friends-and-foes-forge-602059:4429819")
-    modImplementation("curse.maven:infinity-buttons-661902:4276400")
+    modImplementation("curse.maven:handcrafted-538214:4437459")
+    modImplementation("curse.maven:infinity-buttons-661902:4276396")
 
     modImplementation("curse.maven:macaws-bridges-351725:4446187")
     modImplementation("curse.maven:macaws-doors-378646:4446154")
@@ -144,9 +149,10 @@ dependencies {
     modImplementation("curse.maven:missing-wilds-forge-634277:3840197")
     modImplementation("curse.maven:mosaic-carpentry-690226:4068673")
     modImplementation("curse.maven:mrcrayfish-furniture-mod-55438:4374996")
+    modImplementation("curse.maven:pokecube-aoi-285121:4109051")
     modImplementation("curse.maven:premium-wood-353515:3905203")
     modImplementation("curse.maven:productivebees-377897:4418663")
-    modImplementation("curse.maven:pokecube-aoi-285121:4109051")
+
     modImplementation("curse.maven:quark-243121:4463411")
     modImplementation("curse.maven:storage-drawers-223852:3884263")
     modImplementation("curse.maven:the-graveyard-forge-531188:4025847")
@@ -158,12 +164,6 @@ dependencies {
 
 
 
-
-
-    //modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4133216")
-
-    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
-    modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
 
     // implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     // implementation fg.deobf("curse.maven:curios-309927:3670447")

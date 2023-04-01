@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.mcaw;
+package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwbridges.kikoz.MacawsBridges;
 import com.mcwbridges.kikoz.init.BlockInit;
