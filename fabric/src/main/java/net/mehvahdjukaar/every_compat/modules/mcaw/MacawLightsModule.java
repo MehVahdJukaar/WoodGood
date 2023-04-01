@@ -48,56 +48,10 @@ public class MacawLightsModule extends SimpleModule {
                                 .strength(0.2f, 2.5f), ParticleTypes.FLAME))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .defaultRecipe()
                 .setTab(() -> LightGroup.LIGHTSGROUP)
+                .defaultRecipe()
                 .build();
 
         this.addEntry(TIKI_TORCHES);
-    }
-
-    @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-
-
-        try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/tiki_torch_mask"));
-             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/tiki_torch_overlay"));
-             TextureImage overlay_soul = TextureImage.open(manager, EveryCompat.res("item/tiki_torch_soul_overlay"))
-        ) {
-
-
-            TIKI_TORCHES.blocks.forEach((wood, block) -> {
-                var id = Utils.getID(block);
-
-                try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteUtils.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
-
-                    var t = mask.makeCopy();
-                    t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());
-
-                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
-                            "item/" + id.getPath().replace("_torch", "")), t);
-
-                } catch (Exception ignored) {
-                }
-            });
-            SOUL_TIKI_TORCHES.blocks.forEach((wood, block) -> {
-                var id = Utils.getID(block);
-
-                try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteUtils.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
-
-                    var t = mask.makeCopy();
-                    t.applyOverlayOnExisting(logTexture.makeCopy(), overlay_soul.makeCopy());
-
-                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
-                            "item/" + id.getPath().replace("_torch", "")), t);
-
-                } catch (Exception ignored) {
-                }
-            });
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Tiki torch item texture : ", ex);
-        }
     }
 }
