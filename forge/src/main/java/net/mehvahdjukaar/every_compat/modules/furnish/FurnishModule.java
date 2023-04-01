@@ -1,11 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.furnish;
 
 import com.google.gson.JsonObject;
+import io.github.wouink.furnish.Furnish;
 import io.github.wouink.furnish.block.*;
 import io.github.wouink.furnish.block.util.VoxelShapeHelper;
 import io.github.wouink.furnish.setup.FurnishBlocks;
-import io.github.wouink.furnish.setup.FurnishData;
-import io.github.wouink.furnish.setup.FurnishItems;
+import io.github.wouink.furnish.setup.FurnishRegistries;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -67,7 +67,7 @@ public class FurnishModule extends SimpleModule {
 
     public FurnishModule(String modId) {
         super(modId, "fur");
-        CreativeModeTab tab = FurnishItems.Furnish_ItemGroup;
+        CreativeModeTab tab = Furnish.CREATIVE_TAB;
 
         TemplateRecipeManager.registerTemplate(modRes("furniture_making"), FurnishRecipeTemplate::new);
 
@@ -109,7 +109,7 @@ public class FurnishModule extends SimpleModule {
 
         BEDSIDE_TABLE = SimpleEntrySet.builder(WoodType.class, "bedside_table",
                         FurnishBlocks.Oak_Bedside_Table, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new InventoryFurniture(Utils.copyPropertySafe(w.log), FurnishData.Sounds.Drawers_Open, FurnishData.Sounds.Drawers_Close), "stripped_log"))
+                        ifHasChild(w -> new InventoryFurniture(Utils.copyPropertySafe(w.log), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -121,7 +121,7 @@ public class FurnishModule extends SimpleModule {
 
         KITCHEN_CABINET = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinet",
                         FurnishBlocks.Oak_Kitchen_Cabinet, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new InventoryFurniture(Utils.copyPropertySafe(w.planks), FurnishData.Sounds.Drawers_Open, FurnishData.Sounds.Drawers_Close))
+                        w -> new InventoryFurniture(Utils.copyPropertySafe(w.planks), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -133,7 +133,7 @@ public class FurnishModule extends SimpleModule {
 
         CABINET = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         FurnishBlocks.Birch_Cabinet, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
-                        ifHasChild(w -> new Cabinet(Utils.copyPropertySafe(w.log), FurnishData.Sounds.Cabinet_Open, FurnishData.Sounds.Cabinet_Close), "stripped_log"))
+                        ifHasChild(w -> new Cabinet(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -147,7 +147,7 @@ public class FurnishModule extends SimpleModule {
 
         WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         FurnishBlocks.Birch_Wardrobe, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
-                        ifHasChild(w -> new Wardrobe(Utils.copyPropertySafe(w.log), FurnishData.Sounds.Cabinet_Open, FurnishData.Sounds.Cabinet_Close), "stripped_log"))
+                        ifHasChild(w -> new Wardrobe(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound), "stripped_log"))
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -396,7 +396,7 @@ public class FurnishModule extends SimpleModule {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return FurnishData.RecipeSerializers.Furniture_Recipe_Serializer.get();
+            return FurnishRegistries.Furniture_Recipe_Serializer.get();
         }
 
         @Nullable
