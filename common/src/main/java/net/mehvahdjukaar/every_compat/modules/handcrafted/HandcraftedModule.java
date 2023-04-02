@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.handcrafted;
+package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Block;
 
 public class HandcraftedModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> chair;
+    public final SimpleEntrySet<WoodType, ChairBlock> chair;
 
     public HandcraftedModule(String modId) {
         super(modId, "hc");

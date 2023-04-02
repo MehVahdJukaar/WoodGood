@@ -77,7 +77,7 @@ dependencies {
 
     modImplementation("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
-    modCompileOnly("curse.maven:twigs-496913:3865476")
+    modCompileOnly("curse.maven:twigs-496913:3943447")
 
 
 

@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.forge;
 
-import com.simibubi.create.foundation.utility.RemapHelper;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
@@ -14,7 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
-import net.mehvahdjukaar.every_compat.modules.forge.handcrafted.HandcraftedModule;
+import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
@@ -24,11 +23,11 @@ import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModu
 import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
+import net.mehvahdjukaar.every_compat.modules.forge.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
-import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -40,7 +39,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.MissingMappingsEvent;
-import twilightforest.block.SpecialMagicLogBlock;
 
 import java.util.Optional;
 

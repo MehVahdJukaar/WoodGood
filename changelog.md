@@ -1,1 +1,1 @@
-* Fixed an issue with quark hollow logs
+* Fixed an issue with twigs tables

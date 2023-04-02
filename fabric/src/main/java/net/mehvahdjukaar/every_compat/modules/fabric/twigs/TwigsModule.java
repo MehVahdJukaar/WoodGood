@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.twigs;
+package net.mehvahdjukaar.every_compat.modules.fabric.twigs;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -8,7 +8,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
-import net.moddingplayground.twigs.block.TableBlock;
+import net.moddingplayground.twigs.api.block.TableBlock;
 
 public class TwigsModule extends SimpleModule {
 
