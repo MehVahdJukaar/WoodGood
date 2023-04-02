@@ -209,7 +209,7 @@ public class XercaModule extends SimpleModule {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return (RecipeSerializer) xerca.xercamod.common.item.Items.CARVING.get();
+            return xerca.xercamod.common.item.Items.CARVING.get();
         }
 
         @Nullable

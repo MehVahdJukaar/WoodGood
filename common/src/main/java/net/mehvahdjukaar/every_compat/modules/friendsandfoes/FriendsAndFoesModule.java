@@ -1,24 +1,38 @@
 package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 
+import com.google.common.collect.ImmutableSet;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
+import net.minecraft.tags.TagBuilder;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Set;
+import java.util.function.Supplier;
 
 public class FriendsAndFoesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> beehives;
+
+    private Supplier<PoiType> compatBeeHivePOI = RegHelper.register(EveryCompat.res("ec_beehive"),
+            () -> new PoiType(getBeehives(), 1, 1), Registry.POINT_OF_INTEREST_TYPE);
 
     public FriendsAndFoesModule(String modId) {
         super(modId, "faf");
@@ -33,13 +47,28 @@ public class FriendsAndFoesModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
-                .addTag(PoiTypeTags.BEE_HOME, Registry.POINT_OF_INTEREST_TYPE_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .addTile(() -> BlockEntityType.BEEHIVE)
                 .defaultRecipe()
                 .build();
         this.addEntry(beehives);
+
     }
 
+    private Set<BlockState> getBeehives() {
+        var set = new ImmutableSet.Builder<BlockState>();
+        beehives.blocks.values().forEach(b->set.addAll(b.getStateDefinition().getPossibleStates()));
+        return set.build();
+    }
 
+    @Override
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
+
+        tb.add(EveryCompat.res("ec_beehive"));
+
+        handler.dynamicPack.addTag(tb, Registry.POINT_OF_INTEREST_TYPE_REGISTRY);
+    }
 }

@@ -3,24 +3,22 @@ package net.mehvahdjukaar.every_compat.modules.fabric.create;
 import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.palettes.WindowBlock;
+import com.simibubi.create.foundation.block.connected.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class CreateModule extends SimpleModule {
 
@@ -49,7 +47,7 @@ public class CreateModule extends SimpleModule {
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         () -> getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
-                .addTag(Tags.Items.GLASS_PANES, Registry.BLOCK_REGISTRY)
+                //.addTag(Tags.Items.GLASS_PANES, Registry.BLOCK_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -65,7 +63,7 @@ public class CreateModule extends SimpleModule {
                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false), false);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    //@OnlyIn(Dist.CLIENT)
     @Override
     public void onClientSetup() {
         super.onClientSetup();
@@ -83,19 +81,15 @@ public class CreateModule extends SimpleModule {
     }
 
     public void onClientInit() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onTextureStitch);
+        ClientPlatformHelper.addAtlasTextureCallback(TextureAtlas.LOCATION_BLOCKS, this::onTextureStitch);
     }
 
-
-    @OnlyIn(Dist.CLIENT)
     //we could also remove this and run getCT before client setup
-    public void onTextureStitch(TextureStitchEvent.Pre event) {
-        if (event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
-            windows.blocks.forEach((w, b) -> {
-                String path = "block/" + shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window_connected";
-                event.addSprite(EveryCompat.res(path));
-            });
-        }
+    private void onTextureStitch(ClientPlatformHelper.AtlasTextureEvent event) {
+        windows.blocks.forEach((w, b) -> {
+            String path = "block/" + shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window_connected";
+            event.addSprite(EveryCompat.res(path));
+        });
     }
 
 }

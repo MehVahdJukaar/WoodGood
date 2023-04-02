@@ -55,6 +55,8 @@ allprojects {
             allowInsecureProtocol = true
         }
         maven { url = "https://mvn.devos.one/snapshots/" }
+
+        maven { url = "https://jitpack.io/" } // for Porting Lib: Mixin Extras, Fabric ASM
     }
 
     tasks.withType(JavaCompile) {
