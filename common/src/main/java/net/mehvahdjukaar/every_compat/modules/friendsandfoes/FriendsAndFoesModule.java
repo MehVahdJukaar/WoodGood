@@ -31,8 +31,6 @@ public class FriendsAndFoesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> beehives;
 
-    private Supplier<PoiType> compatBeeHivePOI = RegHelper.register(EveryCompat.res("ec_beehive"),
-            () -> new PoiType(getBeehives(), 1, 1), Registry.POINT_OF_INTEREST_TYPE);
 
     public FriendsAndFoesModule(String modId) {
         super(modId, "faf");
@@ -55,6 +53,10 @@ public class FriendsAndFoesModule extends SimpleModule {
 
     }
 
+    private Supplier<PoiType> compatBeeHivePOI = RegHelper.register(EveryCompat.res("faf_beehive"),
+            () -> new PoiType(getBeehives(), 1, 1), Registry.POINT_OF_INTEREST_TYPE);
+
+
     private Set<BlockState> getBeehives() {
         var set = new ImmutableSet.Builder<BlockState>();
         beehives.blocks.values().forEach(b->set.addAll(b.getStateDefinition().getPossibleStates()));
@@ -67,7 +69,7 @@ public class FriendsAndFoesModule extends SimpleModule {
 
         SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
 
-        tb.add(EveryCompat.res("ec_beehive"));
+        tb.add(EveryCompat.res("faf_beehive"));
 
         handler.dynamicPack.addTag(tb, Registry.POINT_OF_INTEREST_TYPE_REGISTRY);
     }

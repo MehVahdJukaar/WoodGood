@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.forge.handcrafted;
 
-import earth.terrarium.handcrafted.client.block.chair.chair.ChairRenderer;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
@@ -18,13 +17,13 @@ import net.minecraft.world.level.block.Block;
 
 public class HandcraftedModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> CHAIR;
+    public final SimpleEntrySet<WoodType, Block> chair;
 
     public HandcraftedModule(String modId) {
         super(modId, "hc");
         CreativeModeTab tab = ModItems.ITEM_GROUP;
 
-        CHAIR = SimpleEntrySet.builder(WoodType.class, "chair",
+        chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -34,6 +33,6 @@ public class HandcraftedModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(CHAIR);
+        this.addEntry(chair);
     }
 }

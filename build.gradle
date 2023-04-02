@@ -1,6 +1,9 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
+    id 'io.github.juuxel.loom-quiltflower' version '1.7.1' apply false
+    id "com.matthewprenger.cursegradle" version "1.4.0"
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 architectury {
@@ -9,6 +12,9 @@ architectury {
 
 subprojects {
     apply plugin: "dev.architectury.loom"
+    apply plugin: "io.github.juuxel.loom-quiltflower"
+    apply plugin: "com.matthewprenger.cursegradle"
+    apply plugin: "com.modrinth.minotaur"
 
     loom {
         silentMojangMappingsLicense()
@@ -21,6 +27,93 @@ subprojects {
             it.parchment("org.parchmentmc.data:parchment-${rootProject.parchment_version}")
             it.officialMojangMappings {
                 setNameSyntheticMembers(false)
+            }
+        }
+    }
+
+    var env = System.getenv()
+    var modLoader = name
+
+    var changelogFile = rootProject.file("changelog.md")
+    var changelogText = changelogFile.exists() ? changelogFile.text : ""
+
+    if (env.MODRINTH_TOKEN) {
+        modrinth {
+            projectId = "every-compat"
+            uploadFile = tasks.remapJar
+            gameVersions = [rootProject.minecraft_version]
+            loaders = [modLoader]
+            changelog = changelogText
+
+            if (modLoader == "fabric") {
+                dependencies {
+                    required.project "fabric-api"
+                    required.project "moonlight"
+                }
+            } else {
+                dependencies {
+                    required.project "moonlight"
+                }
+            }
+        }
+    }
+
+    if (env.CURSEFORGE_TOKEN) {
+        curseforge {
+            apiKey = env.CURSEFORGE_TOKEN
+            project {
+                id = rootProject.project_id
+                changelog = changelogText
+                releaseType = 'release'
+                addGameVersion rootProject.minecraft_version
+                addGameVersion modLoader.capitalize()
+
+                mainArtifact(tasks.remapJar)
+
+                if (modLoader == "fabric") {
+                    relations {
+                        requiredDependency "fabric-api"
+                        requiredDependency "selene"
+
+                        optionalDependency("create-fabric")
+                        optionalDependency("twigs")
+                        optionalDependency("camp-chair")
+                        optionalDependency("farmers-delight-fabric")
+                        optionalDependency("missing-wilds")
+                        optionalDependency("infinity-buttons")
+                        optionalDependency("furnish")
+                        optionalDependency("another-furniture")
+                        optionalDependency("decorative-blocks")
+                        optionalDependency("friends-and-foes")
+                        optionalDependency("architects-palette")
+                        optionalDependency("the-twilight-forest")
+                    }
+                } else {
+                    relations {
+                        requiredDependency("selene")
+
+                        optionalDependency("create")
+                        optionalDependency("quark")
+                        optionalDependency("twigs")
+                        optionalDependency("camp-chair")
+                        optionalDependency("woodworks")
+                        optionalDependency("backpacked")
+                        optionalDependency("buildersaddition")
+                        optionalDependency("dramatic-doors")
+                        optionalDependency("farmers-delight")
+                        optionalDependency("missing-wilds-forge")
+                        optionalDependency("infinity-buttons")
+                        optionalDependency("furnish")
+                        optionalDependency("mrcrayfish-furniture-mod")
+                        optionalDependency("another-furniture")
+                        optionalDependency("decorative-blocks")
+                        optionalDependency("pokecube-aoi")
+                        optionalDependency("the-twilight-forest")
+                        optionalDependency("storage-drawers")
+                        optionalDependency("valhelsia-structures")
+                        optionalDependency("friends-and-foes-forge")
+                    }
+                }
             }
         }
     }

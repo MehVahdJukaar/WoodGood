@@ -63,7 +63,7 @@ dependencies {
     modImplementation("curse.maven:friends-and-foes-551364:4429816")
 
     modImplementation("curse.maven:handcrafted-538214:4215478")
-    modImplementation("curse.maven:infinity-buttons-661902:4259446")
+    modCompileOnly("curse.maven:infinity-buttons-661902:4259446")
 
     modImplementation("curse.maven:macaws-bridges-351725:4446196")
     modImplementation("curse.maven:macaws-doors-378646:4446168")
@@ -76,7 +76,7 @@ dependencies {
     modImplementation("curse.maven:macaws-windows-363569:4271891")
 
     modImplementation("curse.maven:missing-wilds-622590:3891602")
-    modImplementation("curse.maven:the-twilight-forest-227639:4389094")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:3865476")
 
 

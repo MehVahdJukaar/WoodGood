@@ -14,6 +14,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.forge.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
@@ -39,6 +40,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.MissingMappingsEvent;
+import twilightforest.block.SpecialMagicLogBlock;
 
 import java.util.Optional;
 
@@ -95,7 +97,7 @@ public class EveryCompatForge extends EveryCompat {
         // addModule("graveyard", () -> GraveyardModule::new);
 
         // Disabled due to block entity complications
-        // addModule("handcrafted", () -> HandcraftedModule::new);
+        addModule("handcrafted", () -> HandcraftedModule::new);
 
         // Disabled until custom block models work
         // addModule("xercamod", () -> XercaModule::new);

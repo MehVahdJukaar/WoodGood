@@ -1,0 +1,1 @@
+* Fixed an issue with quark hollow logs
