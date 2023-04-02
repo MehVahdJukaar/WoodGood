@@ -132,7 +132,7 @@ public class ResourcesUtils {
             blocks.forEach((w, b) -> {
                 ResourceLocation id = Utils.getID(b);
                 try {
-                    if (WoodConfigs.isEntryEnabled(w, b)) {
+                    if (true || WoodConfigs.isEntryEnabled(w, b)) { //generating all the times otherwise we get log spam
                         //creates blockstate
                         StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
                         assert newBlockState.location != oakBlockstate.location : "ids cant be the same";

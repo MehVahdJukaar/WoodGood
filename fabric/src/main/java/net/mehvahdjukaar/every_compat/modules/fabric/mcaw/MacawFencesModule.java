@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.mcaw;
+package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwfences.init.BlockInit;
 import net.kikoz.mcwfences.objects.FencesGroup;

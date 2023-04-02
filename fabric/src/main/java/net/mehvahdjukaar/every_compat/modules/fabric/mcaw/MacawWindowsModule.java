@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.mcaw;
+package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwwindows.init.BlockInit;
 import net.kikoz.mcwwindows.objects.Blinds;

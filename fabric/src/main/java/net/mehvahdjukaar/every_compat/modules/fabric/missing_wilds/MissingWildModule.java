@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.missing_wilds;
+package net.mehvahdjukaar.every_compat.modules.fabric.missing_wilds;
 
 import me.ultrusmods.missingwilds.MissingWildsFabric;
 import me.ultrusmods.missingwilds.block.FallenLogBlock;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 
 public class MissingWildModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> FALLEN_LOGS;
+    public final SimpleEntrySet<WoodType, Block> fallenLogs;
 
     public MissingWildModule(String modId) {
         super(modId, "msw");

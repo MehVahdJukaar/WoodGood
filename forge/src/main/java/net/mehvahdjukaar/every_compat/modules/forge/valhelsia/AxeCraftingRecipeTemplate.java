@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.valhelsia;
+package net.mehvahdjukaar.every_compat.modules.forge.valhelsia;
 
 import com.google.gson.JsonObject;
 import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipeBuilder;

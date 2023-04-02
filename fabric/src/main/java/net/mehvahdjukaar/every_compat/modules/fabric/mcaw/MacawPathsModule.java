@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.mcaw;
+package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import com.mcwpaths.kikoz.init.BlockInit;
 import com.mcwpaths.kikoz.objects.FacingPathBlock;

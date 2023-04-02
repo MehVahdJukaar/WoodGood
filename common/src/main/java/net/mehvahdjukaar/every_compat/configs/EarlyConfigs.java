@@ -11,15 +11,15 @@ import java.util.function.Supplier;
 //loaded before registry
 public class EarlyConfigs {
 
-    public static ConfigSpec SPEC;
+    public static final ConfigSpec SPEC;
 
-    public static Supplier<Boolean> TAB_ENABLED;
+    public static final Supplier<Boolean> TAB_ENABLED;
     //  public static Supplier<Boolean> REMAP_COMPAT;
     //  public static Supplier<Boolean> REMAP_OWN;
-    public static Supplier<Boolean> DEPEND_ON_PACKS;
-    public static Supplier<Boolean> DEBUG_RESOURCES;
+    public static final Supplier<Boolean> DEPEND_ON_PACKS;
+    public static final Supplier<Boolean> DEBUG_RESOURCES;
 
-    public static void init() {
+    static {
         String s = PlatformHelper.isDev() && PlatformHelper.getEnv().isServer() ? "_s" : "";
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("common" + s), ConfigType.COMMON);
 
@@ -40,5 +40,7 @@ public class EarlyConfigs {
 
         SPEC.loadFromFile(); //manually load early
     }
+
+    public static void init(){}
 
 }

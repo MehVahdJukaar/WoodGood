@@ -5,12 +5,12 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
-import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
+import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
@@ -24,6 +24,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBe
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
@@ -67,6 +68,8 @@ public class EveryCompatForge extends EveryCompat {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("furnish", () -> FurnishModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
+        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+
 
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
@@ -75,10 +78,8 @@ public class EveryCompatForge extends EveryCompat {
         addModule("quark", () -> QuarkModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
-        addModule("woodworks", () -> WoodworksModule::new);
-        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("twigs", () -> TwigsModule::new);
-        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("woodworks", () -> WoodworksModule::new);
 
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
@@ -89,9 +90,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-
-
-        // addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
+        addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
 
         // addModule("graveyard", () -> GraveyardModule::new);
 

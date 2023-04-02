@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.infinitybuttons;
+package net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.larsmans.infinitybuttons.block.InfinityButtonsBlocks;
@@ -17,8 +17,8 @@ import net.minecraft.world.level.material.Material;
 
 public class InfinityButtonsModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> LARGE_BUTTON;
-    public final SimpleEntrySet<WoodType, Block> PLANK_SECRET_BUTTON;
+    public final SimpleEntrySet<WoodType, Block> largeButton;
+    public final SimpleEntrySet<WoodType, Block> plankSecretButton;
 
     public InfinityButtonsModule(String modId) {
         super(modId, "ib");

@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-//loaded before registry
+//loaded after registry
 public class WoodConfigs {
 
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> BLOCK_TYPE_CONFIGS = new HashMap<>();
@@ -62,7 +62,7 @@ public class WoodConfigs {
 
         SPEC = builder.buildAndRegister();
 
-        SPEC.loadFromFile(); //manually load early
+        SPEC.loadFromFile(); //manually load late
     }
 
     public static <T extends BlockType> boolean isEntryEnabled(T w, Object o) {

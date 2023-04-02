@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.architect_palette;
+package net.mehvahdjukaar.every_compat.modules.fabric.architect_palette;
 
 import com.slomaxonical.architectspalette.blocks.BoardBlock;
 import com.slomaxonical.architectspalette.blocks.RailingBlock;
@@ -16,13 +16,13 @@ import net.minecraft.world.level.block.Block;
 
 public class ArchitectsPaletteModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> RAILINGS;
-    public final SimpleEntrySet<WoodType, Block> BOARDS;
+    public final SimpleEntrySet<WoodType, Block> railings;
+    public final SimpleEntrySet<WoodType, Block> boards;
 
     public ArchitectsPaletteModule(String modId) {
         super(modId, "ap");
 
-        RAILINGS = SimpleEntrySet.builder(WoodType.class, "railing",
+        railings = SimpleEntrySet.builder(WoodType.class, "railing",
                         () -> APBlocks.OAK_RAILING, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RailingBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -30,9 +30,9 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .build();
 
-        this.addEntry(RAILINGS);
+        this.addEntry(railings);
 
-        BOARDS = SimpleEntrySet.builder(WoodType.class, "boards",
+        boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         () -> APBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BoardBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -63,7 +63,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTexture(modRes("block/oak_boards_odd"))
                 .build();
 
-        this.addEntry(BOARDS);
+        this.addEntry(boards);
     }
 
 }

@@ -1,8 +1,10 @@
-package net.mehvahdjukaar.every_compat.modules.farmersdelight;
+package net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight;
 
 import com.nhoryzon.mc.farmersdelight.FarmersDelightMod;
 import com.nhoryzon.mc.farmersdelight.block.CabinetBlock;
 import com.nhoryzon.mc.farmersdelight.entity.block.CabinetBlockEntity;
+import com.nhoryzon.mc.farmersdelight.registry.BlockEntityTypesRegistry;
+import com.nhoryzon.mc.farmersdelight.registry.BlocksRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -19,19 +21,19 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class FarmersDelightModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> CABINETS;
+    public final SimpleEntrySet<WoodType, Block> cabinets;
 
     public FarmersDelightModule(String modId) {
         super(modId, "fd");
 
-        CABINETS = SimpleEntrySet.builder(WoodType.class, "cabinet",
+        cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         () -> getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCabinetBlock())
+                        w -> new CabinetBlock())
                 .addTag(modRes("cabinets"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("cabinets"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
-                .addTile(CompatCabinetBlockTile::new)
+                .addTile(BlockEntityTypesRegistry.CABINET::get)
                 .setTab(() -> FarmersDelightMod.ITEM_GROUP)
                 .createPaletteFromOak(Palette::increaseDown)
                 .addTexture(EveryCompat.res("block/oak_cabinet_front"))
@@ -40,30 +42,7 @@ public class FarmersDelightModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/oak_cabinet_front_open"), EveryCompat.res("block/oak_cabinet_front_open_m"))
                 .build();
 
-        this.addEntry(CABINETS);
-    }
-
-    class CompatCabinetBlockTile extends CabinetBlockEntity {
-
-        public CompatCabinetBlockTile(BlockPos pos, BlockState state) {
-            super(pos, state);
-        }
-
-        @Override
-        public BlockEntityType<?> getType() {
-            return CABINETS.getTileHolder().tile;
-        }
-
-    }
-
-    private class CompatCabinetBlock extends CabinetBlock {
-        public CompatCabinetBlock() {
-            super();
-        }
-
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new CompatCabinetBlockTile(pos, state);
-        }
+        this.addEntry(cabinets);
     }
 
 }

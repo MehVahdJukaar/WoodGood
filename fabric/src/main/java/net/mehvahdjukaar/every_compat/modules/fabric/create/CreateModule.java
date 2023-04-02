@@ -1,9 +1,8 @@
-package net.mehvahdjukaar.every_compat.modules.forge.create;
+package net.mehvahdjukaar.every_compat.modules.fabric.create;
 
 import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.palettes.WindowBlock;
-import com.simibubi.create.foundation.block.connected.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;

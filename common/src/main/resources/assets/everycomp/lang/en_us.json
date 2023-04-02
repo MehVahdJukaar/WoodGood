@@ -117,7 +117,9 @@
   "block_type.architects_palette.boards": "%s Boards",
 
   "block_type.valhelsia_structures.cut_post": "Cut %s Post",
+  "block_type.valhelsia_structures.stripped_cut_post": "Stripped Cut %s Post",
   "block_type.valhelsia_structures.post": "%s Post",
+  "block_type.valhelsia_structures.stripped_post": "Stripped %s Post",
 
   "block_type.backpacked.backpack_shelf": "%s Backpack Shelf",
 
@@ -322,7 +324,9 @@
   "block_type.cfm.support": "%s Support",
   "block_type.cfm.table": "%s Table",
   "block_type.cfm.upgraded_fence": "%s Upgraded Fence",
+  "block_type.cfm.stripped_upgraded_fence": "Stripped %s Upgraded Fence",
   "block_type.cfm.upgraded_gate": "%s Upgraded Gate",
+  "block_type.cfm.stripped_upgraded_gate": "Stripped %s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
   "block_type.productivebees.advanced_beehive": "Advanced %s Beehive",
