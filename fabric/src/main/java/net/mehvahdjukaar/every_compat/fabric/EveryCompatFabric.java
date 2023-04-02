@@ -14,7 +14,6 @@ import net.mehvahdjukaar.every_compat.modules.infinitybuttons.InfinityButtonsMod
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
-import net.minecraft.core.Registry;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 

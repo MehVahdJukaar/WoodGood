@@ -94,5 +94,6 @@ public class ProductiveBeesModule extends SimpleModule {
                 .build();
 
         this.addEntry(expansionBoxes);
+
     }
 }

@@ -47,7 +47,7 @@ public class FriendsAndFoesModule extends SimpleModule {
         super.onModSetup();
 
         Set<Block> beehiveBlocks = new HashSet<>();
-        FriendsAndFoes
+
         beehiveBlocks.addAll(BlockEntityType.BEEHIVE.validBlocks);
         beehiveBlocks.addAll(beehives.blocks.values());
         BlockEntityType.BEEHIVE.validBlocks = beehiveBlocks;
