@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 
+import com.faboslav.friendsandfoes.FriendsAndFoes;
 import com.faboslav.friendsandfoes.init.FriendsAndFoesBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -45,10 +46,11 @@ public class FriendsAndFoesModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
 
-        Set<Block> beehiveBlocks = new HashSet();
-
+        Set<Block> beehiveBlocks = new HashSet<>();
+        FriendsAndFoes
         beehiveBlocks.addAll(BlockEntityType.BEEHIVE.validBlocks);
-        beehiveBlocks.addAll(BEEHIVE_BLOCKS);
+        beehiveBlocks.addAll(beehives.blocks.values());
         BlockEntityType.BEEHIVE.validBlocks = beehiveBlocks;
     }
+
 }

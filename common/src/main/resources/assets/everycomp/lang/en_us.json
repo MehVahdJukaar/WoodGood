@@ -103,6 +103,7 @@
 
   "block_type.quark.stripped_post": "Stripped %s Post",
   "block_type.quark.post": "%s Post",
+  "block_type.quark.hollow_log": "Hollow %s Log",
   "block_type.quark.hedge": "%s Leaf Hedge",
   "block_type.quark.leaf_carpet": "%s Leaf Carpet",
   "block_type.quark.ladder": "%s Ladder",
