@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.dramaticdoors;
+package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
 import com.fizzware.dramaticdoors.DramaticDoors;
 import com.fizzware.dramaticdoors.blocks.DDBlocks;
@@ -10,7 +10,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -18,12 +17,12 @@ import java.util.List;
 
 public class DramaticDoorsModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> TALL_DOORS;
+    public final SimpleEntrySet<WoodType, Block> tallDoors;
 
     public DramaticDoorsModule(String modId) {
         super(modId, "dd");
 
-        TALL_DOORS = SimpleEntrySet.builder(WoodType.class, "door", "tall",
+        tallDoors = SimpleEntrySet.builder(WoodType.class, "door", "tall",
                         DDBlocks.TALL_OAK_DOOR, () -> WoodTypeRegistry.OAK_TYPE, w -> new TallDoorBlock(Blocks.OAK_DOOR))
                 .addTextureM(modRes("block/tall_oak_door_bottom"), EveryCompat.res("block/dd/tall_oak_door_bottom_m"))
                 .addTextureM(modRes("block/tall_oak_door_middle"), EveryCompat.res("block/dd/tall_oak_door_middle_m"))
@@ -38,7 +37,7 @@ public class DramaticDoorsModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(TALL_DOORS);
+        this.addEntry(tallDoors);
     }
 
     @Override

@@ -54,7 +54,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> strippedTables;
     public final SimpleEntrySet<WoodType, Block> tables;
     public final SimpleEntrySet<WoodType, Block> upgradedFences;
+    public final SimpleEntrySet<WoodType, Block> strippedUpgradedFences;
     public final SimpleEntrySet<WoodType, Block> upgradedGates;
+    public final SimpleEntrySet<WoodType, Block> strippedUpgradedGates;
 
     public MrCrayfishFurnitureModule(String modId) {
         super(modId, "cfm");
@@ -460,6 +462,21 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
         this.addEntry(upgradedFences);
 
+        strippedUpgradedFences = SimpleEntrySet.builder(WoodType.class, "upgraded_fence", "stripped",
+                        ModBlocks.UPGRADED_FENCE_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new UpgradedFenceBlock(Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.FENCES, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Blocks.UPGRADED_FENCES, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ModTags.Items.UPGRADED_FENCES, Registry.ITEM_REGISTRY)
+                .setTab(() -> FurnitureMod.GROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .build();
+
+        this.addEntry(strippedUpgradedFences);
+
         upgradedGates = SimpleEntrySet.builder(WoodType.class, "upgraded_gate",
                         ModBlocks.UPGRADED_GATE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new UpgradedGateBlock(Utils.copyPropertySafe(w.planks)))
@@ -475,6 +492,22 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .build();
 
         this.addEntry(upgradedGates);
+
+        strippedUpgradedGates = SimpleEntrySet.builder(WoodType.class, "upgraded_gate", "stripped",
+                        ModBlocks.UPGRADED_GATE_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new UpgradedGateBlock(Utils.copyPropertySafe(w.planks)))
+                .addTag(BlockTags.FENCE_GATES, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Blocks.UPGRADED_FENCE_GATES, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
+                .addTag(ModTags.Items.UPGRADED_FENCE_GATES, Registry.ITEM_REGISTRY)
+                .setTab(() -> FurnitureMod.GROUP)
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .build();
+
+        this.addEntry(strippedUpgradedGates);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         ModBlocks.HEDGE_OAK, () -> LeavesTypeRegistry.OAK_TYPE,

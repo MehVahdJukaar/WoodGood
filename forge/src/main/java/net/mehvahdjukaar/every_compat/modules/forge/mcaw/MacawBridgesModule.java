@@ -18,17 +18,17 @@ import net.minecraft.world.level.block.Block;
 
 public class MacawBridgesModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> BRIDGE_PIERS;
-    public final SimpleEntrySet<WoodType, Block> BRIDGE_MIDDLES;
-    public final SimpleEntrySet<WoodType, Block> ROPE_BRIDGES;
-    public final SimpleEntrySet<WoodType, Block> RAIL_BRIDGES;
-    public final SimpleEntrySet<WoodType, Block> BRIDGE_STAIRS;
-    public final SimpleEntrySet<WoodType, Block> ROPE_STAIRS;
+    public final SimpleEntrySet<WoodType, Block> bridgePiers;
+    public final SimpleEntrySet<WoodType, Block> bridgeMiddles;
+    public final SimpleEntrySet<WoodType, Block> ropeBridges;
+    public final SimpleEntrySet<WoodType, Block> railBridges;
+    public final SimpleEntrySet<WoodType, Block> bridgeStairs;
+    public final SimpleEntrySet<WoodType, Block> ropeStairs;
 
     public MacawBridgesModule(String modId) {
         super(modId, "mcb");
 
-        BRIDGE_PIERS = SimpleEntrySet.builder(WoodType.class, "bridge_pier",
+        bridgePiers = SimpleEntrySet.builder(WoodType.class, "bridge_pier",
                         BlockInit.OAK_BRIDGE_PIER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Support_Pillar(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -37,9 +37,9 @@ public class MacawBridgesModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(BRIDGE_PIERS);
+        this.addEntry(bridgePiers);
 
-        ROPE_BRIDGES = SimpleEntrySet.builder(WoodType.class, "bridge", "rope",
+        ropeBridges = SimpleEntrySet.builder(WoodType.class, "bridge", "rope",
                         BlockInit.ROPE_OAK_BRIDGE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -49,9 +49,9 @@ public class MacawBridgesModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(ROPE_BRIDGES);
+        this.addEntry(ropeBridges);
 
-        BRIDGE_MIDDLES = SimpleEntrySet.builder(WoodType.class, "log_bridge_middle",
+        bridgeMiddles = SimpleEntrySet.builder(WoodType.class, "log_bridge_middle",
                         BlockInit.OAK_LOG_BRIDGE_MIDDLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -61,10 +61,10 @@ public class MacawBridgesModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(BRIDGE_MIDDLES);
+        this.addEntry(bridgeMiddles);
 
 
-        RAIL_BRIDGES = SimpleEntrySet.builder(WoodType.class, "rail_bridge",
+        railBridges = SimpleEntrySet.builder(WoodType.class, "rail_bridge",
                         BlockInit.OAK_RAIL_BRIDGE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Rail_Bridge(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -74,10 +74,10 @@ public class MacawBridgesModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(RAIL_BRIDGES);
+        this.addEntry(railBridges);
 
 
-        BRIDGE_STAIRS = SimpleEntrySet.builder(WoodType.class, "log_bridge_stair",
+        bridgeStairs = SimpleEntrySet.builder(WoodType.class, "log_bridge_stair",
                         BlockInit.OAK_LOG_BRIDGE_STAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Iron_Stair(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -87,9 +87,9 @@ public class MacawBridgesModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(BRIDGE_STAIRS);
+        this.addEntry(bridgeStairs);
 
-        ROPE_STAIRS = SimpleEntrySet.builder(WoodType.class, "rope_bridge_stair",
+        ropeStairs = SimpleEntrySet.builder(WoodType.class, "rope_bridge_stair",
                         BlockInit.OAK_ROPE_BRIDGE_STAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Iron_Stair(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -99,7 +99,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(ROPE_STAIRS);
+        this.addEntry(ropeStairs);
 
 
     }

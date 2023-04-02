@@ -176,10 +176,10 @@ public class BuildersAdditionModule extends SimpleModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "",   "shelf",
                         Index.SHELF_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatShelf(shortenedId() + "/" + w.getAppendableId(), w.planks))
+                        w -> new Shelf(shortenedId() + "/" + w.getAppendableId()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addRecipe(modRes("shelf/shelf_oak"))
-                .addTile(CompatShelfTileEntity::new)
+                .addTile(Index.SHELF_TILE_ENTITY_TYPE)
                 .setTab(() -> tab)
                 .build();
 
@@ -268,27 +268,6 @@ public class BuildersAdditionModule extends SimpleModule {
 //        event.register((BlockEntityType<CompatShelfTileEntity>) (SHELVES.getTileHolder().tile), ShelfRenderer::new);
 //    }
 
-    class CompatShelfTileEntity extends ShelfTileEntity {
-        public CompatShelfTileEntity(BlockPos pos, BlockState state) {
-            super(pos, state);
-        }
-
-        @Override
-        public BlockEntityType<?> getType() {
-            return shelves.getTileHolder().tile;
-        }
-    }
-
-    private class CompatShelf extends Shelf {
-        public CompatShelf(String name, Block source) {
-            super("shelf_" + name);
-        }
-
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new CompatShelfTileEntity(pos, state);
-        }
-    }
-
     private static class CompatCabinet extends Cabinet {
         public CompatCabinet(String name, Block source) {
             super("cabinet_" + name);
@@ -316,12 +295,5 @@ public class BuildersAdditionModule extends SimpleModule {
         hedges.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         });
-    }
-
-    @Override
-    public void registerWoodBlocks(Registrator<Block> registry, Collection<WoodType> woodTypes) {
-
-
-        super.registerWoodBlocks(registry, woodTypes);
     }
 }

@@ -50,13 +50,13 @@ public class GraveyardModule extends SimpleModule {
 
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register((BlockEntityType<CompatCoffinBlockTile>) (COFFINS.getTileHolder().tile), CompatCoffinRenderer::new);
+        event.register((BlockEntityType<CompatCoffinBlockTile>) (COFFINS.getTileHolder().get()), CompatCoffinRenderer::new);
     }
 
     @Override
     public void registerTiles(Registrator<BlockEntityType<?>> registry) {
         super.registerTiles(registry);
-        COFFIN_TILE = (BlockEntityType<? extends SarcophagusBlockEntity>) COFFINS.getTileHolder().tile;
+        COFFIN_TILE = (BlockEntityType<? extends SarcophagusBlockEntity>) COFFINS.getTileHolder().get();
     }
 
     //idk why but object holder class loader thingie keeps trying to load this if its not inner private like this
@@ -71,7 +71,7 @@ public class GraveyardModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return COFFINS.getTileHolder().tile;
+            return COFFINS.getTileHolder().get();
         }
 
         public WoodType getWoodType() {

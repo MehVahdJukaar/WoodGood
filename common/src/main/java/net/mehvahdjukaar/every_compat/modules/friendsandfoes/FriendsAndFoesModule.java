@@ -9,6 +9,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
@@ -32,6 +33,7 @@ public class FriendsAndFoesModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
+                .addTag(PoiTypeTags.BEE_HOME, Registry.POINT_OF_INTEREST_TYPE_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .addTile(() -> BlockEntityType.BEEHIVE)
                 .defaultRecipe()

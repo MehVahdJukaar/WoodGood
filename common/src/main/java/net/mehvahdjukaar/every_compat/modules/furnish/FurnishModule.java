@@ -110,6 +110,7 @@ public class FurnishModule extends SimpleModule {
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_bedside_table"))
                 .setTab(() -> tab)
                 .build();
@@ -122,6 +123,7 @@ public class FurnishModule extends SimpleModule {
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_kitchen_cabinet"))
                 .setTab(() -> tab)
                 .build();
@@ -134,6 +136,7 @@ public class FurnishModule extends SimpleModule {
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addTexture(modRes("block/birch_cabinet_door_right"))
                 .addTexture(modRes("block/birch_cabinet_door_left"))
                 .addRecipe(modRes("furniture_making/birch_cabinet"))
@@ -148,6 +151,7 @@ public class FurnishModule extends SimpleModule {
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTile(FurnishRegistries.Large_Furniture_BlockEntity)
                 .addTexture(modRes("block/birch_wardrobe_door_bottom_right"))
                 .addTexture(modRes("block/birch_wardrobe_door_bottom_left"))
                 .addTexture(modRes("block/birch_wardrobe_door_top_right"))
@@ -216,6 +220,7 @@ public class FurnishModule extends SimpleModule {
 //                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTile(FurnishRegistries.Shelf_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_shelf"))
                 .setTab(() -> tab)
                 .build();

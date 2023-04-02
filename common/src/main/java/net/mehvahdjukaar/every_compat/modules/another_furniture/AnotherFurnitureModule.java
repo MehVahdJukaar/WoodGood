@@ -7,6 +7,7 @@ import com.starfish_studios.another_furniture.block.entity.PlanterBoxBlockEntity
 import com.starfish_studios.another_furniture.block.entity.ShelfBlockEntity;
 import com.starfish_studios.another_furniture.client.renderer.blockentity.PlanterBoxRenderer;
 import com.starfish_studios.another_furniture.client.renderer.blockentity.ShelfRenderer;
+import com.starfish_studios.another_furniture.registry.AFBlockEntityTypes;
 import com.starfish_studios.another_furniture.registry.AFBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -40,12 +41,12 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         planterBoxes = SimpleEntrySet.builder(WoodType.class, "planter_box",
                         AFBlocks.OAK_PLANTER_BOX, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatPlanterBoxBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new PlanterBoxBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("planter_boxes"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("planter_boxes"), Registry.ITEM_REGISTRY)
                 .useLootFromBase()
                 .defaultRecipe()
-                .addTile(CompatPlanterBoxTile::new)
+                .addTile(AFBlockEntityTypes.PLANTER_BOX)
                 .setTab(() -> AnotherFurniture.TAB)
                 .addTexture(modRes("block/planter_box/oak_bottom"))
                 .addTexture(modRes("block/planter_box/oak_supports"))
@@ -105,10 +106,10 @@ public class AnotherFurnitureModule extends SimpleModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
                         AFBlocks.OAK_SHELF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatShelfBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("shelves"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shelves"), Registry.ITEM_REGISTRY)
-                .addTile(CompatShelfBlockTile::new)
+                .addTile(AFBlockEntityTypes.SHELF)
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
                 .addTexture(modRes("block/shelf/oak_sides"))
@@ -124,7 +125,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                         w -> new DrawerBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
-                .addTile(CompatDrawerBlockTile::new)
+                .addTile(AFBlockEntityTypes.DRAWER)
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
                 .setRenderType(() -> RenderType::cutout)
@@ -170,69 +171,6 @@ public class AnotherFurnitureModule extends SimpleModule {
             var nc2 = new PaletteColor(c2.hcl().withLuminance(c2.hcl().luminance() - (dl * 0.05f)));
             nc2.occurrence = c2.occurrence;
             p.set(+2, nc2);
-        }
-    }
-
-    @Override
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register((BlockEntityType<CompatShelfBlockTile>) (shelves.getTileHolder().tile), ShelfRenderer::new);
-        event.register((BlockEntityType<CompatPlanterBoxTile>) (planterBoxes.getTileHolder().tile), PlanterBoxRenderer::new);
-    }
-
-    //idk why but object holder class loader thingie keeps trying to load this if its not inner private like this
-    class CompatShelfBlockTile extends ShelfBlockEntity {
-
-        public CompatShelfBlockTile(BlockPos pos, BlockState state) {
-            super(pos, state);
-        }
-
-        @Override
-        public BlockEntityType<?> getType() {
-            return shelves.getTileHolder().tile;
-        }
-    }
-
-    private class CompatShelfBlock extends ShelfBlock {
-        public CompatShelfBlock(Properties properties) {
-            super(properties);
-        }
-
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new CompatShelfBlockTile(pos, state);
-        }
-    }
-
-    class CompatPlanterBoxTile extends PlanterBoxBlockEntity {
-
-        public CompatPlanterBoxTile(BlockPos pos, BlockState state) {
-            super(pos, state);
-        }
-
-        @Override
-        public BlockEntityType<?> getType() {
-            return planterBoxes.getTileHolder().tile;
-        }
-    }
-    
-    private class CompatPlanterBoxBlock extends PlanterBoxBlock {
-        public CompatPlanterBoxBlock(Properties properties) {
-            super(properties);
-        }
-
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new CompatPlanterBoxTile(pos, state);
-        }
-    }
-
-    class CompatDrawerBlockTile extends DrawerBlockEntity {
-
-        public CompatDrawerBlockTile(BlockPos pos, BlockState state) {
-            super(pos, state);
-        }
-
-        @Override
-        public BlockEntityType<?> getType() {
-            return drawers.getTileHolder().tile;
         }
     }
 

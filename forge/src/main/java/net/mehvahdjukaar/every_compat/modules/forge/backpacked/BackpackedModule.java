@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.backpacked;
 import com.mrcrayfish.backpacked.Backpacked;
 import com.mrcrayfish.backpacked.block.ShelfBlock;
 import com.mrcrayfish.backpacked.client.renderer.entity.layers.ShelfRenderer;
+import com.mrcrayfish.backpacked.core.ModBlockEntities;
 import com.mrcrayfish.backpacked.core.ModBlocks;
 import com.mrcrayfish.backpacked.tileentity.ShelfBlockEntity;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 //credit to WenXin2
 public class BackpackedModule extends SimpleModule {
@@ -30,42 +32,14 @@ public class BackpackedModule extends SimpleModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "backpack_shelf",
                         ModBlocks.OAK_BACKPACK_SHELF, () -> WoodTypeRegistry.OAK_TYPE,
-                ifHasChild(w -> new CompatShelfBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                ifHasChild(w -> new ShelfBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> Backpacked.TAB)
                 .addRecipe(modRes("oak_backpack_shelf"))
-                .addTile(CompatShelfBlockEntity::new)
+                .addTile(ModBlockEntities.SHELF)
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(shelves);
-    }
-
-    @Override
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register((BlockEntityType<ShelfBlockEntity>) (shelves.getTileHolder().tile), ShelfRenderer::new);
-
-    }
-
-    class CompatShelfBlockEntity extends ShelfBlockEntity {
-
-        public CompatShelfBlockEntity(BlockPos pos, BlockState state) {
-            super(pos, state);
-        }
-
-        @Override
-        public BlockEntityType<?> getType() {
-            return shelves.getTileHolder().tile;
-        }
-    }
-
-    private class CompatShelfBlock extends ShelfBlock {
-        public CompatShelfBlock(Properties properties) {
-            super(properties);
-        }
-
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new CompatShelfBlockEntity(pos, state);
-        }
     }
 }

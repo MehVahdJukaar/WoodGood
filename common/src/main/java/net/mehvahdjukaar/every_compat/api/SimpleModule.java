@@ -23,9 +23,16 @@ public class SimpleModule extends CompatModule {
     private final String shortId;
     private final Map<String, EntrySet<?, ?>> entries = new LinkedHashMap<>();
 
+    protected int bloat = 0;
+
     public SimpleModule(String modId, String shortId) {
         super(modId);
         this.shortId = shortId;
+    }
+
+    @Override
+    public int bloatAmount() {
+        return bloat;
     }
 
     public void addEntry(EntrySet<?, ?> entryHolder) {
@@ -58,11 +65,13 @@ public class SimpleModule extends CompatModule {
     @Override
     public void registerWoodBlocks(Registrator<Block> registry, Collection<WoodType> woodTypes) {
         getEntries().forEach(e -> e.registerWoodBlocks(this, registry, woodTypes));
+        getEntries().forEach(e -> bloat += e.blocks.size());
     }
 
     @Override
     public void registerLeavesBlocks(Registrator<Block> registry, Collection<LeavesType> leavesTypes) {
         getEntries().forEach(e -> e.registerLeavesBlocks(this, registry, leavesTypes));
+        getEntries().forEach(e -> bloat += e.blocks.size());
     }
 
     @Override
@@ -113,7 +122,7 @@ public class SimpleModule extends CompatModule {
         getEntries().forEach(e -> e.registerEntityRenderers(this, event));
     }
 
-    public static void appendTileEntityBlocks(BlockEntityType<?> be, Collection<? extends Block> blocks){
+    public static void appendTileEntityBlocks(BlockEntityType<?> be, Collection<? extends Block> blocks) {
         be.validBlocks = new HashSet<>(be.validBlocks);
         be.validBlocks.addAll(blocks);
     }

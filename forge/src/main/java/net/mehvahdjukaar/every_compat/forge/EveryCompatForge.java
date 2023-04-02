@@ -1,18 +1,19 @@
 package net.mehvahdjukaar.every_compat.forge;
 
+import com.simibubi.create.foundation.utility.RemapHelper;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
-import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsMacawModule;
-import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsModule;
-import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
-import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
+import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
@@ -22,17 +23,23 @@ import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModu
 import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
-
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.MissingMappingsEvent;
+
+import java.util.Optional;
 
 /**
  * Author: MehVahdJukaar
@@ -99,10 +106,28 @@ public class EveryCompatForge extends EveryCompat {
         }
 
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
+        MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onRemap);
     }
 
     @SubscribeEvent
     public void onCommonSetup(FMLCommonSetupEvent event) {
         this.commonSetup();
+    }
+
+
+    public static void onRemap(MissingMappingsEvent event) {
+        for (var mapping : event.getMappings(Registry.BLOCK_ENTITY_TYPE_REGISTRY, EveryCompat.MOD_ID)) {
+            ResourceLocation key = mapping.getKey();
+            String path = key.getPath();
+            for (var m : EveryCompat.ACTIVE_MODULES.values()) {
+                if (path.startsWith(m.shortenedId() + "_")) {
+                    String newPath = path.substring((m.shortenedId() + "_").length());
+                    ResourceLocation newId = new ResourceLocation(m.getModId(), newPath);
+                    Optional<BlockEntityType<?>> optional = Registry.BLOCK_ENTITY_TYPE.getOptional(newId);
+                    optional.ifPresent(mapping::remap);
+                    break;
+                }
+            }
+        }
     }
 }

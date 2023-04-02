@@ -44,9 +44,9 @@ import pokecube.legends.recipes.LegendsDistorticRecipeSerializer;
 
 public class PokecubeLegendsModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> DISTORTIC_PLANKS;
-    public final SimpleEntrySet<WoodType, Block> DISTORTIC_STAIRS;
-    public final SimpleEntrySet<WoodType, Block> DISTORTIC_SLABS;
+    public final SimpleEntrySet<WoodType, Block> distorticPlanks;
+    public final SimpleEntrySet<WoodType, Block> distorticStairs;
+    public final SimpleEntrySet<WoodType, Block> DISTORTICSLABS;
 
     public PokecubeLegendsModule(String modId) {
         super(modId, "pcl");
@@ -54,7 +54,7 @@ public class PokecubeLegendsModule extends SimpleModule {
 
         TemplateRecipeManager.registerTemplate(modRes("legends_recipe"), MirrorRecipeTemplate::new);
 
-        DISTORTIC_PLANKS = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
+        distorticPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
                         BlockInit.DISTORTIC_OAK_PLANKS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_planks"))
@@ -67,9 +67,9 @@ public class PokecubeLegendsModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(DISTORTIC_PLANKS);
+        this.addEntry(distorticPlanks);
 
-        DISTORTIC_STAIRS = SimpleEntrySet.builder(WoodType.class, "stairs", "distortic",
+        distorticStairs = SimpleEntrySet.builder(WoodType.class, "stairs", "distortic",
                         BlockInit.DISTORTIC_OAK_STAIRS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ItemGenerator.GenericStairs(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_stairs"))
@@ -80,9 +80,9 @@ public class PokecubeLegendsModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(DISTORTIC_STAIRS);
+        this.addEntry(distorticStairs);
 
-        DISTORTIC_SLABS = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
+        DISTORTICSLABS = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
                         BlockInit.DISTORTIC_OAK_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_slab"))
@@ -93,7 +93,7 @@ public class PokecubeLegendsModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(DISTORTIC_SLABS);
+        this.addEntry(DISTORTICSLABS);
     }
 
     public static class MirrorFinishedRecipe implements FinishedRecipe {

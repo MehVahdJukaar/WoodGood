@@ -211,12 +211,12 @@ public class StorageDrawersModule extends SimpleModule {
 
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register((BlockEntityType<CompatStandardDrawersEntity1>) (FULL_DRAWERS_1.getTileHolder().tile), BlockEntityDrawersRenderer::new);
-        event.register((BlockEntityType<CompatStandardDrawersEntity2>) (FULL_DRAWERS_2.getTileHolder().tile), BlockEntityDrawersRenderer::new);
-        event.register((BlockEntityType<CompatStandardDrawersEntity4>) (FULL_DRAWERS_4.getTileHolder().tile), BlockEntityDrawersRenderer::new);
-        event.register((BlockEntityType<CompatHalfDrawersEntity1>) (HALF_DRAWERS_1.getTileHolder().tile), BlockEntityDrawersRenderer::new);
-        event.register((BlockEntityType<CompatHalfDrawersEntity2>) (HALF_DRAWERS_2.getTileHolder().tile), BlockEntityDrawersRenderer::new);
-        event.register((BlockEntityType<CompatHalfDrawersEntity4>) (HALF_DRAWERS_4.getTileHolder().tile), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatStandardDrawersEntity1>) (FULL_DRAWERS_1.getTileHolder().get()), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatStandardDrawersEntity2>) (FULL_DRAWERS_2.getTileHolder().get()), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatStandardDrawersEntity4>) (FULL_DRAWERS_4.getTileHolder().get()), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatHalfDrawersEntity1>) (HALF_DRAWERS_1.getTileHolder().get()), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatHalfDrawersEntity2>) (HALF_DRAWERS_2.getTileHolder().get()), BlockEntityDrawersRenderer::new);
+        event.register((BlockEntityType<CompatHalfDrawersEntity4>) (HALF_DRAWERS_4.getTileHolder().get()), BlockEntityDrawersRenderer::new);
     }
 
     private class CompatStandardDrawers extends BlockStandardDrawers {
@@ -250,7 +250,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         @Override
         public @NotNull BlockEntityType<?> getType() {
-            return FULL_DRAWERS_1.getTileHolder().tile;
+            return FULL_DRAWERS_1.getTileHolder().get();
         }
     }
 
@@ -262,7 +262,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         @Override
         public @NotNull BlockEntityType<?> getType() {
-            return FULL_DRAWERS_2.getTileHolder().tile;
+            return FULL_DRAWERS_2.getTileHolder().get();
         }
     }
 
@@ -274,7 +274,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         @Override
         public @NotNull BlockEntityType<?> getType() {
-            return FULL_DRAWERS_4.getTileHolder().tile;
+            return FULL_DRAWERS_4.getTileHolder().get();
         }
 
     }
@@ -287,7 +287,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         @Override
         public @NotNull BlockEntityType<?> getType() {
-            return HALF_DRAWERS_1.getTileHolder().tile;
+            return HALF_DRAWERS_1.getTileHolder().get();
         }
     }
 
@@ -299,7 +299,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         @Override
         public @NotNull BlockEntityType<?> getType() {
-            return HALF_DRAWERS_2.getTileHolder().tile;
+            return HALF_DRAWERS_2.getTileHolder().get();
         }
     }
 
@@ -311,7 +311,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         @Override
         public @NotNull BlockEntityType<?> getType() {
-            return HALF_DRAWERS_4.getTileHolder().tile;
+            return HALF_DRAWERS_4.getTileHolder().get();
         }
 
     }

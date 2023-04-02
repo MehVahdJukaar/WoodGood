@@ -160,6 +160,7 @@ public abstract class CompatModule {
     public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
     }
 
+    //utility functions
 
     protected final <T extends Block> T getModBlock(String id, Class<T> blockClass) {
         return (T) Registry.BLOCK.get(modRes(id));
@@ -168,7 +169,14 @@ public abstract class CompatModule {
     protected final Block getModBlock(String id) {
         return Registry.BLOCK.get(modRes(id));
     }
-    //utility functions
+
+    protected final <T extends BlockEntityType<?>> T getModTile(String id, Class<T> blockClass) {
+        return (T) Registry.BLOCK_ENTITY_TYPE.get(modRes(id));
+    }
+
+    protected final BlockEntityType<?> getModTile(String id) {
+        return Registry.BLOCK_ENTITY_TYPE.get(modRes(id));
+    }
 
     //post process some textures. currently only ecologics azalea
     public void addWoodTexture(WoodType wood, DynClientResourcesProvider handler, ResourceManager manager,
@@ -212,8 +220,6 @@ public abstract class CompatModule {
         };
     }
 
-
-    public void onFirstClientTick() {
-    }
-
+    //how much crap this module has registered
+    public abstract int bloatAmount();
 }

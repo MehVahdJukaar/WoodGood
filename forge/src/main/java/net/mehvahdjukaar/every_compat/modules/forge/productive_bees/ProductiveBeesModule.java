@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.productive_bees;
 
 import cy.jdkdigital.productivebees.common.block.AdvancedBeehive;
 import cy.jdkdigital.productivebees.common.block.ExpansionBox;
+import cy.jdkdigital.productivebees.init.ModBlockEntityTypes;
 import cy.jdkdigital.productivebees.init.ModBlocks;
 import cy.jdkdigital.productivebees.init.ModItemGroups;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -54,6 +55,7 @@ public class ProductiveBeesModule extends SimpleModule {
                 .addTag(modRes("advanced_beehives"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
+                .addTile(ModBlockEntityTypes.ADVANCED_BEEHIVE)
                 // Having two recipes overwrites each other TODO: no actually it souldnt
                 .addRecipe(modRes("hives/advanced_spruce_beehive_clear"))
                 .addRecipe(modRes("hives/advanced_spruce_beehive"))
@@ -89,6 +91,7 @@ public class ProductiveBeesModule extends SimpleModule {
                 .addTag(modRes("expansion_boxes"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
+                .addTile(ModBlockEntityTypes.EXPANSION_BOX)
                 .addRecipe(modRes("boxes/expansion_box_spruce"))
                 .setTab(() -> tab)
                 .build();
