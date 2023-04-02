@@ -16,7 +16,6 @@ import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -72,7 +71,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Nullable
     protected final TriFunction<T, B, Item.Properties, @Nullable Item> itemFactory;
     @Nullable
-    protected final TileHolder<?> tileHolder;
+    protected final SimpleEntrySet.ITileHolder<?> tileHolder;
 
     protected final Supplier<CreativeModeTab> tab;
     protected final boolean copyLoot;
@@ -95,7 +94,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                           Supplier<CreativeModeTab> tab,
                           boolean copyLoot,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
-                          @Nullable TileHolder<?> tileFactory,
+                          @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                           @Nullable Supplier<Supplier<RenderType>> renderType,
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
@@ -126,7 +125,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         }
     }
 
-    public TileHolder<?> getTileHolder() {
+    public ITileHolder<?> getTileHolder() {
         return tileHolder;
     }
 
@@ -240,8 +239,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void registerTiles(CompatModule module, Registrator<BlockEntityType<?>> registry) {
-        if (tileHolder != null) {
-            var tile = this.tileHolder.createInstance(blocks.values().toArray(Block[]::new));
+        if (tileHolder instanceof NewTileHolder<?> nt) {
+            var tile = nt.createInstance(blocks.values().toArray(Block[]::new));
             registry.register(EveryCompat.res(module.shortenedId() + "_" + this.getName()), tile);
         }
     }
@@ -250,6 +249,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public void registerEntityRenderers(CompatModule simpleModule, ClientPlatformHelper.BlockEntityRendererEvent event) {
         if (this.tileHolder != null) {
             //this.tileHolder.registerRenderer(event);
+        }
+    }
+
+    @Override
+    public void setupExistingTiles() {
+        if (tileHolder instanceof ExistingTileHolder<?> et) {
+            SimpleModule.appendTileEntityBlocks(et.get(), blocks.values());
         }
     }
 
@@ -265,8 +271,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         if (!tags.isEmpty()) {
             for (var tb : tags.entrySet()) {
                 SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
-                for(var b : blocks.entrySet()){
-                    if(WoodConfigs.isEntryEnabled(b.getKey(),b.getValue())){
+                for (var b : blocks.entrySet()) {
+                    if (WoodConfigs.isEntryEnabled(b.getKey(), b.getValue())) {
                         builder.addEntry(b.getValue());
                     }
                 }
@@ -432,7 +438,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         @Nullable
         protected TriFunction<T, B, Item.Properties, Item> itemFactory;
         @Nullable
-        protected TileHolder<?> tileFactory;
+        protected SimpleEntrySet.ITileHolder<?> tileHolder;
         @Nullable
         protected Supplier<Supplier<RenderType>> renderType = null;
         @Nullable
@@ -453,15 +459,20 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
         public SimpleEntrySet<T, B> build() {
             var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot,
-                    itemFactory, tileFactory, renderType, palette, extraModelTransform);
+                    itemFactory, tileHolder, renderType, palette, extraModelTransform);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
             return e;
         }
 
+        public <H extends BlockEntity> Builder<T, B> addTile(Supplier<BlockEntityType<H>> tile) {
+            this.tileHolder = new ExistingTileHolder<>(tile);
+            return this;
+        }
+
         public <H extends BlockEntity> Builder<T, B> addTile(BiFunction<BlockPos, BlockState, H> tileFactory) {
-            this.tileFactory = new TileHolder<>(tileFactory);
+            this.tileHolder = new NewTileHolder<>(tileFactory);
             return this;
         }
 
@@ -553,14 +564,28 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
 
-    public static class TileHolder<H extends BlockEntity> {
+    public interface ITileHolder<H extends BlockEntity> {
+
+        BlockEntityType<? extends H> get();
+    }
+
+    public record ExistingTileHolder<H extends BlockEntity>(
+            Supplier<BlockEntityType<H>> supplier) implements ITileHolder<H> {
+
+        @Override
+        public BlockEntityType<? extends H> get() {
+            return supplier.get();
+        }
+    }
+
+    public static class NewTileHolder<H extends BlockEntity> implements ITileHolder<H> {
 
         protected final BiFunction<BlockPos, BlockState, H> tileFactory;
         protected Supplier<BlockEntityRendererProvider<H>> renderer = null;
         public BlockEntityType<? extends H> tile = null;
 
 
-        public TileHolder(BiFunction<BlockPos, BlockState, H> tileFactory) {
+        public NewTileHolder(BiFunction<BlockPos, BlockState, H> tileFactory) {
             this.tileFactory = tileFactory;
         }
 

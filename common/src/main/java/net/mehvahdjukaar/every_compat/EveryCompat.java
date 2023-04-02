@@ -76,6 +76,10 @@ public abstract class EveryCompat {
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
+        addOtherCompatMod("abnormals_delight", "autumnity", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "endergetic", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", "atmospheric", List.of("farmersdelight"));
 
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
         addOtherCompatMod("macawbridgesbyg", "byg", List.of("mcwbridges"));
@@ -151,6 +155,9 @@ public abstract class EveryCompat {
         int am = newSize - prevRegSize;
         float p = (am / (float) newSize) * 100f;
         EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", am, p);
+        if (p > 33) {
+            EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time. You might want to uninstall some furniture mod");
+        }
     }
 
     protected void registerItems(Registrator<Item> event) {
