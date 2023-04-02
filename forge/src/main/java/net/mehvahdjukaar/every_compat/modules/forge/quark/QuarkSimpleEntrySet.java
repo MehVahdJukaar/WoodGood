@@ -39,7 +39,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                BiFunction<T, vazkii.quark.base.module.QuarkModule, B> blockSupplier,
                                Supplier<CreativeModeTab> tab, boolean copyLoot,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
-                               @Nullable SimpleEntrySet.TileHolder<?> tileFactory,
+                               @Nullable SimpleEntrySet.NewTileHolder<?> tileFactory,
                                @Nullable Supplier<Supplier<RenderType>> renderType,
                                @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
@@ -123,7 +123,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         public QuarkSimpleEntrySet<T, B> build() {
             var e = new QuarkSimpleEntrySet<>(type, name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, copyLoot,
-                    itemFactory, tileFactory, renderType, palette, extraModelTransform);
+                    itemFactory, tileHolder, renderType, palette, extraModelTransform);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);

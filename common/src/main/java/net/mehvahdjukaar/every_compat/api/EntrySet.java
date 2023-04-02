@@ -5,7 +5,6 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -75,5 +74,5 @@ public abstract class EntrySet<T extends BlockType, B extends Block> {
 
     public abstract void registerEntityRenderers(CompatModule simpleModule, ClientPlatformHelper.BlockEntityRendererEvent event);
 
-
+    public void setupExistingTiles() {}
 }

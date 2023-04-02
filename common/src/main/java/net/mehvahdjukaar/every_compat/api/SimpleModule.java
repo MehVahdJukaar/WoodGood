@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -102,9 +103,18 @@ public class SimpleModule extends CompatModule {
         getEntries().forEach(EntrySet::setRenderLayer);
     }
 
+    @Override
+    public void onModSetup() {
+        getEntries().forEach(EntrySet::setupExistingTiles);
+    }
 
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
         getEntries().forEach(e -> e.registerEntityRenderers(this, event));
+    }
+
+    public static void appendTileEntityBlocks(BlockEntityType<?> be, Collection<? extends Block> blocks){
+        be.validBlocks = new HashSet<>(be.validBlocks);
+        be.validBlocks.addAll(blocks);
     }
 }

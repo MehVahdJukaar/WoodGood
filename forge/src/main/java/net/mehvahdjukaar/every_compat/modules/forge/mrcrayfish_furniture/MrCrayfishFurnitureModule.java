@@ -1,16 +1,13 @@
-package net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture;
+package net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture;
 
 import com.mrcrayfish.furniture.FurnitureMod;
 import com.mrcrayfish.furniture.FurnitureModTab;
 import com.mrcrayfish.furniture.block.*;
-import com.mrcrayfish.furniture.client.renderer.tileentity.KitchenSinkBlockEntityRenderer;
 import com.mrcrayfish.furniture.common.ModTags;
+import com.mrcrayfish.furniture.core.ModBlockEntities;
 import com.mrcrayfish.furniture.core.ModBlocks;
-import com.mrcrayfish.furniture.tileentity.KitchenSinkBlockEntity;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
@@ -18,84 +15,79 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MrCrayfishFurnitureModule extends SimpleModule {
 
-    public final SimpleEntrySet<LeavesType, Block> HEDGES;
-    public final SimpleEntrySet<WoodType, Block> BEDSIDE_CABINETS;
-    public final SimpleEntrySet<WoodType, Block> BENCHES;
-    public final SimpleEntrySet<WoodType, Block> BLINDS;
-    public final SimpleEntrySet<WoodType, Block> CABINETS;
-    public final SimpleEntrySet<WoodType, Block> CHAIRS;
-    public final SimpleEntrySet<WoodType, Block> COFFEE_TABLES;
-    public final SimpleEntrySet<WoodType, Block> CRATES;
-    public final SimpleEntrySet<WoodType, Block> DESKS;
-    public final SimpleEntrySet<WoodType, Block> DESK_CABINETS;
-    public final SimpleEntrySet<WoodType, Block> KITCHEN_COUNTERS;
-    public final SimpleEntrySet<WoodType, Block> KITCHEN_DRAWERS;
-    public final SimpleEntrySet<WoodType, Block> KITCHEN_SINK_DARK;
-    public final SimpleEntrySet<WoodType, Block> KITCHEN_SINK_LIGHT;
-    public final SimpleEntrySet<WoodType, Block> MAIL_BOXES;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_BEDSIDE_CABINETS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_BENCHES;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_BLINDS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_CABINETS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_CHAIRS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_COFFEE_TABLES;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_CRATES;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_DESKS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_DESK_CABINETS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_COUNTERS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_DRAWERS;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_SINK_DARK;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_KITCHEN_SINK_LIGHT;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_MAIL_BOXES;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_TABLES;
-    public final SimpleEntrySet<WoodType, Block> TABLES;
-    public final SimpleEntrySet<WoodType, Block> UPGRADED_FENCES;
-    public final SimpleEntrySet<WoodType, Block> UPGRADED_GATES;
+    public final SimpleEntrySet<LeavesType, Block> hedges;
+    public final SimpleEntrySet<WoodType, Block> bedsideCabinets;
+    public final SimpleEntrySet<WoodType, Block> benches;
+    public final SimpleEntrySet<WoodType, Block> blinds;
+    public final SimpleEntrySet<WoodType, Block> cabinets;
+    public final SimpleEntrySet<WoodType, Block> chairs;
+    public final SimpleEntrySet<WoodType, Block> coffeeTables;
+    public final SimpleEntrySet<WoodType, Block> crates;
+    public final SimpleEntrySet<WoodType, Block> desks;
+    public final SimpleEntrySet<WoodType, Block> deskCabinets;
+    public final SimpleEntrySet<WoodType, Block> kitchenCounters;
+    public final SimpleEntrySet<WoodType, Block> kitchenDrawers;
+    public final SimpleEntrySet<WoodType, Block> kitchenSinkDark;
+    public final SimpleEntrySet<WoodType, Block> kitchenSinkLight;
+    public final SimpleEntrySet<WoodType, Block> mailBoxes;
+    public final SimpleEntrySet<WoodType, Block> strippedBedsideCabinets;
+    public final SimpleEntrySet<WoodType, Block> strippedBenches;
+    public final SimpleEntrySet<WoodType, Block> strippedBlinds;
+    public final SimpleEntrySet<WoodType, Block> strippedCabinets;
+    public final SimpleEntrySet<WoodType, Block> strippedChairs;
+    public final SimpleEntrySet<WoodType, Block> strippedCoffeeTables;
+    public final SimpleEntrySet<WoodType, Block> strippedCrates;
+    public final SimpleEntrySet<WoodType, Block> strippedDesks;
+    public final SimpleEntrySet<WoodType, Block> strippedDeskCabinets;
+    public final SimpleEntrySet<WoodType, Block> strippedKitchenCounters;
+    public final SimpleEntrySet<WoodType, Block> strippedKitchenDrawers;
+    public final SimpleEntrySet<WoodType, Block> strippedKitchenSinkDark;
+    public final SimpleEntrySet<WoodType, Block> strippedKitchenSinkLight;
+    public final SimpleEntrySet<WoodType, Block> strippedMailBoxes;
+    public final SimpleEntrySet<WoodType, Block> strippedTables;
+    public final SimpleEntrySet<WoodType, Block> tables;
+    public final SimpleEntrySet<WoodType, Block> upgradedFences;
+    public final SimpleEntrySet<WoodType, Block> upgradedGates;
 
     public MrCrayfishFurnitureModule(String modId) {
         super(modId, "cfm");
 
-        BEDSIDE_CABINETS = SimpleEntrySet.builder(WoodType.class, "bedside_cabinet",
+        bedsideCabinets = SimpleEntrySet.builder(WoodType.class, "bedside_cabinet",
                         ModBlocks.BEDSIDE_CABINET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BedsideCabinetBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.BEDSIDE_CABINET)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(BEDSIDE_CABINETS);
+        this.addEntry(bedsideCabinets);
 
-        STRIPPED_BEDSIDE_CABINETS = SimpleEntrySet.builder(WoodType.class, "bedside_cabinet", "stripped",
+        strippedBedsideCabinets = SimpleEntrySet.builder(WoodType.class, "bedside_cabinet", "stripped",
                         ModBlocks.BEDSIDE_CABINET_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BedsideCabinetBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.BEDSIDE_CABINET)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_BEDSIDE_CABINETS);
+        this.addEntry(strippedBedsideCabinets);
 
-        BENCHES = SimpleEntrySet.builder(WoodType.class, "park_bench",
+        benches = SimpleEntrySet.builder(WoodType.class, "park_bench",
                         ModBlocks.PARK_BENCH_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ParkBenchBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -106,9 +98,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(BENCHES);
+        this.addEntry(benches);
 
-        STRIPPED_BENCHES = SimpleEntrySet.builder(WoodType.class, "park_bench", "stripped",
+        strippedBenches = SimpleEntrySet.builder(WoodType.class, "park_bench", "stripped",
                         ModBlocks.PARK_BENCH_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new ParkBenchBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -119,9 +111,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_BENCHES);
+        this.addEntry(strippedBenches);
 
-        BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds",
+        blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
                         ModBlocks.BLINDS_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BlindsBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -130,9 +122,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(BLINDS);
+        this.addEntry(blinds);
 
-        STRIPPED_BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds", "stripped",
+        strippedBlinds = SimpleEntrySet.builder(WoodType.class, "blinds", "stripped",
                         ModBlocks.BLINDS_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BlindsBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -141,33 +133,35 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_BLINDS);
+        this.addEntry(strippedBlinds);
 
-        CABINETS = SimpleEntrySet.builder(WoodType.class, "cabinet",
+        cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         ModBlocks.CABINET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CabinetBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.CABINET)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(CABINETS);
+        this.addEntry(cabinets);
 
-        STRIPPED_CABINETS = SimpleEntrySet.builder(WoodType.class, "cabinet", "stripped",
+        strippedCabinets = SimpleEntrySet.builder(WoodType.class, "cabinet", "stripped",
                         ModBlocks.CABINET_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new CabinetBlock(Utils.copyPropertySafe(w.planks)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.CABINET)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_CABINETS);
+        this.addEntry(strippedCabinets);
 
-        CHAIRS = SimpleEntrySet.builder(WoodType.class, "chair",
+        chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.CHAIR_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -177,9 +171,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(CHAIRS);
+        this.addEntry(chairs);
 
-        STRIPPED_CHAIRS = SimpleEntrySet.builder(WoodType.class, "chair", "stripped",
+        strippedChairs = SimpleEntrySet.builder(WoodType.class, "chair", "stripped",
                         ModBlocks.CHAIR_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new ChairBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -189,9 +183,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_CHAIRS);
+        this.addEntry(strippedChairs);
 
-        COFFEE_TABLES = SimpleEntrySet.builder(WoodType.class, "coffee_table",
+        coffeeTables = SimpleEntrySet.builder(WoodType.class, "coffee_table",
                         ModBlocks.COFFEE_TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CoffeeTableBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -201,9 +195,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(COFFEE_TABLES);
+        this.addEntry(coffeeTables);
 
-        STRIPPED_COFFEE_TABLES = SimpleEntrySet.builder(WoodType.class, "coffee_table", "stripped",
+        strippedCoffeeTables = SimpleEntrySet.builder(WoodType.class, "coffee_table", "stripped",
                         ModBlocks.COFFEE_TABLE_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new CoffeeTableBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -213,33 +207,35 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_COFFEE_TABLES);
+        this.addEntry(strippedCoffeeTables);
 
-        CRATES = SimpleEntrySet.builder(WoodType.class, "crate",
+        crates = SimpleEntrySet.builder(WoodType.class, "crate",
                         ModBlocks.CRATE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CrateBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.CRATE)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(CRATES);
+        this.addEntry(crates);
 
-        STRIPPED_CRATES = SimpleEntrySet.builder(WoodType.class, "crate", "stripped",
+        strippedCrates = SimpleEntrySet.builder(WoodType.class, "crate", "stripped",
                         ModBlocks.CRATE_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new CrateBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.CRATE)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_CRATES);
+        this.addEntry(strippedCrates);
 
-        DESKS = SimpleEntrySet.builder(WoodType.class, "desk",
+        desks = SimpleEntrySet.builder(WoodType.class, "desk",
                         ModBlocks.DESK_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DeskBlock(Utils.copyPropertySafe(w.planks), DeskBlock.MaterialType.OAK))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -249,9 +245,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(DESKS);
+        this.addEntry(desks);
 
-        STRIPPED_DESKS = SimpleEntrySet.builder(WoodType.class, "desk", "stripped",
+        strippedDesks = SimpleEntrySet.builder(WoodType.class, "desk", "stripped",
                         ModBlocks.DESK_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new DeskBlock(Utils.copyPropertySafe(w.log), DeskBlock.MaterialType.STRIPPED_OAK), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -261,35 +257,37 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_DESKS);
+        this.addEntry(strippedDesks);
 
-        DESK_CABINETS = SimpleEntrySet.builder(WoodType.class, "desk_cabinet",
+        deskCabinets = SimpleEntrySet.builder(WoodType.class, "desk_cabinet",
                         ModBlocks.DESK_CABINET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DeskCabinetBlock(Utils.copyPropertySafe(w.log), DeskBlock.MaterialType.OAK))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.DESK_CABINET)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(DESK_CABINETS);
+        this.addEntry(deskCabinets);
 
-        STRIPPED_DESK_CABINETS = SimpleEntrySet.builder(WoodType.class, "desk_cabinet", "stripped",
+        strippedDeskCabinets = SimpleEntrySet.builder(WoodType.class, "desk_cabinet", "stripped",
                         ModBlocks.DESK_CABINET_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new DeskCabinetBlock(Utils.copyPropertySafe(w.log), DeskBlock.MaterialType.STRIPPED_OAK), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.BEDROOM, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.DESK_CABINET)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_DESK_CABINETS);
+        this.addEntry(strippedDeskCabinets);
 
-        KITCHEN_COUNTERS = SimpleEntrySet.builder(WoodType.class, "kitchen_counter",
+        kitchenCounters = SimpleEntrySet.builder(WoodType.class, "kitchen_counter",
                         ModBlocks.KITCHEN_COUNTER_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new KitchenCounterBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -299,9 +297,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(KITCHEN_COUNTERS);
+        this.addEntry(kitchenCounters);
 
-        STRIPPED_KITCHEN_COUNTERS = SimpleEntrySet.builder(WoodType.class, "kitchen_counter", "stripped",
+        strippedKitchenCounters = SimpleEntrySet.builder(WoodType.class, "kitchen_counter", "stripped",
                         ModBlocks.KITCHEN_COUNTER_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new KitchenCounterBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -311,110 +309,117 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_KITCHEN_COUNTERS);
+        this.addEntry(strippedKitchenCounters);
 
-        KITCHEN_DRAWERS = SimpleEntrySet.builder(WoodType.class, "kitchen_drawer",
+        kitchenDrawers = SimpleEntrySet.builder(WoodType.class, "kitchen_drawer",
                         ModBlocks.KITCHEN_DRAWER_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new KitchenDrawerBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
+                .addTile(ModBlockEntities.KITCHEN_DRAWER)
                 .setTab(() -> FurnitureMod.GROUP)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(KITCHEN_DRAWERS);
+        this.addEntry(kitchenDrawers);
 
-        STRIPPED_KITCHEN_DRAWERS = SimpleEntrySet.builder(WoodType.class, "kitchen_drawer", "stripped",
+        strippedKitchenDrawers = SimpleEntrySet.builder(WoodType.class, "kitchen_drawer", "stripped",
                         ModBlocks.KITCHEN_DRAWER_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new KitchenDrawerBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.KITCHEN_DRAWER)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_KITCHEN_DRAWERS);
+        this.addEntry(strippedKitchenDrawers);
 
-        KITCHEN_SINK_DARK = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_dark",
+        kitchenSinkDark = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_dark",
                         ModBlocks.KITCHEN_SINK_DARK_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.planks), true))
+                        w -> new KitchenSinkBlock(Utils.copyPropertySafe(w.planks), true))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.KITCHEN_SINK)
                 .defaultRecipe()
-                .addTile(CompatKitchenSinkBlockEntity::new)
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(KITCHEN_SINK_DARK);
+        this.addEntry(kitchenSinkDark);
 
-        STRIPPED_KITCHEN_SINK_DARK = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_dark", "stripped",
+        strippedKitchenSinkDark = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_dark", "stripped",
                         ModBlocks.KITCHEN_SINK_DARK_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.log), true), "stripped_log"))
+                        ifHasChild(w -> new KitchenSinkBlock(Utils.copyPropertySafe(w.log), true), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.KITCHEN_SINK)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_KITCHEN_SINK_DARK);
+        this.addEntry(strippedKitchenSinkDark);
 
-        KITCHEN_SINK_LIGHT = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_light",
+        kitchenSinkLight = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_light",
                         ModBlocks.KITCHEN_SINK_LIGHT_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.planks), true))
+                        w -> new KitchenSinkBlock(Utils.copyPropertySafe(w.planks), true))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.KITCHEN_SINK)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(KITCHEN_SINK_LIGHT);
+        this.addEntry(kitchenSinkLight);
 
-        STRIPPED_KITCHEN_SINK_LIGHT = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_light", "stripped",
+        strippedKitchenSinkLight = SimpleEntrySet.builder(WoodType.class, "kitchen_sink_light", "stripped",
                         ModBlocks.KITCHEN_SINK_LIGHT_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new CompatKitchenSinkBlock(Utils.copyPropertySafe(w.log), true), "stripped_log"))
+                        ifHasChild(w -> new KitchenSinkBlock(Utils.copyPropertySafe(w.log), true), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.KITCHEN, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.KITCHEN_SINK)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_KITCHEN_SINK_LIGHT);
+        this.addEntry(strippedKitchenSinkLight);
 
-        MAIL_BOXES = SimpleEntrySet.builder(WoodType.class, "mail_box",
+        mailBoxes = SimpleEntrySet.builder(WoodType.class, "mail_box",
                         ModBlocks.MAIL_BOX_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new MailBoxBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.MAIL_BOX)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(MAIL_BOXES);
+        this.addEntry(mailBoxes);
 
-        STRIPPED_MAIL_BOXES = SimpleEntrySet.builder(WoodType.class, "mail_box", "stripped",
+        strippedMailBoxes = SimpleEntrySet.builder(WoodType.class, "mail_box", "stripped",
                         ModBlocks.MAIL_BOX_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new MailBoxBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(ModTags.Items.OUTDOORS, Registry.ITEM_REGISTRY)
                 .addTag(ModTags.Items.STORAGE, Registry.ITEM_REGISTRY)
                 .setTab(() -> FurnitureMod.GROUP)
+                .addTile(ModBlockEntities.MAIL_BOX)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_MAIL_BOXES);
+        this.addEntry(strippedMailBoxes);
 
-        STRIPPED_TABLES = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
+        strippedTables = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
                         ModBlocks.TABLE_STRIPPED_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TableBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -425,9 +430,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(STRIPPED_TABLES);
+        this.addEntry(strippedTables);
 
-        TABLES = SimpleEntrySet.builder(WoodType.class, "table",
+        tables = SimpleEntrySet.builder(WoodType.class, "table",
                         ModBlocks.TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -438,9 +443,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(TABLES);
+        this.addEntry(tables);
 
-        UPGRADED_FENCES = SimpleEntrySet.builder(WoodType.class, "upgraded_fence",
+        upgradedFences = SimpleEntrySet.builder(WoodType.class, "upgraded_fence",
                         ModBlocks.UPGRADED_FENCE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new UpgradedFenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.FENCES, Registry.BLOCK_REGISTRY)
@@ -453,9 +458,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(UPGRADED_FENCES);
+        this.addEntry(upgradedFences);
 
-        UPGRADED_GATES = SimpleEntrySet.builder(WoodType.class, "upgraded_gate",
+        upgradedGates = SimpleEntrySet.builder(WoodType.class, "upgraded_gate",
                         ModBlocks.UPGRADED_GATE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new UpgradedGateBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.FENCE_GATES, Registry.BLOCK_REGISTRY)
@@ -469,9 +474,9 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(UPGRADED_GATES);
+        this.addEntry(upgradedGates);
 
-        HEDGES = SimpleEntrySet.builder(LeavesType.class, "hedge",
+        hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         ModBlocks.HEDGE_OAK, () -> LeavesTypeRegistry.OAK_TYPE,
                         w -> {
                             var l = w.getBlockOfThis("leaves");
@@ -488,34 +493,13 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
-        this.addEntry(HEDGES);
-    }
-
-    public static BlockEntityType<?> COMPAT_SINK;
-
-    @Override
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register((BlockEntityType<KitchenSinkBlockEntity>) (KITCHEN_SINK_DARK.getTileHolder().tile),
-                KitchenSinkBlockEntityRenderer::new);
-    }
-
-
-    @Override
-    public void registerTiles(Registrator<BlockEntityType<?>> event) {
-        List<Block> blocks = new ArrayList<>();
-        blocks.addAll(KITCHEN_SINK_LIGHT.blocks.values());
-        blocks.addAll(KITCHEN_SINK_DARK.blocks.values());
-        blocks.addAll(STRIPPED_KITCHEN_SINK_DARK.blocks.values());
-        blocks.addAll(STRIPPED_KITCHEN_SINK_LIGHT.blocks.values());
-
-        event.register(EveryCompat.res(this.shortenedId() + "_sink"),
-                KITCHEN_SINK_DARK.getTileHolder().createInstance(blocks.toArray(Block[]::new)));
+        this.addEntry(hedges);
     }
 
     @Override
     public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
-        HEDGES.blocks.forEach((t, b) -> {
+        hedges.blocks.forEach((t, b) -> {
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
         });
     }
@@ -523,54 +507,8 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
     @Override
     public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
         super.registerItemColors(event);
-        HEDGES.blocks.forEach((t, b) -> {
+        hedges.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         });
     }
-
-    class CompatKitchenSinkBlockEntity extends KitchenSinkBlockEntity {
-
-        public CompatKitchenSinkBlockEntity(BlockPos pos, BlockState state) {
-            super(pos, state);
-        }
-
-        @Override
-        public BlockEntityType<?> getType() {
-            return KITCHEN_SINK_DARK.getTileHolder().tile;
-        }
-    }
-
-    private class CompatKitchenSinkBlock extends KitchenSinkBlock {
-        public CompatKitchenSinkBlock(Properties properties, boolean bigSink) {
-            super(properties, bigSink);
-        }
-
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new CompatKitchenSinkBlockEntity(pos, state);
-        }
-    }
-
-//    class CompatKitchenSinkLightBlockEntity extends KitchenSinkBlockEntity {
-//
-//        public CompatKitchenSinkLightBlockEntity(BlockPos pos, BlockState state) {
-//            super(pos, state);
-//        }
-//
-//        @Override
-//        public BlockEntityType<?> getTypeClass() {
-//            return KITCHEN_SINK_LIGHT.getTileHolder().tile;
-//        }
-//    }
-//
-//    private class CompatKitchenSinkLightBlock extends KitchenSinkBlock {
-//        private boolean bigSink;
-//        public CompatKitchenSinkLightBlock(Properties properties, boolean bigSink) {
-//            super(properties, bigSink);
-//            this.bigSink = bigSink;
-//        }
-//
-//        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-//            return new CompatKitchenSinkLightBlockEntity(pos, state);
-//        }
-//    }
 }

@@ -1,7 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 
-import com.faboslav.friendsandfoes.FriendsAndFoes;
-import com.faboslav.friendsandfoes.init.FriendsAndFoesBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -17,12 +15,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class FriendsAndFoesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> beehives;
+
     public FriendsAndFoesModule(String modId) {
         super(modId, "faf");
 
@@ -37,20 +33,11 @@ public class FriendsAndFoesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+                .addTile(() -> BlockEntityType.BEEHIVE)
                 .defaultRecipe()
                 .build();
         this.addEntry(beehives);
     }
 
-    @Override
-    public void onModSetup() {
-        super.onModSetup();
-
-        Set<Block> beehiveBlocks = new HashSet<>();
-
-        beehiveBlocks.addAll(BlockEntityType.BEEHIVE.validBlocks);
-        beehiveBlocks.addAll(beehives.blocks.values());
-        BlockEntityType.BEEHIVE.validBlocks = beehiveBlocks;
-    }
 
 }
