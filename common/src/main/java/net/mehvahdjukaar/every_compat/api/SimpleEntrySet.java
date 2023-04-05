@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
@@ -61,7 +62,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     private final Pattern nameScheme;
 
     protected final Supplier<T> baseType;
-    protected final Supplier<B> baseBlock;
+    protected final Supplier<@Nullable B> baseBlock;
 
     public final String postfix;
     @Nullable
@@ -85,11 +86,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Nullable
     protected final Consumer<BlockTypeResTransformer<T>> extraTransform;
 
+    private final Supplier<Boolean> disabled;
+
 
     public SimpleEntrySet(Class<T> type,
                           String name, @Nullable String prefix,
                           Function<T, B> blockSupplier,
-                          Supplier<B> baseBlock,
+                          Supplier<@Nullable B> baseBlock,
                           Supplier<T> baseType,
                           Supplier<CreativeModeTab> tab,
                           boolean copyLoot,
@@ -123,6 +126,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         } else {
             nameScheme = Pattern.compile("^(.+?)_" + postfix + "$");
         }
+
+        disabled = Suppliers.memoize(() -> this.getBaseBlock() != null);
     }
 
     public ITileHolder<?> getTileHolder() {
@@ -180,7 +185,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void registerBlocks(CompatModule module, Registrator<Block> registry, Collection<T> woodTypes) {
-        Block base = baseBlock.get();
+        if (disabled.get()) return;
+        Block base = getBaseBlock();
         if (base == null || base == Blocks.AIR)
             throw new UnsupportedOperationException("Base block cant be null");
         baseType.get().addChild(getChildKey(module), (Object) base);
@@ -239,6 +245,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void registerTiles(CompatModule module, Registrator<BlockEntityType<?>> registry) {
+        if (disabled.get()) return;
         if (tileHolder instanceof NewTileHolder<?> nt) {
             var tile = nt.createInstance(blocks.values().toArray(Block[]::new));
             registry.register(EveryCompat.res(module.shortenedId() + "_" + this.getName()), tile);
@@ -254,6 +261,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void setupExistingTiles() {
+        if (disabled.get()) return;
         if (tileHolder instanceof ExistingTileHolder<?> et) {
             SimpleModule.appendTileEntityBlocks(et.get(), blocks.values());
         }
@@ -261,6 +269,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void setRenderLayer() {
+        if (disabled.get()) return;
         if (renderType != null) {
             blocks.values().forEach(t -> ClientPlatformHelper.registerRenderType(t, renderType.get().get()));
         }
@@ -268,6 +277,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void generateTags(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
+        if (disabled.get()) return;
         if (!tags.isEmpty()) {
             for (var tb : tags.entrySet()) {
                 SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
@@ -285,8 +295,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void generateLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
+        if (disabled.get()) return;
         if (copyLoot) {
-            ResourceLocation reg = Utils.getID(baseBlock.get());
+            ResourceLocation reg = Utils.getID(getBaseBlock());
             ResourcesUtils.addBlockResources(module.getModId(), manager, pack, blocks, baseType.get().getTypeName(),
                     ResType.BLOCK_LOOT_TABLES.getPath(reg));
 
@@ -298,6 +309,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
+        if (disabled.get()) return;
         this.recipeLocations.forEach(r -> {
             var res = r.get();
             try {
@@ -310,11 +322,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
     @Override
     public void generateModels(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
+        if (disabled.get()) return;
         ResourcesUtils.addStandardResources(module.getModId(), manager, handler, blocks, baseType.get(), extraTransform);
     }
 
     @Override
     public void generateTextures(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
+        if (disabled.get()) return;
         if (textures.isEmpty()) return;
 
         List<TextureImage> images = new ArrayList<>();
@@ -428,7 +442,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     public static class Builder<T extends BlockType, B extends Block> {
         protected final Class<T> type;
         protected final Supplier<T> baseType;
-        protected final Supplier<B> baseBlock;
+        protected final Supplier<@Nullable B> baseBlock;
         protected final String name;
         @Nullable
         protected final String prefix;

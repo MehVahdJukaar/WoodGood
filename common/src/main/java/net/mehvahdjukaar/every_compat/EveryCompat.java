@@ -134,6 +134,18 @@ public abstract class EveryCompat {
 
 
     public void commonSetup() {
+        //log registered stuff size
+        int newSize = Registry.BLOCK.size();
+        int am = newSize - prevRegSize;
+        float p = (am / (float) newSize) * 100f;
+        EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", am, String.format("%.2f", p));
+        if (p > 33) {
+            CompatModule bloated = ACTIVE_MODULES.values().stream()
+                    .max(Comparator.comparing(CompatModule::bloatAmount)).get();
+            EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
+            EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModId().toUpperCase(Locale.ROOT), bloated.bloatAmount());
+        }
+
         forAllModules(CompatModule::onModSetup);
     }
 
@@ -151,18 +163,6 @@ public abstract class EveryCompat {
     public void registerLeavesStuff(Registrator<Block> event, Collection<LeavesType> leaves) {
         LOGGER.info("Registering Compat Leaves Blocks");
         forAllModules(m -> m.registerLeavesBlocks(event, leaves));
-
-        //log registered stuff size
-        int newSize = Registry.BLOCK.size();
-        int am = newSize - prevRegSize;
-        float p = (am / (float) newSize) * 100f;
-        EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", am, String.format("%.2f", p));
-        if (p > 33) {
-            CompatModule bloated = ACTIVE_MODULES.values().stream()
-                    .max(Comparator.comparing(CompatModule::bloatAmount)).get();
-            EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
-            EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModId().toUpperCase(Locale.ROOT), bloated.bloatAmount());
-        }
     }
 
     protected void registerItems(Registrator<Item> event) {

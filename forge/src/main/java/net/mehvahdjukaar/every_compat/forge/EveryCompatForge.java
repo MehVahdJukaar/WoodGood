@@ -13,7 +13,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
-import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
@@ -28,6 +27,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightFores
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
+import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -64,7 +64,9 @@ public class EveryCompatForge extends EveryCompat {
         addModule("create", () -> CreateModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
-        addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+        if (PlatformHelper.isModLoaded("mcwdoors")) {
+            addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+        }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("furnish", () -> FurnishModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
@@ -95,7 +97,7 @@ public class EveryCompatForge extends EveryCompat {
         // addModule("graveyard", () -> GraveyardModule::new);
 
         // Disabled due to block entity complications
-        addModule("handcrafted", () -> HandcraftedModule::new);
+        //addModule("handcrafted", () -> HandcraftedModule::new);
 
         // Disabled until custom block models work
         // addModule("xercamod", () -> XercaModule::new);

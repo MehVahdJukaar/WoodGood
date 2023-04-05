@@ -50,7 +50,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         () -> getModBlock("stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new PostBlock(Utils.getID(w.log), Utils.copyPropertySafe(w.log)))
+                        w -> {
+                            Block stripped = w.getBlockOfThis("stripped_log");
+                            if (stripped == null) return null;
+                            return new PostBlock(Utils.getID(w.log), Utils.copyPropertySafe(w.log));
+                        })
                 .addTag(modRes("stripped_posts"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("stripped_posts"), Registry.ITEM_REGISTRY)
                 .setTab(() -> ModCreativeModeTabs.MAIN)
@@ -75,7 +79,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         cutStrippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut_stripped",
                         () -> getModBlock("cut_stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CutPostBlock(cutPostProperties(w)))
+                        w -> {
+                            Block stripped = w.getBlockOfThis("stripped_log");
+                            if (stripped == null) return null;
+                            return new CutPostBlock(cutPostProperties(w));
+                        })
                 .addTag(modRes("cut_stripped_posts"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("cut_stripped_posts"), Registry.ITEM_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN

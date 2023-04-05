@@ -17,12 +17,12 @@ import net.minecraft.world.level.block.Block;
 
 public class HandcraftedModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, ChairBlock> chair;
+    //public final SimpleEntrySet<WoodType, ChairBlock> chair;
 
     public HandcraftedModule(String modId) {
         super(modId, "hc");
         CreativeModeTab tab = ModItems.ITEM_GROUP;
-
+/*
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
@@ -33,6 +33,6 @@ public class HandcraftedModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(chair);
+        this.addEntry(chair);*/
     }
 }

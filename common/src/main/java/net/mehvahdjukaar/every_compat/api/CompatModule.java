@@ -162,18 +162,22 @@ public abstract class CompatModule {
 
     //utility functions
 
+    @Nullable
     protected final <T extends Block> T getModBlock(String id, Class<T> blockClass) {
         return (T) Registry.BLOCK.get(modRes(id));
     }
 
+    @Nullable
     protected final Block getModBlock(String id) {
         return Registry.BLOCK.get(modRes(id));
     }
 
+    @Nullable
     protected final <T extends BlockEntityType<?>> T getModTile(String id, Class<T> blockClass) {
         return (T) Registry.BLOCK_ENTITY_TYPE.get(modRes(id));
     }
 
+    @Nullable
     protected final BlockEntityType<?> getModTile(String id) {
         return Registry.BLOCK_ENTITY_TYPE.get(modRes(id));
     }

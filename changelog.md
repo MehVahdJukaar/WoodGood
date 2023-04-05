@@ -1,1 +1,1 @@
-* Fixed an issue with twigs tables
+* Fixed dramatic door macaw module being on when macaw doors wasnt instaled
