@@ -686,6 +686,9 @@
   "wood_type.cinderscapes.scorched": "焦灼木",
   "wood_type.cinderscapes.umbral": "暗影木",
 
+  "wood_type.cobblemon.apricorn": "球果木",
+  "leaves_type.cobblemon.apricorn": "球果",
+
   "leaves_type.croptopia.cinnamon": "肉桂",
 
   "leaves_type.culturaldelights.avocado": "牛油果",
@@ -743,6 +746,9 @@
 
   "wood_type.enhanced_mushrooms.red_mushroom": "红色蘑菇",
   "wood_type.enhanced_mushrooms.brown_mushroom": "棕色蘑菇",
+
+  "wood_type.enlightened_end.congealed": "凝结木",
+  "wood_type.enlightened_end.ebony": "阴沉木",
 
   "wood_type.environmental.willow": "柳木",
   "wood_type.environmental.cherry": "樱桃木",
@@ -831,8 +837,10 @@
 
   "wood_type.hexerei.mahogany": "桃花心木",
   "wood_type.hexerei.willow": "柳木",
+  "wood_type.hexerei.witch_hazel": "金缕梅木",
   "leaves_type.hexerei.mahogany": "桃花心",
   "leaves_type.hexerei.willow": "柳树",
+  "leaves_type.hexerei.witch_hazel": "金缕梅",
 
   "wood_type.hibernalherbs.myqueste": "棕奎木",
   "leaves_type.hibernalherbs.myqueste": "棕奎",
