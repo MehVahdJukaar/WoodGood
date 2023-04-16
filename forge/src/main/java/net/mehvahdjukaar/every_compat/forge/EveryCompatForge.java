@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
+import net.mehvahdjukaar.every_compat.modules.forge.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
@@ -63,6 +64,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("campchair", () -> CampChairModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+        addModule("chipped", () -> ChippedModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
@@ -70,22 +72,20 @@ public class EveryCompatForge extends EveryCompat {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("furnish", () -> FurnishModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
+        addModule("furnish", () -> FurnishModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
-        addModule("shutter", () -> LauchsShuttersModule::new);
-
-
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
         addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("quark", () -> QuarkModule::new);
+        addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("twigs", () -> TwigsModule::new);
-        addModule("woodworks", () -> WoodworksModule::new);
+        addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
+        addModule("woodworks", () -> WoodworksModule::new);
 
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
