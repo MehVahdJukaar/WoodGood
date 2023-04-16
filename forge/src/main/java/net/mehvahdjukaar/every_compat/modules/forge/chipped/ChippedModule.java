@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 public class ChippedModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> mosaic;
+    public final SimpleEntrySet<WoodType, Block> panel;
 
     public ChippedModule(String modId) {
         super(modId, "ch");
@@ -35,6 +36,22 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(mosaic);
+
+        panel = SimpleEntrySet.builder(WoodType.class, "planks_panel",
+                        () -> getModBlock("oak_planks_panel"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/ctm/oak_planks_panel_ctm"))
+                .addTexture(modRes("block/oak_planks/oak_planks_panel"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(panel);
     }
 
     private void dullPalette(Palette p) {
