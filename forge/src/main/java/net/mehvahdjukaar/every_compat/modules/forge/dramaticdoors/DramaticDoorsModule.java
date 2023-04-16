@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
 import com.fizzware.dramaticdoors.DramaticDoors;
-import com.fizzware.dramaticdoors.blocks.DDBlocks;
+import com.fizzware.dramaticdoors.init.DDBlocks;
 import com.fizzware.dramaticdoors.blocks.TallDoorBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
