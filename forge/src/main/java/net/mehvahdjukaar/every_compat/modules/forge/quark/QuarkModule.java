@@ -177,7 +177,7 @@ public class QuarkModule extends SimpleModule {
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w, m) -> {
                             String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatHollowLogBlock(name, w.log, m, w.canBurn());
+                            return new HollowLogBlock(name, w.log, m, w.canBurn());
                         })
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

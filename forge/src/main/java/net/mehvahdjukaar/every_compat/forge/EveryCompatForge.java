@@ -20,6 +20,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildMod
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
@@ -84,6 +85,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
+        addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
 
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
@@ -94,8 +96,8 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-        addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
 
+        // addModule("premium_wood", () -> PremiumWoodModule::new);
         // addModule("graveyard", () -> GraveyardModule::new);
 
         // Disabled due to block entity complications
