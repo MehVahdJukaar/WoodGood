@@ -27,6 +27,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::dullPalette)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -34,7 +37,10 @@ public class ChippedModule extends SimpleModule {
         this.addEntry(mosaic);
     }
 
-    private void shutterPalette(Palette p) {
+    private void dullPalette(Palette p) {
+        p.remove(p.getLightest());
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
     }
