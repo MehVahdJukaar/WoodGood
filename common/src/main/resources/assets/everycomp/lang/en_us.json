@@ -371,6 +371,8 @@
   "block_type.storagedrawers.half_drawers_4": "%s Half Drawers 2x2",
   "block_type.storagedrawers.trim": "%s Trim",
 
+  "block_type.shutter.shutter": "%s Shutter",
+
   "block_type.xercamod.carved_1": "Carved %s",
   "block_type.xercamod.carved_2": "Carved %s",
   "block_type.xercamod.carved_3": "Carved %s",
