@@ -16,6 +16,7 @@ public class ChippedModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> mosaic;
     public final SimpleEntrySet<WoodType, Block> panel;
+    public final SimpleEntrySet<WoodType, Block> shavings;
 
     public ChippedModule(String modId) {
         super(modId, "ch");
@@ -47,11 +48,28 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
 
         this.addEntry(panel);
+
+        shavings = SimpleEntrySet.builder(WoodType.class, "planks_shavings",
+                        () -> getModBlock("oak_planks_shavings"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/oak_planks_shavings"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+//                .createPaletteFromOak(p -> p.add(p.getDarkest()))
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(shavings);
     }
 
     private void dullPalette(Palette p) {
