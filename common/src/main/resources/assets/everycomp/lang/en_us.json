@@ -47,6 +47,8 @@
   "block_type.chipped.cross_laced_planks": "Cross Laced %s Planks",
   "block_type.chipped.crossed_planks": "Crossed %s Planks",
   "block_type.chipped.detailed_planks": "Detailed %s Planks",
+  "block_type.chipped.diagonal_planks": "Diagonal %s Planks",
+  "block_type.chipped.diamond_planks": "Diamond %s Planks",
   "block_type.chipped.planks_mosaic": "%s Planks Mosaic",
   "block_type.chipped.planks_panel": "%s Planks Panel",
   "block_type.chipped.planks_shavings": "%s Planks Shavings",

@@ -23,6 +23,8 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> crossLaced;
     public final SimpleEntrySet<WoodType, Block> crossed;
     public final SimpleEntrySet<WoodType, Block> detailed;
+    public final SimpleEntrySet<WoodType, Block> diagonal;
+    public final SimpleEntrySet<WoodType, Block> diamond;
     public final SimpleEntrySet<WoodType, Block> mosaic;
     public final SimpleEntrySet<WoodType, Block> panel;
     public final SimpleEntrySet<WoodType, Block> shavings;
@@ -222,6 +224,37 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(detailed);
+
+        diagonal = SimpleEntrySet.builder(WoodType.class, "planks", "diagonal",
+                        () -> getModBlock("diagonal_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/diagonal_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::darkerPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(diagonal);
+
+        diamond = SimpleEntrySet.builder(WoodType.class, "planks", "diamond",
+                        () -> getModBlock("diamond_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/diamond_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(diamond);
     }
 
     private void dullPalette(Palette p) {
