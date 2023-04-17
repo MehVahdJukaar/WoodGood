@@ -14,6 +14,10 @@ import net.minecraft.world.level.block.Block;
 
 public class ChippedModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> basketWoven;
+    public final SimpleEntrySet<WoodType, Block> boxed;
+    public final SimpleEntrySet<WoodType, Block> brickBond;
+    public final SimpleEntrySet<WoodType, Block> bricky;
     public final SimpleEntrySet<WoodType, Block> mosaic;
     public final SimpleEntrySet<WoodType, Block> panel;
     public final SimpleEntrySet<WoodType, Block> shavings;
@@ -64,17 +68,92 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-//                .createPaletteFromOak(p -> p.add(p.getDarkest()))
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
 
         this.addEntry(shavings);
+
+        basketWoven = SimpleEntrySet.builder(WoodType.class, "planks", "basket_woven",
+                        () -> getModBlock("basket_woven_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/basket_woven_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::lighterPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(basketWoven);
+
+        boxed = SimpleEntrySet.builder(WoodType.class, "planks", "boxed",
+                        () -> getModBlock("boxed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/boxed_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::lighterPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(boxed);
+
+        brickBond = SimpleEntrySet.builder(WoodType.class, "planks", "brick_bond",
+                        () -> getModBlock("brick_bond_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/brick_bond_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::brickBondPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(brickBond);
+
+        bricky = SimpleEntrySet.builder(WoodType.class, "planks", "bricky",
+                        () -> getModBlock("bricky_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/bricky_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::lighterPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(bricky);
     }
 
     private void dullPalette(Palette p) {
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
+    }
+
+    private void lighterPalette(Palette p) {
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
+    }
+
+    private void brickBondPalette(Palette p) {
+        p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
