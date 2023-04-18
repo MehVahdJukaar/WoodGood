@@ -68,9 +68,9 @@ public class EveryCompatForge extends EveryCompat {
         addModule("create", () -> CreateModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
-        if (PlatformHelper.isModLoaded("mcwdoors")) {
-            addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
-        }
+//        if (PlatformHelper.isModLoaded("mcwdoors")) {
+//            addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+//        }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("furnish", () -> FurnishModule::new);
