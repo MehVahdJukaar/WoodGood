@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.forge.chipped;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -35,6 +36,11 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> doubleHerringbone;
     public final SimpleEntrySet<WoodType, Block> enclosed;
     public final SimpleEntrySet<WoodType, Block> fine;
+    public final SimpleEntrySet<WoodType, Block> fineVertical;
+    public final SimpleEntrySet<WoodType, Block> framed;
+    public final SimpleEntrySet<WoodType, Block> herringbone;
+    public final SimpleEntrySet<WoodType, Block> hewn;
+    public final SimpleEntrySet<WoodType, Block> laced;
     public final SimpleEntrySet<WoodType, Block> mosaic;
     public final SimpleEntrySet<WoodType, Block> panel;
     public final SimpleEntrySet<WoodType, Block> shavings;
@@ -275,7 +281,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lightestPalette)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -315,6 +321,87 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(fine);
+
+        fineVertical = SimpleEntrySet.builder(WoodType.class, "planks", "fine_vertical",
+                        () -> getModBlock("fine_vertical_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/fine_vertical_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::dullPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(fineVertical);
+
+        framed = SimpleEntrySet.builder(WoodType.class, "planks", "framed",
+                        () -> getModBlock("framed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/ctm/framed_oak_planks_ctm"))
+                .addTexture(modRes("block/oak_planks/framed_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(framed);
+
+        herringbone = SimpleEntrySet.builder(WoodType.class, "planks", "herringbone",
+                        () -> getModBlock("herringbone_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/herringbone_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::lightestPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(herringbone);
+
+        hewn = SimpleEntrySet.builder(WoodType.class, "planks", "hewn",
+                        () -> getModBlock("hewn_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/hewn_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(hewn);
+
+        laced = SimpleEntrySet.builder(WoodType.class, "planks", "laced",
+                        () -> getModBlock("laced_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/laced_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::dullPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(laced);
     }
 
     private void dullPalette(Palette p) {
@@ -326,6 +413,12 @@ public class ChippedModule extends SimpleModule {
     }
 
     private void lighterPalette(Palette p) {
+        p.remove(p.getDarkest());
+        p.remove(p.getDarkest());
+    }
+
+    private void lightestPalette(Palette p) {
+        p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
     }
@@ -351,6 +444,8 @@ public class ChippedModule extends SimpleModule {
                 TagBuilder.create().add(TagEntry.tag(Objects.requireNonNull(ResourceLocation.tryParse(w.id + "_planks"))));
                 handler.dynamicPack.addTag(planks_tag.addEntry(SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"))), Registry.BLOCK_REGISTRY);
                 handler.dynamicPack.addTag(planks_tag.addEntry(SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"))), Registry.ITEM_REGISTRY);
+                planks_tag.add(ResourceLocation.tryParse(w.id + "_planks"));
+                System.out.print(planks_tag.add(ResourceLocation.tryParse(w.id + "_planks")));
             }
     }
 }
