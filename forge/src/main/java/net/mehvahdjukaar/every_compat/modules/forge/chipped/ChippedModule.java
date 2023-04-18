@@ -294,7 +294,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/fine_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nailed_oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
