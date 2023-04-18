@@ -357,6 +357,8 @@
   "block_type.cfm.stripped_upgraded_gate": "Stripped %s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
+  "block_type.premium_wood.framed_glass": "%s Framed Glass",
+
   "block_type.productivebees.advanced_beehive": "Advanced %s Beehive",
   "block_type.productivebees.expansion_box": "%s Expansion Box",
 

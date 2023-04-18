@@ -78,6 +78,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
+        addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("quark", () -> QuarkModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
@@ -97,7 +98,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
 
-        // addModule("premium_wood", () -> PremiumWoodModule::new);
         // addModule("graveyard", () -> GraveyardModule::new);
 
         // Disabled due to block entity complications

@@ -26,10 +26,11 @@ public class PremiumWoodModule extends SimpleModule {
 
         framedGlass = SimpleEntrySet.builder(WoodType.class, "framed_glass",
                         () -> getModBlock("magic_framed_glass"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("magic")),
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks)))
+                        () -> WoodTypeRegistry.getValue(new ResourceLocation("premium_wood:magic")),
+                        w -> new GlassBlock(Utils.copyPropertySafe(Blocks.GLASS)))
                 .addTextureM(modRes("block/magic/magic_framed_glass"), EveryCompat.res("block/pw/magic_framed_glass_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("framed_glass"), Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .defaultRecipe()
