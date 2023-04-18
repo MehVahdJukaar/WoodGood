@@ -45,6 +45,10 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> polished;
     public final SimpleEntrySet<WoodType, Block> shavings;
 
+    // TODO: Fix recipes & tags
+    // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
+    // Create a recipe using the new tag for `chipped:recipes/carpenters_table`
+    // Currently all variants are crafted with Oak Planks due to them using the `chipped:oak_planks` tag
     public ChippedModule(String modId) {
         super(modId, "ch");
         CreativeModeTab tab = CreativeModeTab.TAB_BUILDING_BLOCKS;
@@ -480,7 +484,7 @@ public class ChippedModule extends SimpleModule {
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
     }
-    
+
 // Disabled due to it also creating textures files instead of only tags
 //    @Override
 //    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
