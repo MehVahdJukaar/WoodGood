@@ -480,21 +480,16 @@ public class ChippedModule extends SimpleModule {
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
     }
-
-    @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
-
-            for (var w : WoodTypeRegistry.getTypes()) {
-                SimpleTagBuilder planks_tag = SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"));
-                handler.dynamicPack.addTag(planks_tag.add(ResourceLocation.tryParse(w.id + "_planks")), Registry.BLOCK_REGISTRY);
-//                handler.dynamicPack.addTag(planks_tag.add(ResourceLocation.tryParse(nailed.blocks.get(w).toString())), Registry.BLOCK_REGISTRY);
-                handler.dynamicPack.addTag(planks_tag.add(ResourceLocation.tryParse(w.id + "_planks")), Registry.ITEM_REGISTRY);
-//                handler.dynamicPack.addTag(planks_tag.add(ResourceLocation.tryParse(nailed.blocks.get(w).toString())), Registry.ITEM_REGISTRY);
-//                nailed.blocks.forEach((v, m) -> {
-//                    handler.dynamicPack.addTag(planks_tag.add(ResourceLocation.tryParse(w.id + "_planks")).add(ResourceLocation.tryParse(nailed.blocks.get(v).toString())), Registry.BLOCK_REGISTRY);
-//                });
-//                System.out.print(planks_tag.add(ResourceLocation.tryParse(w.id + "_planks")));
-            }
-    }
+    
+// Disabled due to it also creating textures files instead of only tags
+//    @Override
+//    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+//        super.addDynamicServerResources(handler, manager);
+//
+//            for (var w : WoodTypeRegistry.getTypes()) {
+//                SimpleTagBuilder planks_tag = SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"));
+//                handler.dynamicPack.addTag(planks_tag.add(ResourceLocation.tryParse(w.id + "_planks")), Registry.BLOCK_REGISTRY);
+//                handler.dynamicPack.addTag(planks_tag.add(ResourceLocation.tryParse(w.id + "_planks")), Registry.ITEM_REGISTRY);
+//            }
+//    }
 }
