@@ -25,10 +25,10 @@ public class PremiumWoodModule extends SimpleModule {
         CreativeModeTab tab = CreativeModeTab.TAB_BUILDING_BLOCKS;
 
         framedGlass = SimpleEntrySet.builder(WoodType.class, "framed_glass",
-                        () -> getModBlock("magic_framed_glass"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("premium_wood:magic")),
+                        () -> getModBlock("tiger_framed_glass"),
+                        () -> WoodTypeRegistry.getValue(new ResourceLocation("premium_wood:tiger")),
                         w -> new GlassBlock(Utils.copyPropertySafe(Blocks.GLASS)))
-                .addTextureM(modRes("block/magic/magic_framed_glass"), EveryCompat.res("block/pw/magic_framed_glass_m"))
+                .addTextureM(modRes("block/tiger/tiger_framed_glass"), EveryCompat.res("block/pw/tiger_framed_glass_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("framed_glass"), Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
