@@ -1,9 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.chipped;
 
-import com.mrh0.buildersaddition.event.BlockRegistry;
 import java.util.Objects;
-import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.EntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -16,7 +13,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.tags.TagBuilder;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.world.item.CreativeModeTab;
@@ -120,7 +116,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::brickBondPalette)
+                .createPaletteFromOak(this::neutralPalette)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -136,7 +132,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::brickBondPalette)
+                .createPaletteFromOak(this::neutralPalette)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -232,7 +228,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::brickBondPalette)
+                .createPaletteFromOak(this::neutralPalette)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -279,7 +275,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::brickBondPalette)
+                .createPaletteFromOak(this::neutralPalette)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -334,18 +330,12 @@ public class ChippedModule extends SimpleModule {
         p.remove(p.getDarkest());
     }
 
-    private void lightestPalette(Palette p) {
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-    }
-
     private void darkerPalette(Palette p) {
         p.remove(p.getDarkest());
         p.remove(p.getLightest());
     }
 
-    private void brickBondPalette(Palette p) {
+    private void neutralPalette(Palette p) {
         p.remove(p.getLightest());
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
@@ -358,19 +348,9 @@ public class ChippedModule extends SimpleModule {
 
             for (var w : WoodTypeRegistry.getTypes()) {
                 SimpleTagBuilder planks_tag = SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"));
-//                TagBuilder.create().add(TagEntry.tag(w.id));
-//                tb.addTag(planks_tag);
                 TagBuilder.create().add(TagEntry.tag(Objects.requireNonNull(ResourceLocation.tryParse(w.id + "_planks"))));
-//                handler.dynamicPack.addTag(WoodTypeRegistry.getTypes(), Registry.ITEM_REGISTRY);
                 handler.dynamicPack.addTag(planks_tag.addEntry(SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"))), Registry.BLOCK_REGISTRY);
                 handler.dynamicPack.addTag(planks_tag.addEntry(SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"))), Registry.ITEM_REGISTRY);
-//                fine.blocks.get(WoodTypeRegistry.getTypes() == planks_tag);
-//                for (var z : fine.blocks.get(WoodTypeRegistry.getTypes()))
-//                {
-//
-//                }
             }
-
-
     }
 }
