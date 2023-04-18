@@ -1,13 +1,24 @@
 package net.mehvahdjukaar.every_compat.modules.forge.chipped;
 
+import com.mrh0.buildersaddition.event.BlockRegistry;
+import java.util.Objects;
+import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.EntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.PoiTypeTags;
+import net.minecraft.tags.TagBuilder;
+import net.minecraft.tags.TagEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
@@ -25,6 +36,9 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> detailed;
     public final SimpleEntrySet<WoodType, Block> diagonal;
     public final SimpleEntrySet<WoodType, Block> diamond;
+    public final SimpleEntrySet<WoodType, Block> doubleHerringbone;
+    public final SimpleEntrySet<WoodType, Block> enclosed;
+    public final SimpleEntrySet<WoodType, Block> fine;
     public final SimpleEntrySet<WoodType, Block> mosaic;
     public final SimpleEntrySet<WoodType, Block> panel;
     public final SimpleEntrySet<WoodType, Block> shavings;
@@ -106,7 +120,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::lighterPalette)
+                .createPaletteFromOak(this::brickBondPalette)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -218,7 +232,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::darkerPalette)
+                .createPaletteFromOak(this::brickBondPalette)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -255,6 +269,56 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(diamond);
+
+        doubleHerringbone = SimpleEntrySet.builder(WoodType.class, "planks", "double_herringbone",
+                        () -> getModBlock("double_herringbone_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/double_herringbone_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::brickBondPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(doubleHerringbone);
+
+        enclosed = SimpleEntrySet.builder(WoodType.class, "planks", "enclosed",
+                        () -> getModBlock("enclosed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/ctm/enclosed_oak_planks_ctm"))
+                .addTexture(modRes("block/oak_planks/enclosed_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(enclosed);
+
+        fine = SimpleEntrySet.builder(WoodType.class, "planks", "fine",
+                        () -> getModBlock("fine_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/fine_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("nailed_oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::dullPalette)
+                .setTab(() -> tab)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(fine);
     }
 
     private void dullPalette(Palette p) {
@@ -270,6 +334,12 @@ public class ChippedModule extends SimpleModule {
         p.remove(p.getDarkest());
     }
 
+    private void lightestPalette(Palette p) {
+        p.remove(p.getDarkest());
+        p.remove(p.getLightest());
+        p.remove(p.getLightest());
+    }
+
     private void darkerPalette(Palette p) {
         p.remove(p.getDarkest());
         p.remove(p.getLightest());
@@ -277,8 +347,30 @@ public class ChippedModule extends SimpleModule {
 
     private void brickBondPalette(Palette p) {
         p.remove(p.getLightest());
+        p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
+    }
+
+    @Override
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+            for (var w : WoodTypeRegistry.getTypes()) {
+                SimpleTagBuilder planks_tag = SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"));
+//                TagBuilder.create().add(TagEntry.tag(w.id));
+//                tb.addTag(planks_tag);
+                TagBuilder.create().add(TagEntry.tag(Objects.requireNonNull(ResourceLocation.tryParse(w.id + "_planks"))));
+//                handler.dynamicPack.addTag(WoodTypeRegistry.getTypes(), Registry.ITEM_REGISTRY);
+                handler.dynamicPack.addTag(planks_tag.addEntry(SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"))), Registry.BLOCK_REGISTRY);
+                handler.dynamicPack.addTag(planks_tag.addEntry(SimpleTagBuilder.of(ResourceLocation.tryParse(w.id + "_planks"))), Registry.ITEM_REGISTRY);
+//                fine.blocks.get(WoodTypeRegistry.getTypes() == planks_tag);
+//                for (var z : fine.blocks.get(WoodTypeRegistry.getTypes()))
+//                {
+//
+//                }
+            }
+
+
     }
 }
