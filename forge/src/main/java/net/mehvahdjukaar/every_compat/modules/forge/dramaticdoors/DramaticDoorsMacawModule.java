@@ -47,6 +47,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
     public DramaticDoorsMacawModule(String modId) {
         super(modId, "ddm");
 
+        // TODO: Fix null block crash
         tallBarnDoors = SimpleEntrySet.builder(WoodType.class, "barn_door", "tall_macaw",
                         () -> getModBlock("tall_macaw_oak_barn_door"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallDoorBlock(BlockInit.OAK_BARN_DOOR.get()))
