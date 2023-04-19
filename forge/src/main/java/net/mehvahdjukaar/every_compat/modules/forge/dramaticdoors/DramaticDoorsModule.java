@@ -1,7 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
 import com.fizzware.dramaticdoors.DramaticDoors;
-import com.fizzware.dramaticdoors.blocks.DDBlocks;
+import com.fizzware.dramaticdoors.blocks.ShortDoorBlock;
+import com.fizzware.dramaticdoors.init.DDBlocks;
 import com.fizzware.dramaticdoors.blocks.TallDoorBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class DramaticDoorsModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> shortDoors;
     public final SimpleEntrySet<WoodType, Block> tallDoors;
 
     public DramaticDoorsModule(String modId) {
@@ -38,6 +40,21 @@ public class DramaticDoorsModule extends SimpleModule {
                 .build();
 
         this.addEntry(tallDoors);
+
+        shortDoors = SimpleEntrySet.builder(WoodType.class, "door", "short",
+                        DDBlocks.SHORT_OAK_DOOR, () -> WoodTypeRegistry.OAK_TYPE, w -> new ShortDoorBlock(Blocks.OAK_DOOR))
+                .addTextureM(modRes("block/short_oak_door"), EveryCompat.res("block/dd/short_oak_door_m"))
+                .addTextureM(modRes("item/short_oak_door"), EveryCompat.res("item/dd/short_oak_door_m"))
+                .addTag(modRes("short_wooden_doors"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("short_wooden_doors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .useLootFromBase()
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(shortDoors);
     }
 
     @Override

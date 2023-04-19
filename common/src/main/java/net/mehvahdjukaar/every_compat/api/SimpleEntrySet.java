@@ -127,7 +127,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
             nameScheme = Pattern.compile("^(.+?)_" + postfix + "$");
         }
 
-        disabled = Suppliers.memoize(() -> this.getBaseBlock() != null);
+        disabled = Suppliers.memoize(() -> this.getBaseBlock() == null);
     }
 
     public ITileHolder<?> getTileHolder() {

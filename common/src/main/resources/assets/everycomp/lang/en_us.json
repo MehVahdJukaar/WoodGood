@@ -38,6 +38,33 @@
   "block_type.buildersaddition.table": "%s Table",
   "block_type.buildersaddition.vertical_slab": "%s Panel",
 
+  "block_type.chipped.basket_woven_planks": "Basket Woven %s Planks",
+  "block_type.chipped.boxed_planks": "Boxed %s Planks",
+  "block_type.chipped.brick_bond_planks": "Brick Bond %s Planks",
+  "block_type.chipped.bricky_planks": "Bricky %s Planks",
+  "block_type.chipped.cornered_planks": "Cornered %s Planks",
+  "block_type.chipped.crated_planks": "Crated %s Planks",
+  "block_type.chipped.cross_laced_planks": "Cross Laced %s Planks",
+  "block_type.chipped.crossed_planks": "Crossed %s Planks",
+  "block_type.chipped.detailed_planks": "Detailed %s Planks",
+  "block_type.chipped.diagonal_planks": "Diagonal %s Planks",
+  "block_type.chipped.diamond_planks": "Diamond %s Planks",
+  "block_type.chipped.double_herringbone_planks": "Double Herringbone %s Planks",
+  "block_type.chipped.enclosed_planks": "Enclosed %s Planks",
+  "block_type.chipped.fine_planks": "Fine %s Planks",
+  "block_type.chipped.fine_vertical_planks": "Fine Vertical %s Planks",
+  "block_type.chipped.framed_planks": "Framed %s Planks",
+  "block_type.chipped.herringbone_planks": "Herringbone %s Planks",
+  "block_type.chipped.hewn_planks": "Hewn %s Planks",
+  "block_type.chipped.laced_planks": "Laced %s Planks",
+  "block_type.chipped.nailed_planks": "Nailed %s Planks",
+  "block_type.chipped.natural_planks": "Natural %s Planks",
+  "block_type.chipped.pegged_planks": "Pegged %s Planks",
+  "block_type.chipped.polished_planks": "Polished %s Planks",
+  "block_type.chipped.planks_mosaic": "%s Planks Mosaic",
+  "block_type.chipped.planks_panel": "%s Planks Panel",
+  "block_type.chipped.planks_shavings": "%s Planks Shavings",
+
   "block_type.graveyard.coffin": "%s Coffin",
 
   "block_type.decorative_blocks.palisade": "%s Palisade",
@@ -46,6 +73,7 @@
   "block_type.decorative_blocks.seat": "%s Seat",
   "block_type.decorative_winter.snowy_palisade": "Snowy %s Palisade",
 
+  "block_type.dramaticdoors.short_door": "Short %s Door",
   "block_type.dramaticdoors.tall_door": "Tall %s Door",
   "block_type.dramaticdoors.tall_macaw_bark_glass_door": "Tall %s Bark Glass Door",
   "block_type.dramaticdoors.tall_macaw_barn_door": "Tall %s Barn Door",
@@ -329,6 +357,10 @@
   "block_type.cfm.stripped_upgraded_gate": "Stripped %s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
+  "block_type.premium_wood.bookshelf": "%s Bookshelf",
+  "block_type.premium_wood.crafting_table": "%s Crafting Table",
+  "block_type.premium_wood.framed_glass": "%s Framed Glass",
+
   "block_type.productivebees.advanced_beehive": "Advanced %s Beehive",
   "block_type.productivebees.expansion_box": "%s Expansion Box",
 
@@ -370,6 +402,8 @@
   "block_type.storagedrawers.half_drawers_2": "%s Half Drawers 1x2",
   "block_type.storagedrawers.half_drawers_4": "%s Half Drawers 2x2",
   "block_type.storagedrawers.trim": "%s Trim",
+
+  "block_type.shutter.shutter": "%s Shutter",
 
   "block_type.xercamod.carved_1": "Carved %s",
   "block_type.xercamod.carved_2": "Carved %s",
