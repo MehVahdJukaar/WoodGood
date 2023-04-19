@@ -9,16 +9,19 @@ import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
+import net.mehvahdjukaar.every_compat.modules.forge.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
@@ -61,6 +64,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("campchair", () -> CampChairModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+        addModule("chipped", () -> ChippedModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
@@ -68,19 +72,20 @@ public class EveryCompatForge extends EveryCompat {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("furnish", () -> FurnishModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
+        addModule("furnish", () -> FurnishModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
-
-
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
+        addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("quark", () -> QuarkModule::new);
+        addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("twigs", () -> TwigsModule::new);
+        addModule("twilightforest", () -> TwilightForestModule::new);
+        addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
 
         addModule("mcwbridges", () -> MacawBridgesModule::new);
@@ -92,7 +97,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-        addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
 
         // addModule("graveyard", () -> GraveyardModule::new);
 

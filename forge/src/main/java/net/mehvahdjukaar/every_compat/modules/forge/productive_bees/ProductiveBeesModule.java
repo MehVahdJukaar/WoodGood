@@ -32,7 +32,7 @@ public class ProductiveBeesModule extends SimpleModule {
                         ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new AdvancedBeehive(Utils.copyPropertySafe(w.planks)))
                 // Textures are not generated for this, temporary until model overrides work
-                .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "everycomp:block/spruce"))
+                .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_right_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_right_honey_m"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_left_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_left_honey_m"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_right"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_right_m"))
@@ -68,7 +68,7 @@ public class ProductiveBeesModule extends SimpleModule {
                         ModBlocks.EXPANSION_BOX_SPRUCE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new ExpansionBox(Utils.copyPropertySafe(w.planks)))
                 // Textures are not generated for this, temporary until model overrides work
-                .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "everycomp:block/spruce"))
+                .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_right_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_right_honey_m"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_left_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_left_honey_m"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_right"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_right_m"))
