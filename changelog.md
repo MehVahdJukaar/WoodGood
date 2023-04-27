@@ -1,1 +1,1 @@
-Fixed some textures from twigs tables
+Added architects palette and shutters. Probably other stuff too

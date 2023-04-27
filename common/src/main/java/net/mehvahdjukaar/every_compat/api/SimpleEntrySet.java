@@ -188,7 +188,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         if (disabled.get()) return;
         Block base = getBaseBlock();
         if (base == null || base == Blocks.AIR)
-            throw new UnsupportedOperationException("Base block cant be null");
+            throw new UnsupportedOperationException("Base block cant be null ("+this.typeName+ " for " +module.modId+" module)");
         baseType.get().addChild(getChildKey(module), (Object) base);
 
         for (T w : woodTypes) {

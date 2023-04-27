@@ -47,7 +47,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
     public DramaticDoorsMacawModule(String modId) {
         super(modId, "ddm");
 
-        // TODO: Fix null block crash
         tallBarnDoors = SimpleEntrySet.builder(WoodType.class, "barn_door", "tall_macaw",
                         () -> getModBlock("tall_macaw_oak_barn_door"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallDoorBlock(BlockInit.OAK_BARN_DOOR.get()))
@@ -217,7 +216,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
         this.addEntry(tallShojiWholeDoors);
 
         tallClassicDoors = SimpleEntrySet.builder(WoodType.class, "classic_door", "tall_macaw",
-                        () -> getModBlock("tall_spruce_classic_door"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> getModBlock("tall_macaw_spruce_classic_door"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new TallDoorBlock(BlockInit.SPRUCE_CLASSIC_DOOR.get()))
                 .addTextureM(modRes("block/macaw/tall_spruce_classic_door_lower"), EveryCompat.res("block/ddm/tall_oak_classic_door_lower_m"))
                 .addTextureM(modRes("block/macaw/tall_spruce_classic_door_middle"), EveryCompat.res("block/ddm/tall_oak_classic_door_middle_m"))
