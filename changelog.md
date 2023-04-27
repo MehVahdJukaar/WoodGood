@@ -1,1 +1,1 @@
-* Fixed dramatic door macaw module being on when macaw doors wasnt instaled
+Fixed some textures from twigs tables

@@ -25,7 +25,7 @@ public class TwigsModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak((p) -> p.remove(p.getDarkest()))
-                .addTexture(modRes("block/oak_table"))
+                .addTexture(modRes("block/oak_table_side"))
                 .addTexture(modRes("block/oak_table_top"))
                 .addTexture(modRes("block/oak_table_bottom"))
                 .build();
