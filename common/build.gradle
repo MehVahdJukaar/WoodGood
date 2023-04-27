@@ -11,6 +11,7 @@ dependencies {
 
     // modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
      modImplementation("curse.maven:selene-499980:4460382")
+    modImplementation("curse.maven:resourceful-lib-570073:4434139")
 
 
     //common. Fabric version that works on both
@@ -18,6 +19,7 @@ dependencies {
 
     modImplementation("curse.maven:another-furniture-610492:4034011")
     modImplementation("curse.maven:camp-chair-531744:3835679")
+    modImplementation("curse.maven:chipped-456956:4463479")
     modImplementation("curse.maven:create-fabric-624165:4394141")
     modImplementation("curse.maven:decorative-blocks-362528:3941637")
     modImplementation("curse.maven:exlines-bark-carpets-527296:4094399")
