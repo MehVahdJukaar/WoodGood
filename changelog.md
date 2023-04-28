@@ -1,1 +1,1 @@
-Added architects palette and shutters. Probably other stuff too
+fixed dramatic doors module

@@ -85,7 +85,7 @@ subprojects {
                         optionalDependency("another-furniture")
                         optionalDependency("decorative-blocks")
                         optionalDependency("friends-and-foes")
-                        optionalDependency("architects-palette")
+                        optionalDependency("architects-palette-fabric")
                         optionalDependency("the-twilight-forest")
                     }
                 } else {
@@ -112,6 +112,7 @@ subprojects {
                         optionalDependency("storage-drawers")
                         optionalDependency("valhelsia-structures")
                         optionalDependency("friends-and-foes-forge")
+                        optionalDependency("architects-palette")
                     }
                 }
             }

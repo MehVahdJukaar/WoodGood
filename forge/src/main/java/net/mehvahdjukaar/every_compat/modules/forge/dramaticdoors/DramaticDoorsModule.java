@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
 import com.fizzware.dramaticdoors.DramaticDoors;
 import com.fizzware.dramaticdoors.blocks.ShortDoorBlock;
-import com.fizzware.dramaticdoors.init.DDBlocks;
 import com.fizzware.dramaticdoors.blocks.TallDoorBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -14,6 +13,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+
 import java.util.List;
 
 public class DramaticDoorsModule extends SimpleModule {
@@ -25,7 +25,7 @@ public class DramaticDoorsModule extends SimpleModule {
         super(modId, "dd");
 
         tallDoors = SimpleEntrySet.builder(WoodType.class, "door", "tall",
-                        DDBlocks.TALL_OAK_DOOR, () -> WoodTypeRegistry.OAK_TYPE, w -> new TallDoorBlock(Blocks.OAK_DOOR))
+                        () -> getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new TallDoorBlock(Blocks.OAK_DOOR))
                 .addTextureM(modRes("block/tall_oak_door_bottom"), EveryCompat.res("block/dd/tall_oak_door_bottom_m"))
                 .addTextureM(modRes("block/tall_oak_door_middle"), EveryCompat.res("block/dd/tall_oak_door_middle_m"))
                 .addTextureM(modRes("block/tall_oak_door_top"), EveryCompat.res("block/dd/tall_oak_door_top_m"))
@@ -42,7 +42,7 @@ public class DramaticDoorsModule extends SimpleModule {
         this.addEntry(tallDoors);
 
         shortDoors = SimpleEntrySet.builder(WoodType.class, "door", "short",
-                        DDBlocks.SHORT_OAK_DOOR, () -> WoodTypeRegistry.OAK_TYPE, w -> new ShortDoorBlock(Blocks.OAK_DOOR))
+                        () -> getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new ShortDoorBlock(Blocks.OAK_DOOR))
                 .addTextureM(modRes("block/short_oak_door"), EveryCompat.res("block/dd/short_oak_door_m"))
                 .addTextureM(modRes("item/short_oak_door"), EveryCompat.res("item/dd/short_oak_door_m"))
                 .addTag(modRes("short_wooden_doors"), Registry.BLOCK_REGISTRY)
@@ -60,14 +60,14 @@ public class DramaticDoorsModule extends SimpleModule {
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of(
-            "biomesoplenty", "byg", "prehistoricfauna", "twilightforest", "tflostblocks",
-            "bamboo_blocks", "caverns_and_chasms", "endergetic", "environmental", "upgrade_aquatic",
-            "abundance", "atmospheric", "autumnity", "bayou_blues", "buzzier_bees",
-            "enhanced_mushrooms", "architects_palette", "ars_nouveau", "biomemakeover", "blocksplus",
-            "ceilands", "copperoverhaul", "alloyed", "createdeco", "darkerdepths",
-            "dustrial_decor", "ecologics", "phantasm", "nourished_end", "habitat",
-            "nethers_exoticism", "outer_end", "pokecube", "pokecube_legends", "premium_wood", "quark",
-            "snowyspirit", "supplementaries", "twigs", "undergarden"
+                "biomesoplenty", "byg", "prehistoricfauna", "twilightforest", "tflostblocks",
+                "bamboo_blocks", "caverns_and_chasms", "endergetic", "environmental", "upgrade_aquatic",
+                "abundance", "atmospheric", "autumnity", "bayou_blues", "buzzier_bees",
+                "enhanced_mushrooms", "architects_palette", "ars_nouveau", "biomemakeover", "blocksplus",
+                "ceilands", "copperoverhaul", "alloyed", "createdeco", "darkerdepths",
+                "dustrial_decor", "ecologics", "phantasm", "nourished_end", "habitat",
+                "nethers_exoticism", "outer_end", "pokecube", "pokecube_legends", "premium_wood", "quark",
+                "snowyspirit", "supplementaries", "twigs", "undergarden"
         );
     }
 }
