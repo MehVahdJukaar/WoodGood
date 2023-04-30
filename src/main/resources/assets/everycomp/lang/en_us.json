@@ -210,5 +210,8 @@
   "block_type.storagedrawers.half_drawers_4": "%s Half Drawers 2x2",
   "block_type.storagedrawers.trim": "%s Trim",
 
-  "wood_type.twilightforest.dark": "Darkwood"
+  "wood_type.twilightforest.dark": "Darkwood",
+
+  "block_type.infinitybuttons.large_button": "%s Large Button",
+  "block_type.infinitybuttons.plank_secret_button": "%s Plank Secret Button"
 }
