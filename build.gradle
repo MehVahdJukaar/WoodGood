@@ -150,7 +150,7 @@ dependencies {
     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     implementation fg.deobf("curse.maven:twigs-496913:3756844")
     implementation fg.deobf("curse.maven:another-furniture-610492:4034013")
-	implementation fg.deobf("curse.maven:architects-palette-433862:3815327")
+	implementation fg.deobf("curse.maven:architects-palette-433862:4498424")
 	implementation fg.deobf("curse.maven:the-twilight-forest-227639:3998681")
 
     implementation fg.deobf("curse.maven:macaws-bridges-351725:3793697")
