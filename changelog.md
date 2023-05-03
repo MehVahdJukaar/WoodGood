@@ -1,1 +1,1 @@
-fixed dramatic doors module
+- added architects palette board slabs walls and stairs
