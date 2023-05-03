@@ -53,7 +53,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
         this.addEntry(boardSlabs);
 
 
-        boardWalls = SimpleEntrySet.builder(WoodType.class, "board_walls",
+        boardWalls = SimpleEntrySet.builder(WoodType.class, "board_wall",
                         () -> getModBlock("oak_board_wall"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WallBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

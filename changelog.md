@@ -1,1 +1,1 @@
-- added architects palette board slabs walls and stairs
+- fixed AP walls
