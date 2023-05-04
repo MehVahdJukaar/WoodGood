@@ -1,1 +1,1 @@
-- fixed AP walls
+- fixed some architects palette and woodworks boards being considered equivalent

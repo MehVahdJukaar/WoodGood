@@ -112,7 +112,9 @@ public abstract class CompatModule {
         if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types
                 registry.containsKey(new ResourceLocation(modId, n2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
+        if (this.shortenedId().equals("ap")) return false; //hardcoding
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
+        if (this.shortenedId().equals("abww") && woodFrom.equals("architects_palette")) return false; //we always register everything for these
 
         if (registry.containsKey(new ResourceLocation(woodFrom, name))) return true;
 
