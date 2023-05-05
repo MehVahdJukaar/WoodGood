@@ -1,1 +1,1 @@
-- fixed some architects palette and woodworks boards being considered equivalent
+fixed crash on servers with create module

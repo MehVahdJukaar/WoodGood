@@ -4,6 +4,8 @@ import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.palettes.WindowBlock;
 import com.simibubi.create.foundation.block.connected.*;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -13,7 +15,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -63,7 +64,7 @@ public class CreateModule extends SimpleModule {
                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false), false);
     }
 
-    //@OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     @Override
     public void onClientSetup() {
         super.onClientSetup();
@@ -78,6 +79,7 @@ public class CreateModule extends SimpleModule {
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(windowPanes.blocks.get(w)),
                     (model) -> new CTModel(model, new GlassPaneCTBehaviour(spriteShift)));
         });
+
     }
 
     public void onClientInit() {
