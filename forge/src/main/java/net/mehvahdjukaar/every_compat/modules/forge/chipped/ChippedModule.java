@@ -2,15 +2,11 @@ package net.mehvahdjukaar.every_compat.modules.forge.chipped;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -51,6 +47,9 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> stacked;
     public final SimpleEntrySet<WoodType, Block> thin;
     public final SimpleEntrySet<WoodType, Block> tiled;
+    public final SimpleEntrySet<WoodType, Block> versailles;
+    public final SimpleEntrySet<WoodType, Block> vertical;
+    public final SimpleEntrySet<WoodType, Block> verticallyRailed;
 
     // TODO: Fix recipes & tags
     // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
@@ -385,7 +384,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::dullPalette)
+                .createPaletteFromOak(this::darkerPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -556,6 +555,49 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(tiled);
+
+        versailles = SimpleEntrySet.builder(WoodType.class, "planks", "versailles",
+                        () -> getModBlock("versailles_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/versailles_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::darkerPalette)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(versailles);
+
+        vertical = SimpleEntrySet.builder(WoodType.class, "planks", "vertical",
+                        () -> getModBlock("vertical_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/vertical_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(vertical);
+
+        verticallyRailed = SimpleEntrySet.builder(WoodType.class, "planks", "vertically_railed",
+                        () -> getModBlock("vertically_railed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/vertically_railed_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(verticallyRailed);
     }
 
     private void dullPalette(Palette p) {
