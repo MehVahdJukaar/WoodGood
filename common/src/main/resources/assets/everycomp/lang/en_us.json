@@ -66,6 +66,8 @@
   "block_type.chipped.slanted_planks": "Slanted %s Planks",
   "block_type.chipped.smooth_planks": "Smooth %s Planks",
   "block_type.chipped.stacked_planks": "Stacked %s Planks",
+  "block_type.chipped.thin_planks": "Thin %s Planks",
+  "block_type.chipped.tiled_planks": "Tiled %s Planks",
   "block_type.chipped.planks_mosaic": "%s Planks Mosaic",
   "block_type.chipped.planks_panel": "%s Planks Panel",
   "block_type.chipped.planks_shavings": "%s Planks Shavings",
