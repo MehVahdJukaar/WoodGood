@@ -452,7 +452,6 @@ public class ChippedModule extends SimpleModule {
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
     }
 
     private void dullerPalette(Palette p) {
