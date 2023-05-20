@@ -44,6 +44,11 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> pegged;
     public final SimpleEntrySet<WoodType, Block> polished;
     public final SimpleEntrySet<WoodType, Block> shavings;
+    public final SimpleEntrySet<WoodType, Block> railed;
+    public final SimpleEntrySet<WoodType, Block> shifted;
+    public final SimpleEntrySet<WoodType, Block> slanted;
+    public final SimpleEntrySet<WoodType, Block> smooth;
+    public final SimpleEntrySet<WoodType, Block> stacked;
 
     // TODO: Fix recipes & tags
     // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
@@ -152,7 +157,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::lighterPalette)
+                .createPaletteFromOak(this::lightestPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -445,9 +450,84 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(polished);
+
+        railed = SimpleEntrySet.builder(WoodType.class, "planks", "railed",
+                        () -> getModBlock("railed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/railed_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(railed);
+
+        shifted = SimpleEntrySet.builder(WoodType.class, "planks", "shifted",
+                        () -> getModBlock("shifted_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/shifted_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::lightestPalette)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(shifted);
+
+        slanted = SimpleEntrySet.builder(WoodType.class, "planks", "slanted",
+                        () -> getModBlock("slanted_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/slanted_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::lightestPalette)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(slanted);
+
+        smooth = SimpleEntrySet.builder(WoodType.class, "planks", "smooth",
+                        () -> getModBlock("smooth_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/smooth_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(smooth);
+
+        stacked = SimpleEntrySet.builder(WoodType.class, "planks", "stacked",
+                        () -> getModBlock("stacked_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/stacked_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::lightestPalette)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(stacked);
     }
 
     private void dullPalette(Palette p) {
+        p.add(p.increaseInner());
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
