@@ -11,6 +11,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
+//TODO: Fix recipes
 
 public class ChippedModule extends SimpleModule {
 
