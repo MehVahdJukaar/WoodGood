@@ -423,6 +423,13 @@
   "wood_type.twilightforest.time": "Timewood",
   "wood_type.twilightforest.trans": "Transwood",
   "wood_type.twilightforest.sorting": "Sortingwood",
+
+  "leaves_type.quark.blue": "Frosty",
+  "leaves_type.quark.lavender":"Serene",
+  "leaves_type.quark.orange": "Warm",
+  "leaves_type.quark.pink": "Sweet",
+  "leaves_type.quark.yellow": "Sunny",
+  "leaves_type.quark.red":"Fiery",
   "leaves_type.twilightforest.dark": "Darkwood",
   "leaves_type.ulterlands.souldrained": "Petrified",
 

@@ -139,7 +139,7 @@ dependencies {
     modImplementation("curse.maven:friends-and-foes-forge-602059:4429819")
     modCompileOnly("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:infinity-buttons-661902:4276396")
-    modImplementation("curse.maven:lauchs-shutters-714019:4328526")
+    modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
     modImplementation("curse.maven:architects-palette-433862:4498448")
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4446187")
@@ -163,7 +163,7 @@ dependencies {
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modImplementation("curse.maven:the-twilight-forest-227639:4389567")
-    modCompileOnly("curse.maven:twigs-496913:4160178")
+    modImplementation("curse.maven:twigs-496913:4531850")
     modImplementation("curse.maven:woodworks-543610:4023081")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")

@@ -64,34 +64,14 @@ public class CreateModule extends SimpleModule {
                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false), false);
     }
 
-    @Environment(EnvType.CLIENT)
     @Override
     public void onClientSetup() {
         super.onClientSetup();
-        windows.blocks.forEach((w, b) -> {
-            String path = "block/" + shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window";
-
-            CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
-                    EveryCompat.res(path), EveryCompat.res(path + "_connected"));
-
-            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(b),
-                    (model) -> new CTModel(model, new HorizontalCTBehaviour(spriteShift)));
-            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(windowPanes.blocks.get(w)),
-                    (model) -> new CTModel(model, new GlassPaneCTBehaviour(spriteShift)));
-        });
-
+        CreateClientModule.onClientSetup(this);
     }
 
     public void onClientInit() {
-        ClientPlatformHelper.addAtlasTextureCallback(TextureAtlas.LOCATION_BLOCKS, this::onTextureStitch);
-    }
-
-    //we could also remove this and run getCT before client setup
-    private void onTextureStitch(ClientPlatformHelper.AtlasTextureEvent event) {
-        windows.blocks.forEach((w, b) -> {
-            String path = "block/" + shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window_connected";
-            event.addSprite(EveryCompat.res(path));
-        });
+        CreateClientModule.onClientInit(this);
     }
 
 }

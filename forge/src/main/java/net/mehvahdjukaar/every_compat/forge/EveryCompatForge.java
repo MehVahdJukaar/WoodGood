@@ -26,12 +26,11 @@ import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModu
 import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
-import net.mehvahdjukaar.every_compat.modules.forge.twigs.TwigsModule;
+import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
-import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -43,6 +42,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.MissingMappingsEvent;
+import vazkii.quark.content.world.block.BlossomLeavesBlock;
+import vazkii.quark.content.world.module.BlossomTreesModule;
 
 import java.util.Optional;
 
@@ -88,7 +89,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
-
+        BlossomTreesModule
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
