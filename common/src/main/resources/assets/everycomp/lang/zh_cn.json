@@ -143,7 +143,10 @@
   
   "block_type.architects_palette.railing": "%s扶手",
   "block_type.architects_palette.boards": "%s宽木板",
-  
+  "block_type.architects_palette.board_wall": "%s宽板墙",
+  "block_type.architects_palette.board_stairs": "%s宽板楼梯",
+  "block_type.architects_palette.board_slab": "%s宽板台阶",
+
   "block_type.valhelsia_structures.cut_post": "切制%s桩",
   "block_type.valhelsia_structures.stripped_cut_post": "去皮切制%s桩",
   "block_type.valhelsia_structures.post": "%s桩",
@@ -430,6 +433,9 @@
   "wood_type.minecraft.jungle": "丛林木",
   "wood_type.minecraft.dark_oak": "深色橡木",
   "wood_type.minecraft.acacia": "金合欢木",
+  "wood_type.minecraft.mangrove": "红树木",
+  "wood_type.minecraft.cherry": "樱花木",
+  "wood_type.minecraft.bamboo": "竹",
   "wood_type.minecraft.crimson": "绯红木",
   "wood_type.minecraft.warped": "诡异木",
   "leaves_type.minecraft.oak": "橡树",
@@ -438,6 +444,8 @@
   "leaves_type.minecraft.jungle": "丛林",
   "leaves_type.minecraft.dark_oak": "深色橡树",
   "leaves_type.minecraft.acacia": "金合欢",
+  "leaves_type.minecraft.mangrove": "红树",
+  "leaves_type.minecraft.cherry": "樱花",
   "leaves_type.minecraft.azalea": "杜鹃",
   "leaves_type.minecraft.flowering_azalea": "盛开的杜鹃",
   
