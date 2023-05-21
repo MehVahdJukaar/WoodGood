@@ -738,6 +738,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
