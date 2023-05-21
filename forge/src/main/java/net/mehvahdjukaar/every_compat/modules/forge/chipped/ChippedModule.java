@@ -76,6 +76,9 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> paneledDoor;
     public final SimpleEntrySet<WoodType, Block> paperDoor;
     public final SimpleEntrySet<WoodType, Block> pressedDoor;
+    public final SimpleEntrySet<WoodType, Block> screenDoor;
+    public final SimpleEntrySet<WoodType, Block> secretDoor;
+    public final SimpleEntrySet<WoodType, Block> shackDoor;
     public ChippedModule(String modId) {
         super(modId, "ch");
         CreativeModeTab tab = CreativeModeTab.TAB_BUILDING_BLOCKS;
@@ -709,7 +712,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -729,7 +731,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -750,7 +751,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getLightest()))
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -771,7 +771,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getLightest()))
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -792,7 +791,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getLightest()))
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -813,7 +811,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getLightest()))
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -833,7 +830,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -854,7 +850,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getLightest()))
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -874,7 +869,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -895,7 +889,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getLightest()))
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -916,7 +909,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getLightest()))
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -937,7 +929,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getLightest()))
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
