@@ -63,6 +63,9 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> barredDoor;
     public final SimpleEntrySet<WoodType, Block> beachDoor;
     public final SimpleEntrySet<WoodType, Block> boardedDoor;
+    public final SimpleEntrySet<WoodType, Block> dualPaneledDoor;
+    public final SimpleEntrySet<WoodType, Block> fortifiedDoor;
+    public final SimpleEntrySet<WoodType, Block> gatedDoor;
 
     // TODO: Fix recipes & tags
     // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
@@ -701,6 +704,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
+                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -720,6 +724,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
+                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -740,10 +745,72 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .setRenderType(() -> RenderType::cutout)
+                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
         this.addEntry(boardedDoor);
+
+        dualPaneledDoor = SimpleEntrySet.builder(WoodType.class, "door", "dual_paneled",
+                        () -> getModBlock("dual_paneled_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTextureM(modRes("block/oak_door/dual_paneled_oak_door_bottom"), EveryCompat.res("block/ch/doors/dual_paneled_oak_door_bottom_m"))
+                .addTextureM(modRes("block/oak_door/dual_paneled_oak_door_top"), EveryCompat.res("block/ch/doors/dual_paneled_oak_door_top_m"))
+                .addTextureM(EveryCompat.res("item/ch/doors/dual_paneled_oak_door"), EveryCompat.res("item/ch/doors/dual_paneled_oak_door_m"))
+                .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
+                        .replaceGenericType("oak", "item/ch/doors"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setRenderType(() -> RenderType::cutout)
+                .useLootFromBase()
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(dualPaneledDoor);
+
+        fortifiedDoor = SimpleEntrySet.builder(WoodType.class, "door", "fortified",
+                        () -> getModBlock("fortified_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTextureM(modRes("block/oak_door/fortified_oak_door_bottom"), EveryCompat.res("block/ch/doors/fortified_oak_door_bottom_m"))
+                .addTextureM(modRes("block/oak_door/fortified_oak_door_top"), EveryCompat.res("block/ch/doors/fortified_oak_door_top_m"))
+                .addTextureM(EveryCompat.res("item/ch/doors/fortified_oak_door"), EveryCompat.res("item/ch/doors/fortified_oak_door_m"))
+                .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
+                        .replaceGenericType("oak", "item/ch/doors"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .useLootFromBase()
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(fortifiedDoor);
+
+        gatedDoor = SimpleEntrySet.builder(WoodType.class, "door", "gated",
+                        () -> getModBlock("gated_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTextureM(modRes("block/oak_door/gated_oak_door_bottom"), EveryCompat.res("block/ch/doors/gated_oak_door_bottom_m"))
+                .addTextureM(modRes("block/oak_door/gated_oak_door_top"), EveryCompat.res("block/ch/doors/gated_oak_door_top_m"))
+                .addTextureM(EveryCompat.res("item/ch/doors/gated_oak_door"), EveryCompat.res("item/ch/doors/gated_oak_door_m"))
+                .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
+                        .replaceGenericType("oak", "item/ch/doors"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .useLootFromBase()
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(gatedDoor);
     }
 
     private void dullPalette(Palette p) {
