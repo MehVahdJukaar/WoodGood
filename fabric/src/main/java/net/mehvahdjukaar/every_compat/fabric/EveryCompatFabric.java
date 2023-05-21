@@ -23,7 +23,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
     @Override
     public void onInitialize() {
         this.commonInit();
-Blossom
+
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
