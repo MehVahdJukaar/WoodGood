@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.chipped;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -9,17 +10,20 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Block;
 
 //TODO: Fix recipes
 
 public class ChippedModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> barrel;
     public final SimpleEntrySet<WoodType, Block> basketWoven;
     public final SimpleEntrySet<WoodType, Block> boxed;
     public final SimpleEntrySet<WoodType, Block> brickBond;
     public final SimpleEntrySet<WoodType, Block> bricky;
     public final SimpleEntrySet<WoodType, Block> cornered;
+    public final SimpleEntrySet<WoodType, Block> crate;
     public final SimpleEntrySet<WoodType, Block> crated;
     public final SimpleEntrySet<WoodType, Block> crossLaced;
     public final SimpleEntrySet<WoodType, Block> crossed;
@@ -42,6 +46,7 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> polished;
     public final SimpleEntrySet<WoodType, Block> shavings;
     public final SimpleEntrySet<WoodType, Block> railed;
+    public final SimpleEntrySet<WoodType, Block> reinforcedCrate;
     public final SimpleEntrySet<WoodType, Block> shifted;
     public final SimpleEntrySet<WoodType, Block> slanted;
     public final SimpleEntrySet<WoodType, Block> smooth;
@@ -632,6 +637,50 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(wickered);
+
+        barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
+                        () -> getModBlock("oak_barrel"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BarrelBlock(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/barrel/oak_barrel_bottom"))
+                .addTexture(modRes("block/barrel/oak_barrel_top_open"))
+                .addTextureM(modRes("block/barrel/oak_barrel_side"), EveryCompat.res("block/ch/oak_barrel_side_m"))
+                .addTextureM(modRes("block/barrel/oak_barrel_top"), EveryCompat.res("block/ch/oak_barrel_top_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("barrel"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("barrel"), Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::darkerPalette)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(barrel);
+
+        crate = SimpleEntrySet.builder(WoodType.class, "crate",
+                        () -> getModBlock("oak_crate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BarrelBlock(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/barrel/oak_crate_side"))
+                .addTexture(modRes("block/barrel/oak_crate_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("barrel"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("barrel"), Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(crate);
+
+        reinforcedCrate = SimpleEntrySet.builder(WoodType.class, "crate", "reinforced",
+                        () -> getModBlock("reinforced_oak_crate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BarrelBlock(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/barrel/reinforced_oak_crate_side"))
+                .addTexture(modRes("block/barrel/reinforced_oak_crate_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("barrel"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("barrel"), Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(reinforcedCrate);
     }
 
     private void dullPalette(Palette p) {
