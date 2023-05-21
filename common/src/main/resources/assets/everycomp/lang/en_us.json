@@ -60,6 +60,9 @@
   "block_type.chipped.nailed_planks": "Nailed %s Planks",
   "block_type.chipped.natural_planks": "Natural %s Planks",
   "block_type.chipped.pegged_planks": "Pegged %s Planks",
+  "block_type.chipped.planks_mosaic": "%s Planks Mosaic",
+  "block_type.chipped.planks_panel": "%s Planks Panel",
+  "block_type.chipped.planks_shavings": "%s Planks Shavings",
   "block_type.chipped.polished_planks": "Polished %s Planks",
   "block_type.chipped.railed_planks": "Railed %s Planks",
   "block_type.chipped.shifted_planks": "Shifted %s Planks",
@@ -71,9 +74,8 @@
   "block_type.chipped.versailles_planks": "Versailles %s Planks",
   "block_type.chipped.vertical_planks": "Vertical %s Planks",
   "block_type.chipped.vertically_railed_planks": "Vertically Railed %s Planks",
-  "block_type.chipped.planks_mosaic": "%s Planks Mosaic",
-  "block_type.chipped.planks_panel": "%s Planks Panel",
-  "block_type.chipped.planks_shavings": "%s Planks Shavings",
+  "block_type.chipped.whirlwind_planks": "Whirlwind %s Planks",
+  "block_type.chipped.wickered_planks": "Wickered %s Planks",
 
   "block_type.graveyard.coffin": "%s Coffin",
 

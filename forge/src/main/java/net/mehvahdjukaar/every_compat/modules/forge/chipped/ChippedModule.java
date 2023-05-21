@@ -51,6 +51,8 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> versailles;
     public final SimpleEntrySet<WoodType, Block> vertical;
     public final SimpleEntrySet<WoodType, Block> verticallyRailed;
+    public final SimpleEntrySet<WoodType, Block> whirlwind;
+    public final SimpleEntrySet<WoodType, Block> wickered;
 
     // TODO: Fix recipes & tags
     // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
@@ -599,6 +601,37 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(verticallyRailed);
+
+        whirlwind = SimpleEntrySet.builder(WoodType.class, "planks", "whirlwind",
+                        () -> getModBlock("whirlwind_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/whirlwind_oak_planks"))
+                .addTexture(modRes("block/oak_planks/ctm/whirlwind_oak_planks_ctm"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(whirlwind);
+
+        wickered = SimpleEntrySet.builder(WoodType.class, "planks", "wickered",
+                        () -> getModBlock("wickered_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_planks/wickered_oak_planks"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.PLANKS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::darkerPalette)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(wickered);
     }
 
     private void dullPalette(Palette p) {
