@@ -15,7 +15,11 @@ import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 
-//TODO: Fix recipes
+// TODO: Fix recipes & tags
+// `chipped:oak_planks` tags should be changed to `modid:modded_planks`
+// Create a recipe using the new tag for `chipped:recipes/carpenters_table`
+// Currently all variants are crafted with Oak Planks due to them using the `chipped:oak_planks` tag
+// The same should be done for door variants
 
 public class ChippedModule extends SimpleModule {
 
@@ -66,11 +70,6 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> dualPaneledDoor;
     public final SimpleEntrySet<WoodType, Block> fortifiedDoor;
     public final SimpleEntrySet<WoodType, Block> gatedDoor;
-
-    // TODO: Fix recipes & tags
-    // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
-    // Create a recipe using the new tag for `chipped:recipes/carpenters_table`
-    // Currently all variants are crafted with Oak Planks due to them using the `chipped:oak_planks` tag
     public ChippedModule(String modId) {
         super(modId, "ch");
         CreativeModeTab tab = CreativeModeTab.TAB_BUILDING_BLOCKS;
