@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.DoorBlock;
 // Create a recipe using the new tag for `chipped:recipes/carpenters_table`
 // Currently all variants are crafted with Oak Planks due to them using the `chipped:oak_planks` tag
 // The same should be done for door variants
+// Fix doors dropping two items
 
 public class ChippedModule extends SimpleModule {
 
