@@ -14,8 +14,8 @@ import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityBut
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
+import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
