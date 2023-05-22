@@ -4,6 +4,8 @@ import earth.terrarium.chipped.common.registry.ModItems;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -12,14 +14,17 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.TorchBlock;
 import net.minecraft.world.level.block.WallTorchBlock;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
 
 // TODO: Fix recipes & tags
 // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
@@ -1109,23 +1114,9 @@ public class ChippedModule extends SimpleModule {
 
         this.addEntry(windowedDoor);
 
-        torch = SimpleEntrySet.builder(WoodType.class, "torch",
-                        () -> getModBlock("spruce_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new TorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak()
-                                .lightLevel((arg) -> { return 14; }), ParticleTypes.FLAME))
-                .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
-                .addTag(BlockTags.WALL_POST_OVERRIDE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("torch"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("torch"), Registry.ITEM_REGISTRY)
-                .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
-                .build();
-
-        this.addEntry(torch);
-
         wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
                         () -> getModBlock("spruce_wall_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new WallTorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak().dropsLike(torch.blocks.get(w))
+                        w -> new WallTorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak()
                                 .lightLevel((arg) -> { return 14; }), ParticleTypes.FLAME))
                 .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
                 .setRenderType(() -> RenderType::cutout)
@@ -1134,6 +1125,21 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(wallTorch);
+
+        torch = SimpleEntrySet.builder(WoodType.class, "torch",
+                        () -> getModBlock("spruce_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new TorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak()
+                                .lightLevel((arg) -> { return 14; }), ParticleTypes.FLAME))
+                .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
+                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, wallTorch.blocks.get(w), p))
+                .addTag(BlockTags.WALL_POST_OVERRIDE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("torch"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("torch"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(torch);
     }
 
     private void dullPalette(Palette p) {
@@ -1178,6 +1184,25 @@ public class ChippedModule extends SimpleModule {
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
+    }
+
+    @Override
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+        getEntries().forEach(e -> {
+//            String itemName = Utils.getID(e).getPath();
+//            SimpleTagBuilder planksTag = SimpleTagBuilder.of(modRes(basketWoven.getBaseBlock().toString()));
+//            SimpleTagBuilder planksTag2 = SimpleTagBuilder.of(modRes(itemId + "_planks"));
+
+            handler.dynamicPack.addJson(torch.getBaseBlock().getLootTable(),
+                    LootTables.serialize(new LootTable.Builder().build()),
+                    ResType.LOOT_TABLES);
+            handler.dynamicPack.addJson(wallTorch.getBaseBlock().getLootTable(),
+                    LootTables.serialize(new LootTable.Builder().build()),
+                    ResType.LOOT_TABLES);
+//            handler.dynamicPack.addTag(planksTag, Registry.BLOCK_REGISTRY);
+//            handler.dynamicPack.addTag(planksTag, Registry.ITEM_REGISTRY);
+        });
     }
 
 // Disabled due to it also creating textures files instead of only tags
