@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.chipped;
 
+import earth.terrarium.chipped.common.registry.ModItems;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -9,11 +10,16 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.TorchBlock;
+import net.minecraft.world.level.block.WallTorchBlock;
 
 // TODO: Fix recipes & tags
 // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
@@ -80,9 +86,17 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> screenDoor;
     public final SimpleEntrySet<WoodType, Block> secretDoor;
     public final SimpleEntrySet<WoodType, Block> shackDoor;
+    public final SimpleEntrySet<WoodType, Block> slidingDoor;
+    public final SimpleEntrySet<WoodType, Block> supportedDoor;
+    public final SimpleEntrySet<WoodType, Block> tileWindowedDoor;
+    public final SimpleEntrySet<WoodType, Block> tiledDoor;
+    public final SimpleEntrySet<WoodType, Block> windowedDoor;
+    public final SimpleEntrySet<WoodType, Block> torch;
+    public final SimpleEntrySet<WoodType, Block> wallTorch;
+
     public ChippedModule(String modId) {
         super(modId, "ch");
-        CreativeModeTab tab = CreativeModeTab.TAB_BUILDING_BLOCKS;
+        CreativeModeTab tab = ModItems.ITEM_GROUP;
 
         mosaic = SimpleEntrySet.builder(WoodType.class, "planks_mosaic",
                         () -> getModBlock("oak_planks_mosaic"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -994,6 +1008,132 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(shackDoor);
+
+        slidingDoor = SimpleEntrySet.builder(WoodType.class, "door", "sliding",
+                        () -> getModBlock("sliding_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTextureM(modRes("block/oak_door/sliding_oak_door_bottom"), EveryCompat.res("block/ch/doors/sliding_oak_door_bottom_m"))
+                .addTextureM(modRes("block/oak_door/sliding_oak_door_top"), EveryCompat.res("block/ch/doors/sliding_oak_door_top_m"))
+                .addTextureM(EveryCompat.res("item/ch/doors/sliding_oak_door"), EveryCompat.res("item/ch/doors/sliding_oak_door_m"))
+                .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
+                        .replaceGenericType("oak", "item/ch/doors"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(slidingDoor);
+
+        supportedDoor = SimpleEntrySet.builder(WoodType.class, "door", "supported",
+                        () -> getModBlock("supported_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTextureM(modRes("block/oak_door/supported_oak_door_bottom"), EveryCompat.res("block/ch/doors/supported_oak_door_bottom_m"))
+                .addTextureM(modRes("block/oak_door/supported_oak_door_top"), EveryCompat.res("block/ch/doors/supported_oak_door_top_m"))
+                .addTextureM(EveryCompat.res("item/ch/doors/supported_oak_door"), EveryCompat.res("item/ch/doors/supported_oak_door_m"))
+                .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
+                        .replaceGenericType("oak", "item/ch/doors"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(this::lightestPalette)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(supportedDoor);
+
+        tileWindowedDoor = SimpleEntrySet.builder(WoodType.class, "door", "tile_windowed",
+                        () -> getModBlock("tile_windowed_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_bottom"), EveryCompat.res("block/ch/doors/tile_windowed_oak_door_bottom_m"))
+                .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_top"), EveryCompat.res("block/ch/doors/tile_windowed_oak_door_top_m"))
+                .addTextureM(EveryCompat.res("item/ch/doors/tile_windowed_oak_door"), EveryCompat.res("item/ch/doors/tile_windowed_oak_door_m"))
+                .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
+                        .replaceGenericType("oak", "item/ch/doors"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(tileWindowedDoor);
+
+        tiledDoor = SimpleEntrySet.builder(WoodType.class, "door", "tiled",
+                        () -> getModBlock("tiled_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_door/tiled_oak_door_bottom"))
+                .addTextureM(modRes("block/oak_door/tiled_oak_door_top"), EveryCompat.res("block/ch/doors/tiled_oak_door_top_m"))
+                .addTextureM(EveryCompat.res("item/ch/doors/tiled_oak_door"), EveryCompat.res("item/ch/doors/tiled_oak_door_m"))
+                .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
+                        .replaceGenericType("oak", "item/ch/doors"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(tiledDoor);
+
+        windowedDoor = SimpleEntrySet.builder(WoodType.class, "door", "windowed",
+                        () -> getModBlock("windowed_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_door/windowed_oak_door_bottom"))
+                .addTextureM(modRes("block/oak_door/windowed_oak_door_top"), EveryCompat.res("block/ch/doors/windowed_oak_door_top_m"))
+                .addTextureM(EveryCompat.res("item/ch/doors/windowed_oak_door"), EveryCompat.res("item/ch/doors/windowed_oak_door_m"))
+                .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
+                        .replaceGenericType("oak", "item/ch/doors"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(windowedDoor);
+
+        torch = SimpleEntrySet.builder(WoodType.class, "torch",
+                        () -> getModBlock("spruce_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new TorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak()
+                                .lightLevel((arg) -> { return 14; }), ParticleTypes.FLAME))
+                .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
+                .addTag(BlockTags.WALL_POST_OVERRIDE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("torch"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("torch"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(torch);
+
+        wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
+                        () -> getModBlock("spruce_wall_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new WallTorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak().dropsLike(torch.blocks.get(w))
+                                .lightLevel((arg) -> { return 14; }), ParticleTypes.FLAME))
+                .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .noItem()
+                .build();
+
+        this.addEntry(wallTorch);
     }
 
     private void dullPalette(Palette p) {
