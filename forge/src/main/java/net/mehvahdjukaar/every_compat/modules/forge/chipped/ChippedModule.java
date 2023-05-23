@@ -1081,7 +1081,7 @@ public class ChippedModule extends SimpleModule {
         tiledDoor = SimpleEntrySet.builder(WoodType.class, "door", "tiled",
                         () -> getModBlock("tiled_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
-                .addTexture(modRes("block/oak_door/tiled_oak_door_bottom"))
+                .addTextureM(modRes("block/oak_door/tiled_oak_door_bottom"), EveryCompat.res("block/ch/doors/tiled_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/tiled_oak_door_top"), EveryCompat.res("block/ch/doors/tiled_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/tiled_oak_door"), EveryCompat.res("item/ch/doors/tiled_oak_door_m"))
                 .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
@@ -1101,7 +1101,7 @@ public class ChippedModule extends SimpleModule {
         windowedDoor = SimpleEntrySet.builder(WoodType.class, "door", "windowed",
                         () -> getModBlock("windowed_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
-                .addTexture(modRes("block/oak_door/windowed_oak_door_bottom"))
+                .addTextureM(modRes("block/oak_door/windowed_oak_door_bottom"), EveryCompat.res("block/ch/doors/windowed_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/windowed_oak_door_top"), EveryCompat.res("block/ch/doors/windowed_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/windowed_oak_door"), EveryCompat.res("item/ch/doors/windowed_oak_door_m"))
                 .addModelTransform(m -> m.replaceString("chipped:item/oak_door", "chipped:item/ch/doors")
