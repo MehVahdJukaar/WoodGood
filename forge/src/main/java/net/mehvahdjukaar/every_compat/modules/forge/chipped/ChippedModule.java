@@ -724,7 +724,7 @@ public class ChippedModule extends SimpleModule {
 
         barredDoor = SimpleEntrySet.builder(WoodType.class, "door", "barred",
                         () -> getModBlock("barred_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/barred_oak_door_bottom"), EveryCompat.res("block/ch/doors/barred_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/barred_oak_door_top"), EveryCompat.res("block/ch/doors/barred_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/barred_oak_door"), EveryCompat.res("item/ch/doors/barred_oak_door_m"))
@@ -743,7 +743,7 @@ public class ChippedModule extends SimpleModule {
 
         beachDoor = SimpleEntrySet.builder(WoodType.class, "door", "beach",
                         () -> getModBlock("beach_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/beach_oak_door_bottom"), EveryCompat.res("block/ch/doors/beach_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/beach_oak_door_top"), EveryCompat.res("block/ch/doors/beach_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/beach_oak_door"), EveryCompat.res("item/ch/doors/beach_oak_door_m"))
@@ -762,7 +762,7 @@ public class ChippedModule extends SimpleModule {
 
         boardedDoor = SimpleEntrySet.builder(WoodType.class, "door", "boarded",
                         () -> getModBlock("boarded_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/boarded_oak_door_bottom"), EveryCompat.res("block/ch/doors/boarded_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/boarded_oak_door_top"), EveryCompat.res("block/ch/doors/boarded_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/boarded_oak_door"), EveryCompat.res("item/ch/doors/boarded_oak_door_m"))
@@ -782,7 +782,7 @@ public class ChippedModule extends SimpleModule {
 
         dualPaneledDoor = SimpleEntrySet.builder(WoodType.class, "door", "dual_paneled",
                         () -> getModBlock("dual_paneled_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/dual_paneled_oak_door_bottom"), EveryCompat.res("block/ch/doors/dual_paneled_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/dual_paneled_oak_door_top"), EveryCompat.res("block/ch/doors/dual_paneled_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/dual_paneled_oak_door"), EveryCompat.res("item/ch/doors/dual_paneled_oak_door_m"))
@@ -802,7 +802,7 @@ public class ChippedModule extends SimpleModule {
 
         fortifiedDoor = SimpleEntrySet.builder(WoodType.class, "door", "fortified",
                         () -> getModBlock("fortified_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/fortified_oak_door_bottom"), EveryCompat.res("block/ch/doors/fortified_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/fortified_oak_door_top"), EveryCompat.res("block/ch/doors/fortified_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/fortified_oak_door"), EveryCompat.res("item/ch/doors/fortified_oak_door_m"))
@@ -822,7 +822,7 @@ public class ChippedModule extends SimpleModule {
 
         gatedDoor = SimpleEntrySet.builder(WoodType.class, "door", "gated",
                         () -> getModBlock("gated_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/gated_oak_door_bottom"), EveryCompat.res("block/ch/doors/gated_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/gated_oak_door_top"), EveryCompat.res("block/ch/doors/gated_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/gated_oak_door"), EveryCompat.res("item/ch/doors/gated_oak_door_m"))
@@ -842,7 +842,7 @@ public class ChippedModule extends SimpleModule {
 
         glassDoor = SimpleEntrySet.builder(WoodType.class, "door", "glass",
                         () -> getModBlock("glass_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/glass_oak_door_bottom"), EveryCompat.res("block/ch/doors/glass_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/glass_oak_door_top"), EveryCompat.res("block/ch/doors/glass_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/glass_oak_door"), EveryCompat.res("item/ch/doors/glass_oak_door_m"))
@@ -861,7 +861,7 @@ public class ChippedModule extends SimpleModule {
 
         heavyDoor = SimpleEntrySet.builder(WoodType.class, "door", "heavy",
                         () -> getModBlock("heavy_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/heavy_oak_door_bottom"), EveryCompat.res("block/ch/doors/heavy_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/heavy_oak_door_top"), EveryCompat.res("block/ch/doors/heavy_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/heavy_oak_door"), EveryCompat.res("item/ch/doors/heavy_oak_door_m"))
@@ -881,7 +881,7 @@ public class ChippedModule extends SimpleModule {
 
         overgrownDoor = SimpleEntrySet.builder(WoodType.class, "door", "overgrown",
                         () -> getModBlock("overgrown_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/overgrown_oak_door_bottom"), EveryCompat.res("block/ch/doors/overgrown_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/overgrown_oak_door_top"), EveryCompat.res("block/ch/doors/overgrown_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/overgrown_oak_door"), EveryCompat.res("item/ch/doors/overgrown_oak_door_m"))
@@ -900,7 +900,7 @@ public class ChippedModule extends SimpleModule {
 
         paneledDoor = SimpleEntrySet.builder(WoodType.class, "door", "paneled",
                         () -> getModBlock("paneled_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/paneled_oak_door_bottom"), EveryCompat.res("block/ch/doors/paneled_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/paneled_oak_door_top"), EveryCompat.res("block/ch/doors/paneled_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/paneled_oak_door"), EveryCompat.res("item/ch/doors/paneled_oak_door_m"))
@@ -920,7 +920,7 @@ public class ChippedModule extends SimpleModule {
 
         paperDoor = SimpleEntrySet.builder(WoodType.class, "door", "paper",
                         () -> getModBlock("paper_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/paper_oak_door_bottom"), EveryCompat.res("block/ch/doors/paper_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/paper_oak_door_top"), EveryCompat.res("block/ch/doors/paper_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/paper_oak_door"), EveryCompat.res("item/ch/doors/paper_oak_door_m"))
@@ -940,7 +940,7 @@ public class ChippedModule extends SimpleModule {
 
         pressedDoor = SimpleEntrySet.builder(WoodType.class, "door", "pressed",
                         () -> getModBlock("pressed_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/pressed_oak_door_bottom"), EveryCompat.res("block/ch/doors/pressed_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/pressed_oak_door_top"), EveryCompat.res("block/ch/doors/pressed_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/pressed_oak_door"), EveryCompat.res("item/ch/doors/pressed_oak_door_m"))
@@ -960,7 +960,7 @@ public class ChippedModule extends SimpleModule {
 
         screenDoor = SimpleEntrySet.builder(WoodType.class, "door", "screen",
                         () -> getModBlock("screen_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/screen_oak_door_bottom"), EveryCompat.res("block/ch/doors/screen_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/screen_oak_door_top"), EveryCompat.res("block/ch/doors/screen_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/screen_oak_door"), EveryCompat.res("item/ch/doors/screen_oak_door_m"))
@@ -980,7 +980,7 @@ public class ChippedModule extends SimpleModule {
 
         secretDoor = SimpleEntrySet.builder(WoodType.class, "door", "secret",
                         () -> getModBlock("secret_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/secret_oak_door_bottom"), EveryCompat.res("block/ch/doors/secret_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/secret_oak_door_top"), EveryCompat.res("block/ch/doors/secret_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/secret_oak_door"), EveryCompat.res("item/ch/doors/secret_oak_door_m"))
@@ -1000,7 +1000,7 @@ public class ChippedModule extends SimpleModule {
 
         shackDoor = SimpleEntrySet.builder(WoodType.class, "door", "shack",
                         () -> getModBlock("shack_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTexture(modRes("block/oak_door/shack_oak_door_bottom"))
                 .addTextureM(modRes("block/oak_door/shack_oak_door_top"), EveryCompat.res("block/ch/doors/shack_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/shack_oak_door"), EveryCompat.res("item/ch/doors/shack_oak_door_m"))
@@ -1020,7 +1020,7 @@ public class ChippedModule extends SimpleModule {
 
         slidingDoor = SimpleEntrySet.builder(WoodType.class, "door", "sliding",
                         () -> getModBlock("sliding_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/sliding_oak_door_bottom"), EveryCompat.res("block/ch/doors/sliding_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/sliding_oak_door_top"), EveryCompat.res("block/ch/doors/sliding_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/sliding_oak_door"), EveryCompat.res("item/ch/doors/sliding_oak_door_m"))
@@ -1040,7 +1040,7 @@ public class ChippedModule extends SimpleModule {
 
         supportedDoor = SimpleEntrySet.builder(WoodType.class, "door", "supported",
                         () -> getModBlock("supported_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/supported_oak_door_bottom"), EveryCompat.res("block/ch/doors/supported_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/supported_oak_door_top"), EveryCompat.res("block/ch/doors/supported_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/supported_oak_door"), EveryCompat.res("item/ch/doors/supported_oak_door_m"))
@@ -1060,7 +1060,7 @@ public class ChippedModule extends SimpleModule {
 
         tileWindowedDoor = SimpleEntrySet.builder(WoodType.class, "door", "tile_windowed",
                         () -> getModBlock("tile_windowed_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_bottom"), EveryCompat.res("block/ch/doors/tile_windowed_oak_door_bottom_m"))
                 .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_top"), EveryCompat.res("block/ch/doors/tile_windowed_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/tile_windowed_oak_door"), EveryCompat.res("item/ch/doors/tile_windowed_oak_door_m"))
@@ -1080,7 +1080,7 @@ public class ChippedModule extends SimpleModule {
 
         tiledDoor = SimpleEntrySet.builder(WoodType.class, "door", "tiled",
                         () -> getModBlock("tiled_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/tiled_oak_door_bottom"), EveryCompat.res("block/ch/doors/tiled_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/tiled_oak_door_top"), EveryCompat.res("block/ch/doors/tiled_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/tiled_oak_door"), EveryCompat.res("item/ch/doors/tiled_oak_door_m"))
@@ -1100,7 +1100,7 @@ public class ChippedModule extends SimpleModule {
 
         windowedDoor = SimpleEntrySet.builder(WoodType.class, "door", "windowed",
                         () -> getModBlock("windowed_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_door/windowed_oak_door_bottom"), EveryCompat.res("block/ch/doors/windowed_oak_door_bottom_m"))
                 .addTextureM(modRes("block/oak_door/windowed_oak_door_top"), EveryCompat.res("block/ch/doors/windowed_oak_door_top_m"))
                 .addTextureM(EveryCompat.res("item/ch/doors/windowed_oak_door"), EveryCompat.res("item/ch/doors/windowed_oak_door_m"))
@@ -1120,7 +1120,7 @@ public class ChippedModule extends SimpleModule {
 
         airyTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "airy",
                         () -> getModBlock("airy_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_trapdoor/airy_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/airy_oak_trapdoor_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
@@ -1135,7 +1135,7 @@ public class ChippedModule extends SimpleModule {
 
         barredTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "barred",
                         () -> getModBlock("barred_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTexture(modRes("block/oak_trapdoor/barred_oak_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
@@ -1150,7 +1150,7 @@ public class ChippedModule extends SimpleModule {
 
         checkeredTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "checkered",
                         () -> getModBlock("checkered_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTexture(modRes("block/oak_trapdoor/checkered_oak_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
