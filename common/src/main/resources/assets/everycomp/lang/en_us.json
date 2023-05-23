@@ -64,6 +64,9 @@
   "block_type.chipped.classic_trapdoor": "Classic %s Trapdoor",
   "block_type.chipped.classic_windowed_trapdoor": "Classic Windowed %s Trapdoor",
   "block_type.chipped.cobweb_trapdoor": "Cobweb %s Trapdoor",
+  "block_type.chipped.distorted_trapdoor": "Distorted %s Trapdoor",
+  "block_type.chipped.fancy_trapdoor": "Fancy %s Trapdoor",
+  "block_type.chipped.golden_barred_trapdoor": "Golden Barred %s Trapdoor",
 
   "block_type.chipped.barrel": "%s Barrel",
   "block_type.chipped.crate": "%s Crate",
