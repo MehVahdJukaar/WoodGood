@@ -100,6 +100,9 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> airyTrapdoor;
     public final SimpleEntrySet<WoodType, Block> barredTrapdoor;
     public final SimpleEntrySet<WoodType, Block> checkeredTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> classicTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> classicWindowedTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> cobwebTrapdoor;
     public final SimpleEntrySet<WoodType, Block> torch;
     public final SimpleEntrySet<WoodType, Block> wallTorch;
 
@@ -1122,9 +1125,9 @@ public class ChippedModule extends SimpleModule {
                         () -> getModBlock("airy_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTextureM(modRes("block/oak_trapdoor/airy_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/airy_oak_trapdoor_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
@@ -1137,9 +1140,9 @@ public class ChippedModule extends SimpleModule {
                         () -> getModBlock("barred_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTexture(modRes("block/oak_trapdoor/barred_oak_trapdoor"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
@@ -1152,6 +1155,36 @@ public class ChippedModule extends SimpleModule {
                         () -> getModBlock("checkered_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTexture(modRes("block/oak_trapdoor/checkered_oak_trapdoor"))
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(checkeredTrapdoor);
+
+        classicTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "classic",
+                        () -> getModBlock("classic_spruce_trapdoor"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTexture(EveryCompat.res("block/spruce_trapdoor/classic_spruce_trapdoor"))
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(classicTrapdoor);
+
+        classicWindowedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "classic_windowed",
+                        () -> getModBlock("classic_windowed_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTextureM(modRes("block/oak_trapdoor/classic_windowed_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/classic_windowed_oak_trapdoor_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
@@ -1161,7 +1194,22 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(checkeredTrapdoor);
+        this.addEntry(classicWindowedTrapdoor);
+
+        cobwebTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "cobweb",
+                        () -> getModBlock("cobweb_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTextureM(modRes("block/oak_trapdoor/cobweb_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/cobweb_oak_trapdoor_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(cobwebTrapdoor);
 
         wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
                         () -> getModBlock("spruce_wall_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
