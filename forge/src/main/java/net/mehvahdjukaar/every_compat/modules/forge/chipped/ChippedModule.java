@@ -38,44 +38,44 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> barrel;
     public final SimpleEntrySet<WoodType, Block> crate;
     public final SimpleEntrySet<WoodType, Block> reinforcedCrate;
-    public final SimpleEntrySet<WoodType, Block> basketWoven;
-    public final SimpleEntrySet<WoodType, Block> boxed;
-    public final SimpleEntrySet<WoodType, Block> brickBond;
-    public final SimpleEntrySet<WoodType, Block> bricky;
-    public final SimpleEntrySet<WoodType, Block> cornered;
-    public final SimpleEntrySet<WoodType, Block> crated;
-    public final SimpleEntrySet<WoodType, Block> crossLaced;
-    public final SimpleEntrySet<WoodType, Block> crossed;
-    public final SimpleEntrySet<WoodType, Block> detailed;
-    public final SimpleEntrySet<WoodType, Block> diagonal;
-    public final SimpleEntrySet<WoodType, Block> diamond;
-    public final SimpleEntrySet<WoodType, Block> doubleHerringbone;
-    public final SimpleEntrySet<WoodType, Block> enclosed;
-    public final SimpleEntrySet<WoodType, Block> fine;
-    public final SimpleEntrySet<WoodType, Block> fineVertical;
-    public final SimpleEntrySet<WoodType, Block> framed;
-    public final SimpleEntrySet<WoodType, Block> herringbone;
-    public final SimpleEntrySet<WoodType, Block> hewn;
-    public final SimpleEntrySet<WoodType, Block> laced;
-    public final SimpleEntrySet<WoodType, Block> mosaic;
-    public final SimpleEntrySet<WoodType, Block> nailed;
-    public final SimpleEntrySet<WoodType, Block> natural;
-    public final SimpleEntrySet<WoodType, Block> panel;
-    public final SimpleEntrySet<WoodType, Block> pegged;
-    public final SimpleEntrySet<WoodType, Block> polished;
-    public final SimpleEntrySet<WoodType, Block> shavings;
-    public final SimpleEntrySet<WoodType, Block> railed;
-    public final SimpleEntrySet<WoodType, Block> shifted;
-    public final SimpleEntrySet<WoodType, Block> slanted;
-    public final SimpleEntrySet<WoodType, Block> smooth;
-    public final SimpleEntrySet<WoodType, Block> stacked;
-    public final SimpleEntrySet<WoodType, Block> thin;
-    public final SimpleEntrySet<WoodType, Block> tiled;
-    public final SimpleEntrySet<WoodType, Block> versailles;
-    public final SimpleEntrySet<WoodType, Block> vertical;
-    public final SimpleEntrySet<WoodType, Block> verticallyRailed;
-    public final SimpleEntrySet<WoodType, Block> whirlwind;
-    public final SimpleEntrySet<WoodType, Block> wickered;
+    public final SimpleEntrySet<WoodType, Block> basketWovenPlanks;
+    public final SimpleEntrySet<WoodType, Block> boxedPlanks;
+    public final SimpleEntrySet<WoodType, Block> brickBondPlanks;
+    public final SimpleEntrySet<WoodType, Block> brickyPlanks;
+    public final SimpleEntrySet<WoodType, Block> corneredPlanks;
+    public final SimpleEntrySet<WoodType, Block> cratedPlanks;
+    public final SimpleEntrySet<WoodType, Block> crossLacedPlanks;
+    public final SimpleEntrySet<WoodType, Block> crossedPlanks;
+    public final SimpleEntrySet<WoodType, Block> detailedPlanks;
+    public final SimpleEntrySet<WoodType, Block> diagonalPlanks;
+    public final SimpleEntrySet<WoodType, Block> diamondPlanks;
+    public final SimpleEntrySet<WoodType, Block> doubleHerringbonePlanks;
+    public final SimpleEntrySet<WoodType, Block> enclosedPlanks;
+    public final SimpleEntrySet<WoodType, Block> finePlanks;
+    public final SimpleEntrySet<WoodType, Block> fineVerticalPlanks;
+    public final SimpleEntrySet<WoodType, Block> framedPlanks;
+    public final SimpleEntrySet<WoodType, Block> herringbonePlanks;
+    public final SimpleEntrySet<WoodType, Block> hewnPlanks;
+    public final SimpleEntrySet<WoodType, Block> lacedPlanks;
+    public final SimpleEntrySet<WoodType, Block> mosaicPlanks;
+    public final SimpleEntrySet<WoodType, Block> nailedPlanks;
+    public final SimpleEntrySet<WoodType, Block> naturalPlanks;
+    public final SimpleEntrySet<WoodType, Block> panelPlanks;
+    public final SimpleEntrySet<WoodType, Block> peggedPlanks;
+    public final SimpleEntrySet<WoodType, Block> polishedPlanks;
+    public final SimpleEntrySet<WoodType, Block> shavingsPlanks;
+    public final SimpleEntrySet<WoodType, Block> railedPlanks;
+    public final SimpleEntrySet<WoodType, Block> shiftedPlanks;
+    public final SimpleEntrySet<WoodType, Block> slantedPlanks;
+    public final SimpleEntrySet<WoodType, Block> smoothPlanks;
+    public final SimpleEntrySet<WoodType, Block> stackedPlanks;
+    public final SimpleEntrySet<WoodType, Block> thinPlanks;
+    public final SimpleEntrySet<WoodType, Block> tiledPlanks;
+    public final SimpleEntrySet<WoodType, Block> versaillesPlanks;
+    public final SimpleEntrySet<WoodType, Block> verticalPlanks;
+    public final SimpleEntrySet<WoodType, Block> verticallyRailedPlanks;
+    public final SimpleEntrySet<WoodType, Block> whirlwindPlanks;
+    public final SimpleEntrySet<WoodType, Block> wickeredPlanks;
     public final SimpleEntrySet<WoodType, Block> barredDoor;
     public final SimpleEntrySet<WoodType, Block> beachDoor;
     public final SimpleEntrySet<WoodType, Block> boardedDoor;
@@ -103,7 +103,7 @@ public class ChippedModule extends SimpleModule {
         super(modId, "ch");
         CreativeModeTab tab = ModItems.ITEM_GROUP;
 
-        mosaic = SimpleEntrySet.builder(WoodType.class, "planks_mosaic",
+        mosaicPlanks = SimpleEntrySet.builder(WoodType.class, "planks_mosaic",
                         () -> getModBlock("oak_planks_mosaic"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/oak_planks_mosaic"))
@@ -116,9 +116,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(mosaic);
+        this.addEntry(mosaicPlanks);
 
-        panel = SimpleEntrySet.builder(WoodType.class, "planks_panel",
+        panelPlanks = SimpleEntrySet.builder(WoodType.class, "planks_panel",
                         () -> getModBlock("oak_planks_panel"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/oak_planks_panel_ctm"))
@@ -132,9 +132,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(panel);
+        this.addEntry(panelPlanks);
 
-        shavings = SimpleEntrySet.builder(WoodType.class, "planks_shavings",
+        shavingsPlanks = SimpleEntrySet.builder(WoodType.class, "planks_shavings",
                         () -> getModBlock("oak_planks_shavings"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/oak_planks_shavings"))
@@ -146,9 +146,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(shavings);
+        this.addEntry(shavingsPlanks);
 
-        basketWoven = SimpleEntrySet.builder(WoodType.class, "planks", "basket_woven",
+        basketWovenPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "basket_woven",
                         () -> getModBlock("basket_woven_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/basket_woven_oak_planks"))
@@ -161,9 +161,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(basketWoven);
+        this.addEntry(basketWovenPlanks);
 
-        boxed = SimpleEntrySet.builder(WoodType.class, "planks", "boxed",
+        boxedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "boxed",
                         () -> getModBlock("boxed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/boxed_oak_planks"))
@@ -176,9 +176,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(boxed);
+        this.addEntry(boxedPlanks);
 
-        brickBond = SimpleEntrySet.builder(WoodType.class, "planks", "brick_bond",
+        brickBondPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "brick_bond",
                         () -> getModBlock("brick_bond_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/brick_bond_oak_planks"))
@@ -191,9 +191,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(brickBond);
+        this.addEntry(brickBondPlanks);
 
-        bricky = SimpleEntrySet.builder(WoodType.class, "planks", "bricky",
+        brickyPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "bricky",
                         () -> getModBlock("bricky_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/bricky_oak_planks"))
@@ -206,9 +206,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(bricky);
+        this.addEntry(brickyPlanks);
 
-        cornered = SimpleEntrySet.builder(WoodType.class, "planks", "cornered",
+        corneredPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "cornered",
                         () -> getModBlock("cornered_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/cornered_oak_planks_ctm"))
@@ -222,9 +222,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(cornered);
+        this.addEntry(corneredPlanks);
 
-        crated = SimpleEntrySet.builder(WoodType.class, "planks", "crated",
+        cratedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "crated",
                         () -> getModBlock("crated_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/crated_oak_planks_ctm"))
@@ -238,9 +238,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(crated);
+        this.addEntry(cratedPlanks);
 
-        crossLaced = SimpleEntrySet.builder(WoodType.class, "planks", "cross_laced",
+        crossLacedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "cross_laced",
                         () -> getModBlock("cross_laced_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/cross_laced_oak_planks"))
@@ -252,9 +252,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(crossLaced);
+        this.addEntry(crossLacedPlanks);
 
-        crossed = SimpleEntrySet.builder(WoodType.class, "planks", "crossed",
+        crossedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "crossed",
                         () -> getModBlock("crossed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/crossed_oak_planks"))
@@ -266,9 +266,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(crossed);
+        this.addEntry(crossedPlanks);
 
-        detailed = SimpleEntrySet.builder(WoodType.class, "planks", "detailed",
+        detailedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "detailed",
                         () -> getModBlock("detailed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/detailed_oak_planks"))
@@ -281,9 +281,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(detailed);
+        this.addEntry(detailedPlanks);
 
-        diagonal = SimpleEntrySet.builder(WoodType.class, "planks", "diagonal",
+        diagonalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "diagonal",
                         () -> getModBlock("diagonal_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/diagonal_oak_planks"))
@@ -296,9 +296,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(diagonal);
+        this.addEntry(diagonalPlanks);
 
-        diamond = SimpleEntrySet.builder(WoodType.class, "planks", "diamond",
+        diamondPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "diamond",
                         () -> getModBlock("diamond_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/diamond_oak_planks"))
@@ -310,9 +310,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(diamond);
+        this.addEntry(diamondPlanks);
 
-        doubleHerringbone = SimpleEntrySet.builder(WoodType.class, "planks", "double_herringbone",
+        doubleHerringbonePlanks = SimpleEntrySet.builder(WoodType.class, "planks", "double_herringbone",
                         () -> getModBlock("double_herringbone_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/double_herringbone_oak_planks"))
@@ -325,9 +325,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(doubleHerringbone);
+        this.addEntry(doubleHerringbonePlanks);
 
-        enclosed = SimpleEntrySet.builder(WoodType.class, "planks", "enclosed",
+        enclosedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "enclosed",
                         () -> getModBlock("enclosed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/enclosed_oak_planks_ctm"))
@@ -341,9 +341,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(enclosed);
+        this.addEntry(enclosedPlanks);
 
-        fine = SimpleEntrySet.builder(WoodType.class, "planks", "fine",
+        finePlanks = SimpleEntrySet.builder(WoodType.class, "planks", "fine",
                         () -> getModBlock("fine_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/fine_oak_planks"))
@@ -356,9 +356,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(fine);
+        this.addEntry(finePlanks);
 
-        fineVertical = SimpleEntrySet.builder(WoodType.class, "planks", "fine_vertical",
+        fineVerticalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "fine_vertical",
                         () -> getModBlock("fine_vertical_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/fine_vertical_oak_planks"))
@@ -371,9 +371,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(fineVertical);
+        this.addEntry(fineVerticalPlanks);
 
-        framed = SimpleEntrySet.builder(WoodType.class, "planks", "framed",
+        framedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "framed",
                         () -> getModBlock("framed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/framed_oak_planks_ctm"))
@@ -387,9 +387,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(framed);
+        this.addEntry(framedPlanks);
 
-        herringbone = SimpleEntrySet.builder(WoodType.class, "planks", "herringbone",
+        herringbonePlanks = SimpleEntrySet.builder(WoodType.class, "planks", "herringbone",
                         () -> getModBlock("herringbone_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/herringbone_oak_planks"))
@@ -402,9 +402,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(herringbone);
+        this.addEntry(herringbonePlanks);
 
-        hewn = SimpleEntrySet.builder(WoodType.class, "planks", "hewn",
+        hewnPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "hewn",
                         () -> getModBlock("hewn_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/hewn_oak_planks"))
@@ -417,9 +417,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(hewn);
+        this.addEntry(hewnPlanks);
 
-        laced = SimpleEntrySet.builder(WoodType.class, "planks", "laced",
+        lacedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "laced",
                         () -> getModBlock("laced_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/laced_oak_planks"))
@@ -432,9 +432,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(laced);
+        this.addEntry(lacedPlanks);
 
-        nailed = SimpleEntrySet.builder(WoodType.class, "planks", "nailed",
+        nailedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "nailed",
                         () -> getModBlock("nailed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/nailed_oak_planks"))
@@ -447,9 +447,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(nailed);
+        this.addEntry(nailedPlanks);
 
-        natural = SimpleEntrySet.builder(WoodType.class, "planks", "natural",
+        naturalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "natural",
                         () -> getModBlock("natural_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/natural_oak_planks_ctm"))
@@ -463,9 +463,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(natural);
+        this.addEntry(naturalPlanks);
 
-        pegged = SimpleEntrySet.builder(WoodType.class, "planks", "pegged",
+        peggedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "pegged",
                         () -> getModBlock("pegged_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/pegged_oak_planks_ctm"))
@@ -479,9 +479,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(pegged);
+        this.addEntry(peggedPlanks);
 
-        polished = SimpleEntrySet.builder(WoodType.class, "planks", "polished",
+        polishedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "polished",
                         () -> getModBlock("polished_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/polished_oak_planks"))
@@ -494,9 +494,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(polished);
+        this.addEntry(polishedPlanks);
 
-        railed = SimpleEntrySet.builder(WoodType.class, "planks", "railed",
+        railedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "railed",
                         () -> getModBlock("railed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/railed_oak_planks"))
@@ -508,9 +508,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(railed);
+        this.addEntry(railedPlanks);
 
-        shifted = SimpleEntrySet.builder(WoodType.class, "planks", "shifted",
+        shiftedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "shifted",
                         () -> getModBlock("shifted_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/shifted_oak_planks"))
@@ -523,9 +523,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(shifted);
+        this.addEntry(shiftedPlanks);
 
-        slanted = SimpleEntrySet.builder(WoodType.class, "planks", "slanted",
+        slantedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "slanted",
                         () -> getModBlock("slanted_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/slanted_oak_planks"))
@@ -538,9 +538,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(slanted);
+        this.addEntry(slantedPlanks);
 
-        smooth = SimpleEntrySet.builder(WoodType.class, "planks", "smooth",
+        smoothPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "smooth",
                         () -> getModBlock("smooth_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/smooth_oak_planks"))
@@ -553,9 +553,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(smooth);
+        this.addEntry(smoothPlanks);
 
-        stacked = SimpleEntrySet.builder(WoodType.class, "planks", "stacked",
+        stackedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "stacked",
                         () -> getModBlock("stacked_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/stacked_oak_planks"))
@@ -568,9 +568,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(stacked);
+        this.addEntry(stackedPlanks);
 
-        thin = SimpleEntrySet.builder(WoodType.class, "planks", "thin",
+        thinPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "thin",
                         () -> getModBlock("thin_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/thin_oak_planks"))
@@ -583,9 +583,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(thin);
+        this.addEntry(thinPlanks);
 
-        tiled = SimpleEntrySet.builder(WoodType.class, "planks", "tiled",
+        tiledPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "tiled",
                         () -> getModBlock("tiled_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/tiled_oak_planks"))
@@ -598,9 +598,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(tiled);
+        this.addEntry(tiledPlanks);
 
-        versailles = SimpleEntrySet.builder(WoodType.class, "planks", "versailles",
+        versaillesPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "versailles",
                         () -> getModBlock("versailles_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/versailles_oak_planks"))
@@ -613,9 +613,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(versailles);
+        this.addEntry(versaillesPlanks);
 
-        vertical = SimpleEntrySet.builder(WoodType.class, "planks", "vertical",
+        verticalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "vertical",
                         () -> getModBlock("vertical_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/vertical_oak_planks"))
@@ -627,9 +627,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(vertical);
+        this.addEntry(verticalPlanks);
 
-        verticallyRailed = SimpleEntrySet.builder(WoodType.class, "planks", "vertically_railed",
+        verticallyRailedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "vertically_railed",
                         () -> getModBlock("vertically_railed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/vertically_railed_oak_planks"))
@@ -641,9 +641,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(verticallyRailed);
+        this.addEntry(verticallyRailedPlanks);
 
-        whirlwind = SimpleEntrySet.builder(WoodType.class, "planks", "whirlwind",
+        whirlwindPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "whirlwind",
                         () -> getModBlock("whirlwind_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/whirlwind_oak_planks"))
@@ -657,9 +657,9 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(whirlwind);
+        this.addEntry(whirlwindPlanks);
 
-        wickered = SimpleEntrySet.builder(WoodType.class, "planks", "wickered",
+        wickeredPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "wickered",
                         () -> getModBlock("wickered_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/wickered_oak_planks"))
@@ -672,7 +672,7 @@ public class ChippedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .build();
 
-        this.addEntry(wickered);
+        this.addEntry(wickeredPlanks);
 
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
                         () -> getModBlock("oak_barrel"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -1119,7 +1119,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new WallTorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak().lightLevel(l -> 14), ParticleTypes.FLAME))
                 .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
                 .addTag(modRes("wall_torch"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wall_torch"), Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .noItem()
