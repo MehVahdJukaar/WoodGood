@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.TorchBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
@@ -96,6 +97,9 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> tileWindowedDoor;
     public final SimpleEntrySet<WoodType, Block> tiledDoor;
     public final SimpleEntrySet<WoodType, Block> windowedDoor;
+    public final SimpleEntrySet<WoodType, Block> airyTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> barredTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> checkeredTrapdoor;
     public final SimpleEntrySet<WoodType, Block> torch;
     public final SimpleEntrySet<WoodType, Block> wallTorch;
 
@@ -1113,6 +1117,51 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(windowedDoor);
+
+        airyTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "airy",
+                        () -> getModBlock("airy_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTextureM(modRes("block/oak_trapdoor/airy_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/airy_oak_trapdoor_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(airyTrapdoor);
+
+        barredTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "barred",
+                        () -> getModBlock("barred_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_trapdoor/barred_oak_trapdoor"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(barredTrapdoor);
+
+        checkeredTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "checkered",
+                        () -> getModBlock("checkered_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                .addTexture(modRes("block/oak_trapdoor/checkered_oak_trapdoor"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(checkeredTrapdoor);
 
         wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
                         () -> getModBlock("spruce_wall_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),

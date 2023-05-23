@@ -58,6 +58,10 @@
   "block_type.chipped.tiled_door": "Tiled %s Door",
   "block_type.chipped.windowed_door": "Windowed %s Door",
 
+  "block_type.chipped.airy_trapdoor": "Airy %s Door",
+  "block_type.chipped.barred_trapdoor": "Barred %s Door",
+  "block_type.chipped.checkered_trapdoor": "Checkered %s Door",
+
   "block_type.chipped.barrel": "%s Barrel",
   "block_type.chipped.crate": "%s Crate",
   "block_type.chipped.reinforced_crate": "Reinforced %s Crate",
