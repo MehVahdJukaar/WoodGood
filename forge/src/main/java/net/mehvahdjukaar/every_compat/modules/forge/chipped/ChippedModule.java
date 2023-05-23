@@ -1116,9 +1116,10 @@ public class ChippedModule extends SimpleModule {
 
         wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
                         () -> getModBlock("spruce_wall_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new WallTorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak()
-                                .lightLevel((arg) -> { return 14; }), ParticleTypes.FLAME))
+                        w -> new WallTorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak().lightLevel(l -> 14), ParticleTypes.FLAME))
                 .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
+                .addTag(modRes("wall_torch"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("wall_torch"), Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .noItem()
@@ -1128,8 +1129,7 @@ public class ChippedModule extends SimpleModule {
 
         torch = SimpleEntrySet.builder(WoodType.class, "torch",
                         () -> getModBlock("spruce_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new TorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak()
-                                .lightLevel((arg) -> { return 14; }), ParticleTypes.FLAME))
+                        w -> new TorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak().lightLevel(l -> 14), ParticleTypes.FLAME))
                 .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, wallTorch.blocks.get(w), p))
                 .addTag(BlockTags.WALL_POST_OVERRIDE, Registry.BLOCK_REGISTRY)

@@ -63,7 +63,7 @@
   "block_type.chipped.reinforced_crate": "Reinforced %s Crate",
 
   "block_type.chipped.torch": "%s Torch",
-  "block_type.chipped.wall_torch": "%s Wall Torch",
+  "block_type.chipped.wall_torch": "%s Torch",
 
   "block_type.chipped.tile_windowed_door": "Tile Windowed %s Door",
   "block_type.chipped.basket_woven_planks": "Basket Woven %s Planks",
