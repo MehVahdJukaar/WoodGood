@@ -79,6 +79,8 @@
   "block_type.chipped.twisted_trapdoor": "Twisted %s Trapdoor",
   "block_type.chipped.vined_trapdoor": "Vined %s Trapdoor",
   "block_type.chipped.warted_trapdoor": "Warted %s Trapdoor",
+  "block_type.chipped.windowed_trapdoor": "Windowed %s Trapdoor",
+  "block_type.chipped.woven_trapdoor": "Woven %s Trapdoor",
 
   "block_type.chipped.barrel": "%s Barrel",
   "block_type.chipped.crate": "%s Crate",

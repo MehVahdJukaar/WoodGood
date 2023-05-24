@@ -119,6 +119,8 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> twistedTrapdoor;
     public final SimpleEntrySet<WoodType, Block> vinedTrapdoor;
     public final SimpleEntrySet<WoodType, Block> wartedTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> windowedTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> wovenTrapdoor;
     public final SimpleEntrySet<WoodType, Block> torch;
     public final SimpleEntrySet<WoodType, Block> wallTorch;
 
@@ -1453,6 +1455,36 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(wartedTrapdoor);
+
+        windowedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "windowed",
+                        () -> getModBlock("windowed_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTextureM(modRes("block/oak_trapdoor/windowed_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/windowed_oak_trapdoor_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(windowedTrapdoor);
+
+        wovenTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "woven",
+                        () -> getModBlock("woven_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTexture(modRes("block/oak_trapdoor/woven_oak_trapdoor"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(wovenTrapdoor);
 
         wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
                         () -> getModBlock("spruce_wall_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
