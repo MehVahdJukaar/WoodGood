@@ -31,8 +31,9 @@ import net.minecraft.world.level.storage.loot.LootTables;
 // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
 // Create a recipe using the new tag for `chipped:recipes/carpenters_table`
 // Currently all variants are crafted with Oak Planks due to them using the `chipped:oak_planks` tag
-// The same should be done for door variants
+// The same should be done for door & trapdoor variants
 // Fix doors dropping two items
+// Mcmeta files are not copied
 
 public class ChippedModule extends SimpleModule {
 
@@ -112,6 +113,12 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> meshedTrapdoor;
     public final SimpleEntrySet<WoodType, Block> overgrownTrapdoor;
     public final SimpleEntrySet<WoodType, Block> pointlessTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> slottedTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> solidTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> suspiciousTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> twistedTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> vinedTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> wartedTrapdoor;
     public final SimpleEntrySet<WoodType, Block> torch;
     public final SimpleEntrySet<WoodType, Block> wallTorch;
 
@@ -748,7 +755,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
                 .setTab(() -> tab)
                 .build();
 
@@ -1357,6 +1363,96 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(pointlessTrapdoor);
+
+        slottedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "slotted",
+                        () -> getModBlock("slotted_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTexture(modRes("block/oak_trapdoor/slotted_oak_trapdoor"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(slottedTrapdoor);
+
+        solidTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "solid",
+                        () -> getModBlock("solid_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTexture(modRes("block/oak_trapdoor/solid_oak_trapdoor"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(solidTrapdoor);
+
+        suspiciousTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "suspicious",
+                        () -> getModBlock("suspicious_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTexture(modRes("block/oak_trapdoor/suspicious_oak_trapdoor"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(suspiciousTrapdoor);
+
+        twistedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "twisted",
+                        () -> getModBlock("twisted_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTextureM(modRes("block/oak_trapdoor/twisted_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/twisted_oak_trapdoor_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(twistedTrapdoor);
+
+        vinedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "vined",
+                        () -> getModBlock("vined_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTextureM(modRes("block/oak_trapdoor/vined_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/vined_oak_trapdoor_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(vinedTrapdoor);
+
+        wartedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "warted",
+                        () -> getModBlock("warted_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTextureM(modRes("block/oak_trapdoor/warted_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/warted_oak_trapdoor_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(wartedTrapdoor);
 
         wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
                         () -> getModBlock("spruce_wall_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),

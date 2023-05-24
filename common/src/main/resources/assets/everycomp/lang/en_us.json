@@ -73,6 +73,12 @@
   "block_type.chipped.meshed_trapdoor": "Meshed %s Trapdoor",
   "block_type.chipped.overgrown_trapdoor": "Overgrown %s Trapdoor",
   "block_type.chipped.pointless_trapdoor": "Pointless %s Trapdoor",
+  "block_type.chipped.slotted_trapdoor": "Slotted %s Trapdoor",
+  "block_type.chipped.solid_trapdoor": "Solid %s Trapdoor",
+  "block_type.chipped.suspicious_trapdoor": "Suspicious %s Trapdoor",
+  "block_type.chipped.twisted_trapdoor": "Twisted %s Trapdoor",
+  "block_type.chipped.vined_trapdoor": "Vined %s Trapdoor",
+  "block_type.chipped.warted_trapdoor": "Warted %s Trapdoor",
 
   "block_type.chipped.barrel": "%s Barrel",
   "block_type.chipped.crate": "%s Crate",
