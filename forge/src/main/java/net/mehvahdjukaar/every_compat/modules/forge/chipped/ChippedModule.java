@@ -109,6 +109,9 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> heavyTrapdoor;
     public final SimpleEntrySet<WoodType, Block> ironBarredTrapdoor;
     public final SimpleEntrySet<WoodType, Block> leafyTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> meshedTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> overgrownTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> pointlessTrapdoor;
     public final SimpleEntrySet<WoodType, Block> torch;
     public final SimpleEntrySet<WoodType, Block> wallTorch;
 
@@ -1309,6 +1312,51 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(leafyTrapdoor);
+
+        meshedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "meshed",
+                        () -> getModBlock("meshed_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTexture(modRes("block/oak_trapdoor/meshed_oak_trapdoor"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(meshedTrapdoor);
+
+        overgrownTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "overgrown",
+                        () -> getModBlock("overgrown_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTextureM(modRes("block/oak_trapdoor/overgrown_oak_trapdoor"), EveryCompat.res("block/ch/trapdoors/overgrown_oak_trapdoor_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(overgrownTrapdoor);
+
+        pointlessTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "pointless",
+                        () -> getModBlock("pointless_oak_trapdoor"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                .addTexture(modRes("block/oak_trapdoor/pointless_oak_trapdoor"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(pointlessTrapdoor);
 
         wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
                         () -> getModBlock("spruce_wall_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
