@@ -116,6 +116,7 @@ dependencies {
     modImplementation("curse.maven:resourceful-lib-570073:4434139")
     modImplementation("curse.maven:supermartijn642s-config-lib-438332:3871792")
     modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238")
+    modImplementation("curse.maven:valhelsia-core-416935:4181245")
 
     // modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
     modImplementation("curse.maven:roughly-enough-items-310111:4119141")
@@ -167,7 +168,6 @@ dependencies {
     modImplementation("curse.maven:woodworks-543610:4023081")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
-    modCompileOnly("curse.maven:valhelsia-core-416935:4181245")
     modCompileOnly("curse.maven:xercamod-341575:3947222")
 
 
