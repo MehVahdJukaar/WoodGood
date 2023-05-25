@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -21,7 +22,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.GlassBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TorchBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallTorchBlock;
@@ -34,7 +38,7 @@ import net.minecraft.world.level.storage.loot.LootTables;
 // Currently all variants are crafted with Oak Planks due to them using the `chipped:oak_planks` tag
 // The same should be done for door & trapdoor variants
 // Fix doors dropping two items
-// Mcmeta files are not copied
+// Mcmeta files are not copied from the base block
 
 public class ChippedModule extends SimpleModule {
 
@@ -124,6 +128,17 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> wovenTrapdoor;
     public final SimpleEntrySet<WoodType, Block> torch;
     public final SimpleEntrySet<WoodType, Block> wallTorch;
+    public final SimpleEntrySet<WoodType, Block> circleGlass;
+    public final SimpleEntrySet<WoodType, Block> barredGlass;
+    public final SimpleEntrySet<WoodType, Block> borderedGlass;
+    public final SimpleEntrySet<WoodType, Block> diamondBorderedGlass;
+    public final SimpleEntrySet<WoodType, Block> horizontalLinedGlass;
+    public final SimpleEntrySet<WoodType, Block> largeDiamondGlass;
+    public final SimpleEntrySet<WoodType, Block> lineBarredGlass;
+    public final SimpleEntrySet<WoodType, Block> ornateBarredGlass;
+    public final SimpleEntrySet<WoodType, Block> snowflakeGlass;
+    public final SimpleEntrySet<WoodType, Block> squareGlass;
+    public final SimpleEntrySet<WoodType, Block> wovenGlass;
 
     public ChippedModule(String modId) {
         super(modId, "ch");
@@ -1513,6 +1528,191 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(torch);
+
+        circleGlass = SimpleEntrySet.builder(WoodType.class, "glass", "circle",
+                        () -> getModBlock("circle_oak_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/circle_oak_glass"), EveryCompat.res("block/ch/glass/circle_oak_glass_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(circleGlass);
+
+        barredGlass = SimpleEntrySet.builder(WoodType.class, "bared_glass",
+                        () -> getModBlock("oak_bared_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_bared_glass"), EveryCompat.res("block/ch/glass/oak_barred_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/oak_bared_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_barred_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(barredGlass);
+
+        borderedGlass = SimpleEntrySet.builder(WoodType.class, "bordered_glass",
+                        () -> getModBlock("oak_bordered_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_bordered_glass"), EveryCompat.res("block/ch/glass/oak_bordered_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/oak_bordered_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_bordered_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(borderedGlass);
+
+        diamondBorderedGlass = SimpleEntrySet.builder(WoodType.class, "diamond_bordered_glass",
+                        () -> getModBlock("oak_diamond_bordered_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_diamond_bordered_glass"), EveryCompat.res("block/ch/glass/oak_diamond_bordered_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/oak_diamond_bordered_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_diamond_bordered_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(diamondBorderedGlass);
+
+        horizontalLinedGlass = SimpleEntrySet.builder(WoodType.class, "horizontal_lined_glass",
+                        () -> getModBlock("oak_horizontal_lined_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_horizontal_lined_glass"), EveryCompat.res("block/ch/glass/oak_horizontal_lined_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/oak_horizontal_lined_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_horizontal_lined_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(horizontalLinedGlass);
+
+        largeDiamondGlass = SimpleEntrySet.builder(WoodType.class, "large_diamond_glass",
+                        () -> getModBlock("oak_large_diamond_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_large_diamond_glass"), EveryCompat.res("block/ch/glass/oak_large_diamond_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/oak_large_diamond_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_large_diamond_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(largeDiamondGlass);
+
+        lineBarredGlass = SimpleEntrySet.builder(WoodType.class, "line_bared_glass",
+                        () -> getModBlock("oak_line_bared_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_line_bared_glass"), EveryCompat.res("block/ch/glass/oak_line_barred_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/oak_line_bared_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_line_barred_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(lineBarredGlass);
+
+        ornateBarredGlass = SimpleEntrySet.builder(WoodType.class, "ornate_bared_glass",
+                        () -> getModBlock("oak_ornate_bared_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_ornate_bared_glass"), EveryCompat.res("block/ch/glass/oak_ornate_barred_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/oak_ornate_bared_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_ornate_barred_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(ornateBarredGlass);
+
+        snowflakeGlass = SimpleEntrySet.builder(WoodType.class, "snowflake_glass",
+                        () -> getModBlock("oak_snowflake_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_snowflake_glass"), EveryCompat.res("block/ch/glass/oak_snowflake_glass_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(snowflakeGlass);
+
+        wovenGlass = SimpleEntrySet.builder(WoodType.class, "woven_glass",
+                        () -> getModBlock("oak_woven_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/oak_woven_glass"), EveryCompat.res("block/ch/glass/oak_woven_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/oak_woven_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_woven_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(wovenGlass);
+
+        squareGlass = SimpleEntrySet.builder(WoodType.class, "glass", "square",
+                        () -> getModBlock("square_oak_glass"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                                .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
+                                .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
+                .addTextureM(modRes("block/glass/square_oak_glass"), EveryCompat.res("block/ch/glass/square_oak_glass_m"))
+                .addTextureM(modRes("block/glass/ctm/square_oak_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/square_oak_glass_ctm_m"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(squareGlass);
     }
 
     private void dullPalette(Palette p) {

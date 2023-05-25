@@ -82,6 +82,18 @@
   "block_type.chipped.windowed_trapdoor": "Windowed %s Trapdoor",
   "block_type.chipped.woven_trapdoor": "Woven %s Trapdoor",
 
+  "block_type.chipped.bared_glass": "%s Barred Glass",
+  "block_type.chipped.bordered_glass": "%s Bordered Glass",
+  "block_type.chipped.circle_glass": "Circle %s Glass",
+  "block_type.chipped.diamond_bordered_glass": "%s Diamond Bordered Glass",
+  "block_type.chipped.horizontal_lined_glass": "%s Horizontal Lined Glass",
+  "block_type.chipped.large_diamond_glass": "%s Large Diamond Glass",
+  "block_type.chipped.line_bared_glass": "%s Line Barred Glass",
+  "block_type.chipped.ornate_bared_glass": "%s Ornate Barred Glass",
+  "block_type.chipped.snowflake_glass": "%s Snowflake Glass",
+  "block_type.chipped.square_glass": "Square %s Glass",
+  "block_type.chipped.woven_glass": "%s Woven Glass",
+
   "block_type.chipped.barrel": "%s Barrel",
   "block_type.chipped.crate": "%s Crate",
   "block_type.chipped.reinforced_crate": "Reinforced %s Crate",

@@ -1,0 +1,13 @@
+{
+	"ctm": {
+		"ctm_version": 1,
+		"type": "ctm",
+		"layer": "CUTOUT",
+		"textures": [
+			"chipped:block/glass/ctm/oak_ornate_bared_glass_ctm_m"
+		],
+		"extra": {
+			"light": 0
+		}
+	}
+}
