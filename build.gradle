@@ -146,7 +146,7 @@ dependencies {
     implementation fg.deobf("curse.maven:camp-chair-531744:3548494")
     implementation fg.deobf("curse.maven:configured-457570:3640884")
     implementation fg.deobf("curse.maven:flywheel-486392:3871082")
-    implementation fg.deobf("curse.maven:create-328085:3871091")
+    implementation fg.deobf("curse.maven:create-328085:4547146")
     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     implementation fg.deobf("curse.maven:twigs-496913:3756844")
     implementation fg.deobf("curse.maven:another-furniture-610492:4034013")
@@ -181,7 +181,7 @@ dependencies {
     implementation fg.deobf("curse.maven:geckolib-388172:3856641")
     implementation fg.deobf("curse.maven:infinity-buttons-661902:4259435")
    // implementation fg.deobf("curse.maven:apple-crates-630726:3834400")
-
+    implementation fg.deobf("com.tterrag.registrate:Registrate:MC1.18.2-1.1.1")
 
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
 }
@@ -190,6 +190,11 @@ repositories {
     maven {
         url = "https://www.cursemaven.com"
         allowInsecureProtocol = true
+    }
+    maven { // Registrate
+        url "http://maven.tterrag.com/"
+        allowInsecureProtocol = true
+
     }
 }
 

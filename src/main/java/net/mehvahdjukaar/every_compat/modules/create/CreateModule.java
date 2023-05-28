@@ -1,8 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.create;
 
 import com.simibubi.create.CreateClient;
-import com.simibubi.create.content.palettes.ConnectedGlassPaneBlock;
-import com.simibubi.create.content.palettes.WindowBlock;
+import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
+import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import com.simibubi.create.foundation.block.connected.*;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -19,6 +20,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.util.NonNullFunction;
+
+import java.util.function.Function;
 
 public class CreateModule extends SimpleModule {
 
@@ -73,10 +77,10 @@ public class CreateModule extends SimpleModule {
             CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
                     WoodGood.res(path), WoodGood.res(path + "_connected"));
 
-            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(b.delegate,
+            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(b.getRegistryName(),
                     (model) -> new CTModel(model, new HorizontalCTBehaviour(spriteShift)));
-            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(WINDOW_PANES.blocks.get(w).delegate,
-                    (model) -> new CTModel(model, new GlassPaneCTBehaviour(spriteShift)));
+            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register( WINDOW_PANES.blocks.get(w).getRegistryName(),
+                    bakedModel -> new CTModel( bakedModel, new GlassPaneCTBehaviour(spriteShift)));
         });
     }
 
