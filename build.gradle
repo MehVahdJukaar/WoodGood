@@ -136,6 +136,7 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
+    compileOnly fg.deobf("com.tterrag.registrate:Registrate:MC1.18.2-1.1.3")
 
     implementation fg.deobf("curse.maven:farmersdelight-398521:3739914")
     implementation fg.deobf("curse.maven:jei-238222:3682513")
@@ -191,6 +192,13 @@ repositories {
         url = "https://www.cursemaven.com"
         allowInsecureProtocol = true
     }
+}
+
+repositories {
+    maven { // Registrate
+        url "https://maven.tterrag.com/"
+    }
+    mavenLocal()
 }
 
 // Loads files in the format {modid}-{version}.jar, MC version optional but picky about hyphens.
