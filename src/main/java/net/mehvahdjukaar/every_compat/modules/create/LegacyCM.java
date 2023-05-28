@@ -107,9 +107,9 @@ public class LegacyCM extends CompatModule {
             CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
                     WoodGood.res(path), WoodGood.res(path + "_connected"));
 
-            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(b.delegate,
+            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(b.getRegistryName(),
                     (model) -> new CTModel(model, new HorizontalCTBehaviour(spriteShift)));
-            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(WINDOW_PANES.get(w).delegate,
+            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(WINDOW_PANES.get(w).getRegistryName(),
                     (model) -> new CTModel(model, new GlassPaneCTBehaviour(spriteShift)));
             ItemBlockRenderTypes.setRenderLayer(b, RenderType.cutoutMipped());
         });
