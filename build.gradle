@@ -145,8 +145,8 @@ dependencies {
     implementation fg.deobf("curse.maven:benched-417063:3543980")
     implementation fg.deobf("curse.maven:camp-chair-531744:3548494")
     implementation fg.deobf("curse.maven:configured-457570:3640884")
-    implementation fg.deobf("curse.maven:flywheel-486392:3871082")
-    implementation fg.deobf("curse.maven:create-328085:3871091")
+    implementation fg.deobf("curse.maven:create-328085:4550986")
+
     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     implementation fg.deobf("curse.maven:twigs-496913:3756844")
     implementation fg.deobf("curse.maven:another-furniture-610492:4034013")
