@@ -87,12 +87,12 @@ public class LegacyCM extends CompatModule {
     @Override
     public void registerItems(IForgeRegistry<Item> registry) {
         WINDOWS.forEach((w, value) -> {
-            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(Create.PALETTES_CREATIVE_TAB), w, 0);
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(AllCreativeModeTabs.PALETTES_CREATIVE_TAB), w, 0);
             WINDOW_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
         WINDOW_PANES.forEach((w, value) -> {
-            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(Create.PALETTES_CREATIVE_TAB), w, 0);
+            Item i = new WoodBasedBlockItem(value, new Item.Properties().tab(AllCreativeModeTabs.PALETTES_CREATIVE_TAB), w, 0);
             WINDOW_PANE_ITEMS.put(w, i);
             registry.register(i.setRegistryName(value.getRegistryName()));
         });
