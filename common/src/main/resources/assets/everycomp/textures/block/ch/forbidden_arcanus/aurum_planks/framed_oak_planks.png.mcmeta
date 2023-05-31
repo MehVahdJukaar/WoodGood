@@ -1,0 +1,32 @@
+{
+  "animation": {
+    "frametime": 40,
+    "interpolate": true,
+    "height": 16,
+    "width": 16,
+    "frames": [
+      {
+        "time": 40,
+        "index": 0
+      },
+      {
+        "time": 40,
+        "index": 1
+      },
+      {
+        "time": 40,
+        "index": 2
+      }
+    ]
+  },
+  "ctm": {
+    "ctm_version": 1,
+    "type": "ctm",
+    "textures": [
+      "everycomp:block/ch/forbidden_arcanus/aurum_planks/ctm/framed_oak_planks_ctm"
+    ],
+    "extra": {
+      "light": 0
+    }
+  }
+}
