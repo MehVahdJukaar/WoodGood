@@ -18,6 +18,7 @@ public class EarlyConfigs {
     //  public static Supplier<Boolean> REMAP_OWN;
     public static final Supplier<Boolean> DEPEND_ON_PACKS;
     public static final Supplier<Boolean> DEBUG_RESOURCES;
+    public static final Supplier<Boolean> DEBUG_PACKET;
 
     static {
         String s = PlatformHelper.isDev() && PlatformHelper.getEnv().isServer() ? "_s" : "";
@@ -34,6 +35,7 @@ public class EarlyConfigs {
                 .define("assets_depend_on_loaded_packs", true);
         DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
                 .define("save_debug_resources", false);
+        DEBUG_PACKET = builder.comment("Don't touch unless you are told to").define("debug_packet",false);
         builder.pop();
 
         SPEC = builder.buildAndRegister();

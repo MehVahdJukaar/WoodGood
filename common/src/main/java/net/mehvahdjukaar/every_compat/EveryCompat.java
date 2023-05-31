@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 
+import io.netty.buffer.Unpooled;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
@@ -12,12 +13,19 @@ import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
+import net.mehvahdjukaar.moonlight.api.platform.network.Message;
+import net.mehvahdjukaar.moonlight.api.platform.network.NetworkDir;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -184,4 +192,81 @@ public abstract class EveryCompat {
 
     //TODO: replace oak based with acacia based
 
+    public static final ChannelHandler CHANNEL = ChannelHandler.createChannel(EveryCompat.res("network"));
+
+    static {
+        CHANNEL.register(NetworkDir.PLAY_TO_CLIENT, S2CBlockStateCheckMessage.class, S2CBlockStateCheckMessage::new);
+    }
+
+    public static class S2CBlockStateCheckMessage implements Message {
+
+        public S2CBlockStateCheckMessage(FriendlyByteBuf buf) {
+            int start = buf.readVarInt();
+            int size = buf.readVarInt();
+
+            boolean mismatched = false;
+            for (int i = start; i < (start + size); i++) {
+                try {
+                    var nbt = buf.readNbt();
+                    if(nbt == null){
+                        int aa = 1;
+                    }
+                    var b = NbtUtils.readBlockState(nbt);
+                    if (b != Block.BLOCK_STATE_REGISTRY.byId(i)) {
+                        if (!mismatched) {
+                            LOGGER.error("Found blockstate id mismatch from " + b + "at id " + i);
+                        }
+                        mismatched = true;
+                    } else {
+                        if (mismatched) {
+                            LOGGER.error("to" + b + "at id " + i);
+                        }
+                        mismatched = false;
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Failed to read blockstate in id map: ", e);
+                    break;
+                }
+            }
+            buf.release();
+        }
+
+        public S2CBlockStateCheckMessage() {
+        }
+
+        @Override
+        public void writeToBuffer(FriendlyByteBuf buf) {
+            FriendlyByteBuf dummy = new FriendlyByteBuf(Unpooled.buffer());
+            int start = lastInd;
+            for (int i = lastInd; i < Block.BLOCK_STATE_REGISTRY.size(); i++) {
+                lastInd++;
+                CompoundTag nbt = NbtUtils.writeBlockState(Block.stateById(i));
+                dummy.writeNbt(nbt);
+                if (dummy.writerIndex() > 1048576 * 0.9) {
+                    break;
+                }
+            }
+            buf.writeVarInt(start);
+            buf.writeVarInt(lastInd-start);
+            buf.writeBytes(dummy);
+            dummy.release();
+        }
+
+        @Override
+        public void handle(ChannelHandler.Context context) {
+
+        }
+    }
+
+
+    private static int lastInd = 0;
+
+    public static void sendPacket(ServerPlayer s) {
+        if(EarlyConfigs.DEBUG_PACKET.get() || PlatformHelper.isDev()) {
+            lastInd = 0;
+            while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {
+                EveryCompat.CHANNEL.sendToClientPlayer(s, new EveryCompat.S2CBlockStateCheckMessage());
+            }
+        }
+    }
 }

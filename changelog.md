@@ -1,1 +1,1 @@
-create compat
+added some optional debugging
