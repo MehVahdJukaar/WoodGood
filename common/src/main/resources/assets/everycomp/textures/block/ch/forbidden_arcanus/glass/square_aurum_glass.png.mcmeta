@@ -24,7 +24,7 @@
     "type": "ctm",
     "layer": "CUTOUT",
     "textures": [
-      "everycomp:block/ch/forbidden_arcanus/glass/ctm/aurum_snowflake_glass_ctm"
+      "everycomp:block/ch/forbidden_arcanus/glass/ctm/square_aurum_glass_ctm"
     ]
   }
 }
