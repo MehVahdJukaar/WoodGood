@@ -18,5 +18,13 @@
         "index": 2
       }
     ]
+  },
+  "ctm": {
+    "ctm_version": 1,
+    "type": "ctm",
+    "layer": "CUTOUT",
+    "textures": [
+      "everycomp:block/ch/forbidden_arcanus/glass/ctm/aurum_snowflake_glass_ctm"
+    ]
   }
 }
