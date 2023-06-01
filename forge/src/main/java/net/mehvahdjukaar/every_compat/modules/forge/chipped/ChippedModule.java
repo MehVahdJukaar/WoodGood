@@ -163,13 +163,13 @@ public class ChippedModule extends SimpleModule {
                         () -> getModBlock("oak_planks_panel"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/oak_planks_panel_ctm"))
-                .addTexture(modRes("block/oak_planks/oak_planks_panel"))
+                .addTexture(EveryCompat.res("block/oak_planks/oak_planks_panel"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -253,13 +253,13 @@ public class ChippedModule extends SimpleModule {
                         () -> getModBlock("cornered_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/cornered_oak_planks_ctm"))
-                .addTexture(modRes("block/oak_planks/cornered_oak_planks"))
+                .addTexture(EveryCompat.res("block/oak_planks/cornered_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkerPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -268,14 +268,14 @@ public class ChippedModule extends SimpleModule {
         cratedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "crated",
                         () -> getModBlock("crated_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
-                .addTexture(modRes("block/oak_planks/ctm/crated_oak_planks_ctm"))
-                .addTexture(modRes("block/oak_planks/crated_oak_planks"))
+                .addTexture(EveryCompat.res("block/oak_planks/ctm/crated_oak_planks_ctm"))
+                .addTexture(EveryCompat.res("block/oak_planks/crated_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkerPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -372,13 +372,13 @@ public class ChippedModule extends SimpleModule {
                         () -> getModBlock("enclosed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/ctm/enclosed_oak_planks_ctm"))
-                .addTexture(modRes("block/oak_planks/enclosed_oak_planks"))
+                .addTexture(EveryCompat.res("block/oak_planks/enclosed_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkerPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -417,14 +417,14 @@ public class ChippedModule extends SimpleModule {
         framedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "framed",
                         () -> getModBlock("framed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
-                .addTexture(modRes("block/oak_planks/ctm/framed_oak_planks_ctm"))
-                .addTexture(modRes("block/oak_planks/framed_oak_planks"))
+                .addTexture(EveryCompat.res("block/oak_planks/ctm/framed_oak_planks_ctm"))
+                .addTexture(EveryCompat.res("block/oak_planks/framed_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkerPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -493,14 +493,14 @@ public class ChippedModule extends SimpleModule {
         naturalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "natural",
                         () -> getModBlock("natural_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
-                .addTexture(modRes("block/oak_planks/ctm/natural_oak_planks_ctm"))
-                .addTexture(modRes("block/oak_planks/natural_oak_planks"))
+                .addTexture(EveryCompat.res("block/oak_planks/ctm/natural_oak_planks_ctm"))
+                .addTexture(EveryCompat.res("block/oak_planks/natural_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -509,14 +509,14 @@ public class ChippedModule extends SimpleModule {
         peggedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "pegged",
                         () -> getModBlock("pegged_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
-                .addTexture(modRes("block/oak_planks/ctm/pegged_oak_planks_ctm"))
-                .addTexture(modRes("block/oak_planks/pegged_oak_planks"))
+                .addTexture(EveryCompat.res("block/oak_planks/ctm/pegged_oak_planks_ctm"))
+                .addTexture(EveryCompat.res("block/oak_planks/pegged_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -590,7 +590,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkerPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -687,14 +687,14 @@ public class ChippedModule extends SimpleModule {
         whirlwindPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "whirlwind",
                         () -> getModBlock("whirlwind_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
-                .addTexture(modRes("block/oak_planks/whirlwind_oak_planks"))
-                .addTexture(modRes("block/oak_planks/ctm/whirlwind_oak_planks_ctm"))
+                .addTexture(EveryCompat.res("block/oak_planks/ctm/whirlwind_oak_planks_ctm"))
+                .addTexture(EveryCompat.res("block/oak_planks/whirlwind_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("oak_planks"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -739,7 +739,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("barrel"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("barrel"), Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -753,7 +753,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("barrel"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("barrel"), Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -811,7 +811,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -831,7 +831,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -851,7 +851,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -871,7 +871,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -910,7 +910,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -949,7 +949,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -969,7 +969,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -989,7 +989,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1009,7 +1009,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1029,7 +1029,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1049,7 +1049,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1069,7 +1069,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1109,7 +1109,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1129,7 +1129,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1149,7 +1149,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_door"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getLightest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1285,7 +1285,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1316,7 +1316,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(modRes("oak_trapdoor"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
                 .build();
@@ -1585,7 +1585,7 @@ public class ChippedModule extends SimpleModule {
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_diamond_bordered_glass"), EveryCompat.res("block/ch/glass/oak_diamond_bordered_glass_m"))
-                .addTextureM(modRes("block/glass/ctm/oak_diamond_bordered_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_diamond_bordered_glass_ctm_m"))
+                .addTextureM(EveryCompat.res("block/glass/ctm/oak_diamond_bordered_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_diamond_bordered_glass_ctm_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.IMPERMEABLE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("glass"), Registry.BLOCK_REGISTRY)
@@ -1746,10 +1746,19 @@ public class ChippedModule extends SimpleModule {
         p.remove(p.getLightest());
     }
 
-    private void darkestPalette(Palette p) {
+    private void darkPalette(Palette p) {
+        p.add(p.increaseInner());
+        p.add(p.increaseInner());
+        p.add(p.increaseInner());
+        p.remove(p.getLightest());
+        p.remove(p.getLightest());
         p.remove(p.getDarkest());
+    }
+
+    private void darkestPalette(Palette p) {
         p.remove(p.getLightest());
         p.remove(p.getLightest());
+        p.remove(p.getDarkest());
     }
 
     private void neutralPalette(Palette p) {
