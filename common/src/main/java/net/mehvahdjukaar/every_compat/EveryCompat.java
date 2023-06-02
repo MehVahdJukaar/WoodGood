@@ -43,6 +43,9 @@ import java.util.function.Supplier;
 /**
  * Author: MehVahdJukaar
  */
+
+//TODO: Fix Chipped recipes
+
 public abstract class EveryCompat {
     public static final String MOD_ID = "everycomp";
 
