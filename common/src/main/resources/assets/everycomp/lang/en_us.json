@@ -94,6 +94,18 @@
   "block_type.chipped.square_glass": "Square %s Glass",
   "block_type.chipped.woven_glass": "%s Woven Glass",
 
+  "block_type.chipped.bared_glass_pane": "%s Barred Glass Pane",
+  "block_type.chipped.bordered_glass_pane": "%s Bordered Glass Pane",
+  "block_type.chipped.circle_glass_pane": "Circle %s Glass Pane",
+  "block_type.chipped.diamond_bordered_glass_pane": "%s Diamond Bordered Glass Pane",
+  "block_type.chipped.horizontal_lined_glass_pane": "%s Horizontal Lined Glass Pane",
+  "block_type.chipped.large_diamond_glass_pane": "%s Large Diamond Glass Pane",
+  "block_type.chipped.line_bared_glass_pane": "%s Line Barred Glass Pane",
+  "block_type.chipped.ornate_bared_glass_pane": "%s Ornate Barred Glass Pane",
+  "block_type.chipped.snowflake_glass_pane": "%s Snowflake Glass Pane",
+  "block_type.chipped.square_glass_pane": "Square %s Glass Pane",
+  "block_type.chipped.woven_glass_pane": "%s Woven Glass Pane",
+
   "block_type.chipped.barrel": "%s Barrel",
   "block_type.chipped.crate": "%s Crate",
   "block_type.chipped.reinforced_crate": "Reinforced %s Crate",

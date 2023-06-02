@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.GlassBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TorchBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
@@ -139,6 +140,17 @@ public class ChippedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> snowflakeGlass;
     public final SimpleEntrySet<WoodType, Block> squareGlass;
     public final SimpleEntrySet<WoodType, Block> wovenGlass;
+    public final SimpleEntrySet<WoodType, Block> circleGlassPane;
+    public final SimpleEntrySet<WoodType, Block> barredGlassPane;
+    public final SimpleEntrySet<WoodType, Block> borderedGlassPane;
+    public final SimpleEntrySet<WoodType, Block> diamondBorderedGlassPane;
+    public final SimpleEntrySet<WoodType, Block> horizontalLinedGlassPane;
+    public final SimpleEntrySet<WoodType, Block> largeDiamondGlassPane;
+    public final SimpleEntrySet<WoodType, Block> lineBarredGlassPane;
+    public final SimpleEntrySet<WoodType, Block> ornateBarredGlassPane;
+    public final SimpleEntrySet<WoodType, Block> snowflakeGlassPane;
+    public final SimpleEntrySet<WoodType, Block> squareGlassPane;
+    public final SimpleEntrySet<WoodType, Block> wovenGlassPane;
 
     public ChippedModule(String modId) {
         super(modId, "ch");
@@ -1713,6 +1725,180 @@ public class ChippedModule extends SimpleModule {
                 .build();
 
         this.addEntry(squareGlass);
+
+        circleGlassPane = SimpleEntrySet.builder(WoodType.class, "glass_pane", "circle",
+                        () -> getModBlock("circle_oak_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/circle_oak_glass_pane_top"))
+                .addTextureM(modRes("block/glass/circle_oak_glass"), EveryCompat.res("block/ch/glass/circle_oak_glass_m"))
+                .addTexture(modRes("block/glass_pane/circle_oak_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(circleGlassPane);
+
+        barredGlassPane = SimpleEntrySet.builder(WoodType.class, "bared_glass_pane",
+                        () -> getModBlock("oak_bared_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_bared_glass_pane_top"))
+                .addTextureM(modRes("block/glass/ctm/oak_bared_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_barred_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/oak_bared_glass"), EveryCompat.res("block/ch/glass/oak_barred_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_bared_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(barredGlassPane);
+
+        borderedGlassPane = SimpleEntrySet.builder(WoodType.class, "bordered_glass_pane",
+                        () -> getModBlock("oak_bordered_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_bordered_glass_pane_top"))
+                .addTextureM(modRes("block/glass/ctm/oak_bordered_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_bordered_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/oak_bordered_glass"), EveryCompat.res("block/ch/glass/oak_bordered_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_bordered_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(borderedGlassPane);
+
+        diamondBorderedGlassPane = SimpleEntrySet.builder(WoodType.class, "diamond_bordered_glass_pane",
+                        () -> getModBlock("oak_diamond_bordered_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_diamond_bordered_glass_pane_top"))
+                .addTextureM(EveryCompat.res("block/glass/ctm/oak_diamond_bordered_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_diamond_bordered_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/oak_diamond_bordered_glass"), EveryCompat.res("block/ch/glass/oak_diamond_bordered_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_diamond_bordered_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(diamondBorderedGlassPane);
+
+        horizontalLinedGlassPane = SimpleEntrySet.builder(WoodType.class, "horizontal_lined_glass_pane",
+                        () -> getModBlock("oak_horizontal_lined_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_horizontal_lined_glass_pane_top"))
+                .addTextureM(modRes("block/glass/ctm/oak_horizontal_lined_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_horizontal_lined_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/oak_horizontal_lined_glass"), EveryCompat.res("block/ch/glass/oak_horizontal_lined_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_horizontal_lined_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(horizontalLinedGlassPane);
+
+        largeDiamondGlassPane = SimpleEntrySet.builder(WoodType.class, "large_diamond_glass_pane",
+                        () -> getModBlock("oak_large_diamond_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_large_diamond_glass_pane_top"))
+                .addTextureM(modRes("block/glass/ctm/oak_large_diamond_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_large_diamond_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/oak_large_diamond_glass"), EveryCompat.res("block/ch/glass/oak_large_diamond_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_large_diamond_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(largeDiamondGlassPane);
+
+        lineBarredGlassPane = SimpleEntrySet.builder(WoodType.class, "line_bared_glass_pane",
+                        () -> getModBlock("oak_line_bared_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_line_bared_glass_pane_top"))
+                .addTextureM(modRes("block/glass/ctm/oak_line_bared_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_line_barred_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/oak_line_bared_glass"), EveryCompat.res("block/ch/glass/oak_line_barred_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_line_bared_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(lineBarredGlassPane);
+
+        ornateBarredGlassPane = SimpleEntrySet.builder(WoodType.class, "ornate_bared_glass_pane",
+                        () -> getModBlock("oak_ornate_bared_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_ornate_bared_glass_pane_top"))
+                .addTextureM(modRes("block/glass/ctm/oak_ornate_bared_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_ornate_barred_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/oak_ornate_bared_glass"), EveryCompat.res("block/ch/glass/oak_ornate_barred_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_ornate_bared_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(ornateBarredGlassPane);
+
+        snowflakeGlassPane = SimpleEntrySet.builder(WoodType.class, "snowflake_glass_pane",
+                        () -> getModBlock("oak_snowflake_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_snowflake_glass_pane_top"))
+                .addTextureM(modRes("block/glass/oak_snowflake_glass"), EveryCompat.res("block/ch/glass/oak_snowflake_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_snowflake_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(snowflakeGlassPane);
+
+        wovenGlassPane = SimpleEntrySet.builder(WoodType.class, "woven_glass_pane",
+                        () -> getModBlock("oak_woven_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_woven_glass_pane_top"))
+                .addTextureM(modRes("block/glass/ctm/oak_woven_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/oak_woven_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/oak_woven_glass"), EveryCompat.res("block/ch/glass/oak_woven_glass_m"))
+                .addTexture(modRes("block/glass_pane/oak_woven_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(wovenGlassPane);
+
+        squareGlassPane = SimpleEntrySet.builder(WoodType.class, "glass_pane", "square",
+                        () -> getModBlock("square_oak_glass_pane"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion()))
+                .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/square_oak_glass_pane_top"))
+                .addTextureM(modRes("block/glass/ctm/square_oak_glass_ctm"), EveryCompat.res("block/ch/glass/ctm/square_oak_glass_ctm_m"))
+                .addTextureM(modRes("block/glass/square_oak_glass"), EveryCompat.res("block/ch/glass/square_oak_glass_m"))
+                .addTexture(modRes("block/glass_pane/square_oak_glass_pane_top"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("glass_pane"), Registry.ITEM_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                .setTab(() -> tab)
+                .build();
+
+        this.addEntry(squareGlassPane);
     }
 
     private void dullPalette(Palette p) {

@@ -25,6 +25,10 @@
     "layer": "CUTOUT",
     "textures": [
       "everycomp:block/ch/forbidden_arcanus/glass/ctm/aurum_line_bared_glass_ctm"
-    ]
+    ],
+    "extra":{
+      "ignore_states":true,
+      "connect_inside":true
+    }
   }
 }
