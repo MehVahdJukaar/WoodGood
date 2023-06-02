@@ -1,1 +1,1 @@
-fixed translations
+added some optional debugging
