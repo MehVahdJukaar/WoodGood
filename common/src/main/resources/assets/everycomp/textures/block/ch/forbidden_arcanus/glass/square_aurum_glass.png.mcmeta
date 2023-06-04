@@ -1,0 +1,34 @@
+{
+  "animation": {
+    "frametime": 40,
+    "interpolate": true,
+    "height": 16,
+    "width": 16,
+    "frames": [
+      {
+        "time": 40,
+        "index": 0
+      },
+      {
+        "time": 40,
+        "index": 1
+      },
+      {
+        "time": 40,
+        "index": 2
+      }
+    ]
+  },
+  "ctm": {
+    "ctm_version": 1,
+    "type": "ctm",
+    "layer": "CUTOUT",
+    "textures": [
+      "everycomp:block/ch/forbidden_arcanus/glass/ctm/square_aurum_glass_ctm"
+    ],
+    "extra":{
+      "ignore_states":true,
+      "connect_inside":true
+    }
+  }
+}

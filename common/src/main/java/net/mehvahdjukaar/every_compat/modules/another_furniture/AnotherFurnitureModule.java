@@ -129,8 +129,8 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
                 .setRenderType(() -> RenderType::cutout)
-                .addTexture(modRes("block/drawer/oak_front"))
-                .addTexture(modRes("block/drawer/oak_front_open"))
+                .addTextureM(modRes("block/drawer/oak_front"), EveryCompat.res("block/af/oak_front_m"))
+                .addTextureM(modRes("block/drawer/oak_front_open"), EveryCompat.res("block/af/oak_front_open_m"))
                 .addTexture(modRes("block/drawer/oak_side"))
                 .addTexture(modRes("block/drawer/oak_top"))
                 .build();
