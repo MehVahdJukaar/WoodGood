@@ -183,7 +183,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hollow_logs"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hollow_logs"), Registry.ITEM_REGISTRY)
-                .addRecipe(modRes("building/crafting/hollow_oak_log"))
+                .addRecipe(modRes("building/crafting/hollowlogs/hollow_oak_log"))
                 .build();
 
         this.addEntry(hollowLogs);
@@ -315,19 +315,6 @@ public class QuarkModule extends SimpleModule {
         super.registerTiles(registry);
         chestTile = (BlockEntityType<? extends ChestBlockEntity>) chests.getTileHolder().get();
         trappedChestTile = (BlockEntityType<? extends ChestBlockEntity>) trappedChests.getTileHolder().get();
-    }
-
-
-    public void onFirstClientTick1() {
-        var ic = Minecraft.getInstance().getItemColors();
-        var bc = Minecraft.getInstance().getBlockColors();
-        hedges.blocks.forEach((t, b) -> {
-            var leaf = t.getChild("leaves");
-            if (leaf instanceof Block block) {
-                bc.register((s, l, p, i) -> bc.getColor(block.defaultBlockState(), l, p, i), b);
-                ic.register((stack, tintIndex) -> ic.getColor(new ItemStack(block.asItem()), tintIndex), b.asItem());
-            }
-        });
     }
 
     @Override

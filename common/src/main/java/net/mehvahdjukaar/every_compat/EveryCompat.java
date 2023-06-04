@@ -27,11 +27,13 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -208,13 +210,14 @@ public abstract class EveryCompat {
             for (int i = start; i < (start + size); i++) {
                 try {
                     var nbt = buf.readNbt();
-                    if(nbt == null){
+                    if (nbt == null) {
                         int aa = 1;
                     }
                     var b = NbtUtils.readBlockState(nbt);
-                    if (b != Block.BLOCK_STATE_REGISTRY.byId(i)) {
+                    BlockState exp = Block.BLOCK_STATE_REGISTRY.byId(i);
+                    if (b != exp) {
                         if (!mismatched) {
-                            LOGGER.error("Found blockstate id mismatch from " + b + "at id " + i);
+                            LOGGER.error("Found blockstate id mismatch from " + b + "at id " + i + ". Was expecting: " + exp);
                         }
                         mismatched = true;
                     } else {
@@ -247,7 +250,7 @@ public abstract class EveryCompat {
                 }
             }
             buf.writeVarInt(start);
-            buf.writeVarInt(lastInd-start);
+            buf.writeVarInt(lastInd - start);
             buf.writeBytes(dummy);
             dummy.release();
         }
@@ -262,8 +265,9 @@ public abstract class EveryCompat {
     private static int lastInd = 0;
 
     public static void sendPacket(ServerPlayer s) {
-        if(EarlyConfigs.DEBUG_PACKET.get() || PlatformHelper.isDev()) {
+        if (EarlyConfigs.DEBUG_PACKET.get() || PlatformHelper.isDev()) {
             lastInd = 0;
+            LOGGER.warn("Starting Blockstate Map validity check:");
             while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {
                 EveryCompat.CHANNEL.sendToClientPlayer(s, new EveryCompat.S2CBlockStateCheckMessage());
             }
