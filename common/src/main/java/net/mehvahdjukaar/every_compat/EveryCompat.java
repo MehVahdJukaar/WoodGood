@@ -147,6 +147,9 @@ public abstract class EveryCompat {
 
 
     public void commonSetup() {
+        if(PlatformHelper.isModLoaded("chipped")){
+            EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
+        }
         //log registered stuff size
         int newSize = Registry.BLOCK.size();
         int am = newSize - prevRegSize;
