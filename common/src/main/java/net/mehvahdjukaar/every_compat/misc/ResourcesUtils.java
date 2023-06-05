@@ -26,6 +26,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -77,7 +78,6 @@ public class ResourcesUtils {
                 // modelModifier.replaceItemType(baseBlockName);
 
                 BlockTypeResTransformer<T> itemModifier = standardModelTransformer(modId, manager, baseType, baseBlockName, extraTransform);
-
 
                 StaticResource oakItemModel = StaticResource.getOrFail(manager,
                         ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
@@ -200,11 +200,12 @@ public class ResourcesUtils {
     public static <B extends Block, T extends BlockType> void addBlockResources(String modId, ResourceManager manager, DynamicResourcePack pack,
                                                                                 Map<T, B> blocks,
                                                                                 BlockTypeResTransformer<T> modifier, ResourceLocation... jsonsLocations) {
-        List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
+        List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).toList();
 
         blocks.forEach((wood, value) -> {
             if (WoodConfigs.isEntryEnabled(wood, value)) {
                 for (var res : original) {
+
                     try {
                         StaticResource newRes = modifier.transform(res, Utils.getID(value), wood);
 
@@ -212,7 +213,9 @@ public class ResourcesUtils {
 
                         pack.addResource(newRes);
                     } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to generate json resource from {}", res.location);
+                        if(res != null){
+                            EveryCompat.LOGGER.error("Failed to generate json resource from {}", res.location);
+                        }
                     }
                 }
             }

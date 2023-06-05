@@ -1913,23 +1913,17 @@ public class ChippedModule extends SimpleModule {
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
-        getEntries().forEach(e -> {
-//            String itemName = Utils.getID(e).getPath();
-//            SimpleTagBuilder planksTag = SimpleTagBuilder.of(modRes(basketWoven.getBaseBlock().toString()));
-//            SimpleTagBuilder planksTag2 = SimpleTagBuilder.of(modRes(itemId + "_planks"));
 
-            handler.dynamicPack.addJson(torch.getBaseBlock().getLootTable(),
-                    LootTables.serialize(new LootTable.Builder().build()),
-                    ResType.LOOT_TABLES);
-            handler.dynamicPack.addJson(wallTorch.getBaseBlock().getLootTable(),
-                    LootTables.serialize(new LootTable.Builder().build()),
-                    ResType.LOOT_TABLES);
-            handler.dynamicPack.addJson(barredDoor.getBaseBlock().getLootTable(),
-                    LootTables.serialize(BlockLoot.createDoorTable(barredDoor.getBaseBlock()).build()),
-                    ResType.LOOT_TABLES);
-//            handler.dynamicPack.addTag(planksTag, Registry.BLOCK_REGISTRY);
-//            handler.dynamicPack.addTag(planksTag, Registry.ITEM_REGISTRY);
-        });
+
+        handler.dynamicPack.addJson(torch.getBaseBlock().getLootTable(),
+                LootTables.serialize(new LootTable.Builder().build()),
+                ResType.LOOT_TABLES);
+        handler.dynamicPack.addJson(wallTorch.getBaseBlock().getLootTable(),
+                LootTables.serialize(new LootTable.Builder().build()),
+                ResType.LOOT_TABLES);
+        handler.dynamicPack.addJson(barredDoor.getBaseBlock().getLootTable(),
+                LootTables.serialize(BlockLoot.createDoorTable(barredDoor.getBaseBlock()).build()),
+                ResType.LOOT_TABLES);
 
         for (var w : WoodTypeRegistry.getTypes()) {
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(w.id.getNamespace(),w.id.getPath() + "_planks"));
