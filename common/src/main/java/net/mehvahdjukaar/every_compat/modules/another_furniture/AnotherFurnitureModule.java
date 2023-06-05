@@ -2,29 +2,19 @@ package net.mehvahdjukaar.every_compat.modules.another_furniture;
 
 import com.starfish_studios.another_furniture.AnotherFurniture;
 import com.starfish_studios.another_furniture.block.*;
-import com.starfish_studios.another_furniture.block.entity.DrawerBlockEntity;
-import com.starfish_studios.another_furniture.block.entity.PlanterBoxBlockEntity;
-import com.starfish_studios.another_furniture.block.entity.ShelfBlockEntity;
-import com.starfish_studios.another_furniture.client.renderer.blockentity.PlanterBoxRenderer;
-import com.starfish_studios.another_furniture.client.renderer.blockentity.ShelfRenderer;
 import com.starfish_studios.another_furniture.registry.AFBlockEntityTypes;
 import com.starfish_studios.another_furniture.registry.AFBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class AnotherFurnitureModule extends SimpleModule {
 
@@ -44,7 +34,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                         w -> new PlanterBoxBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("planter_boxes"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("planter_boxes"), Registry.ITEM_REGISTRY)
-                .useLootFromBase()
+                .copyParentDrop()
                 .defaultRecipe()
                 .addTile(AFBlockEntityTypes.PLANTER_BOX)
                 .setTab(() -> AnotherFurniture.TAB)
@@ -60,7 +50,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                         w -> new ShutterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shutters"), Registry.ITEM_REGISTRY)
-                .useLootFromBase()
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
                 .addTexture(modRes("block/shutter/oak_bottom"))
@@ -77,7 +67,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
-                .useLootFromBase()
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTab(() -> AnotherFurniture.TAB)
                 .setRenderType(() -> RenderType::cutout)

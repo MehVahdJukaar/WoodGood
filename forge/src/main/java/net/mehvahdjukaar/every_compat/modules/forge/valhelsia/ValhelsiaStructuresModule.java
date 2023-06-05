@@ -71,7 +71,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .addTag(modRes("cut_posts"), Registry.ITEM_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
-                .useLootFromBase()
+                .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -88,7 +88,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .addTag(modRes("cut_stripped_posts"), Registry.ITEM_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
-                .useLootFromBase()
+                .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 

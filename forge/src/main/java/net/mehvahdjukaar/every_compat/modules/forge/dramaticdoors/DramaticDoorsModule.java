@@ -35,7 +35,7 @@ public class DramaticDoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> DramaticDoors.MAIN_TAB)
-                .useLootFromBase()
+                .copyParentDrop()
                 .defaultRecipe()
                 .build();
 
@@ -50,7 +50,7 @@ public class DramaticDoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> DramaticDoors.MAIN_TAB)
-                .useLootFromBase()
+                .copyParentDrop()
                 .defaultRecipe()
                 .build();
 

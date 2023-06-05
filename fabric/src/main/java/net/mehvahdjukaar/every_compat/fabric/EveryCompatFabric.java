@@ -53,7 +53,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 
     public void onClientSetup() {
         EveryCompatClient.commonInit();
-        EveryCompatClient.commonSetup();
+        EveryCompatClient.clientSetup();
         EveryCompat.ALL_WOODS.get().registerFabricRenderer();
     }
 }

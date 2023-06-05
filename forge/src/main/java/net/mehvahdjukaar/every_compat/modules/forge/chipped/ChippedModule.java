@@ -741,7 +741,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
+                .noDrops()
                 .setTab(() -> tab)
                 .build();
 
@@ -1915,9 +1915,11 @@ public class ChippedModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
 
-        handler.dynamicPack.addJson(torch.getBaseBlock().getLootTable(),
-                LootTables.serialize(new LootTable.Builder().build()),
-                ResType.LOOT_TABLES);
+        //use this. also set the entry to no drop so we dont have 2
+        for(var b : barredDoor.blocks.values()){
+            handler.dynamicPack.addLootTable(b, BlockLoot.createDoorTable(b));
+        }
+
         handler.dynamicPack.addJson(wallTorch.getBaseBlock().getLootTable(),
                 LootTables.serialize(new LootTable.Builder().build()),
                 ResType.LOOT_TABLES);

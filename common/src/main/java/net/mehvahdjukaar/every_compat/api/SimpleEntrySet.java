@@ -25,7 +25,6 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.core.mixins.accessor.BlockLootAccessor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
@@ -43,9 +42,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,7 +75,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     protected final SimpleEntrySet.ITileHolder<?> tileHolder;
 
     protected final Supplier<CreativeModeTab> tab;
-    protected final boolean copyLoot;
+    protected final LootTableMode lootMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
     protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
@@ -99,7 +95,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
                           Supplier<@Nullable B> baseBlock,
                           Supplier<T> baseType,
                           Supplier<CreativeModeTab> tab,
-                          boolean copyLoot,
+                          LootTableMode lootMode,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                           @Nullable Supplier<Supplier<RenderType>> renderType,
@@ -111,7 +107,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         this.prefix = prefix;
         this.tileHolder = tileFactory;
         this.tab = tab;
-        this.copyLoot = copyLoot;
+        this.lootMode = lootMode;
         this.baseBlock = baseBlock;
         this.baseType = baseType;
         this.itemFactory = itemFactory;
@@ -133,6 +129,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
         disabled = Suppliers.memoize(() -> this.getBaseBlock() == null);
     }
+
 
     public ITileHolder<?> getTileHolder() {
         return tileHolder;
@@ -192,7 +189,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         if (disabled.get()) return;
         Block base = getBaseBlock();
         if (base == null || base == Blocks.AIR)
-            throw new UnsupportedOperationException("Base block cant be null ("+this.typeName+ " for " +module.modId+" module)");
+            throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
         baseType.get().addChild(getChildKey(module), (Object) base);
 
         for (T w : woodTypes) {
@@ -207,6 +204,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
 
                 registry.register(EveryCompat.res(fullName), block);
                 w.addChild(getChildKey(module), (Object) block);
+
+                if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
+                    SIMPLE_DROPS.add(block);
+                }
             }
         }
     }
@@ -300,14 +301,16 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     @Override
     public void generateLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         if (disabled.get()) return;
-        if (copyLoot) {
+        if (lootMode == LootTableMode.COPY_FROM_PARENT) {
             ResourceLocation reg = Utils.getID(getBaseBlock());
             ResourcesUtils.addBlockResources(module.getModId(), manager, pack, blocks, baseType.get().getTypeName(),
                     ResType.BLOCK_LOOT_TABLES.getPath(reg));
 
-        } else {
+        } else if (lootMode == LootTableMode.DROP_SELF) {
             //drop self
-            blocks.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+            if (!YEET_JSONS) {
+                blocks.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+            }
         }
     }
 
@@ -451,7 +454,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         @Nullable
         protected final String prefix;
         protected Supplier<CreativeModeTab> tab = () -> CreativeModeTab.TAB_DECORATIONS;
-        protected boolean copyLoot = false;
+        protected LootTableMode lootMode = LootTableMode.DROP_SELF;
         protected final Function<T, B> blockFactory;
         @Nullable
         protected TriFunction<T, B, Item.Properties, Item> itemFactory;
@@ -476,7 +479,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         }
 
         public SimpleEntrySet<T, B> build() {
-            var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, copyLoot,
+            var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, lootMode,
                     itemFactory, tileHolder, renderType, palette, extraModelTransform);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
@@ -518,8 +521,19 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         /**
          * As opposed to just dropping itself
          */
-        public Builder<T, B> useLootFromBase() {
-            this.copyLoot = true;
+        public Builder<T, B> copyParentDrop() {
+            this.lootMode = LootTableMode.COPY_FROM_PARENT;
+            return this;
+        }
+
+        //default
+        public Builder<T, B> dropSelf() {
+            this.lootMode = LootTableMode.DROP_SELF;
+            return this;
+        }
+
+        public Builder<T, B> noDrops() {
+            this.lootMode = LootTableMode.NO_LOOT;
             return this;
         }
 
@@ -618,4 +632,17 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
         }
     }
 
+
+    private static final boolean YEET_JSONS = true;
+    private static final Set<Block> SIMPLE_DROPS = new HashSet<>();
+
+    public static boolean isSimpleDrop(Block block) {
+        return SIMPLE_DROPS.contains(block);
+    }
+
+    public enum LootTableMode {
+        DROP_SELF,
+        COPY_FROM_PARENT,
+        NO_LOOT
+    }
 }

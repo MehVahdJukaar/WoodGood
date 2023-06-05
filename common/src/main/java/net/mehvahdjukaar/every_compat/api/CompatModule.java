@@ -132,16 +132,7 @@ public abstract class CompatModule {
 
     //resource pack stuff
 
-    public void addStaticServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-
-    }
-
-
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-
-    }
-
-    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
 
     }
 

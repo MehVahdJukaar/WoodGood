@@ -14,6 +14,9 @@ loom {
     forge {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
+        mixinConfig  "everycomp-common.mixins.json"
+
     }
 }
 
@@ -118,9 +121,10 @@ dependencies {
     modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238")
     modCompileOnly("curse.maven:valhelsia-core-416935:4181245")
 
-    // modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
+    modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
+   // modImplementation("curse.maven:selene-499980:4491267")
     modImplementation("curse.maven:roughly-enough-items-310111:4119141")
-    modImplementation("curse.maven:selene-499980:4491267")
+
     modImplementation("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 

@@ -32,17 +32,6 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
     }
 
     @Override
-    public void generateStaticAssetsOnStartup(ResourceManager manager) {
-        EveryCompat.forAllModules(m -> {
-            try {
-                m.addStaticClientResources(this, manager);
-            } catch (Exception e) {
-                getLogger().error("Failed to generate client static assets for module {}: {}", m, e);
-            }
-        });
-    }
-
-    @Override
     public void addDynamicTranslations(AfterLanguageLoadEvent lang) {
         EveryCompat.forAllModules(m -> {
             m.addTranslations(this, lang);

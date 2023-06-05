@@ -44,7 +44,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.SLABS, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.SLABS, Registry.ITEM_REGISTRY)
                 .defaultRecipe()
-                .useLootFromBase()
+                .copyParentDrop()
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .build();
 

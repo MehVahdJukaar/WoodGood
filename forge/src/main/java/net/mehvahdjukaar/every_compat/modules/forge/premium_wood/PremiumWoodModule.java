@@ -37,7 +37,7 @@ public class PremiumWoodModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/tiger/tiger_crafting_table_top"))
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .useLootFromBase()
+                .copyParentDrop()
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
@@ -51,7 +51,7 @@ public class PremiumWoodModule extends SimpleModule {
                 .addTextureM(modRes("block/tiger/tiger_bookshelf"), EveryCompat.res("block/pw/tiger_bookshelf_m"))
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .useLootFromBase()
+                .copyParentDrop()
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .build();

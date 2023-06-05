@@ -19,7 +19,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
@@ -87,7 +86,7 @@ public class QuarkModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         (w, m) -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(), m, w.canBurn()))
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
-                .useLootFromBase()
+                .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Items.BOOKSHELVES, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Items.BOOKSHELVES, Registry.ITEM_REGISTRY)

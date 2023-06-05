@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.forge.abnormal;
 
-import com.google.common.collect.ImmutableSet;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.BlueprintLadderBlock;
 import com.teamabnormals.blueprint.common.block.BookshelfBlock;
@@ -15,13 +14,10 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -37,25 +33,17 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.PoiTypeTags;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Supplier;
 
 
 public class WoodworksModule extends SimpleModule {
@@ -80,7 +68,7 @@ public class WoodworksModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
-                .useLootFromBase()
+                .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Items.BOOKSHELVES, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Items.BOOKSHELVES, Registry.ITEM_REGISTRY)
@@ -94,7 +82,7 @@ public class WoodworksModule extends SimpleModule {
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .useLootFromBase()
+                .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/oak_boards"))
                 .defaultRecipe()
@@ -175,7 +163,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(modRes("leaf_piles"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .setRenderType(() -> RenderType::cutout)
-                .useLootFromBase()
+                .copyParentDrop()
                 .defaultRecipe()
                 .build();
 

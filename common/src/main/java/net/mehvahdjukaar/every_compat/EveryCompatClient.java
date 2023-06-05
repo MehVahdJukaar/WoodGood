@@ -25,7 +25,7 @@ public class EveryCompatClient {
         EveryCompat.forAllModules(m -> m.registerBlockEntityRenderers(event));
     }
 
-    public static void commonSetup() {
+    public static void clientSetup() {
         EveryCompat.forAllModules(CompatModule::onClientSetup);
     }
 

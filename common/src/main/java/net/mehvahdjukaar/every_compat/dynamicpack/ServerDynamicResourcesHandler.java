@@ -41,16 +41,4 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesProvider {
         });
     }
 
-    @Override
-    public void generateStaticAssetsOnStartup(ResourceManager manager) {
-        EveryCompat.forAllModules(m -> {
-            try {
-                m.addStaticServerResources(this, manager);
-            } catch (Exception e) {
-                getLogger().error("Failed to generate server static assets for module {} : {}", m, e);
-            }
-        });
-    }
-
-
 }

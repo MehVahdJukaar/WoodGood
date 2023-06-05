@@ -4,7 +4,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -14,7 +13,6 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
@@ -49,7 +47,7 @@ public class TwilightForestModule extends SimpleModule {
                 .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("wood/oak_banister"))
-                .useLootFromBase()
+                .copyParentDrop()
                 .setTab(() -> TFItems.creativeTab)
                 .build();
 
@@ -126,11 +124,6 @@ public class TwilightForestModule extends SimpleModule {
                 (s, l, pos, i) -> l != null && pos != null ?
                         BiomeColors.getAverageGrassColor(l, pos) : -1,
                 hollowLogsHorizontal.blocks.values().toArray(Block[]::new));
-    }
-
-    @Override
-    public void addStaticClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addStaticClientResources(handler, manager);
     }
 
     @Nullable
