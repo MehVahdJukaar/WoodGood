@@ -21,7 +21,7 @@ public class WoodsterModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> ladders;
 
     public WoodsterModule(String modId) {
-        super(modId, "salwood");
+        super(modId, "wdst");
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         () -> getModBlock("oak_chiseled_bookshelf"),
@@ -30,15 +30,15 @@ public class WoodsterModule extends SimpleModule {
                 .setTab(() -> WoodsterTabs.WOODSTER)
                 .useLootFromBase()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_0"))
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_1"))
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_2"))
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_3"))
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_4"))
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_5"))
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_6"))
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_side"))
-                .addTexture(EveryCompat.res("block/oak_chiseled_bookshelf_top"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_0"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_1"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_2"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_3"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_4"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_5"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_6"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_side"))
+                .addTexture(modRes("block/oak_chiseled_bookshelf_top"))
                 //.addTile(ChiseledBookshelfBlockEntity::new)
                 .build();
 
@@ -51,7 +51,7 @@ public class WoodsterModule extends SimpleModule {
                 .setTab(() -> WoodsterTabs.WOODSTER)
                 .useLootFromBase()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTexture(EveryCompat.res("block/spruce_bookshelf"))
+                .addTexture(modRes("block/spruce_bookshelf"))
                 .build();
 
         this.addEntry(books);
@@ -66,7 +66,7 @@ public class WoodsterModule extends SimpleModule {
                 .addTag(new ResourceLocation("minecraft:ladders"), Registry.BLOCK_REGISTRY)
                 .addTag(new ResourceLocation("minecraft:ladders"), Registry.ITEM_REGISTRY)
                 .defaultRecipe()
-                .addTexture(EveryCompat.res("block/spruce_ladder"))
+                .addTexture(modRes("block/spruce_ladder"))
                 .build();
 
         this.addEntry(ladders);

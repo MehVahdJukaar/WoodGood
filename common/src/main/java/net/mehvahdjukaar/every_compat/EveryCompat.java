@@ -120,7 +120,6 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, Registry.BLOCK_ENTITY_TYPE);
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, Registry.ENTITY_TYPE);
 
-
     }
 
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
