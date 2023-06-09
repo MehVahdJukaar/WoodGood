@@ -38,19 +38,18 @@ public class WoodsterModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_chiseled_bookshelf_6"),modRes( "block/everycomp_chiseled_bookself_6"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_top"))
-                //.addTile(ChiseledBookshelfBlockEntity::new)
                 .build();
 
         this.addEntry(chiseled_books);
 
         books = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        () -> getModBlock("spruce_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new BookshelfBlock(Utils.copyPropertySafe(getModBlock("spruce_bookshelf"))))
+                        () -> getModBlock("acacia_bookshelf"),
+                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        w -> new BookshelfBlock(Utils.copyPropertySafe(getModBlock("acacia_bookshelf"))))
                 .setTab(() -> WoodsterTabs.WOODSTER)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTextureM(modRes("block/spruce_bookshelf"),modRes( "block/everycomp_bookshelf"))
+                .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .build();
 
         this.addEntry(books);
@@ -65,7 +64,7 @@ public class WoodsterModule extends SimpleModule {
                 .addTag(new ResourceLocation("minecraft:ladders"), Registry.BLOCK_REGISTRY)
                 .addTag(new ResourceLocation("minecraft:ladders"), Registry.ITEM_REGISTRY)
                 .defaultRecipe()
-                .addTextureM(modRes("block/spruce_ladder"),modRes( "block/everycomp_ladder"))
+                .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
 
         this.addEntry(ladders);
