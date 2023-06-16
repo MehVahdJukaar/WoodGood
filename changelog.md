@@ -1,1 +1,1 @@
-added some optional debugging
+- some chipped stuff. if you got that mod on expect EC to register an absurd amount of blocks. you have been warned

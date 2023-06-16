@@ -28,7 +28,7 @@ dependencies {
    modCompileOnly("curse.maven:handcrafted-538214:4437458")
   // modCompileOnly("curse.maven:missing-wilds-622590:3891602")
    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
-   modCompileOnly("curse.maven:twigs-496913:4531594")
+   modCompileOnly("curse.maven:twigs-496913:4533061")
 
 
 

@@ -37,13 +37,13 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                Class<? extends vazkii.quark.base.module.QuarkModule> module,
                                Supplier<B> baseBlock, Supplier<T> baseType,
                                BiFunction<T, vazkii.quark.base.module.QuarkModule, B> blockSupplier,
-                               Supplier<CreativeModeTab> tab, boolean copyLoot,
+                               Supplier<CreativeModeTab> tab, LootTableMode tableMode,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                                @Nullable Supplier<Supplier<RenderType>> renderType,
                                @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
-        super(type, name, prefix, null, baseBlock, baseType, tab, copyLoot, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform);
+        super(type, name, prefix, null, baseBlock, baseType, tab, tableMode, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform);
         this.blockSupplier = blockSupplier;
         this.quarkModule = module;
     }

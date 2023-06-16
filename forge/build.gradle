@@ -169,7 +169,7 @@ dependencies {
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modImplementation("curse.maven:the-twilight-forest-227639:4389567")
-    modImplementation("curse.maven:twigs-496913:4531850")
+    modImplementation("curse.maven:twigs-496913:4533061")
     modCompileOnly("curse.maven:woodworks-543610:4023081")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
