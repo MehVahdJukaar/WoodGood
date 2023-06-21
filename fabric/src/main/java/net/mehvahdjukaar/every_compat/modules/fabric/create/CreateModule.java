@@ -1,20 +1,14 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.create;
 
-import com.simibubi.create.CreateClient;
-import com.simibubi.create.content.palettes.ConnectedGlassPaneBlock;
-import com.simibubi.create.content.palettes.WindowBlock;
-import com.simibubi.create.foundation.block.connected.*;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
+import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;

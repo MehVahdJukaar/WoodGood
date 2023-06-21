@@ -1,1 +1,3 @@
-- some chipped stuff. if you got that mod on expect EC to register an absurd amount of blocks. you have been warned
+- re added wip chipped module. beware of your ram. also some recipes/loot tables arent done there
+- updated craete
+- updated macaw roofs
