@@ -1929,7 +1929,9 @@ public class ChippedModule extends SimpleModule {
 
         for (var w : WoodTypeRegistry.getTypes()) {
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(w.id.getNamespace(),w.id.getPath() + "_planks"));
-            tagBuilder.addEntry(barredDoor.blocks.get(w));
+            for(var e : this.getEntries()){
+                tagBuilder.addEntry(e.blocks.get(w));
+            }
             handler.dynamicPack.addTag(tagBuilder, Registry.BLOCK_REGISTRY);
             handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
         }

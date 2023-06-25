@@ -164,7 +164,7 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
     modImplementation("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:4418663")
-    modCompileOnly("curse.maven:quark-243121:4469559")
+    modImplementation("curse.maven:quark-243121:4469559")
     modImplementation("curse.maven:rechiseled-558998:4364936")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
