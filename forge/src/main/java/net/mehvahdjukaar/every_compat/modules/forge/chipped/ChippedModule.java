@@ -1,7 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.forge.chipped;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import earth.terrarium.chipped.common.recipe.ChippedRecipe;
 import earth.terrarium.chipped.common.registry.ModItems;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.EntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -24,6 +28,8 @@ import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
+
+import java.util.List;
 
 // TODO: Fix recipes & tags
 // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
@@ -1916,25 +1922,39 @@ public class ChippedModule extends SimpleModule {
 
 
         //use this. also set the entry to no drop so we dont have 2
-        for(var b : barredDoor.blocks.values()){
-            handler.dynamicPack.addLootTable(b, BlockLoot.createDoorTable(b));
-        }
-
-        handler.dynamicPack.addJson(wallTorch.getBaseBlock().getLootTable(),
-                LootTables.serialize(new LootTable.Builder().build()),
-                ResType.LOOT_TABLES);
-        handler.dynamicPack.addJson(barredDoor.getBaseBlock().getLootTable(),
-                LootTables.serialize(BlockLoot.createDoorTable(barredDoor.getBaseBlock()).build()),
-                ResType.LOOT_TABLES);
-
-        for (var w : WoodTypeRegistry.getTypes()) {
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(w.id.getNamespace(),w.id.getPath() + "_planks"));
-            for(var e : this.getEntries()){
-                tagBuilder.addEntry(e.blocks.get(w));
+        List<EntrySet<?,?>> doors = this.getEntries().stream().filter(e->e.typeName.contains("door")).toList();
+        for(var e : doors) {
+            for (var d : e.blocks.values()) {
+                handler.dynamicPack.addLootTable(d, BlockLoot.createDoorTable(d));
             }
-            handler.dynamicPack.addTag(tagBuilder, Registry.BLOCK_REGISTRY);
-            handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
         }
+
+        //id what this is for
+       // handler.dynamicPack.addJson(wallTorch.getBaseBlock().getLootTable(),
+         //       LootTables.serialize(new LootTable.Builder().build()),
+           //     ResType.LOOT_TABLES);
+
+        JsonArray ja = new JsonArray();
+        for (var w : WoodTypeRegistry.getTypes()) {
+            boolean hasSomething = false;
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(w.id.getNamespace(), w.id.getPath() + "_planks"));
+            for (var e : this.getEntries()) {
+                var v = e.blocks.get(w);
+                if (v != null) {
+                    hasSomething = true;
+                    tagBuilder.addEntry(v);
+                }
+            }
+            if (hasSomething) {
+                handler.dynamicPack.addTag(tagBuilder, Registry.BLOCK_REGISTRY);
+                handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
+                ja.add(tagBuilder.getId().toString());
+            }
+        }
+        JsonObject jo = new JsonObject();
+        jo.addProperty("type","chipped:carpenters_table");
+        jo.add("tags",ja);
+        handler.dynamicPack.addJson(EveryCompat.res("chipped_carpenters_table"), jo, ResType.RECIPES);
     }
 
 }
