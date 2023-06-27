@@ -66,14 +66,13 @@ dependencies {
     modImplementation("curse.maven:handcrafted-538214:4215478")
     modCompileOnly("curse.maven:infinity-buttons-661902:4259446")
 
-    modCompileOnly("curse.maven:macaws-bridges-351725:4446196")
+    modCompileOnly("curse.maven:macaws-bridges-351725:4599786")
     modCompileOnly("curse.maven:macaws-doors-378646:4446168")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:4203533")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:4203533")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4358250")
-    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:3923442")
+    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4585100")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590009")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:4429498")
+    modCompileOnly("curse.maven:macaws-trapdoors-400933:4608559")
     modCompileOnly("curse.maven:macaws-windows-363569:4271891")
 
     modImplementation("curse.maven:missing-wilds-622590:3891602")
