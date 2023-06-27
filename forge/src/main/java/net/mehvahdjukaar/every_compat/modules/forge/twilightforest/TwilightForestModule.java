@@ -55,7 +55,7 @@ public class TwilightForestModule extends SimpleModule {
 
 
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
-                        TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         w -> regIfPossible(w, () -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))))
                 .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
                 .noItem()
@@ -66,7 +66,7 @@ public class TwilightForestModule extends SimpleModule {
 
 
         hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
-                        TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return regIfPossible(w, () -> new HollowLogVertical(Utils.copyPropertySafe(w.log), RegistryObject.create(id, ForgeRegistries.BLOCKS)));
@@ -79,7 +79,7 @@ public class TwilightForestModule extends SimpleModule {
         this.addEntry(hollowLogsVertical);
 
         hollowLogsClimbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
-                        TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         w -> regIfPossible(w, () -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
                                 RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS))))
                 .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)

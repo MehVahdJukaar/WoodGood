@@ -44,7 +44,7 @@ public class WoodsterModule extends SimpleModule {
         this.addEntry(chiseled_books);
 
         books = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        WoodsterBlocks.ACACIA_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        WoodsterBlocks.ACACIA_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
