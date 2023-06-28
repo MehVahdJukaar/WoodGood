@@ -29,6 +29,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawer
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
+import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
@@ -108,7 +109,7 @@ public class EveryCompatForge extends EveryCompat {
         //addModule("handcrafted", () -> HandcraftedModule::new);
 
         // Disabled until custom block models work
-        // addModule("xercamod", () -> XercaModule::new);
+         addModule("xercamod", () -> XercaModule::new);
 
         if (PlatformHelper.getEnv().isClient()) {
             EveryCompatClient.commonInit();
