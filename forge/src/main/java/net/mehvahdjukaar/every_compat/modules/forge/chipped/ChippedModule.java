@@ -1926,7 +1926,7 @@ public class ChippedModule extends SimpleModule {
         JsonObject jo = new JsonObject();
         jo.addProperty("type","chipped:carpenters_table");
         jo.add("tags",ja);
-        handler.dynamicPack.addJson(EveryCompat.res("chipped_carpenters_table"), jo, ResType.RECIPES);
+        handler.dynamicPack.addJson(EveryCompat.res("carpenters_table"), jo, ResType.RECIPES);
     }
 
 }
