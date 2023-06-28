@@ -43,7 +43,7 @@ dependencies {
     modImplementation("curse.maven:architectury-api-419699:4384405")
     modImplementation("curse.maven:cloth-config-348521:3972420")
     modImplementation("curse.maven:resourceful-lib-570073:4434137")
-    modImplementation("curse.maven:roughly-enough-items-310111:4119140")
+    modImplementation("curse.maven:roughly-enough-items-310111:4573156")
     modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
     modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
     modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
