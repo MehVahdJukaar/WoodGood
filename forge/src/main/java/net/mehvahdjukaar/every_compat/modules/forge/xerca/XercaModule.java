@@ -52,7 +52,7 @@ public class XercaModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> carved7;
     public final SimpleEntrySet<WoodType, Block> carved8;
 
-    //TODO: Remove model transforms once parent models can be generated
+    //TODO: Remove model transforms once built-in models work
     // Fix recipes
 
     public XercaModule(String modId) {
