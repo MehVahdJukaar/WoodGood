@@ -113,7 +113,6 @@ public class ResourcesUtils {
         //blockstate
         try {
             StaticResource oakBlockstate = StaticResource.getOrFail(manager, ResType.BLOCKSTATES.getPath(oakId));
-
             //models
             JsonElement json = RPUtils.deserializeJson(oakBlockstate.getInputStream());
 

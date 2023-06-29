@@ -633,8 +633,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends EntryS
     }
 
 
-    private static final boolean YEET_JSONS = true;
-    private static final Set<Block> SIMPLE_DROPS = new HashSet<>();
+    protected static final boolean YEET_JSONS = true;
+    protected static final Set<Block> SIMPLE_DROPS = new HashSet<>();
 
     public static boolean isSimpleDrop(Block block) {
         return SIMPLE_DROPS.contains(block);

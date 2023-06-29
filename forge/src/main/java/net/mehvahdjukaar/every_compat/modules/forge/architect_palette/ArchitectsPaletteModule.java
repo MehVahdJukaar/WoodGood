@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.architect_palette;
 
 import architectspalette.content.blocks.BoardBlock;
 import architectspalette.content.blocks.RailingBlock;
+import architectspalette.core.ArchitectsPalette;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;

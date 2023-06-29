@@ -4,9 +4,11 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.client.renderer.RenderType;
@@ -37,7 +39,8 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                Class<? extends vazkii.quark.base.module.QuarkModule> module,
                                Supplier<B> baseBlock, Supplier<T> baseType,
                                BiFunction<T, vazkii.quark.base.module.QuarkModule, B> blockSupplier,
-                               Supplier<CreativeModeTab> tab, LootTableMode tableMode,
+                               Supplier<CreativeModeTab> tab,
+                               LootTableMode tableMode,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                                @Nullable Supplier<Supplier<RenderType>> renderType,
@@ -46,6 +49,11 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         super(type, name, prefix, null, baseBlock, baseType, tab, tableMode, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform);
         this.blockSupplier = blockSupplier;
         this.quarkModule = module;
+    }
+
+    @Override
+    public void generateLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
+        super.generateLootTables(module, pack, manager);
     }
 
     @Override
@@ -71,6 +79,11 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
 
                 registry.register(EveryCompat.res(name), block); //does not set registry name
                 w.addChild(module.getModId() + ":" + typeName,(Object) block);
+
+
+                if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
+                    SIMPLE_DROPS.add(block);
+                }
             }
         }
     }

@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -98,14 +99,15 @@ public class QuarkModule extends SimpleModule {
         this.addEntry(bookshelves);
 
         posts = QuarkSimpleEntrySet.builder(WoodType.class, "post",
-                        VariantBookshelvesModule.class,
+                        WoodenPostsModule.class,
                         () -> getModBlock("oak_post"),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w, m) -> {
                             if (w.getNamespace().equals("malum")) return null;
                             Block fence = w.getBlockOfThis("fence");
                             return fence == null ? null :
-                                    new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/", w.canBurn());
+                                    new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/",
+                                            fence.getSoundType(fence.defaultBlockState()) == SoundType.STEM);
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
@@ -117,7 +119,7 @@ public class QuarkModule extends SimpleModule {
         this.addEntry(posts);
 
         strippedPosts = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
-                        VariantBookshelvesModule.class,
+                        WoodenPostsModule.class,
                         () -> getModBlock("stripped_oak_post"),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w, m) -> {
@@ -125,7 +127,8 @@ public class QuarkModule extends SimpleModule {
                             Block fence = w.getBlockOfThis("fence");
                             Block stripped = w.getBlockOfThis("stripped_log");
                             return (fence == null || stripped == null) ? null :
-                                    new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_", w.canBurn());
+                                    new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_",
+                                            fence.getSoundType(fence.defaultBlockState()) == SoundType.STEM);
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
