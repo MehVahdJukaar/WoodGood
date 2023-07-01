@@ -193,6 +193,9 @@ public class WoodworksModule extends SimpleModule {
     @Override
     public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event){
         super.registerBlockColors(event);
+        leafPiles.blocks.forEach((t, b) -> {
+            event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
+        });
     }
 
     @Override
