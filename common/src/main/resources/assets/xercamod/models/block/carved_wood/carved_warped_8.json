@@ -7,6 +7,6 @@
     "south": "xercamod:block/carved_wood/carved_warped_8_side_abcd",
     "west":  "xercamod:block/carved_wood/carved_warped_8_side_abcd",
     "east":  "xercamod:block/carved_wood/carved_warped_8_side_abcd",
-    "particle": "block/stripped_warped_stem_top"
+    "particle": "xercamod:block/carved_wood/carved_warped_8_side_abcd"
   }
 }
