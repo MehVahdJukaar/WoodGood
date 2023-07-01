@@ -61,12 +61,12 @@ public class XercaModule extends SimpleModule {
                         Blocks.CARVED_WARPED_2, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addModelTransform(m -> m.replaceString("xercamod:block/carved_wood/carved_warped", "xercamod:block/carved_wood/carved_oak"))
+                .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_2_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_2_side_abcd"))
                 .addRecipe(modRes("carving/carved_warped_2_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_2_from_stripped_warped_log_carving"))
-                .createPaletteFromOak(this::nuetralPalette)
+                .createPaletteFromOak(this::darkestestPalette)
                 .setTab(() -> tab)
                 .build();
 
