@@ -117,16 +117,16 @@ dependencies {
     modCompileOnly("curse.maven:jei-238222:3940099")
     modCompileOnly("curse.maven:configured-457570:4462837")
     modImplementation("curse.maven:resourceful-lib-570073:4434139")
+    modImplementation("curse.maven:roughly-enough-items-310111:4573157")
     modImplementation("curse.maven:supermartijn642s-config-lib-438332:3871792")
     modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238")
-    modCompileOnly("curse.maven:valhelsia-core-416935:4181245")
-
-    //modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
+    modImplementation("curse.maven:valhelsia-core-416935:4181245")
     modImplementation("curse.maven:selene-499980:4569958")
-    modImplementation("curse.maven:roughly-enough-items-310111:4119141")
 
     modImplementation("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
+
+    //modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
 
     // Imports
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
@@ -135,7 +135,6 @@ dependencies {
     modCompileOnly("curse.maven:buildersaddition-389697:4008246")
     modCompileOnly("curse.maven:camp-chair-531744:3879293")
     modImplementation("curse.maven:chipped-456956:4463479")
-    modImplementation("curse.maven:woodster-869951:4567687")
     modCompileOnly("curse.maven:create-328085:4547147")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:dramatic-doors-380617:4507455")
@@ -148,14 +147,14 @@ dependencies {
     modCompileOnly("curse.maven:infinity-buttons-661902:4276396")
     modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
 
-    modCompileOnly("curse.maven:macaws-bridges-351725:4446187")
+    modImplementation("curse.maven:macaws-bridges-351725:4599799")
     modImplementation("curse.maven:macaws-doors-378646:4446154")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:4204550")
     modCompileOnly("curse.maven:macaws-furniture-359540:4419012")
-    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4358264")
-    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4126526")
-    modCompileOnly("curse.maven:macaws-roofs-352039:4590028")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:4429507")
+    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618179")
+    modImplementation("curse.maven:macaws-paths-and-pavings-629153:4585116")
+    modImplementation("curse.maven:macaws-roofs-352039:4590028")
+    modImplementation("curse.maven:macaws-trapdoors-400933:4608580")
     modCompileOnly("curse.maven:macaws-windows-363569:4203423")
 
     modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
@@ -171,6 +170,7 @@ dependencies {
     modImplementation("curse.maven:the-twilight-forest-227639:4389567")
     modImplementation("curse.maven:twigs-496913:4533061")
     modCompileOnly("curse.maven:woodworks-543610:4023081")
+    modImplementation("curse.maven:woodster-869951:4575175")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
     modCompileOnly("curse.maven:xercamod-341575:3947222")

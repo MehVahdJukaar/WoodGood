@@ -1,0 +1,10 @@
+
+{
+    "type": "xercamod:carving",
+    "ingredient": {
+        "item": "minecraft:warped_stem"
+    },
+    "result": "xercamod:carved_warped_4",
+    "count": 1
+}
+        

@@ -190,7 +190,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_bamboo_door_lower"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_lower_m"))
                 .addTextureM(modRes("block/oak_bamboo_door_upper"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_upper_m"))
                 .addTextureM(modRes("item/oak_bamboo_door"), EveryCompat.res("item/mcaw/doors/oak_bamboo_door_m"))
-//                .createPaletteFromOak(p -> p.remove(p.getDarkest()))
+                .createPaletteFromOak(this::darkerPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -336,7 +336,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .copyParentDrop()
                 .addRecipe(modRes("oak_swamp_door"))
                 .setRenderType(() -> RenderType::cutout)
-                .createPaletteFromOak(this::swampDoorPalette)
+                .createPaletteFromOak(this::darkerPalette)
                 .addTextureM(EveryCompat.res("block/oak_swamp_door_lower"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_lower_m"))
                 .addTextureM(EveryCompat.res("block/oak_swamp_door_upper"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_upper_m"))
                 .addTextureM(modRes("item/oak_swamp_door"), EveryCompat.res("item/mcaw/doors/oak_swamp_door_m"))
@@ -377,9 +377,10 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(WESTERN_DOORS);
     }
 
-    private void swampDoorPalette(Palette p) {
+    private void darkerPalette(Palette p) {
+        p.add(p.increaseInner());
         p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
+        p.remove(p.getLightest());
     }
 
     @Override

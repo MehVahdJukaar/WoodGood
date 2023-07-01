@@ -380,8 +380,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/fine_vertical_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::dullPalette)
@@ -396,8 +394,6 @@ public class ChippedModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/oak_planks/ctm/framed_oak_planks_ctm"))
                 .addTexture(EveryCompat.res("block/oak_planks/framed_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -411,8 +407,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/herringbone_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkestPalette)
@@ -426,8 +420,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/hewn_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -441,8 +433,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/laced_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -456,8 +446,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/nailed_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -472,8 +460,6 @@ public class ChippedModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/oak_planks/ctm/natural_oak_planks_ctm"))
                 .addTexture(EveryCompat.res("block/oak_planks/natural_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkPalette)
@@ -488,8 +474,6 @@ public class ChippedModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/oak_planks/ctm/pegged_oak_planks_ctm"))
                 .addTexture(EveryCompat.res("block/oak_planks/pegged_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkPalette)
@@ -503,8 +487,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/polished_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::dullerPalette)
@@ -518,8 +500,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/railed_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tab)
@@ -532,8 +512,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/shifted_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -547,8 +525,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/slanted_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkestPalette)
@@ -562,8 +538,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/smooth_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -577,8 +551,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/stacked_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -592,8 +564,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/thin_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -607,8 +577,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/tiled_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -622,8 +590,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/versailles_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -637,8 +603,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/vertical_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tab)
@@ -651,8 +615,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/vertically_railed_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tab)
@@ -666,8 +628,6 @@ public class ChippedModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/oak_planks/ctm/whirlwind_oak_planks_ctm"))
                 .addTexture(EveryCompat.res("block/oak_planks/whirlwind_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkPalette)
@@ -681,8 +641,6 @@ public class ChippedModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTexture(modRes("block/oak_planks/wickered_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-
-
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .createPaletteFromOak(this::darkerPalette)
@@ -747,8 +705,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .noDrops()
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(barredDoor);
@@ -768,6 +726,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(beachDoor);
@@ -788,6 +747,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(boardedDoor);
@@ -808,6 +768,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(dualPaneledDoor);
@@ -828,6 +789,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(fortifiedDoor);
@@ -848,6 +810,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(gatedDoor);
@@ -867,6 +830,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(glassDoor);
@@ -887,6 +851,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(heavyDoor);
@@ -906,6 +871,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(overgrownDoor);
@@ -926,6 +892,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(paneledDoor);
@@ -946,6 +913,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(paperDoor);
@@ -966,6 +934,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(pressedDoor);
@@ -986,6 +955,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(screenDoor);
@@ -1006,6 +976,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(secretDoor);
@@ -1026,6 +997,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(shackDoor);
@@ -1046,6 +1018,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(slidingDoor);
@@ -1066,6 +1039,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(supportedDoor);
@@ -1086,6 +1060,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(tileWindowedDoor);
@@ -1106,6 +1081,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(tiledDoor);
@@ -1126,6 +1102,7 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .noDrops()
                 .build();
 
         this.addEntry(windowedDoor);
@@ -1921,18 +1898,13 @@ public class ChippedModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
 
-        //use this. also set the entry to no drop so we dont have 2
+        //use this. also set the entry to no drop so we don't have 2
         List<EntrySet<?,?>> doors = this.getEntries().stream().filter(e->e.typeName.contains("door")).toList();
         for(var e : doors) {
             for (var d : e.blocks.values()) {
                 handler.dynamicPack.addLootTable(d, BlockLoot.createDoorTable(d));
             }
         }
-
-        //id what this is for
-       // handler.dynamicPack.addJson(wallTorch.getBaseBlock().getLootTable(),
-         //       LootTables.serialize(new LootTable.Builder().build()),
-           //     ResType.LOOT_TABLES);
 
         JsonArray ja = new JsonArray();
         for (var w : WoodTypeRegistry.getTypes()) {
@@ -1954,7 +1926,7 @@ public class ChippedModule extends SimpleModule {
         JsonObject jo = new JsonObject();
         jo.addProperty("type","chipped:carpenters_table");
         jo.add("tags",ja);
-        handler.dynamicPack.addJson(EveryCompat.res("chipped_carpenters_table"), jo, ResType.RECIPES);
+        handler.dynamicPack.addJson(EveryCompat.res("carpenters_table"), jo, ResType.RECIPES);
     }
 
 }

@@ -1,0 +1,12 @@
+{
+  "parent": "xercamod:block/carved_wood/carved_warped",
+  "textures": {
+    "up": "xercamod:block/carved_wood/carved_warped_7_top",
+    "down": "xercamod:block/carved_wood/carved_warped_7_top",
+    "north": "xercamod:block/carved_wood/carved_warped_7_side_bcd",
+    "south": "xercamod:block/carved_wood/carved_warped_7_side_a",
+    "west":  "xercamod:block/carved_wood/carved_warped_7_side_bcd",
+    "east":  "xercamod:block/carved_wood/carved_warped_7_side_bcd",
+    "particle": "xercamod:block/carved_wood/carved_warped_7_side_bcd"
+  }
+}
