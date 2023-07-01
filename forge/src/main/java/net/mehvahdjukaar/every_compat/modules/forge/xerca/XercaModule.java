@@ -1,44 +1,27 @@
 package net.mehvahdjukaar.every_compat.modules.forge.xerca;
 
 import com.google.gson.JsonObject;
-import io.github.wouink.furnish.setup.FurnishRegistries;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.core.Moonlight;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.Registry;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.Nullable;
 import xerca.xercamod.common.DecoCreativeTab;
 import xerca.xercamod.common.block.BlockCarvedLog;
 import xerca.xercamod.common.block.Blocks;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class XercaModule extends SimpleModule {
@@ -59,8 +42,6 @@ public class XercaModule extends SimpleModule {
         super(modId, "x");
         CreativeModeTab tab = DecoCreativeTab.TAB_BUILDING_BLOCKS;
 
-//        TemplateRecipeManager.registerTemplate(modRes("recipes/carving"), CarvingRecipeTemplate::new);
-
         carved1 = SimpleEntrySet.builder(WoodType.class, "1", "carved",
                         Blocks.CARVED_WARPED_1, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
@@ -70,6 +51,7 @@ public class XercaModule extends SimpleModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_1_side_abcd"))
                 .addRecipe(modRes("carving/carved_warped_1_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_1_from_stripped_warped_log_carving"))
+                .createPaletteFromOak(this::darkestPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -84,7 +66,7 @@ public class XercaModule extends SimpleModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_2_side_abcd"))
                 .addRecipe(modRes("carving/carved_warped_2_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_2_from_stripped_warped_log_carving"))
-                .createPaletteFromOak(this::darkerPalette)
+                .createPaletteFromOak(this::nuetralPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -99,7 +81,7 @@ public class XercaModule extends SimpleModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_3_side_abcd"))
                 .addRecipe(modRes("carving/carved_warped_3_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_3_from_stripped_warped_log_carving"))
-                .createPaletteFromOak(this::darkerPalette)
+                .createPaletteFromOak(this::darkestestPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -114,7 +96,7 @@ public class XercaModule extends SimpleModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_4_side_abcd"))
                 .addRecipe(modRes("carving/carved_warped_4_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_4_from_stripped_warped_log_carving"))
-                .createPaletteFromOak(this::darkerPalette)
+                .createPaletteFromOak(this::darkestestPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -130,7 +112,7 @@ public class XercaModule extends SimpleModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_5_side_cd"))
                 .addRecipe(modRes("carving/carved_warped_5_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_5_from_stripped_warped_log_carving"))
-                .createPaletteFromOak(this::darkerPalette)
+                .createPaletteFromOak(this::darkestestPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -165,7 +147,7 @@ public class XercaModule extends SimpleModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_7_side_bcd"))
                 .addRecipe(modRes("carving/carved_warped_7_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_7_from_stripped_warped_log_carving"))
-                .createPaletteFromOak(this::darkerPalette)
+                .createPaletteFromOak(this::nuetralPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -180,18 +162,39 @@ public class XercaModule extends SimpleModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_8_side_abcd"))
                 .addRecipe(modRes("carving/carved_warped_8_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_8_from_stripped_warped_log_carving"))
-                .createPaletteFromOak(this::darkerPalette)
+                .createPaletteFromOak(this::nuetralPalette)
                 .setTab(() -> tab)
                 .build();
 
         this.addEntry(carved8);
     }
 
+    private void nuetralPalette(Palette p) {
+        p.add(p.increaseInner());
+        p.remove(p.getDarkest());
+        p.remove(p.getLightest());
+    }
+
     private void darkerPalette(Palette p) {
         p.add(p.increaseInner());
+        p.remove(p.getDarkest());
+        p.remove(p.getLightest());
+        p.remove(p.getLightest());
+    }
+
+    private void darkestPalette(Palette p) {
+        p.add(p.increaseInner());
+        p.remove(p.getDarkest());
+        p.remove(p.getLightest());
+        p.remove(p.getLightest());
+        p.remove(p.getLightest());
+    }
+
+    private void darkestestPalette(Palette p) {
         p.add(p.increaseInner());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
+        p.remove(p.getLightest());
         p.remove(p.getLightest());
         p.remove(p.getLightest());
     }
