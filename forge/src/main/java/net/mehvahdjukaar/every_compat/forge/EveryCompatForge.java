@@ -15,6 +15,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.forge.hearth_and_home.HearthAndHomeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
@@ -78,6 +79,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("furnish", () -> FurnishModule::new);
+        addModule("hearth_and_home", () -> HearthAndHomeModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
