@@ -1909,7 +1909,7 @@ public class ChippedModule extends SimpleModule {
         JsonArray ja = new JsonArray();
         for (var w : WoodTypeRegistry.getTypes()) {
             boolean hasSomething = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(w.id.getNamespace(), w.id.getPath() + "_planks"));
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation("every_comp",id.getNamespace()+"/"+id.getPath()+ "_planks"));
             for (var e : this.getEntries()) {
                 var v = e.blocks.get(w);
                 if (v != null) {
