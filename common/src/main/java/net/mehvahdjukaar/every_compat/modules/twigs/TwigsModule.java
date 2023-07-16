@@ -8,6 +8,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 public class TwigsModule extends SimpleModule {
@@ -22,6 +23,7 @@ public class TwigsModule extends SimpleModule {
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
                 .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak((p) -> p.remove(p.getDarkest()))

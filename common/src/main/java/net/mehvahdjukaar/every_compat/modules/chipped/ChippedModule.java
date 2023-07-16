@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.chipped;
+package net.mehvahdjukaar.every_compat.modules.chipped;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

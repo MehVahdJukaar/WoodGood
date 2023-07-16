@@ -9,6 +9,8 @@ import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
+import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
+import net.mehvahdjukaar.every_compat.modules.heart_and_home.HearthAndHomeModule;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
@@ -109,6 +111,8 @@ public abstract class EveryCompat {
         addOtherCompatMod("abnormals_delight", "environmental", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
 
+        addModule("hearth_and_home", () -> HearthAndHomeModule::new);
+        addModule("chipped", () -> ChippedModule::new);
 
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
