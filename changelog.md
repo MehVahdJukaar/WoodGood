@@ -1,1 +1,2 @@
-fixed some issues with quark module
+added chipped module to fabric
+possibly fixed an issue with tags

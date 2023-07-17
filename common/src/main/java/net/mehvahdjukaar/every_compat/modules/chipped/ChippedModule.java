@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.chipped;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import earth.terrarium.chipped.common.recipe.ChippedRecipe;
 import earth.terrarium.chipped.common.registry.ModItems;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.EntrySet;
@@ -26,8 +25,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 
 import java.util.List;
 
@@ -1899,8 +1896,8 @@ public class ChippedModule extends SimpleModule {
 
 
         //use this. also set the entry to no drop so we don't have 2
-        List<EntrySet<?,?>> doors = this.getEntries().stream().filter(e->e.typeName.contains("door")).toList();
-        for(var e : doors) {
+        List<EntrySet<?, ?>> doors = this.getEntries().stream().filter(e -> e.typeName.contains("door")).toList();
+        for (var e : doors) {
             for (var d : e.blocks.values()) {
                 handler.dynamicPack.addLootTable(d, BlockLoot.createDoorTable(d));
             }
@@ -1909,7 +1906,9 @@ public class ChippedModule extends SimpleModule {
         JsonArray ja = new JsonArray();
         for (var w : WoodTypeRegistry.getTypes()) {
             boolean hasSomething = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation("every_comp",id.getNamespace()+"/"+id.getPath()+ "_planks"));
+            var id = w.id;
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation("every_comp",
+                    id.getNamespace() + "/" + id.getPath() + "_planks"));
             for (var e : this.getEntries()) {
                 var v = e.blocks.get(w);
                 if (v != null) {
@@ -1924,8 +1923,8 @@ public class ChippedModule extends SimpleModule {
             }
         }
         JsonObject jo = new JsonObject();
-        jo.addProperty("type","chipped:carpenters_table");
-        jo.add("tags",ja);
+        jo.addProperty("type", "chipped:carpenters_table");
+        jo.add("tags", ja);
         handler.dynamicPack.addJson(EveryCompat.res("carpenters_table"), jo, ResType.RECIPES);
     }
 
