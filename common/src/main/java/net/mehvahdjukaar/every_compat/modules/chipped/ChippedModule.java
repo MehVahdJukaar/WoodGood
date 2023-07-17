@@ -1902,13 +1902,14 @@ public class ChippedModule extends SimpleModule {
                 handler.dynamicPack.addLootTable(d, BlockLoot.createDoorTable(d));
             }
         }
-
+        SimpleTagBuilder bigTag = SimpleTagBuilder.of(EveryCompat.res(
+                "chipped_wooden_stuff"));
         JsonArray ja = new JsonArray();
         for (var w : WoodTypeRegistry.getTypes()) {
             boolean hasSomething = false;
             var id = w.id;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation("every_comp",
-                    id.getNamespace() + "/" + id.getPath() + "_planks"));
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation("chipped",
+                    id.getNamespace() + "_" + id.getPath() + "_planks"));
             for (var e : this.getEntries()) {
                 var v = e.blocks.get(w);
                 if (v != null) {
@@ -1917,11 +1918,13 @@ public class ChippedModule extends SimpleModule {
                 }
             }
             if (hasSomething) {
-                handler.dynamicPack.addTag(tagBuilder, Registry.BLOCK_REGISTRY);
                 handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
                 ja.add(tagBuilder.getId().toString());
+               // bigTag.addTag(tagBuilder);
             }
         }
+     //   handler.dynamicPack.addTag(bigTag, Registry.ITEM_REGISTRY);
+        ja.add(bigTag.getId().toString());
         JsonObject jo = new JsonObject();
         jo.addProperty("type", "chipped:carpenters_table");
         jo.add("tags", ja);

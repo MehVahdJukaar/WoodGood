@@ -17,6 +17,7 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesProvider {
         //needed for tags
         getPack().addNamespaces("minecraft");
         getPack().addNamespaces("forge");
+        getPack().addNamespaces(EveryCompat.MOD_ID);
         this.dynamicPack.generateDebugResources = PlatformHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get();
     }
 
