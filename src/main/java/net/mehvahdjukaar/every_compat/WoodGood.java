@@ -13,7 +13,6 @@ import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurniture
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
-import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.graveyard.GraveyardModule;
@@ -118,7 +117,7 @@ public class WoodGood {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
 
-        addModule("create", () -> CreateModule::new);
+       // addModule("create", () -> CreateModule::new);
         addModule("campchair", () -> CampChairModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
 

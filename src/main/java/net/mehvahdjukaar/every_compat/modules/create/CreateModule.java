@@ -1,5 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.create;
-
+/*
 import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
@@ -97,3 +97,4 @@ public class CreateModule extends SimpleModule {
     }
 
 }
+*/
