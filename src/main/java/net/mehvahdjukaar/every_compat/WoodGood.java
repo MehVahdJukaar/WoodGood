@@ -100,16 +100,16 @@ public class WoodGood {
         //also fix that one crash that idk what was about
 
         addModule("mcwlights", () -> MacawLightsModule::new);
-
         addModule("mcwdoors", () -> MacawDoorsModule::new);
-
+        addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
+        addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwpaths", () -> MacawPathsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
         addModule("mcwbridges", () -> MacawBridgesModule::new);
-        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
 
+        addModule("cfm", () -> MrCrayfishFurnitureModule::new);
 
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("twigs", () -> TwigsModule::new);
@@ -127,10 +127,10 @@ public class WoodGood {
         addModule("quark", () -> QuarkModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
 
+        //addModule("storagedrawers", () -> StorageDrawersModule::new); required fixing for rendering properly
         //addModule("graveyard", () -> GraveyardModule::new);
-        //addModule("benched", () -> BenchedModule::new);
+        //addModule("benched", () -> BenchedModule::new); Issue with model format, OBJ -> improperly rendering
         //addModule("projectbrazier", () -> ProjectBrazierModule::new);
-        //addModule("storagedrawers", () -> StorageDrawersModule::new);
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
 
