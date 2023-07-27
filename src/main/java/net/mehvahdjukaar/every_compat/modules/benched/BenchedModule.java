@@ -1,8 +1,14 @@
 package net.mehvahdjukaar.every_compat.modules.benched;
 
+/*
+ * The Benched mod use model format "OBJ" with another file "MTL", it's different from the normal FORMAT that Minecraft
+ * used to display an object or a model. Its disabled due to improperly rendering OBJ model because it's not implemented
+ */
+
 import com.supermartijn642.benched.blocks.BenchBlock;
-import com.supermartijn642.benched.blocks.BenchTile;
-import com.supermartijn642.benched.blocks.BenchTileRenderer;
+import com.supermartijn642.benched.blocks.BenchBlockEntity;
+import com.supermartijn642.benched.blocks.BenchBlockEntityRenderer;
+import com.supermartijn642.core.render.CustomBlockEntityRenderer;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -31,9 +37,10 @@ public class BenchedModule extends SimpleModule {
     public BenchedModule(String modId) {
         super(modId, "bd");
 
-        BENCHES = SimpleEntrySet.builder(WoodType.class, "bench",
-                        () -> this.getModBlock("spruce_bench"), () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
-                        w -> new CompatBenchBlock(this.shortenedId() + "/" + w.getVariantId("bench", false)))
+        BENCHES = SimpleEntrySet.builder(WoodType.class, "bench", () -> this.getModBlock("spruce_bench"),
+                    () -> WoodTypeRegistry.WOOD_TYPES.get(new ResourceLocation("spruce")),
+                    w -> new CompatBenchBlock(this.shortenedId() + "/" + w.getVariantId("bench", false))
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .defaultRecipe()
@@ -61,10 +68,10 @@ public class BenchedModule extends SimpleModule {
 
     @Override
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType<? extends BenchTile>) (BENCHES.getTileHolder().tile), context -> new BenchTileRenderer());
+        event.registerBlockEntityRenderer((BlockEntityType<? extends BenchBlockEntity>) (BENCHES.getTileHolder().tile), context -> CustomBlockEntityRenderer.of(new BenchBlockEntityRenderer()));
     }
 
-    class CompatBenchBlockEntity extends BenchTile {
+    class CompatBenchBlockEntity extends BenchBlockEntity {
 
         public CompatBenchBlockEntity(BlockPos pos, BlockState state) {
             super(pos, state);
@@ -78,7 +85,7 @@ public class BenchedModule extends SimpleModule {
 
     private class CompatBenchBlock extends BenchBlock {
         public CompatBenchBlock(String registryName) {
-            super(registryName);
+            super();
         }
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
