@@ -95,6 +95,10 @@ public abstract class CompatModule {
         name = name.substring(name.lastIndexOf("/")+1); //gets the base name
 
         String woodFrom = woodType.getNamespace();
+
+        // check if TerraFirmaCraft (tfc) mod exist, then won't discards wood types
+        if (woodFrom.equals("tfc")) return false;
+
         //discards wood types from this mod
         if (woodFrom.equals(modId)) return true; //quark, blossom
 
