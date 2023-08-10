@@ -25,6 +25,8 @@ import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
+import net.mehvahdjukaar.every_compat.modules.workshop.CarryOnBlacklist;
+import net.mehvahdjukaar.every_compat.modules.workshop.WorkshopForHandsomeAdventurerModule; 
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -131,9 +133,11 @@ public class WoodGood {
         //addModule("graveyard", () -> GraveyardModule::new);
         //addModule("benched", () -> BenchedModule::new); Issue with model format, OBJ -> improperly rendering
         //addModule("projectbrazier", () -> ProjectBrazierModule::new);
-
+        addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new); 
+		
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
-
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(CarryOnBlacklist::sendIMC);
+        
         BlockSetManager.addBlockSetRegistrationCallback(this::registerWoodStuff, Block.class, WoodType.class);
         BlockSetManager.addBlockSetRegistrationCallback(this::registerLeavesStuff, Block.class, LeavesType.class);
 

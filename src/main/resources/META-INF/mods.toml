@@ -62,5 +62,12 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     ordering="BEFORE"
     side="BOTH"
 
+[[dependencies.everycomp]]
+    modId="workshop_for_handsome_adventurer"
+    mandatory=false
+    versionRange="[1.07b,)"
+    ordering="AFTER"
+    side="BOTH"
 
+  
 
