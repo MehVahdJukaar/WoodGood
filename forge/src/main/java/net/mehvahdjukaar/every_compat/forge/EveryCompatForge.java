@@ -28,6 +28,8 @@ import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawer
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
+import net.mehvahdjukaar.every_compat.modules.forge.workshop.CarryOnBlacklist;
+import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
@@ -101,6 +103,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+		addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
 
         // addModule("graveyard", () -> GraveyardModule::new);
 
@@ -114,6 +117,7 @@ public class EveryCompatForge extends EveryCompat {
             EveryCompatClient.commonInit();
         }
 
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(CarryOnBlacklist::sendIMC); // used by WorkshopForHandsomeAdventurerModule
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onRemap);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onDataSync);
