@@ -160,10 +160,10 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     }
 
     public static <T extends BlockType, I extends Item> Builder<T, I> builder(Class<T> type, String name, String prefix,
-                                                                               Supplier<I> baseBlock, Supplier<T> baseType,
+                                                                               Supplier<I> baseItem, Supplier<T> baseType,
                                                                               Function<T, I> itemSupplier) {
 
-        return new Builder<>(type, name, prefix, baseType, baseBlock, itemSupplier);
+        return new Builder<>(type, name, prefix, baseType, baseItem, itemSupplier);
     }
 
     public static class Builder<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet.Builder<Builder<T,I>, T,Block,I> {

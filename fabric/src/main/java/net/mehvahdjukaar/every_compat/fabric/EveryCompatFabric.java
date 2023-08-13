@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
+import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
@@ -42,6 +43,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
         FabricSetupCallbacks.COMMON_SETUP.add(this::commonSetup);
 
+        forAllModules(CompatModule::onModInit);
     }
 
     public void onClientSetup() {

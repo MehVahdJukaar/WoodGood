@@ -1896,7 +1896,7 @@ public class ChippedModule extends SimpleModule {
 
 
         //use this. also set the entry to no drop so we don't have 2
-        List<EntrySet<?, ?>> doors = this.getEntries().stream().filter(e -> e.typeName.contains("door")).toList();
+        List<EntrySet<?, ?, ?>> doors = this.getEntries().stream().filter(e -> e.typeName.contains("door")).toList();
         for (var e : doors) {
             for (var d : e.blocks.values()) {
                 handler.dynamicPack.addLootTable(d, BlockLoot.createDoorTable(d));

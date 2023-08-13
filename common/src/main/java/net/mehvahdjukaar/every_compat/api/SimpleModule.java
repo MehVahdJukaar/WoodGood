@@ -21,7 +21,7 @@ import java.util.Map;
 public class SimpleModule extends CompatModule {
 
     private final String shortId;
-    private final Map<String, EntrySet<?, ?>> entries = new LinkedHashMap<>();
+    private final Map<String, EntrySet<?, ?, ?>> entries = new LinkedHashMap<>();
 
     protected int bloat = 0;
 
@@ -35,17 +35,17 @@ public class SimpleModule extends CompatModule {
         return bloat;
     }
 
-    public void addEntry(EntrySet<?, ?> entryHolder) {
+    public void addEntry(EntrySet<?, ?, ?> entryHolder) {
         this.entries.put(entryHolder.getName(), entryHolder);
 
         EveryCompat.addEntryType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
     }
 
-    public Collection<EntrySet<?, ?>> getEntries() {
+    public Collection<EntrySet<?, ?, ?>> getEntries() {
         return entries.values();
     }
 
-    public EntrySet<?, ?> getEntry(String name) {
+    public EntrySet<?, ?, ?> getEntry(String name) {
         var e = entries.get(name);
         if (e == null)
             throw new UnsupportedOperationException(String.format("This module does not have entries of type %s", name));

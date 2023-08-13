@@ -350,8 +350,13 @@ public class ResourcesUtils {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     if (i.getItemCategory() != null) {
                         String id = RecipeBuilder.getDefaultRecipeId(i).toString();
-                        if (index != 0) id += "_" + index;
-                        FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
+                        FinishedRecipe newR;
+                        if (index != 0) {
+                            id += "_" + index;
+                            newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
+                        } else {
+                            newR = template.createSimilar(fromType, w, w.mainChild().asItem());
+                        }
                         if (newR == null) return;
                         //not even needed
                         newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());

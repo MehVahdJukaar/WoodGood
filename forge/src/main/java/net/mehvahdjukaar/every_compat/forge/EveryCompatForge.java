@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.forge;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
+import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
@@ -28,12 +29,8 @@ import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawer
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
-import net.mehvahdjukaar.every_compat.modules.forge.workshop.CarryOnBlacklist;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
-import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
-import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
-import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -109,10 +106,11 @@ public class EveryCompatForge extends EveryCompat {
             EveryCompatClient.commonInit();
         }
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(CarryOnBlacklist::sendIMC); // used by WorkshopForHandsomeAdventurerModule
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onRemap);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onDataSync);
+
+        forAllModules(CompatModule::onModInit);
     }
 
     @SubscribeEvent
