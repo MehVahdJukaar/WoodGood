@@ -252,7 +252,7 @@ public class Utils {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     if (i.getItemCategory() != null) {
                         String id = RecipeBuilder.getDefaultRecipeId(i).toString();
-                        if (index == 0) id += "_" + index;
+                        if (index != 0) id += "_" + index;
                         FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
                         if (newR == null) return;
                         var builder = ConditionalRecipe.builder()
