@@ -389,7 +389,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                                 if (i != null) {
                                     atLeastOneChanged = true;
                                     ingredient = Ingredient.of(new ItemLike[]{i});
-                                    break;  // so, we're just keeping one item?
+                                    break;  // so, we're just keeping one item? //this code should be different in 1.19
                                 }
                             }
                         }
