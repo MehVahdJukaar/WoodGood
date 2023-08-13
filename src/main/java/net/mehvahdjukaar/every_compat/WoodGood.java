@@ -119,7 +119,7 @@ public class WoodGood {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
 
-       // addModule("create", () -> CreateModule::new);
+        addModule("create", () -> CreateModule::new);
         addModule("campchair", () -> CampChairModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
 
