@@ -184,7 +184,7 @@ dependencies {
     implementation fg.deobf("curse.maven:workshop-for-handsome-adventurer-875843:4688655")
 
    // implementation fg.deobf("curse.maven:apple-crates-630726:3834400")
-    //implementation fg.deobf("com.tterrag.registrate:Registrate:MC1.18.2-1.1.1")
+    implementation fg.deobf("com.tterrag.registrate:Registrate:MC1.18.2-1.1.1")
 
     annotationProcessor "org.spongepowered:mixin:${project.mixin_version}:processor"
 }

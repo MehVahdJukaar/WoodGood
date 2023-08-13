@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurniture
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
+import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.graveyard.GraveyardModule;
@@ -135,14 +136,15 @@ public class WoodGood {
         addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new); 
 		
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(CarryOnBlacklist::sendIMC);
-        
+
         BlockSetManager.addBlockSetRegistrationCallback(this::registerWoodStuff, Block.class, WoodType.class);
         BlockSetManager.addBlockSetRegistrationCallback(this::registerLeavesStuff, Block.class, LeavesType.class);
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         bus.register(this);
+        bus.addListener(CarryOnBlacklist::sendIMC);
+
 
         MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::onEarlyPackLoad);
         MinecraftForge.EVENT_BUS.register(EntriesRemapper.class);

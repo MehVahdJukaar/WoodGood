@@ -11,6 +11,7 @@ import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.resourcepack.*;
 import net.mehvahdjukaar.selene.resourcepack.recipe.IRecipeTemplate;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
@@ -53,9 +54,9 @@ public class Utils {
 
         BlockTypeResTransformer<T> modifier = BlockTypeResTransformer.create(modId, manager);
         modifier.IDReplaceType(baseBlockName).replaceBlockType(baseBlockName);
-        if(extraTransform != null)extraTransform.accept(modifier); //idk about this
+        if (extraTransform != null) extraTransform.accept(modifier); //idk about this
 
-        BlockTypeResTransformer<T> modelModifier = standardModelTransformer(modId, manager, baseType, baseBlockName,extraTransform);
+        BlockTypeResTransformer<T> modelModifier = standardModelTransformer(modId, manager, baseType, baseBlockName, extraTransform);
 
         Set<String> modelsLoc = new HashSet<>();
 
@@ -125,7 +126,7 @@ public class Utils {
             blocks.forEach((w, b) -> {
                 ResourceLocation id = b.getRegistryName();
                 try {
-                    if(EarlyConfigs.isTypeEnabled(w)) {
+                    if (EarlyConfigs.isTypeEnabled(w)) {
                         //creates blockstate
                         StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
                         assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
@@ -141,7 +142,7 @@ public class Utils {
                                 WoodGood.LOGGER.error("Failed to add {} model json file:", b, exception);
                             }
                         }
-                    }else{
+                    } else {
                         //dummy blockstate so we dont generate models for this
                         pack.addJson(b.getRegistryName(), DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
@@ -150,18 +151,18 @@ public class Utils {
                     WoodGood.LOGGER.error("Failed to add {} blockstate json file:", b, e);
                 }
             });
-        } catch (Exception e) {WoodGood.LOGGER.error("Could not find blockstate definition for {}", oakBlock);
+        } catch (Exception e) {
+            WoodGood.LOGGER.error("Could not find blockstate definition for {}", oakBlock);
         }
 
     }
-
 
 
     @NotNull
     private static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(
             String modId, ResourceManager manager, T baseType, String oldTypeName, @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
         BlockTypeResTransformer<T> modelModifier = BlockTypeResTransformer.create(modId, manager);
-        if(extraTransform != null)extraTransform.accept(modelModifier);
+        if (extraTransform != null) extraTransform.accept(modelModifier);
         modelModifier.IDReplaceType(oldTypeName);
         if (baseType instanceof LeavesType leavesType) {
             modelModifier.replaceLeavesTextures(leavesType);
@@ -196,7 +197,7 @@ public class Utils {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).collect(Collectors.toList());
 
         blocks.forEach((wood, value) -> {
-            if(EarlyConfigs.isTypeEnabled(wood)) {
+            if (EarlyConfigs.isTypeEnabled(wood)) {
                 for (var res : original) {
                     try {
                         StaticResource newRes = modifier.transform(res, value.getRegistryName(), wood);
@@ -235,21 +236,24 @@ public class Utils {
      */
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
                                                                               Map<T, B> blocks, String oakRecipe, T fromType) {
-        addBlocksRecipes(manager, pack, blocks, new ResourceLocation(modId, oakRecipe), fromType);
+        addBlocksRecipes(manager, pack, blocks, new ResourceLocation(modId, oakRecipe), fromType, 0);
     }
 
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,
-                                                                              Map<T, B> items, ResourceLocation oakRecipe, T fromType) {
+                                                                              Map<T, B> items, ResourceLocation oakRecipe, T fromType,
+                                                                              int index) {
         IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
                 ResType.RECIPES.getPath(oakRecipe));
 
         items.forEach((w, i) -> {
 
-            if(EarlyConfigs.isTypeEnabled(w)) {
+            if (EarlyConfigs.isTypeEnabled(w)) {
                 try {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     if (i.getItemCategory() != null) {
-                        FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
+                        String id = RecipeBuilder.getDefaultRecipeId(i).toString();
+                        if (index == 0) id += "_" + index;
+                        FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
                         if (newR == null) return;
                         var builder = ConditionalRecipe.builder()
                                 .addCondition(new BlockTypeEnabledCondition(w)); //not needed since we simply dont add the recipe if its disabled
@@ -269,12 +273,12 @@ public class Utils {
 
     private static final JsonObject DUMMY_BLOCKSTATE;
 
-    static{
+    static {
         DUMMY_BLOCKSTATE = new JsonObject();
-        DUMMY_BLOCKSTATE.addProperty("parent","block/cube_all");
+        DUMMY_BLOCKSTATE.addProperty("parent", "block/cube_all");
         JsonObject t = new JsonObject();
-        t.addProperty("all","everycomp:block/disabled");
-        DUMMY_BLOCKSTATE.add("textures",t);
+        t.addProperty("all", "everycomp:block/disabled");
+        DUMMY_BLOCKSTATE.add("textures", t);
     }
 
 }

@@ -4,7 +4,7 @@ package net.mehvahdjukaar.every_compat.modules.benched;
  * The Benched mod use model format "OBJ" with another file "MTL", it's different from the normal FORMAT that Minecraft
  * used to display an object or a model. Its disabled due to improperly rendering OBJ model because it's not implemented
  */
-
+/*
 import com.supermartijn642.benched.blocks.BenchBlock;
 import com.supermartijn642.benched.blocks.BenchBlockEntity;
 import com.supermartijn642.benched.blocks.BenchBlockEntityRenderer;
@@ -92,4 +92,4 @@ public class BenchedModule extends SimpleModule {
             return new CompatBenchBlockEntity(pos, state);
         }
     }
-}
+}*/
