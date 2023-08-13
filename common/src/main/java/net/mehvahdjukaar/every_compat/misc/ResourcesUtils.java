@@ -244,11 +244,12 @@ public class ResourcesUtils {
      */
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
                                                                               Map<T, B> blocks, String oakRecipe, T fromType) {
-        addBlocksRecipes(manager, pack, blocks, new ResourceLocation(modId, oakRecipe), fromType);
+        addBlocksRecipes(manager, pack, blocks, new ResourceLocation(modId, oakRecipe), fromType, 0);
     }
 
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,
-                                                                              Map<T, B> items, ResourceLocation oakRecipe, T fromType) {
+                                                                              Map<T, B> items, ResourceLocation oakRecipe, T fromType,
+                                                                              int index) {
         IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
                 ResType.RECIPES.getPath(oakRecipe));
 
@@ -258,7 +259,9 @@ public class ResourcesUtils {
                 try {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     if (i.getItemCategory() != null) {
-                        FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem());
+                        String id = RecipeBuilder.getDefaultRecipeId(i).toString();
+                        if (index != 0) id += "_" + index;
+                        FinishedRecipe newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
                         if (newR == null) return;
                         //not even needed
                         newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
