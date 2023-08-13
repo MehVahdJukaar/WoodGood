@@ -63,22 +63,16 @@ public class EveryCompatForge extends EveryCompat {
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
 
-        addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
-        addModule("barkcarpets", () -> BarkCarpetsModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
-        addModule("campchair", () -> CampChairModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
 
         addModule("create", () -> CreateModule::new);
-        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         if (PlatformHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
-        addModule("furnish", () -> FurnishModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
@@ -88,7 +82,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("quark", () -> QuarkModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
-        addModule("twigs", () -> TwigsModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodster", () -> WoodsterModule::new);
@@ -108,7 +101,6 @@ public class EveryCompatForge extends EveryCompat {
         // addModule("graveyard", () -> GraveyardModule::new);
 
         // Disabled due to block entity complications
-        //addModule("handcrafted", () -> HandcraftedModule::new);
 
         // Disabled until custom block models work
          addModule("xercamod", () -> XercaModule::new);

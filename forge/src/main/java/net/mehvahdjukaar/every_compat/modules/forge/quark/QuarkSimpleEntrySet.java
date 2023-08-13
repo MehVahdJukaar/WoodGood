@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEntrySet<T, B> {
@@ -45,8 +46,9 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                                @Nullable Supplier<Supplier<RenderType>> renderType,
                                @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
-                               @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
-        super(type, name, prefix, null, baseBlock, baseType, tab, tableMode, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform);
+                               @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                               Function<T, Boolean> condition) {
+        super(type, name, prefix, null, baseBlock, baseType, tab, tableMode, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform, condition);
         this.blockSupplier = blockSupplier;
         this.quarkModule = module;
     }
@@ -136,7 +138,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         public QuarkSimpleEntrySet<T, B> build() {
             var e = new QuarkSimpleEntrySet<>(type, name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, lootMode,
-                    itemFactory, tileHolder, renderType, palette, extraModelTransform);
+                    itemFactory, tileHolder, renderType, palette, extraModelTransform, condition);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);

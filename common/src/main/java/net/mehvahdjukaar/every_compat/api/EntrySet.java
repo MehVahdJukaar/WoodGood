@@ -18,11 +18,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class EntrySet<T extends BlockType, B extends Block> {
+public abstract class EntrySet<T extends BlockType, B extends Block, I extends Item> {
 
     public final String typeName;
     public final Map<T, B> blocks = new HashMap<>();
-    public final Map<T, Item> items = new HashMap<>();
+    public final Map<T, I> items = new HashMap<>();
 
 
     protected EntrySet(String baseName) {

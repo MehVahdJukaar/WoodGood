@@ -33,18 +33,11 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
 
-        addModule("another_furniture", () -> AnotherFurnitureModule::new);
+
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
-        addModule("barkcarpets", () -> BarkCarpetsModule::new);
-        addModule("campchair", () -> CampChairModule::new);
         addModule("create", () -> CreateModule::new);
-        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
-        addModule("furnish", () -> FurnishModule::new);
-        addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
-        addModule("twigs", () -> TwigsModule::new);
 
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
         FabricSetupCallbacks.COMMON_SETUP.add(this::commonSetup);
