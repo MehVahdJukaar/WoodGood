@@ -8,6 +8,8 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
 import net.mehvahdjukaar.every_compat.misc.EntriesRemapper;
+
+    // MODULE
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
@@ -26,7 +28,10 @@ import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.workshop.CarryOnBlacklist;
-import net.mehvahdjukaar.every_compat.modules.workshop.WorkshopForHandsomeAdventurerModule; 
+import net.mehvahdjukaar.every_compat.modules.workshop.WorkshopForHandsomeAdventurerModule;
+import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
+
+
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
@@ -101,6 +106,7 @@ public class WoodGood {
         //TODO: add folwering azalea special textures, fix vertical planks not generating & add leaves to it. same for quark
         //also fix that one crash that idk what was about
 
+            // MAIN
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
@@ -128,13 +134,17 @@ public class WoodGood {
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
 
+            //TODO: CURRENTLY TESTING
+        addModule("buildersdelight", () -> BuildersDelightModule::new);
+
+            //TODO: ISSUES
         //addModule("storagedrawers", () -> StorageDrawersModule::new); required fixing for rendering properly
         //addModule("graveyard", () -> GraveyardModule::new);
         //addModule("benched", () -> BenchedModule::new); Issue with model format, OBJ -> improperly rendering
         //addModule("projectbrazier", () -> ProjectBrazierModule::new);
-        addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new); 
-		
+
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
 
         BlockSetManager.addBlockSetRegistrationCallback(this::registerWoodStuff, Block.class, WoodType.class);
