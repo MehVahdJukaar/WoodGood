@@ -80,7 +80,7 @@ public class GraveyardModule extends SimpleModule {
         private final WoodType woodType;
 
         public CompatCoffinfBlock(Properties properties, WoodType woodType) {
-            super(properties,true);
+            super(properties,true, "lid", "base");
             this.woodType = woodType;
         }
 
