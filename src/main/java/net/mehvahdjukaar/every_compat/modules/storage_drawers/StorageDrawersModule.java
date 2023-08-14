@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.storage_drawers;
 
+/*
 import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockStandardDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
@@ -271,3 +272,4 @@ public class StorageDrawersModule extends SimpleModule {
 
     }
 }
+*/
