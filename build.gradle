@@ -171,6 +171,7 @@ dependencies {
     implementation fg.deobf("curse.maven:twigs-496913:3968055")
     implementation fg.deobf("curse.maven:valhelsia-core-416935:3886212")
     implementation fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
+    implementation fg.deobf("curse.maven:workshop-for-handsome-adventurer-875843:4688655")
 
 
         // Macaw's
@@ -206,7 +207,7 @@ dependencies {
     // Iron Age Furniture is included in Mods folder
 
         // NOT FULLY WORKING PROPERLY \\
-//    implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
+    implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
 //    implementation fg.deobf("curse.maven:benched-417063:4291393")
 
     // Others
