@@ -176,7 +176,7 @@ dependencies {
     modCompileOnly("curse.maven:xercamod-341575:3947222")
     modImplementation("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
 
-
+    modImplementation("curse.maven:builders-delight-forge-563734:4362665")
 
 
     // implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
