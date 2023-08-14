@@ -30,13 +30,13 @@ import net.minecraft.world.level.block.Blocks;
 
 public class MacawFurnitureModule extends SimpleModule {
 
-    // BOOKSHELF
+    //TYPE: BOOKSHELF
     public final SimpleEntrySet<WoodType, Block> bookshelf;
     public final SimpleEntrySet<WoodType, Block> cupboardBookshelf;
     public final SimpleEntrySet<WoodType, Block> strippedBookshelf;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_CUPBOARD_BOOKSHELF;
 
-    // CHAIR
+    //TYPE: CHAIR
     public final SimpleEntrySet<WoodType, Block> chair;
     public final SimpleEntrySet<WoodType, Block> modernChair;
     public final SimpleEntrySet<WoodType, Block> stripedChair;
@@ -47,7 +47,7 @@ public class MacawFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_STRIPED_CHAIR;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_STOOL;
 
-    // COUNTER
+    //TYPE: COUNTER
     public final SimpleEntrySet<WoodType, Block> counter;
     public final SimpleEntrySet<WoodType, Block> drawerCounter;
     public final SimpleEntrySet<WoodType, Block> cupboardCounter;
@@ -58,7 +58,7 @@ public class MacawFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_CUPBOARD_COUNTER;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_DOUBLE_DRAWER_COUNTER;
 
-    // DRAWER
+    //TYPE: DRAWER
     public final SimpleEntrySet<WoodType, Block> drawer;
     public final SimpleEntrySet<WoodType, Block> bookshelfDrawer;
     public final SimpleEntrySet<WoodType, Block> doubleDrawer;
@@ -75,7 +75,7 @@ public class MacawFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOWER_TRIPLE_DRAWER;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_TRIPLE_DRAWER;
 
-    // DESK
+    //TYPE: DESK
     public final SimpleEntrySet<WoodType, Block> desk;
     public final SimpleEntrySet<WoodType, Block> coveredDesk;
     public final SimpleEntrySet<WoodType, Block> modernDesk;
@@ -84,7 +84,7 @@ public class MacawFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_MODERN_DESK;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_COVERED_DESK;
 
-    // TABLE
+    //TYPE: TABLE
     public final SimpleEntrySet<WoodType, Block> TABLE;
     public final SimpleEntrySet<WoodType, Block> glassTable;
     public final SimpleEntrySet<WoodType, Block> endTable;
@@ -94,7 +94,7 @@ public class MacawFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_TABLE;
     public final SimpleEntrySet<WoodType, Block> strippedCoffeeTable;
 
-    // WARDROBE
+    //TYPE: WARDROBE
     public final SimpleEntrySet<WoodType, Block> WARDROBE;
     public final SimpleEntrySet<WoodType, Block> doubleWardrobe;
     public final SimpleEntrySet<WoodType, Block> modernWardrobe;
@@ -106,7 +106,7 @@ public class MacawFurnitureModule extends SimpleModule {
         super(modId, "mcfur");
         CreativeModeTab tab = MacawsFurnitures.FURNITUREITEMGROUP;
 
-        // BOOKSHELF
+        //TYPE: BOOKSHELF
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         BlockInit.OAK_BOOKSHELF, () -> WoodType.OAK_WOOD_TYPE,
                         ifHasChild(w -> new BookCabinet(WoodGood.copySafe(w.log)), "stripped_log"))
@@ -152,6 +152,7 @@ public class MacawFurnitureModule extends SimpleModule {
         this.addEntry(STRIPPED_CUPBOARD_BOOKSHELF);
 
 
+        //TYPE: CHAIR
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         BlockInit.OAK_CHAIR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new ClassicChair(WoodGood.copySafe(w.log)))
@@ -163,7 +164,6 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(chair);
 
-        // CHAIR
         modernChair = SimpleEntrySet.builder(WoodType.class, "modern_chair",
                         BlockInit.OAK_MODERN_CHAIR, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new ModernChair(WoodGood.copySafe(w.log)))
@@ -248,7 +248,7 @@ public class MacawFurnitureModule extends SimpleModule {
         this.addEntry(STRIPPED_STOOL);
 
 
-        // COUNTER
+        //TYPE: COUNTER
         counter = SimpleEntrySet.builder(WoodType.class, "counter",
                         BlockInit.OAK_COUNTER, () -> WoodType.OAK_WOOD_TYPE,
                         ifHasChild(w -> new Counter(Blocks.OAK_PLANKS.defaultBlockState(), WoodGood.copySafe(w.log)), "stripped_log"))
@@ -339,7 +339,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(STRIPPED_CUPBOARD_COUNTER);
 
-        // DRAWER
+        //TYPE: DRAWER
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
                         BlockInit.OAK_DRAWER, () -> WoodType.OAK_WOOD_TYPE,
                         ifHasChild(w -> new WideFurniture(WoodGood.copySafe(w.log)), "stripped_log"))
@@ -495,7 +495,7 @@ public class MacawFurnitureModule extends SimpleModule {
         this.addEntry(STRIPPED_TRIPLE_DRAWER);
 
 
-        // DESK
+        //TYPE: DESK
         desk = SimpleEntrySet.builder(WoodType.class, "desk",
                         BlockInit.OAK_DESK, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new Desk(WoodGood.copySafe(w.log)))
@@ -563,7 +563,7 @@ public class MacawFurnitureModule extends SimpleModule {
         this.addEntry(STRIPPED_MODERN_DESK);
 
 
-        // TABLE
+        //TYPE: TABLE
         TABLE = SimpleEntrySet.builder(WoodType.class, "table",
                         BlockInit.OAK_TABLE, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new TableHitbox(WoodGood.copySafe(w.log)))
@@ -655,7 +655,7 @@ public class MacawFurnitureModule extends SimpleModule {
         this.addEntry(STRIPPED_GLASS_TABLE);
 
 
-        // WARDROBE
+        //TYPE: WARDROBE
         WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         BlockInit.OAK_WARDROBE, () -> WoodType.OAK_WOOD_TYPE,
                         ifHasChild(w -> new TallFurniture(WoodGood.copySafe(w.log)), "stripped_log"))
