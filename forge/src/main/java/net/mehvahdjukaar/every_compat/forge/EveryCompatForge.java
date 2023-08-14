@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.forge;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
@@ -31,6 +32,8 @@ import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructure
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
+import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
+
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -94,6 +97,8 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
 		addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+
+        addModule("buildersdelight", () -> BuildersDelightModule::new);
 
         // addModule("graveyard", () -> GraveyardModule::new);
 
