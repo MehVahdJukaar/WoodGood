@@ -146,7 +146,7 @@ dependencies {
 //    implementation fg.deobf("curse.maven:selene-499980:4668166")
     compileOnly fg.deobf("curse.maven:blueprint-382216:3991478") // Woodworks
     implementation fg.deobf("curse.maven:configured-457570:4462832")
-    implementation fg.deobf("curse.maven:workshop-for-handsome-adventurer-875843:4688655")
+
         // Main
     implementation fg.deobf("curse.maven:another-furniture-610492:4034013")
     implementation fg.deobf("curse.maven:architects-palette-433862:4498424")
@@ -171,7 +171,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:twigs-496913:3968055")
     compileOnly fg.deobf("curse.maven:valhelsia-core-416935:3886212")
     compileOnly fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
-
+    implementation fg.deobf("curse.maven:workshop-for-handsome-adventurer-875843:4688655")
 
         // Macaw's
     compileOnly fg.deobf("curse.maven:macaws-bridges-351725:4599796")
