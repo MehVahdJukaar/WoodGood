@@ -137,7 +137,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         "", "simple_table",
                         () -> getModBlock("simple_table_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        (w) ->  new SimpleTable())
+                        (w) -> new SimpleTable())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .requiresChildren("stripped_log")
                 .addTag(TAG_FORGE_WORKBENCH, Registry.BLOCK_REGISTRY)
@@ -219,7 +219,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         "", "dual_table_top_right",
                         () -> getModBlock("dual_table_top_right_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w ->  new AdvancedTableTopSecondary())
+                        w -> new AdvancedTableTopSecondary())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .noItem()
                 .requiresChildren("stripped_log")
@@ -249,105 +249,28 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         "", "dual_table_bottom_left",
                         () -> getModBlock("dual_table_bottom_left_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w ->  new SimpleTable())
+                        w -> new AdvancedTableBottomPrimary())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registry.BLOCK_REGISTRY)
                 .requiresChildren("stripped_log")
                 .noItem()
-                .addTile(Registration.SIMPLE_TABLE_BE)
+                .addTile(Registration.DUAL_TABLE_BE)
                 .build();
         this.addEntry(DUAL_TABLE_PARTS_BL);
 
 
-        STATION_PLACERS = ItemOnlyEntrySet.builder(WoodType.class, "","",
-                ()->getModItem(""),
-                ()->WoodTypeRegistry.OAK_TYPE, w->null)
+        STATION_PLACERS = ItemOnlyEntrySet.builder(WoodType.class, "workstation_placer",
+                        () -> getModItem("workstation_placer_spruce"),
+                        () -> WoodTypeRegistry.getValue(SPRUCE),
+                        w -> {
+                            CreativeModeTab tab = EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : CreativeTab.TAB_WORKSHOP;
+                            return new WorkstationPlacerItem(w.getTypeName(), new Item.Properties().tab(tab));
+                        })
+                .addRecipe(modRes("workstation_placer_spruce"))
+                .addCondition(DUAL_TABLE_PARTS_BL.blocks::containsKey)
                 .build();
+        this.addEntry(STATION_PLACERS);
     }
-
-    @Override
-    public void registerItems(Registrator<Item> registry) {
-        super.registerItems(registry);
-        // we need to add workstation placer item
-        SIMPLE_TABLES.blocks.forEach(
-                (w, value) ->
-                {
-                    if (WoodConfigs.isTypeEnabled(w)) {
-                        CreativeModeTab tab = EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : CreativeTab.TAB_WORKSHOP;
-                        Item item = new WorkstationPlacerItem(w.getTypeName(), (new Item.Properties()).tab(tab));
-                        registry.register(new ResourceLocation(EveryCompat.MOD_ID, "wfha/" + w.getNamespace() + "/workstation_placer_" + w.getTypeName()), item);
-                    }
-                });
-    }
-
-
-    @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        //this copy-pasta should make models for workstation placer item
-        Item spruceWorkbench = ForgeRegistries.ITEMS.getValue(workstation);
-        if (spruceWorkbench == null || spruceWorkbench.equals(Items.AIR)) {
-            return;
-        }
-        try {
-            String baseBlockName = "spruce";
-            BlockTypeResTransformer<WoodType> itemModifier = standardModelTransformer2(modId, manager, WoodTypeRegistry.getValue(SPRUCE), baseBlockName);
-            StaticResource spruceItemModel = StaticResource.getOrFail(manager, ResType.ITEM_MODELS.getPath(ForgeRegistries.ITEMS.getKey(spruceWorkbench)));
-
-            JsonObject json = RPUtils.deserializeJson(new ByteArrayInputStream(spruceItemModel.data));
-            if (json.has("parent")) {
-                String parent = json.get("parent").getAsString();
-                if (parent.contains("item/generated")) {
-                    itemModifier.replaceItemType(baseBlockName);
-                }
-            }
-
-            SIMPLE_TABLES.blocks.forEach((w, b) ->
-            {
-                String path = ForgeRegistries.BLOCKS.getKey(b).getPath();
-                path = path.replace("simple_table", "workstation_placer");
-                ResourceLocation id = new ResourceLocation(EveryCompat.MOD_ID, path);
-                try {
-                    StaticResource newRes = itemModifier.transform(spruceItemModel, id, w);
-                    assert newRes.location != spruceItemModel.location : "ids cant be the same";
-                    handler.dynamicPack.addResource(newRes);
-                } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to add {} item model json file:", b, e);
-                }
-            });
-        } catch (Exception e) {
-            EveryCompat.LOGGER.error("Could not find item model for spruce workstation. ~~~");
-        }
-        super.addDynamicClientResources(handler, manager);
-    }
-
-    private static BlockTypeResTransformer<WoodType> standardModelTransformer2(String modId, ResourceManager manager, WoodType baseType, String oldTypeName) {
-        BlockTypeResTransformer<WoodType> modelModifier = BlockTypeResTransformer.create(modId, manager);
-        modelModifier.IDReplaceType(oldTypeName);
-        modelModifier.replaceWoodTextures(baseType);
-        modelModifier.replaceGenericType(oldTypeName, "block");
-        return modelModifier;
-    }
-
-    private final ResourceLocation workstation = new ResourceLocation(Constants.MODID, "workstation_placer_spruce");
-
-
-    @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
-        super.addTranslations(clientDynamicResourcesHandler, lang);
-        // we need to add a translation for workstation placer
-        SIMPLE_TABLES.blocks.forEach((w, b) ->
-        {
-            String base = lang.getEntry("block_type.workshop_for_handsome_adventurer.workstation_placer");
-            if (base != null) {
-                String typeName = lang.getEntry(w.getTranslationKey());
-                if (typeName != null) {
-                    String key = MessageFormat.format("item.{0}.wfha.{1}.workstation_placer_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName());
-                    lang.addEntry(key, String.format(base, typeName));  // typeName.toLowerCase(Locale.ROOT) would be preferred
-                }
-            }
-        });
-    }
-
 
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
@@ -357,82 +280,14 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(Constants.MODID, "supported_planks"));
         SIMPLE_TABLES.blocks.forEach((w, value) -> tagBuilder.add(ForgeRegistries.ITEMS.getKey(w.planks.asItem())));
         handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
-
-        // we need a recipe for workstations
-        IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager, ResType.RECIPES.getPath(workstation));
-        WoodType spruce = WoodTypeRegistry.getValue(SPRUCE);
-        SIMPLE_TABLES.blocks.forEach((w, b) ->
-        {
-            if (WoodConfigs.isTypeEnabled(w)) {
-                try {
-
-                    FinishedRecipe newRecipe = null; // template.createSimilar() doesn't work for non-blocks
-                    /////////////
-                    String newId = MessageFormat.format("{2}:wfha/{0}/workstation_placer_{1}", w.getNamespace(), w.getTypeName(), EveryCompat.MOD_ID);
-                    ShapedRecipeBuilder builder = new ShapedRecipeBuilder(ForgeRegistries.ITEMS.getValue(new ResourceLocation(newId)), 1);
-                    boolean atLeastOneChanged = false;
-
-                    Map.Entry e;
-                    Ingredient ingredient;
-                    ShapedRecipeTemplate shapedTemplate = (ShapedRecipeTemplate) template; // i can
-                    for (Iterator var8 = shapedTemplate.keys.entrySet().iterator(); var8.hasNext(); builder.define((Character) e.getKey(), ingredient)) {
-                        e = (Map.Entry) var8.next();
-                        ingredient = (Ingredient) e.getValue();
-                        ItemStack[] var11 = ingredient.getItems();
-                        int var12 = var11.length;
-
-                        for (int var13 = 0; var13 < var12; ++var13) {
-                            ItemStack in = var11[var13];
-                            Item it = in.getItem();
-                            if (it != Items.BARRIER) {
-                                ItemLike i = BlockType.changeItemType(it, spruce, w);
-                                if (i != null) {
-                                    atLeastOneChanged = true;
-                                    ingredient = Ingredient.of(new ItemLike[]{i});
-                                    break;  // so, we're just keeping one item? //this code should be different in 1.19
-                                }
-                            }
-                        }
-                    }
-                    if (!atLeastOneChanged) {
-                        newRecipe = null;
-                    } else {
-                        List<String> var10000 = shapedTemplate.pattern;
-                        Objects.requireNonNull(builder);
-                        var10000.forEach(builder::pattern);
-                        builder.group(shapedTemplate.group);
-                        builder.unlockedBy("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{w.planks.asItem()}));
-                        AtomicReference<ShapedRecipeBuilder.Result> newRecipe0 = new AtomicReference();
-                        builder.save((r) ->
-                        {
-                            newRecipe0.set((ShapedRecipeBuilder.Result) r);
-                        }); //! removed id here
-                        newRecipe = (ShapedRecipeBuilder.Result) newRecipe0.get();
-                    }
-
-                    /////////////
-                    if (newRecipe != null) {
-                        var builder2 = ConditionalRecipe.builder().addCondition(new BlockTypeEnabledCondition(w));
-                        template.getConditions().forEach(c ->
-                        {
-                            if (c instanceof ICondition c2)
-                                builder2.addCondition(c2);
-                        });
-                        builder2.addRecipe(newRecipe).build(handler.dynamicPack::addRecipe, newRecipe.getId());
-                    }
-                } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to generate recipe for placer: " + e.getMessage());
-                }
-            }
-        });
     }
 
-    public void init(){
-        FMLJavaModLoadingContext.get().getModEventBus().register(WorkshopForHandsomeAdventurerModule.class);
+    @Override
+    public void onModInit() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(WorkshopForHandsomeAdventurerModule::sendIMC);
     }
 
 
-    @SubscribeEvent
     public static void sendIMC(final InterModEnqueueEvent event) {
         ArrayList<String> blacklist = new ArrayList<>();
         for (WoodType w : WoodTypeRegistry.getTypes()) {
