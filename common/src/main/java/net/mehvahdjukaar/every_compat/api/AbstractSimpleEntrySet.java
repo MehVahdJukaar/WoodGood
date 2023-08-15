@@ -28,10 +28,7 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,15 +54,15 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Nullable
     protected final Consumer<BlockTypeResTransformer<T>> extraTransform;
 
-    protected final Function<T, Boolean> condition;
+    protected final Predicate<T> condition;
 
-    public AbstractSimpleEntrySet(Class<T> type,
+    protected AbstractSimpleEntrySet(Class<T> type,
                                   String name, @Nullable String prefix,
                                   Supplier<T> baseType,
                                   Supplier<CreativeModeTab> tab,
                                   @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                   @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
-                                  Function<T, Boolean> condition) {
+                                     Predicate<T> condition) {
         super((prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name);
         this.postfix = name;
         this.prefix = prefix;
@@ -271,7 +268,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
         @Nullable
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
-        protected Function<T, Boolean> condition = w -> true;
+        protected Predicate<T> condition = w -> true;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType) {
             this.baseType = baseType;
@@ -290,14 +287,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         public BL requiresChildren(String... childKeys) {
             this.addCondition(w -> {
                 for (var c : childKeys) {
-                    if (w.getChild(c) == null) return true;
+                    if (w.getChild(c) == null) return false;
                 }
-                return false;
+                return true;
             });
             return (BL) this;
         }
 
-        public BL addCondition(Function<T, Boolean> condition) {
+        public BL addCondition(Predicate<T> condition) {
             this.condition = condition;
             return (BL) this;
         }

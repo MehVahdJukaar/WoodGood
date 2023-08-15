@@ -549,5 +549,5 @@
   "block_type.workshop_for_handsome_adventurer.tool_rack_pframed": "Tool Rack (%s, partly framed)",
   "block_type.workshop_for_handsome_adventurer.tool_rack_single": "Tool Rack (%s, single)",
   "block_type.workshop_for_handsome_adventurer.potion_shelf": "Potion Shelf (%s)",
-  "block_type.workshop_for_handsome_adventurer.workstation_placer": "Workstation (%s)" 
+  "item_type.workshop_for_handsome_adventurer.workstation_placer": "Workstation (%s)"
 }

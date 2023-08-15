@@ -40,10 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet<T, Block, I> {
@@ -59,7 +56,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                             Supplier<CreativeModeTab> tab,
                             @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                             @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
-                            Function<T, Boolean> condition) {
+                            Predicate<T> condition) {
         super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, condition);
         this.itemFactory = itemFactory;
         this.baseItem = baseItem;
@@ -103,7 +100,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         if (base == null || base == Items.AIR)
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
-        baseType.get().addChild(getChildKey(module), base);
+        baseType.get().addChild(getChildKey(module),(Object) base);
 
 
         BlockTypeRegistry<T> typeRegistry = (BlockTypeRegistry<T>) BlockSetAPI.getTypeRegistry(this.type);
@@ -112,14 +109,14 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
             if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
 
-            if(condition.apply(w)) {
+            if(condition.test(w)) {
                 I item = itemFactory.apply(w);
                 //for blocks that fail
                 if (item != null) {
                     this.items.put(w, item);
 
                     registry.register(EveryCompat.res(fullName), item);
-                    w.addChild(getChildKey(module), item);
+                    w.addChild(getChildKey(module),(Object) item);
                 }
             }
         }

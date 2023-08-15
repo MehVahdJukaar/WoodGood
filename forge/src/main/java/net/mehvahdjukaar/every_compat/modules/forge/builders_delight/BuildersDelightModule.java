@@ -655,7 +655,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"))
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_5);
@@ -670,7 +670,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_6_mask"))
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_6);
@@ -698,9 +698,10 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_8_mask"))
+                .addTextureM(modRes("block/glass/oak_glass/oak_glass_8"),
+                        EveryCompat.res("block/bdl/oak_glass_8_mask"))
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_8);

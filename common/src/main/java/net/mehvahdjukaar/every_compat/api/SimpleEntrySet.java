@@ -47,10 +47,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -82,7 +79,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           @Nullable Supplier<Supplier<RenderType>> renderType,
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
-                          Function<T, Boolean> condition) {
+                          Predicate<T> condition) {
         super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, condition);
         this.blockFactory = blockSupplier;
         this.tileHolder = tileFactory;
@@ -157,7 +154,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
             if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
 
-            if(condition.apply(w)) {
+            if(condition.test(w)) {
                 B block = blockFactory.apply(w);
                 //for blocks that fail
                 if (block != null) {
