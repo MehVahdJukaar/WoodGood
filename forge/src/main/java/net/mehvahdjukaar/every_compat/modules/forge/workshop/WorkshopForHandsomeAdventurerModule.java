@@ -259,7 +259,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(DUAL_TABLE_PARTS_BL);
 
 
-        STATION_PLACERS = ItemOnlyEntrySet.builder(WoodType.class, "workstation_placer",
+        STATION_PLACERS = ItemOnlyEntrySet.builder(WoodType.class,"", "workstation_placer",
                         () -> getModItem("workstation_placer_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> {
