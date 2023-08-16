@@ -266,10 +266,11 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: STAIRS
         STAIRS_1 = SimpleEntrySet.builder(WoodType.class, "stairs_1",
                         BdBlocks.OAK_STAIRS_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w  -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_1"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -280,10 +281,11 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_2 = SimpleEntrySet.builder(WoodType.class, "stairs_2",
                         BdBlocks.OAK_STAIRS_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w-> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_2"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -294,10 +296,11 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_3 = SimpleEntrySet.builder(WoodType.class, "stairs_3",
                         BdBlocks.OAK_STAIRS_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w ->new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_3"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -308,10 +311,11 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_4 = SimpleEntrySet.builder(WoodType.class, "stairs_4",
                         BdBlocks.OAK_STAIRS_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w ->  new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_4"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -322,10 +326,11 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_5 = SimpleEntrySet.builder(WoodType.class, "stairs_5",
                         BdBlocks.OAK_STAIRS_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_5"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -336,10 +341,11 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_6 = SimpleEntrySet.builder(WoodType.class, "stairs_6",
                         BdBlocks.OAK_STAIRS_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w  -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_6"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -350,10 +356,11 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_7 = SimpleEntrySet.builder(WoodType.class, "stairs_7",
                         BdBlocks.OAK_STAIRS_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_7"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -369,6 +376,7 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .requiresChildren("slab")
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_1"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -384,6 +392,7 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_2"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -398,6 +407,7 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_3"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -412,6 +422,7 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_4"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -426,6 +437,7 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_5"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -440,6 +452,7 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_6"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -454,6 +467,7 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
+                .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_7"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
@@ -828,12 +842,5 @@ public class BuildersDelightModule extends SimpleModule {
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
-    }
-
-    private <B extends Block> B regIfPossible(WoodType woodType, Supplier<B> supplier) {
-        if (woodType.getBlockOfThis("stairs") != null) {
-            return supplier.get();
-        }
-        return null;
     }
 }
