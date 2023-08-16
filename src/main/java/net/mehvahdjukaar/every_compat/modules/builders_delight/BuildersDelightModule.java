@@ -268,7 +268,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: STAIRS
         STAIRS_1 = SimpleEntrySet.builder(WoodType.class, "stairs_1",
                         BdBlocks.OAK_STAIRS_1, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
+                        w -> registerIfStairs(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -282,7 +282,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_2 = SimpleEntrySet.builder(WoodType.class, "stairs_2",
                         BdBlocks.OAK_STAIRS_2, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
+                        w -> registerIfStairs(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -296,7 +296,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_3 = SimpleEntrySet.builder(WoodType.class, "stairs_3",
                         BdBlocks.OAK_STAIRS_3, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
+                        w -> registerIfStairs(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -310,7 +310,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_4 = SimpleEntrySet.builder(WoodType.class, "stairs_4",
                         BdBlocks.OAK_STAIRS_4, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
+                        w -> registerIfStairs(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -324,7 +324,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_5 = SimpleEntrySet.builder(WoodType.class, "stairs_5",
                         BdBlocks.OAK_STAIRS_5, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
+                        w -> registerIfStairs(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -338,7 +338,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_6 = SimpleEntrySet.builder(WoodType.class, "stairs_6",
                         BdBlocks.OAK_STAIRS_6, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
+                        w -> registerIfStairs(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -352,7 +352,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_7 = SimpleEntrySet.builder(WoodType.class, "stairs_7",
                         BdBlocks.OAK_STAIRS_7, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> regIfPossible(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
+                        w -> registerIfStairs(w, () -> new StairFlammable(w.getBlockOfThis("stairs").defaultBlockState(),WoodGood.copySafe(w.getBlockOfThis("stairs") )))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -368,7 +368,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: SLAB
         SLAB_1 = SimpleEntrySet.builder(WoodType.class, "slab_1",
                         BdBlocks.OAK_SLAB_1, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab")))
+                        w -> registerIfSlab(w,()-> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab"))))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -382,7 +382,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_2 = SimpleEntrySet.builder(WoodType.class, "slab_2",
                         BdBlocks.OAK_SLAB_2, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab")))
+                        w ->registerIfSlab(w,()-> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab"))))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -396,7 +396,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_3 = SimpleEntrySet.builder(WoodType.class, "slab_3",
                         BdBlocks.OAK_SLAB_3, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab")))
+                        w ->registerIfSlab(w,()-> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab"))))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -410,7 +410,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_4 = SimpleEntrySet.builder(WoodType.class, "slab_4",
                         BdBlocks.OAK_SLAB_4, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab")))
+                        w -> registerIfSlab(w,()->new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab"))))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -424,7 +424,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_5 = SimpleEntrySet.builder(WoodType.class, "slab_5",
                         BdBlocks.OAK_SLAB_5, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab")))
+                        w -> registerIfSlab(w,()->new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab"))))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -438,7 +438,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_6 = SimpleEntrySet.builder(WoodType.class, "slab_6",
                         BdBlocks.OAK_SLAB_6, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab")))
+                        w -> registerIfSlab(w,()->new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab"))))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -452,7 +452,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_7 = SimpleEntrySet.builder(WoodType.class, "slab_7",
                         BdBlocks.OAK_SLAB_7, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab")))
+                        w -> registerIfSlab(w,()->new SlabFlammable(WoodGood.copySafe(w.getBlockOfThis("slab"))))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -831,8 +831,14 @@ public class BuildersDelightModule extends SimpleModule {
         p.remove(p.getDarkest());
     }
 
-    private <B extends Block> B regIfPossible(WoodType woodType, Supplier<B> supplier) {
+    private <B extends Block> B registerIfStairs(WoodType woodType, Supplier<B> supplier) {
         if (woodType.getBlockOfThis("stairs") != null) {
+            return supplier.get();
+        }
+        return null;
+    }
+    private <B extends Block> B registerIfSlab(WoodType woodType, Supplier<B> supplier) {
+        if (woodType.getBlockOfThis("slab") != null) {
             return supplier.get();
         }
         return null;
