@@ -7,13 +7,14 @@ import com.tynoxs.buildersdelight.content.block.wood.StairFlammable;
 import com.tynoxs.buildersdelight.content.init.BdBlocks;
 import com.tynoxs.buildersdelight.content.init.BdDecoration;
 import com.tynoxs.buildersdelight.content.init.BdTabs;
+import com.tynoxs.buildersdelight.content.init.BdItems;
 import com.tynoxs.buildersdelight.content.block.custom.BlockChair;
 import com.tynoxs.buildersdelight.content.block.custom.BlockSmallTable;
 import com.tynoxs.buildersdelight.content.block.custom.BlockStool;
 
-
 // net.mehvahdjukaar
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -24,8 +25,11 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 // minecraft
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -36,71 +40,45 @@ import java.util.function.Supplier;
 
 
 public class BuildersDelightModule extends SimpleModule {
+    private static final ResourceLocation OAK = new ResourceLocation("oak");
+
+    //TYPE: ITEM
+    public final ItemOnlyEntrySet<WoodType, Item> FURNITURE_KIT;
 
     //TYPE: DECORATION
-    public final SimpleEntrySet<WoodType, Block> CHAIR_1;
-    public final SimpleEntrySet<WoodType, Block> CHAIR_2;
-    public final SimpleEntrySet<WoodType, Block> TABLE_1;
-    public final SimpleEntrySet<WoodType, Block> TABLE_2;
+    public final SimpleEntrySet<WoodType, Block> CHAIR_1, CHAIR_2;
+    public final SimpleEntrySet<WoodType, Block> TABLE_1, TABLE_2;
 
     //TYPE: BLOCKS
-    public final SimpleEntrySet<WoodType, Block> PLANKS_1;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_2;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_3;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_4;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_5;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_6;
-    public final SimpleEntrySet<WoodType, Block> PLANKS_7;
-    public final SimpleEntrySet<WoodType, Block> STAIRS_1;
-    public final SimpleEntrySet<WoodType, Block> STAIRS_2;
-    public final SimpleEntrySet<WoodType, Block> STAIRS_3;
-    public final SimpleEntrySet<WoodType, Block> STAIRS_4;
-    public final SimpleEntrySet<WoodType, Block> STAIRS_5;
-    public final SimpleEntrySet<WoodType, Block> STAIRS_6;
-    public final SimpleEntrySet<WoodType, Block> STAIRS_7;
+    public final SimpleEntrySet<WoodType, Block> PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7;
 
+    public final SimpleEntrySet<WoodType, Block> STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7;
 
-    public final SimpleEntrySet<WoodType, Block> SLAB_1;
-    public final SimpleEntrySet<WoodType, Block> SLAB_2;
-    public final SimpleEntrySet<WoodType, Block> SLAB_3;
-    public final SimpleEntrySet<WoodType, Block> SLAB_4;
-    public final SimpleEntrySet<WoodType, Block> SLAB_5;
-    public final SimpleEntrySet<WoodType, Block> SLAB_6;
-    public final SimpleEntrySet<WoodType, Block> SLAB_7;
+    public final SimpleEntrySet<WoodType, Block> SLAB_1, SLAB_2, SLAB_3, SLAB_4, SLAB_5, SLAB_6, SLAB_7;
 
-    public final SimpleEntrySet<WoodType, Block> FRAME_1;
-    public final SimpleEntrySet<WoodType, Block> FRAME_2;
-    public final SimpleEntrySet<WoodType, Block> FRAME_3;
-    public final SimpleEntrySet<WoodType, Block> FRAME_4;
-    public final SimpleEntrySet<WoodType, Block> FRAME_5;
-    public final SimpleEntrySet<WoodType, Block> FRAME_6;
-    public final SimpleEntrySet<WoodType, Block> FRAME_7;
-    public final SimpleEntrySet<WoodType, Block> FRAME_8;
+    public final SimpleEntrySet<WoodType, Block> FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8;
 
     //TYPE: GLASS
-    public final SimpleEntrySet<WoodType, Block> GLASS_1;
-    public final SimpleEntrySet<WoodType, Block> GLASS_2;
-    public final SimpleEntrySet<WoodType, Block> GLASS_3;
-    public final SimpleEntrySet<WoodType, Block> GLASS_4;
-    public final SimpleEntrySet<WoodType, Block> GLASS_5;
-    public final SimpleEntrySet<WoodType, Block> GLASS_6;
-    public final SimpleEntrySet<WoodType, Block> GLASS_7;
-    public final SimpleEntrySet<WoodType, Block> GLASS_8;
+    public final SimpleEntrySet<WoodType, Block> GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8;
 
-    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_1;
-    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_2;
-    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_3;
-    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_4;
-    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_5;
-    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_6;
-    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_7;
-    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_8;
+    public final SimpleEntrySet<WoodType, Block> GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8;
 
 
     public BuildersDelightModule(String modId) {
         super(modId, "bdl");
         CreativeModeTab TabDeco = BdTabs.TabDecoration;
         CreativeModeTab TabBlock =  BdTabs.TabBlocks;
+        CreativeModeTab TabMater = BdTabs.TabMaterials;
+
+        //TYPE: ITEM
+        FURNITURE_KIT = ItemOnlyEntrySet.builder(WoodType.class, "furniture_kit",
+                        BdItems.OAK_FURNITURE_KIT, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CustomBdFurnitureKit(w.getTypeName(), new Item.Properties().tab(TabMater).stacksTo(64))
+                )
+                .addTexture(modRes("item/oak_furniture_kit"))
+                .addRecipe(modRes("oak_furniture_kit"))
+                .build();
+        this.addEntry(FURNITURE_KIT);
 
         //TYPE: CHAIR
         CHAIR_1 = SimpleEntrySet.builder(WoodType.class, "chair_1",
@@ -175,7 +153,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_planks_1"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(PLANKS_1);
@@ -189,7 +167,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_planks_2"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(PLANKS_2);
@@ -203,7 +181,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_planks_3"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(PLANKS_3);
@@ -217,7 +195,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_planks_4"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(PLANKS_4);
@@ -231,7 +209,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_planks_5"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(PLANKS_5);
@@ -245,7 +223,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_planks_6"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(PLANKS_6);
@@ -259,14 +237,14 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_planks_7"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(PLANKS_7);
         //TYPE: STAIRS
         STAIRS_1 = SimpleEntrySet.builder(WoodType.class, "stairs_1",
                         BdBlocks.OAK_STAIRS_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w  -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) ))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -281,7 +259,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_2 = SimpleEntrySet.builder(WoodType.class, "stairs_2",
                         BdBlocks.OAK_STAIRS_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w-> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -296,7 +274,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_3 = SimpleEntrySet.builder(WoodType.class, "stairs_3",
                         BdBlocks.OAK_STAIRS_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w ->new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w ->registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -311,7 +289,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_4 = SimpleEntrySet.builder(WoodType.class, "stairs_4",
                         BdBlocks.OAK_STAIRS_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w ->  new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -326,7 +304,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_5 = SimpleEntrySet.builder(WoodType.class, "stairs_5",
                         BdBlocks.OAK_STAIRS_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -341,7 +319,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_6 = SimpleEntrySet.builder(WoodType.class, "stairs_6",
                         BdBlocks.OAK_STAIRS_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w  -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w  -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -356,7 +334,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_7 = SimpleEntrySet.builder(WoodType.class, "stairs_7",
                         BdBlocks.OAK_STAIRS_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -373,7 +351,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: SLAB
         SLAB_1 = SimpleEntrySet.builder(WoodType.class, "slab_1",
                         BdBlocks.OAK_SLAB_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
+                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .requiresChildren("slab")
@@ -388,7 +366,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_2 = SimpleEntrySet.builder(WoodType.class, "slab_2",
                         BdBlocks.OAK_SLAB_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
+                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -403,7 +381,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_3 = SimpleEntrySet.builder(WoodType.class, "slab_3",
                         BdBlocks.OAK_SLAB_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
+                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -418,7 +396,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_4 = SimpleEntrySet.builder(WoodType.class, "slab_4",
                         BdBlocks.OAK_SLAB_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
+                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -433,7 +411,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_5 = SimpleEntrySet.builder(WoodType.class, "slab_5",
                         BdBlocks.OAK_SLAB_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
+                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -448,7 +426,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_6 = SimpleEntrySet.builder(WoodType.class, "slab_6",
                         BdBlocks.OAK_SLAB_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
+                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -463,7 +441,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_7 = SimpleEntrySet.builder(WoodType.class, "slab_7",
                         BdBlocks.OAK_SLAB_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
+                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
@@ -487,7 +465,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_frame_1"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(FRAME_1);
@@ -502,7 +480,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_frame_2"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(FRAME_2);
@@ -517,7 +495,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_frame_3"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(FRAME_3);
@@ -532,7 +510,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_frame_4"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(FRAME_4);
@@ -547,7 +525,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_frame_5"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(FRAME_5);
@@ -562,7 +540,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_frame_6"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(FRAME_6);
@@ -577,7 +555,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_frame_7"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(FRAME_7);
@@ -592,7 +570,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_frame_8"))
                 .createPaletteFromOak(this::neutralPalette)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(FRAME_8);
@@ -712,8 +690,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_8"),
-                        EveryCompat.res("block/bdl/oak_glass_8_mask"))
+                .addTextureM(modRes("block/glass/oak_glass/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_8_mask"))
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::translucent)
                 .build();
@@ -731,7 +708,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_PANE_1);
@@ -745,7 +722,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_PANE_2);
@@ -759,7 +736,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_PANE_3);
@@ -773,7 +750,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_PANE_4);
@@ -787,7 +764,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_PANE_5);
@@ -801,7 +778,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_PANE_6);
@@ -815,7 +792,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_PANE_7);
@@ -829,11 +806,10 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(GLASS_PANE_8);
-
     }
 
     //TYPE: FUNCTIONS
@@ -842,5 +818,20 @@ public class BuildersDelightModule extends SimpleModule {
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
+    }
+
+    // if STAIRS exist, then register. Otherwise won't register
+    private <B extends Block> B registerIfStairs(WoodType woodType, Supplier<B> supplier) {
+        if (woodType.getBlockOfThis("stairs") != null) {
+            return supplier.get();
+        }
+        return null;
+    }
+    // if SLAB exist, then register. Otherwise won't register
+    private <B extends Block> B registerIfSlab(WoodType woodType, Supplier<B> supplier) {
+        if (woodType.getBlockOfThis("slab") != null) {
+            return supplier.get();
+        }
+        return null;
     }
 }
