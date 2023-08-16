@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.forge.workshop;
 
 import com.google.gson.JsonObject;
+import com.tynoxs.buildersdelight.content.item.BdFurnitureKit;
 import moonfather.workshop_for_handsome_adventurer.Constants;
 import moonfather.workshop_for_handsome_adventurer.block_entities.*;
 import moonfather.workshop_for_handsome_adventurer.blocks.*;
@@ -258,7 +259,6 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                 .build();
         this.addEntry(DUAL_TABLE_PARTS_BL);
 
-
         STATION_PLACERS = ItemOnlyEntrySet.builder(WoodType.class,"", "workstation_placer",
                         () -> getModItem("workstation_placer_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
@@ -270,6 +270,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                 .addCondition(DUAL_TABLE_PARTS_BL.blocks::containsKey)
                 .build();
         this.addEntry(STATION_PLACERS);
+
     }
 
     @Override

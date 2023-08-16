@@ -1908,7 +1908,7 @@ public class ChippedModule extends SimpleModule {
         for (var w : WoodTypeRegistry.getTypes()) {
             boolean hasSomething = false;
             var id = w.id;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation("chipped",
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
                     id.getNamespace() + "_" + id.getPath() + "_planks"));
             for (var e : this.getEntries()) {
                 var v = e.blocks.get(w);
