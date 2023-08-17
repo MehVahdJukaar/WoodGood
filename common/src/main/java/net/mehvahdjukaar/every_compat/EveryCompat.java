@@ -9,8 +9,16 @@ import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
+import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
+import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
+import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
+import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.heart_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
@@ -111,8 +119,16 @@ public abstract class EveryCompat {
         addOtherCompatMod("abnormals_delight", "environmental", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
 
-        addModule("hearth_and_home", () -> HearthAndHomeModule::new);
+        addModule("another_furniture", () -> AnotherFurnitureModule::new);
+        addModule("barkcarpets", () -> BarkCarpetsModule::new);
+        addModule("campchair", () -> CampChairModule::new);
         addModule("chipped", () -> ChippedModule::new);
+        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
+        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
+        addModule("furnish", () -> FurnishModule::new);
+        addModule("handcrafted", () -> HandcraftedModule::new);
+        addModule("hearth_and_home", () -> HearthAndHomeModule::new);
+        addModule("twigs", () -> TwigsModule::new);
 
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 

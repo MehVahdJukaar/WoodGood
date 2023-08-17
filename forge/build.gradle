@@ -143,7 +143,7 @@ dependencies {
     modCompileOnly("curse.maven:farmersdelight-398521:3999157")
     modCompileOnly("curse.maven:furnish-547069:4449620")
     modImplementation("curse.maven:friends-and-foes-forge-602059:4429819")
-    modCompileOnly("curse.maven:handcrafted-538214:4437459")
+    modImplementation("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:infinity-buttons-661902:4276396")
     modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
 
@@ -164,18 +164,19 @@ dependencies {
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:4418663")
     modImplementation("curse.maven:quark-243121:4587248")
-    modImplementation("curse.maven:rechiseled-558998:4364936")
+    modCompileOnly("curse.maven:rechiseled-558998:4364936")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modImplementation("curse.maven:the-twilight-forest-227639:4389567")
-    modImplementation("curse.maven:twigs-496913:4533061")
+    modCompileOnly("curse.maven:twigs-496913:4533061")
     modCompileOnly("curse.maven:woodworks-543610:4023081")
     modImplementation("curse.maven:woodster-869951:4575175")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
     modCompileOnly("curse.maven:xercamod-341575:3947222")
+    modImplementation("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
 
-
+    modImplementation("curse.maven:builders-delight-forge-563734:4362665")
 
 
     // implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")

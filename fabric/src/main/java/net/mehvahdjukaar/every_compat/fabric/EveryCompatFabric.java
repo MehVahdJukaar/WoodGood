@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
+import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
@@ -33,22 +34,16 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
 
-        addModule("another_furniture", () -> AnotherFurnitureModule::new);
+
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
-        addModule("barkcarpets", () -> BarkCarpetsModule::new);
-        addModule("campchair", () -> CampChairModule::new);
         addModule("create", () -> CreateModule::new);
-        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
-        addModule("furnish", () -> FurnishModule::new);
-        addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
-        addModule("twigs", () -> TwigsModule::new);
 
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
         FabricSetupCallbacks.COMMON_SETUP.add(this::commonSetup);
 
+        forAllModules(CompatModule::onModInit);
     }
 
     public void onClientSetup() {

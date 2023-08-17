@@ -2,6 +2,8 @@ package net.mehvahdjukaar.every_compat.forge;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
+import net.mehvahdjukaar.every_compat.api.CompatModule;
+
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
@@ -28,10 +30,10 @@ import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawer
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
+import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
-import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
-import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
-import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
+
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -61,22 +63,16 @@ public class EveryCompatForge extends EveryCompat {
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
 
-        addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
-        addModule("barkcarpets", () -> BarkCarpetsModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
-        addModule("campchair", () -> CampChairModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
 
         addModule("create", () -> CreateModule::new);
-        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         if (PlatformHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
-        addModule("furnish", () -> FurnishModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
@@ -86,7 +82,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("quark", () -> QuarkModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
-        addModule("twigs", () -> TwigsModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodster", () -> WoodsterModule::new);
@@ -101,11 +96,13 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+		addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+
+        addModule("buildersdelight", () -> BuildersDelightModule::new);
 
         // addModule("graveyard", () -> GraveyardModule::new);
 
         // Disabled due to block entity complications
-        //addModule("handcrafted", () -> HandcraftedModule::new);
 
         // Disabled until custom block models work
          addModule("xercamod", () -> XercaModule::new);
@@ -117,6 +114,8 @@ public class EveryCompatForge extends EveryCompat {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onRemap);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onDataSync);
+
+        forAllModules(CompatModule::onModInit);
     }
 
     @SubscribeEvent

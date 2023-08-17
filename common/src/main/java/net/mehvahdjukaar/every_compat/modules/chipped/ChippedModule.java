@@ -23,6 +23,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
 
@@ -1896,7 +1897,7 @@ public class ChippedModule extends SimpleModule {
 
 
         //use this. also set the entry to no drop so we don't have 2
-        List<EntrySet<?, ?>> doors = this.getEntries().stream().filter(e -> e.typeName.contains("door")).toList();
+        List<EntrySet<?, ?, ?>> doors = this.getEntries().stream().filter(e -> e.typeName.contains("door")).toList();
         for (var e : doors) {
             for (var d : e.blocks.values()) {
                 handler.dynamicPack.addLootTable(d, BlockLoot.createDoorTable(d));
@@ -1908,22 +1909,20 @@ public class ChippedModule extends SimpleModule {
         for (var w : WoodTypeRegistry.getTypes()) {
             boolean hasSomething = false;
             var id = w.id;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation("chipped",
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
                     id.getNamespace() + "_" + id.getPath() + "_planks"));
             for (var e : this.getEntries()) {
-                var v = e.blocks.get(w);
-                if (v != null) {
+                Item b = e.items.get(w);
+                if (b != null) {
                     hasSomething = true;
-                    tagBuilder.addEntry(v);
+                    tagBuilder.addEntry(b);
                 }
             }
             if (hasSomething) {
                 handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
                 ja.add(tagBuilder.getId().toString());
-               // bigTag.addTag(tagBuilder);
             }
         }
-     //   handler.dynamicPack.addTag(bigTag, Registry.ITEM_REGISTRY);
         ja.add(bigTag.getId().toString());
         JsonObject jo = new JsonObject();
         jo.addProperty("type", "chipped:carpenters_table");

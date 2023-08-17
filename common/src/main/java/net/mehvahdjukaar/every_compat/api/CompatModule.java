@@ -57,6 +57,9 @@ public abstract class CompatModule {
         return List.of();
     }
 
+    public void onModInit() {
+    }
+
     public void onModSetup() {
 
     }
@@ -163,6 +166,11 @@ public abstract class CompatModule {
     @Nullable
     protected final Block getModBlock(String id) {
         return Registry.BLOCK.get(modRes(id));
+    }
+
+    @Nullable
+    protected final Item getModItem(String id) {
+        return Registry.ITEM.get(modRes(id));
     }
 
     @Nullable
