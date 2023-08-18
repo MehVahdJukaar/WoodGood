@@ -51,6 +51,7 @@ import java.util.function.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public class SimpleEntrySet<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet<T, B, Item> {
 
