@@ -30,13 +30,11 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -89,6 +87,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         this.renderType = renderType;
     }
 
+    @Override
+    protected Map<T, ? extends ItemLike> getMainEntryMap() {
+        return blocks;
+    }
 
     public ITileHolder<?> getTileHolder() {
         return tileHolder;

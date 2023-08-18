@@ -31,6 +31,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -60,6 +61,11 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, condition);
         this.itemFactory = itemFactory;
         this.baseItem = baseItem;
+    }
+
+    @Override
+    protected Map<T, ? extends ItemLike> getMainEntryMap() {
+        return items;
     }
 
     @Override

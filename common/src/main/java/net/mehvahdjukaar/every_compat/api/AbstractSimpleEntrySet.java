@@ -24,6 +24,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
@@ -127,7 +128,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         if (!tags.isEmpty()) {
             for (var tb : tags.entrySet()) {
                 SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
-                for (var b : blocks.entrySet()) {
+                for (var b : getMainEntryMap().entrySet()) {
                     if (WoodConfigs.isEntryEnabled(b.getKey(), b.getValue())) {
                         builder.addEntry(b.getValue());
                     }
@@ -157,7 +158,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public void generateTextures(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
         if (isDisabled()) return;
         if (textures.isEmpty()) return;
-
         List<TextureImage> images = new ArrayList<>();
         try {
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
@@ -181,8 +181,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 }
             }
 
-            for (var entry : blocks.entrySet()) {
-                B b = entry.getValue();
+            for (var entry : getMainEntryMap().entrySet()) {
+                ItemLike b = entry.getValue();
                 T w = entry.getKey();
                 //skips disabled ones
 
@@ -252,6 +252,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
     }
+
+    protected abstract Map<T, ? extends ItemLike> getMainEntryMap();
 
 
     protected static class Builder<BL extends Builder<BL, T, B, I>, T extends BlockType, B extends Block, I extends Item> {
