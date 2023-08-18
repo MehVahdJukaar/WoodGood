@@ -40,9 +40,10 @@ dependencies {
     modImplementation("curse.maven:selene-499980:4569959")
 
     // Dependencies
-    modImplementation("curse.maven:architectury-api-419699:4384405")
+    modImplementation("curse.maven:resourceful-lib-570073:4681832")
+    modImplementation("curse.maven:architectury-api-419699:4663009")
+
     modImplementation("curse.maven:cloth-config-348521:3972420")
-    modImplementation("curse.maven:resourceful-lib-570073:4434137")
     modImplementation("curse.maven:roughly-enough-items-310111:4573156")
     modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
     modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")

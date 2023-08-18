@@ -11,7 +11,7 @@ import com.jaquadro.minecraft.storagedrawers.core.ModItemGroup;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -210,7 +210,7 @@ public class StorageDrawersModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         event.register((BlockEntityType<CompatStandardDrawersEntity1>) (FULL_DRAWERS_1.getTileHolder().get()), BlockEntityDrawersRenderer::new);
         event.register((BlockEntityType<CompatStandardDrawersEntity2>) (FULL_DRAWERS_2.getTileHolder().get()), BlockEntityDrawersRenderer::new);
         event.register((BlockEntityType<CompatStandardDrawersEntity4>) (FULL_DRAWERS_4.getTileHolder().get()), BlockEntityDrawersRenderer::new);

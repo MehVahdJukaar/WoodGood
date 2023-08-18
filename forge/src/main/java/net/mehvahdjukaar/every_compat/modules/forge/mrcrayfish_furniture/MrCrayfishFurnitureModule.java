@@ -8,7 +8,7 @@ import com.mrcrayfish.furniture.core.ModBlockEntities;
 import com.mrcrayfish.furniture.core.ModBlocks;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -530,7 +530,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
         hedges.blocks.forEach((t, b) -> {
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
@@ -538,7 +538,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
     }
 
     @Override
-    public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
         super.registerItemColors(event);
         hedges.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());

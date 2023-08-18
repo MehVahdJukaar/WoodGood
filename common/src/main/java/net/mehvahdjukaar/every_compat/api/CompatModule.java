@@ -5,7 +5,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
@@ -143,17 +143,20 @@ public abstract class CompatModule {
 
     }
 
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
 
     }
 
     public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
     }
 
-    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
     }
 
-    public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
+    }
+
+    public void registerItemsToTabs(ClientHelper.ItemToTabsEvent event) {
     }
 
     //utility functions

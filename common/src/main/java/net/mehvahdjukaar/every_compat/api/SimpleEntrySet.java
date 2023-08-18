@@ -8,7 +8,7 @@ import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -212,7 +212,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Override
-    public void registerEntityRenderers(CompatModule simpleModule, ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerEntityRenderers(CompatModule simpleModule, ClientHelper.BlockEntityRendererEvent event) {
         if (this.tileHolder != null) {
             //this.tileHolder.registerRenderer(event);
         }
@@ -230,7 +230,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public void setRenderLayer() {
         if (isDisabled()) return;
         if (renderType != null) {
-            blocks.values().forEach(t -> ClientPlatformHelper.registerRenderType(t, renderType.get().get()));
+            blocks.values().forEach(t -> ClientHelper.registerRenderType(t, renderType.get().get()));
         }
     }
 

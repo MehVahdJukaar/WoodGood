@@ -7,7 +7,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -320,12 +320,12 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
     }
 
     @Override
-    public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
         hedges.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         });
@@ -336,7 +336,7 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         event.register(chestTile, VariantChestRenderer::new);
         event.register(trappedChestTile, VariantChestRenderer::new);

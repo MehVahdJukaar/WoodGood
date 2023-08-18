@@ -16,7 +16,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -191,7 +191,7 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event){
+    public void registerBlockColors(ClientHelper.BlockColorEvent event){
         super.registerBlockColors(event);
         leafPiles.blocks.forEach((t, b) -> {
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
@@ -199,7 +199,7 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    public void registerItemColors (ClientPlatformHelper.ItemColorEvent event){
+    public void registerItemColors (ClientHelper.ItemColorEvent event){
         leafPiles.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
             //blockColor.register((s, l, p, i) -> blockColor.getColor(bl.defaultBlockState(), l, p, i), b);
@@ -207,7 +207,7 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockEntityRenderers (ClientPlatformHelper.BlockEntityRendererEvent event){
+    public void registerBlockEntityRenderers (ClientHelper.BlockEntityRendererEvent event){
         super.registerBlockEntityRenderers(event);
         //event.register(CHEST_TILE, ChestRenderer::new);
         //event.register(TRAPPED_CHEST_TILE, ChestRenderer::new);

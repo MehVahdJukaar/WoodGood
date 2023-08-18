@@ -5,7 +5,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -118,7 +118,7 @@ public class TwilightForestModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         event.register(
                 (s, l, pos, i) -> l != null && pos != null ?
                         BiomeColors.getAverageFoliageColor(l, pos) : FoliageColor.getDefaultColor(),

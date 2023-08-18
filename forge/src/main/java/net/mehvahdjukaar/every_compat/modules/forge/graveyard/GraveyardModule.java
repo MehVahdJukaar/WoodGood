@@ -9,7 +9,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
@@ -49,7 +49,7 @@ public class GraveyardModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         event.register((BlockEntityType<CompatCoffinBlockTile>) (COFFINS.getTileHolder().get()), CompatCoffinRenderer::new);
     }
 

@@ -21,7 +21,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.forge.BlockTypeEnabledCondition;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.*;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;

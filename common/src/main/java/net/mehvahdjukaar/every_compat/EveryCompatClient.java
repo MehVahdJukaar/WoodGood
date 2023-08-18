@@ -1,28 +1,33 @@
 package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 
 
 public class EveryCompatClient {
 
     public static void commonInit() {
         EveryCompat.forAllModules(CompatModule::onClientInit);
-        ClientPlatformHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
-        ClientPlatformHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
-        ClientPlatformHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
+        ClientHelper.addBlockEntityRenderersRegistration(ClientHelper::registerBlockEntityRenderers);
+        ClientHelper.addBlockColorsRegistration(ClientHelper::registerBlockColors);
+        ClientHelper.addItemColorsRegistration(ClientHelper::registerItemColors);
+        ClientHelper.addItemsToTabsRegistration(ClientHelper::registerItemsToTabs);
     }
 
-    private static void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
         EveryCompat.forAllModules(m -> m.registerBlockColors(event));
     }
 
-    private static void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
+    private static void registerItemColors(ClientHelper.ItemColorEvent event) {
         EveryCompat.forAllModules(m -> m.registerItemColors(event));
     }
 
-    private static void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    private static void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         EveryCompat.forAllModules(m -> m.registerBlockEntityRenderers(event));
+    }
+
+    private static void registerItemsToTabs(ClientHelper.ItemToTabsEvent event) {
+        EveryCompat.forAllModules(m -> m.registerItemsToTabs(event));
     }
 
     public static void clientSetup() {
