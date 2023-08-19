@@ -57,9 +57,6 @@ import java.util.function.Supplier;
 /**
  * Author: MehVahdJukaar
  */
-
-//TODO: Fix Chipped recipes
-
 public abstract class EveryCompat {
     public static final String MOD_ID = "everycomp";
 
@@ -69,7 +66,7 @@ public abstract class EveryCompat {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static final Map<String, CompatModule> ACTIVE_MODULES = new LinkedHashMap<>();
+    public static final Map<String, CompatModule> ACTIVE_MODULES = new TreeMap<>();
 
     public static final List<CompatMod> COMPAT_MODS = new ArrayList<>();
 

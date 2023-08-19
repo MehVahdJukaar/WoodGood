@@ -221,15 +221,6 @@ public abstract class CompatModule {
         }
     }
 
-    public <T extends BlockType, B extends Block> Function<T, @Nullable B> ifHasChild(Function<T, B> supplier, String... children) {
-        return w -> {
-            for (var v : children) {
-                if (w.getChild(v) == null) return null;
-            }
-            return supplier.apply(w);
-        };
-    }
-
     //how much crap this module has registered
     public abstract int bloatAmount();
 

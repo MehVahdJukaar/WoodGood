@@ -218,7 +218,7 @@ public class BuildersAdditionModule extends SimpleModule {
 
         supportsBracket = SimpleEntrySet.builder(WoodType.class, "", "support_bracket",
                         Index.SUPPORT_BRACKET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new SupportBracket(shortenedId() + "/" + w.getAppendableId(), w.planks), "stripped_log"))
+                        w -> new SupportBracket(shortenedId() + "/" + w.getAppendableId(), w.planks)).requiresChildren("stripped_log")
                 .addRecipe(modRes("support_bracket/support_bracket_oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)

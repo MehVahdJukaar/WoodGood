@@ -50,7 +50,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 
         tallBarnDoors = SimpleEntrySet.builder(WoodType.class, "barn_door", "tall_macaw",
                         () -> getModBlock("tall_macaw_oak_barn_door"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallDoorBlock(BlockInit.OAK_BARN_DOOR.get()))
+                        w -> new TallDoorBlock(BlockInit.OAK_BARN_DOOR.get(), w.toVanillaOrOak().setType()))
                 .addTextureM(modRes("block/macaw/tall_oak_barn_door_lower"), EveryCompat.res("block/ddm/tall_oak_barn_door_lower_m"))
                 .addTextureM(modRes("block/macaw/tall_oak_barn_door_middle"), EveryCompat.res("block/ddm/tall_oak_barn_door_middle_m"))
                 .addTextureM(modRes("block/macaw/tall_oak_barn_door_upper"), EveryCompat.res("block/ddm/tall_oak_barn_door_upper_m"))

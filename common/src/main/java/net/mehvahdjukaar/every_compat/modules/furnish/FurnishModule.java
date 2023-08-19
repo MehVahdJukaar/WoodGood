@@ -70,7 +70,7 @@ public class FurnishModule extends SimpleModule {
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
                         () -> getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new Table(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                        w -> new Table(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -82,7 +82,7 @@ public class FurnishModule extends SimpleModule {
 
         squareTable = SimpleEntrySet.builder(WoodType.class, "square_table",
                         () -> getModBlock("oak_square_table"), () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new SimpleFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                        w -> new SimpleFurniture(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -94,7 +94,7 @@ public class FurnishModule extends SimpleModule {
 
         pedestalTable = SimpleEntrySet.builder(WoodType.class, "pedestal_table",
                         () -> getModBlock("oak_pedestal_table"), () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new SimpleFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                        w -> new SimpleFurniture(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -106,7 +106,7 @@ public class FurnishModule extends SimpleModule {
 
         bedsideTable = SimpleEntrySet.builder(WoodType.class, "bedside_table",
                         () -> getModBlock("oak_bedside_table"), () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new InventoryFurniture(Utils.copyPropertySafe(w.log), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound), "stripped_log"))
+                        w -> new InventoryFurniture(Utils.copyPropertySafe(w.log), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound)).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -132,7 +132,7 @@ public class FurnishModule extends SimpleModule {
 
         cabinet = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         FurnishBlocks.Birch_Cabinet, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
-                        ifHasChild(w -> new Cabinet(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound), "stripped_log"))
+                        w -> new Cabinet(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound)).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -147,7 +147,7 @@ public class FurnishModule extends SimpleModule {
 
         wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         FurnishBlocks.Birch_Wardrobe, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
-                        ifHasChild(w -> new Wardrobe(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound), "stripped_log"))
+                        w -> new Wardrobe(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound)).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -164,7 +164,7 @@ public class FurnishModule extends SimpleModule {
 
         stool = SimpleEntrySet.builder(WoodType.class, "stool",
                         FurnishBlocks.Oak_Stool, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log), Chair.BASE_SHAPES), "stripped_log"))
+                        w -> new Chair(Utils.copyPropertySafe(w.log), Chair.BASE_SHAPES)).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -176,8 +176,8 @@ public class FurnishModule extends SimpleModule {
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         FurnishBlocks.Oak_Chair, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log),
-                                VoxelShapeHelper.getMergedShapes(Chair.BASE_SHAPES, Chair.CHAIR_SEAT)), "stripped_log"))
+                        w -> new Chair(Utils.copyPropertySafe(w.log),
+                                VoxelShapeHelper.getMergedShapes(Chair.BASE_SHAPES, Chair.CHAIR_SEAT))).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -255,7 +255,7 @@ public class FurnishModule extends SimpleModule {
 
         ladder = SimpleEntrySet.builder(WoodType.class, "ladder",
                         FurnishBlocks.Oak_Ladder, () -> WoodTypeRegistry.OAK_TYPE,
-                        ifHasChild(w -> new Ladder(Utils.copyPropertySafe(w.log)), "stripped_log"))
+                        w -> new Ladder(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

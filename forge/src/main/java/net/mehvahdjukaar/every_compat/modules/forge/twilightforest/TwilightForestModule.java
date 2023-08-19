@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.forge.twilightforest;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
@@ -20,13 +21,17 @@ import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 import twilightforest.block.BanisterBlock;
 import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.HollowLogHorizontal;
 import twilightforest.block.HollowLogVertical;
 import twilightforest.init.TFBlocks;
+import twilightforest.init.TFCreativeTabs;
 import twilightforest.init.TFItems;
 import twilightforest.item.HollowLogItem;
+
+import java.util.function.Supplier;
 
 public class TwilightForestModule extends SimpleModule {
 
@@ -34,6 +39,7 @@ public class TwilightForestModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, HollowLogVertical> hollowLogsVertical;
     public final SimpleEntrySet<WoodType, HollowLogHorizontal> hollowLogsHorizontal;
     public final SimpleEntrySet<WoodType, HollowLogClimbable> hollowLogsClimbable;
+    //public final ItemOnlyEntrySet<WoodType, Item> hollowLogsItems;
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
@@ -46,14 +52,14 @@ public class TwilightForestModule extends SimpleModule {
                 .addTag(modRes("banisters"), Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
-                .setTab(() -> TFItems.creativeTab)
+                .setTab( TFCreativeTabs.BLOCKS)
                 .build();
 
         this.addEntry(banisters);
 
 
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, getBirch(),
                         w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem()
@@ -65,7 +71,7 @@ public class TwilightForestModule extends SimpleModule {
 
 
         hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, getBirch(),
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return new HollowLogVertical(Utils.copyPropertySafe(w.log), RegistryObject.create(id, ForgeRegistries.BLOCKS));
@@ -73,13 +79,14 @@ public class TwilightForestModule extends SimpleModule {
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .requiresChildren("stripped_log")
                 .noItem()
+                .setTab(TFCreativeTabs.BLOCKS)
                 .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log_vertical"))
                 .build();
 
         this.addEntry(hollowLogsVertical);
 
         hollowLogsClimbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, getBirch(),
                         w  -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
                                 RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS)))
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
@@ -90,7 +97,21 @@ public class TwilightForestModule extends SimpleModule {
 
         this.addEntry(hollowLogsClimbable);
 
+        /*
+        hollowLogsItems = ItemOnlyEntrySet.builder(WoodType.class, "log_vertical", "hollow",
+                TFItems.HOLLOW_BIRCH_LOG, getBirch(),
+                        w->new HollowLogItem(
+                                RegistryObject.create(Utils.getID(hollowLogsHorizontal.blocks.get(w)), ForgeRegistries.BLOCKS),
+                                RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS),
+                                RegistryObject.create(Utils.getID(hollowLogsClimbable.blocks.get(w)), ForgeRegistries.BLOCKS),
+                                new Item.Properties()))
 
+                .build();*/
+    }
+
+    @NotNull
+    private static Supplier<WoodType> getBirch() {
+        return () -> WoodTypeRegistry.getValue(new ResourceLocation("birch"));
     }
 
     @Override
@@ -105,7 +126,7 @@ public class TwilightForestModule extends SimpleModule {
                     RegistryObject.create(EveryCompat.res(itemName + "_climbable"), ForgeRegistries.BLOCKS),
                     new Item.Properties());
             hollowLogsVertical.items.put(w, i);
-            w.addChild(childKey, (Object) i);
+            w.addChild(childKey, i);
             registry.register(EveryCompat.res(itemName + "_vertical"), i);
         });
     }
