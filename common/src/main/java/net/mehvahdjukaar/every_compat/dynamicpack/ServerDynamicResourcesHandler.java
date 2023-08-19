@@ -2,13 +2,13 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
 
-public class ServerDynamicResourcesHandler extends DynServerResourcesProvider {
+public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
 
     public static final ServerDynamicResourcesHandler INSTANCE = new ServerDynamicResourcesHandler();
 
@@ -18,7 +18,7 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesProvider {
         getPack().addNamespaces("minecraft");
         getPack().addNamespaces("forge");
         getPack().addNamespaces(EveryCompat.MOD_ID);
-        this.dynamicPack.generateDebugResources = PlatformHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get();
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get());
     }
 
     @Override

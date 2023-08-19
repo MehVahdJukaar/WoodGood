@@ -6,9 +6,10 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -16,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
@@ -156,38 +158,38 @@ public abstract class CompatModule {
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
     }
 
-    public void registerItemsToTabs(ClientHelper.ItemToTabsEvent event) {
+    public void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
     }
 
     //utility functions
 
     @Nullable
     protected final <T extends Block> T getModBlock(String id, Class<T> blockClass) {
-        return (T) Registry.BLOCK.get(modRes(id));
+        return (T) BuiltInRegistries.BLOCK.getOptional(modRes(id)).orElse(null);
     }
 
     @Nullable
     protected final Block getModBlock(String id) {
-        return Registry.BLOCK.get(modRes(id));
+        return getModBlock(id, Block.class);
     }
 
     @Nullable
     protected final Item getModItem(String id) {
-        return Registry.ITEM.get(modRes(id));
+        return BuiltInRegistries.ITEM.getOptional(modRes(id)).orElse(null);
     }
 
     @Nullable
     protected final <T extends BlockEntityType<?>> T getModTile(String id, Class<T> blockClass) {
-        return (T) Registry.BLOCK_ENTITY_TYPE.get(modRes(id));
+        return (T) BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(modRes(id)).orElse(null);
     }
 
     @Nullable
     protected final BlockEntityType<?> getModTile(String id) {
-        return Registry.BLOCK_ENTITY_TYPE.get(modRes(id));
+        return getModTile(id, BlockEntityType.class);
     }
 
     //post process some textures. currently only ecologics azalea
-    public void addWoodTexture(WoodType wood, DynClientResourcesProvider handler, ResourceManager manager,
+    public void addWoodTexture(WoodType wood, DynClientResourcesGenerator handler, ResourceManager manager,
                                String path, Supplier<TextureImage> textureSupplier) {
         handler.addTextureIfNotPresent(manager, path, () -> {
             var t = textureSupplier.get();

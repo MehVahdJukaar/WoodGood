@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,11 +28,9 @@ public abstract class LootTableHackMixin {
     @Shadow public abstract Item asItem();
 
     @Inject(method = "getDrops", cancellable = true,
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTables;get(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;",
             shift = At.Shift.BY, by = 2), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
-    public void addSimpleFastECdrops(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir,
-                                     ResourceLocation resourceLocation, LootContext lootContext,
-                                     ServerLevel serverLevel, LootTable lootTable) {
+    public void addSimpleFastECdrops(BlockState state, LootParams.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir, ResourceLocation resourceLocation, LootParams lootParams, ServerLevel serverLevel, LootTable lootTable) {
         if(lootTable == LootTable.EMPTY && Utils.getID(state.getBlock()).getNamespace().equals(EveryCompat.MOD_ID)){
             if(SimpleEntrySet.isSimpleDrop(state.getBlock())){
                 cir.setReturnValue(List.of(this.asItem().getDefaultInstance()));

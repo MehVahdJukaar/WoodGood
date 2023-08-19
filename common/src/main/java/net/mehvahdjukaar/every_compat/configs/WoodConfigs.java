@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
@@ -26,7 +26,7 @@ public class WoodConfigs {
     public static ConfigSpec SPEC;
 
     public static void init() {
-        String ss = PlatformHelper.isDev() && PlatformHelper.getEnv().isServer() ? "_s" : "";
+        String ss = PlatHelper.isDev() && PlatHelper.getEnv().isServer() ? "_s" : "";
 
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("wood_types" + ss), ConfigType.COMMON);
 

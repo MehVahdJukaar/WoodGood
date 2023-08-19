@@ -3,22 +3,22 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
+public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
     public static final ClientDynamicResourcesHandler INSTANCE = new ClientDynamicResourcesHandler();
 
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(EveryCompat.res("generated_pack")));
         //since we place chests textures in its namespace to use its renderer
-        if (PlatformHelper.isModLoaded("quark")) getPack().addNamespaces("quark");
-        this.dynamicPack.generateDebugResources = PlatformHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get();
+        if (PlatHelper.isModLoaded("quark")) getPack().addNamespaces("quark");
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get());
     }
 
     @Override

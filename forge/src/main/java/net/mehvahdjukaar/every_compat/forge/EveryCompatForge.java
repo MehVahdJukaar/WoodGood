@@ -34,10 +34,11 @@ import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsome
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -62,14 +63,13 @@ public class EveryCompatForge extends EveryCompat {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
-
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
 
         addModule("create", () -> CreateModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
-        if (PlatformHelper.isModLoaded("mcwdoors")) {
+        if (PlatHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
@@ -107,7 +107,7 @@ public class EveryCompatForge extends EveryCompat {
         // Disabled until custom block models work
          addModule("xercamod", () -> XercaModule::new);
 
-        if (PlatformHelper.getEnv().isClient()) {
+        if (PlatHelper.getEnv().isClient()) {
             EveryCompatClient.commonInit();
         }
 

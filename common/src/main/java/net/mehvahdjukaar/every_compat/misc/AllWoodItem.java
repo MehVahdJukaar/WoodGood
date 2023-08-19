@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 public class AllWoodItem extends Item implements ICustomItemRendererProvider {
 
     public AllWoodItem() {
-        super(new Properties().tab(null));
+        super(new Properties());
     }
 
     @Override

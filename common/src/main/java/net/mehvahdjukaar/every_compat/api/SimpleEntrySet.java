@@ -9,12 +9,13 @@ import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -30,6 +31,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -91,7 +93,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
 
-    public ITileHolder<?> getTileHolder() {
+    public @Nullable ITileHolder<?> getTileHolder() {
         return tileHolder;
     }
 
@@ -102,27 +104,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     public B getBaseBlock() {
         return baseBlock.get();
-    }
-
-    public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
-        String wood = parseWoodType(oldName);
-        if (wood != null) {
-            var w = BlockSetAPI.getBlockSet(this.getTypeClass()).get(new ResourceLocation(woodFrom, wood));
-            if (w != null) {
-                return module.shortenedId() + "/" + w.getNamespace() + "/" + oldName;
-            }
-        }
-        return null;
-    }
-
-    //gets the wood type of the given name if it is in this entry set name format
-    @Nullable
-    public String parseWoodType(String oldName) {
-        Matcher m = nameScheme.matcher(oldName);
-        if (m.find()) {
-            return m.group(1);
-        }
-        return null;
     }
 
     public void addTranslations(CompatModule module, AfterLanguageLoadEvent lang) {
@@ -153,7 +134,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         for (T w : woodTypes) {
             String name = getBlockName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
+            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, BuiltInRegistries.BLOCK)) continue;
 
             if(condition.test(w)) {
                 B block = blockFactory.apply(w);
@@ -188,12 +169,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public void registerItems(CompatModule module, Registrator<Item> registry) {
         blocks.forEach((w, value) -> {
             Item i;
-            CreativeModeTab tab = getTab(w, value);
 
             if (itemFactory != null) {
-                i = itemFactory.apply(w, value, new Item.Properties().tab(tab));
+                i = itemFactory.apply(w, value, new Item.Properties());
             } else {
-                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties().tab(tab), w);
+                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), w);
             }
             //for ones that don't have item
             if (i != null) {
@@ -252,7 +232,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Override
-    public void generateModels(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
+    public void generateModels(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
         if (isDisabled()) return;
         ResourcesUtils.addStandardResources(module.getModId(), manager, handler, blocks, baseType.get(), extraTransform);
     }
@@ -378,7 +358,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         public BlockEntityType<? extends H> createInstance(Block... blocks) {
             if (tile != null) throw new UnsupportedOperationException("tile has already been created");
-            this.tile = PlatformHelper.newBlockEntityType(tileFactory::apply, blocks);
+            this.tile = PlatHelper.newBlockEntityType(tileFactory::apply, blocks);
             return tile;
         }
     }

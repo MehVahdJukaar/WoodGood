@@ -6,40 +6,28 @@ import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.function.*;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
@@ -53,7 +41,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                             Function<T, I> itemFactory,
                             Supplier<@Nullable I> baseItem,
                             Supplier<T> baseType,
-                            Supplier<CreativeModeTab> tab,
+                            Supplier<ResourceKey<CreativeModeTab>> tab,
                             @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                             @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                             Predicate<T> condition) {
@@ -102,16 +90,16 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         for (T w : typeRegistry.getValues()) {
             String name = getItemName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
+            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, BuiltInRegistries.ITEM)) continue;
 
-            if(condition.test(w)) {
+            if (condition.test(w)) {
                 I item = itemFactory.apply(w);
                 //for blocks that fail
                 if (item != null) {
                     this.items.put(w, item);
 
                     registry.register(EveryCompat.res(fullName), item);
-                    w.addChild(getChildKey(module),(Object) item);
+                    w.addChild(getChildKey(module), (Object) item);
                 }
             }
         }
@@ -123,7 +111,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         if (base == null || base == Items.AIR)
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
-        baseType.get().addChild(getChildKey(module),(Object) base);
+        baseType.get().addChild(getChildKey(module), (Object) base);
 
     }
 
@@ -138,7 +126,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     }
 
     @Override
-    public void generateModels(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
+    public void generateModels(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
         if (isDisabled()) return;
         ResourcesUtils.addItemModels(module.getModId(), manager, handler, items, baseType.get(), extraTransform);
     }
@@ -157,18 +145,18 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     }
 
     public static <T extends BlockType, I extends Item> Builder<T, I> builder(Class<T> type, String name, String prefix,
-                                                                               Supplier<I> baseItem, Supplier<T> baseType,
+                                                                              Supplier<I> baseItem, Supplier<T> baseType,
                                                                               Function<T, I> itemSupplier) {
 
         return new Builder<>(type, name, prefix, baseType, baseItem, itemSupplier);
     }
 
-    public static class Builder<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet.Builder<Builder<T,I>, T,Block,I> {
+    public static class Builder<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet.Builder<Builder<T, I>, T, Block, I> {
         protected final Supplier<@Nullable I> baseItem;
         protected final Function<T, I> itemFactory;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<I> baseItem, Function<T, I> itemFactory) {
-            super(type, name, prefix, baseType);;
+            super(type, name, prefix, baseType);
             this.baseItem = baseItem;
             this.itemFactory = itemFactory;
         }

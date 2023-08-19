@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
@@ -21,7 +21,7 @@ public class EarlyConfigs {
     public static final Supplier<Boolean> DEBUG_PACKET;
 
     static {
-        String s = PlatformHelper.isDev() && PlatformHelper.getEnv().isServer() ? "_s" : "";
+        String s = PlatHelper.isDev() && PlatHelper.getPhysicalSide().isServer() ? "_s" : "";
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("common" + s), ConfigType.COMMON);
 
         builder.push("general");

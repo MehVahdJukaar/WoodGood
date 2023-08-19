@@ -9,6 +9,7 @@ import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
@@ -35,12 +36,12 @@ import java.util.function.Consumer;
 public class ResourcesUtils {
 
     public static <B extends Block, T extends BlockType> void addStandardResources(
-            String modId, ResourceManager manager, DynClientResourcesProvider pack, Map<T, B> blocks, T baseType) {
+            String modId, ResourceManager manager, DynClientResourcesGenerator pack, Map<T, B> blocks, T baseType) {
         addStandardResources(modId, manager, pack, blocks, baseType, null);
     }
 
     public static <B extends Block, T extends BlockType> void addStandardResources(
-            String modId, ResourceManager manager, DynClientResourcesProvider d,
+            String modId, ResourceManager manager, DynClientResourcesGenerator d,
             Map<T, B> blocks, T baseType, @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
 
         if (blocks.isEmpty()) return;
@@ -163,7 +164,7 @@ public class ResourcesUtils {
 
     //same as above just with just item models. a bunch of copy paste here... ugly
     public static <I extends Item, T extends BlockType> void addItemModels(
-            String modId, ResourceManager manager, DynClientResourcesProvider d,
+            String modId, ResourceManager manager, DynClientResourcesGenerator d,
             Map<T, I> items, T baseType, @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
 
         if (items.isEmpty()) return;

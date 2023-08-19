@@ -11,7 +11,6 @@ public class EveryCompatClient {
         ClientHelper.addBlockEntityRenderersRegistration(ClientHelper::registerBlockEntityRenderers);
         ClientHelper.addBlockColorsRegistration(ClientHelper::registerBlockColors);
         ClientHelper.addItemColorsRegistration(ClientHelper::registerItemColors);
-        ClientHelper.addItemsToTabsRegistration(ClientHelper::registerItemsToTabs);
     }
 
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {

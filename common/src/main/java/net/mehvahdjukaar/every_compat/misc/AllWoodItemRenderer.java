@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -45,7 +46,7 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
     }
 
     @Override
-    public void renderByItem(ItemStack stack, ItemTransforms.TransformType transformType,
+    public void renderByItem(ItemStack stack, ItemDisplayContext transformType,
                              PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 
         if (!this.initialized) {
@@ -87,8 +88,7 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
                 String key = CHILD_KEYS.get(lastIndex);
                 var vv = MODDED_WOOD_TYPES.get(woodIndex % MODDED_WOOD_TYPES.size()).getChild(key);
                 if (vv instanceof ItemLike il) {
-                    if (il.asItem().getItemCategory() == null) v = null;
-                    else v = il;
+                     v = il;
                 }
             } while (v == null);
 
