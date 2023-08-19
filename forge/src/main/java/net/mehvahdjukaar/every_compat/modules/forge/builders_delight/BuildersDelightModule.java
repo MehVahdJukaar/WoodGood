@@ -35,12 +35,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.common.Tags;
 
-import java.util.Objects;
-import java.util.function.Supplier;
-
 
 public class BuildersDelightModule extends SimpleModule {
-    private static final ResourceLocation OAK = new ResourceLocation("oak");
 
     //TYPE: ITEM
     public final ItemOnlyEntrySet<WoodType, Item> FURNITURE_KIT;
@@ -75,7 +71,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdItems.OAK_FURNITURE_KIT, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomBdFurnitureKit(w.getTypeName(), new Item.Properties().tab(TabMater).stacksTo(64))
                 )
-                .addTexture(modRes("item/oak_furniture_kit"))
+                .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"))
                 .addRecipe(modRes("oak_furniture_kit"))
                 .build();
         this.addEntry(FURNITURE_KIT);
@@ -90,7 +86,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabDeco)
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_1"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -104,8 +100,8 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("chair"), Registry.ITEM_REGISTRY)
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_2"))
                 .createPaletteFromOak(this::neutralPalette)
+                .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_2"))
                 .setTab(() -> TabDeco)
-                .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -122,7 +118,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("table"), Registry.ITEM_REGISTRY)
                 .setTab(() -> TabDeco)
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_1"))
-                .defaultRecipe()
+                .addRecipe(ResourceLocation.tryParse("minecraft:oak_table_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -136,7 +132,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("table"), Registry.ITEM_REGISTRY)
                 .setTab(() -> TabDeco)
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_2"))
-                .defaultRecipe()
+                .addRecipe(ResourceLocation.tryParse("minecraft:oak_table_2"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -152,7 +148,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_1"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_planks_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -166,7 +162,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_2"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_planks_2"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -180,7 +176,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_3"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_planks_3"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -194,7 +190,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_4"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_planks_4"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -208,7 +204,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_5"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_planks_5"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -222,7 +218,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_6"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_planks_6"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -236,22 +232,24 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_7"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_planks_7"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
         this.addEntry(PLANKS_7);
+
+
         //TYPE: STAIRS
         STAIRS_1 = SimpleEntrySet.builder(WoodType.class, "stairs_1",
                         BdBlocks.OAK_STAIRS_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) ))
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_1"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_stairs_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -259,14 +257,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_2 = SimpleEntrySet.builder(WoodType.class, "stairs_2",
                         BdBlocks.OAK_STAIRS_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_2"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_stairs_2"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -274,14 +272,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_3 = SimpleEntrySet.builder(WoodType.class, "stairs_3",
                         BdBlocks.OAK_STAIRS_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w ->registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w ->new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_3"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_stairs_3"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -289,14 +287,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_4 = SimpleEntrySet.builder(WoodType.class, "stairs_4",
                         BdBlocks.OAK_STAIRS_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_4"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_stairs_4"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -304,14 +302,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_5 = SimpleEntrySet.builder(WoodType.class, "stairs_5",
                         BdBlocks.OAK_STAIRS_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_5"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_stairs_5"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -319,14 +317,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_6 = SimpleEntrySet.builder(WoodType.class, "stairs_6",
                         BdBlocks.OAK_STAIRS_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w  -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w  -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_6"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_stairs_6"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -334,14 +332,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_7 = SimpleEntrySet.builder(WoodType.class, "stairs_7",
                         BdBlocks.OAK_STAIRS_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfStairs(w, () -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs"))) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_7"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_stairs_7"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -351,14 +349,14 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: SLAB
         SLAB_1 = SimpleEntrySet.builder(WoodType.class, "slab_1",
                         BdBlocks.OAK_SLAB_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .requiresChildren("slab")
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_1"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_slab_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -366,14 +364,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_2 = SimpleEntrySet.builder(WoodType.class, "slab_2",
                         BdBlocks.OAK_SLAB_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_2"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_slab_2"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -381,14 +379,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_3 = SimpleEntrySet.builder(WoodType.class, "slab_3",
                         BdBlocks.OAK_SLAB_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_3"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_slab_3"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -396,14 +394,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_4 = SimpleEntrySet.builder(WoodType.class, "slab_4",
                         BdBlocks.OAK_SLAB_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_4"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_slab_4"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -411,14 +409,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_5 = SimpleEntrySet.builder(WoodType.class, "slab_5",
                         BdBlocks.OAK_SLAB_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_5"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_slab_5"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -426,14 +424,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_6 = SimpleEntrySet.builder(WoodType.class, "slab_6",
                         BdBlocks.OAK_SLAB_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_6"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_slab_6"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -441,14 +439,14 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_7 = SimpleEntrySet.builder(WoodType.class, "slab_7",
                         BdBlocks.OAK_SLAB_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> registerIfSlab(w, () -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab"))) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_7"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_slab_7"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -464,7 +462,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_1"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_frame_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -479,7 +477,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_2"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_frame_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -494,7 +492,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_3"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_frame_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -509,7 +507,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_4"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_frame_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -524,7 +522,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_5"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_frame_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -539,7 +537,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_6"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_frame_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -554,7 +552,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_7"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_frame_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -569,7 +567,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_8"))
                 .createPaletteFromOak(this::neutralPalette)
-                .defaultRecipe()
+                .addRecipe(modRes("oak_frame_1"))
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -586,7 +584,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_1_mask"))
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -601,7 +599,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_2"), EveryCompat.res("block/bdl/oak_glass_2_mask"))
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -616,7 +614,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_3"), EveryCompat.res("block/bdl/oak_glass_3_mask"))
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -631,7 +629,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_4"), EveryCompat.res("block/bdl/oak_glass_4_mask"))
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -646,7 +644,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"))
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_1"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -661,7 +659,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_6_mask"))
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_1"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -676,7 +674,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_7_mask"))
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -691,7 +689,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_8_mask"))
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_1"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -707,7 +705,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_pane_1"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -721,7 +719,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_pane_2"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -735,7 +733,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_pane_3"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -749,7 +747,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_pane_4"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -763,7 +761,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_pane_5"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -777,7 +775,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_pane_6"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -791,7 +789,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_pane_7"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -805,7 +803,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
-                .defaultRecipe()
+                .addRecipe(modRes("oak_glass_pane_8"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -820,18 +818,4 @@ public class BuildersDelightModule extends SimpleModule {
         p.remove(p.getDarkest());
     }
 
-    // if STAIRS exist, then register. Otherwise won't register
-    private <B extends Block> B registerIfStairs(WoodType woodType, Supplier<B> supplier) {
-        if (woodType.getBlockOfThis("stairs") != null) {
-            return supplier.get();
-        }
-        return null;
-    }
-    // if SLAB exist, then register. Otherwise won't register
-    private <B extends Block> B registerIfSlab(WoodType woodType, Supplier<B> supplier) {
-        if (woodType.getBlockOfThis("slab") != null) {
-            return supplier.get();
-        }
-        return null;
-    }
 }
