@@ -235,9 +235,9 @@
   
   "block_type.architects_palette.railing": "%s扶手",
   "block_type.architects_palette.boards": "%s宽木板",
-  "block_type.architects_palette.board_wall": "%s宽板墙",
-  "block_type.architects_palette.board_stairs": "%s宽板楼梯",
-  "block_type.architects_palette.board_slab": "%s宽板台阶",
+  "block_type.architects_palette.board_wall": "%s宽木板墙",
+  "block_type.architects_palette.board_stairs": "%s宽木板楼梯",
+  "block_type.architects_palette.board_slab": "%s宽木板台阶",
 
   "block_type.valhelsia_structures.cut_post": "切制%s桩",
   "block_type.valhelsia_structures.stripped_cut_post": "去皮切制%s桩",
@@ -510,7 +510,7 @@
   "block_type.xercamod.carved_7": "雕纹%s",
   "block_type.xercamod.carved_8": "雕纹%s",
   
-  "block_type.woodworks.boards": "%s直木板",
+  "block_type.woodworks.boards": "%s直纹板",
   "block_type.woodworks.bookshelf": "%s书架",
   "block_type.woodworks.ladder": "%s梯子",
   "block_type.woodworks.beehive": "%s蜂箱",
@@ -521,6 +521,19 @@
 
   "block_type.infinitybuttons.large_button": "%s大按钮",
   "block_type.infinitybuttons.plank_secret_button": "%s板隐蔽按钮",
+
+  "block_type.workshop_for_handsome_adventurer.simple_table": "工作台（%s）",
+  "block_type.workshop_for_handsome_adventurer.book_shelf_double": "书架（%s，双层）",
+  "block_type.workshop_for_handsome_adventurer.book_shelf_minimal": "书架（%s，单层）",
+  "block_type.workshop_for_handsome_adventurer.book_shelf_open_minimal": "书架（%s，单层，开放式）",
+  "block_type.workshop_for_handsome_adventurer.book_shelf_open_double": "书架（%s，双层，开放式）",
+  "block_type.workshop_for_handsome_adventurer.book_shelf_with_lanterns": "书架（%s，带灯）",
+  "block_type.workshop_for_handsome_adventurer.tool_rack_double": "工具架（%s，三排）",
+  "block_type.workshop_for_handsome_adventurer.tool_rack_framed": "工具架（%s，带框架）",
+  "block_type.workshop_for_handsome_adventurer.tool_rack_pframed": "工具架（%s，带侧架）",
+  "block_type.workshop_for_handsome_adventurer.tool_rack_single": "工具架（%s，单排）",
+  "block_type.workshop_for_handsome_adventurer.potion_shelf": "药水架（%s）",
+  "item_type.workshop_for_handsome_adventurer.workstation_placer": "工作站（%s）",
 
 
   "wood_type.minecraft.oak": "橡木",
@@ -711,6 +724,9 @@
 
   "wood_type.botania.livingwood": "活木",
   "wood_type.botania.dreamwood": "梦之木",
+
+  "wood_type.bwplus.yew": "紫杉木",
+  "leaves_type.bwplus.yew": "紫杉",
 
   "wood_type.byg.aspen": "白杨木",
   "wood_type.byg.baobab": "猴面包木",
@@ -1050,6 +1066,9 @@
 
   "wood_type.pasterdream.dyedream": "染梦木",
   "leaves_type.pasterdream.dyedream": "染梦",
+
+  "wood_type.pearfection.callery": "豆梨木",
+  "leaves_type.pearfection.callery": "豆梨",
 
   "wood_type.phantasm.pream": "梦兰木",
   "wood_type.phantasm.ebony": "黑漆木",
