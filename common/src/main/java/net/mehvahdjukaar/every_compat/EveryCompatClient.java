@@ -2,15 +2,16 @@ package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 
 
 public class EveryCompatClient {
 
     public static void commonInit() {
         EveryCompat.forAllModules(CompatModule::onClientInit);
-        ClientHelper.addBlockEntityRenderersRegistration(ClientHelper::registerBlockEntityRenderers);
-        ClientHelper.addBlockColorsRegistration(ClientHelper::registerBlockColors);
-        ClientHelper.addItemColorsRegistration(ClientHelper::registerItemColors);
+        ClientHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
+        ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
+        ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
     }
 
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
@@ -25,7 +26,7 @@ public class EveryCompatClient {
         EveryCompat.forAllModules(m -> m.registerBlockEntityRenderers(event));
     }
 
-    private static void registerItemsToTabs(ClientHelper.ItemToTabsEvent event) {
+    private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         EveryCompat.forAllModules(m -> m.registerItemsToTabs(event));
     }
 

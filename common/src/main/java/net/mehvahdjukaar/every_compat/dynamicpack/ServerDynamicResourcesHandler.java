@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
@@ -18,7 +18,6 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
         getPack().addNamespaces("minecraft");
         getPack().addNamespaces("forge");
         getPack().addNamespaces(EveryCompat.MOD_ID);
-        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get());
     }
 
     @Override
@@ -28,11 +27,13 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
 
     @Override
     public boolean dependsOnLoadedPacks() {
-        return EarlyConfigs.SPEC != null && EarlyConfigs.DEPEND_ON_PACKS.get();
+        return  ModConfigs.SPEC == null || ModConfigs.DEPEND_ON_PACKS.get();
     }
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ModConfigs.DEBUG_RESOURCES.get());
+
         EveryCompat.forAllModules(m -> {
             try {
                 m.addDynamicServerResources(this, manager);

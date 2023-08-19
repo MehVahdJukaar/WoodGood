@@ -27,7 +27,7 @@ public class MacawPathsModule extends SimpleModule {
         PLANKS_PATHS = SimpleEntrySet.builder(WoodType.class, "planks_path",
                         BlockInit.OAK_PLANKS_PATH, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FacingPathBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)

@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
@@ -18,7 +18,6 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         super(new DynamicTexturePack(EveryCompat.res("generated_pack")));
         //since we place chests textures in its namespace to use its renderer
         if (PlatHelper.isModLoaded("quark")) getPack().addNamespaces("quark");
-        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get());
     }
 
     @Override
@@ -28,7 +27,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
     @Override
     public boolean dependsOnLoadedPacks() {
-        return EarlyConfigs.SPEC != null && EarlyConfigs.DEPEND_ON_PACKS.get();
+        return ModConfigs.SPEC == null || ModConfigs.DEPEND_ON_PACKS.get();
     }
 
     @Override
@@ -40,6 +39,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ModConfigs.DEBUG_RESOURCES.get());
         EveryCompat.forAllModules(m -> {
             try {
                 m.addDynamicClientResources(this, manager);

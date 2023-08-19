@@ -44,7 +44,7 @@ public class XercaModule extends SimpleModule {
         carved1 = SimpleEntrySet.builder(WoodType.class, "1", "carved",
                         Blocks.CARVED_WARPED_1, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_1_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_1_side_abcd"))
@@ -59,7 +59,7 @@ public class XercaModule extends SimpleModule {
         carved2 = SimpleEntrySet.builder(WoodType.class, "2", "carved",
                         Blocks.CARVED_WARPED_2, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_2_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_2_side_abcd"))
@@ -74,7 +74,7 @@ public class XercaModule extends SimpleModule {
         carved3 = SimpleEntrySet.builder(WoodType.class, "3", "carved",
                         Blocks.CARVED_WARPED_3, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_3_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_3_side_abcd"))
@@ -89,7 +89,7 @@ public class XercaModule extends SimpleModule {
         carved4 = SimpleEntrySet.builder(WoodType.class, "4", "carved",
                         Blocks.CARVED_WARPED_4, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_4_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_4_side_abcd"))
@@ -104,7 +104,7 @@ public class XercaModule extends SimpleModule {
         carved5 = SimpleEntrySet.builder(WoodType.class, "5", "carved",
                         Blocks.CARVED_WARPED_5, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_5_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_5_side_ab"))
@@ -120,7 +120,7 @@ public class XercaModule extends SimpleModule {
         carved6 = SimpleEntrySet.builder(WoodType.class, "6", "carved",
                         Blocks.CARVED_WARPED_6, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_6_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_6_bottom"))
@@ -139,7 +139,7 @@ public class XercaModule extends SimpleModule {
         carved7 = SimpleEntrySet.builder(WoodType.class, "7", "carved",
                         Blocks.CARVED_WARPED_7, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_7_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_7_side_a"))
@@ -155,7 +155,7 @@ public class XercaModule extends SimpleModule {
         carved8 = SimpleEntrySet.builder(WoodType.class, "8", "carved",
                         Blocks.CARVED_WARPED_8, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_8_top"))
                 .addTexture(modRes("block/carved_wood/carved_warped_8_side_abcd"))

@@ -4,8 +4,7 @@ package net.mehvahdjukaar.every_compat;
 import io.netty.buffer.Unpooled;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
-import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
-import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
@@ -20,8 +19,8 @@ import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.heart_and_home.HearthAndHomeModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
+import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
@@ -41,7 +40,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -83,10 +81,9 @@ public abstract class EveryCompat {
     }
 
 
-
     protected void commonInit() {
 
-        EarlyConfigs.init();
+        ModConfigs.init();
 
         ServerDynamicResourcesHandler.INSTANCE.register();
 
@@ -139,9 +136,9 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
         BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
 
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, Registry.ITEM);
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, Registry.BLOCK_ENTITY_TYPE);
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, Registry.ENTITY_TYPE);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, BuiltInRegistries.ITEM);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
 
         RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
 
@@ -158,7 +155,12 @@ public abstract class EveryCompat {
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
             var module = moduleFactory.get().apply(modId);
-            EveryCompatAPI.registerModule(module);
+            try {
+                EveryCompatAPI.registerModule(module);
+            } catch (Exception e) {
+                if (PlatHelper.isDev()) throw e;
+                else EveryCompat.LOGGER.error("Failed to register module for mod " + module, e);
+            }
         }
     }
 
@@ -169,17 +171,16 @@ public abstract class EveryCompat {
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
 
-    public static Supplier<CreativeModeTab> MOD_TAB = RegHelper.registerCreativeModeTab(res(MOD_ID),
+    public static RegSupplier<CreativeModeTab> MOD_TAB = RegHelper.registerCreativeModeTab(res(MOD_ID),
             true,
-            builder -> builder.icon( () -> ALL_WOODS.get().getDefaultInstance())
+            builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
                     .backgroundSuffix("item_search.png")
                     .title(Component.translatable("itemGroup.everycomp.everycomp"))
                     .build());
 
 
-
     public void commonSetup() {
-        if(PlatHelper.isModLoaded("chipped")){
+        if (PlatHelper.isModLoaded("chipped")) {
             EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
         }
         //log registered stuff size
@@ -200,7 +201,7 @@ public abstract class EveryCompat {
     private int prevRegSize;
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
-        WoodConfigs.init(); // add wood stuff once its ready
+        ModConfigs.init(); // add wood stuff once its ready
         this.prevRegSize = BuiltInRegistries.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");
         forAllModules(m -> m.registerWoodBlocks(event, woods));
@@ -302,7 +303,7 @@ public abstract class EveryCompat {
     private static int lastInd = 0;
 
     public static void sendPacket(ServerPlayer s) {
-        if (EarlyConfigs.DEBUG_PACKET.get() || PlatHelper.isDev()) {
+        if (ModConfigs.DEBUG_PACKET.get() || PlatHelper.isDev()) {
             lastInd = 0;
             LOGGER.warn("Starting Blockstate Map validity check:");
             while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {

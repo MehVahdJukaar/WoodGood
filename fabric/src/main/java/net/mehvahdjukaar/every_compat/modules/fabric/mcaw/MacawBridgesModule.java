@@ -31,8 +31,8 @@ public class MacawBridgesModule extends SimpleModule {
         BRIDGE_PIERS = SimpleEntrySet.builder(WoodType.class, "bridge_pier",
                         () -> BlockInit.OAK_BRIDGE_PIER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Support_Pillar(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_piers"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wooden_piers"), Registries.BLOCK)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
@@ -42,8 +42,8 @@ public class MacawBridgesModule extends SimpleModule {
         ROPE_BRIDGES = SimpleEntrySet.builder(WoodType.class, "bridge", "rope",
                         () -> BlockInit.ROPE_OAK_BRIDGE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("rope_bridges"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("rope_bridges"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
@@ -54,8 +54,8 @@ public class MacawBridgesModule extends SimpleModule {
         BRIDGE_MIDDLES = SimpleEntrySet.builder(WoodType.class, "log_bridge_middle",
                         () -> BlockInit.OAK_LOG_BRIDGE_MIDDLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("log_bridges"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("log_bridges"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
@@ -67,8 +67,8 @@ public class MacawBridgesModule extends SimpleModule {
         RAIL_BRIDGES = SimpleEntrySet.builder(WoodType.class, "rail_bridge",
                         () -> BlockInit.OAK_RAIL_BRIDGE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Rail_Bridge(Utils.copyPropertySafe(w.planks).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("rail_bridges"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("rail_bridges"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
@@ -80,8 +80,8 @@ public class MacawBridgesModule extends SimpleModule {
         BRIDGE_STAIRS = SimpleEntrySet.builder(WoodType.class, "log_bridge_stair",
                         () -> BlockInit.OAK_LOG_BRIDGE_STAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Iron_Stair(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("log_stairs"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("log_stairs"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()
@@ -92,8 +92,8 @@ public class MacawBridgesModule extends SimpleModule {
         ROPE_STAIRS = SimpleEntrySet.builder(WoodType.class, "rope_bridge_stair",
                         () -> BlockInit.OAK_ROPE_BRIDGE_STAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Iron_Stair(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("rope_stairs"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("rope_stairs"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> BridgesGroup.BRIDGEGROUP)
                 .defaultRecipe()

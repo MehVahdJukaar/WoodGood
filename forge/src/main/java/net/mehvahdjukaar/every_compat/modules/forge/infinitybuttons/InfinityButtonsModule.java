@@ -26,8 +26,8 @@ public class InfinityButtonsModule extends SimpleModule {
         largeButtons = SimpleEntrySet.builder(WoodType.class, "large_button",
                         InfinityButtonsBlocks.OAK_LARGE_BUTTON, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WoodenLargeButton(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.5f).noCollission().sound(SoundType.WOOD)))
-                .addTag(modRes("wooden_large_buttons"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_large_buttons"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("wooden_large_buttons"), Registries.BLOCK)
+                .addTag(modRes("wooden_large_buttons"), Registries.ITEM)
                 .setTab(() -> InfinityButtonsItemGroup.INFINITYBUTTONS)
                 .defaultRecipe()
                 .build();
@@ -37,8 +37,8 @@ public class InfinityButtonsModule extends SimpleModule {
         plankSecretButtons = SimpleEntrySet.builder(WoodType.class, "plank_secret_button",
                         InfinityButtonsBlocks.OAK_PLANK_SECRET_BUTTON, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new PlankSecretButton(Utils.copyPropertySafe(w.planks).strength(2.0f, 3.0f).noOcclusion().sound(SoundType.WOOD)))
-                .addTag(modRes("wooden_secret_buttons"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_secret_buttons"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("wooden_secret_buttons"), Registries.BLOCK)
+                .addTag(modRes("wooden_secret_buttons"), Registries.ITEM)
                 .setTab(() -> InfinityButtonsItemGroup.INFINITYBUTTONS)
                 .defaultRecipe()
                 .build();

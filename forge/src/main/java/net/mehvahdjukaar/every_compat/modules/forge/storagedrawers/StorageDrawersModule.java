@@ -43,9 +43,9 @@ public class StorageDrawersModule extends SimpleModule {
         FULL_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "full_drawers_1",
                         ModBlocks.OAK_FULL_DRAWERS_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatStandardDrawers(1, false, Utils.copyPropertySafe(ModBlocks.OAK_FULL_DRAWERS_1.get())))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.ITEM)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity1::new)
@@ -62,9 +62,9 @@ public class StorageDrawersModule extends SimpleModule {
         FULL_DRAWERS_2 = SimpleEntrySet.builder(WoodType.class, "full_drawers_2",
                         ModBlocks.OAK_FULL_DRAWERS_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatStandardDrawers(2, false, Utils.copyPropertySafe(ModBlocks.OAK_FULL_DRAWERS_2.get())))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.ITEM)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity2::new)
@@ -81,9 +81,9 @@ public class StorageDrawersModule extends SimpleModule {
         FULL_DRAWERS_4 = SimpleEntrySet.builder(WoodType.class, "full_drawers_4",
                         ModBlocks.OAK_FULL_DRAWERS_4, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatStandardDrawers(4, false, Utils.copyPropertySafe(ModBlocks.OAK_FULL_DRAWERS_4.get())))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.ITEM)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity4::new)
@@ -100,9 +100,9 @@ public class StorageDrawersModule extends SimpleModule {
         HALF_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "half_drawers_1",
                         ModBlocks.OAK_HALF_DRAWERS_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatStandardDrawers(1, true, Utils.copyPropertySafe(ModBlocks.OAK_HALF_DRAWERS_1.get())))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.ITEM)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
                 .addTile(CompatHalfDrawersEntity4::new)
@@ -121,9 +121,9 @@ public class StorageDrawersModule extends SimpleModule {
         HALF_DRAWERS_2 = SimpleEntrySet.builder(WoodType.class, "half_drawers_2",
                         ModBlocks.OAK_HALF_DRAWERS_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatStandardDrawers(2, true, Utils.copyPropertySafe(ModBlocks.OAK_HALF_DRAWERS_2.get())))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.ITEM)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
                 .addTile(CompatHalfDrawersEntity4::new)
@@ -142,9 +142,9 @@ public class StorageDrawersModule extends SimpleModule {
         HALF_DRAWERS_4 = SimpleEntrySet.builder(WoodType.class, "half_drawers_4",
                         ModBlocks.OAK_HALF_DRAWERS_4, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatStandardDrawers(4, true, Utils.copyPropertySafe(ModBlocks.OAK_HALF_DRAWERS_4.get())))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.ITEM)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
                 .addTile(CompatHalfDrawersEntity4::new)
@@ -163,7 +163,7 @@ public class StorageDrawersModule extends SimpleModule {
         TRIMS = SimpleEntrySet.builder(WoodType.class, "trim",
                         ModBlocks.OAK_TRIM, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockTrim(Utils.copyPropertySafe(ModBlocks.OAK_TRIM.get())))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(()->ModItemGroup.STORAGE_DRAWERS)
                 .defaultRecipe()
                 .createPaletteFromOak(this::trimPalette)

@@ -3,14 +3,13 @@ package net.mehvahdjukaar.every_compat.misc;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.ForgeHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
@@ -30,6 +29,7 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -81,7 +81,7 @@ public class ResourcesUtils {
                 StaticResource oakItemModel = StaticResource.getOrFail(manager,
                         ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
 
-                JsonObject json = RPUtils.deserializeJson(oakItemModel.getInputStream());
+                JsonObject json = RPUtils.deserializeJson(new ByteArrayInputStream(oakItemModel.data));
                 //adds models referenced from here. not recursive
                 modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
 
@@ -113,7 +113,7 @@ public class ResourcesUtils {
         try {
             StaticResource oakBlockstate = StaticResource.getOrFail(manager, ResType.BLOCKSTATES.getPath(oakId));
             //models
-            JsonElement json = RPUtils.deserializeJson(oakBlockstate.getInputStream());
+            JsonElement json = RPUtils.deserializeJson(new ByteArrayInputStream(oakBlockstate.data));
 
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model")));
             List<StaticResource> oakModels = new ArrayList<>();
@@ -130,7 +130,7 @@ public class ResourcesUtils {
             blocks.forEach((w, b) -> {
                 ResourceLocation id = Utils.getID(b);
                 try {
-                    if (true || WoodConfigs.isEntryEnabled(w, b)) { //generating all the times otherwise we get log spam
+                    if (true || ModConfigs.isEntryEnabled(w, b)) { //generating all the times otherwise we get log spam
                         //creates blockstate
                         StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
                         assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
@@ -197,7 +197,7 @@ public class ResourcesUtils {
             StaticResource oakItemModel = StaticResource.getOrFail(manager,
                     ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
 
-            JsonObject json = RPUtils.deserializeJson(oakItemModel.getInputStream());
+            JsonObject json = RPUtils.deserializeJson(new ByteArrayInputStream(oakItemModel.data));
             //adds models referenced from here. not recursive
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
 
@@ -238,7 +238,7 @@ public class ResourcesUtils {
 
         items.forEach((w, b) -> {
             ResourceLocation id = Utils.getID(b);
-            if (true || WoodConfigs.isEntryEnabled(w, b)) { //generating all the times otherwise we get log spam
+            if (true || ModConfigs.isEntryEnabled(w, b)) { //generating all the times otherwise we get log spam
 
                 //creates item model
                 for (StaticResource model : oakModels) {
@@ -293,7 +293,7 @@ public class ResourcesUtils {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).toList();
 
         blocks.forEach((wood, value) -> {
-            if (WoodConfigs.isEntryEnabled(wood, value)) {
+            if (ModConfigs.isEntryEnabled(wood, value)) {
                 for (var res : original) {
 
                     try {
@@ -346,23 +346,21 @@ public class ResourcesUtils {
 
         items.forEach((w, i) -> {
 
-            if (WoodConfigs.isEntryEnabled(w, i)) {
+            if (ModConfigs.isEntryEnabled(w, i)) {
                 try {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
-                    if (i.getItemCategory() != null) {
-                        String id = RecipeBuilder.getDefaultRecipeId(i).toString();
-                        FinishedRecipe newR;
-                        if (index != 0) {
-                            id += "_" + index;
-                            newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
-                        } else {
-                            newR = template.createSimilar(fromType, w, w.mainChild().asItem());
-                        }
-                        if (newR == null) return;
-                        //not even needed
-                        newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
-                        pack.addRecipe(newR);
+                    String id = RecipeBuilder.getDefaultRecipeId(i).toString();
+                    FinishedRecipe newR;
+                    if (index != 0) {
+                        id += "_" + index;
+                        newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
+                    } else {
+                        newR = template.createSimilar(fromType, w, w.mainChild().asItem());
                     }
+                    if (newR == null) return;
+                    //not even needed
+                    newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
+                    pack.addRecipe(newR);
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate recipe for {}:", i, e);
                 }

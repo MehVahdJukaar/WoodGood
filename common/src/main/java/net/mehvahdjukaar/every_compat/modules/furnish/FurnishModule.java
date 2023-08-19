@@ -19,11 +19,11 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.core.Moonlight;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -69,11 +69,11 @@ public class FurnishModule extends SimpleModule {
         TemplateRecipeManager.registerTemplate(modRes("furniture_making"), FurnishRecipeTemplate::new);
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
-                        ()->getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Table(Utils.copyPropertySafe(w.log)), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_table"))
                 .setTab(() -> tab)
                 .build();
@@ -81,11 +81,11 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(table);
 
         squareTable = SimpleEntrySet.builder(WoodType.class, "square_table",
-                        ()->getModBlock("oak_square_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> getModBlock("oak_square_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new SimpleFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_square_table"))
                 .setTab(() -> tab)
                 .build();
@@ -93,11 +93,11 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(squareTable);
 
         pedestalTable = SimpleEntrySet.builder(WoodType.class, "pedestal_table",
-                        ()->getModBlock("oak_pedestal_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> getModBlock("oak_pedestal_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new SimpleFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_pedestal_table"))
                 .setTab(() -> tab)
                 .build();
@@ -105,11 +105,11 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(pedestalTable);
 
         bedsideTable = SimpleEntrySet.builder(WoodType.class, "bedside_table",
-                        ()->getModBlock("oak_bedside_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> getModBlock("oak_bedside_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new InventoryFurniture(Utils.copyPropertySafe(w.log), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_bedside_table"))
                 .setTab(() -> tab)
@@ -120,9 +120,9 @@ public class FurnishModule extends SimpleModule {
         kitchenCabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinet",
                         FurnishBlocks.Oak_Kitchen_Cabinet, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new InventoryFurniture(Utils.copyPropertySafe(w.planks), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_kitchen_cabinet"))
                 .setTab(() -> tab)
@@ -133,9 +133,9 @@ public class FurnishModule extends SimpleModule {
         cabinet = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         FurnishBlocks.Birch_Cabinet, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         ifHasChild(w -> new Cabinet(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addTexture(modRes("block/birch_cabinet_door_right"))
                 .addTexture(modRes("block/birch_cabinet_door_left"))
@@ -148,9 +148,9 @@ public class FurnishModule extends SimpleModule {
         wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         FurnishBlocks.Birch_Wardrobe, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         ifHasChild(w -> new Wardrobe(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Large_Furniture_BlockEntity)
                 .addTexture(modRes("block/birch_wardrobe_door_bottom_right"))
                 .addTexture(modRes("block/birch_wardrobe_door_bottom_left"))
@@ -165,9 +165,9 @@ public class FurnishModule extends SimpleModule {
         stool = SimpleEntrySet.builder(WoodType.class, "stool",
                         FurnishBlocks.Oak_Stool, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log), Chair.BASE_SHAPES), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_stool"))
                 .setTab(() -> tab)
                 .build();
@@ -178,9 +178,9 @@ public class FurnishModule extends SimpleModule {
                         FurnishBlocks.Oak_Chair, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log),
                                 VoxelShapeHelper.getMergedShapes(Chair.BASE_SHAPES, Chair.CHAIR_SEAT)), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_chair"))
                 .setTab(() -> tab)
                 .build();
@@ -190,9 +190,9 @@ public class FurnishModule extends SimpleModule {
         shutter = SimpleEntrySet.builder(WoodType.class, "shutter",
                         FurnishBlocks.Oak_Shutter, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_shutter"))
                 .addTexture(modRes("block/oak_shutter"))
                 .setTab(() -> tab)
@@ -203,9 +203,9 @@ public class FurnishModule extends SimpleModule {
         crate = SimpleEntrySet.builder(WoodType.class, "crate",
                         FurnishBlocks.Oak_Crate, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Crate(Utils.copyPropertySafe(w.planks)))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_crate"))
                 .addTexture(modRes("block/oak_crate_side"))
                 .addTexture(modRes("block/oak_crate_top"))
@@ -217,9 +217,9 @@ public class FurnishModule extends SimpleModule {
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
                         FurnishBlocks.Oak_Shelf, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shelf(Utils.copyPropertySafe(w.planks)))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Shelf_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_shelf"))
                 .setTab(() -> tab)
@@ -230,9 +230,9 @@ public class FurnishModule extends SimpleModule {
         bench = SimpleEntrySet.builder(WoodType.class, "bench",
                         FurnishBlocks.Oak_Bench, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Bench(Utils.copyPropertySafe(w.planks)))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_bench"))
                 .setTab(() -> tab)
                 .build();
@@ -242,9 +242,9 @@ public class FurnishModule extends SimpleModule {
         logBenches = SimpleEntrySet.builder(WoodType.class, "log_bench",
                         FurnishBlocks.Oak_Log_Bench, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new LogBench(Utils.copyPropertySafe(w.log)))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_log_bench"))
                 .addTexture(modRes("block/oak_log_bench_top"))
                 .setRenderType(() -> RenderType::cutout)
@@ -256,10 +256,10 @@ public class FurnishModule extends SimpleModule {
         ladder = SimpleEntrySet.builder(WoodType.class, "ladder",
                         FurnishBlocks.Oak_Ladder, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Ladder(Utils.copyPropertySafe(w.log)), "stripped_log"))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_ladder"))
                 .setTab(() -> tab)
                 .build();
@@ -269,9 +269,9 @@ public class FurnishModule extends SimpleModule {
         coffin = SimpleEntrySet.builder(WoodType.class, "coffin",
                         FurnishBlocks.Jungle_Coffin, () -> WoodTypeRegistry.getValue(new ResourceLocation("jungle")),
                         w -> new Coffin(Utils.copyPropertySafe(w.planks)))
-//                .addTag(modRes("" + "_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_furniture"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/jungle_coffin"))
                 .addTexture(modRes("block/jungle_coffin_sides"))
                 .setTab(() -> tab)
@@ -337,8 +337,8 @@ public class FurnishModule extends SimpleModule {
 
     private void createTopTexture(TextureImage original, TextureImage newImage) {
         original.forEachFrame((i, x, y) -> {
-            int localX = x - original.getFrameX(i);
-            int localY = y - original.getFrameY(i);
+            int localX = x - original.getFrameStartX(i);
+            int localY = y - original.getFrameStartY(i);
             if (localX >= 5 && localX <= 10 && localY >= 5 && localY <= 10) {
                 newImage.getImage().setPixelRGBA(x - 3, y - 3, original.getImage().getPixelRGBA(x, y));
             } else if (localX >= 10 && localY > 0 && localY <= 7) {
@@ -429,7 +429,7 @@ public class FurnishModule extends SimpleModule {
             this.ingredient = Ingredient.fromJson(json.get("ingredient"));
             String s1 = GsonHelper.getAsString(json, "result");
             int i = GsonHelper.getAsInt(json, "count");
-            this.result = new ItemStack( Registry.ITEM.get(new ResourceLocation(s1)), i);
+            this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i);
         }
 
         @Override
@@ -440,13 +440,9 @@ public class FurnishModule extends SimpleModule {
                 throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
                         this.result, originalMat, destinationMat));
             }
-            if (newRes.asItem().getItemCategory() == null) {
-                Moonlight.LOGGER.error("Failed to generate recipe for {} in block type {}: Output item {} cannot have empty creative tab, skipping", this.result, destinationMat, newRes);
-                return null;
-            }
             ItemStack newResult = new ItemStack(newRes);
             if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
-            if (id == null) id = Registry.ITEM.getKey(newRes.asItem()).toString();
+            if (id == null) id = BuiltInRegistries.ITEM.getKey(newRes.asItem()).toString();
 
             Ingredient newIng = ingredient;
             for (var in : ingredient.getItems()) {

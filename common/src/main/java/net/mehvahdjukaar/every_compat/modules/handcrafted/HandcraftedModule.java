@@ -26,7 +26,7 @@ public class HandcraftedModule extends SimpleModule {
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/chair/oak_chair"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)

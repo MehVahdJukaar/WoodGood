@@ -3,7 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.twilightforest;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.Nullable;
 import twilightforest.block.BanisterBlock;
 import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.HollowLogHorizontal;
@@ -27,8 +26,6 @@ import twilightforest.block.HollowLogVertical;
 import twilightforest.init.TFBlocks;
 import twilightforest.init.TFItems;
 import twilightforest.item.HollowLogItem;
-
-import java.util.function.Supplier;
 
 public class TwilightForestModule extends SimpleModule {
 
@@ -44,8 +41,8 @@ public class TwilightForestModule extends SimpleModule {
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
-                .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("banisters"), Registries.BLOCK)
+                .addTag(modRes("banisters"), Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
                 .setTab(() -> TFItems.creativeTab)
@@ -57,7 +54,7 @@ public class TwilightForestModule extends SimpleModule {
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem()
                 .requiresChildren("stripped_log")
                 .setRenderType(() -> RenderType::cutout)
@@ -72,7 +69,7 @@ public class TwilightForestModule extends SimpleModule {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return new HollowLogVertical(Utils.copyPropertySafe(w.log), RegistryObject.create(id, ForgeRegistries.BLOCKS));
                         })
-                .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .requiresChildren("stripped_log")
                 .noItem()
                 .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log_vertical"))
@@ -84,7 +81,7 @@ public class TwilightForestModule extends SimpleModule {
                         TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
                         w  -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
                                 RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS)))
-                .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .noItem()
                 .requiresChildren("stripped_log")
                 .setRenderType(() -> RenderType::cutout)
@@ -113,7 +110,7 @@ public class TwilightForestModule extends SimpleModule {
     }
 
     private static CreativeModeTab getTab(WoodType w, String type) {
-        return WoodConfigs.isTypeEnabled(w, type) ?
+        return ModConfigs.isTypeEnabled(w, type) ?
                 (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : TFItems.creativeTab) : null;
     }
 

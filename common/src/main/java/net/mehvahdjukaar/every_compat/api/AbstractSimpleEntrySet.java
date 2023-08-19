@@ -2,13 +2,12 @@ package net.mehvahdjukaar.every_compat.api;
 
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -18,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -30,7 +30,10 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,11 +62,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected final Predicate<T> condition;
 
     protected AbstractSimpleEntrySet(Class<T> type,
-                                  String name, @Nullable String prefix,
-                                  Supplier<T> baseType,
-                                  Supplier<ResourceKey<CreativeModeTab>> tab,
-                                  @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
-                                  @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                                     String name, @Nullable String prefix,
+                                     Supplier<T> baseType,
+                                     Supplier<ResourceKey<CreativeModeTab>> tab,
+                                     @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
+                                     @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                      Predicate<T> condition) {
         super((prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name);
         this.postfix = name;
@@ -119,8 +122,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     }
 
     @Deprecated(forRemoval = true)
-    protected CreativeModeTab getTab(T w, B b) {
-        return WoodConfigs.isEntryEnabled(w, b) ? EveryCompat.MOD_TAB.get() : this.tab.get();
+    protected ResourceKey<CreativeModeTab> getTab(T w, B b) {
+        return ModConfigs.isEntryEnabled(w, b) ?
+                (ModConfigs.TAB_ENABLED.get() ? EveryCompat.MOD_TAB.getHolder().unwrapKey().get() : this.tab.get())
+                : null;
     }
 
     @Override
@@ -130,7 +135,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             for (var tb : tags.entrySet()) {
                 SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
                 for (var b : blocks.entrySet()) {
-                    if (WoodConfigs.isEntryEnabled(b.getKey(), b.getValue())) {
+                    if (ModConfigs.isEntryEnabled(b.getKey(), b.getValue())) {
                         builder.addEntry(b.getValue());
                     }
                 }
@@ -188,7 +193,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 T w = entry.getKey();
                 //skips disabled ones
 
-                if (!WoodConfigs.isEntryEnabled(w, b)) continue;
+                if (!ModConfigs.isEntryEnabled(w, b)) continue;
 
                 ResourceLocation blockId = Utils.getID(b);
 
@@ -301,8 +306,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        public BL setTab(Supplier<CreativeModeTab> tab) {
+        public BL setTabKey(Supplier<ResourceKey<CreativeModeTab>> tab) {
             this.tab = tab;
+            return (BL) this;
+        }
+
+        public BL setTab(Supplier<CreativeModeTab> tab) {
+            this.tab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab.get()).get();
             return (BL) this;
         }
 

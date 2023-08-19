@@ -36,7 +36,7 @@ public class WoodsterModule extends SimpleModule {
                 .addTexture(modRes("block/oak_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_top"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_0"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> WoodsterTabs.WOODSTER)
                 .copyParentDrop()
                 .build();
@@ -47,7 +47,7 @@ public class WoodsterModule extends SimpleModule {
                         WoodsterBlocks.ACACIA_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> WoodsterTabs.WOODSTER)
                 .copyParentDrop()
                 .build();
@@ -57,10 +57,10 @@ public class WoodsterModule extends SimpleModule {
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         WoodsterBlocks.SPRUCE_LADDER, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new LadderBlock(Utils.copyPropertySafe(getModBlock("spruce_ladder"))))
-                .addTag(new ResourceLocation("minecraft:ladders"), Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("minecraft:ladders"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
+                .addTag(new ResourceLocation("minecraft:ladders"), Registries.BLOCK)
+                .addTag(new ResourceLocation("minecraft:ladders"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .setTab(() -> WoodsterTabs.WOODSTER)
                 .defaultRecipe()

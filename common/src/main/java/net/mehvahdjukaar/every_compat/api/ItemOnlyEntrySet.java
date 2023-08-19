@@ -17,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -26,8 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.function.*;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
@@ -86,7 +86,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         //if (isDisabled()) return;
         //contrary to blocks other items could be null here
 
-        BlockTypeRegistry<T> typeRegistry = (BlockTypeRegistry<T>) BlockSetAPI.getTypeRegistry(this.type);
+        BlockTypeRegistry<T> typeRegistry = BlockSetAPI.getTypeRegistry(this.type);
         for (T w : typeRegistry.getValues()) {
             String name = getItemName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
@@ -99,10 +99,11 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                     this.items.put(w, item);
 
                     registry.register(EveryCompat.res(fullName), item);
-                    w.addChild(getChildKey(module), (Object) item);
+                    w.addChild(getChildKey(module), item);
                 }
             }
         }
+        //populate default ones
     }
 
     @Override
@@ -111,8 +112,35 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         if (base == null || base == Items.AIR)
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
-        baseType.get().addChild(getChildKey(module), (Object) base);
 
+        String childKey = getChildKey(module);
+        baseType.get().addChild(childKey,  base);
+
+        //attempts adding all other children
+        Set<String> alreadySupportedMods = new HashSet<>(module.getAlreadySupportedMods());
+        alreadySupportedMods.add(module.modId);
+        var possibleNamespaces =  alreadySupportedMods.toArray(String[]::new);
+        for(var w : BlockSetAPI.getTypeRegistry(this.getTypeClass()).getValues()){
+            if(!items.containsKey(w)){
+                String path = getItemName(w);
+                Item item = getOptionalItem(path, w.getNamespace());
+                if(item == null) item = getOptionalItem(path, possibleNamespaces);
+                if(item != null) w.addChild(childKey,  item);
+            }
+        }
+    }
+
+    @Nullable
+    private static Item getOptionalItem(String path, String ...namespaces) {
+        ResourceLocation id;
+        for (var n : namespaces) {
+            id = new ResourceLocation(n, path);
+            var i = BuiltInRegistries.ITEM.getOptional(id);
+            if(i.isPresent()){
+                return i.get();
+            }
+        }
+        return null;
     }
 
     @Override

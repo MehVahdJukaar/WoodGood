@@ -29,9 +29,9 @@ public class FarmersDelightModule extends SimpleModule {
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         () -> getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CabinetBlock())
-                .addTag(modRes("cabinets"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("cabinets"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("cabinets"), Registries.BLOCK)
+                .addTag(modRes("cabinets"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .addTile(BlockEntityTypesRegistry.CABINET::get)
                 .setTab(() -> FarmersDelightMod.ITEM_GROUP)

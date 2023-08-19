@@ -58,11 +58,11 @@ public class PokecubeLegendsModule extends SimpleModule {
                         BlockInit.DISTORTIC_OAK_PLANKS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_planks"))
-                .addTag(modRes("legends_planks"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("legends_planks"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
+                .addTag(modRes("legends_planks"), Registries.BLOCK)
+                .addTag(modRes("legends_planks"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.PLANKS, Registries.BLOCK)
+                .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
                 .setTab(() -> tab)
                 .build();
@@ -73,9 +73,9 @@ public class PokecubeLegendsModule extends SimpleModule {
                         BlockInit.DISTORTIC_OAK_STAIRS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ItemGenerator.GenericStairs(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_stairs"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WOODEN_STAIRS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_STAIRS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
+                .addTag(ItemTags.WOODEN_STAIRS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
                 .setTab(() -> tab)
                 .build();
@@ -86,9 +86,9 @@ public class PokecubeLegendsModule extends SimpleModule {
                         BlockInit.DISTORTIC_OAK_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_slab"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WOODEN_SLABS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_SLABS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
+                .addTag(ItemTags.WOODEN_SLABS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
                 .setTab(() -> tab)
                 .build();

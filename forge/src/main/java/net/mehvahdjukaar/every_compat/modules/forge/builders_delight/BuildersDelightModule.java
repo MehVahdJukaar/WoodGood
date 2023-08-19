@@ -107,8 +107,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdDecoration.OAK_CHAIR_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockChair(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("chair"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("chair"), Registries.ITEM)
                 .setTab(() -> TabDeco)
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_1"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -122,8 +122,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdDecoration.OAK_CHAIR_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockStool(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("chair"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("chair"), Registries.ITEM)
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_2"))
                 .createPaletteFromOak(this::neutralPalette)
                 .setTab(() -> TabDeco)
@@ -140,8 +140,8 @@ public class BuildersDelightModule extends SimpleModule {
                         () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockSmallTable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("table"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("table"), Registries.ITEM)
                 .setTab(() -> TabDeco)
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_1"))
                 .defaultRecipe()
@@ -154,8 +154,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdDecoration.OAK_TABLE_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockSmallTable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("table"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("table"), Registries.ITEM)
                 .setTab(() -> TabDeco)
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_2"))
                 .defaultRecipe()
@@ -170,7 +170,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_PLANKS_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_1"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -184,7 +184,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_PLANKS_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_2"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -198,7 +198,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_PLANKS_3, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_3"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -212,7 +212,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_PLANKS_4, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_4"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -226,7 +226,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_PLANKS_5, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_5"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -240,7 +240,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_PLANKS_6, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_6"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -254,7 +254,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_PLANKS_7, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_7"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -268,7 +268,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_STAIRS_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w  -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_1"))
@@ -283,7 +283,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_STAIRS_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w-> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_2"))
@@ -298,7 +298,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_STAIRS_3, () -> WoodTypeRegistry.OAK_TYPE,
                         w ->new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_3"))
@@ -313,7 +313,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_STAIRS_4, () -> WoodTypeRegistry.OAK_TYPE,
                         w ->  new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_4"))
@@ -328,7 +328,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_STAIRS_5, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_5"))
@@ -343,7 +343,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_STAIRS_6, () -> WoodTypeRegistry.OAK_TYPE,
                         w  -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_6"))
@@ -358,7 +358,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_STAIRS_7, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("stairs")
                 .addTexture(modRes("block/oak_planks_7"))
@@ -375,7 +375,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_SLAB_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .requiresChildren("slab")
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_planks_1"))
@@ -390,7 +390,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_SLAB_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_2"))
@@ -405,7 +405,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_SLAB_3, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_3"))
@@ -420,7 +420,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_SLAB_4, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_4"))
@@ -435,7 +435,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_SLAB_5, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_5"))
@@ -450,7 +450,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_SLAB_6, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_6"))
@@ -465,7 +465,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_SLAB_7, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabFlammable(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")) ))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .requiresChildren("slab")
                 .addTexture(modRes("block/oak_planks_7"))
@@ -482,7 +482,7 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_FRAME_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_1"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -496,8 +496,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_FRAME_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_2"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -511,8 +511,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_FRAME_3, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_3"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -526,8 +526,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_FRAME_4, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_4"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -541,8 +541,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_FRAME_5, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_5"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -556,8 +556,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_FRAME_6, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_6"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -571,8 +571,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_FRAME_7, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_7"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -586,8 +586,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_FRAME_8, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .addTexture(modRes("block/oak_frame_8"))
                 .createPaletteFromOak(this::neutralPalette)
@@ -603,8 +603,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_1")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_1_mask"))
@@ -618,8 +618,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_2")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_2"), EveryCompat.res("block/bdl/oak_glass_2_mask"))
@@ -633,8 +633,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_3, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_3")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_3"), EveryCompat.res("block/bdl/oak_glass_3_mask"))
@@ -648,8 +648,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_4, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_4")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_4"), EveryCompat.res("block/bdl/oak_glass_4_mask"))
@@ -663,8 +663,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_5, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_5")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"))
@@ -678,8 +678,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_6, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_6")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_6_mask"))
@@ -693,8 +693,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_7, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_7")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_7_mask"))
@@ -708,8 +708,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_8, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_8")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_8"),
@@ -726,8 +726,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_PANE_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_1")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
@@ -740,8 +740,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_PANE_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_2")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
@@ -754,8 +754,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_PANE_3, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_3")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
@@ -768,8 +768,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_PANE_4, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_4")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
@@ -782,8 +782,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_PANE_5, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_5")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
@@ -796,8 +796,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_PANE_6, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_6")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
@@ -810,8 +810,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_PANE_7, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_7")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()
@@ -824,8 +824,8 @@ public class BuildersDelightModule extends SimpleModule {
                         BdBlocks.OAK_GLASS_PANE_8, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_8")
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
                 .setTab(() -> TabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .defaultRecipe()

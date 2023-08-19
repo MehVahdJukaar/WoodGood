@@ -39,8 +39,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         posts = SimpleEntrySet.builder(WoodType.class, "post",
                         () -> getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new PostBlock(Utils.getID(w.log), Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("posts"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("posts"), Registries.BLOCK)
+                .addTag(modRes("posts"), Registries.ITEM)
                 .setTab(() -> ModCreativeModeTabs.MAIN)
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_oak_posts"))
@@ -55,8 +55,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                             if (stripped == null) return null;
                             return new PostBlock(Utils.getID(w.log), Utils.copyPropertySafe(w.log));
                         })
-                .addTag(modRes("stripped_posts"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("stripped_posts"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("stripped_posts"), Registries.BLOCK)
+                .addTag(modRes("stripped_posts"), Registries.ITEM)
                 .setTab(() -> ModCreativeModeTabs.MAIN)
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_stripped_oak_posts"))
@@ -67,8 +67,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         cutPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut",
                         () -> getModBlock("cut_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CutPostBlock(cutPostProperties(w)))
-                .addTag(modRes("cut_posts"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("cut_posts"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("cut_posts"), Registries.BLOCK)
+                .addTag(modRes("cut_posts"), Registries.ITEM)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
                 .copyParentDrop()
@@ -84,8 +84,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                             if (stripped == null) return null;
                             return new CutPostBlock(cutPostProperties(w));
                         })
-                .addTag(modRes("cut_stripped_posts"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("cut_stripped_posts"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
+                .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
                 .copyParentDrop()

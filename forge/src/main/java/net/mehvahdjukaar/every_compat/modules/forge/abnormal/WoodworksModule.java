@@ -69,9 +69,9 @@ public class WoodworksModule extends SimpleModule {
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .copyParentDrop()
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Items.BOOKSHELVES, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Items.BOOKSHELVES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Items.BOOKSHELVES, Registries.BLOCK)
+                .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .build();
 
@@ -83,7 +83,7 @@ public class WoodworksModule extends SimpleModule {
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .copyParentDrop()
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_boards"))
                 .defaultRecipe()
                 .build();
@@ -95,9 +95,9 @@ public class WoodworksModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintLadderBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.ladder()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark:ladders"), Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark:ladders"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
+                .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
+                .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
                 .defaultRecipe()
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
@@ -109,8 +109,8 @@ public class WoodworksModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .defaultRecipe()
                 .addTile(BlueprintBlockEntityTypes.BEEHIVE)
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
@@ -125,11 +125,11 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Items.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
-                .addTag(new ResourceLocation("quark:revertable_chests"), Registry.ITEM_REGISTRY)
-                .addTag(new ResourceLocation("quark:boatable_chests"), Registry.ITEM_REGISTRY)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
+                .addTag(new ResourceLocation("quark:revertable_chests"), Registries.ITEM)
+                .addTag(new ResourceLocation("quark:boatable_chests"), Registries.ITEM)
                 .addTile(BlueprintChestBlockEntity::new)
                 //.addCustomItem((w, b, p) -> new BEWLRBlockItem(b, p, null))
                 .defaultRecipe()
@@ -141,9 +141,9 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintTrappedChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Items.CHESTS_TRAPPED, Registry.ITEM_REGISTRY)
+                .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Items.CHESTS_TRAPPED, Registries.ITEM)
                 .addTile(BlueprintTrappedChestBlockEntity::new)
                 .defaultRecipe()
                 .build();
@@ -159,8 +159,8 @@ public class WoodworksModule extends SimpleModule {
                         })
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
-                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("leaf_piles"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(modRes("leaf_piles"), Registries.BLOCK)
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .setRenderType(() -> RenderType::cutout)
                 .copyParentDrop()

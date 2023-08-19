@@ -33,7 +33,7 @@ public class BackpackedModule extends SimpleModule {
         shelves = SimpleEntrySet.builder(WoodType.class, "backpack_shelf",
                         ModBlocks.OAK_BACKPACK_SHELF, () -> WoodTypeRegistry.OAK_TYPE,
                 ifHasChild(w -> new ShelfBlock(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(() -> Backpacked.TAB)
                 .addRecipe(modRes("oak_backpack_shelf"))
                 .addTile(ModBlockEntities.SHELF)

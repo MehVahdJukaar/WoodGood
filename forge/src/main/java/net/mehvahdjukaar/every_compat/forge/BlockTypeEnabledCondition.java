@@ -3,7 +3,7 @@ package net.mehvahdjukaar.every_compat.forge;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
-import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -27,11 +27,11 @@ public record BlockTypeEnabledCondition(BlockType type) implements ICondition {
 
     @Override
     public boolean test(IContext context) {
-        return WoodConfigs.isTypeEnabled(type);
+        return ModConfigs.isTypeEnabled(type);
     }
 
     public boolean test() {
-        return WoodConfigs.isTypeEnabled(type);
+        return ModConfigs.isTypeEnabled(type);
     }
 
     public static class Serializer implements IConditionSerializer<BlockTypeEnabledCondition> {

@@ -1,9 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
-import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
@@ -11,16 +9,11 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -30,13 +23,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -50,8 +40,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
@@ -75,7 +63,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           Function<T, B> blockSupplier,
                           Supplier<@Nullable B> baseBlock,
                           Supplier<T> baseType,
-                          Supplier<CreativeModeTab> tab,
+                          Supplier<ResourceKey<CreativeModeTab>> tab,
                           LootTableMode lootMode,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
@@ -129,7 +117,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         if (base == null || base == Blocks.AIR)
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
-        baseType.get().addChild(getChildKey(module), (Object) base);
 
         for (T w : woodTypes) {
             String name = getBlockName(w);
@@ -143,7 +130,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                     this.blocks.put(w, block);
 
                     registry.register(EveryCompat.res(fullName), block);
-                    w.addChild(getChildKey(module), (Object) block);
+                    w.addChild(getChildKey(module),  block);
 
                     if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
                         SIMPLE_DROPS.add(block);
@@ -151,6 +138,36 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 }
             }
         }
+
+        //attempts adding all other children
+
+        String childKey = getChildKey(module);
+        baseType.get().addChild(childKey,  base);
+
+        Set<String> alreadySupportedMods = new HashSet<>(module.getAlreadySupportedMods());
+        alreadySupportedMods.add(module.modId);
+        var possibleNamespaces =  alreadySupportedMods.toArray(String[]::new);
+        for(var w : BlockSetAPI.getTypeRegistry(this.getTypeClass()).getValues()){
+            if(!items.containsKey(w)){
+                String path = getBlockName(w);
+                Block block = getOptionalBlock(path, w.getNamespace());
+                if(block == null) block = getOptionalBlock(path, possibleNamespaces);
+                if(block != null) w.addChild(childKey,  block);
+            }
+        }
+    }
+
+    @Nullable
+    private static Block getOptionalBlock(String path, String ...namespaces) {
+        ResourceLocation id;
+        for (var n : namespaces) {
+            id = new ResourceLocation(n, path);
+            var i = BuiltInRegistries.BLOCK.getOptional(id);
+            if(i.isPresent()){
+                return i.get();
+            }
+        }
+        return null;
     }
 
     @NotNull

@@ -31,7 +31,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
                         () -> getModBlock("oak_railing"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RailingBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .build();
@@ -41,9 +41,9 @@ public class ArchitectsPaletteModule extends SimpleModule {
         boardSlabs = SimpleEntrySet.builder(WoodType.class, "board_slab",
                         () -> getModBlock("oak_board_slab"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.SLABS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.SLABS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.SLABS, Registries.BLOCK)
+                .addTag(BlockTags.SLABS, Registries.ITEM)
                 .defaultRecipe()
                 .copyParentDrop()
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
@@ -55,9 +55,9 @@ public class ArchitectsPaletteModule extends SimpleModule {
         boardWalls = SimpleEntrySet.builder(WoodType.class, "board_wall",
                         () -> getModBlock("oak_board_wall"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WallBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WALLS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WALLS, Registries.BLOCK)
+                .addTag(BlockTags.WALLS, Registries.ITEM)
                 .defaultRecipe()
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .build();
@@ -67,7 +67,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         () -> getModBlock("oak_boards"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BoardBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .createPaletteFromOak(p -> {
@@ -100,9 +100,9 @@ public class ArchitectsPaletteModule extends SimpleModule {
         boardStairs = SimpleEntrySet.builder(WoodType.class, "board_stairs",
                         () -> getModBlock("oak_board_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ModStairBlock(() -> boards.blocks.get(w), Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.STAIRS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.STAIRS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.STAIRS, Registries.BLOCK)
+                .addTag(BlockTags.STAIRS, Registries.ITEM)
                 .defaultRecipe()
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .build();

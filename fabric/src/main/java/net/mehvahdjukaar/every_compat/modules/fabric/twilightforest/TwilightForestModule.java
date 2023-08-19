@@ -4,7 +4,7 @@ import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -44,8 +44,8 @@ public class TwilightForestModule extends SimpleModule {
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
-                .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("banisters"), Registries.BLOCK)
+                .addTag(modRes("banisters"), Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
                 .setTab(() -> TFItems.creativeTab)
@@ -57,7 +57,7 @@ public class TwilightForestModule extends SimpleModule {
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> ifHasStripped(w, () -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))))
-                .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -71,7 +71,7 @@ public class TwilightForestModule extends SimpleModule {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return ifHasStripped(w, () -> new HollowLogVertical(Utils.copyPropertySafe(w.log), makeRegObj(id)));
                         })
-                .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .noItem()
                 .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log_vertical"))
                 .build();
@@ -82,7 +82,7 @@ public class TwilightForestModule extends SimpleModule {
                         TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> ifHasStripped(w, () -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
                                 makeRegObj(Utils.getID(hollowLogsVertical.blocks.get(w))))))
-                .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .noItem()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -94,7 +94,7 @@ public class TwilightForestModule extends SimpleModule {
 
     @NotNull
     private static<T extends Block> RegistryObject<T> makeRegObj(ResourceLocation id) {
-        return new RegistryObject<>(id, () ->(T) Registry.BLOCK.get(id), Registry.BLOCK_REGISTRY);
+        return new RegistryObject<>(id, () ->(T) Registry.BLOCK.get(id), Registries.BLOCK);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class TwilightForestModule extends SimpleModule {
     }
 
     private static CreativeModeTab getTab(WoodType w, String type) {
-        return WoodConfigs.isTypeEnabled(w, type) ?
+        return ModConfigs.isTypeEnabled(w, type) ?
                 (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : TFItems.creativeTab) : null;
     }
 

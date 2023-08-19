@@ -19,6 +19,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 
@@ -42,8 +43,8 @@ public class DecorativeBlocksModule extends SimpleModule {
         beams = SimpleEntrySet.builder(WoodType.class, "beam",
                         () -> DBBlocks.BEAMS.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.BEAM))
-                .addTag(modRes("beams"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("beams"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("beams"), Registries.BLOCK)
+                .addTag(modRes("beams"), Registries.ITEM)
                 .defaultRecipe()
                 .setTab(() -> DBItems.ITEM_GROUP)
                 .setPalette(this::makeDBPalette)
@@ -57,8 +58,8 @@ public class DecorativeBlocksModule extends SimpleModule {
         palisades = SimpleEntrySet.builder(WoodType.class, "palisade",
                         () -> DBBlocks.PALISADES.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.PALISADE))
-                .addTag(modRes("palisades"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("palisades"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("palisades"), Registries.BLOCK)
+                .addTag(modRes("palisades"), Registries.ITEM)
                 .defaultRecipe()
                 .setTab(() -> DBItems.ITEM_GROUP)
                 .setPalette(this::makeDBPalette)
@@ -72,8 +73,8 @@ public class DecorativeBlocksModule extends SimpleModule {
         supports = SimpleEntrySet.builder(WoodType.class, "support",
                         () -> DBBlocks.SUPPORTS.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.SUPPORT))
-                .addTag(modRes("supports"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("supports"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("supports"), Registries.BLOCK)
+                .addTag(modRes("supports"), Registries.ITEM)
                 .addCustomItem((w, b, p) -> new SupportItem(b, p))
                 .defaultRecipe()
                 .setTab(() -> DBItems.ITEM_GROUP)
@@ -89,8 +90,8 @@ public class DecorativeBlocksModule extends SimpleModule {
         seats = SimpleEntrySet.builder(WoodType.class, "seat",
                         () -> DBBlocks.SEATS.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.SEAT))
-                .addTag(modRes("seats"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("seats"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("seats"), Registries.BLOCK)
+                .addTag(modRes("seats"), Registries.ITEM)
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new SeatItem(b, p))
                 .setTab(() -> DBItems.ITEM_GROUP)

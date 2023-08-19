@@ -25,9 +25,9 @@ public class HearthAndHomeModule extends SimpleModule {
         sandedWood = SimpleEntrySet.builder(WoodType.class, "sandedWood",
                         () -> getModBlock("oak_sanded_wood"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.PLANKS, Registries.BLOCK)
+                .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTexture(modRes("block/oak_sanded_wood"))
                 .defaultRecipe()
                 .build();
@@ -37,9 +37,9 @@ public class HearthAndHomeModule extends SimpleModule {
         parquet = SimpleEntrySet.builder(WoodType.class, "parquet",
                         () -> getModBlock("oak_parquet"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.PLANKS, Registries.BLOCK)
+                .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTexture(modRes("block/oak_parquet"))
                 .defaultRecipe()
                 .build();
@@ -49,9 +49,9 @@ public class HearthAndHomeModule extends SimpleModule {
         trim = SimpleEntrySet.builder(WoodType.class, "trim",
                         () -> getModBlock("oak_trim"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.PLANKS, Registries.BLOCK)
+                .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTexture(modRes("block/oak_trim"))
                 .defaultRecipe()
                 .build();

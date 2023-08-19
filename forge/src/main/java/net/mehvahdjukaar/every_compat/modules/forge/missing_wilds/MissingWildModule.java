@@ -23,8 +23,8 @@ public class MissingWildModule extends SimpleModule {
         fallenLogs = SimpleEntrySet.builder(WoodType.class, "log", "fallen",
                         MissingWildsBlocks.FALLEN_ACACIA_LOG, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
-                .addTag(modRes("fallen_logs"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("fallen_logs"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("fallen_logs"), Registries.BLOCK)
+                .addTag(modRes("fallen_logs"), Registries.ITEM)
                 .setTab(() -> MissingWildsItemGroup.MISSING_WILDS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
