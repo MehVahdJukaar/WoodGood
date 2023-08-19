@@ -36,6 +36,8 @@ import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDel
 
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CreativeModeTab;
@@ -107,7 +109,7 @@ public class EveryCompatForge extends EveryCompat {
         // Disabled until custom block models work
          addModule("xercamod", () -> XercaModule::new);
 
-        if (PlatHelper.getEnv().isClient()) {
+        if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatClient.commonInit();
         }
 
@@ -129,14 +131,14 @@ public class EveryCompatForge extends EveryCompat {
     }
 
     public static void onRemap(MissingMappingsEvent event) {
-        for (var mapping : event.getMappings(Registry.BLOCK_ENTITY_TYPE_REGISTRY, EveryCompat.MOD_ID)) {
+        for (var mapping : event.getMappings(Registries.BLOCK_ENTITY_TYPE, EveryCompat.MOD_ID)) {
             ResourceLocation key = mapping.getKey();
             String path = key.getPath();
             for (var m : EveryCompat.ACTIVE_MODULES.values()) {
                 if (path.startsWith(m.shortenedId() + "_")) {
                     String newPath = path.substring((m.shortenedId() + "_").length());
                     ResourceLocation newId = new ResourceLocation(m.getModId(), newPath);
-                    Optional<BlockEntityType<?>> optional = Registry.BLOCK_ENTITY_TYPE.getOptional(newId);
+                    Optional<BlockEntityType<?>> optional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(newId);
                     optional.ifPresent(mapping::remap);
                     break;
                 }

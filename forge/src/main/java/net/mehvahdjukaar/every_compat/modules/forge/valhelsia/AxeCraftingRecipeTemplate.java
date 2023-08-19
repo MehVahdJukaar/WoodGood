@@ -7,6 +7,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -36,7 +37,7 @@ public class AxeCraftingRecipeTemplate implements IRecipeTemplate<AxeCraftingRec
         if (c != null) count = c.getAsInt();
 
         this.count = count;
-        this.output = Registry.ITEM.get(item);
+        this.output = BuiltInRegistries.ITEM.get(item);
 
         var g = json.get("group");
         this.group = g == null ? "" : g.getAsString();

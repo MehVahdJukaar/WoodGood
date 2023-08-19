@@ -17,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.resources.*;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -53,7 +54,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                 .addRecipe(modRes("book_shelf_double_spruce"))
                 .setTab(() -> CreativeTab.TAB_WORKSHOP)
                 .addTile(Registration.BOOK_SHELF_BE)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .addCustomItem((wood, block, prop) -> new BlockItemEx( block, prop))
                 .build();
         this.addEntry(BOOKSHELVES1);
         BOOKSHELVES2 = SimpleEntrySet.builder(WoodType.class,
@@ -237,10 +238,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         STATION_PLACERS = ItemOnlyEntrySet.builder(WoodType.class,"", "workstation_placer",
                         () -> getModItem("workstation_placer_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> {
-                            CreativeModeTab tab = EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : CreativeTab.TAB_WORKSHOP;
-                            return new WorkstationPlacerItem(w.getTypeName(), new Item.Properties().tab(tab));
-                        })
+                        w -> new WorkstationPlacerItem(w.getTypeName(), new Item.Properties()))
                 .addRecipe(modRes("workstation_placer_spruce"))
                 .addCondition(DUAL_TABLE_PARTS_BL.blocks::containsKey)
                 .build();

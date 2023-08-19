@@ -16,6 +16,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -427,7 +428,6 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.GENERAL, Registries.ITEM)
                 .setTab(() -> FurnitureMod.GROUP)
-                .setTab(() -> FurnitureModTab.TAB_BUILDING_BLOCKS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -440,7 +440,6 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.GENERAL, Registries.ITEM)
                 .setTab(() -> FurnitureMod.GROUP)
-                .setTab(() -> FurnitureModTab.TAB_BUILDING_BLOCKS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();

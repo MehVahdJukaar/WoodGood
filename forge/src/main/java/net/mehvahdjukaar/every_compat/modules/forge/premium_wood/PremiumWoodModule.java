@@ -10,9 +10,11 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GlassBlock;
@@ -26,7 +28,7 @@ public class PremiumWoodModule extends SimpleModule {
 
     public PremiumWoodModule(String modId) {
         super(modId, "pw");
-        CreativeModeTab tab = CreativeModeTab.TAB_BUILDING_BLOCKS;
+        var tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         () -> getModBlock("tiger_crafting_table"),
@@ -38,7 +40,7 @@ public class PremiumWoodModule extends SimpleModule {
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .copyParentDrop()
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .defaultRecipe()
                 .build();
 
@@ -52,7 +54,7 @@ public class PremiumWoodModule extends SimpleModule {
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .copyParentDrop()
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .defaultRecipe()
                 .build();
 
@@ -66,7 +68,7 @@ public class PremiumWoodModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("framed_glass"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .defaultRecipe()
                 .build();
 

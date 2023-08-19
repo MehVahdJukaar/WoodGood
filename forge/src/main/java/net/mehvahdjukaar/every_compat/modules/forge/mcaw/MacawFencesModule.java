@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -87,7 +88,7 @@ public class MacawFencesModule extends SimpleModule {
 
         PYRAMID_GATES = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
                         BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .setTab(() -> tab)
                 .defaultRecipe()
@@ -97,7 +98,7 @@ public class MacawFencesModule extends SimpleModule {
 
         HIGHLEY_GATES = SimpleEntrySet.builder(WoodType.class, "highley_gate",
                         BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks),w.toVanillaOrOak()))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
                 .setTab(() -> tab)

@@ -4,7 +4,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

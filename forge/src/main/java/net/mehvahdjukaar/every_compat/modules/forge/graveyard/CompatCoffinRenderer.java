@@ -5,7 +5,7 @@ import com.finallion.graveyard.blockentities.enums.SarcophagusPart;
 import com.finallion.graveyard.blockentities.render.SarcophagusBlockEntityRenderer;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -68,9 +68,9 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
             boolean isLid
     ) {
         matrixStack.pushPose();
-        Direction direction = ((Direction) entity.getBlockState().getValue(SarcophagusBlock.FACING)).getOpposite();
+        Direction direction = (entity.getBlockState().getValue(SarcophagusBlock.FACING)).getOpposite();
         float f = direction.toYRot();
-        matrixStack.mulPose(Vector3f.YP.rotationDegrees(-f));
+        matrixStack.mulPose(Axis.YP.rotationDegrees(-f));
         switch (direction) {
             case EAST -> matrixStack.translate(-1.0, 0.0, 1.0);
             case SOUTH -> matrixStack.translate(0.0, 0.0, 1.0);
@@ -79,7 +79,7 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
 
         if (isLid) {
             matrixStack.translate((double) g * 0.3, (double) g * 0.3, 0.0);
-            matrixStack.mulPose(Vector3f.ZN.rotationDegrees(g * 45.0F));
+            matrixStack.mulPose(Axis.ZN.rotationDegrees(g * 45.0F));
         }
 
         Minecraft.getInstance()

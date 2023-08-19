@@ -31,7 +31,6 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -42,6 +41,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -82,8 +82,6 @@ public abstract class EveryCompat {
 
 
     protected void commonInit() {
-
-        ModConfigs.init();
 
         ServerDynamicResourcesHandler.INSTANCE.register();
 
@@ -162,10 +160,6 @@ public abstract class EveryCompat {
                 else EveryCompat.LOGGER.error("Failed to register module for mod " + module, e);
             }
         }
-    }
-
-
-    private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
     }
 
 
@@ -309,6 +303,26 @@ public abstract class EveryCompat {
             while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {
                 EveryCompat.CHANNEL.sendToClientPlayer(s, new EveryCompat.S2CBlockStateCheckMessage());
             }
+        }
+    }
+
+
+    private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
+        if (ModConfigs.TAB_ENABLED.get()) {
+            Map<BlockType, List<Item>> typeToEntrySet = new LinkedHashMap<>();
+            for (var r : BlockSetAPI.getRegistries()) {
+                for (var type : r.getValues()) {
+                    forAllModules(m -> {
+                        typeToEntrySet.computeIfAbsent(type, j -> new ArrayList<>())
+                                .addAll(m.getAllItemsOfType(type));
+                    });
+                }
+            }
+            for (var e : typeToEntrySet.values()) {
+                event.add(EveryCompat.MOD_TAB.getHolder().unwrapKey().get(), e.toArray(ItemLike[]::new));
+            }
+        } else {
+            forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
     }
 }

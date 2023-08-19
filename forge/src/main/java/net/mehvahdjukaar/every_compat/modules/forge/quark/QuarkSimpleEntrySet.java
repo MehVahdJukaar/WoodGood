@@ -14,6 +14,8 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -37,7 +39,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                Class<? extends vazkii.quark.base.module.QuarkModule> module,
                                Supplier<B> baseBlock, Supplier<T> baseType,
                                BiFunction<T, vazkii.quark.base.module.QuarkModule, B> blockSupplier,
-                               Supplier<CreativeModeTab> tab,
+                               Supplier<ResourceKey<CreativeModeTab>> tab,
                                LootTableMode tableMode,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
@@ -70,7 +72,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         for (T w : woodTypes) {
             String n = getBlockName(w);
             String name = module.shortenedId() + "/" + w.getNamespace() + "/" + n;
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
+            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, BuiltInRegistries.BLOCK)) continue;
             var m = ModuleLoader.INSTANCE.getModuleInstance(quarkModule);
             B block = blockSupplier.apply(w, m);
             if (block != null) {

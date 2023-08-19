@@ -6,22 +6,22 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SimpleModule extends CompatModule {
 
     private final String shortId;
-    private final Map<String, EntrySet<?, ?, ?>> entries = new LinkedHashMap<>();
+    private final Map<String, EntrySet<?>> entries = new LinkedHashMap<>();
 
     protected int bloat = 0;
 
@@ -35,17 +35,17 @@ public class SimpleModule extends CompatModule {
         return bloat;
     }
 
-    public void addEntry(EntrySet<?, ?, ?> entryHolder) {
+    public void addEntry(EntrySet<?> entryHolder) {
         this.entries.put(entryHolder.getName(), entryHolder);
 
         EveryCompat.addEntryType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
     }
 
-    public Collection<EntrySet<?, ?, ?>> getEntries() {
+    public Collection<EntrySet<?>> getEntries() {
         return entries.values();
     }
 
-    public EntrySet<?, ?, ?> getEntry(String name) {
+    public EntrySet<?> getEntry(String name) {
         var e = entries.get(name);
         if (e == null)
             throw new UnsupportedOperationException(String.format("This module does not have entries of type %s", name));
@@ -65,13 +65,17 @@ public class SimpleModule extends CompatModule {
     @Override
     public void registerWoodBlocks(Registrator<Block> registry, Collection<WoodType> woodTypes) {
         getEntries().forEach(e -> e.registerWoodBlocks(this, registry, woodTypes));
-        getEntries().forEach(e -> bloat += e.blocks.size());
+        getEntries().forEach(e -> {
+            if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) bloat += ae.blocks.size();
+        });
     }
 
     @Override
     public void registerLeavesBlocks(Registrator<Block> registry, Collection<LeavesType> leavesTypes) {
         getEntries().forEach(e -> e.registerLeavesBlocks(this, registry, leavesTypes));
-        getEntries().forEach(e -> bloat += e.blocks.size());
+        getEntries().forEach(e -> {
+            if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) bloat += ae.blocks.size();
+        });
     }
 
     @Override
@@ -118,4 +122,27 @@ public class SimpleModule extends CompatModule {
         be.validBlocks = new HashSet<>(be.validBlocks);
         be.validBlocks.addAll(blocks);
     }
+
+    @Override
+    public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
+
+    }
+
+    @Override
+    public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
+        List<Item> l = new ArrayList<>();
+        for (var e : entries.values()) {
+            if (e.getTypeClass().isAssignableFrom(type.getClass())) {
+                Item itemOfType = getItemOfType(type, (EntrySet<T>) e);
+                if(itemOfType != null) l.add(itemOfType);
+            }
+        }
+        return l;
+    }
+
+    @Nullable
+    private static <T extends BlockType> Item getItemOfType(T type, EntrySet<T> e) {
+        return e.getItemOf(type);
+    }
+
 }

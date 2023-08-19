@@ -11,8 +11,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.WallBlock;
@@ -33,7 +35,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new RailingBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
 
         this.addEntry(railings);
@@ -46,7 +48,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.SLABS, Registries.ITEM)
                 .defaultRecipe()
                 .copyParentDrop()
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
 
         this.addEntry(boardSlabs);
@@ -59,7 +61,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
 
         this.addEntry(boardWalls);
@@ -69,7 +71,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new BoardBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .createPaletteFromOak(p -> {
 
                     while (p.size() > 7) {
@@ -104,7 +106,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
 
         this.addEntry(boardStairs);

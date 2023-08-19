@@ -30,10 +30,12 @@ import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -67,7 +69,7 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.BLOCK)
@@ -81,7 +83,7 @@ public class WoodworksModule extends SimpleModule {
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_boards"))
@@ -94,7 +96,7 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintLadderBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.ladder()))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
@@ -108,7 +110,7 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .defaultRecipe()
@@ -124,7 +126,7 @@ public class WoodworksModule extends SimpleModule {
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         () -> getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
@@ -140,7 +142,7 @@ public class WoodworksModule extends SimpleModule {
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintTrappedChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_TRAPPED, Registries.ITEM)
@@ -161,7 +163,7 @@ public class WoodworksModule extends SimpleModule {
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK)
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .setRenderType(() -> RenderType::cutout)
                 .copyParentDrop()
                 .defaultRecipe()
@@ -211,22 +213,6 @@ public class WoodworksModule extends SimpleModule {
         super.registerBlockEntityRenderers(event);
         //event.register(CHEST_TILE, ChestRenderer::new);
         //event.register(TRAPPED_CHEST_TILE, ChestRenderer::new);
-    }
-
-    @Override
-    public void onClientInit () {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onTextureStitch);
-    }
-
-    private static final ResourceLocation CHEST_SHEET = new ResourceLocation("textures/atlas/chest.png");
-    @EventCalled
-    public void onTextureStitch (TextureStitchEvent.Pre event){
-        if (event.getAtlas().location().equals(CHEST_SHEET)) {
-            // TODO chest renderer stitch thing here instead of quarks. idk
-            //CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
-            //TRAPPED_CHESTS.blocks.values().forEach(c -> VariantChestRenderer.accept(event, c));
-        }
-
     }
 
     //TODO: if this is to be added should be merge with quark module since textures are the same

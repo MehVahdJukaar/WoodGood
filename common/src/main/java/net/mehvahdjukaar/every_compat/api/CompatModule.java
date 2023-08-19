@@ -158,7 +158,7 @@ public abstract class CompatModule {
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
     }
 
-    public void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
+    public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
     }
 
     //utility functions
@@ -232,4 +232,11 @@ public abstract class CompatModule {
 
     //how much crap this module has registered
     public abstract int bloatAmount();
+
+    //used for creative tabs
+    public <T extends BlockType> List<Item> getAllItemsOfType( T type){
+        return List.of();
+    }
+
+
 }

@@ -21,7 +21,7 @@ public class HandcraftedModule extends SimpleModule {
 
     public HandcraftedModule(String modId) {
         super(modId, "hc");
-        CreativeModeTab tab = ModItems.ITEM_GROUP;
+        var tab = ModItems.TAB;
 /*
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,

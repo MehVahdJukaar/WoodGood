@@ -14,14 +14,14 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 
 public class GraveyardModule extends SimpleModule {
 
@@ -34,7 +34,7 @@ public class GraveyardModule extends SimpleModule {
 
         COFFINS = SimpleEntrySet.builder(WoodType.class, "coffin",
                         () -> getModBlock("oak_coffin"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCoffinfBlock(BlockBehaviour.Properties.of(Material.WOOD).noOcclusion(), w))
+                        w -> new CompatCoffinfBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), w))
                 .addTag(modRes("coffins"), Registries.BLOCK)
                 .addTag(modRes("coffins"), Registries.ITEM)
                 .defaultRecipe()

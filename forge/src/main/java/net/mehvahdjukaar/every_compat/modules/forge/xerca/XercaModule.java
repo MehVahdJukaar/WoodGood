@@ -11,15 +11,17 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
-import xerca.xercamod.common.DecoCreativeTab;
 import xerca.xercamod.common.block.BlockCarvedLog;
 import xerca.xercamod.common.block.Blocks;
 
@@ -39,7 +41,7 @@ public class XercaModule extends SimpleModule {
 
     public XercaModule(String modId) {
         super(modId, "x");
-        CreativeModeTab tab = DecoCreativeTab.TAB_BUILDING_BLOCKS;
+        var tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         carved1 = SimpleEntrySet.builder(WoodType.class, "1", "carved",
                         Blocks.CARVED_WARPED_1, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
@@ -51,7 +53,7 @@ public class XercaModule extends SimpleModule {
                 .addRecipe(modRes("carving/carved_warped_1_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_1_from_stripped_warped_log_carving"))
                 .createPaletteFromOak(this::darkestPalette)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .build();
 
         this.addEntry(carved1);
@@ -66,7 +68,7 @@ public class XercaModule extends SimpleModule {
                 .addRecipe(modRes("carving/carved_warped_2_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_2_from_stripped_warped_log_carving"))
                 .createPaletteFromOak(this::darkestestPalette)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .build();
 
         this.addEntry(carved2);
@@ -81,7 +83,7 @@ public class XercaModule extends SimpleModule {
                 .addRecipe(modRes("carving/carved_warped_3_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_3_from_stripped_warped_log_carving"))
                 .createPaletteFromOak(this::darkestestPalette)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .build();
 
         this.addEntry(carved3);
@@ -96,7 +98,7 @@ public class XercaModule extends SimpleModule {
                 .addRecipe(modRes("carving/carved_warped_4_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_4_from_stripped_warped_log_carving"))
                 .createPaletteFromOak(this::darkestestPalette)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .build();
 
         this.addEntry(carved4);
@@ -112,7 +114,7 @@ public class XercaModule extends SimpleModule {
                 .addRecipe(modRes("carving/carved_warped_5_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_5_from_stripped_warped_log_carving"))
                 .createPaletteFromOak(this::darkestestPalette)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .build();
 
         this.addEntry(carved5);
@@ -131,7 +133,7 @@ public class XercaModule extends SimpleModule {
                 .addRecipe(modRes("carving/carved_warped_6_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_6_from_stripped_warped_log_carving"))
                 .createPaletteFromOak(this::darkerPalette)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .build();
 
         this.addEntry(carved6);
@@ -147,7 +149,7 @@ public class XercaModule extends SimpleModule {
                 .addRecipe(modRes("carving/carved_warped_7_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_7_from_stripped_warped_log_carving"))
                 .createPaletteFromOak(this::nuetralPalette)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .build();
 
         this.addEntry(carved7);
@@ -162,7 +164,7 @@ public class XercaModule extends SimpleModule {
                 .addRecipe(modRes("carving/carved_warped_8_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_8_from_stripped_warped_log_carving"))
                 .createPaletteFromOak(this::nuetralPalette)
-                .setTab(() -> tab)
+                .setTabKey(() -> tab)
                 .build();
 
         this.addEntry(carved8);
@@ -207,8 +209,8 @@ public class XercaModule extends SimpleModule {
         json.add("ingredient", Ingredient.fromJson(json.get("ingredient")).toJson());
         String s1 = GsonHelper.getAsString(json, "result");
         int i = GsonHelper.getAsInt(json, "count");
-        json.addProperty("result", Utils.getID((new ItemStack( Registry.ITEM.get(new ResourceLocation(s1)), i)).getItem()).toString());
-        json.addProperty("count", (new ItemStack( Registry.ITEM.get(new ResourceLocation(s1)), i)).getCount());
+        json.addProperty("result", Utils.getID((new ItemStack( BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i)).getItem()).toString());
+        json.addProperty("count", (new ItemStack( BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i)).getCount());
 
         handler.dynamicPack.addJson(EveryCompat.res("carving"), json, ResType.RECIPES);
     }

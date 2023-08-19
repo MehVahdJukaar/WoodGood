@@ -8,11 +8,13 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import vectorwing.farmersdelight.common.registry.ModCreativeTabs;
 
 public class FarmersDelightModule extends SimpleModule {
 
@@ -30,7 +32,7 @@ public class FarmersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .addTile(ModBlockEntityTypes.CABINET)
-                .setTab(() -> FarmersDelight.CREATIVE_TAB)
+                .setTab(ModCreativeTabs.TAB_FARMERS_DELIGHT::get)
                 .createPaletteFromOak(Palette::increaseDown)
                 .addTexture(EveryCompat.res("block/oak_cabinet_front"))
                 .addTexture(EveryCompat.res("block/oak_cabinet_side"))

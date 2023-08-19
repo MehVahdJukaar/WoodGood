@@ -38,13 +38,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
-public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> extends EntrySet<T, B, I> {
+public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
+
+    public final Map<T, B> blocks = new HashMap<>();
+    public final Map<T, I> items = new HashMap<>();
 
     protected final Class<T> type;
 
     protected final Pattern nameScheme;
 
     protected final Supplier<T> baseType;
+
+    public final String typeName;
 
     public final String postfix;
     @Nullable
@@ -68,7 +73,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                                      @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                      Predicate<T> condition) {
-        super((prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name);
+        this.typeName =(prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name;
         this.postfix = name;
         this.prefix = prefix;
         this.tab = tab;
@@ -88,6 +93,15 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             nameScheme = Pattern.compile("^(.+?)_" + postfix + "$");
         }
         this.condition = condition;
+    }
+
+    public String getName() {
+        return typeName;
+    }
+
+    @Override
+    public @Nullable Item getItemOf(T type) {
+        return items.get(type);
     }
 
     public abstract boolean isDisabled();

@@ -17,6 +17,8 @@ import net.mehvahdjukaar.moonlight.core.Moonlight;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -113,7 +115,7 @@ public class PokecubeLegendsModule extends SimpleModule {
             this.ingredient = ingredient;
             this.result = result;
             this.block = block;
-            this.dimId = ResourceKey.create(Registry.DIMENSION_REGISTRY, dimId);
+            this.dimId = ResourceKey.create(Registries.DIMENSION, dimId);
             this.advancement = advancement;
             this.advancementId = advancementId;
 //            this.group = group;
@@ -187,13 +189,9 @@ public class PokecubeLegendsModule extends SimpleModule {
                 throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
                         this.result, originalMat, destinationMat));
             }
-            if (newRes.asItem().getItemCategory() == null) {
-                Moonlight.LOGGER.error("Failed to generate recipe for {} in block type {}: Output item {} cannot have empty creative tab, skipping", this.result, destinationMat, newRes);
-                return null;
-            }
             ItemStack newResult = new ItemStack(newRes);
             if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
-            if (id == null) id = Registry.ITEM.getKey(newRes.asItem()).toString();
+            if (id == null) id = Utils.getID(newRes.asItem()).toString();
 
             Ingredient newIng = null;
             for (var in : input.getItems()) {

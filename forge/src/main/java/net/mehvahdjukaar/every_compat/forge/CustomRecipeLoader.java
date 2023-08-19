@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.forge;
 
 import com.google.common.collect.Maps;
 import com.google.gson.*;
-import mezz.jei.forge.platform.PlatHelper;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
@@ -19,7 +18,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
-
+/*
 public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -33,7 +32,6 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
     // }
     private static final int PATH_SUFFIX_LENGTH = ".json".length();
 
-    /*
     public static void onEarlyPackLoad(final IEarlyPackReloadEvent event) {
         var manager = event.getManager();
         //code from simple reload listener
@@ -64,7 +62,6 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
         }
         loadRecipes(map);
     }
-*/
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> jsons, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         loadRecipes(jsons);
@@ -108,4 +105,4 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
 
 
 }
-
+*/

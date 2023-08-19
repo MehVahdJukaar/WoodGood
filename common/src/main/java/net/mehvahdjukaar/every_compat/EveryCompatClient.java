@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 
@@ -24,10 +25,6 @@ public class EveryCompatClient {
 
     private static void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         EveryCompat.forAllModules(m -> m.registerBlockEntityRenderers(event));
-    }
-
-    private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
-        EveryCompat.forAllModules(m -> m.registerItemsToTabs(event));
     }
 
     public static void clientSetup() {

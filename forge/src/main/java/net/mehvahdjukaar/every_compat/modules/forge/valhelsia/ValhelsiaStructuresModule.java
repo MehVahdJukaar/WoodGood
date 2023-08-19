@@ -18,9 +18,11 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -69,7 +71,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_posts"), Registries.ITEM)
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
@@ -86,7 +88,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
@@ -96,11 +98,12 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     }
 
     public static BlockBehaviour.Properties cutPostProperties(WoodType woodType) {
-        return BlockBehaviour.Properties.of(woodType.material,
+        return woodType.copyProperties()
+                .mapColor(
                         (state) -> state.getValue(DirectionalBlock.FACING).getAxis() == Direction.Axis.Y ?
-                                woodType.planks.defaultBlockState().getMaterial().getColor() :
-                                woodType.log.defaultBlockState().getMaterial().getColor())
-                .strength(2.0F).sound(SoundType.WOOD).noOcclusion();
+                                woodType.planks.defaultMapColor() :
+                                woodType.log.defaultMapColor())
+                .strength(2.0F).noOcclusion();
     }
 
     @Override
@@ -172,8 +175,9 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
     private void createTopTexture(TextureImage original, TextureImage newImage) {
         original.forEachFrame((i, x, y) -> {
-            int localX = x - original.getFrameX(i);
-            int localY = y - original.getFrameY(i);
+            //TODO: use ImageTransformer here instead
+            int localX = x - original.getFrameStartX(i);
+            int localY = y - original.getFrameStartX(i);
             if (localX >= 5 && localX <= 10 && localY >= 5 && localY <= 10) {
                 newImage.getImage().setPixelRGBA(x - 3, y - 3, original.getImage().getPixelRGBA(x, y));
             } else if (localX >= 14 && localY > 0 && localY <= 7) {

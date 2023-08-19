@@ -13,8 +13,10 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -36,7 +38,7 @@ public class CreateModule extends SimpleModule {
                         () -> getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         this::makeWindow)
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
@@ -51,7 +53,7 @@ public class CreateModule extends SimpleModule {
                         () -> getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
                 .addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -83,20 +85,5 @@ public class CreateModule extends SimpleModule {
         });
     }
 
-    public void onClientInit() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onTextureStitch);
-    }
-
-
-    @OnlyIn(Dist.CLIENT)
-    //we could also remove this and run getCT before client setup
-    public void onTextureStitch(TextureStitchEvent.Pre event) {
-        if (event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
-            windows.blocks.forEach((w, b) -> {
-                String path = "block/" + shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window_connected";
-                event.addSprite(EveryCompat.res(path));
-            });
-        }
-    }
 
 }

@@ -91,13 +91,6 @@ public class CompatHedgeBlock extends FenceBlock  { //implements IQuarkBlock
         return (stack, tintIndex) -> colors.getColor(leafStack, tintIndex);
     }
 
-    public void fillItemCategory(@Nonnull CreativeModeTab group, @Nonnull NonNullList<ItemStack> items) {
-        if (this.isEnabled() || group == CreativeModeTab.TAB_SEARCH) {
-            super.fillItemCategory(group, items);
-        }
-
-    }
-
     private boolean isEnabled() {return true;
     }
 

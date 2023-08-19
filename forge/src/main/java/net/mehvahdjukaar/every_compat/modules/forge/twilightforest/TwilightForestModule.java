@@ -12,6 +12,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -102,16 +103,11 @@ public class TwilightForestModule extends SimpleModule {
                     RegistryObject.create(EveryCompat.res(itemName + "_horizontal"), ForgeRegistries.BLOCKS),
                     RegistryObject.create(Utils.getID(b), ForgeRegistries.BLOCKS),
                     RegistryObject.create(EveryCompat.res(itemName + "_climbable"), ForgeRegistries.BLOCKS),
-                    new Item.Properties().tab(getTab(w, childKey + "_vertical")));
+                    new Item.Properties());
             hollowLogsVertical.items.put(w, i);
             w.addChild(childKey, (Object) i);
             registry.register(EveryCompat.res(itemName + "_vertical"), i);
         });
-    }
-
-    private static CreativeModeTab getTab(WoodType w, String type) {
-        return ModConfigs.isTypeEnabled(w, type) ?
-                (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : TFItems.creativeTab) : null;
     }
 
     @Override

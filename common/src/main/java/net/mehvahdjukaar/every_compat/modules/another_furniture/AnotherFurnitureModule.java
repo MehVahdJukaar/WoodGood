@@ -148,7 +148,7 @@ public class AnotherFurnitureModule extends SimpleModule {
         {
             var c0 = p.get(0);
             var nc0 = new PaletteColor(c0.hcl().withLuminance(c0.hcl().luminance() - (dl * 0.35f)));
-            nc0.occurrence = c0.occurrence;
+            nc0.setOccurrence(c0.getOccurrence());
             p.set(0, nc0);
         }
         {
@@ -160,7 +160,7 @@ public class AnotherFurnitureModule extends SimpleModule {
         {
             var c2 = p.get(2);
             var nc2 = new PaletteColor(c2.hcl().withLuminance(c2.hcl().luminance() - (dl * 0.05f)));
-            nc2.occurrence = c2.occurrence;
+            nc2.setOccurrence(c2.getOccurrence());
             p.set(+2, nc2);
         }
     }

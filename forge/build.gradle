@@ -107,6 +107,10 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
+    //modCompileOnly("curse.maven:selene-499980:4569958")
+    modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
+
+
     // Dependencies
     modImplementation("curse.maven:architectury-api-419699:4663010")
     modImplementation("curse.maven:resourceful-lib-570073:4681831")
@@ -122,12 +126,10 @@ dependencies {
     modCompileOnly("curse.maven:supermartijn642s-config-lib-438332:3871792")
     modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:4484238")
     modCompileOnly("curse.maven:valhelsia-core-416935:4181245")
-    modCompileOnly("curse.maven:selene-499980:4569958")
 
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}")
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    //modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
 
     // Imports
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
@@ -135,7 +137,7 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:3923045")
     modImplementation("curse.maven:buildersaddition-389697:4660499")
     modImplementation("curse.maven:camp-chair-531744:4579679")
-    modImplementation("curse.maven:chipped-456956:4634856")
+    modCompileOnly("curse.maven:chipped-456956:4634856")
     modCompileOnly("curse.maven:create-328085:4626108")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:dramatic-doors-380617:4507455")
@@ -168,13 +170,13 @@ dependencies {
     modCompileOnly("curse.maven:rechiseled-558998:4364936")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
-    modCompileOnly("curse.maven:the-twilight-forest-227639:4389567")
-    modCompileOnly("curse.maven:twigs-496913:4533061")
+    modImplementation("curse.maven:the-twilight-forest-227639:4653704")
+    modImplementation("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:woodworks-543610:4023081")
     modCompileOnly("curse.maven:woodster-869951:4575175")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
-    modCompileOnly("curse.maven:xercamod-341575:3947222")
+    modImplementation("curse.maven:xercamod-341575:4667995")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
 
     modCompileOnly("curse.maven:builders-delight-forge-563734:4362665")
