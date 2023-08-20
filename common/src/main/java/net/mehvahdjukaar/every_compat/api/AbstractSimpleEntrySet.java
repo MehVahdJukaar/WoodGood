@@ -73,7 +73,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                                      @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                      Predicate<T> condition) {
-        this.typeName =(prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name;
+        this.typeName = (prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name;
         this.postfix = name;
         this.prefix = prefix;
         this.tab = tab;
@@ -101,7 +101,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     @Override
     public @Nullable Item getItemOf(T type) {
-        return items.get(type);
+        var i = items.get(type);
+        if (ModConfigs.isEntryEnabled(type, i)) return i;
+        return null;
     }
 
     public abstract boolean isDisabled();
@@ -133,13 +135,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return m.group(1);
         }
         return null;
-    }
-
-    @Deprecated(forRemoval = true)
-    protected ResourceKey<CreativeModeTab> getTab(T w, B b) {
-        return ModConfigs.isEntryEnabled(w, b) ?
-                (ModConfigs.TAB_ENABLED.get() ? EveryCompat.MOD_TAB.getHolder().unwrapKey().get() : this.tab.get())
-                : null;
     }
 
     @Override

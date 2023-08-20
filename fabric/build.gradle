@@ -51,7 +51,7 @@ dependencies {
     // Imports
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
-    modImplementation("curse.maven:dramatic-doors-380617:4675138")
+    modImplementation("curse.maven:dramatic-doors-380617:4682820")
     modCompileOnly("curse.maven:arrp-463113:3829389")
     modImplementation("curse.maven:camp-chair-531744:4579676")
     modCompileOnly("curse.maven:chipped-456956:4463478")

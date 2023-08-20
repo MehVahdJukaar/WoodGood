@@ -12,6 +12,7 @@ import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurniture
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
@@ -124,6 +125,9 @@ public abstract class EveryCompat {
         addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("hearth_and_home", () -> HearthAndHomeModule::new);
         addModule("twigs", () -> TwigsModule::new);
+
+        addModule("dramaticdoors", () -> DramaticDoorsModule::new);
+
 
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 

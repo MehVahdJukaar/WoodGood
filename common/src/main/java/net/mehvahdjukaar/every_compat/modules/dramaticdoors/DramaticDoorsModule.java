@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
+package net.mehvahdjukaar.every_compat.modules.dramaticdoors;
 
 import com.fizzware.dramaticdoors.DramaticDoors;
 import com.fizzware.dramaticdoors.blocks.ShortDoorBlock;

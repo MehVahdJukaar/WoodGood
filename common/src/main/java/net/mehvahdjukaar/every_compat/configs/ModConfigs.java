@@ -8,6 +8,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
@@ -27,9 +28,9 @@ public class ModConfigs {
     public static Supplier<Boolean> TAB_ENABLED;
     //  public static Supplier<Boolean> REMAP_COMPAT;
     //  public static Supplier<Boolean> REMAP_OWN;
-    public static  Supplier<Boolean> DEPEND_ON_PACKS;
-    public static  Supplier<Boolean> DEBUG_RESOURCES;
-    public static  Supplier<Boolean> DEBUG_PACKET;
+    public static Supplier<Boolean> DEPEND_ON_PACKS;
+    public static Supplier<Boolean> DEBUG_RESOURCES;
+    public static Supplier<Boolean> DEBUG_PACKET;
 
 
     public static void init() {
@@ -48,7 +49,7 @@ public class ModConfigs {
                 .define("assets_depend_on_loaded_packs", true);
         DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
                 .define("save_debug_resources", false);
-        DEBUG_PACKET = builder.comment("Don't touch unless you are told to").define("debug_packet",false);
+        DEBUG_PACKET = builder.comment("Don't touch unless you are told to").define("debug_packet", false);
         builder.pop();
 
 
@@ -69,7 +70,7 @@ public class ModConfigs {
 
         builder.push("entries");
         for (var reg : BlockSetAPI.getRegistries()) {
-            if(reg.getType() == WoodType.class || reg.getType() == LeavesType.class) {
+            if (reg.getType() == WoodType.class || reg.getType() == LeavesType.class) {
                 builder.push(reg.typeName().replace(" ", "_"));
                 for (var c : EveryCompat.ENTRY_TYPES.getOrDefault(reg.getType(), Set.of())) {
                     String key = c.replace(":", ".");
@@ -88,10 +89,12 @@ public class ModConfigs {
     }
 
     public static <T extends BlockType> boolean isEntryEnabled(T w, Object o) {
+        if (o instanceof BlockItem bi) o = bi.getBlock();
         return isTypeEnabled(w, w.getChildKey(o));
     }
 
     public static <T extends BlockType> boolean isEntryEnabled(Class<T> typeClass, Object o) {
+        if (o instanceof BlockItem bi) o = bi.getBlock();
         var w = BlockSetAPI.getBlockTypeOf((ItemLike) o, typeClass);
         return isTypeEnabled(w, w.getChildKey(o));
     }
