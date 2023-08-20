@@ -1,6 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.forge.builders_delight;
 
 // buildersdelight
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.tynoxs.buildersdelight.content.block.wood.BlockFlammable;
 import com.tynoxs.buildersdelight.content.block.wood.SlabFlammable;
 import com.tynoxs.buildersdelight.content.block.wood.StairFlammable;
@@ -15,26 +17,35 @@ import com.tynoxs.buildersdelight.content.block.custom.BlockStool;
 // net.mehvahdjukaar
 import com.tynoxs.buildersdelight.content.item.BdItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.EntrySet;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 
 // minecraft
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.*;
 
-import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.common.Tags;
+
+import java.util.List;
 
 
 public class BuildersDelightModule extends SimpleModule {
@@ -89,6 +100,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_1"))
                 .setRenderType(() -> RenderType::cutout)
+                .addCustomItem((woodType, block, properties) -> new BDBlockItem(block,properties))
                 .build();
 
         this.addEntry(CHAIR_1);
@@ -819,5 +831,39 @@ public class BuildersDelightModule extends SimpleModule {
         p.remove(p.getDarkest());
     }
 
+    private static class BDBlockItem extends BlockItem {
+        public BDBlockItem(Block arg, Properties arg2) {
+            super(arg, arg2);
+        }
 
+        @Override
+        public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
+            pTooltip.add(Component.translatable("tooltip.everycomp.builders_delight").withStyle(ChatFormatting.GRAY));
+            //TODO: add this line to lang
+        }
+    }
+
+
+    @Override
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+        var pack = handler.getPack();
+        for(var w : WoodTypeRegistry.getTypes()){
+            addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
+        }
+    }
+
+    private static void addChiselRecipe(DynamicDataPack pack, WoodType w, String name, EntrySet<?,?,?>... entries) {
+        ResourceLocation res = EveryCompat.res("chisel/"+ w.getVariantId(name));
+        JsonObject jo = new JsonObject();
+        JsonArray arr = new JsonArray();
+        for(var e : entries){
+            var o = e.items.get(w);
+            if(o != null){
+                arr.add(Utils.getID(o).toString());
+            }
+        }
+        jo.add("variants", arr);
+        pack.addJson(res, jo, ResType.GENERIC);
+    }
 }
