@@ -1,20 +1,19 @@
 package net.mehvahdjukaar.every_compat.modules.forge.builders_delight;
 
 // buildersdelight
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.tynoxs.buildersdelight.content.block.custom.BlockChair;
+import com.tynoxs.buildersdelight.content.block.custom.BlockSmallTable;
+import com.tynoxs.buildersdelight.content.block.custom.BlockStool;
 import com.tynoxs.buildersdelight.content.block.wood.BlockFlammable;
 import com.tynoxs.buildersdelight.content.block.wood.SlabFlammable;
 import com.tynoxs.buildersdelight.content.block.wood.StairFlammable;
 import com.tynoxs.buildersdelight.content.init.BdBlocks;
 import com.tynoxs.buildersdelight.content.init.BdDecoration;
-import com.tynoxs.buildersdelight.content.init.BdTabs;
 import com.tynoxs.buildersdelight.content.init.BdItems;
-import com.tynoxs.buildersdelight.content.block.custom.BlockChair;
-import com.tynoxs.buildersdelight.content.block.custom.BlockSmallTable;
-import com.tynoxs.buildersdelight.content.block.custom.BlockStool;
-
-// net.mehvahdjukaar
+import com.tynoxs.buildersdelight.content.init.BdTabs;
 import com.tynoxs.buildersdelight.content.item.BdItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.EntrySet;
@@ -24,12 +23,12 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-
-// minecraft
+import net.mehvahdjukaar.moonlight.api.util.math.colors.HSVColor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
@@ -37,8 +36,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
-
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -75,7 +74,7 @@ public class BuildersDelightModule extends SimpleModule {
     public BuildersDelightModule(String modId) {
         super(modId, "bdl");
         CreativeModeTab tabDeco = BdTabs.TabDecoration;
-        CreativeModeTab tabBlock =  BdTabs.TabBlocks;
+        CreativeModeTab tabBlock = BdTabs.TabBlocks;
         CreativeModeTab tabMater = BdTabs.TabMaterials;
 
         //TYPE: ITEM
@@ -85,6 +84,7 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"))
                 .addRecipe(modRes("oak_furniture_kit"))
+                .createPaletteFromOak(BuildersDelightModule::extrapolateWoodItemPalette)
                 .build();
         this.addEntry(FURNITURE_KIT);
 
@@ -100,7 +100,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_1"))
                 .setRenderType(() -> RenderType::cutout)
-                .addCustomItem((woodType, block, properties) -> new BDBlockItem(block,properties))
+                .addCustomItem((woodType, block, properties) -> new BDBlockItem(block, properties))
                 .build();
 
         this.addEntry(CHAIR_1);
@@ -270,7 +270,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_2 = SimpleEntrySet.builder(WoodType.class, "stairs_2",
                         BdBlocks.OAK_STAIRS_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -285,7 +285,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_3 = SimpleEntrySet.builder(WoodType.class, "stairs_3",
                         BdBlocks.OAK_STAIRS_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w ->new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -300,7 +300,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_4 = SimpleEntrySet.builder(WoodType.class, "stairs_4",
                         BdBlocks.OAK_STAIRS_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -315,7 +315,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_5 = SimpleEntrySet.builder(WoodType.class, "stairs_5",
                         BdBlocks.OAK_STAIRS_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -330,7 +330,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_6 = SimpleEntrySet.builder(WoodType.class, "stairs_6",
                         BdBlocks.OAK_STAIRS_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w  -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -345,7 +345,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         STAIRS_7 = SimpleEntrySet.builder(WoodType.class, "stairs_7",
                         BdBlocks.OAK_STAIRS_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")) )
+                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -362,7 +362,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: SLAB
         SLAB_1 = SimpleEntrySet.builder(WoodType.class, "slab_1",
                         BdBlocks.OAK_SLAB_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .requiresChildren("slab")
@@ -377,7 +377,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_2 = SimpleEntrySet.builder(WoodType.class, "slab_2",
                         BdBlocks.OAK_SLAB_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -392,7 +392,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_3 = SimpleEntrySet.builder(WoodType.class, "slab_3",
                         BdBlocks.OAK_SLAB_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -407,7 +407,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_4 = SimpleEntrySet.builder(WoodType.class, "slab_4",
                         BdBlocks.OAK_SLAB_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -422,7 +422,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_5 = SimpleEntrySet.builder(WoodType.class, "slab_5",
                         BdBlocks.OAK_SLAB_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -437,7 +437,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_6 = SimpleEntrySet.builder(WoodType.class, "slab_6",
                         BdBlocks.OAK_SLAB_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -452,7 +452,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         SLAB_7 = SimpleEntrySet.builder(WoodType.class, "slab_7",
                         BdBlocks.OAK_SLAB_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")) )
+                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
@@ -590,7 +590,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: GLASS
         GLASS_1 = SimpleEntrySet.builder(WoodType.class, "glass_1",
                         BdBlocks.OAK_GLASS_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_1")
+                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_1")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
@@ -605,7 +605,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_2 = SimpleEntrySet.builder(WoodType.class, "glass_2",
                         BdBlocks.OAK_GLASS_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_2")
+                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_2")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
@@ -620,7 +620,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_3 = SimpleEntrySet.builder(WoodType.class, "glass_3",
                         BdBlocks.OAK_GLASS_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_3")
+                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_3")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
@@ -635,7 +635,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_4 = SimpleEntrySet.builder(WoodType.class, "glass_4",
                         BdBlocks.OAK_GLASS_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_4")
+                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_4")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
@@ -650,7 +650,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_5 = SimpleEntrySet.builder(WoodType.class, "glass_5",
                         BdBlocks.OAK_GLASS_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_5")
+                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_5")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
@@ -665,7 +665,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_6 = SimpleEntrySet.builder(WoodType.class, "glass_6",
                         BdBlocks.OAK_GLASS_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_6")
+                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_6")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
@@ -680,7 +680,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_7 = SimpleEntrySet.builder(WoodType.class, "glass_7",
                         BdBlocks.OAK_GLASS_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_7")
+                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_7")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
@@ -695,7 +695,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_8 = SimpleEntrySet.builder(WoodType.class, "glass_8",
                         BdBlocks.OAK_GLASS_8, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_8")
+                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_8")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
@@ -712,7 +712,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: GLASS_PANE
         GLASS_PANE_1 = SimpleEntrySet.builder(WoodType.class, "glass_pane_1",
                         BdBlocks.OAK_GLASS_PANE_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_1")
+                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_1")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
@@ -726,7 +726,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_2 = SimpleEntrySet.builder(WoodType.class, "glass_pane_2",
                         BdBlocks.OAK_GLASS_PANE_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_2")
+                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_2")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
@@ -740,7 +740,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_3 = SimpleEntrySet.builder(WoodType.class, "glass_pane_3",
                         BdBlocks.OAK_GLASS_PANE_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_3")
+                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_3")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
@@ -754,7 +754,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_4 = SimpleEntrySet.builder(WoodType.class, "glass_pane_4",
                         BdBlocks.OAK_GLASS_PANE_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_4")
+                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_4")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
@@ -768,7 +768,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_5 = SimpleEntrySet.builder(WoodType.class, "glass_pane_5",
                         BdBlocks.OAK_GLASS_PANE_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_5")
+                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_5")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
@@ -782,7 +782,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_6 = SimpleEntrySet.builder(WoodType.class, "glass_pane_6",
                         BdBlocks.OAK_GLASS_PANE_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_6")
+                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_6")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
@@ -796,7 +796,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_7 = SimpleEntrySet.builder(WoodType.class, "glass_pane_7",
                         BdBlocks.OAK_GLASS_PANE_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_7")
+                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_7")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
@@ -810,7 +810,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_8 = SimpleEntrySet.builder(WoodType.class, "glass_pane_8",
                         BdBlocks.OAK_GLASS_PANE_8, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS),"block/bdl/"+ w.getId().getNamespace()+ "/glass/"+ w.getTypeName()+ "_glass/oak_glass_8")
+                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_8")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
@@ -848,26 +848,40 @@ public class BuildersDelightModule extends SimpleModule {
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
         var pack = handler.getPack();
-        for(var w : WoodTypeRegistry.getTypes()) {
+        for (var w : WoodTypeRegistry.getTypes()) {
             if (!w.isVanilla()) {
                 addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
             }
         }
     }
 
-    private static void addChiselRecipe(DynamicDataPack pack, WoodType w, String name, EntrySet<?,?,?>... entries) {
+    private static void addChiselRecipe(DynamicDataPack pack, WoodType w, String name, EntrySet<?, ?, ?>... entries) {
         JsonArray arr = new JsonArray();
-        for(var e : entries){
+        for (var e : entries) {
             var o = e.items.get(w);
-            if(o != null){
+            if (o != null) {
                 arr.add(Utils.getID(o).toString());
             }
         }
-        if(!arr.isEmpty()) {
+        if (!arr.isEmpty()) {
             JsonObject jo = new JsonObject();
-            ResourceLocation res = EveryCompat.res("chisel/"+ w.getVariantId(name));
+            ResourceLocation res = EveryCompat.res("chisel/" + w.getVariantId(name) + ".json");
             jo.add("variants", arr);
             pack.addJson(res, jo, ResType.GENERIC);
         }
+    }
+
+
+    @Deprecated(forRemoval = true, since = "1.20")
+    public static Palette extrapolateWoodItemPalette(Palette palette) {
+        PaletteColor color = palette.get(0);
+        HSVColor hsv = color.rgb().asHSV();
+        float satMult = 1.11F;
+        float brightnessMult = 0.94F;
+        HSVColor newCol = new HSVColor(hsv.hue(), Mth.clamp(hsv.saturation() * satMult, 0.0F, 1.0F), Mth.clamp(hsv.value() * brightnessMult, 0.0F, 1.0F), hsv.alpha());
+        PaletteColor newP = new PaletteColor(newCol);
+        newP.occurrence = color.occurrence;
+        palette.set(0, newP);
+        return palette;
     }
 }
