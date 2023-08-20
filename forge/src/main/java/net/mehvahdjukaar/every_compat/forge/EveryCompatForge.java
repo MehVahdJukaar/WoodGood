@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.forge;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
@@ -38,9 +37,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
@@ -101,20 +98,12 @@ public class EveryCompatForge extends EveryCompat {
         // Disabled until custom block models work
          addModule("xercamod", () -> XercaModule::new);
 
-        if (PlatHelper.getPhysicalSide().isClient()) {
-            EveryCompatClient.commonInit();
-        }
 
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onRemap);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onDataSync);
 
         forAllModules(CompatModule::onModInit);
-    }
-
-    @SubscribeEvent
-    public void onCommonSetup(FMLCommonSetupEvent event) {
-        this.commonSetup();
     }
 
     public static void onDataSync(PlayerEvent.PlayerLoggedInEvent event) {

@@ -12,6 +12,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -81,7 +82,7 @@ public class MacawFencesModule extends SimpleModule {
 
         PYRAMID_GATES = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
                         () -> BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .setTab(() -> FencesGroup.FENCESGROUP)
                 .defaultRecipe()
@@ -91,7 +92,7 @@ public class MacawFencesModule extends SimpleModule {
 
         HIGHLEY_GATES = SimpleEntrySet.builder(WoodType.class, "highley_gate",
                         () -> BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTab(() -> FencesGroup.FENCESGROUP)
                 .defaultRecipe()
@@ -130,7 +131,7 @@ public class MacawFencesModule extends SimpleModule {
         @Override
         public void entityInside(BlockState state, Level level, BlockPos blockPos, Entity entityIn) {
             if (state.getValue(NORTH) || state.getValue(SOUTH) || state.getValue(EAST) || state.getValue(WEST))
-                entityIn.hurt(DamageSource.GENERIC, 2.0F);
+                entityIn.hurt(level.damageSources().generic(), 2.0F);
         }
     }
 

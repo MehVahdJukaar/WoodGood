@@ -1,14 +1,13 @@
 package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 
 
 public class EveryCompatClient {
 
-    public static void commonInit() {
+    public static void init() {
+        ClientHelper.addClientSetup(EveryCompatClient::clientSetup);
         EveryCompat.forAllModules(CompatModule::onClientInit);
         ClientHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
@@ -28,6 +27,7 @@ public class EveryCompatClient {
     }
 
     public static void clientSetup() {
+        EveryCompat.ALL_WOODS.get().registerFabricRenderer();
         EveryCompat.forAllModules(CompatModule::onClientSetup);
     }
 

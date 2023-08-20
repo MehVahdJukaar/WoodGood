@@ -17,7 +17,6 @@ import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModul
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
-import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 
@@ -40,15 +39,6 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
 
-        FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
-        FabricSetupCallbacks.COMMON_SETUP.add(this::commonSetup);
-
         forAllModules(CompatModule::onModInit);
-    }
-
-    public void onClientSetup() {
-        EveryCompatClient.commonInit();
-        EveryCompatClient.clientSetup();
-        EveryCompat.ALL_WOODS.get().registerFabricRenderer();
     }
 }

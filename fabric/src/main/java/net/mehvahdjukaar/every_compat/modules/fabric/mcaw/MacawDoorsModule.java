@@ -17,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -54,7 +55,7 @@ public class MacawDoorsModule extends SimpleModule {
 
         BARK_DOORS = SimpleEntrySet.builder(WoodType.class, "bark_glass_door",
                         () -> BlockInit.OAK_BARK_GLASS_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setTab(() -> DoorItemGroup.DOORITEMGROUP)

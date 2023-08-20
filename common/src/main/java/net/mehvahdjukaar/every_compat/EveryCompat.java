@@ -83,7 +83,9 @@ public abstract class EveryCompat {
 
         ServerDynamicResourcesHandler.INSTANCE.register();
 
+        PlatHelper.addCommonSetup(EveryCompat::commonSetup);
         if (PlatHelper.getPhysicalSide().isClient()) {
+            EveryCompatClient.init();
             ClientDynamicResourcesHandler.INSTANCE.register();
 
             TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log", res("block/cactus_side"));
@@ -174,7 +176,7 @@ public abstract class EveryCompat {
                     .build());
 
 
-    public void commonSetup() {
+    public static void commonSetup() {
         if (PlatHelper.isModLoaded("chipped")) {
             EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
         }
@@ -193,11 +195,11 @@ public abstract class EveryCompat {
         forAllModules(CompatModule::onModSetup);
     }
 
-    private int prevRegSize;
+    private static int prevRegSize;
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
         ModConfigs.init(); // add wood stuff once its ready
-        this.prevRegSize = BuiltInRegistries.BLOCK.size();
+        prevRegSize = BuiltInRegistries.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");
         forAllModules(m -> m.registerWoodBlocks(event, woods));
     }

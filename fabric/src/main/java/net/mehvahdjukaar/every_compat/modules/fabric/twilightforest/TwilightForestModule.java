@@ -13,6 +13,8 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -73,6 +75,7 @@ public class TwilightForestModule extends SimpleModule {
                         })
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .noItem()
+                .setTab(()->TFItems.creativeTab)
                 .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log_vertical"))
                 .build();
 
@@ -94,7 +97,7 @@ public class TwilightForestModule extends SimpleModule {
 
     @NotNull
     private static<T extends Block> RegistryObject<T> makeRegObj(ResourceLocation id) {
-        return new RegistryObject<>(id, () ->(T) Registry.BLOCK.get(id), Registries.BLOCK);
+        return new RegistryObject<>(id, () ->(T) BuiltInRegistries.BLOCK.get(id), Registries.BLOCK);
     }
 
     @Override
@@ -107,16 +110,11 @@ public class TwilightForestModule extends SimpleModule {
                     makeRegObj(EveryCompat.res(itemName + "_horizontal")),
                     makeRegObj(Utils.getID(b)),
                     makeRegObj(EveryCompat.res(itemName + "_climbable")),
-                    new Item.Properties().tab(getTab(w, childKey + "_vertical")));
+                    new Item.Properties());
             hollowLogsVertical.items.put(w, i);
-            w.addChild(childKey, (Object) i);
+            w.addChild(childKey, i);
             registry.register(EveryCompat.res(itemName + "_vertical"), i);
         });
-    }
-
-    private static CreativeModeTab getTab(WoodType w, String type) {
-        return ModConfigs.isTypeEnabled(w, type) ?
-                (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : TFItems.creativeTab) : null;
     }
 
     @Override

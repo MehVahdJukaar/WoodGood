@@ -11,6 +11,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -41,7 +42,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         BARK_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bark_trapdoor",
                         () -> BlockInit.OAK_BARK_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
@@ -56,7 +57,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         BARN_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barn_trapdoor",
                         () -> BlockInit.OAK_BARN_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
@@ -120,7 +121,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         COTTAGE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "cottage_trapdoor",
                         () -> BlockInit.OAK_COTTAGE_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks),w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
@@ -136,7 +137,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         FOUR_PANEL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "four_panel_trapdoor",
                         () -> BlockInit.OAK_FOUR_PANEL_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks),w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
@@ -202,7 +203,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         PAPER_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "paper_trapdoor",
                         () -> BlockInit.OAK_PAPER_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks),w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
@@ -219,7 +220,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
         RANCH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "ranch_trapdoor",
                         () -> BlockInit.OAK_RANCH_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
+                        w -> new TrapDoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(),w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)

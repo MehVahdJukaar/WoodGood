@@ -11,9 +11,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.Material;
 
 public class InfinityButtonsModule extends SimpleModule {
 
@@ -25,7 +26,7 @@ public class InfinityButtonsModule extends SimpleModule {
 
         largeButton = SimpleEntrySet.builder(WoodType.class, "large_button",
                         () -> InfinityButtonsBlocks.OAK_LARGE_BUTTON, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WoodenLargeButton(FabricBlockSettings.of(Material.DECORATION).strength(0.5f).collidable(false).nonOpaque().sounds(SoundType.WOOD)))
+                        w -> new WoodenLargeButton(FabricBlockSettings.copyOf(Blocks.STONE_BUTTON).strength(0.5f).collidable(false).nonOpaque().sounds(SoundType.WOOD)))
                 .addTag(modRes("wooden_large_buttons"), Registries.BLOCK)
                 .addTag(modRes("wooden_large_buttons"), Registries.ITEM)
                 .setTab(() -> InfinityButtonsItemGroup.INFINITYBUTTONS)
