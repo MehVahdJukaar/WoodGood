@@ -100,7 +100,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_1"))
                 .setRenderType(() -> RenderType::cutout)
-                .addCustomItem((woodType, block, properties) -> new BDBlockItem(block, properties))
+                .addCustomItem((woodType, block, properties) -> new BDBlockItem(block, properties, "chair_1"))
                 .build();
 
         this.addEntry(CHAIR_1);
@@ -832,17 +832,19 @@ public class BuildersDelightModule extends SimpleModule {
     }
 
     private static class BDBlockItem extends BlockItem {
-        public BDBlockItem(Block arg, Properties arg2) {
-            super(arg, arg2);
+
+        private final Component tooltip;
+
+        public BDBlockItem(Block block, Properties properties, String name) {
+            super(block, properties);
+            this.tooltip = Component.translatable("tooltip.everycomp.buildersdelight." + name).withStyle(ChatFormatting.GRAY);
         }
 
         @Override
         public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-            pTooltip.add(Component.translatable("tooltip.everycomp.builders_delight").withStyle(ChatFormatting.GRAY));
-            //TODO: add this line to lang
+            pTooltip.add(tooltip);
         }
     }
-
 
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {

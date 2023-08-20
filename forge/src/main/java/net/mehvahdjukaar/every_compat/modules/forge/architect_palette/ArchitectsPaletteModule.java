@@ -72,7 +72,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .createPaletteFromOak(p -> {
 
-                    while (p.size() > 7 && (p.getLightest().luminance()- p.getDarkest().luminance())>0.4) {
+                    while (p.size() > 7 && (p.getLightest().luminance()- p.getDarkest().luminance())>0.23) {
                         p.remove(p.getDarkest());
                     }
 
