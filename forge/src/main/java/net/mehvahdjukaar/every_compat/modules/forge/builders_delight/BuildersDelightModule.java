@@ -848,14 +848,14 @@ public class BuildersDelightModule extends SimpleModule {
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
         var pack = handler.getPack();
-        for(var w : WoodTypeRegistry.getTypes()){
-            addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
+        for(var w : WoodTypeRegistry.getTypes()) {
+            if (!w.isVanilla()) {
+                addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
+            }
         }
     }
 
     private static void addChiselRecipe(DynamicDataPack pack, WoodType w, String name, EntrySet<?,?,?>... entries) {
-        ResourceLocation res = EveryCompat.res("chisel/"+ w.getVariantId(name));
-        JsonObject jo = new JsonObject();
         JsonArray arr = new JsonArray();
         for(var e : entries){
             var o = e.items.get(w);
@@ -863,7 +863,11 @@ public class BuildersDelightModule extends SimpleModule {
                 arr.add(Utils.getID(o).toString());
             }
         }
-        jo.add("variants", arr);
-        pack.addJson(res, jo, ResType.GENERIC);
+        if(!arr.isEmpty()) {
+            JsonObject jo = new JsonObject();
+            ResourceLocation res = EveryCompat.res("chisel/"+ w.getVariantId(name));
+            jo.add("variants", arr);
+            pack.addJson(res, jo, ResType.GENERIC);
+        }
     }
 }
