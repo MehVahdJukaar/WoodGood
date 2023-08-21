@@ -17,6 +17,8 @@ import net.salju.woodster.block.ChiseledBookshelfBlock;
 import net.salju.woodster.init.WoodsterBlocks;
 import net.salju.woodster.init.WoodsterTabs;
 
+import java.util.function.Supplier;
+
 public class WoodsterModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> chiseled_books;
     public final SimpleEntrySet<WoodType, Block> books;
@@ -25,8 +27,9 @@ public class WoodsterModule extends SimpleModule {
     public WoodsterModule(String modId) {
         super(modId, "wdst");
 
+        Supplier<WoodType> spruce = ()-> WoodTypeRegistry.getValue(new ResourceLocation("spruce"));
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        WoodsterBlocks.OAK_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
+                        WoodsterBlocks.SPRUCE_CHISELED_BOOKSHELF, spruce,
                         w -> new ChiseledBookshelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTextureM(modRes("block/oak_chiseled_bookshelf_1"),modRes( "block/everycomp_chiseled_bookshelf_1"))
                 .addTextureM(modRes("block/oak_chiseled_bookshelf_2"),modRes( "block/everycomp_chiseled_bookshelf_2"))
@@ -38,7 +41,7 @@ public class WoodsterModule extends SimpleModule {
                 .addTexture(modRes("block/oak_chiseled_bookshelf_top"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_0"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> WoodsterTabs.WOODSTER)
+                .setTab( WoodsterTabs.WOODSTER)
                 .copyParentDrop()
                 .build();
 
@@ -49,7 +52,7 @@ public class WoodsterModule extends SimpleModule {
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> WoodsterTabs.WOODSTER)
+                .setTab(WoodsterTabs.WOODSTER)
                 .copyParentDrop()
                 .build();
 
@@ -57,13 +60,13 @@ public class WoodsterModule extends SimpleModule {
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         WoodsterBlocks.SPRUCE_LADDER, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new LadderBlock(Utils.copyPropertySafe(getModBlock("spruce_ladder"))))
+                        w -> new LadderBlock(Utils.copyPropertySafe(WoodsterBlocks.SPRUCE_LADDER.get())))
                 .addTag(new ResourceLocation("minecraft:ladders"), Registries.BLOCK)
                 .addTag(new ResourceLocation("minecraft:ladders"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
-                .setTab(() -> WoodsterTabs.WOODSTER)
+                .setTab( WoodsterTabs.WOODSTER)
                 .defaultRecipe()
                 .build();
 
