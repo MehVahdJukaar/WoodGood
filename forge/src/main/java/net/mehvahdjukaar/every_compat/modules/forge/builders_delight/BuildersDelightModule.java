@@ -947,11 +947,11 @@ public class BuildersDelightModule extends SimpleModule {
         for (var v : this.FURNITURE_KIT.items.entrySet()) {
 
             WoodType wood = v.getKey();
-            recipe = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
+            String r = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
                     .replace("[planks]", Utils.getID(wood.planks).toString());
 
             ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "furniture_kit");
-            pack.addBytes(res, recipe.getBytes(), ResType.RECIPES);
+            pack.addBytes(res, r.getBytes(), ResType.RECIPES);
         }
     }
 
