@@ -1,9 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
+import net.kikoz.mcwdoors.MacawsDoors;
 import net.kikoz.mcwdoors.init.BlockInit;
 import net.kikoz.mcwdoors.objects.JapaneseDoors;
 import net.kikoz.mcwdoors.objects.StableDoor;
-import net.kikoz.mcwdoors.util.DoorItemGroup;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -58,7 +58,7 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -72,7 +72,7 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -88,7 +88,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -104,7 +105,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -120,7 +122,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -136,7 +139,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -152,7 +156,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -168,7 +173,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -187,7 +193,8 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.DOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .addTextureM(modRes("block/oak_bamboo_door_lower"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_lower_m"))
                 .addTextureM(modRes("block/oak_bamboo_door_upper"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_upper_m"))
                 .addTextureM(modRes("item/oak_bamboo_door"), EveryCompat.res("item/mcaw/doors/oak_bamboo_door_m"))
@@ -203,7 +210,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -219,7 +227,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -235,7 +244,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -251,7 +261,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -264,10 +275,12 @@ public class MacawDoorsModule extends SimpleModule {
 
         SHOJI_DOORS = SimpleEntrySet.builder(WoodType.class, "japanese_door",
                         () -> BlockInit.OAK_JAPANESE_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new JapaneseDoors(Utils.copyPropertySafe(w.planks).noOcclusion().sound(SoundType.SCAFFOLDING)))
+                        w -> new JapaneseDoors(Utils.copyPropertySafe(w.planks).noOcclusion().sound(SoundType.SCAFFOLDING),
+                                w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -280,10 +293,12 @@ public class MacawDoorsModule extends SimpleModule {
 
         SHOJI_WHOLE_DOORS = SimpleEntrySet.builder(WoodType.class, "japanese2_door",
                         () -> BlockInit.OAK_JAPANESE2_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new JapaneseDoors(Utils.copyPropertySafe(w.planks).noOcclusion().sound(SoundType.SCAFFOLDING)))
+                        w -> new JapaneseDoors(Utils.copyPropertySafe(w.planks).noOcclusion().sound(SoundType.SCAFFOLDING),
+                                w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -296,10 +311,12 @@ public class MacawDoorsModule extends SimpleModule {
 
         STABLE_DOORS = SimpleEntrySet.builder(WoodType.class, "stable_door",
                         () -> BlockInit.OAK_STABLE_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StableDoor(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new StableDoor(Utils.copyPropertySafe(w.planks).noOcclusion(),
+                                w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
@@ -313,10 +330,12 @@ public class MacawDoorsModule extends SimpleModule {
 
         STABLE_HEAD_DOORS = SimpleEntrySet.builder(WoodType.class, "stable_head_door",
                         () -> BlockInit.OAK_STABLE_HEAD_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StableDoor(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new StableDoor(Utils.copyPropertySafe(w.planks).noOcclusion(),
+                                w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .addRecipe(modRes("oak_stable_head_door"))
                 .setRenderType(() -> RenderType::cutout)
@@ -333,7 +352,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .addRecipe(modRes("oak_swamp_door"))
                 .setRenderType(() -> RenderType::cutout)
@@ -350,7 +370,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .addRecipe(modRes("oak_tropical_door"))
                 .setRenderType(() -> RenderType::cutout)
@@ -366,7 +387,8 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTab(() -> DoorItemGroup.DOORITEMGROUP)
+                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+
                 .copyParentDrop()
                 .addRecipe(modRes("oak_western_door"))
                 .setRenderType(() -> RenderType::cutout)

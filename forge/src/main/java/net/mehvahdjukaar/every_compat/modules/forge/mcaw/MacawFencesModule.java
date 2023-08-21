@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwfences.kikoz.MacawsFences;
 import com.mcwfences.kikoz.init.BlockInit;
+import com.mcwfences.kikoz.init.TabInit;
 import com.mcwfences.kikoz.objects.WiredFence;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -38,14 +39,14 @@ public class MacawFencesModule extends SimpleModule {
     public MacawFencesModule(String modId) {
         super(modId, "mcf");
 
-        CreativeModeTab tab = MacawsFences.FencesItemGroup;
+        var tab = TabInit.FENCEITEMGROUP;
 
         PICKET_FENCES = SimpleEntrySet.builder(WoodType.class, "picket_fence",
                         BlockInit.OAK_PICKET_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 
@@ -56,7 +57,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 
@@ -67,7 +68,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 
@@ -79,7 +80,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 
@@ -90,7 +91,7 @@ public class MacawFencesModule extends SimpleModule {
                         BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 
@@ -101,7 +102,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks),w.toVanillaOrOak()))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 
@@ -119,7 +120,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 

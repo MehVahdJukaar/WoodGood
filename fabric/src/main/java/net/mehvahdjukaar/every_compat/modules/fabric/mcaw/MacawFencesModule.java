@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
+import net.kikoz.mcwfences.MacawsFences;
 import net.kikoz.mcwfences.init.BlockInit;
-import net.kikoz.mcwfences.objects.FencesGroup;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -11,11 +11,9 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -42,7 +40,8 @@ public class MacawFencesModule extends SimpleModule {
                         () -> BlockInit.OAK_PICKET_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .setTab(() -> FencesGroup.FENCESGROUP)
+                .setTabKey(() -> MacawsFences.FENCESGROUP)
+
                 .defaultRecipe()
                 .build();
 
@@ -52,7 +51,8 @@ public class MacawFencesModule extends SimpleModule {
                         () -> BlockInit.OAK_STOCKADE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .setTab(() -> FencesGroup.FENCESGROUP)
+                .setTabKey(() -> MacawsFences.FENCESGROUP)
+
                 .defaultRecipe()
                 .build();
 
@@ -62,7 +62,8 @@ public class MacawFencesModule extends SimpleModule {
                         () -> BlockInit.OAK_HORSE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .setTab(() -> FencesGroup.FENCESGROUP)
+                .setTabKey(() -> MacawsFences.FENCESGROUP)
+
                 .defaultRecipe()
                 .build();
 
@@ -72,7 +73,7 @@ public class MacawFencesModule extends SimpleModule {
                         () -> BlockInit.OAK_WIRED_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WiredFence(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .setTab(() -> FencesGroup.FENCESGROUP)
+                .setTabKey(() -> MacawsFences.FENCESGROUP)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -84,7 +85,8 @@ public class MacawFencesModule extends SimpleModule {
                         () -> BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
-                .setTab(() -> FencesGroup.FENCESGROUP)
+                .setTabKey(() -> MacawsFences.FENCESGROUP)
+
                 .defaultRecipe()
                 .build();
 
@@ -94,7 +96,8 @@ public class MacawFencesModule extends SimpleModule {
                         () -> BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .setTab(() -> FencesGroup.FENCESGROUP)
+                .setTabKey(() -> MacawsFences.FENCESGROUP)
+
                 .defaultRecipe()
                 .build();
 
@@ -112,7 +115,8 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
-                .setTab(() -> FencesGroup.FENCESGROUP)
+                .setTabKey(() -> MacawsFences.FENCESGROUP)
+
                 .defaultRecipe()
                 .build();
 

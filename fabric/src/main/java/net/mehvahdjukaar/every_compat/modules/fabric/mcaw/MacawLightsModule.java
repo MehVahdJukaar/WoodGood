@@ -1,24 +1,16 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
+import net.kikoz.mcwlights.MacawsLights;
 import net.kikoz.mcwlights.init.BlockInit;
-import net.kikoz.mcwlights.objects.LightGroup;
 import net.kikoz.mcwlights.objects.TikiTorch;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -38,7 +30,7 @@ public class MacawLightsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
-                .setTab(() -> LightGroup.LIGHTSGROUP)
+                .setTabKey(() -> MacawsLights.LIGHTSGROUP)
                 .build();
 
         this.addEntry(SOUL_TIKI_TORCHES);
@@ -49,7 +41,7 @@ public class MacawLightsModule extends SimpleModule {
                                 .strength(0.2f, 2.5f), ParticleTypes.FLAME))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> LightGroup.LIGHTSGROUP)
+                .setTabKey(() -> MacawsLights.LIGHTSGROUP)
                 .defaultRecipe()
                 .build();
 

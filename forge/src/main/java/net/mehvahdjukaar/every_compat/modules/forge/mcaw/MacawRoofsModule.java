@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwroofs.kikoz.MacawsRoofs;
 import com.mcwroofs.kikoz.init.BlockInit;
+import com.mcwroofs.kikoz.init.TabInit;
 import com.mcwroofs.kikoz.objects.roofs.BaseRoof;
 import com.mcwroofs.kikoz.objects.roofs.Lower;
 import com.mcwroofs.kikoz.objects.roofs.RoofGlass;
@@ -43,12 +44,14 @@ public class MacawRoofsModule extends SimpleModule {
     public MacawRoofsModule(String modId) {
         super(modId, "mcr");
 
+        var tab = TabInit.ROOFSITEMGROUP;
         ATTIC_ROOFS = SimpleEntrySet.builder(WoodType.class, "attic_roof",
                         BlockInit.OAK_ATTIC_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RoofGlass(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(ATTIC_ROOFS);
@@ -59,6 +62,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(LOWER_ROOFS);
@@ -69,6 +73,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(ROOFS);
@@ -79,6 +84,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(STEEP_ROOFS);
@@ -89,6 +95,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(TOP_ROOFS);
@@ -99,6 +106,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(UPPER_LOWER_ROOFS);
@@ -109,6 +117,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(UPPER_STEEP_ROOFS);
@@ -119,6 +128,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(PLANKS_ATTIC_ROOFS);
@@ -129,6 +139,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(PLANKS_LOWER_ROOFS);
@@ -139,6 +150,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(PLANKS_ROOFS);
@@ -149,6 +161,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(PLANKS_STEEP_ROOFS);
@@ -159,6 +172,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(PLANKS_TOP_ROOFS);
@@ -169,6 +183,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(PLANKS_UPPER_LOWER_ROOFS);
@@ -179,6 +194,7 @@ public class MacawRoofsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
                 .defaultRecipe()
+                .setTab(tab)
                 .build();
 
         this.addEntry(PLANKS_UPPER_STEEP_ROOFS);

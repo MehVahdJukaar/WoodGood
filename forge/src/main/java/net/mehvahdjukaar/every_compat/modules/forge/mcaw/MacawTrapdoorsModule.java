@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwtrpdoors.kikoz.MacawsTrapdoors;
 import com.mcwtrpdoors.kikoz.init.BlockInit;
+import com.mcwtrpdoors.kikoz.init.TabInit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -40,6 +41,8 @@ public class MacawTrapdoorsModule extends SimpleModule {
     public MacawTrapdoorsModule(String modId) {
         super(modId, "mct");
 
+        var tab = TabInit.TRAPDOORITEMGROUP;
+
         BARK_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bark_trapdoor",
                         BlockInit.OAK_BARK_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()))
@@ -48,7 +51,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -63,7 +66,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/barn/oak_barn_trapdoor"))
@@ -79,7 +82,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/barred/oak_barred_trapdoor"))
@@ -95,7 +98,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/beach/oak_beach_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_beach_trapdoor_m"))
@@ -111,7 +114,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/classic/spruce_classic_trapdoor"))
@@ -127,7 +130,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/cottage/oak_cottage_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_cottage_trapdoor_m"))
@@ -143,7 +146,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/four_panel/oak_four_panel_trapdoor"))
@@ -159,7 +162,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
@@ -176,7 +179,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .addTexture(modRes("block/bamboo/oak_bamboo_trapdoor"))
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .setRenderType(() -> RenderType::cutout)
@@ -193,7 +196,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/mystic/oak_mystic_trapdoor"))
@@ -209,7 +212,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
@@ -226,7 +229,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -241,7 +244,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(this::swampTrapdoorPalette)
@@ -258,7 +261,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/tropical/oak_tropical_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_tropical_trapdoor_m"))
@@ -275,7 +278,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
-                .setTab(() -> MacawsTrapdoors.TrapDoorItemGroup)
+                .setTab(tab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();

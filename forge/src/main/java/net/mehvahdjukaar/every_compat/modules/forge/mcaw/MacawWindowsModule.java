@@ -36,6 +36,7 @@ public class MacawWindowsModule extends SimpleModule {
     public MacawWindowsModule(String modId) {
         super(modId, "mcw");
 
+        //var tab = MacawsWindows.WindowItemGroup;
         blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
                         BlockInit.OAK_BLINDS, () -> WoodTypeRegistry.OAK_TYPE, w -> new Blinds())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

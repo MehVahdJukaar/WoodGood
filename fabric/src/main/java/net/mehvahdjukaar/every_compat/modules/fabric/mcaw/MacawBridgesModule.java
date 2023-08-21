@@ -1,18 +1,17 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
+import net.kikoz.mcwbridges.MacawsBridges;
 import net.kikoz.mcwbridges.init.BlockInit;
 import net.kikoz.mcwbridges.objects.Iron_Stair;
 import net.kikoz.mcwbridges.objects.Log_Bridge;
 import net.kikoz.mcwbridges.objects.Rail_Bridge;
 import net.kikoz.mcwbridges.objects.Support_Pillar;
-import net.kikoz.mcwbridges.util.BridgesGroup;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -34,7 +33,7 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Support_Pillar(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_piers"), Registries.BLOCK)
-                .setTab(() -> BridgesGroup.BRIDGEGROUP)
+                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -46,7 +45,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_bridges"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> BridgesGroup.BRIDGEGROUP)
+                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -58,7 +57,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("log_bridges"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> BridgesGroup.BRIDGEGROUP)
+                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -71,7 +70,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rail_bridges"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> BridgesGroup.BRIDGEGROUP)
+                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -84,7 +83,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("log_stairs"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> BridgesGroup.BRIDGEGROUP)
+                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -96,7 +95,7 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_stairs"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> BridgesGroup.BRIDGEGROUP)
+                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
