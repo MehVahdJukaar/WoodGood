@@ -28,7 +28,7 @@ public class HearthAndHomeModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .addTexture(modRes("block/oak_sanded_wood"))
+                .addTexture(modRes("block/sanded_wood/oak"))
                 .defaultRecipe()
                 .build();
 
@@ -40,7 +40,7 @@ public class HearthAndHomeModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .addTexture(modRes("block/oak_parquet"))
+                .addTexture(modRes("block/parquet/oak"))
                 .defaultRecipe()
                 .build();
 
@@ -52,7 +52,7 @@ public class HearthAndHomeModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .addTexture(modRes("block/oak_trim"))
+                .addTexture(modRes("block/trim/oak"))
                 .defaultRecipe()
                 .build();
 
