@@ -127,7 +127,7 @@ public abstract class EveryCompat {
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("furnish", () -> FurnishModule::new);
         addModule("handcrafted", () -> HandcraftedModule::new);
-        addModule("hearth_and_home", () -> HearthAndHomeModule::new);
+        addModule( "hnh" , () -> HearthAndHomeModule::new);
         addModule("twigs", () -> TwigsModule::new);
 
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));

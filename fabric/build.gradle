@@ -50,13 +50,13 @@ dependencies {
 
     // Imports
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
-    modImplementation("curse.maven:architects-palette-fabric-487364:3845046")
+    modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
     modCompileOnly("curse.maven:dramatic-doors-380617:4415380")
     modImplementation("curse.maven:arrp-463113:3829389")
     modCompileOnly("curse.maven:camp-chair-531744:3835679")
     modImplementation("curse.maven:chipped-456956:4463478")
     modImplementation("curse.maven:cozy-625281:4171816")
-    modImplementation("curse.maven:create-fabric-624165:4597892")
+    modCompileOnly("curse.maven:create-fabric-624165:4597892")
     modImplementation("curse.maven:decorative-blocks-362528:3941637")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4062547")
     modImplementation("curse.maven:farmers-delight-fabric-482834:4111426")
@@ -78,6 +78,7 @@ dependencies {
     modImplementation("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modImplementation("curse.maven:twigs-496913:4531594")
+    modRuntimeOnly("curse.maven:hearth-and-home-849364:4488851")
 
 
 

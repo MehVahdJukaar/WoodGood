@@ -173,7 +173,7 @@ dependencies {
     modImplementation("curse.maven:woodster-869951:4575175")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
-    modCompileOnly("curse.maven:xercamod-341575:3947222")
+    modImplementation("curse.maven:xercamod-341575:3947222")
     modImplementation("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
 
     modImplementation("curse.maven:builders-delight-forge-563734:4362665")

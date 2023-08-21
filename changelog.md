@@ -1,1 +1,1 @@
-fixed some recipes
+fixed hearth and home module

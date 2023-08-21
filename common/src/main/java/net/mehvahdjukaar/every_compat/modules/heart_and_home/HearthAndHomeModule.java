@@ -22,7 +22,7 @@ public class HearthAndHomeModule extends SimpleModule {
         super(modId, "hnh");
 
 
-        sandedWood = SimpleEntrySet.builder(WoodType.class, "sandedWood",
+        sandedWood = SimpleEntrySet.builder(WoodType.class, "sanded_wood",
                         () -> getModBlock("oak_sanded_wood"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)

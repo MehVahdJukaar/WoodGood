@@ -30,7 +30,7 @@ dependencies {
    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
    modCompileOnly("curse.maven:twigs-496913:4533061")
 
-    modImplementation("curse.maven:chipped-456956:4463479")
+    modCompileOnly("curse.maven:chipped-456956:4463479")
 
 
 }
