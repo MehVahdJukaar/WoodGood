@@ -19,6 +19,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.mehvahdjukaar.moonlight.core.recipe.ShapedRecipeTemplate;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -357,7 +358,10 @@ public class ResourcesUtils {
                         } else {
                             newR = template.createSimilar(fromType, w, w.mainChild().asItem());
                         }
-                        if (newR == null) return;
+                        if (newR == null) {
+                            EveryCompat.LOGGER.error("Failed to generate recipe for {}: recipe template returned null", i);
+                            return;
+                        }
                         //not even needed
                         newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
                         pack.addRecipe(newR);

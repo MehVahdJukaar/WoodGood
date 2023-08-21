@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.forge.builders_delight;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import com.tynoxs.buildersdelight.content.block.custom.BlockChair;
 import com.tynoxs.buildersdelight.content.block.custom.BlockSmallTable;
 import com.tynoxs.buildersdelight.content.block.custom.BlockStool;
@@ -14,8 +13,6 @@ import com.tynoxs.buildersdelight.content.init.BdDecoration;
 import com.tynoxs.buildersdelight.content.init.BdItems;
 import com.tynoxs.buildersdelight.content.init.BdTabs;
 import com.tynoxs.buildersdelight.content.item.BdFurnitureKit;
-import com.tynoxs.buildersdelight.content.item.BdItem;
-
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.EntrySet;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
@@ -30,7 +27,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HSVColor;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
@@ -84,10 +80,10 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: ITEM
         FURNITURE_KIT = ItemOnlyEntrySet.builder(WoodType.class, "furniture_kit",
                         BdItems.OAK_FURNITURE_KIT, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new customBdFurnitureKit(new Item.Properties().tab(tabMater).stacksTo(64),"furniture_kit")
+                        w -> new customBdFurnitureKit(new Item.Properties().tab(tabMater).stacksTo(64), "furniture_kit")
                 )
                 .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"))
-                .addRecipe(modRes("oak_furniture_kit"))
+               // .addRecipe(modRes("oak_furniture_kit"))
                 .createPaletteFromOak(BuildersDelightModule::extrapolateWoodItemPalette)
                 .build();
         this.addEntry(FURNITURE_KIT);
@@ -918,15 +914,47 @@ public class BuildersDelightModule extends SimpleModule {
         var pack = handler.getPack();
         for (var w : WoodTypeRegistry.getTypes()) {
             if (!w.isVanilla()) {
-                addChiselRecipe(pack, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7 );
-                addChiselRecipe(pack, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7 );
-                addChiselRecipe(pack, w, "slab", SLAB_1, SLAB_2, SLAB_3, SLAB_4, SLAB_5, SLAB_6, SLAB_7 );
+                addChiselRecipe(pack, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
+                addChiselRecipe(pack, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7);
+                addChiselRecipe(pack, w, "slab", SLAB_1, SLAB_2, SLAB_3, SLAB_4, SLAB_5, SLAB_6, SLAB_7);
                 addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
                 addChiselRecipe(pack, w, "glass", GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8);
                 addChiselRecipe(pack, w, "glass_pane", GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8);
             }
         }
+        String recipe = """
+                    {
+                      "group": "buildersdelight",
+                      "type": "minecraft:crafting_shaped",
+                      "pattern": [
+                        " 0 ",
+                    \t"010",
+                    \t" 0 "
+                      ],
+                      "key": {
+                        "0": {
+                          "item": "minecraft:string"
+                        },
+                    \t"1": {
+                          "item": "[planks]"
+                        }
+                      },
+                      "result": {
+                        "item": "[result]",
+                        "count": 2
+                      }
+                    }""";
+        for (var v : this.FURNITURE_KIT.items.entrySet()) {
+
+            WoodType wood = v.getKey();
+            recipe = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
+                    .replace("[planks]", Utils.getID(wood.planks).toString());
+
+            ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "furniture_kit");
+            pack.addBytes(res, recipe.getBytes(), ResType.RECIPES);
+        }
     }
+
 
     private static void addChiselRecipe(DynamicDataPack pack, WoodType w, String name, EntrySet<?, ?, ?>... entries) {
         JsonArray arr = new JsonArray();
@@ -937,7 +965,7 @@ public class BuildersDelightModule extends SimpleModule {
             }
         }
         var vanilla = w.getChild(name); // Add Normal blocks to JsonArray
-        if(vanilla != null)  arr.add(Utils.getID(vanilla).toString());
+        if (vanilla != null) arr.add(Utils.getID(vanilla).toString());
 
         if (!arr.isEmpty()) {
             JsonObject jo = new JsonObject();

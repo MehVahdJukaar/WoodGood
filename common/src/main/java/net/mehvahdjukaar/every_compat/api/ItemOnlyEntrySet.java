@@ -118,6 +118,8 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
                     registry.register(EveryCompat.res(fullName), item);
                     w.addChild(getChildKey(module),(Object) item);
+
+                    var v = w.getChild(getChildKey(module));
                 }
             }
         }
@@ -152,6 +154,11 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     @Override
     public void registerEntityRenderers(CompatModule simpleModule, ClientPlatformHelper.BlockEntityRendererEvent event) {
 
+    }
+
+    @Override
+    public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
+        super.generateRecipes(module, pack, manager);
     }
 
     //ok...
