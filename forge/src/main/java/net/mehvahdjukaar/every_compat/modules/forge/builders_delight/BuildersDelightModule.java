@@ -919,20 +919,10 @@ public class BuildersDelightModule extends SimpleModule {
         for (var w : WoodTypeRegistry.getTypes()) {
             if (!w.isVanilla()) {
                 addChiselRecipe(pack, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7 );
-            }
-            if (!w.isVanilla()) {
                 addChiselRecipe(pack, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7 );
-            }
-            if (!w.isVanilla()) {
                 addChiselRecipe(pack, w, "slab", SLAB_1, SLAB_2, SLAB_3, SLAB_4, SLAB_5, SLAB_6, SLAB_7 );
-            }
-            if (!w.isVanilla()) {
                 addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
-            }
-            if (!w.isVanilla()) {
                 addChiselRecipe(pack, w, "glass", GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8);
-            }
-            if (!w.isVanilla()) {
                 addChiselRecipe(pack, w, "glass_pane", GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8);
             }
         }
@@ -947,12 +937,8 @@ public class BuildersDelightModule extends SimpleModule {
             }
         }
         var vanilla = w.getChild(name); // Add Normal blocks to JsonArray
-        switch(name) {
-            case "planks" -> arr.add(Utils.getID(vanilla).toString());
-            case "stairs" -> arr.add(Utils.getID(vanilla).toString());
-            case "slab" -> arr.add(Utils.getID(vanilla).toString());
-            default -> {}
-        };
+        if(vanilla != null)  arr.add(Utils.getID(vanilla).toString());
+
         if (!arr.isEmpty()) {
             JsonObject jo = new JsonObject();
             ResourceLocation res = EveryCompat.res("chisel/" + w.getVariantId(name) + ".json");
