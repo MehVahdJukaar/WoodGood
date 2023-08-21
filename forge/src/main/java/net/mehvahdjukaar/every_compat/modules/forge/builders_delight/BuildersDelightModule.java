@@ -950,7 +950,7 @@ public class BuildersDelightModule extends SimpleModule {
             String r = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
                     .replace("[planks]", Utils.getID(wood.planks).toString());
 
-            ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "furniture_kit");
+            ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "_furniture_kit");
             pack.addBytes(res, r.getBytes(), ResType.RECIPES);
         }
     }
