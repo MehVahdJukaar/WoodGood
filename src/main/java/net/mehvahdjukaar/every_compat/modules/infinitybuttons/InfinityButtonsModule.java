@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.infinitybuttons;
 
 import net.larsmans.infinitybuttons.block.InfinityButtonsBlocks;
-import net.larsmans.infinitybuttons.block.custom.largebutton.WoodenLargeButton;
+import net.larsmans.infinitybuttons.block.custom.button.WoodenButton;
 import net.larsmans.infinitybuttons.block.custom.secretbutton.PlankSecretButton;
 import net.larsmans.infinitybuttons.item.InfinityButtonsItemGroup;
 import net.mehvahdjukaar.every_compat.WoodGood;
@@ -24,7 +24,7 @@ public class InfinityButtonsModule extends SimpleModule {
 
         LARGE_BUTTON = SimpleEntrySet.builder(WoodType.class, "large_button",
                 InfinityButtonsBlocks.OAK_LARGE_BUTTON,() -> WoodType.OAK_WOOD_TYPE,
-                w -> new WoodenLargeButton(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.5f).noCollission().sound(SoundType.WOOD)))
+                w -> new WoodenButton(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.5f).noCollission().sound(SoundType.WOOD), true))
                 .addTag(modRes("wooden_large_buttons"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_large_buttons"), Registry.ITEM_REGISTRY)
                 .setTab(() -> InfinityButtonsItemGroup.INFINITYBUTTONS)
@@ -35,7 +35,7 @@ public class InfinityButtonsModule extends SimpleModule {
 
         PLANK_SECRET_BUTTON = SimpleEntrySet.builder(WoodType.class, "plank_secret_button",
                 InfinityButtonsBlocks.OAK_PLANK_SECRET_BUTTON,() -> WoodType.OAK_WOOD_TYPE,
-                w -> new PlankSecretButton(WoodGood.copySafe(w.planks).strength(2.0f, 3.0f).noOcclusion().sound(SoundType.WOOD)))
+                w -> new PlankSecretButton(WoodGood.copySafe(w.planks).strength(2.0f, 3.0f).noOcclusion().sound(SoundType.WOOD), w.planks))
                 .addTag(modRes("wooden_secret_buttons"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wooden_secret_buttons"), Registry.ITEM_REGISTRY)
                 .setTab(() -> InfinityButtonsItemGroup.INFINITYBUTTONS)

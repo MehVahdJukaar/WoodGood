@@ -157,7 +157,7 @@ dependencies {
     implementation fg.deobf("curse.maven:curios-309927:4590652")
     compileOnly fg.deobf("curse.maven:decorativeblocks-362528:3965454")
     implementation fg.deobf("curse.maven:farmersdelight-398521:4636009")
-    implementation fg.deobf("curse.maven:infinity-buttons-661902:4075885")
+    implementation fg.deobf("curse.maven:infinity-buttons-661902:4716908")
     implementation fg.deobf("curse.maven:jei-238222:4593548")
     compileOnly fg.deobf("curse.maven:malum-484064:4631612")
     compileOnly fg.deobf("curse.maven:marg-324494:3723497")
