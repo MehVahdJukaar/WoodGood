@@ -144,7 +144,7 @@ dependencies {
     modCompileOnly("curse.maven:furnish-547069:4449620")
     modImplementation("curse.maven:friends-and-foes-forge-602059:4429819")
     modImplementation("curse.maven:handcrafted-538214:4437459")
-    modCompileOnly("curse.maven:infinity-buttons-661902:4276396")
+    modCompileOnly("curse.maven:infinity-buttons-661902:4716908")
     modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
 
     modImplementation("curse.maven:macaws-bridges-351725:4599799")
