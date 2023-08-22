@@ -203,9 +203,9 @@
   "block_type.furnish.table": "%s Table",
   "block_type.furnish.wardrobe": "%s Wardrobe",
 
-  "block_type.hearth_and_home.parquet": "%s Parquet",
-  "block_type.hearth_and_home.sanded_wood": "Sanded %s Wood",
-  "block_type.hearth_and_home.trim": "%s Trim",
+  "block_type.hnh.parquet": "%s Parquet",
+  "block_type.hnh.sanded_wood": "Sanded %s Wood",
+  "block_type.hnh.trim": "%s Trim",
 
   "block_type.mosaic_carpentry.mosaic": "%s Mosaic",
   "block_type.mosaic_carpentry.mosaic_stairs": "%s Mosaic Stairs",
