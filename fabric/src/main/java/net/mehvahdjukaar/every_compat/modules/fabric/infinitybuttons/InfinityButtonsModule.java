@@ -38,7 +38,9 @@ public class InfinityButtonsModule extends SimpleModule {
 
         plankSecretButtons = SimpleEntrySet.builder(WoodType.class, "plank_secret_button",
                         () -> InfinityButtonsBlocks.OAK_PLANK_SECRET_BUTTON, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new PlankSecretButton(Utils.copyPropertySafe(w.planks).strength(2.0f, 3.0f).noOcclusion().sound(SoundType.WOOD), w.planks))
+                        w -> new PlankSecretButton(Utils.copyPropertySafe(w.planks)
+                                .strength(2.0f, 3.0f)
+                                .noOcclusion().sound(SoundType.WOOD), w.planks))
                 .addTag(modRes("wooden_secret_buttons"), Registries.BLOCK)
                 .addTag(modRes("wooden_secret_buttons"), Registries.ITEM)
                 .setTabKey(() -> InfinityButtonsItemGroups.INFINITYBUTTONS)
