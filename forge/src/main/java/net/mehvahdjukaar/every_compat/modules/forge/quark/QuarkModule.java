@@ -181,6 +181,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new HollowLogBlock(name, w.log, m, w.canBurn());
                         })
+                .requiresChildren("stripped_log")
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hollow_logs"), Registry.BLOCK_REGISTRY)

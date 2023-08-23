@@ -240,6 +240,7 @@ public class BuildersAdditionModule extends SimpleModule {
                         w -> new BedsideTable(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("bedside_table/bedside_table_oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .requiresChildren("stripped_log")
                 .setTab(() -> tab)
                 .build();
 
@@ -250,6 +251,7 @@ public class BuildersAdditionModule extends SimpleModule {
                         w -> new CompatArcade(shortenedId() + "/" + w.getAppendableId(), w.log))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .requiresChildren("stripped_log")
                 .addRecipe(modRes("arcade/arcade_oak"))
                 .setTab(() -> tab)
                 .build();
