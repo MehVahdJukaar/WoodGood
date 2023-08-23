@@ -25,7 +25,7 @@ public class InfinityButtonsModule extends SimpleModule {
 
         largeButtons = SimpleEntrySet.builder(WoodType.class, "large_button",
                         InfinityButtonsBlocks.OAK_LARGE_BUTTON, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WoodenLargeButton(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON)
+                        w -> new WoodenLargeButton(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)
                                 .strength(0.5f).noCollission().sound(SoundType.WOOD)))
                 .addTag(modRes("wooden_large_buttons"), Registries.BLOCK)
                 .addTag(modRes("wooden_large_buttons"), Registries.ITEM)
