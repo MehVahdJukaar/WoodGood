@@ -25,13 +25,8 @@ public class WoodsterModule extends SimpleModule {
         super(modId, "wdst");
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        WoodsterBlocks.OAK_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
+                        WoodsterBlocks.DARK_OAK_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChiseledBookshelfBlock(Utils.copyPropertySafe(w.planks)))
-                .addTextureM(modRes("block/oak_chiseled_bookshelf_1"),modRes( "block/everycomp_chiseled_bookshelf_1"))
-                .addTextureM(modRes("block/oak_chiseled_bookshelf_2"),modRes( "block/everycomp_chiseled_bookshelf_2"))
-                .addTextureM(modRes("block/oak_chiseled_bookshelf_3"),modRes( "block/everycomp_chiseled_bookshelf_3"))
-                .addTextureM(modRes("block/oak_chiseled_bookshelf_4"),modRes( "block/everycomp_chiseled_bookshelf_4"))
-                .addTextureM(modRes("block/oak_chiseled_bookshelf_5"),modRes( "block/everycomp_chiseled_bookshelf_5"))
                 .addTextureM(modRes("block/oak_chiseled_bookshelf_6"),modRes( "block/everycomp_chiseled_bookshelf_6"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_top"))
