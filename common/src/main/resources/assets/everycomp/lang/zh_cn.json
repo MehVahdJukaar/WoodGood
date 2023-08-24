@@ -203,9 +203,9 @@
   "block_type.furnish.table": "%s桌",
   "block_type.furnish.wardrobe": "%s立柜",
 
-  "block_type.hearth_and_home.parquet": "%s镶木板",
-  "block_type.hearth_and_home.sanded_wood": "磨砂%s",
-  "block_type.hearth_and_home.trim": "%s框木板",
+  "block_type.hnh.parquet": "%s镶木板",
+  "block_type.hnh.sanded_wood": "磨砂%s",
+  "block_type.hnh.trim": "%s框木板",
 
   "block_type.mosaic_carpentry.mosaic": "%s马赛克",
   "block_type.mosaic_carpentry.mosaic_stairs": "%s马赛克楼梯",
