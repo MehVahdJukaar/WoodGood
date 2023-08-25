@@ -655,6 +655,10 @@
   "block_type.buildersdelight.glass_pane_7": "%s Glass Pane",
   "tooltip.everycomp.buildersdelight.glass_pane_7": "Diamond",
   "block_type.buildersdelight.glass_pane_8": "%s Glass Pane",
-  "tooltip.everycomp.buildersdelight.glass_pane_8": "Window"
-}
+  "tooltip.everycomp.buildersdelight.glass_pane_8": "Window",
 
+  "item_type.boatload.boat": "%s Boat",
+  "item_type.boatload.chest_boat": "%s Boat with Chest",
+  "item_type.boatload.furnace_boat": "%s Boat with Furnace",
+  "item_type.boatload.large_boat": "Large %s Boat"
+}

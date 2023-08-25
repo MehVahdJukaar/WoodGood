@@ -177,7 +177,7 @@ dependencies {
     modImplementation("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
 
     modImplementation("curse.maven:builders-delight-forge-563734:4362665")
-
+    modImplementation("curse.maven:boatload-337396:4426144")
 
     // implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
     // implementation fg.deobf("curse.maven:curios-309927:3670447")
