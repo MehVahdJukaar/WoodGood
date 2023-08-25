@@ -166,7 +166,7 @@ dependencies {
     modImplementation("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
-    modCompileOnly("curse.maven:productivebees-377897:4418663")
+    modImplementation("curse.maven:productivebees-377897:4709520")
     modCompileOnly("curse.maven:quark-243121:4587248")
     modCompileOnly("curse.maven:rechiseled-558998:4364936")
     modImplementation("curse.maven:storage-drawers-223852:4668552")

@@ -4,7 +4,6 @@ import cy.jdkdigital.productivebees.common.block.AdvancedBeehive;
 import cy.jdkdigital.productivebees.common.block.ExpansionBox;
 import cy.jdkdigital.productivebees.init.ModBlockEntityTypes;
 import cy.jdkdigital.productivebees.init.ModBlocks;
-import cy.jdkdigital.productivebees.init.ModItemGroups;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -18,7 +17,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
-
+/*
 public class ProductiveBeesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> advancedBeehives;
@@ -29,6 +28,7 @@ public class ProductiveBeesModule extends SimpleModule {
         CreativeModeTab tab = ModItemGroups.PRODUCTIVE_BEES;
 
 
+        //TODO: all these are invalid now
         advancedBeehives = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
                         ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new AdvancedBeehive(Utils.copyPropertySafe(w.planks)))
@@ -101,3 +101,4 @@ public class ProductiveBeesModule extends SimpleModule {
 
     }
 }
+*/
