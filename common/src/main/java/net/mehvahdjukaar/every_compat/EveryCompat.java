@@ -119,6 +119,12 @@ public abstract class EveryCompat {
         addOtherCompatMod("abnormals_delight", "environmental", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
 
+        addOtherCompatMod("atmospheric", "atmospheric", List.of("boatload"));
+        addOtherCompatMod("autumnity", "autumnity", List.of("boatload"));
+        addOtherCompatMod("endergetic", "endergetic", List.of("boatload"));
+        addOtherCompatMod("environmental", "environmental", List.of("boatload"));
+        addOtherCompatMod("upgradeaquatic", "upgradeaquatic", List.of("boatload"));
+
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("barkcarpets", () -> BarkCarpetsModule::new);
         addModule("campchair", () -> CampChairModule::new);
