@@ -8,8 +8,6 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
 import net.mehvahdjukaar.every_compat.misc.EntriesRemapper;
-
-    // MODULE
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
@@ -17,8 +15,8 @@ import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
-import net.mehvahdjukaar.every_compat.modules.graveyard.GraveyardModule;
 import net.mehvahdjukaar.every_compat.modules.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
@@ -27,10 +25,17 @@ import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
-import net.mehvahdjukaar.every_compat.modules.workshop.CarryOnBlacklist;
-import net.mehvahdjukaar.every_compat.modules.workshop.WorkshopForHandsomeAdventurerModule;
+import net.mehvahdjukaar.every_compat.modules.the_new_shutters.ShuttersModule;
+import net.mehvahdjukaar.every_compat.modules.mosaic_carpentry.MosaicCarpentryModule;
+import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsModule;
+import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsMacawModule;
+import net.mehvahdjukaar.every_compat.modules.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
-
+//import net.mehvahdjukaar.every_compat.modules.builders_addition.BuildersAdditionModule;
+//import net.mehvahdjukaar.every_compat.modules.premium_wood.PremiumWoodModule;
+//import net.mehvahdjukaar.every_compat.modules.iron_age_furniture.IronAgeFurnitureModule;
+//import net.mehvahdjukaar.every_compat.modules.just_a_raft.JustARaftModule;
+//import net.mehvahdjukaar.every_compat.modules.xerca.XercaModule;
 
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
@@ -106,7 +111,6 @@ public class WoodGood {
         //TODO: add folwering azalea special textures, fix vertical planks not generating & add leaves to it. same for quark
         //also fix that one crash that idk what was about
 
-            // MAIN
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
@@ -134,16 +138,31 @@ public class WoodGood {
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("quark", () -> QuarkModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
-        addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
 
-            //TODO: CURRENTLY TESTING
-        addModule("buildersdelight", () -> BuildersDelightModule::new);
+        addModule("shutter", () -> ShuttersModule::new);
+        addModule("barkcarpets", () -> BarkCarpetsModule::new);
+        addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+        addModule("dramaticdoors", () -> DramaticDoorsModule::new);
+        if (ModList.get().isLoaded("mcwdoors")) {
+            addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+        }
 
-            //TODO: ISSUES
-        //addModule("storagedrawers", () -> StorageDrawersModule::new); required fixing for rendering properly
-        //addModule("graveyard", () -> GraveyardModule::new);
-        //addModule("benched", () -> BenchedModule::new); Issue with model format, OBJ -> improperly rendering
-        //addModule("projectbrazier", () -> ProjectBrazierModule::new);
+        // CURRENTLY TESTING \\
+//        addModule("builders_addition", () -> BuildersAdditionModule::new);
+//        addModule("premium_wood", () -> PremiumWoodModule::new);
+//        addModule("xerca", () -> XercaModule::new);
+
+        // NOT FINISHED \\
+//        addModule("productivebees", () -> ProductiveBeesModule::new);
+//        addModule("buildersdelight", () -> BuildersDelightModule::new);
+
+        // CURRENTLY DISABLED \\
+//        addModule("justaraft", () -> JustARaftModule::new);
+//        addModule("market_crates", () -> MarketCratesModule::new);
+//        addModule("storagedrawers", () -> StorageDrawersModule::new); required fixing for rendering properly
+//        addModule("graveyard", () -> GraveyardModule::new);
+//        addModule("benched", () -> BenchedModule::new); Issue with model format, OBJ -> improperly rendering
+//        addModule("projectbrazier", () -> ProjectBrazierModule::new);
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
 
@@ -153,8 +172,6 @@ public class WoodGood {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         bus.register(this);
-        bus.addListener(CarryOnBlacklist::sendIMC);
-
 
         MinecraftForge.EVENT_BUS.addListener(CustomRecipeLoader::onEarlyPackLoad);
         MinecraftForge.EVENT_BUS.register(EntriesRemapper.class);
