@@ -29,6 +29,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -54,6 +55,10 @@ public abstract class CompatModule {
 
     public ResourceLocation modRes(String string) {
         return new ResourceLocation(modId, string);
+    }
+
+    public List<String> getAlreadySupportedMods() {
+        return List.of();
     }
 
     @Deprecated(forRemoval = true)
@@ -95,6 +100,8 @@ public abstract class CompatModule {
         name = name.substring(name.lastIndexOf("/")+1); //gets the base name
 
         String woodFrom = woodType.getNamespace();
+
+        if (this.getAlreadySupportedMods().contains(woodFrom)) return true;
 
         // check if TerraFirmaCraft (tfc) mod exist, then won't discards wood types
         if (woodFrom.equals("tfc")) return false;
