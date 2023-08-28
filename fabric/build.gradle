@@ -63,7 +63,7 @@ dependencies {
     modImplementation("curse.maven:friends-and-foes-551364:4712045")
 
     modCompileOnly("curse.maven:handcrafted-538214:4215478")
-    modCompileOnly("curse.maven:infinity-buttons-661902:4259446")
+    modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4599790")
     modCompileOnly("curse.maven:macaws-doors-378646:4649888")

@@ -18,7 +18,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpe
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
-import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
@@ -69,7 +68,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
         addModule("premium_wood", () -> PremiumWoodModule::new);
-        addModule("productivebees", () -> ProductiveBeesModule::new);
+        //addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("quark", () -> QuarkModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
