@@ -17,7 +17,7 @@ displayName="Every Compat" #mandatory
 
 updateJSONURL="http://myurl.me/" #optional
 
-displayURL="https://www.curseforge.com/minecraft/mc-mods/every_compat" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/every-compat" #optional
 
 logoFile="logo.png" #optional
 
