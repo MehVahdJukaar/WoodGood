@@ -251,7 +251,7 @@ public class MacawFurnitureModule extends SimpleModule {
         //TYPE: COUNTER
         counter = SimpleEntrySet.builder(WoodType.class, "counter",
                         BlockInit.OAK_COUNTER, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new Counter(Blocks.OAK_PLANKS.defaultBlockState(), WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new Counter(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("counter"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
@@ -296,7 +296,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedCounter = SimpleEntrySet.builder(WoodType.class, "counter", "stripped",
                         BlockInit.STRIPPED_OAK_COUNTER, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new Counter(Blocks.OAK_PLANKS.defaultBlockState(), WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new Counter(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("counter"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)

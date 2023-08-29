@@ -186,7 +186,7 @@ dependencies {
     implementation fg.deobf("curse.maven:macaws-paths-and-pavings-629153:4585113")
     implementation fg.deobf("curse.maven:macaws-trapdoors-400933:4608577")
     implementation fg.deobf("curse.maven:macaws-windows-363569:4203418")
-    compileOnly fg.deobf("curse.maven:macaws-furniture-359540:4419007")
+    implementation fg.deobf("curse.maven:macaws-furniture-359540:4726291")
     compileOnly fg.deobf("curse.maven:macaws-roofs-352039:4590024")
 
         //TODO: CURRENTLY TESTING \\

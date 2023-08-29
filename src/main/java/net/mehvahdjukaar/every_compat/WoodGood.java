@@ -31,8 +31,8 @@ import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
-//import net.mehvahdjukaar.every_compat.modules.builders_addition.BuildersAdditionModule;
-//import net.mehvahdjukaar.every_compat.modules.premium_wood.PremiumWoodModule;
+import net.mehvahdjukaar.every_compat.modules.builders_addition.BuildersAdditionModule;
+import net.mehvahdjukaar.every_compat.modules.premium_wood.PremiumWoodModule;
 //import net.mehvahdjukaar.every_compat.modules.iron_age_furniture.IronAgeFurnitureModule;
 //import net.mehvahdjukaar.every_compat.modules.just_a_raft.JustARaftModule;
 //import net.mehvahdjukaar.every_compat.modules.xerca.XercaModule;
@@ -146,13 +146,13 @@ public class WoodGood {
         if (ModList.get().isLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
+        addModule("premium_wood", () -> PremiumWoodModule::new);
 
         // CURRENTLY TESTING \\
-//        addModule("builders_addition", () -> BuildersAdditionModule::new);
-//        addModule("premium_wood", () -> PremiumWoodModule::new);
 //        addModule("xerca", () -> XercaModule::new);
 
         // NOT FINISHED \\
+//        addModule("buildersaddition", () -> BuildersAdditionModule::new);
 //        addModule("productivebees", () -> ProductiveBeesModule::new);
 //        addModule("buildersdelight", () -> BuildersDelightModule::new);
 
