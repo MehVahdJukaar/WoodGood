@@ -1917,7 +1917,7 @@ public class ChippedModule extends SimpleModule {
             boolean hasSomething = false;
             var id = w.id;
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
-                    id.getNamespace() + "_" + id.getPath() + "_" + id + "s"));
+                    id.getNamespace() + "_" + id.getPath() + "_" + identifier + "s"));
             for (var e : this.getEntries()) {
                 String name = e.getName();
                 if (name.contains(identifier)) {
