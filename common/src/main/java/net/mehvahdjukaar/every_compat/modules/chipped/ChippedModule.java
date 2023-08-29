@@ -1912,7 +1912,7 @@ public class ChippedModule extends SimpleModule {
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
                     id.getNamespace() + "_" + id.getPath() + "_planks"));
             for (var e : this.getEntries()) {
-                if (e.getName().contains("door")) continue;
+                if (e.getName().contains("door") || e.getName().contains("glass")) continue;
                 Item b = e.items.get(w);
                 if (b != null) {
                     hasSomething = true;
