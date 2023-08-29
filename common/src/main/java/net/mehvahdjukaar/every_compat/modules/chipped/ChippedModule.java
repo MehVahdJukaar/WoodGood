@@ -10,6 +10,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -1903,38 +1905,41 @@ public class ChippedModule extends SimpleModule {
                 handler.dynamicPack.addLootTable(d, BlockLoot.createDoorTable(d));
             }
         }
-        SimpleTagBuilder bigTag = SimpleTagBuilder.of(EveryCompat.res(
-                "chipped_wooden_stuff"));
+        addChippedRecipe(handler.getPack(), "plank","carpenters_table", "carpenters_table");
+        addChippedRecipe(handler.getPack(), "crate", "idk", "idk");
+        addChippedRecipe(handler.getPack(), "pane", "idk2", "idk2");
+    }
+
+    private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation,
+                                  String recipeName) {
         JsonArray ja = new JsonArray();
         for (var w : WoodTypeRegistry.getTypes()) {
             boolean hasSomething = false;
             var id = w.id;
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
-                    id.getNamespace() + "_" + id.getPath() + "_planks"));
+                    id.getNamespace() + "_" + id.getPath() + "_" + id + "s"));
             for (var e : this.getEntries()) {
                 String name = e.getName();
-                if (name.contains("door") || name.contains("glass")
-                        || name.contains("crate") || name.contains("torch") ||
-                        name.contains("barrel")) continue;
-                Item b = e.items.get(w);
-                if (b != null) {
-                    hasSomething = true;
-                    tagBuilder.addEntry(b);
+                if (name.contains(identifier)) {
+                    Item b = e.items.get(w);
+                    if (b != null) {
+                        hasSomething = true;
+                        tagBuilder.addEntry(b);
+                    }
                 }
             }
             // adds planks
             tagBuilder.addEntry(w.planks);
 
             if (hasSomething) {
-                handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
+                pack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
                 ja.add(tagBuilder.getId().toString());
             }
         }
-        ja.add(bigTag.getId().toString());
         JsonObject jo = new JsonObject();
-        jo.addProperty("type", "chipped:carpenters_table");
+        jo.addProperty("type", "chipped:"+workStation);
         jo.add("tags", ja);
-        handler.dynamicPack.addJson(EveryCompat.res("carpenters_table"), jo, ResType.RECIPES);
+        pack.addJson(EveryCompat.res(recipeName), jo, ResType.RECIPES);
     }
 
 }
