@@ -1917,12 +1917,17 @@ public class ChippedModule extends SimpleModule {
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
                     id.getNamespace() + "_" + id.getPath() + "_planks"));
             for (var e : this.getEntries()) {
+                String name = e.getName();
+                if(name.contains("glass") || name.contains("door") ||
+                        name.contains("crate") || name.contains("torch") ||
+                        name.contains("barrel"))
                 Item b = ((SimpleEntrySet<?,?>) e).items.get(w);
                 if (b != null) {
                     hasSomething = true;
                     tagBuilder.addEntry(b);
                 }
             }
+            tagBuilder.addEntry(w.planks);
             if (hasSomething) {
                 handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
                 ja.add(tagBuilder.getId().toString());
