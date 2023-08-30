@@ -340,9 +340,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         //only works for oak type. Will fail if its used on leaves
         public BL createPaletteFromOak(Consumer<Palette> paletteTransform) {
+            return createPaletteFromChild(paletteTransform, "planks");
+        }
+
+        //only works for oak type. Will fail if its used on leaves
+        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
             return this.setPalette((w, m) -> {
                 try (TextureImage plankTexture = TextureImage.open(m,
-                        RPUtils.findFirstBlockTextureLocation(m, ((WoodType) w).planks))) {
+                        RPUtils.findFirstBlockTextureLocation(m, w.getBlockOfThis(childKey)))) {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                     targetPalette.forEach(paletteTransform);
