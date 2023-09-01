@@ -316,8 +316,8 @@
   "block_type.barkcarpets.bark_carpet": "%s树皮地毯",
 
   "block_type.mosaic_carpentry.mosaic": "%s马赛克",
-  "block_type.mosaic_carpentry.mosaic_stairs": "%s马赛克楼梯",
   "block_type.mosaic_carpentry.mosaic_slab": "%s马赛克台阶",
+  "block_type.mosaic_carpentry.mosaic_stairs": "%s马赛克楼梯",
 
   "block_type.dramaticdoors.short_door": "矮%s门",
   "block_type.dramaticdoors.tall_door": "高%s门",
