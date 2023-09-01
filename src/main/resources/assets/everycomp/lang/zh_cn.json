@@ -311,6 +311,39 @@
   "block_type.workshop_for_handsome_adventurer.potion_shelf": "药水架（%s）",
   "block_type.workshop_for_handsome_adventurer.workstation_placer": "工作站（%s）",
 
+  "block_type.shutter.shutter": "%s窗扇",
+
+  "block_type.barkcarpets.bark_carpet": "%s树皮地毯",
+
+  "block_type.mosaic_carpentry.mosaic": "%s马赛克",
+  "block_type.mosaic_carpentry.mosaic_stairs": "%s马赛克楼梯",
+  "block_type.mosaic_carpentry.mosaic_slab": "%s马赛克台阶",
+
+  "block_type.dramaticdoors.short_door": "矮%s门",
+  "block_type.dramaticdoors.tall_door": "高%s门",
+  "block_type.dramaticdoors.tall_macaw_bark_glass_door": "高%s树皮玻璃门",
+  "block_type.dramaticdoors.tall_macaw_barn_door": "高%s谷仓门",
+  "block_type.dramaticdoors.tall_macaw_barn_glass_door": "高%s玻璃谷仓门",
+  "block_type.dramaticdoors.tall_macaw_beach_door": "高%s海滨风格门",
+  "block_type.dramaticdoors.tall_macaw_classic_door": "高%s经典风格门",
+  "block_type.dramaticdoors.tall_macaw_cottage_door": "高%s农舍风格门",
+  "block_type.dramaticdoors.tall_macaw_four_panel_door": "高%s四联门",
+  "block_type.dramaticdoors.tall_macaw_glass_door": "高%s玻璃门",
+  "block_type.dramaticdoors.tall_macaw_japanese_door": "高%s障子门",
+  "block_type.dramaticdoors.tall_macaw_japanese2_door": "高%s全格障子门",
+  "block_type.dramaticdoors.tall_macaw_modern_door": "高%s现代风格门",
+  "block_type.dramaticdoors.tall_macaw_mystic_door": "高%s诡秘风格门",
+  "block_type.dramaticdoors.tall_macaw_nether_door": "高%s下界风格门",
+  "block_type.dramaticdoors.tall_macaw_paper_door": "高%s壁纸门",
+  "block_type.dramaticdoors.tall_macaw_stable_door": "高%s马厩门",
+  "block_type.dramaticdoors.tall_macaw_stable_head_door": "高%s有开口马厩门",
+  "block_type.dramaticdoors.tall_macaw_swamp_door": "高%s沼泽风格门",
+  "block_type.dramaticdoors.tall_macaw_tropical_door": "高%s热带风格门",
+
+  "block_type.premium_wood.bookshelf": "%s书架",
+  "block_type.premium_wood.crafting_table": "%s工作台",
+  "block_type.premium_wood.framed_glass": "%s框玻璃",
+
 
   "wood_type.aether.skyroot": "天根木",
   "leaves_type.aether.skyroot": "天根",
