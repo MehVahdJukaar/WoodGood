@@ -33,7 +33,7 @@ import java.util.function.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//contrary to popular belief this class is indeed not simple. Its usage however is
+//Contrary to popular belief, this class is indeed not simple. Its usage, however is
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> extends EntrySet<T, B, I> {
 
     protected final Class<T> type;
@@ -340,9 +340,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         //only works for oak type. Will fail if its used on leaves
         public BL createPaletteFromOak(Consumer<Palette> paletteTransform) {
+            return createPaletteFromChild(paletteTransform, "planks");
+        }
+
+        //only works for oak type. Will fail if its used on leaves
+        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
             return this.setPalette((w, m) -> {
                 try (TextureImage plankTexture = TextureImage.open(m,
-                        RPUtils.findFirstBlockTextureLocation(m, ((WoodType) w).planks))) {
+                        RPUtils.findFirstBlockTextureLocation(m, w.getBlockOfThis(childKey)))) {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                     targetPalette.forEach(paletteTransform);

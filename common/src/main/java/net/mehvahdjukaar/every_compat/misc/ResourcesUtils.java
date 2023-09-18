@@ -106,7 +106,6 @@ public class ResourcesUtils {
                 EveryCompat.LOGGER.error("Could not find item model for {}", oakBlock);
             }
         } else {
-            EveryCompat.LOGGER.warn("Found block with no item {}, this could be a bug", oakBlock);
         }
 
         //blockstate
