@@ -97,15 +97,16 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
 		addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+        addModule("xercamod", () -> XercaModule::new);
 
         addModule("buildersdelight", () -> BuildersDelightModule::new);
 
-        // addModule("graveyard", () -> GraveyardModule::new);
 
         // Disabled due to block entity complications
+//        addModule("handcrafted", () -> HandcraftedModule::new);
 
         // Disabled until custom block models work
-         addModule("xercamod", () -> XercaModule::new);
+            // addModule("graveyard", () -> GraveyardModule::new);
 
         if (PlatformHelper.getEnv().isClient()) {
             EveryCompatClient.commonInit();
