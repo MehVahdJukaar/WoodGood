@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 // TODO: Fix recipes & tags
 // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
@@ -154,7 +155,7 @@ public class ChippedModule extends SimpleModule {
 
     public ChippedModule(String modId) {
         super(modId, "ch");
-        var tab = ModItems.ITEM_GROUP;
+        Supplier<CreativeModeTab> tab = ()->getModTab("main");
 
         mosaicPlanks = SimpleEntrySet.builder(WoodType.class, "planks_mosaic",
                         () -> getModBlock("oak_planks_mosaic"), () -> WoodTypeRegistry.OAK_TYPE,

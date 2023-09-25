@@ -1,6 +1,8 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -38,7 +40,10 @@ import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.*;
 
 
@@ -123,14 +128,14 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
             if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, BuiltInRegistries.BLOCK)) continue;
 
-            if(condition.test(w)) {
+            if (condition.test(w)) {
                 B block = blockFactory.apply(w);
                 //for blocks that fail
                 if (block != null) {
                     this.blocks.put(w, block);
 
                     registry.register(EveryCompat.res(fullName), block);
-                    w.addChild(getChildKey(module),  block);
+                    w.addChild(getChildKey(module), block);
 
                     if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
                         SIMPLE_DROPS.add(block);
@@ -142,28 +147,28 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         //attempts adding all other children
 
         String childKey = getChildKey(module);
-        baseType.get().addChild(childKey,  base);
+        baseType.get().addChild(childKey, base);
 
         Set<String> alreadySupportedMods = new HashSet<>(module.getAlreadySupportedMods());
         alreadySupportedMods.add(module.modId);
-        var possibleNamespaces =  alreadySupportedMods.toArray(String[]::new);
-        for(var w : BlockSetAPI.getTypeRegistry(this.getTypeClass()).getValues()){
-            if(!items.containsKey(w)){
+        var possibleNamespaces = alreadySupportedMods.toArray(String[]::new);
+        for (var w : BlockSetAPI.getTypeRegistry(this.getTypeClass()).getValues()) {
+            if (!items.containsKey(w)) {
                 String path = getBlockName(w);
                 Block block = getOptionalBlock(path, w.getNamespace());
-                if(block == null) block = getOptionalBlock(path, possibleNamespaces);
-                if(block != null) w.addChild(childKey,  block);
+                if (block == null) block = getOptionalBlock(path, possibleNamespaces);
+                if (block != null) w.addChild(childKey, block);
             }
         }
     }
 
     @Nullable
-    private static Block getOptionalBlock(String path, String ...namespaces) {
+    private static Block getOptionalBlock(String path, String... namespaces) {
         ResourceLocation id;
         for (var n : namespaces) {
             id = new ResourceLocation(n, path);
             var i = BuiltInRegistries.BLOCK.getOptional(id);
-            if(i.isPresent()){
+            if (i.isPresent()) {
                 return i.get();
             }
         }
@@ -267,7 +272,16 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return new Builder<>(type, name, prefix, baseType, baseBlock, blockSupplier);
     }
 
-    public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T,B>, T,B,Item> {
+    @Environment(EnvType.CLIENT)
+    @SuppressWarnings({"rawtypes"})
+    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider aNew) {
+        var tile = getTileHolder();
+        if(tile != null){
+            tile.registerRenderer(event, aNew);
+        }
+    }
+
+    public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T, B>, T, B, Item> {
         protected final Supplier<@Nullable B> baseBlock;
         protected LootTableMode lootMode = LootTableMode.DROP_SELF;
         protected final Function<T, B> blockFactory;
@@ -346,14 +360,20 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     public interface ITileHolder<H extends BlockEntity> {
 
-        BlockEntityType<? extends H> get();
+        BlockEntityType<H> get();
+
+        @Environment(EnvType.CLIENT)
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        default void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider renderer) {
+            event.register(get(), renderer);
+        }
     }
 
     public record ExistingTileHolder<H extends BlockEntity>(
             Supplier<BlockEntityType<H>> supplier) implements ITileHolder<H> {
 
         @Override
-        public BlockEntityType<? extends H> get() {
+        public BlockEntityType<H> get() {
             return supplier.get();
         }
     }
@@ -362,14 +382,14 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         protected final BiFunction<BlockPos, BlockState, H> tileFactory;
         protected Supplier<BlockEntityRendererProvider<H>> renderer = null;
-        public BlockEntityType<? extends H> tile = null;
+        protected BlockEntityType<H> tile = null;
 
 
         public NewTileHolder(BiFunction<BlockPos, BlockState, H> tileFactory) {
             this.tileFactory = tileFactory;
         }
 
-        public BlockEntityType<? extends H> get() {
+        public BlockEntityType<H> get() {
             return tile;
         }
 

@@ -193,7 +193,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     }
                     respriters.put(textureId, r);
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to read block texture at: {}", p, e);
+                    EveryCompat.LOGGER.error("Failed to read block texture at: {}", p);
                 }
             }
 
