@@ -38,7 +38,7 @@ public class MacawWindowsModule extends SimpleModule {
         blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
                         BlockInit.OAK_BLINDS, () -> WoodTypeRegistry.OAK_TYPE, w -> new Blinds())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> MacawsWindows.Window2ItemGroup)
+                .setTab(() -> MacawsWindows.WindowItemGroup)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -49,7 +49,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_LOG_PARAPET, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Parapet(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> MacawsWindows.Window2ItemGroup)
+                .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .build();
 
@@ -59,7 +59,7 @@ public class MacawWindowsModule extends SimpleModule {
                         BlockInit.OAK_PLANK_PARAPET, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Parapet(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> MacawsWindows.Window2ItemGroup)
+                .setTab(() -> MacawsWindows.WindowItemGroup)
                 .defaultRecipe()
                 .build();
 
