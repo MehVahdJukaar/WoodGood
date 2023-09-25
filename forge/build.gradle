@@ -155,7 +155,7 @@ dependencies {
     modImplementation("curse.maven:macaws-paths-and-pavings-629153:4585116")
     modImplementation("curse.maven:macaws-roofs-352039:4590028")
     modImplementation("curse.maven:macaws-trapdoors-400933:4608580")
-    modCompileOnly("curse.maven:macaws-windows-363569:4203423")
+    modCompileOnly("curse.maven:macaws-windows-363569:4750673")
 
     modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
     modImplementation("curse.maven:mosaic-carpentry-690226:4068673")
