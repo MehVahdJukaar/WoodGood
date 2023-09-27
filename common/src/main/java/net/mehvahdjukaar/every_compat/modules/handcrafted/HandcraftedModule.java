@@ -1,50 +1,38 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 import earth.terrarium.handcrafted.client.block.chair.chair.ChairRenderer;
-import earth.terrarium.handcrafted.client.block.table.table.TableRenderer;
+import earth.terrarium.handcrafted.client.block.table.table.TableModel;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
-import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
-import earth.terrarium.handcrafted.common.block.chair.woodenbench.WoodenBenchBlock;
-import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlock;
-import earth.terrarium.handcrafted.common.block.chair.bench.BenchBlock;
-import earth.terrarium.handcrafted.common.block.chair.couch.CouchBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
-import earth.terrarium.handcrafted.common.block.table.nightstand.NightstandBlock;
-import earth.terrarium.handcrafted.common.block.table.desk.DeskBlock;
-import earth.terrarium.handcrafted.common.block.table.sidetable.SideTableBlock;
-import earth.terrarium.handcrafted.common.block.fancybed.FancyBedBlock;
-import earth.terrarium.handcrafted.common.block.fancybed.FancyBedBlockEntity;
-import earth.terrarium.handcrafted.common.block.counter.CounterBlock;
-import earth.terrarium.handcrafted.common.block.counter.CupboardBlock;
-import earth.terrarium.handcrafted.common.block.counter.DrawerBlock;
-import earth.terrarium.handcrafted.common.block.counter.ShelfBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
-import earth.terrarium.handcrafted.common.block.trim.TrimBlock;
-import earth.terrarium.handcrafted.common.block.trim.CornerTrimBlock;
 import earth.terrarium.handcrafted.common.registry.ModBlockEntityTypes;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
-
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 
-import javax.swing.text.html.parser.Entity;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 
 public class HandcraftedModule extends SimpleModule {
@@ -81,7 +69,7 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new ChairBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/chair/chair/oak_chair"))
-                .addTile(ChairBlockEntity::new)
+                .addTile(ModBlockEntityTypes.TABLE)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
 //                .defaultRecipe()
@@ -369,7 +357,161 @@ public class HandcraftedModule extends SimpleModule {
 
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register( ((BlockEntityType) CHAIR.getTileHolder().get()), ChairRenderer::new);
-        event.register( ((BlockEntityType) TABLE.getTileHolder().get()), TableRenderer::new);
+        event.register(((BlockEntityType) CHAIR.getTileHolder().get()), ChairRenderer::new);
+        event.register(((BlockEntityType) TABLE.getTileHolder().get()), NonShitTableRenderer::new);
+    }
+
+
+    public static class NonShitTableRenderer implements BlockEntityRenderer<TableBlockEntity> {
+        private static final Map<Block, ResourceLocation> BLOCKS_TO_TEXTURES = new IdentityHashMap<>();
+        private static final Map<Item, ResourceLocation> SHEETS_TO_TEXTURES = new IdentityHashMap<>();
+        private final TableModel model;
+        private final ModelPart northeastLeg;
+        private final ModelPart northwestLeg;
+        private final ModelPart southeastLeg;
+        private final ModelPart northOverlay;
+        private final ModelPart southwestLeg;
+        private final ModelPart eastOverlay;
+        private final ModelPart southOverlay;
+        private final ModelPart westOverlay;
+
+
+        public NonShitTableRenderer(BlockEntityRendererProvider.Context ctx) {
+            this.model = new TableModel(ctx.getModelSet().bakeLayer(TableModel.LAYER_LOCATION));
+            this.northeastLeg = model.getMain().getChild("table").getChild("northeast_leg");
+            this.northwestLeg = model.getMain().getChild("table").getChild("northwest_leg");
+            this.southeastLeg = model.getMain().getChild("table").getChild("southeast_leg");
+            this.southwestLeg = model.getMain().getChild("table").getChild("southwest_leg");
+            this.northOverlay = model.getMain().getChild("overlay").getChild("overlay_side_north");
+            this.eastOverlay = model.getMain().getChild("overlay").getChild("overlay_side_east");
+            this.southOverlay = model.getMain().getChild("overlay").getChild("overlay_side_south");
+            this.westOverlay = model.getMain().getChild("overlay").getChild("overlay_side_west");
+        }
+
+        public void render(TableBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+
+
+            var tableState = entity.getBlockState().getValue(TableBlock.TABLE_BLOCK_SHAPE);
+            var sheetState = entity.getBlockState().getValue(TableBlock.TABLE_SHEET_SHAPE);
+            poseStack.pushPose();
+
+            poseStack.translate(0.5, 1.5, 0.5);
+            poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+
+            //this is bad. you should use custom baked models instead...
+            switch (tableState) {
+                case CENTER -> {
+                    northeastLeg.visible = false;
+                    northwestLeg.visible = false;
+                    southeastLeg.visible = false;
+                    southwestLeg.visible = false;
+                }
+                case NORTH_EAST_CORNER -> {
+                    northeastLeg.visible = false;
+                    northwestLeg.visible = false;
+                    southwestLeg.visible = false;
+                }
+                case NORTH_WEST_CORNER -> {
+                    northeastLeg.visible = false;
+                    northwestLeg.visible = false;
+                    southeastLeg.visible = false;
+                }
+                case SOUTH_EAST_CORNER -> {
+                    northwestLeg.visible = false;
+                    southeastLeg.visible = false;
+                    southwestLeg.visible = false;
+                }
+                case SOUTH_WEST_CORNER -> {
+                    northeastLeg.visible = false;
+                    southeastLeg.visible = false;
+                    southwestLeg.visible = false;
+                }
+                case NORTH_SIDE -> {
+                    northeastLeg.visible = false;
+                    northwestLeg.visible = false;
+                }
+                case EAST_SIDE -> {
+                    northwestLeg.visible = false;
+                    southwestLeg.visible = false;
+                }
+                case SOUTH_SIDE -> {
+                    southeastLeg.visible = false;
+                    southwestLeg.visible = false;
+                }
+                case WEST_SIDE -> {
+                    northeastLeg.visible = false;
+                    southeastLeg.visible = false;
+                }
+            }
+
+            switch (sheetState) {
+                case CENTER -> {
+                    northOverlay.visible = false;
+                    eastOverlay.visible = false;
+                    southOverlay.visible = false;
+                    westOverlay.visible = false;
+                }
+                case NORTH_SIDE -> {
+                    northOverlay.visible = false;
+                    eastOverlay.visible = false;
+                    westOverlay.visible = false;
+                }
+                case EAST_SIDE -> {
+                    northOverlay.visible = false;
+                    eastOverlay.visible = false;
+                    southOverlay.visible = false;
+                }
+                case SOUTH_SIDE -> {
+                    eastOverlay.visible = false;
+                    southOverlay.visible = false;
+                    westOverlay.visible = false;
+                }
+                case WEST_SIDE -> {
+                    northOverlay.visible = false;
+                    southOverlay.visible = false;
+                    westOverlay.visible = false;
+                }
+                case NORTH_EAST_CORNER -> {
+                    northOverlay.visible = false;
+                    eastOverlay.visible = false;
+                }
+                case NORTH_WEST_CORNER -> {
+                    northOverlay.visible = false;
+                    westOverlay.visible = false;
+                }
+                case SOUTH_EAST_CORNER -> {
+                    southOverlay.visible = false;
+                    eastOverlay.visible = false;
+                }
+                case SOUTH_WEST_CORNER -> {
+                    southOverlay.visible = false;
+                    westOverlay.visible = false;
+                }
+                case NORTH_COVER -> northOverlay.visible = false;
+                case EAST_COVER -> eastOverlay.visible = false;
+                case SOUTH_COVER -> southOverlay.visible = false;
+                case WEST_COVER -> westOverlay.visible = false;
+            }
+
+
+            var texture = BLOCKS_TO_TEXTURES.computeIfAbsent(entity.getBlockState().getBlock(), b -> {
+                var blockId = Registry.BLOCK.getKey(b);
+                return EveryCompat.res("textures/block/table/table/hc/" + blockId.getPath() + ".png");
+            });
+
+
+            model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutout(texture)), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+            Item i = entity.getStack().getItem();
+            if (i != Items.AIR) {
+                var sheet = SHEETS_TO_TEXTURES.computeIfAbsent(i, b -> {
+                    var itemId = Registry.ITEM.getKey(b);
+                    return EveryCompat.res("textures/block/table/table_cloth/hc/" + itemId.getPath() + ".png");
+                });
+                model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutout(sheet)), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+            }
+            poseStack.popPose();
+        }
+
+
     }
 }
