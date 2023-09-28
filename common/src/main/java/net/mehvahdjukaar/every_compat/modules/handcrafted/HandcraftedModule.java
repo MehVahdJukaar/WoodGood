@@ -30,6 +30,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -80,7 +81,7 @@ public class HandcraftedModule extends SimpleModule {
 
         TABLE = SimpleEntrySet.builder(WoodType.class, "table",
                         ModBlocks.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new CustomTableBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/table/table/oak_table"))
                 .addTile(CustomTableTile::new)
@@ -375,6 +376,16 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
+    public class CustomTableBlock extends TableBlock{
+        public CustomTableBlock(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new CustomTableTile(pos, state);
+        }
+    }
 
     public static class NonShitTableRenderer implements BlockEntityRenderer<TableBlockEntity> {
         private static final Map<Block, ResourceLocation> BLOCKS_TO_TEXTURES = new IdentityHashMap<>();
