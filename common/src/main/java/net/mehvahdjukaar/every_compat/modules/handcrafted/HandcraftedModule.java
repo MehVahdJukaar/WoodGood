@@ -384,7 +384,8 @@ public class HandcraftedModule extends SimpleModule {
             for (var t : TABLE.blocks.values()) { //all sheets items
                 var texture = OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
                     var blockId = Registry.BLOCK.getKey(t);
-                    return EveryCompat.res("textures/block/table/table/hc/" + blockId.getPath() + ".png");
+                    var s = blockId.getPath().split("/");
+                    return EveryCompat.res("textures/block/hc/" + s[1]+"/table/table/" + s[2] + ".png");
                 });
                 event.addSprite(texture);
             }
