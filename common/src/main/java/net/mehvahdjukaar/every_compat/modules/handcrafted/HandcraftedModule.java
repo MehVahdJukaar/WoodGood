@@ -2,9 +2,14 @@ package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import earth.terrarium.handcrafted.client.HandcraftedClient;
 import earth.terrarium.handcrafted.client.block.chair.chair.ChairRenderer;
 import earth.terrarium.handcrafted.client.block.table.table.TableModel;
+import earth.terrarium.handcrafted.client.block.table.table.TableRenderer;
+import earth.terrarium.handcrafted.client.fabric.HandcraftedClientFabric;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
+import earth.terrarium.handcrafted.common.block.property.SheetState;
+import earth.terrarium.handcrafted.common.block.property.TableState;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
 import earth.terrarium.handcrafted.common.registry.ModBlockEntityTypes;
@@ -15,6 +20,8 @@ import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
+import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -22,6 +29,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -30,9 +38,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -40,6 +46,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 
 public class HandcraftedModule extends SimpleModule {
@@ -91,6 +98,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTile(CustomTableTile::new)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .addCustomItem((woodType, block, properties) -> new CustomTableItem(block, properties))
 //                .defaultRecipe()
                 .build();
         this.addEntry(TABLE);
@@ -383,10 +391,10 @@ public class HandcraftedModule extends SimpleModule {
     @Override
     public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
 
-        if (OptimizedTableRenderer.OBJECT_TO_TEXTURE.isEmpty()) {
-            for (var t : TABLE.blocks.values()) { //all sheets items
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
-                    var blockId = Registry.BLOCK.getKey(t);
+        if (OBJECT_TO_TEXTURE.isEmpty()) {
+            for (var t : TABLE.items.values()) { //all sheets items
+                var texture = OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                    var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res("block/hc/" + s[1] + "/table/table/" + s[2]));
@@ -411,11 +419,14 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
+    //might be worth moving this stuff to a dedicated client class
+    @Environment(EnvType.CLIENT)
+    private static final Map<Item, Material> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
+
     @Environment(EnvType.CLIENT)
     //this is bad. you should use custom baked models instead...
     public static class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEntity> {
-        private static final Map<Object, Material> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
-
+        private static OptimizedTableRenderer INSTANCE = null;
         private final TableModel model;
         private final ModelPart northeastLeg;
         private final ModelPart northwestLeg;
@@ -425,7 +436,6 @@ public class HandcraftedModule extends SimpleModule {
         private final ModelPart eastOverlay;
         private final ModelPart southOverlay;
         private final ModelPart westOverlay;
-
 
         public OptimizedTableRenderer(BlockEntityRendererProvider.Context ctx) {
             this.model = new TableModel(ctx.getModelSet().bakeLayer(TableModel.LAYER_LOCATION));
@@ -437,6 +447,7 @@ public class HandcraftedModule extends SimpleModule {
             this.eastOverlay = model.getMain().getChild("overlay").getChild("overlay_side_east");
             this.southOverlay = model.getMain().getChild("overlay").getChild("overlay_side_south");
             this.westOverlay = model.getMain().getChild("overlay").getChild("overlay_side_west");
+            INSTANCE = this;
         }
 
         public void render(TableBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
@@ -444,6 +455,13 @@ public class HandcraftedModule extends SimpleModule {
 
             var tableState = entity.getBlockState().getValue(TableBlock.TABLE_BLOCK_SHAPE);
             var sheetState = entity.getBlockState().getValue(TableBlock.TABLE_SHEET_SHAPE);
+            Item b = entity.getBlockState().getBlock().asItem();
+            Item sheet = entity.getStack().getItem();
+            doRender( poseStack, buffer, packedLight, packedOverlay, tableState, sheetState, sheet, b);
+        }
+
+        public void doRender(PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay,
+                             TableState tableState, SheetState sheetState, Item sheet, Item block) {
             poseStack.pushPose();
 
             poseStack.translate(0.5, 1.5, 0.5);
@@ -543,23 +561,42 @@ public class HandcraftedModule extends SimpleModule {
                 case WEST_COVER -> westOverlay.visible = false;
             }
 
-            var texture = OBJECT_TO_TEXTURE.get(entity.getBlockState().getBlock());
+            var texture = OBJECT_TO_TEXTURE.get(block);
 
             model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
-            Item i = entity.getStack().getItem();
-            if (i != Items.AIR) {
-                var sheet = OBJECT_TO_TEXTURE.computeIfAbsent(i, b -> {
+            if (sheet != Items.AIR) {
+                var s = OBJECT_TO_TEXTURE.computeIfAbsent(sheet, b -> {
 
-                    var itemId = Registry.ITEM.getKey(i);
+                    var itemId = Registry.ITEM.getKey(sheet);
                     return new Material(
                             TextureAtlas.LOCATION_BLOCKS,
                             new ResourceLocation("handcrafted:block/table/table_cloth/hc/" + itemId.getPath()));
                 });
-                model.renderToBuffer(poseStack, sheet.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+                model.renderToBuffer(poseStack, s.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             }
             poseStack.popPose();
         }
+    }
 
+    public static class TableItemRenderer extends ItemStackRenderer{
 
+        @Override
+        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
+            OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, i, i1,
+                    TableState.CENTER, SheetState.CENTER, Items.AIR, itemStack.getItem());
+
+        }
+    }
+
+    public static class CustomTableItem extends BlockItem implements ICustomItemRendererProvider {
+
+        public CustomTableItem(Block block, Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        public Supplier<ItemStackRenderer> getRendererFactory() {
+            return ()->new TableItemRenderer();
+        }
     }
 }
