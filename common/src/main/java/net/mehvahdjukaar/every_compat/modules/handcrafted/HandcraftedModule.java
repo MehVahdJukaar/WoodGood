@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -364,7 +365,7 @@ public class HandcraftedModule extends SimpleModule {
         event.register(((BlockEntityType) TABLE.getTileHolder().get()), NonShitTableRenderer::new);
     }
 
-    public class CustomTableTile extends TableBlockEntity{
+    public class CustomTableTile extends TableBlockEntity {
 
         public CustomTableTile(BlockPos blockPos, BlockState blockState) {
             super(blockPos, blockState);
@@ -376,7 +377,35 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class CustomTableBlock extends TableBlock{
+    @Override
+    public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
+
+        if (OBJECT_TO_TEXTURE.isEmpty()) {
+            for (var s : List.of(ModItems.RED_SHEET, ModItems.ORANGE_SHEET)) { //all sheets items
+                var sheet = OBJECT_TO_TEXTURE.computeIfAbsent(s.get(), b -> {
+
+                    var itemId = Registry.ITEM.getKey(s.get());
+                    return EveryCompat.res("textures/block/table/table_cloth/hc/" + itemId.getPath() + ".png");
+                });
+                event.addSprite(sheet);
+            }
+            for (var t : TABLE.blocks.values()) { //all sheets items
+                var texture = OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                    var blockId = Registry.BLOCK.getKey(t);
+                    return EveryCompat.res("textures/block/table/table/hc/" + blockId.getPath() + ".png");
+                });
+                event.addSprite(texture);
+            }
+
+
+            //...
+        }
+    }
+
+    private static final Map<Object, ResourceLocation> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
+
+
+    public class CustomTableBlock extends TableBlock {
         public CustomTableBlock(Properties properties) {
             super(properties);
         }
@@ -387,9 +416,9 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
+
     public static class NonShitTableRenderer implements BlockEntityRenderer<TableBlockEntity> {
-        private static final Map<Block, ResourceLocation> BLOCKS_TO_TEXTURES = new IdentityHashMap<>();
-        private static final Map<Item, ResourceLocation> SHEETS_TO_TEXTURES = new IdentityHashMap<>();
+
         private final TableModel model;
         private final ModelPart northeastLeg;
         private final ModelPart northwestLeg;
@@ -518,20 +547,12 @@ public class HandcraftedModule extends SimpleModule {
                 case WEST_COVER -> westOverlay.visible = false;
             }
 
-
-            var texture = BLOCKS_TO_TEXTURES.computeIfAbsent(entity.getBlockState().getBlock(), b -> {
-                var blockId = Registry.BLOCK.getKey(b);
-                return EveryCompat.res("textures/block/table/table/hc/" + blockId.getPath() + ".png");
-            });
-
+            var texture = OBJECT_TO_TEXTURE.get(entity.getBlockState().getBlock());
 
             model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutout(texture)), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             Item i = entity.getStack().getItem();
             if (i != Items.AIR) {
-                var sheet = SHEETS_TO_TEXTURES.computeIfAbsent(i, b -> {
-                    var itemId = Registry.ITEM.getKey(b);
-                    return EveryCompat.res("textures/block/table/table_cloth/hc/" + itemId.getPath() + ".png");
-                });
+                var sheet = OBJECT_TO_TEXTURE.get(i);
                 model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutout(sheet)), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             }
             poseStack.popPose();

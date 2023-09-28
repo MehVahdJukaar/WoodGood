@@ -227,4 +227,7 @@ public abstract class CompatModule {
 
     //how much crap this module has registered
     public abstract int bloatAmount();
+
+    public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
+    }
 }
