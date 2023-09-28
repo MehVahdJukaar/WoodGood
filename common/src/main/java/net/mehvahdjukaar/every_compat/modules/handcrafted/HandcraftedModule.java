@@ -381,14 +381,6 @@ public class HandcraftedModule extends SimpleModule {
     public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
 
         if (OBJECT_TO_TEXTURE.isEmpty()) {
-            for (var s : List.of(ModItems.RED_SHEET, ModItems.ORANGE_SHEET)) { //all sheets items
-                var sheet = OBJECT_TO_TEXTURE.computeIfAbsent(s.get(), b -> {
-
-                    var itemId = Registry.ITEM.getKey(s.get());
-                    return EveryCompat.res("textures/block/table/table_cloth/hc/" + itemId.getPath() + ".png");
-                });
-                event.addSprite(sheet);
-            }
             for (var t : TABLE.blocks.values()) { //all sheets items
                 var texture = OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
                     var blockId = Registry.BLOCK.getKey(t);
@@ -552,7 +544,11 @@ public class HandcraftedModule extends SimpleModule {
             model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutout(texture)), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             Item i = entity.getStack().getItem();
             if (i != Items.AIR) {
-                var sheet = OBJECT_TO_TEXTURE.get(i);
+                var sheet = OBJECT_TO_TEXTURE.computeIfAbsent(i, b -> {
+
+                    var itemId = Registry.ITEM.getKey(i);
+                    return EveryCompat.res("textures/block/table/table_cloth/hc/" + itemId.getPath() + ".png");
+                });
                 model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutout(sheet)), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             }
             poseStack.popPose();
