@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -30,6 +31,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -81,7 +83,7 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/table/table/oak_table"))
-                .addTile(TableBlockEntity::new)
+                .addTile(CustomTableTile::new)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
 //                .defaultRecipe()
@@ -359,6 +361,18 @@ public class HandcraftedModule extends SimpleModule {
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
         event.register(((BlockEntityType) CHAIR.getTileHolder().get()), ChairRenderer::new);
         event.register(((BlockEntityType) TABLE.getTileHolder().get()), NonShitTableRenderer::new);
+    }
+
+    public class CustomTableTile extends TableBlockEntity{
+
+        public CustomTableTile(BlockPos blockPos, BlockState blockState) {
+            super(blockPos, blockState);
+        }
+
+        @Override
+        public BlockEntityType<?> getType() {
+            return TABLE.getTileHolder().get();
+        }
     }
 
 
