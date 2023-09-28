@@ -10,6 +10,8 @@ import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
 import earth.terrarium.handcrafted.common.registry.ModBlockEntityTypes;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -22,6 +24,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +39,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.IdentityHashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -362,7 +365,7 @@ public class HandcraftedModule extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
         event.register(((BlockEntityType) CHAIR.getTileHolder().get()), ChairRenderer::new);
-        event.register(((BlockEntityType) TABLE.getTileHolder().get()), NonShitTableRenderer::new);
+        event.register(((BlockEntityType) TABLE.getTileHolder().get()), OptimizedTableRenderer::new);
     }
 
     public class CustomTableTile extends TableBlockEntity {
@@ -380,22 +383,21 @@ public class HandcraftedModule extends SimpleModule {
     @Override
     public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
 
-        if (OBJECT_TO_TEXTURE.isEmpty()) {
+        if (OptimizedTableRenderer.OBJECT_TO_TEXTURE.isEmpty()) {
             for (var t : TABLE.blocks.values()) { //all sheets items
-                var texture = OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
                     var blockId = Registry.BLOCK.getKey(t);
                     var s = blockId.getPath().split("/");
-                    return EveryCompat.res("textures/block/hc/" + s[1]+"/table/table/" + s[2] + ".png");
+                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+                            EveryCompat.res("block/hc/" + s[1] + "/table/table/" + s[2]));
                 });
-                event.addSprite(texture);
+                event.addSprite(texture.texture());
             }
 
 
             //...
         }
     }
-
-    private static final Map<Object, ResourceLocation> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
 
 
     public class CustomTableBlock extends TableBlock {
@@ -409,8 +411,10 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-
-    public static class NonShitTableRenderer implements BlockEntityRenderer<TableBlockEntity> {
+    @Environment(EnvType.CLIENT)
+    //this is bad. you should use custom baked models instead...
+    public static class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEntity> {
+        private static final Map<Object, Material> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
 
         private final TableModel model;
         private final ModelPart northeastLeg;
@@ -423,7 +427,7 @@ public class HandcraftedModule extends SimpleModule {
         private final ModelPart westOverlay;
 
 
-        public NonShitTableRenderer(BlockEntityRendererProvider.Context ctx) {
+        public OptimizedTableRenderer(BlockEntityRendererProvider.Context ctx) {
             this.model = new TableModel(ctx.getModelSet().bakeLayer(TableModel.LAYER_LOCATION));
             this.northeastLeg = model.getMain().getChild("table").getChild("northeast_leg");
             this.northwestLeg = model.getMain().getChild("table").getChild("northwest_leg");
@@ -445,7 +449,6 @@ public class HandcraftedModule extends SimpleModule {
             poseStack.translate(0.5, 1.5, 0.5);
             poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
 
-            //this is bad. you should use custom baked models instead...
             switch (tableState) {
                 case CENTER -> {
                     northeastLeg.visible = false;
@@ -542,15 +545,17 @@ public class HandcraftedModule extends SimpleModule {
 
             var texture = OBJECT_TO_TEXTURE.get(entity.getBlockState().getBlock());
 
-            model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutout(texture)), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+            model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             Item i = entity.getStack().getItem();
             if (i != Items.AIR) {
                 var sheet = OBJECT_TO_TEXTURE.computeIfAbsent(i, b -> {
 
                     var itemId = Registry.ITEM.getKey(i);
-                    return EveryCompat.res("textures/block/table/table_cloth/hc/" + itemId.getPath() + ".png");
+                    return new Material(
+                            TextureAtlas.LOCATION_BLOCKS,
+                            new ResourceLocation("handcrafted:block/table/table_cloth/hc/" + itemId.getPath()));
                 });
-                model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutout(sheet)), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+                model.renderToBuffer(poseStack, sheet.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             }
             poseStack.popPose();
         }
