@@ -21,6 +21,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -166,6 +167,11 @@ public abstract class CompatModule {
     @Nullable
     protected final <T extends Block> T getModBlock(String id, Class<T> blockClass) {
         return (T) BuiltInRegistries.BLOCK.getOptional(modRes(id)).orElse(null);
+    }
+
+    @Nullable
+    protected final CreativeModeTab getModTab(String id) {
+        return BuiltInRegistries.CREATIVE_MODE_TAB.getOptional(modRes(id)).orElse(null);
     }
 
     @Nullable

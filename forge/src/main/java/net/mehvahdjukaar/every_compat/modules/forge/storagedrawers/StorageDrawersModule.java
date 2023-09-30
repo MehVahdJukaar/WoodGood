@@ -214,7 +214,8 @@ public class StorageDrawersModule extends SimpleModule {
 
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-        event.register((BlockEntityType<CompatStandardDrawersEntity1>) (FULL_DRAWERS_1.getTileHolder().get()), BlockEntityDrawersRenderer::new);
+        //TODO: somehow put this in builder instead
+        FULL_DRAWERS_1.registerTileRenderer(event, BlockEntityDrawersRenderer::new);
         event.register((BlockEntityType<CompatStandardDrawersEntity2>) (FULL_DRAWERS_2.getTileHolder().get()), BlockEntityDrawersRenderer::new);
         event.register((BlockEntityType<CompatStandardDrawersEntity4>) (FULL_DRAWERS_4.getTileHolder().get()), BlockEntityDrawersRenderer::new);
         event.register((BlockEntityType<CompatHalfDrawersEntity1>) (HALF_DRAWERS_1.getTileHolder().get()), BlockEntityDrawersRenderer::new);
