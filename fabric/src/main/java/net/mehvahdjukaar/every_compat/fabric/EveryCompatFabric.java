@@ -33,7 +33,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-
+//        addModule("handcrafted", () -> HandcraftedModule::new);
 
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("create", () -> CreateModule::new);
