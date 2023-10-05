@@ -105,7 +105,6 @@ public class EveryCompatForge extends EveryCompat {
 
 
         // Disabled due to block entity complications
-//        addModule("handcrafted", () -> HandcraftedModule::new);
 
         // Disabled until custom block models work
             // addModule("graveyard", () -> GraveyardModule::new);
