@@ -65,10 +65,6 @@ public class CreateModule extends SimpleModule {
         CreateClientModule.onClientSetup(this);
     }
 
-    public void onClientInit() {
-        CreateClientModule.onClientInit(this);
-    }
-
     @Override
     public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
         CreateClientModule.onTextureStitch(event, this);
