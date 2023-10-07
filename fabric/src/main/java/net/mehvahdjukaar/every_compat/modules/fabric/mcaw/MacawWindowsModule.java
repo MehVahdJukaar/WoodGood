@@ -35,6 +35,9 @@ public class MacawWindowsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_PANE_WINDOWS;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_LOG_FOUR_WINDOW;
+    public final SimpleEntrySet<WoodType, Block> PANE_WINDOW;
+    public final SimpleEntrySet<WoodType, Block> STRIPPED_PANE_WINDOW;
+    public final SimpleEntrySet<WoodType, Block> PLANK_PANE_WINDOW;
 
 
     public MacawWindowsModule(String modId) {
@@ -213,6 +216,45 @@ public class MacawWindowsModule extends SimpleModule {
                 .build();
 
         this.addEntry(SHUTTERS);
+
+        PANE_WINDOW = SimpleEntrySet.builder(WoodType.class, "pane_window",
+                        () -> BlockInit.OAK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Window(Utils.copyPropertySafe(w.log)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("pane_windows"), Registry.BLOCK_REGISTRY)
+                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PANE_WINDOW);
+
+        STRIPPED_PANE_WINDOW = SimpleEntrySet.builder(WoodType.class, "pane_window", "stripped",
+                        () -> BlockInit.STRIPPED_OAK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Window(Utils.copyPropertySafe(w.log)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("pane_windows"), Registry.BLOCK_REGISTRY)
+                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(STRIPPED_PANE_WINDOW);
+
+        PLANK_PANE_WINDOW = SimpleEntrySet.builder(WoodType.class, "plank_pane_window",
+                        () -> BlockInit.OAK_PLANK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new Window(Utils.copyPropertySafe(w.log)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("pane_windows"), Registry.BLOCK_REGISTRY)
+                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .build();
+
+        this.addEntry(PLANK_PANE_WINDOW);
     }
 
     private void shutterPalette(Palette p) {
