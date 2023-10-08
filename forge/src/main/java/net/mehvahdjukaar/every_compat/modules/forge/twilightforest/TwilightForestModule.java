@@ -26,6 +26,7 @@ import twilightforest.block.BanisterBlock;
 import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.HollowLogHorizontal;
 import twilightforest.block.HollowLogVertical;
+import twilightforest.enums.HollowLogVariants;
 import twilightforest.init.TFBlocks;
 import twilightforest.init.TFCreativeTabs;
 import twilightforest.init.TFItems;
@@ -127,14 +128,15 @@ public class TwilightForestModule extends SimpleModule {
                     new Item.Properties());
             hollowLogsVertical.items.put(w, i);
             w.addChild(childKey, i);
-            registry.register(EveryCompat.res(itemName + "_vertical"), i);
+            registry.register(EveryCompat.res(itemName), i);
         });
     }
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         event.register(
-                (s, l, pos, i) -> l != null && pos != null ?
+                (s, l, pos, i) -> s.getValue(HollowLogClimbable.VARIANT) != HollowLogVariants.Climbable.VINE ? -1 :
+                        l != null && pos != null ?
                         BiomeColors.getAverageFoliageColor(l, pos) : FoliageColor.getDefaultColor(),
                 hollowLogsClimbable.blocks.values().toArray(Block[]::new));
         event.register(
