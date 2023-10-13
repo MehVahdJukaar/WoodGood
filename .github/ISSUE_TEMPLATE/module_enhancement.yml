@@ -1,0 +1,36 @@
+name: Module Enhancement
+description: Supported Mod missing a block or an item via new version? 
+title: "[🗃]: "
+labels: ["module", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Module Enhancement
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "Current Version of the mod that adds new block/item"
+      placeholder: ex. v2.2.0
+    validations:
+      required: true
+
+  - type: input
+    id: curseforge
+    attributes:
+      label: Curseforge
+      description: "The link for mod's Curseforge"
+      placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/macaws-windows
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Details
+      description: |
+        List the missing block/items that have been recently added and is not supported in the module via Every Compat
+      placeholder: "ex: Macaw's Windows v2.2.0 has added 3 new blocks:\n- <TYPE> Pane Window\n- Stripped <TYPE> Pane Window\n- <TYPE> Plank Pane Window"
+    validations:
+      required: true
