@@ -38,7 +38,16 @@ body:
     attributes:
       label: EveryCompat Version
       description: The current Version of EveryCompat
-      placeholder: ex. everycompat-1.20-2.6.7 (REQUIRED)
+      placeholder: ex. everycompat-1.20-2.6.7
+    validations:
+      required: true
+     
+  - type: input
+    id: moonlight
+    attributes:
+      label: Moonlight Lib Version
+      description: The current Version of EveryCompat
+      placeholder: ex. moonlight-1.20-2.8.46-forge
     validations:
       required: true
 
@@ -47,7 +56,7 @@ body:
     attributes:
       label: "Issue with mods"
       description: "Which mods does Every Compat have an issue with?"
-      placeholder: "ex. - Biomes O' Plenty <version> \nex. - Chipped <version>"
+      placeholder: "ex. - Biomes O' Plenty <version> \nex. - Chipped <version> \n\nBiomes O' Plenty has Wood_type & Chipped has Furniture"
     validations:
       required: true
 
