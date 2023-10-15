@@ -46,7 +46,7 @@ body:
     attributes:
       label: MODID
       description: "MODID of the mod"
-      placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/giacomos-bookshelf
+      placeholder: giacomosbookshelf
     validations:
       required: true
 
