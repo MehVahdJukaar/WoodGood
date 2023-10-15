@@ -20,25 +20,26 @@ body:
   - type: checkboxes
     id: version-availability
     attributes:
-      label: Version Availability
-      description: "Multiple Selection: which version is the mod available in?"
+      label: FABRIC Version Availability
+      description: "Multiple Selection: which version is the mod available in FABRIC?"
       options:
         - label: 1.18.2
         - label: 1.19.2
         - label: 1.20.1
     validations:
-      required: true
+      required: false
 
   - type: checkboxes
-    id: loader
+    id: version-availability
     attributes:
-      label: loader
-      description: "Multiple Selection: which loader is the mod available in?"
+      label: FORGE Version Availability
+      description: "Multiple Selection: which version is the mod available in FORGE?"
       options:
-        - label: Forge
-        - label: Fabric
+        - label: 1.18.2
+        - label: 1.19.2
+        - label: 1.20.1
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: details
