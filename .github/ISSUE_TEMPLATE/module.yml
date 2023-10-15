@@ -41,12 +41,21 @@ body:
     validations:
       required: false
 
+  - type: input
+    id: modid
+    attributes:
+      label: MODID
+      description: "MODID of the mod"
+      placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/giacomos-bookshelf
+    validations:
+      required: true
+
   - type: textarea
     id: details
     attributes:
       label: "Types"
       description: "Type of blocks are in the mod?"
-      value: "## Block:\n- ex: chair\n\n## Item:\n- <item-name with wood_type>"
+      value: "**Block:**\n- ex: chair\n- ex: block-name with wood_type\n\n**Item:**\n- <item-name with wood_type>"
     validations:
         required: true
 
