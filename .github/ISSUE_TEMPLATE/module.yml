@@ -18,7 +18,7 @@ body:
       required: true
 
   - type: checkboxes
-    id: version-availability
+    id: fabric-version-availability
     attributes:
       label: FABRIC Version Availability
       description: "Multiple Selection: which version is the mod available in FABRIC?"
@@ -30,7 +30,7 @@ body:
       required: false
 
   - type: checkboxes
-    id: version-availability
+    id: forge-version-availability
     attributes:
       label: FORGE Version Availability
       description: "Multiple Selection: which version is the mod available in FORGE?"
