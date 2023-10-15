@@ -9,13 +9,22 @@ body:
         MOD SUGGESTION
 
   - type: input
-    id: curseforge
+    id: curseforge-normal
     attributes:
-      label: Curseforge
-      description: "The link for mod's Curseforge"
+      label: Curseforge (Normal)
+      description: "The link for mod's Curseforge with Forge & Fabric"
       placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/giacomos-bookshelf
     validations:
       required: true
+
+  - type: input
+    id: curseforge-fabric
+    attributes:
+      label: Curseforge-Fabric (Optional)
+      description: "If the mod has 2 Curseforge pages for Forge & Fabric, then use Fabric Link here"
+      placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/giacomos-bookshelf
+    validations:
+      required: false
 
   - type: checkboxes
     id: fabric-version-availability
