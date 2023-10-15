@@ -34,8 +34,8 @@ public class WoodsterModule extends SimpleModule {
                 .addTexture(modRes("block/oak_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_top"))
                 .addTexture(modRes("block/oak_chiseled_bookshelf_0"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WoodsterTabs.WOODSTER)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(WoodsterTabs.WOODSTER)
                 .copyParentDrop()
                 .build();
 
