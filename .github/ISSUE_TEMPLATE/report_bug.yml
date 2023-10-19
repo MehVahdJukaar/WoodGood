@@ -7,7 +7,21 @@ body:
     attributes:
       value: |
         BUG
-        
+
+  - type: checkboxes
+    id: pre-report-bug
+    attributes:
+      label: "Before Continuing:"
+      options:
+        - label: "Always check you are using the latest version of the mods and its dependencies"
+          required: true
+        - label: "Remove mod that enhances Minecraft: Optifine, Sodium, others. The issue still persists."
+          required: true
+        - label: "If you are unsure which mod is the culprit.\nDisable all of your mods and enable them 1-2 mods each time to isolate the culprit"
+          required: true
+        - label: "Confirm that there is no existing issue with a similar description submitted in the list of issues."
+          required: true
+
   - type: dropdown
     id: version
     attributes:
