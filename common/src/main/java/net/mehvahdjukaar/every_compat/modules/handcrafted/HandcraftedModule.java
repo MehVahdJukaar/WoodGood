@@ -15,6 +15,7 @@ import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
 import earth.terrarium.handcrafted.common.registry.ModBlockEntityTypes;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
+import earth.terrarium.handcrafted.common.registry.ModTags;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -94,6 +95,7 @@ public class HandcraftedModule extends SimpleModule {
                         ModBlocks.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomTableBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.TABLE_ATTACHMENTS, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/table/table/oak_table"))
                 .addTile(CustomTableTile::new)
                 .setRenderType(() -> RenderType::cutout)
@@ -466,7 +468,6 @@ public class HandcraftedModule extends SimpleModule {
 
             poseStack.translate(0.5, 1.5, 0.5);
             poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
-
             switch (tableState) {
                 case CENTER -> {
                     northeastLeg.visible = false;
@@ -478,37 +479,49 @@ public class HandcraftedModule extends SimpleModule {
                     northeastLeg.visible = false;
                     northwestLeg.visible = false;
                     southwestLeg.visible = false;
+                    southeastLeg.visible = true;
                 }
                 case NORTH_WEST_CORNER -> {
                     northeastLeg.visible = false;
                     northwestLeg.visible = false;
                     southeastLeg.visible = false;
+                    southwestLeg.visible = true;
                 }
                 case SOUTH_EAST_CORNER -> {
+                    northeastLeg.visible = true;
                     northwestLeg.visible = false;
                     southeastLeg.visible = false;
                     southwestLeg.visible = false;
                 }
                 case SOUTH_WEST_CORNER -> {
                     northeastLeg.visible = false;
+                    northwestLeg.visible = true;
                     southeastLeg.visible = false;
                     southwestLeg.visible = false;
                 }
                 case NORTH_SIDE -> {
                     northeastLeg.visible = false;
                     northwestLeg.visible = false;
+                    southeastLeg.visible = true;
+                    southwestLeg.visible = true;
                 }
                 case EAST_SIDE -> {
+                    northeastLeg.visible = true;
                     northwestLeg.visible = false;
+                    southeastLeg.visible = true;
                     southwestLeg.visible = false;
                 }
                 case SOUTH_SIDE -> {
+                    northeastLeg.visible = true;
+                    northwestLeg.visible = true;
                     southeastLeg.visible = false;
                     southwestLeg.visible = false;
                 }
                 case WEST_SIDE -> {
                     northeastLeg.visible = false;
+                    northwestLeg.visible = true;
                     southeastLeg.visible = false;
+                    southwestLeg.visible = true;
                 }
             }
 
@@ -555,10 +568,18 @@ public class HandcraftedModule extends SimpleModule {
                     southOverlay.visible = false;
                     westOverlay.visible = false;
                 }
-                case NORTH_COVER -> northOverlay.visible = false;
-                case EAST_COVER -> eastOverlay.visible = false;
-                case SOUTH_COVER -> southOverlay.visible = false;
-                case WEST_COVER -> westOverlay.visible = false;
+                case NORTH_COVER -> {
+                    northOverlay.visible = false;
+                }
+                case EAST_COVER -> {
+                    eastOverlay.visible = false;
+                }
+                case SOUTH_COVER -> {
+                    southOverlay.visible = false;
+                }
+                case WEST_COVER -> {
+                    westOverlay.visible = false;
+                }
             }
 
             var texture = OBJECT_TO_TEXTURE.get(block);
