@@ -104,12 +104,14 @@ public abstract class EveryCompat {
         addOtherCompatMod("abnormals_delight", "endergetic", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "atmospheric", List.of("farmersdelight"));
 
+        // Macaw's
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
         addOtherCompatMod("macawbridgesbyg", "byg", List.of("mcwbridges"));
         addOtherCompatMod("mcwfencesbop", "biomesoplenty", List.of("mcwfences"));
         addOtherCompatMod("mcwfencesbyg", "byg", List.of("mcwfences"));
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
+
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
 
         // Abnormals Delight
@@ -126,9 +128,13 @@ public abstract class EveryCompat {
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("furnish", () -> FurnishModule::new);
-        addModule("handcrafted", () -> HandcraftedModule::new);
         addModule( "hnh" , () -> HearthAndHomeModule::new);
         addModule("twigs", () -> TwigsModule::new);
+
+        // =========================================== WORK IN PROGRESS ============================================  \\
+//        addModule("handcrafted", () -> HandcraftedModule::new);
+
+        // ========================================= DISABLED FOR A REASON =========================================  \\
 
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
