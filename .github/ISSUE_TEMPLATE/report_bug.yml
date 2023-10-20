@@ -1,0 +1,104 @@
+name: Report Bug
+description: Every Compat got a bug? Report it.
+title: "[🐞]: "
+labels: "bug"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        BUG
+
+  - type: checkboxes
+    id: pre-report-bug
+    attributes:
+      label: "Before Continuing:"
+      options:
+        - label: "Always check you are using the latest version of the mods and its dependencies"
+          required: true
+        - label: "Remove mod that enhances Minecraft: Optifine, Sodium, others. The issue still persists."
+          required: true
+        - label: "If you are unsure which mod is the culprit.\nDisable all of your mods and enable them 1-2 mods each time to isolate the culprit"
+          required: true
+        - label: "Confirm that there is no existing issue with a similar description submitted in the list of issues."
+          required: true
+
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: The Version of Minecraft?
+      options:
+        - 1.20.1
+        - 1.19.2
+        - 1.18.2 
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: loader
+    attributes:
+      label: Loader
+      description: "Which loader are you using?"
+      options:
+        - Forge
+        - Fabric 
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: everycompat
+    attributes:
+      label: EveryCompat Version
+      description: The current version of EveryCompat
+      placeholder: ex. everycompat-1.20-2.6.7
+    validations:
+      required: true
+     
+  - type: input
+    id: moonlight
+    attributes:
+      label: Moonlight Lib Version
+      description: The current version of Moonlight Lib
+      placeholder: ex. moonlight-1.20-2.8.46-forge
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue-with-mods
+    attributes:
+      label: "Issue with mods"
+      description: "Which mods does Every Compat have an issue with?"
+      placeholder: "ex. - Biomes O' Plenty <version> \nex. - Chipped <version> \n\nBiomes O' Plenty has Wood_type & Chipped has Furniture"
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue-details
+    attributes:
+      label: "Issue Detail"
+      description: "A clear and concise description of what the bug is"
+      placeholder: The more details, the better. (REQUIRED)
+    validations:
+        required: true
+
+  - type: textarea
+    id: to-reproduce
+    attributes:
+      label: "To Produce"
+      description: "Steps to reproduce the behaviour"
+
+      placeholder: OPTIONAL
+    validations:
+        required: false
+
+  - type: textarea
+    attributes:
+      label: Optional Attachment
+      description: |
+        If your Minecraft crashes, it creates a crash-report file which is located in ~/.minecraft/crash-report/
+        Tip: You can attach images, too
+      placeholder: Attach log files (latest.log or crash-report) by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false

@@ -1,0 +1,26 @@
+name: Question
+description: Ask your question
+title: "[❔]: "
+labels: "question"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        QUESTION
+
+  - type: input
+    id: question
+    attributes:
+      label: Question
+      description: "The link for mod's Curseforge"
+      placeholder: ex. Does Every Compat support **Gravestone mod - Graves**?
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "Optional: Details"
+      description: "Details to further your question"
+    validations:
+      required: false

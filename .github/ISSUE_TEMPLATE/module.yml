@@ -1,0 +1,78 @@
+name: Suggest Mod
+description: Suggest mods to be added to Every Compat
+title: "[📦]: "
+labels: "module"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        MOD SUGGESTION
+
+  - type: input
+    id: curseforge-normal
+    attributes:
+      label: Curseforge (Normal)
+      description: "The link for mod's Curseforge with Forge & Fabric"
+      placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/giacomos-bookshelf
+    validations:
+      required: true
+
+  - type: input
+    id: curseforge-fabric
+    attributes:
+      label: Curseforge-Fabric (Optional)
+      description: "If the mod has 2 Curseforge pages for Forge & Fabric, then use Fabric Link here"
+      placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/giacomos-bookshelf
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: fabric-version-availability
+    attributes:
+      label: FABRIC Version Availability
+      description: "Multiple Selection: which version is the mod available in FABRIC?"
+      options:
+        - label: 1.18.2
+        - label: 1.19.2
+        - label: 1.20.1
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: forge-version-availability
+    attributes:
+      label: FORGE Version Availability
+      description: "Multiple Selection: which version is the mod available in FORGE?"
+      options:
+        - label: 1.18.2
+        - label: 1.19.2
+        - label: 1.20.1
+    validations:
+      required: false
+
+  - type: input
+    id: modid
+    attributes:
+      label: MODID
+      description: "MODID of the mod"
+      placeholder: giacomosbookshelf
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "Types"
+      description: "Type of blocks are in the mod?"
+      value: "**Block:**\n- ex: chair\n- ex: block-name with wood_type\n\n**Item:**\n- <item-name with wood_type>"
+    validations:
+        required: true
+
+  - type: textarea
+    attributes:
+      label: Optional Details
+      description: |
+        A note that we should keep in mind regarding the mod
+      placeholder: "ex: Giacomo's Bookshelf can store books and, configurably, other items. Updates front texture\nthrough 4 stages (empty, slightly full, more full, completely full) depending on if 0, 1, 2, or 3+ books are stored"
+    validations:
+      required: false
