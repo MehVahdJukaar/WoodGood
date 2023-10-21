@@ -16,6 +16,7 @@ import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.exnihilo.ExNihiloSequentiaModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
@@ -29,9 +30,9 @@ import net.mehvahdjukaar.every_compat.modules.the_new_shutters.ShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsMacawModule;
-import net.mehvahdjukaar.every_compat.modules.productive_bees.ProductiveBeesModule;
+//import net.mehvahdjukaar.every_compat.modules.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
-import net.mehvahdjukaar.every_compat.modules.builders_addition.BuildersAdditionModule;
+//import net.mehvahdjukaar.every_compat.modules.builders_addition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.premium_wood.PremiumWoodModule;
 //import net.mehvahdjukaar.every_compat.modules.iron_age_furniture.IronAgeFurnitureModule;
 //import net.mehvahdjukaar.every_compat.modules.just_a_raft.JustARaftModule;
@@ -147,6 +148,7 @@ public class WoodGood {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("premium_wood", () -> PremiumWoodModule::new);
+        addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
 
         // CURRENTLY TESTING \\
 //        addModule("xerca", () -> XercaModule::new);
