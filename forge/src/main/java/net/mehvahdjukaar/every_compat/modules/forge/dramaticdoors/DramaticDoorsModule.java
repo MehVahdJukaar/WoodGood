@@ -1,8 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
-import com.fizzware.dramaticdoors.DramaticDoors;
-import com.fizzware.dramaticdoors.blocks.ShortDoorBlock;
-import com.fizzware.dramaticdoors.blocks.TallDoorBlock;
+import com.fizzware.dramaticdoors.forge.DDRegistry;
+import com.fizzware.dramaticdoors.forge.blocks.ShortDoorBlock;
+import com.fizzware.dramaticdoors.forge.blocks.TallDoorBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -13,7 +13,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-
 import java.util.List;
 
 public class DramaticDoorsModule extends SimpleModule {
@@ -34,7 +33,7 @@ public class DramaticDoorsModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -49,7 +48,7 @@ public class DramaticDoorsModule extends SimpleModule {
                 .addTag(modRes("short_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -60,14 +59,21 @@ public class DramaticDoorsModule extends SimpleModule {
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of(
-                "biomesoplenty", "byg", "prehistoricfauna", "twilightforest", "tflostblocks",
-                "bamboo_blocks", "caverns_and_chasms", "endergetic", "environmental", "upgrade_aquatic",
-                "abundance", "atmospheric", "autumnity", "bayou_blues", "buzzier_bees",
-                "enhanced_mushrooms", "architects_palette", "ars_nouveau", "biomemakeover", "blocksplus",
-                "ceilands", "copperoverhaul", "alloyed", "createdeco", "darkerdepths",
-                "dustrial_decor", "ecologics", "phantasm", "nourished_end", "habitat",
-                "nethers_exoticism", "outer_end", "pokecube", "pokecube_legends", "premium_wood", "quark",
-                "snowyspirit", "supplementaries", "twigs", "undergarden"
+            "abundance", "abundant_atmosphere", "ad_astra",
+            "aether", "alloyed", "architects_palette",
+            "ars_nouveau", "atmospheric", "autumnity",
+            "bamboo_blocks", "bayou_blues", "biomemakeover",
+            "biomesoplenty", "blocksplus", "buzzier_bees",
+            "byg", "caverns_and_chasms", "ceilands",
+            "copperoverhaul", "createdeco", "darkerdepths",
+            "dustrial_decor", "ecologics", "endergetic",
+            "enhanced_mushrooms", "environmental", "habitat",
+            "hexcasting", "nethers_exoticism", "nourished_end",
+            "outer_end", "phantasm", "pokecube",
+            "pokecube_legends", "prehistoricfauna", "premium_wood",
+            "quark", "snowyspirit", "supplementaries",
+            "tflostblocks", "twigs", "twilightforest",
+            "undergarden", "upgrade_aquatic", "windswept"
         );
     }
 }
