@@ -124,7 +124,7 @@ public abstract class EveryCompat {
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("furnish", () -> FurnishModule::new);
-        addModule("handcrafted", () -> HandcraftedModule::new);
+       // addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("hearth_and_home", () -> HearthAndHomeModule::new);
         addModule("twigs", () -> TwigsModule::new);
 
