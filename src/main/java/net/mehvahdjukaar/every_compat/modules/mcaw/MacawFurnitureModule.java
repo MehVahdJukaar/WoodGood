@@ -3,18 +3,15 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 import com.mcwfurnitures.kikoz.MacawsFurnitures;
 import com.mcwfurnitures.kikoz.init.BlockEntityInit;
 import com.mcwfurnitures.kikoz.init.BlockInit;
-import com.mcwfurnitures.kikoz.objects.Chair;
-import com.mcwfurnitures.kikoz.objects.Desk;
-import com.mcwfurnitures.kikoz.objects.Table;
-import com.mcwfurnitures.kikoz.objects.TableHitbox;
-import com.mcwfurnitures.kikoz.objects.TallFurniture;
-import com.mcwfurnitures.kikoz.objects.WideFurniture;
+import com.mcwfurnitures.kikoz.objects.*;
 import com.mcwfurnitures.kikoz.objects.bookshelves.BookCabinet;
+import com.mcwfurnitures.kikoz.objects.bookshelves.BookCabinetHinge;
 import com.mcwfurnitures.kikoz.objects.bookshelves.BookDrawer;
 import com.mcwfurnitures.kikoz.objects.chairs.ClassicChair;
 import com.mcwfurnitures.kikoz.objects.chairs.ModernChair;
 import com.mcwfurnitures.kikoz.objects.chairs.StripedChair;
 import com.mcwfurnitures.kikoz.objects.counters.Counter;
+import com.mcwfurnitures.kikoz.objects.counters.CupboardCounter;
 import com.mcwfurnitures.kikoz.objects.counters.StorageCounter;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -120,7 +117,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         cupboardBookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf_cupboard",
                         BlockInit.OAK_BOOKSHELF_CUPBOARD, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new BookCabinet(WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new BookCabinetHinge(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(modRes("bookshelf_cupboard"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
@@ -284,7 +281,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         cupboardCounter = SimpleEntrySet.builder(WoodType.class, "cupboard_counter",
                         BlockInit.OAK_CUPBOARD_COUNTER, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new CupboardCounter(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(modRes("cupboard_counter"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::solid)
@@ -658,7 +655,7 @@ public class MacawFurnitureModule extends SimpleModule {
         //TYPE: WARDROBE
         WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         BlockInit.OAK_WARDROBE, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new TallFurniture(WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new TallFurnitureHinge(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wardrobe"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
@@ -669,7 +666,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         modernWardrobe = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe",
                         BlockInit.OAK_MODERN_WARDROBE, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new TallFurniture(WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new TallFurnitureHinge(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(modRes("modern_wardrobe"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
