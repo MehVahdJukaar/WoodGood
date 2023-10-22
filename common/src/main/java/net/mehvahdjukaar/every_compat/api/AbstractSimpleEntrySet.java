@@ -180,20 +180,29 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             for (var p : textures) {
                 ResourceLocation textureId = p.getFirst();
                 try {
-                    TextureImage main = TextureImage.open(manager, textureId);
-                    images.add(main);
-                    ResourceLocation m = p.getSecond();
+                    ResourceLocation maskId = p.getSecond();
                     Respriter r;
-                    if (m != null) {
-                        TextureImage mask = TextureImage.open(manager, m);
-                        images.add(main);
-                        r = Respriter.masked(main, mask);
+                    //Simple texture copy. Ugly... Not even used for more than 1 mod
+                    if (maskId != null && textureId == null) {
+                        TextureImage main = TextureImage.open(manager, maskId);
+                        respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of()))));
                     } else {
-                        r = Respriter.of(main);
+                        TextureImage main = TextureImage.open(manager, textureId);
+                        images.add(main);
+
+                        if (maskId != null) {
+                            TextureImage mask = TextureImage.open(manager, maskId);
+                            images.add(main);
+                            r = Respriter.masked(main, mask);
+                        } else {
+                            r = Respriter.of(main);
+                        }
+                        respriters.put(textureId, r);
                     }
-                    respriters.put(textureId, r);
+                } catch (UnsupportedOperationException e) {
+                    EveryCompat.LOGGER.error("Could not generate textures for {}: {}", p, e);
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to read block texture at: {}", p);
+                    EveryCompat.LOGGER.error("Failed to read block texture at {}", p);
                 }
             }
 
@@ -235,7 +244,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 AnimationMetadataSection finalAnimation = animation;
                 List<Palette> finalTargetPalette = targetPalette;
 
-                //sanity check to verity that palette isnt changed. can be removed
+                //sanity check to verity that palette isn't changed. can be removed
                 int oldSize = finalTargetPalette.get(0).size();
 
                 for (var re : respriters.entrySet()) {
@@ -254,7 +263,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     } else {
                         handler.addTextureIfNotPresent(manager, newId, () ->
                                 respriter.recolorWithAnimation(finalTargetPalette, finalAnimation));
-
                     }
                 }
             }
@@ -350,6 +358,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             this.textures.add(Pair.of(textureLocation, maskLocation));
             return (BL) this;
         }
+
+        // Experimental. IDK why anybody would reuse the same texture seems like a waste of resources
+        public BL copyTexture(ResourceLocation textureLocation) {
+            this.textures.add(Pair.of(null, textureLocation));
+            return (BL) this;
+        }
+
 
         //by default, they all use planks palette
         public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteProvider) {
