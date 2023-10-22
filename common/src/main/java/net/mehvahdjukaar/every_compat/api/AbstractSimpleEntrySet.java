@@ -16,6 +16,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -185,7 +186,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     //Simple texture copy. Ugly... Not even used for more than 1 mod
                     if (maskId != null && textureId == null) {
                         TextureImage main = TextureImage.open(manager, maskId);
-                        respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of()))));
+                        respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
                     } else {
                         TextureImage main = TextureImage.open(manager, textureId);
                         images.add(main);
