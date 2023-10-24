@@ -78,27 +78,26 @@ body:
     id: issue-details
     attributes:
       label: "Issue Detail"
-      description: "A clear and concise description of what the bug is"
-      placeholder: The more details, the better. (REQUIRED)
+      description: "A clear and concise description of what the bug is."
+      placeholder: "ATTENTION: DO NOT put log files here. The next area (below) is for attaching the log files"
     validations:
         required: true
 
   - type: textarea
-    id: to-reproduce
     attributes:
-      label: "To Produce"
-      description: "Steps to reproduce the behaviour"
-
-      placeholder: OPTIONAL
-    validations:
-        required: false
-
-  - type: textarea
-    attributes:
-      label: Optional Attachment
+      label: "OPTIONAL: Latest.log | Crash-report Attachment"
       description: |
         If your Minecraft crashes, it creates a crash-report file which is located in ~/.minecraft/crash-report/
-        Tip: You can attach images, too
+        Tip: You can attach images or links, too.
       placeholder: Attach log files (latest.log or crash-report) by clicking this area to highlight it and then dragging files in.
     validations:
       required: false
+
+  - type: textarea
+    id: to-reproduce
+    attributes:
+      label: "OPTIONAL: To Produce"
+      description: "Steps to reproduce the behaviour"
+      placeholder: OPTIONAL
+    validations:
+        required: false
