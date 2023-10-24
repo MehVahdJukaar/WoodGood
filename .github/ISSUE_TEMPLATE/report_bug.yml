@@ -97,6 +97,6 @@ body:
     attributes:
       label: "OPTIONAL: To Produce"
       description: "Steps to reproduce the behaviour"
-      placeholder: "Example:\n1) Place a <block> anywhere\n2) Interact with <block>\n3) The bug happened here 
+      placeholder: "Example:\n1) Place a <block> anywhere\n2) Interact with <block>\n3) The bug happened here"
     validations:
         required: false
