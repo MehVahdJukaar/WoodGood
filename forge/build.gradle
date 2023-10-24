@@ -132,7 +132,7 @@ dependencies {
 
 
     // Imports
-    modCompileOnly("curse.maven:another-furniture-610492:4034009")
+    modImplementation("curse.maven:another-furniture-610492:4813228")
     modCompileOnly("curse.maven:architects-palette-433862:4498448")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")

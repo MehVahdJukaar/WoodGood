@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
@@ -330,7 +331,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         public BL setTab(Supplier<CreativeModeTab> tab) {
-            this.tab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab.get()).get();
+            this.tab = Suppliers.memoize(()-> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab.get()).get());
             return (BL) this;
         }
 
