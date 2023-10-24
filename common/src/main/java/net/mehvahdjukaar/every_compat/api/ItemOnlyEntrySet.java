@@ -44,8 +44,9 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                             Supplier<ResourceKey<CreativeModeTab>> tab,
                             @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                             @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                            boolean mergedPalette,
                             Predicate<T> condition) {
-        super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, condition);
+        super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, mergedPalette, condition);
         this.itemFactory = itemFactory;
         this.baseItem = baseItem;
     }
@@ -191,7 +192,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
         public ItemOnlyEntrySet<T, I> build() {
             var e = new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab,
-                    palette, extraModelTransform, condition);
+                    palette, extraModelTransform, useMergedPalette, condition);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);

@@ -56,6 +56,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public final String postfix;
     @Nullable
     public final String prefix;
+    protected final boolean mergePalette;
 
     protected final Supplier<ResourceKey<CreativeModeTab>> tab;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
@@ -74,6 +75,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                                      Supplier<ResourceKey<CreativeModeTab>> tab,
                                      @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                                     boolean mergePalette,
                                      Predicate<T> condition) {
         this.typeName = (prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name;
         this.postfix = name;
@@ -84,6 +86,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         this.extraTransform = extraTransform;
         this.paletteSupplier = paletteSupplier;
+        this.mergePalette = mergePalette;
 
         if (this.prefix != null) {
             if (postfix.isEmpty()) {
@@ -179,6 +182,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         List<TextureImage> images = new ArrayList<>();
         try {
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
+            Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
+            Palette globalPalette = Palette.ofColors(new ArrayList<>());
             for (var p : textures) {
                 ResourceLocation textureId = p.getFirst();
                 try {
@@ -195,17 +200,30 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         if (maskId != null) {
                             TextureImage mask = TextureImage.open(manager, maskId);
                             images.add(main);
-                            r = Respriter.masked(main, mask);
+                            if(mergePalette){
+                                globalPalette.addAll(Palette.fromImage(main, mask, 0));
+                                partialRespriters.put(textureId, main);
+                            }else {
+                                respriters.put(textureId, Respriter.masked(main, mask));
+                            }
                         } else {
-                            r = Respriter.of(main);
+                            if(mergePalette){
+                                globalPalette.addAll(Palette.fromImage(main,null, 0));
+                                partialRespriters.put(textureId, main);
+                            }else {
+                                respriters.put(textureId, Respriter.of(main));
+                            }
                         }
-                        respriters.put(textureId, r);
                     }
                 } catch (UnsupportedOperationException e) {
                     EveryCompat.LOGGER.error("Could not generate textures for {}: {}", p, e);
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to read block texture at {}", p);
                 }
+            }
+
+            for(var e : partialRespriters.entrySet()){
+                respriters.put(e.getKey(), Respriter.ofPalette(e.getValue(), globalPalette));
             }
 
             for (var entry : blocks.entrySet()) {
@@ -292,6 +310,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
         protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
+        protected boolean useMergedPalette;
         @Nullable
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
         protected Predicate<T> condition = w -> true;
@@ -367,6 +386,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+
+        public BL useMergedPalette(){
+            this.useMergedPalette = true;
+            return (BL)this;
+        }
 
         //by default, they all use planks palette
         public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteProvider) {
