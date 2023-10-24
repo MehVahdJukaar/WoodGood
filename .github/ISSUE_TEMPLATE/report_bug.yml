@@ -79,7 +79,7 @@ body:
     attributes:
       label: "Issue Detail"
       description: "A clear and concise description of what the bug is."
-      placeholder: "ATTENTION: DO NOT put log files here. The next area (below) is for attaching the log files"
+      placeholder: "ATTENTION: DO NOT put log files here. The next area (below) is for attaching the log files\nHere is for detailing the bug you encountered."
     validations:
         required: true
 
@@ -88,8 +88,7 @@ body:
       label: "OPTIONAL: Latest.log | Crash-report Attachment"
       description: |
         If your Minecraft crashes, it creates a crash-report file which is located in ~/.minecraft/crash-report/
-        Tip: You can attach images or links, too.
-      placeholder: Attach log files (latest.log or crash-report) by clicking this area to highlight it and then dragging files in.
+      placeholder: Attach log files (latest.log or crash-report) here by clicking this area to highlight it and then dragging files in.
     validations:
       required: false
 
@@ -98,6 +97,6 @@ body:
     attributes:
       label: "OPTIONAL: To Produce"
       description: "Steps to reproduce the behaviour"
-      placeholder: OPTIONAL
+      placeholder: "Example:\n1) Place a <block> anywhere\n2) Interact with <block>\n3) The bug happened here 
     validations:
         required: false
