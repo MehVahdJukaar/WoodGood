@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.another_furniture;
 import com.starfish_studios.another_furniture.block.*;
 import com.starfish_studios.another_furniture.registry.AFBlockEntityTypes;
 import com.starfish_studios.another_furniture.registry.AFBlocks;
-import com.starfish_studios.another_furniture.registry.forge.AFRegistryImpl;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
