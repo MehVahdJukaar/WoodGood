@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.another_furniture;
 import com.starfish_studios.another_furniture.block.*;
 import com.starfish_studios.another_furniture.registry.AFBlockEntityTypes;
 import com.starfish_studios.another_furniture.registry.AFBlocks;
+import com.starfish_studios.another_furniture.registry.forge.AFRegistryImpl;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -13,6 +14,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
 public class AnotherFurnitureModule extends SimpleModule {
@@ -20,7 +22,7 @@ public class AnotherFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> tables;
     public final SimpleEntrySet<WoodType, Block> chairs;
     public final SimpleEntrySet<WoodType, Block> shelves;
-    public final SimpleEntrySet<WoodType, Block> planterBoxes;
+    public final SimpleEntrySet<WoodType, Block> flowerBoxes;
     public final SimpleEntrySet<WoodType, Block> shutters;
     public final SimpleEntrySet<WoodType, Block> drawers;
     public final SimpleEntrySet<WoodType, Block> benches;
@@ -28,35 +30,75 @@ public class AnotherFurnitureModule extends SimpleModule {
     public AnotherFurnitureModule(String modId) {
         super(modId, "af");
 
-        planterBoxes = SimpleEntrySet.builder(WoodType.class, "planter_box",
+        flowerBoxes = SimpleEntrySet.builder(WoodType.class, "flower_box",
                         AFBlocks.OAK_FLOWER_BOX, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FlowerBoxBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(modRes("planter_boxes"), Registries.BLOCK)
-                .addTag(modRes("planter_boxes"), Registries.ITEM)
+                .addTag(modRes("flower_boxes"), Registries.BLOCK)
+                .addTag(modRes("flower_boxes"), Registries.ITEM)
                 .copyParentDrop()
                 .defaultRecipe()
                 .addTile(AFBlockEntityTypes.FLOWER_BOX)
                 .setTab(() -> getModTab("tab"))
-                .addTexture(modRes("block/planter_box/oak_bottom"))
-                .addTexture(modRes("block/planter_box/oak_supports"))
-                .addTextureM(modRes("block/planter_box/oak_top_sides"), EveryCompat.res("block/af/planter_box_top_sides_mask"))
+                .addTexture(modRes("block/flower_box/oak_bottom"))
+                .addTexture(modRes("block/flower_box/oak_supports"))
+                .addTextureM(modRes("block/flower_box/oak_top_sides"), EveryCompat.res("block/af/planter_box_top_sides_mask"))
                 .build();
 
-        this.addEntry(planterBoxes);
+        this.addEntry(flowerBoxes);
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
                         AFBlocks.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ShutterBlock(1,Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new ShutterBlock(1, Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(modRes("shutters"), Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.ITEM)
                 .copyParentDrop()
                 .defaultRecipe()
                 .setTab(() -> getModTab("tab"))
-                .addTexture(modRes("block/shutter/oak_bottom"))
-                .addTexture(modRes("block/shutter/oak_middle"))
-                .addTexture(modRes("block/shutter/oak_none"))
-                .addTexture(modRes("block/shutter/oak_top"))
-                .createPaletteFromOak(this::shuttersPalette)
+                .addTexture(modRes("block/shutter/variant_1/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_1/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_1/oak_single"))
+                .addTexture(modRes("block/shutter/variant_1/oak_top"))
+                .addTexture(modRes("block/shutter/variant_2/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_2/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_2/oak_single"))
+                .addTexture(modRes("block/shutter/variant_2/oak_top"))
+                .addTextureM(modRes("block/shutter/variant_3/oak_bottom"), EveryCompat.res("block/af/shutter/variant_3/oak_common_m"))
+                .addTextureM(modRes("block/shutter/variant_3/oak_middle"), EveryCompat.res("block/af/shutter/variant_3/oak_common_m"))
+                .addTextureM(modRes("block/shutter/variant_3/oak_single"), EveryCompat.res("block/af/shutter/variant_3/oak_common_m"))
+                .addTextureM(modRes("block/shutter/variant_3/oak_top"), EveryCompat.res("block/af/shutter/variant_3/oak_common_m"))
+                .addTexture(modRes("block/shutter/variant_4/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_4/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_4/oak_single"))
+                .addTexture(modRes("block/shutter/variant_4/oak_top"))
+                .addTexture(modRes("block/shutter/variant_5/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_5/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_5/oak_single"))
+                .addTexture(modRes("block/shutter/variant_5/oak_top"))
+                .addTexture(modRes("block/shutter/variant_6/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_6/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_6/oak_single"))
+                .addTexture(modRes("block/shutter/variant_6/oak_top"))
+                .addTexture(modRes("block/shutter/variant_7/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_7/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_7/oak_single"))
+                .addTexture(modRes("block/shutter/variant_7/oak_top"))
+                .addTexture(modRes("block/shutter/variant_8/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_8/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_8/oak_single"))
+                .addTexture(modRes("block/shutter/variant_8/oak_top"))
+                .addTexture(modRes("block/shutter/variant_9/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_9/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_9/oak_single"))
+                .addTexture(modRes("block/shutter/variant_9/oak_top"))
+                .addTexture(modRes("block/shutter/variant_10/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_10/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_10/oak_single"))
+                .addTexture(modRes("block/shutter/variant_10/oak_top"))
+                .addTexture(modRes("block/shutter/variant_11/oak_bottom"))
+                .addTexture(modRes("block/shutter/variant_11/oak_middle"))
+                .addTexture(modRes("block/shutter/variant_11/oak_single"))
+                .addTexture(modRes("block/shutter/variant_11/oak_top"))
+//                .createPaletteFromOak(this::shuttersPalette)
                 .build();
 
         this.addEntry(shutters);
@@ -86,9 +128,18 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .setTab(() -> getModTab("tab"))
                 .setRenderType(() -> RenderType::cutout)
-                .addTexture(modRes("block/chair/oak_back"))
-                .addTexture(modRes("block/chair/oak_bottom"))
-                .addTexture(modRes("block/chair/oak_seat"))
+                .addTexture(modRes("block/chair/back_1/oak"))
+                .addTexture(modRes("block/chair/back_2/oak"))
+                .addTexture(modRes("block/chair/back_3/oak"))
+                .addTexture(modRes("block/chair/back_4/oak"))
+                .addTexture(modRes("block/chair/back_5/oak"))
+                .addTexture(modRes("block/chair/back_6/oak"))
+                .addTexture(modRes("block/chair/back_7/oak"))
+                .addTexture(modRes("block/chair/back_8/oak"))
+                .addTexture(modRes("block/chair/back_9/oak"))
+                .addTexture(modRes("block/chair/back_10/oak"))
+                .addTexture(modRes("block/chair/bottom/oak"))
+                .addTexture(modRes("block/chair/seat/oak"))
                 .build();
 
         this.addEntry(chairs);
