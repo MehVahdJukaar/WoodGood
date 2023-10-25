@@ -17,7 +17,7 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:4663010")
 
 
-    modCompileOnly("curse.maven:another-furniture-610492:4813228")
+    modCompileOnly("curse.maven:another-furniture-610492:4815124")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856")
     modCompileOnly("curse.maven:create-328085:4626108")
@@ -29,7 +29,7 @@ dependencies {
     // modCompileOnly("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
     modCompileOnly("curse.maven:twigs-496913:4605097")
-    modCompileOnly("curse.maven:dramatic-doors-380617:4682820")
+    modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
 
 }
 

@@ -183,7 +183,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         try {
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
-            Palette globalPalette = Palette.ofColors(new ArrayList<>());
+            Palette globalPalette = Palette.ofColors(new ArrayList<RGBColor>());
             for (var p : textures) {
                 ResourceLocation textureId = p.getFirst();
                 try {

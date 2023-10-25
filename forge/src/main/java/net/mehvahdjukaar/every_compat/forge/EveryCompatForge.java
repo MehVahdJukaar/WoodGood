@@ -54,10 +54,10 @@ public class EveryCompatForge extends EveryCompat {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
+        // ========================================= Add Modules ==================================================== \\
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
-
         addModule("create", () -> CreateModule::new);
         if (PlatHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
@@ -68,7 +68,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
         addModule("premium_wood", () -> PremiumWoodModule::new);
-        //addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("quark", () -> QuarkModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
@@ -76,6 +75,13 @@ public class EveryCompatForge extends EveryCompat {
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodster", () -> WoodsterModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
+        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+        addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+        addModule("xercamod", () -> XercaModule::new);
+        addModule("buildersdelight", () -> BuildersDelightModule::new);
+        addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+
+        // ========================================= Macaw's ======================================================== \\
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
@@ -85,17 +91,15 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
-		addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
 
-        addModule("buildersdelight", () -> BuildersDelightModule::new);
 
+        // ========================================== WORK IN PROGRESS ============================================== \\
+
+        // ====================================== DISABLED FOR A REASON ============================================= \\
+//        addModule("productivebees", () -> ProductiveBeesModule::new); // what's the reason?
+
+        // ============================== Disabled until custom block models work =================================== \\
         // addModule("graveyard", () -> GraveyardModule::new);
-
-        // Disabled due to block entity complications
-
-        // Disabled until custom block models work
-         addModule("xercamod", () -> XercaModule::new);
 
 
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
