@@ -138,6 +138,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/chair/back_8/oak"))
                 .addTexture(modRes("block/chair/back_9/oak"))
                 .addTexture(modRes("block/chair/back_10/oak"))
+                .addTexture(modRes("block/chair/back_11/oak"))
                 .addTexture(modRes("block/chair/bottom/oak"))
                 .addTexture(modRes("block/chair/seat/oak"))
                 .build();
