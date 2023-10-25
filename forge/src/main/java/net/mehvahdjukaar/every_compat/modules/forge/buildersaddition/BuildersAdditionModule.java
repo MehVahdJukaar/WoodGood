@@ -6,6 +6,7 @@ import com.mrh0.buildersaddition.event.CreativeModeTabRegistry;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -38,22 +39,26 @@ public class BuildersAdditionModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> stools;
     public final SimpleEntrySet<WoodType, Block> supportsBracket;
     public final SimpleEntrySet<WoodType, Block> tables;
-    //public final SimpleEntrySet<WoodType, Block> panels;
+    public final SimpleEntrySet<WoodType, Block> verticalSlab;
 
     public BuildersAdditionModule(String modId) {
         super(modId, "bca");
         var tab = CreativeModeTabRegistry.MAIN_TAB;
 
-        /*
-        panels = SimpleEntrySet.builder(WoodType.class, "", "vertical_slab",
+
+        verticalSlab = SimpleEntrySet.builder(WoodType.class, "vertical_slab",
                         Index.OAK_VERTICAL_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks))
+                        (w) -> {
+                            if (PlatHelper.isModLoaded("v_slab_compat")) return null;
+                            return new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks);
+                        })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("vertical_slab/vertical_slab_oak"))
-                .setTab( tab)
+                .addRecipe(modRes("vertical_slab/oak_vertical_slab"))
+                .addRecipe(modRes("vertical_slab/reverse/oak_vertical_slab"))
+                .setTab(tab)
                 .build();
 
-        this.addEntry(panels);*/
+        this.addEntry(verticalSlab);
 
         tables = SimpleEntrySet.builder(WoodType.class, "", "table",
                         Index.TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
@@ -190,7 +195,8 @@ public class BuildersAdditionModule extends SimpleModule {
                         Index.CUPBOARD_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Cupboard(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("cupboard/cupboard_oak"))
+                .addRecipe(modRes("cupboard/cupboard_oak_left"))
+                .addRecipe(modRes("cupboard/cupboard_oak_right"))
                 .setTab(tab)
                 .build();
 
@@ -199,7 +205,8 @@ public class BuildersAdditionModule extends SimpleModule {
         smallCupboards = SimpleEntrySet.builder(WoodType.class, "", "small_cupboard",
                         Index.SMALL_CUPBOARD_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SmallCupboard(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("small_cupboard/small_cupboard_oak"))
+                .addRecipe(modRes("small_cupboard/small_cupboard_oak_left"))
+                .addRecipe(modRes("small_cupboard/small_cupboard_oak_right"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
                 .build();
@@ -219,7 +226,8 @@ public class BuildersAdditionModule extends SimpleModule {
         supportsBracket = SimpleEntrySet.builder(WoodType.class, "", "support_bracket",
                         Index.SUPPORT_BRACKET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SupportBracket(shortenedId() + "/" + w.getAppendableId(), w.planks)).requiresChildren("stripped_log")
-                .addRecipe(modRes("support_bracket/support_bracket_oak"))
+                .addRecipe(modRes("support_bracket/support_bracket_oak_left"))
+                .addRecipe(modRes("support_bracket/support_bracket_oak_right"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
                 .build();
