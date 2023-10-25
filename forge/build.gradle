@@ -132,7 +132,7 @@ dependencies {
 
 
     // Imports
-    modImplementation("curse.maven:another-furniture-610492:4813228")
+    modImplementation("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:architects-palette-433862:4498448")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
@@ -140,7 +140,7 @@ dependencies {
     modCompileOnly("curse.maven:chipped-456956:4634856")
     modCompileOnly("curse.maven:create-328085:4626108")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
-    modCompileOnly("curse.maven:dramatic-doors-380617:4682820")
+    modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
@@ -148,7 +148,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
-    modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
+    modCompileOnly("curse.maven:lauchs-shutters-714019:4764777")
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4605466")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
