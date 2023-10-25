@@ -1,16 +1,14 @@
-package net.mehvahdjukaar.every_compat.modules.dramaticdoors;
+package net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.dramaticdoors;
 
-import com.fizzware.dramaticdoors.DramaticDoors;
-import com.fizzware.dramaticdoors.blocks.ShortDoorBlock;
-import com.fizzware.dramaticdoors.blocks.TallDoorBlock;
-import com.fizzware.dramaticdoors.items.DDItems;
+import com.fizzware.dramaticdoors.fabric.blocks.ShortDoorBlock;
+import com.fizzware.dramaticdoors.fabric.blocks.TallDoorBlock;
+import com.fizzware.dramaticdoors.fabric.DDRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -37,7 +35,7 @@ public class DramaticDoorsModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> DDItems.MAIN_TAB)
+                .setTabKey(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -53,7 +51,7 @@ public class DramaticDoorsModule extends SimpleModule {
                 .addTag(modRes("short_wooden_doors"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> DDItems.MAIN_TAB)
+                .setTabKey(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -71,7 +69,7 @@ public class DramaticDoorsModule extends SimpleModule {
                 "ceilands", "copperoverhaul", "alloyed", "createdeco", "darkerdepths",
                 "dustrial_decor", "ecologics", "phantasm", "nourished_end", "habitat",
                 "nethers_exoticism", "outer_end", "pokecube", "pokecube_legends", "premium_wood", "quark",
-                "snowyspirit", "supplementaries", "twigs", "undergarden"
+                "snowyspirit", "supplementaries", "twigs", "undergarden", "vinery", "aurorasdeco", "create"
         );
     }
 }
