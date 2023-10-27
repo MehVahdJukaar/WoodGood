@@ -1,8 +1,8 @@
-package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
+package net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors;
 
-import com.fizzware.dramaticdoors.forge.DDRegistry;
-import com.fizzware.dramaticdoors.forge.blocks.ShortDoorBlock;
-import com.fizzware.dramaticdoors.forge.blocks.TallDoorBlock;
+import com.fizzware.dramaticdoors.fabric.DDRegistry;
+import com.fizzware.dramaticdoors.fabric.blocks.ShortDoorBlock;
+import com.fizzware.dramaticdoors.fabric.blocks.TallDoorBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import java.util.List;
 
-// SUPPORT: v3.1.2
+// SUPPORT: v3.1.2+
 public class DramaticDoorsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> shortDoors;
@@ -75,7 +75,7 @@ public class DramaticDoorsModule extends SimpleModule {
             "quark", "snowyspirit", "supplementaries",
             "tflostblocks", "twigs", "twilightforest",
             "undergarden", "upgrade_aquatic", "windswept",
-            "vinery", "create"
+            "vinery", "aurorasdeco", "create"
         );
     }
 }
