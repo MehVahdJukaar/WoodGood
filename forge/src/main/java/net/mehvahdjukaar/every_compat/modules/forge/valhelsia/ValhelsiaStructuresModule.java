@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.forge.valhelsia;
 
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
-import com.stal111.valhelsia_structures.common.item.ModCreativeModeTabs;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -17,15 +16,11 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ValhelsiaStructuresModule extends SimpleModule {
@@ -40,10 +35,10 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         posts = SimpleEntrySet.builder(WoodType.class, "post",
                         () -> getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new PostBlock(Utils.getID(w.log), Utils.copyPropertySafe(w.log)))
+                        w -> new PostBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("posts"), Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.ITEM)
-                .setTab(() -> ModCreativeModeTabs.MAIN)
+                .setTab(() -> getModTab("main"))
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_oak_posts"))
                 .build();
@@ -55,11 +50,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         w -> {
                             Block stripped = w.getBlockOfThis("stripped_log");
                             if (stripped == null) return null;
-                            return new PostBlock(Utils.getID(w.log), Utils.copyPropertySafe(w.log));
+                            return new PostBlock(Utils.copyPropertySafe(w.log));
                         })
                 .addTag(modRes("stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("stripped_posts"), Registries.ITEM)
-                .setTab(() -> ModCreativeModeTabs.MAIN)
+                .setTab(() -> getModTab("main"))
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_stripped_oak_posts"))
                 .build();
@@ -71,7 +66,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_posts"), Registries.ITEM)
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS) //ModCreativeModeTabs.MAIN
+                .setTab(() -> getModTab("main"))
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
@@ -88,7 +83,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS) //ModCreativeModeTabs.MAIN
+                .setTab(() -> getModTab("main"))
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)

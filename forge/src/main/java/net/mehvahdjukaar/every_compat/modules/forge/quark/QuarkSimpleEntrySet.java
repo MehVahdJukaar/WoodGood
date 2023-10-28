@@ -37,7 +37,8 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
     public QuarkSimpleEntrySet(Class<T> type,
                                String name, @Nullable String prefix,
                                Class<? extends vazkii.quark.base.module.QuarkModule> module,
-                               Supplier<B> baseBlock, Supplier<T> baseType,
+                               Supplier<B> baseBlock,
+                               Supplier<T> baseType,
                                BiFunction<T, vazkii.quark.base.module.QuarkModule, B> blockSupplier,
                                Supplier<ResourceKey<CreativeModeTab>> tab,
                                LootTableMode tableMode,
@@ -46,8 +47,9 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                @Nullable Supplier<Supplier<RenderType>> renderType,
                                @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                               boolean mergedPalette,
                                Predicate<T> condition) {
-        super(type, name, prefix, null, baseBlock, baseType, tab, tableMode, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform, condition);
+        super(type, name, prefix, null, baseBlock, baseType, tab, tableMode, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, condition);
         this.blockSupplier = blockSupplier;
         this.quarkModule = module;
     }
@@ -137,7 +139,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         public QuarkSimpleEntrySet<T, B> build() {
             var e = new QuarkSimpleEntrySet<>(type, name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, lootMode,
-                    itemFactory, tileHolder, renderType, palette, extraModelTransform, condition);
+                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, condition);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);

@@ -1,9 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
-import com.fizzware.dramaticdoors.blocks.TallDoorBlock;
-import com.fizzware.dramaticdoors.blocks.TallSlidingDoorBlock;
-import com.fizzware.dramaticdoors.blocks.TallStableDoorBlock;
-import com.fizzware.dramaticdoors.items.DDItems;
+import com.fizzware.dramaticdoors.forge.blocks.TallDoorBlock;
+import com.fizzware.dramaticdoors.forge.blocks.TallSlidingDoorBlock;
+import com.fizzware.dramaticdoors.forge.blocks.TallStableDoorBlock;
+import com.fizzware.dramaticdoors.forge.DDRegistry;
 import com.mcwdoors.kikoz.init.BlockInit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -47,7 +47,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
     public DramaticDoorsMacawModule(String modId) {
         super(modId, "ddm");
 
-        var tab = DDItems.MAIN_TAB;
+        var tab = DDRegistry.MAIN_TAB;
         
         tallBarnDoors = SimpleEntrySet.builder(WoodType.class, "barn_door", "tall_macaw",
                         () -> getModBlock("tall_macaw_oak_barn_door"), () -> WoodTypeRegistry.OAK_TYPE,

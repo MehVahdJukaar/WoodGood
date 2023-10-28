@@ -75,8 +75,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           @Nullable Supplier<Supplier<RenderType>> renderType,
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                          boolean mergedPalette,
                           Predicate<T> condition) {
-        super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, condition);
+        super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, mergedPalette, condition);
         this.blockFactory = blockSupplier;
         this.tileHolder = tileFactory;
         this.lootMode = lootMode;
@@ -300,7 +301,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         public SimpleEntrySet<T, B> build() {
             var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, lootMode,
-                    itemFactory, tileHolder, renderType, palette, extraModelTransform, condition);
+                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, condition);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);

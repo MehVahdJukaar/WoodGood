@@ -1,18 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
-import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
-import earth.terrarium.handcrafted.common.registry.ModBlocks;
-import earth.terrarium.handcrafted.common.registry.ModItems;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.block.Block;
 
 
 public class HandcraftedModule extends SimpleModule {
@@ -21,7 +9,7 @@ public class HandcraftedModule extends SimpleModule {
 
     public HandcraftedModule(String modId) {
         super(modId, "hc");
-        var tab = ModItems.TAB;
+        // var tab = ModItems.TAB;
 /*
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,

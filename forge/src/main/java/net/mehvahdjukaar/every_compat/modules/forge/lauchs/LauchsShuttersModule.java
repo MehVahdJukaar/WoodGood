@@ -7,15 +7,16 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
-import net.stehschnitzel.shutter.ShutterMain;
+import net.minecraftforge.registries.RegistryObject;
 import net.stehschnitzel.shutter.common.blocks.Shutter;
 import net.stehschnitzel.shutter.init.BlockInit;
+import net.stehschnitzel.shutter.init.CreativTabInit;
 
+import java.util.List;
 
 public class LauchsShuttersModule extends SimpleModule {
 
@@ -23,7 +24,7 @@ public class LauchsShuttersModule extends SimpleModule {
 
     public LauchsShuttersModule(String modId) {
         super(modId, "ls");
-        CreativeModeTab tab = ShutterMain.SHUTTER_TAB;
+        RegistryObject<CreativeModeTab> tab = CreativTabInit.SHUTTER_TAB;
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
                         BlockInit.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
@@ -35,10 +36,19 @@ public class LauchsShuttersModule extends SimpleModule {
                 .addTexture(modRes("block/oak_shutter_middle"))
                 .addTexture(modRes("item/oak_shutter"))
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 
         this.addEntry(shutters);
+    }
+
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of(
+                "create", "quark", "supplementaries",
+                "twigs", "oreganized", "autumnity",
+                "environmental", "snowy_spirit", "upgrade_aquatic"
+        );
     }
 }

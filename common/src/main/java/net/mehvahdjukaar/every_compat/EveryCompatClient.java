@@ -27,7 +27,6 @@ public class EveryCompatClient {
     }
 
     public static void clientSetup() {
-        EveryCompat.ALL_WOODS.get().registerFabricRenderer();
         EveryCompat.forAllModules(CompatModule::onClientSetup);
     }
 

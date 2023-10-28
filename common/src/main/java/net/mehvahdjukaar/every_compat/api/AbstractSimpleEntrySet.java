@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
@@ -16,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -54,6 +56,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public final String postfix;
     @Nullable
     public final String prefix;
+    protected final boolean mergePalette;
 
     protected final Supplier<ResourceKey<CreativeModeTab>> tab;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
@@ -72,6 +75,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                                      Supplier<ResourceKey<CreativeModeTab>> tab,
                                      @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                                     boolean mergePalette,
                                      Predicate<T> condition) {
         this.typeName = (prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name;
         this.postfix = name;
@@ -82,6 +86,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         this.extraTransform = extraTransform;
         this.paletteSupplier = paletteSupplier;
+        this.mergePalette = mergePalette;
 
         if (this.prefix != null) {
             if (postfix.isEmpty()) {
@@ -177,24 +182,48 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         List<TextureImage> images = new ArrayList<>();
         try {
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
+            Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
+            Palette globalPalette = Palette.ofColors(new ArrayList<RGBColor>());
             for (var p : textures) {
                 ResourceLocation textureId = p.getFirst();
                 try {
-                    TextureImage main = TextureImage.open(manager, textureId);
-                    images.add(main);
-                    ResourceLocation m = p.getSecond();
+                    ResourceLocation maskId = p.getSecond();
                     Respriter r;
-                    if (m != null) {
-                        TextureImage mask = TextureImage.open(manager, m);
-                        images.add(main);
-                        r = Respriter.masked(main, mask);
+                    //Simple texture copy. Ugly... Not even used for more than 1 mod
+                    if (maskId != null && textureId == null) {
+                        TextureImage main = TextureImage.open(manager, maskId);
+                        respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
                     } else {
-                        r = Respriter.of(main);
+                        TextureImage main = TextureImage.open(manager, textureId);
+                        images.add(main);
+
+                        if (maskId != null) {
+                            TextureImage mask = TextureImage.open(manager, maskId);
+                            images.add(main);
+                            if(mergePalette){
+                                globalPalette.addAll(Palette.fromImage(main, mask, 0));
+                                partialRespriters.put(textureId, main);
+                            }else {
+                                respriters.put(textureId, Respriter.masked(main, mask));
+                            }
+                        } else {
+                            if(mergePalette){
+                                globalPalette.addAll(Palette.fromImage(main,null, 0));
+                                partialRespriters.put(textureId, main);
+                            }else {
+                                respriters.put(textureId, Respriter.of(main));
+                            }
+                        }
                     }
-                    respriters.put(textureId, r);
+                } catch (UnsupportedOperationException e) {
+                    EveryCompat.LOGGER.error("Could not generate textures for {}: {}", p, e);
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to read block texture at: {}", p);
+                    EveryCompat.LOGGER.error("Failed to read block texture at {}", p);
                 }
+            }
+
+            for(var e : partialRespriters.entrySet()){
+                respriters.put(e.getKey(), Respriter.ofPalette(e.getValue(), globalPalette));
             }
 
             for (var entry : blocks.entrySet()) {
@@ -235,7 +264,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 AnimationMetadataSection finalAnimation = animation;
                 List<Palette> finalTargetPalette = targetPalette;
 
-                //sanity check to verity that palette isnt changed. can be removed
+                //sanity check to verity that palette isn't changed. can be removed
                 int oldSize = finalTargetPalette.get(0).size();
 
                 for (var re : respriters.entrySet()) {
@@ -254,7 +283,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     } else {
                         handler.addTextureIfNotPresent(manager, newId, () ->
                                 respriter.recolorWithAnimation(finalTargetPalette, finalAnimation));
-
                     }
                 }
             }
@@ -282,6 +310,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
         protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
+        protected boolean useMergedPalette;
         @Nullable
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
         protected Predicate<T> condition = w -> true;
@@ -321,7 +350,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         public BL setTab(Supplier<CreativeModeTab> tab) {
-            this.tab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab.get()).get();
+            this.tab = Suppliers.memoize(()-> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab.get()).get());
             return (BL) this;
         }
 
@@ -349,6 +378,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
             this.textures.add(Pair.of(textureLocation, maskLocation));
             return (BL) this;
+        }
+
+        // Experimental. IDK why anybody would reuse the same texture seems like a waste of resources
+        public BL copyTexture(ResourceLocation textureLocation) {
+            this.textures.add(Pair.of(null, textureLocation));
+            return (BL) this;
+        }
+
+
+        public BL useMergedPalette(){
+            this.useMergedPalette = true;
+            return (BL)this;
         }
 
         //by default, they all use planks palette
