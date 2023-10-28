@@ -706,6 +706,8 @@
   "leaves_type.ancient_aether.highsproot": "高茁",
   "leaves_type.ancient_aether.frosted_highsproot": "霜结高茁",
   "leaves_type.ancient_aether.sakura": "樱树",
+  "leaves_type.ancient_aether.divine_skyroot": "神圣天根",
+  "leaves_type.ancient_aether.crystal": "水晶",
 
   "wood_type.aoa3.achony": "桉格尼木",
   "wood_type.aoa3.baobab": "猴面包木",
@@ -1093,6 +1095,9 @@
   "wood_type.edenring.brain_tree": "脑木",
   "leaves_type.edenring.auritis": "伊甸朴",
   "leaves_type.edenring.auritis_outer": "外层伊甸朴",
+
+  "wood_type.eidolon.illwood": "灾厄木",
+  "leaves_type.eidolon.illwood": "灾厄",
 
   "wood_type.emeraldcraft.ginkgo": "银杏木",
   "wood_type.emeraldcraft.palm": "棕榈木",
