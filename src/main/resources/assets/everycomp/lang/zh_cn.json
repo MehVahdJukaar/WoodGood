@@ -179,21 +179,24 @@
   "block_type.mcwtrpdoors.paper_trapdoor": "%s纸窗活板门",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s热带活板门",
 
-  "block_type.mcwwindows.window": "%s窗户",
-  "block_type.mcwwindows.window2": "%s双格窗户",
+  "block_type.mcwwindows.window": "可调%s窗户",
+  "block_type.mcwwindows.window2": "长方格%s窗户",
   "block_type.mcwwindows.four_window": "%s四格窗户",
   "block_type.mcwwindows.plank_four_window": "%s板四格窗户",
   "block_type.mcwwindows.stripped_log_four_window": "去皮%s四格窗户",
-  "block_type.mcwwindows.window_pane": "%s窗户板",
-  "block_type.mcwwindows.plank_window": "%s板窗户",
-  "block_type.mcwwindows.plank_window2": "%s板双格窗户",
-  "block_type.mcwwindows.stripped_log_window": "去皮%s窗户",
-  "block_type.mcwwindows.stripped_log_window2": "去皮%s双格窗户",
+  "block_type.mcwwindows.window_pane": "%s窗板",
+  "block_type.mcwwindows.plank_window": "可调%s板窗户",
+  "block_type.mcwwindows.plank_window2": "长方格%s板窗户",
+  "block_type.mcwwindows.stripped_log_window": "可调去皮%s窗户",
+  "block_type.mcwwindows.stripped_log_window2": "长方格去皮%s窗户",
   "block_type.mcwwindows.log_parapet": "%s护台",
   "block_type.mcwwindows.plank_parapet": "%s板护台",
   "block_type.mcwwindows.blinds": "%s百叶窗",
   "block_type.mcwwindows.shutter": "%s窗扇",
   "block_type.mcwwindows.louvered_shutter": "%s百叶窗扇",
+  "block_type.mcwwindows.pane_window": "%s嵌板窗户",
+  "block_type.mcwwindows.stripped_pane_window": "去皮%s嵌板窗户",
+  "block_type.mcwwindows.plank_pane_window": "%s板嵌板窗户",
   
   "block_type.benched.bench": "%s野餐桌",
   
@@ -344,7 +347,11 @@
   "block_type.premium_wood.crafting_table": "%s工作台",
   "block_type.premium_wood.framed_glass": "%s框玻璃",
 
+  "block_type.exnihilosequentia.barrel": "%s桶",
+  "block_type.exnihilosequentia.crucible": "%s坩埚",
+  "block_type.exnihilosequentia.sieve": "%s筛子",
 
+  
   "wood_type.aether.skyroot": "天根木",
   "leaves_type.aether.skyroot": "天根",
   "leaves_type.aether.golden_oak": "金琥珀",
