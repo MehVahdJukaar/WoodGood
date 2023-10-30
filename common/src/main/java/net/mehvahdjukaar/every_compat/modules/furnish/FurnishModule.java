@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.furnish;
 
 import com.google.gson.JsonObject;
+import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.wouink.furnish.Furnish;
 import io.github.wouink.furnish.block.*;
 import io.github.wouink.furnish.block.util.VoxelShapeHelper;
@@ -42,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-
+// SUPPORT: v24
 public class FurnishModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> bedsideTable;
@@ -64,7 +65,7 @@ public class FurnishModule extends SimpleModule {
 
     public FurnishModule(String modId) {
         super(modId, "fur");
-        CreativeModeTab tab = Furnish.CREATIVE_TAB;
+        RegistrySupplier<CreativeModeTab> tab = Furnish.CREATIVE_TAB;
 
         TemplateRecipeManager.registerTemplate(modRes("furniture_making"), FurnishRecipeTemplate::new);
 
@@ -75,7 +76,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_table"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(table);
@@ -87,7 +88,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_square_table"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(squareTable);
@@ -99,7 +100,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_pedestal_table"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(pedestalTable);
@@ -112,7 +113,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_bedside_table"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(bedsideTable);
@@ -125,7 +126,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_kitchen_cabinet"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(kitchenCabinet);
@@ -140,7 +141,7 @@ public class FurnishModule extends SimpleModule {
                 .addTexture(modRes("block/birch_cabinet_door_right"))
                 .addTexture(modRes("block/birch_cabinet_door_left"))
                 .addRecipe(modRes("furniture_making/birch_cabinet"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(cabinet);
@@ -157,7 +158,7 @@ public class FurnishModule extends SimpleModule {
                 .addTexture(modRes("block/birch_wardrobe_door_top_right"))
                 .addTexture(modRes("block/birch_wardrobe_door_top_left"))
                 .addRecipe(modRes("furniture_making/birch_wardrobe"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(wardrobe);
@@ -169,7 +170,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_stool"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(stool);
@@ -182,7 +183,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_chair"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(chair);
@@ -195,7 +196,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_shutter"))
                 .addTexture(modRes("block/oak_shutter"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(shutter);
@@ -209,7 +210,7 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_crate"))
                 .addTexture(modRes("block/oak_crate_side"))
                 .addTexture(modRes("block/oak_crate_top"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(crate);
@@ -222,7 +223,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Shelf_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_shelf"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(shelf);
@@ -234,7 +235,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_bench"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(bench);
@@ -248,7 +249,7 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_log_bench"))
                 .addTexture(modRes("block/oak_log_bench_top"))
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(logBenches);
@@ -261,7 +262,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_ladder"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(ladder);
@@ -274,7 +275,7 @@ public class FurnishModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/jungle_coffin"))
                 .addTexture(modRes("block/jungle_coffin_sides"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(coffin);
