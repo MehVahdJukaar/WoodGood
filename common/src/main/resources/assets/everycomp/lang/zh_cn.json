@@ -240,7 +240,7 @@
   "block_type.architects_palette.board_slab": "%s宽板台阶",
 
   "block_type.valhelsia_structures.cut_post": "切制%s桩",
-  "block_type.valhelsia_structures.stripped_cut_post": "去皮切制%s桩",
+  "block_type.valhelsia_structures.cut_stripped_post": "切制去皮%s桩",
   "block_type.valhelsia_structures.post": "%s桩",
   "block_type.valhelsia_structures.stripped_post": "去皮%s桩",
   
