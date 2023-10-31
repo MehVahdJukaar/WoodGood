@@ -77,7 +77,9 @@ dependencies {
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modImplementation("curse.maven:twigs-496913:4603805")
+    modImplementation("curse.maven:hearth-and-home-849364:4828281")
 
+    // ======================================== DISABLED FOR A REASON =============================================== \\
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 }
