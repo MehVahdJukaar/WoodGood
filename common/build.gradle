@@ -26,11 +26,13 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-551364:4639311")
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:handcrafted-538214:4681794")
-    // modCompileOnly("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
+    modImplementation("curse.maven:hearth-and-home-849364:4828281")
 
+    // ======================================== DISABLED FOR A REASON =============================================== \\
+//     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
 }
 
 publishing {

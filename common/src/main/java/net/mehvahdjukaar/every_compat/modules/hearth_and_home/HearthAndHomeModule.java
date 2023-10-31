@@ -1,11 +1,12 @@
 package net.mehvahdjukaar.every_compat.modules.hearth_and_home;
 
-//import com.starfish_studios.hearth_and_home.block.LatticeBlock;
+import com.starfish_studios.hearth_and_home.block.LatticeBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -13,15 +14,14 @@ import net.minecraft.world.level.block.Block;
 
 public class HearthAndHomeModule extends SimpleModule {
 
-//    public final SimpleEntrySet<WoodType, Block> sanded_wood;
-//    public final SimpleEntrySet<WoodType, Block> parquet;
-//    public final SimpleEntrySet<WoodType, Block> trim;
-//    public final SimpleEntrySet<WoodType, Block> vertical_trim;
-//    public final SimpleEntrySet<WoodType, Block> lattice;
+    public final SimpleEntrySet<WoodType, Block> sanded_wood;
+    public final SimpleEntrySet<WoodType, Block> parquet;
+    public final SimpleEntrySet<WoodType, Block> trim;
+    public final SimpleEntrySet<WoodType, Block> vertical_trim;
+    public final SimpleEntrySet<WoodType, Block> lattice;
 
     public HearthAndHomeModule(String modId) {
         super(modId, "hnhome");
-/*
 
         sanded_wood = SimpleEntrySet.builder(WoodType.class, "sanded_wood",
                         () -> getModBlock("oak_sanded_wood"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
@@ -79,6 +79,5 @@ public class HearthAndHomeModule extends SimpleModule {
                 .build();
 
         this.addEntry(lattice);
- */
     }
 }
