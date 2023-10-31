@@ -52,6 +52,7 @@ public class HearthAndHomeModule extends SimpleModule {
                 .addTag(modRes("trims"), Registries.ITEM)
                 .addTexture(modRes("block/trim/oak"))
                 .defaultRecipe()
+                .addRecipe(modRes("oak_trim_from_oak_vertical_trim"))
                 .build();
 
         this.addEntry(trim);
