@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
+// MODULES
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
@@ -17,8 +18,9 @@ import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
-import net.mehvahdjukaar.every_compat.modules.heart_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
+// LIB
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
@@ -136,6 +138,8 @@ public abstract class EveryCompat {
 
         // ========================================= DISABLED FOR A REASON =========================================  \\
 
+
+        // ========================================================================================================== \\
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
 
