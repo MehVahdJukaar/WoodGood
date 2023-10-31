@@ -57,7 +57,7 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(trim);
 
         vertical_trim = SimpleEntrySet.builder(WoodType.class, "vertical_trim",
-                        () -> getModBlock("oak_trim"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
+                        () -> getModBlock("oak_vertical_trim"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("trims"), Registries.BLOCK)
                 .addTag(modRes("trims"), Registries.ITEM)
