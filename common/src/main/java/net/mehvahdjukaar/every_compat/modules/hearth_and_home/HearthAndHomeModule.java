@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.heart_and_home;
+package net.mehvahdjukaar.every_compat.modules.hearth_and_home;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
