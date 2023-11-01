@@ -73,6 +73,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4585100")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590009")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4608559")
+    modCompileOnly("curse.maven:macaws-furniture-359540:4726276")
     modCompileOnly("curse.maven:macaws-windows-363569:4750640")
 
     modImplementation("curse.maven:missing-wilds-622590:3891602")
