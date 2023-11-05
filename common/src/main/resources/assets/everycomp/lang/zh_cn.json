@@ -206,6 +206,8 @@
   "block_type.hearth_and_home.parquet": "%s镶木板",
   "block_type.hearth_and_home.sanded_wood": "磨砂%s",
   "block_type.hearth_and_home.trim": "%s框木板",
+  "block_type.hearth_and_home.vertical_trim": "%s竖框木板",
+  "block_type.hearth_and_home.lattice": "%s格栅",
 
   "block_type.mosaic_carpentry.mosaic": "%s马赛克",
   "block_type.mosaic_carpentry.mosaic_stairs": "%s马赛克楼梯",
@@ -235,9 +237,9 @@
   
   "block_type.architects_palette.railing": "%s扶手",
   "block_type.architects_palette.boards": "%s宽木板",
-  "block_type.architects_palette.board_wall": "%s宽板墙",
-  "block_type.architects_palette.board_stairs": "%s宽板楼梯",
-  "block_type.architects_palette.board_slab": "%s宽板台阶",
+  "block_type.architects_palette.board_wall": "%s宽木板墙",
+  "block_type.architects_palette.board_stairs": "%s宽木板楼梯",
+  "block_type.architects_palette.board_slab": "%s宽木板台阶",
 
   "block_type.valhelsia_structures.cut_post": "切制%s桩",
   "block_type.valhelsia_structures.cut_stripped_post": "切制去皮%s桩",
@@ -513,7 +515,7 @@
   "block_type.xercamod.carved_7": "雕纹%s",
   "block_type.xercamod.carved_8": "雕纹%s",
   
-  "block_type.woodworks.boards": "%s直木板",
+  "block_type.woodworks.boards": "%s直纹板",
   "block_type.woodworks.bookshelf": "%s书架",
   "block_type.woodworks.ladder": "%s梯子",
   "block_type.woodworks.beehive": "%s蜂箱",
@@ -685,7 +687,7 @@
   "leaves_type.aether.holiday": "节庆",
   "leaves_type.aether.decorated_holiday": "装饰节庆",
 
-  "wood_type.aether_redux.prismatic": "虹彩木",
+  "wood_type.aether_redux.fieldsprout": "域茁木",
   "wood_type.aether_redux.blightwillow": "疫纤木",
   "wood_type.aether_redux.cloudcap": "云伞木",
   "wood_type.aether_redux.springshroom": "簧菇木",
@@ -695,8 +697,9 @@
   "leaves_type.aether_redux.glacia": "冰川",
   "leaves_type.aether_redux.gilded_oak": "透金橡树",
   "leaves_type.aether_redux.blighted_skyroot": "染疫天根",
-  "leaves_type.aether_redux.pink_prismatic": "粉红色虹彩",
-  "leaves_type.aether_redux.teal_prismatic": "亮青色虹彩",
+  "leaves_type.aether_redux.flowering_fieldsprout": "盛开的域茁",
+  "leaves_type.aether_redux.chromatic": "缤彩灌木",
+  "leaves_type.aether_redux.chromatic_berry": "结莓的缤彩灌木",
 
   "wood_type.alexscaves.pewen": "南洋杉木",
   "wood_type.alexscaves.thornwood": "荆棘木",
