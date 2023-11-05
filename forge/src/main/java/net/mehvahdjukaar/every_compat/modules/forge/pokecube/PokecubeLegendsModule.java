@@ -6,18 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.core.Moonlight;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceKey;
@@ -25,7 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -37,10 +32,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pokecube.core.init.ItemGenerator;
-import pokecube.legends.PokecubeLegends;
 import pokecube.legends.init.BlockInit;
+import pokecube.legends.init.LegendsCreativeTabs;
 import pokecube.legends.recipes.LegendsDistorticRecipeSerializer;
 
 
@@ -52,8 +48,7 @@ public class PokecubeLegendsModule extends SimpleModule {
 
     public PokecubeLegendsModule(String modId) {
         super(modId, "pcl");
-        CreativeModeTab tab = PokecubeLegends.TAB_DECORATIONS;
-
+        var tab = LegendsCreativeTabs.BUILDING_BLOCKS_TAB;
         TemplateRecipeManager.registerTemplate(modRes("legends_recipe"), MirrorRecipeTemplate::new);
 
         distorticPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
@@ -66,7 +61,7 @@ public class PokecubeLegendsModule extends SimpleModule {
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(distorticPlanks);
@@ -79,7 +74,7 @@ public class PokecubeLegendsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_STAIRS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(distorticStairs);
@@ -92,7 +87,7 @@ public class PokecubeLegendsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_SLABS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
-                .setTab(() -> tab)
+                .setTab(tab)
                 .build();
 
         this.addEntry(DISTORTICSLABS);
@@ -135,12 +130,12 @@ public class PokecubeLegendsModule extends SimpleModule {
         }
 
         @Override
-        public ResourceLocation getId() {
+        public @NotNull ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public RecipeSerializer<?> getType() {
+        public @NotNull RecipeSerializer<?> getType() {
             return LegendsDistorticRecipeSerializer.SERIALIZER_DISTORTIC;
         }
 
