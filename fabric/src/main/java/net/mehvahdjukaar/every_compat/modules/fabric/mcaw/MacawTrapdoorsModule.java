@@ -286,17 +286,17 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(WAFFLE_TRAPDOORS);
 
         BARREL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barrel_trapdoor",
-                        () -> BlockInit.OAK_BARREL_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.SPRUCE_BARREL_TRAPDOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()))
-                .addTexture(modRes("block/blossom/oak_barrel_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
-                .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
+                .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
+                .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
-                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTexture(modRes("block/barrel/spruce_barrel_trapdoor"))
                 .build();
 
         this.addEntry(BARREL_TRAPDOORS);
