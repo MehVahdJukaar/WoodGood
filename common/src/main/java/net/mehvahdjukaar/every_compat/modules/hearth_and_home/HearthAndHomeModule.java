@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.heart_and_home;
+package net.mehvahdjukaar.every_compat.modules.hearth_and_home;
 
 import com.starfish_studios.hearth_and_home.block.LatticeBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -6,11 +6,9 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 
 
@@ -24,7 +22,6 @@ public class HearthAndHomeModule extends SimpleModule {
 
     public HearthAndHomeModule(String modId) {
         super(modId, "hnhome");
-
 
         sanded_wood = SimpleEntrySet.builder(WoodType.class, "sanded_wood",
                         () -> getModBlock("oak_sanded_wood"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
@@ -55,12 +52,13 @@ public class HearthAndHomeModule extends SimpleModule {
                 .addTag(modRes("trims"), Registries.ITEM)
                 .addTexture(modRes("block/trim/oak"))
                 .defaultRecipe()
+                .addRecipe(modRes("oak_trim_from_oak_vertical_trim"))
                 .build();
 
         this.addEntry(trim);
 
         vertical_trim = SimpleEntrySet.builder(WoodType.class, "vertical_trim",
-                        () -> getModBlock("oak_trim"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
+                        () -> getModBlock("oak_vertical_trim"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("trims"), Registries.BLOCK)
                 .addTag(modRes("trims"), Registries.ITEM)
