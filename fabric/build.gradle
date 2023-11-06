@@ -59,7 +59,7 @@ dependencies {
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4062547")
     modImplementation("curse.maven:farmers-delight-fabric-482834:4712795")
-    modCompileOnly("curse.maven:furnish-547069:4449619")
+    modCompileOnly("curse.maven:furnish-547069:4821516")
     modImplementation("curse.maven:friends-and-foes-551364:4712045")
 
     modCompileOnly("curse.maven:handcrafted-538214:4215478")
@@ -71,13 +71,16 @@ dependencies {
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618169")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4585104")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590013")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:4608563")
+    modCompileOnly("curse.maven:macaws-trapdoors-400933:4841534")
     modCompileOnly("curse.maven:macaws-windows-363569:4750644")
+    modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
 
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modImplementation("curse.maven:twigs-496913:4603805")
+    modImplementation("curse.maven:hearth-and-home-849364:4828281")
 
+    // ======================================== DISABLED FOR A REASON =============================================== \\
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 }

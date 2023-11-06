@@ -15,8 +15,7 @@ import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocks
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
-import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
-import net.mehvahdjukaar.every_compat.modules.heart_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;

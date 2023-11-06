@@ -206,6 +206,8 @@
   "block_type.hearth_and_home.parquet": "%s Parquet",
   "block_type.hearth_and_home.sanded_wood": "Sanded %s Wood",
   "block_type.hearth_and_home.trim": "%s Trim",
+  "block_type.hearth_and_home.vertical_trim": "%s Vertical Trim",
+  "block_type.hearth_and_home.lattice": "%s Lattice",
 
   "block_type.mosaic_carpentry.mosaic": "%s Mosaic",
   "block_type.mosaic_carpentry.mosaic_stairs": "%s Mosaic Stairs",
@@ -240,7 +242,7 @@
   "block_type.architects_palette.board_slab": "%s Boards Slab",
 
   "block_type.valhelsia_structures.cut_post": "Cut %s Post",
-  "block_type.valhelsia_structures.stripped_cut_post": "Stripped Cut %s Post",
+  "block_type.valhelsia_structures.cut_stripped_post": "Cut Stripped %s Post",
   "block_type.valhelsia_structures.post": "%s Post",
   "block_type.valhelsia_structures.stripped_post": "Stripped %s Post",
 
@@ -374,6 +376,7 @@
   "block_type.mcwtrpdoors.ranch_trapdoor": "%s Ranch Trapdoor",
   "block_type.mcwtrpdoors.swamp_trapdoor": "%s Swamp Trapdoor",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s Tropical Trapdoor",
+  "block_type.mcwtrpdoors.barrel_trapdoor": "%s Barrel Trapdoor",
 
   "block_type.mcwwindows.window": "Resizeable %s Window",
   "block_type.mcwwindows.window2": "Rectangle %s Window",
