@@ -1,11 +1,12 @@
 package net.mehvahdjukaar.every_compat.forge;
 
+import net.mehvahdjukaar.every_compat.ECNetworking;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
@@ -25,19 +26,18 @@ import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructure
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
-import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
-
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.network.forge.ChannelHandlerImpl;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerNegotiationEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
 import java.util.Optional;
@@ -102,19 +102,18 @@ public class EveryCompatForge extends EveryCompat {
         // addModule("graveyard", () -> GraveyardModule::new);
 
 
-        FMLJavaModLoadingContext.get().getModEventBus().register(this);
-        MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onRemap);
-        MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onDataSync);
+        MinecraftForge.EVENT_BUS.register(this);
 
         forAllModules(CompatModule::onModInit);
     }
 
-    public static void onDataSync(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer s)EveryCompat.sendPacket(s);
+    //public static void onDataSync(PlayerEvent.PlayerLoggedInEvent event) {
+    //    if (event.getEntity() instanceof ServerPlayer s)EveryCompat.sendPacket(s);
+//
+    //  }
 
-    }
-
-    public static void onRemap(MissingMappingsEvent event) {
+    @SubscribeEvent
+    public void onRemap(MissingMappingsEvent event) {
         for (var mapping : event.getMappings(Registries.BLOCK_ENTITY_TYPE, EveryCompat.MOD_ID)) {
             ResourceLocation key = mapping.getKey();
             String path = key.getPath();
@@ -128,5 +127,14 @@ public class EveryCompatForge extends EveryCompat {
                 }
             }
         }
+    }
+
+
+    @SubscribeEvent
+    public void onPlayerNegotiation(PlayerNegotiationEvent playerNegotiationEvent) {
+        ((ChannelHandlerImpl) ECNetworking.CHANNEL).channel.sendTo(new ECNetworking.S2CModVersionCheckMessage(),
+                playerNegotiationEvent.getConnection(),
+                NetworkDirection.LOGIN_TO_CLIENT
+        );
     }
 }
