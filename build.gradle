@@ -178,6 +178,7 @@ dependencies {
     implementation fg.deobf("curse.maven:lauchs-shutters-714019:4492153")  // PORTED FROM 1.19.2
     implementation fg.deobf("curse.maven:mosaic-carpentry-690226:4071275") // PORTED FROM 1.19.2
     implementation fg.deobf("curse.maven:ex-nihilo-sequentia-400012:4556977")
+    implementation fg.deobf("curse.maven:premium-wood-353515:3781130")  // PORTED FROM 1.19.2
 
         // Macaw's
     compileOnly fg.deobf("curse.maven:macaws-bridges-351725:4599796")
@@ -185,18 +186,17 @@ dependencies {
     compileOnly fg.deobf("curse.maven:macaws-fences-and-walls-453925:4204541")
     compileOnly fg.deobf("curse.maven:macaws-lights-and-lamps-502372:4618176")
     implementation fg.deobf("curse.maven:macaws-paths-and-pavings-629153:4585113")
-    implementation fg.deobf("curse.maven:macaws-trapdoors-400933:4608577")
+    implementation fg.deobf("curse.maven:macaws-trapdoors-400933:4841544")
     implementation fg.deobf("curse.maven:macaws-windows-363569:4750670")
     implementation fg.deobf("curse.maven:macaws-furniture-359540:4726291")
     compileOnly fg.deobf("curse.maven:macaws-roofs-352039:4590024")
 
         //TODO: CURRENTLY TESTING \\
-    implementation fg.deobf("curse.maven:premium-wood-353515:3781130")  // PORTED FROM 1.19.2
+    implementation fg.deobf("curse.maven:xercamod-341575:4318574")  // PORTED FROM 1.19.2
     implementation fg.deobf("curse.maven:builders-delight-forge-563734:3857874")
     implementation fg.deobf("curse.maven:productivebees-377897:4257307")  // PORTED FROM 1.19.2
     implementation fg.deobf("curse.maven:buildersaddition-389697:3682212")  // PORTED FROM 1.19.2
-//    compileOnly fg.deobf("curse.maven:woodworks-543610:4396956")  // PORTED FROM 1.19.2
-//    implementation fg.deobf("curse.maven:xercamod-341575:4318574")  // PORTED FROM 1.19.2
+    compileOnly fg.deobf("curse.maven:woodworks-543610:4396956")  // PORTED FROM 1.19.2
 
         //TODO: NOT ADDED YET \\
 //    implementation fg.deobf("curse.maven:functional-storage-556861:4324179") // storage-drawers' alternative
