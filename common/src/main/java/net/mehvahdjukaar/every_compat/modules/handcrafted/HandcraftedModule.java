@@ -8,10 +8,12 @@ import earth.terrarium.handcrafted.client.block.table.table.TableModel;
 import earth.terrarium.handcrafted.client.block.table.table.TableRenderer;
 import earth.terrarium.handcrafted.client.fabric.HandcraftedClientFabric;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
+import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
 import earth.terrarium.handcrafted.common.block.property.SheetState;
 import earth.terrarium.handcrafted.common.block.property.TableState;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
+import earth.terrarium.handcrafted.common.item.RenderedBlockItem;
 import earth.terrarium.handcrafted.common.registry.ModBlockEntityTypes;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
@@ -41,6 +43,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -48,6 +51,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 
 public class HandcraftedModule extends SimpleModule {
@@ -81,12 +86,13 @@ public class HandcraftedModule extends SimpleModule {
 
         CHAIR = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ChairBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new CustomChairBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/chair/chair/oak_chair"))
-                .addTile(ModBlockEntityTypes.TABLE)
+                .addTile(CustomChairTile::new)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .addCustomItem((w, b, p) -> new RenderedBlockItem(b, p))
 //                .defaultRecipe()
                 .build();
         this.addEntry(CHAIR);
@@ -100,7 +106,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTile(CustomTableTile::new)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
-                .addCustomItem((woodType, block, properties) -> new CustomTableItem(block, properties))
+                .addCustomItem((w, b, p) -> new CustomTableItem(b, p))
 //                .defaultRecipe()
                 .build();
         this.addEntry(TABLE);
@@ -378,8 +384,19 @@ public class HandcraftedModule extends SimpleModule {
         event.register(((BlockEntityType) TABLE.getTileHolder().get()), OptimizedTableRenderer::new);
     }
 
-    public class CustomTableTile extends TableBlockEntity {
+    //TYPE: ================ Entity
+    public class CustomChairTile extends ChairBlockEntity {
+        public CustomChairTile(BlockPos blockPos, BlockState blockState) {
+            super(blockPos, blockState);
+        }
 
+        @Override
+        public BlockEntityType<?> getType() {
+            return CHAIR.getTileHolder().get();
+        }
+    }
+
+    public class CustomTableTile extends TableBlockEntity {
         public CustomTableTile(BlockPos blockPos, BlockState blockState) {
             super(blockPos, blockState);
         }
@@ -390,6 +407,7 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
+    //TYPE: ================ stitchAtlasTextures
     @Override
     public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
 
@@ -404,11 +422,32 @@ public class HandcraftedModule extends SimpleModule {
                 event.addSprite(texture.texture());
             }
 
+            for (var t : CHAIR.items.values()) {
+                var texture = OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                    var blockId = Registry.ITEM.getKey(t);
+                    var s = blockId.getPath().split("/");
+                    EveryCompat.LOGGER.info("PATH IS: {} AND {}", s[1], s[2]);
+                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+                            EveryCompat.res("block/hc/" + s[1] + "/chair/chair/" + s[2]));
+                });
+                event.addSprite(texture.texture());
+            }
 
             //...
         }
     }
 
+    //TYPE: ================ Custom Block
+    public class CustomChairBlock extends ChairBlock {
+        public CustomChairBlock(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new CustomChairTile(pos, state);
+        }
+    }
 
     public class CustomTableBlock extends TableBlock {
         public CustomTableBlock(Properties properties) {
@@ -420,6 +459,31 @@ public class HandcraftedModule extends SimpleModule {
             return new CustomTableTile(pos, state);
         }
     }
+
+    //TYPE: ================ Renderer
+    public static class TableItemRenderer extends ItemStackRenderer{
+        @Override
+        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
+            OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, i, i1,
+                    TableState.SINGLE, SheetState.SINGLE, Items.AIR, itemStack.getItem());
+        }
+    }
+
+    //TYPE: ================ Item
+    public static class CustomTableItem extends BlockItem implements ICustomItemRendererProvider {
+
+        public CustomTableItem(Block block, Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        public Supplier<ItemStackRenderer> getRendererFactory() {
+            return () -> new TableItemRenderer();
+        }
+    }
+
+
+    //TYPE: ==================================================
 
     //might be worth moving this stuff to a dedicated client class
     @Environment(EnvType.CLIENT)
@@ -454,7 +518,6 @@ public class HandcraftedModule extends SimpleModule {
 
         public void render(TableBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 
-
             var tableState = entity.getBlockState().getValue(TableBlock.TABLE_BLOCK_SHAPE);
             var sheetState = entity.getBlockState().getValue(TableBlock.TABLE_SHEET_SHAPE);
             Item b = entity.getBlockState().getBlock().asItem();
@@ -469,6 +532,12 @@ public class HandcraftedModule extends SimpleModule {
             poseStack.translate(0.5, 1.5, 0.5);
             poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
             switch (tableState) {
+                case SINGLE -> {
+                    northeastLeg.visible = true;
+                    northwestLeg.visible = true;
+                    southeastLeg.visible = true;
+                    southwestLeg.visible = true;
+                }
                 case CENTER -> {
                     northeastLeg.visible = false;
                     northwestLeg.visible = false;
@@ -526,6 +595,12 @@ public class HandcraftedModule extends SimpleModule {
             }
 
             switch (sheetState) {
+                case SINGLE -> {
+                    northOverlay.visible = true;
+                    eastOverlay.visible = true;
+                    southOverlay.visible = true;
+                    westOverlay.visible = true;
+                }
                 case CENTER -> {
                     northOverlay.visible = false;
                     eastOverlay.visible = false;
@@ -533,52 +608,75 @@ public class HandcraftedModule extends SimpleModule {
                     westOverlay.visible = false;
                 }
                 case NORTH_SIDE -> {
-                    northOverlay.visible = false;
+                    northOverlay.visible = true;
                     eastOverlay.visible = false;
+                    southOverlay.visible = false;
                     westOverlay.visible = false;
                 }
                 case EAST_SIDE -> {
                     northOverlay.visible = false;
-                    eastOverlay.visible = false;
+                    eastOverlay.visible = true;
                     southOverlay.visible = false;
+                    westOverlay.visible = false;
                 }
                 case SOUTH_SIDE -> {
+                    northOverlay.visible = false;
                     eastOverlay.visible = false;
-                    southOverlay.visible = false;
+                    southOverlay.visible = true;
                     westOverlay.visible = false;
                 }
                 case WEST_SIDE -> {
                     northOverlay.visible = false;
+                    eastOverlay.visible = false;
                     southOverlay.visible = false;
-                    westOverlay.visible = false;
+                    westOverlay.visible = true;
                 }
                 case NORTH_EAST_CORNER -> {
-                    northOverlay.visible = false;
-                    eastOverlay.visible = false;
+                    northOverlay.visible = true;
+                    eastOverlay.visible = true;
+                    southOverlay.visible = false;
+                    westOverlay.visible = false;
                 }
                 case NORTH_WEST_CORNER -> {
-                    northOverlay.visible = false;
-                    westOverlay.visible = false;
+                    northOverlay.visible = true;
+                    eastOverlay.visible = false;
+                    southOverlay.visible = false;
+                    westOverlay.visible = true;
                 }
                 case SOUTH_EAST_CORNER -> {
-                    southOverlay.visible = false;
-                    eastOverlay.visible = false;
+                    northOverlay.visible = false;
+                    eastOverlay.visible = true;
+                    southOverlay.visible = true;
+                    westOverlay.visible = false;
                 }
                 case SOUTH_WEST_CORNER -> {
-                    southOverlay.visible = false;
-                    westOverlay.visible = false;
+                    northOverlay.visible = false;
+                    eastOverlay.visible = false;
+                    southOverlay.visible = true;
+                    westOverlay.visible = true;
                 }
                 case NORTH_COVER -> {
-                    northOverlay.visible = false;
+                    northOverlay.visible = true;
+                    eastOverlay.visible = false;
+                    westOverlay.visible = false;
                 }
                 case EAST_COVER -> {
-                    eastOverlay.visible = false;
+                    northOverlay.visible = false;
+                    westOverlay.visible = false;
+                    southOverlay.visible = false;
+                    eastOverlay.visible = true;
                 }
                 case SOUTH_COVER -> {
-                    southOverlay.visible = false;
+                    northOverlay.visible = false;
+                    westOverlay.visible = false;
+                    southOverlay.visible = true;
+                    eastOverlay.visible = false;
                 }
                 case WEST_COVER -> {
-                    westOverlay.visible = false;
+                    northOverlay.visible = false;
+                    westOverlay.visible = true;
+                    southOverlay.visible = false;
+                    eastOverlay.visible = false;
                 }
             }
 
@@ -587,11 +685,10 @@ public class HandcraftedModule extends SimpleModule {
             model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             if (sheet != Items.AIR) {
                 var s = OBJECT_TO_TEXTURE.computeIfAbsent(sheet, b -> {
-
                     var itemId = Registry.ITEM.getKey(sheet);
                     return new Material(
                             TextureAtlas.LOCATION_BLOCKS,
-                            new ResourceLocation("handcrafted:block/table/table_cloth/hc/" + itemId.getPath()));
+                            new ResourceLocation("handcrafted:block/table/table_cloth/" + itemId.getPath()));
                 });
                 model.renderToBuffer(poseStack, s.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             }
@@ -599,25 +696,4 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public static class TableItemRenderer extends ItemStackRenderer{
-
-        @Override
-        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
-            OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, i, i1,
-                    TableState.CENTER, SheetState.CENTER, Items.AIR, itemStack.getItem());
-
-        }
-    }
-
-    public static class CustomTableItem extends BlockItem implements ICustomItemRendererProvider {
-
-        public CustomTableItem(Block block, Properties properties) {
-            super(block, properties);
-        }
-
-        @Override
-        public Supplier<ItemStackRenderer> getRendererFactory() {
-            return ()->new TableItemRenderer();
-        }
-    }
 }
