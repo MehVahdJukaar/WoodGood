@@ -215,11 +215,11 @@ public class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEnt
             }
         }
 
-        var texture = HandcraftedModule.OBJECT_TO_TEXTURE.get(block);
+        var texture = OBJECT_TO_TEXTURE.get(block);
 
         model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
         if (sheet != Items.AIR) {
-            var sheetTexture = HandcraftedModule.OBJECT_TO_TEXTURE.get(sheet);
+            var sheetTexture = OBJECT_TO_TEXTURE.get(sheet);
             if (sheetTexture != null)
                 model.renderToBuffer(poseStack, sheetTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
         }
