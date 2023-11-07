@@ -2,11 +2,8 @@ package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import earth.terrarium.handcrafted.client.HandcraftedClient;
 import earth.terrarium.handcrafted.client.block.chair.chair.ChairRenderer;
 import earth.terrarium.handcrafted.client.block.table.table.TableModel;
-import earth.terrarium.handcrafted.client.block.table.table.TableRenderer;
-import earth.terrarium.handcrafted.client.fabric.HandcraftedClientFabric;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
 import earth.terrarium.handcrafted.common.block.property.SheetState;
@@ -14,7 +11,6 @@ import earth.terrarium.handcrafted.common.block.property.TableState;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
 import earth.terrarium.handcrafted.common.item.RenderedBlockItem;
-import earth.terrarium.handcrafted.common.registry.ModBlockEntityTypes;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
 import earth.terrarium.handcrafted.common.registry.ModTags;
@@ -43,7 +39,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,8 +46,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 
 public class HandcraftedModule extends SimpleModule {
@@ -432,6 +425,16 @@ public class HandcraftedModule extends SimpleModule {
                 });
                 event.addSprite(texture.texture());
             }
+            for (var d : DyeColor.values()) {
+                var sheetItem = Registry.ITEM.get(this.modRes("sheet_" + d.getName()));
+                if (sheetItem != Items.AIR) {
+                    var texture = OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, b ->
+                            new Material(TextureAtlas.LOCATION_BLOCKS,
+                                    modRes("block/table/table_cloth/sheet_" + d.getName())));
+                    event.addSprite(texture.texture());
+                }
+
+            }
 
             //...
         }
@@ -461,7 +464,7 @@ public class HandcraftedModule extends SimpleModule {
     }
 
     //TYPE: ================ Renderer
-    public static class TableItemRenderer extends ItemStackRenderer{
+    public static class TableItemRenderer extends ItemStackRenderer {
         @Override
         public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
             OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, i, i1,
@@ -522,7 +525,7 @@ public class HandcraftedModule extends SimpleModule {
             var sheetState = entity.getBlockState().getValue(TableBlock.TABLE_SHEET_SHAPE);
             Item b = entity.getBlockState().getBlock().asItem();
             Item sheet = entity.getStack().getItem();
-            doRender( poseStack, buffer, packedLight, packedOverlay, tableState, sheetState, sheet, b);
+            doRender(poseStack, buffer, packedLight, packedOverlay, tableState, sheetState, sheet, b);
         }
 
         public void doRender(PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay,
@@ -684,16 +687,12 @@ public class HandcraftedModule extends SimpleModule {
 
             model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             if (sheet != Items.AIR) {
-                var sheetTexture = OBJECT_TO_TEXTURE.computeIfAbsent(sheet, b -> {
-                    var itemId = Registry.ITEM.getKey(sheet);
-                    return new Material(
-                            TextureAtlas.LOCATION_BLOCKS,
-                            new ResourceLocation("handcrafted:block/table/table_cloth/" + itemId.getPath()));
-                });
+                var sheetTexture = OBJECT_TO_TEXTURE.get(sheet);
                 model.renderToBuffer(poseStack, sheetTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             }
             poseStack.popPose();
         }
     }
+
 
 }
