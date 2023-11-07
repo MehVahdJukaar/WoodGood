@@ -37,7 +37,7 @@ dependencies {
 
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     // modImplementation(fileTree(dir: 'mods_fabric', include: '*.jar'))
-    modImplementation("curse.maven:selene-499980:4569959")
+    modImplementation("curse.maven:selene-499980:4843865")
 
     // ============================================= DEPENDENCIES =================================================== \\
     modImplementation("curse.maven:architectury-api-419699:4384405")
@@ -54,7 +54,7 @@ dependencies {
     modCompileOnly("curse.maven:dramatic-doors-380617:4817180")
     modImplementation("curse.maven:arrp-463113:3829389")
     modCompileOnly("curse.maven:camp-chair-531744:3835679")
-    modImplementation("curse.maven:chipped-456956:4634858")
+    modCompileOnly("curse.maven:chipped-456956:4634858")
     modImplementation("curse.maven:cozy-625281:4171816")
     modCompileOnly("curse.maven:create-fabric-624165:4597892")
     modImplementation("curse.maven:decorative-blocks-362528:3941637")

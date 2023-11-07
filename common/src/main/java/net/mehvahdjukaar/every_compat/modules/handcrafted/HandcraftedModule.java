@@ -684,13 +684,13 @@ public class HandcraftedModule extends SimpleModule {
 
             model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             if (sheet != Items.AIR) {
-                var s = OBJECT_TO_TEXTURE.computeIfAbsent(sheet, b -> {
+                var sheetTexture = OBJECT_TO_TEXTURE.computeIfAbsent(sheet, b -> {
                     var itemId = Registry.ITEM.getKey(sheet);
                     return new Material(
                             TextureAtlas.LOCATION_BLOCKS,
                             new ResourceLocation("handcrafted:block/table/table_cloth/" + itemId.getPath()));
                 });
-                model.renderToBuffer(poseStack, s.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+                model.renderToBuffer(poseStack, sheetTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             }
             poseStack.popPose();
         }
