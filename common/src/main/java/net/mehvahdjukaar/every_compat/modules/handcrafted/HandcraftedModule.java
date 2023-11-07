@@ -1,9 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
 import earth.terrarium.handcrafted.client.block.chair.chair.ChairRenderer;
-import earth.terrarium.handcrafted.client.block.table.table.TableModel;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
 import earth.terrarium.handcrafted.common.block.property.SheetState;
@@ -14,8 +12,6 @@ import earth.terrarium.handcrafted.common.item.RenderedBlockItem;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
 import earth.terrarium.handcrafted.common.registry.ModTags;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -25,12 +21,9 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
@@ -42,8 +35,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.IdentityHashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
 
@@ -403,9 +394,9 @@ public class HandcraftedModule extends SimpleModule {
     @Override
     public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
 
-        if (OBJECT_TO_TEXTURE.isEmpty()) {
+        if (OptimizedTableRenderer.OBJECT_TO_TEXTURE.isEmpty()) {
             for (var t : TABLE.items.values()) { //all sheets items
-                var texture = OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
                     var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
@@ -415,7 +406,7 @@ public class HandcraftedModule extends SimpleModule {
             }
 
             for (var t : CHAIR.items.values()) {
-                var texture = OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
                     var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     EveryCompat.LOGGER.info("PATH IS: {} AND {}", s[1], s[2]);
@@ -427,7 +418,7 @@ public class HandcraftedModule extends SimpleModule {
             for (var d : DyeColor.values()) {
                 Item sheetItem = Registry.ITEM.get(this.modRes(d.getName() + "_sheet"));
                 if (sheetItem != Items.AIR) {
-                    var texture = OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, b ->
+                    var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, b ->
                             new Material(TextureAtlas.LOCATION_BLOCKS,
                                     modRes("block/table/table_cloth/" + d.getName() + "_sheet")));
                     event.addSprite(texture.texture());
@@ -486,213 +477,5 @@ public class HandcraftedModule extends SimpleModule {
 
 
     //TYPE: ==================================================
-
-    //might be worth moving this stuff to a dedicated client class
-    @Environment(EnvType.CLIENT)
-    private static final Map<Item, Material> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
-
-    @Environment(EnvType.CLIENT)
-    //this is bad. you should use custom baked models instead...
-    public static class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEntity> {
-        private static OptimizedTableRenderer INSTANCE = null;
-        private final TableModel model;
-        private final ModelPart northeastLeg;
-        private final ModelPart northwestLeg;
-        private final ModelPart southeastLeg;
-        private final ModelPart northOverlay;
-        private final ModelPart southwestLeg;
-        private final ModelPart eastOverlay;
-        private final ModelPart southOverlay;
-        private final ModelPart westOverlay;
-
-        public OptimizedTableRenderer(BlockEntityRendererProvider.Context ctx) {
-            this.model = new TableModel(ctx.getModelSet().bakeLayer(TableModel.LAYER_LOCATION));
-            this.northeastLeg = model.getMain().getChild("table").getChild("northeast_leg");
-            this.northwestLeg = model.getMain().getChild("table").getChild("northwest_leg");
-            this.southeastLeg = model.getMain().getChild("table").getChild("southeast_leg");
-            this.southwestLeg = model.getMain().getChild("table").getChild("southwest_leg");
-            this.northOverlay = model.getMain().getChild("overlay").getChild("overlay_side_north");
-            this.eastOverlay = model.getMain().getChild("overlay").getChild("overlay_side_east");
-            this.southOverlay = model.getMain().getChild("overlay").getChild("overlay_side_south");
-            this.westOverlay = model.getMain().getChild("overlay").getChild("overlay_side_west");
-            INSTANCE = this;
-        }
-
-        public void render(TableBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-
-            var tableState = entity.getBlockState().getValue(TableBlock.TABLE_BLOCK_SHAPE);
-            var sheetState = entity.getBlockState().getValue(TableBlock.TABLE_SHEET_SHAPE);
-            Item b = entity.getBlockState().getBlock().asItem();
-            Item sheet = entity.getStack().getItem();
-            doRender(poseStack, buffer, packedLight, packedOverlay, tableState, sheetState, sheet, b);
-        }
-
-        public void doRender(PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay,
-                             TableState tableState, SheetState sheetState, Item sheet, Item block) {
-            poseStack.pushPose();
-
-            poseStack.translate(0.5, 1.5, 0.5);
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
-            switch (tableState) {
-                case SINGLE -> {
-                    northeastLeg.visible = true;
-                    northwestLeg.visible = true;
-                    southeastLeg.visible = true;
-                    southwestLeg.visible = true;
-                }
-                case CENTER -> {
-                    northeastLeg.visible = false;
-                    northwestLeg.visible = false;
-                    southeastLeg.visible = false;
-                    southwestLeg.visible = false;
-                }
-                case NORTH_EAST_CORNER -> {
-                    northeastLeg.visible = false;
-                    northwestLeg.visible = false;
-                    southwestLeg.visible = false;
-                    southeastLeg.visible = true;
-                }
-                case NORTH_WEST_CORNER -> {
-                    northeastLeg.visible = false;
-                    northwestLeg.visible = false;
-                    southeastLeg.visible = false;
-                    southwestLeg.visible = true;
-                }
-                case SOUTH_EAST_CORNER -> {
-                    northeastLeg.visible = true;
-                    northwestLeg.visible = false;
-                    southeastLeg.visible = false;
-                    southwestLeg.visible = false;
-                }
-                case SOUTH_WEST_CORNER -> {
-                    northeastLeg.visible = false;
-                    northwestLeg.visible = true;
-                    southeastLeg.visible = false;
-                    southwestLeg.visible = false;
-                }
-                case NORTH_SIDE -> {
-                    northeastLeg.visible = false;
-                    northwestLeg.visible = false;
-                    southeastLeg.visible = true;
-                    southwestLeg.visible = true;
-                }
-                case EAST_SIDE -> {
-                    northeastLeg.visible = true;
-                    northwestLeg.visible = false;
-                    southeastLeg.visible = true;
-                    southwestLeg.visible = false;
-                }
-                case SOUTH_SIDE -> {
-                    northeastLeg.visible = true;
-                    northwestLeg.visible = true;
-                    southeastLeg.visible = false;
-                    southwestLeg.visible = false;
-                }
-                case WEST_SIDE -> {
-                    northeastLeg.visible = false;
-                    northwestLeg.visible = true;
-                    southeastLeg.visible = false;
-                    southwestLeg.visible = true;
-                }
-            }
-
-            switch (sheetState) {
-                case SINGLE -> {
-                    northOverlay.visible = true;
-                    eastOverlay.visible = true;
-                    southOverlay.visible = true;
-                    westOverlay.visible = true;
-                }
-                case CENTER -> {
-                    northOverlay.visible = false;
-                    eastOverlay.visible = false;
-                    southOverlay.visible = false;
-                    westOverlay.visible = false;
-                }
-                case NORTH_SIDE -> {
-                    northOverlay.visible = true;
-                    eastOverlay.visible = false;
-                    southOverlay.visible = false;
-                    westOverlay.visible = false;
-                }
-                case EAST_SIDE -> {
-                    northOverlay.visible = false;
-                    eastOverlay.visible = true;
-                    southOverlay.visible = false;
-                    westOverlay.visible = false;
-                }
-                case SOUTH_SIDE -> {
-                    northOverlay.visible = false;
-                    eastOverlay.visible = false;
-                    southOverlay.visible = true;
-                    westOverlay.visible = false;
-                }
-                case WEST_SIDE -> {
-                    northOverlay.visible = false;
-                    eastOverlay.visible = false;
-                    southOverlay.visible = false;
-                    westOverlay.visible = true;
-                }
-                case NORTH_EAST_CORNER -> {
-                    northOverlay.visible = true;
-                    eastOverlay.visible = true;
-                    southOverlay.visible = false;
-                    westOverlay.visible = false;
-                }
-                case NORTH_WEST_CORNER -> {
-                    northOverlay.visible = true;
-                    eastOverlay.visible = false;
-                    southOverlay.visible = false;
-                    westOverlay.visible = true;
-                }
-                case SOUTH_EAST_CORNER -> {
-                    northOverlay.visible = false;
-                    eastOverlay.visible = true;
-                    southOverlay.visible = true;
-                    westOverlay.visible = false;
-                }
-                case SOUTH_WEST_CORNER -> {
-                    northOverlay.visible = false;
-                    eastOverlay.visible = false;
-                    southOverlay.visible = true;
-                    westOverlay.visible = true;
-                }
-                case NORTH_COVER -> {
-                    northOverlay.visible = true;
-                    eastOverlay.visible = false;
-                    westOverlay.visible = false;
-                }
-                case EAST_COVER -> {
-                    northOverlay.visible = false;
-                    westOverlay.visible = false;
-                    southOverlay.visible = false;
-                    eastOverlay.visible = true;
-                }
-                case SOUTH_COVER -> {
-                    northOverlay.visible = false;
-                    westOverlay.visible = false;
-                    southOverlay.visible = true;
-                    eastOverlay.visible = false;
-                }
-                case WEST_COVER -> {
-                    northOverlay.visible = false;
-                    westOverlay.visible = true;
-                    southOverlay.visible = false;
-                    eastOverlay.visible = false;
-                }
-            }
-
-            var texture = OBJECT_TO_TEXTURE.get(block);
-
-            model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
-            if (sheet != Items.AIR) {
-                var sheetTexture = OBJECT_TO_TEXTURE.get(sheet);
-                if (sheetTexture != null)
-                    model.renderToBuffer(poseStack, sheetTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
-            }
-            poseStack.popPose();
-        }
-    }
-
 
 }
