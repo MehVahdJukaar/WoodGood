@@ -35,7 +35,6 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -426,11 +425,11 @@ public class HandcraftedModule extends SimpleModule {
                 event.addSprite(texture.texture());
             }
             for (var d : DyeColor.values()) {
-                var sheetItem = Registry.ITEM.get(this.modRes("sheet_" + d.getName()));
+                Item sheetItem = Registry.ITEM.get(this.modRes(d.getName() + "_sheet"));
                 if (sheetItem != Items.AIR) {
                     var texture = OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, b ->
                             new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/table/table_cloth/sheet_" + d.getName())));
+                                    modRes("block/table/table_cloth/" + d.getName() + "_sheet")));
                     event.addSprite(texture.texture());
                 }
 
@@ -688,7 +687,8 @@ public class HandcraftedModule extends SimpleModule {
             model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             if (sheet != Items.AIR) {
                 var sheetTexture = OBJECT_TO_TEXTURE.get(sheet);
-                model.renderToBuffer(poseStack, sheetTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+                if (sheetTexture != null)
+                    model.renderToBuffer(poseStack, sheetTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             }
             poseStack.popPose();
         }
