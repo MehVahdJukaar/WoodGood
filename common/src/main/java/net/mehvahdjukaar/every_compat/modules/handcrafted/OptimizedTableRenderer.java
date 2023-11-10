@@ -26,7 +26,6 @@ public class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEnt
     //item to texture map used for all renderers
     public static final Map<Item, Material> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
 
-
     public static OptimizedTableRenderer INSTANCE = null;
     private final TableModel model;
     private final ModelPart northeastLeg;
@@ -51,7 +50,8 @@ public class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEnt
         INSTANCE = this;
     }
 
-    public void render(TableBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void render(TableBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
+                       int packedLight, int packedOverlay) {
 
         var tableState = entity.getBlockState().getValue(TableBlock.TABLE_BLOCK_SHAPE);
         var sheetState = entity.getBlockState().getValue(TableBlock.TABLE_SHEET_SHAPE);
@@ -143,75 +143,77 @@ public class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEnt
                 westOverlay.visible = false;
             }
             case NORTH_SIDE -> {
-                northOverlay.visible = true;
+                northOverlay.visible = false;
                 eastOverlay.visible = false;
-                southOverlay.visible = false;
+                southOverlay.visible = true;
                 westOverlay.visible = false;
             }
             case EAST_SIDE -> {
                 northOverlay.visible = false;
-                eastOverlay.visible = true;
+                eastOverlay.visible = false;
                 southOverlay.visible = false;
-                westOverlay.visible = false;
+                westOverlay.visible = true;
             }
             case SOUTH_SIDE -> {
-                northOverlay.visible = false;
+                northOverlay.visible = true;
                 eastOverlay.visible = false;
-                southOverlay.visible = true;
+                southOverlay.visible = false;
                 westOverlay.visible = false;
             }
             case WEST_SIDE -> {
                 northOverlay.visible = false;
-                eastOverlay.visible = false;
+                eastOverlay.visible = true;
                 southOverlay.visible = false;
-                westOverlay.visible = true;
+                westOverlay.visible = false;
             }
             case NORTH_EAST_CORNER -> {
-                northOverlay.visible = true;
-                eastOverlay.visible = true;
-                southOverlay.visible = false;
-                westOverlay.visible = false;
+                northOverlay.visible = false;
+                eastOverlay.visible = false;
+                southOverlay.visible = true;
+                westOverlay.visible = true;
             }
             case NORTH_WEST_CORNER -> {
-                northOverlay.visible = true;
-                eastOverlay.visible = false;
-                southOverlay.visible = false;
-                westOverlay.visible = true;
+                northOverlay.visible = false;
+                eastOverlay.visible = true;
+                southOverlay.visible = true;
+                westOverlay.visible = false;
             }
             case SOUTH_EAST_CORNER -> {
-                northOverlay.visible = false;
-                eastOverlay.visible = true;
-                southOverlay.visible = true;
-                westOverlay.visible = false;
-            }
-            case SOUTH_WEST_CORNER -> {
-                northOverlay.visible = false;
-                eastOverlay.visible = false;
-                southOverlay.visible = true;
-                westOverlay.visible = true;
-            }
-            case NORTH_COVER -> {
                 northOverlay.visible = true;
                 eastOverlay.visible = false;
+                southOverlay.visible = false;
+                westOverlay.visible = true;
+            }
+            case SOUTH_WEST_CORNER -> {
+                northOverlay.visible = true;
+                eastOverlay.visible = true;
+                southOverlay.visible = false;
                 westOverlay.visible = false;
+            }
+            // Only applied to 2 tables
+            case NORTH_COVER -> {
+                northOverlay.visible = false;
+                eastOverlay.visible = true;
+                southOverlay.visible = true;
+                westOverlay.visible = true;
             }
             case EAST_COVER -> {
-                northOverlay.visible = false;
-                westOverlay.visible = false;
-                southOverlay.visible = false;
-                eastOverlay.visible = true;
+                eastOverlay.visible = false;
+                northOverlay.visible = true;
+                westOverlay.visible = true;
+                southOverlay.visible = true;
             }
             case SOUTH_COVER -> {
-                northOverlay.visible = false;
-                westOverlay.visible = false;
-                southOverlay.visible = true;
-                eastOverlay.visible = false;
+                southOverlay.visible = false;
+                northOverlay.visible = true;
+                westOverlay.visible = true;
+                eastOverlay.visible = true;
             }
             case WEST_COVER -> {
-                northOverlay.visible = false;
-                westOverlay.visible = true;
-                southOverlay.visible = false;
-                eastOverlay.visible = false;
+                westOverlay.visible = false;
+                northOverlay.visible = true;
+                southOverlay.visible = true;
+                eastOverlay.visible = true;
             }
         }
 

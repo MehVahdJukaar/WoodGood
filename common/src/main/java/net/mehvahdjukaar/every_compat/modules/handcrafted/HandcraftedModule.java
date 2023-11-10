@@ -1,9 +1,15 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.handcrafted.client.block.chair.chair.ChairRenderer;
+import com.mojang.math.Vector3f;
+import earth.terrarium.handcrafted.common.block.chair.bench.BenchBlock;
+import earth.terrarium.handcrafted.common.block.chair.bench.BenchBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
+import earth.terrarium.handcrafted.common.block.chair.couch.CouchBlock;
+import earth.terrarium.handcrafted.common.block.chair.couch.CouchBlockEntity;
+import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
+import earth.terrarium.handcrafted.common.block.property.CouchShape;
 import earth.terrarium.handcrafted.common.block.property.SheetState;
 import earth.terrarium.handcrafted.common.block.property.TableState;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
@@ -27,6 +33,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
@@ -43,7 +50,7 @@ public class HandcraftedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> CHAIR;
     public final SimpleEntrySet<WoodType, Block> TABLE;
 //    public final SimpleEntrySet<WoodType, Block> BENCH;
-//    public final SimpleEntrySet<WoodType, Block> COUCH;
+    public final SimpleEntrySet<WoodType, Block> COUCH;
 //    public final SimpleEntrySet<WoodType, Block> FANCY_BED;
 //    public final SimpleEntrySet<WoodType, Block> DINING_BENCH;
 //    public final SimpleEntrySet<WoodType, Block> NIGHTSTAND;
@@ -75,7 +82,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTile(CustomChairTile::new)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
-                .addCustomItem((w, b, p) -> new RenderedBlockItem(b, p))
+                .addCustomItem((w, b, p) -> new CustomChairItem(b, p))
 //                .defaultRecipe()
                 .build();
         this.addEntry(CHAIR);
@@ -104,18 +111,20 @@ public class HandcraftedModule extends SimpleModule {
 //                .defaultRecipe()
                 .build();
         this.addEntry(BENCH);
-
+*/
         COUCH = SimpleEntrySet.builder(WoodType.class, "couch",
                         ModBlocks.OAK_COUCH, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CouchBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new CustomCouchBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/chair/couch/oak_couch"))
+                .addTile(CustomCouchTile::new)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .addCustomItem((w, b, p) -> new CustomCouchItem(b, p))
 //                .defaultRecipe()
                 .build();
         this.addEntry(COUCH);
-
+/*
         FANCY_BED = SimpleEntrySet.builder(WoodType.class, "fancy_bed",
                         ModBlocks.OAK_FANCY_BED, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FancyBedBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BED)))
@@ -363,8 +372,10 @@ public class HandcraftedModule extends SimpleModule {
 
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register(((BlockEntityType) CHAIR.getTileHolder().get()), ChairRenderer::new);
+        event.register(((BlockEntityType) CHAIR.getTileHolder().get()), CompatChairRenderer::new);
         event.register(((BlockEntityType) TABLE.getTileHolder().get()), OptimizedTableRenderer::new);
+//        event.register(((BlockEntityType) BENCH.getTileHolder().get()), CompatBenchRenderer::new);
+        event.register(((BlockEntityType) COUCH.getTileHolder().get()), CompatCouchRenderer::new);
     }
 
     //TYPE: ================ Entity
@@ -389,29 +400,42 @@ public class HandcraftedModule extends SimpleModule {
             return TABLE.getTileHolder().get();
         }
     }
+/*
+    public class CustomBenchTile extends BenchBlockEntity {
+        public CustomBenchTile(BlockPos blockPos, BlockState blockState) {
+            super(blockPos, blockState);
+        }
+
+        @Override
+        public BlockEntityType<?> getType() {
+            return Bench.getTileHolder().get();
+        }
+    }
+*/
+
+    public class CustomCouchTile extends CouchBlockEntity {
+        public CustomCouchTile(BlockPos blockPos, BlockState blockState) {
+            super(blockPos, blockState);
+        }
+
+        @Override
+        public BlockEntityType<?> getType() {
+            return COUCH.getTileHolder().get();
+        }
+    }
 
     //TYPE: ================ stitchAtlasTextures
     @Override
     public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
 
         if (OptimizedTableRenderer.OBJECT_TO_TEXTURE.isEmpty()) {
+            // TABLE
             for (var t : TABLE.items.values()) { //all sheets items
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
                     var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res("block/hc/" + s[1] + "/table/table/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-            for (var t : CHAIR.items.values()) {
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
-                    var blockId = Registry.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    EveryCompat.LOGGER.info("PATH IS: {} AND {}", s[1], s[2]);
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res("block/hc/" + s[1] + "/chair/chair/" + s[2]));
                 });
                 event.addSprite(texture.texture());
             }
@@ -423,10 +447,51 @@ public class HandcraftedModule extends SimpleModule {
                                     modRes("block/table/table_cloth/" + d.getName() + "_sheet")));
                     event.addSprite(texture.texture());
                 }
-
             }
 
-            //...
+            // CHAIR
+            for (var t : CHAIR.items.values()) {
+                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                    var blockId = Registry.ITEM.getKey(t);
+                    var s = blockId.getPath().split("/");
+                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+                            EveryCompat.res("block/hc/" + s[1] + "/chair/chair/" + s[2]));
+                });
+                event.addSprite(texture.texture());
+            }
+            for (var d : DyeColor.values()) {
+                Item cushionItem = Registry.ITEM.get(this.modRes(d.getName() + "_cushion"));
+                if (cushionItem != Items.AIR) {
+                    var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, b ->
+                            new Material(TextureAtlas.LOCATION_BLOCKS,
+                                    modRes("block/chair/chair/cushion/" + d.getName() + "_cushion")));
+                    event.addSprite(texture.texture());
+                }
+            }
+
+            // BENCH
+
+
+            // COUCH
+            for (var t : COUCH.items.values()) {
+                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                    var blockId = Registry.ITEM.getKey(t);
+                    var s = blockId.getPath().split("/");
+                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+                            EveryCompat.res("block/hc/" + s[1] + "/chair/couch/" + s[2]));
+                });
+                event.addSprite(texture.texture());
+            }
+            for (var d : DyeColor.values()) {
+                Item couchCushion = Registry.ITEM.get(this.modRes(d.getName() + "_couch"));
+                if (couchCushion != Items.AIR) {
+                    var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(couchCushion, b ->
+                            new Material(TextureAtlas.LOCATION_BLOCKS,
+                                    modRes("block/chair/couch/cushion/" + d.getName() + "_couch")));
+                    event.addSprite(texture.texture());
+                }
+            }
+
         }
     }
 
@@ -453,15 +518,65 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    //TYPE: ================ Renderer
+/*
+    public class CustomBenchBlock extends BenchBlock {
+        public CustomBenchBlock(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new CustomBenchTile(pos, state);
+        }
+    }
+*/
+
+    public class CustomCouchBlock extends CouchBlock {
+        public CustomCouchBlock(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new CustomCouchTile(pos, state);
+        }
+    }
+
+
+    //TYPE: ================ ItemRenderer
     public static class TableItemRenderer extends ItemStackRenderer {
         @Override
-        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
+        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int i, int i1) {
             OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, i, i1,
                     TableState.SINGLE, SheetState.SINGLE, Items.AIR, itemStack.getItem());
         }
     }
 
+    public static class ChairItemRenderer extends ItemStackRenderer {
+        @Override
+        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int i, int i1) {
+            CompatChairRenderer.INSTANCE.doRender(itemStack.getItem(), Items.AIR, Direction.SOUTH, poseStack,
+                    multiBufferSource, i, i1, 0.75f, -0.5);
+        }
+    }
+/*
+    public static class BenchItemRenderer extends ItemStackRenderer {
+        @Override
+        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int i, int i1) {
+        }
+    }
+*/
+
+    public static class CouchItemRenderer extends ItemStackRenderer {
+        @Override
+        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int i, int i1) {
+
+        }
+    }
     //TYPE: ================ Item
     public static class CustomTableItem extends BlockItem implements ICustomItemRendererProvider {
 
@@ -475,7 +590,41 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
+    public static class CustomChairItem extends BlockItem implements ICustomItemRendererProvider {
 
-    //TYPE: ==================================================
+        public CustomChairItem(Block block, Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        public Supplier<ItemStackRenderer> getRendererFactory() {
+            return () -> new ChairItemRenderer();
+        }
+    }
+/*
+    public static class CustomBenchItem extends BlockItem implements ICustomItemRendererProvider {
+
+        public CustomBenchItem(Block block, Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        public Supplier<ItemStackRenderer> getRendererFactory() {
+            return () -> new BenchItemRenderer();
+        }
+    }
+*/
+
+    public static class CustomCouchItem extends BlockItem implements ICustomItemRendererProvider {
+
+        public CustomCouchItem(Block block, Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        public Supplier<ItemStackRenderer> getRendererFactory() {
+            return () -> new CouchItemRenderer();
+        }
+    }
 
 }
