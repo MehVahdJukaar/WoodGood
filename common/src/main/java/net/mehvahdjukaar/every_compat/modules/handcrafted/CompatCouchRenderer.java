@@ -86,7 +86,7 @@ public class CompatCouchRenderer implements BlockEntityRenderer<CouchBlockEntity
         poseStack.mulPose(Vector3f.XP.rotationDegrees(180));
         var blockTexture = OBJECT_TO_TEXTURE.get(block); // COMPAT
         model.renderToBuffer(poseStack, blockTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f); // COMPAT
-        if (false && cushion != Items.AIR) {
+        if (cushion != Items.AIR) {
             var cushionTexture = OBJECT_TO_TEXTURE.get(cushion); // COMPAT
             model.renderToBuffer(poseStack, cushionTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f); // COMPAT
         }
