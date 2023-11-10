@@ -3,14 +3,11 @@ package net.mehvahdjukaar.every_compat.modules.handcrafted;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import earth.terrarium.handcrafted.client.block.chair.couch.CouchModel;
-import earth.terrarium.handcrafted.client.block.chair.couch.CouchRenderer;
 import earth.terrarium.handcrafted.common.block.chair.couch.CouchBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
 import earth.terrarium.handcrafted.common.block.property.CouchShape;
-import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import net.minecraft.client.Minecraft;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -20,11 +17,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 public class CompatCouchRenderer implements BlockEntityRenderer<CouchBlockEntity> {
-    public static final Map<Item, Material> OBJECT_TO_TEXTURE = new Object2ObjectArrayMap<>();
+    public static final Map<Item, Material> OBJECT_TO_TEXTURE = new Object2ObjectOpenHashMap<>();
 
     public static CompatCouchRenderer INSTANCE = null;
     private final CouchModel couchSingle;
@@ -52,18 +48,19 @@ public class CompatCouchRenderer implements BlockEntityRenderer<CouchBlockEntity
         Item cushion = entity.getStack().getItem();
 
         CouchShape shape = entity.getBlockState().getValue(ExpandableCouchBlock.COUCH_SHAPE);
+
+        doRender(block, cushion, shape, entity.getBlockState().getValue(ExpandableCouchBlock.FACING), shape, poseStack, bufferSource, packedLight, packedOverlay);
+    }
+
+    public void doRender(Item block, Item cushion, CouchShape shape, Direction direction, CouchShape shape, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         CouchModel model = switch (shape) {
             case SINGLE -> couchSingle;
             case LEFT -> couchLeft;
             case MIDDLE -> couchMiddle;
             case RIGHT -> couchRight;
-            case INNER_LEFT, INNER_RIGHT ->couchCorner;
+            case INNER_LEFT, INNER_RIGHT -> couchCorner;
             case OUTER_LEFT, OUTER_RIGHT -> couchInvertedCorner;
         };
-        doRender(block, cushion, model, entity.getBlockState().getValue(ExpandableCouchBlock.FACING), shape, poseStack, bufferSource, packedLight, packedOverlay);
-    }
-
-    public void doRender(Item block, Item cushion, CouchModel model, Direction direction, CouchShape shape, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
         poseStack.mulPose(switch (direction) {
