@@ -49,10 +49,10 @@ public class CompatCouchRenderer implements BlockEntityRenderer<CouchBlockEntity
 
         CouchShape shape = entity.getBlockState().getValue(ExpandableCouchBlock.COUCH_SHAPE);
 
-        doRender(block, cushion, shape, entity.getBlockState().getValue(ExpandableCouchBlock.FACING), shape, poseStack, bufferSource, packedLight, packedOverlay);
+        doRender(block, cushion, entity.getBlockState().getValue(ExpandableCouchBlock.FACING), shape, poseStack, bufferSource, packedLight, packedOverlay);
     }
 
-    public void doRender(Item block, Item cushion, CouchShape shape, Direction direction, CouchShape shape, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void doRender(Item block, Item cushion, Direction direction, CouchShape shape, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         CouchModel model = switch (shape) {
             case SINGLE -> couchSingle;
             case LEFT -> couchLeft;

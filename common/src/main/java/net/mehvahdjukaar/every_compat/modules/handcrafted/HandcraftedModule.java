@@ -575,7 +575,7 @@ public class HandcraftedModule extends SimpleModule {
         @Override
         public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
                                  MultiBufferSource multiBufferSource, int i, int i1) {
-            CompatCouchRenderer.INSTANCE.doRender(itemStack.getItem(), Items.AIR, CouchShape.SINGLE, Direction.SOUTH,
+            CompatCouchRenderer.INSTANCE.doRender(itemStack.getItem(), Items.AIR, Direction.SOUTH,
                     CouchShape.SINGLE, poseStack,
                     multiBufferSource, i, i1);
         }
