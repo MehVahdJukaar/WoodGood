@@ -111,29 +111,30 @@ dependencies {
     //modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
 
 
-    // Dependencies
-    modImplementation("curse.maven:architectury-api-419699:4663010")
-    modImplementation("curse.maven:resourceful-lib-570073:4681831")
+    // ============================================== DEPENDENCIES ================================================== \\
+    modImplementation("curse.maven:architectury-api-419699:4663010") // REI
+    modImplementation("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
 
-    modImplementation("curse.maven:jade-324717:4711195")
-
+    modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:4442628")
-    modCompileOnly("curse.maven:cloth-config-348521:3972423")
-    modCompileOnly("curse.maven:ctm-267602:4393695")
-    modImplementation("curse.maven:jei-238222:4712868")
+    modCompileOnly("curse.maven:cloth-config-348521:3972423") // REI
+//    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped ## not required ##
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
-    modCompileOnly("curse.maven:roughly-enough-items-310111:4573157")
-    modImplementation("curse.maven:valhelsia-core-416935:4735319")
+    modCompileOnly("curse.maven:valhelsia-core-416935:4735319")
     modCompileOnly("curse.maven:framework-549225:4710572")
-    modImplementation("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
+    modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
     //modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}")
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
 
 
-    // Imports
-    modImplementation("curse.maven:another-furniture-610492:4815126")
+    // ================================================ IMPORTS ===================================================== \\
+    modCompileOnly("curse.maven:roughly-enough-items-310111:4573157")
+    modImplementation("curse.maven:jade-324717:4711195")
+    modImplementation("curse.maven:jei-238222:4712868")
+
+    modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:architects-palette-433862:4498448")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
@@ -183,18 +184,17 @@ dependencies {
 
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
-    // implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
-    // implementation fg.deobf("curse.maven:curios-309927:3670447")
-    // implementation fg.deobf("curse.maven:geckolib-388172:3856641")
-    // implementation fg.deobf("curse.maven:marg-324494:3723497")
-    // implementation fg.deobf("curse.maven:ortuslib-616457:3768197")
+    // implementation fg.deobf("curse.maven:curios-309927:3670447") // LIBRARY
+    // implementation fg.deobf("curse.maven:geckolib-388172:3856641") // LIBRARY
+    // implementation fg.deobf("curse.maven:marg-324494:3723497") // LIBRARY
+    // implementation fg.deobf("curse.maven:ortuslib-616457:3768197") // LIBRARY
     // implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
 
-    // modImplementation("curse.maven:benched-417063:3821546")
+    // modImplementation("curse.maven:benched-417063:3821546") // Use OBJ Format
 
-    // modImplementation("curse.maven:malum-484064:3768401")
+    // modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBModel
 
-    // ============================================================================================================== \\
+    // =========================================== FOR TESTING ===================================================== \\
     modImplementation("curse.maven:terrablender-563928:4647094")
     modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
 }
