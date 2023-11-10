@@ -439,6 +439,7 @@ public class HandcraftedModule extends SimpleModule {
                 });
                 event.addSprite(texture.texture());
             }
+            // cloths
             for (var d : DyeColor.values()) {
                 Item sheetItem = Registry.ITEM.get(this.modRes(d.getName() + "_sheet"));
                 if (sheetItem != Items.AIR) {
@@ -459,13 +460,22 @@ public class HandcraftedModule extends SimpleModule {
                 });
                 event.addSprite(texture.texture());
             }
+
+            // cushins
             for (var d : DyeColor.values()) {
                 Item cushionItem = Registry.ITEM.get(this.modRes(d.getName() + "_cushion"));
                 if (cushionItem != Items.AIR) {
+                    // chair
                     var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, b ->
                             new Material(TextureAtlas.LOCATION_BLOCKS,
                                     modRes("block/chair/chair/cushion/" + d.getName() + "_cushion")));
                     event.addSprite(texture.texture());
+
+                    // couch
+                    var texture2 = CompatCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, b ->
+                            new Material(TextureAtlas.LOCATION_BLOCKS,
+                                    modRes("block/chair/couch/cushion/" + d.getName() + "_cushion")));
+                    event.addSprite(texture2.texture());
                 }
             }
 
@@ -474,22 +484,13 @@ public class HandcraftedModule extends SimpleModule {
 
             // COUCH
             for (var t : COUCH.items.values()) {
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                var texture = CompatCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
                     var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res("block/hc/" + s[1] + "/chair/couch/" + s[2]));
                 });
                 event.addSprite(texture.texture());
-            }
-            for (var d : DyeColor.values()) {
-                Item couchCushion = Registry.ITEM.get(this.modRes(d.getName() + "_couch"));
-                if (couchCushion != Items.AIR) {
-                    var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(couchCushion, b ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/chair/couch/cushion/" + d.getName() + "_couch")));
-                    event.addSprite(texture.texture());
-                }
             }
 
         }

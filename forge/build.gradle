@@ -171,7 +171,7 @@ dependencies {
     modCompileOnly("curse.maven:twigs-496913:4533061")
     modCompileOnly("curse.maven:woodworks-543610:4023081")
     modImplementation("curse.maven:woodster-869951:4575175")
-    modCompileOnly("curse.maven:habitat-422972:4594207")
+    modImplementation("curse.maven:habitat-422972:4594207")
     modImplementation("curse.maven:ex-nihilo-sequentia-400012:4731378")
     modImplementation("curse.maven:xercamod-341575:3947222")
     modImplementation("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
