@@ -7,6 +7,7 @@ import earth.terrarium.handcrafted.common.block.property.SheetState;
 import earth.terrarium.handcrafted.common.block.property.TableState;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
@@ -24,7 +25,7 @@ import java.util.Map;
 //this is bad. you should use custom baked models instead...
 public class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEntity> {
     //item to texture map used for all renderers
-    public static final Map<Item, Material> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
+    public static final Map<Item, Material> OBJECT_TO_TEXTURE = new Object2ObjectArrayMap<>();
 
     public static OptimizedTableRenderer INSTANCE = null;
     private final TableModel model;

@@ -7,6 +7,7 @@ import earth.terrarium.handcrafted.client.block.chair.couch.CouchRenderer;
 import earth.terrarium.handcrafted.common.block.chair.couch.CouchBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
 import earth.terrarium.handcrafted.common.block.property.CouchShape;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
@@ -23,7 +24,7 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 
 public class CompatCouchRenderer implements BlockEntityRenderer<CouchBlockEntity> {
-    public static final Map<Item, Material> OBJECT_TO_TEXTURE = new IdentityHashMap<>();
+    public static final Map<Item, Material> OBJECT_TO_TEXTURE = new Object2ObjectArrayMap<>();
 
     public static CompatCouchRenderer INSTANCE = null;
     private final CouchModel couchSingle;
