@@ -121,14 +121,14 @@ dependencies {
     modImplementation("curse.maven:supermartijn642s-config-lib-438332:3871792")
     modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238")
     modImplementation("curse.maven:valhelsia-core-416935:4181245")
-    modImplementation("curse.maven:selene-499980:4569958")
+    modImplementation("curse.maven:selene-499980:4843863")
 
     modImplementation("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
     //modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
 
-    // Imports
+    // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
     modImplementation("curse.maven:architects-palette-433862:4498448")
     modCompileOnly("curse.maven:backpacked-352835:3923045")
@@ -147,14 +147,14 @@ dependencies {
     modCompileOnly("curse.maven:infinity-buttons-661902:4716908")
     modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
 
-    modImplementation("curse.maven:macaws-bridges-351725:4599799")
-    modImplementation("curse.maven:macaws-doors-378646:4446154")
+    modCompileOnly("curse.maven:macaws-bridges-351725:4599799")
+    modCompileOnly("curse.maven:macaws-doors-378646:4446154")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:4204550")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726294")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618179")
-    modImplementation("curse.maven:macaws-paths-and-pavings-629153:4585116")
-    modImplementation("curse.maven:macaws-roofs-352039:4590028")
-    modImplementation("curse.maven:macaws-trapdoors-400933:4608580")
+    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4585116")
+    modCompileOnly("curse.maven:macaws-roofs-352039:4590028")
+    modImplementation("curse.maven:macaws-trapdoors-400933:4841549")
     modCompileOnly("curse.maven:macaws-windows-363569:4750673")
 
     modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
@@ -173,15 +173,20 @@ dependencies {
     modImplementation("curse.maven:woodster-869951:4575175")
     modImplementation("curse.maven:habitat-422972:4594207")
     modImplementation("curse.maven:ex-nihilo-sequentia-400012:4731378")
-    modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
     modImplementation("curse.maven:xercamod-341575:3947222")
     modImplementation("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
-
+    modCompileOnly("curse.maven:valhelsia-structures-347488:4799968")
     modImplementation("curse.maven:builders-delight-forge-563734:4362665")
 
+
     // =========================================== WORK IN PROGRESS ================================================= \\
-    modImplementation("curse.maven:i-like-wood-324164:4463114")
+//    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
+//    modImplementation("curse.maven:i-like-wood-324164:4463114")
+    modCompileOnly("curse.maven:carpenter-549446:4673192")
+    modCompileOnly("curse.maven:functional-storage-556861:4810636")
+    //modImplementation("com.playtics.shipping:shipping-forge-1.19.2-1.2")
+    //modImplementation("net.mcreator.cozyhome:cozyhome-forge-1.19.2-2.2.7")
+    modImplementation("curse.maven:just-a-raft-mod-274350:4688639")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")

@@ -37,9 +37,9 @@ dependencies {
 
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     // modImplementation(fileTree(dir: 'mods_fabric', include: '*.jar'))
-    modImplementation("curse.maven:selene-499980:4569959")
+    modImplementation("curse.maven:selene-499980:4843865")
 
-    // Dependencies
+    // ============================================= DEPENDENCIES =================================================== \\
     modImplementation("curse.maven:architectury-api-419699:4384405")
     modImplementation("curse.maven:cloth-config-348521:3972420")
     modImplementation("curse.maven:resourceful-lib-570073:4434137")
@@ -48,13 +48,13 @@ dependencies {
     modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
     modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
 
-    // Imports
+    // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
     modCompileOnly("curse.maven:dramatic-doors-380617:4817180")
     modImplementation("curse.maven:arrp-463113:3829389")
     modCompileOnly("curse.maven:camp-chair-531744:3835679")
-    modImplementation("curse.maven:chipped-456956:4634858")
+    modCompileOnly("curse.maven:chipped-456956:4634858")
     modImplementation("curse.maven:cozy-625281:4171816")
     modCompileOnly("curse.maven:create-fabric-624165:4597892")
     modImplementation("curse.maven:decorative-blocks-362528:3941637")
@@ -72,7 +72,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618164")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4585100")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590009")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:4608559")
+    modCompileOnly("curse.maven:macaws-trapdoors-400933:4841530")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726276")
     modCompileOnly("curse.maven:macaws-windows-363569:4750640")
 
@@ -81,8 +81,9 @@ dependencies {
     modImplementation("curse.maven:twigs-496913:4531594")
     modRuntimeOnly("curse.maven:hearth-and-home-849364:4488851")
 
+    // =========================================== WORK IN PROGRESS ================================================= \\
 
-
+    // ======================================== DISABLED FOR A REASON =============================================== \\
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 }
