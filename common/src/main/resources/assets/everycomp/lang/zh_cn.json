@@ -376,6 +376,7 @@
   "block_type.mcwtrpdoors.ranch_trapdoor": "%s农场活板门",
   "block_type.mcwtrpdoors.swamp_trapdoor": "%s沼泽活板门",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s热带活板门",
+  "block_type.mcwtrpdoors.barrel_trapdoor": "%s桶式活板门",
   
   "block_type.mcwwindows.window": "可调%s窗户",
   "block_type.mcwwindows.window2": "长方格%s窗户",
@@ -1265,7 +1266,11 @@
   "wood_type.mysticsbiomes.jacaranda": "蓝花楹木",
   "wood_type.mysticsbiomes.cherry": "樱桃木",
   "wood_type.mysticsbiomes.strawberry": "草莓木",
+  "wood_type.mysticsbiomes.maple": "枫木",
   "leaves_type.mysticsbiomes.jacaranda": "蓝花楹",
+  "leaves_type.mysticsbiomes.maple": "枫树",
+  "leaves_type.mysticsbiomes.orange_maple": "橙色枫树",
+  "leaves_type.mysticsbiomes.yellow_maple": "黄色枫树",
   "leaves_type.mysticsbiomes.budding_peony": "含苞的牡丹",
   "leaves_type.mysticsbiomes.peony": "牡丹",
 
@@ -1748,5 +1753,4 @@
   "wood_type.windswept.holly": "冬青木",
   "wood_type.windswept.chestnut": "栗木",
   "leaves_type.windswept.holly": "冬青",
-  "leaves_type.windswept.chestnut": "栗树"
-}
+  "leaves_type.windswept.chestnut": "栗树"}
