@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modMenu;
+package net.mehvahdjukaar.every_compat.modmenu;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

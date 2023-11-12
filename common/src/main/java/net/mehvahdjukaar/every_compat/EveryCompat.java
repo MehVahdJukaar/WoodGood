@@ -68,6 +68,8 @@ public abstract class EveryCompat {
     public static final Map<String, CompatModule> ACTIVE_MODULES = new TreeMap<>();
 
     public static final List<CompatMod> COMPAT_MODS = new ArrayList<>();
+    // all mod that EC directly or indirectly depends on
+    public static final Set<String> DEPENDENCIES = new HashSet<>();
 
     //these are the names of the block types we add wooden variants for
     public static final Map<Class<? extends BlockType>, Set<String>> ENTRY_TYPES = new HashMap<>();
@@ -78,6 +80,8 @@ public abstract class EveryCompat {
 
 
     protected void commonInit() {
+
+        ECNetworking.init();
 
         ServerDynamicResourcesHandler.INSTANCE.register();
 
@@ -152,24 +156,29 @@ public abstract class EveryCompat {
 
     private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
         COMPAT_MODS.add(new CompatMod(modId, woodFrom, blocksFrom));
+        DEPENDENCIES.add(modId);
+        DEPENDENCIES.add(woodFrom);
+        DEPENDENCIES.addAll(blocksFrom);
     }
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
-            var module = moduleFactory.get().apply(modId);
+            CompatModule module = moduleFactory.get().apply(modId);
             try {
                 EveryCompatAPI.registerModule(module);
             } catch (Exception e) {
                 if (PlatHelper.isDev()) throw e;
                 else EveryCompat.LOGGER.error("Failed to register module for mod " + module, e);
             }
+            DEPENDENCIES.add(modId);
+            DEPENDENCIES.addAll(module.getAlreadySupportedMods());
         }
     }
 
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
 
-    public static RegSupplier<CreativeModeTab> MOD_TAB = RegHelper.registerCreativeModeTab(res(MOD_ID),
+    public static final RegSupplier<CreativeModeTab> MOD_TAB = RegHelper.registerCreativeModeTab(res(MOD_ID),
             true,
             builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
                     .backgroundSuffix("item_search.png")
@@ -230,86 +239,6 @@ public abstract class EveryCompat {
 
     //TODO: replace oak based with acacia based
 
-    public static final ChannelHandler CHANNEL = ChannelHandler.createChannel(EveryCompat.res("network"));
-
-    static {
-        CHANNEL.register(NetworkDir.PLAY_TO_CLIENT, S2CBlockStateCheckMessage.class, S2CBlockStateCheckMessage::new);
-    }
-
-    public static class S2CBlockStateCheckMessage implements Message {
-
-        public S2CBlockStateCheckMessage(FriendlyByteBuf buf) {
-            int start = buf.readVarInt();
-            int size = buf.readVarInt();
-
-            boolean mismatched = false;
-            for (int i = start; i < (start + size); i++) {
-                try {
-                    var nbt = buf.readNbt();
-                    if (nbt == null) {
-                        int aa = 1;
-                    }
-                    var b = Utils.readBlockState(nbt, null);
-                    BlockState exp = Block.BLOCK_STATE_REGISTRY.byId(i);
-                    if (b != exp) {
-                        if (!mismatched) {
-                            LOGGER.error("Found blockstate id mismatch from " + b + "at id " + i + ". Was expecting: " + exp);
-                        }
-                        mismatched = true;
-                    } else {
-                        if (mismatched) {
-                            LOGGER.error("to" + b + "at id " + i);
-                        }
-                        mismatched = false;
-                    }
-                } catch (Exception e) {
-                    LOGGER.error("Failed to read blockstate in id map: ", e);
-                    break;
-                }
-            }
-            buf.release();
-        }
-
-        public S2CBlockStateCheckMessage() {
-        }
-
-        @Override
-        public void writeToBuffer(FriendlyByteBuf buf) {
-            FriendlyByteBuf dummy = new FriendlyByteBuf(Unpooled.buffer());
-            int start = lastInd;
-            for (int i = lastInd; i < Block.BLOCK_STATE_REGISTRY.size(); i++) {
-                lastInd++;
-                CompoundTag nbt = NbtUtils.writeBlockState(Block.stateById(i));
-                dummy.writeNbt(nbt);
-                if (dummy.writerIndex() > 1048576 * 0.9) {
-                    break;
-                }
-            }
-            buf.writeVarInt(start);
-            buf.writeVarInt(lastInd - start);
-            buf.writeBytes(dummy);
-            dummy.release();
-        }
-
-        @Override
-        public void handle(ChannelHandler.Context context) {
-
-        }
-    }
-
-
-    private static int lastInd = 0;
-
-    public static void sendPacket(ServerPlayer s) {
-        if (ModConfigs.DEBUG_PACKET.get() || PlatHelper.isDev()) {
-            lastInd = 0;
-            LOGGER.warn("Starting Blockstate Map validity check:");
-            while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {
-                EveryCompat.CHANNEL.sendToClientPlayer(s, new EveryCompat.S2CBlockStateCheckMessage());
-            }
-        }
-    }
-
 
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         if (ModConfigs.TAB_ENABLED.get()) {
@@ -329,4 +258,10 @@ public abstract class EveryCompat {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
     }
+
+
+    protected static void sendPacket(ServerPlayer s) {
+    }
+
+
 }

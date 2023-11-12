@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.fabric;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
@@ -34,6 +35,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
+        addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
 
         // ========================================= Add Modules ==================================================== \\
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
@@ -48,5 +50,6 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 
         // ============================================= OTHERS ===================================================== \\
         forAllModules(CompatModule::onModInit);
+
     }
 }

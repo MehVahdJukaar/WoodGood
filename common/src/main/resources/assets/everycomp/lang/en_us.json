@@ -376,6 +376,7 @@
   "block_type.mcwtrpdoors.ranch_trapdoor": "%s Ranch Trapdoor",
   "block_type.mcwtrpdoors.swamp_trapdoor": "%s Swamp Trapdoor",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s Tropical Trapdoor",
+  "block_type.mcwtrpdoors.barrel_trapdoor": "%s Barrel Trapdoor",
 
   "block_type.mcwwindows.window": "Resizeable %s Window",
   "block_type.mcwwindows.window2": "Rectangle %s Window",

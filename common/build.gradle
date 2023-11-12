@@ -9,8 +9,8 @@ loom {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
-    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
-    //modImplementation("curse.maven:selene-499980:4569959")
+    //modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
+    modImplementation("curse.maven:selene-499980:4845156")
 
     //common. Fabric version that works on both
     modImplementation("curse.maven:resourceful-lib-570073:4681831")
