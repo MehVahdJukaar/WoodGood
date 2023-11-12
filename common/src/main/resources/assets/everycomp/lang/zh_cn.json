@@ -374,7 +374,8 @@
   "block_type.mcwtrpdoors.ranch_trapdoor": "%s农场活板门",
   "block_type.mcwtrpdoors.swamp_trapdoor": "%s沼泽活板门",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s热带活板门",
-  
+  "block_type.mcwtrpdoors.barrel_trapdoor": "%s桶式活板门",
+
   "block_type.mcwwindows.blinds": "%s百叶窗",
   "block_type.mcwwindows.four_window": "%s四格窗户",
   "block_type.mcwwindows.log_parapet": "%s护台",
