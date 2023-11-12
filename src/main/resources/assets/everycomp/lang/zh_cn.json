@@ -178,6 +178,11 @@
   "block_type.mcwtrpdoors.mystic_trapdoor": "%s神秘活板门",
   "block_type.mcwtrpdoors.paper_trapdoor": "%s纸窗活板门",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s热带活板门",
+  "block_type.mcwtrpdoors.bamboo_trapdoor": "%s竹编活板门",
+  "block_type.mcwtrpdoors.ranch_trapdoor": "%s农场活板门",
+  "block_type.mcwtrpdoors.swamp_trapdoor": "%s沼泽活板门",
+  "block_type.mcwtrpdoors.blossom_trapdoor": "%s花格活板门",
+  "block_type.mcwtrpdoors.barrel_trapdoor": "%s桶式活板门",
 
   "block_type.mcwwindows.window": "可调%s窗户",
   "block_type.mcwwindows.window2": "长方格%s窗户",
