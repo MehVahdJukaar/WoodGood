@@ -240,7 +240,7 @@
   "block_type.architects_palette.board_slab": "%s宽木板台阶",
 
   "block_type.valhelsia_structures.cut_post": "切制%s桩",
-  "block_type.valhelsia_structures.stripped_cut_post": "去皮切制%s桩",
+  "block_type.valhelsia_structures.cut_stripped_post": "切制去皮%s桩",
   "block_type.valhelsia_structures.post": "%s桩",
   "block_type.valhelsia_structures.stripped_post": "去皮%s桩",
   
@@ -374,7 +374,8 @@
   "block_type.mcwtrpdoors.ranch_trapdoor": "%s农场活板门",
   "block_type.mcwtrpdoors.swamp_trapdoor": "%s沼泽活板门",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s热带活板门",
-  
+  "block_type.mcwtrpdoors.barrel_trapdoor": "%s桶式活板门",
+
   "block_type.mcwwindows.blinds": "%s百叶窗",
   "block_type.mcwwindows.four_window": "%s四格窗户",
   "block_type.mcwwindows.log_parapet": "%s护台",
@@ -684,7 +685,7 @@
   "leaves_type.aether.holiday": "节庆",
   "leaves_type.aether.decorated_holiday": "装饰节庆",
 
-  "wood_type.aether_redux.prismatic": "虹彩木",
+  "wood_type.aether_redux.fieldsprout": "域茁木",
   "wood_type.aether_redux.blightwillow": "疫纤木",
   "wood_type.aether_redux.cloudcap": "云伞木",
   "wood_type.aether_redux.springshroom": "簧菇木",
@@ -694,8 +695,9 @@
   "leaves_type.aether_redux.glacia": "冰川",
   "leaves_type.aether_redux.gilded_oak": "透金橡树",
   "leaves_type.aether_redux.blighted_skyroot": "染疫天根",
-  "leaves_type.aether_redux.pink_prismatic": "粉红色虹彩",
-  "leaves_type.aether_redux.teal_prismatic": "亮青色虹彩",
+  "leaves_type.aether_redux.flowering_fieldsprout": "盛开的域茁",
+  "leaves_type.aether_redux.chromatic": "缤彩灌木",
+  "leaves_type.aether_redux.chromatic_berry": "结莓的缤彩灌木",
 
   "wood_type.alexscaves.pewen": "南洋杉木",
   "wood_type.alexscaves.thornwood": "荆棘木",
@@ -1261,7 +1263,11 @@
   "wood_type.mysticsbiomes.jacaranda": "蓝花楹木",
   "wood_type.mysticsbiomes.cherry": "樱桃木",
   "wood_type.mysticsbiomes.strawberry": "草莓木",
+  "wood_type.mysticsbiomes.maple": "枫木",
   "leaves_type.mysticsbiomes.jacaranda": "蓝花楹",
+  "leaves_type.mysticsbiomes.maple": "枫树",
+  "leaves_type.mysticsbiomes.orange_maple": "橙色枫树",
+  "leaves_type.mysticsbiomes.yellow_maple": "黄色枫树",
   "leaves_type.mysticsbiomes.budding_peony": "含苞的牡丹",
   "leaves_type.mysticsbiomes.peony": "牡丹",
 
@@ -1744,5 +1750,4 @@
   "wood_type.windswept.holly": "冬青木",
   "wood_type.windswept.chestnut": "栗木",
   "leaves_type.windswept.holly": "冬青",
-  "leaves_type.windswept.chestnut": "栗树"
-}
+  "leaves_type.windswept.chestnut": "栗树"}
