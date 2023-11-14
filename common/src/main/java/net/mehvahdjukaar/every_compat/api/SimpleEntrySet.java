@@ -161,7 +161,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 String path = getBlockName(w);
                 Block block = getOptionalBlock(path, w.getNamespace());
                 if (block == null) block = getOptionalBlock(path, possibleNamespaces);
-                if (block != null) {
+                if (block != null && w.getChildKey(block) == null) {
                     try {
                         w.addChild(childKey, block);
                     } catch (Exception ignored) {
