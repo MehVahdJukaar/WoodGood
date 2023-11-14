@@ -124,6 +124,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
+        String childKey = getChildKey(module);
         for (T w : woodTypes) {
             String name = getBlockName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
@@ -136,7 +137,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                     this.blocks.put(w, block);
 
                     registry.register(EveryCompat.res(fullName), block);
-                    w.addChild(getChildKey(module), block);
+                    w.addChild(childKey, block);
 
                     if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
                         SIMPLE_DROPS.add(block);
@@ -147,24 +148,23 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         //attempts adding all other children
 
-        String childKey = getChildKey(module);
-        baseType.get().addChild(childKey, base);
+        try {
+            baseType.get().addChild(childKey, base);
+        } catch (Exception ignored) {
+        }
 
         Set<String> alreadySupportedMods = new HashSet<>(module.getAlreadySupportedMods());
         alreadySupportedMods.add(module.modId);
         var possibleNamespaces = alreadySupportedMods.toArray(String[]::new);
         for (var w : BlockSetAPI.getTypeRegistry(this.getTypeClass()).getValues()) {
-            if (!items.containsKey(w)) {
+            if (!items.containsKey(w) && w.getChild(childKey) == null) {
                 String path = getBlockName(w);
                 Block block = getOptionalBlock(path, w.getNamespace());
                 if (block == null) block = getOptionalBlock(path, possibleNamespaces);
                 if (block != null) {
                     try {
                         w.addChild(childKey, block);
-                    } catch (Exception e) {
-                        if (PlatHelper.isDev()) throw new RuntimeException();
-                        else
-                            EveryCompat.LOGGER.warn("Tried to register same object twice to block set: key {}, object {}", childKey, block);
+                    } catch (Exception ignored) {
                     }
                 }
             }
