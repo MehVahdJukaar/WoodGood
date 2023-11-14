@@ -38,17 +38,18 @@ dependencies {
     //modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     modImplementation("curse.maven:selene-499980:4845156")
 
-    // Dependencies
-    modImplementation("curse.maven:resourceful-lib-570073:4681832")
-    modImplementation("curse.maven:architectury-api-419699:4663009")
-
-    modCompileOnly("curse.maven:cloth-config-348521:3972420")
-    modCompileOnly("curse.maven:roughly-enough-items-310111:4573156")
+    // ============================================== DEPENDENCIES ================================================== \\
+    modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
+    modImplementation("curse.maven:architectury-api-419699:4663009") // REI
+    modCompileOnly("curse.maven:athena-841890:4764358") // Chipped
+    modCompileOnly("curse.maven:cloth-config-348521:3972420") // REI
     modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
     modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
 
-    // Imports
+    // ================================================ IMPORTS ===================================================== \\
+    modCompileOnly("curse.maven:roughly-enough-items-310111:4573156")
+
     modImplementation("curse.maven:another-furniture-610492:4815124")
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
@@ -83,6 +84,9 @@ dependencies {
     // ======================================== DISABLED FOR A REASON =============================================== \\
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
     // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
+
+    // ============================================ FOR TESTING ===================================================== \\
+    modImplementation("curse.maven:terrestria-323974:4850485")
 }
 
 
