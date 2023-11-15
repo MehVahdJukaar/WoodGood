@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 
+//SUPPORT: v3.2.1
 public class MacawFurnitureModule extends SimpleModule {
 
     //TYPE: BOOKSHELF
@@ -47,7 +48,7 @@ public class MacawFurnitureModule extends SimpleModule {
     //TYPE: COUNTER
     public final SimpleEntrySet<WoodType, Block> counter;
     public final SimpleEntrySet<WoodType, Block> drawerCounter;
-    public final SimpleEntrySet<WoodType, Block> cupboardCounter;
+    public final SimpleEntrySet<WoodType, Block> CUPBOARD_Counter;
     public final SimpleEntrySet<WoodType, Block> doubleDrawerCounter;
 
     public final SimpleEntrySet<WoodType, Block> strippedCounter;
@@ -139,7 +140,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         STRIPPED_CUPBOARD_BOOKSHELF = SimpleEntrySet.builder(WoodType.class, "bookshelf_cupboard","stripped",
                         BlockInit.STRIPPED_OAK_BOOKSHELF_CUPBOARD, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new BookCabinet(WoodGood.copySafe(w.log)),"stripped_log"))
+                        ifHasChild(w -> new BookCabinetHinge(WoodGood.copySafe(w.log)),"stripped_log"))
                 .addTag(modRes("bookshelf_cupboard"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
@@ -279,7 +280,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(doubleDrawerCounter);
 
-        cupboardCounter = SimpleEntrySet.builder(WoodType.class, "cupboard_counter",
+        CUPBOARD_Counter = SimpleEntrySet.builder(WoodType.class, "cupboard_counter",
                         BlockInit.OAK_CUPBOARD_COUNTER, () -> WoodType.OAK_WOOD_TYPE,
                         ifHasChild(w -> new CupboardCounter(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(modRes("cupboard_counter"), Registry.BLOCK_REGISTRY)
@@ -289,7 +290,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(cupboardCounter);
+        this.addEntry(CUPBOARD_Counter);
 
         strippedCounter = SimpleEntrySet.builder(WoodType.class, "counter", "stripped",
                         BlockInit.STRIPPED_OAK_COUNTER, () -> WoodType.OAK_WOOD_TYPE,
@@ -326,7 +327,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         STRIPPED_CUPBOARD_COUNTER = SimpleEntrySet.builder(WoodType.class, "cupboard_counter", "stripped",
                         BlockInit.STRIPPED_OAK_CUPBOARD_COUNTER, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new CupboardCounter(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(modRes("cupboard_counter"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::solid)
@@ -688,7 +689,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         STRIPPED_WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe", "stripped",
                         BlockInit.STRIPPED_OAK_WARDROBE, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new TallFurniture(WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new TallFurnitureHinge(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("wardrobe"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
@@ -699,7 +700,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         STRIPPED_MODERN_WARDROBE = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe", "stripped",
                         BlockInit.STRIPPED_OAK_MODERN_WARDROBE, () -> WoodType.OAK_WOOD_TYPE,
-                        ifHasChild(w -> new TallFurniture(WoodGood.copySafe(w.log)), "stripped_log"))
+                        ifHasChild(w -> new TallFurnitureHinge(WoodGood.copySafe(w.log)), "stripped_log"))
                 .addTag(modRes("modern_wardrobe"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tab)
