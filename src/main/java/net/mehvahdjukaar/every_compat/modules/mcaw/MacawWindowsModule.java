@@ -12,8 +12,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 
+//SUPPORT: v2.20
 public class MacawWindowsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BLINDS;
@@ -70,7 +70,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         LOG_WINDOWS = SimpleEntrySet.builder(WoodType.class, "window",
                         BlockInit.OAK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new Window(WoodGood.copySafe(w.log)))
+                        w -> new ConnectedWindow(WoodGood.copySafe(w.log)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
@@ -83,7 +83,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         PLANKS_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_window",
                         BlockInit.OAK_PLANK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new Window(WoodGood.copySafe(w.planks)))
+                        w -> new ConnectedWindow(WoodGood.copySafe(w.planks)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
@@ -122,7 +122,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         STRIPPED_LOG_WINDOWS = SimpleEntrySet.builder(WoodType.class, "log_window", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new Window(WoodGood.copySafe(w.log)))
+                        w -> new ConnectedWindow(WoodGood.copySafe(w.log)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
