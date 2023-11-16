@@ -35,8 +35,8 @@ dependencies {
         exclude module: "fabric-api"
     }
 
-    //modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
-    modImplementation("curse.maven:selene-499980:4845156")
+    //modImplementation ("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric")
+    modImplementation("curse.maven:selene-499980:4871409")
 
     // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
