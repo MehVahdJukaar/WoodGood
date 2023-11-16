@@ -107,7 +107,7 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    modImplementation("curse.maven:selene-499980:4871420")
+    modImplementation("curse.maven:selene-499980:4871785")
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
 
 
@@ -155,7 +155,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-bridges-351725:4605466")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:4605518")
-    modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
+    modImplementation("curse.maven:macaws-furniture-359540:4726300")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618183")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4585120")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
@@ -197,6 +197,6 @@ dependencies {
     // =========================================== FOR TESTING ===================================================== \\
 //    modImplementation("curse.maven:terrablender-563928:4647094") // BOP
 //    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
-//    modImplementation("curse.maven:terrafirmacraft-302973:4862659")
-//    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
+    modImplementation("curse.maven:terrafirmacraft-302973:4862659")
+    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
 }

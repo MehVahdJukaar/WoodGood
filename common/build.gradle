@@ -10,14 +10,14 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
     //modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
-    modImplementation("curse.maven:selene-499980:4845156")
+    modImplementation("curse.maven:selene-499980:4871784")
 
 
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}")))
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
     //common. Fabric version that works on both
-    modImplementation("curse.maven:resourceful-lib-570073:4681831")
+    modCompileOnly("curse.maven:resourceful-lib-570073:4681831")
     modCompileOnly("curse.maven:architectury-api-419699:4663010")
 
 
@@ -33,7 +33,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
-    modImplementation("curse.maven:hearth-and-home-849364:4828281")
+    modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
