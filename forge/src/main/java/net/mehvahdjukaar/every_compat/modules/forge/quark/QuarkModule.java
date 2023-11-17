@@ -318,8 +318,8 @@ public class QuarkModule extends SimpleModule {
     @Override
     public void registerTiles(Registrator<BlockEntityType<?>> registry) {
         super.registerTiles(registry);
-        chestTile = (BlockEntityType<? extends ChestBlockEntity>) chests.getTileHolder().get();
-        trappedChestTile = (BlockEntityType<? extends ChestBlockEntity>) trappedChests.getTileHolder().get();
+        chestTile = chests.getTile(ChestBlockEntity.class);
+        trappedChestTile = trappedChests.getTile(ChestBlockEntity.class);
     }
 
     @Override

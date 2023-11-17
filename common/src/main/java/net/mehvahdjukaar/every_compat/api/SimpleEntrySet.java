@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -87,8 +88,14 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
 
+    @Deprecated(forRemoval = true)
     public @Nullable ITileHolder<?> getTileHolder() {
         return tileHolder;
+    }
+
+    public <E extends BlockEntity> BlockEntityType<E> getTile(Class<E> tileClass){
+        Preconditions.checkNotNull(tileHolder, "Entry set has no tile entity!");
+        return (BlockEntityType<E>) tileHolder.get();
     }
 
     @Override

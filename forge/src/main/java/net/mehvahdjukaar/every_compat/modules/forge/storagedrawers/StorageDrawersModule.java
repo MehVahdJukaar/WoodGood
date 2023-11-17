@@ -22,6 +22,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -254,7 +255,7 @@ public class StorageDrawersModule extends SimpleModule {
 
         @Override
         public @NotNull BlockEntityType<?> getType() {
-            return FULL_DRAWERS_1.getTileHolder().get();
+            return FULL_DRAWERS_1.getTile(BlockEntity.class);
         }
     }
 
