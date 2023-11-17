@@ -104,6 +104,9 @@ public abstract class CompatModule {
 
         if (this.getAlreadySupportedMods().contains(woodFrom)) return true;
 
+        // check if TerraFirmaCraft (tfc) mod exist, then won't discards wood types
+        if (woodFrom.equals("tfc")) return false;
+
         //discards wood types from this mod
         if (woodFrom.equals(modId)) return true; //quark, blossom
 
