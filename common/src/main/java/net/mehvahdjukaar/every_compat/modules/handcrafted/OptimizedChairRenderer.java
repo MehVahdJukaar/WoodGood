@@ -15,16 +15,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class CompatChairRenderer implements BlockEntityRenderer<ChairBlockEntity> {
+public class OptimizedChairRenderer implements BlockEntityRenderer<ChairBlockEntity> {
 
-    public static CompatChairRenderer INSTANCE = null;
+    public static OptimizedChairRenderer INSTANCE = null;
     private final ChairModel model;
     protected final ModelPart base;
     protected final ModelPart seat;
     protected final ModelPart chair;
     protected final ModelPart withCushion;
 
-    public CompatChairRenderer(BlockEntityRendererProvider.Context ctx) {
+    public OptimizedChairRenderer(BlockEntityRendererProvider.Context ctx) {
         this.model = new ChairModel(ctx.getModelSet().bakeLayer(ChairModel.LAYER_LOCATION));
         base = model.getMain().getChild("base");
         seat = model.getMain().getChild("seat");
@@ -38,18 +38,15 @@ public class CompatChairRenderer implements BlockEntityRenderer<ChairBlockEntity
                        int packedLight, int packedOverlay) {
         Item block = entity.getBlockState().getBlock().asItem();
         Item cushion = entity.getStack().getItem();
-//        CouchShape shape = entity.getBlockState().getValue(ExpandableCouchBlock.COUCH_SHAPE);
         doRender(block, cushion,
-                entity.getBlockState().getValue(ExpandableCouchBlock.FACING), poseStack, bufferSource, packedLight, packedOverlay, 1, 0);
+                entity.getBlockState().getValue(ExpandableCouchBlock.FACING), poseStack, bufferSource, packedLight, packedOverlay);
     }
 
     public void doRender(Item block, Item cushion, Direction direction, PoseStack poseStack,
-                         MultiBufferSource buffer, int packedLight, int packedOverlay, float scale, double moveY) {
+                         MultiBufferSource buffer, int packedLight, int packedOverlay) {
 
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
-        poseStack.scale(scale, scale, scale);
-        poseStack.translate(0, moveY, 0);
         poseStack.mulPose(Vector3f.YN.rotationDegrees(direction.getOpposite().toYRot()));
         poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
         withCushion.visible = false;
