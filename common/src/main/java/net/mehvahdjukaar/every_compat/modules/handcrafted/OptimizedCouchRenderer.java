@@ -19,10 +19,10 @@ import net.minecraft.world.item.Items;
 
 import java.util.Map;
 
-public class CompatCouchRenderer implements BlockEntityRenderer<CouchBlockEntity> {
+public class OptimizedCouchRenderer implements BlockEntityRenderer<CouchBlockEntity> {
     public static final Map<Item, Material> OBJECT_TO_TEXTURE = new Object2ObjectOpenHashMap<>();
 
-    public static CompatCouchRenderer INSTANCE = null;
+    public static OptimizedCouchRenderer INSTANCE = null;
     private final CouchModel couchSingle;
     private final CouchModel couchCorner;
     private final CouchModel couchInvertedCorner;
@@ -30,7 +30,7 @@ public class CompatCouchRenderer implements BlockEntityRenderer<CouchBlockEntity
     private final CouchModel couchMiddle;
     private final CouchModel couchRight;
 
-    public CompatCouchRenderer(BlockEntityRendererProvider.Context ctx) {
+    public OptimizedCouchRenderer(BlockEntityRendererProvider.Context ctx) {
         EntityModelSet modelSet = ctx.getModelSet();
         this.couchSingle = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_SINGLE));
         this.couchCorner = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_CORNER));
@@ -77,15 +77,15 @@ public class CompatCouchRenderer implements BlockEntityRenderer<CouchBlockEntity
                 case OUTER_RIGHT, INNER_RIGHT -> Vector3f.YP.rotationDegrees(0);
             };
             default -> switch (shape) {
-                case OUTER_LEFT, INNER_LEFT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(0);
+                 case OUTER_LEFT, INNER_LEFT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(0);
                 case OUTER_RIGHT, INNER_RIGHT -> Vector3f.YP.rotationDegrees(270);
             };
         });
         poseStack.mulPose(Vector3f.XP.rotationDegrees(180));
-        var blockTexture = OBJECT_TO_TEXTURE.get(block); // COMPAT
+        var blockTexture = OBJECT_TO_TEXTURE.get(block);
         model.renderToBuffer(poseStack, blockTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f); // COMPAT
         if (cushion != Items.AIR) {
-            var cushionTexture = OBJECT_TO_TEXTURE.get(cushion); // COMPAT
+            var cushionTexture = OBJECT_TO_TEXTURE.get(cushion);
             model.renderToBuffer(poseStack, cushionTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f); // COMPAT
         }
         poseStack.popPose();
