@@ -31,7 +31,9 @@ public class ModConfigs {
     public static Supplier<Boolean> DEPEND_ON_PACKS;
     public static Supplier<Boolean> DEBUG_RESOURCES;
     public static Supplier<Boolean> DEBUG_PACKET;
-    public static Supplier<Boolean> TOOLTIPS;
+    public static Supplier<Boolean> BLOCK_TYPE_TOOLTIP;
+    public static Supplier<Boolean> MOD_TOOPTIP;
+    public static Supplier<Boolean> TOOLTIPS_ADVANCED;
 
 
     public static void init() {
@@ -51,8 +53,15 @@ public class ModConfigs {
         DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
                 .define("save_debug_resources", false);
         DEBUG_PACKET = builder.comment("Don't touch unless you are told to").define("debug_packet", false);
-        TOOLTIPS = builder.comment("Enabled tooltips showing which mod an EC item is from")
-                        .define("mod_origin_tooltips", true);
+
+        builder.push("tooltips");
+        MOD_TOOPTIP = builder.comment("Enabled tooltips showing which mod an EC item is from")
+                        .define("mod_origin_enabled", true);
+        BLOCK_TYPE_TOOLTIP = builder.comment("Enabled tooltips showing which block type an EC item is made from")
+                .define("block_type_ednabld", true);
+        TOOLTIPS_ADVANCED = builder.comment("Only show on advanced settings")
+                        .define("show_on_advanced_tooltips", false);
+
         builder.pop();
 
 
