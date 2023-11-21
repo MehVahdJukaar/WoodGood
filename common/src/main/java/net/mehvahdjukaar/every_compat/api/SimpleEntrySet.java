@@ -93,7 +93,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return tileHolder;
     }
 
-    public <E extends BlockEntity> BlockEntityType<E> getTile(Class<E> tileClass){
+    public <E extends BlockEntity> BlockEntityType<E> getTile(Class<E> tileClass) {
         Preconditions.checkNotNull(tileHolder, "Entry set has no tile entity!");
         return (BlockEntityType<E>) tileHolder.get();
     }
@@ -217,6 +217,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             if (i != null) {
                 this.items.put(w, i);
                 registry.register(Utils.getID(value), i);
+                EveryCompat.ITEMS_TO_MODULES.put(i, module);
             }
         });
     }

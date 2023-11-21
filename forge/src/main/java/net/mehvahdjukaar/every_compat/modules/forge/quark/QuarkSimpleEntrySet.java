@@ -91,10 +91,6 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         }
     }
 
-    @Override
-    public void registerItems(CompatModule module, Registrator<Item> registry) {
-        super.registerItems(module, registry);
-    }
 
     //this does not work. all modules seem to be disabled here. why??
     /*

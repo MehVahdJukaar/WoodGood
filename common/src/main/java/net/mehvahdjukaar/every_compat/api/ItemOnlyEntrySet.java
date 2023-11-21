@@ -101,6 +101,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
                     registry.register(EveryCompat.res(fullName), item);
                     w.addChild(getChildKey(module), item);
+                    EveryCompat.ITEMS_TO_MODULES.put(item, module);
                 }
             }
         }
