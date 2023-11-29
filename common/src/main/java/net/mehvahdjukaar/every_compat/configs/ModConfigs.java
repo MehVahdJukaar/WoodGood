@@ -58,7 +58,7 @@ public class ModConfigs {
         MOD_TOOPTIP = builder.comment("Enabled tooltips showing which mod an EC item is from")
                         .define("mod_origin_enabled", true);
         BLOCK_TYPE_TOOLTIP = builder.comment("Enabled tooltips showing which block type an EC item is made from")
-                .define("block_type_ednabld", true);
+                .define("block_type_enabled", true);
         TOOLTIPS_ADVANCED = builder.comment("Only show on advanced settings")
                         .define("show_on_advanced_tooltips", false);
 
