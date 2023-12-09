@@ -228,7 +228,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     }
                     String oldPath = re.getKey().getPath();
 
-                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
+                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w,
+                            blockId, baseType.get().getTypeName());
 
                     Respriter respriter = re.getValue();
                     if (type == WoodType.class) {

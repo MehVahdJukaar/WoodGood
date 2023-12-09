@@ -2,6 +2,8 @@ package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.world.inventory.InventoryMenu;
 
 
 public class EveryCompatClient {
@@ -11,6 +13,11 @@ public class EveryCompatClient {
         ClientPlatformHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
         ClientPlatformHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         ClientPlatformHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
+        ClientPlatformHelper.addAtlasTextureCallback(TextureAtlas.LOCATION_BLOCKS, EveryCompatClient::registerTextures);
+    }
+
+    private static void registerTextures(ClientPlatformHelper.AtlasTextureEvent event){
+        EveryCompat.forAllModules(m -> m.stitchAtlasTextures(event));
     }
 
     private static void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {

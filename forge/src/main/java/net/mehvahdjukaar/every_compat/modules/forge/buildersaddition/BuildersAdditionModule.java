@@ -3,28 +3,21 @@ package net.mehvahdjukaar.every_compat.modules.forge.buildersaddition;
 import com.mrh0.buildersaddition.Index;
 import com.mrh0.buildersaddition.blocks.*;
 import com.mrh0.buildersaddition.itemgroup.ModGroup;
-import com.mrh0.buildersaddition.tileentity.ShelfTileEntity;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Collection;
 
 
 public class BuildersAdditionModule extends SimpleModule {
@@ -47,22 +40,23 @@ public class BuildersAdditionModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> stools;
     public final SimpleEntrySet<WoodType, Block> supportsBracket;
     public final SimpleEntrySet<WoodType, Block> tables;
-    //public final SimpleEntrySet<WoodType, Block> panels;
+    public final SimpleEntrySet<WoodType, Block> verticalSlab;
 
     public BuildersAdditionModule(String modId) {
         super(modId, "bca");
         CreativeModeTab tab = ModGroup.MAIN;
 
-        /*
-        panels = SimpleEntrySet.builder(WoodType.class, "", "vertical_slab",
+        verticalSlab = SimpleEntrySet.builder(WoodType.class, "vertical_slab",
                         Index.OAK_VERTICAL_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks))
+                        (w) -> {
+                            if (PlatformHelper.isModLoaded("v_slab_compat")) return null;
+                            return new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks);
+                        })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addRecipe(modRes("vertical_slab/vertical_slab_oak"))
+                .addRecipe(modRes("vertical_slab/oak_vertical_slab"))
+                .addRecipe(modRes("vertical_slab/reverse/oak_vertical_slab"))
                 .setTab(() -> tab)
                 .build();
-
-        this.addEntry(panels);*/
 
         tables = SimpleEntrySet.builder(WoodType.class, "", "table",
                         Index.TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,

@@ -1,9 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
-import com.fizzware.dramaticdoors.DramaticDoors;
-import com.fizzware.dramaticdoors.blocks.TallDoorBlock;
-import com.fizzware.dramaticdoors.blocks.TallSlidingDoorBlock;
-import com.fizzware.dramaticdoors.blocks.TallStableDoorBlock;
+import com.fizzware.dramaticdoors.forge.DDRegistry;
+import com.fizzware.dramaticdoors.forge.blocks.TallDoorBlock;
+import com.fizzware.dramaticdoors.forge.blocks.TallSlidingDoorBlock;
+import com.fizzware.dramaticdoors.forge.blocks.TallStableDoorBlock;
 import com.mcwdoors.kikoz.init.BlockInit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -59,7 +59,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -78,7 +78,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -97,7 +97,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -116,7 +116,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -132,7 +132,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -151,7 +151,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -170,7 +170,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -189,7 +189,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -208,7 +208,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -227,7 +227,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -246,7 +246,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -265,7 +265,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -284,7 +284,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -303,7 +303,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -322,7 +322,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -342,7 +342,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .createPaletteFromOak(this::swampDoorPalette)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -361,7 +361,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -380,7 +380,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DramaticDoors.MAIN_TAB)
+                .setTab(() -> DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();

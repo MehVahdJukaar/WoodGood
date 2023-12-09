@@ -16,6 +16,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdd
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.exnihilo.ExNihiloSequentiaModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
@@ -98,16 +99,17 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
 		addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+        addModule("xercamod", () -> XercaModule::new);
+        addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
 
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("boatload", () -> BoatloadModule::new);
 
-        // addModule("graveyard", () -> GraveyardModule::new);
 
         // Disabled due to block entity complications
 
         // Disabled until custom block models work
-         addModule("xercamod", () -> XercaModule::new);
+            // addModule("graveyard", () -> GraveyardModule::new);
 
         if (PlatformHelper.getEnv().isClient()) {
             EveryCompatClient.commonInit();

@@ -24,12 +24,8 @@ public class CreateClientModule {
 
     }
 
-    public static void onClientInit(CreateModule module) {
-        ClientPlatformHelper.addAtlasTextureCallback(TextureAtlas.LOCATION_BLOCKS, (e) -> onTextureStitch(e, module));
-    }
-
     //we could also remove this and run getCT before client setup
-    private static void onTextureStitch(ClientPlatformHelper.AtlasTextureEvent event, CreateModule module) {
+    public static void onTextureStitch(ClientPlatformHelper.AtlasTextureEvent event, CreateModule module) {
         module.windows.blocks.forEach((w, b) -> {
             String path = "block/" + module.shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window_connected";
             event.addSprite(EveryCompat.res(path));
