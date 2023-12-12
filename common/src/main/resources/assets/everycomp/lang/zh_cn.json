@@ -1,7 +1,9 @@
 {
   "itemGroup.everycomp": "泛用兼容",
   "itemGroup.everycomp.everycomp": "泛用兼容",
-  
+  "tooltip.everycomp.mod": "模组：%s",
+  "tooltip.everycomp.wood_type": "木材种类：%s",
+  "tooltip.everycomp.leaf_type": "树叶种类：%s",
   "block_type.twigs.table": "%s桌",
   
   "block_type.missingwilds.fallen_log": "倒下的%s原木",
@@ -377,7 +379,7 @@
   "block_type.mcwtrpdoors.swamp_trapdoor": "%s沼泽活板门",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s热带活板门",
   "block_type.mcwtrpdoors.barrel_trapdoor": "%s桶式活板门",
-  
+
   "block_type.mcwwindows.window": "可调%s窗户",
   "block_type.mcwwindows.window2": "长方格%s窗户",
   "block_type.mcwwindows.four_window": "%s四格窗户",
@@ -1753,4 +1755,5 @@
   "wood_type.windswept.holly": "冬青木",
   "wood_type.windswept.chestnut": "栗木",
   "leaves_type.windswept.holly": "冬青",
-  "leaves_type.windswept.chestnut": "栗树"}
+  "leaves_type.windswept.chestnut": "栗树"
+}
