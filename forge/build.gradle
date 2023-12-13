@@ -177,7 +177,7 @@ dependencies {
     modImplementation("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4799968")
     modImplementation("curse.maven:builders-delight-forge-563734:4362665")
-
+    modImplementation("curse.maven:boatload-337396:4426144")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")

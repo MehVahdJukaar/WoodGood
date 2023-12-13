@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurniture
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.abnormal.BoatloadModule;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
@@ -102,6 +103,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
 
         addModule("buildersdelight", () -> BuildersDelightModule::new);
+        addModule("boatload", () -> BoatloadModule::new);
 
 
         // Disabled due to block entity complications
