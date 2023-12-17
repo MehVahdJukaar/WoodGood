@@ -8,6 +8,14 @@ body:
       value: |
         MOD SUGGESTION
 
+  - type: checkboxes
+    id: pre-report-bug
+    attributes:
+      label: "Before Continuing:"
+      options:
+        - label: "See [EC Backlog](https://github.com/users/MehVahdJukaar/projects/1/views/1) if someone already suggested a mod that you are going to suggest."
+          required: true
+
   - type: input
     id: curseforge-normal
     attributes:
