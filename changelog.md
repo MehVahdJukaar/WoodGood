@@ -1,6 +1,4 @@
 #### UPDATED:
-- Macaw's Trapdoor 
-  - New trapdoor (BARREL) added
-  - Support v1.1.2 from now onward
+- Macaw's Windows Module to support **v2.2.1** 
 ---
-**NOTE:** Older than v1.1.2 won't be supported due to a new trapdoor added. 
+**NOTE:** Older than v2.2.1 of Macaw's Windows is not supported anymore

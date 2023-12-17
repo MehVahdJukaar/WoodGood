@@ -1,20 +1,16 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
-import earth.terrarium.handcrafted.common.block.chair.bench.BenchBlock;
-import earth.terrarium.handcrafted.common.block.chair.bench.BenchBlockEntity;
+import earth.terrarium.handcrafted.client.block.chair.couch.CouchModel;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.couch.CouchBlock;
 import earth.terrarium.handcrafted.common.block.chair.couch.CouchBlockEntity;
-import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
 import earth.terrarium.handcrafted.common.block.property.CouchShape;
 import earth.terrarium.handcrafted.common.block.property.SheetState;
 import earth.terrarium.handcrafted.common.block.property.TableState;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
-import earth.terrarium.handcrafted.common.item.RenderedBlockItem;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
 import earth.terrarium.handcrafted.common.registry.ModTags;
@@ -372,10 +368,10 @@ public class HandcraftedModule extends SimpleModule {
 
     @Override
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
-        event.register(((BlockEntityType) CHAIR.getTileHolder().get()), CompatChairRenderer::new);
+        event.register(((BlockEntityType) CHAIR.getTileHolder().get()), OptimizedChairRenderer::new);
         event.register(((BlockEntityType) TABLE.getTileHolder().get()), OptimizedTableRenderer::new);
 //        event.register(((BlockEntityType) BENCH.getTileHolder().get()), CompatBenchRenderer::new);
-        event.register(((BlockEntityType) COUCH.getTileHolder().get()), CompatCouchRenderer::new);
+        event.register(((BlockEntityType) COUCH.getTileHolder().get()), OptimizedCouchRenderer::new);
     }
 
     //TYPE: ================ Entity
@@ -429,17 +425,9 @@ public class HandcraftedModule extends SimpleModule {
     public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
 
         if (OptimizedTableRenderer.OBJECT_TO_TEXTURE.isEmpty()) {
-            // TABLE
-            for (var t : TABLE.items.values()) { //all sheets items
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
-                    var blockId = Registry.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res("block/hc/" + s[1] + "/table/table/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-            // cloths
+
+                                        // SHEET | CUSHION
+            // TABLE SHEET
             for (var d : DyeColor.values()) {
                 Item sheetItem = Registry.ITEM.get(this.modRes(d.getName() + "_sheet"));
                 if (sheetItem != Items.AIR) {
@@ -450,6 +438,34 @@ public class HandcraftedModule extends SimpleModule {
                 }
             }
 
+            // CUSHION
+            for (var d : DyeColor.values()) {
+                Item cushionItem = Registry.ITEM.get(this.modRes(d.getName() + "_cushion"));
+                if (cushionItem != Items.AIR) {
+                    // CHAIR
+                    var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, b ->
+                            new Material(TextureAtlas.LOCATION_BLOCKS,
+                                    modRes("block/chair/chair/cushion/" + d.getName() + "_cushion")));
+                    event.addSprite(texture.texture());
+
+                    // COUCH
+                    var texture2 = OptimizedCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, b ->
+                            new Material(TextureAtlas.LOCATION_BLOCKS,
+                                    modRes("block/chair/couch/cushion/" + d.getName() + "_cushion")));
+                    event.addSprite(texture2.texture());
+                }
+            }
+                                        // TEXTURE FOR BLOCKS
+            // TABLE
+            for (var t : TABLE.items.values()) {
+                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                    var blockId = Registry.ITEM.getKey(t);
+                    var s = blockId.getPath().split("/");
+                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+                            EveryCompat.res("block/hc/" + s[1] + "/table/table/" + s[2]));
+                });
+                event.addSprite(texture.texture());
+            }
             // CHAIR
             for (var t : CHAIR.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
@@ -461,30 +477,14 @@ public class HandcraftedModule extends SimpleModule {
                 event.addSprite(texture.texture());
             }
 
-            // cushins
-            for (var d : DyeColor.values()) {
-                Item cushionItem = Registry.ITEM.get(this.modRes(d.getName() + "_cushion"));
-                if (cushionItem != Items.AIR) {
-                    // chair
-                    var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, b ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/chair/chair/cushion/" + d.getName() + "_cushion")));
-                    event.addSprite(texture.texture());
-
-                    // couch
-                    var texture2 = CompatCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, b ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/chair/couch/cushion/" + d.getName() + "_cushion")));
-                    event.addSprite(texture2.texture());
-                }
-            }
-
             // BENCH
 
 
+        }
+        if (OptimizedCouchRenderer.OBJECT_TO_TEXTURE.isEmpty()) {
             // COUCH
             for (var t : COUCH.items.values()) {
-                var texture = CompatCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
+                var texture = OptimizedCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, b -> {
                     var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
@@ -492,9 +492,9 @@ public class HandcraftedModule extends SimpleModule {
                 });
                 event.addSprite(texture.texture());
             }
-
         }
     }
+
 
     //TYPE: ================ Custom Block
     public class CustomChairBlock extends ChairBlock {
@@ -558,8 +558,9 @@ public class HandcraftedModule extends SimpleModule {
         @Override
         public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
                                  MultiBufferSource multiBufferSource, int i, int i1) {
-            CompatChairRenderer.INSTANCE.doRender(itemStack.getItem(), Items.AIR, Direction.SOUTH, poseStack,
-                    multiBufferSource, i, i1, 0.75f, -0.5);
+            poseStack.scale(0.75f, 0.75f, 0.75f);
+            OptimizedChairRenderer.INSTANCE.doRender(itemStack.getItem(), Items.AIR, Direction.SOUTH, poseStack,
+                    multiBufferSource, i, i1);
         }
     }
 /*
@@ -575,9 +576,11 @@ public class HandcraftedModule extends SimpleModule {
         @Override
         public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
                                  MultiBufferSource multiBufferSource, int i, int i1) {
-            CompatCouchRenderer.INSTANCE.doRender(itemStack.getItem(), Items.AIR, Direction.SOUTH,
-                    CouchShape.SINGLE, poseStack,
-                    multiBufferSource, i, i1);
+
+            poseStack.scale(0.9f, 0.9f, 0.9f);
+            poseStack.translate(0, 0, 0.12);
+            OptimizedCouchRenderer.INSTANCE.doRender(itemStack.getItem(), ModItems.WHITE_CUSHION.get(), Direction.SOUTH,
+                    CouchShape.SINGLE, poseStack, multiBufferSource, i, i1);
         }
     }
     //TYPE: ================ Item
