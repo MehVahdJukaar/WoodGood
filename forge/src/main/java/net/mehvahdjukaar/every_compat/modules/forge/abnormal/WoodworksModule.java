@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.abnormal;
 
+import com.google.common.collect.ImmutableSet;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.BlueprintLadderBlock;
 import com.teamabnormals.blueprint.common.block.BookshelfBlock;
@@ -14,10 +15,13 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -34,18 +38,22 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.PoiTypeTags;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Supplier;
 
 
 public class WoodworksModule extends SimpleModule {
@@ -170,6 +178,28 @@ public class WoodworksModule extends SimpleModule {
                 .build();
 
         this.addEntry(leafPiles);
+    }
+
+
+    private Supplier<PoiType> compatBeeHivePOI = RegHelper.register(EveryCompat.res("faf_beehive"),
+            () -> new PoiType(getBeehives(), 1, 1), Registries.POINT_OF_INTEREST_TYPE);
+
+
+    private Set<BlockState> getBeehives() {
+        var set = new ImmutableSet.Builder<BlockState>();
+        beehives.blocks.values().forEach(b->set.addAll(b.getStateDefinition().getPossibleStates()));
+        return set.build();
+    }
+
+    @Override
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
+
+        tb.add(EveryCompat.res("faf_beehive"));
+
+        handler.dynamicPack.addTag(tb, Registries.POINT_OF_INTEREST_TYPE);
     }
 
     @Override
