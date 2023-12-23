@@ -12,8 +12,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 
-//SUPPORT: v2.2.0
+//SUPPORT: v2.2.1
 public class MacawWindowsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BLINDS;
@@ -39,7 +41,8 @@ public class MacawWindowsModule extends SimpleModule {
         super(modId, "mcw");
 
         BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds",
-                        BlockInit.OAK_BLINDS, () -> WoodType.OAK_WOOD_TYPE, w -> new Blinds())
+                        BlockInit.OAK_BLINDS, () -> WoodType.OAK_WOOD_TYPE,
+                        w -> new Blinds(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .setRenderType(() -> RenderType::cutout)
