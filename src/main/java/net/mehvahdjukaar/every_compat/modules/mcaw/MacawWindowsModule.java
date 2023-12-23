@@ -13,7 +13,9 @@ import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 
+//SUPPORT: v2.2.1
 public class MacawWindowsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BLINDS;
@@ -39,7 +41,8 @@ public class MacawWindowsModule extends SimpleModule {
         super(modId, "mcw");
 
         BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds",
-                        BlockInit.OAK_BLINDS, () -> WoodType.OAK_WOOD_TYPE, w -> new Blinds())
+                        BlockInit.OAK_BLINDS, () -> WoodType.OAK_WOOD_TYPE,
+                        w -> new Blinds(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F, 1.2F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> MacawsWindows.WindowItemGroup)
                 .setRenderType(() -> RenderType::cutout)
@@ -70,7 +73,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         LOG_WINDOWS = SimpleEntrySet.builder(WoodType.class, "window",
                         BlockInit.OAK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new Window(WoodGood.copySafe(w.log)))
+                        w -> new ConnectedWindow(WoodGood.copySafe(w.log)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
@@ -83,7 +86,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         PLANKS_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_window",
                         BlockInit.OAK_PLANK_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new Window(WoodGood.copySafe(w.planks)))
+                        w -> new ConnectedWindow(WoodGood.copySafe(w.planks)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
@@ -122,7 +125,7 @@ public class MacawWindowsModule extends SimpleModule {
 
         STRIPPED_LOG_WINDOWS = SimpleEntrySet.builder(WoodType.class, "log_window", "stripped",
                         BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new Window(WoodGood.copySafe(w.log)))
+                        w -> new ConnectedWindow(WoodGood.copySafe(w.log)))
                 .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
