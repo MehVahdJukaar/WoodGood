@@ -1066,7 +1066,10 @@
   "leaves_type.desolation.charred": "烧焦的",
 
   "wood_type.divinerpg.divine": "神圣木",
-  "wood_type.divinerpg.frozen": "冰冻木",
+  "wood_type.divinerpg.shiverspine": "寒颤脊木",
+  "wood_type.divinerpg.auroraoak": "极光橡木",
+  "wood_type.divinerpg.cozybark": "柔皮木",
+  "wood_type.divinerpg.streamleaf": "流叶木",
   "wood_type.divinerpg.eden": "伊甸木",
   "wood_type.divinerpg.wildwood": "原始森林木",
   "wood_type.divinerpg.apalachia": "附魔山脉木",
@@ -1075,6 +1078,9 @@
   "wood_type.divinerpg.eucalyptus": "桉木",
   "leaves_type.divinerpg.divine": "神圣",
   "leaves_type.divinerpg.brittle": "尖脆",
+  "leaves_type.divinerpg.auroraoak": "极光橡树",
+  "leaves_type.divinerpg.cozybark": "柔皮",
+  "leaves_type.divinerpg.streamleaf": "流叶",
   "leaves_type.divinerpg.dreamwood": "梦境",
   "leaves_type.divinerpg.mintwood": "薄荷",
   "leaves_type.divinerpg.firewood": "火焰",
@@ -1154,20 +1160,22 @@
   "leaves_type.eternal_tales.lychee": "荔枝",
   "leaves_type.eternal_tales.amberwood": "琥珀",
 
+  "leaves_type.evilcraft.undead": "亡灵",
+
   "wood_type.extendedmushrooms.mushroom": "蘑菇",
   "wood_type.extendedmushrooms.glowshroom": "荧光菇",
   "wood_type.extendedmushrooms.poisonous_mushroom": "毒蘑菇",
   "wood_type.extendedmushrooms.honey_fungus": "蜂蜜菌",
 
   "wood_type.forbidden_arcanus.aurum": "神秘木",
-  "wood_type.forbidden_arcanus.cherry": "樱桃木",
   "wood_type.forbidden_arcanus.edelwood": "埃德木",
   "wood_type.forbidden_arcanus.fungyss": "魔菇",
-  "leaves_type.forbidden_arcanus.cherry": "樱桃木",
   "leaves_type.forbidden_arcanus.aurum": "神秘木",
   "leaves_type.forbidden_arcanus.nuggety_aurum": "浑金神秘木",
+  "wood_type.forbidden_arcanus.cherry": "樱桃木",
   "wood_type.forbidden_arcanus.cherrywood": "樱桃木",
   "wood_type.forbidden_arcanus.mysterywood": "神秘木",
+  "leaves_type.forbidden_arcanus.cherry": "樱桃木",
   "leaves_type.forbidden_arcanus.cherrywood": "樱桃木",
   "leaves_type.forbidden_arcanus.mysterywood": "神秘木",
   "leaves_type.forbidden_arcanus.nuggety_mysterywood": "浑金神秘木",
@@ -1477,6 +1485,9 @@
   "leaves_type.rankine.weeping_willow": "垂柳",
   "leaves_type.rankine.erythrina": "刺桐",
 
+  "wood_type.rats.pirat": "幽灵鼠盗木",
+  "leaves_type.rats.pirat": "幽灵鼠盗",
+
   "wood_type.regions_unexplored.alpha": "始源木",
   "wood_type.regions_unexplored.baobab": "猴面包木",
   "wood_type.regions_unexplored.blackwood": "黑木",
@@ -1727,6 +1738,8 @@
 
   "wood_type.valhelsia_structures.lapidified_jungle": "石化丛林木",
 
+  "leaves_type.vampirism.dark_spruce": "血杉",
+
   "wood_type.vinery.cherry": "樱桃木",
   "leaves_type.vinery.grapevine": "葡萄藤",
   "leaves_type.vinery.cherry": "樱桃",
@@ -1754,6 +1767,8 @@
   "leaves_type.wilds.baobab": "猴面包",
   "leaves_type.wilds.cypress": "柏树",
   "leaves_type.wilds.eucalyptus": "桉树",
+
+  "leaves_type.witherstormmod.tainted": "腐化",
 
   "wood_type.windswept.holly": "冬青木",
   "wood_type.windswept.chestnut": "栗木",
