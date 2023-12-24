@@ -16,6 +16,7 @@ import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
@@ -123,7 +124,9 @@ public abstract class EveryCompat {
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("furnish", () -> FurnishModule::new);
         addModule("hearth_and_home", () -> HearthAndHomeModule::new);
+        addModule("quark", () -> QuarkModule::new);
         addModule("twigs", () -> TwigsModule::new);
+
 
         // ========================================== WORK IN PROGRESS ============================================== \\
        // addModule("handcrafted", () -> HandcraftedModule::new);

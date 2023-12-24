@@ -131,18 +131,13 @@ public class SimpleModule extends CompatModule {
     @Override
     public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
         List<Item> l = new ArrayList<>();
-        for (var e : entries.values()) {
-            if (e.getTypeClass().isAssignableFrom(type.getClass())) {
-                Item itemOfType = getItemOfType(type, (EntrySet<T>) e);
+        for (EntrySet<?> entrySet : entries.values()) {
+            if (entrySet.getTypeClass().isAssignableFrom(type.getClass())) {
+                Item itemOfType = ( (EntrySet<T>) entrySet).getItemOf(type);
                 if(itemOfType != null) l.add(itemOfType);
             }
         }
         return l;
-    }
-
-    @Nullable
-    private static <T extends BlockType> Item getItemOfType(T type, EntrySet<T> e) {
-        return e.getItemOf(type);
     }
 
 }
