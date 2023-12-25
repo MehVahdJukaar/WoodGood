@@ -26,14 +26,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import org.violetmoon.quark.base.handler.ToolInteractionHandler;
 import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
 import org.violetmoon.quark.content.building.module.*;
@@ -262,7 +260,7 @@ public class QuarkModule extends SimpleModule {
     public void onModSetup() {
         posts.blocks.forEach((w, post) -> {
             Block stripped = strippedPosts.blocks.get(w);
-            if (stripped != null) ECPlatformStuff.registerStripping( post, stripped);
+            if (stripped != null) ECPlatformStuff.registerStripping(post, stripped);
         });
         leafCarpets.blocks.forEach((w, leaf) -> {
             ComposterBlock.COMPOSTABLES.put(leaf, 0.2F);
@@ -366,9 +364,9 @@ public class QuarkModule extends SimpleModule {
                     }
 
                     {
-                        ResourceLocation res = modRes(b.getTextureFolder()+"/"+ b.getTexturePath() + "/normal");
+                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/normal");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder()+"/"+ b.getTexturePath() + "/trap");
+                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap");
 
                             var img = respriterNormal.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
                             img.applyOverlayOnExisting(respriterNormalO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
@@ -382,9 +380,9 @@ public class QuarkModule extends SimpleModule {
                         }
                     }
                     {
-                        ResourceLocation res = modRes(b.getTextureFolder()+"/"+ b.getTexturePath() + "/left");
+                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/left");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder()+"/"+ b.getTexturePath() + "/trap_left");
+                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_left");
 
                             var img = respriterLeft.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
                             img.applyOverlayOnExisting(respriterLeftO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
@@ -397,9 +395,9 @@ public class QuarkModule extends SimpleModule {
                         }
                     }
                     {
-                        ResourceLocation res = modRes(b.getTextureFolder()+"/"+ b.getTexturePath()+ "/right");
+                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/right");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder()+"/"+ b.getTexturePath() + "/trap_right");
+                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_right");
 
                             var img = respriterRight.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
                             img.applyOverlayOnExisting(respriterRightO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));

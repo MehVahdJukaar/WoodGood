@@ -1,3 +1,3 @@
-v2.6.17
+v2.6.18
 #### UPDATED:
-- Fixed the uncraftable _door_ & _trapdoor_ via some mods (Region Unexplored)
+- updated to work with quark

@@ -181,8 +181,9 @@ public class WoodworksModule extends SimpleModule {
     }
 
 
-    private Supplier<PoiType> compatBeeHivePOI = RegHelper.register(EveryCompat.res("faf_beehive"),
-            () -> new PoiType(getBeehives(), 1, 1), Registries.POINT_OF_INTEREST_TYPE);
+    protected final ResourceLocation POI_ID = EveryCompat.res("ww_beehive");
+    private Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(POI_ID,
+            () -> new PoiType(getBeehives(), 0, 1));
 
 
     private Set<BlockState> getBeehives() {
@@ -197,7 +198,7 @@ public class WoodworksModule extends SimpleModule {
 
         SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
 
-        tb.add(EveryCompat.res("faf_beehive"));
+        tb.add(POI_ID);
 
         handler.dynamicPack.addTag(tb, Registries.POINT_OF_INTEREST_TYPE);
     }

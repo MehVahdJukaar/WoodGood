@@ -24,12 +24,10 @@ public class CompatTrappedChestBlock extends VariantTrappedChestBlock {
         return new CompatTrappedChestBlockTile(pos, state);
     }
 
-    @Override
     public String getTextureFolder() {
         return "model/chest/everycompat";
     }
 
-    @Override
     public String getTexturePath(){
         return  woodType.getAppendableId();
     }

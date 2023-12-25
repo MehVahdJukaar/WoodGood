@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 
+import com.faboslav.friendsandfoes.mixin.PointOfInterestTypesMixin;
 import com.google.common.collect.ImmutableSet;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -55,9 +56,10 @@ public class FriendsAndFoesModule extends SimpleModule {
 
     }
 
-    private Supplier<PoiType> compatBeeHivePOI = RegHelper.register(EveryCompat.res("faf_beehive"),
-            () -> new PoiType(getBeehives(), 1, 1), Registries.POINT_OF_INTEREST_TYPE);
+    protected final ResourceLocation POI_ID = EveryCompat.res("faf_beehive");
 
+    private final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(POI_ID,
+            () -> new PoiType(getBeehives(), 0, 1));
 
     private Set<BlockState> getBeehives() {
         var set = new ImmutableSet.Builder<BlockState>();
@@ -71,7 +73,7 @@ public class FriendsAndFoesModule extends SimpleModule {
 
         SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
 
-        tb.add(EveryCompat.res("faf_beehive"));
+        tb.add(POI_ID);
 
         handler.dynamicPack.addTag(tb, Registries.POINT_OF_INTEREST_TYPE);
     }
