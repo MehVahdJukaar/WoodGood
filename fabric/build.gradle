@@ -27,6 +27,8 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}")))
+    annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
     modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
         exclude group: 'net.fabricmc.fabric-api'
@@ -36,7 +38,7 @@ dependencies {
     }
 
     //modImplementation ("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric")
-    modImplementation("curse.maven:selene-499980:4871784")
+    modImplementation("curse.maven:selene-499980:4980619")
 
     // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
@@ -61,7 +63,8 @@ dependencies {
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4062547")
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:4712795")
     modCompileOnly("curse.maven:furnish-547069:4821516")
-    modCompileOnly("curse.maven:friends-and-foes-551364:4712045")
+
+    modImplementation("curse.maven:friends-and-foes-551364:4968876")
 
     modCompileOnly("curse.maven:handcrafted-538214:4215478")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
@@ -77,7 +80,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
 
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
-    modImplementation("curse.maven:the-twilight-forest-227639:4389094")
+    modCompileOnly ("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4603805")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
 
