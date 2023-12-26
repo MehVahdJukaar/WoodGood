@@ -50,7 +50,7 @@ public class EveryCompatClient {
             var m = EveryCompat.ITEMS_TO_MODULES.get(item);
             if (m != null) {
                 if (mod)
-                    components.add(Component.translatable("tooltip.everycomp.mod", m.getModId()).withStyle(ChatFormatting.BLUE));
+                    components.add(Component.translatable("tooltip.everycomp.mod", m.getModName()).withStyle(ChatFormatting.BLUE));
                 if (block) {
                     BlockType w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
                     if (w == null) w = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);

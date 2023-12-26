@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
@@ -29,20 +30,26 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 
 public abstract class CompatModule {
 
     protected final String modId;
+    protected final String modName;
 
     protected CompatModule(String modId) {
         this.modId = modId;
+        this.modName = PlatHelper.getModName(modId);
     }
 
     public String getModId() {
         return modId;
+    }
+
+    // readable name
+    public String getModName() {
+        return modName;
     }
 
     public abstract String shortenedId();
@@ -123,7 +130,8 @@ public abstract class CompatModule {
         if (this.shortenedId().equals("af")) return false; //hardcoding
         if (this.shortenedId().equals("ap")) return false; //hardcoding
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
-        if (this.shortenedId().equals("abww") && woodFrom.equals("architects_palette")) return false; //we always register everything for these
+        if (this.shortenedId().equals("abww") && woodFrom.equals("architects_palette"))
+            return false; //we always register everything for these
 
         if (registry.containsKey(new ResourceLocation(woodFrom, name))) return true;
 
@@ -234,7 +242,7 @@ public abstract class CompatModule {
     public abstract int bloatAmount();
 
     //used for creative tabs
-    public <T extends BlockType> List<Item> getAllItemsOfType( T type){
+    public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
         return List.of();
     }
 

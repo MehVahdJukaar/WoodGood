@@ -195,7 +195,7 @@ public abstract class EveryCompat {
             CompatModule bloated = ACTIVE_MODULES.values().stream()
                     .max(Comparator.comparing(CompatModule::bloatAmount)).get();
             EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
-            EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModId().toUpperCase(Locale.ROOT), bloated.bloatAmount());
+            EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
         }
 
         forAllModules(CompatModule::onModSetup);
