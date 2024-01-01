@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
 import org.violetmoon.quark.content.building.module.*;
@@ -140,7 +141,7 @@ public class QuarkModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         (w) -> {
                             String name = shortenedId() + "/" + w.getAppendableId();
-                            return new VariantLadderBlock(name, null, w.canBurn());
+                            return new VariantLadderBlock(name, null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()),  w.canBurn());
                         })
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
