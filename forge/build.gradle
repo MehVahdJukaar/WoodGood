@@ -110,7 +110,8 @@ dependencies {
     // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("curse.maven:architectury-api-419699:4104616") // REI
 
-    modImplementation("curse.maven:selene-499980:4843863") // EVERY COMPAT
+    modImplementation("curse.maven:selene-499980:4983974") // EVERY COMPAT
+//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
 
     modCompileOnly("curse.maven:configured-457570:4462837")
     modCompileOnly("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure
@@ -119,6 +120,7 @@ dependencies {
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
     modCompileOnly("curse.maven:cloth-config-348521:3972423") // REI
     modImplementation("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
+    modCompileOnly("curse.maven:framework-549225:4718247") // Mighty Mail
 
 //    modImplementation("curse.maven:supermartijn642s-config-lib-438332:3871792") // Benched
 //    modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238") // Benched
@@ -126,7 +128,6 @@ dependencies {
     modImplementation("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    //modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
 
     // ================================================ IMPORTS ===================================================== \\
     modImplementation("curse.maven:jei-238222:4712866")
@@ -188,7 +189,8 @@ dependencies {
 //    modImplementation("curse.maven:i-like-wood-324164:4463114")
     modCompileOnly("curse.maven:carpenter-549446:4673192")
     modCompileOnly("curse.maven:functional-storage-556861:4810636")
-    modImplementation("com.playtics.shipping:shipping-forge-1.19.2-1.2")
+    modImplementation("curse.maven:corail-woodcutter-331983:4442685")
+    modImplementation("curse.maven:mighty-mail-902986:4750268")
 //    modImplementation("curse.maven:just-a-raft-mod-274350:4688639")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
@@ -203,6 +205,7 @@ dependencies {
 //     modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBMODEL
 
     // ============================================= FOR TESTING ==================================================== \\
-    modImplementation("curse.maven:biomes-o-plenty-220318:3927361")
-    modImplementation("curse.maven:terrablender-563928:3925974") // BIOMES O' PLENTY
+    modImplementation("curse.maven:terrablender-563928:4205732") // REQUIRED by BOP, region-unexplored
+//    modImplementation("curse.maven:biomes-o-plenty-220318:3927361"
+    modImplementation("curse.maven:regions-unexplored-659110:4807303")
 }
