@@ -63,6 +63,7 @@ subprojects {
             apiKey = env.CURSEFORGE_TOKEN
             project {
                 id = rootProject.project_id
+                changelogType = 'markdown'
                 changelog = changelogText
                 releaseType = 'release'
                 addGameVersion rootProject.minecraft_version
