@@ -98,6 +98,7 @@ public abstract class EveryCompat {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
         }
 
+        // ============================================ addOtherCompatMod =========================================== \\
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
@@ -123,6 +124,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("abnormals_delight", "environmental", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
 
+        // ============================================== addModule ================================================= \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("barkcarpets", () -> BarkCarpetsModule::new);
         addModule("campchair", () -> CampChairModule::new);
@@ -134,7 +136,7 @@ public abstract class EveryCompat {
         addModule("twigs", () -> TwigsModule::new);
 
         // =========================================== WORK IN PROGRESS ============================================  \\
-        addModule("handcrafted", () -> HandcraftedModule::new);
+//        addModule("handcrafted", () -> HandcraftedModule::new);
 
         // ========================================= DISABLED FOR A REASON =========================================  \\
 
