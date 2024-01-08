@@ -1,3 +1,3 @@
-v2.6.20
+v2.6.21
 #### UPDATED:
-- updated to work with quark (again x2)
+- updated to work with quark beta (again x4)

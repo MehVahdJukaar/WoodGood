@@ -1,6 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECPlatformStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -222,7 +224,7 @@ public class QuarkModule extends SimpleModule {
                         () -> LeavesTypeRegistry.OAK_TYPE,
                         (w) -> {
                             if (w.getWoodType() == null) return null;
-                            return new HedgeBlock(null, Blocks.OAK_FENCE, w.leaves);
+                            return new HedgeBlock("",null, Blocks.OAK_FENCE, w.leaves);
                         })
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
@@ -291,6 +293,7 @@ public class QuarkModule extends SimpleModule {
         TRAPPED_CHEST_TILE = trappedChests.getTile(ChestBlockEntity.class);
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
