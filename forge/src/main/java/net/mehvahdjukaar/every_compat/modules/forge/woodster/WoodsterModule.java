@@ -37,6 +37,7 @@ public class WoodsterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(WoodsterTabs.WOODSTER)
                 .copyParentDrop()
+                .defaultRecipe()
                 .build();
 
         this.addEntry(chiseled_books);
@@ -48,6 +49,7 @@ public class WoodsterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(WoodsterTabs.WOODSTER)
                 .copyParentDrop()
+                .defaultRecipe()
                 .build();
 
         this.addEntry(books);
