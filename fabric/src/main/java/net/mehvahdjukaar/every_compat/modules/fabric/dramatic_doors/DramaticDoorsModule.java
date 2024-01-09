@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.dramaticdoors;
+package net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors;
 
 import com.fizzware.dramaticdoors.fabric.blocks.ShortDoorBlock;
 import com.fizzware.dramaticdoors.fabric.blocks.TallDoorBlock;
@@ -62,14 +62,25 @@ public class DramaticDoorsModule extends SimpleModule {
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of(
-                "biomesoplenty", "byg", "prehistoricfauna", "twilightforest", "tflostblocks",
-                "bamboo_blocks", "caverns_and_chasms", "endergetic", "environmental", "upgrade_aquatic",
-                "abundance", "atmospheric", "autumnity", "bayou_blues", "buzzier_bees",
-                "enhanced_mushrooms", "architects_palette", "ars_nouveau", "biomemakeover", "blocksplus",
-                "ceilands", "copperoverhaul", "alloyed", "createdeco", "darkerdepths",
-                "dustrial_decor", "ecologics", "phantasm", "nourished_end", "habitat",
-                "nethers_exoticism", "outer_end", "pokecube", "pokecube_legends", "premium_wood", "quark",
-                "snowyspirit", "supplementaries", "twigs", "undergarden", "vinery", "aurorasdeco", "create"
+                "automaticdoors", "doubledoors", "couplings", "woodworks",
+                "chipped", "mcwdoors", "manyideas_doors", "quark", "supplementaries",
+                "statement", "abundant_atmosphere", "ad_astra", "aether",
+                "aether_redux", "alexscaves", "architects_palette", "atum",
+                "aurorasdeco", "bambooeverything", "betterarcheology", "betterend",
+                "betternether", "bewitchment", "biomancy", "biomemakeover", "biomesoplenty",
+                "blocksplus", "blockus", "byg", "caupona", "ceilands", "charm", "cinderscapes",
+                "cobblemon", "colorfulazaleas", "copperoverhaul", "alloyed", "createdeco",
+                "create_things_and_misc", "darkerdepths", "deep_aether", "deeperdarker",
+                "desolation", "dustrial_decor", "ecologics", "endlessbiomes", "enhanced_mushrooms",
+                "phantasm", "enderscape", "enlightened_end", "everythingcopper", "extendedmushrooms",
+                "fruittrees", "forbidden_arcanus", "gardens_of_the_dead", "goodending", "graveyard",
+                "hexcasting", "hexerei", "horizons", "integrateddynamics", "malum", "modern_glass_doors",
+                "ms", "morecraft", "mysticsbiomes", "nethers_exoticism", "newworld", "pokecube",
+                "prehistoricfauna", "premium_wood", "promenade", "pyromancer", "quark",
+                "regions_unexplored", "silentgear", "snowyspirit", "supplementaries",
+                "tconstruct", "techreborn", "terraqueous", "terrestria", "traverse",
+                "twilightforest", "undergarden", "vinery", "wilderwild", "windswept",
+                "xps_additions", "yippee", "chipped", "mcwdoors", "manyideas_doors"
         );
     }
 }
