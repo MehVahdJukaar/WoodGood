@@ -25,7 +25,7 @@ public class CompatTrappedChestBlock extends VariantTrappedChestBlock {
     }
 
     public String getTextureFolder() {
-        return "model/chest/everycompat";
+        return "quark_variant_chests/everycompat";
     }
 
     public String getTexturePath(){
