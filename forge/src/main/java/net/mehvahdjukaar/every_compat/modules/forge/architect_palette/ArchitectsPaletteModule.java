@@ -1,8 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.architect_palette;
 
-import architectspalette.content.blocks.BoardBlock;
 import architectspalette.content.blocks.RailingBlock;
-import architectspalette.core.ArchitectsPalette;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
@@ -10,10 +8,8 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
@@ -68,7 +64,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         () -> getModBlock("oak_boards"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BoardBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
