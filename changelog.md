@@ -1,4 +1,5 @@
-v2.6.21
+v2.6.24
 #### UPDATED:
-- DramaticDoors Module: added more new supported mods to the list
-- Woodster Module: 2 Blocks's missing recipes
+- Fixed quark chest renderers
+- updated architects palette module
+- misc fixes

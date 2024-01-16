@@ -35,10 +35,12 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import org.violetmoon.quark.base.QuarkClient;
 import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
 import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
+import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -295,6 +297,18 @@ public class QuarkModule extends SimpleModule {
 
     @Environment(EnvType.CLIENT)
     @Override
+    public void onClientSetup() {
+        super.onClientSetup();
+
+        for(var b : chests.blocks.values())
+            QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(CHEST_TILE, b.defaultBlockState()));
+        for(var b : trappedChests.blocks.values())
+            QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(TRAPPED_CHEST_TILE, b.defaultBlockState()));
+
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         event.register(CHEST_TILE, context -> new VariantChestRenderer(context, false));
@@ -324,13 +338,13 @@ public class QuarkModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
-        try (TextureImage normal = TextureImage.open(manager, modRes("model/chest/oak/normal"));
+        try (TextureImage normal = TextureImage.open(manager, modRes("quark_variant_chests/oak/normal"));
              TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
              TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
-             TextureImage left = TextureImage.open(manager, modRes("model/chest/oak/left"));
+             TextureImage left = TextureImage.open(manager, modRes("quark_variant_chests/oak/left"));
              TextureImage left_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_m"));
              TextureImage left_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_o"));
-             TextureImage right = TextureImage.open(manager, modRes("model/chest/oak/right"));
+             TextureImage right = TextureImage.open(manager, modRes("quark_variant_chests/oak/right"));
              TextureImage right_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_m"));
              TextureImage right_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_o"));
              TextureImage left_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_left"));
