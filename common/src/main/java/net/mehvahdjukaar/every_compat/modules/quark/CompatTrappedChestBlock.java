@@ -26,10 +26,12 @@ public class CompatTrappedChestBlock extends VariantTrappedChestBlock {
         return new CompatTrappedChestBlockTile(pos, state);
     }
 
+    @Override
     public String getTextureFolder() {
         return "quark_variant_chests/everycomp";
     }
 
+    @Override
     public String getTexturePath(){
         return texture;
     }
