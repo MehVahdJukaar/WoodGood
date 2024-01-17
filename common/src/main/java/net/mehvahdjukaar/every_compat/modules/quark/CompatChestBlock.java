@@ -11,14 +11,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.content.building.block.VariantChestBlock;
+import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
 
 public class CompatChestBlock extends VariantChestBlock {
 
     public final WoodType woodType;
+    private final String texture;
 
     public CompatChestBlock(WoodType woodType, String type,  BlockBehaviour.Properties props) {
         super(type, null, () -> QuarkModule.CHEST_TILE, props);
         this.woodType = woodType;
+        this.texture = woodType.getAppendableId();
     }
 
     @Override
@@ -27,10 +30,10 @@ public class CompatChestBlock extends VariantChestBlock {
     }
 
     public String getTextureFolder() {
-        return "quark_variant_chests/everycompat";
+        return "quark_variant_chests/everycomp";
     }
 
     public String getTexturePath(){
-        return  woodType.getAppendableId();
+        return texture;
     }
 }

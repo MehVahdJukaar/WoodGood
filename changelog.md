@@ -1,5 +1,3 @@
-v2.6.24
+v2.6.25
 #### UPDATED:
-- Fixed quark chest renderers
-- updated architects palette module
-- misc fixes
+- Fixed quark trapped chest renderers
