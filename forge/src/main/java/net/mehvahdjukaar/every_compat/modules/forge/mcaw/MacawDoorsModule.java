@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.SoundType;
 
 public class MacawDoorsModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> WAFFLE_DOORS;
     public final SimpleEntrySet<WoodType, Block> BARK_DOORS;
     public final SimpleEntrySet<WoodType, Block> BARN_DOORS;
     public final SimpleEntrySet<WoodType, Block> BARN_GLASS_DOORS;
@@ -51,8 +52,23 @@ public class MacawDoorsModule extends SimpleModule {
 
     public MacawDoorsModule(String modId) {
         super(modId, "mcd");
-
         var tab = TabInit.DOORITEMGROUP;
+
+        WAFFLE_DOORS = SimpleEntrySet.builder(WoodType.class, "waffle_door",
+                        BlockInit.OAK_WAFFLE_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()))
+                .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
+                .setTab(tab)
+                .copyParentDrop()
+                .defaultRecipe()
+                .setRenderType(() -> RenderType::cutout)
+                .addTextureM(modRes("block/oak_waffle_door_lower"), EveryCompat.res("block/mcaw/doors/oak_waffle_door_lower_m"))
+                .addTextureM(modRes("block/oak_waffle_door_upper"), EveryCompat.res("block/mcaw/doors/oak_waffle_door_upper_m"))
+                .addTextureM(modRes("item/oak_waffle_door"), EveryCompat.res("item/mcaw/doors/oak_waffle_door_m"))
+                .build();
+        this.addEntry(WAFFLE_DOORS);
+
         BARK_DOORS = SimpleEntrySet.builder(WoodType.class, "bark_glass_door",
                         BlockInit.OAK_BARK_GLASS_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()))
