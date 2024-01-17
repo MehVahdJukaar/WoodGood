@@ -135,7 +135,7 @@ dependencies {
     modImplementation("curse.maven:jei-238222:4712868")
 
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
-    modCompileOnly("curse.maven:architects-palette-433862:4498448")
+    modImplementation("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
@@ -167,8 +167,10 @@ dependencies {
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
+    modImplementation("curse.maven:worldedit-225608:4586218")
     modCompileOnly("curse.maven:productivebees-377897:4709520")
-    modImplementation("org.violetmoon.quark:Quark-4.0-beta-423")
+    modImplementation("org.violetmoon.quark:Quark-4.0-beta-426")
+    modImplementation("org.violetmoon.zeta:Zeta-1.0-beta-1")
 
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")

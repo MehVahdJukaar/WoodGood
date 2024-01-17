@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDel
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
+import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
@@ -62,6 +63,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
+        addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         if (PlatHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
@@ -81,7 +83,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addModule("xercamod", () -> XercaModule::new);
         addModule("buildersdelight", () -> BuildersDelightModule::new);
-        addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
 
         // ========================================= Macaw's ======================================================== \\
         addModule("mcwbridges", () -> MacawBridgesModule::new);
@@ -99,9 +100,7 @@ public class EveryCompatForge extends EveryCompat {
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // what's the reason?
-
-        // ============================== Disabled until custom block models work =================================== \\
-        // addModule("graveyard", () -> GraveyardModule::new);
+//        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
 
 
         MinecraftForge.EVENT_BUS.register(this);

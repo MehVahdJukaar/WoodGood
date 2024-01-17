@@ -1,3 +1,5 @@
-v2.6.20
+v2.6.24
 #### UPDATED:
-- updated to work with quark (again x2)
+- Fixed quark chest renderers
+- updated architects palette module
+- misc fixes
