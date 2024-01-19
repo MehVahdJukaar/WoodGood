@@ -8,10 +8,12 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.every_compat.misc.CustomRecipeLoader;
 import net.mehvahdjukaar.every_compat.misc.EntriesRemapper;
+
 import net.mehvahdjukaar.every_compat.modules.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
@@ -19,10 +21,12 @@ import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.exnihilo.ExNihiloSequentiaModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.infinitybuttons.InfinityButtonsModule;
+import net.mehvahdjukaar.every_compat.modules.iron_age_furniture.IronAgeFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
@@ -30,13 +34,17 @@ import net.mehvahdjukaar.every_compat.modules.the_new_shutters.ShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsMacawModule;
-//import net.mehvahdjukaar.every_compat.modules.productive_bees.ProductiveBeesModule;
-import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
-//import net.mehvahdjukaar.every_compat.modules.builders_addition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.premium_wood.PremiumWoodModule;
-//import net.mehvahdjukaar.every_compat.modules.iron_age_furniture.IronAgeFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.market_crates.MarketCratesModule;
+import net.mehvahdjukaar.every_compat.modules.productive_bees.ProductiveBeesModule;
+import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.corail.PillarModule;
+import net.mehvahdjukaar.every_compat.modules.corail.WoodcutterModule;
+import net.mehvahdjukaar.every_compat.modules.xerca.XercaModule;
+import net.mehvahdjukaar.every_compat.modules.abnormal.WoodworksModule;
+
 //import net.mehvahdjukaar.every_compat.modules.just_a_raft.JustARaftModule;
-//import net.mehvahdjukaar.every_compat.modules.xerca.XercaModule;
+//import net.mehvahdjukaar.every_compat.modules.verdure.VerdureModule;
 
 import net.mehvahdjukaar.selene.block_set.BlockSetManager;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
@@ -112,6 +120,7 @@ public class WoodGood {
         //TODO: add folwering azalea special textures, fix vertical planks not generating & add leaves to it. same for quark
         //also fix that one crash that idk what was about
 
+        // ========================================== ADD MODULES =================================================== \\
         addModule("mcwlights", () -> MacawLightsModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
@@ -149,22 +158,30 @@ public class WoodGood {
         }
         addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
+        addModule("decoration_delight", () -> DecorativeBlocksModule::new);
+        addModule("productivebees", () -> ProductiveBeesModule::new);
+        addModule("ironagefurniture", () -> IronAgeFurnitureModule::new);
+        addModule("marketcrates", () -> MarketCratesModule::new);
+        addModule("stylishstiles", () -> StylishStilesModule::new);
+        addModule("corail_pillar", () -> PillarModule::new);
+        addModule("corail_woodcutter", () -> WoodcutterModule::new);
+        addModule("woodworks", () -> WoodworksModule::new);
+        addModule("buildersdelight", () -> BuildersDelightModule::new);
+        addModule("xercamod", () -> XercaModule::new);
+        addModule("", () -> DecorativeBlocksModule::new);
 
-        // CURRENTLY TESTING \\
-//        addModule("xerca", () -> XercaModule::new);
+        // ========================================= CURRENTLY TESTING ============================================== \\
 
-        // NOT FINISHED \\
-//        addModule("buildersaddition", () -> BuildersAdditionModule::new);
-//        addModule("productivebees", () -> ProductiveBeesModule::new);
-//        addModule("buildersdelight", () -> BuildersDelightModule::new);
+        // =========================================== CURRENTLY WIP ================================================ \\
 
-        // CURRENTLY DISABLED \\
+        // ============================================= NOT ADDED ================================================== \\
 //        addModule("justaraft", () -> JustARaftModule::new);
-//        addModule("market_crates", () -> MarketCratesModule::new);
-//        addModule("storagedrawers", () -> StorageDrawersModule::new); required fixing for rendering properly
-//        addModule("graveyard", () -> GraveyardModule::new);
-//        addModule("benched", () -> BenchedModule::new); Issue with model format, OBJ -> improperly rendering
 //        addModule("projectbrazier", () -> ProjectBrazierModule::new);
+
+        // ======================================= DISABLED FOR A REASON ============================================ \\
+//        addModule("storagedrawers", () -> StorageDrawersModule::new); //Improperly rendering items
+//        addModule("graveyard", () -> GraveyardModule::new);
+//        addModule("benched", () -> BenchedModule::new); # OBJ Format not supported
 
         forAllModules(m -> WoodGood.LOGGER.info("Loaded {}", m.toString()));
 
