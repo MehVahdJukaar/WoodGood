@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightMo
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.exnihilo.ExNihiloSequentiaModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
@@ -158,7 +159,7 @@ public class WoodGood {
         }
         addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
-        addModule("decoration_delight", () -> DecorativeBlocksModule::new);
+        addModule("decoration_delight", () -> DecorationDelightModule::new);
         addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("ironagefurniture", () -> IronAgeFurnitureModule::new);
         addModule("marketcrates", () -> MarketCratesModule::new);
@@ -168,7 +169,7 @@ public class WoodGood {
         addModule("woodworks", () -> WoodworksModule::new);
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("xercamod", () -> XercaModule::new);
-        addModule("", () -> DecorativeBlocksModule::new);
+        addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
 
         // ========================================= CURRENTLY TESTING ============================================== \\
 
