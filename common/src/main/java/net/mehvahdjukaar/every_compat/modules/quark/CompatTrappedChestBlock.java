@@ -13,10 +13,12 @@ import org.violetmoon.quark.content.building.module.VariantChestsModule;
 public class CompatTrappedChestBlock extends VariantTrappedChestBlock {
 
     public final WoodType woodType;
+    protected String texture;
 
     public CompatTrappedChestBlock(WoodType woodType, String type, BlockBehaviour.Properties props) {
         super(type,null, () -> QuarkModule.TRAPPED_CHEST_TILE, props);
         this.woodType = woodType;
+        this.texture = woodType.getAppendableId();
     }
 
     @Override
@@ -24,11 +26,13 @@ public class CompatTrappedChestBlock extends VariantTrappedChestBlock {
         return new CompatTrappedChestBlockTile(pos, state);
     }
 
+    @Override
     public String getTextureFolder() {
-        return "quark_variant_chests/everycompat";
+        return "quark_variant_chests/everycomp";
     }
 
+    @Override
     public String getTexturePath(){
-        return  woodType.getAppendableId();
+        return texture;
     }
 }
