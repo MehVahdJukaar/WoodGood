@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.decoration_delight;
+package net.mehvahdjukaar.every_compat.modules.decoration_delight;
 
 import decor.delight.block.*;
 import decor.delight.block.entity.OakCounterBlockEntity;
