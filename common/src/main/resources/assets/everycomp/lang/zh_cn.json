@@ -1276,6 +1276,21 @@
   "wood_type.morecraft.netherwood": "下界木",
   "leaves_type.morecraft.netherwood": "下界",
 
+  "wood_type.ms.nature/maple": "枫木",
+  "wood_type.ms.nature/silverbell": "银钟木",
+  "wood_type.ms.nature/willow": "柳木",
+  "wood_type.ms.nature/tigerwood": "虎木",
+  "wood_type.ms.nature/glowood": "荧光木",
+  "wood_type.ms.nature/hellwood": "地狱木",
+  "leaves_type.ms.nature/green_maple": "绿色枫树",
+  "leaves_type.ms.nature/yellow_maple": "黄色枫树",
+  "leaves_type.ms.nature/red_maple": "红色枫树",
+  "leaves_type.ms.nature/silverbell": "银钟",
+  "leaves_type.ms.nature/willow": "柳树",
+  "leaves_type.ms.nature/tigerwood": "虎树",
+  "leaves_type.ms.nature/glowood": "荧光",
+  "leaves_type.ms.nature/hellwood": "地狱",
+
   "leaves_type.mythicbotany.dreamwood": "梦之木",
 
   "wood_type.mysticalworld.charred": "烧焦的",
@@ -1290,6 +1305,15 @@
   "leaves_type.mysticsbiomes.yellow_maple": "黄色枫树",
   "leaves_type.mysticsbiomes.budding_peony": "含苞的牡丹",
   "leaves_type.mysticsbiomes.peony": "牡丹",
+
+  "wood_type.nature_arise.maple": "枫木",
+  "wood_type.nature_arise.fir": "冷杉木",
+  "leaves_type.nature_arise.maple": "枫树",
+  "leaves_type.nature_arise.red_maple": "红色枫树",
+  "leaves_type.nature_arise.orange_maple": "橙色枫树",
+  "leaves_type.nature_arise.yellow_maple": "黄色枫树",
+  "leaves_type.nature_arise.fir": "冷杉",
+  "leaves_type.nature_arise.silver_birch": "垂枝桦",
 
   "wood_type.natures_spirit.aspen": "白杨木",
   "wood_type.natures_spirit.cypress": "柏木",
@@ -1334,6 +1358,9 @@
   "leaves_type.nourished_end.cosmic": "星宙",
 
   "leaves_type.occultism.otherworld": "异界",
+
+  "wood_type.organics.hoaky": "霍橡木",
+  "leaves_type.organics.hoaky": "霍橡",
 
   "wood_type.pasterdream.dyedream": "染梦木",
   "leaves_type.pasterdream.dyedream": "染梦",
@@ -1747,6 +1774,8 @@
   "wood_type.vinery.cherry": "樱桃木",
   "leaves_type.vinery.grapevine": "葡萄藤",
   "leaves_type.vinery.cherry": "樱桃",
+
+  "wood_type.voidscape.thunder": "雷暴木",
 
   "wood_type.wilderwild.baobab": "猴面包木",
   "wood_type.wilderwild.cypress": "柏木",
