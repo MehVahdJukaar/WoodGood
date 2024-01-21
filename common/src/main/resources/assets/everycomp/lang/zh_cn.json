@@ -279,7 +279,9 @@
   "block_type.mcwdoors.swamp_door": "%s沼泽风格门",
   "block_type.mcwdoors.tropical_door": "%s热带风格门",
   "block_type.mcwdoors.western_door": "%s西部百叶门",
-  
+  "block_type.mcwdoors.waffle_door": "%s华夫格门",
+
+
   "block_type.mcwfences.picket_fence": "%s篱栅",
   "block_type.mcwfences.stockade_fence": "%s栅栏墙",
   "block_type.mcwfences.hedge": "%s树篱",
