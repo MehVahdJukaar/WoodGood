@@ -6,6 +6,7 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.crafting.RecipeManager;
 import org.apache.logging.log4j.Logger;
 
 public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {

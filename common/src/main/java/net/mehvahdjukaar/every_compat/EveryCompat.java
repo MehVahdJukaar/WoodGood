@@ -68,6 +68,9 @@ public abstract class EveryCompat {
     public static final Map<Class<? extends BlockType>, Set<String>> ENTRY_TYPES = new Object2ObjectOpenHashMap<>();
     public static final Map<Object, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
 
+
+    private static final UnsafeModuleDisabler MODULE_DISABLER = new UnsafeModuleDisabler();
+
     public static void forAllModules(Consumer<CompatModule> action) {
         ACTIVE_MODULES.values().forEach(action);
     }
@@ -78,8 +81,17 @@ public abstract class EveryCompat {
         ECNetworking.init();
 
         ServerDynamicResourcesHandler.INSTANCE.register();
-
+        RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
         PlatHelper.addCommonSetup(EveryCompat::commonSetup);
+
+        BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
+        BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
+
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, BuiltInRegistries.ITEM);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
+
+
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatClient.init();
             ClientDynamicResourcesHandler.INSTANCE.register();
@@ -135,15 +147,7 @@ public abstract class EveryCompat {
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
 
-        BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
-        BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
-
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, BuiltInRegistries.ITEM);
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
-
-        RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
-
+        MODULE_DISABLER.save();
     }
 
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
@@ -158,7 +162,8 @@ public abstract class EveryCompat {
     }
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatHelper.isModLoaded(modId)) {
+        if (PlatHelper.isModLoaded(modId) && MODULE_DISABLER.isModuleOn(modId)) {
+
             CompatModule module = moduleFactory.get().apply(modId);
             try {
                 EveryCompatAPI.registerModule(module);
@@ -171,6 +176,9 @@ public abstract class EveryCompat {
         }
     }
 
+    public static Collection<CompatMod> getCompatMods(){
+        return COMPAT_MODS;
+    }
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
 
