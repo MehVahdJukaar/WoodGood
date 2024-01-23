@@ -29,5 +29,8 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "moonlight": ">=1.20-2.8.4"
+  },
+  "recommends": {
+    "sawmill": "*"
   }
 }

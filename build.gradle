@@ -80,6 +80,7 @@ subprojects {
                         requiredDependency "selene"
 
                         optionalDependency("create-fabric")
+                        optionalDependency("sawmill")
                         optionalDependency("twigs")
                         optionalDependency("camp-chair")
                         optionalDependency("farmers-delight-fabric")
@@ -95,7 +96,7 @@ subprojects {
                 } else {
                     relations {
                         requiredDependency("selene")
-
+                        requiredDependency("sawmill")
                         optionalDependency("create")
                         optionalDependency("quark")
                         optionalDependency("twigs")

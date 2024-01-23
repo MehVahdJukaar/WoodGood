@@ -12,6 +12,8 @@ public class UnsafeModuleDisabler {
     private final Properties properties;
     private final Path configPath = PlatHelper.getGamePath().resolve("config/everycomp-hazardous.properties");
 
+    private boolean isSafe = true;
+
     public UnsafeModuleDisabler() {
         this.properties = new Properties();
         loadProperties();
@@ -39,7 +41,12 @@ public class UnsafeModuleDisabler {
                 properties.setProperty(modId, String.valueOf(true));
             }else {
                 // Assuming the values in the properties file are boolean
-                return Boolean.parseBoolean(properties.getProperty(modId, "true"));
+                var ret = Boolean.parseBoolean(properties.getProperty(modId, "true"));
+                if(!ret && isSafe){
+                    isSafe = false;
+                    EveryCompat.LOGGER.warn("!!! You are using conditional modules registration. Proceed at your own risk and dont complain if you cant connect to servers !!!");
+                }
+                return ret;
             }
         }catch (Exception ignored){
         }

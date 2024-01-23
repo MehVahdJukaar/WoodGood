@@ -56,7 +56,7 @@ public abstract class EveryCompat {
         return new ResourceLocation(MOD_ID, name);
     }
 
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger("Every Compat");
 
     public static final Map<String, CompatModule> ACTIVE_MODULES = new TreeMap<>();
 
@@ -77,7 +77,7 @@ public abstract class EveryCompat {
 
 
     protected void commonInit() {
-
+        //TODO: this class is a mess. Should be split and cleaned up
         ECNetworking.init();
 
         ServerDynamicResourcesHandler.INSTANCE.register();
@@ -261,10 +261,6 @@ public abstract class EveryCompat {
         } else {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
-    }
-
-
-    protected static void sendPacket(ServerPlayer s) {
     }
 
 

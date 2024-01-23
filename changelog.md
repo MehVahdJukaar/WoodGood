@@ -1,3 +1,3 @@
-v2.6.25
+v2.6.27
 #### UPDATED:
-- Fixed quark ancient and blossom wood names
+- Added super hacky conditional module registration via .properties file. Dont use it!
