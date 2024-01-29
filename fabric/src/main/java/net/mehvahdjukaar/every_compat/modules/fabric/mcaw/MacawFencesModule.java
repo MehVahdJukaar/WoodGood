@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwfences.init.BlockInit;
-import net.kikoz.mcwfences.objects.FencesGroup;
+import net.kikoz.mcwfences.util.FencesGroup;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-
+//SUPPORT v1.0.4
 public class MacawFencesModule extends SimpleModule {
 
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
@@ -44,7 +44,6 @@ public class MacawFencesModule extends SimpleModule {
                 .setTab(() -> FencesGroup.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(PICKET_FENCES);
 
         STOCKADE_FENCES = SimpleEntrySet.builder(WoodType.class, "stockade_fence",
@@ -54,7 +53,6 @@ public class MacawFencesModule extends SimpleModule {
                 .setTab(() -> FencesGroup.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(STOCKADE_FENCES);
 
         HORSE_FENCES = SimpleEntrySet.builder(WoodType.class, "horse_fence",
@@ -64,7 +62,6 @@ public class MacawFencesModule extends SimpleModule {
                 .setTab(() -> FencesGroup.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(HORSE_FENCES);
 
         WIRED_FENCES = SimpleEntrySet.builder(WoodType.class, "wired_fence",
@@ -75,7 +72,6 @@ public class MacawFencesModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(WIRED_FENCES);
 
 
@@ -86,7 +82,6 @@ public class MacawFencesModule extends SimpleModule {
                 .setTab(() -> FencesGroup.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(PYRAMID_GATES);
 
         HIGHLEY_GATES = SimpleEntrySet.builder(WoodType.class, "highley_gate",
@@ -96,7 +91,6 @@ public class MacawFencesModule extends SimpleModule {
                 .setTab(() -> FencesGroup.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(HIGHLEY_GATES);
 
         HEDGES = SimpleEntrySet.builder(LeavesType.class, "hedge",
@@ -106,15 +100,16 @@ public class MacawFencesModule extends SimpleModule {
                             if (l == null) return null;
                             return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
-                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_hedge",
-                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
+                .addModelTransform(m -> m.addModifier((s, id, w) ->
+                        s.replace("mcwfences:block/oak_leaves",
+                                w.getNamespace() + ":block/" + w.getTypeName() + "_leaves"))
+                )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WALLS, Registry.ITEM_REGISTRY)
                 .setTab(() -> FencesGroup.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(HEDGES);
     }
 
