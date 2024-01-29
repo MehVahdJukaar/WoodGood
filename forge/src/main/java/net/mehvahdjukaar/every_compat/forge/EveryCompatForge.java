@@ -9,7 +9,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.Architects
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
-import net.mehvahdjukaar.every_compat.modules.forge.corail.WoodcutterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
@@ -102,7 +101,6 @@ public class EveryCompatForge extends EveryCompat {
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 //        addModule("carpenter", () -> CarpenterModule::new);
-//        addModule("corail_woodcutter", () -> WoodcutterModule::new);
 
         // ======================================== DISABLED FOR A REASON =========================================== \\
 
