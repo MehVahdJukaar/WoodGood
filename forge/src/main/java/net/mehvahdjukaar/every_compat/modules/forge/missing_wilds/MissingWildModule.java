@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.missing_wilds;
 
 import me.ultrusmods.missingwilds.block.FallenLogBlock;
-import me.ultrusmods.missingwilds.item.MissingWildsItemGroup;
 import me.ultrusmods.missingwilds.register.MissingWildsBlocks;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -9,11 +8,11 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
+//SUPPORT v1.2.0
 public class MissingWildModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> fallenLogs;
@@ -26,11 +25,10 @@ public class MissingWildModule extends SimpleModule {
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(modRes("fallen_logs"), Registries.BLOCK)
                 .addTag(modRes("fallen_logs"), Registries.ITEM)
-                .setTab(() -> MissingWildsItemGroup.MISSING_WILDS)
+                .setTab(() -> getModTab("items"))
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(fallenLogs);
     }
 }
