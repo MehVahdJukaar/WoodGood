@@ -6,8 +6,3 @@
 - XercaMod - Finished recipes & Improved textures (FORGE)
 - Builders Delight - Added the missing recipes (FORGE)
 - Productive Bees - Improved textures (FORGE)
-
-#### NEW:
-- Corail's Pillar
-- Decoration Delight Refurnished
-
