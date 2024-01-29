@@ -15,25 +15,23 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
 
+//SUPPORT v1.0.4
 public class MacawPathsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> PLANKS_PATHS;
 
     public MacawPathsModule(String modId) {
         super(modId, "mcp");
-        CreativeModeTab tab = MacawsPaths.PathsItemGroup;
-
 
         PLANKS_PATHS = SimpleEntrySet.builder(WoodType.class, "planks_path",
                         BlockInit.OAK_PLANKS_PATH, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FacingPathBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .setTab(() -> MacawsPaths.PATHSITEMGROUP)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/oak_planks_path"))
                 .build();
-
         this.addEntry(PLANKS_PATHS);
     }
 }
