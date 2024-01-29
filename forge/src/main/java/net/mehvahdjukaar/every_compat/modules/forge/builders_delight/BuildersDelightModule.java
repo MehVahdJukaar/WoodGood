@@ -19,6 +19,7 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -44,7 +45,10 @@ import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 
 
 public class BuildersDelightModule extends SimpleModule {
@@ -71,6 +75,7 @@ public class BuildersDelightModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8;
 
 
+    @SuppressWarnings("DataFlowIssue") // <- already has null check
     public BuildersDelightModule(String modId) {
         super(modId, "bdl");
         CreativeModeTab tabDeco = BdTabs.TabDecoration;
@@ -270,8 +275,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_1"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_1"))
@@ -286,8 +290,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_2"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_2"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_2"))
@@ -302,8 +305,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_3"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_3"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_3"))
@@ -318,8 +320,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_4"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_4"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_4"))
@@ -334,8 +335,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_5"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_5"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_5"))
@@ -350,8 +350,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_6"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_6"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_6"))
@@ -366,8 +365,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_7"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_7"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_7"))
@@ -384,8 +382,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .requiresChildren("slab")
                 .setTab(() -> tabBlock)
-                .addTexture(modRes("block/oak_planks_1"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_1"))
@@ -400,8 +397,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_2"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_2"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_2"))
@@ -416,8 +412,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_3"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_3"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_3"))
@@ -432,8 +427,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_4"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_4"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_4"))
@@ -448,8 +442,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_5"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_5"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_5"))
@@ -464,8 +457,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_6"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_6"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_6"))
@@ -480,8 +472,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_7"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_7"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_7"))
@@ -496,11 +487,11 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_1"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .setTab(() -> tabBlock)
                 .addTexture(modRes("block/oak_frame_1"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // custom recipe below
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -511,12 +502,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_2"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .addTexture(modRes("block/oak_frame_2"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -527,12 +518,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_3"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .addTexture(modRes("block/oak_frame_3"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -543,12 +534,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_4"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .addTexture(modRes("block/oak_frame_4"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -559,12 +550,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_5"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .addTexture(modRes("block/oak_frame_5"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -575,12 +566,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_6"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .addTexture(modRes("block/oak_frame_6"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -591,12 +582,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_7"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .addTexture(modRes("block/oak_frame_7"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -607,12 +598,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_8"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("frame"), Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .addTexture(modRes("block/oak_frame_8"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
 
@@ -625,12 +616,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_1")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_1"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_1_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                // custom recipe below
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -641,12 +632,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_2")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_2"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_2"), EveryCompat.res("block/bdl/oak_glass_2_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -657,12 +648,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_3")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_3"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_3"), EveryCompat.res("block/bdl/oak_glass_3_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -673,12 +664,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_4")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_4"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_4"), EveryCompat.res("block/bdl/oak_glass_4_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -689,12 +680,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_5")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_5"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -705,12 +696,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_6")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_6"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_6_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -721,12 +712,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_7")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_7"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_7_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
@@ -737,12 +728,12 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_8")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_8"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
                 .addTextureM(modRes("block/glass/oak_glass/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_8_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();
 
@@ -755,8 +746,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_1")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_1"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_1"))
@@ -770,8 +761,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_2")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_2"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_2"))
@@ -785,8 +776,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_3")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_3"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_3"))
@@ -800,8 +791,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_4")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_4"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_4"))
@@ -815,8 +806,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_5")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_5"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_5"))
@@ -830,8 +821,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_6")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_6"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_6"))
@@ -845,8 +836,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_7")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_7"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_7"))
@@ -860,8 +851,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_8")
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_8"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+//                .addTag(Tags.Blocks.GLASS_PANES, Registry.ITEM_REGISTRY)
                 .setTab(() -> tabBlock)
                 // (.addTexture) Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_8"))
@@ -908,11 +899,37 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
+    // Create a tag file for wood types of planks
+    public void planksTags(WoodType wood, DynamicDataPack DDPack, EntrySet<?, ?, ?>... entries) {
+        /*
+        planksTags is used as ingreident for crafting Glass_1
+         */
+
+        JsonArray tagList = new JsonArray();
+
+        var vanilla = wood.getItemOfThis("planks"); // Add Normal blocks to the list
+        if (vanilla != null) tagList.add(Utils.getID(vanilla).toString());
+
+        for (var e : entries) { // Add blocks to the list
+            Item obj = e.items.get(wood);
+            if (obj != null) tagList.add(Utils.getID(obj).toString());
+        }
+
+        if (!tagList.isEmpty()) {
+            ResourceLocation resLoc = EveryCompat.res("items/" + wood.getTypeName() + "_planks");
+            JsonObject file = new JsonObject();
+            file.addProperty("replace", "false");
+            file.add("values", tagList);
+            DDPack.addJson(resLoc, file, ResType.TAGS);
+        }
+
+    }
+
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
         var pack = handler.getPack();
-        for (var w : WoodTypeRegistry.getTypes()) {
+        for (WoodType w : WoodTypeRegistry.getTypes()) {
             if (!w.isVanilla()) {
                 addChiselRecipe(pack, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
                 addChiselRecipe(pack, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7);
@@ -920,6 +937,12 @@ public class BuildersDelightModule extends SimpleModule {
                 addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
                 addChiselRecipe(pack, w, "glass", GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8);
                 addChiselRecipe(pack, w, "glass_pane", GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8);
+
+                planksTags(w, pack, PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
+
+                // Glass Recipe
+                craftingWithTagsRecipe("glass_1", "planks", GLASS_1.items.get(w), w, pack, manager);
+                craftingWithTagsRecipe("frame_1", "planks", FRAME_1.items.get(w), w, pack, manager);
             }
         }
         String recipe = """
@@ -955,6 +978,36 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
+    // glass_1 has tag for ingredients, so defaultRecipe() won't work
+    public void craftingWithTagsRecipe(String baseName, String input, Item output, WoodType wood, DynamicDataPack pack, ResourceManager manager) {
+        // bdl/namespace/<type>_glass_1;
+        String pathBuilder = this.shortenedId() + "/" + wood.getVariantId(baseName,false);
+
+        ResourceLocation recipeLoc = modRes("recipes/oak_"+ baseName + ".json");
+        JsonObject recipe;
+        try (InputStream recipeStream = manager.getResource(recipeLoc).orElseThrow().open()) {
+            recipe = RPUtils.deserializeJson(recipeStream);
+            String inputTag = EveryCompat.MOD_ID + ":" + wood.getTypeName() +"_"+ input ;
+
+            // VARIABLES for json
+            JsonObject underKey;
+            if (Objects.equals(baseName, "glass_1")) {
+                underKey = recipe.getAsJsonObject("key").getAsJsonObject("1");
+            } else {
+                underKey = recipe.getAsJsonObject("key").getAsJsonObject("0");
+            }
+            JsonObject underResult = recipe.getAsJsonObject("result");
+
+            // EDITING
+            underKey.addProperty("tag", inputTag);
+            underResult.addProperty("item", Utils.getID(output).toString());
+
+            pack.addJson(EveryCompat.res(pathBuilder), recipe, ResType.RECIPES);
+        }
+        catch (IOException ex) {
+            EveryCompat.LOGGER.error("{BuildersDelight Module} TagsRecipe(): " + ex);
+        }
+    }
 
     private static void addChiselRecipe(DynamicDataPack pack, WoodType w, String name, EntrySet<?, ?, ?>... entries) {
         JsonArray arr = new JsonArray();
