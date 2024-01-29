@@ -13,7 +13,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
-
+//SUPPORT v1.0.4+
 public class MacawPathsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> PLANKS_PATHS;
@@ -30,7 +30,6 @@ public class MacawPathsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/oak_planks_path"))
                 .build();
-
         this.addEntry(PLANKS_PATHS);
     }
 }
