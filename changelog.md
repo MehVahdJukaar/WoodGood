@@ -1,3 +1,4 @@
-v2.6.27
+### CHANGELOG: v2.6.28
 #### UPDATED:
-- Added super hacky conditional module registration via .properties file. Dont use it!
+- Macaw's Fences & walls - Fixed Hedge's textures
+- Missing Wilds - CreativeTabMode
