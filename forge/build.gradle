@@ -152,11 +152,11 @@ dependencies {
     modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4599799")
-    modCompileOnly("curse.maven:macaws-doors-378646:4446154")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:4204550")
+    modCompileOnly("curse.maven:macaws-doors-378646:4649906")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5046056")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726294")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618179")
-    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4585116")
+    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054877")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590028")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841549")
     modCompileOnly("curse.maven:macaws-windows-363569:4961138")
@@ -173,7 +173,7 @@ dependencies {
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389567")
     modCompileOnly("curse.maven:twigs-496913:4533061")
-    modCompileOnly("curse.maven:woodworks-543610:4023081")
+    modCompileOnly("curse.maven:woodworks-543610:4776123")
     modCompileOnly("curse.maven:woodster-869951:4575175")
     modCompileOnly("curse.maven:habitat-422972:4594207")
     modCompileOnly("curse.maven:ex-nihilo-sequentia-400012:4731378")
@@ -185,13 +185,14 @@ dependencies {
 
     // =========================================== WORK IN PROGRESS ================================================= \\
     modImplementation("curse.maven:handcrafted-538214:4437459")
-//    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
+
+    // ============================================= NOT ADDED YET ================================================== \\
 //    modImplementation("curse.maven:i-like-wood-324164:4463114")
-    modCompileOnly("curse.maven:carpenter-549446:4673192")
-    modCompileOnly("curse.maven:functional-storage-556861:4810636")
-    modImplementation("curse.maven:corail-woodcutter-331983:4442685")
-    modImplementation("curse.maven:mighty-mail-902986:4750268")
 //    modImplementation("curse.maven:just-a-raft-mod-274350:4688639")
+//    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
+    modCompileOnly("curse.maven:mighty-mail-902986:4750268")
+    modCompileOnly("curse.maven:functional-storage-556861:4810636")
+    modCompileOnly("curse.maven:carpenter-549446:4673192")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")

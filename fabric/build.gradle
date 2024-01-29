@@ -67,10 +67,10 @@ dependencies {
     modCompileOnly("curse.maven:infinity-buttons-661902:4716974")
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4599786")
-    modCompileOnly("curse.maven:macaws-doors-378646:4446168")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:4203533")
+    modCompileOnly("curse.maven:macaws-doors-378646:4649884")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5045040")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618164")
-    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:4585100")
+    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054851")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590009")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841530")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726276")
