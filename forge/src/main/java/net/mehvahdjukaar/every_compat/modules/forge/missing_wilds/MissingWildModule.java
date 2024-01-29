@@ -12,7 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
-//SUPPORT v1.2.0
+//SUPPORT v1.2.0+
 public class MissingWildModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> fallenLogs;
