@@ -78,7 +78,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodster", () -> WoodsterModule::new);
-        addModule("woodworks", () -> WoodworksModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addModule("xercamod", () -> XercaModule::new);
