@@ -96,7 +96,7 @@ subprojects {
                 } else {
                     relations {
                         requiredDependency("selene")
-                        requiredDependency("sawmill")
+                        optionalDependency("sawmill")
                         optionalDependency("create")
                         optionalDependency("quark")
                         optionalDependency("twigs")
