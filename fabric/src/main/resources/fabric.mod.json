@@ -22,7 +22,7 @@
       "net.mehvahdjukaar.every_compat.fabric.EveryCompatFabric"
     ],
     "modmenu": [
-      "net.mehvahdjukaar.every_compat.modMenu.ModMenuCompat"
+      "net.mehvahdjukaar.every_compat.modmenu.ModMenuCompat"
     ]
   },
   "depends": {
