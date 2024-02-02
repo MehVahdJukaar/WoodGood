@@ -21,6 +21,8 @@ import net.minecraft.client.resources.metadata.animation.AnimationMetadataSectio
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Collection;
@@ -39,12 +41,15 @@ public class DecorativeBlocksModule extends SimpleModule {
     public DecorativeBlocksModule(String modId) {
         super(modId, "db");
 
-
         beams = SimpleEntrySet.builder(WoodType.class, "beam",
                         () -> DBBlocks.BEAMS.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.BEAM))
                 .addTag(modRes("beams"), Registries.BLOCK)
                 .addTag(modRes("beams"), Registries.ITEM)
+                .addTag(modRes("beams_that_burn"), Registries.ITEM)
+                .addTag(modRes("beams_that_burn"), Registries.BLOCK)
+                .addTag(modRes("logs_that_burn"), Registries.BLOCK)
+                .addTag(modRes("logs_that_burn"), Registries.ITEM)
                 .defaultRecipe()
                 .setTab(() -> DBItems.ITEM_GROUP)
                 .setPalette(this::makeDBPalette)

@@ -30,7 +30,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -212,7 +211,7 @@ public abstract class EveryCompat {
     private static int prevRegSize;
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
-        ModConfigs.init(); // add wood stuff once its ready
+        ModConfigs.initEarlyButNotSuperEarly(); // add wood stuff once its ready
         prevRegSize = BuiltInRegistries.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");
         forAllModules(m -> m.registerWoodBlocks(event, woods));

@@ -25,18 +25,19 @@ public class ModConfigs {
 
     public static ConfigSpec SPEC;
 
-    public static Supplier<Boolean> TAB_ENABLED;
+    // default as we are initializing it late
+    public static Supplier<Boolean> TAB_ENABLED =  () -> true;
     //  public static Supplier<Boolean> REMAP_COMPAT;
     //  public static Supplier<Boolean> REMAP_OWN;
-    public static Supplier<Boolean> DEPEND_ON_PACKS;
-    public static Supplier<Boolean> DEBUG_RESOURCES;
-    public static Supplier<Boolean> DEBUG_PACKET;
-    public static Supplier<Boolean> BLOCK_TYPE_TOOLTIP;
-    public static Supplier<Boolean> MOD_TOOPTIP;
-    public static Supplier<Boolean> TOOLTIPS_ADVANCED;
+    public static Supplier<Boolean> DEPEND_ON_PACKS =  () -> true;
+    public static Supplier<Boolean> DEBUG_RESOURCES = () -> false;
+    public static Supplier<Boolean> DEBUG_PACKET =  () -> false;
+    public static Supplier<Boolean> BLOCK_TYPE_TOOLTIP = () -> true;
+    public static Supplier<Boolean> MOD_TOOPTIP = () -> true;
+    public static Supplier<Boolean> TOOLTIPS_ADVANCED = () -> true;
 
 
-    public static void init() {
+    public static void initEarlyButNotSuperEarly() {
 
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.COMMON);
 
@@ -56,11 +57,11 @@ public class ModConfigs {
 
         builder.push("tooltips");
         MOD_TOOPTIP = builder.comment("Enabled tooltips showing which mod an EC item is from")
-                        .define("mod_origin_enabled", true);
+                .define("mod_origin_enabled", true);
         BLOCK_TYPE_TOOLTIP = builder.comment("Enabled tooltips showing which block type an EC item is made from")
                 .define("block_type_enabled", true);
         TOOLTIPS_ADVANCED = builder.comment("Only show on advanced settings")
-                        .define("show_on_advanced_tooltips", false);
+                .define("show_on_advanced_tooltips", false);
 
         builder.pop();
 
