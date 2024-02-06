@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.ECNetworking;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
@@ -139,9 +140,11 @@ public class EveryCompatForge extends EveryCompat {
 
     @SubscribeEvent
     public void onPlayerNegotiation(PlayerNegotiationEvent playerNegotiationEvent) {
-        ((ChannelHandlerImpl) ECNetworking.CHANNEL).channel.sendTo(new ECNetworking.S2CModVersionCheckMessage(),
-                playerNegotiationEvent.getConnection(),
-                NetworkDirection.LOGIN_TO_CLIENT
-        );
+        if(ModConfigs.CHECK_PACKET.get()) {
+            ((ChannelHandlerImpl) ECNetworking.CHANNEL).channel.sendTo(new ECNetworking.S2CModVersionCheckMessage(),
+                    playerNegotiationEvent.getConnection(),
+                    NetworkDirection.LOGIN_TO_CLIENT
+            );
+        }
     }
 }

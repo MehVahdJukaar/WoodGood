@@ -30,6 +30,7 @@ public class ModConfigs {
     //  public static Supplier<Boolean> REMAP_COMPAT;
     //  public static Supplier<Boolean> REMAP_OWN;
     public static Supplier<Boolean> DEPEND_ON_PACKS =  () -> true;
+    public static Supplier<Boolean> CHECK_PACKET =  () -> true;
     public static Supplier<Boolean> DEBUG_RESOURCES = () -> false;
     public static Supplier<Boolean> DEBUG_PACKET =  () -> false;
     public static Supplier<Boolean> BLOCK_TYPE_TOOLTIP = () -> true;
@@ -53,6 +54,8 @@ public class ModConfigs {
                 .define("assets_depend_on_loaded_packs", true);
         DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
                 .define("save_debug_resources", false);
+        CHECK_PACKET = builder.comment("Sends a packet to verify all dependencies mod versions are the same on connect. DIsable if it causes issues")
+                .define("mod_version_check_packet", true);
         DEBUG_PACKET = builder.comment("Don't touch unless you are told to").define("debug_packet", false);
 
         builder.push("tooltips");
