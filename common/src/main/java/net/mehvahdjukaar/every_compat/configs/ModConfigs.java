@@ -69,7 +69,8 @@ public class ModConfigs {
         builder.pop();
 
 
-        builder.push("types");
+        builder.comment("Disables certain types")
+                .push("types");
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));
             for (var w : reg.getValues()) {
@@ -84,7 +85,8 @@ public class ModConfigs {
         }
         builder.pop();
 
-        builder.push("entries");
+        builder.comment("Disables specific entries")
+                .push("entries");
         for (var reg : BlockSetAPI.getRegistries()) {
             if (reg.getType() == WoodType.class || reg.getType() == LeavesType.class) {
                 builder.push(reg.typeName().replace(" ", "_"));
