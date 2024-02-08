@@ -44,6 +44,7 @@ import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class QuarkModule extends SimpleModule {
 
@@ -151,8 +152,9 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.ITEM)
-                .addRecipe(modRes("building/crafting/spruce_ladder"))
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
+                .addRecipe(modRes("building/crafting/spruce_ladder"))
+                .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(ladders);
@@ -165,6 +167,20 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new HollowLogBlock(name, w.log, null, w.canBurn());
                         })
+                .addModelTransform(m -> m.addModifier((s, id, w) -> {
+                        if (!Objects.nonNull(w.getBlockOfThis("stripped_log")) && Objects.equals(w.getNamespace(), "gardens_of_the_dead")) {
+                        // Workaround: whistlecane from gardens_of_the_dead & blocks having no stripped texture
+                            String pathID = "\"" + w.getNamespace() + ":block/" + w.getTypeName() + "_block";
+                            return s.replace("\"end\": \"minecraft:block/oak_log_top\"",
+                                            "\"end\": " + pathID + "_top\"")
+                                    .replace("\"side\": \"minecraft:block/oak_log\"",
+                                            "\"side\": " + pathID + "\"")
+                                    .replace("\"inside\": \"minecraft:block/stripped_oak_log\"",
+                                            "\"inside\": " + pathID + "\"");
+                        }
+                        return s;
+                    })
+                )
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hollow_logs"), Registries.BLOCK)
