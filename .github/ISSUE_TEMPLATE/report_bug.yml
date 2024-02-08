@@ -1,7 +1,7 @@
 name: Report Bug
 description: Every Compat got a bug? Report it.
 title: "[🐞]: "
-labels: "bug"
+labels: "🐞bug"
 body:
   - type: markdown
     attributes:

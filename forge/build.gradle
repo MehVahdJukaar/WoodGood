@@ -107,39 +107,42 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    modImplementation("curse.maven:selene-499980:4981685")
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
+    modImplementation("curse.maven:selene-499980:4981685")
 
 
     // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("curse.maven:architectury-api-419699:4663010") // REI
-    modImplementation("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
-
-    modImplementation("curse.maven:athena-841890:4764357") // Chipped
+    modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
+    modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
+    modImplementation("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modCompileOnly("curse.maven:blueprint-382216:4442628")
+    modImplementation("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:3972423") // REI
-//    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
-//    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
-    modCompileOnly("curse.maven:valhelsia-core-416935:4735319")
+    modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:4710572")
-    modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
-    //modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
+
+//    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
+//    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
+//    modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
+
+        // LOCAL
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}")
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
-
+    modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:roughly-enough-items-310111:4573157")
+    modCompileOnly("curse.maven:worldedit-225608:4586218")
     modImplementation("curse.maven:jade-324717:4711195")
     modImplementation("curse.maven:jei-238222:4712868")
 
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
-    modImplementation("curse.maven:architects-palette-433862:5036133")
+    modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
-    modImplementation("curse.maven:chipped-456956:4634856")
+    modCompileOnly("curse.maven:chipped-456956:4634856")
     modCompileOnly("curse.maven:create-328085:4626108")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
@@ -147,7 +150,7 @@ dependencies {
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
     modCompileOnly("curse.maven:furnish-547069:4821511")
-    modImplementation("curse.maven:friends-and-foes-forge-602059:4712044")
+    modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
     modCompileOnly("curse.maven:lauchs-shutters-714019:4764777")
@@ -167,16 +170,14 @@ dependencies {
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
-    modImplementation("curse.maven:worldedit-225608:4586218")
     modCompileOnly("curse.maven:productivebees-377897:4709520")
-    modImplementation("org.violetmoon.quark:Quark-4.0-beta-426")
-    modImplementation("org.violetmoon.zeta:Zeta-1.0-beta-1")
+    modCompileOnly("curse.maven:quark-243121:5084013")
 
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
-    modImplementation("curse.maven:the-twilight-forest-227639:4653704")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
     modCompileOnly("curse.maven:twigs-496913:4605097")
-    modCompileOnly("curse.maven:woodworks-543610:4023081")
+    modCompileOnly("curse.maven:woodworks-543610:4023081") // no 1.20.1 yet
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
@@ -198,9 +199,13 @@ dependencies {
     // modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBModel
 
     // =========================================== FOR TESTING ===================================================== \\
-//    modImplementation("curse.maven:terrablender-563928:4647094") // Required by: BOP, Regions-Unexplored
 //    modImplementation("curse.maven:regions-unexplored-659110:4779426")
 //    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
+    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
+
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659")
+
+    // Dependencies
+//    modImplementation("curse.maven:terrablender-563928:4647094") // Required by: BOP, Regions-Unexplored
 //    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
 }
