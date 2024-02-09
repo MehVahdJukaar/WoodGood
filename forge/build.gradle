@@ -115,9 +115,9 @@ dependencies {
     modImplementation("curse.maven:architectury-api-419699:4663010") // REI
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
-    modImplementation("curse.maven:zeta-968868:5078215") // Quark
+    modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modImplementation("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
+    modCompileOnly("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:3972423") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:4710572")
@@ -181,7 +181,7 @@ dependencies {
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
-    modCompileOnly("curse.maven:builders-delight-forge-563734:4362665")
+    modImplementation("curse.maven:builders-delight-forge-563734:5088176")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
@@ -200,12 +200,12 @@ dependencies {
 
     // =========================================== FOR TESTING ===================================================== \\
 //    modImplementation("curse.maven:regions-unexplored-659110:4779426")
-//    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
-    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
+    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
+//    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659")
 
     // Dependencies
-//    modImplementation("curse.maven:terrablender-563928:4647094") // Required by: BOP, Regions-Unexplored
+    modImplementation("curse.maven:terrablender-563928:4647094") // Required by: BOP, Regions-Unexplored
 //    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
 }
