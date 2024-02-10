@@ -11,7 +11,6 @@ import com.tynoxs.buildersdelight.content.block.wood.SlabFlammable;
 import com.tynoxs.buildersdelight.content.block.wood.StairFlammable;
 import com.tynoxs.buildersdelight.content.init.BdBlocks;
 import com.tynoxs.buildersdelight.content.init.BdDecoration;
-import com.tynoxs.buildersdelight.content.init.BdItems;
 import com.tynoxs.buildersdelight.content.init.BdTabs;
 import com.tynoxs.buildersdelight.content.item.BdFurnitureKit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -22,9 +21,6 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -86,7 +82,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: ITEM
         FURNITURE_KIT = ItemOnlyEntrySet.builder(WoodType.class, "furniture_kit",
                         () -> getModItem("oak_furniture_kit"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new customBdFurnitureKit(new Item.Properties().stacksTo(64),"furniture_kit")
+                        w -> new CustomBdFurnitureKit(new Item.Properties().stacksTo(64),"furniture_kit")
                 )
                 .setTab(tabMater)
                 .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"))
@@ -103,7 +99,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("chair"), Registries.ITEM)
                 .setTab(tabDeco)
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_1"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((woodType, block, properties) -> new BDBlockItem(block, properties, "chair_1"))
@@ -117,7 +113,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.ITEM)
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_2"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_2"))
                 .setTab(tabDeco)
                 .setRenderType(() -> RenderType::cutout)
@@ -165,7 +161,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_1"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(modRes("oak_planks_1"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_1"))
@@ -179,7 +175,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_2"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(modRes("oak_planks_2"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_2"))
@@ -193,7 +189,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_3"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(modRes("oak_planks_3"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_3"))
@@ -207,7 +203,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_4"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(modRes("oak_planks_4"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_4"))
@@ -221,7 +217,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_5"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(modRes("oak_planks_5"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_5"))
@@ -235,7 +231,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_6"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(modRes("oak_planks_6"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_6"))
@@ -249,7 +245,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_7"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addRecipe(modRes("oak_planks_7"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_7"))
@@ -466,7 +462,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_1"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 // custom recipe below
                 .setRenderType(() -> RenderType::solid)
                 .build();
@@ -481,7 +477,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_2"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
@@ -496,7 +492,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_3"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
@@ -511,7 +507,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_4"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
@@ -526,7 +522,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_5"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
@@ -541,7 +537,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_6"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
@@ -556,7 +552,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_7"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
@@ -571,7 +567,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(modRes("frame"), Registries.ITEM)
                 .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_8"))
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
@@ -586,7 +582,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_1"))
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_1_mask"))
                 // custom recipe below
                 .setRenderType(() -> RenderType::cutout)
@@ -600,7 +596,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_2"))
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_2"), EveryCompat.res("block/bdl/oak_glass_2_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
@@ -614,7 +610,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_3"))
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_3"), EveryCompat.res("block/bdl/oak_glass_3_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
@@ -628,7 +624,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_4"))
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_4"), EveryCompat.res("block/bdl/oak_glass_4_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
@@ -642,7 +638,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_5"))
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"))
                 .addTexture(modRes("block/oak_glass_5_top"))
                 // ChiselRecipe
@@ -657,7 +653,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_6"))
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_6_mask"))
                 .addTexture(modRes("block/oak_glass_6_top"))
                 // ChiselRecipe
@@ -672,7 +668,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_7"))
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_7_mask"))
                 .addTexture(modRes("block/oak_glass_7_top"))
                 // ChiselRecipe
@@ -687,7 +683,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_8"))
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_8_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
@@ -802,10 +798,13 @@ public class BuildersDelightModule extends SimpleModule {
     }
 
     //TYPE: FUNCTIONS
-    private void neutralPalette(Palette p) {
+    private void lessContrastPalette(Palette p) {
         p.remove(p.getLightest());
-        p.remove(p.getLightest());
+        p.increaseInner();
         p.remove(p.getDarkest());
+        p.increaseInner();
+        p.remove(p.getLightest());
+        p.increaseInner();
         p.remove(p.getDarkest());
     }
 
@@ -824,10 +823,10 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
-    public static class customBdFurnitureKit extends BdFurnitureKit {
+    public static class CustomBdFurnitureKit extends BdFurnitureKit {
         private final Component tooltip;
 
-        public customBdFurnitureKit(Properties properties, String name) {
+        public CustomBdFurnitureKit(Properties properties, String name) {
             super(properties);
             this.tooltip = Component.translatable("tooltip.everycomp.buildersdelight." + name).withStyle(ChatFormatting.GRAY);
         }
@@ -936,7 +935,12 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
-//    @Override
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+    }
+
+    //    @Override
     // idk why .addTextureM() don't work for furniture_kit (ITEM) - Had to add below to do
     // Textures for furniture_kit
 /*    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {

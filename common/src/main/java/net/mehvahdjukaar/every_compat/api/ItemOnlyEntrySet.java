@@ -166,6 +166,11 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     }
 
+    @Override
+    public Map<T, ?> getDefaultEntries() {
+        return items;
+    }
+
     //ok...
     public static <T extends BlockType, I extends Item> Builder<T, I> builder(Class<T> type, String name,
                                                                               Supplier<I> baseItem, Supplier<T> baseType,

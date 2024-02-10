@@ -148,7 +148,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         if (!tags.isEmpty()) {
             for (var tb : tags.entrySet()) {
                 SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
-                for (var b : blocks.entrySet()) {
+                for (var b : getDefaultEntries().entrySet()) {
                     if (ModConfigs.isEntryEnabled(b.getKey(), b.getValue())) {
                         builder.addEntry(b.getValue());
                     }
@@ -158,6 +158,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 }
             }
         }
+    }
+
+    public Map<T, ?> getDefaultEntries(){
+        return blocks;
     }
 
     @Override
@@ -186,9 +190,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             Palette globalPalette = Palette.ofColors(new ArrayList<RGBColor>());
             for (var p : textures) {
                 ResourceLocation textureId = p.getFirst();
+
                 try {
                     ResourceLocation maskId = p.getSecond();
-                    Respriter r;
                     //Simple texture copy. Ugly... Not even used for more than 1 mod
                     if (maskId != null && textureId == null) {
                         TextureImage main = TextureImage.open(manager, maskId);
@@ -226,8 +230,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 respriters.put(e.getKey(), Respriter.ofPalette(e.getValue(), globalPalette));
             }
 
-            for (var entry : blocks.entrySet()) {
-                B b = entry.getValue();
+            for (var entry : getDefaultEntries().entrySet()) {
+                var b = entry.getValue();
                 T w = entry.getKey();
                 //skips disabled ones
 
