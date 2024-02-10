@@ -2,8 +2,8 @@ package net.mehvahdjukaar.every_compat.modules.forge.builders_delight;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import com.tynoxs.buildersdelight.content.block.custom.BlockChair;
+import com.tynoxs.buildersdelight.content.block.custom.BlockGlassBlock;
 import com.tynoxs.buildersdelight.content.block.custom.BlockSmallTable;
 import com.tynoxs.buildersdelight.content.block.custom.BlockStool;
 import com.tynoxs.buildersdelight.content.block.wood.BlockFlammable;
@@ -14,43 +14,44 @@ import com.tynoxs.buildersdelight.content.init.BdDecoration;
 import com.tynoxs.buildersdelight.content.init.BdItems;
 import com.tynoxs.buildersdelight.content.init.BdTabs;
 import com.tynoxs.buildersdelight.content.item.BdFurnitureKit;
-import com.tynoxs.buildersdelight.content.item.BdItem;
-
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.api.util.math.colors.HSVColor;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 
-
+//SUPPORT ------------Not out yet------------
 public class BuildersDelightModule extends SimpleModule {
 
     //TYPE: ITEM
@@ -75,20 +76,21 @@ public class BuildersDelightModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8;
 
 
+//    @SuppressWarnings("DataFlowIssue")
     public BuildersDelightModule(String modId) {
         super(modId, "bdl");
-        CreativeModeTab tabDeco = BdTabs.TabDecoration;
-        CreativeModeTab tabBlock = BdTabs.TabBlocks;
-        CreativeModeTab tabMater = BdTabs.TabMaterials;
+        RegistryObject<CreativeModeTab> tabDeco = BdTabs.TabDecoration;
+        RegistryObject<CreativeModeTab> tabBlock = BdTabs.TabBlocks;
+        RegistryObject<CreativeModeTab> tabMater = BdTabs.TabMaterials;
 
         //TYPE: ITEM
         FURNITURE_KIT = ItemOnlyEntrySet.builder(WoodType.class, "furniture_kit",
-                        BdItems.OAK_FURNITURE_KIT, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> getModItem("oak_furniture_kit"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new customBdFurnitureKit(new Item.Properties().stacksTo(64),"furniture_kit")
                 )
+                .setTab(tabMater)
                 .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"))
                 .addRecipe(modRes("oak_furniture_kit"))
-                .createPaletteFromOak(SpriteUtils::extrapolateWoodItemPalette)
                 .build();
         this.addEntry(FURNITURE_KIT);
 
@@ -99,14 +101,13 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.ITEM)
-                .setTab(() -> tabDeco)
+                .setTab(tabDeco)
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_1"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((woodType, block, properties) -> new BDBlockItem(block, properties, "chair_1"))
                 .build();
-
         this.addEntry(CHAIR_1);
 
         CHAIR_2 = SimpleEntrySet.builder(WoodType.class, "chair_2",
@@ -118,11 +119,10 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_2"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_2"))
-                .setTab(() -> tabDeco)
+                .setTab(tabDeco)
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "chair_2"))
                 .build();
-
         this.addEntry(CHAIR_2);
 
 
@@ -134,13 +134,12 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.ITEM)
-                .setTab(() -> tabDeco)
+                .setTab(tabDeco)
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_1"))
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_table_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "table_1"))
                 .build();
-
         this.addEntry(TABLE_1);
 
         TABLE_2 = SimpleEntrySet.builder(WoodType.class, "table_2",
@@ -149,13 +148,12 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.ITEM)
-                .setTab(() -> tabDeco)
+                .setTab(tabDeco)
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_2"))
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_table_2"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "table_2"))
                 .build();
-
         this.addEntry(TABLE_2);
 
 
@@ -165,14 +163,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_1"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(modRes("oak_planks_1"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_1"))
                 .build();
-
         this.addEntry(PLANKS_1);
 
         PLANKS_2 = SimpleEntrySet.builder(WoodType.class, "planks_2",
@@ -180,14 +177,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_2"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(modRes("oak_planks_2"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_2"))
                 .build();
-
         this.addEntry(PLANKS_2);
 
         PLANKS_3 = SimpleEntrySet.builder(WoodType.class, "planks_3",
@@ -195,14 +191,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_3"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(modRes("oak_planks_3"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_3"))
                 .build();
-
         this.addEntry(PLANKS_3);
 
         PLANKS_4 = SimpleEntrySet.builder(WoodType.class, "planks_4",
@@ -210,14 +205,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_4"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(modRes("oak_planks_4"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_4"))
                 .build();
-
         this.addEntry(PLANKS_4);
 
         PLANKS_5 = SimpleEntrySet.builder(WoodType.class, "planks_5",
@@ -225,14 +219,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_5"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(modRes("oak_planks_5"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_5"))
                 .build();
-
         this.addEntry(PLANKS_5);
 
         PLANKS_6 = SimpleEntrySet.builder(WoodType.class, "planks_6",
@@ -240,14 +233,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_6"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(modRes("oak_planks_6"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_6"))
                 .build();
-
         this.addEntry(PLANKS_6);
 
         PLANKS_7 = SimpleEntrySet.builder(WoodType.class, "planks_7",
@@ -255,14 +247,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_planks_7"))
                 .createPaletteFromOak(this::neutralPalette)
                 .addRecipe(modRes("oak_planks_7"))
                 .setRenderType(() -> RenderType::solid)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_7"))
                 .build();
-
         this.addEntry(PLANKS_7);
 
 
@@ -272,15 +263,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_1"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_1"))
                 .build();
-
         this.addEntry(STAIRS_1);
 
         STAIRS_2 = SimpleEntrySet.builder(WoodType.class, "stairs_2",
@@ -288,15 +277,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_2"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_2"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_2"))
                 .build();
-
         this.addEntry(STAIRS_2);
 
         STAIRS_3 = SimpleEntrySet.builder(WoodType.class, "stairs_3",
@@ -304,15 +291,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_3"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_3"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_3"))
                 .build();
-
         this.addEntry(STAIRS_3);
 
         STAIRS_4 = SimpleEntrySet.builder(WoodType.class, "stairs_4",
@@ -320,15 +305,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_4"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_4"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_4"))
                 .build();
-
         this.addEntry(STAIRS_4);
 
         STAIRS_5 = SimpleEntrySet.builder(WoodType.class, "stairs_5",
@@ -336,15 +319,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_5"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_5"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_5"))
                 .build();
-
         this.addEntry(STAIRS_5);
 
         STAIRS_6 = SimpleEntrySet.builder(WoodType.class, "stairs_6",
@@ -352,15 +333,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_6"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_6"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_6"))
                 .build();
-
         this.addEntry(STAIRS_6);
 
         STAIRS_7 = SimpleEntrySet.builder(WoodType.class, "stairs_7",
@@ -368,15 +347,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("stairs")
-                .addTexture(modRes("block/oak_planks_7"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_7"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "stairs_7"))
                 .build();
-
         this.addEntry(STAIRS_7);
 
 
@@ -387,14 +364,12 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .requiresChildren("slab")
-                .setTab(() -> tabBlock)
-                .addTexture(modRes("block/oak_planks_1"))
-                .createPaletteFromOak(this::neutralPalette)
+                .setTab(tabBlock)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_1"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_1"))
                 .build();
-
         this.addEntry(SLAB_1);
 
         SLAB_2 = SimpleEntrySet.builder(WoodType.class, "slab_2",
@@ -402,15 +377,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_2"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_2"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_2"))
                 .build();
-
         this.addEntry(SLAB_2);
 
         SLAB_3 = SimpleEntrySet.builder(WoodType.class, "slab_3",
@@ -418,15 +391,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_3"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_3"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_3"))
                 .build();
-
         this.addEntry(SLAB_3);
 
         SLAB_4 = SimpleEntrySet.builder(WoodType.class, "slab_4",
@@ -434,15 +405,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_4"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_4"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_4"))
                 .build();
-
         this.addEntry(SLAB_4);
 
         SLAB_5 = SimpleEntrySet.builder(WoodType.class, "slab_5",
@@ -450,15 +419,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_5"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_5"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_5"))
                 .build();
-
         this.addEntry(SLAB_5);
 
         SLAB_6 = SimpleEntrySet.builder(WoodType.class, "slab_6",
@@ -466,15 +433,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_6"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_6"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_6"))
                 .build();
-
         this.addEntry(SLAB_6);
 
         SLAB_7 = SimpleEntrySet.builder(WoodType.class, "slab_7",
@@ -482,15 +447,13 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .requiresChildren("slab")
-                .addTexture(modRes("block/oak_planks_7"))
-                .createPaletteFromOak(this::neutralPalette)
+                // using the same textures from planks
                 .addRecipe(modRes("oak_slab_7"))
                 .setRenderType(() -> RenderType::cutout)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "slab_7"))
                 .build();
-
         this.addEntry(SLAB_7);
 
 
@@ -501,13 +464,12 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_1"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_1"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // custom recipe below
                 .setRenderType(() -> RenderType::solid)
                 .build();
-
         this.addEntry(FRAME_1);
 
         FRAME_2 = SimpleEntrySet.builder(WoodType.class, "frame_2",
@@ -517,13 +479,12 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_2"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_2"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
-
         this.addEntry(FRAME_2);
 
         FRAME_3 = SimpleEntrySet.builder(WoodType.class, "frame_3",
@@ -533,13 +494,12 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_3"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_3"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
-
         this.addEntry(FRAME_3);
 
         FRAME_4 = SimpleEntrySet.builder(WoodType.class, "frame_4",
@@ -549,13 +509,12 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_4"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_4"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
-
         this.addEntry(FRAME_4);
 
         FRAME_5 = SimpleEntrySet.builder(WoodType.class, "frame_5",
@@ -565,13 +524,12 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_5"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_5"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
-
         this.addEntry(FRAME_5);
 
         FRAME_6 = SimpleEntrySet.builder(WoodType.class, "frame_6",
@@ -581,13 +539,12 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_6"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_6"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
-
         this.addEntry(FRAME_6);
 
         FRAME_7 = SimpleEntrySet.builder(WoodType.class, "frame_7",
@@ -597,13 +554,12 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_7"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_7"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
-
         this.addEntry(FRAME_7);
 
         FRAME_8 = SimpleEntrySet.builder(WoodType.class, "frame_8",
@@ -613,265 +569,235 @@ public class BuildersDelightModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_8"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .setTab(tabBlock)
                 .addTexture(modRes("block/oak_frame_8"))
                 .createPaletteFromOak(this::neutralPalette)
-                .addRecipe(modRes("oak_frame_1"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::solid)
                 .build();
-
         this.addEntry(FRAME_8);
 
 
         //TYPE: GLASS
         GLASS_1 = SimpleEntrySet.builder(WoodType.class, "glass_1",
                         BdBlocks.OAK_GLASS_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_1")
+                        w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_1"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
+                .setTab(tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_1_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                .addTextureM(modRes("block/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_1_mask"))
+                // custom recipe below
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(GLASS_1);
 
         GLASS_2 = SimpleEntrySet.builder(WoodType.class, "glass_2",
                         BdBlocks.OAK_GLASS_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_2")
+                        w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_2"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
+                .setTab(tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_2"), EveryCompat.res("block/bdl/oak_glass_2_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                .addTextureM(modRes("block/oak_glass_2"), EveryCompat.res("block/bdl/oak_glass_2_mask"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(GLASS_2);
 
         GLASS_3 = SimpleEntrySet.builder(WoodType.class, "glass_3",
                         BdBlocks.OAK_GLASS_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_3")
+                        w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_3"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
+                .setTab(tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_3"), EveryCompat.res("block/bdl/oak_glass_3_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                .addTextureM(modRes("block/oak_glass_3"), EveryCompat.res("block/bdl/oak_glass_3_mask"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(GLASS_3);
 
         GLASS_4 = SimpleEntrySet.builder(WoodType.class, "glass_4",
                         BdBlocks.OAK_GLASS_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_4")
+                        w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_4"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
+                .setTab(tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_4"), EveryCompat.res("block/bdl/oak_glass_4_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                .addTextureM(modRes("block/oak_glass_4"), EveryCompat.res("block/bdl/oak_glass_4_mask"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(GLASS_4);
 
         GLASS_5 = SimpleEntrySet.builder(WoodType.class, "glass_5",
                         BdBlocks.OAK_GLASS_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_5")
+                        w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_5"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
+                .setTab(tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                .addTextureM(modRes("block/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"))
+                .addTexture(modRes("block/oak_glass_5_top"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_5);
 
         GLASS_6 = SimpleEntrySet.builder(WoodType.class, "glass_6",
                         BdBlocks.OAK_GLASS_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_6")
+                        w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_6"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
+                .setTab(tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_6_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                .addTextureM(modRes("block/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_6_mask"))
+                .addTexture(modRes("block/oak_glass_6_top"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_6);
 
         GLASS_7 = SimpleEntrySet.builder(WoodType.class, "glass_7",
                         BdBlocks.OAK_GLASS_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_7")
+                        w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_7"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
+                .setTab(tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_7_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                .addTextureM(modRes("block/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_7_mask"))
+                .addTexture(modRes("block/oak_glass_7_top"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(GLASS_7);
 
         GLASS_8 = SimpleEntrySet.builder(WoodType.class, "glass_8",
                         BdBlocks.OAK_GLASS_8, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomGlassCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_8")
+                        w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_8"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS, Registries.ITEM)
-                .setTab(() -> tabBlock)
+                .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
+                .setTab(tabBlock)
                 .createPaletteFromOak(this::neutralPalette)
-                .addTextureM(modRes("block/glass/oak_glass/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_8_mask"))
-                .addRecipe(modRes("oak_glass_1"))
+                .addTextureM(modRes("block/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_8_mask"))
+                // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_8);
 
 
         //TYPE: GLASS_PANE
         GLASS_PANE_1 = SimpleEntrySet.builder(WoodType.class, "glass_pane_1",
                         BdBlocks.OAK_GLASS_PANE_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_1")
+                        w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_1"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
-                .setTab(() -> tabBlock)
-                // (.addTexture) Using the same texture added from GLASS_X
+                .setTab(tabBlock)
+                .addTexture(modRes("block/oak_glass_pane_1_top"))
+                // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_1"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_PANE_1);
 
         GLASS_PANE_2 = SimpleEntrySet.builder(WoodType.class, "glass_pane_2",
                         BdBlocks.OAK_GLASS_PANE_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_2")
+                        w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_2"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
-                .setTab(() -> tabBlock)
-                // (.addTexture) Using the same texture added from GLASS_X
+                .setTab(tabBlock)
+                .addTexture(modRes("block/oak_glass_pane_2_top"))
+                // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_2"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_PANE_2);
 
         GLASS_PANE_3 = SimpleEntrySet.builder(WoodType.class, "glass_pane_3",
                         BdBlocks.OAK_GLASS_PANE_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_3")
+                        w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_3"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
-                .setTab(() -> tabBlock)
-                // (.addTexture) Using the same texture added from GLASS_X
+                .setTab(tabBlock)
+                .addTexture(modRes("block/oak_glass_pane_3_top"))
+                // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_3"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_PANE_3);
 
         GLASS_PANE_4 = SimpleEntrySet.builder(WoodType.class, "glass_pane_4",
                         BdBlocks.OAK_GLASS_PANE_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_4")
+                        w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_4"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
-                .setTab(() -> tabBlock)
-                // (.addTexture) Using the same texture added from GLASS_X
+                .setTab(tabBlock)
+                .addTexture(modRes("block/oak_glass_pane_4_top"))
+                // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_4"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_PANE_4);
 
         GLASS_PANE_5 = SimpleEntrySet.builder(WoodType.class, "glass_pane_5",
                         BdBlocks.OAK_GLASS_PANE_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_5")
+                        w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_5"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
-                .setTab(() -> tabBlock)
-                // (.addTexture) Using the same texture added from GLASS_X
+                .setTab(tabBlock)
+                .addTexture(modRes("block/oak_glass_pane_5_top"))
+                // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_5"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_PANE_5);
 
         GLASS_PANE_6 = SimpleEntrySet.builder(WoodType.class, "glass_pane_6",
                         BdBlocks.OAK_GLASS_PANE_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_6")
+                        w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_6"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
-                .setTab(() -> tabBlock)
-                // (.addTexture) Using the same texture added from GLASS_X
+                .setTab(tabBlock)
+                .addTexture(modRes("block/oak_glass_pane_6_top"))
+                // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_6"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_PANE_6);
 
         GLASS_PANE_7 = SimpleEntrySet.builder(WoodType.class, "glass_pane_7",
                         BdBlocks.OAK_GLASS_PANE_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_7")
+                        w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_7"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
-                .setTab(() -> tabBlock)
-                // (.addTexture) Using the same texture added from GLASS_X
+                .setTab(tabBlock)
+                .addTexture(modRes("block/oak_glass_pane_7_top"))
+                // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_7"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_PANE_7);
 
         GLASS_PANE_8 = SimpleEntrySet.builder(WoodType.class, "glass_pane_8",
                         BdBlocks.OAK_GLASS_PANE_8, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CustomPaneCT(BlockBehaviour.Properties.copy(Blocks.GLASS), "block/bdl/" + w.getId().getNamespace() + "/glass/" + w.getTypeName() + "_glass/oak_glass_8")
+                        w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_8"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.GLASS_PANES, Registries.ITEM)
-                .setTab(() -> tabBlock)
-                // (.addTexture) Using the same texture added from GLASS_X
+                .setTab(tabBlock)
+                .addTexture(modRes("block/oak_glass_pane_8_top"))
+                // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_8"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(GLASS_PANE_8);
     }
 
@@ -893,7 +819,7 @@ public class BuildersDelightModule extends SimpleModule {
         }
 
         @Override
-        public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
+        public void appendHoverText(@NotNull ItemStack pStack, Level pLevel, List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
             pTooltip.add(tooltip);
         }
     }
@@ -912,6 +838,32 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
+    @SafeVarargs
+    // Create a tag file for wood types of planks
+    public final void planksTags(WoodType wood, DynamicDataPack DDPack, EntrySet<WoodType>... entries) {
+        /*
+        planksTags is used as ingredient for crafting Glass_1
+        */
+        JsonArray tagList = new JsonArray();
+
+        var vanilla = wood.getItemOfThis("planks"); // Add Normal blocks to the list
+        if (vanilla != null) tagList.add(Utils.getID(vanilla).toString());
+
+        for (var e : entries) { // Add blocks to the list
+            Item obj = e.getItemOf(wood);
+            if (obj != null) tagList.add(Utils.getID(obj).toString());
+        }
+
+        if (!tagList.isEmpty()) {
+            ResourceLocation resLoc = EveryCompat.res("items/" + wood.getTypeName() + "_planks");
+            JsonObject file = new JsonObject();
+            file.addProperty("replace", "false");
+            file.add("values", tagList);
+            DDPack.addJson(resLoc, file, ResType.TAGS);
+        }
+
+    }
+
     @Override
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
@@ -924,7 +876,45 @@ public class BuildersDelightModule extends SimpleModule {
                 addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
                 addChiselRecipe(pack, w, "glass", GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8);
                 addChiselRecipe(pack, w, "glass_pane", GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8);
+
+                planksTags(w, pack, PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
+
+                // crafting Recipe
+                craftingWithTagsRecipe("glass_1", "planks", GLASS_1.items.get(w), w, pack, manager);
+                craftingWithTagsRecipe("frame_1", "planks", FRAME_1.items.get(w), w, pack, manager);
             }
+        }
+
+
+    }
+
+    public void craftingWithTagsRecipe(String baseName, String input, Item output, WoodType wood, DynamicDataPack pack, ResourceManager manager) {
+        // bdl/namespace/<type>_glass_1;
+        String pathBuilder = this.shortenedId() + "/" + wood.getVariantId(baseName,false);
+
+        ResourceLocation recipeLoc = modRes("recipes/oak_"+ baseName + ".json");
+        JsonObject recipe;
+        try (InputStream recipeStream = manager.getResource(recipeLoc).orElseThrow().open()) {
+            recipe = RPUtils.deserializeJson(recipeStream);
+            String inputTag = EveryCompat.MOD_ID + ":" + wood.getTypeName() +"_"+ input ;
+
+            // VARIABLES for json
+            JsonObject underKey;
+            if (Objects.equals(baseName, "glass_1")) {
+                underKey = recipe.getAsJsonObject("key").getAsJsonObject("1");
+            } else {
+                underKey = recipe.getAsJsonObject("key").getAsJsonObject("0");
+            }
+            JsonObject underResult = recipe.getAsJsonObject("result");
+
+            // EDITING
+            underKey.addProperty("tag", inputTag);
+            underResult.addProperty("item", Utils.getID(output).toString());
+
+            pack.addJson(EveryCompat.res(pathBuilder), recipe, ResType.RECIPES);
+        }
+        catch (IOException ex) {
+            EveryCompat.LOGGER.error("{BuildersDelight Module} TagsRecipe(): " + ex);
         }
     }
 
@@ -945,5 +935,45 @@ public class BuildersDelightModule extends SimpleModule {
             pack.addJson(res, jo, ResType.GENERIC);
         }
     }
+
+//    @Override
+    // idk why .addTextureM() don't work for furniture_kit (ITEM) - Had to add below to do
+    // Textures for furniture_kit
+/*    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+        try (
+                TextureImage kitTexture = TextureImage.open(manager, modRes("item/oak_furniture_kit"));
+                TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/bdl/string_overlay"))
+        ) {
+
+            Respriter respriterKit = Respriter.of(kitTexture);
+
+            FURNITURE_KIT.items.forEach((wood, item) -> {
+                ResourceLocation itemID = Utils.getID(item);
+
+                try (TextureImage plankTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))
+                ) {
+                    Palette targetPalette = SpriteUtils.extrapolateWoodItemPalette(plankTexture);
+
+                    TextureImage newImage = respriterKit.recolor(targetPalette);
+                    TextureImage newTexture  = newImage.makeCopy();
+                    newTexture.applyOverlayOnExisting(overlay.makeCopy());
+
+                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(Objects.requireNonNull(itemID).getNamespace(),
+                            "item/" + itemID.getPath()), newTexture);
+
+                } catch (Exception e) {
+                    handler.getLogger().error("{BuildersDelight Module} Failed opening file via" +
+                            " AddDyanmicClientResource: " + e);
+                }
+            });
+
+        }
+        catch (Exception ex) {
+            handler.getLogger().error("{BuildersDelight Module} furniture_kit textures via AddDynamicClientResources: " + ex);
+        }
+    }*/
 
 }
