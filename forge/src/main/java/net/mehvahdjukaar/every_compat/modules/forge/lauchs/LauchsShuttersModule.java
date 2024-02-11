@@ -18,9 +18,10 @@ import net.stehschnitzel.shutter.init.CreativTabInit;
 
 import java.util.List;
 
+//SUPPORT: v2.0.0+
 public class LauchsShuttersModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> shutters;
+    public final SimpleEntrySet<WoodType, Shutter> shutters;
 
     public LauchsShuttersModule(String modId) {
         super(modId, "ls");
@@ -33,7 +34,11 @@ public class LauchsShuttersModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_shutter_lower"), EveryCompat.res("block/ls/oak_shutter_lower_m"))
                 .addTextureM(modRes("block/oak_shutter_normal"), EveryCompat.res("block/ls/oak_shutter_normal_m"))
                 .addTextureM(modRes("block/oak_shutter_upper"), EveryCompat.res("block/ls/oak_shutter_upper_m"))
+                .addTexture(modRes("block/oak_shutter_lower_big"))
+                .addTexture(modRes("block/oak_shutter_normal_big"))
+                .addTexture(modRes("block/oak_shutter_upper_big"))
                 .addTexture(modRes("block/oak_shutter_middle"))
+                .addTexture(modRes("block/oak_shutter_middle_big"))
                 .addTexture(modRes("item/oak_shutter"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(tab)
