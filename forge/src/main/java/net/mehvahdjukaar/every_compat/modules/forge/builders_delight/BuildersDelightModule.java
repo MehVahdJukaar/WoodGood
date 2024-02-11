@@ -21,6 +21,7 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -47,7 +48,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
-//SUPPORT ------------Not out yet------------
+//SUPPORT: v1.2+
 public class BuildersDelightModule extends SimpleModule {
 
     //TYPE: ITEM
@@ -72,7 +73,7 @@ public class BuildersDelightModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8;
 
 
-//    @SuppressWarnings("DataFlowIssue")
+    @SuppressWarnings("DataFlowIssue") // <- already has null check
     public BuildersDelightModule(String modId) {
         super(modId, "bdl");
         RegistryObject<CreativeModeTab> tabDeco = BdTabs.TabDecoration;
@@ -86,7 +87,8 @@ public class BuildersDelightModule extends SimpleModule {
                 )
                 .setTab(tabMater)
                 .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"))
-                .addRecipe(modRes("oak_furniture_kit"))
+                .createPaletteFromOak(SpriteUtils::extrapolateWoodItemPalette)
+                // manual recipe below
                 .build();
         this.addEntry(FURNITURE_KIT);
 
@@ -876,6 +878,7 @@ public class BuildersDelightModule extends SimpleModule {
                 addChiselRecipe(pack, w, "glass", GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8);
                 addChiselRecipe(pack, w, "glass_pane", GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8);
 
+                // Used in recipe of glass_1, frame_1, & furniture_kit
                 planksTags(w, pack, PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
 
                 // crafting Recipe
@@ -884,6 +887,37 @@ public class BuildersDelightModule extends SimpleModule {
             }
         }
 
+        String recipe = """
+            {
+                "group": "buildersdelight",
+                "type": "minecraft:crafting_shaped",
+                "pattern": [
+                    " 0 ",
+                    \t"010",
+                    \t" 0 "
+                ],
+                "key": {
+                    "0": {
+                        "item": "minecraft:string"
+                    },
+                    \t"1": {
+                        "tag": "[planks]"
+                    }
+                },
+                "result": {
+                    "item": "[result]",
+                    "count": 2
+                }
+            }
+        """;
+        for (var v : this.FURNITURE_KIT.items.entrySet()) {
+            WoodType wood = v.getKey();
+            String r = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
+                    .replace("[planks]", EveryCompat.MOD_ID + ":" + wood.getTypeName() +"_planks");
+
+            ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "_furniture_kit");
+            pack.addBytes(res, r.getBytes(), ResType.RECIPES);
+        }
 
     }
 
@@ -899,7 +933,7 @@ public class BuildersDelightModule extends SimpleModule {
 
             // VARIABLES for json
             JsonObject underKey;
-            if (Objects.equals(baseName, "glass_1")) {
+            if (baseName.equals("glass_1")) {
                 underKey = recipe.getAsJsonObject("key").getAsJsonObject("1");
             } else {
                 underKey = recipe.getAsJsonObject("key").getAsJsonObject("0");
@@ -934,50 +968,5 @@ public class BuildersDelightModule extends SimpleModule {
             pack.addJson(res, jo, ResType.GENERIC);
         }
     }
-
-    @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-    }
-
-    //    @Override
-    // idk why .addTextureM() don't work for furniture_kit (ITEM) - Had to add below to do
-    // Textures for furniture_kit
-/*    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-
-        try (
-                TextureImage kitTexture = TextureImage.open(manager, modRes("item/oak_furniture_kit"));
-                TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/bdl/string_overlay"))
-        ) {
-
-            Respriter respriterKit = Respriter.of(kitTexture);
-
-            FURNITURE_KIT.items.forEach((wood, item) -> {
-                ResourceLocation itemID = Utils.getID(item);
-
-                try (TextureImage plankTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))
-                ) {
-                    Palette targetPalette = SpriteUtils.extrapolateWoodItemPalette(plankTexture);
-
-                    TextureImage newImage = respriterKit.recolor(targetPalette);
-                    TextureImage newTexture  = newImage.makeCopy();
-                    newTexture.applyOverlayOnExisting(overlay.makeCopy());
-
-                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(Objects.requireNonNull(itemID).getNamespace(),
-                            "item/" + itemID.getPath()), newTexture);
-
-                } catch (Exception e) {
-                    handler.getLogger().error("{BuildersDelight Module} Failed opening file via" +
-                            " AddDyanmicClientResource: " + e);
-                }
-            });
-
-        }
-        catch (Exception ex) {
-            handler.getLogger().error("{BuildersDelight Module} furniture_kit textures via AddDynamicClientResources: " + ex);
-        }
-    }*/
 
 }
