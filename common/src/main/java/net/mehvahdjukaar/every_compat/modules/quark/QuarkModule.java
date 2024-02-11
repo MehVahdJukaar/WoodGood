@@ -168,7 +168,7 @@ public class QuarkModule extends SimpleModule {
                             return new HollowLogBlock(name, w.log, null, w.canBurn());
                         })
                 .addModelTransform(m -> m.addModifier((s, id, w) -> {
-                        if (!Objects.nonNull(w.getBlockOfThis("stripped_log")) && Objects.equals(w.getNamespace(), "gardens_of_the_dead")) {
+                        if (!Objects.nonNull(w.getBlockOfThis("stripped_log")) && w.getNamespace().equals("gardens_of_the_dead")) {
                         // Workaround: whistlecane from gardens_of_the_dead & blocks having no stripped texture
                             String pathID = "\"" + w.getNamespace() + ":block/" + w.getTypeName() + "_block";
                             return s.replace("\"end\": \"minecraft:block/oak_log_top\"",
