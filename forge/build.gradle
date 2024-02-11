@@ -153,7 +153,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
-    modImplementation("curse.maven:lauchs-shutters-714019:4764777")
+    modImplementation("curse.maven:lauchs-shutters-714019:5094131")
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4605466")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
@@ -170,7 +170,7 @@ dependencies {
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
-    modCompileOnly("curse.maven:productivebees-377897:4709520")
+    modCompileOnly("curse.maven:productivebees-377897:5029855")
     modCompileOnly("curse.maven:quark-243121:5084013")
 
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
