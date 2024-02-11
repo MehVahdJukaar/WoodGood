@@ -5,7 +5,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
-import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
@@ -22,7 +21,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpe
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
-import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
@@ -97,9 +95,9 @@ public class EveryCompatForge extends EveryCompat {
 
 
         // ========================================== WORK IN PROGRESS ============================================== \\
+//        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
-//        addModule("productivebees", () -> ProductiveBeesModule::new); // what's the reason?
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
 
 

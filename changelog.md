@@ -1,4 +1,8 @@
-### CHANGELOG: v2.6.28
 #### UPDATED:
-- gave configs some defaults incase some mods would do questionable stuff like launching a pack reload before blocks are registered
-- added some missing tags to deco blocks beams
+- Quark 
+  - Fixed ladder's background to be transparent
+  - Fix the texture of Whistlecane (Gardens 0f the dead) 
+- Woodster - ChiseledBook (credited to Salju*)
+- The New Shutters aka Lauch's Shutter - Added textures for the 2-wide shutters
+- Builder's Delight - Out for v1.20.1
+- EN_US - corrected a few typos for Architects Palette
