@@ -115,7 +115,7 @@ dependencies {
     modImplementation("curse.maven:architectury-api-419699:4663010") // REI
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
-    modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
+    modImplementation("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:3972423") // REI
@@ -171,7 +171,7 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:4709520")
-    modCompileOnly("curse.maven:quark-243121:5084013")
+    modImplementation("curse.maven:quark-243121:5093415")
 
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")

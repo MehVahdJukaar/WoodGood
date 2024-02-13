@@ -384,6 +384,7 @@ public class QuarkModule extends SimpleModule {
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+                    AnimationMetadataSection meta = plankTexture.getMetadata();
 
                     List<Palette> overlayPalette = new ArrayList<>();
                     for (var p : targetPalette) {
@@ -402,15 +403,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap");
 
-                            var img = respriterNormal.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterNormalO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-
-                            trapped.applyOverlayOnExisting(normal_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
                     {
@@ -418,14 +411,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_left");
 
-                            var img = respriterLeft.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterLeftO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-                            trapped.applyOverlayOnExisting(left_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
                     {
@@ -433,14 +419,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_right");
 
-                            var img = respriterRight.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterRightO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-                            trapped.applyOverlayOnExisting(right_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
 
@@ -452,5 +431,21 @@ public class QuarkModule extends SimpleModule {
         } catch (Exception ex) {
             handler.getLogger().error("Could not generate any Chest block texture : ", ex);
         }
+    }
+
+    private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
+                                     Respriter respriterLeft, Respriter respriterLeftO,
+                                     AnimationMetadataSection baseMeta, List<Palette> basePalette,
+                                     List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes) {
+
+        TextureImage recoloredBase = respriterLeft.recolorWithAnimation(basePalette, baseMeta);
+        TextureImage recoloredOverlay = respriterLeftO.recolorWithAnimation(overlayPalette, baseMeta);
+        recoloredBase.applyOverlayOnExisting(recoloredOverlay);
+
+        TextureImage trapped = recoloredBase.makeCopy();
+        trapped.applyOverlayOnExisting(trappedOverlay.makeCopy());
+
+        handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
+        handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
     }
 }

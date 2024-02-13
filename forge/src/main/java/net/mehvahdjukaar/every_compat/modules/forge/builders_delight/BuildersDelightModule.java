@@ -935,11 +935,6 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
-    @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-    }
-
     //    @Override
     // idk why .addTextureM() don't work for furniture_kit (ITEM) - Had to add below to do
     // Textures for furniture_kit
