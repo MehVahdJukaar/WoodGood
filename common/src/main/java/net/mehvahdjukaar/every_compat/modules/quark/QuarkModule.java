@@ -440,10 +440,10 @@ public class QuarkModule extends SimpleModule {
 
         TextureImage recoloredBase = respriterLeft.recolorWithAnimation(basePalette, baseMeta);
         TextureImage recoloredOverlay = respriterLeftO.recolorWithAnimation(overlayPalette, baseMeta);
-        recoloredBase.applyOverlayOnExisting(recoloredOverlay);
+        recoloredBase.applyOverlay(recoloredOverlay);
 
         TextureImage trapped = recoloredBase.makeCopy();
-        trapped.applyOverlayOnExisting(trappedOverlay.makeCopy());
+        trapped.applyOverlay(trappedOverlay.makeCopy());
 
         handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
         handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);

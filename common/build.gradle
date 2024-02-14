@@ -19,7 +19,7 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:4663010")
 
 // ================================================== IMPORTS ==========================================================
-    modCompileOnly("curse.maven:another-furniture-610492:4815124")
+    modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856")
     modCompileOnly("curse.maven:create-328085:4626108")

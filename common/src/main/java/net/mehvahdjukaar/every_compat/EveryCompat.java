@@ -80,8 +80,8 @@ public abstract class EveryCompat {
         ECNetworking.init();
 
         ServerDynamicResourcesHandler.INSTANCE.register();
-        RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
-        PlatHelper.addCommonSetup(EveryCompat::commonSetup);
+        RegHelper.addItemsToTabsRegistration(this::registerItemsToTabs);
+        PlatHelper.addCommonSetup(this::commonSetup);
 
         BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
         BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
@@ -189,7 +189,7 @@ public abstract class EveryCompat {
                     .build());
 
 
-    public static void commonSetup() {
+    public void commonSetup() {
         if (PlatHelper.isModLoaded("chipped")) {
             EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
         }
@@ -208,7 +208,7 @@ public abstract class EveryCompat {
         forAllModules(CompatModule::onModSetup);
     }
 
-    private static int prevRegSize;
+    private int prevRegSize;
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
         ModConfigs.initEarlyButNotSuperEarly(); // add wood stuff once its ready
@@ -239,11 +239,7 @@ public abstract class EveryCompat {
     public record CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
     }
 
-
-    //TODO: replace oak based with acacia based
-
-
-    private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
+    private void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         if (ModConfigs.TAB_ENABLED.get()) {
             Map<BlockType, List<Item>> typeToEntrySet = new LinkedHashMap<>();
             for (var r : BlockSetAPI.getRegistries()) {
@@ -261,6 +257,4 @@ public abstract class EveryCompat {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
     }
-
-
 }
