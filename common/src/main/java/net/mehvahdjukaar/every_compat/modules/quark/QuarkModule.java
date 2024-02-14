@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//SUPPORT: v4.0-435+
 public class QuarkModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> bookshelves;
@@ -154,7 +155,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("ladders"), Registries.ITEM)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addRecipe(modRes("building/crafting/spruce_ladder"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(ladders);

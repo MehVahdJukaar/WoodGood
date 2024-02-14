@@ -32,8 +32,8 @@ dependencies {
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
-    modCompileOnly("curse.maven:quark-243121:5084013")
-    modCompileOnly("curse.maven:zeta-968868:5078215")
+    modImplementation("curse.maven:quark-243121:5093415")
+    modImplementation("curse.maven:zeta-968868:5078215")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modCompileOnly("curse.maven:missing-wilds-622590:3891602")

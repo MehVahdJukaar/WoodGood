@@ -151,9 +151,8 @@ dependencies {
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
-    modCompileOnly("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
-    modImplementation("curse.maven:lauchs-shutters-714019:5094131")
+    modCompileOnly("curse.maven:lauchs-shutters-714019:5094131")
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4605466")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
@@ -171,7 +170,7 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:5029855")
-    modImplementation("curse.maven:quark-243121:5084013")
+    modImplementation("curse.maven:quark-243121:5093415")
 
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
@@ -181,10 +180,11 @@ dependencies {
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
-    modImplementation("curse.maven:builders-delight-forge-563734:5088176")
+    modCompileOnly("curse.maven:builders-delight-forge-563734:5088176")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
+    modCompileOnly("curse.maven:handcrafted-538214:4437459")
 
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
@@ -199,8 +199,8 @@ dependencies {
     // modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBModel
 
     // =========================================== FOR TESTING ===================================================== \\
-//    modImplementation("curse.maven:regions-unexplored-659110:4779426")
-    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
+    modImplementation("curse.maven:regions-unexplored-659110:4779426")
+//    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
 //    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659")
