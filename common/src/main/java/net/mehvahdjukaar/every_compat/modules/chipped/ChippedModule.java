@@ -1804,10 +1804,12 @@ public class ChippedModule extends SimpleModule {
     }
 
     private void dullerPalette(Palette p) {
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-        p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
+        if (p.size() > 6) {
+            p.remove(p.getLightest());
+            p.remove(p.getLightest());
+            p.remove(p.getDarkest());
+            p.remove(p.getDarkest());
+        }
     }
 
     private void lightPalette(Palette p) {
@@ -1842,10 +1844,13 @@ public class ChippedModule extends SimpleModule {
     }
 
     private void panelPalette(Palette p) {
-        p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
+            p.remove(p.getDarkest());
+            p.add(p.increaseInner());
+            p.remove(p.getDarkest());
+            p.add(p.increaseInner());
+            p.remove(p.getDarkest());
+            p.add(p.increaseInner());
+            p.remove(p.getLightest());
     }
 
     @Override
