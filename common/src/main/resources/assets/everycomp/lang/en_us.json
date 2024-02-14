@@ -239,9 +239,9 @@
 
   "block_type.architects_palette.railing": "%s Railing",
   "block_type.architects_palette.boards": "%s Boards",
-  "block_type.architects_palette.board_wall": "%s Boards Wall",
-  "block_type.architects_palette.board_stairs": "%s Boards Stairs",
-  "block_type.architects_palette.board_slab": "%s Boards Slab",
+  "block_type.architects_palette.board_wall": "%s Board Wall",
+  "block_type.architects_palette.board_stairs": "%s Board Stairs",
+  "block_type.architects_palette.board_slab": "%s Board Slab",
 
   "block_type.valhelsia_structures.cut_post": "Cut %s Post",
   "block_type.valhelsia_structures.cut_stripped_post": "Cut Stripped %s Post",

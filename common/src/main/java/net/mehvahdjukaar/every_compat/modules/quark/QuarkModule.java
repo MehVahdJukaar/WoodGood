@@ -44,7 +44,9 @@ import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+//SUPPORT: v4.0-435+
 public class QuarkModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> bookshelves;
@@ -151,8 +153,9 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.ITEM)
-                .addRecipe(modRes("building/crafting/spruce_ladder"))
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
+                .addRecipe(modRes("building/crafting/spruce_ladder"))
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(ladders);
@@ -165,6 +168,20 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new HollowLogBlock(name, w.log, null, w.canBurn());
                         })
+                .addModelTransform(m -> m.addModifier((s, id, w) -> {
+                        if (!Objects.nonNull(w.getBlockOfThis("stripped_log")) && w.getNamespace().equals("gardens_of_the_dead")) {
+                        // Workaround: whistlecane from gardens_of_the_dead & blocks having no stripped texture
+                            String pathID = "\"" + w.getNamespace() + ":block/" + w.getTypeName() + "_block";
+                            return s.replace("\"end\": \"minecraft:block/oak_log_top\"",
+                                            "\"end\": " + pathID + "_top\"")
+                                    .replace("\"side\": \"minecraft:block/oak_log\"",
+                                            "\"side\": " + pathID + "\"")
+                                    .replace("\"inside\": \"minecraft:block/stripped_oak_log\"",
+                                            "\"inside\": " + pathID + "\"");
+                        }
+                        return s;
+                    })
+                )
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hollow_logs"), Registries.BLOCK)
@@ -368,6 +385,7 @@ public class QuarkModule extends SimpleModule {
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+                    AnimationMetadataSection meta = plankTexture.getMetadata();
 
                     List<Palette> overlayPalette = new ArrayList<>();
                     for (var p : targetPalette) {
@@ -386,15 +404,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap");
 
-                            var img = respriterNormal.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterNormalO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-
-                            trapped.applyOverlayOnExisting(normal_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
                     {
@@ -402,14 +412,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_left");
 
-                            var img = respriterLeft.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterLeftO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-                            trapped.applyOverlayOnExisting(left_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
                     {
@@ -417,14 +420,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_right");
 
-                            var img = respriterRight.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterRightO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-                            trapped.applyOverlayOnExisting(right_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
 
@@ -436,5 +432,21 @@ public class QuarkModule extends SimpleModule {
         } catch (Exception ex) {
             handler.getLogger().error("Could not generate any Chest block texture : ", ex);
         }
+    }
+
+    private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
+                                     Respriter respriterLeft, Respriter respriterLeftO,
+                                     AnimationMetadataSection baseMeta, List<Palette> basePalette,
+                                     List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes) {
+
+        TextureImage recoloredBase = respriterLeft.recolorWithAnimation(basePalette, baseMeta);
+        TextureImage recoloredOverlay = respriterLeftO.recolorWithAnimation(overlayPalette, baseMeta);
+        recoloredBase.applyOverlay(recoloredOverlay);
+        TextureImage trapped = recoloredBase.makeCopy();
+
+        handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
+
+        trapped.applyOverlay(trappedOverlay.makeCopy());
+        handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
     }
 }

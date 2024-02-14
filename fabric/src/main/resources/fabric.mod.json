@@ -22,12 +22,15 @@
       "net.mehvahdjukaar.every_compat.fabric.EveryCompatFabric"
     ],
     "modmenu": [
-      "net.mehvahdjukaar.every_compat.modMenu.ModMenuCompat"
+      "net.mehvahdjukaar.every_compat.modmenu.ModMenuCompat"
     ]
   },
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20",
     "moonlight": ">=1.20-2.8.4"
+  },
+  "recommends": {
+    "sawmill": "*"
   }
 }

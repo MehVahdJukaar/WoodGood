@@ -1,7 +1,7 @@
 name: Module Enhancement
 description: Supported Mod missing a block or an item via new version? 
 title: "[🗃]: "
-labels: ["module", "enhancement"]
+labels: ["📦Module", "enhancement"]
 body:
   - type: markdown
     attributes:

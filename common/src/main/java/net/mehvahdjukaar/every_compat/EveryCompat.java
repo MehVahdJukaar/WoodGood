@@ -30,7 +30,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -56,7 +55,7 @@ public abstract class EveryCompat {
         return new ResourceLocation(MOD_ID, name);
     }
 
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger("Every Compat");
 
     public static final Map<String, CompatModule> ACTIVE_MODULES = new TreeMap<>();
 
@@ -68,18 +67,30 @@ public abstract class EveryCompat {
     public static final Map<Class<? extends BlockType>, Set<String>> ENTRY_TYPES = new Object2ObjectOpenHashMap<>();
     public static final Map<Object, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
 
+
+    private static final UnsafeModuleDisabler MODULE_DISABLER = new UnsafeModuleDisabler();
+
     public static void forAllModules(Consumer<CompatModule> action) {
         ACTIVE_MODULES.values().forEach(action);
     }
 
 
     protected void commonInit() {
-
+        //TODO: this class is a mess. Should be split and cleaned up
         ECNetworking.init();
 
         ServerDynamicResourcesHandler.INSTANCE.register();
+        RegHelper.addItemsToTabsRegistration(this::registerItemsToTabs);
+        PlatHelper.addCommonSetup(this::commonSetup);
 
-        PlatHelper.addCommonSetup(EveryCompat::commonSetup);
+        BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
+        BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
+
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, BuiltInRegistries.ITEM);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
+
+
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatClient.init();
             ClientDynamicResourcesHandler.INSTANCE.register();
@@ -135,15 +146,7 @@ public abstract class EveryCompat {
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
 
-        BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
-        BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
-
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, BuiltInRegistries.ITEM);
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
-
-        RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
-
+        MODULE_DISABLER.save();
     }
 
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
@@ -158,7 +161,8 @@ public abstract class EveryCompat {
     }
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatHelper.isModLoaded(modId)) {
+        if (PlatHelper.isModLoaded(modId) && MODULE_DISABLER.isModuleOn(modId)) {
+
             CompatModule module = moduleFactory.get().apply(modId);
             try {
                 EveryCompatAPI.registerModule(module);
@@ -171,6 +175,9 @@ public abstract class EveryCompat {
         }
     }
 
+    public static Collection<CompatMod> getCompatMods(){
+        return COMPAT_MODS;
+    }
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
 
@@ -182,7 +189,7 @@ public abstract class EveryCompat {
                     .build());
 
 
-    public static void commonSetup() {
+    public void commonSetup() {
         if (PlatHelper.isModLoaded("chipped")) {
             EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
         }
@@ -201,10 +208,10 @@ public abstract class EveryCompat {
         forAllModules(CompatModule::onModSetup);
     }
 
-    private static int prevRegSize;
+    private int prevRegSize;
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
-        ModConfigs.init(); // add wood stuff once its ready
+        ModConfigs.initEarlyButNotSuperEarly(); // add wood stuff once its ready
         prevRegSize = BuiltInRegistries.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");
         forAllModules(m -> m.registerWoodBlocks(event, woods));
@@ -232,11 +239,7 @@ public abstract class EveryCompat {
     public record CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
     }
 
-
-    //TODO: replace oak based with acacia based
-
-
-    private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
+    private void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         if (ModConfigs.TAB_ENABLED.get()) {
             Map<BlockType, List<Item>> typeToEntrySet = new LinkedHashMap<>();
             for (var r : BlockSetAPI.getRegistries()) {
@@ -254,10 +257,4 @@ public abstract class EveryCompat {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
     }
-
-
-    protected static void sendPacket(ServerPlayer s) {
-    }
-
-
 }

@@ -34,6 +34,7 @@ import twilightforest.item.HollowLogItem;
 
 import java.util.function.Supplier;
 
+//SUPPORT: v4.3.1750+
 public class TwilightForestModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, BanisterBlock> banisters;
@@ -81,7 +82,7 @@ public class TwilightForestModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .noItem()
                 .setTab(TFCreativeTabs.BLOCKS)
-                .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log_vertical"))
+                .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log"))
                 .build();
 
         this.addEntry(hollowLogsVertical);

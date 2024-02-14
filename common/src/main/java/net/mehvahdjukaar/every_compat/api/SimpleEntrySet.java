@@ -88,6 +88,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
 
+    //use get tile
     @Deprecated(forRemoval = true)
     public @Nullable ITileHolder<?> getTileHolder() {
         return tileHolder;
@@ -96,6 +97,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public <E extends BlockEntity> BlockEntityType<E> getTile(Class<E> tileClass) {
         Preconditions.checkNotNull(tileHolder, "Entry set has no tile entity!");
         return (BlockEntityType<E>) tileHolder.get();
+    }
+
+    public BlockEntityType<?> getTile() {
+        Preconditions.checkNotNull(tileHolder, "Entry set has no tile entity!");
+        return tileHolder.get();
     }
 
     @Override
@@ -231,12 +237,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
     }
 
-    @Override
-    public void registerEntityRenderers(CompatModule simpleModule, ClientHelper.BlockEntityRendererEvent event) {
-        if (this.tileHolder != null) {
-            //this.tileHolder.registerRenderer(event);
-        }
-    }
+
 
     @Override
     public void setupExistingTiles() {
@@ -295,6 +296,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         var tile = getTileHolder();
         if (tile != null) {
             tile.registerRenderer(event, aNew);
+        }
+    }
+
+    @Override
+    public void registerEntityRenderers(CompatModule simpleModule, ClientHelper.BlockEntityRendererEvent event) {
+        if (this.tileHolder != null) {
+            //this.tileHolder.registerRenderer(event);
         }
     }
 

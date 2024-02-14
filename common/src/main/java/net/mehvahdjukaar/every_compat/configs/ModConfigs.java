@@ -10,8 +10,8 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -25,18 +25,20 @@ public class ModConfigs {
 
     public static ConfigSpec SPEC;
 
-    public static Supplier<Boolean> TAB_ENABLED;
+    // default as we are initializing it late
+    public static Supplier<Boolean> TAB_ENABLED =  () -> true;
     //  public static Supplier<Boolean> REMAP_COMPAT;
     //  public static Supplier<Boolean> REMAP_OWN;
-    public static Supplier<Boolean> DEPEND_ON_PACKS;
-    public static Supplier<Boolean> DEBUG_RESOURCES;
-    public static Supplier<Boolean> DEBUG_PACKET;
-    public static Supplier<Boolean> BLOCK_TYPE_TOOLTIP;
-    public static Supplier<Boolean> MOD_TOOPTIP;
-    public static Supplier<Boolean> TOOLTIPS_ADVANCED;
+    public static Supplier<Boolean> DEPEND_ON_PACKS =  () -> true;
+    public static Supplier<Boolean> CHECK_PACKET =  () -> true;
+    public static Supplier<Boolean> DEBUG_RESOURCES = () -> false;
+    public static Supplier<Boolean> DEBUG_PACKET =  () -> false;
+    public static Supplier<Boolean> BLOCK_TYPE_TOOLTIP = () -> true;
+    public static Supplier<Boolean> MOD_TOOPTIP = () -> true;
+    public static Supplier<Boolean> TOOLTIPS_ADVANCED = () -> true;
 
 
-    public static void init() {
+    public static void initEarlyButNotSuperEarly() {
 
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.COMMON);
 
@@ -52,20 +54,23 @@ public class ModConfigs {
                 .define("assets_depend_on_loaded_packs", true);
         DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
                 .define("save_debug_resources", false);
+        CHECK_PACKET = builder.comment("Sends a packet to verify all dependencies mod versions are the same on connect. DIsable if it causes issues")
+                .define("mod_version_check_packet", true);
         DEBUG_PACKET = builder.comment("Don't touch unless you are told to").define("debug_packet", false);
 
         builder.push("tooltips");
         MOD_TOOPTIP = builder.comment("Enabled tooltips showing which mod an EC item is from")
-                        .define("mod_origin_enabled", true);
+                .define("mod_origin_enabled", true);
         BLOCK_TYPE_TOOLTIP = builder.comment("Enabled tooltips showing which block type an EC item is made from")
                 .define("block_type_enabled", true);
         TOOLTIPS_ADVANCED = builder.comment("Only show on advanced settings")
-                        .define("show_on_advanced_tooltips", false);
+                .define("show_on_advanced_tooltips", false);
 
         builder.pop();
 
 
-        builder.push("types");
+        builder.comment("Disables certain types")
+                .push("types");
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));
             for (var w : reg.getValues()) {
@@ -80,7 +85,8 @@ public class ModConfigs {
         }
         builder.pop();
 
-        builder.push("entries");
+        builder.comment("Disables specific entries")
+                .push("entries");
         for (var reg : BlockSetAPI.getRegistries()) {
             if (reg.getType() == WoodType.class || reg.getType() == LeavesType.class) {
                 builder.push(reg.typeName().replace(" ", "_"));

@@ -2,8 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.forge.abnormal;
 
 import com.google.common.collect.ImmutableSet;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
-import com.teamabnormals.blueprint.common.block.BlueprintLadderBlock;
-import com.teamabnormals.blueprint.common.block.BookshelfBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
@@ -49,6 +47,7 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
+import net.salju.woodster.block.BookshelfBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,13 +56,13 @@ import java.util.function.Supplier;
 
 
 public class WoodworksModule extends SimpleModule {
-    public final SimpleEntrySet<WoodType, Block> bookshelves;
-    public final SimpleEntrySet<WoodType, Block> boards;
-    public final SimpleEntrySet<WoodType, Block> ladders;
-    public final SimpleEntrySet<WoodType, Block> beehives;
-    public final SimpleEntrySet<WoodType, Block> chests;
-    public final SimpleEntrySet<WoodType, Block> trappedChests;
-    public final SimpleEntrySet<LeavesType, Block> leafPiles;
+//    public final SimpleEntrySet<WoodType, Block> bookshelves;
+//    public final SimpleEntrySet<WoodType, Block> boards;
+//    public final SimpleEntrySet<WoodType, Block> ladders;
+//    public final SimpleEntrySet<WoodType, Block> beehives;
+//    public final SimpleEntrySet<WoodType, Block> chests;
+//    public final SimpleEntrySet<WoodType, Block> trappedChests;
+//    public final SimpleEntrySet<LeavesType, Block> leafPiles;
 
 
     public static BlockEntityType<? extends ChestBlockEntity> CHEST_TILE;
@@ -72,6 +71,7 @@ public class WoodworksModule extends SimpleModule {
 
     public WoodworksModule(String modId) {
         super(modId, "abnww");
+/*
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         () -> getModBlock("acacia_bookshelf"),
@@ -349,6 +349,7 @@ public class WoodworksModule extends SimpleModule {
         } catch (Exception ex) {
             handler.getLogger().error("Could not generate any Chest block texture : ", ex);
         }
+*/
     }
 
 }

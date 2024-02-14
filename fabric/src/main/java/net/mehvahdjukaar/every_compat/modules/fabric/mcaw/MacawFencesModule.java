@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-
+//SUPPORT v1.1.0+
 public class MacawFencesModule extends SimpleModule {
 
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
@@ -44,7 +44,6 @@ public class MacawFencesModule extends SimpleModule {
 
                 .defaultRecipe()
                 .build();
-
         this.addEntry(PICKET_FENCES);
 
         STOCKADE_FENCES = SimpleEntrySet.builder(WoodType.class, "stockade_fence",
@@ -55,7 +54,6 @@ public class MacawFencesModule extends SimpleModule {
 
                 .defaultRecipe()
                 .build();
-
         this.addEntry(STOCKADE_FENCES);
 
         HORSE_FENCES = SimpleEntrySet.builder(WoodType.class, "horse_fence",
@@ -66,7 +64,6 @@ public class MacawFencesModule extends SimpleModule {
 
                 .defaultRecipe()
                 .build();
-
         this.addEntry(HORSE_FENCES);
 
         WIRED_FENCES = SimpleEntrySet.builder(WoodType.class, "wired_fence",
@@ -77,7 +74,6 @@ public class MacawFencesModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(WIRED_FENCES);
 
 
@@ -89,7 +85,6 @@ public class MacawFencesModule extends SimpleModule {
 
                 .defaultRecipe()
                 .build();
-
         this.addEntry(PYRAMID_GATES);
 
         HIGHLEY_GATES = SimpleEntrySet.builder(WoodType.class, "highley_gate",
@@ -100,7 +95,6 @@ public class MacawFencesModule extends SimpleModule {
 
                 .defaultRecipe()
                 .build();
-
         this.addEntry(HIGHLEY_GATES);
 
         HEDGES = SimpleEntrySet.builder(LeavesType.class, "hedge",
@@ -110,8 +104,10 @@ public class MacawFencesModule extends SimpleModule {
                             if (l == null) return null;
                             return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
-                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_hedge",
-                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
+                .addModelTransform(m -> m.addModifier((s, id, w) ->
+                        s.replace("mcwfences:block/oak_leaves",
+                                w.getNamespace() + ":block/" + w.getTypeName() + "_leaves"))
+                )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
@@ -119,7 +115,6 @@ public class MacawFencesModule extends SimpleModule {
 
                 .defaultRecipe()
                 .build();
-
         this.addEntry(HEDGES);
     }
 

@@ -232,7 +232,7 @@ public abstract class CompatModule {
                     temp.close();
 
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.warn("failed to apply azalea overlay: ", e);
+                    EveryCompat.LOGGER.warn("failed to apply azalea overlay for wood type {} and image {}", woodType, image);
                 }
             }
         }
