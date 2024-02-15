@@ -279,7 +279,9 @@
   "block_type.mcwdoors.swamp_door": "%s沼泽风格门",
   "block_type.mcwdoors.tropical_door": "%s热带风格门",
   "block_type.mcwdoors.western_door": "%s西部百叶门",
-  
+  "block_type.mcwdoors.waffle_door": "%s华夫格门",
+
+
   "block_type.mcwfences.picket_fence": "%s篱栅",
   "block_type.mcwfences.stockade_fence": "%s栅栏墙",
   "block_type.mcwfences.hedge": "%s树篱",
@@ -710,11 +712,14 @@
 
   "wood_type.ancient_aether.highsproot": "高茁木",
   "wood_type.ancient_aether.sakura": "樱木",
+  "leaves_type.ancient_aether.skyroot_pine": "天根松",
+  "leaves_type.ancient_aether.crystal_skyroot": "水晶天根",
   "leaves_type.ancient_aether.highsproot": "高茁",
-  "leaves_type.ancient_aether.frosted_highsproot": "霜结高茁",
   "leaves_type.ancient_aether.sakura": "樱树",
-  "leaves_type.ancient_aether.divine_skyroot": "神圣天根",
+  "leaves_type.ancient_aether.enchanted_skyroot": "神沃天根",
   "leaves_type.ancient_aether.crystal": "水晶",
+  "leaves_type.ancient_aether.frosted_highsproot": "霜结高茁",
+  "leaves_type.ancient_aether.divine_skyroot": "神圣天根",
 
   "wood_type.aoa3.achony": "桉格尼木",
   "wood_type.aoa3.baobab": "猴面包木",
@@ -789,6 +794,11 @@
   "leaves_type.atmospheric.grimwood": "阴郁",
   "leaves_type.atmospheric.laurel": "月桂",
   "leaves_type.atmospheric.flowering_morado": "开花酸枝",
+
+  "wood_type.aurorasdeco.azalea": "杜鹃木",
+  "wood_type.aurorasdeco.flowering_azalea": "盛开的杜鹃木",
+  "wood_type.aurorasdeco.jacaranda": "蓝花楹木",
+  "leaves_type.aurorasdeco.jacaranda": "蓝花楹",
 
   "wood_type.autumnity.maple": "枫木",
   "leaves_type.autumnity.maple": "枫树",
@@ -888,6 +898,26 @@
   "wood_type.blockus.raw_bamboo": "粗竹",
   "wood_type.blockus.white_oak": "白色橡木",
   "leaves_type.blockus.white_oak": "白色橡树",
+
+  "wood_type.bloomingnature.aspen": "白杨木",
+  "wood_type.bloomingnature.baobab": "猴面包木",
+  "wood_type.bloomingnature.chestnut": "栗木",
+  "wood_type.bloomingnature.ebony": "乌木",
+  "wood_type.bloomingnature.fir": "冷杉木",
+  "wood_type.bloomingnature.larch": "落叶松木",
+  "wood_type.bloomingnature.palm": "棕榈木",
+  "wood_type.bloomingnature.swamp_cypress": "落羽杉木",
+  "wood_type.bloomingnature.swamp_oak": "双色栎木",
+  "leaves_type.bloomingnature.aspen": "白杨",
+  "leaves_type.bloomingnature.baobab": "猴面包",
+  "leaves_type.bloomingnature.chestnut": "栗树",
+  "leaves_type.bloomingnature.ebony": "乌树",
+  "leaves_type.bloomingnature.fir": "冷杉",
+  "leaves_type.bloomingnature.larch": "落叶松",
+  "leaves_type.bloomingnature.palm": "棕榈",
+  "leaves_type.bloomingnature.swamp_cypress": "落羽杉",
+  "leaves_type.bloomingnature.swamp_oak": "双色栎",
+  "leaves_type.bloomingnature.orange": "橙色",
 
   "wood_type.blue_skies.crystallized": "水晶木",
   "wood_type.blue_skies.bluebright": "蓝辉木",
@@ -1047,7 +1077,7 @@
 
   "wood_type.deep_aether.roseroot": "瑰根木",
   "wood_type.deep_aether.yagroot": "榴根木",
-  "wood_type.deep_aether.cruderoot": "油根木",
+  "wood_type.deep_aether.cruderoot": "朴根木",
   "wood_type.deep_aether.conberry": "孪团木",
   "wood_type.deep_aether.sunroot": "晖根木",
   "leaves_type.deep_aether.roseroot": "瑰根",
@@ -1055,7 +1085,7 @@
   "leaves_type.deep_aether.blue_roseroot": "蓝色瑰根",
   "leaves_type.deep_aether.flowering_blue_roseroot": "盛开的蓝色瑰根",
   "leaves_type.deep_aether.yagroot": "榴根",
-  "leaves_type.deep_aether.cruderoot": "油根",
+  "leaves_type.deep_aether.cruderoot": "朴根",
   "leaves_type.deep_aether.conberry": "孪团",
   "leaves_type.deep_aether.sunroot": "晖根",
   
@@ -1112,6 +1142,9 @@
   "wood_type.eidolon.illwood": "灾厄木",
   "leaves_type.eidolon.illwood": "灾厄",
 
+  "wood_type.eldritch_end.primordial": "原始木",
+  "leaves_type.eldritch_end.primordial": "原始",
+
   "wood_type.emeraldcraft.ginkgo": "银杏木",
   "wood_type.emeraldcraft.palm": "棕榈木",
   "wood_type.emeraldcraft.peach": "桃木",
@@ -1129,6 +1162,9 @@
   "wood_type.enhanced_mushrooms.red_mushroom": "红色蘑菇",
   "wood_type.enhanced_mushrooms.brown_mushroom": "棕色蘑菇",
 
+  "wood_type.enlightened_end.cerulean": "蔚蓝木",
+  "wood_type.enlightened_end.indigo": "胶靛木",
+  "leaves_type.enlightened_end.cerulean": "蔚蓝",
   "wood_type.enlightened_end.congealed": "凝结木",
   "wood_type.enlightened_end.ebony": "阴沉木",
 
@@ -1272,6 +1308,21 @@
   "wood_type.morecraft.netherwood": "下界木",
   "leaves_type.morecraft.netherwood": "下界",
 
+  "wood_type.ms.nature/maple": "枫木",
+  "wood_type.ms.nature/silverbell": "银钟木",
+  "wood_type.ms.nature/willow": "柳木",
+  "wood_type.ms.nature/tigerwood": "虎木",
+  "wood_type.ms.nature/glowood": "荧光木",
+  "wood_type.ms.nature/hellwood": "地狱木",
+  "leaves_type.ms.nature/green_maple": "绿色枫树",
+  "leaves_type.ms.nature/yellow_maple": "黄色枫树",
+  "leaves_type.ms.nature/red_maple": "红色枫树",
+  "leaves_type.ms.nature/silverbell": "银钟",
+  "leaves_type.ms.nature/willow": "柳树",
+  "leaves_type.ms.nature/tigerwood": "虎树",
+  "leaves_type.ms.nature/glowood": "荧光",
+  "leaves_type.ms.nature/hellwood": "地狱",
+
   "leaves_type.mythicbotany.dreamwood": "梦之木",
 
   "wood_type.mysticalworld.charred": "烧焦的",
@@ -1286,6 +1337,15 @@
   "leaves_type.mysticsbiomes.yellow_maple": "黄色枫树",
   "leaves_type.mysticsbiomes.budding_peony": "含苞的牡丹",
   "leaves_type.mysticsbiomes.peony": "牡丹",
+
+  "wood_type.nature_arise.maple": "枫木",
+  "wood_type.nature_arise.fir": "冷杉木",
+  "leaves_type.nature_arise.maple": "枫树",
+  "leaves_type.nature_arise.red_maple": "红色枫树",
+  "leaves_type.nature_arise.orange_maple": "橙色枫树",
+  "leaves_type.nature_arise.yellow_maple": "黄色枫树",
+  "leaves_type.nature_arise.fir": "冷杉",
+  "leaves_type.nature_arise.silver_birch": "垂枝桦",
 
   "wood_type.natures_spirit.aspen": "白杨木",
   "wood_type.natures_spirit.cypress": "柏木",
@@ -1330,6 +1390,9 @@
   "leaves_type.nourished_end.cosmic": "星宙",
 
   "leaves_type.occultism.otherworld": "异界",
+
+  "wood_type.organics.hoaky": "霍橡木",
+  "leaves_type.organics.hoaky": "霍橡",
 
   "wood_type.pasterdream.dyedream": "染梦木",
   "leaves_type.pasterdream.dyedream": "染梦",
@@ -1429,7 +1492,7 @@
   "wood_type.quark.blossom": "花木",
   "wood_type.quark.azalea": "杜鹃木",
   "wood_type.quark.bamboo": "竹",
-  "wood_type.quark.ancient": "远古木",
+  "wood_type.quark.ancient": "苍灰木",
   "leaves_type.quark.blue_blossom": "雪霜花",
   "leaves_type.quark.lavender_blossom": "幽静花",
   "leaves_type.quark.orange_blossom": "温暖花",
@@ -1442,7 +1505,7 @@
   "leaves_type.quark.pink": "甜蜜花",
   "leaves_type.quark.yellow": "阳光花",
   "leaves_type.quark.red": "火热花",
-  "leaves_type.quark.ancient": "远古",
+  "leaves_type.quark.ancient": "苍灰",
 
   "wood_type.rankine.cedar": "雪松木",
   "wood_type.rankine.balsam_fir": "香脂冷杉木",
@@ -1743,6 +1806,8 @@
   "wood_type.vinery.cherry": "樱桃木",
   "leaves_type.vinery.grapevine": "葡萄藤",
   "leaves_type.vinery.cherry": "樱桃",
+
+  "wood_type.voidscape.thunder": "雷暴木",
 
   "wood_type.wilderwild.baobab": "猴面包木",
   "wood_type.wilderwild.cypress": "柏木",
