@@ -88,8 +88,8 @@ public class BuildersDelightModule extends SimpleModule {
                         w -> new customBdFurnitureKit(new Item.Properties().tab(tabMater).stacksTo(64), "furniture_kit")
                 )
                 .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"))
-               // .addRecipe(modRes("oak_furniture_kit"))
                 .createPaletteFromOak(BuildersDelightModule::extrapolateWoodItemPalette)
+                // manual recipe below
                 .build();
         this.addEntry(FURNITURE_KIT);
 
@@ -865,8 +865,11 @@ public class BuildersDelightModule extends SimpleModule {
     //TYPE: FUNCTIONS
     private void neutralPalette(Palette p) {
         p.remove(p.getLightest());
-        p.remove(p.getLightest());
+        p.increaseInner();
         p.remove(p.getDarkest());
+        p.increaseInner();
+        p.remove(p.getLightest());
+        p.increaseInner();
         p.remove(p.getDarkest());
     }
 
@@ -938,40 +941,42 @@ public class BuildersDelightModule extends SimpleModule {
                 addChiselRecipe(pack, w, "glass", GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8);
                 addChiselRecipe(pack, w, "glass_pane", GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8);
 
+                // Used in recipe of glass_1, frame_1, & furniture_kit
                 planksTags(w, pack, PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
 
-                // Glass Recipe
+                // Crafting Recipe
                 craftingWithTagsRecipe("glass_1", "planks", GLASS_1.items.get(w), w, pack, manager);
                 craftingWithTagsRecipe("frame_1", "planks", FRAME_1.items.get(w), w, pack, manager);
             }
         }
         String recipe = """
-                    {
-                      "group": "buildersdelight",
-                      "type": "minecraft:crafting_shaped",
-                      "pattern": [
-                        " 0 ",
+            {
+                "group": "buildersdelight",
+                "type": "minecraft:crafting_shaped",
+                "pattern": [
+                    " 0 ",
                     \t"010",
                     \t" 0 "
-                      ],
-                      "key": {
-                        "0": {
-                          "item": "minecraft:string"
-                        },
+                ],
+                "key": {
+                    "0": {
+                        "item": "minecraft:string"
+                    },
                     \t"1": {
-                          "item": "[planks]"
-                        }
-                      },
-                      "result": {
-                        "item": "[result]",
-                        "count": 2
-                      }
-                    }""";
+                        "tag": "[planks]"
+                    }
+                },
+                "result": {
+                    "item": "[result]",
+                    "count": 2
+                }
+            }
+        """;
         for (var v : this.FURNITURE_KIT.items.entrySet()) {
 
             WoodType wood = v.getKey();
             String r = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
-                    .replace("[planks]", Utils.getID(wood.planks).toString());
+                    .replace("[planks]", EveryCompat.MOD_ID + ":" + wood.getTypeName() +"_planks");
 
             ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "_furniture_kit");
             pack.addBytes(res, r.getBytes(), ResType.RECIPES);
@@ -987,7 +992,7 @@ public class BuildersDelightModule extends SimpleModule {
         JsonObject recipe;
         try (InputStream recipeStream = manager.getResource(recipeLoc).orElseThrow().open()) {
             recipe = RPUtils.deserializeJson(recipeStream);
-            String inputTag = EveryCompat.MOD_ID + ":" + wood.getTypeName() +"_"+ input ;
+            String inputTag = EveryCompat.MOD_ID + ":" + wood.getTypeName() +"_"+ input;
 
             // VARIABLES for json
             JsonObject underKey;
@@ -1028,8 +1033,8 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
-    // Improved the texture of FURNITURE_KIT
     @Deprecated(forRemoval = true, since = "1.20")
+    // Improved the texture of FURNITURE_KIT
     public static Palette extrapolateWoodItemPalette(Palette palette) {
         PaletteColor color = palette.get(0);
         HSVColor hsv = color.rgb().asHSV();
