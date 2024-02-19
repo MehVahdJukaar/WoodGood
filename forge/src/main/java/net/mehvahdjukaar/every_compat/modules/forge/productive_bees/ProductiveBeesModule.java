@@ -100,7 +100,10 @@ public class ProductiveBeesModule extends SimpleModule {
 
     private void removeDarkest(@NotNull Palette p) {
         p.remove(p.getDarkest());
+        p.add(p.increaseInner());
         p.remove(p.getDarkest());
+        p.add(p.increaseInner());
         p.remove(p.getDarkest());
+        p.add(p.increaseInner());
     }
 }

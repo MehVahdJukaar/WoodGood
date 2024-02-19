@@ -228,7 +228,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::neutralPalette)
+                .createPaletteFromOak(this::dullerPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -491,7 +491,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
-                .createPaletteFromOak(this::dullerPalette)
+                .createPaletteFromOak(this::neutralPalette)
                 .setTab(() -> tab)
                 .build();
 
@@ -1767,10 +1767,12 @@ public class ChippedModule extends SimpleModule {
     }
 
     private void dullerPalette(Palette p) {
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-        p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
+        if (p.size() > 6) {
+            p.remove(p.getLightest());
+            p.remove(p.getLightest());
+            p.remove(p.getDarkest());
+            p.remove(p.getDarkest());
+        }
     }
 
     private void lighterPalette(Palette p) {
@@ -1806,9 +1808,16 @@ public class ChippedModule extends SimpleModule {
 
     private void neutralPalette(Palette p) {
         p.remove(p.getLightest());
+        p.add(p.increaseInner());
         p.remove(p.getLightest());
+        p.add(p.increaseInner());
+        p.remove(p.getLightest());
+        p.add(p.increaseInner());
+
         p.remove(p.getDarkest());
+        p.add(p.increaseInner());
         p.remove(p.getDarkest());
+        p.add(p.increaseInner());
     }
 
     @Override
