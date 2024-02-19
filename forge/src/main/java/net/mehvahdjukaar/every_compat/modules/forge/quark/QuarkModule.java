@@ -46,11 +46,9 @@ import vazkii.quark.content.building.client.render.be.VariantChestRenderer;
 import vazkii.quark.content.building.module.*;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+//SUPPORT: v3.4-418+
 public class QuarkModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> bookshelves;
@@ -105,6 +103,7 @@ public class QuarkModule extends SimpleModule {
                         (w, m) -> {
                             if (w.getNamespace().equals("malum")) return null;
                             Block fence = w.getBlockOfThis("fence");
+                            //noinspection deprecation
                             return fence == null ? null :
                                     new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/",
                                             fence.getSoundType(fence.defaultBlockState()) == SoundType.STEM);
@@ -126,6 +125,7 @@ public class QuarkModule extends SimpleModule {
                             if (w.getNamespace().equals("malum") || w.getNamespace().equals("twigs")) return null;
                             Block fence = w.getBlockOfThis("fence");
                             Block stripped = w.getBlockOfThis("stripped_log");
+                            //noinspection deprecation
                             return (fence == null || stripped == null) ? null :
                                     new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_",
                                             fence.getSoundType(fence.defaultBlockState()) == SoundType.STEM);
@@ -169,6 +169,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("ladders"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("building/crafting/spruce_ladder"))
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
+                .setRenderType(() -> RenderType::translucent)
                 .build();
 
         this.addEntry(ladders);
@@ -180,7 +181,22 @@ public class QuarkModule extends SimpleModule {
                         (w, m) -> {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new HollowLogBlock(name, w.log, m, w.canBurn());
+                        }
+                    )
+                .addModelTransform(m -> m.addModifier((s, id, w) -> {
+                            if (!Objects.nonNull(w.getBlockOfThis("stripped_log")) && w.getNamespace().equals("gardens_of_the_dead")) {
+                                // Workaround: whistlecane from gardens_of_the_dead & blocks having no stripped texture
+                                String pathID = "\"" + w.getNamespace() + ":block/" + w.getTypeName() + "_block";
+                                return s.replace("\"end\": \"minecraft:block/oak_log_top\"",
+                                                "\"end\": " + pathID + "_top\"")
+                                        .replace("\"side\": \"minecraft:block/oak_log\"",
+                                                "\"side\": " + pathID + "\"")
+                                        .replace("\"inside\": \"minecraft:block/stripped_oak_log\"",
+                                                "\"inside\": " + pathID + "\"");
+                            }
+                            return s;
                         })
+                )
                 .requiresChildren("stripped_log")
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -292,6 +308,7 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void registerWoodBlocks(Registrator<Block> registry, Collection<WoodType> woodTypes) {
         try { //ARL hax
             var data = (Map<String, ?>) ARLModData.get(null);
@@ -303,6 +320,7 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void registerLeavesBlocks(Registrator<Block> registry, Collection<LeavesType> leavesTypes) {
         try { //ARL hax
             var data = (Map<String, ?>) ARLModData.get(null);
@@ -314,10 +332,11 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void registerTiles(Registrator<BlockEntityType<?>> registry) {
         super.registerTiles(registry);
-        chestTile = (BlockEntityType<? extends ChestBlockEntity>) chests.getTileHolder().get();
-        trappedChestTile = (BlockEntityType<? extends ChestBlockEntity>) trappedChests.getTileHolder().get();
+        chestTile = (BlockEntityType<? extends ChestBlockEntity>) Objects.requireNonNull(chests.getTileHolder()).get();
+        trappedChestTile = (BlockEntityType<? extends ChestBlockEntity>) Objects.requireNonNull(trappedChests.getTileHolder()).get();
     }
 
     @Override
@@ -412,6 +431,7 @@ public class QuarkModule extends SimpleModule {
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+                    AnimationMetadataSection meta = plankTexture.getMetadata();
 
                     List<Palette> overlayPalette = new ArrayList<>();
                     for (var p : targetPalette) {
@@ -430,15 +450,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap");
 
-                            var img = respriterNormal.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterNormalO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-
-                            trapped.applyOverlayOnExisting(normal_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
                     {
@@ -446,14 +458,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap_left");
 
-                            var img = respriterLeft.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterLeftO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-                            trapped.applyOverlayOnExisting(left_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
                     {
@@ -461,14 +466,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap_right");
 
-                            var img = respriterRight.recolorWithAnimation(targetPalette, plankTexture.getMetadata());
-                            img.applyOverlayOnExisting(respriterRightO.recolorWithAnimation(overlayPalette, plankTexture.getMetadata()));
-
-                            var trapped = img.makeCopy();
-                            trapped.applyOverlayOnExisting(right_t.makeCopy());
-
-                            handler.dynamicPack.addAndCloseTexture(res, img);
-                            handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes);
                         }
                     }
 
@@ -480,5 +478,21 @@ public class QuarkModule extends SimpleModule {
         } catch (Exception ex) {
             handler.getLogger().error("Could not generate any Chest block texture : ", ex);
         }
+    }
+
+    private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
+                                     Respriter respriterBase, Respriter respriterBase_O,
+                                     AnimationMetadataSection baseMeta, List<Palette> basePalette,
+                                     List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes) {
+
+        TextureImage recoloredBase = respriterBase.recolorWithAnimation(basePalette, baseMeta);
+        TextureImage recoloredOverlay = respriterBase_O.recolorWithAnimation(overlayPalette, baseMeta);
+        recoloredBase.applyOverlay(recoloredOverlay);
+        TextureImage trapped = recoloredBase.makeCopy();
+
+        handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
+
+        trapped.applyOverlay(trappedOverlay.makeCopy());
+        handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
     }
 }
