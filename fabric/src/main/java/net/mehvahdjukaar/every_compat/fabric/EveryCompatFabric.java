@@ -11,10 +11,12 @@ import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocks
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
@@ -41,6 +43,9 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
+        if (PlatformHelper.isModLoaded("mcwdoors")) {
+            addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+        }
         // ========================================== WORK IN PROGRESS ============================================== \\
 
         // ============================================= OTHERS ===================================================== \\
