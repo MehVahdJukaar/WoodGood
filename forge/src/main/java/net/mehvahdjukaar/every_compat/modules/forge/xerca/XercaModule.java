@@ -194,7 +194,9 @@ public class XercaModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
         carved1.items.forEach((wood, item) -> {
-            recipeCreator(handler, wood.log.asItem(), Objects.requireNonNull(wood.getBlockOfThis("stripped_log")).asItem(), "1", wood);
+            if (Objects.nonNull(wood.getBlockOfThis("stripped_log")))
+                recipeCreator(handler, wood.log.asItem(),
+                        Objects.requireNonNull(wood.getBlockOfThis("stripped_log")).asItem(), "1", wood);
 
             recipeCreator(handler, wood.log.asItem(), item,"1", wood);
             createRecipeIfNotNull("stripped_log", item, "1", wood, handler);
@@ -227,7 +229,7 @@ public class XercaModule extends SimpleModule {
     @SuppressWarnings("DataFlowIssue")
     public void recipeCreator(ServerDynamicResourcesHandler handler, Item input, Item output, String X, WoodType wood) {
         // pathBuilder: carving/x/namespace/
-        String pathBuilder = XercaModule.this.shortenedId() + "/" + wood.getNamespace() + "/";
+        String pathBuilder = this.shortenedId() + "/" + wood.getNamespace() + "/";
 
         String recipeName = null;
 
