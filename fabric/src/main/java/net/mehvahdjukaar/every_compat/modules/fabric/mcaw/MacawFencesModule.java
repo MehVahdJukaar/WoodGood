@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwfences.MacawsFences;
 import net.kikoz.mcwfences.init.BlockInit;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -41,7 +42,6 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
-
                 .defaultRecipe()
                 .build();
         this.addEntry(PICKET_FENCES);
@@ -51,7 +51,6 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
-
                 .defaultRecipe()
                 .build();
         this.addEntry(STOCKADE_FENCES);
@@ -61,7 +60,6 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
-
                 .defaultRecipe()
                 .build();
         this.addEntry(HORSE_FENCES);
@@ -82,7 +80,6 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
-
                 .defaultRecipe()
                 .build();
         this.addEntry(PYRAMID_GATES);
@@ -92,7 +89,6 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
-
                 .defaultRecipe()
                 .build();
         this.addEntry(HIGHLEY_GATES);
@@ -104,20 +100,32 @@ public class MacawFencesModule extends SimpleModule {
                             if (l == null) return null;
                             return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
-                .addModelTransform(m -> m.addModifier((s, id, w) ->
-                        s.replace("mcwfences:block/oak_leaves",
-                                w.getNamespace() + ":block/" + w.getTypeName() + "_leaves"))
+                .addModelTransform(m -> m.addModifier((s, id, w) -> {
+                            // The path of leaves from Chipped is different
+                            if (w.getNamespace().equals("chipped")) return getLeavesPath(s, w);
+                            return s.replace("mcwfences:block/oak_leaves",
+                                    w.getNamespace() + ":block/" + w.getTypeName() + "_leaves");
+                        }
+                    )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
-
                 .defaultRecipe()
                 .build();
         this.addEntry(HEDGES);
     }
 
+    public String getLeavesPath(String s, LeavesType w) {
+        String path = w.getNamespace() + ":block/"; // {Namespace}:block/
+        String[] nameSplit = w.getTypeName().split("_");
+        if (w.getTypeName().contains("dark")) path += "dark_";
+        // {Namespace}:block/<type>_leaves/{fullnameType}_leaves.png
+        path += nameSplit[nameSplit.length - 1] + "_leaves/" + w.getTypeName() + "_leaves";
+
+        return s.replace("mcwfences:block/oak_leaves", path);
+    }
 
     public static class WiredFence extends FenceBlock {
 
