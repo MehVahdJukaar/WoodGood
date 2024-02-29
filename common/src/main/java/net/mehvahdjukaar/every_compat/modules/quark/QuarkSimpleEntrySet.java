@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
-import com.mojang.datafixers.types.Func;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
@@ -39,7 +39,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                Class<? extends ZetaModule> module,
                                Supplier<B> baseBlock,
                                Supplier<T> baseType,
-                               Function<T,  B> blockSupplier,
+                               Function<T, B> blockSupplier,
                                Supplier<ResourceKey<CreativeModeTab>> tab,
                                LootTableMode tableMode,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
@@ -51,7 +51,8 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                Predicate<T> condition) {
         super(type, name, prefix, null, baseBlock, baseType, tab, tableMode, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, condition);
         this.blockSupplier = blockSupplier;
-        this.zetaModule = Suppliers.memoize(()->Quark.ZETA.modules.get(module));
+        var m = Preconditions.checkNotNull(module);
+        this.zetaModule = Suppliers.memoize(() -> Quark.ZETA.modules.get(m));
     }
 
     @Override
@@ -69,7 +70,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         Block base = baseBlock.get();
         if (base == null)
             throw new UnsupportedOperationException("Base block cant be null");
-        baseType.get().addChild(module.getModId() + ":" + typeName,(Object) base);
+        baseType.get().addChild(module.getModId() + ":" + typeName, (Object) base);
 
         for (T w : woodTypes) {
             String n = getBlockName(w);
@@ -80,7 +81,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                 this.blocks.put(w, block);
 
                 registry.register(EveryCompat.res(name), block); //does not set registry name
-                w.addChild(module.getModId() + ":" + typeName,(Object) block);
+                w.addChild(module.getModId() + ":" + typeName, (Object) block);
 
 
                 if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
@@ -92,14 +93,16 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
 
     @Override
     public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
-        if(zetaModule.get().enabled) {
+        ZetaModule mod = zetaModule.get();
+        if (mod == null || mod.enabled) {
             super.generateRecipes(module, pack, manager);
         }
     }
 
     @Override
     public @Nullable Item getItemOf(T type) {
-        if(zetaModule.get().enabled) {
+        ZetaModule mod = zetaModule.get();
+        if (mod == null || mod.enabled) {
             return super.getItemOf(type);
         }
         return null;
