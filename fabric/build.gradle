@@ -38,7 +38,7 @@ dependencies {
     }
 
     //modImplementation ("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric")
-    modImplementation("curse.maven:moonlightlib-499980:5068159")
+    modImplementation("curse.maven:moonlightlib-499980:5106393")
 
     // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
