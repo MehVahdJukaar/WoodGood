@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.mixins;
 
+import net.mehvahdjukaar.every_compat.ECPlatStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -28,10 +29,10 @@ public abstract class LootTablesHackMixin {
     @Inject(method = "getDrops", cancellable = true,
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"
             ), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
-    public void addSimpleFastECdrops(BlockState state, LootParams.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir, ResourceLocation resourceLocation, LootParams lootParams, ServerLevel serverLevel, LootTable lootTable) {
+    public void addSimpleFastECdrops(BlockState state, LootParams.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir, ResourceLocation resId, LootParams lootParams, ServerLevel serverLevel, LootTable lootTable) {
         if(lootTable == LootTable.EMPTY && Utils.getID(state.getBlock()).getNamespace().equals(EveryCompat.MOD_ID)){
             if(SimpleEntrySet.isSimpleDrop(state.getBlock())){
-                cir.setReturnValue(List.of(this.asItem().getDefaultInstance()));
+                cir.setReturnValue(ECPlatStuff.modifyLoot(resId, List.of(this.asItem().getDefaultInstance()),lootContext));
             }
         }
     }
