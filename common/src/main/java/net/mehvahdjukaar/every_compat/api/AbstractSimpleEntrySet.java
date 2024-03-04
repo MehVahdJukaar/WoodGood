@@ -186,7 +186,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 T w = entry.getKey();
                 //skips disabled ones
 
-                if (!WoodConfigs.isEntryEnabled(w, b)) continue;
+                // actually we dont otherwise we get missign texture log spam. TODO: replace models with empty dummy instead
+//                if (!WoodConfigs.isEntryEnabled(w, b)) continue;
 
                 ResourceLocation blockId = Utils.getID(b);
 
