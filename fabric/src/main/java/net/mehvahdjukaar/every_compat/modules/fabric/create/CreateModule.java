@@ -40,7 +40,6 @@ public class CreateModule extends SimpleModule {
 
         this.addEntry(windows);
 
-
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         () -> getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))

@@ -337,7 +337,7 @@ public class FurnishModule extends SimpleModule {
     }
 
     private void createTopTexture(TextureImage original, TextureImage newImage) {
-        original.forEachFrame((i, x, y) -> {
+        original.forEachFramePixel((i, x, y) -> {
             int localX = x - original.getFrameStartX(i);
             int localY = y - original.getFrameStartY(i);
             if (localX >= 5 && localX <= 10 && localY >= 5 && localY <= 10) {

@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.forge;
 
+import net.mehvahdjukaar.moonlight.core.mixins.forge.FireBlockMixin;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ToolActions;
 import org.violetmoon.zeta.util.handler.ToolInteractionHandler;
