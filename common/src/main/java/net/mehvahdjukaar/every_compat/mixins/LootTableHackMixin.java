@@ -29,7 +29,7 @@ public abstract class LootTableHackMixin {
     @Inject(method = "getDrops", cancellable = true,
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTables;get(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;",
             shift = At.Shift.BY, by = 2), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
-    public void addSimpleFastECdrops(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir,
+    public void everyCompat$addSimpleFastDrops(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir,
                                      ResourceLocation resourceLocation, LootContext lootContext,
                                      ServerLevel serverLevel, LootTable lootTable) {
         if(lootTable == LootTable.EMPTY && Utils.getID(state.getBlock()).getNamespace().equals(EveryCompat.MOD_ID)){

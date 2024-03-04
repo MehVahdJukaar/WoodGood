@@ -32,6 +32,9 @@ dependencies {
 
     modCompileOnly("curse.maven:chipped-456956:4463479")
 
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
+    implementation("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")
+    annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 }
 
