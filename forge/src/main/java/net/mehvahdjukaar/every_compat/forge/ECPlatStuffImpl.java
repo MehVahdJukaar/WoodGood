@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ECPlatStuffImpl {
     public static List<ItemStack> modifyLoot(ResourceLocation id, List<ItemStack> stacks, LootContext lootContext) {
-        return ForgeHooks.modifyLoot(id, ObjectArrayList.wrap((ItemStack[]) stacks.toArray()), lootContext);
+        ItemStack[] array = stacks.toArray(ItemStack[]::new);
+        return ForgeHooks.modifyLoot(id, ObjectArrayList.wrap(array), lootContext);
     }
 }
