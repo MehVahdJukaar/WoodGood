@@ -116,15 +116,8 @@ public abstract class EveryCompat {
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
 
         // Abnormals Delight
-        addOtherCompatMod("abnormals_delight", "autumnity", List.of("farmersdelight"));
-        addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
-        addOtherCompatMod("abnormals_delight", "endergetic", List.of("farmersdelight"));
-        addOtherCompatMod("abnormals_delight", "atmospheric", List.of("farmersdelight"));
-        addOtherCompatMod("abnormals_delight", "atmospheric", List.of("farmersdelight"));
-        addOtherCompatMod("abnormals_delight", "autumnity", List.of("farmersdelight"));
-        addOtherCompatMod("abnormals_delight", "endergetic", List.of("farmersdelight"));
-        addOtherCompatMod("abnormals_delight", "environmental", List.of("farmersdelight"));
-        addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", List.of("autumnity","upgrade_aquatic",
+                "environmental","atmospheric","endergetic","caves_and_chasms"), List.of("farmersdelight"));
 
         // ========================================= Add Modules ==================================================== \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
@@ -152,11 +145,14 @@ public abstract class EveryCompat {
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
         ENTRY_TYPES.computeIfAbsent(type, t -> new HashSet<>()).add(childId);
     }
-
     private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
+        addOtherCompatMod(modId, List.of(woodFrom), blocksFrom);
+    }
+
+    private void addOtherCompatMod(String modId, List<String> woodFrom, List<String> blocksFrom) {
         COMPAT_MODS.add(new CompatMod(modId, woodFrom, blocksFrom));
         DEPENDENCIES.add(modId);
-        DEPENDENCIES.add(woodFrom);
+        DEPENDENCIES.addAll(woodFrom);
         DEPENDENCIES.addAll(blocksFrom);
     }
 
@@ -236,7 +232,11 @@ public abstract class EveryCompat {
     }
 
 
-    public record CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
+    public record CompatMod(String modId, List<String> woodFrom, List<String> blocksFrom) {
+
+        public CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
+            this(modId, List.of(woodFrom), blocksFrom);
+        }
     }
 
     private void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
