@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
+import net.mehvahdjukaar.every_compat.misc.SpriteStuff;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
@@ -96,10 +97,6 @@ public abstract class EveryCompat {
             EveryCompatClient.init();
             ClientDynamicResourcesHandler.INSTANCE.register();
 
-            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log", res("block/cactus_side"));
-            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log_top", res("block/cactus_top"));
-//            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
-//            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
         }
 
         // ========================================= Add Other Compat Mods ========================================== \\
@@ -204,6 +201,10 @@ public abstract class EveryCompat {
         }
 
         forAllModules(CompatModule::onModSetup);
+
+        if(PlatHelper.getPhysicalSide().isClient()){
+            SpriteStuff.addHardcodedSprites();
+        }
     }
 
     private int prevRegSize;

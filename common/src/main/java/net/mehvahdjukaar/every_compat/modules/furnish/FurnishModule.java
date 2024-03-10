@@ -10,12 +10,11 @@ import io.github.wouink.furnish.setup.FurnishRegistries;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpritePredicates;
+import net.mehvahdjukaar.every_compat.misc.SpriteStuff;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
-import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -290,7 +289,7 @@ public class FurnishModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpritePredicates.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteStuff.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/oak_log_bench_top", w, id, "oak");
 
@@ -313,7 +312,7 @@ public class FurnishModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpritePredicates.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteStuff.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/jungle_coffin_sides", w, id, "jungle");
 
