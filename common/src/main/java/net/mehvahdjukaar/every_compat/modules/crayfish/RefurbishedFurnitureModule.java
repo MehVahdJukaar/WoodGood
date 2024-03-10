@@ -92,67 +92,59 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
+        // code copied from ResourceUtils.addStandardResources
         {
             //remove the ones from mc namespace
             StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
                     modRes("extra/oak_dark_ceiling_fan_blade")
             ));
-            BlockTypeResTransformer<WoodType> modelModifier =
-                    ResourcesUtils.standardModelTransformer(modId, manager, darkFans.getBaseType(),
-                            darkFans.typeName, null);
-
-            darkFans.blocks.forEach((w, b) -> {
-                ResourceLocation id = Utils.getID(b);
-
-                //creates item model
-                try {
-                    StaticResource newModel = modelModifier.transform(darkBlade, id, w);
-                    assert newModel.location != darkBlade.location : "ids cant be the same";
-                    handler.addResourceIfNotPresent(manager, newModel);
-                } catch (Exception exception) {
-                    EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
-                }
-            });
+            addFanModels(handler, manager, darkBlade, darkFans);
         }
         {
             //remove the ones from mc namespace
             StaticResource lightBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
                     modRes("extra/oak_light_ceiling_fan_blade")
             ));
-            BlockTypeResTransformer<WoodType> modelModifier =
-                    ResourcesUtils.standardModelTransformer(modId, manager, lightFans.getBaseType(),
-                            lightFans.typeName, null);
-
-            lightFans.blocks.forEach((w, b) -> {
-                ResourceLocation id = Utils.getID(b);
-
-                //creates item model
-                try {
-                    StaticResource newModel = modelModifier.transform(lightBlade, id, w);
-                    assert newModel.location != lightBlade.location : "ids cant be the same";
-                    handler.addResourceIfNotPresent(manager, newModel);
-                } catch (Exception exception) {
-                    EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
-                }
-            });
+            addFanModels(handler, manager, lightBlade, lightFans);
         }
 
+    }
+
+    private void addFanModels(ClientDynamicResourcesHandler handler, ResourceManager manager, StaticResource darkBlade, SimpleEntrySet<WoodType, Block> darkFans) {
+        BlockTypeResTransformer<WoodType> modelModifier =
+                ResourcesUtils.standardModelTransformer(modId, manager, darkFans.getBaseType(),
+                        darkFans.typeName, null);
+
+        darkFans.blocks.forEach((w, b) -> {
+            ResourceLocation id = Utils.getID(b);
+
+            //creates item model
+            try {
+                StaticResource newModel = modelModifier.transform(darkBlade, id, w);
+                assert newModel.location != darkBlade.location : "ids cant be the same";
+                handler.addResourceIfNotPresent(manager, newModel);
+            } catch (Exception exception) {
+                EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
+            }
+        });
     }
 
     @Override
     public void onClientSetup() {
         super.onClientSetup();
-        ModelManager manager = Minecraft.getInstance().getModelManager();
         darkFans.blocks.forEach((key, value) -> {
-            var m = ClientHelper.getModel(manager,
-                    EveryCompat.res("extra/rfm/" + key.getAppendableId() + "_dark_ceiling_fan_blade"));
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> m);
-
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> {
+                ModelManager manager = Minecraft.getInstance().getModelManager();
+                return ClientHelper.getModel(manager,
+                        EveryCompat.res("extra/rfm/" + key.getAppendableId() + "_dark_ceiling_fan_blade"));
+            });
         });
         lightFans.blocks.forEach((key, value) -> {
-            var m = ClientHelper.getModel(manager,
-                    EveryCompat.res("extra/rfm/" + key.getAppendableId() + "_light_ceiling_fan_blade"));
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> m);
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> {
+                ModelManager manager = Minecraft.getInstance().getModelManager();
+                return ClientHelper.getModel(manager,
+                        EveryCompat.res("extra/rfm/" + key.getAppendableId() + "_light_ceiling_fan_blade"));
+            });
         });
     }
 
