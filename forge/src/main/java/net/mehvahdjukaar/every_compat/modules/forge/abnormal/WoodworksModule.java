@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.forge.abnormal;
 
 import com.google.common.collect.ImmutableSet;
+import com.mrcrayfish.furniture.refurbished.core.ModBlocks;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
