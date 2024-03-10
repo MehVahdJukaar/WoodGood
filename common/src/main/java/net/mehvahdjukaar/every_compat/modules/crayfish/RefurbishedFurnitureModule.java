@@ -4,6 +4,7 @@ import com.mrcrayfish.furniture.refurbished.block.CeilingFanBlock;
 import com.mrcrayfish.furniture.refurbished.block.ChairBlock;
 import com.mrcrayfish.furniture.refurbished.block.MetalType;
 import com.mrcrayfish.furniture.refurbished.block.TableBlock;
+import com.mrcrayfish.furniture.refurbished.client.renderer.blockentity.CeilingFanBlockEntityRenderer;
 import com.mrcrayfish.furniture.refurbished.core.ModBlockEntities;
 import com.mrcrayfish.furniture.refurbished.core.ModCreativeTabs;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -91,26 +92,50 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
-        //remove the ones from mc namespace
-        StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
-                modRes("extra/oak_dark_ceiling_fan_blade")
-        ));
-        BlockTypeResTransformer<WoodType> modelModifier =
-                ResourcesUtils.standardModelTransformer(modId, manager, darkFans.getBaseType(),
-                        darkFans.typeName, null);
+        {
+            //remove the ones from mc namespace
+            StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                    modRes("extra/oak_dark_ceiling_fan_blade")
+            ));
+            BlockTypeResTransformer<WoodType> modelModifier =
+                    ResourcesUtils.standardModelTransformer(modId, manager, darkFans.getBaseType(),
+                            darkFans.typeName, null);
 
-        darkFans.blocks.forEach((w, b) -> {
-            ResourceLocation id = Utils.getID(b);
+            darkFans.blocks.forEach((w, b) -> {
+                ResourceLocation id = Utils.getID(b);
 
-            //creates item model
-            try {
-                StaticResource newModel = modelModifier.transform(darkBlade, id, w);
-                assert newModel.location != darkBlade.location : "ids cant be the same";
-                handler.addResourceIfNotPresent(manager, newModel);
-            } catch (Exception exception) {
-                EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
-            }
-        });
+                //creates item model
+                try {
+                    StaticResource newModel = modelModifier.transform(darkBlade, id, w);
+                    assert newModel.location != darkBlade.location : "ids cant be the same";
+                    handler.addResourceIfNotPresent(manager, newModel);
+                } catch (Exception exception) {
+                    EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
+                }
+            });
+        }
+        {
+            //remove the ones from mc namespace
+            StaticResource lightBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                    modRes("extra/oak_light_ceiling_fan_blade")
+            ));
+            BlockTypeResTransformer<WoodType> modelModifier =
+                    ResourcesUtils.standardModelTransformer(modId, manager, lightFans.getBaseType(),
+                            lightFans.typeName, null);
+
+            lightFans.blocks.forEach((w, b) -> {
+                ResourceLocation id = Utils.getID(b);
+
+                //creates item model
+                try {
+                    StaticResource newModel = modelModifier.transform(lightBlade, id, w);
+                    assert newModel.location != lightBlade.location : "ids cant be the same";
+                    handler.addResourceIfNotPresent(manager, newModel);
+                } catch (Exception exception) {
+                    EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
+                }
+            });
+        }
 
     }
 
@@ -118,13 +143,16 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public void onClientSetup() {
         super.onClientSetup();
         ModelManager manager = Minecraft.getInstance().getModelManager();
-        darkFans.blocks.keySet().forEach(w -> {
-            ClientHelper.getModel(manager,
-                    EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
+        darkFans.blocks.forEach((key, value) -> {
+            var m = ClientHelper.getModel(manager,
+                    EveryCompat.res("extra/rfm/" + key.getAppendableId() + "_dark_ceiling_fan_blade"));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> m);
+
         });
-        lightFans.blocks.keySet().forEach(w -> {
-            ClientHelper.getModel(manager,
-                    EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
+        lightFans.blocks.forEach((key, value) -> {
+            var m = ClientHelper.getModel(manager,
+                    EveryCompat.res("extra/rfm/" + key.getAppendableId() + "_light_ceiling_fan_blade"));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> m);
         });
     }
 
@@ -133,8 +161,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         super.onClientInit();
         ClientHelper.addSpecialModelRegistration(event -> {
             darkFans.blocks.keySet().forEach(w -> {
-                event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
-                event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
+                event.register(EveryCompat.res("extra/rfm/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
+                event.register(EveryCompat.res("extra/rfm/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
             });
         });
     }
