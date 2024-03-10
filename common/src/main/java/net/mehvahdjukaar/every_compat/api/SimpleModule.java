@@ -14,7 +14,8 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 import java.util.*;
 
@@ -138,6 +139,13 @@ public class SimpleModule extends CompatModule {
             }
         }
         return l;
+    }
+
+
+    public static BlockBehaviour.Properties addWoodProp(WoodType w, BlockBehaviour.Properties p) {
+        if (w.canBurn()) p.ignitedByLava();
+        p.mapColor(w.planks.defaultMapColor()).sound(w.getSound()).instrument(NoteBlockInstrument.BASS);
+        return p;
     }
 
 }
