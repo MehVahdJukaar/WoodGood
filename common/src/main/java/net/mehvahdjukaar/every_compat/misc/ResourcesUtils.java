@@ -137,7 +137,7 @@ public class ResourcesUtils {
                         assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
                         d.addResourceIfNotPresent(manager, newBlockState);
 
-                        //creates item model
+                        //creates block model
                         for (StaticResource model : oakModels) {
                             try {
                                 StaticResource newModel = modelModifier.transform(model, id, w);
@@ -256,7 +256,7 @@ public class ResourcesUtils {
     }
 
     @NotNull
-    private static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(
+    public static <T extends BlockType> BlockTypeResTransformer<T> standardModelTransformer(
             String modId, ResourceManager manager, T baseType, String oldTypeName, @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
         BlockTypeResTransformer<T> modelModifier = BlockTypeResTransformer.create(modId, manager);
         if (extraTransform != null) extraTransform.accept(modelModifier);

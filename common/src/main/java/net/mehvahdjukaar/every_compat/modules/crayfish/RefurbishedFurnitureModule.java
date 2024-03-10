@@ -5,15 +5,24 @@ import com.mrcrayfish.furniture.refurbished.block.ChairBlock;
 import com.mrcrayfish.furniture.refurbished.block.MetalType;
 import com.mrcrayfish.furniture.refurbished.block.TableBlock;
 import com.mrcrayfish.furniture.refurbished.core.ModBlockEntities;
-import com.mrcrayfish.furniture.refurbished.core.ModBlocks;
 import com.mrcrayfish.furniture.refurbished.core.ModCreativeTabs;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class RefurbishedFurnitureModule extends SimpleModule {
@@ -78,4 +87,55 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(lightFans);
     }
 
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+        //remove the ones from mc namespace
+        StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                modRes("extra/oak_dark_ceiling_fan_blade")
+        ));
+        BlockTypeResTransformer<WoodType> modelModifier =
+                ResourcesUtils.standardModelTransformer(modId, manager, darkFans.getBaseType(),
+                        darkFans.typeName, null);
+
+        darkFans.blocks.forEach((w, b) -> {
+            ResourceLocation id = Utils.getID(b);
+
+            //creates item model
+            try {
+                StaticResource newModel = modelModifier.transform(darkBlade, id, w);
+                assert newModel.location != darkBlade.location : "ids cant be the same";
+                handler.addResourceIfNotPresent(manager, newModel);
+            } catch (Exception exception) {
+                EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
+            }
+        });
+
+    }
+
+    @Override
+    public void onClientSetup() {
+        super.onClientSetup();
+        ModelManager manager = Minecraft.getInstance().getModelManager();
+        darkFans.blocks.keySet().forEach(w -> {
+            ClientHelper.getModel(manager,
+                    EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
+        });
+        lightFans.blocks.keySet().forEach(w -> {
+            ClientHelper.getModel(manager,
+                    EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
+        });
+    }
+
+    @Override
+    public void onClientInit() {
+        super.onClientInit();
+        ClientHelper.addSpecialModelRegistration(event -> {
+            darkFans.blocks.keySet().forEach(w -> {
+                event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
+                event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
+            });
+        });
+    }
 }
