@@ -115,9 +115,9 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 ResourceLocation id = Utils.getID(block);
 
                 try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteUtils.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpritePredicates.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                      TextureImage topTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteUtils.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                             RPUtils.findFirstBlockTextureLocation(manager, w.log, SpritePredicates.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak");
 
@@ -141,9 +141,9 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 ResourceLocation id = Utils.getID(block);
 
                 try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpriteUtils.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                        RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpritePredicates.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                      TextureImage topTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpriteUtils.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                             RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpritePredicates.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak");
 

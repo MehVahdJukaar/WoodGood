@@ -32,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class ResourcesUtils {
 
@@ -378,5 +379,7 @@ public class ResourcesUtils {
         t.addProperty("all", "everycomp:block/disabled");
         DUMMY_BLOCKSTATE.add("textures", t);
     }
+
+
 
 }
