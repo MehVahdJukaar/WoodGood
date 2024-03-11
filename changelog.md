@@ -1,12 +1,3 @@
 #### UPDATED:
-- **Farmer's Delight** - Added recipes for cutting_board with logs from other mods
-- **Quark**
-  - Added custom texture for Brimwood _chest_ & _trapped_chest_ from **Regions Unexplored**
-  - Fixed blocks with missing textures from mods' wood variants:
-    - **Gardens of the dead** - whistlecane
-    - **Regions Unexplored** - eucalyptus
-    - **Endless Biomes**
-      - twisted
-      - penumbra
-  - Fixed Hedges' & Leaf_Carpets' having gray textures when placed (partially)
-    - investigation is currently ongoing for other leaves variants
+- **Macaw Fences & Wall** - Fixed the Hedges' texture with Blue SKies
+- **Furnish** - Fixed the behaviour of the Crate, it is same as Furnish's Crates'
