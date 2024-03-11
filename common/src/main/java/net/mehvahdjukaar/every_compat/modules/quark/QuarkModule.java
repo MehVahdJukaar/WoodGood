@@ -114,6 +114,7 @@ public class QuarkModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
+                .addTag(modRes("posts"), Registries.ITEM)
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/oak_post"))
                 .setRenderType(() -> RenderType::cutout)
@@ -135,6 +136,7 @@ public class QuarkModule extends SimpleModule {
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
+                .addTag(modRes("posts"), Registries.ITEM)
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/stripped_oak_post"))
                 .setRenderType(() -> RenderType::cutout)
@@ -153,6 +155,7 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
+                .addTag(BlockTags.PLANKS, Registries.ITEM)
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
 

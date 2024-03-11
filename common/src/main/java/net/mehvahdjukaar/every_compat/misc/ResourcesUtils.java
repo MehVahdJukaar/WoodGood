@@ -25,6 +25,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -382,4 +384,19 @@ public class ResourcesUtils {
 
 
 
+    public static   <T extends BlockType> Ingredient convertIngredient(Ingredient ingredient, T originalMat, T destinationMat ) {
+        Ingredient newIng = ingredient;
+        for (var in : ingredient.getItems()) {
+            Item it = in.getItem();
+            if (it != Items.BARRIER) {
+                ItemLike i = BlockType.changeItemType(it, originalMat, destinationMat);
+                if (i != null) {
+                    //converts first ingredient it finds
+                    newIng = Ingredient.of(i);
+                    break;
+                }
+            }
+        }
+        return newIng;
+    }
 }

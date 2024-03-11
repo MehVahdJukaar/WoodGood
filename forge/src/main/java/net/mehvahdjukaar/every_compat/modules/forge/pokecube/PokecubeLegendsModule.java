@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -188,18 +189,8 @@ public class PokecubeLegendsModule extends SimpleModule {
             if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
             if (id == null) id = Utils.getID(newRes.asItem()).toString();
 
-            Ingredient newIng = null;
-            for (var in : input.getItems()) {
-                Item it = in.getItem();
-                if (it != Items.BARRIER) {
-                    ItemLike i = BlockType.changeItemType(it, originalMat, destinationMat);
-                    if (i != null) {
-                        //converts first ingredient it finds
-                        newIng = Ingredient.of(i);
-                        break;
-                    }
-                }
-            }
+            Ingredient newIng = ResourcesUtils.convertIngredient(this.input, originalMat, destinationMat);
+
             Advancement.Builder advancement = Advancement.Builder.advancement();
 
             advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));

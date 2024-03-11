@@ -66,7 +66,7 @@ public class EveryCompatClient {
             }
         }
         if(PlatHelper.isDev()){
-            stack.getTags().forEach((k)-> components.add(Component.literal(k.toString()).withStyle(ChatFormatting.GRAY)));
+            stack.getTags().forEach((k)-> components.add(Component.literal("ItemTag: "+ k.location()).withStyle(ChatFormatting.GRAY)));
         }
     }
 }
