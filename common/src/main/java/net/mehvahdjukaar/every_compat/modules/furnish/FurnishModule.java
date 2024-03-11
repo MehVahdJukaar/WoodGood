@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.furnish;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.wouink.furnish.Furnish;
@@ -7,12 +8,16 @@ import io.github.wouink.furnish.block.*;
 import io.github.wouink.furnish.block.util.VoxelShapeHelper;
 import io.github.wouink.furnish.setup.FurnishBlocks;
 import io.github.wouink.furnish.setup.FurnishRegistries;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteStuff;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -211,6 +216,7 @@ public class FurnishModule extends SimpleModule {
                 .addTexture(modRes("block/oak_crate_side"))
                 .addTexture(modRes("block/oak_crate_top"))
                 .setTab(tab)
+                .copyParentDrop()
                 .build();
 
         this.addEntry(crate);
@@ -279,6 +285,30 @@ public class FurnishModule extends SimpleModule {
                 .build();
 
         this.addEntry(coffin);
+    }
+
+    @Override
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        for (var w : WoodTypeRegistry.getTypes()) {
+            boolean hasSomething = false;
+            var id = w.id;
+            SimpleTagBuilder itemTag = SimpleTagBuilder.of(EveryCompat.res(
+                    id.getNamespace() + "_" + id.getPath() + "_" + "furniture"));
+
+            for (var entry : this.getEntries()) {
+                Item b = ((SimpleEntrySet<?, ?>) entry).items.get(w);
+                if (b != null) {
+                    hasSomething = true;
+                    itemTag.addEntry(b);
+                }
+            }
+            if (hasSomething) {
+                handler.dynamicPack.addTag(itemTag, Registries.ITEM);
+                handler.dynamicPack.addTag(itemTag, Registries.BLOCK);
+            }
+        }
     }
 
     @Override
@@ -356,123 +386,123 @@ public class FurnishModule extends SimpleModule {
         });
     }
 
-    public static class FurnishFinishedRecipe implements FinishedRecipe {
-        protected final Ingredient ingredient;
-        protected final ItemStack result;
-        protected final ResourceLocation id;
-        protected final String group;
-        private final Advancement.Builder advancement;
-        protected final ResourceLocation advancementId;
+public static class FurnishFinishedRecipe implements FinishedRecipe {
+    protected final Ingredient ingredient;
+    protected final ItemStack result;
+    protected final ResourceLocation id;
+    protected final String group;
+    private final Advancement.Builder advancement;
+    protected final ResourceLocation advancementId;
 
 
-        public FurnishFinishedRecipe(
-                ResourceLocation resourceLocation,
-                String group,
-                Ingredient ingredient,
-                ItemStack result, Advancement.Builder advancement, ResourceLocation advancementId
-        ) {
-            this.id = resourceLocation;
-            this.group = group;
-            this.ingredient = ingredient;
-            this.result = result;
-            this.advancement = advancement;
-            this.advancementId = advancementId;
-        }
-
-
-        public void serializeRecipeData(JsonObject json) {
-            if (!this.group.isEmpty()) {
-                json.addProperty("group", this.group);
-            }
-            json.addProperty("id", this.id.toString());
-
-            json.add("ingredient", ingredient.toJson());
-
-            json.addProperty("result", Utils.getID(result.getItem()).toString());
-            json.addProperty("count", result.getCount());
-        }
-
-        @Override
-        public ResourceLocation getId() {
-            return id;
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return FurnishRegistries.Furniture_Recipe_Serializer.get();
-        }
-
-        @Nullable
-        @Override
-        public JsonObject serializeAdvancement() {
-            return advancement.serializeToJson();
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return advancementId;
-        }
+    public FurnishFinishedRecipe(
+            ResourceLocation resourceLocation,
+            String group,
+            Ingredient ingredient,
+            ItemStack result, Advancement.Builder advancement, ResourceLocation advancementId
+    ) {
+        this.id = resourceLocation;
+        this.group = group;
+        this.ingredient = ingredient;
+        this.result = result;
+        this.advancement = advancement;
+        this.advancementId = advancementId;
     }
 
-    public class FurnishRecipeTemplate implements IRecipeTemplate<FurnishFinishedRecipe> {
 
-        private final List<Object> conditions = new ArrayList<>();
-
-        public final ItemStack result;
-        public final String group;
-        public final Ingredient ingredient;
-
-        public FurnishRecipeTemplate(JsonObject json) {
-            var g = json.get("group");
-            this.group = g == null ? "" : g.getAsString();
-
-            this.ingredient = Ingredient.fromJson(json.get("ingredient"));
-            String s1 = GsonHelper.getAsString(json, "result");
-            int i = GsonHelper.getAsInt(json, "count");
-            this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i);
+    public void serializeRecipeData(JsonObject json) {
+        if (!this.group.isEmpty()) {
+            json.addProperty("group", this.group);
         }
+        json.addProperty("id", this.id.toString());
 
-        @Override
-        public <T extends BlockType> FurnishFinishedRecipe createSimilar(
-                T originalMat, T destinationMat, Item unlockItem, String id) {
-            ItemLike newRes = BlockType.changeItemType(this.result.getItem(), originalMat, destinationMat);
-            if (newRes == null) {
-                throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
-                        this.result, originalMat, destinationMat));
-            }
-            ItemStack newResult = new ItemStack(newRes);
-            if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
-            if (id == null) id = BuiltInRegistries.ITEM.getKey(newRes.asItem()).toString();
+        json.add("ingredient", ingredient.toJson());
 
-            Ingredient newIng = ingredient;
-            for (var in : ingredient.getItems()) {
-                Item it = in.getItem();
-                if (it != Items.BARRIER) {
-                    ItemLike i = BlockType.changeItemType(it, originalMat, destinationMat);
-                    if (i != null) {
-                        //converts first ingredient it finds
-                        newIng = Ingredient.of(i);
-                        break;
-                    }
+        json.addProperty("result", Utils.getID(result.getItem()).toString());
+        json.addProperty("count", result.getCount());
+    }
+
+    @Override
+    public ResourceLocation getId() {
+        return id;
+    }
+
+    @Override
+    public RecipeSerializer<?> getType() {
+        return FurnishRegistries.Furniture_Recipe_Serializer.get();
+    }
+
+    @Nullable
+    @Override
+    public JsonObject serializeAdvancement() {
+        return advancement.serializeToJson();
+    }
+
+    @Nullable
+    @Override
+    public ResourceLocation getAdvancementId() {
+        return advancementId;
+    }
+}
+
+public class FurnishRecipeTemplate implements IRecipeTemplate<FurnishFinishedRecipe> {
+
+    private final List<Object> conditions = new ArrayList<>();
+
+    public final ItemStack result;
+    public final String group;
+    public final Ingredient ingredient;
+
+    public FurnishRecipeTemplate(JsonObject json) {
+        var g = json.get("group");
+        this.group = g == null ? "" : g.getAsString();
+
+        this.ingredient = Ingredient.fromJson(json.get("ingredient"));
+        String s1 = GsonHelper.getAsString(json, "result");
+        int i = GsonHelper.getAsInt(json, "count");
+        this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i);
+    }
+
+    @Override
+    public <T extends BlockType> FurnishFinishedRecipe createSimilar(
+            T originalMat, T destinationMat, Item unlockItem, String id) {
+        ItemLike newRes = BlockType.changeItemType(this.result.getItem(), originalMat, destinationMat);
+        if (newRes == null) {
+            throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
+                    this.result, originalMat, destinationMat));
+        }
+        ItemStack newResult = new ItemStack(newRes);
+        if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
+        if (id == null) id = BuiltInRegistries.ITEM.getKey(newRes.asItem()).toString();
+
+        Ingredient newIng = ingredient;
+        for (var in : ingredient.getItems()) {
+            Item it = in.getItem();
+            if (it != Items.BARRIER) {
+                ItemLike i = BlockType.changeItemType(it, originalMat, destinationMat);
+                if (i != null) {
+                    //converts first ingredient it finds
+                    newIng = Ingredient.of(i);
+                    break;
                 }
             }
-            Advancement.Builder advancement = Advancement.Builder.advancement();
-
-            advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
-            var res = new ResourceLocation(id);
-            return new FurnishFinishedRecipe(res, group, newIng, newResult, advancement,
-                    modRes("recipes/" + "furnish" + "/" + res.getPath()));
         }
+        Advancement.Builder advancement = Advancement.Builder.advancement();
 
-        @Override
-        public void addCondition(Object condition) {
-            this.conditions.add(condition);
-        }
-
-        @Override
-        public List<Object> getConditions() {
-            return conditions;
-        }
+        advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
+        var res = new ResourceLocation(id);
+        return new FurnishFinishedRecipe(res, group, newIng, newResult, advancement,
+                modRes("recipes/" + "furnish" + "/" + res.getPath()));
     }
+
+    @Override
+    public void addCondition(Object condition) {
+        this.conditions.add(condition);
+    }
+
+    @Override
+    public List<Object> getConditions() {
+        return conditions;
+    }
+}
 }

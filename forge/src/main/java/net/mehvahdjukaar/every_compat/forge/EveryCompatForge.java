@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.forge;
 
+import com.mrcrayfish.furniture.refurbished.core.ModBlocks;
 import net.mehvahdjukaar.every_compat.ECNetworking;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
@@ -104,6 +105,10 @@ public class EveryCompatForge extends EveryCompat {
         MinecraftForge.EVENT_BUS.register(this);
 
         forAllModules(CompatModule::onModInit);
+
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            EveryCompatClient.init();
+        }
     }
 
 

@@ -1,11 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.crayfish;
 
-import com.mrcrayfish.furniture.refurbished.block.CeilingFanBlock;
-import com.mrcrayfish.furniture.refurbished.block.ChairBlock;
-import com.mrcrayfish.furniture.refurbished.block.MetalType;
-import com.mrcrayfish.furniture.refurbished.block.TableBlock;
+import com.mrcrayfish.furniture.refurbished.block.*;
 import com.mrcrayfish.furniture.refurbished.client.renderer.blockentity.CeilingFanBlockEntityRenderer;
 import com.mrcrayfish.furniture.refurbished.core.ModBlockEntities;
+import com.mrcrayfish.furniture.refurbished.core.ModBlocks;
 import com.mrcrayfish.furniture.refurbished.core.ModCreativeTabs;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -24,6 +22,7 @@ import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class RefurbishedFurnitureModule extends SimpleModule {
@@ -32,6 +31,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> tables;
     public final SimpleEntrySet<WoodType, Block> darkFans;
     public final SimpleEntrySet<WoodType, Block> lightFans;
+    public final SimpleEntrySet<WoodType, Block> toilets;
+    public final SimpleEntrySet<WoodType, Block> crates;
 
     public RefurbishedFurnitureModule(String modId) {
         super(modId, "rfm");
@@ -40,7 +41,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         () -> getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of().strength(2.0F))))
-                .defaultRecipe()
+                .addRecipe(modRes("constructing/oak_chair"))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTexture(modRes("block/oak_chair"))
                 .build();
@@ -51,7 +52,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         () -> getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
                                 .strength(2.0F))))
-                .defaultRecipe()
+                .addRecipe(modRes("constructing/oak_table"))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTexture(modRes("block/oak_table"))
                 .addTexture(modRes("block/oak_particle"))
@@ -66,6 +67,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
                                         .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light)))
                 .defaultRecipe()
+                .addRecipe(modRes("constructing/oak_dark_ceiling_fan"))
                 .addTile(ModBlockEntities.CEILING_FAN::get)
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTexture(modRes("block/oak_dark_ceiling_fan"))
@@ -79,13 +81,37 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 MetalType.DARK,
                                 BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
                                         .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light)))
-                .defaultRecipe()
+                .addRecipe(modRes("constructing/oak_light_ceiling_fan"))
                 .addTile(ModBlockEntities.CEILING_FAN::get)
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTexture(modRes("block/oak_light_ceiling_fan"))
                 .build();
 
         this.addEntry(lightFans);
+
+        toilets = SimpleEntrySet.builder(WoodType.class, "toilet",
+                        () -> getModBlock("oka_toilet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ToiletBlock(BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
+                                        .strength(3.5f).sound(SoundType.STONE)))
+                .addRecipe(modRes("constructing/oak_toilet"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTexture(modRes("block/oak_toilet"))
+                .build();
+
+        this.addEntry(toilets);
+
+        crates = SimpleEntrySet.builder(WoodType.class, "crate",
+                        () -> getModBlock("oak_crate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CrateBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
+                                .forceSolidOn().strength(2.5F))))
+                .addRecipe(modRes("constructing/oak_crate"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .copyParentDrop()
+                .addTile(ModBlockEntities.CRATE::get)
+                .addTexture(modRes("block/oak_crate"))
+                .build();
+
+        this.addEntry(crates);
     }
 
     @Override

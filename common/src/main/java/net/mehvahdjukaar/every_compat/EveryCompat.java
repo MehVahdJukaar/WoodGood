@@ -93,11 +93,7 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
 
 
-        if (PlatHelper.getPhysicalSide().isClient()) {
-            EveryCompatClient.init();
-            ClientDynamicResourcesHandler.INSTANCE.register();
 
-        }
 
         // ========================================= Add Other Compat Mods ========================================== \\
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
@@ -139,6 +135,7 @@ public abstract class EveryCompat {
 
 
         MODULE_DISABLER.save();
+
     }
 
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {

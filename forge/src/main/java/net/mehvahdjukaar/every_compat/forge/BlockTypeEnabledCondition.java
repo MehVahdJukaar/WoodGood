@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.forge;
 
 import com.google.gson.JsonObject;
+import io.github.wouink.furnish.block.Crate;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;

@@ -2,11 +2,14 @@ package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +26,8 @@ public class EveryCompatClient {
         ClientHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
+        ClientDynamicResourcesHandler.INSTANCE.register();
+
     }
 
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
@@ -59,6 +64,9 @@ public class EveryCompatClient {
                     }
                 }
             }
+        }
+        if(PlatHelper.isDev()){
+            stack.getTags().forEach((k)-> components.add(Component.literal(k.toString()).withStyle(ChatFormatting.GRAY)));
         }
     }
 }

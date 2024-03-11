@@ -46,6 +46,8 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 
         // ============================================= OTHERS ===================================================== \\
         forAllModules(CompatModule::onModInit);
-
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            EveryCompatClient.init();
+        }
     }
 }
