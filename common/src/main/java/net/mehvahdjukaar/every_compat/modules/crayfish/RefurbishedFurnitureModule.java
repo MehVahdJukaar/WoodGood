@@ -8,6 +8,7 @@ import com.mrcrayfish.furniture.refurbished.core.ModBlockEntities;
 import com.mrcrayfish.furniture.refurbished.core.ModCreativeTabs;
 import com.mrcrayfish.furniture.refurbished.crafting.StackedIngredient;
 import com.mrcrayfish.furniture.refurbished.crafting.WorkbenchContructingRecipe;
+import com.mrcrayfish.furniture.refurbished.item.MailboxItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -30,16 +31,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +58,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> lightFans;
     public final SimpleEntrySet<WoodType, Block> toilets;
     public final SimpleEntrySet<WoodType, Block> crates;
+    public final SimpleEntrySet<WoodType, Block> mailboxes;
+    public final SimpleEntrySet<WoodType, Block> jars;
 
     public RefurbishedFurnitureModule(String modId) {
         super(modId, "rfm");
@@ -67,6 +74,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_chair"))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTexture(modRes("block/oak_chair"))
+                .addTag(modRes("general"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .build();
 
         this.addEntry(chairs);
@@ -79,6 +88,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTexture(modRes("block/oak_table"))
                 .addTexture(modRes("block/oak_particle"))
+                .addTag(modRes("general"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .build();
 
         this.addEntry(tables);
@@ -93,6 +104,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_dark_ceiling_fan"))
                 .addTile(ModBlockEntities.CEILING_FAN::get)
                 .setTab(ModCreativeTabs.MAIN::get)
+                .addTag(modRes("electronics"), Registries.ITEM)
+                .addTag(modRes("bedroom"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_dark_ceiling_fan"))
                 .build();
 
@@ -107,21 +121,15 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_light_ceiling_fan"))
                 .addTile(ModBlockEntities.CEILING_FAN::get)
                 .setTab(ModCreativeTabs.MAIN::get)
+                .addTag(modRes("electronics"), Registries.ITEM)
+                .addTag(modRes("bedroom"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_light_ceiling_fan"))
                 .build();
 
         this.addEntry(lightFans);
 
-        toilets = SimpleEntrySet.builder(WoodType.class, "toilet",
-                        () -> getModBlock("oka_toilet"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ToiletBlock(BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
-                                .strength(3.5f).sound(SoundType.STONE)))
-                .addRecipe(modRes("constructing/oak_toilet"))
-                .setTab(ModCreativeTabs.MAIN::get)
-                .addTexture(modRes("block/oak_toilet"))
-                .build();
 
-        this.addEntry(toilets);
 
         crates = SimpleEntrySet.builder(WoodType.class, "crate",
                         () -> getModBlock("oak_crate"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -129,12 +137,61 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .forceSolidOn().strength(2.5F))))
                 .addRecipe(modRes("constructing/oak_crate"))
                 .setTab(ModCreativeTabs.MAIN::get)
-                .copyParentDrop()
                 .addTile(ModBlockEntities.CRATE::get)
                 .addTexture(modRes("block/oak_crate"))
+                .addTag(modRes("storage"), Registries.ITEM)
+                .addTag(modRes("outdoors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .build();
 
         this.addEntry(crates);
+
+        mailboxes = SimpleEntrySet.builder(WoodType.class, "mailbox",
+                        () -> getModBlock("oak_mailbox"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new MailboxBlock(w.toVanillaOrOak(), addWoodPropNoFire(w, BlockBehaviour.Properties.of()
+                                .strength(2.5F))))
+                .addRecipe(modRes("constructing/oak_crate"))
+                .addCustomItem((woodType, block, properties) -> new MailboxItem(block, properties))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.MAIL_BOX::get)
+                .addTexture(modRes("block/oak_mailbox"))
+                .addTag(modRes("outdoor"), Registries.ITEM)
+                .addTag(modRes("storage"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .build();
+
+        this.addEntry(mailboxes);
+
+        toilets = SimpleEntrySet.builder(WoodType.class, "toilet",
+                        () -> getModBlock("oak_toilet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ToiletBlock(BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
+                                .strength(3.5f).sound(SoundType.STONE)))
+                .addRecipe(modRes("constructing/oak_toilet"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.TOILET::get)
+                .addTexture(modRes("block/oak_toilet"))
+                .addTag(modRes("wooden_toilets"), Registries.ITEM)
+                .addTag(modRes("bathroom"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .build();
+
+        this.addEntry(toilets);
+
+        jars = SimpleEntrySet.builder(WoodType.class, "storage_jar",
+                        () -> getModBlock("oak_toilet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new StorageJarBlock(w.toVanillaOrOak(),  BlockBehaviour.Properties.of()
+                                .mapColor(w.planks.defaultMapColor())
+                                .instrument(NoteBlockInstrument.HAT).strength(1.0F).sound(SoundType.GLASS)))
+                .addRecipe(modRes("constructing/oak_storage_jar"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTexture(modRes("block/storage_jar"))
+                .addTag(modRes("storage"), Registries.ITEM)
+                .addTag(modRes("kitchen"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .build();
+
+        this.addEntry(jars);
     }
 
     @Override
@@ -160,18 +217,12 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     }
 
     private void addFanModels(ClientDynamicResourcesHandler handler, ResourceManager manager, StaticResource darkBlade, SimpleEntrySet<WoodType, Block> darkFans) {
-        BlockTypeResTransformer<WoodType> modelModifier =
-                ResourcesUtils.standardModelTransformer(modId, manager, darkFans.getBaseType(),
-                        darkFans.typeName, null);
-
         darkFans.blocks.forEach((w, b) -> {
-            ResourceLocation id = Utils.getID(b);
-
-            //creates item model
             try {
-                StaticResource newModel = modelModifier.transform(darkBlade, id, w);
-                assert newModel.location != darkBlade.location : "ids cant be the same";
-                handler.addResourceIfNotPresent(manager, newModel);
+                handler.addSimilarJsonResource(manager, darkBlade, s->
+                    s.replace("oak", w.getAppendableId())
+                            .replace("texture\": \"refurbished_furniture", "texture\": \"everycomp"));
+
             } catch (Exception exception) {
                 EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
             }
@@ -182,13 +233,13 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public void onClientSetup() {
         super.onClientSetup();
         darkFans.blocks.forEach((key, value) -> {
-            ResourceLocation res = EveryCompat.res("extra/rfm/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
+            ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
             ModelManager manager = Minecraft.getInstance().getModelManager();
             CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(manager, res));
         });
         lightFans.blocks.forEach((key, value) -> {
             ModelManager manager = Minecraft.getInstance().getModelManager();
-            ResourceLocation res = EveryCompat.res("extra/rfm/" + key.getAppendableId() + "_light_ceiling_fan_blade");
+            ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
             CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(manager, res));
         });
     }
@@ -198,8 +249,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         super.onClientInit();
         ClientHelper.addSpecialModelRegistration(event -> {
             darkFans.blocks.keySet().forEach(w -> {
-                event.register(EveryCompat.res("extra/rfm/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
-                event.register(EveryCompat.res("extra/rfm/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
+                event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
+                event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
             });
         });
     }

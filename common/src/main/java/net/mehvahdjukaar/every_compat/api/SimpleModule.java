@@ -148,4 +148,9 @@ public class SimpleModule extends CompatModule {
         return p;
     }
 
+    public static BlockBehaviour.Properties addWoodPropNoFire(WoodType w, BlockBehaviour.Properties p) {
+        p.mapColor(w.planks.defaultMapColor()).sound(w.getSound()).instrument(NoteBlockInstrument.BASS);
+        return p;
+    }
+
 }
