@@ -34,20 +34,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// SUPPORT: v24
+// SUPPORT: v24+
 public class FurnishModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> bedsideTable;
@@ -66,6 +64,7 @@ public class FurnishModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> stool;
     public final SimpleEntrySet<WoodType, Block> table;
     public final SimpleEntrySet<WoodType, Block> wardrobe;
+    public final SimpleEntrySet<WoodType, Block> bookshelfChest;
 
     public FurnishModule(String modId) {
         super(modId, "fur");
@@ -82,7 +81,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_table"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(table);
 
         squareTable = SimpleEntrySet.builder(WoodType.class, "square_table",
@@ -94,7 +92,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_square_table"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(squareTable);
 
         pedestalTable = SimpleEntrySet.builder(WoodType.class, "pedestal_table",
@@ -106,7 +103,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_pedestal_table"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(pedestalTable);
 
         bedsideTable = SimpleEntrySet.builder(WoodType.class, "bedside_table",
@@ -119,7 +115,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_bedside_table"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(bedsideTable);
 
         kitchenCabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinet",
@@ -132,7 +127,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_kitchen_cabinet"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(kitchenCabinet);
 
         cabinet = SimpleEntrySet.builder(WoodType.class, "cabinet",
@@ -147,7 +141,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/birch_cabinet"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(cabinet);
 
         wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
@@ -164,7 +157,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/birch_wardrobe"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(wardrobe);
 
         stool = SimpleEntrySet.builder(WoodType.class, "stool",
@@ -176,7 +168,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_stool"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(stool);
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
@@ -189,7 +180,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_chair"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(chair);
 
         shutter = SimpleEntrySet.builder(WoodType.class, "shutter",
@@ -202,22 +192,26 @@ public class FurnishModule extends SimpleModule {
                 .addTexture(modRes("block/oak_shutter"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(shutter);
 
         crate = SimpleEntrySet.builder(WoodType.class, "crate",
                         FurnishBlocks.Oak_Crate, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Crate(Utils.copyPropertySafe(w.planks)))
 //                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
-                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+                .addTag(modRes("crates"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.ITEM)
+                .addTag(modRes("mail"), Registries.ITEM)
+                .addTag(modRes("crates"), Registries.ITEM)
+                .addTag(modRes("crate_blacklist"), Registries.ITEM)
                 .addRecipe(modRes("furniture_making/oak_crate"))
                 .addTexture(modRes("block/oak_crate_side"))
                 .addTexture(modRes("block/oak_crate_top"))
                 .setTab(tab)
+                .addCustomItem((woodType, block, properties) -> new BlockItem(block, properties.stacksTo(1)))
                 .copyParentDrop()
                 .build();
-
         this.addEntry(crate);
 
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
@@ -230,7 +224,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_shelf"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(shelf);
 
         bench = SimpleEntrySet.builder(WoodType.class, "bench",
@@ -242,7 +235,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_bench"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(bench);
 
         logBenches = SimpleEntrySet.builder(WoodType.class, "log_bench",
@@ -256,7 +248,6 @@ public class FurnishModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(tab)
                 .build();
-
         this.addEntry(logBenches);
 
         ladder = SimpleEntrySet.builder(WoodType.class, "ladder",
@@ -269,7 +260,6 @@ public class FurnishModule extends SimpleModule {
                 .addRecipe(modRes("furniture_making/oak_ladder"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(ladder);
 
         coffin = SimpleEntrySet.builder(WoodType.class, "coffin",
@@ -282,11 +272,38 @@ public class FurnishModule extends SimpleModule {
                 .addTexture(modRes("block/jungle_coffin_sides"))
                 .setTab(tab)
                 .build();
-
         this.addEntry(coffin);
+
+        bookshelfChest = SimpleEntrySet.builder(WoodType.class, "bookshelf_chest",
+                        FurnishBlocks.Oak_Bookshelf_Chest, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BookshelfChest(Utils.copyPropertySafe(w.planks).pushReaction(PushReaction.BLOCK))
+                )
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("bookshelf_chest"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.BLOCK)
+//                .addTag(modRes("" + "_furniture"), Registries.BLOCK)
+                .addTag(modRes("wooden_furniture"), Registries.ITEM)
+                .addTag(modRes("bookshelf_chest"), Registries.ITEM)
+
+                .addRecipe(modRes("furniture_making/oak_bookshelf_chest"))
+                .addModelTransform(m -> m.addModifier((s, id, w) -> s.replace(
+                        "\"model\": \"minecraft:block/bookshelf\"",
+                        "\"model\": \"everycomp:block/fur/tfc/bookshelf_chest/"+w.getTypeName()+"_bookshelf")))
+                .addTextureM(modRes("block/bookshelf/oak_bookshelf"),
+                        EveryCompat.res("block/fur/oak_bookshelf_chest_m"))
+                .addTextureM(modRes("block/bookshelf/oak_bookshelf_chest_empty"),
+                        EveryCompat.res("block/fur/oak_bookshelf_chest_m"))
+                .addTextureM(modRes("block/bookshelf/oak_bookshelf_chest_plenty"),
+                        EveryCompat.res("block/fur/oak_bookshelf_chest_m"))
+                .addTextureM(modRes("block/bookshelf/oak_bookshelf_chest_sparse"),
+                        EveryCompat.res("block/fur/oak_bookshelf_chest_m"))
+                .setTab(tab)
+                .build();
+        this.addEntry(bookshelfChest);
     }
 
     @Override
+    // Textures
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
