@@ -169,7 +169,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_toilet"))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.TOILET::get)
-                .addTexture(modRes("block/oak_toilet"))
+                .addTextureAutoM(modRes("block/oak_toilet"))
                 .addTag(modRes("wooden_toilets"), Registries.ITEM)
                 .addTag(modRes("bathroom"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
@@ -178,7 +178,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(toilets);
 
         jars = SimpleEntrySet.builder(WoodType.class, "storage_jar",
-                        () -> getModBlock("oak_toilet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> getModBlock("storage_jar"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StorageJarBlock(w.toVanillaOrOak(),  BlockBehaviour.Properties.of()
                                 .mapColor(w.planks.defaultMapColor())
                                 .instrument(NoteBlockInstrument.HAT).strength(1.0F).sound(SoundType.GLASS)))
