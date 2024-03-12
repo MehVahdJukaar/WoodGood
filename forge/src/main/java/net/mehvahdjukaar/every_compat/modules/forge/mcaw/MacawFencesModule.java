@@ -111,12 +111,15 @@ public class MacawFencesModule extends SimpleModule {
                             return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
                 .addModelTransform(m -> m.addModifier((s, id, w) -> {
-                                    // The path of leaves from Chipped is different
-                                    if (w.getNamespace().equals("chipped")) return getLeavesPath(s, w);
-                                    return s.replace("mcwfences:block/oak_leaves",
-                                            w.getNamespace() + ":block/" + w.getTypeName() + "_leaves");
-                                }
-                        )
+                        // The path of Chipped's leaves are different
+                        if (w.getNamespace().equals("chipped")) return getLeavesPath(s, w);
+                        else if (w.getNamespace().equals("blue_skies")) {
+                            return s.replace("mcwfences:block/oak_leaves",
+                                    w.getNamespace() + ":block/leaves/" + w.getTypeName() + "_leaves");
+                        }
+                        return s.replace("mcwfences:block/oak_leaves",
+                                w.getNamespace() + ":block/" + w.getTypeName() + "_leaves");
+                    })
                 )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)

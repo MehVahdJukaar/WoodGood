@@ -10,7 +10,6 @@ import com.teamabnormals.blueprint.common.block.entity.BlueprintChestBlockEntity
 import com.teamabnormals.blueprint.common.block.entity.BlueprintTrappedChestBlockEntity;
 import com.teamabnormals.blueprint.core.registry.BlueprintBlockEntityTypes;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
-import io.github.wouink.furnish.block.Crate;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -56,7 +55,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-
+//SUPPORT: v??? Not available yet
 public class WoodworksModule extends SimpleModule {
 //    public final SimpleEntrySet<WoodType, Block> bookshelves;
 //    public final SimpleEntrySet<WoodType, Block> boards;
