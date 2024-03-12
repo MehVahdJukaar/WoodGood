@@ -39,6 +39,8 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder.AUTO_MASK_MARKER;
+
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
@@ -178,16 +180,22 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
     }
 
+    // i have no fucking clue whats going on here
     @Override
     public void generateTextures(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
         if (isDisabled()) return;
         if (textures.isEmpty()) return;
 
         List<TextureImage> images = new ArrayList<>();
-        try {
+        try (TextureImage oakPlanksTexture = TextureImage.open(manager,
+                RPUtils.findFirstItemTextureLocation(manager, this.getBaseType().mainChild().asItem()))){
+            Palette oakPlanksPalette  = Palette.fromImage(oakPlanksTexture);
+
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
             Palette globalPalette = Palette.ofColors(new ArrayList<RGBColor>());
+
+
             for (var p : textures) {
                 ResourceLocation textureId = p.getFirst();
 
@@ -202,14 +210,24 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         images.add(main);
 
                         if (maskId != null) {
-                            TextureImage mask = TextureImage.open(manager, maskId);
-                            images.add(main);
-                            if(mergePalette){
-                                globalPalette.addAll(Palette.fromImage(main, mask, 0));
-                                partialRespriters.put(textureId, main);
+                            TextureImage mask;
+                            if(maskId.equals(AUTO_MASK_MARKER)) {
+                                if(mergePalette){
+                                    globalPalette.addAll(oakPlanksPalette);
+                                    partialRespriters.put(textureId, main);
+                                }else {
+                                    respriters.put(textureId, Respriter.ofPalette(main, oakPlanksPalette));
+                                }
                             }else {
-                                respriters.put(textureId, Respriter.masked(main, mask));
+                                mask = TextureImage.open(manager, maskId);
+                                if(mergePalette){
+                                    globalPalette.addAll(Palette.fromImage(main, mask, 0));
+                                    partialRespriters.put(textureId, main);
+                                }else {
+                                    respriters.put(textureId, Respriter.masked(main, mask));
+                                }
                             }
+
                         } else {
                             if(mergePalette){
                                 globalPalette.addAll(Palette.fromImage(main,null, 0));
@@ -247,15 +265,15 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     targetPalette = pal.getFirst();
                 } else {
                     var m = w.mainChild();
-                    Block mainBlock = null;
-                    if (m instanceof Block bb) mainBlock = bb;
-                    else if (m instanceof BlockItem bii) mainBlock = bii.getBlock();
-                    if (mainBlock == null) {
+                    Block mainWoodTypeBlock = null;
+                    if (m instanceof Block bb) mainWoodTypeBlock = bb;
+                    else if (m instanceof BlockItem bii) mainWoodTypeBlock = bii.getBlock();
+                    if (mainWoodTypeBlock == null) {
                         throw new UnsupportedOperationException("You need to provide a palette supplier for non wood type based blocks");
                     }
 
                     try (TextureImage plankTexture = TextureImage.open(manager,
-                            RPUtils.findFirstBlockTextureLocation(manager, mainBlock))) {
+                            RPUtils.findFirstBlockTextureLocation(manager, mainWoodTypeBlock))) {
                         targetPalette = Palette.fromAnimatedImage(plankTexture);
                         animation = plankTexture.getMetadata();
                     } catch (Exception ignored) {
@@ -381,6 +399,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
             this.textures.add(Pair.of(textureLocation, maskLocation));
+            return (BL) this;
+        }
+
+        protected static final ResourceLocation AUTO_MASK_MARKER = new ResourceLocation("auto_mask");
+
+        // adds a texture with automatic masking. Experimental
+        public BL addTextureAutoM(ResourceLocation textureLocation) {
+            this.textures.add(Pair.of(textureLocation, AUTO_MASK_MARKER));
             return (BL) this;
         }
 
