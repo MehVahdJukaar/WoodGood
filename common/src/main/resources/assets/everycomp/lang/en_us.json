@@ -465,6 +465,12 @@
 
   "block_type.refurbished_furniture.chair": "%s Chair",
   "block_type.refurbished_furniture.table": "%s Table",
+  "block_type.refurbished_furniture.storage_jar": "%s Storage Jar",
+  "block_type.refurbished_furniture.toilet": "%s Toilet",
+  "block_type.refurbished_furniture.crate": "%s Crate",
+  "block_type.refurbished_furniture.mailbox": "%s Mailbox",
+  "block_type.refurbished_furniture.dark_ceiling_fan": "%s Dark Ceiling Fan",
+  "block_type.refurbished_furniture.light_ceiling_fan": "%s Light Ceiling Fan",
 
   "block_type.premium_wood.bookshelf": "%s Bookshelf",
   "block_type.premium_wood.crafting_table": "%s Crafting Table",

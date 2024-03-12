@@ -185,7 +185,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_storage_jar"))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
-                .addTexture(modRes("block/storage_jar"))
+                .addTexture(modRes("block/oak_storage_jar"))
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
@@ -221,7 +221,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
             try {
                 handler.addSimilarJsonResource(manager, darkBlade, s->
                     s.replace("oak", w.getAppendableId())
-                            .replace("texture\": \"refurbished_furniture", "texture\": \"everycomp"));
+                            .replace("texture\": \"refurbished_furniture:block", "texture\": \"everycomp:block/rfm"));
 
             } catch (Exception exception) {
                 EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
