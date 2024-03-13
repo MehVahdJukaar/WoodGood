@@ -188,7 +188,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         List<TextureImage> images = new ArrayList<>();
         try (TextureImage oakPlanksTexture = TextureImage.open(manager,
-                RPUtils.findFirstItemTextureLocation(manager, this.getBaseType().mainChild().asItem()))){
+                RPUtils.findFirstBlockTextureLocation(manager,(Block) this.getBaseType().mainChild()))){
             Palette oakPlanksPalette  = Palette.fromImage(oakPlanksTexture);
 
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();

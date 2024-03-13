@@ -107,7 +107,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("electronics"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTexture(modRes("block/oak_dark_ceiling_fan"))
+                .addTextureAutoM(modRes("block/oak_dark_ceiling_fan"))
                 .build();
 
         this.addEntry(darkFans);
@@ -124,7 +124,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("electronics"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTexture(modRes("block/oak_light_ceiling_fan"))
+                .addTextureAutoM(modRes("block/oak_light_ceiling_fan"))
                 .build();
 
         this.addEntry(lightFans);
@@ -185,7 +185,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_storage_jar"))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
-                .addTexture(modRes("block/oak_storage_jar"))
+                .addTextureAutoM(modRes("block/oak_storage_jar"))
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
