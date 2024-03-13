@@ -60,6 +60,20 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> crates;
     public final SimpleEntrySet<WoodType, Block> mailboxes;
     public final SimpleEntrySet<WoodType, Block> jars;
+    public final SimpleEntrySet<WoodType, Block> kitchen_cabinetry;
+    public final SimpleEntrySet<WoodType, Block> kitchen_drawer;
+    public final SimpleEntrySet<WoodType, Block> kitchen_sink;
+    public final SimpleEntrySet<WoodType, Block> kitchen_storage_cabinet;
+    public final SimpleEntrySet<WoodType, Block> storage_cabinet;
+    public final SimpleEntrySet<WoodType, Block> basin;
+    public final SimpleEntrySet<WoodType, Block> bath;
+    public final SimpleEntrySet<WoodType, Block> lattice_fence;
+    public final SimpleEntrySet<WoodType, Block> lattice_fence_gate;
+    public final SimpleEntrySet<WoodType, Block> desk;
+    public final SimpleEntrySet<WoodType, Block> cutting_board;
+    public final SimpleEntrySet<WoodType, Block> drawer;
+
+
 
     public RefurbishedFurnitureModule(String modId) {
         super(modId, "rfm");
@@ -77,7 +91,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("general"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .build();
-
         this.addEntry(chairs);
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
@@ -91,7 +104,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("general"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .build();
-
         this.addEntry(tables);
 
         darkFans = SimpleEntrySet.builder(WoodType.class, "dark_ceiling_fan",
@@ -109,7 +121,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTextureAutoM(modRes("block/oak_dark_ceiling_fan"))
                 .build();
-
         this.addEntry(darkFans);
 
         lightFans = SimpleEntrySet.builder(WoodType.class, "light_ceiling_fan",
@@ -126,7 +137,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTextureAutoM(modRes("block/oak_light_ceiling_fan"))
                 .build();
-
         this.addEntry(lightFans);
 
 
@@ -143,7 +153,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("outdoors"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .build();
-
         this.addEntry(crates);
 
         mailboxes = SimpleEntrySet.builder(WoodType.class, "mailbox",
@@ -154,12 +163,11 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addCustomItem((woodType, block, properties) -> new MailboxItem(block, properties))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.MAIL_BOX::get)
-                .addTexture(modRes("block/oak_mailbox"))
+                .addTextureAutoM(modRes("block/oak_mailbox"))
                 .addTag(modRes("outdoor"), Registries.ITEM)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .build();
-
         this.addEntry(mailboxes);
 
         toilets = SimpleEntrySet.builder(WoodType.class, "toilet",
@@ -174,7 +182,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bathroom"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .build();
-
         this.addEntry(toilets);
 
         jars = SimpleEntrySet.builder(WoodType.class, "storage_jar",
@@ -190,8 +197,198 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("kitchen"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .build();
-
         this.addEntry(jars);
+
+        kitchen_cabinetry = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinetry",
+                    () -> getModBlock("oak_kitchen_cabinetry"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new WoodenKitchenCabinetryBlock(w.toVanillaOrOak(),
+                            addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.0f))
+                )
+                .addRecipe(modRes("constructing/oak_kitchen_cabinetry"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTextureAutoM(modRes("block/oak_kitchen_cabinetry"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(kitchen_cabinetry);
+
+        kitchen_drawer = SimpleEntrySet.builder(WoodType.class, "kitchen_drawer",
+                    () -> getModBlock("oak_kitchen_drawer"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new WoodenKitchenDrawerBlock(w.toVanillaOrOak(),
+                            addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
+                )
+                .addRecipe(modRes("constructing/oak_kitchen_drawer"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTextureAutoM(modRes("block/oak_kitchen_drawer"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(kitchen_drawer);
+
+        kitchen_sink = SimpleEntrySet.builder(WoodType.class, "kitchen_sink",
+                    () -> getModBlock("oak_kitchen_sink"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new WoodenKitchenSinkBlock(w.toVanillaOrOak(),
+                            addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
+                )
+                .addRecipe(modRes("constructing/oak_kitchen_sink"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTextureAutoM(modRes("block/oak_kitchen_sink"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(kitchen_sink);
+
+        kitchen_storage_cabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_storage_cabinet",
+                    () -> getModBlock("oak_kitchen_storage_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new WoodenKitchenStorageCabinetBlock(w.toVanillaOrOak(),
+                            addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
+                )
+                .addRecipe(modRes("constructing/oak_kitchen_storage_cabinet"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTextureAutoM(modRes("block/oak_kitchen_storage_cabinet"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(kitchen_storage_cabinet);
+
+        storage_cabinet = SimpleEntrySet.builder(WoodType.class, "storage_cabinet",
+                    () -> getModBlock("oak_storage_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new WoodenStorageCabinetBlock(w.toVanillaOrOak(),
+                            addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
+                )
+                .addRecipe(modRes("constructing/oak_storage_cabinet"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTextureAutoM(modRes("block/oak_storage_cabinet"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(storage_cabinet);
+
+        basin = SimpleEntrySet.builder(WoodType.class, "basin",
+                    () -> getModBlock("oak_basin"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new WoodenBasinBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
+                            .mapColor(w.planks.defaultMapColor())
+                            .strength(3.5f).sound(SoundType.STONE)
+                    )
+                )
+                .addRecipe(modRes("constructing/oak_basin"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTextureAutoM(modRes("block/oak_basin"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(basin);
+
+        bath = SimpleEntrySet.builder(WoodType.class, "bath",
+                    () -> getModBlock("oak_bath"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new WoodenBathBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
+                            .mapColor(w.planks.defaultMapColor())
+                            .strength(3.5f).sound(SoundType.STONE)
+                    )
+                )
+                .addRecipe(modRes("constructing/oak_bath"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTextureAutoM(modRes("block/oak_bath"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(bath);
+
+        lattice_fence = SimpleEntrySet.builder(WoodType.class, "lattice_fence",
+                    () -> getModBlock("oak_lattice_fence"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new LatticeFenceBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
+                            .strength(2.0f).forceSolidOn())
+                    )
+                )
+                .addRecipe(modRes("constructing/oak_lattice_fence"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTexture(modRes("block/oak_lattice_fence"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(lattice_fence);
+
+        lattice_fence_gate = SimpleEntrySet.builder(WoodType.class, "lattice_fence_gate",
+                    () -> getModBlock("oak_lattice_fence_gate"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new LatticeFenceGateBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
+                            .strength(2.0f)
+                    )
+                )
+                .addRecipe(modRes("constructing/oak_lattice_fence_gate"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTextureAutoM(modRes("block/oak_lattice_fence_gate"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(lattice_fence_gate);
+
+        desk = SimpleEntrySet.builder(WoodType.class, "desk",
+                    () -> getModBlock("oak_desk"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new DeskBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
+                            .strength(2.0f).forceSolidOn()
+                    )
+                )
+                .addRecipe(modRes("constructing/oak_desk"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTexture(modRes("block/oak_desk"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(desk);
+
+        cutting_board = SimpleEntrySet.builder(WoodType.class, "cutting_board",
+                    () -> getModBlock("oak_cutting_board"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new CuttingBoardBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
+                            .strength(1.5f)
+                    )
+                )
+                .addRecipe(modRes("constructing/oak_cutting_board"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTexture(modRes("block/oak_cutting_board"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(cutting_board);
+
+        drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
+                    () -> getModBlock("oak_drawer"), () -> WoodTypeRegistry.OAK_TYPE,
+                    w -> new DrawerBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
+                            .strength(2.5f).forceSolidOn()
+                    )
+                )
+                .addRecipe(modRes("constructing/oak_drawer"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.STORAGE_JAR::get)
+                .addTexture(modRes("block/oak_drawer"))
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+//                .addTag(modRes("storage"), Registries.ITEM)
+//                .addTag(modRes("kitchen"), Registries.ITEM)
+                .build();
+        this.addEntry(drawer);
+
+
     }
 
     @Override
