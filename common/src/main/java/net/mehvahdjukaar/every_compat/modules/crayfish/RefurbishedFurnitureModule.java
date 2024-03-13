@@ -479,7 +479,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 newMaterials.add(new StackedIngredient(converted, ing.count()));
             }
 
-
             Advancement.Builder advancement = Advancement.Builder.advancement();
 
             advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
