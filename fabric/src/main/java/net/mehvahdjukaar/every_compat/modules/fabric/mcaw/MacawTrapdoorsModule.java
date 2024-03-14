@@ -37,7 +37,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> WAFFLE_TRAPDOORS;
     public final SimpleEntrySet<WoodType, Block> BARREL_TRAPDOORS;
 
-    //SUPPORT: v1.1.2
+    //SUPPORT: v1.1.2+
     public MacawTrapdoorsModule(String modId) {
         super(modId, "mct");
 
@@ -49,13 +49,13 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("bark_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(BARK_TRAPDOORS);
 
         BARN_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barn_trapdoor",
@@ -64,6 +64,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("barn_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -71,7 +72,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/barn/oak_barn_trapdoor"))
                 .build();
-
         this.addEntry(BARN_TRAPDOORS);
 
         BARRED_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barred_trapdoor",
@@ -80,6 +80,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("barred_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -87,7 +88,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/barred/oak_barred_trapdoor"))
                 .build();
-
         this.addEntry(BARRED_TRAPDOORS);
 
         BEACH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "beach_trapdoor",
@@ -96,6 +96,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("beach_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -103,7 +104,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/beach/oak_beach_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_beach_trapdoor_m"))
                 .build();
-
         this.addEntry(BEACH_TRAPDOORS);
 
         CLASSIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "classic_trapdoor",
@@ -112,6 +112,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("classic_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -119,7 +120,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/classic/spruce_classic_trapdoor"))
                 .build();
-
         this.addEntry(CLASSIC_TRAPDOORS);
 
         COTTAGE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "cottage_trapdoor",
@@ -128,6 +128,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("cottage_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -135,7 +136,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/cottage/oak_cottage_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_cottage_trapdoor_m"))
                 .build();
-
         this.addEntry(COTTAGE_TRAPDOORS);
 
         FOUR_PANEL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "four_panel_trapdoor",
@@ -144,6 +144,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("four_panel_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -151,7 +152,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/four_panel/oak_four_panel_trapdoor"))
                 .build();
-
         this.addEntry(FOUR_PANEL_TRAPDOORS);
 
         GLASS_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "glass_trapdoor",
@@ -160,6 +160,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("glass_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -168,7 +169,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .addTextureM(modRes("block/glass/oak_glass_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_glass_trapdoor_m"))
                 .build();
-
         this.addEntry(GLASS_TRAPDOORS);
 
         MESH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bamboo_trapdoor",
@@ -177,6 +177,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("bamboo_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -185,7 +186,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(MESH_TRAPDOORS);
 
         MYSTIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "mystic_trapdoor",
@@ -194,6 +194,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("mystic_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -201,7 +202,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/mystic/oak_mystic_trapdoor"))
                 .build();
-
         this.addEntry(MYSTIC_TRAPDOORS);
 
         PAPER_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "paper_trapdoor",
@@ -210,6 +210,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("paper_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -218,7 +219,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .addTextureM(modRes("block/paper/oak_paper_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_paper_trapdoor_m"))
                 .build();
-
         this.addEntry(PAPER_TRAPDOORS);
 
         RANCH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "ranch_trapdoor",
@@ -227,13 +227,13 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("ranch_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(RANCH_TRAPDOORS);
 
         SWAMP_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "swamp_trapdoor",
@@ -242,6 +242,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("swamp_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -250,7 +251,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .createPaletteFromOak(this::swampTrapdoorPalette)
                 .addTexture(modRes("block/swamp/oak_swamp_trapdoor"))
                 .build();
-
         this.addEntry(SWAMP_TRAPDOORS);
 
         TROPICAL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "tropical_trapdoor",
@@ -259,6 +259,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("tropical_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -266,7 +267,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/tropical/oak_tropical_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_tropical_trapdoor_m"))
                 .build();
-
         this.addEntry(TROPICAL_TRAPDOORS);
 
         WAFFLE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "blossom_trapdoor",
@@ -275,6 +275,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTexture(modRes("block/blossom/oak_blossom_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("blossom_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
@@ -282,7 +283,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(WAFFLE_TRAPDOORS);
 
         BARREL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barrel_trapdoor",
@@ -291,6 +291,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
+                .addTag(modRes("barrel_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setTabKey(() -> tab)
@@ -298,7 +299,6 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/barrel/spruce_barrel_trapdoor"))
                 .build();
-
         this.addEntry(BARREL_TRAPDOORS);
 
     }
