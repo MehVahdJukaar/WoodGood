@@ -32,10 +32,17 @@ public class SpriteStuff {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
         addOptional("regions_unexplored:eucalyptus_log", "eucalyptus_side", "regions_unexplored:block/eucalyptus_log");
+
         addOptional("endlessbiomes:stripped_twisted_stem", "_top", "endlessbiomes:block/twistedstrippedlogtoptest");
         addOptional("endlessbiomes:twisted_stem", "_top", "endlessbiomes:block/twistedlogtoptest");
         addOptional("endlessbiomes:stripped_twisted_stem", "_side", "endlessbiomes:block/twistedstrippedlogsidetest");
         addOptional("endlessbiomes:twisted_stem", "_side", "endlessbiomes:block/twistedlogsidetest");
+
+        addOptional("endlessbiomes:stripped_penumbra_stem", "_top", "endlessbiomes:block/penumbrastrippedlogtoptest");
+        addOptional("endlessbiomes:penumbra_stem", "_top", "endlessbiomes:block/penumbralogtoptest");
+        addOptional("endlessbiomes:stripped_penumbra_stem", "_side", "endlessbiomes:block/penumbrastrippedlogsidetest");
+        addOptional("endlessbiomes:penumbra_stem", "_side", "endlessbiomes:block/penumbralogsidetest");
+
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
