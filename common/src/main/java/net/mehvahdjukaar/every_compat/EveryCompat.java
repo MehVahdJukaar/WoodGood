@@ -199,9 +199,6 @@ public abstract class EveryCompat {
 
         forAllModules(CompatModule::onModSetup);
 
-        if(PlatHelper.getPhysicalSide().isClient()){
-            SpriteStuff.addHardcodedSprites();
-        }
     }
 
     private int prevRegSize;
