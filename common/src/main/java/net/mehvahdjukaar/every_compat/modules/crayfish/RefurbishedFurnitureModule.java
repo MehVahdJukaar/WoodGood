@@ -27,6 +27,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -185,7 +186,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(toilets);
 
         jars = SimpleEntrySet.builder(WoodType.class, "storage_jar",
-                        () -> getModBlock("storage_jar"), () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> getModBlock("oak_storage_jar"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StorageJarBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
                                 .mapColor(w.planks.defaultMapColor())
                                 .instrument(NoteBlockInstrument.HAT).strength(1.0F).sound(SoundType.GLASS)))
@@ -197,6 +198,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
         this.addEntry(jars);
 
