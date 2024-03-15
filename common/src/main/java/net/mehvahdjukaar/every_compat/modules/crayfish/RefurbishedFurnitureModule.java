@@ -24,8 +24,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelManager;
@@ -46,7 +45,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 //SUPPORT: v?.?.?
@@ -118,7 +119,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("electronics"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_dark_ceiling_fan"),
-                            EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
+                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .build();
         this.addEntry(darkFans);
 
@@ -135,7 +136,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("electronics"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_light_ceiling_fan"),
-                            EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
+                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .build();
         this.addEntry(lightFans);
 
@@ -163,7 +164,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.MAIL_BOX::get)
                 .addTextureM(modRes("block/oak_mailbox"),
-                            EveryCompat.res("block/rfm/oak_mail_box_m"))
+                        EveryCompat.res("block/rfm/oak_mail_box_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
                 .addTag(modRes("storage"), Registries.ITEM)
@@ -178,7 +179,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.TOILET::get)
                 .addTextureM(modRes("block/oak_toilet"),
-                            EveryCompat.res("block/rfm/oak_toilet_m"))
+                        EveryCompat.res("block/rfm/oak_toilet_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("wooden_toilets"), Registries.ITEM)
                 .addTag(modRes("bathroom"), Registries.ITEM)
@@ -194,7 +195,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
                 .addTextureM(modRes("block/oak_storage_jar"),
-                            EveryCompat.res("block/rfm/oak_storage_jar_m"))
+                        EveryCompat.res("block/rfm/oak_storage_jar_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
@@ -211,7 +212,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
 //                .addTile(ModBlockEntities.STORAGE_CABINET::get)
                 .addTextureM(modRes("block/oak_kitchen_cabinetry"),
-                            EveryCompat.res("block/rfm/oak_kitchen_cabinetry_m"))
+                        EveryCompat.res("block/rfm/oak_kitchen_cabinetry_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_kitchen_cabinetry"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
@@ -227,7 +228,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.KITCHEN_DRAWER::get)
                 .addTextureM(modRes("block/oak_kitchen_drawer"),
-                            EveryCompat.res("block/rfm/oak_kitchen_drawer_m"))
+                        EveryCompat.res("block/rfm/oak_kitchen_drawer_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
@@ -244,7 +245,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.KITCHEN_SINK::get)
                 .addTextureM(modRes("block/oak_kitchen_sink"),
-                            EveryCompat.res("block/rfm/oak_kitchen_sink_m"))
+                        EveryCompat.res("block/rfm/oak_kitchen_sink_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_kitchen_sinks"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
@@ -261,7 +262,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.STORAGE_CABINET::get)
                 .addTextureM(modRes("block/oak_kitchen_storage_cabinet"),
-                            EveryCompat.res("block/rfm/oak_kitchen_storage_cabinet_m"))
+                        EveryCompat.res("block/rfm/oak_kitchen_storage_cabinet_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_kitchen_storage_cabinets"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
@@ -278,7 +279,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.STORAGE_CABINET::get)
                 .addTextureM(modRes("block/oak_storage_cabinet"),
-                            EveryCompat.res("block/rfm/oak_storage_cabinet_m"))
+                        EveryCompat.res("block/rfm/oak_storage_cabinet_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("general"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
@@ -298,7 +299,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.BASIN::get)
                 .addTextureM(modRes("block/oak_basin"),
-                            EveryCompat.res("block/rfm/oak_basin_m"))
+                        EveryCompat.res("block/rfm/oak_basin_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("wooden_basins"), Registries.ITEM)
                 .addTag(modRes("bathroom"), Registries.ITEM)
@@ -316,7 +317,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.BATH::get)
                 .addTextureM(modRes("block/oak_bath"),
-                            EveryCompat.res("block/rfm/oak_bath_m"))
+                        EveryCompat.res("block/rfm/oak_bath_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("bathroom"), Registries.ITEM)
                 .addTag(modRes("wooden_baths"), Registries.ITEM)
@@ -351,7 +352,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
                 .addTextureM(modRes("block/oak_lattice_fence_gate"),
-                            EveryCompat.res("block/rfm/oak_lattice_fence_gate_m"))
+                        EveryCompat.res("block/rfm/oak_lattice_fence_gate_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
@@ -502,25 +503,24 @@ public class RefurbishedFurnitureModule extends SimpleModule {
             }
 
             Advancement.Builder advancement = Advancement.Builder.advancement();
-            var res = new ResourceLocation(id);
-            String[][] requires = new String[][] {
-                {
-                    "has_planks",
-                    "has_quartz_block",
-                    "has_copper_ingot",
-                    "has_iron_ingot",
-                    "has_the_recipe"
 
-                }
-            };
+            List<String> requirements = new ArrayList<>();
+            for (var m : newMaterials) {
+                String name = "has_" + m.ingredient().getItems()[0].getItem();
+                requirements.add(name);
+                var items = Arrays.stream(m.ingredient().getItems()).map(ItemStack::getItem).collect(Collectors.toSet());
+                advancement.addCriterion(name, new InventoryChangeTrigger.TriggerInstance(
+                        ContextAwarePredicate.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                        new ItemPredicate[]{new ItemPredicate(null, items,
+                                MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                                EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, null, NbtPredicate.ANY)}
+                ));
+            }
+
+            var res = new ResourceLocation(id);
 
             advancement.rewards(AdvancementRewards.Builder.recipe(EveryCompat.res("recipes/" + res.getPath())));
-            advancement.requirements(requires);
-            advancement.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(EveryCompat.res("recipes/" + res.getPath())));
-            advancement.addCriterion("has_quartz_block", InventoryChangeTrigger.TriggerInstance.hasItems(BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft:quartz_block"))));
-            advancement.addCriterion("has_iron_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft:iron_ingot"))));
-            advancement.addCriterion("has_copper_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft:copper_ingot"))));
-            advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
+            advancement.requirements(new String[][]{requirements.toArray(new String[0])});
 
             return new WorkbenchContructingRecipe.Result(res, newResult.getItem(), newResult.getCount(), newMaterials, advancement,
                     modRes("recipes/misc/constructing/" + res.getPath()), notification);

@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.forge;
 
 import com.mrcrayfish.furniture.refurbished.core.ModBlocks;
+import com.mrcrayfish.furniture.refurbished.crafting.WorkbenchContructingRecipe;
 import net.mehvahdjukaar.moonlight.core.mixins.forge.FireBlockMixin;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ToolActions;

@@ -99,8 +99,6 @@ repositories{
 
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
-    // Remove the next line if you don't want to depend on the API
-    // modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
@@ -129,7 +127,6 @@ dependencies {
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
-//    modCompileOnly("curse.maven:valhelsia-structures-347488:4429711")
 
         // LOCAL
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}")
