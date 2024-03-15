@@ -23,7 +23,9 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.core.NonNullList;
@@ -46,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+//SUPPORT: v?.?.?
 public class RefurbishedFurnitureModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chairs;
@@ -75,8 +78,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 
         TemplateRecipeManager.registerTemplate(modRes("workbench_constructing"), ConstructingTemplate::new);
 
-
-        // somebody else pls finish this <3
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         () -> getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of().strength(2.0F))))
@@ -499,11 +500,28 @@ public class RefurbishedFurnitureModule extends SimpleModule {
             }
 
             Advancement.Builder advancement = Advancement.Builder.advancement();
-
-            advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
             var res = new ResourceLocation(id);
+            String[][] requires = new String[][] {
+                {
+                    "has_planks",
+                    "has_quartz_block",
+                    "has_copper_ingot",
+                    "has_iron_ingot",
+                    "has_the_recipe"
+
+                }
+            };
+
+            advancement.rewards(AdvancementRewards.Builder.recipe(EveryCompat.res("recipes/" + res.getPath())));
+            advancement.requirements(requires);
+            advancement.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(EveryCompat.res("recipes/" + res.getPath())));
+            advancement.addCriterion("has_quartz_block", InventoryChangeTrigger.TriggerInstance.hasItems(BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft:quartz_block"))));
+            advancement.addCriterion("has_iron_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft:iron_ingot"))));
+            advancement.addCriterion("has_copper_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft:copper_ingot"))));
+            advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
+
             return new WorkbenchContructingRecipe.Result(res, newResult.getItem(), newResult.getCount(), newMaterials, advancement,
-                    modRes("recipes/" + "furnish" + "/" + res.getPath()), notification);
+                    modRes("recipes/misc/constructing/" + res.getPath()), notification);
         }
 
         @Override
