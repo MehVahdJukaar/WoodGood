@@ -110,11 +110,11 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
-    modImplementation("curse.maven:selene-499980:5106395")
+    modImplementation("curse.maven:selene-499980:5180872") // v2.11.4
 
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modImplementation("curse.maven:architectury-api-419699:4663010") // REI
+    modCompileOnly("curse.maven:architectury-api-419699:4663010") // REI
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
     modImplementation("curse.maven:zeta-968868:5078215") // Quark
@@ -122,8 +122,8 @@ dependencies {
     modCompileOnly("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:3972423") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
-    modImplementation("curse.maven:framework-549225:5098255")
-    modImplementation("com.mrcrayfish.furniture.refurbished:cfm")
+    modCompileOnly("curse.maven:framework-549225:5098255") // refurbished-furniture
+    modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
@@ -133,12 +133,13 @@ dependencies {
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
     modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
 
-    // ================================================ IMPORTS ===================================================== \\
+        // TOOLS
     modCompileOnly("curse.maven:roughly-enough-items-310111:4573157")
     modCompileOnly("curse.maven:worldedit-225608:4586218")
     modImplementation("curse.maven:jade-324717:4711195")
     modImplementation("curse.maven:jei-238222:4712868")
 
+    // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
@@ -202,6 +203,7 @@ dependencies {
 
     // =========================================== FOR TESTING ===================================================== \\
     modImplementation("curse.maven:regions-unexplored-659110:4779426")
+    modImplementation("curse.maven:endless-biomes-667688:5109705")
 //    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
 //    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
 

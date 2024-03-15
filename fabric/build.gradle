@@ -36,7 +36,7 @@ dependencies {
     modCompileOnly ("com.terraformersmc:modmenu:4.0.6")
 
     //modImplementation ("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric")
-    modImplementation("curse.maven:moonlightlib-499980:5106393")
+    modImplementation("curse.maven:moonlightlib-499980:5180870") // v2.11.4
 
     // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
