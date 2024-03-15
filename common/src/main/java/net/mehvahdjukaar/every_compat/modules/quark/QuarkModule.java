@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
+import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,6 +9,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -23,8 +25,10 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.FallbackResourceManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -43,6 +47,9 @@ import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
 import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -96,22 +103,6 @@ public class QuarkModule extends SimpleModule {
                                     new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/",
                                             fence.getSoundType(fence.defaultBlockState()));
                         })
-                .addModelTransform(m -> m.addModifier((s, id, w) -> {
-                            String currentNamespace = w.getNamespace();
-                            String currentTypeName = w.getTypeName();
-                            switch (currentNamespace) {
-                                case "gardens_of_the_dead" -> {
-                                    if (currentTypeName.equals("whistlecane"))
-                                        return correctingJSON("block", s, w, true, "");
-                                }
-                                case "regions_unexplored" -> {
-                                    if (currentTypeName.equals("eucalyptus"))
-                                        return correctingJSON("log", s, w, true, "");
-                                }
-                            }
-                            return s; // default
-                        })
-                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.ITEM)
@@ -188,40 +179,6 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new HollowLogBlock(name, w.log, null, w.canBurn());
                         })
-                .addModelTransform(m -> m.addModifier((s, id, w) -> {
-                    String currentNamespace = w.getNamespace();
-                    String currentTypeName = w.getTypeName();
-
-                    switch (currentNamespace) {
-                        case "gardens_of_the_dead" -> {
-                            if (currentTypeName.equals("whistlecane")) {
-                                return correctingJSON("block", s, w, true, "");
-                            }
-                        }
-                        case "regions_unexplored" -> {
-                            if (currentTypeName.equals("eucalyptus")) {
-                                return correctingJSON("log", s, w, true, "", "top");
-                            }
-                        }
-                        case "cataclysm" -> {
-                            return correctingJSON("stem", s, w, true, "", "");
-                        }
-                        case "endlessbiomes" -> {
-                            switch (currentTypeName) {
-                                case "twisted" -> {
-                                    return correctingJSON("log", s, w, false,
-                                            "sidetest", "toptest");
-                                }
-                                case "penumbra" -> {
-                                    return correctingJSON("llog", s, w, false,
-                                            "sidenewest", "topnewest");
-                                }
-                            }
-                        }
-                    }
-                    return s; // default
-                    })
-                )
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hollow_logs"), Registries.BLOCK)
@@ -496,32 +453,5 @@ public class QuarkModule extends SimpleModule {
         handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
     }
 
-    // fix blocks with missing textures
-    public String correctingJSON(String blockType, String s, WoodType w,
-                                 boolean hasUnderscore, String side, String top) {
-        String pathID = w.getNamespace() + ":block/" + w.getTypeName();
 
-        pathID += (hasUnderscore) ? "_" + blockType : blockType;
-        side = (hasUnderscore && !side.isEmpty()) ? "_" + side : side;
-        top = (hasUnderscore && !top.isEmpty()) ? "_" + top : top;
-
-        if (w.getNamespace().equals("cataclysm")) EveryCompat.LOGGER.info("<MODEL> " + w.getNamespace() + " Correcting JSON");
-
-        if (s.contains("\"end\": \"minecraft:block/oak_log_top\"")) {
-            if (w.getNamespace().equals("cataclysm")) EveryCompat.LOGGER.info("<MODEL> " + w.getNamespace() + " CORRECTED");
-            return s.replace("\"end\": \"minecraft:block/oak_log_top\"",
-                            "\"end\": \"" + pathID + top + "\"")
-                    .replace("\"side\": \"minecraft:block/oak_log\"",
-                            "\"side\": \"" + pathID + side +"\"")
-                    .replace("\"inside\": \"minecraft:block/stripped_oak_log\"",
-                            "\"inside\": \"" + pathID + side +"\"");
-        }
-        else {
-            return s.replace("\"texture\": \"minecraft:block/oak_log\"",
-                    "\"texture\": \"" + pathID + side + "\"");
-        }
-    }
-    public String correctingJSON(String blockType, String s, WoodType w, boolean hasUnderscore, String side) {
-        return correctingJSON(blockType, s, w, hasUnderscore,  side, "top");
-    }
 }
