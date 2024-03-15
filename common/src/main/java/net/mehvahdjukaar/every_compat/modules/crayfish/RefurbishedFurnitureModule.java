@@ -24,6 +24,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
@@ -517,10 +518,14 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 ));
             }
 
+            requirements.add("has_the_recipe");
+
             var res = new ResourceLocation(id);
 
-            advancement.rewards(AdvancementRewards.Builder.recipe(EveryCompat.res("recipes/" + res.getPath())));
             advancement.requirements(new String[][]{requirements.toArray(new String[0])});
+            advancement.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(res));
+
+            advancement.rewards(AdvancementRewards.Builder.recipe(EveryCompat.res("recipes/" + res.getPath())));
 
             return new WorkbenchContructingRecipe.Result(res, newResult.getItem(), newResult.getCount(), newMaterials, advancement,
                     modRes("recipes/misc/constructing/" + res.getPath()), notification);
