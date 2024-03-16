@@ -9,7 +9,8 @@ loom {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
 
-    //    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"("net.mehvahdjukaar:moonlight:${moonlight_version}")
+    //    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    //modImplementation("net.mehvahdjukaar:moonlight:${moonlight_version}")
     modImplementation("curse.maven:selene-499980:5180870") // v2.11.4
 
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'

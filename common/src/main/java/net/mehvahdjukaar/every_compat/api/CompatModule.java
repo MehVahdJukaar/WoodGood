@@ -23,6 +23,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -210,8 +211,7 @@ public abstract class CompatModule {
                                String path, Supplier<TextureImage> textureSupplier) {
         handler.addTextureIfNotPresent(manager, path, () -> {
             var t = textureSupplier.get();
-//            maybeFlowerAzalea(t, manager, wood);
-            eucalyptus(t, manager, wood);
+            maybeFlowerAzalea(t, manager, wood);
             return t;
         });
     }
@@ -240,7 +240,7 @@ public abstract class CompatModule {
     }
 
     // Regions Unexplored
-    protected void eucalyptus(TextureImage image, ResourceManager manager, WoodType woodType) {
+    protected void maybeOverlayEucalyptus(TextureImage image, ResourceManager manager, WoodType woodType) {
         if (woodType.getId().toString().equals("regions_unexplored:eucalyptus")) {
             WoodType eucalyptus = WoodTypeRegistry.getValue(new ResourceLocation("regions_unexplored:eucalyptus"));
             if (eucalyptus != null) {
@@ -254,7 +254,6 @@ public abstract class CompatModule {
 
                     image.applyOverlayOnExisting(temp, mask);
                     temp.close();
-
                 } catch (Exception e) {
                     EveryCompat.LOGGER.warn("failed to apply Eucalyptus overlay for wood type {} and image {}", woodType, image);
                 }
