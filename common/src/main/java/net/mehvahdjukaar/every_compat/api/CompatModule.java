@@ -210,7 +210,8 @@ public abstract class CompatModule {
                                String path, Supplier<TextureImage> textureSupplier) {
         handler.addTextureIfNotPresent(manager, path, () -> {
             var t = textureSupplier.get();
-            maybeFlowerAzalea(t, manager, wood);
+//            maybeFlowerAzalea(t, manager, wood);
+            eucalyptus(t, manager, wood);
             return t;
         });
     }
@@ -233,6 +234,29 @@ public abstract class CompatModule {
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.warn("failed to apply azalea overlay for wood type {} and image {}", woodType, image);
+                }
+            }
+        }
+    }
+
+    // Regions Unexplored
+    protected void eucalyptus(TextureImage image, ResourceManager manager, WoodType woodType) {
+        if (woodType.getId().toString().equals("regions_unexplored:eucalyptus")) {
+            WoodType eucalyptus = WoodTypeRegistry.getValue(new ResourceLocation("regions_unexplored:eucalyptus"));
+            if (eucalyptus != null) {
+                try (TextureImage mask = TextureImage.open(manager,
+                        EveryCompat.res("block/eucalyptus_log_overlay"));
+                     TextureImage logTexture = TextureImage.open(manager,
+                             RPUtils.findFirstBlockTextureLocation(manager, eucalyptus.log))) {
+
+                    Respriter respriter = Respriter.of(image);
+                    var temp = respriter.recolorWithAnimationOf(logTexture);
+
+                    image.applyOverlayOnExisting(temp, mask);
+                    temp.close();
+
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.warn("failed to apply Eucalyptus overlay for wood type {} and image {}", woodType, image);
                 }
             }
         }
