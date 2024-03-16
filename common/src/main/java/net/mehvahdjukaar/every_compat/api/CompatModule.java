@@ -245,7 +245,7 @@ public abstract class CompatModule {
             WoodType eucalyptus = WoodTypeRegistry.getValue(new ResourceLocation("regions_unexplored:eucalyptus"));
             if (eucalyptus != null) {
                 try (TextureImage mask = TextureImage.open(manager,
-                        EveryCompat.res("block/eucalyptus_log_overlay"));
+                        new ResourceLocation("regions_unexplored", "block/eucalyptus_log_overlay"));
                      TextureImage logTexture = TextureImage.open(manager,
                              RPUtils.findFirstBlockTextureLocation(manager, eucalyptus.log))) {
 
