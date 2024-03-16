@@ -30,7 +30,7 @@ public class CreateModule extends SimpleModule {
                         () -> getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         this::makeWindow)
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                //.setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
@@ -44,7 +44,7 @@ public class CreateModule extends SimpleModule {
                         () -> getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
                 //.addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                //.setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
