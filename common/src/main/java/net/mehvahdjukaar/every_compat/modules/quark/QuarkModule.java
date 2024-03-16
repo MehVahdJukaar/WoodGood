@@ -121,6 +121,7 @@ public class QuarkModule extends SimpleModule {
                             if (w.getNamespace().equals("malum") || w.getNamespace().equals("twigs")) return null;
                             Block fence = w.getBlockOfThis("fence");
                             Block stripped = w.getBlockOfThis("stripped_log");
+                            // required stripped_log texture & fence as an ingredients
                             return (fence == null || stripped == null) ? null :
                                     new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_",
                                             fence.getSoundType(fence.defaultBlockState()));
@@ -176,6 +177,7 @@ public class QuarkModule extends SimpleModule {
                         () -> getModBlock("hollow_oak_log"),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
+                            if (w.getBlockOfThis("stripped_log") == null) return null; // required stripped_log texture
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new HollowLogBlock(name, w.log, null, w.canBurn());
                         })
