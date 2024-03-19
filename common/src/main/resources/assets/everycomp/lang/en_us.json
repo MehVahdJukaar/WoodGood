@@ -204,6 +204,7 @@
   "block_type.furnish.stool": "%s Stool",
   "block_type.furnish.table": "%s Table",
   "block_type.furnish.wardrobe": "%s Wardrobe",
+  "block_type.furnish.bookshelf_chest": "%s Bookshelf Chest",
 
   "block_type.hearth_and_home.parquet": "%s Parquet",
   "block_type.hearth_and_home.sanded_wood": "Sanded %s Wood",
