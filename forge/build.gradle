@@ -114,7 +114,7 @@ dependencies {
 
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modCompileOnly("curse.maven:architectury-api-419699:4663010") // REI, Furnish
+    modImplementation("curse.maven:architectury-api-419699:4663010") // REI, Furnish
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
