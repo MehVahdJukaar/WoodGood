@@ -114,10 +114,10 @@ dependencies {
 
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modImplementation("curse.maven:architectury-api-419699:4663010") // REI, Furnish
+    modCompileOnly("curse.maven:architectury-api-419699:4663010") // REI, Furnish
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
-    modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
+    modImplementation("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modImplementation("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
@@ -152,7 +152,7 @@ dependencies {
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
-    modImplementation("curse.maven:furnish-547069:4821511")
+    modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
     modCompileOnly("curse.maven:lauchs-shutters-714019:5094131")
@@ -173,7 +173,7 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:5029855")
-    modCompileOnly("curse.maven:quark-243121:5093415")
+    modImplementation("curse.maven:quark-243121:5093415")
 
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
