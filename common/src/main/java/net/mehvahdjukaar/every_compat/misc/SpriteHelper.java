@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 
 // Used to identify textures "types" only based off their name.
 // feed into "findFirstBlockTextureLocation()"
-public class SpriteStuff {
+public class SpriteHelper {
 
     public static final @NotNull Predicate<String> LOOKS_LIKE_TOP_LOG_TEXTURE = (s) -> {
         s = (new ResourceLocation(s)).getPath();
@@ -48,6 +48,8 @@ public class SpriteStuff {
         // Gardens Of The Dead
         addOptional("gardens_of_the_dead:whistlecane", "_side", "gardens_of_the_dead:block/whistlecane_block");
         addOptional("gardens_of_the_dead:whistlecane", "_top", "gardens_of_the_dead:block/whistlecane_block_top");
+
+        addOptional("regions_unexplored:palm_leaves", "_leaves", "minecraft:block/stone");
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {

@@ -8,16 +8,14 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpriteStuff;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -435,7 +433,7 @@ public class MacawDoorsModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteStuff.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
 
                     var t = mask.makeCopy();
                     t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());

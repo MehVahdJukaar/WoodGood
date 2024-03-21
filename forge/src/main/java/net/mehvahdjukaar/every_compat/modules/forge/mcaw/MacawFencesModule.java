@@ -105,11 +105,7 @@ public class MacawFencesModule extends SimpleModule {
 
         HEDGES = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
-                        w -> {
-                            var l = w.getBlockOfThis("leaves");
-                            if (l == null) return null;
-                            return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
-                        })
+                        w -> new WallBlock(Utils.copyPropertySafe(w.leaves).lightLevel((s) -> 0)))
                 .addModelTransform(m -> m.addModifier((s, id, w) -> {
                         // The path of Chipped's leaves are different
                         if (w.getNamespace().equals("chipped")) return getLeavesPath(s, w);

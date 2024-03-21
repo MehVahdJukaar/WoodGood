@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.wouink.furnish.Furnish;
 import io.github.wouink.furnish.block.*;
-import io.github.wouink.furnish.block.tileentity.BookshelfChestBlockEntity;
 import io.github.wouink.furnish.block.util.VoxelShapeHelper;
 import io.github.wouink.furnish.setup.FurnishBlocks;
 import io.github.wouink.furnish.setup.FurnishRegistries;
@@ -14,9 +13,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
-import net.mehvahdjukaar.every_compat.misc.SpriteStuff;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -30,8 +27,6 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -44,11 +39,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -332,7 +323,7 @@ public class FurnishModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteStuff.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/oak_log_bench_top", w, id, "oak");
 
@@ -355,7 +346,7 @@ public class FurnishModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteStuff.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/jungle_coffin_sides", w, id, "jungle");
 

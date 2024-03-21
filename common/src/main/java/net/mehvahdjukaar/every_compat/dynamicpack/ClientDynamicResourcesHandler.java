@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
-import net.mehvahdjukaar.every_compat.misc.SpriteStuff;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
@@ -43,7 +43,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
         if(!init){
-            SpriteStuff.addHardcodedSprites();
+            SpriteHelper.addHardcodedSprites();
             init = true;
         }
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ModConfigs.DEBUG_RESOURCES.get());

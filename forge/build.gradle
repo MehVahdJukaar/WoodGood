@@ -119,11 +119,11 @@ dependencies {
     modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modCompileOnly("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
-    modCompileOnly("curse.maven:cloth-config-348521:3972423") // REI
+    modImplementation("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
+    modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
-    modCompileOnly("curse.maven:framework-549225:5098255") // refurbished-furniture
-    modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
+    modImplementation("curse.maven:framework-549225:5098255") // refurbished-furniture
+    modImplementation("com.mrcrayfish.furniture.refurbished:cfm")
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
@@ -203,9 +203,9 @@ dependencies {
 
     // =========================================== FOR TESTING ===================================================== \\
     modImplementation("curse.maven:regions-unexplored-659110:4779426")
-//    modImplementation("curse.maven:endless-biomes-667688:5109705")
+    modImplementation("curse.maven:endless-biomes-667688:5109705")
 //    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
-//    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
+    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659")
 
