@@ -123,7 +123,7 @@ dependencies {
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modImplementation("curse.maven:framework-549225:5098255") // refurbished-furniture
-    modImplementation("com.mrcrayfish.furniture.refurbished:cfm")
+    modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
@@ -169,7 +169,7 @@ dependencies {
 
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
-    modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
+    modImplementation("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:5029855")

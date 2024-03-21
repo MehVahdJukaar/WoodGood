@@ -37,7 +37,7 @@ public class SpriteHelper {
         // Regions Unexplored
         addOptional("regions_unexplored:eucalyptus_log", "_side", "everycomp:regions_unexplored/eucalyptus_log");
             // Leaves
-        addOptional("regions_unexplored:palm_leaves", "_leaves", "minecraft:block/stone");
+        addOptional("regions_unexplored:palm_leaves", "_leaves", "regions_unexplored:block/palm_leaves_side");
 
         // Endless Biomes
         addOptional("endlessbiomes:twisted_stem", "_side", "endlessbiomes:block/twistedlogsidetest");
@@ -53,8 +53,6 @@ public class SpriteHelper {
         // Gardens Of The Dead
         addOptional("gardens_of_the_dead:whistlecane", "_side", "gardens_of_the_dead:block/whistlecane_block");
         addOptional("gardens_of_the_dead:whistlecane", "_top", "gardens_of_the_dead:block/whistlecane_block_top");
-
-        addOptional("regions_unexplored:palm_leaves", "_leaves", "minecraft:block/stone");
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
