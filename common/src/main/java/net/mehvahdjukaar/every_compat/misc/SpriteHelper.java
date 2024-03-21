@@ -34,6 +34,11 @@ public class SpriteHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
 
+        // Regions Unexplored
+        addOptional("regions_unexplored:eucalyptus_log", "_side", "everycomp:regions_unexplored/eucalyptus_log");
+            // Leaves
+        addOptional("regions_unexplored:palm_leaves", "_leaves", "minecraft:block/stone");
+
         // Endless Biomes
         addOptional("endlessbiomes:twisted_stem", "_side", "endlessbiomes:block/twistedlogsidetest");
         addOptional("endlessbiomes:twisted_stem", "_top", "endlessbiomes:block/twistedlogtoptest");
