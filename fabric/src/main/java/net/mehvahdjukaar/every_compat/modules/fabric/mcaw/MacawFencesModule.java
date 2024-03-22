@@ -100,14 +100,6 @@ public class MacawFencesModule extends SimpleModule {
                             if (l == null) return null;
                             return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
-                .addModelTransform(m -> m.addModifier((s, id, w) -> {
-                            // The path of leaves from Chipped is different
-                            if (w.getNamespace().equals("chipped")) return getLeavesPath(s, w);
-                            return s.replace("mcwfences:block/oak_leaves",
-                                    w.getNamespace() + ":block/" + w.getTypeName() + "_leaves");
-                        }
-                    )
-                )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
@@ -115,16 +107,6 @@ public class MacawFencesModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
         this.addEntry(HEDGES);
-    }
-
-    public String getLeavesPath(String s, LeavesType w) {
-        String path = w.getNamespace() + ":block/"; // {Namespace}:block/
-        String[] nameSplit = w.getTypeName().split("_");
-        if (w.getTypeName().contains("dark")) path += "dark_";
-        // {Namespace}:block/<type>_leaves/{fullnameType}_leaves.png
-        path += nameSplit[nameSplit.length - 1] + "_leaves/" + w.getTypeName() + "_leaves";
-
-        return s.replace("mcwfences:block/oak_leaves", path);
     }
 
     public static class WiredFence extends FenceBlock {
