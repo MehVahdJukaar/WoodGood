@@ -38,10 +38,10 @@ public class SpriteHelper {
 
         // Blue Skies
             // Leaves
-        addOptional("", "_leaves", "");
+        // SAME AS CHIPPED
 
         // Regions Unexplored
-        addOptional("regions_unexplored:eucalyptus_log", "_side", "everycomp:regions_unexplored/eucalyptus_log");
+        addOptional("regions_unexplored:eucalyptus_log", "_side", EveryCompat.MOD_ID+":block/regions_unexplored/eucalyptus_log");
             // Leaves
         addOptional("regions_unexplored:alpha_leaves", "_leaves", "regions_unexplored:block/alpha_oak_leaves");
         addOptional("regions_unexplored:apple_oak_leaves", "_leaves", "regions_unexplored:block/apple_oak_leaves_stage_0");
@@ -74,6 +74,11 @@ public class SpriteHelper {
                 .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
     }
 
-    private void addLeaves() {}
-    String[] woodType = new String[] {"acacia_", "birch", "dark_oak_", "oak_", "spruce_"};
+    // WORK-IN-PROGRESS
+    private void addLeaves(String modID, String path, String... nameTypes) {
+
+        for (String name : nameTypes) {
+            addOptional(modID + ":" + name, "_leaves", modID + ":" + path + nameTypes);
+        }
+    }
 }
