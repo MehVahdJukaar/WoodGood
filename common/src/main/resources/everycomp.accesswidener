@@ -3,9 +3,7 @@ accessWidener   v2  named
 accessible field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 mutable field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 
-
-
-
+accessible method net/minecraft/data/loot/BlockLootSubProvider createDoorTable (Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/world/level/storage/loot/LootTable$Builder;
 
 
 ## TDO: remove. Not needed as they are in Moonlight. Architectury loom however is fucked up and wont pick them up..........
