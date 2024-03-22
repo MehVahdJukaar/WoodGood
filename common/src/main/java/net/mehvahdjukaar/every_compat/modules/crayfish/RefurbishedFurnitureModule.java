@@ -20,6 +20,8 @@ import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
+import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.advancements.Advancement;
@@ -44,6 +46,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,6 +77,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> desk;
     public final SimpleEntrySet<WoodType, Block> cutting_board;
     public final SimpleEntrySet<WoodType, Block> drawer;
+    public final SimpleEntrySet<LeavesType, Block> hedges;
 
 
     public RefurbishedFurnitureModule(String modId) {
@@ -121,6 +125,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_dark_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(darkFans);
 
@@ -138,6 +143,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_light_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(lightFans);
 
@@ -156,15 +162,15 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .build();
         this.addEntry(crates);
 
-        mailboxes = SimpleEntrySet.builder(WoodType.class, "mailbox",
-                        () -> getModBlock("oak_mailbox"), () -> WoodTypeRegistry.OAK_TYPE,
+        mailboxes = SimpleEntrySet.builder(WoodType.class, "mail_box",
+                        () -> getModBlock("oak_mail_box"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new MailboxBlock(w.toVanillaOrOak(), addWoodPropNoFire(w, BlockBehaviour.Properties.of()
                                 .strength(2.5F))))
                 .addRecipe(modRes("constructing/oak_crate"))
                 .addCustomItem((woodType, block, properties) -> new MailboxItem(block, properties))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.MAIL_BOX::get)
-                .addTextureM(modRes("block/oak_mailbox"),
+                .addTextureM(modRes("block/oak_mail_box"),
                         EveryCompat.res("block/rfm/oak_mail_box_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
@@ -184,6 +190,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("wooden_toilets"), Registries.ITEM)
                 .addTag(modRes("bathroom"), Registries.ITEM)
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(toilets);
 
@@ -200,7 +207,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(jars);
 
@@ -340,6 +347,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(lattice_fence);
 
@@ -358,6 +366,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(lattice_fence_gate);
 
@@ -410,7 +419,33 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .build();
         this.addEntry(drawer);
 
+        hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
+                        () -> getModBlock("oak_hedge"), () -> LeavesTypeRegistry.OAK_TYPE,
+                        l -> new HedgeBlock(LeafType.OAK, BlockBehaviour.Properties.of().strength(0.5f)
+                                .sound(SoundType.AZALEA_LEAVES))
+                )
+                .addRecipe(modRes("constructing/oak_hedge"))
+                .setTab(ModCreativeTabs.MAIN::get)
+                .addTile(ModBlockEntities.DRAWER::get)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .build();
+        this.addEntry(hedges);
+    }
 
+    @Override
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
+        super.registerBlockColors(event);
+        hedges.blocks.forEach((t, b) -> {
+            event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
+        });
+    }
+
+    @Override
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
+        super.registerItemColors(event);
+        hedges.blocks.forEach((t, b) -> {
+            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
+        });
     }
 
     @Override
