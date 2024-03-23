@@ -14,11 +14,11 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -27,6 +27,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -1907,11 +1913,13 @@ public class ChippedModule extends SimpleModule {
         //use this. also set the entry to no drop so we don't have 2.
         // why do we need this instead of copy parent drop? macaw has doors too and they work
         // I wrote this btw
+        // chipped adds their loot not via loot table.this is why we need this. no other mod should need this stuff
+        // this shouldnt be needed.... why isnt copy parent loot working?
         List<EntrySet<?>> doors = this.getEntries().stream().filter(e -> e.getName().contains("door")).toList();
         for (var e : doors) {
-            if(e instanceof SimpleEntrySet<?,?> se) {
+            if (e instanceof SimpleEntrySet<?, ?> se) {
                 for (var d : se.blocks.values()) {
-                    handler.dynamicPack.addLootTable(d, VanillaBlockLoot.createDoorTable(d));
+                    handler.dynamicPack.addLootTable(d, createDoorLoot(d));
                 }
             }
         }
@@ -1920,6 +1928,16 @@ public class ChippedModule extends SimpleModule {
         addChippedRecipe(handler.getPack(), "door", "carpenters_table", "ch/carpenters_table");
         addChippedRecipe(handler.getPack(), "trapdoor", "carpenters_table", "ch/carpenters_table");
 
+    }
+
+    public static LootTable.Builder createDoorLoot(Block block) {
+        return LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(block)
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)))));
     }
 
     private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation, String recipeName) {
