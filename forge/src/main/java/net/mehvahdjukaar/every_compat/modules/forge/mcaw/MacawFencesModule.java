@@ -25,6 +25,8 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.WallBlock;
 
+import java.util.Map;
+
 
 //SUPPORT v1.1.0+
 public class MacawFencesModule extends SimpleModule {
@@ -112,23 +114,122 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(ItemTags.WALLS, Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
+                .addModelTransform(m -> m.addModifier((s, id, l) -> {
+                    /*
+                    * EveryCompat's code don't account for "mcwfences:block/oak_leaves" when the mod could have used
+                    * "minecraft:block/oak_leaves" for texturing. idk why the dev use this way.
+                    * FABRIC use "minecraft:block/oak_leaves" which is fine
+                    */
+                    String namespace = l.getNamespace();
+                    String typeName = l.getTypeName();
+                    switch (namespace) {
+                        case "chipped" -> {
+                            return LeavesPath("","", s, l, true);
+                        }
+                        case "blue_skies" -> {
+                            if (typeName.equals("comet"))
+                                return LeavesPath("comet_leaves_grown", "leaves", s, l);
+
+                            return LeavesPath("", "leaves", s, l);
+                        }
+                        case "regions_unexplored" -> {
+                            switch (typeName) {
+                                case "alpha" -> {
+                                    return LeavesPath("alpha_oak_leaves", "", s, l);
+                                }
+                                case "apple_oak" -> {
+                                    return LeavesPath("apple_oak_leaves_stage_0", "", s, l);
+                                }
+                                case "small_oak" -> {
+                                    return s.replace("\"mcwfences:block/oak_leaves\"",
+                                            "\"minecraft:block/oak_leaves\"");
+                                }
+                                case "flowering" -> {
+                                    return s.replace("\"mcwfences:block/oak_leaves\"",
+                                            "\"regions_unexplored:item/flowering_leaves\"");
+                                }
+                                case "palm" -> {
+                                    return LeavesPath("palm_leaves_side", "", s, l);
+                                }
+                            }
+                        }
+                        case "endlessbiomes" -> {
+                            switch (typeName) {
+                                case "glowing_penumbral" -> {
+                                    return LeavesPath("penumbralleavesglowing", "", s, l);
+                                }
+                                case "penumbral" -> {
+                                    return LeavesPath("penumbralleavesnewest", "", s, l);
+                                }
+                            }
+                        }
+                    }
+                    return LeavesPath("", "", s, l);
+                }))
                 .build();
         this.addEntry(HEDGES);
+    }
+
+    public String LeavesPath(String leavesName, String folderName, String s, LeavesType l) {
+        return LeavesPath(leavesName, folderName, s, l, false);
+    }
+
+    public String LeavesPath(String leavesName, String folderName, String s, LeavesType l, boolean has_CHIPPED) {
+        String path = "\"" + l.getNamespace() + ":block/";
+        String TypeName = l.getTypeName();
+        String folder;
+        if (!leavesName.isEmpty()) {
+            if (!folderName.isEmpty()) path += folderName + "/";
+
+            return s.replace("\"mcwfences:block/oak_leaves\"",
+                    path + leavesName + "\"");
+        }
+        else if (!folderName.isEmpty()) { // only for blue_skies
+            folder = folderName + "/";
+        }
+        else if (has_CHIPPED) { // only for chipped
+            folder = TypeName.replaceAll("cherry_|frosted_|dead_|golden_|apple_|magenta_|flower_|red_|white_",
+                    "") + "/";
+        }
+        else folder = "";
+
+        return s.replace("\"mcwfences:block/oak_leaves\"",
+                path + folder + l.getTypeName() + "_leaves"+ "\"");
+    }
+
+    public String getLeavesPath(String s, LeavesType w) {
+        String path = w.getNamespace() + ":block/"; // {Namespace}:block/
+        String[] nameSplit = w.getTypeName().split("_");
+        if (w.getTypeName().contains("dark")) path += "dark_";
+        // {Namespace}:block/<type>_leaves/{fullnameType}_leaves.png
+        path += nameSplit[nameSplit.length - 1] + "_leaves/" + w.getTypeName() + "_leaves";
+
+        return s.replace("mcwfences:block/oak_leaves", path);
     }
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
-        HEDGES.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : HEDGES.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            if (t.getNamespace().equals("regions_unexplored") && t.getTypeName().equals("flowering")) {
+                continue;
+            }
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        });
+        }
     }
 
     @Override
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
         super.registerItemColors(event);
-        HEDGES.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : HEDGES.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            if (t.getNamespace().equals("regions_unexplored") && t.getTypeName().equals("flowering")) {
+                continue;
+            }
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        });
+        }
     }
 }
