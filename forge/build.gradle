@@ -113,11 +113,10 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modImplementation("curse.maven:architectury-api-419699:4104616") // REI
-
     modImplementation("curse.maven:selene-499980:4983974") // EVERY COMPAT
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
 
+    modImplementation("curse.maven:architectury-api-419699:4104616") // REI
     modCompileOnly("curse.maven:configured-457570:4462837")
     modCompileOnly("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure
     modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
@@ -130,13 +129,13 @@ dependencies {
 //    modImplementation("curse.maven:supermartijn642s-config-lib-438332:3871792") // Benched
 //    modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238") // Benched
 
+    // Local
     modImplementation("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
 
     // ================================================ IMPORTS ===================================================== \\
     modImplementation("curse.maven:jei-238222:4712866")
-
     modCompileOnly("curse.maven:roughly-enough-items-310111:4812888")
 
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
@@ -158,7 +157,7 @@ dependencies {
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4599799")
     modCompileOnly("curse.maven:macaws-doors-378646:4649906")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5050215")
+    modImplementation("curse.maven:macaws-fences-and-walls-453925:5050215")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726294")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618179")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054877")
@@ -211,7 +210,9 @@ dependencies {
 //     modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBMODEL
 
     // ============================================= FOR TESTING ==================================================== \\
-    modImplementation("curse.maven:terrablender-563928:4205732") // REQUIRED by BOP, region-unexplored
 //    modImplementation("curse.maven:biomes-o-plenty-220318:3927361"
     modImplementation("curse.maven:regions-unexplored-659110:4807303")
+
+    // Dependencies
+    modImplementation("curse.maven:terrablender-563928:4205732") // REQUIRED by BOP, region-unexplored
 }
