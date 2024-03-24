@@ -34,7 +34,7 @@ dependencies {
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.1"
 
 //    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
-    modImplementation("curse.maven:moonlightlib-499980:5180870") // v2.11.4
+    modImplementation("curse.maven:moonlightlib-499980:5201141") // v2.11.9
 
     // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
