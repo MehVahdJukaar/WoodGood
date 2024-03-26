@@ -126,7 +126,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_dark_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
         this.addEntry(darkFans);
 
@@ -144,7 +144,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_light_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
         this.addEntry(lightFans);
 
