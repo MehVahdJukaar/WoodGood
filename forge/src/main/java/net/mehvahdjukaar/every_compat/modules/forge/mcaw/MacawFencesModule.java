@@ -197,16 +197,6 @@ public class MacawFencesModule extends SimpleModule {
                 path + folder + l.getTypeName() + "_leaves"+ "\"");
     }
 
-    public String getLeavesPath(String s, LeavesType w) {
-        String path = w.getNamespace() + ":block/"; // {Namespace}:block/
-        String[] nameSplit = w.getTypeName().split("_");
-        if (w.getTypeName().contains("dark")) path += "dark_";
-        // {Namespace}:block/<type>_leaves/{fullnameType}_leaves.png
-        path += nameSplit[nameSplit.length - 1] + "_leaves/" + w.getTypeName() + "_leaves";
-
-        return s.replace("mcwfences:block/oak_leaves", path);
-    }
-
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
