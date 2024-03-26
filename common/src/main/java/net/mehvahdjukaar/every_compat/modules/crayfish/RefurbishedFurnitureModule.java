@@ -51,6 +51,7 @@ import net.minecraft.world.level.material.MapColor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -125,7 +126,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_dark_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
         this.addEntry(darkFans);
 
@@ -143,7 +144,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_light_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(() -> RenderType::translucent)
                 .build();
         this.addEntry(lightFans);
 
@@ -424,10 +425,12 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         l -> new HedgeBlock(LeafType.OAK, BlockBehaviour.Properties.of().strength(0.5f)
                                 .sound(SoundType.AZALEA_LEAVES))
                 )
+                .requiresChildren("leaves")
                 .addRecipe(modRes("constructing/oak_hedge"))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.DRAWER::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(hedges);
     }
@@ -435,17 +438,23 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
-        hedges.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            if (t.getNamespace().equals("regions_unexplored") && t.getTypeName().equals("flowering")) continue;
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        });
+        }
     }
 
     @Override
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
         super.registerItemColors(event);
-        hedges.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            if (t.getNamespace().equals("regions_unexplored") && t.getTypeName().equals("flowering")) continue;
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        });
+        }
     }
 
     @Override
