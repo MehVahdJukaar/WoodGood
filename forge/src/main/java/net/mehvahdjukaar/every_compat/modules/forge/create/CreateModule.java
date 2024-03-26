@@ -11,20 +11,16 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+// SUPPORT: v0.5.1+
 public class CreateModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> windows;
@@ -42,8 +38,8 @@ public class CreateModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
-                .addTextureM(EveryCompat.res("block/palettes/oak_window"), EveryCompat.res("block/palettes/oak_window_m"))
-                .addTextureM(EveryCompat.res("block/palettes/oak_window_connected"), EveryCompat.res("block/palettes/oak_window_connected_m"))
+                .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/palettes/oak_window_m"))
+                .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/palettes/oak_window_connected_m"))
                 .build();
 
         this.addEntry(windows);
