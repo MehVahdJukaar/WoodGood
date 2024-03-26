@@ -206,38 +206,6 @@ public abstract class CompatModule {
         return getModTile(id, BlockEntityType.class);
     }
 
-    //post process some textures. currently only ecologics azalea
-    public void addWoodTexture(WoodType wood, DynClientResourcesGenerator handler, ResourceManager manager,
-                               String path, Supplier<TextureImage> textureSupplier) {
-        handler.addTextureIfNotPresent(manager, path, () -> {
-            var t = textureSupplier.get();
-            maybeFlowerAzalea(t, manager, wood);
-            return t;
-        });
-    }
-
-    //for ecologics
-    protected void maybeFlowerAzalea(TextureImage image, ResourceManager manager, WoodType woodType) {
-        if (woodType.getId().toString().equals("ecologics:flowering_azalea")) {
-            WoodType azalea = WoodTypeRegistry.getValue(new ResourceLocation("ecologics:azalea"));
-            if (azalea != null) {
-                try (TextureImage mask = TextureImage.open(manager,
-                        EveryCompat.res("block/ecologics_overlay"));
-                     TextureImage plankTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, azalea.planks))) {
-
-                    Respriter respriter = Respriter.of(image);
-                    var temp = respriter.recolorWithAnimationOf(plankTexture);
-
-                    image.applyOverlayOnExisting(temp, mask);
-                    temp.close();
-
-                } catch (Exception e) {
-                    EveryCompat.LOGGER.warn("failed to apply azalea overlay for wood type {} and image {}", woodType, image);
-                }
-            }
-        }
-    }
 
     //how much crap this module has registered
     public abstract int bloatAmount();

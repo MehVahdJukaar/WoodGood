@@ -42,7 +42,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
-        if(!init){
+        if (!init) {
             SpriteHelper.addHardcodedSprites();
             init = true;
         }
@@ -54,6 +54,8 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
                 getLogger().error("Failed to generate client dynamic assets for module {}:", m, e);
             }
         });
+
+        ExtraTextureGenerator.generateExtraTextures(this, manager);
     }
 
 }

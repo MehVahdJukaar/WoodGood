@@ -84,7 +84,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                     float dl = p.get(ind + 1).luminance() - newC.luminance();
                     p.set(ind, newC);
                     PaletteColor before = p.get(ind - 1);
-                    //lighten the other main plank color if its too dark
+                    //lighten the other main plank mask if its too dark
                     if (newC.luminance() - before.luminance() > dl * 1.5) {
                         PaletteColor newBefore = new PaletteColor(before.lab().withLuminance(
                                 (before.luminance() * 0.6f + (newC.luminance() + dl) * 0.4f)));

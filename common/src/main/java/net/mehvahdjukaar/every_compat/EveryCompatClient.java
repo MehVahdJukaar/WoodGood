@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ExtraTextureGenerator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -27,7 +28,6 @@ public class EveryCompatClient {
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
         ClientDynamicResourcesHandler.INSTANCE.register();
-
     }
 
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {

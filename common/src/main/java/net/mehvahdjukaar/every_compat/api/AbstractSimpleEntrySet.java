@@ -16,6 +16,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
@@ -299,7 +300,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
                     Respriter respriter = re.getValue();
                     if (type == WoodType.class) {
-                        module.addWoodTexture((WoodType) w, handler, manager, newId, () ->
+                        addWoodTexture((WoodType) w, handler, manager, newId, () ->
                                 respriter.recolorWithAnimation(finalTargetPalette, finalAnimation));
 
                     } else {
@@ -310,13 +311,48 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
 
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Could not generate any block texture for entry set {} : ", module.modRes(this.getName()), e);
+            EveryCompat.LOGGER.error("Could not generate any block texture for entry set {} : ",
+                    module == null ? "dummy" : module.modRes(this.getName()), e);
         } finally {
             for (var t : images) {
                 t.close();
             }
         }
 
+    }
+
+
+    //post process some textures. currently only ecologics azalea
+    public void addWoodTexture(WoodType wood, DynClientResourcesGenerator handler, ResourceManager manager,
+                                      String path, Supplier<TextureImage> textureSupplier) {
+        handler.addTextureIfNotPresent(manager, path, () -> {
+            var t = textureSupplier.get();
+            maybeFlowerAzalea(t, manager, wood);
+            return t;
+        });
+    }
+
+    //for ecologics
+    protected void maybeFlowerAzalea(TextureImage image, ResourceManager manager, WoodType woodType) {
+        if (woodType.getId().toString().equals("ecologics:flowering_azalea")) {
+            WoodType azalea = WoodTypeRegistry.getValue(new ResourceLocation("ecologics:azalea"));
+            if (azalea != null) {
+                try (TextureImage mask = TextureImage.open(manager,
+                        EveryCompat.res("block/ecologics_overlay"));
+                     TextureImage plankTexture = TextureImage.open(manager,
+                             RPUtils.findFirstBlockTextureLocation(manager, azalea.planks))) {
+
+                    Respriter respriter = Respriter.of(image);
+                    var temp = respriter.recolorWithAnimationOf(plankTexture);
+
+                    image.applyOverlayOnExisting(temp, mask);
+                    temp.close();
+
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.warn("failed to apply azalea overlay for wood type {} and image {}", woodType, image);
+                }
+            }
+        }
     }
 
 
