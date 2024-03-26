@@ -129,7 +129,7 @@ dependencies {
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
 
         // LOCAL
-    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}")
+//    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // no longer required since 0.5.1
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
     modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
 
@@ -146,7 +146,7 @@ dependencies {
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856")
-    modCompileOnly("curse.maven:create-328085:4626108")
+    modCompileOnly("curse.maven:create-328085:4835191")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
