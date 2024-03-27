@@ -111,7 +111,7 @@ public class BuildersAdditionModule extends SimpleModule {
         this.addEntry(hedges);
 
         countersAndesite = SimpleEntrySet.builder(WoodType.class, "andesite", "counter",
-                        () -> getModBlock("counter_oak_andesite"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("counter_oak_andesite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_andesite"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -121,7 +121,7 @@ public class BuildersAdditionModule extends SimpleModule {
         this.addEntry(countersAndesite);
 
         countersDiorite = SimpleEntrySet.builder(WoodType.class, "diorite", "counter",
-                        () -> getModBlock("counter_oak_diorite"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("counter_oak_diorite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_diorite"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -131,7 +131,7 @@ public class BuildersAdditionModule extends SimpleModule {
         this.addEntry(countersDiorite);
 
         countersGranite = SimpleEntrySet.builder(WoodType.class, "granite", "counter",
-                        () -> getModBlock("counter_oak_granite"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("counter_oak_granite"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_granite"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -141,7 +141,7 @@ public class BuildersAdditionModule extends SimpleModule {
         this.addEntry(countersGranite);
 
         countersBlackstone = SimpleEntrySet.builder(WoodType.class, "blackstone", "counter",
-                        () -> getModBlock("counter_oak_blackstone"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("counter_oak_blackstone"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_blackstone"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -151,7 +151,7 @@ public class BuildersAdditionModule extends SimpleModule {
         this.addEntry(countersBlackstone);
 
         countersDeepslate = SimpleEntrySet.builder(WoodType.class, "deepslate", "counter",
-                        () -> getModBlock("counter_oak_deepslate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("counter_oak_deepslate"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("counter/counter_oak_deepslate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -235,7 +235,7 @@ public class BuildersAdditionModule extends SimpleModule {
         this.addEntry(supportsBracket);
 
         bedsideTables = SimpleEntrySet.builder(WoodType.class, "", "bedside_table",
-                        () -> getModBlock("bedside_table_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("bedside_table_oak"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BedsideTable(shortenedId() + "/" + w.getAppendableId(), w.planks))
                 .addRecipe(modRes("bedside_table/bedside_table_oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

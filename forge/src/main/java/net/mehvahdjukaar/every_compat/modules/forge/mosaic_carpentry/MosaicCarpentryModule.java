@@ -29,7 +29,7 @@ public class MosaicCarpentryModule extends SimpleModule {
 
 
         mosaics = SimpleEntrySet.builder(WoodType.class, "mosaic",
-                        () -> getModBlock("spruce_mosaic"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_mosaic"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
@@ -42,7 +42,7 @@ public class MosaicCarpentryModule extends SimpleModule {
         this.addEntry(mosaics);
 
         mosaicStairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
-                        () -> getModBlock("spruce_mosaic_stairs"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_mosaic_stairs"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new StairBlock(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
@@ -55,7 +55,7 @@ public class MosaicCarpentryModule extends SimpleModule {
         this.addEntry(mosaicStairs);
 
         mosaicSlabs = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
-                        () -> getModBlock("spruce_mosaic_slab"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_mosaic_slab"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)

@@ -25,7 +25,7 @@ public class DramaticDoorsModule extends SimpleModule {
         super(modId, "dd");
 
         tallDoors = SimpleEntrySet.builder(WoodType.class, "door", "tall",
-                        () -> getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new TallDoorBlock(Blocks.OAK_DOOR,
+                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new TallDoorBlock(Blocks.OAK_DOOR,
                                 w.toVanillaOrOak().setType()))
                 .addTextureM(modRes("block/tall_oak_door_bottom"), EveryCompat.res("block/dd/tall_oak_door_bottom_m"))
                 .addTextureM(modRes("block/tall_oak_door_middle"), EveryCompat.res("block/dd/tall_oak_door_middle_m"))
@@ -43,7 +43,7 @@ public class DramaticDoorsModule extends SimpleModule {
         this.addEntry(tallDoors);
 
         shortDoors = SimpleEntrySet.builder(WoodType.class, "door", "short",
-                        () -> getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new ShortDoorBlock(Blocks.OAK_DOOR,
+                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new ShortDoorBlock(Blocks.OAK_DOOR,
                                 w.toVanillaOrOak().setType()))
                 .addTextureM(modRes("block/short_oak_door"), EveryCompat.res("block/dd/short_oak_door_m"))
                 .addTextureM(modRes("item/short_oak_door"), EveryCompat.res("item/dd/short_oak_door_m"))

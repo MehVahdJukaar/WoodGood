@@ -20,7 +20,7 @@ public class TwigsModule extends SimpleModule {
         super(modId, "tw");
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
-                        () -> getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
                 .addTag(modRes("tables"), Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.ITEM)

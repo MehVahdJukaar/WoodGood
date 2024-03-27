@@ -20,7 +20,7 @@ public class BarkCarpetsModule extends SimpleModule {
 
     public BarkCarpetsModule(String modId) {
         super(modId, "bc");
-        Supplier<CreativeModeTab> tab =  () -> getModTab("tab");
+        Supplier<CreativeModeTab> tab =  getModTab("tab");
 
 
         barkCarpets = SimpleEntrySet.builder(WoodType.class, "bark_carpet",

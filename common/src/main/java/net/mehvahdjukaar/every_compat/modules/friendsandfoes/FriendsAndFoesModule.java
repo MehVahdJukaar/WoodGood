@@ -40,7 +40,7 @@ public class FriendsAndFoesModule extends SimpleModule {
         super(modId, "faf");
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
-                        () -> getModBlock("spruce_beehive"),
+                        getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE)))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))

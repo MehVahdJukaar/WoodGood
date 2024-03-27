@@ -33,14 +33,14 @@ public class FarmersDelightModule extends SimpleModule {
         super(modId, "fd");
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
-                        () -> getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CabinetBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("cabinets"), Registries.BLOCK)
                 .addTag(modRes("cabinets"), Registries.ITEM)
                 .addTag(modRes("cabinets/wooden"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .addTile(Suppliers.memoize(() -> getModTile("cabinet")))
+                .addTile(getModTile("cabinet"))
                 .setTabKey(() -> ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("farmersdelight", "farmersdelight")))
                 .createPaletteFromOak(Palette::increaseDown)
                 .addTexture(EveryCompat.res("block/oak_cabinet_front"))

@@ -34,11 +34,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         super(modId, "vs");
 
         posts = SimpleEntrySet.builder(WoodType.class, "post",
-                        () -> getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new PostBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("posts"), Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.ITEM)
-                .setTab(() -> getModTab("main"))
+                .setTab(getModTab("main"))
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_oak_posts"))
                 .build();
@@ -46,7 +46,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         this.addEntry(posts);
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
-                        () -> getModBlock("stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> {
                             Block stripped = w.getBlockOfThis("stripped_log");
                             if (stripped == null) return null;
@@ -54,7 +54,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("stripped_posts"), Registries.ITEM)
-                .setTab(() -> getModTab("main"))
+                .setTab(getModTab("main"))
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_stripped_oak_posts"))
                 .build();
@@ -62,11 +62,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         this.addEntry(strippedPosts);
 
         cutPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut",
-                        () -> getModBlock("cut_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("cut_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_posts"), Registries.ITEM)
-                .setTab(() -> getModTab("main"))
+                .setTab(getModTab("main"))
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
@@ -75,7 +75,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         this.addEntry(cutPosts);
 
         cutStrippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut_stripped",
-                        () -> getModBlock("cut_stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("cut_stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> {
                             Block stripped = w.getBlockOfThis("stripped_log");
                             if (stripped == null) return null;
@@ -83,7 +83,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
-                .setTab(() -> getModTab("main"))
+                .setTab(getModTab("main"))
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)

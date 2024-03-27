@@ -25,7 +25,7 @@ public class MissingWildModule extends SimpleModule {
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(modRes("fallen_logs"), Registries.BLOCK)
                 .addTag(modRes("fallen_logs"), Registries.ITEM)
-                .setTab(() -> getModTab("items"))
+                .setTab(getModTab("items"))
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();

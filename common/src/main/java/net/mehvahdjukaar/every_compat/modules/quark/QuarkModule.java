@@ -76,7 +76,7 @@ public class QuarkModule extends SimpleModule {
 
         bookshelves = QuarkSimpleEntrySet.builder(WoodType.class, "bookshelf",
                         VariantBookshelvesModule.class,
-                        () -> getModBlock("acacia_bookshelf"),
+                        getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         (w) -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(), null, w.canBurn(),
                                 w.getSound()))
@@ -94,7 +94,7 @@ public class QuarkModule extends SimpleModule {
 
         posts = QuarkSimpleEntrySet.builder(WoodType.class, "post",
                         WoodenPostsModule.class,
-                        () -> getModBlock("oak_post"),
+                        getModBlock("oak_post"),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
                             if (w.getNamespace().equals("malum")) return null;
@@ -115,7 +115,7 @@ public class QuarkModule extends SimpleModule {
 
         strippedPosts = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         WoodenPostsModule.class,
-                        () -> getModBlock("stripped_oak_post"),
+                        getModBlock("stripped_oak_post"),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
                             if (w.getNamespace().equals("malum") || w.getNamespace().equals("twigs")) return null;
@@ -138,7 +138,7 @@ public class QuarkModule extends SimpleModule {
 
         verticalPlanks = QuarkSimpleEntrySet.builder(WoodType.class, "planks", "vertical",
                         VerticalPlanksModule.class,
-                        () -> getModBlock("vertical_oak_planks"),
+                        getModBlock("vertical_oak_planks"),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
                             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
@@ -155,7 +155,7 @@ public class QuarkModule extends SimpleModule {
 
         ladders = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
                         VariantLaddersModule.class,
-                        () -> getModBlock("spruce_ladder"),
+                        getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         (w) -> {
                             String name = shortenedId() + "/" + w.getAppendableId();
@@ -174,7 +174,7 @@ public class QuarkModule extends SimpleModule {
 
         hollowLogs = QuarkSimpleEntrySet.builder(WoodType.class, "log", "hollow",
                         HollowLogsModule.class,
-                        () -> getModBlock("hollow_oak_log"),
+                        getModBlock("hollow_oak_log"),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
                             if (w.getBlockOfThis("stripped_log") == null) return null; // required stripped_log texture
@@ -192,7 +192,7 @@ public class QuarkModule extends SimpleModule {
 
         chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
                         VariantChestsModule.class,
-                        () -> getModBlock("oak_chest", VariantChestBlock.class),
+                        getModBlock("oak_chest", VariantChestBlock.class),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
                             if (w.getId().toString().equals("twilightforest:dark")) return null;
@@ -213,7 +213,7 @@ public class QuarkModule extends SimpleModule {
 
         trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         VariantChestsModule.class,
-                        () -> getModBlock("oak_trapped_chest", VariantTrappedChestBlock.class),
+                        getModBlock("oak_trapped_chest", VariantTrappedChestBlock.class),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
                             if (!chests.blocks.containsKey(w)) return null;
@@ -238,7 +238,7 @@ public class QuarkModule extends SimpleModule {
         //doing it this way because for some reason its nuking whatever block item I throw in here
         hedges = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
                         HedgesModule.class,
-                        () -> getModBlock("oak_hedge"),
+                        getModBlock("oak_hedge"),
                         () -> LeavesTypeRegistry.OAK_TYPE,
                         (w) -> {
                             if (w.getWoodType() == null) return null;
@@ -259,7 +259,7 @@ public class QuarkModule extends SimpleModule {
         //doing it this way because for some reason its nuking whatever block item I throw in here
         leafCarpets = QuarkSimpleEntrySet.builder(LeavesType.class, "leaf_carpet",
                         LeafCarpetModule.class,
-                        () -> getModBlock("oak_leaf_carpet"),
+                        getModBlock("oak_leaf_carpet"),
                         () -> LeavesTypeRegistry.OAK_TYPE,
                         (w) -> {
                             String name = shortenedId() + "/" + w.getVariantId("%s_leaf_carpet");

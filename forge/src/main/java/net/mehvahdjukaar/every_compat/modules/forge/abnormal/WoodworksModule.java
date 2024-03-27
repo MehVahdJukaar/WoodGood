@@ -76,7 +76,7 @@ public class WoodworksModule extends SimpleModule {
 /*
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        () -> getModBlock("acacia_bookshelf"),
+                        getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
@@ -103,7 +103,7 @@ public class WoodworksModule extends SimpleModule {
         this.addEntry(boards);
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        () -> getModBlock("spruce_ladder"),
+                        getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintLadderBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.ladder()))
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
@@ -117,7 +117,7 @@ public class WoodworksModule extends SimpleModule {
         this.addEntry(ladders);
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
-                        () -> getModBlock("spruce_beehive"),
+                        getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
@@ -134,7 +134,7 @@ public class WoodworksModule extends SimpleModule {
         this.addEntry(beehives);
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
-                        () -> getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
@@ -150,7 +150,7 @@ public class WoodworksModule extends SimpleModule {
         //this.addEntry(CHESTS);
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
-                        () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintTrappedChestBlock(WoodTypeRegistry.OAK_TYPE.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)

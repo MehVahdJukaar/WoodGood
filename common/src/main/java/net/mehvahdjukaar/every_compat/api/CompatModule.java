@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import com.google.common.base.Suppliers;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -8,22 +9,16 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -176,36 +171,29 @@ public abstract class CompatModule {
 
     //utility functions
 
-    @Nullable
-    protected final <T extends Block> T getModBlock(String id, Class<T> blockClass) {
-        return (T) BuiltInRegistries.BLOCK.getOptional(modRes(id)).orElse(null);
+    protected final <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
+        return Suppliers.memoize(() -> (T) BuiltInRegistries.BLOCK.getOptional(modRes(id)).orElse(null));
     }
 
-    @Nullable
-    protected final CreativeModeTab getModTab(String id) {
-        return BuiltInRegistries.CREATIVE_MODE_TAB.getOptional(modRes(id)).orElse(null);
+    protected final Supplier<CreativeModeTab> getModTab(String id) {
+        return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.getOptional(modRes(id)).orElse(null));
     }
 
-    @Nullable
-    protected final Block getModBlock(String id) {
+    protected final Supplier<Block> getModBlock(String id) {
         return getModBlock(id, Block.class);
     }
 
-    @Nullable
-    protected final Item getModItem(String id) {
-        return BuiltInRegistries.ITEM.getOptional(modRes(id)).orElse(null);
+    protected final Supplier<Item> getModItem(String id) {
+        return Suppliers.memoize(() -> BuiltInRegistries.ITEM.getOptional(modRes(id)).orElse(null));
     }
 
-    @Nullable
-    protected final <T extends BlockEntityType<?>> T getModTile(String id, Class<T> blockClass) {
-        return (T) BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(modRes(id)).orElse(null);
+    protected final <T extends BlockEntityType<?>> Supplier<T> getModTile(String id, Class<T> blockClass) {
+        return Suppliers.memoize(() -> (T) BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(modRes(id)).orElse(null));
     }
 
-    @Nullable
-    protected final BlockEntityType<?> getModTile(String id) {
+    protected final Supplier<BlockEntityType> getModTile(String id) {
         return getModTile(id, BlockEntityType.class);
     }
-
 
     //how much crap this module has registered
     public abstract int bloatAmount();

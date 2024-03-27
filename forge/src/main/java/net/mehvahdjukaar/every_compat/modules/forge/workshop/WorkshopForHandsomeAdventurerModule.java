@@ -46,7 +46,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
 
         BOOKSHELVES1 = SimpleEntrySet.builder(WoodType.class,
                         "", "book_shelf_double",
-                        () -> getModBlock("book_shelf_double_spruce"),
+                        getModBlock("book_shelf_double_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new BookShelf.Dual("double"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -59,7 +59,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(BOOKSHELVES1);
         BOOKSHELVES2 = SimpleEntrySet.builder(WoodType.class,
                         "", "book_shelf_open_double",
-                        () -> getModBlock("book_shelf_open_double_spruce"),
+                        getModBlock("book_shelf_open_double_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new BookShelf.Dual("open_double"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -72,7 +72,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(BOOKSHELVES2);
         BOOKSHELVES3 = SimpleEntrySet.builder(WoodType.class,
                         "", "book_shelf_minimal",
-                        () -> getModBlock("book_shelf_minimal_spruce"),
+                        getModBlock("book_shelf_minimal_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new BookShelf.TopSimple("minimal"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -85,7 +85,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(BOOKSHELVES3);
         BOOKSHELVES4 = SimpleEntrySet.builder(WoodType.class,
                         "", "book_shelf_open_minimal",
-                        () -> getModBlock("book_shelf_open_minimal_spruce"),
+                        getModBlock("book_shelf_open_minimal_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new BookShelf.TopSimple("open_minimal"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -99,7 +99,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(BOOKSHELVES4);
         BOOKSHELVES5 = SimpleEntrySet.builder(WoodType.class,
                         "", "book_shelf_with_lanterns",
-                        () -> getModBlock("book_shelf_with_lanterns_spruce"),
+                        getModBlock("book_shelf_with_lanterns_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new BookShelf.TopWithLanterns("with_lanterns"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -112,7 +112,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(BOOKSHELVES5);
         SIMPLE_TABLES = SimpleEntrySet.builder(WoodType.class,
                         "", "simple_table",
-                        () -> getModBlock("simple_table_spruce"),
+                        getModBlock("simple_table_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         (w) -> new SimpleTable())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -128,7 +128,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(SIMPLE_TABLES);
         TOOLRACKS1 = SimpleEntrySet.builder(WoodType.class,
                         "", "tool_rack_framed",
-                        () -> getModBlock("tool_rack_framed_spruce"),
+                        getModBlock("tool_rack_framed_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new DualToolRack(6, "framed"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -141,7 +141,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(TOOLRACKS1);
         TOOLRACKS2 = SimpleEntrySet.builder(WoodType.class,
                         "", "tool_rack_pframed",
-                        () -> getModBlock("tool_rack_pframed_spruce"),
+                        getModBlock("tool_rack_pframed_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new DualToolRack(6, "pframed"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -154,7 +154,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(TOOLRACKS2);
         TOOLRACKS3 = SimpleEntrySet.builder(WoodType.class,
                         "", "tool_rack_double",
-                        () -> getModBlock("tool_rack_double_spruce"),
+                        getModBlock("tool_rack_double_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new DualToolRack(6, "double"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -167,7 +167,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(TOOLRACKS3);
         TOOLRACKS4 = SimpleEntrySet.builder(WoodType.class,
                         "", "tool_rack_single",
-                        () -> getModBlock("tool_rack_single_spruce"),
+                        getModBlock("tool_rack_single_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new ToolRack(2, "single"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -181,7 +181,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(TOOLRACKS4);
         POTIONSHELVES1 = SimpleEntrySet.builder(WoodType.class,
                         "", "potion_shelf",
-                        () -> getModBlock("potion_shelf_spruce"),
+                        getModBlock("potion_shelf_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new PotionShelf())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -194,7 +194,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(POTIONSHELVES1);
         DUAL_TABLE_PARTS_TR = SimpleEntrySet.builder(WoodType.class,
                         "", "dual_table_top_right",
-                        () -> getModBlock("dual_table_top_right_spruce"),
+                        getModBlock("dual_table_top_right_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new AdvancedTableTopSecondary())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -204,7 +204,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(DUAL_TABLE_PARTS_TR);
         DUAL_TABLE_PARTS_TL = SimpleEntrySet.builder(WoodType.class,
                         "", "dual_table_top_left",
-                        () -> getModBlock("dual_table_top_left_spruce"),
+                        getModBlock("dual_table_top_left_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new AdvancedTableTopSecondary())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -214,7 +214,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(DUAL_TABLE_PARTS_TL);
         DUAL_TABLE_PARTS_BR = SimpleEntrySet.builder(WoodType.class,
                         "", "dual_table_bottom_right",
-                        () -> getModBlock("dual_table_bottom_right_spruce"),
+                        getModBlock("dual_table_bottom_right_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new AdvancedTableBottomSecondary())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -224,7 +224,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(DUAL_TABLE_PARTS_BR);
         DUAL_TABLE_PARTS_BL = SimpleEntrySet.builder(WoodType.class,
                         "", "dual_table_bottom_left",
-                        () -> getModBlock("dual_table_bottom_left_spruce"),
+                        getModBlock("dual_table_bottom_left_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new AdvancedTableBottomPrimary())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -236,7 +236,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         this.addEntry(DUAL_TABLE_PARTS_BL);
 
         STATION_PLACERS = ItemOnlyEntrySet.builder(WoodType.class,"", "workstation_placer",
-                        () -> getModItem("workstation_placer_spruce"),
+                        getModItem("workstation_placer_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
                         w -> new WorkstationPlacerItem(w.getTypeName(), new Item.Properties()))
                 .addRecipe(modRes("workstation_placer_spruce"))

@@ -33,7 +33,7 @@ public class GraveyardModule extends SimpleModule {
         super(modId, "gy");
 
         COFFINS = SimpleEntrySet.builder(WoodType.class, "coffin",
-                        () -> getModBlock("oak_coffin"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_coffin"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatCoffinfBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), w))
                 .addTag(modRes("coffins"), Registries.BLOCK)
                 .addTag(modRes("coffins"), Registries.ITEM)

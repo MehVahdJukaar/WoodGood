@@ -40,7 +40,7 @@ public class FarmersDelightModule extends SimpleModule {
         super(modId, "fd");
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
-                        () -> getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CabinetBlock())
                 .addTag(modRes("cabinets"), Registries.BLOCK)
                 .addTag(modRes("cabinets"), Registries.ITEM)

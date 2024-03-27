@@ -18,7 +18,7 @@ public class CampChairModule extends SimpleModule {
         super(modId, "cc");
 
         campChairs = SimpleEntrySet.builder(WoodType.class, "camp_chair",
-                        () -> getModBlock("oak_camp_chair", CampChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_camp_chair", CampChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CampChairBlock(BlockBehaviour.Properties.of()
                                 .mapColor(w.getColor())
                                 .sound(w.getSound())

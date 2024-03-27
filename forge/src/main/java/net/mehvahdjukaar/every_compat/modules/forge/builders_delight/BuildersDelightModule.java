@@ -82,7 +82,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: ITEM
         FURNITURE_KIT = ItemOnlyEntrySet.builder(WoodType.class, "furniture_kit",
-                        () -> getModItem("oak_furniture_kit"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModItem("oak_furniture_kit"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CustomBdFurnitureKit(new Item.Properties().stacksTo(64),"furniture_kit")
                 )
                 .setTab(tabMater)

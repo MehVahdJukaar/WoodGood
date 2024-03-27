@@ -73,7 +73,7 @@ public class FurnishModule extends SimpleModule {
         TemplateRecipeManager.registerTemplate(modRes("furniture_making"), FurnishRecipeTemplate::new);
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
-                        () -> getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Table(Utils.copyPropertySafe(w.log)))
                 .requiresChildren("stripped_log")
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
@@ -84,7 +84,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(table);
 
         squareTable = SimpleEntrySet.builder(WoodType.class, "square_table",
-                        () -> getModBlock("oak_square_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_square_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SimpleFurniture(Utils.copyPropertySafe(w.log)))
                 .requiresChildren("stripped_log")
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
@@ -95,7 +95,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(squareTable);
 
         pedestalTable = SimpleEntrySet.builder(WoodType.class, "pedestal_table",
-                        () -> getModBlock("oak_pedestal_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_pedestal_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SimpleFurniture(Utils.copyPropertySafe(w.log)))
                 .requiresChildren("stripped_log")
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
@@ -106,7 +106,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(pedestalTable);
 
         bedsideTable = SimpleEntrySet.builder(WoodType.class, "bedside_table",
-                        () -> getModBlock("oak_bedside_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bedside_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new InventoryFurniture(Utils.copyPropertySafe(w.log), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound))
                 .requiresChildren("stripped_log")
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
