@@ -81,7 +81,7 @@ subprojects {
                         optionalDependency("sawmill")
                         optionalDependency("twigs")
                         optionalDependency("camp-chair")
-                        optionalDependency("farmers-delight-fabric")
+                        optionalDependency("farmers-delight-refabricated")
                         optionalDependency("missing-wilds")
                         optionalDependency("infinity-buttons")
                         optionalDependency("furnish")
