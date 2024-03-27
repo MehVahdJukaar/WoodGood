@@ -34,6 +34,6 @@
     "sawmill": "*"
   },
   "breaks": {
-    "farmersdelight": "<2.0.0"
+    "farmersdelight": "<1.20.1-2.0.0"
   }
 }
