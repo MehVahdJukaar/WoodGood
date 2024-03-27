@@ -140,7 +140,7 @@ dependencies {
     modImplementation("curse.maven:jei-238222:4712868")
 
     // ================================================ IMPORTS ===================================================== \\
-    modCompileOnly("curse.maven:another-furniture-610492:4815126")
+    modImplementation("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
@@ -159,7 +159,7 @@ dependencies {
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4605466")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
-    modImplementation("curse.maven:macaws-fences-and-walls-453925:5050219")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5050219")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618183")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
@@ -202,16 +202,16 @@ dependencies {
     // modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBModel
 
     // =========================================== FOR TESTING ===================================================== \\
-    modImplementation("curse.maven:regions-unexplored-659110:4779426")
-    modImplementation("curse.maven:endless-biomes-667688:5109705")
-    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-//    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
+//    modImplementation("curse.maven:regions-unexplored-659110:4779426")
+//    modImplementation("curse.maven:endless-biomes-667688:5109705")
+//    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
+    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
 //    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli
 
     // Dependencies
-    modImplementation("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
+//    modImplementation("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
     modImplementation("curse.maven:terrablender-563928:4647094") // Required by: BOP, Regions-Unexplored
 //    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
 }
