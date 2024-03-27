@@ -90,8 +90,6 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
 
 
-
-
         // ========================================= Add Other Compat Mods ========================================== \\
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
@@ -107,8 +105,8 @@ public abstract class EveryCompat {
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
 
         // Abnormals Delight
-        addOtherCompatMod("abnormals_delight", List.of("autumnity","upgrade_aquatic",
-                "environmental","atmospheric","endergetic","caves_and_chasms"), List.of("farmersdelight"));
+        addOtherCompatMod("abnormals_delight", List.of("autumnity", "upgrade_aquatic",
+                "environmental", "atmospheric", "endergetic", "caves_and_chasms"), List.of("farmersdelight"));
 
         // ========================================= Add Modules ==================================================== \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
@@ -126,7 +124,7 @@ public abstract class EveryCompat {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
 
         // ========================================== WORK IN PROGRESS ============================================== \\
-       // addModule("handcrafted", () -> HandcraftedModule::new);
+        // addModule("handcrafted", () -> HandcraftedModule::new);
 
         // ============================================= OTHERS ===================================================== \\
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
@@ -139,6 +137,7 @@ public abstract class EveryCompat {
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
         ENTRY_TYPES.computeIfAbsent(type, t -> new HashSet<>()).add(childId);
     }
+
     private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
         addOtherCompatMod(modId, List.of(woodFrom), blocksFrom);
     }
@@ -153,6 +152,15 @@ public abstract class EveryCompat {
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId) && MODULE_DISABLER.isModuleOn(modId)) {
 
+            if (modId.equals("farmersdelight")) {
+                try {
+                    Class.forName("vectorwing.farmersdelight.FarmersDelight");
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("Farmers Delight Refabricated is not installed. Disabling Farmers Delight Module");
+                    return;
+                }
+            }
+
             CompatModule module = moduleFactory.get().apply(modId);
             try {
                 EveryCompatAPI.registerModule(module);
@@ -165,7 +173,7 @@ public abstract class EveryCompat {
         }
     }
 
-    public static Collection<CompatMod> getCompatMods(){
+    public static Collection<CompatMod> getCompatMods() {
         return COMPAT_MODS;
     }
 
@@ -232,6 +240,7 @@ public abstract class EveryCompat {
         public CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
             this(modId, List.of(woodFrom), blocksFrom);
         }
+
     }
 
     private void registerItemsToTabs(RegHelper.ItemToTabEvent event) {

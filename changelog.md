@@ -1,2 +1,2 @@
-#### UPDATED:
-- **BarkCarpets** - Fixed the crash due to outdated CreativeTabMode
+- Supports Famers Delight Refabricated
+- Updated a mod that adds carpets
