@@ -1,6 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 
-import com.google.gson.JsonArray;
+import com.google.common.base.Suppliers;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -12,16 +12,13 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.common.registry.ModCreativeTabs;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,8 +40,8 @@ public class FarmersDelightModule extends SimpleModule {
                 .addTag(modRes("cabinets/wooden"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .addTile(ModBlockEntityTypes.CABINET)
-                .setTab(ModCreativeTabs.TAB_FARMERS_DELIGHT::get)
+                .addTile(Suppliers.memoize(() -> getModTile("cabinet")))
+                .setTabKey(() -> ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("farmersdelight", "farmersdelight")))
                 .createPaletteFromOak(Palette::increaseDown)
                 .addTexture(EveryCompat.res("block/oak_cabinet_front"))
                 .addTexture(EveryCompat.res("block/oak_cabinet_side"))
@@ -79,8 +76,7 @@ public class FarmersDelightModule extends SimpleModule {
                     String path = this.shortenedId() + "/cutting/" + woodType.getAppendableId() + "_log";
 
                     handler.dynamicPack.addJson(EveryCompat.res(path), recipe, ResType.RECIPES);
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     handler.getLogger().error("{Farmer's Delight} Failed to generate recipe via " + e);
                 }
             }
