@@ -1,3 +1,2 @@
 #### UPDATED:
-- **Refurbished Furniture** - Corrected dark-fan & light-fan's RenderType
-- **Create** - Windows' new textures
+- **BarkCarpets** - Fixed the crash due to outdated CreativeTabMode
