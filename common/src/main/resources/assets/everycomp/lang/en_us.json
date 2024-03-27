@@ -158,6 +158,7 @@
   "block_type.graveyard.coffin": "%s Coffin",
 
   "block_type.dawnoftimebuilder.beam": "%s Beam",
+  "block_type.dawnoftimebuilder.planks_edge": "%s Edge",
   "block_type.dawnoftimebuilder.lattice": "%s Lattice",
   "block_type.dawnoftimebuilder.pergola": "%s Pergola",
   "block_type.dawnoftimebuilder.planks_plate": "%s Plate",
