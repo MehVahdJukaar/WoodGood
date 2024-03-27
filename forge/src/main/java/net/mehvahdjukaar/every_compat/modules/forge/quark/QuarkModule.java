@@ -93,7 +93,6 @@ public class QuarkModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .setPalette(this::bookshelfPalette)
                 .build();
-
         this.addEntry(bookshelves);
 
         posts = QuarkSimpleEntrySet.builder(WoodType.class, "post",
@@ -108,29 +107,12 @@ public class QuarkModule extends SimpleModule {
                                     new WoodPostBlock(m, fence, shortenedId() + "/" + w.getNamespace() + "/",
                                             fence.getSoundType(fence.defaultBlockState()) == SoundType.STEM);
                         })
-                .addModelTransform(m -> m.addModifier((s, id, w) -> {
-                        String currentNamespace = w.getNamespace();
-                        String currentTypeName = w.getTypeName();
-                        switch (currentNamespace) {
-                            case "gardens_of_the_dead" -> {
-                                if (currentTypeName.equals("whistlecane"))
-                                    return correctingJSON("block", s, w, true, "");
-                            }
-                            case "regions_unexplored" -> {
-                                if (currentTypeName.equals("eucalyptus"))
-                                    return correctingJSON("log", s, w, true, "");
-                            }
-                        }
-                        return s; // default
-                    })
-                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("posts"), Registry.BLOCK_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .addRecipe(modRes("building/crafting/oak_post"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(posts);
 
         strippedPosts = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
@@ -152,7 +134,6 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/stripped_oak_post"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(strippedPosts);
 
         verticalPlanks = QuarkSimpleEntrySet.builder(WoodType.class, "planks", "vertical",
@@ -168,7 +149,6 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
-
         this.addEntry(verticalPlanks);
 
         ladders = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
@@ -187,7 +167,6 @@ public class QuarkModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .setRenderType(() -> RenderType::translucent)
                 .build();
-
         this.addEntry(ladders);
 
         hollowLogs = QuarkSimpleEntrySet.builder(WoodType.class, "log", "hollow",
@@ -199,40 +178,6 @@ public class QuarkModule extends SimpleModule {
                             return new HollowLogBlock(name, w.log, m, w.canBurn());
                         }
                     )
-                .addModelTransform(m -> m.addModifier((s, id, w) -> { // fix textures
-                        String currentNamespace = w.getNamespace();
-                        String currentTypeName = w.getTypeName();
-
-                        switch (currentNamespace) {
-                            case "gardens_of_the_dead" -> {
-                                if (currentTypeName.equals("whistlecane")) {
-                                    return correctingJSON("block", s, w, true, "");
-                                }
-                            }
-                            case "regions_unexplored" -> {
-                                if (currentTypeName.equals("eucalyptus")) {
-                                    return correctingJSON("log", s, w, true, "", "top");
-                                }
-                            }
-                            case "cataclysm" -> {
-                                return correctingJSON("stem", s, w, true, "", "");
-                            }
-                            case "endlessbiomes" -> {
-                                switch (currentTypeName) {
-                                    case "twisted" -> {
-                                        return correctingJSON("log", s, w, false,
-                                                "sidetest", "toptest");
-                                    }
-                                    case "penumbra" -> {
-                                        return correctingJSON("llog", s, w, false,
-                                                "sidenewest", "topnewest");
-                                    }
-                                }
-                            }
-                        }
-                        return s; // default
-                    })
-                )
                 .requiresChildren("stripped_log")
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -240,7 +185,6 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("hollow_logs"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("building/crafting/hollowlogs/hollow_oak_log"))
                 .build();
-
         this.addEntry(hollowLogs);
 
         chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
@@ -262,7 +206,6 @@ public class QuarkModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new VariantChestBlock.Item(b, p))
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .build();
-
         this.addEntry(chests);
 
         trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
@@ -283,10 +226,8 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("revertable_trapped_chests"), Registry.ITEM_REGISTRY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTile(CompatTrappedChestBlockTile::new)
-
                 .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
                 .build();
-
         this.addEntry(trappedChests);
 
 
@@ -299,8 +240,6 @@ public class QuarkModule extends SimpleModule {
                             if (w.getWoodType() == null) return null;
                             return new HedgeBlock(m, Blocks.OAK_FENCE, w.leaves);
                         })
-                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
-                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hedges"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hedges"), Registry.ITEM_REGISTRY)
@@ -320,8 +259,6 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getVariantId("%s_leaf_carpet");
                             return new LeafCarpetBlock(name, w.leaves, m);
                         })
-                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
-                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(modRes("leaf_carpets"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("leaf_carpets"), Registry.ITEM_REGISTRY)
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
@@ -378,17 +315,59 @@ public class QuarkModule extends SimpleModule {
     @Override
     public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
+        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            String namespace = t.getNamespace();
+            String typeName = t.getTypeName();
+            if (namespace.equals("regions_unexplored")) {
+                if (typeName.equals("flowering")) continue;
+            } else if (namespace.equals("blue_skies")) {
+                if (typeName.equals("cherry")) continue;
+            }
+            event.register((bs, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
+        }
+        for (Map.Entry<LeavesType, Block> entry : leafCarpets.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            String namespace = t.getNamespace();
+            String typeName = t.getTypeName();
+            if (namespace.equals("regions_unexplored")) {
+                if (typeName.equals("flowering")) continue;
+            } else if (namespace.equals("blue_skies")) {
+                if (typeName.equals("cherry")) continue;
+            }
+            event.register((bs, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
+        }
     }
 
     @Override
     public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
-        hedges.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            String namespace = t.getNamespace();
+            String typeName = t.getTypeName();
+            if (namespace.equals("regions_unexplored")) {
+                if (typeName.equals("flowering")) continue;
+            } else if (namespace.equals("blue_skies")) {
+                if (typeName.equals("cherry")) continue;
+            }
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        });
+        }
 
-        leafCarpets.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : leafCarpets.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            String namespace = t.getNamespace();
+            String typeName = t.getTypeName();
+            if (namespace.equals("regions_unexplored")) {
+                if (typeName.equals("flowering")) continue;
+            } else if (namespace.equals("blue_skies")) {
+                if (typeName.equals("cherry")) continue;
+            }
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        });
+        }
     }
 
     @Override
@@ -532,39 +511,4 @@ public class QuarkModule extends SimpleModule {
         handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
     }
 
-
-    public String correctingJSON(String blockType, String s, WoodType w,
-                              boolean hasUnderscore, String side, String top) {
-        String block = (w.getNamespace().equals("endlessbiomes")) ? ":blocks/" : ":block/";
-        String pathID = w.getNamespace() + block + w.getTypeName();
-
-        pathID += (hasUnderscore) ? "_" + blockType : blockType;
-        side = (hasUnderscore && !side.isEmpty()) ? "_" + side : side;
-        top = (hasUnderscore && !top.isEmpty()) ? "_" + top : top;
-
-        if (w.getNamespace().equals("cataclysm")) EveryCompat.LOGGER.info("<MODEL> " + w.getNamespace() + " Correcting JSON");
-
-        if (s.contains("\"end\": \"minecraft:block/oak_log_top\"")) {
-            if (w.getNamespace().equals("cataclysm")) EveryCompat.LOGGER.info("<MODEL> " + w.getNamespace() + " CORRECTED");
-            return s.replace("\"end\": \"minecraft:block/oak_log_top\"",
-                            "\"end\": \"" + pathID + top + "\"")
-                    .replace("\"side\": \"minecraft:block/oak_log\"",
-                            "\"side\": \"" + pathID + side +"\"")
-                    .replace("\"inside\": \"minecraft:block/stripped_oak_log\"",
-                            "\"inside\": \"" + pathID + side +"\"");
-        }
-        else {
-            return s.replace("\"texture\": \"minecraft:block/oak_log\"",
-                    "\"texture\": \"" + pathID + side + "\"");
-        }
-    }
-    public String correctingJSON(String blockType, String s, WoodType w, boolean hasUnderscore, String side) {
-        return correctingJSON(blockType, s, w, hasUnderscore,  side, "top");
-    }
-    public String correctingJSON(String blockType, String s, WoodType w, boolean hasUnderscore) {
-        return correctingJSON(blockType, s, w, hasUnderscore, "side", "top");
-    }
-    public String correctingJSON(String blockType, String s, WoodType w) {
-        return correctingJSON(blockType, s, w, true, "side", "top");
-    }
 }
