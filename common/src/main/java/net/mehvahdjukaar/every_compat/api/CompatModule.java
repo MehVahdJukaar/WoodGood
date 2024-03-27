@@ -191,8 +191,8 @@ public abstract class CompatModule {
         return Suppliers.memoize(() -> (T) BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(modRes(id)).orElse(null));
     }
 
-    protected final Supplier<BlockEntityType> getModTile(String id) {
-        return getModTile(id, BlockEntityType.class);
+    protected final <T extends BlockEntityType<?>> Supplier<T> getModTile(String id) {
+        return (Supplier<T>) getModTile(id, BlockEntityType.class);
     }
 
     //how much crap this module has registered

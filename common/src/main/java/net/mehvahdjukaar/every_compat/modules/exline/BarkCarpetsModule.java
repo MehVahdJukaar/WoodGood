@@ -24,7 +24,7 @@ public class BarkCarpetsModule extends SimpleModule {
 
 
         barkCarpets = SimpleEntrySet.builder(WoodType.class, "bark_carpet",
-                        ()->getModBlock("oak_bark_carpet", BarkCarpetBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bark_carpet", BarkCarpetBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BarkCarpetBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
