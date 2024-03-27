@@ -124,7 +124,7 @@ dependencies {
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modImplementation("curse.maven:framework-549225:5098255") // refurbished-furniture
-    modImplementation("com.mrcrayfish.furniture.refurbished:cfm")
+    modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
@@ -141,8 +141,8 @@ dependencies {
     modImplementation("curse.maven:jei-238222:4712868")
 
     // ================================================ IMPORTS ===================================================== \\
-    modImplementation("curse.maven:another-furniture-610492:4815126")
-    modCompileOnly("curse.maven:architects-palette-433862:5036133")
+    modCompileOnly("curse.maven:another-furniture-610492:4815126")
+    modImplementation("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
@@ -204,10 +204,10 @@ dependencies {
     // modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBModel
 
     // =========================================== FOR TESTING ===================================================== \\
-//    modImplementation("curse.maven:regions-unexplored-659110:4779426")
-//    modImplementation("curse.maven:endless-biomes-667688:5109705")
-//    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
+    modCompileOnly("curse.maven:regions-unexplored-659110:4779426")
+    modCompileOnly("curse.maven:endless-biomes-667688:5109705")
+    modCompileOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
+//    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
 //    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli
