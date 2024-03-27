@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
-import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,7 +8,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -25,10 +23,8 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.FallbackResourceManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -39,7 +35,6 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import org.violetmoon.quark.base.QuarkClient;
 import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
@@ -47,12 +42,9 @@ import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
 import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 //SUPPORT: v4.0-435+
 public class QuarkModule extends SimpleModule {
@@ -291,12 +283,30 @@ public class QuarkModule extends SimpleModule {
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
-        hedges.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+            LeavesType key = entry.getKey();
+            Block value = entry.getValue();
+            String namespace = key.getNamespace();
+            String typeName = key.getTypeName();
+            if (namespace.equals("regions_unexplored")) {
+                if (typeName.equals("flowering")) continue;
+            } else if (namespace.equals("blue_skies")) {
+                if (typeName.equals("cherry")) continue;
+            }
+            event.register((bs, l, p, i) -> event.getColor(key.leaves.defaultBlockState(), l, p, i), value);
+        }
+        for (Map.Entry<LeavesType, Block> entry : leafCarpets.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            String namespace = t.getNamespace();
+            String typeName = t.getTypeName();
+            if (namespace.equals("regions_unexplored")) {
+                if (typeName.equals("flowering")) continue;
+            } else if (namespace.equals("blue_skies")) {
+                if (typeName.equals("cherry")) continue;
+            }
             event.register((bs, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        });
-        leafCarpets.blocks.forEach((t, b) -> {
-            event.register((bs, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        });
+        }
     }
 
     @Override
