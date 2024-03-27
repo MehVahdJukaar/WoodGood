@@ -157,6 +157,11 @@
 
   "block_type.graveyard.coffin": "%s Coffin",
 
+  "block_type.dawnoftimebuilder.beam": "%s Beam",
+  "block_type.dawnoftimebuilder.lattice": "%s Lattice",
+  "block_type.dawnoftimebuilder.pergola": "%s Pergola",
+  "block_type.dawnoftimebuilder.wall": "%s Wall",
+
   "block_type.decorative_blocks.palisade": "%s Palisade",
   "block_type.decorative_blocks.support": "%s Support",
   "block_type.decorative_blocks.beam": "%s Beam",
