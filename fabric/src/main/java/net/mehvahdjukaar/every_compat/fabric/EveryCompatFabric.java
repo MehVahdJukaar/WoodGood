@@ -8,7 +8,6 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;

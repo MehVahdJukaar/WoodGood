@@ -192,7 +192,7 @@ public abstract class CompatModule {
     }
 
     protected final <T extends BlockEntityType<?>> Supplier<T> getModTile(String id) {
-        return (Supplier<T>) getModTile(id, BlockEntityType.class);
+        return (Supplier<T>)(Object) getModTile(id, BlockEntityType.class);
     }
 
     //how much crap this module has registered
