@@ -32,5 +32,8 @@
   },
   "recommends": {
     "sawmill": "*"
+  },
+  "breaks": {
+    "farmersdelight": "<2.0.0"
   }
 }

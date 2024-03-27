@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.farmersdelight;
+package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

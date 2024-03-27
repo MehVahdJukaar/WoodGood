@@ -30,7 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-
+/*
 //SUPPORT: v1.2.4
 public class FarmersDelightModule extends SimpleModule {
 
@@ -90,3 +90,4 @@ public class FarmersDelightModule extends SimpleModule {
         }));
     }
 }
+*/

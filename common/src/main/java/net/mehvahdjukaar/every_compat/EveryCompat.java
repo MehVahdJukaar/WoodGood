@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.crayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
@@ -122,6 +123,7 @@ public abstract class EveryCompat {
         addModule("twigs", () -> TwigsModule::new);
         addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
 
+        addModule("farmersdelight", () -> FarmersDelightModule::new);
 
         // ========================================== WORK IN PROGRESS ============================================== \\
        // addModule("handcrafted", () -> HandcraftedModule::new);

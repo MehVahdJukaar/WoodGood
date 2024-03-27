@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.forge;
 
-import com.mrcrayfish.furniture.refurbished.core.ModBlocks;
 import net.mehvahdjukaar.every_compat.ECNetworking;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
@@ -13,7 +12,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdd
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
-import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;

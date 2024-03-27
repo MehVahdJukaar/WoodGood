@@ -37,6 +37,7 @@ dependencies {
     modImplementation("curse.maven:zeta-968868:5078215")
     modCompileOnly("curse.maven:framework-549225:5098255")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
+    modCompileOnly("curse.maven:farmersdelight-398521:4679319")
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
 }

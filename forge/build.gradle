@@ -151,7 +151,7 @@ dependencies {
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
-    modCompileOnly("curse.maven:farmersdelight-398521:4679319")
+    modImplementation("curse.maven:farmersdelight-398521:4679319")
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")

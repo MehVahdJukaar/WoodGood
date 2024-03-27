@@ -5,6 +5,7 @@
     },
     {
       "texture": "minecraft:block/lectern_bottom"
+      "mask": "mypack:block/lectern_bottom_mask"
     }
   ],
   "merge_palette": true,
