@@ -144,6 +144,7 @@ dependencies {
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modImplementation("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
+    modCompileOnly("curse.maven:builders-delight-forge-563734:5088176")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856")
@@ -169,7 +170,8 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
-    modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
+    modImplementation("curse.maven:mighty-mail-902986:4750272")
+    modImplementation("curse.maven:missing-wilds-forge-634277:5053677")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
@@ -181,11 +183,11 @@ dependencies {
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
     modCompileOnly("curse.maven:twigs-496913:4605097")
-    modCompileOnly("curse.maven:woodworks-543610:4023081") // no 1.20.1 yet
+    modImplementation("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:woodster-869951:4670471")
-    modCompileOnly("curse.maven:xercamod-341575:4667995")
+    modCompileOnly("curse.maven:woodworks-543610:4023081") // no 1.20.1 yet
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
-    modCompileOnly("curse.maven:builders-delight-forge-563734:5088176")
+    modCompileOnly("curse.maven:xercamod-341575:4667995")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
