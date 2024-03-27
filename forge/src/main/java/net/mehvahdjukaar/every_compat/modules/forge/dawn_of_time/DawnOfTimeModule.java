@@ -18,6 +18,8 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
+import org.dawnoftimebuilder.block.japanese.SpruceLeglessChairBlock;
+import org.dawnoftimebuilder.block.japanese.SpruceLowTableBlock;
 import org.dawnoftimebuilder.block.roman.BirchCouchBlock;
 import org.dawnoftimebuilder.block.roman.BirchFootstoolBlock;
 import org.dawnoftimebuilder.block.templates.BalusterBlock;
@@ -28,6 +30,7 @@ import org.dawnoftimebuilder.block.templates.PergolaBlock;
 import org.dawnoftimebuilder.block.templates.PlateBlock;
 import org.dawnoftimebuilder.block.templates.SupportBeamBlock;
 import org.dawnoftimebuilder.block.templates.SupportSlabBlock;
+import org.dawnoftimebuilder.registry.DoTBBlockEntitiesRegistry;
 import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
 
 
@@ -40,6 +43,7 @@ public class DawnOfTimeModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> FANCY_FENCE;
     public final SimpleEntrySet<WoodType, Block> FOOTSTOOL;
     public final SimpleEntrySet<WoodType, Block> LATTICE;
+    public final SimpleEntrySet<WoodType, Block> LEGLESS_CHAIR;
     public final SimpleEntrySet<WoodType, Block> LOW_TABLE;
     public final SimpleEntrySet<WoodType, Block> PERGOLA;
     public final SimpleEntrySet<WoodType, Block> PLATE;
@@ -169,6 +173,30 @@ public class DawnOfTimeModule extends SimpleModule {
                 .build();
         this.addEntry(COUCH);
 
+        LOW_TABLE = SimpleEntrySet.builder(WoodType.class, "low_table",
+                        () -> getModBlock("spruce_low_table"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new SpruceLowTableBlock(Utils.copyPropertySafe(w.log).noOcclusion().mapColor(MapColor.COLOR_BLACK)
+                                .strength(2.0F, 6.0F).lightLevel(litBlockEmission(14))))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTexture(modRes("block/spruce_low_table"))
+                .addTile(DoTBBlockEntitiesRegistry.DISPLAYER)
+                .createPaletteFromOak(this::dullPalette)
+                .defaultRecipe()
+                .setTab(tab)
+                .build();
+        this.addEntry(LOW_TABLE);
+
+        LEGLESS_CHAIR = SimpleEntrySet.builder(WoodType.class, "legless_chair",
+                        () -> getModBlock("spruce_legless_chair"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        w -> new SpruceLeglessChairBlock(Utils.copyPropertySafe(w.log).noOcclusion().mapColor(MapColor.COLOR_BLACK)
+                                .strength(2.0F, 6.0F), 3.0F))
+                .addTextureM(modRes("block/spruce_legless_chair"), EveryCompat.res("block/dot/spruce_legless_chair_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .createPaletteFromOak(this::dullPalette)
+                .defaultRecipe()
+                .setTab(tab)
+                .build();
+        this.addEntry(LEGLESS_CHAIR);
     }
 
     private void dullPalette(Palette p) {
@@ -176,5 +204,11 @@ public class DawnOfTimeModule extends SimpleModule {
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
+    }
+
+    private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
+        return (state) -> {
+            return (Boolean)state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
+        };
     }
 }
