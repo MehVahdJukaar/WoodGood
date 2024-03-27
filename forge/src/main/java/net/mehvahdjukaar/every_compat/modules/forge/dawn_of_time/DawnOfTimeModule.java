@@ -22,6 +22,8 @@ import org.dawnoftimebuilder.block.templates.EdgeBlock;
 import org.dawnoftimebuilder.block.templates.LatticeBlock;
 import org.dawnoftimebuilder.block.templates.PergolaBlock;
 import org.dawnoftimebuilder.block.templates.PlateBlock;
+import org.dawnoftimebuilder.block.templates.SupportBeamBlock;
+import org.dawnoftimebuilder.block.templates.SupportSlabBlock;
 import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
 
 
@@ -33,6 +35,8 @@ public class DawnOfTimeModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> LATTICE;
     public final SimpleEntrySet<WoodType, Block> PERGOLA;
     public final SimpleEntrySet<WoodType, Block> PLATE;
+    public final SimpleEntrySet<WoodType, Block> SUPPORT_BEAM;
+    public final SimpleEntrySet<WoodType, Block> SUPPORT_SLAB;
     public final SimpleEntrySet<WoodType, Block> WALL;
 
     public DawnOfTimeModule(String modId) {
@@ -44,7 +48,6 @@ public class DawnOfTimeModule extends SimpleModule {
                         () -> getModBlock("oak_planks_plate"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new PlateBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
@@ -55,11 +58,35 @@ public class DawnOfTimeModule extends SimpleModule {
                         () -> getModBlock("oak_planks_edge"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new EdgeBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
         this.addEntry(EDGE);
+
+
+        PERGOLA = SimpleEntrySet.builder(WoodType.class, "pergola",
+                        () -> getModBlock("oak_pergola"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new PergolaBlock(Utils.copyPropertySafe(w.log).ignitedByLava()))
+                .addTextureM(modRes("block/oak_pergola"), EveryCompat.res("block/dot/oak_pergola_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .createPaletteFromOak(this::dullPalette)
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .setTab(tab)
+                .build();
+        this.addEntry(PERGOLA);
+
+
+        LATTICE = SimpleEntrySet.builder(WoodType.class, "lattice",
+                        () -> getModBlock("oak_lattice"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new LatticeBlock(Utils.copyPropertySafe(w.planks).noOcclusion().ignitedByLava()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTexture(modRes("block/oak_lattice"))
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .setTab(tab)
+                .build();
+        this.addEntry(LATTICE);
 
 
         BEAM = SimpleEntrySet.builder(WoodType.class, "beam",
@@ -90,29 +117,25 @@ public class DawnOfTimeModule extends SimpleModule {
         this.addEntry(WALL);
 
 
-        PERGOLA = SimpleEntrySet.builder(WoodType.class, "pergola",
-                        () -> getModBlock("oak_pergola"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new PergolaBlock(Utils.copyPropertySafe(w.log).ignitedByLava()))
-                .addTextureM(modRes("block/oak_pergola"), EveryCompat.res("block/dot/oak_pergola_m"))
+        SUPPORT_BEAM = SimpleEntrySet.builder(WoodType.class, "support_beam",
+                        () -> getModBlock("oak_support_beam"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new SupportBeamBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .createPaletteFromOak(this::dullPalette)
-                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
-        this.addEntry(PERGOLA);
+        this.addEntry(SUPPORT_BEAM);
 
 
-        LATTICE = SimpleEntrySet.builder(WoodType.class, "lattice",
-                        () -> getModBlock("oak_lattice"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new LatticeBlock(Utils.copyPropertySafe(w.planks).noOcclusion().ignitedByLava()))
+        SUPPORT_SLAB = SimpleEntrySet.builder(WoodType.class, "support_slab",
+                        () -> getModBlock("oak_support_slab"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new SupportSlabBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTexture(modRes("block/oak_lattice"))
-                .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
-        this.addEntry(LATTICE);
+        this.addEntry(SUPPORT_SLAB);
     }
 
     private void dullPalette(Palette p) {
