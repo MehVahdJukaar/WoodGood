@@ -37,7 +37,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import java.util.List;
 import java.util.function.Supplier;
 
-// TODO: Fix recipes & tags
 // `chipped:oak_planks` tags should be changed to `modid:modded_planks`
 // Create a recipe using the new tag for `chipped:recipes/carpenters_table`
 // Currently all variants are crafted with Oak Planks due to them using the `chipped:oak_planks` tag
