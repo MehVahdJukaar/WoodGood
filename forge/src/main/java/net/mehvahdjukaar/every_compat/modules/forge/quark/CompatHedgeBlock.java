@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.quark;
+package net.mehvahdjukaar.every_compat.modules.forge.quark;
 
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.block.BlockColors;
