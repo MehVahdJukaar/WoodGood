@@ -149,6 +149,8 @@ public abstract class EveryCompat {
         DEPENDENCIES.addAll(blocksFrom);
     }
 
+    public static boolean OLD_FD = false;
+
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId) && MODULE_DISABLER.isModuleOn(modId)) {
 
@@ -157,6 +159,7 @@ public abstract class EveryCompat {
                     Class.forName("vectorwing.farmersdelight.FarmersDelight");
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Farmers Delight Refabricated is not installed. Disabling Farmers Delight Module");
+                    OLD_FD = true;
                     return;
                 }
             }

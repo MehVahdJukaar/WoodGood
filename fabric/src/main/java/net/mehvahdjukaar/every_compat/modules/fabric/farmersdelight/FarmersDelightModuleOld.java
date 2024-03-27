@@ -1,5 +1,4 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight;
-/*
 
 import com.google.gson.JsonObject;
 import com.nhoryzon.mc.farmersdelight.FarmersDelightMod;
@@ -17,26 +16,21 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 //SUPPORT: v1.2.4
-public class FarmersDelightModule extends SimpleModule {
+public class FarmersDelightModuleOld extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> cabinets;
 
-    public FarmersDelightModule(String modId) {
+    public FarmersDelightModuleOld(String modId) {
         super(modId, "fd");
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
@@ -90,4 +84,3 @@ public class FarmersDelightModule extends SimpleModule {
         }));
     }
 }
-*/

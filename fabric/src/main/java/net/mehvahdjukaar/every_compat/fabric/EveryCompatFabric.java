@@ -5,12 +5,15 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.modules.fabric.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModuleOld;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
@@ -40,6 +43,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
 
+        if(EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
         // ========================================== WORK IN PROGRESS ============================================== \\
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
