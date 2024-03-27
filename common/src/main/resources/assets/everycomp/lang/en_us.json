@@ -478,6 +478,8 @@
   "block_type.cfm.stripped_upgraded_gate": "Stripped %s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
+  "block_type.mighty_mail.mail_box": "%s Mailbox",
+
   "block_type.refurbished_furniture.chair": "%s Chair",
   "block_type.refurbished_furniture.table": "%s Table",
   "block_type.refurbished_furniture.storage_jar": "%s Storage Jar",

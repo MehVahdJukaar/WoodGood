@@ -19,6 +19,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time.DawnOfTimeModul
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
+import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
@@ -70,6 +71,7 @@ public class EveryCompatForge extends EveryCompat {
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
