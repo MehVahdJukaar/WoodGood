@@ -1,8 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time;
 
-import com.mcwpaths.kikoz.init.BlockInit;
-import com.mcwpaths.kikoz.init.TabInit;
-import com.mcwpaths.kikoz.objects.FacingPathBlock;
+import java.util.function.ToIntFunction;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -17,6 +15,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.MapColor;
+import org.dawnoftimebuilder.block.roman.BirchCouchBlock;
+import org.dawnoftimebuilder.block.roman.BirchFootstoolBlock;
+import org.dawnoftimebuilder.block.templates.BalusterBlock;
 import org.dawnoftimebuilder.block.templates.BeamBlock;
 import org.dawnoftimebuilder.block.templates.EdgeBlock;
 import org.dawnoftimebuilder.block.templates.LatticeBlock;
@@ -31,8 +35,12 @@ import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
 public class DawnOfTimeModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BEAM;
+    public final SimpleEntrySet<WoodType, Block> COUCH;
     public final SimpleEntrySet<WoodType, Block> EDGE;
+    public final SimpleEntrySet<WoodType, Block> FANCY_FENCE;
+    public final SimpleEntrySet<WoodType, Block> FOOTSTOOL;
     public final SimpleEntrySet<WoodType, Block> LATTICE;
+    public final SimpleEntrySet<WoodType, Block> LOW_TABLE;
     public final SimpleEntrySet<WoodType, Block> PERGOLA;
     public final SimpleEntrySet<WoodType, Block> PLATE;
     public final SimpleEntrySet<WoodType, Block> SUPPORT_BEAM;
@@ -53,7 +61,6 @@ public class DawnOfTimeModule extends SimpleModule {
                 .build();
         this.addEntry(PLATE);
 
-
         EDGE = SimpleEntrySet.builder(WoodType.class, "planks_edge",
                         () -> getModBlock("oak_planks_edge"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new EdgeBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
@@ -62,7 +69,6 @@ public class DawnOfTimeModule extends SimpleModule {
                 .setTab(tab)
                 .build();
         this.addEntry(EDGE);
-
 
         PERGOLA = SimpleEntrySet.builder(WoodType.class, "pergola",
                         () -> getModBlock("oak_pergola"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -76,7 +82,6 @@ public class DawnOfTimeModule extends SimpleModule {
                 .build();
         this.addEntry(PERGOLA);
 
-
         LATTICE = SimpleEntrySet.builder(WoodType.class, "lattice",
                         () -> getModBlock("oak_lattice"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new LatticeBlock(Utils.copyPropertySafe(w.planks).noOcclusion().ignitedByLava()))
@@ -87,7 +92,6 @@ public class DawnOfTimeModule extends SimpleModule {
                 .setTab(tab)
                 .build();
         this.addEntry(LATTICE);
-
 
         BEAM = SimpleEntrySet.builder(WoodType.class, "beam",
                         () -> getModBlock("oak_beam"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -100,7 +104,6 @@ public class DawnOfTimeModule extends SimpleModule {
                 .setTab(tab)
                 .build();
         this.addEntry(BEAM);
-
 
         WALL = SimpleEntrySet.builder(WoodType.class, "wall",
                         () -> getModBlock("oak_wall"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -116,7 +119,6 @@ public class DawnOfTimeModule extends SimpleModule {
                 .build();
         this.addEntry(WALL);
 
-
         SUPPORT_BEAM = SimpleEntrySet.builder(WoodType.class, "support_beam",
                         () -> getModBlock("oak_support_beam"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SupportBeamBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
@@ -127,7 +129,6 @@ public class DawnOfTimeModule extends SimpleModule {
                 .build();
         this.addEntry(SUPPORT_BEAM);
 
-
         SUPPORT_SLAB = SimpleEntrySet.builder(WoodType.class, "support_slab",
                         () -> getModBlock("oak_support_slab"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SupportSlabBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
@@ -136,6 +137,38 @@ public class DawnOfTimeModule extends SimpleModule {
                 .setTab(tab)
                 .build();
         this.addEntry(SUPPORT_SLAB);
+
+        FANCY_FENCE = SimpleEntrySet.builder(WoodType.class, "fancy_fence",
+                        () -> getModBlock("birch_fancy_fence"), () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        w -> new BalusterBlock(Utils.copyPropertySafe(w.planks)
+                                .ignitedByLava().noOcclusion().strength(3.0F, 5.0F)))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTexture(modRes("block/birch_fancy_fence"))
+                .defaultRecipe()
+                .setTab(tab)
+                .build();
+        this.addEntry(FANCY_FENCE);
+
+        FOOTSTOOL = SimpleEntrySet.builder(WoodType.class, "footstool",
+                        () -> getModBlock("birch_footstool"), () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        w -> new BirchFootstoolBlock(Utils.copyPropertySafe(w.planks), 9.0F))
+                .addTextureM(modRes("block/birch_footstool"), EveryCompat.res("block/dot/birch_footstool_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .defaultRecipe()
+                .setTab(tab)
+                .build();
+        this.addEntry(FOOTSTOOL);
+
+        COUCH = SimpleEntrySet.builder(WoodType.class, "couch",
+                        () -> getModBlock("birch_couch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        w -> new BirchCouchBlock(Utils.copyPropertySafe(w.planks), 13.0F))
+                .addTextureM(modRes("block/birch_couch"), EveryCompat.res("block/dot/birch_couch_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .defaultRecipe()
+                .setTab(tab)
+                .build();
+        this.addEntry(COUCH);
+
     }
 
     private void dullPalette(Palette p) {

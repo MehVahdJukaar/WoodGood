@@ -117,7 +117,7 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:4663010") // REI, Furnish
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
-    modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
+    modImplementation("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
