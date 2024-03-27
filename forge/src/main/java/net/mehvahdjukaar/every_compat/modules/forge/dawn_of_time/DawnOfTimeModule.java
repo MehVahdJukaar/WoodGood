@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.WallBlock;
 import org.dawnoftimebuilder.block.templates.BeamBlock;
 import org.dawnoftimebuilder.block.templates.LatticeBlock;
 import org.dawnoftimebuilder.block.templates.PergolaBlock;
+import org.dawnoftimebuilder.block.templates.PlateBlock;
 import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
 
 
@@ -29,11 +30,23 @@ public class DawnOfTimeModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> BEAM;
     public final SimpleEntrySet<WoodType, Block> LATTICE;
     public final SimpleEntrySet<WoodType, Block> PERGOLA;
+    public final SimpleEntrySet<WoodType, Block> PLATE;
     public final SimpleEntrySet<WoodType, Block> WALL;
 
     public DawnOfTimeModule(String modId) {
         super(modId, "dot");
         var tab = DoTBCreativeModeTabsRegistry.DOT_TAB;
+
+
+        PLATE = SimpleEntrySet.builder(WoodType.class, "planks_plate",
+                        () -> getModBlock("oak_planks_plate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new PlateBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setRenderType(() -> RenderType::cutout)
+                .defaultRecipe()
+                .setTab(tab)
+                .build();
+        this.addEntry(PLATE);
 
 
         BEAM = SimpleEntrySet.builder(WoodType.class, "beam",
