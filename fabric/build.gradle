@@ -40,6 +40,7 @@ dependencies {
     modCompileOnly("curse.maven:athena-841890:4764358") // Chipped
     modCompileOnly("curse.maven:cloth-config-348521:3972420") // REI
     modImplementation("curse.maven:architectury-api-419699:4663009") // REI
+    modImplementation("curse.maven:framework-fabric-667391:4718252") // Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:quad-932715:5146132") // More Crafting Tables
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
 
