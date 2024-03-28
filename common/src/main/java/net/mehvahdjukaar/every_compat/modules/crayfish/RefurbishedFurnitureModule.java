@@ -176,6 +176,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
                 .addTag(modRes("storage"), Registries.ITEM)
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(mailboxes);
 
