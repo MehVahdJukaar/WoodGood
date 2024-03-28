@@ -550,6 +550,8 @@
 
   "block_type.shutter.shutter": "%s Shutter",
 
+  "block_type.vct.crafting_table": "%s Crafting Table",
+
   "block_type.xercamod.carved_1": "Carved %s",
   "block_type.xercamod.carved_2": "Carved %s",
   "block_type.xercamod.carved_3": "Carved %s",
@@ -568,6 +570,7 @@
 
   "wood_type.quark.ancient": "Ashen",
   "wood_type.quark.blossom": "Trumpet",
+
   "leaves_type.quark.blue": "Frosty",
   "leaves_type.quark.lavender":"Serene",
   "leaves_type.quark.orange": "Warm",
