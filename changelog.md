@@ -1,2 +1,5 @@
-- Supports Famers Delight Refabricated
-- Updated a mod that adds carpets
+- Support Mighty Mail (Forge & Fabric)
+- Support Dawn of Time (Forge)
+- Support Variant Crafting Tables (Forge)
+- Support More Crafting Tables (Forge & Fabric)
+- Fix render type of RFM Mailboxes to use cutout
