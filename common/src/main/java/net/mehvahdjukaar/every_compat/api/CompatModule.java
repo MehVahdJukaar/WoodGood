@@ -121,6 +121,44 @@ public abstract class CompatModule {
         if (woodType.getId().toString().equals("twilightforest:mangrove")) {
             return name.equals("mangrove_chest");//mangrove waaa so much pain
         }
+
+        if (woodType.getId().toString().equals("architects_palette:twisted")) {
+            return name.equals("vct:twisted_crafting_table");
+        }
+        if (woodType.getId().toString().equals("biomesoplenty:fir")) {
+            return name.equals("vct:fir_crafting_table");
+        }
+        if (woodType.getId().toString().equals("biomesoplenty:jacaranda")) {
+            return name.equals("vct:jacaranda_crafting_table");
+        }
+        if (woodType.getId().toString().equals("biomesoplenty:maple")) {
+            return name.equals("vct:maple_crafting_table");
+        }
+        if (woodType.getId().toString().equals("ecologics:azalea")) {
+            return name.equals("vct:azalea_crafting_table");
+        }
+        if (woodType.getId().toString().equals("ecologics:walnut")) {
+            return name.equals("vct:walnut_crafting_table");
+        }
+        if (woodType.getId().toString().equals("regions_unexplored:aspen")) {
+            return name.equals("vct:aspen_crafting_table");
+        }
+        if (woodType.getId().toString().equals("regions_unexplored:cherry")) {
+            return name.equals("vct:cherry_crafting_table");
+        }
+        if (woodType.getId().toString().equals("regions_unexplored:fir")) {
+            return name.equals("vct:fir_crafting_table");
+        }
+        if (woodType.getId().toString().equals("regions_unexplored:jacaranda")) {
+            return name.equals("vct:jacaranda_crafting_table");
+        }
+        if (woodType.getId().toString().equals("regions_unexplored:maple")) {
+            return name.equals("vct:maple_crafting_table");
+        }
+        if (woodType.getId().toString().equals("regions_unexplored:willow")) {
+            return name.equals("vct:willow_crafting_table");
+        }
+
         if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types
                 registry.containsKey(new ResourceLocation(modId, n2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
