@@ -201,6 +201,7 @@ public class DawnOfTimeModule extends SimpleModule {
 
     private void dullPalette(Palette p) {
         p.add(p.increaseInner());
+        p.add(p.increaseInner());
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
