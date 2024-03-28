@@ -1,5 +1,8 @@
-- Support Mighty Mail (Forge & Fabric)
-- Support Dawn of Time (Forge)
-- Support Variant Crafting Tables (Forge)
-- Support More Crafting Tables (Forge & Fabric)
+#### UPDATED
 - Fix render type of RFM Mailboxes to use cutout
+
+#### NEW
+- Mighty Mail (Forge & Fabric)
+- Dawn of Time (Forge)
+- Variant Crafting Tables (Forge)
+- More Crafting Tables (Forge & Fabric)
