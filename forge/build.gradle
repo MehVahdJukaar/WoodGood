@@ -171,7 +171,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
     modImplementation("curse.maven:mighty-mail-902986:4750272")
-    modImplementation("curse.maven:missing-wilds-forge-634277:5053677")
+    modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
@@ -182,7 +182,7 @@ dependencies {
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
-    modCompileOnly("curse.maven:twigs-496913:4605097")
+    modImplementation("curse.maven:twigs-496913:4605097")
     modImplementation("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:woodworks-543610:4023081") // no 1.20.1 yet
@@ -208,14 +208,14 @@ dependencies {
     // =========================================== FOR TESTING ===================================================== \\
     modCompileOnly("curse.maven:regions-unexplored-659110:4779426")
     modCompileOnly("curse.maven:endless-biomes-667688:5109705")
-    modCompileOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
+    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
 //    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
 //    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli
 
     // Dependencies
-//    modImplementation("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
+    modImplementation("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
     modImplementation("curse.maven:terrablender-563928:4647094") // Required by: BOP, Regions-Unexplored
 //    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
 }
