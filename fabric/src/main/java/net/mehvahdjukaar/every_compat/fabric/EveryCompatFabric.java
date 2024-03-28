@@ -13,8 +13,8 @@ import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoor
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModuleOld;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
-import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.more_crafting_tables.MoreCraftingTablesModule;
+//import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
@@ -44,7 +44,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("lolmct", () -> MoreCraftingTablesModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
+//        addModule("twilightforest", () -> TwilightForestModule::new);
 
         if(EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
         // ========================================== WORK IN PROGRESS ============================================== \\

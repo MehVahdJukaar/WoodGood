@@ -18,6 +18,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
+import net.mehvahdjukaar.every_compat.modules.forge.more_crafting_tables.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
@@ -74,6 +75,7 @@ public class EveryCompatForge extends EveryCompat {
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("mctb", () -> MoreCraftingTablesModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
