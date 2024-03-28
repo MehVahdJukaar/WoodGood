@@ -14,7 +14,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelig
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
-import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.more_crafting_tables.MoreCraftingTablesModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
@@ -42,6 +42,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("create", () -> CreateModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("lolmct", () -> MoreCraftingTablesModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
 

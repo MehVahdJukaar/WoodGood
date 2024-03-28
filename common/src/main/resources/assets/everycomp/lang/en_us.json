@@ -265,6 +265,8 @@
 
   "block_type.backpacked.backpack_shelf": "%s Backpack Shelf",
 
+  "block_type.mctb.crafting_table": "%s Crafting Table",
+
   "block_type.mcwbridges.rail_bridge": "%s Rail Bridge",
   "block_type.mcwbridges.bridge_pier": "%s Bridge Support",
   "block_type.mcwbridges.log_bridge_middle": "%s Bridge",

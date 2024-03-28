@@ -37,15 +37,16 @@ dependencies {
     modImplementation("curse.maven:moonlightlib-499980:5201141") // v2.11.9
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
-    modImplementation("curse.maven:architectury-api-419699:4663009") // REI
     modCompileOnly("curse.maven:athena-841890:4764358") // Chipped
     modCompileOnly("curse.maven:cloth-config-348521:3972420") // REI
+    modImplementation("curse.maven:architectury-api-419699:4663009") // REI
+    modImplementation("curse.maven:quad-932715:5146132") // More Crafting Tables
+    modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
 
         // LOCAL
-    modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
-    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
-    modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
+//    modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
+//     modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
+//    modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:roughly-enough-items-310111:4573156")

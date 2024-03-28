@@ -123,7 +123,7 @@ dependencies {
     modCompileOnly("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
-    modImplementation("curse.maven:framework-549225:5098255") // refurbished-furniture
+    modImplementation("curse.maven:framework-549225:5098255") //  Refurbished Furniture, Mighty Mail
     modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
