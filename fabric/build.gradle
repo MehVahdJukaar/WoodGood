@@ -77,6 +77,7 @@ dependencies {
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
     modImplementation("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:missing-wilds-622590:5053651")
+    modImplementation("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4603805")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
