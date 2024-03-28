@@ -50,7 +50,10 @@ dependencies {
 //    modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
 
     // ================================================ IMPORTS ===================================================== \\
+    // Tools
     modCompileOnly("curse.maven:roughly-enough-items-310111:4573156")
+    modImplementation("curse.maven:modmenu-308702:5162837")
+    modImplementation("curse.maven:jei-238222:5101365")
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:4599790")
@@ -63,26 +66,26 @@ dependencies {
     modCompileOnly("curse.maven:macaws-windows-363569:4750644")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
 
-    modImplementation("curse.maven:another-furniture-610492:4815124")
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
-    modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:arrp-463113:3829389")
     modCompileOnly("curse.maven:camp-chair-531744:4579676")
     modCompileOnly("curse.maven:chipped-456956:4463478")
     modCompileOnly("curse.maven:create-fabric-624165:5168511")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
+    modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4062547")
-    modImplementation("curse.maven:farmers-delight-refabricated-993166:5215829")
     modCompileOnly("curse.maven:furnish-547069:4821516")
-    modImplementation("curse.maven:friends-and-foes-551364:4968876")
     modCompileOnly("curse.maven:handcrafted-538214:4215478")
+    modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
-    modImplementation("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:missing-wilds-622590:5053651")
-    modImplementation("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4603805")
-    modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
+    modImplementation("curse.maven:another-furniture-610492:4815124")
+    modImplementation("curse.maven:farmers-delight-refabricated-993166:5215829")
+    modImplementation("curse.maven:friends-and-foes-551364:4968876")
+    modImplementation("curse.maven:mighty-mail-fabric-904097:4750271")
+    modImplementation("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
 
     // modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
