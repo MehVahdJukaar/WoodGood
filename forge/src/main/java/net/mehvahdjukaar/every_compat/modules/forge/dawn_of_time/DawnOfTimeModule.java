@@ -175,7 +175,7 @@ public class DawnOfTimeModule extends SimpleModule {
 
         LOW_TABLE = SimpleEntrySet.builder(WoodType.class, "low_table",
                         getModBlock("spruce_low_table"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new SpruceLowTableBlock(Utils.copyPropertySafe(w.log).noOcclusion().mapColor(MapColor.COLOR_BLACK)
+                        w -> new SpruceLowTableBlock(Utils.copyPropertySafe(w.log).noOcclusion()
                                 .strength(2.0F, 6.0F).lightLevel(litBlockEmission(14))))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/spruce_low_table"))
@@ -188,7 +188,7 @@ public class DawnOfTimeModule extends SimpleModule {
 
         LEGLESS_CHAIR = SimpleEntrySet.builder(WoodType.class, "legless_chair",
                         getModBlock("spruce_legless_chair"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new SpruceLeglessChairBlock(Utils.copyPropertySafe(w.log).noOcclusion().mapColor(MapColor.COLOR_BLACK)
+                        w -> new SpruceLeglessChairBlock(Utils.copyPropertySafe(w.log).noOcclusion()
                                 .strength(2.0F, 6.0F), 3.0F))
                 .addTextureM(modRes("block/spruce_legless_chair"), EveryCompat.res("block/dot/spruce_legless_chair_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
