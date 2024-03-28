@@ -26,6 +26,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModu
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
+import net.mehvahdjukaar.every_compat.modules.forge.variant_crafting_tables.VariantCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
@@ -60,7 +61,9 @@ public class EveryCompatForge extends EveryCompat {
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
         // ========================================= Add Modules ==================================================== \\
+        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
+        addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
@@ -81,10 +84,9 @@ public class EveryCompatForge extends EveryCompat {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodster", () -> WoodsterModule::new);
-        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+        addModule("vct", () -> VariantCraftingTablesModule::new);
         addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addModule("xercamod", () -> XercaModule::new);
-        addModule("buildersdelight", () -> BuildersDelightModule::new);
 
         // ========================================= Macaw's ======================================================== \\
         addModule("mcwbridges", () -> MacawBridgesModule::new);

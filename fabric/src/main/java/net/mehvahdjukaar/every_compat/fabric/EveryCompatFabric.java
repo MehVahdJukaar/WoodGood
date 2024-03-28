@@ -40,8 +40,8 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         // ========================================= Add Modules ==================================================== \\
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("create", () -> CreateModule::new);
-        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
+        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
 
