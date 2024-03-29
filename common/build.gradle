@@ -19,6 +19,9 @@ dependencies {
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831")
     modCompileOnly("curse.maven:architectury-api-419699:4663010")
 
+    // LOCAL
+//    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
+
 // ================================================== IMPORTS ==========================================================
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")

@@ -19,6 +19,9 @@ configurations {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    for (String module in port_lib_modules.split(",")) {
+        include(modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version"))
+    }
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
@@ -46,8 +49,9 @@ dependencies {
 
         // LOCAL
 //    modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
-//     modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
+//    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
 //    modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
+    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
     // ================================================ IMPORTS ===================================================== \\
     // Tools
@@ -81,9 +85,10 @@ dependencies {
     modCompileOnly("curse.maven:missing-wilds-622590:5053651")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4603805")
-    modImplementation("curse.maven:another-furniture-610492:4815124")
-    modImplementation("curse.maven:farmers-delight-refabricated-993166:5215829")
-    modImplementation("curse.maven:friends-and-foes-551364:4968876")
+    modCompileOnly("curse.maven:another-furniture-610492:4815124")
+    modCompileOnly("curse.maven:farmers-delight-fabric-482834:4939709")
+    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:5215829")
+    modCompileOnly("curse.maven:friends-and-foes-551364:4968876")
     modImplementation("curse.maven:mighty-mail-fabric-904097:4750271")
     modImplementation("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
 
@@ -173,5 +178,10 @@ repositories {
     maven {
         name = 'ModdingPlayground'
         url  = 'https://raw.githubusercontent.com/moddingplayground/maven/main/'
+    }
+    maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
+    maven { // Reach Entity Attributes
+        url = "https://maven.jamieswhiteshirt.com/libs-release"
+        content { includeGroup("com.jamieswhiteshirt") }
     }
 }
