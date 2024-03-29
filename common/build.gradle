@@ -19,8 +19,12 @@ dependencies {
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831")
     modCompileOnly("curse.maven:architectury-api-419699:4663010")
 
-    // LOCAL
+// =============================================== DEPENDENCIES ========================================================
+    modImplementation("curse.maven:framework-549225:5180973")
+
+        // LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
+    modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
 
 // ================================================== IMPORTS ==========================================================
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
@@ -38,8 +42,6 @@ dependencies {
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
     modCompileOnly("curse.maven:quark-243121:5093415")
     modCompileOnly("curse.maven:zeta-968868:5078215")
-    modCompileOnly("curse.maven:framework-549225:5098255")
-    modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
