@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.lauchs;
+package net.mehvahdjukaar.every_compat.modules.fabric.lauchs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -9,8 +9,8 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
-import net.stehschnitzel.shutter.common.blocks.Shutter;
-import net.stehschnitzel.shutter.init.CreativTabInit;
+import net.stehschnitzel.shutter.block.Shutter;
+import net.stehschnitzel.shutter.init.ShutterItemGroup;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class LauchsShuttersModule extends SimpleModule {
 
     public LauchsShuttersModule(String modId) {
         super(modId, "ls");
+        var tab = "shutter_tab";
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
                         getModBlock("oak_shutter", Shutter.class), () -> WoodTypeRegistry.OAK_TYPE,
@@ -36,18 +37,18 @@ public class LauchsShuttersModule extends SimpleModule {
                 .addTexture(modRes("block/oak_shutter_middle_big"))
                 .addTexture(modRes("item/oak_shutter"))
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(CreativTabInit.SHUTTER_TAB)
+                .setTab(() -> ShutterItemGroup.SHUTTER_GROUP)
                 .defaultRecipe()
                 .build();
 
         this.addEntry(shutters);
     }
 
-    @Override
-    public List<String> getAlreadySupportedMods() {
-        return List.of(
-                "ecologics", "quark", "twigs",
-                "autumnity", "environments", "goodending"
-        );
-    }
+//    @Override
+//    public List<String> getAlreadySupportedMods() {
+//        return List.of(
+//                "ecologics", "quark", "twigs",
+//                "autumnity", "environments", "goodending"
+//        );
+//    }
 }

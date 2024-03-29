@@ -157,6 +157,20 @@
 
   "block_type.graveyard.coffin": "%s Coffin",
 
+  "block_type.dawnoftimebuilder.beam": "%s Beam",
+  "block_type.dawnoftimebuilder.couch": "%s Couch",
+  "block_type.dawnoftimebuilder.fancy_fence": "%s Fancy Fence",
+  "block_type.dawnoftimebuilder.footstool": "%s Footstool",
+  "block_type.dawnoftimebuilder.lattice": "%s Lattice",
+  "block_type.dawnoftimebuilder.legless_chair": "%s Legless Chair",
+  "block_type.dawnoftimebuilder.low_table": "%s Low Table",
+  "block_type.dawnoftimebuilder.pergola": "%s Pergola",
+  "block_type.dawnoftimebuilder.planks_edge": "%s Edge",
+  "block_type.dawnoftimebuilder.planks_plate": "%s Plate",
+  "block_type.dawnoftimebuilder.support_beam": "%s Support Beam",
+  "block_type.dawnoftimebuilder.support_slab": "%s Support Slab",
+  "block_type.dawnoftimebuilder.wall": "%s Wall",
+
   "block_type.decorative_blocks.palisade": "%s Palisade",
   "block_type.decorative_blocks.support": "%s Support",
   "block_type.decorative_blocks.beam": "%s Beam",
@@ -250,6 +264,8 @@
   "block_type.valhelsia_structures.stripped_post": "Stripped %s Post",
 
   "block_type.backpacked.backpack_shelf": "%s Backpack Shelf",
+
+  "block_type.mctb.crafting_table": "%s Crafting Table",
 
   "block_type.mcwbridges.rail_bridge": "%s Rail Bridge",
   "block_type.mcwbridges.bridge_pier": "%s Bridge Support",
@@ -464,6 +480,8 @@
   "block_type.cfm.stripped_upgraded_gate": "Stripped %s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
 
+  "block_type.mighty_mail.mail_box": "%s Mailbox",
+
   "block_type.refurbished_furniture.chair": "%s Chair",
   "block_type.refurbished_furniture.table": "%s Table",
   "block_type.refurbished_furniture.storage_jar": "%s Storage Jar",
@@ -534,6 +552,8 @@
 
   "block_type.shutter.shutter": "%s Shutter",
 
+  "block_type.vct.crafting_table": "%s Crafting Table",
+
   "block_type.xercamod.carved_1": "Carved %s",
   "block_type.xercamod.carved_2": "Carved %s",
   "block_type.xercamod.carved_3": "Carved %s",
@@ -552,6 +572,7 @@
 
   "wood_type.quark.ancient": "Ashen",
   "wood_type.quark.blossom": "Trumpet",
+
   "leaves_type.quark.blue": "Frosty",
   "leaves_type.quark.lavender":"Serene",
   "leaves_type.quark.orange": "Warm",

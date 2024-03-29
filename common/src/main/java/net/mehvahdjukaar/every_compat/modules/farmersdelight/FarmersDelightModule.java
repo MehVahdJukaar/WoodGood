@@ -24,7 +24,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-//SUPPORT: v1.2.4
+// SUPPORT: v1.2.4+
+// SUPPORT FABRIC-v2.0.5+
 public class FarmersDelightModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> cabinets;

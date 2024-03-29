@@ -41,8 +41,8 @@ public class SpriteHelper {
         addOptional("regions_unexplored:apple_oak_leaves", "_leaves", "regions_unexplored:block/apple_oak_leaves_stage_0");
         addOptional("regions_unexplored:flowering_leaves", "_leaves", "regions_unexplored:item/flowering_leaves");
         addOptional("regions_unexplored:palm_leaves", "_leaves", "regions_unexplored:block/palm_leaves_side");
-        addOptional("regions_unexplored:enchanted_birch_leaves", "_leaves", "regions_unexplored:block/enchanted_birch_leaves");
-        addOptional("regions_unexplored:silver_birch_leaves", "_leaves", "regions_unexplored:block/silver_birch_leaves");
+        addOptional("regions_unexplored:enchanted_birch_leaves", "_leaves", "regions_unexplored:item/enchanted_birch_leaves");
+        addOptional("regions_unexplored:silver_birch_leaves", "_leaves", "regions_unexplored:item/silver_birch_leaves");
         addOptional("regions_unexplored:small_oak_leaves", "_leaves", "minecraft:block/oak_leaves");
 
         // Endless Biomes
@@ -59,6 +59,10 @@ public class SpriteHelper {
         // Gardens Of The Dead
         addOptional("gardens_of_the_dead:whistlecane", "_side", "gardens_of_the_dead:block/whistlecane_block");
         addOptional("gardens_of_the_dead:whistlecane", "_top", "gardens_of_the_dead:block/whistlecane_block_top");
+
+        // L_Ender 's Cataclysm
+        addOptional("cataclysm:chorus_stem", "_side", "cataclysm:block/chorus_stem");
+        addOptional("cataclysm:chorus_stem", "_top", "cataclysm:block/chorus_stem");
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {

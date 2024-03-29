@@ -117,13 +117,14 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:4663010") // REI, Furnish
     modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
+    modImplementation("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:4594238") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
-    modImplementation("curse.maven:framework-549225:5098255") // refurbished-furniture
-    modImplementation("com.mrcrayfish.furniture.refurbished:cfm")
+    modImplementation("curse.maven:framework-549225:5098255") //  Refurbished Furniture, Mighty Mail
+    modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
@@ -132,6 +133,7 @@ dependencies {
 //    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // no longer required since 0.5.1
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
     modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
+    modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
 
         // TOOLS
     modCompileOnly("curse.maven:roughly-enough-items-310111:4573157")
@@ -140,13 +142,15 @@ dependencies {
     modImplementation("curse.maven:jei-238222:4712868")
 
     // ================================================ IMPORTS ===================================================== \\
-    modImplementation("curse.maven:another-furniture-610492:4815126")
-    modCompileOnly("curse.maven:architects-palette-433862:5036133")
+    modCompileOnly("curse.maven:another-furniture-610492:4815126")
+    modImplementation("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
+    modCompileOnly("curse.maven:builders-delight-forge-563734:5088176")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856")
     modCompileOnly("curse.maven:create-328085:4835191")
+    modImplementation("curse.maven:dawn-of-time-312359:5199362")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
@@ -155,7 +159,6 @@ dependencies {
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
-    modCompileOnly("curse.maven:lauchs-shutters-714019:5094131")
 
     modCompileOnly("curse.maven:macaws-bridges-351725:4605466")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
@@ -167,7 +170,9 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
+    modImplementation("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
+    modImplementation("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
@@ -178,12 +183,12 @@ dependencies {
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
-    modCompileOnly("curse.maven:twigs-496913:4605097")
-    modCompileOnly("curse.maven:woodworks-543610:4023081") // no 1.20.1 yet
+    modImplementation("curse.maven:twigs-496913:4605097")
+    modImplementation("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:woodster-869951:4670471")
-    modCompileOnly("curse.maven:xercamod-341575:4667995")
+    modCompileOnly("curse.maven:woodworks-543610:4023081") // no 1.20.1 yet
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
-    modCompileOnly("curse.maven:builders-delight-forge-563734:5088176")
+    modCompileOnly("curse.maven:xercamod-341575:4667995")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
@@ -202,16 +207,16 @@ dependencies {
     // modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBModel
 
     // =========================================== FOR TESTING ===================================================== \\
-//    modImplementation("curse.maven:regions-unexplored-659110:4779426")
-//    modImplementation("curse.maven:endless-biomes-667688:5109705")
-//    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
+    modCompileOnly("curse.maven:regions-unexplored-659110:4779426")
+    modCompileOnly("curse.maven:endless-biomes-667688:5109705")
+    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
+//    modImplementation("curse.maven:biomes-o-plenty-220318:4707270")
 //    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli
 
     // Dependencies
-//    modImplementation("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
+    modImplementation("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
     modImplementation("curse.maven:terrablender-563928:4647094") // Required by: BOP, Regions-Unexplored
 //    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
 }
