@@ -13,7 +13,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelig
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
-import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
@@ -22,7 +21,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
     public void onInitialize() {
         this.commonInit();
 
-        if(PlatHelper.getPhysicalSide().isClient())
+        if (PlatHelper.getPhysicalSide().isClient())
             ItemTooltipCallback.EVENT.register(EveryCompatClient::onItemTooltip);
 
         // ========================================= Macaw's ======================================================== \\
@@ -43,7 +42,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
 
-        if(EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
+        if (EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
         // ========================================== WORK IN PROGRESS ============================================== \\
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
