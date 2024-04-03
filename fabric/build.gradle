@@ -20,7 +20,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     for (String module in port_lib_modules.split(",")) {
-        include(modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version"))
+        modImplementation(include("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version"))
     }
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
@@ -43,13 +43,13 @@ dependencies {
     modCompileOnly("curse.maven:athena-841890:4764358") // Chipped
     modCompileOnly("curse.maven:cloth-config-348521:3972420") // REI
     modImplementation("curse.maven:architectury-api-419699:4663009") // REI
-    modImplementation("curse.maven:framework-fabric-667391:4718252") // Refurbished Furniture, Mighty Mail
+    modImplementation("curse.maven:framework-549225:5180973") // Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:quad-932715:5146132") // More Crafting Tables
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
 
         // LOCAL
 //    modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
-//    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
+//    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2") // updated to 1.20.1
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
@@ -70,6 +70,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-windows-363569:4750644")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
 
+        // OTHERS
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
     modCompileOnly("curse.maven:arrp-463113:3829389")
     modCompileOnly("curse.maven:camp-chair-531744:4579676")
