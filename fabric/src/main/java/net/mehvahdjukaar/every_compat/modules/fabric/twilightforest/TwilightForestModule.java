@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -97,7 +98,7 @@ public class TwilightForestModule extends SimpleModule {
 
     @NotNull
     private static<T extends Block> RegistryObject<T> makeRegObj(ResourceLocation id) {
-        return new RegistryObject<>(id, () ->(T) BuiltInRegistries.BLOCK.get(id), Registries.BLOCK);
+        return new RegistryObject<>(id, ResourceKey.create(Registries.BLOCK, id));
     }
 
     @Override
