@@ -53,10 +53,7 @@ import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 //SUPPORT: v3.0.0+
@@ -385,10 +382,13 @@ public class WoodworksModule extends SimpleModule {
             Respriter respriterLeftO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            chests.blocks.forEach((wood, block) -> {
+            trappedChests.blocks.forEach((wood, block) -> {
 
-                BlueprintChestBlock b = (BlueprintChestBlock) block;
+                BlueprintTrappedChestBlock b = (BlueprintTrappedChestBlock) block;
                 String folderPath = "entity/chest/";
+
+                boolean blueSkies = wood.getNamespace().equals("blue_skies");
+                boolean blueSkies_Crystallized = blueSkies && wood.getTypeName().equals("crystallized");
 
                 try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
@@ -419,7 +419,7 @@ public class WoodworksModule extends SimpleModule {
 
                             trapped.applyOverlayOnExisting(normal_t.makeCopy());
 
-                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            if (!blueSkies || blueSkies_Crystallized) handler.dynamicPack.addAndCloseTexture(res, img);
                             handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
                         }
                     }
@@ -434,7 +434,7 @@ public class WoodworksModule extends SimpleModule {
                             var trapped = img.makeCopy();
                             trapped.applyOverlayOnExisting(left_t.makeCopy());
 
-                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            if (!blueSkies || blueSkies_Crystallized) handler.dynamicPack.addAndCloseTexture(res, img);
                             handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
                         }
                     }
@@ -449,13 +449,10 @@ public class WoodworksModule extends SimpleModule {
                             var trapped = img.makeCopy();
                             trapped.applyOverlayOnExisting(right_t.makeCopy());
 
-                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            if (!blueSkies || blueSkies_Crystallized) handler.dynamicPack.addAndCloseTexture(res, img);
                             handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
                         }
                     }
-
-//                    BlueprintChestMaterials.registerMaterials(EveryCompat.MOD_ID, wood.getTypeName(), false);
-//                    BlueprintChestMaterials.registerMaterials(EveryCompat.MOD_ID, wood.getTypeName(), true);
 
                 } catch (Exception ex) {
                     handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", b, ex);
