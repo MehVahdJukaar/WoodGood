@@ -392,9 +392,9 @@ public class QuarkModule extends SimpleModule {
             Respriter respriterLeftO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            chests.blocks.forEach((wood, block) -> {
+            trappedChests.blocks.forEach((wood, block) -> {
 
-                CompatChestBlock b = (CompatChestBlock) block;
+                CompatTrappedChestBlock b = (CompatTrappedChestBlock) block;
 
                 try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
@@ -419,7 +419,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap");
 
-                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes);
+                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
                         }
                     }
                     {
@@ -427,7 +427,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_left");
 
-                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes);
+                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
                         }
                     }
                     {
@@ -435,7 +435,7 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_right");
 
-                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes);
+                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
                         }
                     }
 
@@ -452,14 +452,16 @@ public class QuarkModule extends SimpleModule {
     private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
                                      Respriter respriterLeft, Respriter respriterLeftO,
                                      AnimationMetadataSection baseMeta, List<Palette> basePalette,
-                                     List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes) {
+                                     List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes,
+                                     WoodType wood) {
 
         TextureImage recoloredBase = respriterLeft.recolorWithAnimation(basePalette, baseMeta);
         TextureImage recoloredOverlay = respriterLeftO.recolorWithAnimation(overlayPalette, baseMeta);
         recoloredBase.applyOverlay(recoloredOverlay);
         TextureImage trapped = recoloredBase.makeCopy();
 
-        handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
+        if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
+            handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
 
         trapped.applyOverlay(trappedOverlay.makeCopy());
         handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
