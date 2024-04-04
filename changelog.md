@@ -1,2 +1,2 @@
-- updated twilight forest fabric module
-- minor fixes with versioning
+#### UPDATED:
+- Woodworks - Supported for 1.20.1
