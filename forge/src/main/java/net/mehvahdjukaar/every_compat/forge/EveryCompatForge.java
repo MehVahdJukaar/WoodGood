@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
+import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
@@ -103,6 +104,7 @@ public class EveryCompatForge extends EveryCompat {
 
 
         // ========================================== WORK IN PROGRESS ============================================== \\
+        addModule("woodworks", () -> WoodworksModule::new);
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
