@@ -46,12 +46,14 @@ dependencies {
     modImplementation("curse.maven:framework-549225:5180973") // Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:quad-932715:5146132") // More Crafting Tables
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
+    modCompileOnly("curse.maven:terrablender-fabric-565956:5068219") // Regions Unexplored
 
         // LOCAL
 //    modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 //    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2") // updated to 1.20.1
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
+    // modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
     // ================================================ IMPORTS ===================================================== \\
     // Tools
@@ -93,7 +95,7 @@ dependencies {
     modImplementation("curse.maven:mighty-mail-fabric-904097:4750271")
     modImplementation("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
 
-    // modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
+    modCompileOnly("curse.maven:regions-unexplored-659110:5151837")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 
