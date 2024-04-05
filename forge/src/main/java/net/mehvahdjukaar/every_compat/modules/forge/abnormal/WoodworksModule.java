@@ -214,17 +214,17 @@ public class WoodworksModule extends SimpleModule {
                         new BlueprintChestBlockEntity(BlockPos.ZERO, Blocks.CHEST.defaultBlockState())));
     }
 
-    protected final ResourceLocation POI_ID = EveryCompat.res("tags/block/ww_beehives.json");
-    private final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(
-            POI_ID,
-            () -> new PoiType(getBeehives(), 0, 1)
-    );
-
-    private Set<BlockState> getBeehives() {
-        var set = new ImmutableSet.Builder<BlockState>();
-        beehives.blocks.values().forEach(b->set.addAll(b.getStateDefinition().getPossibleStates()));
-        return set.build();
-    }
+//    protected final ResourceLocation POI_ID = EveryCompat.res("ww_beehives");
+//    private final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(
+//            POI_ID,
+//            () -> new PoiType(getBeehives(), 0, 1)
+//    );
+//
+//    private Set<BlockState> getBeehives() {
+//        var set = new ImmutableSet.Builder<BlockState>();
+//        beehives.blocks.values().forEach(b->set.addAll(b.getStateDefinition().getPossibleStates()));
+//        return set.build();
+//    }
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event){
@@ -260,9 +260,9 @@ public class WoodworksModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
         // Point-of-Interest for beehives
-        SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
-        tb.add(POI_ID);
-        handler.dynamicPack.addTag(tb, Registries.POINT_OF_INTEREST_TYPE);
+//        SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
+//        tb.add(POI_ID);
+//        handler.dynamicPack.addTag(tb, Registries.POINT_OF_INTEREST_TYPE);
 
         // Recipes
         bookshelves.items.forEach((wood, item) -> {

@@ -20,7 +20,7 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:4663010")
 
 // =============================================== DEPENDENCIES ========================================================
-    modImplementation("curse.maven:framework-549225:5180973")
+    modCompileOnly("curse.maven:framework-549225:5180973") // Furniture Refurbished
 
         // LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
@@ -43,6 +43,7 @@ dependencies {
     modCompileOnly("curse.maven:quark-243121:5093415")
     modCompileOnly("curse.maven:zeta-968868:5078215")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
+
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
 }

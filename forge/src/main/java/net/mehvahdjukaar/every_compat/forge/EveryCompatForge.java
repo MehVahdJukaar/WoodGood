@@ -25,6 +25,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MightyM
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
+import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
@@ -88,6 +89,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodster", () -> WoodsterModule::new);
         addModule("vct", () -> VariantCraftingTablesModule::new);
+        addModule("woodworks", () -> WoodworksModule::new);
         addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addModule("xercamod", () -> XercaModule::new);
 
@@ -104,7 +106,7 @@ public class EveryCompatForge extends EveryCompat {
 
 
         // ========================================== WORK IN PROGRESS ============================================== \\
-        addModule("woodworks", () -> WoodworksModule::new);
+        addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
