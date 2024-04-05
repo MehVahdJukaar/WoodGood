@@ -34,7 +34,7 @@ public class RegionsUnexploredModule extends SimpleModule {
         super(modId, "ru");
 
         BRANCH = SimpleEntrySet.builder(WoodType.class, "branch",
-            RuBlocks.OAK_BRANCH, () -> WoodTypeRegistry.OAK_TYPE,
+            getModBlock("regions_unexplored:oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
             w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()), "branch")
         )
             .addTexture(modRes("block/oak_branch"))
