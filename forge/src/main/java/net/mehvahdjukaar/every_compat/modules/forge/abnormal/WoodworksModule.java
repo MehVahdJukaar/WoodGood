@@ -214,17 +214,6 @@ public class WoodworksModule extends SimpleModule {
                         new BlueprintChestBlockEntity(BlockPos.ZERO, Blocks.CHEST.defaultBlockState())));
     }
 
-//    protected final ResourceLocation POI_ID = EveryCompat.res("ww_beehives");
-//    private final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(
-//            POI_ID,
-//            () -> new PoiType(getBeehives(), 0, 1)
-//    );
-//
-//    private Set<BlockState> getBeehives() {
-//        var set = new ImmutableSet.Builder<BlockState>();
-//        beehives.blocks.values().forEach(b->set.addAll(b.getStateDefinition().getPossibleStates()));
-//        return set.build();
-//    }
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event){
@@ -255,16 +244,10 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    // Recipes & Point-Of-Interest
+    // Recipes
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
-        // Point-of-Interest for beehives
-//        SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
-//        tb.add(POI_ID);
-//        handler.dynamicPack.addTag(tb, Registries.POINT_OF_INTEREST_TYPE);
-
-        // Recipes
         bookshelves.items.forEach((wood, item) -> {
             // sawmill recipes - from LOGS
             sawmill_Recipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
