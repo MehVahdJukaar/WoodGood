@@ -48,7 +48,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
-//SUPPORT: v1.2+
+//SUPPORT: v1.3+
 public class BuildersDelightModule extends SimpleModule {
 
     //TYPE: ITEM
@@ -825,7 +825,7 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
-    public static class CustomBdFurnitureKit extends BdFurnitureKit {
+    public static class CustomBdFurnitureKit extends Item {
         private final Component tooltip;
 
         public CustomBdFurnitureKit(Properties properties, String name) {
