@@ -8,8 +8,12 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
+import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -225,7 +229,6 @@ public class QuarkModule extends SimpleModule {
                 .build();
 
         this.addEntry(trappedChests);
-
 
         //doing it this way because for some reason its nuking whatever block item I throw in here
         hedges = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
@@ -448,6 +451,20 @@ public class QuarkModule extends SimpleModule {
             handler.getLogger().error("Could not generate any Chest block texture : ", ex);
         }
     }
+
+    @Override
+    // Recipes & Point-Of-Interest
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        if (PlatHelper.isModLoaded("botanypots")) {
+            hedges.items.forEach((leaves, item) -> {
+                var leavesItem = leaves.leaves.asItem();
+                BotanyPotsHelper.crop_quarkhedge_recipe(this, item, leavesItem, handler, manager, leaves);
+            });
+        }
+    }
+
 
     private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
                                      Respriter respriterLeft, Respriter respriterLeftO,
