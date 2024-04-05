@@ -124,7 +124,7 @@ dependencies {
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
-    modImplementation("curse.maven:terrablender-563928:4647094") // Required by: BOP, Regions-Unexplored
+    modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
@@ -149,7 +149,7 @@ dependencies {
     modCompileOnly("curse.maven:builders-delight-forge-563734:5088176")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
-    modCompileOnly("curse.maven:chipped-456956:4634856")
+    modCompileOnly("curse.maven:chipped-456956:5077656")
     modCompileOnly("curse.maven:create-328085:4835191")
     modCompileOnly("curse.maven:dawn-of-time-312359:5199362")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")

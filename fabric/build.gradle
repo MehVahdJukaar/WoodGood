@@ -46,7 +46,7 @@ dependencies {
     modImplementation("curse.maven:framework-549225:5180973") // Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:quad-932715:5146132") // More Crafting Tables
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
-    modCompileOnly("curse.maven:terrablender-fabric-565956:5068219") // Regions Unexplored
+    modCompileOnly("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
 
         // LOCAL
 //    modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
