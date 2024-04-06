@@ -1,10 +1,6 @@
 #### UPDATED:
-- **Woodworks** 
-  - Supported for 1.20.1
-  - fixed texture bugs from **Blue Skies**
-- **Quark** - fixed texture bugs from **Blue Skies**
-- **Builder's Delight** - Supported for 1.20.1
-- **TwilightForest** - re-added for FABRIC 
----
-#### NEW
-- **Regions Unexplored** - only Branches (FORGE | FABRIC) 
+- **Regions Unexplored** 
+  - Fixed the crashing via a unique case
+  - Added tags to log so branch can be placed on modded logs
+  - Added _branch_ to _Composer_'s list
+- **en_us.json** - Added the corrected WoodType name from **Unusual Prehistory**
