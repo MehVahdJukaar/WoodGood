@@ -120,7 +120,7 @@ dependencies {
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modCompileOnly("curse.maven:blueprint-382216:5228040") // The-Outer-End, Woodworks
+    modImplementation("curse.maven:blueprint-382216:5228040") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
@@ -175,12 +175,12 @@ dependencies {
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:woodster-869951:4670471")
-    modCompileOnly("curse.maven:woodworks-543610:5228779")
+    modImplementation("curse.maven:woodworks-543610:5228779")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
 
         // MACAW's
-    modCompileOnly("curse.maven:macaws-bridges-351725:4605466")
+    modCompileOnly("curse.maven:macaws-bridges-351725:5240521")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5050219")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
@@ -212,7 +212,7 @@ dependencies {
 //    modCompileOnly("curse.maven:endless-biomes-667688:5109705")
     modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
 //    modImplementation("curse.maven:biomes-o-plenty-220318:4707270") // Terrablender
-//    modImplementation("curse.maven:the-outer-end-430404:5043937") // Blueprint
+   // modCompileOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli
 

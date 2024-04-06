@@ -53,7 +53,10 @@ import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Supplier;
 
 //SUPPORT: v3.0.0+
@@ -207,27 +210,26 @@ public class WoodworksModule extends SimpleModule {
     private static BEWLRBlockItem.LazyBEWLR chestBEWLR(boolean trapped) {
         return trapped
                 ? new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) ->
-                    new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
+                new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
                         new BlueprintTrappedChestBlockEntity(BlockPos.ZERO, Blocks.TRAPPED_CHEST.defaultBlockState())))
                 : new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) ->
-                    new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
+                new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
                         new BlueprintChestBlockEntity(BlockPos.ZERO, Blocks.CHEST.defaultBlockState())));
     }
 
-//    protected final ResourceLocation POI_ID = EveryCompat.res("ww_beehives");
-//    private final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(
-//            POI_ID,
-//            () -> new PoiType(getBeehives(), 0, 1)
-//    );
-//
-//    private Set<BlockState> getBeehives() {
-//        var set = new ImmutableSet.Builder<BlockState>();
-//        beehives.blocks.values().forEach(b->set.addAll(b.getStateDefinition().getPossibleStates()));
-//        return set.build();
-//    }
+    protected final ResourceLocation POI_ID = EveryCompat.res("ww_beehives");
+    private final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(
+            POI_ID, () -> new PoiType(getBeehives(), 0, 1)
+    );
+
+    private Set<BlockState> getBeehives() {
+        var set = new ImmutableSet.Builder<BlockState>();
+        beehives.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
+        return set.build();
+    }
 
     @Override
-    public void registerBlockColors(ClientHelper.BlockColorEvent event){
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
         leafPiles.blocks.forEach((t, b) -> {
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
@@ -235,14 +237,14 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    public void registerItemColors (ClientHelper.ItemColorEvent event){
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
         leafPiles.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
             //blockColor.register((s, l, p, i) -> blockColor.getColor(bl.defaultBlockState(), l, p, i), b);
         });
     }
 
-    public void onFirstClientTick1 () {
+    public void onFirstClientTick1() {
         var ic = Minecraft.getInstance().getItemColors();
         var bc = Minecraft.getInstance().getBlockColors();
         leafPiles.blocks.forEach((t, b) -> {
@@ -260,9 +262,9 @@ public class WoodworksModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
         // Point-of-Interest for beehives
-//        SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
-//        tb.add(POI_ID);
-//        handler.dynamicPack.addTag(tb, Registries.POINT_OF_INTEREST_TYPE);
+        SimpleTagBuilder tb = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
+        tb.add(POI_ID);
+        handler.dynamicPack.addTag(tb, Registries.POINT_OF_INTEREST_TYPE);
 
         // Recipes
         bookshelves.items.forEach((wood, item) -> {
@@ -315,8 +317,7 @@ public class WoodworksModule extends SimpleModule {
         Item input = (usingLog) ? wood.log.asItem() : wood.planks.asItem();
         if (Objects.nonNull(wood.getItemOfThis(output))) {
             sawmill_Recipe(recipeName, input, wood.getItemOfThis(output), handler, manager, wood);
-        }
-        else if (Objects.nonNull(wood.getBlockOfThis(output))) {
+        } else if (Objects.nonNull(wood.getBlockOfThis(output))) {
             sawmill_Recipe(recipeName, input, wood.getBlockOfThis(output).asItem(), handler, manager, wood);
         }
     }
@@ -357,7 +358,7 @@ public class WoodworksModule extends SimpleModule {
     }
 
     // Textures
-    public void addDynamicClientResources (ClientDynamicResourcesHandler handler, ResourceManager manager) {
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
         try (TextureImage normal = TextureImage.open(manager, modRes("entity/chest/oak/normal"));
