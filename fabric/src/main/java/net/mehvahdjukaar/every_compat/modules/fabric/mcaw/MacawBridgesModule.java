@@ -2,10 +2,10 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwbridges.MacawsBridges;
 import net.kikoz.mcwbridges.init.BlockInit;
-import net.kikoz.mcwbridges.objects.Iron_Stair;
+import net.kikoz.mcwbridges.objects.Bridge_Stairs;
+import net.kikoz.mcwbridges.objects.Bridge_Support;
 import net.kikoz.mcwbridges.objects.Log_Bridge;
 import net.kikoz.mcwbridges.objects.Rail_Bridge;
-import net.kikoz.mcwbridges.objects.Support_Pillar;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -30,7 +30,7 @@ public class MacawBridgesModule extends SimpleModule {
 
         BRIDGE_PIERS = SimpleEntrySet.builder(WoodType.class, "bridge_pier",
                         () -> BlockInit.OAK_BRIDGE_PIER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Support_Pillar(Utils.copyPropertySafe(w.planks)))
+                        w -> new Bridge_Support(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_piers"), Registries.BLOCK)
                 .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
@@ -79,7 +79,7 @@ public class MacawBridgesModule extends SimpleModule {
 
         BRIDGE_STAIRS = SimpleEntrySet.builder(WoodType.class, "log_bridge_stair",
                         () -> BlockInit.OAK_LOG_BRIDGE_STAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Iron_Stair(Utils.copyPropertySafe(w.planks)))
+                        w -> new Bridge_Stairs(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("log_stairs"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
@@ -91,7 +91,7 @@ public class MacawBridgesModule extends SimpleModule {
 
         ROPE_STAIRS = SimpleEntrySet.builder(WoodType.class, "rope_bridge_stair",
                         () -> BlockInit.OAK_ROPE_BRIDGE_STAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Iron_Stair(Utils.copyPropertySafe(w.planks)))
+                        w -> new Bridge_Stairs(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_stairs"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
