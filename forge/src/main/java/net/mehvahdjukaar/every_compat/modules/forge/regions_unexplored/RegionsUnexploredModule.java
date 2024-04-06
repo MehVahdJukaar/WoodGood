@@ -4,13 +4,16 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +22,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.regions_unexplored.block.RuBlocks;
 import net.regions_unexplored.world.level.block.plant.branch.BranchBlock;
 
@@ -34,17 +38,28 @@ public class RegionsUnexploredModule extends SimpleModule {
         super(modId, "ru");
 
         BRANCH = SimpleEntrySet.builder(WoodType.class, "branch",
-            getModBlock("regions_unexplored:oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
+            getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
             w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()), "branch")
         )
             .addTexture(modRes("block/oak_branch"))
             .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
             .addTag(modRes("branches"), Registries.BLOCK)
-            .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
             .addTag(modRes("branches"), Registries.ITEM)
             .addRecipe(modRes("oak_branch_from_oak_log"))
             .build();
         this.addEntry(BRANCH);
+    }
+
+    @Override
+    // Tags
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        BRANCH.blocks.forEach((wood, block) -> {
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(modRes("branches_can_survive_on"));
+            tagBuilder.add(Utils.getID(wood.log));
+            handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
+        });
     }
 
     @Override
