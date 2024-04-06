@@ -48,7 +48,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
-//SUPPORT: v1.3+
+//SUPPORT: v3.0.4+
 public class BuildersDelightModule extends SimpleModule {
 
     //TYPE: ITEM

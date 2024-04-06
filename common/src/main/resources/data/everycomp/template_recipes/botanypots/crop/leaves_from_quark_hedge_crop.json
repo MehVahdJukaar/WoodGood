@@ -1,0 +1,21 @@
+{
+  "type": "botanypots:crop",
+  "seed": {
+    "item": "quark:oak_hedge"
+  },
+  "categories": [
+    "dirt"
+  ],
+  "growthTicks": 1800,
+  "display": {
+    "block": "quark:oak_hedge"
+  },
+  "drops": [
+    {
+      "chance": 1,
+      "output": {
+        "item": "minecraft:oak_leaves"
+      }
+    }
+  ]
+}
