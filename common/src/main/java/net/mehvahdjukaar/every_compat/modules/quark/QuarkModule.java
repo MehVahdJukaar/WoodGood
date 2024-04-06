@@ -453,7 +453,7 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
-    // Recipes & Point-Of-Interest
+    // Recipes
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
