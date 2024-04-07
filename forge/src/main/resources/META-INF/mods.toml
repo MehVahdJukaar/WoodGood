@@ -54,5 +54,12 @@ versionRange="[1.19-2.1.21,]"
 ordering="NONE"
 side="BOTH"
 
+# -------------------------------------------------- MODS --------------------------------------------------------------
 
+[[dependencies.everycomp]]
 
+modId="mcwbridges"
+mandatory=false
+versionRange="[3.0.0,]" #mandatory
+ordering="NONE"
+side="BOTH"
