@@ -67,10 +67,11 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
 
     @Override
     public void registerBlocks(CompatModule module, Registrator<Block> registry, Collection<T> woodTypes) {
-        Block base = baseBlock.get();
-        if (base == null)
-            throw new UnsupportedOperationException("Base block cant be null");
-        baseType.get().addChild(module.getModId() + ":" + typeName, (Object) base);
+        if (isDisabled()) return;
+        Block base = getBaseBlock();
+        if (base == null || base == Blocks.AIR)
+            //?? wtf im using disabled to allow for null??
+            throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         for (T w : woodTypes) {
             String n = getBlockName(w);
