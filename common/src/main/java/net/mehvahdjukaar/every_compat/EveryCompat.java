@@ -92,10 +92,6 @@ public abstract class EveryCompat {
         if (PlatformHelper.getEnv().isClient()) {
             ClientDynamicResourcesHandler.INSTANCE.register();
 
-            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log", res("block/cactus_side"));
-            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log_top", res("block/cactus_top"));
-//            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
-//            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
         }
 
         // ============================================ addOtherCompatMod =========================================== \\
@@ -136,7 +132,7 @@ public abstract class EveryCompat {
         addModule("twigs", () -> TwigsModule::new);
 
         // =========================================== WORK IN PROGRESS ============================================  \\
-//        addModule("handcrafted", () -> HandcraftedModule::new);
+        addModule("handcrafted", () -> HandcraftedModule::new);
 
         // ========================================= DISABLED FOR A REASON =========================================  \\
 
@@ -152,6 +148,11 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, Registry.BLOCK_ENTITY_TYPE);
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, Registry.ENTITY_TYPE);
 
+    }
+
+    private static void addOptional(String blockId, String textureId, String texturePath) {
+        Registry.BLOCK.getOptional(new ResourceLocation(blockId))
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
     }
 
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
