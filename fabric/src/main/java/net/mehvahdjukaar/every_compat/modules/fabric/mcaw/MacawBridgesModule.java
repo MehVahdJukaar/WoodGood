@@ -16,6 +16,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
+// SUPPORT: v3.0.0+
 public class MacawBridgesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BRIDGE_PIERS;
