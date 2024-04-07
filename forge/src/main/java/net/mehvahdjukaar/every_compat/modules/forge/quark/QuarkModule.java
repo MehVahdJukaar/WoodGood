@@ -438,9 +438,9 @@ public class QuarkModule extends SimpleModule {
             Respriter respriterLeftO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            chests.blocks.forEach((wood, block) -> {
+            trappedChests.blocks.forEach((wood, block) -> {
 
-                CompatChestBlock b = (CompatChestBlock) block;
+                CompatTrappedChestBlock b = (CompatTrappedChestBlock) block;
 
                 try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
@@ -505,7 +505,7 @@ public class QuarkModule extends SimpleModule {
         recoloredBase.applyOverlay(recoloredOverlay);
         TextureImage trapped = recoloredBase.makeCopy();
 
-        handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
+        if (!chests.blocks.isEmpty()) handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
 
         trapped.applyOverlay(trappedOverlay.makeCopy());
         handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);

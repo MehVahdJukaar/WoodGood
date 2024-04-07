@@ -12,6 +12,7 @@ import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock
 import com.teamabnormals.blueprint.common.block.entity.BlueprintChestBlockEntity;
 import com.teamabnormals.blueprint.common.block.entity.BlueprintTrappedChestBlockEntity;
 import com.teamabnormals.blueprint.common.item.BEWLRBlockItem;
+import com.teamabnormals.blueprint.common.item.BEWLRFuelBlockItem;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.blueprint.core.registry.BlueprintBlockEntityTypes;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
@@ -43,13 +44,9 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -138,14 +135,14 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(BlueprintItemTags.BOATABLE_CHESTS, Registry.ITEM_REGISTRY)
                 .addTag(BlueprintItemTags.REVERTABLE_CHESTS, Registry.ITEM_REGISTRY)
                 .addTile(BlueprintChestBlockEntity::new)
-                .addCustomItem((w, b, p) -> new BEWLRBlockItem(b, p, () -> () -> chestBEWLR(false)))
+                .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(false), 300))
                 .defaultRecipe()
                 .build();
         this.addEntry(chests);
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlueprintTrappedChestBlock(EveryCompat.MOD_ID + ":" + w.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
+                        w -> new BlueprintTrappedChestBlock(EveryCompat.MOD_ID + ":" + w.getTypeName() + "_trapped", WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registry.BLOCK_REGISTRY)
@@ -156,7 +153,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(Tags.Items.CHESTS_TRAPPED, Registry.ITEM_REGISTRY)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
                 .addTile(BlueprintTrappedChestBlockEntity::new)
-                .addCustomItem((w, b, p) -> new BEWLRBlockItem(b, p, () -> () -> chestBEWLR(true)))
+                .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(true), 300))
                 .defaultRecipe()
                 .build();
         this.addEntry(trappedChests);
@@ -183,11 +180,13 @@ public class WoodworksModule extends SimpleModule {
 
     @OnlyIn(Dist.CLIENT)
     private static BEWLRBlockItem.LazyBEWLR chestBEWLR(boolean trapped) {
-        return trapped ? new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) -> {
-            return new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet, new BlueprintTrappedChestBlockEntity(BlockPos.ZERO, Blocks.TRAPPED_CHEST.defaultBlockState()));
-        }) : new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) -> {
-            return new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet, new BlueprintChestBlockEntity(BlockPos.ZERO, Blocks.CHEST.defaultBlockState()));
-        });
+        return trapped
+                ? new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) ->
+                    new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
+                    new BlueprintTrappedChestBlockEntity(BlockPos.ZERO, Blocks.TRAPPED_CHEST.defaultBlockState())))
+                : new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) ->
+                    new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
+                    new BlueprintChestBlockEntity(BlockPos.ZERO, Blocks.CHEST.defaultBlockState())));
     }
 
     public void onFirstClientTick1 () {
@@ -343,9 +342,9 @@ public class WoodworksModule extends SimpleModule {
             Respriter respriterLeftO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            chests.blocks.forEach((wood, block) -> {
+            trappedChests.blocks.forEach((wood, block) -> {
 
-                BlueprintChestBlock b = (BlueprintChestBlock) block;
+                BlueprintTrappedChestBlock b = (BlueprintTrappedChestBlock) block;
                 String folderPath = "entity/chest/";
 
                 try (TextureImage plankTexture = TextureImage.open(manager,
@@ -377,7 +376,7 @@ public class WoodworksModule extends SimpleModule {
 
                             trapped.applyOverlayOnExisting(normal_t.makeCopy());
 
-                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            if (!chests.blocks.isEmpty()) handler.dynamicPack.addAndCloseTexture(res, img);
                             handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
                         }
                     }
@@ -392,7 +391,7 @@ public class WoodworksModule extends SimpleModule {
                             var trapped = img.makeCopy();
                             trapped.applyOverlayOnExisting(left_t.makeCopy());
 
-                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            if (!chests.blocks.isEmpty()) handler.dynamicPack.addAndCloseTexture(res, img);
                             handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
                         }
                     }
