@@ -1857,10 +1857,13 @@ public class ChippedModule extends SimpleModule {
                 }
             }
 
-            switch (identifier) {
-                case "planks" -> tagBuilder.addEntry(w.planks); // adds normal planks
-                case "door" -> tagBuilder.addEntry(w.getChild("door")); // adds normal door
-                case "trapdoor" -> tagBuilder.addEntry(w.getChild("trapdoor")); // adds normal trapdoor
+            // null check
+            if (w.getChild(identifier) != null) {
+                switch (identifier) {
+                    case "planks" -> tagBuilder.addEntry(w.planks); // adds vanilla|modded planks
+                    case "door" -> tagBuilder.addEntry(w.getChild("door")); // adds vanilla|modded door
+                    case "trapdoor" -> tagBuilder.addEntry(w.getChild("trapdoor")); // adds vanilla|modded trapdoor
+                }
             }
 
             if (hasSomething) {
