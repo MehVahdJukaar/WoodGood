@@ -5,18 +5,21 @@ import net.kikoz.mcwdoors.objects.JapaneseDoors;
 import net.kikoz.mcwdoors.objects.StableDoor;
 import net.kikoz.mcwdoors.util.DoorItemGroup;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.EntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -24,6 +27,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SoundType;
+
+import java.util.List;
 
 //SUPPORT: v1.1.0+
 public class MacawDoorsModule extends SimpleModule {
@@ -381,9 +386,22 @@ public class MacawDoorsModule extends SimpleModule {
     }
 
     @Override
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        // Ensure the drop of door is just 1, not more.
+        List<EntrySet<?, ?, ?>> doors = this.getEntries().stream().filter(e -> e.typeName.contains("door")).toList();
+        for (var e : doors) {
+            for (var block : e.blocks.values()) {
+                handler.dynamicPack.addLootTable(block, BlockLoot.createDoorTable(block));
+            }
+        }
+    }
+
+
+    @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
-
 
         try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_mask"));
              TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_overlay"));
@@ -394,7 +412,7 @@ public class MacawDoorsModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteUtils.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
 
                     var t = mask.makeCopy();
                     t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());

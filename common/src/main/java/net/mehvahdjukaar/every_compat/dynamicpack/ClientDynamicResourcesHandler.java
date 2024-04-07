@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
 
     public static final ClientDynamicResourcesHandler INSTANCE = new ClientDynamicResourcesHandler();
+    private static boolean init = false;
 
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(EveryCompat.res("generated_pack")));
@@ -40,6 +42,10 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
+        if (!init) {
+            SpriteHelper.addHardcodedSprites();
+            init = true;
+        }
         EveryCompat.forAllModules(m -> {
             try {
                 m.addDynamicClientResources(this, manager);
