@@ -44,6 +44,7 @@ import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifierManager;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -88,7 +89,10 @@ public class EveryCompatForge extends EveryCompat {
         addModule("woodster", () -> WoodsterModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
-        addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+        if (ModList.get().getModContainerById("workshop_for_handsome_adventurer") // Won't enabled if version is 1.14.7
+                .map(v->v.getModInfo().getVersion()).toString().compareTo("1.14.7") < 0) {
+            addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+        }
         addModule("xercamod", () -> XercaModule::new);
         addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
         addModule("buildersdelight", () -> BuildersDelightModule::new);
