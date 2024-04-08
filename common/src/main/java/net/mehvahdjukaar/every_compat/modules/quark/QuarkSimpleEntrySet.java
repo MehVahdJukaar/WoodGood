@@ -20,6 +20,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
@@ -71,7 +72,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         Block base = getBaseBlock();
         if (base == null || base == Blocks.AIR)
             //?? wtf im using disabled to allow for null??
-            throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
+            throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.getModId() + " module)");
 
         for (T w : woodTypes) {
             String n = getBlockName(w);
