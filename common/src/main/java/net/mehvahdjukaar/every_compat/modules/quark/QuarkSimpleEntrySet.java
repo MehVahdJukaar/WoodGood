@@ -72,6 +72,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         if (base == null || base == Blocks.AIR)
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
+        baseType.get().addChild(module.getModId() + ":" + typeName, (Object) base);
 
         for (T w : woodTypes) {
             String n = getBlockName(w);
