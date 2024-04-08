@@ -71,7 +71,7 @@ dependencies {
     modCompileOnly("curse.maven:twigs-496913:4531594")
     modRuntimeOnly("curse.maven:hearth-and-home-849364:4488851")
         // MACAW's
-    modCompileOnly("curse.maven:macaws-bridges-351725:4599786")
+    modCompileOnly("curse.maven:macaws-bridges-351725:5240491")
     modCompileOnly("curse.maven:macaws-doors-378646:4649884")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5121430")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618164")
