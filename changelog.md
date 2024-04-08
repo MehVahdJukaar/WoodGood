@@ -1,10 +1,10 @@
 #### UPDATED:
-- **Quark**
-  - Fixed textures for Hollow Logs via:
-    - Regions Unexplored
-    - Gardens Of The Dead's _whistlecane_
-    - Endless Biomes's _twisted_ & _penumbra_
-    - L_Enders' Cataclysm's _chorus_
-  - Fixed textures for Post
-    - Gardens Of The Dead's _whistlecane_
-    - Regions Unexplored's _eucalyptus_
+- **Macaw's Door** (COMMON) - Fixed the multiple drops of Bamboo door when broken 
+- **Macaw's Fences & Walls** (COMMON) - Fixed Hedges' missing textures via Blue Skies 
+- **Macaw's Furniture** - (FABRIC) Fixed _nether_reed_ (BetterNether) texture problems
+- **Macaw's Bridge** - (COMMON) Supports v3.0.0 & **NOTE:**  no longer support older version than v3.0.0
+- **Chipped** - Fixed _door_ & _trapdoor_'s recipes not being added to _Carpenter's Table_ (COMMON)
+
+---
+##### LEGENDS: 
+(COMMON) = FORGE & FABRIC
