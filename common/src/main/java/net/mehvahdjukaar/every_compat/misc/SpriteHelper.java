@@ -57,8 +57,9 @@ public class SpriteHelper {
         addOptional("gardens_of_the_dead:whistlecane", "_top", "gardens_of_the_dead:block/whistlecane_block_top");
 
         // BetterNether
-        addOptional("betternether:nether_reed", "_side", "betternether:block/nether_reed_planks_side");
-        addOptional("betternether:nether_reed", "_top", "betternether:block/nether_reed_planks_top");
+        addOptional("betternether:nether_reed_stem", "_side", "betternether:block/nether_reed_planks_side");
+        addOptional("betternether:nether_reed_stem", "_top", "betternether:block/nether_reed_planks_top");
+
 
         // Blue Skies
             // Leaves
