@@ -2,10 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwbridges.MacawsBridges;
 import net.kikoz.mcwbridges.init.BlockInit;
-import net.kikoz.mcwbridges.objects.Bridge_Stairs;
-import net.kikoz.mcwbridges.objects.Bridge_Support;
-import net.kikoz.mcwbridges.objects.Log_Bridge;
-import net.kikoz.mcwbridges.objects.Rail_Bridge;
+import net.kikoz.mcwbridges.objects.*;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -42,7 +39,7 @@ public class MacawBridgesModule extends SimpleModule {
 
         ROPE_BRIDGES = SimpleEntrySet.builder(WoodType.class, "bridge", "rope",
                         () -> BlockInit.ROPE_OAK_BRIDGE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Log_Bridge(Utils.copyPropertySafe(w.planks)))
+                        w -> new Bridge_Block_Rope(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_bridges"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
