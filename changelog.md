@@ -1,7 +1,7 @@
 #### UPDATED:
-- **zh_cn.json** (v2.6.45)
-- **Macaw's Bridge** - Updated to support v3.0.0
+- **zh_cn.json** - woodtypes and others
+- **Macaw's Bridge** (COMMON) - Fixed _rope_bridge_'s block & texture not correctly displaying 
 
 ---
-### NOTE: 
-**Macaw's Bridge**, From onward, older version than v3.0.0 won't be supported. 
+**LEGEND**:
+- (COMMON) = FORGE & FABRIC
