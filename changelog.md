@@ -1,5 +1,5 @@
 #### UPDATED:
-- **Quark** - Fixed the problem related to all blocks
+- Improved some logic related to block registration
 
 ---
 **LEGEND**:

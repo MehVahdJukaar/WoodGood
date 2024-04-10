@@ -8,7 +8,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -42,6 +41,7 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
         for (var w : WoodTypeRegistry.getTypes()) {
             if (!w.isVanilla()) MODDED_WOOD_TYPES.add(w);
         }
+        if (MODDED_WOOD_TYPES.size() > 1) CHILD_KEYS.clear();
         Collections.shuffle(MODDED_WOOD_TYPES);
     }
 
@@ -88,7 +88,7 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
                 String key = CHILD_KEYS.get(lastIndex);
                 var vv = MODDED_WOOD_TYPES.get(woodIndex % MODDED_WOOD_TYPES.size()).getChild(key);
                 if (vv instanceof ItemLike il) {
-                     v = il;
+                    v = il;
                 }
             } while (v == null);
 

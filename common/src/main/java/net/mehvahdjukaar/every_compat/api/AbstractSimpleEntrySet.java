@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Suppliers;
+import com.mojang.datafixers.DataFixerUpper;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
@@ -181,7 +182,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Override
     public void generateTextures(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
         if (textures.isEmpty()) return;
-
+        
         List<TextureImage> images = new ArrayList<>();
         try (TextureImage oakPlanksTexture = TextureImage.open(manager,
                 RPUtils.findFirstBlockTextureLocation(manager,(Block) this.getBaseType().mainChild()))){
