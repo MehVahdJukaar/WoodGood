@@ -1,5 +1,5 @@
 #### UPDATED:
-- Improved some logic related to block registration
+- Fixed an issue with quark module
 
 ---
 **LEGEND**:

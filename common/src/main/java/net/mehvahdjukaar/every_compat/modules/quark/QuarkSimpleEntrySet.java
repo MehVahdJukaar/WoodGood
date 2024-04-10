@@ -32,7 +32,6 @@ import java.util.function.*;
 
 class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEntrySet<T, B> {
 
-    private final Function<T, B> blockSupplier;
     private final Supplier<ZetaModule> zetaModule;
 
     public QuarkSimpleEntrySet(Class<T> type,
@@ -50,8 +49,8 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                boolean mergedPalette,
                                Predicate<T> condition) {
-        super(type, name, prefix, null, baseBlock, baseType, tab, tableMode, itemFactory, tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, condition);
-        this.blockSupplier = blockSupplier;
+        super(type, name, prefix, blockSupplier, baseBlock, baseType, tab, tableMode, itemFactory,
+                tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, condition);
         var m = Preconditions.checkNotNull(module);
         this.zetaModule = Suppliers.memoize(() -> Quark.ZETA.modules.get(m));
     }
@@ -64,33 +63,6 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
     @Override
     public void addTranslations(CompatModule module, AfterLanguageLoadEvent lang) {
         super.addTranslations(module, lang);
-    }
-
-    @Override
-    public void registerBlocks(CompatModule module, Registrator<Block> registry, Collection<T> woodTypes) {
-        Block base = getBaseBlock();
-        if (base == null || base == Blocks.AIR)
-            //?? wtf im using disabled to allow for null??
-            throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.getModId() + " module)");
-        baseType.get().addChild(module.getModId() + ":" + typeName, (Object) base);
-
-        for (T w : woodTypes) {
-            String n = getBlockName(w);
-            String name = module.shortenedId() + "/" + w.getNamespace() + "/" + n;
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, BuiltInRegistries.BLOCK)) continue;
-            B block = blockSupplier.apply(w);
-            if (block != null) {
-                this.blocks.put(w, block);
-
-                registry.register(EveryCompat.res(name), block); //does not set registry name
-                w.addChild(module.getModId() + ":" + typeName, (Object) block);
-
-
-                if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
-                    SIMPLE_DROPS.add(block);
-                }
-            }
-        }
     }
 
     @Override
