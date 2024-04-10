@@ -1,1 +1,6 @@
-fixed an issue with quark module
+#### UPDATED:
+- **Quark** - Fixed the problem related to all blocks
+
+---
+**LEGEND**:
+- (COMMON) = FORGE & FABRIC
