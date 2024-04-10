@@ -114,8 +114,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         return null;
     }
 
-    public abstract boolean isDisabled();
-
     public Class<T> getTypeClass() {
         return type;
     }
@@ -147,7 +145,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     @Override
     public void generateTags(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
-        if (isDisabled()) return;
         if (!tags.isEmpty()) {
             for (var tb : tags.entrySet()) {
                 SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
@@ -169,7 +166,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     @Override
     public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
-        if (isDisabled()) return;
         int i = 0;
         for (var r : this.recipeLocations) {
             var res = r.get();
@@ -184,7 +180,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     // i have no fucking clue whats going on here
     @Override
     public void generateTextures(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
-        if (isDisabled()) return;
         if (textures.isEmpty()) return;
 
         List<TextureImage> images = new ArrayList<>();

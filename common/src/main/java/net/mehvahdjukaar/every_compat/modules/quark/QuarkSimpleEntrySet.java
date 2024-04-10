@@ -68,7 +68,6 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
 
     @Override
     public void registerBlocks(CompatModule module, Registrator<Block> registry, Collection<T> woodTypes) {
-        //if (isDisabled()) return;
         Block base = getBaseBlock();
         if (base == null || base == Blocks.AIR)
             //?? wtf im using disabled to allow for null??

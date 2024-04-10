@@ -93,15 +93,14 @@ public class QuarkModule extends SimpleModule {
                         getModBlock("oak_post"),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
-                            if (w.getNamespace().equals("malum")) return null;
                             Block fence = w.getBlockOfThis("fence");
-                            return fence == null ? null :
-                                    new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/",
+                            return new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/",
                                             fence.getSoundType(fence.defaultBlockState()));
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.ITEM)
+                .requiresChildren("fence")
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/oak_post"))
                 .setRenderType(() -> RenderType::cutout)
@@ -118,13 +117,13 @@ public class QuarkModule extends SimpleModule {
                             Block fence = w.getBlockOfThis("fence");
                             Block stripped = w.getBlockOfThis("stripped_log");
                             // required stripped_log texture & fence as an ingredients
-                            return (fence == null || stripped == null) ? null :
-                                    new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_",
+                            return new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_",
                                             fence.getSoundType(fence.defaultBlockState()));
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.ITEM)
+                .requiresChildren("fence", "stripped_log")
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/stripped_oak_post"))
                 .setRenderType(() -> RenderType::cutout)

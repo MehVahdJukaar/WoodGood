@@ -104,12 +104,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return tileHolder.get();
     }
 
-    //wtf is this?
-    @Override
-    public boolean isDisabled() {
-        return this.getBaseBlock() == null;
-    }
-
     public B getBaseBlock() {
         return baseBlock.get();
     }
@@ -132,7 +126,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void registerBlocks(CompatModule module, Registrator<Block> registry, Collection<T> woodTypes) {
-        if (isDisabled()) return;
         Block base = getBaseBlock();
         if (base == null || base == Blocks.AIR)
             //?? wtf im using disabled to allow for null??
@@ -231,7 +224,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void registerTiles(CompatModule module, Registrator<BlockEntityType<?>> registry) {
-        if (isDisabled()) return;
         if (tileHolder instanceof NewTileHolder<?> nt) {
             var tile = nt.createInstance(blocks.values().toArray(Block[]::new));
             registry.register(EveryCompat.res(module.shortenedId() + "_" + this.getName()), tile);
@@ -242,7 +234,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void setupExistingTiles() {
-        if (isDisabled()) return;
         if (tileHolder instanceof ExistingTileHolder<?> et) {
             SimpleModule.appendTileEntityBlocks(et.get(), blocks.values());
         }
@@ -250,7 +241,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void setRenderLayer() {
-        if (isDisabled()) return;
         if (renderType != null) {
             blocks.values().forEach(t -> ClientHelper.registerRenderType(t, renderType.get().get()));
         }
@@ -258,7 +248,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void generateLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
-        if (isDisabled()) return;
         if (lootMode == LootTableMode.COPY_FROM_PARENT) {
             ResourceLocation reg = Utils.getID(getBaseBlock());
             ResourcesUtils.addBlockResources(module.getModId(), manager, pack, blocks, baseType.get().getTypeName(),
@@ -274,7 +263,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void generateModels(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
-        if (isDisabled()) return;
         ResourcesUtils.addStandardResources(module.getModId(), manager, handler, blocks, baseType.get(), extraTransform);
     }
 
