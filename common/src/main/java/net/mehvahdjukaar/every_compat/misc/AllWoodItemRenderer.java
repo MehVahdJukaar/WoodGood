@@ -41,7 +41,7 @@ public class AllWoodItemRenderer extends ItemStackRenderer {
         for (var w : WoodTypeRegistry.getTypes()) {
             if (!w.isVanilla()) MODDED_WOOD_TYPES.add(w);
         }
-        if (MODDED_WOOD_TYPES.size() > 1) CHILD_KEYS.clear();
+        if (MODDED_WOOD_TYPES.size() == 0) CHILD_KEYS.clear();
         Collections.shuffle(MODDED_WOOD_TYPES);
     }
 
