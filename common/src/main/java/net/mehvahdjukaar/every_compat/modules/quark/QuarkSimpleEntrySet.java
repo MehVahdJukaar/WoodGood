@@ -20,6 +20,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
@@ -67,7 +68,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
 
     @Override
     public void registerBlocks(CompatModule module, Registrator<Block> registry, Collection<T> woodTypes) {
-        if (isDisabled()) return;
+        //if (isDisabled()) return;
         Block base = getBaseBlock();
         if (base == null || base == Blocks.AIR)
             //?? wtf im using disabled to allow for null??

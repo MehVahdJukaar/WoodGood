@@ -104,6 +104,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return tileHolder.get();
     }
 
+    //wtf is this?
     @Override
     public boolean isDisabled() {
         return this.getBaseBlock() == null;
