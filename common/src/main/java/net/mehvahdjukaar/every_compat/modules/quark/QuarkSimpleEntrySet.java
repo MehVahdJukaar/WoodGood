@@ -56,16 +56,6 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
     }
 
     @Override
-    public void generateLootTables(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
-        super.generateLootTables(module, pack, manager);
-    }
-
-    @Override
-    public void addTranslations(CompatModule module, AfterLanguageLoadEvent lang) {
-        super.addTranslations(module, lang);
-    }
-
-    @Override
     public void generateRecipes(CompatModule module, DynamicDataPack pack, ResourceManager manager) {
         ZetaModule mod = zetaModule.get();
         if (mod == null || mod.enabled) {

@@ -9,7 +9,6 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -74,8 +73,8 @@ public class QuarkModule extends SimpleModule {
                         VariantBookshelvesModule.class,
                         getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        (w) -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(), null, w.canBurn(),
-                                w.getSound()))
+                        (w) -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(),
+                                null, w.canBurn(), w.getSound()))
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -95,7 +94,7 @@ public class QuarkModule extends SimpleModule {
                         (w) -> {
                             Block fence = w.getBlockOfThis("fence");
                             return new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/",
-                                            fence.getSoundType(fence.defaultBlockState()));
+                                    fence.getSoundType(fence.defaultBlockState()));
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
@@ -115,10 +114,9 @@ public class QuarkModule extends SimpleModule {
                         (w) -> {
                             if (w.getNamespace().equals("malum") || w.getNamespace().equals("twigs")) return null;
                             Block fence = w.getBlockOfThis("fence");
-                            Block stripped = w.getBlockOfThis("stripped_log");
                             // required stripped_log texture & fence as an ingredients
                             return new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_",
-                                            fence.getSoundType(fence.defaultBlockState()));
+                                    fence.getSoundType(fence.defaultBlockState()));
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
@@ -152,10 +150,8 @@ public class QuarkModule extends SimpleModule {
                         VariantLaddersModule.class,
                         getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        (w) -> {
-                            String name = shortenedId() + "/" + w.getAppendableId();
-                            return new VariantLadderBlock(name, null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()),  w.canBurn());
-                        })
+                        (w) -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
+                                null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.BLOCK)
@@ -171,11 +167,9 @@ public class QuarkModule extends SimpleModule {
                         HollowLogsModule.class,
                         getModBlock("hollow_oak_log"),
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        (w) -> {
-                            if (w.getBlockOfThis("stripped_log") == null) return null; // required stripped_log texture
-                            String name = shortenedId() + "/" + w.getAppendableId();
-                            return new HollowLogBlock(name, w.log, null, w.canBurn());
-                        })
+                        (w) -> new HollowLogBlock(shortenedId() + "/" + w.getAppendableId(),
+                                w.log, null, w.canBurn()))
+                .requiresChildren("stripped_log")
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hollow_logs"), Registries.BLOCK)
@@ -189,11 +183,9 @@ public class QuarkModule extends SimpleModule {
                         VariantChestsModule.class,
                         getModBlock("oak_chest", VariantChestBlock.class),
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        (w) -> {
-                            if (w.getId().toString().equals("twilightforest:dark")) return null;
-                            String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatChestBlock(w, name, Utils.copyPropertySafe(w.planks));
-                        })
+                        (w) -> new CompatChestBlock(w,
+                                shortenedId() + "/" + w.getAppendableId(),
+                                Utils.copyPropertySafe(w.planks)))
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(new ResourceLocation("forge:chests/wooden"), Registries.BLOCK)
                 .addTag(new ResourceLocation("forge:chests/wooden"), Registries.ITEM)
@@ -201,6 +193,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:revertable_chests"), Registries.ITEM)
                 .addTile(CompatChestBlockTile::new)
+                .addCondition(w -> !w.getId().toString().equals("twilightforest:dark"))
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .build();
 
@@ -234,16 +227,14 @@ public class QuarkModule extends SimpleModule {
                         HedgesModule.class,
                         getModBlock("oak_hedge"),
                         () -> LeavesTypeRegistry.OAK_TYPE,
-                        (w) -> {
-                            if (w.getWoodType() == null) return null;
-                            return new HedgeBlock("",null, Blocks.OAK_FENCE, w.leaves);
-                        })
+                        (w) -> new HedgeBlock("", null, Blocks.OAK_FENCE, w.leaves))
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hedges"), Registries.BLOCK)
                 .addTag(modRes("hedges"), Registries.ITEM)
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .addCondition(l -> l.getWoodType() != null)
                 .addRecipe(modRes("building/crafting/oak_hedge"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -334,9 +325,9 @@ public class QuarkModule extends SimpleModule {
     public void onClientSetup() {
         super.onClientSetup();
 
-        for(var b : chests.blocks.values())
+        for (var b : chests.blocks.values())
             QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(CHEST_TILE, b.defaultBlockState()));
-        for(var b : trappedChests.blocks.values())
+        for (var b : trappedChests.blocks.values())
             QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(TRAPPED_CHEST_TILE, b.defaultBlockState()));
 
     }
