@@ -216,7 +216,6 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("revertable_trapped_chests"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(CompatTrappedChestBlockTile::new)
-
                 .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
                 .build();
 

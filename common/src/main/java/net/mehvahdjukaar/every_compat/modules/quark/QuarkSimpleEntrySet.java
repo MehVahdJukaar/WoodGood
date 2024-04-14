@@ -3,30 +3,25 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
+import org.violetmoon.zeta.module.IDisableable;
 import org.violetmoon.zeta.module.ZetaModule;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.function.*;
 
@@ -67,19 +62,16 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
     public @Nullable Item getItemOf(T type) {
         ZetaModule mod = zetaModule.get();
         if (mod == null || mod.enabled) {
-            return super.getItemOf(type);
+            var item = super.getItemOf(type);
+            if (item instanceof IDisableable<?> zetablock) {
+                if (!zetablock.doesConditionApply()) {
+                    return null;
+                }
+                return item;
+            }
         }
         return null;
     }
-
-
-    //this does not work. all modules seem to be disabled here. why??
-    /*
-    @Override
-    protected CreativeModeTab getTab(T w, B b) {
-        boolean e = b instanceof IQuarkBlock qb ? qb.isEnabled() : ModuleLoader.INSTANCE.isModuleEnabled(quarkModule);
-        return e ? super.getTab(w, b) : null;
-    }*/
 
     public static <T extends BlockType, B extends Block> Builder<T, B> builder(
             Class<T> type,

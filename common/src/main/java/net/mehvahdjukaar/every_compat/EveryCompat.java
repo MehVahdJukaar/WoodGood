@@ -248,6 +248,7 @@ public abstract class EveryCompat {
 
     private void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         if (ModConfigs.TAB_ENABLED.get()) {
+            var tab = EveryCompat.MOD_TAB.getKey();
             Map<BlockType, List<Item>> typeToEntrySet = new LinkedHashMap<>();
             for (var r : BlockSetAPI.getRegistries()) {
                 for (var type : r.getValues()) {
@@ -258,7 +259,7 @@ public abstract class EveryCompat {
                 }
             }
             for (var e : typeToEntrySet.values()) {
-                event.add(EveryCompat.MOD_TAB.getHolder().unwrapKey().get(), e.toArray(ItemLike[]::new));
+                event.add(tab, e.toArray(ItemLike[]::new));
             }
         } else {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
