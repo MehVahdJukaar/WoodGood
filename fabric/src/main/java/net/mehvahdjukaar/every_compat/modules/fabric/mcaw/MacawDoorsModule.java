@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.SoundType;
 public class MacawDoorsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> WAFFLE_DOORS;
-    public final SimpleEntrySet<WoodType, Block> BARK_DOORS;
+    public final SimpleEntrySet<WoodType, Block> BARK_GLASS_DOORS;
     public final SimpleEntrySet<WoodType, Block> BARN_DOORS;
     public final SimpleEntrySet<WoodType, Block> BARN_GLASS_DOORS;
     public final SimpleEntrySet<WoodType, Block> BEACH_DOORS;
@@ -66,7 +66,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_waffle_door_upper"), EveryCompat.res("item/mcaw/doors/oak_waffle_door_upper_m"))
                 .build();
 
-        BARK_DOORS = SimpleEntrySet.builder(WoodType.class, "bark_glass_door",
+        BARK_GLASS_DOORS = SimpleEntrySet.builder(WoodType.class, "bark_glass_door",
                         () -> BlockInit.OAK_BARK_GLASS_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
@@ -78,7 +78,7 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_bark_glass_door"), EveryCompat.res("item/mcaw/doors/oak_bark_glass_door_m"))
                 .build();
 
-        this.addEntry(BARK_DOORS);
+        this.addEntry(BARK_GLASS_DOORS);
 
         BARN_DOORS = SimpleEntrySet.builder(WoodType.class, "barn_door",
                         () -> BlockInit.OAK_BARN_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
@@ -417,36 +417,6 @@ public class MacawDoorsModule extends SimpleModule {
         p.add(p.increaseInner());
         p.remove(p.getDarkest());
         p.remove(p.getLightest());
-    }
-
-    @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-
-
-        try (TextureImage mask = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_mask"));
-             TextureImage overlay = TextureImage.open(manager, EveryCompat.res("item/mcaw/doors/bark_glass_door_overlay"));
-        ) {
-
-
-            BARK_DOORS.blocks.forEach((wood, block) -> {
-                var id = Utils.getID(block);
-
-                try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
-
-                    var t = mask.makeCopy();
-                    t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());
-
-                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
-                            "item/" + id.getPath().replace("_bark_door", "")), t);
-
-                } catch (Exception ignored) {
-                }
-            });
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Bark Door item textures : ", ex);
-        }
     }
 
 }
