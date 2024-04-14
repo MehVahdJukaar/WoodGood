@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -63,12 +64,13 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         ZetaModule mod = zetaModule.get();
         if (mod == null || mod.enabled) {
             var item = super.getItemOf(type);
-            if (item instanceof IDisableable<?> zetablock) {
-                if (!zetablock.doesConditionApply()) {
-                    return null;
-                }
-                return item;
+            if (item instanceof IDisableable<?> d && !d.doesConditionApply()) {
+                return null;
             }
+            if (item instanceof BlockItem bi && bi.getBlock() instanceof IDisableable<?> d && !d.doesConditionApply()) {
+                return null;
+            }
+            return item;
         }
         return null;
     }
