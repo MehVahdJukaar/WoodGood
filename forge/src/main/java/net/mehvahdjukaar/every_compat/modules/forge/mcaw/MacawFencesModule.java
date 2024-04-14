@@ -4,6 +4,7 @@ import com.mcwfences.kikoz.MacawsFences;
 import com.mcwfences.kikoz.init.BlockInit;
 import com.mcwfences.kikoz.init.TabInit;
 import com.mcwfences.kikoz.objects.WiredFence;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -28,7 +29,7 @@ import net.minecraft.world.level.block.WallBlock;
 import java.util.Map;
 
 
-//SUPPORT v1.1.0+
+//SUPPORT v1.1.1+
 public class MacawFencesModule extends SimpleModule {
 
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
@@ -116,9 +117,8 @@ public class MacawFencesModule extends SimpleModule {
                 .defaultRecipe()
                 .addModelTransform(m -> m.addModifier((s, id, l) -> {
                     /*
-                    * EveryCompat's code don't account for "mcwfences:block/oak_leaves" when the mod could have used
+                    * EveryComp's code don't account for "mcwfences:block/oak_leaves" when the mod could have used
                     * "minecraft:block/oak_leaves" for texturing. idk why the dev use this way.
-                    * FABRIC use "minecraft:block/oak_leaves" which is fine
                     */
                     String namespace = l.getNamespace();
                     String typeName = l.getTypeName();
@@ -163,6 +163,15 @@ public class MacawFencesModule extends SimpleModule {
                                 }
                             }
                         }
+                        case "aether" -> {
+                            return LeavesPath("", "natural", s, l);
+                        }
+                        case "aether_redux" -> {
+                            if (typeName.equals("azure_fieldsproot")) {
+                                return LeavesPath("fieldsproot_leaves", "natural", s, l);
+                            }
+                            return LeavesPath("", "natural", s, l);
+                        }
                     }
                     return LeavesPath("", "", s, l);
                 }))
@@ -176,9 +185,9 @@ public class MacawFencesModule extends SimpleModule {
 
     public String LeavesPath(String leavesName, String folderName, String s, LeavesType l, boolean has_CHIPPED) {
         String path = "\"" + l.getNamespace() + ":block/";
-        String TypeName = l.getTypeName();
+        String LeavesTypeName = l.getTypeName();
         String folder;
-        if (!leavesName.isEmpty()) {
+        if (!leavesName.isEmpty()) { // unique name for leaves texture
             if (!folderName.isEmpty()) path += folderName + "/";
 
             return s.replace("\"mcwfences:block/oak_leaves\"",
@@ -188,13 +197,14 @@ public class MacawFencesModule extends SimpleModule {
             folder = folderName + "/";
         }
         else if (has_CHIPPED) { // only for chipped
-            folder = TypeName.replaceAll("cherry_|frosted_|dead_|golden_|apple_|magenta_|flower_|red_|white_",
-                    "") + "/";
+            folder = LeavesTypeName.replaceAll(
+                    "cherry_|frosted_|dead_|golden_|apple_|magenta_|flower_|red_|white_|orange_",
+                    "") + "_leaves/";
         }
         else folder = "";
 
         return s.replace("\"mcwfences:block/oak_leaves\"",
-                path + folder + l.getTypeName() + "_leaves"+ "\"");
+                path + folder + LeavesTypeName + "_leaves\"");
     }
 
     @Override

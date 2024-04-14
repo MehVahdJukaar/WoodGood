@@ -63,6 +63,18 @@ public class SpriteHelper {
         // L_Ender 's Cataclysm
         addOptional("cataclysm:chorus_stem", "_side", "cataclysm:block/chorus_stem");
         addOptional("cataclysm:chorus_stem", "_top", "cataclysm:block/chorus_stem");
+
+        // PFW Aesthetic Gems
+        addOptional("pfw_aesthetic_gems:ice_blue_topaz_log", "_side", "pfw_aesthetic_gems:block/ice_blue_topaz_log_round");
+//        addOptional("pfw_aesthetic_gems:ice_blue_topaz_log", "_top", "pfw_aesthetic_gems:block/ice_blue_topaz_log_top");
+        addOptional("pfw_aesthetic_gems:ice_blue_topaz_stripped_log", "_side", "pfw_aesthetic_gems:block/ice_blue_topaz_stripped_log_round");
+//        addOptional("pfw_aesthetic_gems:ice_blue_topaz_stripped_log", "_top", "pfw_aesthetic_gems:block/ice_blue_topaz_stripped_log_top");
+
+        addOptional("pfw_aesthetic_gems:pink_topaz_log", "_side", "pfw_aesthetic_gems:block/pink_topaz_log_round");
+//        addOptional("pfw_aesthetic_gems:pink_topaz_log", "_top", "pfw_aesthetic_gems:block/pink_topaz_log_top");
+        addOptional("pfw_aesthetic_gems:pink_topaz_stripped_log", "_side", "pfw_aesthetic_gems:block/pink_topaz_stripped_log_round");
+//        addOptional("pfw_aesthetic_gems:pink_topaz_stripped_log", "_top", "pfw_aesthetic_gems:block/pink_topaz_stripped_log_top");
+
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
