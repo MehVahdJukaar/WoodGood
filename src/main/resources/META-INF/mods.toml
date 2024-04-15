@@ -54,6 +54,8 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     ordering="NONE"
     side="BOTH"
 
+# ======================================================== MODS ====================================================== #
+
 [[dependencies.everycomp]]
 
     modId="projectbrazier"
@@ -69,5 +71,19 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     ordering="AFTER"
     side="BOTH"
 
-  
+[[dependencies.everycomp]]
+    modId="mcwbridges"
+    mandatory=false
+    versionRange="[3.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.everycomp]]
+    modId="mcwfences"
+    mandatory=false
+    versionRange="[1.1.1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+
 
