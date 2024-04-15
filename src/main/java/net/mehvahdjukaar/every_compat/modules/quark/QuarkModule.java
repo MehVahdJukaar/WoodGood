@@ -167,14 +167,15 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new VariantLadderBlock(name, m, w.canBurn());
                         })
+                .addTexture(WoodGood.res("block/spruce_ladder"))
+                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("ladders"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("ladders"), Registry.ITEM_REGISTRY)
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/spruce_ladder"))
-                .addTexture(WoodGood.res("block/spruce_ladder"))
+                .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(LADDERS);
