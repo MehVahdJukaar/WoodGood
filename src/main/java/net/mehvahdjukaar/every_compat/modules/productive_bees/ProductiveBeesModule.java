@@ -12,7 +12,6 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
-import net.mehvahdjukaar.selene.client.asset_generators.textures.PaletteColor;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -38,7 +37,7 @@ public class ProductiveBeesModule extends SimpleModule {
                         w -> new ExpansionBox(Block.Properties.copy(Blocks.BEEHIVE)))
                 // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))
-                // END -OK
+                // END
                 .addTexture(WoodGood.res("block/spruce_beehive_end"))
                 .addTexture(WoodGood.res("block/advanced_beehive/horizontal/spruce_beehive_end_right"))
                 .addTexture(WoodGood.res("block/advanced_beehive/horizontal/spruce_beehive_end_left"))
@@ -100,26 +99,6 @@ public class ProductiveBeesModule extends SimpleModule {
                 .build();
         this.addEntry(advancedBeehives);
 
-    }
-
-    private void lightenDark(@NotNull Palette p) {
-        while (p.size() > 7) {
-            p.remove(p.getDarkest());
-        }
-
-        var col = p.getColorAtSlope(0.5f);
-        int ind = p.indexOf(col);
-        var lab = col.lab();
-        PaletteColor newC = new PaletteColor(lab.withLuminance(lab.luminance() * 1.03f));
-        float dl = p.get(ind + 1).luminance() - newC.luminance();
-        p.set(ind, newC);
-        PaletteColor before = p.get(ind - 1);
-        //lighten the other main plank color if its too dark
-        if (newC.luminance() - before.luminance() > dl * 1.5) {
-            PaletteColor newBefore = new PaletteColor(before.lab().withLuminance(
-                    (before.luminance() * 0.6f + (newC.luminance() + dl) * 0.4f)));
-            p.set(ind - 1, newBefore);
-        }
     }
 
     private void removeDarkest(@NotNull Palette p) {
