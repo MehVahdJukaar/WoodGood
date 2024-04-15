@@ -1,8 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.builders_delight;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.tynoxs.buildersdelight.content.block.custom.BlockChair;
@@ -59,7 +57,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 
-//SUPPORT v1.0
+//SUPPORT v1.0+
 public class BuildersDelightModule extends SimpleModule {
 
     //TYPE: ITEM
@@ -931,9 +929,6 @@ public class BuildersDelightModule extends SimpleModule {
         recipe.addProperty("count", 1);
 
         handler.dynamicPack.addJson(new ResourceLocation(ResLoc), recipe, ResType.RECIPES);
-        Gson gb = new GsonBuilder().setPrettyPrinting().create();
-
-//        if (Objects.equals(wood.getTypeName(), "oak")) WoodGood.LOGGER.info("<RECIPE> " + gb.toJson(recipe));
     }
 
     // Recipes use tags for ingredients
@@ -963,7 +958,7 @@ public class BuildersDelightModule extends SimpleModule {
             pack.addJson(WoodGood.res(pathBuilder), recipe, ResType.RECIPES);
         }
         catch (IOException ex) {
-            WoodGood.LOGGER.error("{BuildersDelight Module} glassRecipe(): " + ex);
+            WoodGood.LOGGER.error("{BuildersDelight Module} TagsRecipe(): " + ex);
         }
     }
 
