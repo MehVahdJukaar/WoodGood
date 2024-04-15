@@ -2,10 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.mcaw;
 
 import com.mcwbridges.kikoz.MacawsBridges;
 import com.mcwbridges.kikoz.init.BlockInit;
-import com.mcwbridges.kikoz.objects.Iron_Stair;
-import com.mcwbridges.kikoz.objects.Log_Bridge;
-import com.mcwbridges.kikoz.objects.Rail_Bridge;
-import com.mcwbridges.kikoz.objects.Support_Pillar;
+import com.mcwbridges.kikoz.objects.*;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -14,8 +11,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 
+// SUPPORT: v3.0.0+
 public class MacawBridgesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BRIDGE_PIERS;
@@ -27,12 +24,13 @@ public class MacawBridgesModule extends SimpleModule {
 
     public MacawBridgesModule(String modId) {
         super(modId, "mcb");
+        var tab = MacawsBridges.BridgeItemGroup;
 
         BRIDGE_PIERS = SimpleEntrySet.builder(WoodType.class,"bridge_pier",
                         BlockInit.OAK_BRIDGE_PIER, ()-> WoodType.OAK_WOOD_TYPE,
-                        w -> new Support_Pillar(WoodGood.copySafe(w.planks).strength(0.5F, 2.0F)))
+                        w -> new Bridge_Support(WoodGood.copySafe(w.planks).strength(0.5F, 2.0F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(()->MacawsBridges.BridgesItemGroup)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
 
@@ -40,9 +38,9 @@ public class MacawBridgesModule extends SimpleModule {
 
         ROPE_BRIDGES = SimpleEntrySet.builder(WoodType.class,"bridge", "rope",
                         BlockInit.ROPE_OAK_BRIDGE, ()-> WoodType.OAK_WOOD_TYPE,
-                        w -> new Log_Bridge(WoodGood.copySafe(w.planks).strength(0.5F, 2.5F)))
+                        w -> new Bridge_Block_Rope(WoodGood.copySafe(w.planks).strength(0.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(()->MacawsBridges.BridgesItemGroup)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
@@ -53,7 +51,7 @@ public class MacawBridgesModule extends SimpleModule {
                         BlockInit.OAK_LOG_BRIDGE_MIDDLE, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new Log_Bridge(WoodGood.copySafe(w.planks).strength(0.5F, 2.5F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(()->MacawsBridges.BridgesItemGroup)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
 
@@ -64,7 +62,7 @@ public class MacawBridgesModule extends SimpleModule {
                         BlockInit.OAK_RAIL_BRIDGE, ()-> WoodType.OAK_WOOD_TYPE,
                         w -> new Rail_Bridge(WoodGood.copySafe(w.planks).noOcclusion().strength(0.8F, 3)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(()->MacawsBridges.BridgesItemGroup)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
 
@@ -73,9 +71,9 @@ public class MacawBridgesModule extends SimpleModule {
 
         BRIDGE_STAIRS = SimpleEntrySet.builder(WoodType.class,"log_bridge_stair",
                         BlockInit.OAK_LOG_BRIDGE_STAIR, ()-> WoodType.OAK_WOOD_TYPE,
-                        w -> new Iron_Stair(WoodGood.copySafe(w.planks).strength(0.8F, 2.0F)))
+                        w -> new Bridge_Stairs(WoodGood.copySafe(w.planks).strength(0.8F, 2.0F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(()->MacawsBridges.BridgesItemGroup)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .build();
 
@@ -83,9 +81,9 @@ public class MacawBridgesModule extends SimpleModule {
 
         ROPE_STAIRS = SimpleEntrySet.builder(WoodType.class,"rope_bridge_stair",
                         BlockInit.OAK_ROPE_BRIDGE_STAIR, ()-> WoodType.OAK_WOOD_TYPE,
-                        w -> new Iron_Stair(WoodGood.copySafe(w.planks).strength(0.8F, 2.0F)))
+                        w -> new Bridge_Stairs(WoodGood.copySafe(w.planks).strength(0.8F, 2.0F)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(()->MacawsBridges.BridgesItemGroup)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .setRenderType(()-> RenderType::cutout)
                 .build();
