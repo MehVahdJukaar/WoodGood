@@ -15,6 +15,7 @@ import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPalett
 import net.mehvahdjukaar.every_compat.modules.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
+import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.deco_block.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.decoration_delight.DecorationDelightModule;
@@ -170,8 +171,7 @@ public class WoodGood {
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("xercamod", () -> XercaModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
-
-        // ========================================= CURRENTLY TESTING ============================================== \\
+        addModule("chipped", () -> ChippedModule::new);
 
         // =========================================== CURRENTLY WIP ================================================ \\
 
