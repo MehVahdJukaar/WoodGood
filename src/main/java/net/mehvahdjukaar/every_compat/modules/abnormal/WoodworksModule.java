@@ -117,8 +117,8 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(Tags.Items.CHESTS, Registry.ITEM_REGISTRY)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
                 .addTag(BlueprintItemTags.BOATABLE_CHESTS, Registry.ITEM_REGISTRY)
-                .addTile(BlueprintChestBlockEntity::new)
                 .addTag(BlueprintItemTags.REVERTABLE_CHESTS, Registry.ITEM_REGISTRY)
+                .addTile(BlueprintChestBlockEntity::new)
                 .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(false), 300))
                 .build();
         this.addEntry(chests);
@@ -209,7 +209,6 @@ public class WoodworksModule extends SimpleModule {
     @Override
     // Recipes
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
 
         bookshelves.items.forEach((wood, item) -> {
             // crafting_shaped recipes
@@ -317,9 +316,9 @@ public class WoodworksModule extends SimpleModule {
 
         // filenameBuilder: <woodType>_<blockType>_from_<woodType>_<logs|planks>_sawing
         String[] nameSplit = recipeName.split("_(?!gate|plate)");
-        String filenameBuilder = wood.getTypeName() + "_" + nameSplit[1] + "_from_" + wood.getTypeName() + "_" + nameSplit[4] + "_sawing";
+        String filenameBuilder = wood.getAppendableId() + "_" + nameSplit[1] + "_from_" + wood.getTypeName() + "_" + nameSplit[4] + "_sawing";
 
-        handler.dynamicPack.addJson(WoodGood.res(filenameBuilder), recipe, ResType.RECIPES);
+        handler.dynamicPack.addJson(WoodGood.res(this.shortenedId() + "/" + filenameBuilder), recipe, ResType.RECIPES);
     }
 
     public void craftingShaped_Recipe(String recipeName, Item input, Item output,
