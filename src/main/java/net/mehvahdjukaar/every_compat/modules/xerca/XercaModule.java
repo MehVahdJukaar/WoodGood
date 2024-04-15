@@ -152,7 +152,9 @@ public class XercaModule extends SimpleModule {
 
         carved1.items.forEach((wood, item) -> {
             // LOG -> STRIPPED_LOG
-            recipeCreator(handler, wood.log.asItem(), Objects.requireNonNull(wood.getBlockOfThis("stripped_log")).asItem(), "", wood);
+            if (Objects.nonNull(wood.getBlockOfThis("stripped_log")))
+                recipeCreator(handler, wood.log.asItem(), Objects.requireNonNull(
+                        wood.getBlockOfThis("stripped_log")).asItem(), "", wood);
 
             // Carved 1 to Carved 8
             recipeCreator(handler, wood.log.asItem(), item,"1", wood);
@@ -182,17 +184,24 @@ public class XercaModule extends SimpleModule {
     }
 
 
+    @SuppressWarnings("DataFlowIssue")
     public void recipeCreator(ServerDynamicResourcesHandler handler, Item input, Item output, String X, WoodType wood) {
         // pathBuilder: carving/x/namespace/
         String pathBuilder = this.shortenedId() + "/" + wood.getNamespace() + "/";
-        // recipeName: carved_<type>_X_from_<type>_log_carving | carved_<type>_X_from_stripped_<type>_log_carving
-        String recipeName = (X != null) ? "carved_" + wood.getTypeName() + "_" + X + "_from_" : "carved_" + wood.getTypeName() + "_from_" ;
 
-        if (input == wood.log.asItem()) {
-            recipeName += wood.getTypeName() + "_log_carving";
+        String recipeName = null;
+        if (output == wood.getBlockOfThis("stripped_log").asItem()) {
+            // recipeName: stripped_<Type>_log_from_<type>_log_carving
+            recipeName += "stripped_" + wood.getTypeName() + "_log_from_" + wood.getTypeName() + "_log_carving";
         }
         else {
-            recipeName += "stripped_"  + wood.getTypeName() + "_log_carving";
+            recipeName += "carved_" + wood.getTypeName() + "_" + X;
+            // IF statement
+            recipeName += (input == wood.getBlockOfThis("stripped_log").asItem())
+                    // recipeName: carved_<type>_X_from_stripped_<type>_log_carving
+                    ? "_from_stripped_" + wood.getTypeName() + "_log_carving"
+                    // recipeName: carved_<type>_X_from_<type>_log_carving
+                    : "_from_" + wood.getTypeName() + "_log_carving";
         }
 
         JsonObject ingredient = new JsonObject();
