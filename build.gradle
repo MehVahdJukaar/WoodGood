@@ -142,6 +142,8 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
+    implementation fg.deobf("curse.maven:selene-499980:4747959")
+
         // ======================================== DEPENDENCIES ==================================================== \\
     compileOnly fg.deobf("curse.maven:flywheel-486392:4341461") // Create
     compileOnly fg.deobf("curse.maven:autoreglib-250363:3642382") // Quark
@@ -150,11 +152,26 @@ dependencies {
     compileOnly fg.deobf("curse.maven:ortuslib-616457:3768197")
     compileOnly fg.deobf("curse.maven:geckolib-388172:4215249") // Graveyard
     compileOnly fg.deobf("curse.maven:blueprint-382216:3991478") // Woodworks
-    implementation fg.deobf("curse.maven:configured-457570:4462832")
+    implementation fg.deobf("curse.maven:ctm-267602:3933537") // chipped
 
-    implementation fg.deobf("curse.maven:selene-499980:4747959")
-    // =============================================== IMPORTS ====================================================== \\
+        // TOOLS
+    implementation fg.deobf("curse.maven:configured-457570:4462832")
     implementation fg.deobf("curse.maven:jei-238222:4593548")
+    implementation fg.deobf("curse.maven:jade-324717:5079263")
+
+    // =============================================== IMPORTS ====================================================== \\
+        // Macaw's
+    compileOnly fg.deobf("curse.maven:macaws-bridges-351725:5240511")
+    compileOnly fg.deobf("curse.maven:macaws-doors-378646:4649903")
+    implementation fg.deobf("curse.maven:macaws-fences-and-walls-453925:5050212")
+    compileOnly fg.deobf("curse.maven:macaws-lights-and-lamps-502372:4618176")
+    compileOnly fg.deobf("curse.maven:macaws-paths-and-pavings-629153:4585113")
+    compileOnly fg.deobf("curse.maven:macaws-trapdoors-400933:4841544")
+    compileOnly fg.deobf("curse.maven:macaws-windows-363569:4961135")
+    compileOnly fg.deobf("curse.maven:macaws-furniture-359540:4726291")
+    compileOnly fg.deobf("curse.maven:macaws-roofs-352039:4590024")
+
+        // OTHERS
     compileOnly fg.deobf("curse.maven:another-furniture-610492:4034013")
     compileOnly fg.deobf("curse.maven:architects-palette-433862:4498424")
     compileOnly fg.deobf("curse.maven:backpacked-352835:4480722")
@@ -178,37 +195,25 @@ dependencies {
     compileOnly fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
     compileOnly fg.deobf("curse.maven:workshop-for-handsome-adventurer-875843:4688655")
     compileOnly fg.deobf("curse.maven:dramatic-doors-380617:4511658")
+    compileOnly fg.deobf("curse.maven:corail-pillar-266228:3672409")
+    compileOnly fg.deobf("curse.maven:corail-woodcutter-331983:4442684")
+    compileOnly fg.deobf("curse.maven:builders-delight-forge-563734:3857874")
+    compileOnly fg.deobf("curse.maven:decoration-delight-687475:4689698")
 
     compileOnly fg.deobf("curse.maven:exlines-bark-carpets-527296:3776832") // PORTED FROM 1.19.2
     compileOnly fg.deobf("curse.maven:lauchs-shutters-714019:4492153")  // PORTED FROM 1.19.2
     compileOnly fg.deobf("curse.maven:mosaic-carpentry-690226:4071275") // PORTED FROM 1.19.2
     compileOnly fg.deobf("curse.maven:ex-nihilo-sequentia-400012:4556977") // PORTED FROM 1.19.2
-
     compileOnly fg.deobf("curse.maven:premium-wood-353515:3781130")  // PORTED FROM 1.19.2
     compileOnly fg.deobf("curse.maven:productivebees-377897:4257307")  // PORTED FROM 1.19.2
     compileOnly fg.deobf("curse.maven:woodworks-543610:4396956")  // PORTED FROM 1.19.2
     compileOnly fg.deobf("curse.maven:xercamod-341575:4318574") // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:corail-pillar-266228:3672409")
-    compileOnly fg.deobf("curse.maven:corail-woodcutter-331983:4442684")
-    compileOnly fg.deobf("curse.maven:builders-delight-forge-563734:3857874")
-    compileOnly fg.deobf("curse.maven:decoration-delight-687475:4689698")
-//  ironagefurniture-1.18.2-0.2.0.10 in Mods folder
-//  marketcrates-1.18.2-1.4.1 in Mods folder
-//  Stylish Stiles in Mods folder
+    compileOnly fg.deobf("curse.maven:chipped-456956:4293291") // PORTED FROM 1.19.2
 
-        // Macaw's
-    compileOnly fg.deobf("curse.maven:macaws-bridges-351725:4599796")
-    compileOnly fg.deobf("curse.maven:macaws-doors-378646:4649903")
-    compileOnly fg.deobf("curse.maven:macaws-fences-and-walls-453925:4204541")
-    compileOnly fg.deobf("curse.maven:macaws-lights-and-lamps-502372:4618176")
-    compileOnly fg.deobf("curse.maven:macaws-paths-and-pavings-629153:4585113")
-    compileOnly fg.deobf("curse.maven:macaws-trapdoors-400933:4841544")
-    compileOnly fg.deobf("curse.maven:macaws-windows-363569:4961135")
-    compileOnly fg.deobf("curse.maven:macaws-furniture-359540:4726291")
-    compileOnly fg.deobf("curse.maven:macaws-roofs-352039:4590024")
-
-
-    // ============================================= WORK IN PROGRESS =============================================== \\
+        // LOCAL
+    compileOnly fg.deobf(getModVersion("ironagefurniture-1.18.2-0.2.0.10.jar"))
+    compileOnly fg.deobf(getModVersion("marketcrates-1.18.2-1.4.1.jar"))
+    compileOnly fg.deobf(getModVersion("stylishstiles-1.1.1-1.18.2.jar"))
 
     //=========================================== TODO: NOT ADDED YET =============================================== \\
 //    compileOnly fg.deobf("curse.maven:malum-484064:4631612")
@@ -221,11 +226,14 @@ dependencies {
 //    implementation fg.deobf("curse.maven:benched-417063:4291393") // Uses OBJ Format
 
     // ============================================= FOR TESTING ==================================================== \\
-    implementation fg.deobf("curse.maven:terrablender-563928:3957976") // biomesoplenty
-//    implementation fg.deobf("curse.maven:patchouli-306770:3846086") // terrafirmacraft
-
-//    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:3759236")
 //    implementation fg.deobf("curse.maven:terrafirmacraft-302973:4843196")
+//    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:3759236")
+    implementation fg.deobf("curse.maven:blue-skies-312918:3788736")
+
+        // DEPENDENCIES
+//    implementation fg.deobf("curse.maven:patchouli-306770:3846086") // terrafirmacraft
+    implementation fg.deobf("curse.maven:terrablender-563928:3957976") // biomesoplenty
+    implementation fg.deobf("curse.maven:structure-gel-api-378802:4804138") // blue-skies
 
 
     // ================================================ OTHERS ====================================================== \\
@@ -289,8 +297,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies{
     // Deobfuscate each dev mod for runtime
     dev_mods.each {
-        compileOnly fg.deobf(it)
-        runtimeOnly fg.deobf(it)
+//        compileOnly fg.deobf(it)
+//        runtimeOnly fg.deobf(it)
     }
 
     implementation 'org.jetbrains:annotations:22.0.0'
