@@ -1457,7 +1457,7 @@ public class ChippedModule extends SimpleModule {
         //TYPE: STRIPPED_LOG
         Stripped_Log_1 = SimpleEntrySet.builder(WoodType.class, "log_1", "stripped",
                         () -> getModBlock("stripped_oak_log_1"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_1_side"))
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_1_top"))
@@ -1470,7 +1470,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_2 = SimpleEntrySet.builder(WoodType.class, "log_2", "stripped",
                         () -> getModBlock("stripped_oak_log_2"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_2"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1482,7 +1482,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_3 = SimpleEntrySet.builder(WoodType.class, "log_3", "stripped",
                         () -> getModBlock("stripped_oak_log_3"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_3"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1494,7 +1494,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_4 = SimpleEntrySet.builder(WoodType.class, "log_4", "stripped",
                         () -> getModBlock("stripped_oak_log_4"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_4"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1506,7 +1506,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_5 = SimpleEntrySet.builder(WoodType.class, "log_5", "stripped",
                         () -> getModBlock("stripped_oak_log_5"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_5"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1518,7 +1518,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_6 = SimpleEntrySet.builder(WoodType.class, "log_6", "stripped",
                         () -> getModBlock("stripped_oak_log_6"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_6"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1530,7 +1530,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_7 = SimpleEntrySet.builder(WoodType.class, "log_7", "stripped",
                         () -> getModBlock("stripped_oak_log_7"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_7"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1542,7 +1542,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_8 = SimpleEntrySet.builder(WoodType.class, "log_8", "stripped",
                         () -> getModBlock("stripped_oak_log_8"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_8"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1554,7 +1554,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_9 = SimpleEntrySet.builder(WoodType.class, "log_9", "stripped",
                         () -> getModBlock("stripped_oak_log_9"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_9"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1566,7 +1566,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_10 = SimpleEntrySet.builder(WoodType.class, "log_10", "stripped",
                         () -> getModBlock("stripped_oak_log_10"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_10"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1578,7 +1578,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_11 = SimpleEntrySet.builder(WoodType.class, "log_11", "stripped",
                         () -> getModBlock("stripped_oak_log_11"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_11"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1590,7 +1590,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_12 = SimpleEntrySet.builder(WoodType.class, "log_12", "stripped",
                         () -> getModBlock("stripped_oak_log_12"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_12"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1602,7 +1602,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_13 = SimpleEntrySet.builder(WoodType.class, "log_13", "stripped",
                         () -> getModBlock("stripped_oak_log_13"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_13"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1614,7 +1614,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_14 = SimpleEntrySet.builder(WoodType.class, "log_14", "stripped",
                         () -> getModBlock("stripped_oak_log_14"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTextureM(modRes("block/stripped_oak_log/stripped_oak_log_14"),
                         WoodGood.res("block/ch/stripped_log/stripped_oak_log_14_m"))
@@ -1626,7 +1626,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_15 = SimpleEntrySet.builder(WoodType.class, "log_15", "stripped",
                         () -> getModBlock("stripped_oak_log_15"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_15"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1638,7 +1638,7 @@ public class ChippedModule extends SimpleModule {
 
         Stripped_Log_16 = SimpleEntrySet.builder(WoodType.class, "log_16", "stripped",
                         () -> getModBlock("stripped_oak_log_16"), () -> WoodType.OAK_WOOD_TYPE,
-                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.strippedLog))
+                        w -> new RotatedPillarBlock(WoodGood.copySafe(w.log))
                 )
                 .addTexture(modRes("block/stripped_oak_log/stripped_oak_log_16"))
                 .createPaletteFromOak(this::dullerPalette)
@@ -1760,7 +1760,7 @@ public class ChippedModule extends SimpleModule {
                     case "door" -> tagBuilder.addEntry(w.getBlockOfThis("door")); // adds vanilla|modded door
                     case "trapdoor" -> tagBuilder.addEntry(w.getBlockOfThis("trapdoor")); // adds vanilla|modded trapdoor
                     case "log" -> tagBuilder.addEntry(w.log); // adds vanilla|modded log
-                    case "stripped_log" -> tagBuilder.addEntry(w.strippedLog); // adds vanilla|modded stripped_log
+                    case "stripped_log" -> tagBuilder.addEntry(w.getBlockOfThis("stripped_log")); // adds vanilla|modded stripped_log
                 }
             }
 
