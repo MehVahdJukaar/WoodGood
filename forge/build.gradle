@@ -120,7 +120,7 @@ dependencies {
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modImplementation("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modImplementation("curse.maven:blueprint-382216:5228040") // The-Outer-End, Woodworks
+    modCompileOnly("curse.maven:blueprint-382216:5228040") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
@@ -130,11 +130,11 @@ dependencies {
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
 
         // LOCAL
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // no longer required since 0.5.1
+    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // no longer required since 0.5.1
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
     modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
-    modCompileOnly("com.mrcrayfish.furniture.refurbished:cfm")
+    modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-forge-1.20.1-1.0.0-beta.4")
 
         // TOOLS
     modCompileOnly("curse.maven:roughly-enough-items-310111:4573157")
@@ -150,7 +150,7 @@ dependencies {
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:5077656")
-    modImplementation("curse.maven:create-328085:4835191")
+    modCompileOnly("curse.maven:create-328085:4835191")
     modCompileOnly("curse.maven:dawn-of-time-312359:5199362")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
@@ -175,7 +175,7 @@ dependencies {
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:woodster-869951:4670471")
-    modImplementation("curse.maven:woodworks-543610:5228779")
+    modCompileOnly("curse.maven:woodworks-543610:5228779")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
 
