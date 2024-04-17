@@ -59,6 +59,8 @@ public class SpriteHelper {
         // Gardens Of The Dead
         addOptional("gardens_of_the_dead:whistlecane", "_side", "gardens_of_the_dead:block/whistlecane_block");
         addOptional("gardens_of_the_dead:whistlecane", "_top", "gardens_of_the_dead:block/whistlecane_block_top");
+        addOptional("gardens_of_the_dead:stripped_soulblight_stem", "_side", "gardens_of_the_dead:block/stripped_soulblight_stem");
+        addOptional("gardens_of_the_dead:stripped_soulblight_stem", "_top", "gardens_of_the_dead:block/stripped_soulblight_stem_top");
 
         // L_Ender 's Cataclysm
         addOptional("cataclysm:chorus_stem", "_side", "cataclysm:block/chorus_stem");
