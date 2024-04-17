@@ -169,7 +169,7 @@ public class QuarkModule extends SimpleModule {
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> new HollowLogBlock(shortenedId() + "/" + w.getAppendableId(),
                                 w.log, null, w.canBurn()))
-                .requiresChildren("stripped_log")
+                .requiresChildren("stripped_log") // Texture
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hollow_logs"), Registries.BLOCK)
