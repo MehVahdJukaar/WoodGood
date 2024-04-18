@@ -1,5 +1,5 @@
 #### UPDATED:
-- **Quark** - Fixed the code - if a block is disabled via Quark's Config, then EveryComp won't add the block
+- **MrCrayFish's Refurbished Furniture** - Supporting v1.0.0-beta.4+  **NOTE:** no longer supporting older beta version
 
 ---
 **LEGEND**:
