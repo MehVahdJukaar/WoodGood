@@ -86,7 +86,6 @@ public class WoodworksModule extends SimpleModule {
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/oak_boards"))
                 .defaultRecipe()
@@ -304,7 +303,7 @@ public class WoodworksModule extends SimpleModule {
             );
 
         } catch (IOException e) {
-            EveryCompat.LOGGER.error("{Woodworks Module} sawmill_recipe(): " + e);
+            EveryCompat.LOGGER.error("{Woodworks Module} sawmill_recipe(): {0}", e);
         }
 
         // filenameBuilder: <woodType>_<blockType>_from_<woodType>_<logs|planks>_sawing
