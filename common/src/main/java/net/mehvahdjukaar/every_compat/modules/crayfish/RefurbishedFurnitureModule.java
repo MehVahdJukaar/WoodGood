@@ -55,7 +55,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-//SUPPORT: v?.?.?
+//SUPPORT: v1.0.0-beta-4
 public class RefurbishedFurnitureModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chairs;
@@ -182,7 +182,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 
         toilets = SimpleEntrySet.builder(WoodType.class, "toilet",
                         getModBlock("oak_toilet"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ToiletBlock(BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
+                        w -> new WoodenToiletBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
                                 .strength(3.5f).sound(SoundType.STONE)))
                 .addRecipe(modRes("constructing/oak_toilet"))
                 .setTab(ModCreativeTabs.MAIN::get)
