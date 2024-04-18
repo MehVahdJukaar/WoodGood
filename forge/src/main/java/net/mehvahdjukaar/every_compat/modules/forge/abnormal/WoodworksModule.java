@@ -405,7 +405,7 @@ public class WoodworksModule extends SimpleModule {
                             var trapped = img.makeCopy();
                             trapped.applyOverlayOnExisting(right_t.makeCopy());
 
-                            handler.dynamicPack.addAndCloseTexture(res, img);
+                            if (!chests.blocks.isEmpty()) handler.dynamicPack.addAndCloseTexture(res, img);
                             handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
                         }
                     }
@@ -414,7 +414,7 @@ public class WoodworksModule extends SimpleModule {
                     ChestManager.putChestInfo(EveryCompat.MOD_ID, wood.getTypeName(), true);
 
                 } catch (Exception ex) {
-                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", b, ex);
+                    handler.getLogger().error("Failed to generate Chest block texture for {} : {}", b, ex);
                 }
             });
         } catch (Exception ex) {
