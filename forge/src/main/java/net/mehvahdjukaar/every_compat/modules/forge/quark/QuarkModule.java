@@ -184,6 +184,16 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("hollow_logs"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hollow_logs"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("building/crafting/hollowlogs/hollow_oak_log"))
+                .addModelTransform(m -> m.addModifier((s, resLoc, w) -> {
+                    String namespace = w.getNamespace();
+                    String typeName = w.getTypeName();
+                    if (namespace.equals("gardens_of_the_dead") && typeName.equals("whistlecane")) {
+                        return s.replace("\"minecraft:block/stripped_oak_log\"",
+                                "\"gardens_of_the_dead:block/whistlecane_block\"");
+                    }
+
+                    return s;
+                }))
                 .build();
         this.addEntry(hollowLogs);
 
@@ -487,7 +497,7 @@ public class QuarkModule extends SimpleModule {
 
 
                 } catch (Exception ex) {
-                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", b, ex);
+                    handler.getLogger().error("Failed to generate Chest block texture for {} : {}", b, ex);
                 }
             });
         } catch (Exception ex) {
