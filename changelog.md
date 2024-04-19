@@ -1,2 +1,5 @@
-#### UPDATED:
-- **Macaw's Bridge** - Fixed _rope_bridge_ block & texture not correctly displaying
+## UPDATED:
+- **Woodworks** (FORGE) - Fixed bookshelves' behaviours (will have same behaviour as vanilla bookshelf)
+
+### LEGEND: 
+- (COMMON) = FORGE & FABRIC
