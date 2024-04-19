@@ -2,6 +2,26 @@
   "itemGroup.everycomp": "Every Compat",
   "itemGroup.everycomp.everycomp": "Every Compat",
 
+  "block.everycomp.q.endergetic.hollow_poise_log": "Hollow Poise Stem",
+  "block.everycomp.q.gardens_of_the_dead.hollow_soulblight_log": "Hollow Soulblight Stem",
+
+  "wood_type.domum_ornamentum.cactus": "Green Cactus",
+  "wood_type.domum_ornamentum.cactus_extra": "Cactus",
+  "wood_type.twilightforest.dark": "Darkwood",
+  "wood_type.twilightforest.time": "Timewood",
+  "wood_type.twilightforest.transformation": "Transwood",
+  "wood_type.twilightforest.sorting": "Sortingwood",
+  "wood_type.twilightforest.mining": "Minewood",
+
+  "leaves_type.quark.blue": "Frosty",
+  "leaves_type.quark.lavender":"Serene",
+  "leaves_type.quark.orange": "Warm",
+  "leaves_type.quark.pink": "Sweet",
+  "leaves_type.quark.yellow": "Sunny",
+  "leaves_type.quark.red":"Fiery",
+  "leaves_type.twilightforest.dark": "Darkwood",
+  "leaves_type.ulterlands.souldrained": "Petrified",
+
   "block_type.twigs.table": "%s Table",
 
   "block_type.missingwilds.fallen_log": "Fallen %s Log",
@@ -516,23 +536,6 @@
   "block_type.xercamod.carved_6": "Carved %s",
   "block_type.xercamod.carved_7": "Carved %s",
   "block_type.xercamod.carved_8": "Carved %s",
-
-  "wood_type.domum_ornamentum.cactus": "Green Cactus",
-  "wood_type.domum_ornamentum.cactus_extra": "Cactus",
-  "wood_type.twilightforest.dark": "Darkwood",
-  "wood_type.twilightforest.time": "Timewood",
-  "wood_type.twilightforest.transformation": "Transwood",
-  "wood_type.twilightforest.sorting": "Sortingwood",
-  "wood_type.twilightforest.mining": "Minewood",
-
-  "leaves_type.quark.blue": "Frosty",
-  "leaves_type.quark.lavender":"Serene",
-  "leaves_type.quark.orange": "Warm",
-  "leaves_type.quark.pink": "Sweet",
-  "leaves_type.quark.yellow": "Sunny",
-  "leaves_type.quark.red":"Fiery",
-  "leaves_type.twilightforest.dark": "Darkwood",
-  "leaves_type.ulterlands.souldrained": "Petrified",
 
   "block_type.woodworks.boards": "%s Boards",
   "block_type.woodworks.bookshelf": "%s Bookshelf",
