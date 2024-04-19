@@ -70,11 +70,11 @@ public class WoodworksModule extends SimpleModule {
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new Block(Utils.copyPropertySafe(w.log)))
+                        w -> new Block(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.bookshelf()))
                 .setTabKey(() -> tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Items.BOOKSHELVES, Registries.BLOCK)
+                .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .defaultRecipe()
@@ -84,11 +84,11 @@ public class WoodworksModule extends SimpleModule {
         chiseled_bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf", "chiseled",
                         getModBlock("chiseled_acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.log)))
+                        w -> new ChiseledBookShelfBlock(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.chiseledBookshelf()))
                 .setTabKey(() -> tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Items.BOOKSHELVES, Registries.BLOCK)
+                .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTexture(modRes("block/chiseled_acacia_bookshelf_empty"))
                 .addTextureM(modRes("block/chiseled_acacia_bookshelf_occupied"),
