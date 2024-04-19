@@ -47,10 +47,7 @@ import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 //SUPPORT: v3.0.0+
 public class WoodworksModule extends SimpleModule {
@@ -214,29 +211,22 @@ public class WoodworksModule extends SimpleModule {
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
-        leafPiles.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : leafPiles.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        });
+        }
     }
 
     @Override
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        leafPiles.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : leafPiles.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-            //blockColor.register((s, l, p, i) -> blockColor.getColor(bl.defaultBlockState(), l, p, i), b);
-        });
-    }
-
-    public void onFirstClientTick1() {
-        var ic = Minecraft.getInstance().getItemColors();
-        var bc = Minecraft.getInstance().getBlockColors();
-        leafPiles.blocks.forEach((t, b) -> {
-            var leaf = t.getChild("leaves");
-            if (leaf instanceof Block block) {
-                bc.register((s, l, p, i) -> bc.getColor(block.defaultBlockState(), l, p, i), b);
-                ic.register((stack, tintIndex) -> ic.getColor(new ItemStack(block.asItem()), tintIndex), b.asItem());
-            }
-        });
+        }
     }
 
     @Override
