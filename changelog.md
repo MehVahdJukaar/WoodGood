@@ -1,5 +1,5 @@
 #### UPDATED:
-- **MrCrayFish's Refurbished Furniture** - Supporting v1.0.0-beta.4+  **NOTE:** no longer supporting older beta version
+- **Woodworks** (FORGE) - Fixed the Behaviour of Bookshelf (have the same behaviour as vanilla bookshelf)
 
 ---
 **LEGEND**:
