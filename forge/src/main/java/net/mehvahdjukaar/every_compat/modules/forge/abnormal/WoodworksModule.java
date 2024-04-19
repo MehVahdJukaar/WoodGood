@@ -70,11 +70,11 @@ public class WoodworksModule extends SimpleModule {
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         () -> getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new BookshelfBlock(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.bookshelf()))
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Items.BOOKSHELVES, Registry.BLOCK_REGISTRY)
+                .addTag(Tags.Blocks.BOOKSHELVES, Registry.BLOCK_REGISTRY)
                 .addTag(Tags.Items.BOOKSHELVES, Registry.ITEM_REGISTRY)
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .defaultRecipe()
