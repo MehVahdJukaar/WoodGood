@@ -34,6 +34,11 @@ public class SpriteHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
 
+        // The Twilight Forest
+            // Leaves
+        addOptional("twilightforest:beanstalk_leaves", "_leaves", "minecraft:block/azalea_leaves");
+        addOptional("twilightforest:thorn_leaves", "_leaves", "minecraft:block/oak_leaves");
+
         // Regions Unexplored
         addOptional("regions_unexplored:eucalyptus_log", "_side", EveryCompat.MOD_ID+":block/regions_unexplored/eucalyptus_log");
             // Leaves
