@@ -24,7 +24,7 @@ public class SpriteHelper {
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_LEAF_TEXTURE = (s) -> {
         s = (new ResourceLocation(s)).getPath();
-        return !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay");
+        return !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow");
     };
 
     public static void addHardcodedSprites() {
