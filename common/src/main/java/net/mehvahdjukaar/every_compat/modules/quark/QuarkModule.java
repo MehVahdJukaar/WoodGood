@@ -205,7 +205,9 @@ public class QuarkModule extends SimpleModule {
                         getModBlock("oak_trapped_chest", VariantTrappedChestBlock.class),
                         () -> WoodTypeRegistry.OAK_TYPE,
                         (w) -> {
-                            if (!chests.blocks.containsKey(w)) return null;
+                            boolean isNamespaceLoaded = w.getNamespace().equals("twilightforest")
+                                    || w.getNamespace().equals("blue_skies");
+                            if (!chests.blocks.containsKey(w) && !isNamespaceLoaded) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
                             return new CompatTrappedChestBlock(w, name, Utils.copyPropertySafe(w.planks));
                         })
