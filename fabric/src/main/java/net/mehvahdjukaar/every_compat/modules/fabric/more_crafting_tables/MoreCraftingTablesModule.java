@@ -14,7 +14,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
-
+// SUPPORT: v1.2.6+
+// NOTE: More Crafting Table is developed by LieOnLion and has both FORGE & FABRIC
 public class MoreCraftingTablesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;

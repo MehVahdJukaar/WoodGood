@@ -12,10 +12,8 @@ import com.tynoxs.buildersdelight.content.block.wood.StairFlammable;
 import com.tynoxs.buildersdelight.content.init.BdBlocks;
 import com.tynoxs.buildersdelight.content.init.BdDecoration;
 import com.tynoxs.buildersdelight.content.init.BdTabs;
-import com.tynoxs.buildersdelight.content.item.BdFurnitureKit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -46,9 +44,8 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Objects;
 
-//SUPPORT: v3.0.4+
+//SUPPORT: v1.3+
 public class BuildersDelightModule extends SimpleModule {
 
     //TYPE: ITEM
@@ -585,7 +582,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
                 .createPaletteFromOak(this::lessContrastPalette)
-                .addTextureM(modRes("block/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_1_mask"))
+                .addTextureM(modRes("block/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_x_l_mask"))
                 // custom recipe below
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -600,6 +597,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(tabBlock)
                 .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_2"), EveryCompat.res("block/bdl/oak_glass_2_mask"))
+                .addTextureM(modRes("block/oak_glass_2_top"), EveryCompat.res("block/bdl/oak_glass_x_l_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -613,7 +611,8 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
                 .createPaletteFromOak(this::lessContrastPalette)
-                .addTextureM(modRes("block/oak_glass_3"), EveryCompat.res("block/bdl/oak_glass_3_mask"))
+                .addTexture(modRes("block/oak_glass_3"))
+                .addTexture(modRes("block/oak_glass_3_top"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -642,7 +641,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .setTab(tabBlock)
                 .createPaletteFromOak(this::lessContrastPalette)
                 .addTextureM(modRes("block/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"))
-                .addTexture(modRes("block/oak_glass_5_top"))
+                .addTextureM(modRes("block/oak_glass_5_top"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();
@@ -656,8 +655,8 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
                 .createPaletteFromOak(this::lessContrastPalette)
-                .addTextureM(modRes("block/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_6_mask"))
-                .addTexture(modRes("block/oak_glass_6_top"))
+                .addTextureM(modRes("block/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"))
+                .addTextureM(modRes("block/oak_glass_6_top"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();
@@ -671,8 +670,8 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
                 .createPaletteFromOak(this::lessContrastPalette)
-                .addTextureM(modRes("block/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_7_mask"))
-                .addTexture(modRes("block/oak_glass_7_top"))
+                .addTextureM(modRes("block/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"))
+                .addTextureM(modRes("block/oak_glass_7_top"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -686,7 +685,7 @@ public class BuildersDelightModule extends SimpleModule {
                 .addTag(Tags.Blocks.GLASS, Registries.BLOCK)
                 .setTab(tabBlock)
                 .createPaletteFromOak(this::lessContrastPalette)
-                .addTextureM(modRes("block/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_8_mask"))
+                .addTextureM(modRes("block/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"))
                 // ChiselRecipe
                 .setRenderType(() -> RenderType::translucent)
                 .build();

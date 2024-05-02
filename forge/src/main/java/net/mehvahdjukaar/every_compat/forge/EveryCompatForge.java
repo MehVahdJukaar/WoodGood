@@ -94,6 +94,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("woodworks", () -> WoodworksModule::new);
         addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addModule("xercamod", () -> XercaModule::new);
+        addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
 
         // ========================================= Macaw's ======================================================== \\
         addModule("mcwbridges", () -> MacawBridgesModule::new);
@@ -108,7 +109,6 @@ public class EveryCompatForge extends EveryCompat {
 
 
         // ========================================== WORK IN PROGRESS ============================================== \\
-        addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
         addModule("boatload", () -> BoatLoadModule::new);
 

@@ -13,7 +13,10 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
+import java.util.List;
 
+// SUPPORT: v5.1.2+
+// NOTE: More Crafting Table for Forge! is developed by Duart And is FORGE only
 public class MoreCraftingTablesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;
@@ -41,5 +44,15 @@ public class MoreCraftingTablesModule extends SimpleModule {
                 .build();
 
         this.addEntry(craftingTable);
+    }
+
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of(
+                "biomesoplenty", "quark", "ad_astra",
+                "naturesaura", "undergarden", "twilightforest",
+                "regions_unexplored"
+        );
+
     }
 }

@@ -1,9 +1,13 @@
 #### UPDATED:
-- **Macaw's Door** (COMMON) - Fixed _bark_glass_door_'s item texture
-- **Macaw's Fences & Walls** (FORGE) - Related to **The Aether: Redux** & **The Aether** - Fixed _hedge_'s texturing problems 
-
-#### OTHERS: 
-- **FPW Aesthetic Gems** (COMMMON) - Fixed the 2 woods' texturing problems - Related to **Macaw's Furniture**
+- **Woodworks** (FORGE) 
+  - Fixed the Behaviour of Bookshelf (have the same behaviour as vanilla bookshelf)
+  - Fixed 2 _leaf_pile_'s missing textures with **TheTwilightForest**
+- **MoreCraftingTables for Forge!** (FORGE) - Fixed duplicated recipes & _CraftingTable_.
+- **Refurbished Furniture** (COMMON) - Fixed Hedge's texture problem via **Pokemon AIO**
+- **Quark** (COMMON) - Fixed _trapped_chest_ not being generated for **The Twilight Forest** & **Blue Skies**
+- **Builder's Delight** (FORGE) 
+  - GLASSES' textures for v1.3+ (textures were outdated)
+  - en_us (incorrect tooltip names for GLASSES)
 
 ---
 **LEGEND**:
