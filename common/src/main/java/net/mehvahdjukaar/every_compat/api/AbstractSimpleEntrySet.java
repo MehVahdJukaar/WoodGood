@@ -294,7 +294,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
 
                     Respriter respriter = re.getValue();
-                    boolean isOnAtlas = !newId.contains(":entity/");
+                    boolean isOnAtlas = !newId.startsWith("entity/");
                     if (type == WoodType.class) {
                         addWoodTexture((WoodType) w, handler, manager, newId, () ->
                                 respriter.recolorWithAnimation(finalTargetPalette, finalAnimation), isOnAtlas);
