@@ -294,13 +294,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
 
                     Respriter respriter = re.getValue();
+                    boolean isOnAtlas = !newId.contains(":entity/");
                     if (type == WoodType.class) {
                         addWoodTexture((WoodType) w, handler, manager, newId, () ->
-                                respriter.recolorWithAnimation(finalTargetPalette, finalAnimation));
+                                respriter.recolorWithAnimation(finalTargetPalette, finalAnimation), isOnAtlas);
 
                     } else {
                         handler.addTextureIfNotPresent(manager, newId, () ->
-                                respriter.recolorWithAnimation(finalTargetPalette, finalAnimation));
+                                respriter.recolorWithAnimation(finalTargetPalette, finalAnimation), isOnAtlas);
                     }
                 }
             }
@@ -319,12 +320,12 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     //post process some textures. currently only ecologics azalea
     public void addWoodTexture(WoodType wood, DynClientResourcesGenerator handler, ResourceManager manager,
-                               String path, Supplier<TextureImage> textureSupplier) {
+                               String path, Supplier<TextureImage> textureSupplier, boolean isOnAtlas) {
         handler.addTextureIfNotPresent(manager, path, () -> {
             var t = textureSupplier.get();
             maybeFlowerAzalea(t, manager, wood);
             return t;
-        });
+        }, isOnAtlas);
     }
 
     //for ecologics
