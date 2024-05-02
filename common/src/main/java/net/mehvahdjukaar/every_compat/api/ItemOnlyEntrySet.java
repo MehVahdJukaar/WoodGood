@@ -105,7 +105,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         Item base = getBaseItem();
         if (base == null || base == Items.AIR)
             //?? wtf im using disabled to allow for null??
-            throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
+            throw new UnsupportedOperationException("Base Item cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = getChildKey(module);
         baseType.get().addChild(childKey,  base);

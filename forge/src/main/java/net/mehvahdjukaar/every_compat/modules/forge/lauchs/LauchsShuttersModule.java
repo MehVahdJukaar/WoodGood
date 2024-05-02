@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.stehschnitzel.shutter.common.blocks.Shutter;
+import net.stehschnitzel.shutter.init.BlockInit;
 import net.stehschnitzel.shutter.init.CreativTabInit;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class LauchsShuttersModule extends SimpleModule {
         super(modId, "ls");
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
-                        getModBlock("oak_shutter", Shutter.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTextureM(modRes("block/oak_shutter_lower"), EveryCompat.res("block/ls/oak_shutter_lower_m"))

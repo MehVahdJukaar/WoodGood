@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
+import net.mehvahdjukaar.every_compat.modules.forge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
@@ -38,6 +39,7 @@ import net.mehvahdjukaar.moonlight.api.platform.network.forge.ChannelHandlerImpl
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -108,6 +110,7 @@ public class EveryCompatForge extends EveryCompat {
         // ========================================== WORK IN PROGRESS ============================================== \\
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
+        addModule("boatload", () -> BoatLoadModule::new);
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
