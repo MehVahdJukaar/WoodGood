@@ -35,7 +35,8 @@ public class BoatLoadModule extends SimpleModule {
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("large_boats"), Registries.ITEM)
                 .addRecipe(modRes("large_oak_boat"))
-                .addTexture(EveryCompat.res("entity/large_boat/oak"))
+                .addTexture(modRes("entity/large_boat/oak"))
+                .addTexture(modRes("entity/furnace_boat/oak"))
                 .build();
         this.addEntry(largeBoats);
 
@@ -49,13 +50,15 @@ public class BoatLoadModule extends SimpleModule {
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("furnace_boats"), Registries.ITEM)
                 .addRecipe(modRes("furnace_oak_boat"))
-                .addTexture(EveryCompat.res("entity/furnace_boat/oak"))
+                .addTexture(modRes("item/large_oak_boat"))
+                .addTexture(modRes("item/oak_furnace_boat"))
+                .createPaletteFromChild(p->{}, "boat")
                 .build();
         this.addEntry(furnaceBoats);
     }
 
     private BoatloadBoatType getBoatType(WoodType w) {
-        return boatTypes.computeIfAbsent(w, k -> new BoatloadBoatType(k.getId(),
+        return boatTypes.computeIfAbsent(w, k -> BoatloadBoatType.register(new BoatloadBoatType(k.getId(),
                 () -> w.getItemOfThis("planks"),
                 () -> w.getItemOfThis("boat"),
                 () -> w.getItemOfThis("chest_boat"),
@@ -63,7 +66,7 @@ public class BoatLoadModule extends SimpleModule {
                 () -> largeBoats.items.get(w),
                 w.canBurn(),
                 false
-        ));
+        )));
     }
 
     @Override

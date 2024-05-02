@@ -120,7 +120,7 @@ dependencies {
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modImplementation("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks
+    modImplementation("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail

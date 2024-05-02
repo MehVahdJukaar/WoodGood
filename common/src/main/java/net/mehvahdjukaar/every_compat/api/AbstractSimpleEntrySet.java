@@ -467,14 +467,27 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
             return this.setPalette((w, m) -> {
-                try (TextureImage plankTexture = TextureImage.open(m,
-                        RPUtils.findFirstBlockTextureLocation(m, w.getBlockOfThis(childKey)))) {
+                var c = w.getChild(childKey);
+                if(c instanceof Block b) {
+                    try (TextureImage plankTexture = TextureImage.open(m,
+                            RPUtils.findFirstBlockTextureLocation(m, b))) {
 
-                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-                    targetPalette.forEach(paletteTransform);
-                    return Pair.of(targetPalette, plankTexture.getMetadata());
-                } catch (Exception e) {
-                    throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
+                        List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+                        targetPalette.forEach(paletteTransform);
+                        return Pair.of(targetPalette, plankTexture.getMetadata());
+                    } catch (Exception e) {
+                        throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
+                    }
+                }else if(c instanceof Item i){
+                    try (TextureImage plankTexture = TextureImage.open(m,
+                            RPUtils.findFirstItemTextureLocation(m, i))) {
+
+                        List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+                        targetPalette.forEach(paletteTransform);
+                        return Pair.of(targetPalette, plankTexture.getMetadata());
+                    } catch (Exception e) {
+                        throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
+                    }
                 }
             });
         }
