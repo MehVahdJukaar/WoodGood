@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.abnormal;
 
+import com.teamabnormals.boatload.common.item.FurnaceBoatItem;
 import com.teamabnormals.boatload.common.item.LargeBoatItem;
 import com.teamabnormals.boatload.core.api.BoatloadBoatType;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -43,22 +44,24 @@ public class BoatLoadModule extends SimpleModule {
         furnaceBoats = ItemOnlyEntrySet.builder(WoodType.class, "furnace_boat",
                         getModItem("oak_furnace_boat"),
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new LargeBoatItem(getBoatType(w)))
+                        w -> new FurnaceBoatItem(getBoatType(w)))
                 .setTabKey(() -> tab)
                 .requiresChildren("chest_boat")
                 .requiresChildren("boat")
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("furnace_boats"), Registries.ITEM)
-                .addRecipe(modRes("furnace_oak_boat"))
+                .addRecipe(modRes("oak_furnace_boat"))
                 .addTexture(modRes("item/large_oak_boat"))
                 .addTexture(modRes("item/oak_furnace_boat"))
-                .createPaletteFromChild(p->{}, "boat")
+                .createPaletteFromChild(p -> {
+                }, "boat")
                 .build();
         this.addEntry(furnaceBoats);
     }
 
     private BoatloadBoatType getBoatType(WoodType w) {
-        return boatTypes.computeIfAbsent(w, k -> BoatloadBoatType.register(new BoatloadBoatType(k.getId(),
+        return boatTypes.computeIfAbsent(w, k -> BoatloadBoatType.register(new BoatloadBoatType(
+                EveryCompat.res(this.shortenedId() + "/" + w.getAppendableId()),
                 () -> w.getItemOfThis("planks"),
                 () -> w.getItemOfThis("boat"),
                 () -> w.getItemOfThis("chest_boat"),
