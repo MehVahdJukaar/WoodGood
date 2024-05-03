@@ -37,7 +37,8 @@ public class BoatLoadModule extends SimpleModule {
                 .addTag(modRes("large_boats"), Registries.ITEM)
                 .addRecipe(modRes("large_oak_boat"))
                 .addTexture(modRes("entity/large_boat/oak"))
-                .addTexture(modRes("entity/furnace_boat/oak"))
+                .addTextureM(modRes("entity/furnace_boat/oak_on"), EveryCompat.res("entity/furnace_boat_mask"))
+                .addTextureM(modRes("entity/furnace_boat/oak"), EveryCompat.res("entity/furnace_boat_mask"))
                 .build();
         this.addEntry(largeBoats);
 
@@ -52,7 +53,7 @@ public class BoatLoadModule extends SimpleModule {
                 .addTag(modRes("furnace_boats"), Registries.ITEM)
                 .addRecipe(modRes("oak_furnace_boat"))
                 .addTexture(modRes("item/large_oak_boat"))
-                .addTexture(modRes("item/oak_furnace_boat"))
+                .addTextureM(modRes("item/oak_furnace_boat"), EveryCompat.res("item/furnace_boat_mask"))
                 .createPaletteFromChild(p -> {
                 }, "boat")
                 .build();

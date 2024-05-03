@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.forge;
 
-import com.mrcrayfish.furniture.refurbished.core.ModBlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
