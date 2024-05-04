@@ -83,7 +83,7 @@ dependencies {
 
 
     // =========================================== WORK IN PROGRESS ================================================= \\
-    modImplementation("curse.maven:handcrafted-538214:4215478")
+    modImplementation("curse.maven:handcrafted-538214:4437458")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
