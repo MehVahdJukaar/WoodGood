@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.farmersdelight;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.block.Block;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+
+import java.util.List;
 
 public class FarmersDelightModule extends SimpleModule {
 
@@ -41,4 +44,11 @@ public class FarmersDelightModule extends SimpleModule {
         this.addEntry(cabinets);
     }
 
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        // abnormals_delight supports caverns_and_chasms
+        if (PlatformHelper.isModLoaded("abnormals_delight")) return List.of("caverns_and_chasms");
+
+        return List.of();
+    }
 }
