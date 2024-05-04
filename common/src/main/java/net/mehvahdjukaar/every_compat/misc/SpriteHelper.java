@@ -55,11 +55,12 @@ public class SpriteHelper {
         // Gardens Of The Dead
         addOptional("gardens_of_the_dead:whistlecane", "_side", "gardens_of_the_dead:block/whistlecane_block");
         addOptional("gardens_of_the_dead:whistlecane", "_top", "gardens_of_the_dead:block/whistlecane_block_top");
+        addOptional("gardens_of_the_dead:stripped_soulblight_stem", "_side", "gardens_of_the_dead:block/stripped_soulblight_stem");
+        addOptional("gardens_of_the_dead:stripped_soulblight_stem", "_top", "gardens_of_the_dead:block/stripped_soulblight_stem_top");
 
         // BetterNether
         addOptional("betternether:nether_reed_stem", "_side", "betternether:block/nether_reed_planks_side");
         addOptional("betternether:nether_reed_stem", "_top", "betternether:block/nether_reed_planks_top");
-
 
         // Blue Skies
             // Leaves
@@ -69,6 +70,9 @@ public class SpriteHelper {
         addOptional("cataclysm:chorus_stem", "_side", "cataclysm:block/chorus_stem");
         addOptional("cataclysm:chorus_stem", "_top", "cataclysm:block/chorus_stem");
 
+        // The Endergetic Expansion
+        addOptional("endergetic:stripped_poise_stem", "_side", "endergetic:block/poise_stem_stripped");
+        addOptional("endergetic:stripped_poise_stem", "_top", "endergetic:block/poise_stem_stripped_top");
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
