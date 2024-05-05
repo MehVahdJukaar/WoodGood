@@ -43,8 +43,8 @@ dependencies {
     modCompileOnly("curse.maven:athena-841890:4764358") // Chipped
     modCompileOnly("curse.maven:cloth-config-348521:3972420") // REI
     modImplementation("curse.maven:architectury-api-419699:4663009") // REI
-    modImplementation("curse.maven:framework-549225:5180973") // Refurbished Furniture, Mighty Mail
-    modImplementation("curse.maven:quad-932715:5146132") // More Crafting Tables
+    modCompileOnly("curse.maven:framework-549225:5180973") // Refurbished Furniture, Mighty Mail
+    modCompileOnly("curse.maven:quad-932715:5146132") // More Crafting Tables
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
     modCompileOnly("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
 
@@ -70,7 +70,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-roofs-352039:4590013")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841534")
     modCompileOnly("curse.maven:macaws-windows-363569:4750644")
-    modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
+    modImplementation("curse.maven:macaws-furniture-359540:4726281")
 
         // OTHERS
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
@@ -92,8 +92,8 @@ dependencies {
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:4939709")
     modCompileOnly("curse.maven:farmers-delight-refabricated-993166:5215829")
     modCompileOnly("curse.maven:friends-and-foes-551364:4968876")
-    modImplementation("curse.maven:mighty-mail-fabric-904097:4750271")
-    modImplementation("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
+    modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151837")
 
@@ -101,6 +101,11 @@ dependencies {
 
     // ============================================ FOR TESTING ===================================================== \\
     modImplementation("curse.maven:terrestria-323974:4850485")
+
+    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
+    modRuntimeOnly("curse.maven:architectury-api-419699:5137936")
+    modRuntimeOnly("curse.maven:terrablender-fabric-565956:5068219")
+    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4583000")
 }
 
 

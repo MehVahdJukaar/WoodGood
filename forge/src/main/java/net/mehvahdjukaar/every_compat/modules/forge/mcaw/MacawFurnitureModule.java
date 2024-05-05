@@ -62,37 +62,37 @@ public class MacawFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> strippedChair;
     public final SimpleEntrySet<WoodType, Block> strippedCoffeeTable;
     public final SimpleEntrySet<WoodType, Block> strippedCounter;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_COVERED_DESK;
+    public final SimpleEntrySet<WoodType, Block> strippedCoveredDesk;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_CUPBOARD_BOOKSHELF;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_CUPBOARD_COUNTER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_DESK;
+    public final SimpleEntrySet<WoodType, Block> strippedCupboardCounter;
+    public final SimpleEntrySet<WoodType, Block> strippedDesk;
     public final SimpleEntrySet<WoodType, Block> STRIPPED_DOUBLE_DRAWER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_DOUBLE_DRAWER_COUNTER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_DOUBLE_WARDROBE;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_DRAWER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_DRAWER_COUNTER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_END_TABLE;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_GLASS_TABLE;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_LARGE_DRAWER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_LOWER_BOOKSHELF_DRAWER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_LOWER_TRIPLE_DRAWER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_MODERN_CHAIR;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_MODERN_DESK;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_MODERN_WARDROBE;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_STOOL;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_STRIPED_CHAIR;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_TABLE;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_TRIPLE_DRAWER;
-    public final SimpleEntrySet<WoodType, Block> STRIPPED_WARDROBE;
-    public final SimpleEntrySet<WoodType, Block> TABLE;
-    public final SimpleEntrySet<WoodType, Block> TRIPLE_DRAWER;
-    public final SimpleEntrySet<WoodType, Block> WARDROBE;
+    public final SimpleEntrySet<WoodType, Block> strippedDoubleDrawerCounter;
+    public final SimpleEntrySet<WoodType, Block> strippedDoubleWardrobe;
+    public final SimpleEntrySet<WoodType, Block> strippedDrawer;
+    public final SimpleEntrySet<WoodType, Block> strippedDrawerCounter;
+    public final SimpleEntrySet<WoodType, Block> strippedEndTable;
+    public final SimpleEntrySet<WoodType, Block> strippedGlassTable;
+    public final SimpleEntrySet<WoodType, Block> strippedLargeDrawer;
+    public final SimpleEntrySet<WoodType, Block> strippedLowerBookshelfDrawer;
+    public final SimpleEntrySet<WoodType, Block> strippedLowerTripleDrawer;
+    public final SimpleEntrySet<WoodType, Block> strippedModernChair;
+    public final SimpleEntrySet<WoodType, Block> strippedModernDesk;
+    public final SimpleEntrySet<WoodType, Block> strippedModernWardrobe;
+    public final SimpleEntrySet<WoodType, Block> strippedStool;
+    public final SimpleEntrySet<WoodType, Block> strippedStripedChair;
+    public final SimpleEntrySet<WoodType, Block> strippedTable;
+    public final SimpleEntrySet<WoodType, Block> strippedTripleDrawer;
+    public final SimpleEntrySet<WoodType, Block> strippedWardrobe;
+    public final SimpleEntrySet<WoodType, Block> table;
+    public final SimpleEntrySet<WoodType, Block> tripleDrawer;
+    public final SimpleEntrySet<WoodType, Block> wardrobe;
 
     public MacawFurnitureModule(String modId) {
         super(modId, "mcfur");
         var tab = TabInit.FURNITUREITEMGROUP;
 
-        WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe",
+        wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         BlockInit.OAK_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -102,7 +102,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(WARDROBE);
+        this.addEntry(wardrobe);
 
         modernWardrobe = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe",
                         BlockInit.OAK_MODERN_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
@@ -224,7 +224,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(lowerTripleDrawer);
 
-        TRIPLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "triple_drawer",
+        tripleDrawer = SimpleEntrySet.builder(WoodType.class, "triple_drawer",
                         BlockInit.OAK_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
                 .addTag(modRes("triple_drawer"), Registries.BLOCK)
@@ -234,7 +234,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(TRIPLE_DRAWER);
+        this.addEntry(tripleDrawer);
 
         desk = SimpleEntrySet.builder(WoodType.class, "desk",
                         BlockInit.OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
@@ -269,7 +269,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(modernDesk);
 
-        TABLE = SimpleEntrySet.builder(WoodType.class, "table",
+        table = SimpleEntrySet.builder(WoodType.class, "table",
                         BlockInit.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -278,7 +278,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(TABLE);
+        this.addEntry(table);
 
         endTable = SimpleEntrySet.builder(WoodType.class, "end_table",
                         BlockInit.OAK_END_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
@@ -407,7 +407,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(cupboardCounter);
 
-        STRIPPED_WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe", "stripped",
+        strippedWardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe", "stripped",
                         BlockInit.STRIPPED_OAK_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -417,9 +417,9 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_WARDROBE);
+        this.addEntry(strippedWardrobe);
 
-        STRIPPED_MODERN_WARDROBE = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe", "stripped",
+        strippedModernWardrobe = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe", "stripped",
                         BlockInit.STRIPPED_OAK_MODERN_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
                 .addTag(modRes("modern_wardrobe"), Registries.BLOCK)
@@ -429,9 +429,9 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_MODERN_WARDROBE);
+        this.addEntry(strippedModernWardrobe);
 
-        STRIPPED_DOUBLE_WARDROBE = SimpleEntrySet.builder(WoodType.class, "double_wardrobe", "stripped",
+        strippedDoubleWardrobe = SimpleEntrySet.builder(WoodType.class, "double_wardrobe", "stripped",
                         BlockInit.STRIPPED_OAK_DOUBLE_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallFurniture(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
                 .addTag(modRes("double_wardrobe"), Registries.BLOCK)
@@ -441,7 +441,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_DOUBLE_WARDROBE);
+        this.addEntry(strippedDoubleWardrobe);
 
         strippedBookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf", "stripped",
                         BlockInit.STRIPPED_OAK_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
@@ -467,7 +467,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(STRIPPED_CUPBOARD_BOOKSHELF);
 
-        STRIPPED_DRAWER = SimpleEntrySet.builder(WoodType.class, "drawer", "stripped",
+        strippedDrawer = SimpleEntrySet.builder(WoodType.class, "drawer", "stripped",
                         BlockInit.STRIPPED_OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -477,7 +477,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_DRAWER);
+        this.addEntry(strippedDrawer);
 
         STRIPPED_DOUBLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "double_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_DOUBLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
@@ -493,7 +493,8 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedBookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "bookshelf_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BookDrawer(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new BookDrawer(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -503,9 +504,10 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(strippedBookshelfDrawer);
 
-        STRIPPED_LOWER_BOOKSHELF_DRAWER = SimpleEntrySet.builder(WoodType.class, "lower_bookshelf_drawer", "stripped",
+        strippedLowerBookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "lower_bookshelf_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_LOWER_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BookDrawer(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new BookDrawer(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("lower_bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -513,11 +515,12 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_LOWER_BOOKSHELF_DRAWER);
+        this.addEntry(strippedLowerBookshelfDrawer);
 
-        STRIPPED_LARGE_DRAWER = SimpleEntrySet.builder(WoodType.class, "large_drawer", "stripped",
+        strippedLargeDrawer = SimpleEntrySet.builder(WoodType.class, "large_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_LARGE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new WideFurniture(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("large_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -525,11 +528,12 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_LARGE_DRAWER);
+        this.addEntry(strippedLargeDrawer);
 
-        STRIPPED_LOWER_TRIPLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "lower_triple_drawer", "stripped",
+        strippedLowerTripleDrawer = SimpleEntrySet.builder(WoodType.class, "lower_triple_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_LOWER_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new WideFurniture(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("lower_triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -537,11 +541,12 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_LOWER_TRIPLE_DRAWER);
+        this.addEntry(strippedLowerTripleDrawer);
 
-        STRIPPED_TRIPLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "triple_drawer", "stripped",
+        strippedTripleDrawer = SimpleEntrySet.builder(WoodType.class, "triple_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new WideFurniture(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -549,66 +554,72 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_TRIPLE_DRAWER);
+        this.addEntry(strippedTripleDrawer);
 
-        STRIPPED_DESK = SimpleEntrySet.builder(WoodType.class, "desk", "stripped",
+        strippedDesk = SimpleEntrySet.builder(WoodType.class, "desk", "stripped",
                         BlockInit.STRIPPED_OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new Desk(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("desk"), Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_DESK);
+        this.addEntry(strippedDesk);
 
-        STRIPPED_COVERED_DESK = SimpleEntrySet.builder(WoodType.class, "covered_desk", "stripped",
+        strippedCoveredDesk = SimpleEntrySet.builder(WoodType.class, "covered_desk", "stripped",
                         BlockInit.STRIPPED_OAK_COVERED_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new Desk(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_COVERED_DESK);
+        this.addEntry(strippedCoveredDesk);
 
-        STRIPPED_MODERN_DESK = SimpleEntrySet.builder(WoodType.class, "modern_desk", "stripped",
+        strippedModernDesk = SimpleEntrySet.builder(WoodType.class, "modern_desk", "stripped",
                         BlockInit.STRIPPED_OAK_MODERN_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new Desk(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("modern_desk"), Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_MODERN_DESK);
+        this.addEntry(strippedModernDesk);
 
-        STRIPPED_TABLE = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
+        strippedTable = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
                         BlockInit.STRIPPED_OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new TableHitbox(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_TABLE);
+        this.addEntry(strippedTable);
 
-        STRIPPED_END_TABLE = SimpleEntrySet.builder(WoodType.class, "end_table", "stripped",
+        strippedEndTable = SimpleEntrySet.builder(WoodType.class, "end_table", "stripped",
                         BlockInit.STRIPPED_OAK_END_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new TableHitbox(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("end_table"), Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_END_TABLE);
+        this.addEntry(strippedEndTable);
 
         strippedCoffeeTable = SimpleEntrySet.builder(WoodType.class, "coffee_table", "stripped",
                         BlockInit.STRIPPED_OAK_COFFEE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Table(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new Table(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -617,9 +628,10 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(strippedCoffeeTable);
 
-        STRIPPED_GLASS_TABLE = SimpleEntrySet.builder(WoodType.class, "glass_table", "stripped",
+        strippedGlassTable = SimpleEntrySet.builder(WoodType.class, "glass_table", "stripped",
                         BlockInit.STRIPPED_OAK_GLASS_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new TableHitbox(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
@@ -627,11 +639,12 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_GLASS_TABLE);
+        this.addEntry(strippedGlassTable);
 
         strippedChair = SimpleEntrySet.builder(WoodType.class, "chair", "stripped",
                         BlockInit.STRIPPED_OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ClassicChair(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new ClassicChair(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.BLOCK)
                 .setTab(tab)
@@ -640,20 +653,22 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(strippedChair);
 
-        STRIPPED_MODERN_CHAIR = SimpleEntrySet.builder(WoodType.class, "modern_chair", "stripped",
+        strippedModernChair = SimpleEntrySet.builder(WoodType.class, "modern_chair", "stripped",
                         BlockInit.STRIPPED_OAK_MODERN_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ModernChair(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .requiresChildren("stripped_log")
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_MODERN_CHAIR);
+        this.addEntry(strippedModernChair);
 
-        STRIPPED_STRIPED_CHAIR = SimpleEntrySet.builder(WoodType.class, "striped_chair", "stripped",
+        strippedStripedChair = SimpleEntrySet.builder(WoodType.class, "striped_chair", "stripped",
                         BlockInit.STRIPPED_OAK_STRIPED_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StripedChair(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new StripedChair(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
@@ -661,22 +676,24 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_STRIPED_CHAIR);
+        this.addEntry(strippedStripedChair);
 
-        STRIPPED_STOOL = SimpleEntrySet.builder(WoodType.class, "stool_chair", "stripped",
+        strippedStool = SimpleEntrySet.builder(WoodType.class, "stool_chair", "stripped",
                         BlockInit.STRIPPED_OAK_STOOL_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Chair(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new Chair(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool_chair"), Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_STOOL);
+        this.addEntry(strippedStool);
 
         strippedCounter = SimpleEntrySet.builder(WoodType.class, "counter", "stripped",
                         BlockInit.STRIPPED_OAK_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Counter(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new Counter(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("counter"), Registries.BLOCK)
                 .setTab(tab)
@@ -685,9 +702,10 @@ public class MacawFurnitureModule extends SimpleModule {
 
         this.addEntry(strippedCounter);
 
-        STRIPPED_DRAWER_COUNTER = SimpleEntrySet.builder(WoodType.class, "drawer_counter", "stripped",
+        strippedDrawerCounter = SimpleEntrySet.builder(WoodType.class, "drawer_counter", "stripped",
                         BlockInit.STRIPPED_OAK_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -695,11 +713,12 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_DRAWER_COUNTER);
+        this.addEntry(strippedDrawerCounter);
 
-        STRIPPED_DOUBLE_DRAWER_COUNTER = SimpleEntrySet.builder(WoodType.class, "double_drawer_counter", "stripped",
+        strippedDoubleDrawerCounter = SimpleEntrySet.builder(WoodType.class, "double_drawer_counter", "stripped",
                         BlockInit.STRIPPED_OAK_DOUBLE_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("double_drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -707,11 +726,12 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_DOUBLE_DRAWER_COUNTER);
+        this.addEntry(strippedDoubleDrawerCounter);
 
-        STRIPPED_CUPBOARD_COUNTER = SimpleEntrySet.builder(WoodType.class, "cupboard_counter", "stripped",
+        strippedCupboardCounter = SimpleEntrySet.builder(WoodType.class, "cupboard_counter", "stripped",
                         BlockInit.STRIPPED_OAK_CUPBOARD_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CupboardCounter(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
+                        w -> new CupboardCounter(Utils.copyPropertySafe(w.log)))
+                .requiresChildren("stripped_log")
                 .addTag(modRes("cupboard_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
@@ -720,6 +740,6 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
 
-        this.addEntry(STRIPPED_CUPBOARD_COUNTER);
+        this.addEntry(strippedCupboardCounter);
     }
 }

@@ -1,7 +1,5 @@
 ## UPDATED:
-
-## NEW: 
-- Boatload (FORGE) 
+- Boatload (FORGE)
 
 ---
 **LEGEND**:
