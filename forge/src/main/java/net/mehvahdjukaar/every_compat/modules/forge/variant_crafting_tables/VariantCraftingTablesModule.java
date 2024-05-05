@@ -14,6 +14,8 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
+import java.util.List;
+
 
 public class VariantCraftingTablesModule extends SimpleModule {
 
@@ -24,6 +26,7 @@ public class VariantCraftingTablesModule extends SimpleModule {
         var tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
+
                         getModBlock("spruce_crafting_table"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new VCTCraftingTableBlock(Utils.copyPropertySafe(w.planks).strength(2.5F).sound(SoundType.WOOD)))
@@ -41,5 +44,33 @@ public class VariantCraftingTablesModule extends SimpleModule {
                 .build();
 
         this.addEntry(craftingTable);
+    }
+
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of(
+                "abundant_atmosphere", "ad_astra", "aether", "aether_redux",
+                "alexscaves", "alloyed", "architects_palette", "atum",
+                "aurorasdeco", "automaticdoors", "bambooeverything", "betterarcheology",
+                "betterend", "betternether", "bewitchment", "biomancy",
+                "biomemakeover", "biomesoplenty", "blocksplus", "blockus",
+                "byg", "caupona", "ceilands", "charm",
+                "chipped", "cinderscapes", "cobblemon", "colorfulazaleas",
+                "copperoverhaul", "couplings", "create_things_and_misc", "createdeco",
+                "darkerdepths", "deep_aether", "deeperdarker", "desolation",
+                "doubledoors", "dustrial_decor", "ecologics", "enderscape",
+                "endlessbiomes", "enhanced_mushrooms", "enlightened_end", "everythingcopper",
+                "extendedmushrooms", "forbidden_arcanus", "fruittrees", "gardens_of_the_dead",
+                "goodending", "graveyard", "hexcasting", "hexerei",
+                "horizons", "integrateddynamics", "malum", "manyideas_doors",
+                "mcwdoors", "modern_glass_doors", "morecraft", "ms",
+                "mysticsbiomes", "nethers_exoticism", "newworld", "phantasm",
+                "pokecube", "prehistoricfauna", "premium_wood", "promenade",
+                "pyromancer", "quark", "regions_unexplored", "silentgear",
+                "snowyspirit", "statement", "supplementaries", "tconstruct",
+                "techreborn", "terraqueous", "terrestria", "traverse",
+                "twilightforest", "undergarden", "vinery", "wilderwild",
+                "windswept", "woodworks", "xps_additions", "yippee"
+        );
     }
 }
