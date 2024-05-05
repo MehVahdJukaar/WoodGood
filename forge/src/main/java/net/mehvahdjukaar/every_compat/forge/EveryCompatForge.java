@@ -68,6 +68,7 @@ public class EveryCompatForge extends EveryCompat {
         // ========================================= Add Modules ==================================================== \\
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
+        addModule("boatload", () -> BoatLoadModule::new);
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
@@ -110,7 +111,6 @@ public class EveryCompatForge extends EveryCompat {
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
-        addModule("boatload", () -> BoatLoadModule::new);
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work

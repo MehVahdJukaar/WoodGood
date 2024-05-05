@@ -62,25 +62,28 @@ public class DramaticDoorsModule extends SimpleModule {
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of(
-                "automaticdoors", "doubledoors", "couplings", "woodworks",
-                "chipped", "mcwdoors", "manyideas_doors", "quark", "supplementaries",
-                "statement", "abundant_atmosphere", "ad_astra", "aether",
-                "aether_redux", "alexscaves", "architects_palette", "atum",
-                "aurorasdeco", "bambooeverything", "betterarcheology", "betterend",
-                "betternether", "bewitchment", "biomancy", "biomemakeover", "biomesoplenty",
-                "blocksplus", "blockus", "byg", "caupona", "ceilands", "charm", "cinderscapes",
-                "cobblemon", "colorfulazaleas", "copperoverhaul", "alloyed", "createdeco",
-                "create_things_and_misc", "darkerdepths", "deep_aether", "deeperdarker",
-                "desolation", "dustrial_decor", "ecologics", "endlessbiomes", "enhanced_mushrooms",
-                "phantasm", "enderscape", "enlightened_end", "everythingcopper", "extendedmushrooms",
-                "fruittrees", "forbidden_arcanus", "gardens_of_the_dead", "goodending", "graveyard",
-                "hexcasting", "hexerei", "horizons", "integrateddynamics", "malum", "modern_glass_doors",
-                "ms", "morecraft", "mysticsbiomes", "nethers_exoticism", "newworld", "pokecube",
-                "prehistoricfauna", "premium_wood", "promenade", "pyromancer", "quark",
-                "regions_unexplored", "silentgear", "snowyspirit", "supplementaries",
-                "tconstruct", "techreborn", "terraqueous", "terrestria", "traverse",
-                "twilightforest", "undergarden", "vinery", "wilderwild", "windswept",
-                "xps_additions", "yippee", "chipped", "mcwdoors", "manyideas_doors"
+                "abundant_atmosphere", "ad_astra", "aether", "aether_redux",
+                "alexscaves", "alloyed", "architects_palette", "atum",
+                "aurorasdeco", "automaticdoors", "bambooeverything", "betterarcheology",
+                "betterend", "betternether", "bewitchment", "biomancy",
+                "biomemakeover", "biomesoplenty", "blocksplus", "blockus",
+                "byg", "caupona", "ceilands", "charm",
+                "chipped", "cinderscapes", "cobblemon", "colorfulazaleas",
+                "copperoverhaul", "couplings", "create_things_and_misc", "createdeco",
+                "darkerdepths", "deep_aether", "deeperdarker", "desolation",
+                "doubledoors", "dustrial_decor", "ecologics", "enderscape",
+                "endlessbiomes", "enhanced_mushrooms", "enlightened_end", "everythingcopper",
+                "extendedmushrooms", "forbidden_arcanus", "fruittrees", "gardens_of_the_dead",
+                "goodending", "graveyard", "hexcasting", "hexerei",
+                "horizons", "integrateddynamics", "malum", "manyideas_doors",
+                "mcwdoors", "modern_glass_doors", "morecraft", "ms",
+                "mysticsbiomes", "nethers_exoticism", "newworld", "phantasm",
+                "pokecube", "prehistoricfauna", "premium_wood", "promenade",
+                "pyromancer", "quark", "regions_unexplored", "silentgear",
+                "snowyspirit", "statement", "supplementaries", "tconstruct",
+                "techreborn", "terraqueous", "terrestria", "traverse",
+                "twilightforest", "undergarden", "vinery", "wilderwild",
+                "windswept", "woodworks", "xps_additions", "yippee"
         );
     }
 }
