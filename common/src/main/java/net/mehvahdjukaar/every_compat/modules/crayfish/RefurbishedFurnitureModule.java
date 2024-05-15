@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -49,12 +50,17 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+//TODO:
+// The TemplateRecipeManager class is not working, why?
 
 //SUPPORT: v1.0.0-beta-4
 public class RefurbishedFurnitureModule extends SimpleModule {
@@ -528,7 +534,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
             this.materials = NonNullList.withSize(materialArray.size(), StackedIngredient.EMPTY);
             IntStream.range(0, materialArray.size()).forEach((i) -> materials.set(i, StackedIngredient.fromJson(materialArray.get(i))));
             String s1 = GsonHelper.getAsString(json, "result");
-            int i = GsonHelper.getAsInt(json, "count");
+            int i = GsonHelper.getAsInt(json, "count", 1);
             this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i);
             this.notification = GsonHelper.getAsBoolean(json, "show_notification", true);
         }
