@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
+import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,6 +16,8 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -32,6 +35,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -46,9 +50,12 @@ import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
 import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 //SUPPORT: v4.0-435+
 public class QuarkModule extends SimpleModule {
@@ -95,7 +102,7 @@ public class QuarkModule extends SimpleModule {
                         (w) -> {
                             Block fence = w.getBlockOfThis("fence");
                             return new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/",
-                                    fence.getSoundType(fence.defaultBlockState()));
+                                    Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
@@ -117,7 +124,7 @@ public class QuarkModule extends SimpleModule {
                             Block fence = w.getBlockOfThis("fence");
                             // required stripped_log texture & fence as an ingredients
                             return new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_",
-                                    fence.getSoundType(fence.defaultBlockState()));
+                                    Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
@@ -237,7 +244,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("hedges"), Registries.ITEM)
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addCondition(l -> l.getWoodType() != null)
-                .addRecipe(modRes("building/crafting/oak_hedge"))
+//              Recipe being created below blc the recipe has a tag as an ingredient
                 .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(hedges);
@@ -362,6 +369,7 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
+    // Textures
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
@@ -444,20 +452,6 @@ public class QuarkModule extends SimpleModule {
         }
     }
 
-    @Override
-    // Recipes
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
-
-        if (PlatHelper.isModLoaded("botanypots")) {
-            hedges.items.forEach((leaves, item) -> {
-                var leavesItem = leaves.leaves.asItem();
-                BotanyPotsHelper.crop_quarkhedge_recipe(this, item, leavesItem, handler, manager, leaves);
-            });
-        }
-    }
-
-
     private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
                                      Respriter respriterLeft, Respriter respriterLeftO,
                                      AnimationMetadataSection baseMeta, List<Palette> basePalette,
@@ -476,5 +470,77 @@ public class QuarkModule extends SimpleModule {
         handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
     }
 
+    @Override
+    // Recipes & Tags
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        if (PlatHelper.isModLoaded("botanypots")) {
+            hedges.items.forEach((leaves, item) -> {
+                var leavesItem = leaves.leaves.asItem();
+                BotanyPotsHelper.crop_quarkhedge_recipe(this, item, leavesItem, handler, manager, leaves);
+            });
+        }
+
+        //  modID:woodType_logs tags
+        for (WoodType wood : WoodTypeRegistry.getTypes()) {
+            boolean ifHasSomething = false;
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(wood.getNamespace(),
+                    wood.getTypeName() + "_logs"));
+
+            // skipping vanilla|quark's woodTypes
+            if (wood.isVanilla()) continue;
+
+            for (var entry : this.getEntries()) {
+                String name = entry.getName();
+                // adding log, stripped_log, wood, stripped_wood
+                if (name.matches("log|wood")) {
+                    Item item = ((SimpleEntrySet<?, ?>) entry).items.get(wood);
+                    if (item != null) {
+                        ifHasSomething = true;
+                        tagBuilder.addEntry(item);
+                    }
+                }
+            }
+
+            if (ifHasSomething) {
+                handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
+                handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
+            }
+        }
+
+        // Recipes for hedges
+        ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
+
+        hedges.blocks.forEach((leavesType, block) -> {
+
+            JsonObject recipe;
+
+            //noinspection OptionalGetWithoutIsPresent
+            try (InputStream recipeStream = manager.getResource(recipeLoc).get().open()) {
+                recipe = RPUtils.deserializeJson(recipeStream);
+
+                JsonObject underKey = recipe.getAsJsonObject("key");
+                JsonObject underResult = recipe.getAsJsonObject("result");
+
+                // Editing JSON
+                    // Leaves
+                underKey.getAsJsonObject("L").addProperty("item", Utils.getID(leavesType.leaves).toString());
+                    // WoodTypes
+                underKey.getAsJsonObject("W").addProperty("tag",
+                        leavesType.getNamespace() + ":" + leavesType.getTypeName() + "_logs");
+                    // Hedges
+                underResult.addProperty("item", Utils.getID(block).toString());
+
+                // Adding the finished recipe to ResourceLocation
+                String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
+                handler.dynamicPack.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
+                        ResType.RECIPES);
+
+            } catch (IOException e) {
+                handler.getLogger().error("QuarkModule - Failed to open the recipe file: {0}", e);
+            }
+        });
+    }
 
 }
