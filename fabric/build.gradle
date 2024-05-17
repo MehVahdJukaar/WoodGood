@@ -49,11 +49,12 @@ dependencies {
     modCompileOnly("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
 
         // LOCAL
+//     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 //    modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 //    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2") // updated to 1.20.1
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
-    // modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
+    modImplementation("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
 
     // ================================================ IMPORTS ===================================================== \\
     // Tools
@@ -61,7 +62,6 @@ dependencies {
     modImplementation("curse.maven:modmenu-308702:5162837")
     modImplementation("curse.maven:jei-238222:5101365")
 
-    modImplementation("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
