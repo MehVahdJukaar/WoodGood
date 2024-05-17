@@ -43,7 +43,7 @@ dependencies {
     modCompileOnly("curse.maven:athena-841890:4764358") // Chipped
     modCompileOnly("curse.maven:cloth-config-348521:3972420") // REI
     modImplementation("curse.maven:architectury-api-419699:4663009") // REI
-    modCompileOnly("curse.maven:framework-549225:5180973") // Refurbished Furniture, Mighty Mail
+    modImplementation("curse.maven:framework-549225:5180973") // Refurbished Furniture, Mighty Mail
     modCompileOnly("curse.maven:quad-932715:5146132") // More Crafting Tables
     modImplementation("curse.maven:resourceful-lib-570073:4681832") // Chipped, Handcrafted
     modCompileOnly("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
@@ -60,6 +60,8 @@ dependencies {
     modCompileOnly("curse.maven:roughly-enough-items-310111:4573156")
     modImplementation("curse.maven:modmenu-308702:5162837")
     modImplementation("curse.maven:jei-238222:5101365")
+
+    modImplementation("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
