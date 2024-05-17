@@ -1,24 +1,37 @@
 package net.mehvahdjukaar.every_compat.modules.forge.buildersaddition;
 
+import com.google.gson.JsonObject;
 import com.mrh0.buildersaddition.Index;
 import com.mrh0.buildersaddition.blocks.*;
 import com.mrh0.buildersaddition.event.CreativeModeTabRegistry;
+import io.netty.util.ResourceLeakDetector;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
+//SUPPORT: v20230928a+
 public class BuildersAdditionModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> arcades;
@@ -54,7 +67,7 @@ public class BuildersAdditionModule extends SimpleModule {
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("vertical_slab/oak_vertical_slab"))
-                .addRecipe(modRes("vertical_slab/reverse/oak_vertical_slab"))
+//              Recipe added by a manual code below
                 .setTab(tab)
                 .build();
 
@@ -283,16 +296,50 @@ public class BuildersAdditionModule extends SimpleModule {
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
-        hedges.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        });
+        }
     }
 
     @Override
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
         super.registerItemColors(event);
-        hedges.blocks.forEach((t, b) -> {
+        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+            LeavesType t = entry.getKey();
+            Block b = entry.getValue();
+            if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        });
+        }
+    }
+
+    @Override
+    // Recipes for vertical_slab (from 2 v-slab to plank)
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        ResourceLocation recipeLoc = modRes("recipes/vertical_slab/reverse/oak_vertical_slab.json");
+        JsonObject recipe;
+
+        try (InputStream recipeStream = manager.getResource(recipeLoc).get().open()) {
+            recipe = RPUtils.deserializeJson(recipeStream);
+
+            verticalSlab.items.forEach((woodType, item) -> {
+                // Editing JSON
+                JsonObject underIngredient = recipe.getAsJsonObject("key").getAsJsonObject("P");
+                underIngredient.addProperty("item", Utils.getID(item).toString());
+
+                JsonObject underResult = recipe.getAsJsonObject("result");
+                underResult.addProperty("item", Utils.getID(woodType.planks).toString());
+                // Adding finished recipe
+                handler.dynamicPack.addJson(EveryCompat.res(this.shortenedId() +"/" + woodType.getAppendableId() + "_vertical_slab_reversed"), recipe, ResType.RECIPES);
+            });
+
+        } catch (IOException e) {
+            handler.getLogger().error("BuilderAdditional - failed to open the reverse/vertical_slab recipe: {0}", e );
+        }
     }
 }

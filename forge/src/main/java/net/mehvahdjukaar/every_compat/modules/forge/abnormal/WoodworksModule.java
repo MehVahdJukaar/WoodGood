@@ -289,13 +289,14 @@ public class WoodworksModule extends SimpleModule {
         }
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public void sawmill_Recipe(String recipeName, Item input, Item output,
                                ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
 
         ResourceLocation recipeLocation = modRes("recipes/" + recipeName + ".json"); // get Recipe JSON
         JsonObject recipe = null;
 
-        try (InputStream recipeStream = manager.getResource(recipeLocation).orElseThrow().open()) {
+        try (InputStream recipeStream = manager.getResource(recipeLocation).get().open()) {
             recipe = RPUtils.deserializeJson(recipeStream);
 
             // VARIABLES
@@ -310,11 +311,10 @@ public class WoodworksModule extends SimpleModule {
             } else { // getIngredient.has("item")
                 getIngredient.addProperty("item", Utils.getID(input).toString());
             }
-            getRecipe.addProperty("result", Utils.getID(output).toString()
-            );
+            getRecipe.addProperty("result", Utils.getID(output).toString());
 
         } catch (IOException e) {
-            EveryCompat.LOGGER.error("{Woodworks Module} sawmill_recipe(): " + e);
+            EveryCompat.LOGGER.error("Woodworks Module/sawmill_recipe() - failed to open the recipe: {0}", e);
         }
 
         // filenameBuilder: <woodType>_<blockType>_from_<woodType>_<logs|planks>_sawing
