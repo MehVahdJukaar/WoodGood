@@ -501,13 +501,11 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         super.onClientSetup();
         darkFans.blocks.forEach((key, value) -> {
             ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
-            ModelManager manager = Minecraft.getInstance().getModelManager();
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(manager, res));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(Minecraft.getInstance().getModelManager(), res));
         });
         lightFans.blocks.forEach((key, value) -> {
-            ModelManager manager = Minecraft.getInstance().getModelManager();
             ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(manager, res));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(Minecraft.getInstance().getModelManager(), res));
         });
     }
 
