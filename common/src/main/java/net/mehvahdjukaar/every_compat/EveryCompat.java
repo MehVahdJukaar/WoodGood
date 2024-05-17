@@ -238,7 +238,7 @@ public abstract class EveryCompat {
     }
 
 
-    public record CompatMod(String modId, List<String> woodFrom, List<String> blocksFrom) {
+    public record CompatMod(String modId, List<String> woodsFrom, List<String> blocksFrom) {
 
         public CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
             this(modId, List.of(woodFrom), blocksFrom);

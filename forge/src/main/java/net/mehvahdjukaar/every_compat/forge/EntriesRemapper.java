@@ -44,7 +44,7 @@ public class EntriesRemapper {
         if (!EarlyConfigs.REMAP_COMPAT.get()) return;
         for (var compatMod : EveryCompat.COMPAT_MODS) {
             if (ModList.get().isLoaded(compatMod.modId())) continue;
-            String woodFrom = compatMod.woodFrom(); //ie bop
+            String woodsFrom = compatMod.woodsFrom(); //ie bop
             label:
             for (var mapping : event.getMappings(compatMod.modId())) {
                 //ie: bopcomp:willow_table
@@ -58,7 +58,7 @@ public class EntriesRemapper {
                             if (entry instanceof SimpleEntrySet se) {
                                 //find wood types from that mod id
 
-                                String s = se.getEquivalentBlock(module, mapping.key.getPath(), woodFrom);
+                                String s = se.getEquivalentBlock(module, mapping.key.getPath(), woodsFrom);
                                 if (s != null) {
                                     if (blockReg.containsKey(EveryCompat.res(s))) {
                                         var b = blockReg.getValue(EveryCompat.res(s));
