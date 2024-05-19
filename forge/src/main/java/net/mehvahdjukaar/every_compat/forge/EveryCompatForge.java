@@ -30,7 +30,8 @@ import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUn
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
-import net.mehvahdjukaar.every_compat.modules.forge.variant_crafting_tables.VariantCraftingTablesModule;
+import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantCraftingTablesModule;
+import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantVanillaBlocks;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
@@ -39,7 +40,6 @@ import net.mehvahdjukaar.moonlight.api.platform.network.forge.ChannelHandlerImpl
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -111,6 +111,7 @@ public class EveryCompatForge extends EveryCompat {
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
+        addModule("variantvanillablocks", () -> VariantVanillaBlocks::new);
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work

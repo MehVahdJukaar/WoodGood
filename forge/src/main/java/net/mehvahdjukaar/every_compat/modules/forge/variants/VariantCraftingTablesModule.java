@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.variant_crafting_tables;
+package net.mehvahdjukaar.every_compat.modules.forge.variants;
 
 import kittehmod.vct.blocks.VCTCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
