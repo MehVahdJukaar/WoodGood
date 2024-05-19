@@ -234,7 +234,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         }
                     }
                 } catch (UnsupportedOperationException e) {
-                    EveryCompat.LOGGER.error("Could not generate textures for {}: {}", p, e);
+                    EveryCompat.LOGGER.error("Could not generate textures for {}", p, e);
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to read block texture at {}", p);
                 }
