@@ -1,11 +1,14 @@
 package net.mehvahdjukaar.every_compat.modules.forge.variants;
 
 import com.google.common.collect.ImmutableSet;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
+import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -18,8 +21,11 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -28,25 +34,23 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.entity.ChiseledBookShelfBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.RegistryObject;
 import net.xanthian.variantvanillablocks.block.*;
-import net.xanthian.variantvanillablocks.block.custom.VariantChestBlock;
-import net.xanthian.variantvanillablocks.block.custom.VariantChests;
-import net.xanthian.variantvanillablocks.entity.VariantChestBlockEntity;
-import net.xanthian.variantvanillablocks.renderer.VariantChestRenderer;
 import net.xanthian.variantvanillablocks.utils.ModCreativeModTabs;
-import net.xanthian.variantvanillablocks.utils.ModPOITypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -57,7 +61,7 @@ public class VariantVanillaBlocks extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> Beehive;
     public final SimpleEntrySet<WoodType, Block> Bookshelves;
     public final SimpleEntrySet<WoodType, Block> Cartography;
-//    public final SimpleEntrySet<WoodType, Block> Chests;
+    public final SimpleEntrySet<WoodType, Block> Chests;
     public final SimpleEntrySet<WoodType, Block> ChiseledBookshelves;
     public final SimpleEntrySet<WoodType, Block> Composters;
     public final SimpleEntrySet<WoodType, Block> CraftingTable;
@@ -150,18 +154,18 @@ public class VariantVanillaBlocks extends SimpleModule {
                 .setTab(tab)
                 .build();
         this.addEntry(Cartography);
-/*
+
         Chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         net.xanthian.variantvanillablocks.block.Chests.ACACIA_CHEST,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
                 )
+                .addCustomItem((w, block, properties) -> new BlockItem(block, properties))
                 .addTile(() -> BlockEntityType.CHEST)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
         this.addEntry(Chests);
-*/
 
         {
         ChiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
@@ -339,23 +343,21 @@ public class VariantVanillaBlocks extends SimpleModule {
         handler.dynamicPack.addTag(tagBuilder, Registries.POINT_OF_INTEREST_TYPE);
     }
 
-    /*
     // Block -----------------------------------------------------------------------------------------------------------
     public class CompatChestBlock extends ChestBlock {
-        @SuppressWarnings("unchecked")
-        public CompatVariantChestBlock(BlockBehaviour.Properties properties, VariantChests pType) {
-            super(properties, pType);
+        public CompatChestBlock(BlockBehaviour.Properties properties) {
+            super(properties, () -> Chest_tile);
         }
 
         @Override
         public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-            return new CompatVariantChestEntityBlock(pos, state);
+            return new CompatChestEntityBlock(pos, state);
         }
     }
 
     // EntityBlock -----------------------------------------------------------------------------------------------------
     public class CompatChestEntityBlock extends ChestBlockEntity {
-        public CompatVariantChestEntityBlock(BlockPos pos, BlockState state) {
+        public CompatChestEntityBlock(BlockPos pos, BlockState state) {
             super(Chest_tile, pos, state);
         }
 
@@ -375,7 +377,7 @@ public class VariantVanillaBlocks extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(Chest_tile, ChestRenderer::new);
+        event.register(Chest_tile, context -> new ChestRenderer<>(context));
     }
 
     @Override
@@ -425,23 +427,22 @@ public class VariantVanillaBlocks extends SimpleModule {
                     }
 
                     {
-                        ResourceLocation res = modRes("entity/chest/" + wood.getTypeName() + "_chest");
+                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
 
                             createChestTextures(handler, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res);
                         }
                     }
                     {
-                        ResourceLocation res = modRes("entity/chest/" + wood.getTypeName() + "_chest_left");
+                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal_left");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
 
                             createChestTextures(handler, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res);
                         }
                     }
                     {
-                        ResourceLocation res = modRes("entity/chest/" + wood.getTypeName() + "_chest_right");
+                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal_right");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-
 
                             createChestTextures(handler, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res);
                         }
@@ -470,5 +471,5 @@ public class VariantVanillaBlocks extends SimpleModule {
         handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
 
     }
-*/
+
 }
