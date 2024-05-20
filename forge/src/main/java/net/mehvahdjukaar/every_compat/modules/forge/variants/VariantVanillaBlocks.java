@@ -22,10 +22,9 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -35,7 +34,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
@@ -45,7 +43,6 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.RegistryObject;
 import net.xanthian.variantvanillablocks.block.*;
 import net.xanthian.variantvanillablocks.utils.ModCreativeModTabs;
 import org.jetbrains.annotations.NotNull;
@@ -160,7 +157,7 @@ public class VariantVanillaBlocks extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addCustomItem((w, block, properties) -> new BlockItem(block, properties))
+                .addCustomItem((w, block, properties) -> new ChestItem(block, properties))
                 .addTile(() -> BlockEntityType.CHEST)
                 .defaultRecipe()
                 .setTab(tab)
@@ -168,155 +165,155 @@ public class VariantVanillaBlocks extends SimpleModule {
         this.addEntry(Chests);
 
         {
-        ChiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        net.xanthian.variantvanillablocks.block.ChiseledBookshelves.ACACIA_CHISELED_BOOKSHELF,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
-                )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("chiseled_bookshelves"), Registries.BLOCK)
-                .addTag(modRes("chiseled_bookshelves"), Registries.ITEM)
-                .addTexture(modRes("block/acacia_chiseled_bookshelf_empty"))
-                .addTextureM(modRes("block/acacia_chiseled_bookshelf_occupied"),
-                        EveryCompat.res("block/acacia_chiseled_bookshelf_occupied_m"))
-                .addTexture(modRes("block/acacia_chiseled_bookshelf_side"))
-                .addTexture(modRes("block/acacia_chiseled_bookshelf_top"))
-                .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
-                .defaultRecipe()
-                .setTab(tab)
-                .build();
-        this.addEntry(ChiseledBookshelves);
+            ChiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
+                            net.xanthian.variantvanillablocks.block.ChiseledBookshelves.ACACIA_CHISELED_BOOKSHELF,
+                            () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                            w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
+                    )
+                    .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                    .addTag(modRes("chiseled_bookshelves"), Registries.BLOCK)
+                    .addTag(modRes("chiseled_bookshelves"), Registries.ITEM)
+                    .addTexture(modRes("block/acacia_chiseled_bookshelf_empty"))
+                    .addTextureM(modRes("block/acacia_chiseled_bookshelf_occupied"),
+                            EveryCompat.res("block/acacia_chiseled_bookshelf_occupied_m"))
+                    .addTexture(modRes("block/acacia_chiseled_bookshelf_side"))
+                    .addTexture(modRes("block/acacia_chiseled_bookshelf_top"))
+                    .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
+                    .defaultRecipe()
+                    .setTab(tab)
+                    .build();
+            this.addEntry(ChiseledBookshelves);
 
-        Composters = SimpleEntrySet.builder(WoodType.class, "composter",
-                        net.xanthian.variantvanillablocks.block.Composters.OAK_COMPOSTER,
-                        () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ComposterBlock(Utils.copyPropertySafe(w.planks))
-                )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("composters"), Registries.BLOCK)
-                .addTag(modRes("composters"), Registries.ITEM)
-                .addTexture(modRes("block/oak_composter_bottom"))
-                .addTexture(modRes("block/oak_composter_side"))
-                .addTexture(modRes("block/oak_composter_top"))
-                .defaultRecipe()
-                .setTab(tab)
-                .build();
-        this.addEntry(Composters);
+            Composters = SimpleEntrySet.builder(WoodType.class, "composter",
+                            net.xanthian.variantvanillablocks.block.Composters.OAK_COMPOSTER,
+                            () -> WoodTypeRegistry.OAK_TYPE,
+                            w -> new ComposterBlock(Utils.copyPropertySafe(w.planks))
+                    )
+                    .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                    .addTag(modRes("composters"), Registries.BLOCK)
+                    .addTag(modRes("composters"), Registries.ITEM)
+                    .addTexture(modRes("block/oak_composter_bottom"))
+                    .addTexture(modRes("block/oak_composter_side"))
+                    .addTexture(modRes("block/oak_composter_top"))
+                    .defaultRecipe()
+                    .setTab(tab)
+                    .build();
+            this.addEntry(Composters);
 
-        CraftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
-                        CraftingTables.SPRUCE_CRAFTING_TABLE,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks))
-                )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("crafting_tables"), Registries.BLOCK)
-                .addTag(modRes("crafting_tables"), Registries.ITEM)
-                .addTexture(EveryCompat.res("block/spruce_crafting_table_top"))
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
-                        EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"),
-                        EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .defaultRecipe()
-                .setTab(tab)
-                .build();
-        this.addEntry(CraftingTable);
+            CraftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
+                            CraftingTables.SPRUCE_CRAFTING_TABLE,
+                            () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                            w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks))
+                    )
+                    .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                    .addTag(modRes("crafting_tables"), Registries.BLOCK)
+                    .addTag(modRes("crafting_tables"), Registries.ITEM)
+                    .addTexture(EveryCompat.res("block/spruce_crafting_table_top"))
+                    .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
+                            EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
+                    .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"),
+                            EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
+                    .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                    .defaultRecipe()
+                    .setTab(tab)
+                    .build();
+            this.addEntry(CraftingTable);
 
-        FletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
-                        FletchingTables.OAK_FLETCHING_TABLE,
-                        () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FletchingTableBlock(Utils.copyPropertySafe(w.planks))
-                )
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(modRes("fletching_tables"), Registries.BLOCK)
-                .addTag(modRes("fletching_tables"), Registries.ITEM)
-                .addTextureM(modRes("block/oak_fletching_table_front"),
-                        EveryCompat.res("block/vanilla_fletching_table_front_m"))
-                .addTextureM(modRes("block/oak_fletching_table_side"),
-                        EveryCompat.res("block/vanilla_fletching_table_side_m"))
-                .addTextureM(modRes("block/oak_fletching_table_top"),
-                        EveryCompat.res("block/vanilla_fletching_table_top_m"))
-                .defaultRecipe()
-                .setTab(tab)
-                .build();
-        this.addEntry(FletchingTable);
+            FletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
+                            FletchingTables.OAK_FLETCHING_TABLE,
+                            () -> WoodTypeRegistry.OAK_TYPE,
+                            w -> new FletchingTableBlock(Utils.copyPropertySafe(w.planks))
+                    )
+                    .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                    .addTag(modRes("fletching_tables"), Registries.BLOCK)
+                    .addTag(modRes("fletching_tables"), Registries.ITEM)
+                    .addTextureM(modRes("block/oak_fletching_table_front"),
+                            EveryCompat.res("block/vanilla_fletching_table_front_m"))
+                    .addTextureM(modRes("block/oak_fletching_table_side"),
+                            EveryCompat.res("block/vanilla_fletching_table_side_m"))
+                    .addTextureM(modRes("block/oak_fletching_table_top"),
+                            EveryCompat.res("block/vanilla_fletching_table_top_m"))
+                    .defaultRecipe()
+                    .setTab(tab)
+                    .build();
+            this.addEntry(FletchingTable);
 
-        Grindstones = SimpleEntrySet.builder(WoodType.class, "grindstone",
-                        net.xanthian.variantvanillablocks.block.Grindstones.OAK_GRINDSTONE,
-                        () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GrindstoneBlock(Utils.copyPropertySafe(w.planks))
-                )
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(modRes("grindstones"), Registries.BLOCK)
-                .addTag(modRes("grindstones"), Registries.ITEM)
-                .addTexture(modRes("block/oak_grindstone_pivot"))
-                .defaultRecipe()
-                .setTab(tab)
-                .build();
-        this.addEntry(Grindstones);
+            Grindstones = SimpleEntrySet.builder(WoodType.class, "grindstone",
+                            net.xanthian.variantvanillablocks.block.Grindstones.OAK_GRINDSTONE,
+                            () -> WoodTypeRegistry.OAK_TYPE,
+                            w -> new GrindstoneBlock(Utils.copyPropertySafe(w.planks))
+                    )
+                    .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                    .addTag(modRes("grindstones"), Registries.BLOCK)
+                    .addTag(modRes("grindstones"), Registries.ITEM)
+                    .addTexture(modRes("block/oak_grindstone_pivot"))
+                    .defaultRecipe()
+                    .setTab(tab)
+                    .build();
+            this.addEntry(Grindstones);
 
-        Lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
-                        Lecterns.ACACIA_LECTERN,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new LecternBlock(Utils.copyPropertySafe(w.planks))
-                )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("lecterns"), Registries.BLOCK)
-                .addTag(modRes("lecterns"), Registries.ITEM)
-                .addTextureM(modRes("block/acacia_lectern_base"),
-                        EveryCompat.res("block/vanilla_lectern_base_m"))
-                .addTextureM(modRes("block/acacia_lectern_front"),
-                        EveryCompat.res("block/vanilla_lectern_front_m"))
-                .addTexture(modRes("block/acacia_lectern_sides"))
-                .addTexture(modRes("block/acacia_lectern_top"))
-                .addTile(() -> BlockEntityType.LECTERN)
-                .defaultRecipe()
-                .setTab(tab)
-                .build();
-        this.addEntry(Lectern);
+            Lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
+                            Lecterns.ACACIA_LECTERN,
+                            () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                            w -> new LecternBlock(Utils.copyPropertySafe(w.planks))
+                    )
+                    .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                    .addTag(modRes("lecterns"), Registries.BLOCK)
+                    .addTag(modRes("lecterns"), Registries.ITEM)
+                    .addTextureM(modRes("block/acacia_lectern_base"),
+                            EveryCompat.res("block/vanilla_lectern_base_m"))
+                    .addTextureM(modRes("block/acacia_lectern_front"),
+                            EveryCompat.res("block/vanilla_lectern_front_m"))
+                    .addTexture(modRes("block/acacia_lectern_sides"))
+                    .addTexture(modRes("block/acacia_lectern_top"))
+                    .addTile(() -> BlockEntityType.LECTERN)
+                    .defaultRecipe()
+                    .setTab(tab)
+                    .build();
+            this.addEntry(Lectern);
 
-        SmithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
-                        SmithingTables.OAK_SMITHING_TABLE,
-                        () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SmithingTableBlock(Utils.copyPropertySafe(w.planks))
-                )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("smithing_tables"), Registries.BLOCK)
-                .addTag(modRes("smithing_tables"), Registries.ITEM)
-                .addTextureM(modRes("block/oak_smithing_table_bottom"),
-                        EveryCompat.res("block/vanilla_smithing_table_bottom_m"))
-                .addTextureM(modRes("block/oak_smithing_table_front"),
-                        EveryCompat.res("block/vanilla_smithing_table_front_m"))
-                .addTextureM(modRes("block/oak_smithing_table_side"),
-                        EveryCompat.res("block/vanilla_smithing_table_side_m"))
-                .defaultRecipe()
-                .setTab(tab)
-                .build();
-        this.addEntry(SmithingTable);
+            SmithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
+                            SmithingTables.OAK_SMITHING_TABLE,
+                            () -> WoodTypeRegistry.OAK_TYPE,
+                            w -> new SmithingTableBlock(Utils.copyPropertySafe(w.planks))
+                    )
+                    .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                    .addTag(modRes("smithing_tables"), Registries.BLOCK)
+                    .addTag(modRes("smithing_tables"), Registries.ITEM)
+                    .addTextureM(modRes("block/oak_smithing_table_bottom"),
+                            EveryCompat.res("block/vanilla_smithing_table_bottom_m"))
+                    .addTextureM(modRes("block/oak_smithing_table_front"),
+                            EveryCompat.res("block/vanilla_smithing_table_front_m"))
+                    .addTextureM(modRes("block/oak_smithing_table_side"),
+                            EveryCompat.res("block/vanilla_smithing_table_side_m"))
+                    .defaultRecipe()
+                    .setTab(tab)
+                    .build();
+            this.addEntry(SmithingTable);
 
-        Smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
-                        Smokers.ACACIA_SMOKER,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new SmokerBlock(Utils.copyPropertySafe(w.planks))
-                )
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(modRes("smokers"), Registries.BLOCK)
-                .addTag(modRes("smokers"), Registries.ITEM)
-                .addTextureM(modRes("block/acacia_smoker_front"),
-                        EveryCompat.res("block/vanilla_smoker_front_m"))
-                .addTextureM(modRes("block/acacia_smoker_front_on"),
-                        EveryCompat.res("block/vanilla_smoker_front_on_m"))
-                .addTextureM(modRes("block/acacia_smoker_side"),
-                        EveryCompat.res("block/vanilla_smoker_side_m"))
-                .addTextureM(modRes("block/acacia_smoker_top"),
-                        EveryCompat.res("block/vanilla_smoker_x_m"))
-                .addTextureM(modRes("block/acacia_smoker_bottom"),
-                        EveryCompat.res("block/vanilla_smoker_x_m"))
-                .addTile(() -> BlockEntityType.SMOKER)
-                .defaultRecipe()
-                .setTab(tab)
-                .build();
-        this.addEntry(Smoker);
+            Smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
+                            Smokers.ACACIA_SMOKER,
+                            () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                            w -> new SmokerBlock(Utils.copyPropertySafe(w.planks))
+                    )
+                    .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                    .addTag(modRes("smokers"), Registries.BLOCK)
+                    .addTag(modRes("smokers"), Registries.ITEM)
+                    .addTextureM(modRes("block/acacia_smoker_front"),
+                            EveryCompat.res("block/vanilla_smoker_front_m"))
+                    .addTextureM(modRes("block/acacia_smoker_front_on"),
+                            EveryCompat.res("block/vanilla_smoker_front_on_m"))
+                    .addTextureM(modRes("block/acacia_smoker_side"),
+                            EveryCompat.res("block/vanilla_smoker_side_m"))
+                    .addTextureM(modRes("block/acacia_smoker_top"),
+                            EveryCompat.res("block/vanilla_smoker_x_m"))
+                    .addTextureM(modRes("block/acacia_smoker_bottom"),
+                            EveryCompat.res("block/vanilla_smoker_x_m"))
+                    .addTile(() -> BlockEntityType.SMOKER)
+                    .defaultRecipe()
+                    .setTab(tab)
+                    .build();
+            this.addEntry(Smoker);
 
         }
     }
@@ -384,7 +381,7 @@ public class VariantVanillaBlocks extends SimpleModule {
     // Textures
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
-             // single
+        // single
         try (TextureImage normal = TextureImage.open(manager, modRes("entity/chest/acacia_chest"));
              TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
              TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
@@ -472,4 +469,24 @@ public class VariantVanillaBlocks extends SimpleModule {
 
     }
 
+
+    private static class ChestItem extends BlockItem implements ICustomItemRendererProvider {
+
+        public ChestItem(Block arg, Properties arg2) {
+            super(arg, arg2);
+        }
+
+        @Override
+        public Supplier<ItemStackRenderer> getRendererFactory() {
+            return () -> new ItemStackRenderer() {
+                final BlockEntityRenderDispatcher renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher();
+                final ChestBlockEntity dummy = new ChestBlockEntity(BlockPos.ZERO, ChestItem.this.getBlock().defaultBlockState());
+
+                @Override
+                public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
+                    renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
+                }
+            };
+        }
+    }
 }
