@@ -20,6 +20,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
+import net.mehvahdjukaar.every_compat.modules.forge.more_chest_variants.MoreChestVariants;
 import net.mehvahdjukaar.every_compat.modules.forge.more_crafting_tables.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MightyMailModule;
@@ -31,7 +32,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawer
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantCraftingTablesModule;
-import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantVanillaBlocks;
+import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
@@ -111,7 +112,8 @@ public class EveryCompatForge extends EveryCompat {
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
-        addModule("variantvanillablocks", () -> VariantVanillaBlocks::new);
+        addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
+//        addModule("lolmcv", () -> MoreChestVariants::new);
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
