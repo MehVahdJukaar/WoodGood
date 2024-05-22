@@ -54,7 +54,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 //SUPPORT: v1.3.6
-public class VariantVanillaBlocks extends SimpleModule {
+public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> Barrel;
     public final SimpleEntrySet<WoodType, Block> Beehive;
     public final SimpleEntrySet<WoodType, Block> Bookshelves;
@@ -71,7 +71,7 @@ public class VariantVanillaBlocks extends SimpleModule {
 
     public static BlockEntityType<ChestBlockEntity> Chest_tile;
 
-    public VariantVanillaBlocks(String modID) {
+    public VariantVanillaBlocksModule(String modID) {
         super(modID, "vvb");
         var tab = ModCreativeModTabs.VVB_TAB;
 
