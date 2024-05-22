@@ -36,10 +36,11 @@ public class SimpleModule extends CompatModule {
         return bloat;
     }
 
-    public void addEntry(EntrySet<?> entryHolder) {
+    public <T extends BlockType> EntrySet<T> addEntry(EntrySet<T> entryHolder) {
         this.entries.put(entryHolder.getName(), entryHolder);
 
         EveryCompat.addEntryType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
+        return entryHolder;
     }
 
     public Collection<EntrySet<?>> getEntries() {

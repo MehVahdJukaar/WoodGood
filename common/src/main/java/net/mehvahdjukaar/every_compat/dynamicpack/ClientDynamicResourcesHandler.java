@@ -2,11 +2,14 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
+import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
 
@@ -56,6 +59,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         });
 
         ExtraTextureGenerator.generateExtraTextures(this, manager);
+        
     }
 
 }

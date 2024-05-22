@@ -9,7 +9,6 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -23,9 +22,12 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -42,6 +44,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.ChestType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 import net.xanthian.variantvanillablocks.block.*;
 import net.xanthian.variantvanillablocks.utils.ModCreativeModTabs;
@@ -54,27 +59,29 @@ import java.util.function.Supplier;
 
 //SUPPORT: v
 public class VariantVanillaBlocks extends SimpleModule {
-    public final SimpleEntrySet<WoodType, Block> Barrel;
-    public final SimpleEntrySet<WoodType, Block> Beehive;
-    public final SimpleEntrySet<WoodType, Block> Bookshelves;
-    public final SimpleEntrySet<WoodType, Block> Cartography;
-    public final SimpleEntrySet<WoodType, Block> Chests;
-    public final SimpleEntrySet<WoodType, Block> ChiseledBookshelves;
-    public final SimpleEntrySet<WoodType, Block> Composters;
-    public final SimpleEntrySet<WoodType, Block> CraftingTable;
-    public final SimpleEntrySet<WoodType, Block> FletchingTable;
-    public final SimpleEntrySet<WoodType, Block> Grindstones;
-    public final SimpleEntrySet<WoodType, Block> Lectern;
-    public final SimpleEntrySet<WoodType, Block> SmithingTable;
-    public final SimpleEntrySet<WoodType, Block> Smoker;
+    public final SimpleEntrySet<WoodType, Block> barrel;
+    public final SimpleEntrySet<WoodType, Block> beehive;
+    public final SimpleEntrySet<WoodType, Block> bookshelves;
+    public final SimpleEntrySet<WoodType, Block> cartography;
+    public final SimpleEntrySet<WoodType, Block> chests;
+    public final SimpleEntrySet<WoodType, Block> chiseledBookshelves;
+    public final SimpleEntrySet<WoodType, Block> composters;
+    public final SimpleEntrySet<WoodType, Block> craftingTable;
+    public final SimpleEntrySet<WoodType, Block> fletchingTable;
+    public final SimpleEntrySet<WoodType, Block> grindstones;
+    public final SimpleEntrySet<WoodType, Block> lectern;
+    public final SimpleEntrySet<WoodType, Block> smithingTable;
+    public final SimpleEntrySet<WoodType, Block> smoker;
 
-    public static BlockEntityType<ChestBlockEntity> Chest_tile;
+    protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
+    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
+            () -> new PoiType(getBeehives(), 1, 1));
 
     public VariantVanillaBlocks(String modID) {
         super(modID, "vvb");
         var tab = ModCreativeModTabs.VVB_TAB;
 
-        Barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
+        barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
                         Barrels.OAK_BARREL, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BarrelBlock(Utils.copyPropertySafe(w.planks))
                 )
@@ -96,9 +103,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
-        this.addEntry(Barrel);
+        this.addEntry(barrel);
 
-        Beehive = SimpleEntrySet.builder(WoodType.class, "beehive",
+        beehive = SimpleEntrySet.builder(WoodType.class, "beehive",
                         Beehives.SPRUCE_BEEHIVE,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE))
@@ -117,9 +124,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
-        this.addEntry(Beehive);
+        this.addEntry(beehive);
 
-        Bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
+        bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         net.xanthian.variantvanillablocks.block.Bookshelves.ACACIA_BOOKSHELF,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new Block(Utils.copyPropertySafe(w.planks))
@@ -134,9 +141,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
-        this.addEntry(Bookshelves);
+        this.addEntry(bookshelves);
 
-        Cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
+        cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
                         CartographyTables.OAK_CARTOGRAPHY_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CartographyTableBlock(Utils.copyPropertySafe(w.planks))
                 )
@@ -150,22 +157,22 @@ public class VariantVanillaBlocks extends SimpleModule {
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
-        this.addEntry(Cartography);
+        this.addEntry(cartography);
 
-        Chests = SimpleEntrySet.builder(WoodType.class, "chest",
+        chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         net.xanthian.variantvanillablocks.block.Chests.ACACIA_CHEST,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addCustomItem((w, block, properties) -> new ChestItem(block, properties))
-                .addTile(() -> BlockEntityType.CHEST)
+                .addTile(CompatChestBlockEntity::new)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
-        this.addEntry(Chests);
+        this.addEntry(chests);
 
         {
-            ChiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
+            chiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                             net.xanthian.variantvanillablocks.block.ChiseledBookshelves.ACACIA_CHISELED_BOOKSHELF,
                             () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                             w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
@@ -182,9 +189,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                     .defaultRecipe()
                     .setTab(tab)
                     .build();
-            this.addEntry(ChiseledBookshelves);
+            this.addEntry(chiseledBookshelves);
 
-            Composters = SimpleEntrySet.builder(WoodType.class, "composter",
+            composters = SimpleEntrySet.builder(WoodType.class, "composter",
                             net.xanthian.variantvanillablocks.block.Composters.OAK_COMPOSTER,
                             () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new ComposterBlock(Utils.copyPropertySafe(w.planks))
@@ -198,9 +205,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                     .defaultRecipe()
                     .setTab(tab)
                     .build();
-            this.addEntry(Composters);
+            this.addEntry(composters);
 
-            CraftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
+            craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                             CraftingTables.SPRUCE_CRAFTING_TABLE,
                             () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                             w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks))
@@ -217,9 +224,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                     .defaultRecipe()
                     .setTab(tab)
                     .build();
-            this.addEntry(CraftingTable);
+            this.addEntry(craftingTable);
 
-            FletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
+            fletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
                             FletchingTables.OAK_FLETCHING_TABLE,
                             () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new FletchingTableBlock(Utils.copyPropertySafe(w.planks))
@@ -236,9 +243,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                     .defaultRecipe()
                     .setTab(tab)
                     .build();
-            this.addEntry(FletchingTable);
+            this.addEntry(fletchingTable);
 
-            Grindstones = SimpleEntrySet.builder(WoodType.class, "grindstone",
+            grindstones = SimpleEntrySet.builder(WoodType.class, "grindstone",
                             net.xanthian.variantvanillablocks.block.Grindstones.OAK_GRINDSTONE,
                             () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new GrindstoneBlock(Utils.copyPropertySafe(w.planks))
@@ -250,9 +257,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                     .defaultRecipe()
                     .setTab(tab)
                     .build();
-            this.addEntry(Grindstones);
+            this.addEntry(grindstones);
 
-            Lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
+            lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
                             Lecterns.ACACIA_LECTERN,
                             () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                             w -> new LecternBlock(Utils.copyPropertySafe(w.planks))
@@ -270,9 +277,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                     .defaultRecipe()
                     .setTab(tab)
                     .build();
-            this.addEntry(Lectern);
+            this.addEntry(lectern);
 
-            SmithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
+            smithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
                             SmithingTables.OAK_SMITHING_TABLE,
                             () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new SmithingTableBlock(Utils.copyPropertySafe(w.planks))
@@ -289,9 +296,9 @@ public class VariantVanillaBlocks extends SimpleModule {
                     .defaultRecipe()
                     .setTab(tab)
                     .build();
-            this.addEntry(SmithingTable);
+            this.addEntry(smithingTable);
 
-            Smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
+            smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
                             Smokers.ACACIA_SMOKER,
                             () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                             w -> new SmokerBlock(Utils.copyPropertySafe(w.planks))
@@ -313,19 +320,16 @@ public class VariantVanillaBlocks extends SimpleModule {
                     .defaultRecipe()
                     .setTab(tab)
                     .build();
-            this.addEntry(Smoker);
+            this.addEntry(smoker);
 
         }
     }
 
-    protected final ResourceLocation POI_ID = EveryCompat.res("vvb_beehive");
 
-    private final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(POI_ID,
-            () -> new PoiType(getBeehives(), 1, 1));
 
     private Set<BlockState> getBeehives() {
         var set = new ImmutableSet.Builder<BlockState>();
-        Beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
+        beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
         return set.build();
     }
 
@@ -335,7 +339,7 @@ public class VariantVanillaBlocks extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
         SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
-        tagBuilder.add(POI_ID);
+        tagBuilder.add(poiId);
 
         handler.dynamicPack.addTag(tagBuilder, Registries.POINT_OF_INTEREST_TYPE);
     }
@@ -343,38 +347,26 @@ public class VariantVanillaBlocks extends SimpleModule {
     // Block -----------------------------------------------------------------------------------------------------------
     public class CompatChestBlock extends ChestBlock {
         public CompatChestBlock(BlockBehaviour.Properties properties) {
-            super(properties, () -> Chest_tile);
+            super(properties, () -> chests.getTile(ChestBlockEntity.class));
         }
 
         @Override
         public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-            return new CompatChestEntityBlock(pos, state);
+            return new CompatChestBlockEntity(pos, state);
         }
     }
 
     // EntityBlock -----------------------------------------------------------------------------------------------------
-    public class CompatChestEntityBlock extends ChestBlockEntity {
-        public CompatChestEntityBlock(BlockPos pos, BlockState state) {
-            super(Chest_tile, pos, state);
+    public class CompatChestBlockEntity extends ChestBlockEntity {
+        public CompatChestBlockEntity(BlockPos pos, BlockState state) {
+            super(chests.getTile(), pos, state);
         }
-
-        @Override
-        public @NotNull BlockEntityType<?> getType() {
-            return Chests.getTile();
-        }
-    }
-
-    // Registry --------------------------------------------------------------------------------------------------------
-    @Override
-    public void registerTiles(Registrator<BlockEntityType<?>> registry) {
-        super.registerTiles(registry);
-        Chest_tile = Chests.getTile(ChestBlockEntity.class);
     }
 
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(Chest_tile, context -> new ChestRenderer<>(context));
+        event.register(chests.getTile(CompatChestBlockEntity.class), CompatChestRenderer::new);
     }
 
     @Override
@@ -403,7 +395,7 @@ public class VariantVanillaBlocks extends SimpleModule {
             Respriter respriterLeftO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            Chests.blocks.forEach((wood, block) -> {
+            chests.blocks.forEach((wood, block) -> {
 
                 try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
@@ -470,7 +462,7 @@ public class VariantVanillaBlocks extends SimpleModule {
     }
 
 
-    private static class ChestItem extends BlockItem implements ICustomItemRendererProvider {
+    private class ChestItem extends BlockItem implements ICustomItemRendererProvider {
 
         public ChestItem(Block arg, Properties arg2) {
             super(arg, arg2);
@@ -480,13 +472,28 @@ public class VariantVanillaBlocks extends SimpleModule {
         public Supplier<ItemStackRenderer> getRendererFactory() {
             return () -> new ItemStackRenderer() {
                 final BlockEntityRenderDispatcher renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher();
-                final ChestBlockEntity dummy = new ChestBlockEntity(BlockPos.ZERO, ChestItem.this.getBlock().defaultBlockState());
+                final CompatChestBlockEntity dummy = new CompatChestBlockEntity(BlockPos.ZERO, ChestItem.this.getBlock().defaultBlockState());
 
                 @Override
                 public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
                     renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
                 }
             };
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private class CompatChestRenderer extends ChestRenderer<CompatChestBlockEntity>{
+
+        public CompatChestRenderer(BlockEntityRendererProvider.Context arg) {
+            super(arg);
+        }
+
+        @Override
+        protected Material getMaterial(CompatChestBlockEntity blockEntity, ChestType chestType) {
+
+            //TODO: add logic here that returns the correct material based off the chest wood type
+            return super.getMaterial(blockEntity, chestType);
         }
     }
 }
