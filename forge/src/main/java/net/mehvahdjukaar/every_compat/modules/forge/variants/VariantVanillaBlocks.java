@@ -34,6 +34,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
@@ -52,7 +53,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-//SUPPORT: v
+//SUPPORT: v1.3.6
 public class VariantVanillaBlocks extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> Barrel;
     public final SimpleEntrySet<WoodType, Block> Beehive;
@@ -151,13 +152,14 @@ public class VariantVanillaBlocks extends SimpleModule {
                 .setTab(tab)
                 .build();
         this.addEntry(Cartography);
-
+/*
+*/
         Chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         net.xanthian.variantvanillablocks.block.Chests.ACACIA_CHEST,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addCustomItem((w, block, properties) -> new ChestItem(block, properties))
+                .addCustomItem((w, block, properties) -> new ChestItem(block, new Item.Properties()))
                 .addTile(() -> BlockEntityType.CHEST)
                 .defaultRecipe()
                 .setTab(tab)
@@ -341,6 +343,8 @@ public class VariantVanillaBlocks extends SimpleModule {
     }
 
     // Block -----------------------------------------------------------------------------------------------------------
+/*
+*/
     public class CompatChestBlock extends ChestBlock {
         public CompatChestBlock(BlockBehaviour.Properties properties) {
             super(properties, () -> Chest_tile);
@@ -374,11 +378,34 @@ public class VariantVanillaBlocks extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(Chest_tile, context -> new ChestRenderer<>(context));
+        event.register(Chest_tile, context -> new ChestRenderer(context));
     }
 
+    // Item ------------------------------------------------------------------------------------------------------------
+    private static class ChestItem extends BlockItem implements ICustomItemRendererProvider {
+
+        public ChestItem(Block block, Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        public Supplier<ItemStackRenderer> getRendererFactory() {
+            return () -> new ItemStackRenderer() {
+                final BlockEntityRenderDispatcher renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher();
+                final ChestBlockEntity dummy = new ChestBlockEntity(BlockPos.ZERO, ChestItem.this.getBlock().defaultBlockState());
+
+                @Override
+                public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
+                    renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
+                }
+            };
+        }
+    }
+
+/*
+*/
     @Override
-    // Textures
+    // Textures --------------------------------------------------------------------------------------------------------
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
         // single
@@ -424,23 +451,20 @@ public class VariantVanillaBlocks extends SimpleModule {
                     }
 
                     {
-                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-
                             createChestTextures(handler, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res);
                         }
                     }
                     {
-                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal_left");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest_left");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-
                             createChestTextures(handler, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res);
                         }
                     }
                     {
-                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal_right");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest_right");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-
                             createChestTextures(handler, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res);
                         }
                     }
@@ -469,24 +493,4 @@ public class VariantVanillaBlocks extends SimpleModule {
 
     }
 
-
-    private static class ChestItem extends BlockItem implements ICustomItemRendererProvider {
-
-        public ChestItem(Block arg, Properties arg2) {
-            super(arg, arg2);
-        }
-
-        @Override
-        public Supplier<ItemStackRenderer> getRendererFactory() {
-            return () -> new ItemStackRenderer() {
-                final BlockEntityRenderDispatcher renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher();
-                final ChestBlockEntity dummy = new ChestBlockEntity(BlockPos.ZERO, ChestItem.this.getBlock().defaultBlockState());
-
-                @Override
-                public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
-                    renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
-                }
-            };
-        }
-    }
 }
