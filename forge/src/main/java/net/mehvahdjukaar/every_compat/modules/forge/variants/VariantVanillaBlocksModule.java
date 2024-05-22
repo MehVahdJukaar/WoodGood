@@ -36,6 +36,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
@@ -57,8 +58,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-//SUPPORT: v
-public class VariantVanillaBlocks extends SimpleModule {
+//SUPPORT: v1.3.6
+public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> barrel;
     public final SimpleEntrySet<WoodType, Block> beehive;
     public final SimpleEntrySet<WoodType, Block> bookshelves;
@@ -77,7 +78,7 @@ public class VariantVanillaBlocks extends SimpleModule {
     public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
             () -> new PoiType(getBeehives(), 1, 1));
 
-    public VariantVanillaBlocks(String modID) {
+    public VariantVanillaBlocksModule(String modID) {
         super(modID, "vvb");
         var tab = ModCreativeModTabs.VVB_TAB;
 
@@ -164,7 +165,7 @@ public class VariantVanillaBlocks extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addCustomItem((w, block, properties) -> new ChestItem(block, properties))
+                .addCustomItem((w, block, properties) -> new ChestItem(block, new Item.Properties()))
                 .addTile(CompatChestBlockEntity::new)
                 .defaultRecipe()
                 .setTab(tab)
@@ -345,6 +346,8 @@ public class VariantVanillaBlocks extends SimpleModule {
     }
 
     // Block -----------------------------------------------------------------------------------------------------------
+/*
+*/
     public class CompatChestBlock extends ChestBlock {
         public CompatChestBlock(BlockBehaviour.Properties properties) {
             super(properties, () -> chests.getTile(ChestBlockEntity.class));
@@ -369,8 +372,10 @@ public class VariantVanillaBlocks extends SimpleModule {
         event.register(chests.getTile(CompatChestBlockEntity.class), CompatChestRenderer::new);
     }
 
+/*
+*/
     @Override
-    // Textures
+    // Textures --------------------------------------------------------------------------------------------------------
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
         // single
@@ -416,23 +421,20 @@ public class VariantVanillaBlocks extends SimpleModule {
                     }
 
                     {
-                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-
                             createChestTextures(handler, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res);
                         }
                     }
                     {
-                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal_left");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest_left");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-
                             createChestTextures(handler, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res);
                         }
                     }
                     {
-                        ResourceLocation res = new ResourceLocation("minecraft", "entity/chest/" + wood.getTypeName() + "_normal_right");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest_right");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-
                             createChestTextures(handler, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res);
                         }
                     }
