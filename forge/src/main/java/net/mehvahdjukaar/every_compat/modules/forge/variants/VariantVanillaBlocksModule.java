@@ -488,22 +488,24 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
     @OnlyIn(Dist.CLIENT)
     private class CompatChestRenderer extends ChestRenderer<CompatChestBlockEntity> {
-        public Map<WoodType, Material> single = new HashMap<>();
-        public Map<WoodType, Material> left = new HashMap<>();
-        public Map<WoodType, Material> right = new HashMap<>();
+        private final Map<WoodType, Material> single = new HashMap<>();
+        private final Map<WoodType, Material> left = new HashMap<>();
+        private final Map<WoodType, Material> right = new HashMap<>();
 
-        public CompatChestRenderer(BlockEntityRendererProvider.Context arg) {
-            super(arg);
+        public CompatChestRenderer(BlockEntityRendererProvider.Context context) {
+            super(context);
 
             for (WoodType w : WoodTypeRegistry.getTypes()) {
-                single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_single")));
-                left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_left")));
-                right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_right")));
+                if (!w.isVanilla()) {
+                    single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_single")));
+                    left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_left")));
+                    right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_right")));
+                }
             }
         }
 
         @Override
-        protected Material getMaterial(CompatChestBlockEntity blockEntity, ChestType chestType) {
+        protected @NotNull Material getMaterial(CompatChestBlockEntity blockEntity, ChestType chestType) {
             WoodType w = blockEntity.woodType;
             return switch (chestType) {
                 case LEFT -> left.get(w);

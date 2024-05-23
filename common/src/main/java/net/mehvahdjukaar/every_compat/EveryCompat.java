@@ -206,6 +206,9 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
         }
 
+        if(am == 0){
+            EveryCompat.LOGGER.error("EVERY COMPAT REGISTERED 0 BLOCKS! This means that you dont need the mod and should remove it!");
+        }
         forAllModules(CompatModule::onModSetup);
 
     }
