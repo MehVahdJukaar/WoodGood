@@ -53,9 +53,7 @@ import net.xanthian.variantvanillablocks.block.*;
 import net.xanthian.variantvanillablocks.utils.ModCreativeModTabs;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 //SUPPORT: v1.3.6
@@ -327,7 +325,6 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
 
-
     private Set<BlockState> getBeehives() {
         var set = new ImmutableSet.Builder<BlockState>();
         beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
@@ -346,9 +343,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
     // Block -----------------------------------------------------------------------------------------------------------
-/*
-*/
+    /*
+     */
     public class CompatChestBlock extends ChestBlock {
+
         public CompatChestBlock(BlockBehaviour.Properties properties) {
             super(properties, () -> chests.getTile(ChestBlockEntity.class));
         }
@@ -361,8 +359,12 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
     // EntityBlock -----------------------------------------------------------------------------------------------------
     public class CompatChestBlockEntity extends ChestBlockEntity {
+        private final WoodType woodType;
+
         public CompatChestBlockEntity(BlockPos pos, BlockState state) {
             super(chests.getTile(), pos, state);
+            var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
+            this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
         }
     }
 
@@ -372,8 +374,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         event.register(chests.getTile(CompatChestBlockEntity.class), CompatChestRenderer::new);
     }
 
-/*
-*/
+    /*
+     */
     @Override
     // Textures --------------------------------------------------------------------------------------------------------
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
@@ -485,17 +487,29 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
     @OnlyIn(Dist.CLIENT)
-    private class CompatChestRenderer extends ChestRenderer<CompatChestBlockEntity>{
+    private class CompatChestRenderer extends ChestRenderer<CompatChestBlockEntity> {
+        public Map<WoodType, Material> single = new HashMap<>();
+        public Map<WoodType, Material> left = new HashMap<>();
+        public Map<WoodType, Material> right = new HashMap<>();
 
         public CompatChestRenderer(BlockEntityRendererProvider.Context arg) {
             super(arg);
+
+            for (WoodType w : WoodTypeRegistry.getTypes()) {
+                single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_single")));
+                left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_left")));
+                right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_right")));
+            }
         }
 
         @Override
         protected Material getMaterial(CompatChestBlockEntity blockEntity, ChestType chestType) {
-
-            //TODO: add logic here that returns the correct material based off the chest wood type
-            return super.getMaterial(blockEntity, chestType);
+            WoodType w = blockEntity.woodType;
+            return switch (chestType) {
+                case LEFT -> left.get(w);
+                case RIGHT -> right.get(w);
+                default -> single.get(w);
+            };
         }
     }
 }
