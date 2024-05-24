@@ -163,7 +163,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addCustomItem((w, block, properties) -> new ChestItem(block, new Item.Properties()))
+                .addCustomItem((w, block, properties) -> new ChestItem(block, properties))
                 .addTile(CompatChestBlockEntity::new)
                 .defaultRecipe()
                 .setTab(tab)
@@ -423,19 +423,19 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                     }
 
                     {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getAppendableId() + "_chest");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             createChestTextures(handler, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res);
                         }
                     }
                     {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest_left");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getAppendableId() + "_chest_left");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             createChestTextures(handler, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res);
                         }
                     }
                     {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getTypeName() + "_chest_right");
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getAppendableId() + "_chest_right");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             createChestTextures(handler, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res);
                         }
@@ -468,8 +468,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
     private class ChestItem extends BlockItem implements ICustomItemRendererProvider {
 
-        public ChestItem(Block arg, Properties arg2) {
-            super(arg, arg2);
+        public ChestItem(Block block, Properties properties) {
+            super(block, properties);
         }
 
         @Override
@@ -497,9 +497,9 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
             for (WoodType w : WoodTypeRegistry.getTypes()) {
                 if (!w.isVanilla()) {
-                    single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_single")));
-                    left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_left")));
-                    right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_right")));
+                    single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_chest")));
+                    left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_chest_left")));
+                    right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_chest_right")));
                 }
             }
         }
