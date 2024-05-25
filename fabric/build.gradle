@@ -37,7 +37,7 @@ dependencies {
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.1"
 
 //    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
-    modImplementation("curse.maven:moonlightlib-499980:5349848") // v2.11.20
+    modImplementation("curse.maven:selene-499980:5367753") // v2.11.29
 
     // ============================================== DEPENDENCIES ================================================== \\
     modCompileOnly("curse.maven:athena-841890:4764358") // Chipped
@@ -96,6 +96,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-551364:4968876")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5015089")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151837")
 
