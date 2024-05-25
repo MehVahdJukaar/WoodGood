@@ -2,14 +2,15 @@ package net.mehvahdjukaar.every_compat.modules.forge.variants;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
-import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -22,14 +23,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -37,22 +31,13 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.ChestType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 import net.xanthian.variantvanillablocks.block.*;
 import net.xanthian.variantvanillablocks.utils.ModCreativeModTabs;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -165,7 +150,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         net.xanthian.variantvanillablocks.block.Chests.ACACIA_CHEST,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
@@ -175,8 +160,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(modRes("chests"), Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
-                .addCustomItem((w, block, properties) -> new ChestItem(block, properties))
-                .addTile(CompatChestBlockEntity::new)
+                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
+                .addTile(VariantChestBlockEntity::new)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
@@ -334,6 +319,17 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
     }
 
+    //kind of hacy.dont like but we cant reference chests itself while constructing its own object
+    private BlockEntityType<? extends ChestBlockEntity> getTile() {
+        return chests.getTile(CompatChestBlockEntity.class);
+    }
+
+    private class VariantChestBlockEntity extends CompatChestBlockEntity{
+        public VariantChestBlockEntity(BlockPos pos, BlockState state) {
+            super(chests.getTile(), pos, state);
+        }
+    }
+
 
     private Set<BlockState> getBeehives() {
         var set = new ImmutableSet.Builder<BlockState>();
@@ -353,87 +349,19 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
     // Block -----------------------------------------------------------------------------------------------------------
-    public class CompatChestBlock extends ChestBlock {
 
-        public CompatChestBlock(BlockBehaviour.Properties properties) {
-            super(properties, () -> chests.getTile(CompatChestBlockEntity.class));
-        }
-
-        @Override
-        public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-            return new CompatChestBlockEntity(pos, state);
-        }
-    }
 
     // EntityBlock -----------------------------------------------------------------------------------------------------
-    public class CompatChestBlockEntity extends ChestBlockEntity {
-        private final WoodType woodType;
 
-        public CompatChestBlockEntity(BlockPos pos, BlockState state) {
-            super(chests.getTile(), pos, state);
-            var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
-            this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
-        }
-    }
 
     // Registry --------------------------------------------------------------------------------------------------------
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(chests.getTile(CompatChestBlockEntity.class), CompatChestRenderer::new);
+        event.register(chests.getTile(CompatChestBlockEntity.class), CompatChestBlockRenderer::new);
     }
 
-    private class ChestItem extends BlockItem implements ICustomItemRendererProvider {
-
-        public ChestItem(Block block, Properties properties) {
-            super(block, properties);
-        }
-
-        @Override
-        public Supplier<ItemStackRenderer> getRendererFactory() {
-            return () -> new ItemStackRenderer() {
-                final BlockEntityRenderDispatcher renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher();
-                final CompatChestBlockEntity dummy = new CompatChestBlockEntity(BlockPos.ZERO, ChestItem.this.getBlock().defaultBlockState());
-
-                @Override
-                public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
-                    renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
-                }
-            };
-        }
-    }
-
-    // Renderer --------------------------------------------------------------------------------------------------------
-    @OnlyIn(Dist.CLIENT)
-    private class CompatChestRenderer extends ChestRenderer<CompatChestBlockEntity> {
-        private final Map<WoodType, Material> single = new HashMap<>();
-        private final Map<WoodType, Material> left = new HashMap<>();
-        private final Map<WoodType, Material> right = new HashMap<>();
-
-        public CompatChestRenderer(BlockEntityRendererProvider.Context context) {
-            super(context);
-
-            for (WoodType w : WoodTypeRegistry.getTypes()) {
-                if (!w.isVanilla()) {
-                    String path = VariantVanillaBlocksModule.this.shortenedId() + "/" + w.getAppendableId() + "_chest";
-                    single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path)));
-                    left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path + "_left")));
-                    right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path + "_right")));
-                }
-            }
-        }
-
-        @Override
-        protected @NotNull Material getMaterial(CompatChestBlockEntity blockEntity, ChestType chestType) {
-            WoodType w = blockEntity.woodType;
-            return switch (chestType) {
-                case LEFT -> left.get(w);
-                case RIGHT -> right.get(w);
-                default -> single.get(w);
-            };
-        }
-    }
-
+    //TODO: extract this
     @Override
     // Textures --------------------------------------------------------------------------------------------------------
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
