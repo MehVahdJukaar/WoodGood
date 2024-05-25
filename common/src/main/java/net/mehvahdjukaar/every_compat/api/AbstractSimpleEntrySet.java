@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -236,7 +237,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 } catch (UnsupportedOperationException e) {
                     EveryCompat.LOGGER.error("Could not generate textures for {}", p, e);
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to read block texture at {}", p);
+                    if (PlatHelper.isDev()) throw new RuntimeException(e);
+                    EveryCompat.LOGGER.error("Failed to read block texture at {}", p, e);
                 }
             }
 
