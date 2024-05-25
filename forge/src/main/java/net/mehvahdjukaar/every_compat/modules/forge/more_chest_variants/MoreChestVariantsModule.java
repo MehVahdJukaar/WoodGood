@@ -42,12 +42,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-public class MoreChestVariants extends SimpleModule {
+public class MoreChestVariantsModule extends SimpleModule {
 
         public final SimpleEntrySet<WoodType, Block> CHEST;
         public final SimpleEntrySet<WoodType, Block> TRAPPED_CHEST;
 
-    public MoreChestVariants(String modID) {
+    public MoreChestVariantsModule(String modID) {
         super(modID, "mcv");
 
         CHEST = SimpleEntrySet.builder(WoodType.class, "chest",
@@ -126,12 +126,12 @@ public class MoreChestVariants extends SimpleModule {
     }
 
     public class CompatTrappedChestBlockEntity extends ChestBlockEntity {
-        private final WoodType woodType;
+//        private final WoodType woodType;
 
         public CompatTrappedChestBlockEntity(BlockPos pos, BlockState state) {
             super(TRAPPED_CHEST.getTile(), pos, state);
-            var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
-            this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
+//            var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
+//            this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
         }
 
         @Override
@@ -149,8 +149,8 @@ public class MoreChestVariants extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(CHEST.getTile(CompatChestBlockEntity.class), CompatChestRenderer::new);
-        event.register(TRAPPED_CHEST.getTile(CompatTrappedChestBlockEntity.class), CompatTrappedChestRenderer::new);
+        event.register(CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestRenderer(context, false));
+        event.register(TRAPPED_CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestRenderer(context, true));
     }
 
     // Renderer --------------------------------------------------------------------------------------------------------
@@ -159,16 +159,26 @@ public class MoreChestVariants extends SimpleModule {
         private final Map<WoodType, Material> single = new HashMap<>();
         private final Map<WoodType, Material> left = new HashMap<>();
         private final Map<WoodType, Material> right = new HashMap<>();
+        private final Map<WoodType, Material> trapped = new HashMap<>();
+        private final Map<WoodType, Material> trapped_left = new HashMap<>();
+        private final Map<WoodType, Material> trapped_right = new HashMap<>();
 
-        public CompatChestRenderer(BlockEntityRendererProvider.Context context) {
+        protected final boolean isTrap;
+
+        public CompatChestRenderer(BlockEntityRendererProvider.Context context, boolean isTrap) {
             super(context);
-
+            this.isTrap = isTrap;
             for (WoodType w : WoodTypeRegistry.getTypes()) {
-                String path = "entity/chest/" + MoreChestVariants.this.shortenedId() + "/" + w.getAppendableId();
+                String path = "entity/chest/" + MoreChestVariantsModule.this.shortenedId() + "/" + w.getAppendableId();
+                String trapped_path = "entity/chest/" + MoreChestVariantsModule.this.shortenedId() + "/" + w.getNamespace() +
+                        "/trapped/" + w.getTypeName();
                 if (!w.isVanilla()) {
                     single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path)));
                     left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_left")));
                     right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_right")));
+                    trapped.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path)));
+                    trapped_left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path + "_left")));
+                    trapped_right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path + "_right")));
                 }
             }
         }
@@ -176,16 +186,25 @@ public class MoreChestVariants extends SimpleModule {
         @Override
         protected @NotNull Material getMaterial(CompatChestBlockEntity blockEntity, @NotNull ChestType chestType) {
             WoodType w = blockEntity.woodType;
-            return switch (chestType) {
-                case LEFT -> left.get(w);
-                case RIGHT -> right.get(w);
-                default -> single.get(w);
-            };
+            if (isTrap) {
+                return switch (chestType) {
+                    case LEFT -> trapped_left.get(w);
+                    case RIGHT -> trapped_right.get(w);
+                    default -> trapped.get(w);
+                };
+            }
+            else {
+                return switch (chestType) {
+                    case LEFT -> left.get(w);
+                    case RIGHT -> right.get(w);
+                    default -> single.get(w);
+                };
+            }
         }
 
     }
-    @OnlyIn(Dist.CLIENT)
-    private class CompatTrappedChestRenderer extends ChestRenderer<CompatTrappedChestBlockEntity> {
+/*    @OnlyIn(Dist.CLIENT)
+    private class CompatTrappedChestRenderer extends ChestRenderer<CompatChestBlockEntity> {
         private final Map<WoodType, Material> trapped = new HashMap<>();
         private final Map<WoodType, Material> trapped_left = new HashMap<>();
         private final Map<WoodType, Material> trapped_right = new HashMap<>();
@@ -195,7 +214,7 @@ public class MoreChestVariants extends SimpleModule {
             super(context);
 
             for (WoodType w : WoodTypeRegistry.getTypes()) {
-                String path = "entity/chest/" + MoreChestVariants.this.shortenedId() + "/" + w.getNamespace() +
+                String path = "entity/chest/" + MoreChestVariantsModule.this.shortenedId() + "/" + w.getNamespace() +
                         "/trapped/" + w.getTypeName();
                 if (!w.isVanilla()) {
                     trapped.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path)));
@@ -215,7 +234,7 @@ public class MoreChestVariants extends SimpleModule {
             };
         }
 
-    }
+    }*/
 
     @Override
     // Textures
@@ -248,8 +267,8 @@ public class MoreChestVariants extends SimpleModule {
             Respriter respriterRightO = Respriter.of(right_o);
 
             CHEST.blocks.forEach((wood, block) -> {
-                String path = MoreChestVariants.this.shortenedId() + "/" + wood.getAppendableId();
-                String trapped_path = MoreChestVariants.this.shortenedId() + "/" + wood.getNamespace() + "/trapped/" + wood.getTypeName();;
+                String path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId();
+                String trapped_path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getNamespace() + "/trapped/" + wood.getTypeName();;
                 try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
@@ -320,7 +339,7 @@ public class MoreChestVariants extends SimpleModule {
                     handler.dynamicPack.addJson(EveryCompat.res(path + "_chest"), modelBlock, ResType.BLOCK_MODELS);
                     handler.dynamicPack.addJson(EveryCompat.res(trapped_path), trappedModel, ResType.BLOCK_MODELS);
                 } catch (IOException e) {
-                    handler.getLogger().error("MoreChestVariants - failed to open the model file: {0}", e);
+                    handler.getLogger().error("MoreChestVariantsModule - failed to open the model file: {0}", e);
                 }
             });
         } catch (Exception ex) {

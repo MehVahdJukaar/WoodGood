@@ -516,9 +516,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                     // Editing
                     modelItem.getAsJsonObject("textures").addProperty("chest", textureID);
 
+                    // Add to Resource
                     handler.dynamicPack.addJson(EveryCompat.res(path), modelItem, ResType.ITEM_MODELS );
                 } catch (IOException e) {
-                    handler.getLogger().error("VariantVanillaBlocksModule - failed to open the model-item file: {0}", e);
+                    handler.getLogger().error("VariantVanillaBlocks - failed to open the model file: {0}", e);
                 }
 
             });
