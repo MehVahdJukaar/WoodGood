@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.forge.variants;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.gson.JsonObject;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -12,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -36,7 +38,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
@@ -53,6 +54,8 @@ import net.xanthian.variantvanillablocks.block.*;
 import net.xanthian.variantvanillablocks.utils.ModCreativeModTabs;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -73,6 +76,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> smoker;
 
     protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
+    @SuppressWarnings("unused")
     public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
             () -> new PoiType(getBeehives(), 1, 1));
 
@@ -163,6 +167,14 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
                 )
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
+                .addTag(modRes("chests"), Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
+                .addTag(modRes("chests"), Registries.ITEM)
+                .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
+                .addTag(Tags.Items.CHESTS, Registries.ITEM)
                 .addCustomItem((w, block, properties) -> new ChestItem(block, properties))
                 .addTile(CompatChestBlockEntity::new)
                 .defaultRecipe()
@@ -343,12 +355,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
     // Block -----------------------------------------------------------------------------------------------------------
-    /*
-     */
     public class CompatChestBlock extends ChestBlock {
 
         public CompatChestBlock(BlockBehaviour.Properties properties) {
-            super(properties, () -> chests.getTile(ChestBlockEntity.class));
+            super(properties, () -> chests.getTile(CompatChestBlockEntity.class));
         }
 
         @Override
@@ -368,103 +378,12 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         }
     }
 
+    // Registry --------------------------------------------------------------------------------------------------------
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         event.register(chests.getTile(CompatChestBlockEntity.class), CompatChestRenderer::new);
     }
-
-    /*
-     */
-    @Override
-    // Textures --------------------------------------------------------------------------------------------------------
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-        // single
-        try (TextureImage normal = TextureImage.open(manager, modRes("entity/chest/acacia_chest"));
-             TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
-             TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
-             // left
-             TextureImage left = TextureImage.open(manager, modRes("entity/chest/acacia_chest_left"));
-             TextureImage left_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_m"));
-             TextureImage left_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_o"));
-             // right
-             TextureImage right = TextureImage.open(manager, modRes("entity/chest/acacia_chest_right"));
-             TextureImage right_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_m"));
-             TextureImage right_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_o"));
-        ) {
-
-            Respriter respriterNormal = Respriter.masked(normal, normal_m);
-            Respriter respriterLeft = Respriter.masked(left, left_m);
-            Respriter respriterRight = Respriter.masked(right, right_m);
-
-            Respriter respriterNormalO = Respriter.of(normal_o);
-            Respriter respriterLeftO = Respriter.of(left_o);
-            Respriter respriterRightO = Respriter.of(right_o);
-
-            chests.blocks.forEach((wood, block) -> {
-
-                try (TextureImage plankTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
-
-                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-                    AnimationMetadataSection meta = plankTexture.getMetadata();
-
-                    List<Palette> overlayPalette = new ArrayList<>();
-                    for (var p : targetPalette) {
-                        var d1 = p.getDarkest();
-                        p.remove(d1);
-                        var d2 = p.getDarkest();
-                        p.remove(d2);
-                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
-                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
-                        var pal = Palette.ofColors(List.of(n1, n2));
-                        overlayPalette.add(pal);
-                    }
-
-                    {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getAppendableId() + "_chest");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            createChestTextures(handler, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res);
-                        }
-                    }
-                    {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getAppendableId() + "_chest_left");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            createChestTextures(handler, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res);
-                        }
-                    }
-                    {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + wood.getAppendableId() + "_chest_right");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            createChestTextures(handler, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res);
-                        }
-                    }
-
-
-                } catch (Exception ex) {
-                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", block, ex);
-                }
-            });
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Chest block texture : ", ex);
-        }
-    }
-
-
-    private void createChestTextures(ClientDynamicResourcesHandler handler,
-                                     Respriter respriter, Respriter respriter_O,
-                                     AnimationMetadataSection baseMeta, List<Palette> basePalette,
-                                     List<Palette> overlayPalette, ResourceLocation res) {
-
-        TextureImage recoloredBase = respriter.recolorWithAnimation(basePalette, baseMeta);
-        TextureImage recoloredOverlay = respriter_O.recolorWithAnimation(overlayPalette, baseMeta);
-        recoloredBase.applyOverlay(recoloredOverlay);
-
-        handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
-
-    }
-
 
     private class ChestItem extends BlockItem implements ICustomItemRendererProvider {
 
@@ -486,6 +405,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         }
     }
 
+    // Renderer --------------------------------------------------------------------------------------------------------
     @OnlyIn(Dist.CLIENT)
     private class CompatChestRenderer extends ChestRenderer<CompatChestBlockEntity> {
         private final Map<WoodType, Material> single = new HashMap<>();
@@ -497,9 +417,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
             for (WoodType w : WoodTypeRegistry.getTypes()) {
                 if (!w.isVanilla()) {
-                    single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_chest")));
-                    left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_chest_left")));
-                    right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + w.getAppendableId() + "_chest_right")));
+                    String path = VariantVanillaBlocksModule.this.shortenedId() + "/" + w.getAppendableId() + "_chest";
+                    single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path)));
+                    left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path + "_left")));
+                    right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path + "_right")));
                 }
             }
         }
@@ -514,4 +435,113 @@ public class VariantVanillaBlocksModule extends SimpleModule {
             };
         }
     }
+
+    @Override
+    // Textures --------------------------------------------------------------------------------------------------------
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+             // single
+        try (TextureImage normal = TextureImage.open(manager, modRes("entity/chest/acacia_chest"));
+             TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
+             TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
+             // left
+             TextureImage left = TextureImage.open(manager, modRes("entity/chest/acacia_chest_left"));
+             TextureImage left_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_m"));
+             TextureImage left_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_o"));
+             // right
+             TextureImage right = TextureImage.open(manager, modRes("entity/chest/acacia_chest_right"));
+             TextureImage right_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_m"));
+             TextureImage right_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_o"))
+        ) {
+
+            Respriter respriterNormal = Respriter.masked(normal, normal_m);
+            Respriter respriterLeft = Respriter.masked(left, left_m);
+            Respriter respriterRight = Respriter.masked(right, right_m);
+
+            Respriter respriterNormalO = Respriter.of(normal_o);
+            Respriter respriterLeftO = Respriter.of(left_o);
+            Respriter respriterRightO = Respriter.of(right_o);
+
+            chests.blocks.forEach((wood, block) -> {
+                // path to (json||texture) for chest
+                String path = this.shortenedId() + "/" + wood.getAppendableId() + "_chest";
+
+                try (TextureImage plankTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
+
+                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+                    AnimationMetadataSection meta = plankTexture.getMetadata();
+
+                    List<Palette> overlayPalette = new ArrayList<>();
+                    for (var p : targetPalette) {
+                        var d1 = p.getDarkest();
+                        p.remove(d1);
+                        var d2 = p.getDarkest();
+                        p.remove(d2);
+                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
+                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
+                        var pal = Palette.ofColors(List.of(n1, n2));
+                        overlayPalette.add(pal);
+                    }
+
+                    {
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + path);
+                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                            createChestTextures(handler, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res);
+                        }
+                    }
+                    {
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + path + "_left");
+                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                            createChestTextures(handler, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res);
+                        }
+                    }
+                    {
+                        ResourceLocation res = EveryCompat.res("entity/chest/" + path + "_right");
+                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                            createChestTextures(handler, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res);
+                        }
+                    }
+
+
+                } catch (Exception ex) {
+                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", block, ex);
+                }
+
+                // MODEL ITEM ------------------------------------------------------------------------------------------
+                JsonObject modelItem;
+
+                try (InputStream modelStream = manager.getResource(EveryCompat.res("models/item/" + path + ".json"))
+                        .orElseThrow(() -> new TypeNotPresentException("Model-Item file not found: ", null)).open()) {
+                    modelItem = RPUtils.deserializeJson(modelStream);
+                    String textureID = EveryCompat.MOD_ID + ":chest/" + path;
+                    // Editing
+                    modelItem.getAsJsonObject("textures").addProperty("chest", textureID);
+
+                    handler.dynamicPack.addJson(EveryCompat.res(path), modelItem, ResType.ITEM_MODELS );
+                } catch (IOException e) {
+                    handler.getLogger().error("VariantVanillaBlocksModule - failed to open the model-item file: {0}", e);
+                }
+
+            });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Chest block texture : ", ex);
+        }
+    }
+
+
+    private void createChestTextures(ClientDynamicResourcesHandler handler,
+                                     Respriter respriter, Respriter respriter_O,
+                                     AnimationMetadataSection baseMeta, List<Palette> basePalette,
+                                     List<Palette> overlayPalette, ResourceLocation res) {
+
+        TextureImage recoloredBase = respriter.recolorWithAnimation(basePalette, baseMeta);
+        TextureImage recoloredOverlay = respriter_O.recolorWithAnimation(overlayPalette, baseMeta);
+        recoloredBase.applyOverlay(recoloredOverlay);
+
+        handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
+
+    }
+
+
 }
