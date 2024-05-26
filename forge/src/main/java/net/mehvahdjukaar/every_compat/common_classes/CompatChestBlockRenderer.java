@@ -1,8 +1,6 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.renderer.Sheets;
@@ -21,12 +19,12 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
     private final Map<WoodType, Material> right = new HashMap<>();
 
     //assumes standard naming here. Generalize if needed
-    public CompatChestBlockRenderer(BlockEntityRendererProvider.Context context, CompatModule module) {
+    public CompatChestBlockRenderer(BlockEntityRendererProvider.Context context, String shortenedId, boolean trapped) {
         super(context);
 
         for (WoodType w : WoodTypeRegistry.getTypes()) {
             if (!w.isVanilla()) {
-                String path = module.shortenedId() + "/" + w.getAppendableId() + "_chest";
+                String path = shortenedId + "/" + w.getAppendableId() + (trapped ? "_trapped_chest" : "_chest");
                 single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path)));
                 left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path + "_left")));
                 right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path + "_right")));
