@@ -12,13 +12,13 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CompatChestBlockEntity extends ChestBlockEntity {
     private final WoodType woodType;
-    private final boolean isTrapped;
+    private final boolean trapped;
 
     public CompatChestBlockEntity(BlockEntityType<?> arg, BlockPos pos, BlockState state) {
         super(arg, pos, state);
         var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
         this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
-        this.isTrapped = state.getBlock() instanceof TrappedChestBlock;
+        this.trapped = state.getBlock() instanceof TrappedChestBlock;
     }
 
     public WoodType getWoodType() {
@@ -28,10 +28,14 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
     @Override
     protected void signalOpenCount(Level level, BlockPos pos, BlockState state, int eventId, int eventParam) {
         super.signalOpenCount(level, pos, state, eventId, eventParam);
-        if (isTrapped && eventId != eventParam) {
+        if (trapped && eventId != eventParam) {
             Block block = state.getBlock();
             level.updateNeighborsAt(pos, block);
             level.updateNeighborsAt(pos.below(), block);
         }
+    }
+
+    public boolean isTrapped() {
+        return trapped;
     }
 }

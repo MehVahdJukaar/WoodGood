@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.more_chest_variants;
+package net.mehvahdjukaar.every_compat.modules.forge.more;
 
 import com.google.gson.JsonObject;
 import io.github.lieonlion.mcv.init.McvBlockInit;
@@ -153,8 +153,10 @@ public class MoreChestVariantsModule extends SimpleModule {
         event.register(TRAPPED_CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestRenderer(context, true));
     }
 
+
+    //TODO: use CompatChestRenderer common class
     // Renderer --------------------------------------------------------------------------------------------------------
-    @OnlyIn(Dist.CLIENT)
+    @OnlyIn(Dist.CLIENT)//REMOVE
     private class CompatChestRenderer extends ChestRenderer<CompatChestBlockEntity> {
         private final Map<WoodType, Material> single = new HashMap<>();
         private final Map<WoodType, Material> left = new HashMap<>();
@@ -236,6 +238,7 @@ public class MoreChestVariantsModule extends SimpleModule {
 
     }*/
 
+    @Deprecated(forRemoval = true)
     @Override
     // Textures
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {

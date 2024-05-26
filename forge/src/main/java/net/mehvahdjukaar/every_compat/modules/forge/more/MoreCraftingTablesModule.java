@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.more_crafting_tables;
+package net.mehvahdjukaar.every_compat.modules.forge.more;
 
 import com.duart.mctb.blocks.CraftingBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;

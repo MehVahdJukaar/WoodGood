@@ -17,17 +17,25 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
     private final Map<WoodType, Material> single = new HashMap<>();
     private final Map<WoodType, Material> left = new HashMap<>();
     private final Map<WoodType, Material> right = new HashMap<>();
+    private final Map<WoodType, Material> trapped = new HashMap<>();
+    private final Map<WoodType, Material> trapped_left = new HashMap<>();
+    private final Map<WoodType, Material> trapped_right = new HashMap<>();
 
     //assumes standard naming here. Generalize if needed
-    public CompatChestBlockRenderer(BlockEntityRendererProvider.Context context, String shortenedId, boolean trapped) {
+    public CompatChestBlockRenderer(BlockEntityRendererProvider.Context context, String shortenedId) {
         super(context);
-
         for (WoodType w : WoodTypeRegistry.getTypes()) {
+            if (w.isVanilla()) continue;
+            String path = "entity/chest/" + shortenedId + "/" + w.getAppendableId();
+            String trapped_path = "entity/chest/" + shortenedId + "/" + w.getNamespace() +
+                    "/trapped/" + w.getTypeName();
             if (!w.isVanilla()) {
-                String path = shortenedId + "/" + w.getAppendableId() + (trapped ? "_trapped_chest" : "_chest");
-                single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path)));
-                left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path + "_left")));
-                right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res("entity/chest/" + path + "_right")));
+                single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path)));
+                left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_left")));
+                right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_right")));
+                trapped.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path)));
+                trapped_left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path + "_left")));
+                trapped_right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path + "_right")));
             }
         }
     }
@@ -35,10 +43,18 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
     @Override
     protected @NotNull Material getMaterial(CompatChestBlockEntity blockEntity, ChestType chestType) {
         WoodType w = blockEntity.getWoodType();
-        return switch (chestType) {
-            case LEFT -> left.get(w);
-            case RIGHT -> right.get(w);
-            default -> single.get(w);
-        };
+        if (blockEntity.isTrapped()) {
+            return switch (chestType) {
+                case LEFT -> trapped_left.get(w);
+                case RIGHT -> trapped_right.get(w);
+                default -> trapped.get(w);
+            };
+        } else {
+            return switch (chestType) {
+                case LEFT -> left.get(w);
+                case RIGHT -> right.get(w);
+                default -> single.get(w);
+            };
+        }
     }
 }
