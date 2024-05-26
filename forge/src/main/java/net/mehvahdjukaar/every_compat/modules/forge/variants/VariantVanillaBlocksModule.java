@@ -348,17 +348,12 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         handler.dynamicPack.addTag(tagBuilder, Registries.POINT_OF_INTEREST_TYPE);
     }
 
-    // Block -----------------------------------------------------------------------------------------------------------
-
-
-    // EntityBlock -----------------------------------------------------------------------------------------------------
-
 
     // Registry --------------------------------------------------------------------------------------------------------
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(chests.getTile(CompatChestBlockEntity.class), CompatChestBlockRenderer::new);
+        event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, this));
     }
 
     //TODO: extract this
@@ -467,7 +462,6 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         recoloredBase.applyOverlay(recoloredOverlay);
 
         handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
-
     }
 
 
