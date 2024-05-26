@@ -324,7 +324,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         return chests.getTile(CompatChestBlockEntity.class);
     }
 
-    private class VariantChestBlockEntity extends CompatChestBlockEntity{
+    // BlockEntity
+    private class VariantChestBlockEntity extends CompatChestBlockEntity {
         public VariantChestBlockEntity(BlockPos pos, BlockState state) {
             super(chests.getTile(), pos, state);
         }
@@ -348,17 +349,12 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         handler.dynamicPack.addTag(tagBuilder, Registries.POINT_OF_INTEREST_TYPE);
     }
 
-    // Block -----------------------------------------------------------------------------------------------------------
-
-
-    // EntityBlock -----------------------------------------------------------------------------------------------------
-
-
     // Registry --------------------------------------------------------------------------------------------------------
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(chests.getTile(CompatChestBlockEntity.class), CompatChestBlockRenderer::new);
+        event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context,
+                shortenedId(), false));
     }
 
     //TODO: extract this
@@ -390,7 +386,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
             chests.blocks.forEach((wood, block) -> {
                 // path to (json||texture) for chest
-                String path = this.shortenedId() + "/" + wood.getAppendableId() + "_chest";
+                String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
 
                 try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
