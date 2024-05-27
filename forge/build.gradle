@@ -197,8 +197,8 @@ dependencies {
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
     modCompileOnly("curse.maven:handcrafted-538214:4437459")
-    modImplementation("curse.maven:variant-vanilla-blocks-866509:4997060")
-    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619")
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060")
+    modImplementation("curse.maven:more-chest-variants-lieonlion-858032:5334619")
 
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
