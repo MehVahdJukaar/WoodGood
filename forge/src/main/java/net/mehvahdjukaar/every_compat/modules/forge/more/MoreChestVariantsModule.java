@@ -5,6 +5,9 @@ import io.github.lieonlion.mcv.init.McvBlockInit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -16,27 +19,19 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.ChestType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,9 +47,10 @@ public class MoreChestVariantsModule extends SimpleModule {
 
         CHEST = SimpleEntrySet.builder(WoodType.class, "chest",
                         McvBlockInit.OAK_CHEST, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatChestBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new CompatChestBlock(this::getChestTile,
+                                Utils.copyPropertySafe(Blocks.CHEST).mapColor(MapColor.WOOD))
                 )
-                .addTile(CompatChestBlockEntity::new)
+                .addTile(moreChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("chests/wooden"), Registries.BLOCK)
@@ -72,9 +68,10 @@ public class MoreChestVariantsModule extends SimpleModule {
 
         TRAPPED_CHEST = SimpleEntrySet.builder(WoodType.class, "chest",
                         McvBlockInit.OAK_TRAPPED_CHEST, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatTrappedChestBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new CompatChestBlock(this::getTrappedTile,
+                                Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
                 )
-                .addTile(CompatTrappedChestBlockEntity::new)
+                .addTile(moreTrappedBlockEntity::new)
                 .addTag(modRes("chests/wooden"), Registries.BLOCK)
                 .addTag(modRes("chests/trapped"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -91,57 +88,25 @@ public class MoreChestVariantsModule extends SimpleModule {
 
     }
 
-    // Block -----------------------------------------------------------------------------------------------------------
-    public class CompatChestBlock extends ChestBlock {
-        public CompatChestBlock(Properties properties) {
-            super(properties, () -> CHEST.getTile(CompatChestBlockEntity.class));
-        }
-
-        @Override
-        public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-            return new CompatChestBlockEntity(pos, state);
-        }
+    // GetTile -----------------------------------------------------------------------------------------------------------
+    private BlockEntityType<? extends ChestBlockEntity> getChestTile() {
+        return CHEST.getTile(CompatChestBlockEntity.class);
     }
 
-    public class CompatTrappedChestBlock extends ChestBlock {
-        public CompatTrappedChestBlock(Properties properties) {
-            super(properties, () -> TRAPPED_CHEST.getTile(CompatTrappedChestBlockEntity.class));
-        }
-
-        @Override
-        public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-            return new CompatTrappedChestBlockEntity(pos, state);
-        }
+    private BlockEntityType<? extends ChestBlockEntity> getTrappedTile() {
+        return TRAPPED_CHEST.getTile(CompatChestBlockEntity.class);
     }
 
     // BlockEntity -----------------------------------------------------------------------------------------------------------
-    public class CompatChestBlockEntity extends ChestBlockEntity {
-        private final WoodType woodType;
-
-        public CompatChestBlockEntity(BlockPos pos, BlockState state) {
+    private class moreChestBlockEntity extends CompatChestBlockEntity {
+        public moreChestBlockEntity(BlockPos pos, BlockState state) {
             super(CHEST.getTile(), pos, state);
-            var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
-            this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
         }
     }
 
-    public class CompatTrappedChestBlockEntity extends ChestBlockEntity {
-//        private final WoodType woodType;
-
-        public CompatTrappedChestBlockEntity(BlockPos pos, BlockState state) {
+    private class moreTrappedBlockEntity extends CompatChestBlockEntity {
+        public moreTrappedBlockEntity(BlockPos pos, BlockState state) {
             super(TRAPPED_CHEST.getTile(), pos, state);
-//            var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
-//            this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
-        }
-
-        @Override
-        protected void signalOpenCount(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, int eventId, int eventParam) {
-            super.signalOpenCount(level, pos, state, eventId, eventParam);
-            if (eventId != eventParam) {
-                Block block = state.getBlock();
-                level.updateNeighborsAt(pos, block);
-                level.updateNeighborsAt(pos.below(), block);
-            }
         }
     }
 
@@ -149,94 +114,9 @@ public class MoreChestVariantsModule extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestRenderer(context, false));
-        event.register(TRAPPED_CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestRenderer(context, true));
+        event.register(CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
+        event.register(TRAPPED_CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
     }
-
-
-    //TODO: use CompatChestRenderer common class
-    // Renderer --------------------------------------------------------------------------------------------------------
-    @OnlyIn(Dist.CLIENT)//REMOVE
-    private class CompatChestRenderer extends ChestRenderer<CompatChestBlockEntity> {
-        private final Map<WoodType, Material> single = new HashMap<>();
-        private final Map<WoodType, Material> left = new HashMap<>();
-        private final Map<WoodType, Material> right = new HashMap<>();
-        private final Map<WoodType, Material> trapped = new HashMap<>();
-        private final Map<WoodType, Material> trapped_left = new HashMap<>();
-        private final Map<WoodType, Material> trapped_right = new HashMap<>();
-
-        protected final boolean isTrap;
-
-        public CompatChestRenderer(BlockEntityRendererProvider.Context context, boolean isTrap) {
-            super(context);
-            this.isTrap = isTrap;
-            for (WoodType w : WoodTypeRegistry.getTypes()) {
-                String path = "entity/chest/" + MoreChestVariantsModule.this.shortenedId() + "/" + w.getAppendableId();
-                String trapped_path = "entity/chest/" + MoreChestVariantsModule.this.shortenedId() + "/" + w.getNamespace() +
-                        "/trapped/" + w.getTypeName();
-                if (!w.isVanilla()) {
-                    single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path)));
-                    left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_left")));
-                    right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_right")));
-                    trapped.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path)));
-                    trapped_left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path + "_left")));
-                    trapped_right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(trapped_path + "_right")));
-                }
-            }
-        }
-
-        @Override
-        protected @NotNull Material getMaterial(CompatChestBlockEntity blockEntity, @NotNull ChestType chestType) {
-            WoodType w = blockEntity.woodType;
-            if (isTrap) {
-                return switch (chestType) {
-                    case LEFT -> trapped_left.get(w);
-                    case RIGHT -> trapped_right.get(w);
-                    default -> trapped.get(w);
-                };
-            }
-            else {
-                return switch (chestType) {
-                    case LEFT -> left.get(w);
-                    case RIGHT -> right.get(w);
-                    default -> single.get(w);
-                };
-            }
-        }
-
-    }
-/*    @OnlyIn(Dist.CLIENT)
-    private class CompatTrappedChestRenderer extends ChestRenderer<CompatChestBlockEntity> {
-        private final Map<WoodType, Material> trapped = new HashMap<>();
-        private final Map<WoodType, Material> trapped_left = new HashMap<>();
-        private final Map<WoodType, Material> trapped_right = new HashMap<>();
-
-
-        public CompatTrappedChestRenderer(BlockEntityRendererProvider.Context context) {
-            super(context);
-
-            for (WoodType w : WoodTypeRegistry.getTypes()) {
-                String path = "entity/chest/" + MoreChestVariantsModule.this.shortenedId() + "/" + w.getNamespace() +
-                        "/trapped/" + w.getTypeName();
-                if (!w.isVanilla()) {
-                    trapped.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path)));
-                    trapped_left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_left")));
-                    trapped_right.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_right")));
-                }
-            }
-        }
-
-        @Override
-        protected @NotNull Material getMaterial(CompatTrappedChestBlockEntity blockEntity, @NotNull ChestType chestType) {
-            WoodType w = blockEntity.woodType;
-            return switch (chestType) {
-                case LEFT -> trapped_left.get(w);
-                case RIGHT -> trapped_right.get(w);
-                default -> trapped.get(w);
-            };
-        }
-
-    }*/
 
     @Deprecated(forRemoval = true)
     @Override
@@ -270,8 +150,8 @@ public class MoreChestVariantsModule extends SimpleModule {
             Respriter respriterRightO = Respriter.of(right_o);
 
             CHEST.blocks.forEach((wood, block) -> {
-                String path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId();
-                String trapped_path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getNamespace() + "/trapped/" + wood.getTypeName();;
+                String path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId() + "_chest";
+                String trapped_path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";;
                 try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
@@ -323,7 +203,7 @@ public class MoreChestVariantsModule extends SimpleModule {
                 // MODEL BLOCK -----------------------------------------------------------------------------------------
                 JsonObject modelBlock;
                 JsonObject trappedModel;
-                try (InputStream modelStream = manager.getResource(EveryCompat.res("models/block/" + path + "_chest.json"))
+                try (InputStream modelStream = manager.getResource(EveryCompat.res("models/block/" + path + ".json"))
                         .orElseThrow(() -> new TypeNotPresentException("Model file: " + path, new NoSuchElementException())).open();
                      InputStream trappedStream = manager.getResource(EveryCompat.res("models/block/" + trapped_path)) // TODO: correct this
                         .orElseThrow(() -> new TypeNotPresentException("Model file: " + trapped_path, new NoSuchElementException())).open()
