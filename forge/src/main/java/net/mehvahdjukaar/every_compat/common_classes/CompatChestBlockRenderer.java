@@ -26,9 +26,8 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
         super(context);
         for (WoodType w : WoodTypeRegistry.getTypes()) {
             if (w.isVanilla()) continue;
-            String path = "entity/chest/" + shortenedId + "/" + w.getAppendableId();
-            String trapped_path = "entity/chest/" + shortenedId + "/" + w.getNamespace() +
-                    "/trapped/" + w.getTypeName();
+            String path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_chest";
+            String trapped_path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_trapped_chest";
             if (!w.isVanilla()) {
                 single.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path)));
                 left.put(w, new Material(Sheets.CHEST_SHEET, EveryCompat.res(path + "_left")));

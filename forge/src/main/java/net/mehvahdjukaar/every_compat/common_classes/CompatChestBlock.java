@@ -27,6 +27,6 @@ public class CompatChestBlock extends ChestBlock {
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return new CompatChestBlockEntity(blockEntityType.get(), pos, state);
+        return new CompatChestBlockEntity(getTileType(), pos, state);
     }
 }
