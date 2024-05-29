@@ -37,8 +37,10 @@ public class SimpleModule extends CompatModule {
     }
 
     public <T extends BlockType> EntrySet<T> addEntry(EntrySet<T> entryHolder) {
-        this.entries.put(entryHolder.getName(), entryHolder);
-
+        var old = this.entries.put(entryHolder.getName(), entryHolder);
+        if (old != null) {
+            throw new UnsupportedOperationException(String.format("This module already has an entry set with name %s", entryHolder.getName()));
+        }
         EveryCompat.addEntryType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
         return entryHolder;
     }

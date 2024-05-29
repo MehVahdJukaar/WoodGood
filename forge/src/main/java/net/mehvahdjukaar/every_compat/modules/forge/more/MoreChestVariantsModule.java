@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -35,22 +36,24 @@ import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class MoreChestVariantsModule extends SimpleModule {
 
-        public final SimpleEntrySet<WoodType, Block> CHEST;
-        public final SimpleEntrySet<WoodType, Block> TRAPPED_CHEST;
+    public final SimpleEntrySet<WoodType, Block> chests;
+    public final SimpleEntrySet<WoodType, Block> trappedChests;
 
     public MoreChestVariantsModule(String modID) {
         super(modID, "mcv");
 
-        CHEST = SimpleEntrySet.builder(WoodType.class, "chest",
+        chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         McvBlockInit.OAK_CHEST, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatChestBlock(this::getChestTile,
                                 Utils.copyPropertySafe(Blocks.CHEST).mapColor(MapColor.WOOD))
                 )
-                .addTile(moreChestBlockEntity::new)
+                .addTile(MoreChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("chests/wooden"), Registries.BLOCK)
@@ -64,14 +67,14 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(modRes("chests/normal"), Registries.ITEM)
                 .addTag(modRes("chests/wooden"), Registries.ITEM)
                 .build();
-        this.addEntry(CHEST);
+        this.addEntry(chests);
 
-        TRAPPED_CHEST = SimpleEntrySet.builder(WoodType.class, "chest",
+        trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         McvBlockInit.OAK_TRAPPED_CHEST, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatChestBlock(this::getTrappedTile,
                                 Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
                 )
-                .addTile(moreTrappedBlockEntity::new)
+                .addTile(MoreTrappedBlockEntity::new)
                 .addTag(modRes("chests/wooden"), Registries.BLOCK)
                 .addTag(modRes("chests/trapped"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -84,29 +87,34 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
                 .build();
-        this.addEntry(TRAPPED_CHEST);
+        this.addEntry(trappedChests);
 
     }
 
     // GetTile -----------------------------------------------------------------------------------------------------------
     private BlockEntityType<? extends ChestBlockEntity> getChestTile() {
-        return CHEST.getTile(CompatChestBlockEntity.class);
+        return chests.getTile(CompatChestBlockEntity.class);
     }
 
     private BlockEntityType<? extends ChestBlockEntity> getTrappedTile() {
-        return TRAPPED_CHEST.getTile(CompatChestBlockEntity.class);
+        return trappedChests.getTile(CompatChestBlockEntity.class);
+    }
+
+    @Override
+    public void registerTiles(Registrator<BlockEntityType<?>> registry) {
+        super.registerTiles(registry);
     }
 
     // BlockEntity -----------------------------------------------------------------------------------------------------------
-    private class moreChestBlockEntity extends CompatChestBlockEntity {
-        public moreChestBlockEntity(BlockPos pos, BlockState state) {
-            super(CHEST.getTile(), pos, state);
+    private class MoreChestBlockEntity extends CompatChestBlockEntity {
+        public MoreChestBlockEntity(BlockPos pos, BlockState state) {
+            super(chests.getTile(), pos, state);
         }
     }
 
-    private class moreTrappedBlockEntity extends CompatChestBlockEntity {
-        public moreTrappedBlockEntity(BlockPos pos, BlockState state) {
-            super(TRAPPED_CHEST.getTile(), pos, state);
+    private class MoreTrappedBlockEntity extends CompatChestBlockEntity {
+        public MoreTrappedBlockEntity(BlockPos pos, BlockState state) {
+            super(trappedChests.getTile(), pos, state);
         }
     }
 
@@ -114,8 +122,8 @@ public class MoreChestVariantsModule extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
-        event.register(TRAPPED_CHEST.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
+        event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
+        event.register(trappedChests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
     }
 
     @Deprecated(forRemoval = true)
@@ -149,9 +157,10 @@ public class MoreChestVariantsModule extends SimpleModule {
             Respriter respriterO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            CHEST.blocks.forEach((wood, block) -> {
+            chests.blocks.forEach((wood, block) -> {
                 String path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId() + "_chest";
-                String trapped_path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";;
+                String trapped_path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
+                ;
                 try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
@@ -176,7 +185,7 @@ public class MoreChestVariantsModule extends SimpleModule {
                             ResourceLocation trappedRes = EveryCompat.res("entity/chest/" + trapped_path);
 
                             createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta,
-                                                targetPalette, overlayPalette, res, trappedRes, wood);
+                                    targetPalette, overlayPalette, res, trappedRes, wood);
                         }
                     }
                     {
@@ -206,8 +215,8 @@ public class MoreChestVariantsModule extends SimpleModule {
                 try (InputStream modelStream = manager.getResource(EveryCompat.res("models/block/" + path + ".json"))
                         .orElseThrow(() -> new TypeNotPresentException("Model file: " + path, new NoSuchElementException())).open();
                      InputStream trappedStream = manager.getResource(EveryCompat.res("models/block/" + trapped_path)) // TODO: correct this
-                        .orElseThrow(() -> new TypeNotPresentException("Model file: " + trapped_path, new NoSuchElementException())).open()
-                    ) {
+                             .orElseThrow(() -> new TypeNotPresentException("Model file: " + trapped_path, new NoSuchElementException())).open()
+                ) {
                     modelBlock = RPUtils.deserializeJson(modelStream);
                     trappedModel = RPUtils.deserializeJson(trappedStream);
                     String textureID = EveryCompat.MOD_ID + ":entity/chest/" + path;
