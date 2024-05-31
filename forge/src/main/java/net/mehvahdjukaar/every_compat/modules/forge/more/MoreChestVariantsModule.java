@@ -32,10 +32,10 @@ import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.NoSuchElementException;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
+//SUPPORT: v1.5.4+
 public class MoreChestVariantsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chests;
@@ -128,57 +128,57 @@ public class MoreChestVariantsModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
-            trappedChests.blocks.forEach((wood, block) -> {
-                // SINGLE
-                generateChestTexture(handler, manager, shortenedId(), wood, block,
-                        modRes("entity/chest/oak"),
-                        EveryCompat.res("entity/mcv_chest_normal_m"),
-                        EveryCompat.res("entity/mcv_chest_normal_o"),
-                        EveryCompat.res("entity/mcv_trapped_normal_o")
-                );
-                // LEFT
-                generateChestTexture(handler, manager, shortenedId(), wood, block,
-                        modRes("entity/chest/oak_left"),
-                        EveryCompat.res("entity/mcv_chest_left_m"),
-                        EveryCompat.res("entity/mcv_chest_left_o"),
-                        EveryCompat.res("entity/mcv_trapped_left_o")
-                );
-                // RIGHT
-                generateChestTexture(handler, manager, shortenedId(), wood, block,
-                        modRes("entity/chest/oak_right"),
-                        EveryCompat.res("entity/mcv_chest_right_m"),
-                        EveryCompat.res("entity/mcv_chest_right_o"),
-                        EveryCompat.res("entity/mcv_trapped_right_o")
-                );
+        trappedChests.blocks.forEach((wood, block) -> {
+            // SINGLE
+            generateChestTexture(handler, manager, shortenedId(), wood, block,
+                    modRes("entity/chest/oak"),
+                    EveryCompat.res("entity/mcv_chest_normal_m"),
+                    EveryCompat.res("entity/mcv_chest_normal_o"),
+                    EveryCompat.res("entity/mcv_trapped_normal_o")
+            );
+            // LEFT
+            generateChestTexture(handler, manager, shortenedId(), wood, block,
+                    modRes("entity/chest/oak_left"),
+                    EveryCompat.res("entity/mcv_chest_left_m"),
+                    EveryCompat.res("entity/mcv_chest_left_o"),
+                    EveryCompat.res("entity/mcv_trapped_left_o")
+            );
+            // RIGHT
+            generateChestTexture(handler, manager, shortenedId(), wood, block,
+                    modRes("entity/chest/oak_right"),
+                    EveryCompat.res("entity/mcv_chest_right_m"),
+                    EveryCompat.res("entity/mcv_chest_right_o"),
+                    EveryCompat.res("entity/mcv_trapped_right_o")
+            );
 
 
-                String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
-                String trapped_path = shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
+            // MODEL BLOCK
+            String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
+            String trapped_path = shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
 
-                // MODEL BLOCK -----------------------------------------------------------------------------------------
-                JsonObject modelBlock;
-                JsonObject trappedModel;
-                try (InputStream modelStream = manager.getResource(EveryCompat.res("models/block/" + path + ".json"))
-                        .orElseThrow(() -> new TypeNotPresentException("Model file: " + path, new NoSuchElementException())).open();
-                     InputStream trappedStream = manager.getResource(EveryCompat.res("models/block/" + trapped_path + ".json")) // TODO: correct this
-                             .orElseThrow(() -> new TypeNotPresentException("Model file: " + trapped_path, new NoSuchElementException())).open()
-                ) {
-                    modelBlock = RPUtils.deserializeJson(modelStream);
-                    trappedModel = RPUtils.deserializeJson(trappedStream);
-                    String textureID = EveryCompat.MOD_ID + ":entity/chest/" + path;
-                    String trappedID = EveryCompat.MOD_ID + ":entity/chest/" + trapped_path;
+            customModel(path, handler, manager);
+            customModel(trapped_path, handler, manager);
+        });
+    }
 
-                    // Editing
-                    modelBlock.getAsJsonObject("textures").addProperty("wood_type", textureID);
+    public void customModel(String path, ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        JsonObject modelFile;
+        ResourceLocation modelRLoc = EveryCompat.res("models/block/" + path + ".json");
 
-                    trappedModel.getAsJsonObject("textures").addProperty("wood_type", trappedID);
+        if (manager.getResource(modelRLoc).isPresent()) {
+            try (InputStream modelStream = manager.getResource(modelRLoc).get().open()) {
+                modelFile = RPUtils.deserializeJson(modelStream);
 
-                    // Add to Resource
-                    handler.dynamicPack.addJson(EveryCompat.res(path), modelBlock, ResType.BLOCK_MODELS);
-                    handler.dynamicPack.addJson(EveryCompat.res(trapped_path), trappedModel, ResType.BLOCK_MODELS);
-                } catch (IOException e) {
-                    handler.getLogger().error("MoreChestVariantsModule - failed to open the model file: {0}", e);
-                }
-            });
+                String textureID = EveryCompat.MOD_ID + ":entity/chest/" + path;
+
+                // Editing
+                modelFile.getAsJsonObject("textures").addProperty("wood_type", textureID);
+
+                // Add to Resource
+                handler.dynamicPack.addJson(EveryCompat.res(path), modelFile, ResType.BLOCK_MODELS);
+            } catch (IOException e) {
+                handler.getLogger().error("MoreChestVariantsModule: failed to open the model file: {} - {}", modelRLoc, e);
+            }
+        }
     }
 }
