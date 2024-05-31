@@ -8,19 +8,15 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
+import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -36,9 +32,9 @@ import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
+
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
 public class MoreChestVariantsModule extends SimpleModule {
 
@@ -71,7 +67,7 @@ public class MoreChestVariantsModule extends SimpleModule {
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         McvBlockInit.OAK_TRAPPED_CHEST, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatChestBlock(this::getTrappedTile,
+                        w -> new CompatTrappedChestBlock(this::getTrappedTile,
                                 Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
                 )
                 .addTile(MoreTrappedBlockEntity::new)
@@ -132,89 +128,39 @@ public class MoreChestVariantsModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
-        try (TextureImage normal = TextureImage.open(manager, modRes("entity/chest/oak"));
-             TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("entity/mcv_chest_normal_m"));
-             TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("entity/mcv_chest_normal_o"));
-             // Left
-             TextureImage left = TextureImage.open(manager, modRes("entity/chest/oak_left"));
-             TextureImage left_m = TextureImage.open(manager, EveryCompat.res("entity/mcv_chest_left_m"));
-             TextureImage left_o = TextureImage.open(manager, EveryCompat.res("entity/mcv_chest_left_o"));
-             // Right
-             TextureImage right = TextureImage.open(manager, modRes("entity/chest/oak_right"));
-             TextureImage right_m = TextureImage.open(manager, EveryCompat.res("entity/mcv_chest_right_m"));
-             TextureImage right_o = TextureImage.open(manager, EveryCompat.res("entity/mcv_chest_right_o"));
-             // Trapped Overlay
-             TextureImage left_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_left"));
-             TextureImage right_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_right"));
-             TextureImage normal_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_normal"))
-        ) {
-
-            Respriter respriterNormal = Respriter.masked(normal, normal_m);
-            Respriter respriter = Respriter.masked(left, left_m);
-            Respriter respriterRight = Respriter.masked(right, right_m);
-
-            Respriter respriterNormalO = Respriter.of(normal_o);
-            Respriter respriterO = Respriter.of(left_o);
-            Respriter respriterRightO = Respriter.of(right_o);
-
-            chests.blocks.forEach((wood, block) -> {
-                String path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId() + "_chest";
-                String trapped_path = MoreChestVariantsModule.this.shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
-                ;
-                try (TextureImage plankTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
-
-                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-                    AnimationMetadataSection meta = plankTexture.getMetadata();
-
-                    List<Palette> overlayPalette = new ArrayList<>();
-                    for (var p : targetPalette) {
-                        var d1 = p.getDarkest();
-                        p.remove(d1);
-                        var d2 = p.getDarkest();
-                        p.remove(d2);
-                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
-                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
-                        var pal = Palette.ofColors(List.of(n1, n2));
-                        overlayPalette.add(pal);
-                    }
-
-                    {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + path);
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = EveryCompat.res("entity/chest/" + trapped_path);
-
-                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta,
-                                    targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
-                    {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + path + "_left");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = EveryCompat.res("entity/chest/" + trapped_path + "_left");
-
-                            createChestTextures(handler, left_t, respriter, respriterO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
-                    {
-                        ResourceLocation res = EveryCompat.res("entity/chest/" + path + "_right");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = EveryCompat.res("entity/chest/" + trapped_path + "_right");
-
-                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
+            trappedChests.blocks.forEach((wood, block) -> {
+                // SINGLE
+                generateChestTexture(handler, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak"),
+                        EveryCompat.res("entity/mcv_chest_normal_m"),
+                        EveryCompat.res("entity/mcv_chest_normal_o"),
+                        EveryCompat.res("entity/mcv_trapped_normal_o")
+                );
+                // LEFT
+                generateChestTexture(handler, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak_left"),
+                        EveryCompat.res("entity/mcv_chest_left_m"),
+                        EveryCompat.res("entity/mcv_chest_left_o"),
+                        EveryCompat.res("entity/mcv_trapped_left_o")
+                );
+                // RIGHT
+                generateChestTexture(handler, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak_right"),
+                        EveryCompat.res("entity/mcv_chest_right_m"),
+                        EveryCompat.res("entity/mcv_chest_right_o"),
+                        EveryCompat.res("entity/mcv_trapped_right_o")
+                );
 
 
-                } catch (Exception ex) {
-                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", block, ex);
-                }
+                String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
+                String trapped_path = shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
+
                 // MODEL BLOCK -----------------------------------------------------------------------------------------
                 JsonObject modelBlock;
                 JsonObject trappedModel;
                 try (InputStream modelStream = manager.getResource(EveryCompat.res("models/block/" + path + ".json"))
                         .orElseThrow(() -> new TypeNotPresentException("Model file: " + path, new NoSuchElementException())).open();
-                     InputStream trappedStream = manager.getResource(EveryCompat.res("models/block/" + trapped_path)) // TODO: correct this
+                     InputStream trappedStream = manager.getResource(EveryCompat.res("models/block/" + trapped_path + ".json")) // TODO: correct this
                              .orElseThrow(() -> new TypeNotPresentException("Model file: " + trapped_path, new NoSuchElementException())).open()
                 ) {
                     modelBlock = RPUtils.deserializeJson(modelStream);
@@ -228,32 +174,11 @@ public class MoreChestVariantsModule extends SimpleModule {
                     trappedModel.getAsJsonObject("textures").addProperty("wood_type", trappedID);
 
                     // Add to Resource
-                    handler.dynamicPack.addJson(EveryCompat.res(path + "_chest"), modelBlock, ResType.BLOCK_MODELS);
+                    handler.dynamicPack.addJson(EveryCompat.res(path), modelBlock, ResType.BLOCK_MODELS);
                     handler.dynamicPack.addJson(EveryCompat.res(trapped_path), trappedModel, ResType.BLOCK_MODELS);
                 } catch (IOException e) {
                     handler.getLogger().error("MoreChestVariantsModule - failed to open the model file: {0}", e);
                 }
             });
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Chest block texture : ", ex);
-        }
-    }
-
-    private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
-                                     Respriter respriter, Respriter respriterO,
-                                     AnimationMetadataSection baseMeta, List<Palette> basePalette,
-                                     List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes,
-                                     WoodType wood) {
-
-        TextureImage recoloredBase = respriter.recolorWithAnimation(basePalette, baseMeta);
-        TextureImage recoloredOverlay = respriterO.recolorWithAnimation(overlayPalette, baseMeta);
-        recoloredBase.applyOverlay(recoloredOverlay);
-        TextureImage trapped = recoloredBase.makeCopy();
-
-        if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
-            handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
-
-        trapped.applyOverlay(trappedOverlay.makeCopy());
-        handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
     }
 }
