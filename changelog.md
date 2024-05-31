@@ -6,6 +6,10 @@
 - **MrCrayFish's Refurbished Furniture** (FABRIC) - Fixed the crash with Ceiling Fan being placed in the world
 - **Quark** (COMMON) - Corrected hedge's recipe (logs & woods included stripped are tagged as an ingredient)
 
+## NEW:
+- **Variant Vanilla Blocks** (FORGE)
+- **More Chest Variants** (FORGE)
+
 ---
 **LEGEND**:
 - (COMMON) = FORGE & FABRIC
