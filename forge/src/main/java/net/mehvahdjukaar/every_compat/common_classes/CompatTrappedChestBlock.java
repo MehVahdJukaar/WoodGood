@@ -7,9 +7,6 @@ import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.TrappedChestBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,22 +21,22 @@ public class CompatTrappedChestBlock extends CompatChestBlock {
     }
 
     @Override
-    protected Stat<ResourceLocation> getOpenChestStat() {
+    protected @NotNull Stat<ResourceLocation> getOpenChestStat() {
         return Stats.CUSTOM.get(Stats.TRIGGER_TRAPPED_CHEST);
     }
 
     @Override
-    public boolean isSignalSource(BlockState state) {
+    public boolean isSignalSource(@NotNull BlockState state) {
         return true;
     }
 
     @Override
-    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+    public int getSignal(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull Direction direction) {
         return Mth.clamp(ChestBlockEntity.getOpenCount(level, pos), 0, 15);
     }
 
     @Override
-    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+    public int getDirectSignal(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull Direction direction) {
         return direction == Direction.UP ? state.getSignal(level, pos, direction) : 0;
     }
 }
