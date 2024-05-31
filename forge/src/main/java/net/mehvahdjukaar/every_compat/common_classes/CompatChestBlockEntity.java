@@ -18,7 +18,7 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
         super(arg, pos, state);
         var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
         this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
-        this.trapped = state.getBlock() instanceof TrappedChestBlock;
+        this.trapped = state.getBlock() instanceof CompatTrappedChestBlock;
     }
 
     public WoodType getWoodType() {
