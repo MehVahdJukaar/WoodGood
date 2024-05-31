@@ -355,7 +355,6 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 shortenedId()));
     }
 
-    //TODO: extract this
     @Override
     // Textures --------------------------------------------------------------------------------------------------------
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
