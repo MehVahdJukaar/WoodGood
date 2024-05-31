@@ -16,13 +16,9 @@ import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -45,7 +41,7 @@ import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
-//SUPPORT: v1.3.6
+//SUPPORT: v1.3.6+
 public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> barrel;
     public final SimpleEntrySet<WoodType, Block> beehive;
@@ -387,23 +383,23 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 null
                 );
 
-            // path to json for chest
-            String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
+            // MODEL ITEM
+            String path = shortenedId() + "/" + wood.getAppendableId() + "_chest"; // path to json for chest
+            JsonObject modelFile;
+            ResourceLocation modelRLoc = EveryCompat.res("models/item/" + path + ".json");
 
-            // MODEL ITEM ------------------------------------------------------------------------------------------
-            JsonObject modelItem;
+            if (manager.getResource(modelRLoc).isPresent()) {
+                try (InputStream modelStream = manager.getResource(modelRLoc).get().open()) {
+                    modelFile = RPUtils.deserializeJson(modelStream);
+                    String textureID = EveryCompat.MOD_ID + ":chest/" + path;
+                    // Editing
+                    modelFile.getAsJsonObject("textures").addProperty("chest", textureID);
 
-            try (InputStream modelStream = manager.getResource(EveryCompat.res("models/item/" + path + ".json"))
-                    .orElseThrow(() -> new TypeNotPresentException("Model-Item file not found: ", null)).open()) {
-                modelItem = RPUtils.deserializeJson(modelStream);
-                String textureID = EveryCompat.MOD_ID + ":chest/" + path;
-                // Editing
-                modelItem.getAsJsonObject("textures").addProperty("chest", textureID);
-
-                // Add to Resource
-                handler.dynamicPack.addJson(EveryCompat.res(path), modelItem, ResType.ITEM_MODELS );
-            } catch (IOException e) {
-                handler.getLogger().error("VariantVanillaBlocks - failed to open the model file: {0}", e);
+                    // Add to Resource
+                    handler.dynamicPack.addJson(EveryCompat.res(path), modelFile, ResType.ITEM_MODELS );
+                } catch (IOException e) {
+                    handler.getLogger().error("VariantVanillaBlocks: failed to open the model file: {} - {}", modelRLoc, e);
+                }
             }
         });
     }
