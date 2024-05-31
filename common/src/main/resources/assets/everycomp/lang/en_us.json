@@ -736,5 +736,23 @@
   "block_type.buildersdelight.glass_pane_7": "%s Glass Pane",
   "tooltip.everycomp.buildersdelight.glass_pane_7": "Blinds",
   "block_type.buildersdelight.glass_pane_8": "%s Glass Pane",
-  "tooltip.everycomp.buildersdelight.glass_pane_8": "Fancy"
+  "tooltip.everycomp.buildersdelight.glass_pane_8": "Fancy",
+
+  "block_type.lolmcv.chest" : "%s Chest",
+  "block_type.lolmcv.trapped_chest" : "%s Trapped Chest",
+
+  "block_type.variantvanillablocks.barrel" : "%s Barrel",
+  "block_type.variantvanillablocks.beehive" : "%s Beehive",
+  "block_type.variantvanillablocks.bookshelf" : "%s Bookshelf",
+  "block_type.variantvanillablocks.cartography_table" : "%s Cartography Table",
+  "block_type.variantvanillablocks.chest" : "%s Chest",
+  "block_type.variantvanillablocks.chiseled_bookshelf" : "%s Chiseled Bookshelf",
+  "block_type.variantvanillablocks.composter" : "%s Composter",
+  "block_type.variantvanillablocks.crafting_table" : "%s Crafting Table",
+  "block_type.variantvanillablocks.fletching_table" : "%s Fletching Table",
+  "block_type.variantvanillablocks.grindstone" : "%s Grindstone",
+  "block_type.variantvanillablocks.lectern" : "%s Lectern",
+  "block_type.variantvanillablocks.smithing_table" : "%s Smithing Table",
+  "block_type.variantvanillablocks.smoker" : "%s Smoker"
+
 }
