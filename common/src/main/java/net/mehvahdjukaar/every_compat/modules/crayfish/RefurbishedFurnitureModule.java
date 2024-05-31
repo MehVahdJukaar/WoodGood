@@ -59,9 +59,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-//TODO:
-// The TemplateRecipeManager class is not working, why?
-
 //SUPPORT: v1.0.0-beta-4
 public class RefurbishedFurnitureModule extends SimpleModule {
 
