@@ -33,7 +33,7 @@ import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
 import org.dawnoftimebuilder.util.VoxelShapes;
 
 
-//SUPPORT v1.5.3+
+//SUPPORT v1.5.7+
 public class DawnOfTimeModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BEAM;
