@@ -17,13 +17,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.MapColor;
-import org.dawnoftimebuilder.block.japanese.SpruceLeglessChairBlock;
 import org.dawnoftimebuilder.block.japanese.SpruceLowTableBlock;
 import org.dawnoftimebuilder.block.roman.BirchCouchBlock;
 import org.dawnoftimebuilder.block.roman.BirchFootstoolBlock;
-import org.dawnoftimebuilder.block.templates.BalusterBlock;
 import org.dawnoftimebuilder.block.templates.BeamBlock;
+import org.dawnoftimebuilder.block.templates.ChairBlock;
 import org.dawnoftimebuilder.block.templates.EdgeBlock;
 import org.dawnoftimebuilder.block.templates.LatticeBlock;
 import org.dawnoftimebuilder.block.templates.PergolaBlock;
@@ -32,10 +30,10 @@ import org.dawnoftimebuilder.block.templates.SupportBeamBlock;
 import org.dawnoftimebuilder.block.templates.SupportSlabBlock;
 import org.dawnoftimebuilder.registry.DoTBBlockEntitiesRegistry;
 import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
-import pokecube.legends.init.BlockInit;
+import org.dawnoftimebuilder.util.VoxelShapes;
 
 
-//SUPPORT v1.5.3+
+//SUPPORT v1.5.7+
 public class DawnOfTimeModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BEAM;
@@ -144,8 +142,9 @@ public class DawnOfTimeModule extends SimpleModule {
 
         FANCY_FENCE = SimpleEntrySet.builder(WoodType.class, "fancy_fence",
                         getModBlock("birch_fancy_fence"), () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
-                        w -> new BalusterBlock(Utils.copyPropertySafe(w.planks)
-                                .ignitedByLava().noOcclusion().strength(3.0F, 5.0F)))
+                        w -> new PlateBlock(Utils.copyPropertySafe(w.planks)
+                                .ignitedByLava().noOcclusion().strength(3.0F, 5.0F),
+                                VoxelShapes.THIN_PLATE_SHAPES))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/birch_fancy_fence"))
                 .defaultRecipe()
@@ -165,7 +164,8 @@ public class DawnOfTimeModule extends SimpleModule {
 
         COUCH = SimpleEntrySet.builder(WoodType.class, "couch",
                         getModBlock("birch_couch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
-                        w -> new BirchCouchBlock(Utils.copyPropertySafe(w.planks), 13.0F))
+                        w -> new BirchCouchBlock(Utils.copyPropertySafe(w.planks), 13.0F,
+                                VoxelShapes.ROMAN_COUCH_SHAPES))
                 .addTextureM(modRes("block/birch_couch"), EveryCompat.res("block/dot/birch_couch_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
@@ -188,8 +188,9 @@ public class DawnOfTimeModule extends SimpleModule {
 
         LEGLESS_CHAIR = SimpleEntrySet.builder(WoodType.class, "legless_chair",
                         getModBlock("spruce_legless_chair"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new SpruceLeglessChairBlock(Utils.copyPropertySafe(w.log).noOcclusion()
-                                .strength(2.0F, 6.0F), 3.0F))
+                        w -> new ChairBlock(Utils.copyPropertySafe(w.log).noOcclusion()
+                                .strength(2.0F, 6.0F), 3.0F,
+                                VoxelShapes.SPRUCE_LEGLESS_CHAIR_SHAPES))
                 .addTextureM(modRes("block/spruce_legless_chair"), EveryCompat.res("block/dot/spruce_legless_chair_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .createPaletteFromOak(this::dullPalette)
