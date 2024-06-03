@@ -5,7 +5,6 @@ import com.teamabnormals.blueprint.client.BlueprintChestMaterials;
 import com.teamabnormals.blueprint.client.renderer.block.ChestBlockEntityWithoutLevelRenderer;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
-import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
 import com.teamabnormals.blueprint.common.block.entity.BlueprintChestBlockEntity;
 import com.teamabnormals.blueprint.common.block.entity.BlueprintTrappedChestBlockEntity;
@@ -16,21 +15,18 @@ import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -41,6 +37,9 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
@@ -140,40 +139,32 @@ public class WoodworksModule extends SimpleModule {
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> {
-                            // EveryComp.MOD_ID:<type>_normal
-                            String registryName = BlueprintChestMaterials.registerMaterials(EveryCompat.MOD_ID,
-                                   shortenedId() + w.getAppendableId(), false);
-                            return new BlueprintChestBlock(registryName,
-                                    WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest());
-                        })
+                        w -> new CompatChestBlock(this::getChestTile,
+                                WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest())
+                )
                 .setTabKey(() -> tab)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(new ResourceLocation("quark:revertable_chests"), Registries.ITEM)
                 .addTag(new ResourceLocation("quark:boatable_chests"), Registries.ITEM)
-                .addTile(BlueprintChestBlockEntity::new)
-                .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(false), 300))
+                .addTile(abwwChestBlockEntity::new)
+                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .defaultRecipe()
                 .build();
         this.addEntry(chests);
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "chest", "trapped",
                         getModBlock("trapped_oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> {
-                            // EveryComp.MOD_ID:<type>_trapped
-                            String registryName = BlueprintChestMaterials.registerMaterials(EveryCompat.MOD_ID,
-                                    shortenedId() + w.getAppendableId(), true);
-                            return new BlueprintTrappedChestBlock(registryName,
-                                    WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest());
-                        })
+                        w -> new CompatTrappedChestBlock(this::getTrappedTile,
+                                WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest())
+                        )
                 .setTabKey(() -> tab)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_TRAPPED, Registries.ITEM)
-                .addTile(BlueprintTrappedChestBlockEntity::new)
-                .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(true), 300))
+                .addTile(abwwTrappedBlockEntity::new)
+                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .defaultRecipe()
                 .build();
         this.addEntry(trappedChests);
@@ -197,18 +188,35 @@ public class WoodworksModule extends SimpleModule {
         this.addEntry(leafPiles);
     }
 
-
-    @OnlyIn(Dist.CLIENT)
-    private static BEWLRBlockItem.LazyBEWLR chestBEWLR(boolean trapped) {
-        return trapped
-                ? new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) ->
-                new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
-                        new BlueprintTrappedChestBlockEntity(BlockPos.ZERO, Blocks.TRAPPED_CHEST.defaultBlockState())))
-                : new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) ->
-                new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
-                        new BlueprintChestBlockEntity(BlockPos.ZERO, Blocks.CHEST.defaultBlockState())));
+    // GetTile -----------------------------------------------------------------------------------------------------------
+    private BlockEntityType<? extends ChestBlockEntity> getChestTile() {
+        return chests.getTile(CompatChestBlockEntity.class);
     }
 
+    private BlockEntityType<? extends ChestBlockEntity> getTrappedTile() {
+        return trappedChests.getTile(CompatChestBlockEntity.class);
+    }
+
+    // BlockEntity -----------------------------------------------------------------------------------------------------------
+    private class abwwChestBlockEntity extends CompatChestBlockEntity {
+        public abwwChestBlockEntity(BlockPos pos, BlockState state) {
+            super(chests.getTile(), pos, state);
+        }
+    }
+
+    private class abwwTrappedBlockEntity extends CompatChestBlockEntity {
+        public abwwTrappedBlockEntity(BlockPos pos, BlockState state) {
+            super(trappedChests.getTile(), pos, state);
+        }
+    }
+
+    // Registry --------------------------------------------------------------------------------------------------------
+    @Override
+    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
+        super.registerBlockEntityRenderers(event);
+        event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
+        event.register(trappedChests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
+    }
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
