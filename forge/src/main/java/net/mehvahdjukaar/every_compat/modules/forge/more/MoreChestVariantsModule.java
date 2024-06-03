@@ -62,6 +62,7 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
                 .addTag(modRes("chests/normal"), Registries.ITEM)
                 .addTag(modRes("chests/wooden"), Registries.ITEM)
+                .defaultRecipe()
                 .build();
         this.addEntry(chests);
 
@@ -82,6 +83,7 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(modRes("chests/wooden"), Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
+                .defaultRecipe()
                 .build();
         this.addEntry(trappedChests);
 
@@ -94,11 +96,6 @@ public class MoreChestVariantsModule extends SimpleModule {
 
     private BlockEntityType<? extends ChestBlockEntity> getTrappedTile() {
         return trappedChests.getTile(CompatChestBlockEntity.class);
-    }
-
-    @Override
-    public void registerTiles(Registrator<BlockEntityType<?>> registry) {
-        super.registerTiles(registry);
     }
 
     // BlockEntity -----------------------------------------------------------------------------------------------------------
@@ -134,21 +131,21 @@ public class MoreChestVariantsModule extends SimpleModule {
                     modRes("entity/chest/oak"),
                     EveryCompat.res("entity/mcv_chest_normal_m"),
                     EveryCompat.res("entity/mcv_chest_normal_o"),
-                    EveryCompat.res("entity/mcv_trapped_normal_o")
+                    EveryCompat.res("entity/mcv_trapped_normal_o"), 0
             );
             // LEFT
             generateChestTexture(handler, manager, shortenedId(), wood, block,
                     modRes("entity/chest/oak_left"),
                     EveryCompat.res("entity/mcv_chest_left_m"),
                     EveryCompat.res("entity/mcv_chest_left_o"),
-                    EveryCompat.res("entity/mcv_trapped_left_o")
+                    EveryCompat.res("entity/mcv_trapped_left_o"), 0
             );
             // RIGHT
             generateChestTexture(handler, manager, shortenedId(), wood, block,
                     modRes("entity/chest/oak_right"),
                     EveryCompat.res("entity/mcv_chest_right_m"),
                     EveryCompat.res("entity/mcv_chest_right_o"),
-                    EveryCompat.res("entity/mcv_trapped_right_o")
+                    EveryCompat.res("entity/mcv_trapped_right_o"), 0
             );
 
 
