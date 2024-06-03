@@ -120,12 +120,12 @@ dependencies {
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
+    modImplementation("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modImplementation("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
-    modImplementation("curse.maven:quad-932715:5340148") // More Chest Variants
+    modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
@@ -163,6 +163,7 @@ dependencies {
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
+    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
@@ -175,8 +176,9 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060")
     modCompileOnly("curse.maven:woodster-869951:4670471")
-    modCompileOnly("curse.maven:woodworks-543610:5228779")
+    modImplementation("curse.maven:woodworks-543610:5228779")
     modCompileOnly("curse.maven:boatload-337396:5292325")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
@@ -197,8 +199,6 @@ dependencies {
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
     modCompileOnly("curse.maven:handcrafted-538214:4437459")
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060")
-    modImplementation("curse.maven:more-chest-variants-lieonlion-858032:5334619")
 
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
