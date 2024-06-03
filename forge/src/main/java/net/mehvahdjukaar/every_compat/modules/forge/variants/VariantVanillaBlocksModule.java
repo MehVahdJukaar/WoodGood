@@ -317,6 +317,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
     //kind of hacy.dont like but we cant reference chests itself while constructing its own object
+    // GetTiles
     private BlockEntityType<? extends ChestBlockEntity> getTile() {
         return chests.getTile(CompatChestBlockEntity.class);
     }
@@ -327,7 +328,6 @@ public class VariantVanillaBlocksModule extends SimpleModule {
             super(chests.getTile(), pos, state);
         }
     }
-
 
     private Set<BlockState> getBeehives() {
         var set = new ImmutableSet.Builder<BlockState>();
