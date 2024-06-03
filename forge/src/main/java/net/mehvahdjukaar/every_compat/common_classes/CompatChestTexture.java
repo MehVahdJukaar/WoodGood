@@ -19,10 +19,20 @@ import java.util.List;
 public class CompatChestTexture {
 
     public static void generateChestTexture(ClientDynamicResourcesHandler handler, ResourceManager manager,
-                                    String shortenedID,
-                                    WoodType wood, Block block,
+                                            String shortenedID, WoodType wood, Block block,
+                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
+                                            ResourceLocation trappedORLoc) {
+        generateChestTexture(handler, manager, shortenedID, wood, block, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc, 2);
+    }
+
+    /**
+    * Generate a texture for chest and trapped_chest
+    * @param removeDarkest - 0: none removed, 1: removed once, 2: removed twice
+    */
+    public static void generateChestTexture(ClientDynamicResourcesHandler handler, ResourceManager manager,
+                                    String shortenedID, WoodType wood, Block block,
                                 ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                    ResourceLocation trappedORLoc) {
+                                    ResourceLocation trappedORLoc, int removeDarkest) {
 
         try (TextureImage normalTexture = TextureImage.open(manager, normalRLoc);
              TextureImage normalMask = TextureImage.open(manager, maskRLoc);
@@ -56,9 +66,13 @@ public class CompatChestTexture {
                     List<Palette> overlayPalette = new ArrayList<>();
                     for (var p : plankPalette) {
                         var d1 = p.getDarkest();
-                        p.remove(d1);
                         var d2 = p.getDarkest();
-                        p.remove(d2);
+                        switch (removeDarkest) {
+                            case 2:
+                                p.remove(d2);
+                            case 1:
+                                p.remove(d1);
+                        }
                         var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
                         var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
                         var pal = Palette.ofColors(List.of(n1, n2));
