@@ -27,7 +27,7 @@ public class CompatChestTexture {
 
     /**
     * Generate a texture for chest and trapped_chest
-    * @param removeDarkest - 0: none removed, 1: removed once, 2: removed twice
+    * @param removeDarkest 0: none removed, 1: removed once, 2: removed twice
     */
     public static void generateChestTexture(ClientDynamicResourcesHandler handler, ResourceManager manager,
                                     String shortenedID, WoodType wood, Block block,
