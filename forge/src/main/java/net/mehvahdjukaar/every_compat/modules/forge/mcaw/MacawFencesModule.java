@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.material.MapColor;
 
 import java.util.Map;
 
@@ -108,7 +109,27 @@ public class MacawFencesModule extends SimpleModule {
 
         HEDGES = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
-                        w -> new WallBlock(Utils.copyPropertySafe(w.leaves).lightLevel((s) -> 0)))
+                        w -> {
+                            if (w.getNamespace().equals("autumnity")) {
+                                switch (w.getTypeName()) {
+                                    case "red_maple" -> {
+                                        return new WallBlock(Utils.copyPropertySafe(w.leaves)
+                                                .mapColor(MapColor.TERRACOTTA_RED).lightLevel((s) -> 0));
+                                    }
+
+                                    case "orange_maple" -> {
+                                        return new WallBlock(Utils.copyPropertySafe(w.leaves)
+                                                .mapColor(MapColor.TERRACOTTA_ORANGE).lightLevel((s) -> 0));
+                                    }
+
+                                    case "yellow_maple" -> {
+                                        return new WallBlock(Utils.copyPropertySafe(w.leaves)
+                                                .mapColor(MapColor.TERRACOTTA_YELLOW).lightLevel((s) -> 0));
+                                    }
+                                }
+                            }
+                            return new WallBlock(Utils.copyPropertySafe(w.leaves).lightLevel((s) -> 0));
+                        })
                 .requiresChildren("leaves")
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -118,11 +139,19 @@ public class MacawFencesModule extends SimpleModule {
                 .addModelTransform(m -> m.addModifier((s, id, l) -> {
                     /*
                     * EveryComp's code don't account for "mcwfences:block/oak_leaves" when the mod could have used
-                    * "minecraft:block/oak_leaves" for texturing. idk why the dev use this way.
+                    * "minecraft:block/oak_leaves" for texturing. Dev said using "minecraft:block/oak_leaves" lead
+                    * to problems
                     */
                     String namespace = l.getNamespace();
                     String typeName = l.getTypeName();
                     switch (namespace) {
+                        case "vinery" -> {
+                            return LeavesPath("apple_leaves_0", "", s, l);
+                        }
+                        case "autumnity" -> {
+                            if (typeName.equals("red_maple")||typeName.equals("orange_maple")||typeName.equals("yellow_maple"))
+                                return LeavesPath("maple_leaves", "", s, l);
+                        }
                         case "chipped" -> {
                             return LeavesPath("","", s, l, true);
                         }
