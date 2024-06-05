@@ -95,7 +95,8 @@ public abstract class EveryCompat {
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
-        addOtherCompatMod("lolmcvbmo", "biomesoplenty", List.of("lolmcv"));
+        addOtherCompatMod("lolmcvbop", "biomesoplenty", List.of("lolmcv"));
+        addOtherCompatMod("lolmcvbmo", "biomemakeover", List.of("lolmcv"));
 
         // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
