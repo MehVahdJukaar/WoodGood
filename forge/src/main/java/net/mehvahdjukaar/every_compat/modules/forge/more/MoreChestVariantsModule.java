@@ -10,7 +10,6 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;

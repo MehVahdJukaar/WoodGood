@@ -119,6 +119,7 @@ public class BuildersAdditionModule extends SimpleModule {
                 .addRecipe(modRes("hedge/hedge_oak"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(tab)
+                .copyParentTint()
                 .build();
 
         this.addEntry(hedges);
@@ -290,28 +291,6 @@ public class BuildersAdditionModule extends SimpleModule {
         public CompatArcade(String name, Block source) {
             super("arcade_" + name);
 
-        }
-    }
-
-    @Override
-    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
-        super.registerBlockColors(event);
-        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
-            event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        }
-    }
-
-    @Override
-    public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        super.registerItemColors(event);
-        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
-            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         }
     }
 

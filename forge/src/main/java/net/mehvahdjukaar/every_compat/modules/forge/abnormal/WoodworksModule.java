@@ -179,6 +179,7 @@ public class WoodworksModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .copyParentDrop()
                 .defaultRecipe()
+                .copyParentTint()
                 .build();
         this.addEntry(leafPiles);
     }
@@ -214,94 +215,68 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
-        super.registerBlockColors(event);
-        for (Map.Entry<LeavesType, Block> entry : leafPiles.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
-            event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        }
-    }
-
-    //TODO: extract this to a helper method. also why the hardcoded twilight forest stuff? Should be done better
-    @Override
-    public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        for (Map.Entry<LeavesType, Block> entry : leafPiles.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
-            event.register((stack, tintIndex) -> {
-                ItemStack itemStack = new ItemStack(t.leaves);
-                Preconditions.checkArgument(itemStack.isEmpty(), "Block " + t.leaves + " for leaves type" + t + " returned an empty item. How?");
-                return event.getColor(itemStack, tintIndex);
-            }, b.asItem());
-        }
-    }
-
-    @Override
     // Recipes
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
         bookshelves.items.forEach((wood, item) -> {
             // sawmill recipes - from LOGS
-            sawmill_Recipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
+            sawmillRecipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
                     handler, manager, wood);
-            sawmill_Recipe("oak_boards_from_oak_logs_sawing", wood.log.asItem(), boards.items.get(wood),
+            sawmillRecipe("oak_boards_from_oak_logs_sawing", wood.log.asItem(), boards.items.get(wood),
                     handler, manager, wood);
-            sawmill_Recipe("spruce_ladder_from_spruce_logs_sawing", wood.log.asItem(), ladders.items.get(wood),
+            sawmillRecipe("spruce_ladder_from_spruce_logs_sawing", wood.log.asItem(), ladders.items.get(wood),
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_button_from_oak_logs_sawing", true, "button",
+            createRecipeIfNotNull("oak_button_from_oak_logs_sawing", true, "button",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_door_from_oak_logs_sawing", true, "door",
+            createRecipeIfNotNull("oak_door_from_oak_logs_sawing", true, "door",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_fence_from_oak_logs_sawing", true, "fence",
+            createRecipeIfNotNull("oak_fence_from_oak_logs_sawing", true, "fence",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_fence_gate_from_oak_logs_sawing", true, "fence_gate",
+            createRecipeIfNotNull("oak_fence_gate_from_oak_logs_sawing", true, "fence_gate",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_pressure_plate_from_oak_logs_sawing", true, "pressure_plate",
+            createRecipeIfNotNull("oak_pressure_plate_from_oak_logs_sawing", true, "pressure_plate",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_sign_from_oak_logs_sawing", true, "sign",
+            createRecipeIfNotNull("oak_sign_from_oak_logs_sawing", true, "sign",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_slab_from_oak_logs_sawing", true, "slab",
+            createRecipeIfNotNull("oak_slab_from_oak_logs_sawing", true, "slab",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_stairs_from_oak_logs_sawing", true, "stairs",
+            createRecipeIfNotNull("oak_stairs_from_oak_logs_sawing", true, "stairs",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_trapdoor_from_oak_logs_sawing", true, "trapdoor",
+            createRecipeIfNotNull("oak_trapdoor_from_oak_logs_sawing", true, "trapdoor",
                     handler, manager, wood);
 
             // - from PLANKS
-            sawmill_Recipe("oak_boards_from_oak_planks_sawing", wood.planks.asItem(), boards.items.get(wood),
+            sawmillRecipe("oak_boards_from_oak_planks_sawing", wood.planks.asItem(), boards.items.get(wood),
                     handler, manager, wood);
-            sawmill_Recipe("spruce_ladder_from_spruce_planks_sawing", wood.planks.asItem(), ladders.items.get(wood),
+            sawmillRecipe("spruce_ladder_from_spruce_planks_sawing", wood.planks.asItem(), ladders.items.get(wood),
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_button_from_oak_planks_sawing", false, "button",
+            createRecipeIfNotNull("oak_button_from_oak_planks_sawing", false, "button",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_fence_from_oak_planks_sawing", false, "fence",
+            createRecipeIfNotNull("oak_fence_from_oak_planks_sawing", false, "fence",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_slab_from_oak_planks_sawing", false, "slab",
+            createRecipeIfNotNull("oak_slab_from_oak_planks_sawing", false, "slab",
                     handler, manager, wood);
-            createRecipe_ifNotNull("oak_stairs_from_oak_planks_sawing", false, "stairs",
+            createRecipeIfNotNull("oak_stairs_from_oak_planks_sawing", false, "stairs",
                     handler, manager, wood);
 
         });
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public void createRecipe_ifNotNull(String recipeName, boolean usingLog, String output,
-                                       ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
+    public void createRecipeIfNotNull(String recipeName, boolean usingLog, String output,
+                                      ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
         Item input = (usingLog) ? wood.log.asItem() : wood.planks.asItem();
         if (Objects.nonNull(wood.getItemOfThis(output))) {
-            sawmill_Recipe(recipeName, input, wood.getItemOfThis(output), handler, manager, wood);
+            sawmillRecipe(recipeName, input, wood.getItemOfThis(output), handler, manager, wood);
         } else if (Objects.nonNull(wood.getBlockOfThis(output))) {
-            sawmill_Recipe(recipeName, input, wood.getBlockOfThis(output).asItem(), handler, manager, wood);
+            sawmillRecipe(recipeName, input, wood.getBlockOfThis(output).asItem(), handler, manager, wood);
         }
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public void sawmill_Recipe(String recipeName, Item input, Item output,
-                               ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
+    public void sawmillRecipe(String recipeName, Item input, Item output,
+                              ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
 
         ResourceLocation recipeLocation = modRes("recipes/" + recipeName + ".json"); // get Recipe JSON
         JsonObject recipe = null;

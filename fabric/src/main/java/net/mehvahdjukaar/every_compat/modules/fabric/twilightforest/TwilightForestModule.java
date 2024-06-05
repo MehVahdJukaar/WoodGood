@@ -120,6 +120,7 @@ public class TwilightForestModule extends SimpleModule {
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
+        super.registerBlockColors(event);
         event.register(
                 (s, l, pos, i) -> l != null && pos != null ?
                         BiomeColors.getAverageFoliageColor(l, pos) : FoliageColor.getDefaultColor(),

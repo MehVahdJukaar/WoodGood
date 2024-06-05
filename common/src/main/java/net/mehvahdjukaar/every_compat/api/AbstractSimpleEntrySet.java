@@ -4,7 +4,9 @@ import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
+import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -73,13 +75,15 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     protected final Predicate<T> condition;
 
+    protected final boolean copyTint;
+
     protected AbstractSimpleEntrySet(Class<T> type,
                                      String name, @Nullable String prefix,
                                      Supplier<T> baseType,
                                      Supplier<ResourceKey<CreativeModeTab>> tab,
                                      @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
-                                     boolean mergePalette,
+                                     boolean mergePalette, boolean copyTint,
                                      Predicate<T> condition) {
         this.typeName = (prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name;
         this.postfix = name;
@@ -87,6 +91,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         this.tab = tab;
         this.baseType = baseType;
         this.type = type;
+        this.copyTint = copyTint;
 
         this.extraTransform = extraTransform;
         this.paletteSupplier = paletteSupplier;
@@ -142,6 +147,16 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return m.group(1);
         }
         return null;
+    }
+
+    @Override
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
+        if (copyTint) ColoringUtils.copyBlockTint(event, blocks);
+    }
+
+    @Override
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
+        if (copyTint) ColoringUtils.copyBlockTint(event, blocks);
     }
 
     @Override
@@ -370,6 +385,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         @Nullable
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
         protected Predicate<T> condition = w -> true;
+        protected boolean copyTint = false;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType) {
             this.baseType = baseType;
@@ -397,6 +413,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         public BL addCondition(Predicate<T> condition) {
             this.condition = condition;
+            return (BL) this;
+        }
+
+        public BL copyParentTint() {
+            this.copyTint = true;
             return (BL) this;
         }
 

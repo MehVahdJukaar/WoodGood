@@ -72,4 +72,8 @@ public interface EntrySet<T extends BlockType> {
     default Item getItemOf(T type){
         return null;
     }
+
+    void registerItemColors(ClientHelper.ItemColorEvent event);
+
+    void registerBlockColors(ClientHelper.BlockColorEvent event);
 }

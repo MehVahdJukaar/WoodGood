@@ -44,9 +44,10 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                boolean mergedPalette,
+                               boolean copyTint,
                                Predicate<T> condition) {
         super(type, name, prefix, blockSupplier, baseBlock, baseType, tab, tableMode, itemFactory,
-                tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, condition);
+                tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         var m = Preconditions.checkNotNull(module);
         this.zetaModule = Suppliers.memoize(() -> Quark.ZETA.modules.get(m));
     }

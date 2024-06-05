@@ -438,30 +438,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(ModBlockEntities.DRAWER::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
+                .copyParentTint()
                 .build();
         this.addEntry(hedges);
-    }
-
-    @Override
-    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
-        super.registerBlockColors(event);
-        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            if (t.getNamespace().equals("regions_unexplored") && t.getTypeName().equals("flowering")) continue;
-            event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        }
-    }
-
-    @Override
-    public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        super.registerItemColors(event);
-        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            if (t.getNamespace().equals("regions_unexplored") && t.getTypeName().equals("flowering")) continue;
-            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        }
     }
 
     @Override

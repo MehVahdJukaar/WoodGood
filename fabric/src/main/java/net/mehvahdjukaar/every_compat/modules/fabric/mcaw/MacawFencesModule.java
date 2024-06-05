@@ -2,10 +2,8 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwfences.MacawsFences;
 import net.kikoz.mcwfences.init.BlockInit;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -17,7 +15,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
@@ -25,50 +22,48 @@ import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Map;
-
 //SUPPORT v1.1.1+
 public class MacawFencesModule extends SimpleModule {
 
-    public final SimpleEntrySet<LeavesType, Block> HEDGES;
-    public final SimpleEntrySet<WoodType, Block> HIGHLEY_GATES;
-    public final SimpleEntrySet<WoodType, Block> HORSE_FENCES;
-    public final SimpleEntrySet<WoodType, Block> PICKET_FENCES;
-    public final SimpleEntrySet<WoodType, Block> PYRAMID_GATES;
-    public final SimpleEntrySet<WoodType, Block> STOCKADE_FENCES;
-    public final SimpleEntrySet<WoodType, Block> WIRED_FENCES;
+    public final SimpleEntrySet<LeavesType, Block> hedges;
+    public final SimpleEntrySet<WoodType, Block> highleyGates;
+    public final SimpleEntrySet<WoodType, Block> horseFences;
+    public final SimpleEntrySet<WoodType, Block> picketFences;
+    public final SimpleEntrySet<WoodType, Block> pyramidGates;
+    public final SimpleEntrySet<WoodType, Block> stockadeFences;
+    public final SimpleEntrySet<WoodType, Block> wiredFences;
 
     public MacawFencesModule(String modId) {
         super(modId, "mcf");
 
-        PICKET_FENCES = SimpleEntrySet.builder(WoodType.class, "picket_fence",
+        picketFences = SimpleEntrySet.builder(WoodType.class, "picket_fence",
                         () -> BlockInit.OAK_PICKET_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-        this.addEntry(PICKET_FENCES);
+        this.addEntry(picketFences);
 
-        STOCKADE_FENCES = SimpleEntrySet.builder(WoodType.class, "stockade_fence",
+        stockadeFences = SimpleEntrySet.builder(WoodType.class, "stockade_fence",
                         () -> BlockInit.OAK_STOCKADE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-        this.addEntry(STOCKADE_FENCES);
+        this.addEntry(stockadeFences);
 
-        HORSE_FENCES = SimpleEntrySet.builder(WoodType.class, "horse_fence",
+        horseFences = SimpleEntrySet.builder(WoodType.class, "horse_fence",
                         () -> BlockInit.OAK_HORSE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-        this.addEntry(HORSE_FENCES);
+        this.addEntry(horseFences);
 
-        WIRED_FENCES = SimpleEntrySet.builder(WoodType.class, "wired_fence",
+        wiredFences = SimpleEntrySet.builder(WoodType.class, "wired_fence",
                         () -> BlockInit.OAK_WIRED_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WiredFence(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
@@ -76,28 +71,28 @@ public class MacawFencesModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-        this.addEntry(WIRED_FENCES);
+        this.addEntry(wiredFences);
 
 
-        PYRAMID_GATES = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
+        pyramidGates = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
                         () -> BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-        this.addEntry(PYRAMID_GATES);
+        this.addEntry(pyramidGates);
 
-        HIGHLEY_GATES = SimpleEntrySet.builder(WoodType.class, "highley_gate",
+        highleyGates = SimpleEntrySet.builder(WoodType.class, "highley_gate",
                         () -> BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
                 .defaultRecipe()
                 .build();
-        this.addEntry(HIGHLEY_GATES);
+        this.addEntry(highleyGates);
 
-        HEDGES = SimpleEntrySet.builder(LeavesType.class, "hedge",
+        hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         () -> BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
                         w -> {
                             var l = w.getBlockOfThis("leaves");
@@ -111,6 +106,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(ItemTags.WALLS, Registries.ITEM)
                 .setTabKey(() -> MacawsFences.FENCESGROUP)
                 .defaultRecipe()
+                .copyParentTint()
                 .addModelTransform(m -> m.addModifier((s, id, l) -> {
                     /*
                      * EveryComp's code don't account for "mcwfences:block/oak_leaves" when the mod could have used
@@ -143,7 +139,7 @@ public class MacawFencesModule extends SimpleModule {
                     return LeavesPath("", "", s, l);
                 }))
                 .build();
-        this.addEntry(HEDGES);
+        this.addEntry(hedges);
     }
 
     public String LeavesPath(String leavesName, String folderName, String s, LeavesType l) {
@@ -171,26 +167,6 @@ public class MacawFencesModule extends SimpleModule {
 
         return s.replace("\"mcwfences:block/oak_leaves\"",
                 path + folder + LeavesTypeName + "_leaves"+ "\"");
-    }
-
-    @Override
-    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
-        super.registerBlockColors(event);
-        for (Map.Entry<LeavesType, Block> entry : HEDGES.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        }
-    }
-
-    @Override
-    public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        super.registerItemColors(event);
-        for (Map.Entry<LeavesType, Block> entry : HEDGES.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        }
     }
 
     public static class WiredFence extends FenceBlock {

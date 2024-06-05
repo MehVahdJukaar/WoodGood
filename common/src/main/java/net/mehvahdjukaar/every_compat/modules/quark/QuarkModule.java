@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -36,7 +37,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -243,6 +243,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("hedges"), Registries.BLOCK)
                 .addTag(modRes("hedges"), Registries.ITEM)
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .copyParentTint()
                 .addCondition(l -> l.getWoodType() != null)
 //              Recipe being created below blc the recipe has a tag as an ingredient
                 .setRenderType(() -> RenderType::cutout)
@@ -266,6 +267,7 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .addRecipe(modRes("building/crafting/oak_leaf_carpet"))
                 .setRenderType(() -> RenderType::cutout)
+                .copyParentTint()
                 .build();
         this.addEntry(leafCarpets);
 
@@ -279,46 +281,6 @@ public class QuarkModule extends SimpleModule {
         });
         leafCarpets.blocks.forEach((w, leaf) -> {
             ComposterBlock.COMPOSTABLES.put(leaf, 0.2F);
-        });
-    }
-
-    @Override
-    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
-        super.registerBlockColors(event);
-        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-            LeavesType key = entry.getKey();
-            Block value = entry.getValue();
-            String namespace = key.getNamespace();
-            String typeName = key.getTypeName();
-            if (namespace.equals("regions_unexplored")) {
-                if (typeName.equals("flowering")) continue;
-            } else if (namespace.equals("blue_skies")) {
-                if (typeName.equals("cherry")) continue;
-            }
-            event.register((bs, l, p, i) -> event.getColor(key.leaves.defaultBlockState(), l, p, i), value);
-        }
-        for (Map.Entry<LeavesType, Block> entry : leafCarpets.blocks.entrySet()) {
-            LeavesType t = entry.getKey();
-            Block b = entry.getValue();
-            String namespace = t.getNamespace();
-            String typeName = t.getTypeName();
-            if (namespace.equals("regions_unexplored")) {
-                if (typeName.equals("flowering")) continue;
-            } else if (namespace.equals("blue_skies")) {
-                if (typeName.equals("cherry")) continue;
-            }
-            event.register((bs, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        }
-    }
-
-    @Override
-    public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        hedges.blocks.forEach((t, b) -> {
-            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        });
-
-        leafCarpets.blocks.forEach((t, b) -> {
-            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
         });
     }
 
@@ -524,12 +486,12 @@ public class QuarkModule extends SimpleModule {
                 JsonObject underResult = recipe.getAsJsonObject("result");
 
                 // Editing JSON
-                    // Leaves
+                // Leaves
                 underKey.getAsJsonObject("L").addProperty("item", Utils.getID(leavesType.leaves).toString());
-                    // WoodTypes
+                // WoodTypes
                 underKey.getAsJsonObject("W").addProperty("tag",
                         leavesType.getNamespace() + ":" + leavesType.getTypeName() + "_logs");
-                    // Hedges
+                // Hedges
                 underResult.addProperty("item", Utils.getID(block).toString());
 
                 // Adding the finished recipe to ResourceLocation

@@ -534,25 +534,10 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .setTab(ModCreativeTabs.MAIN)
                 .defaultRecipe()
+                .copyParentTint()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
 
         this.addEntry(hedges);
-    }
-
-    @Override
-    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
-        super.registerBlockColors(event);
-        hedges.blocks.forEach((t, b) -> {
-            event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
-        });
-    }
-
-    @Override
-    public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        super.registerItemColors(event);
-        hedges.blocks.forEach((t, b) -> {
-            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
-        });
     }
 }
