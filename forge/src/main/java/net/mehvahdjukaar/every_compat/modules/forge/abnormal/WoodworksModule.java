@@ -1,15 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.forge.abnormal;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
-import com.teamabnormals.blueprint.client.BlueprintChestMaterials;
-import com.teamabnormals.blueprint.client.renderer.block.ChestBlockEntityWithoutLevelRenderer;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
-import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
-import com.teamabnormals.blueprint.common.block.entity.BlueprintChestBlockEntity;
-import com.teamabnormals.blueprint.common.block.entity.BlueprintTrappedChestBlockEntity;
-import com.teamabnormals.blueprint.common.item.BEWLRBlockItem;
-import com.teamabnormals.blueprint.common.item.BEWLRFuelBlockItem;
 import com.teamabnormals.blueprint.core.registry.BlueprintBlockEntityTypes;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -18,7 +12,6 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -36,17 +29,19 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ChiseledBookShelfBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
@@ -158,7 +153,7 @@ public class WoodworksModule extends SimpleModule {
                         getModBlock("trapped_oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatTrappedChestBlock(this::getTrappedTile,
                                 WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest())
-                        )
+                )
                 .setTabKey(() -> tab)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -229,13 +224,18 @@ public class WoodworksModule extends SimpleModule {
         }
     }
 
+    //TODO: extract this to a helper method. also why the hardcoded twilight forest stuff? Should be done better
     @Override
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
         for (Map.Entry<LeavesType, Block> entry : leafPiles.blocks.entrySet()) {
             LeavesType t = entry.getKey();
             Block b = entry.getValue();
             if (t.getNamespace().equals("twilightforest") && t.getTypeName().equals("beanstalk")) continue;
-            event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
+            event.register((stack, tintIndex) -> {
+                ItemStack itemStack = new ItemStack(t.leaves);
+                Preconditions.checkArgument(itemStack.isEmpty(), "Block " + t.leaves + " for leaves type" + t + " returned an empty item. How?");
+                return event.getColor(itemStack, tintIndex);
+            }, b.asItem());
         }
     }
 
