@@ -106,9 +106,13 @@ public abstract class CompatModule {
 
         if (this.getAlreadySupportedMods().contains(woodFrom)) return true;
 
-        // Upgrade-Aqautic already added them but have no recipes
-        if (woodType.getId().toString().equals("upgrade_aquatic:driftwood") && name.equals("driftwood_boards")) return false;
-        if (woodType.getId().toString().equals("upgrade_aquatic:river") && name.equals("river_boards")) return false;
+        // Create's windows will be skipped blc [Let's do] Blooming Nature already has windows
+        if (woodFrom.equals("bloomingnature") && name.contains("window")) return false;
+
+        // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes &
+        // no item in CreativeMode
+        if (woodFrom.equals("upgrade_aquatic") && name.equals("driftwood_boards")) return false;
+        if (woodFrom.equals("upgrade_aquatic") && name.equals("river_boards")) return false;
 
         // check if TerraFirmaCraft (tfc) mod exist, then won't discards wood types
         if (woodFrom.equals("tfc")) return false;
