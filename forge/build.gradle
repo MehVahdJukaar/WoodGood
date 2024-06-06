@@ -110,7 +110,7 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
-    modImplementation("curse.maven:selene-499980:5372910") // v2.11.29
+    modImplementation("curse.maven:selene-499980:5370702") // v2.11.30
 
 
     // ============================================== DEPENDENCIES ================================================== \\
@@ -123,7 +123,7 @@ dependencies {
     modImplementation("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
-    modImplementation("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
+    modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants
 
@@ -146,13 +146,13 @@ dependencies {
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
-    modCompileOnly("curse.maven:architects-palette-433862:5036133")
+    modImplementation("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:5077656")
     modCompileOnly("curse.maven:create-328085:4835191")
-    modImplementation("curse.maven:dawn-of-time-312359:5374048")
+    modCompileOnly("curse.maven:dawn-of-time-312359:5374048")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
@@ -178,7 +178,7 @@ dependencies {
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060")
     modCompileOnly("curse.maven:woodster-869951:4670471")
-    modImplementation("curse.maven:woodworks-543610:5228779")
+    modCompileOnly("curse.maven:woodworks-543610:5228779")
     modCompileOnly("curse.maven:boatload-337396:5292325")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
@@ -215,7 +215,8 @@ dependencies {
     // =========================================== FOR TESTING ===================================================== \\
 //    modCompileOnly("curse.maven:endless-biomes-667688:5109705")
 //    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-    modImplementation("curse.maven:biomes-o-plenty-220318:4707270") // Terrablender
+//    modImplementation("curse.maven:biomes-o-plenty-220318:4707270") // Terrablender
+    modImplementation("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
 //    modCompileOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli

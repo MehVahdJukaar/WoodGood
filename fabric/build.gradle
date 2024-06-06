@@ -37,7 +37,7 @@ dependencies {
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.1"
 
 //    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
-    modImplementation("curse.maven:selene-499980:5367753") // v2.11.29
+    modImplementation("curse.maven:selene-499980:5370700") // v2.11.30
 
     // ============================================== DEPENDENCIES ================================================== \\
     modCompileOnly("curse.maven:athena-841890:4764358") // Chipped
