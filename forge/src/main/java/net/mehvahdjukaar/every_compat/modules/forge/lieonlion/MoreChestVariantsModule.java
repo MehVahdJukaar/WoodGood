@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.more;
+package net.mehvahdjukaar.every_compat.modules.forge.lieonlion;
 
 import com.google.gson.JsonObject;
 import io.github.lieonlion.mcv.init.McvBlockInit;
