@@ -114,13 +114,13 @@ dependencies {
 
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modCompileOnly("curse.maven:architectury-api-419699:4663010") // REI, Furnish
-    modCompileOnly("curse.maven:resourceful-lib-570073:4681831") // Chipped, Handcrafted
-    modCompileOnly("curse.maven:athena-841890:4764357") // Chipped
+    modImplementation("curse.maven:architectury-api-419699:5137938") // REI, Furnish
+    modImplementation("curse.maven:resourceful-lib-570073:5361260") // Chipped, Handcrafted
+    modImplementation("curse.maven:athena-841890:5176879") // Chipped
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modImplementation("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
+    modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
@@ -146,11 +146,11 @@ dependencies {
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
-    modImplementation("curse.maven:architects-palette-433862:5036133")
+    modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
-    modCompileOnly("curse.maven:chipped-456956:5077656")
+    modCompileOnly("curse.maven:chipped-456956:5270039")
     modCompileOnly("curse.maven:create-328085:4835191")
     modCompileOnly("curse.maven:dawn-of-time-312359:5374048")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
@@ -192,7 +192,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
-    modCompileOnly("curse.maven:macaws-windows-363569:4961142")
+    modImplementation("curse.maven:macaws-windows-363569:4961142")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151869")
 
@@ -215,8 +215,8 @@ dependencies {
     // =========================================== FOR TESTING ===================================================== \\
 //    modCompileOnly("curse.maven:endless-biomes-667688:5109705")
 //    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-//    modImplementation("curse.maven:biomes-o-plenty-220318:4707270") // Terrablender
-    modImplementation("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
+    modImplementation("curse.maven:biomes-o-plenty-220318:4707270") // Terrablender
+//    modImplementation("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
 //    modCompileOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli

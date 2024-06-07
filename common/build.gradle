@@ -16,8 +16,8 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
     //common. Fabric version that works on both
-    modCompileOnly("curse.maven:resourceful-lib-570073:4681831")
-    modCompileOnly("curse.maven:architectury-api-419699:4663010")
+    modCompileOnly("curse.maven:resourceful-lib-570073:5361261")
+    modCompileOnly("curse.maven:architectury-api-419699:5137936")
 
 // =============================================== DEPENDENCIES ========================================================
     modCompileOnly("curse.maven:framework-549225:5180973") // Furniture Refurbished
@@ -29,7 +29,7 @@ dependencies {
 // ================================================== IMPORTS ==========================================================
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
-    modCompileOnly("curse.maven:chipped-456956:4634856")
+    modCompileOnly("curse.maven:chipped-456956:5270040")
     modCompileOnly("curse.maven:create-624165:5168511")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550")
