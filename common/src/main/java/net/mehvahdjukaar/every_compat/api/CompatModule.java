@@ -111,8 +111,8 @@ public abstract class CompatModule {
 
         // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes &
         // no item in CreativeMode
-        if (woodFrom.equals("upgrade_aquatic") && name.equals("driftwood_boards")) return false;
-        if (woodFrom.equals("upgrade_aquatic") && name.equals("river_boards")) return false;
+        if (woodFrom.equals("upgrade_aquatic") && ( name.equals("driftwood_boards") || name.equals("river_boards") ))
+            return false;
 
         // check if TerraFirmaCraft (tfc) mod exist, then won't discards wood types
         if (woodFrom.equals("tfc")) return false;
