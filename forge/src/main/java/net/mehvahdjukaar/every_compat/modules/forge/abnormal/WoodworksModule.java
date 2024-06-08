@@ -34,6 +34,8 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
@@ -204,6 +206,7 @@ public class WoodworksModule extends SimpleModule {
     }
 
     // Registry --------------------------------------------------------------------------------------------------------
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);

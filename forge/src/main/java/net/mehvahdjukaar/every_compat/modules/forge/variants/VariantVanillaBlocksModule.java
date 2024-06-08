@@ -30,6 +30,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 import net.xanthian.variantvanillablocks.block.*;
 import net.xanthian.variantvanillablocks.utils.ModCreativeModTabs;
@@ -348,6 +350,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
 
     // Registry --------------------------------------------------------------------------------------------------------
+
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
