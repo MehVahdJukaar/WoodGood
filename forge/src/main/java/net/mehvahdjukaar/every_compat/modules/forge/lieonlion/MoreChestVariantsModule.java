@@ -90,7 +90,7 @@ public class MoreChestVariantsModule extends SimpleModule {
 
     }
 
-    // GetTile -----------------------------------------------------------------------------------------------------------
+    // GetTile ---------------------------------------------------------------------------------------------------------
     private BlockEntityType<? extends ChestBlockEntity> getChestTile() {
         return chests.getTile(CompatChestBlockEntity.class);
     }
@@ -99,7 +99,7 @@ public class MoreChestVariantsModule extends SimpleModule {
         return trappedChests.getTile(CompatChestBlockEntity.class);
     }
 
-    // BlockEntity -----------------------------------------------------------------------------------------------------------
+    // BlockEntity -----------------------------------------------------------------------------------------------------
     private class MoreChestBlockEntity extends CompatChestBlockEntity {
         public MoreChestBlockEntity(BlockPos pos, BlockState state) {
             super(chests.getTile(), pos, state);
@@ -113,8 +113,8 @@ public class MoreChestVariantsModule extends SimpleModule {
     }
 
     // Registry --------------------------------------------------------------------------------------------------------
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));
