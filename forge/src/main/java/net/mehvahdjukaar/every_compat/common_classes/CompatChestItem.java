@@ -13,6 +13,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
@@ -23,6 +25,7 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public Supplier<ItemStackRenderer> getRendererFactory() {
         return () -> {
             ChestBlock block = (ChestBlock) CompatChestItem.this.getBlock();
