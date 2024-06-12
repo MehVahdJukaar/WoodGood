@@ -206,8 +206,8 @@ public class WoodworksModule extends SimpleModule {
     }
 
     // Registry --------------------------------------------------------------------------------------------------------
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context, shortenedId()));

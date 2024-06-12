@@ -125,7 +125,7 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
-    modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants
+    modImplementation("curse.maven:quad-932715:5340148") // More Chest Variants
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
