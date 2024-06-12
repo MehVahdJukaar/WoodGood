@@ -1,5 +1,7 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;

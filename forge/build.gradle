@@ -137,6 +137,7 @@ dependencies {
     modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-forge-1.20.1-1.0.0-beta.4")
     modCompileOnly("com.tynoxs.buildersdelight:BuildersDelight-1.20.1-v.1.3")
+    modImplementation("com.teamresourceful.bytecodecs:bytecodecs-1.0.2")
 
         // TOOLS
     modCompileOnly("curse.maven:roughly-enough-items-310111:4573157")
@@ -150,7 +151,7 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
-    modCompileOnly("curse.maven:chipped-456956:5270039")
+    modImplementation("curse.maven:chipped-456956:5270039")
     modCompileOnly("curse.maven:create-328085:4835191")
     modCompileOnly("curse.maven:dawn-of-time-312359:5374048")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
@@ -192,7 +193,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
-    modImplementation("curse.maven:macaws-windows-363569:4961142")
+    modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151869")
 
