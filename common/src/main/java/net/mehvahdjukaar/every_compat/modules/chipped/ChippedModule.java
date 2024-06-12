@@ -42,7 +42,7 @@ import java.util.function.Supplier;
 //TODO:
 // Mcmeta files are not copied from the base block
 
-//SUPPORT: v3.0.6+
+//SUPPORT: v3.0.1+
 public class ChippedModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> barrel;
