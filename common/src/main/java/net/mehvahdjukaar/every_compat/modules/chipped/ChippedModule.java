@@ -2079,15 +2079,15 @@ public class ChippedModule extends SimpleModule {
                                                 .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)))));
     }
 
-    private JsonArray jsonArray = new JsonArray();
 
     private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation, String recipeName) {
+        JsonArray jsonArray = new JsonArray();
+
 //        JsonArray ja = new JsonArray();
         for (var w : WoodTypeRegistry.getTypes()) {
+            if(w.isVanilla())continue;
             boolean hasSomething = false;
-            var id = w.id;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(id.getNamespace(),
-                    w.getTypeName() + "_" + identifier));
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(w.getAppendableId() + "_" + identifier));
             for (var e : this.getEntries()) {
                 String name = e.getName();
                 if (name.matches(".*(_" + identifier + "|" + identifier + "_).*")) {

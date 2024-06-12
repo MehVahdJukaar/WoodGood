@@ -447,6 +447,7 @@ public class QuarkModule extends SimpleModule {
         //  modID:woodType_logs tags
         for (WoodType wood : WoodTypeRegistry.getTypes()) {
             boolean ifHasSomething = false;
+            //we have a problem here because of namespace
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(wood.getNamespace(),
                     wood.getTypeName() + "_logs"));
 

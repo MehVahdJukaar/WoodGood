@@ -251,7 +251,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
         // we need to generate tag file for supported planks
-        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(Constants.MODID, "supported_planks"));
+        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(modRes("supported_planks"));
         SIMPLE_TABLES.blocks.forEach((w, value) -> tagBuilder.add(ForgeRegistries.ITEMS.getKey(w.planks.asItem())));
         handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
     }
