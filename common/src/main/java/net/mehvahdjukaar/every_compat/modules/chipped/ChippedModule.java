@@ -1988,7 +1988,7 @@ public class ChippedModule extends SimpleModule {
 
     // TYPE: methods
     private void dullPalette(Palette p) {
-        p.add(p.increaseInner());
+        p.increaseInner();
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
         p.remove(p.getDarkest());
@@ -2021,9 +2021,9 @@ public class ChippedModule extends SimpleModule {
     }
 
     private void darkPalette(Palette p) {
-        p.add(p.increaseInner());
-        p.add(p.increaseInner());
-        p.add(p.increaseInner());
+        p.increaseInner();
+        p.increaseInner();
+        p.increaseInner();
         p.remove(p.getLightest());
         p.remove(p.getLightest());
         p.remove(p.getDarkest());
@@ -2037,11 +2037,11 @@ public class ChippedModule extends SimpleModule {
 
     private void panelPalette(Palette p) {
         p.remove(p.getDarkest());
-        p.add(p.increaseInner());
+        p.increaseInner();
         p.remove(p.getDarkest());
-        p.add(p.increaseInner());
+        p.increaseInner();
         p.remove(p.getDarkest());
-        p.add(p.increaseInner());
+        p.increaseInner();
         p.remove(p.getLightest());
     }
 
@@ -2080,7 +2080,8 @@ public class ChippedModule extends SimpleModule {
     }
 
 
-    private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation, String recipeName) {
+    private void addChippedRecipe(DynamicDataPack pack, String identifier,
+                                  String workStation, String recipeBaseName) {
         JsonArray jsonArray = new JsonArray();
 
 //        JsonArray ja = new JsonArray();
@@ -2120,7 +2121,7 @@ public class ChippedModule extends SimpleModule {
         JsonObject jo = new JsonObject();
         jo.addProperty("type", "chipped:" + workStation);
         jo.add("tags", jsonArray);
-        pack.addJson(EveryCompat.res(recipeName), jo, ResType.RECIPES);
+        pack.addJson(EveryCompat.res(recipeBaseName), jo, ResType.RECIPES);
 
     }
 
