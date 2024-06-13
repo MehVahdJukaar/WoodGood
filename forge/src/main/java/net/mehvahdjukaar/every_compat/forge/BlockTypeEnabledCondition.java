@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import io.github.wouink.furnish.block.Crate;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -27,11 +28,11 @@ public record BlockTypeEnabledCondition(BlockType type) implements ICondition {
 
     @Override
     public boolean test(IContext context) {
-        return ModConfigs.isTypeEnabled(type);
+        return ModEntriesConfigs.isTypeEnabled(type);
     }
 
     public boolean test() {
-        return ModConfigs.isTypeEnabled(type);
+        return ModEntriesConfigs.isTypeEnabled(type);
     }
 
     public static class Serializer implements IConditionSerializer<BlockTypeEnabledCondition> {
