@@ -2080,11 +2080,11 @@ public class ChippedModule extends SimpleModule {
     }
 
 
+    @SuppressWarnings("SameParameterValue")
     private void addChippedRecipe(DynamicDataPack pack, String identifier,
                                   String workStation, String recipeBaseName) {
         JsonArray jsonArray = new JsonArray();
 
-//        JsonArray ja = new JsonArray();
         for (var w : WoodTypeRegistry.getTypes()) {
             if(w.isVanilla())continue;
             boolean hasSomething = false;
@@ -2121,7 +2121,7 @@ public class ChippedModule extends SimpleModule {
         JsonObject jo = new JsonObject();
         jo.addProperty("type", "chipped:" + workStation);
         jo.add("tags", jsonArray);
-        pack.addJson(EveryCompat.res(recipeBaseName), jo, ResType.RECIPES);
+        pack.addJson(EveryCompat.res(recipeBaseName + "_" + identifier), jo, ResType.RECIPES);
 
     }
 
