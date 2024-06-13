@@ -4,6 +4,7 @@ import com.ninni.twigs.block.TableBlock;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -27,7 +28,7 @@ public class TwigsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTabKey(modRes("twigs"))
-                .setTabMode(AbstractSimpleEntrySet.TabAddMode.AFTER_TYPE)
+                .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak((p) -> p.remove(p.getDarkest()))
                 .addTexture(modRes("block/oak_table"))

@@ -5,6 +5,7 @@ import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -26,7 +27,7 @@ import org.violetmoon.zeta.module.ZetaModule;
 import java.util.List;
 import java.util.function.*;
 
-class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEntrySet<T, B> {
+public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEntrySet<T, B> {
 
     private final Supplier<ZetaModule> zetaModule;
 
@@ -36,7 +37,8 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                Supplier<B> baseBlock,
                                Supplier<T> baseType,
                                Function<T, B> blockSupplier,
-                               Supplier<ResourceKey<CreativeModeTab>> tab,
+                               @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
+                               TabAddMode tabMode,
                                LootTableMode tableMode,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
@@ -46,7 +48,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
                                boolean mergedPalette,
                                boolean copyTint,
                                Predicate<T> condition) {
-        super(type, name, prefix, blockSupplier, baseBlock, baseType, tab, tableMode, itemFactory,
+        super(type, name, prefix, blockSupplier, baseBlock, baseType, tab, tabMode, tableMode, itemFactory,
                 tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         var m = Preconditions.checkNotNull(module);
         this.zetaModule = Suppliers.memoize(() -> Quark.ZETA.modules.get(m));
@@ -110,7 +112,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         @Override
         public QuarkSimpleEntrySet<T, B> build() {
             var e = new QuarkSimpleEntrySet<>(type, name, prefix, quarkModule,
-                    baseBlock, baseType, blockSupplier, tab, lootMode,
+                    baseBlock, baseType, blockSupplier, tab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
