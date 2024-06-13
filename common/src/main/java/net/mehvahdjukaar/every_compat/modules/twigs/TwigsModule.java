@@ -27,7 +27,7 @@ public class TwigsModule extends SimpleModule {
                 .addTag(modRes("tables"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(modRes("twigs"))
+                .setTabKey(modRes("twig"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak((p) -> p.remove(p.getDarkest()))

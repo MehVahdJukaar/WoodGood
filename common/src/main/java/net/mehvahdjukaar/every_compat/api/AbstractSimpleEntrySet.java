@@ -32,6 +32,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -408,7 +409,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected Supplier<ResourceKey<CreativeModeTab>> tab = null;
+        protected Supplier<ResourceKey<CreativeModeTab>> tab = ()->CreativeModeTabs.COMBAT; //TODO: once all tabs have been properly added to modules (like should have alreyad been the case), make this null. Just here so we know when stuff is does NOT have a tab
         protected TabAddMode tabMode = TabAddMode.AFTER_SAME_WOOD;
         @Nullable
         protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
@@ -456,7 +457,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         public BL setTabMode(TabAddMode mode) {
-            this.tabMode = TabAddMode.AFTER_SAME_WOOD;
+            this.tabMode = mode;
             return (BL) this;
         }
 
