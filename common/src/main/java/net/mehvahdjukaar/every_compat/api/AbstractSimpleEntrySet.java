@@ -182,11 +182,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         } else if (tabMode == TabAddMode.AFTER_SAME_TYPE) {
             var reg = BlockSetAPI.getBlockSet(type);
             String childKey = getChildKey(module);
+            Class<T> typeClass = this.getTypeClass();
             for (var e : items.entrySet()) {
                 var item = e.getValue();
                 event.addAfter(tab, s -> {
                     T type = reg.getBlockTypeOf(s.getItem());
-                    return type != null && type.getClass() == this.getTypeClass()
+                    if (type == null) return false;
+                    return type.getClass() == typeClass
                             && Objects.equals(type.getChildKey(s.getItem()), childKey);
                 }, item);
             }
