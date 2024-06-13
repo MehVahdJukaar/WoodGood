@@ -56,7 +56,7 @@ dependencies {
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
     modCompileOnly("curse.maven:arrp-463113:3829389")
     modCompileOnly("curse.maven:camp-chair-531744:3835679")
-    modCompileOnly("curse.maven:chipped-456956:4634858")
+    modCompileOnly("curse.maven:chipped-456956:4463478")
     modCompileOnly("curse.maven:cozy-625281:4171816")
     modCompileOnly("curse.maven:create-fabric-624165:4597892")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
