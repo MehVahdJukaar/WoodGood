@@ -32,125 +32,42 @@ import net.minecraft.world.level.block.*;
 import java.util.List;
 import java.util.Objects;
 
-// TODO: Fix recipes & tags
-// `chipped:oak_planks` tags should be changed to `modid:modded_planks`
-// Create a recipe using the new tag for `chipped:recipes/carpenters_table`
-// Currently all variants are crafted with Oak Planks due to them using the `chipped:oak_planks` tag
-// The same should be done for door & trapdoor variants
-// Fix doors dropping two items
-// Mcmeta files are not copied from the base block
+// TODO: Fix: Mcmeta files are not copied from the base block
 
+//SUPPORT: v2.1.5+
 public class ChippedModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> barrel;
     public final SimpleEntrySet<WoodType, Block> crate;
     public final SimpleEntrySet<WoodType, Block> reinforcedCrate;
-    public final SimpleEntrySet<WoodType, Block> basketWovenPlanks;
-    public final SimpleEntrySet<WoodType, Block> boxedPlanks;
-    public final SimpleEntrySet<WoodType, Block> brickBondPlanks;
-    public final SimpleEntrySet<WoodType, Block> brickyPlanks;
-    public final SimpleEntrySet<WoodType, Block> corneredPlanks;
-    public final SimpleEntrySet<WoodType, Block> cratedPlanks;
-    public final SimpleEntrySet<WoodType, Block> crossLacedPlanks;
-    public final SimpleEntrySet<WoodType, Block> crossedPlanks;
-    public final SimpleEntrySet<WoodType, Block> detailedPlanks;
-    public final SimpleEntrySet<WoodType, Block> diagonalPlanks;
-    public final SimpleEntrySet<WoodType, Block> diamondPlanks;
-    public final SimpleEntrySet<WoodType, Block> doubleHerringbonePlanks;
-    public final SimpleEntrySet<WoodType, Block> enclosedPlanks;
-    public final SimpleEntrySet<WoodType, Block> finePlanks;
-    public final SimpleEntrySet<WoodType, Block> fineVerticalPlanks;
-    public final SimpleEntrySet<WoodType, Block> framedPlanks;
-    public final SimpleEntrySet<WoodType, Block> herringbonePlanks;
-    public final SimpleEntrySet<WoodType, Block> hewnPlanks;
-    public final SimpleEntrySet<WoodType, Block> lacedPlanks;
-    public final SimpleEntrySet<WoodType, Block> mosaicPlanks;
-    public final SimpleEntrySet<WoodType, Block> nailedPlanks;
-    public final SimpleEntrySet<WoodType, Block> naturalPlanks;
-    public final SimpleEntrySet<WoodType, Block> panelPlanks;
-    public final SimpleEntrySet<WoodType, Block> peggedPlanks;
-    public final SimpleEntrySet<WoodType, Block> polishedPlanks;
-    public final SimpleEntrySet<WoodType, Block> shavingsPlanks;
-    public final SimpleEntrySet<WoodType, Block> railedPlanks;
-    public final SimpleEntrySet<WoodType, Block> shiftedPlanks;
-    public final SimpleEntrySet<WoodType, Block> slantedPlanks;
-    public final SimpleEntrySet<WoodType, Block> smoothPlanks;
-    public final SimpleEntrySet<WoodType, Block> stackedPlanks;
-    public final SimpleEntrySet<WoodType, Block> thinPlanks;
-    public final SimpleEntrySet<WoodType, Block> tiledPlanks;
-    public final SimpleEntrySet<WoodType, Block> versaillesPlanks;
-    public final SimpleEntrySet<WoodType, Block> verticalPlanks;
-    public final SimpleEntrySet<WoodType, Block> verticallyRailedPlanks;
-    public final SimpleEntrySet<WoodType, Block> whirlwindPlanks;
-    public final SimpleEntrySet<WoodType, Block> wickeredPlanks;
-    public final SimpleEntrySet<WoodType, Block> barredDoor;
-    public final SimpleEntrySet<WoodType, Block> beachDoor;
-    public final SimpleEntrySet<WoodType, Block> boardedDoor;
-    public final SimpleEntrySet<WoodType, Block> dualPaneledDoor;
-    public final SimpleEntrySet<WoodType, Block> fortifiedDoor;
-    public final SimpleEntrySet<WoodType, Block> gatedDoor;
-    public final SimpleEntrySet<WoodType, Block> glassDoor;
-    public final SimpleEntrySet<WoodType, Block> heavyDoor;
-    public final SimpleEntrySet<WoodType, Block> overgrownDoor;
-    public final SimpleEntrySet<WoodType, Block> paneledDoor;
-    public final SimpleEntrySet<WoodType, Block> paperDoor;
-    public final SimpleEntrySet<WoodType, Block> pressedDoor;
-    public final SimpleEntrySet<WoodType, Block> screenDoor;
-    public final SimpleEntrySet<WoodType, Block> secretDoor;
-    public final SimpleEntrySet<WoodType, Block> shackDoor;
-    public final SimpleEntrySet<WoodType, Block> slidingDoor;
-    public final SimpleEntrySet<WoodType, Block> supportedDoor;
-    public final SimpleEntrySet<WoodType, Block> tileWindowedDoor;
-    public final SimpleEntrySet<WoodType, Block> tiledDoor;
-    public final SimpleEntrySet<WoodType, Block> windowedDoor;
-    public final SimpleEntrySet<WoodType, Block> airyTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> barredTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> checkeredTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> classicTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> classicWindowedTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> cobwebTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> distortedTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> fancyTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> goldenBarredTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> heavyTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> ironBarredTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> leafyTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> meshedTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> overgrownTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> pointlessTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> slottedTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> solidTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> suspiciousTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> twistedTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> vinedTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> wartedTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> windowedTrapdoor;
-    public final SimpleEntrySet<WoodType, Block> wovenTrapdoor;
+    public final SimpleEntrySet<WoodType, Block> basketWovenPlanks, boxedPlanks, brickBondPlanks, brickyPlanks,
+            corneredPlanks, cratedPlanks, crossLacedPlanks, crossedPlanks, detailedPlanks, diagonalPlanks,
+            diamondPlanks, doubleHerringbonePlanks, enclosedPlanks, finePlanks, fineVerticalPlanks, framedPlanks,
+            herringbonePlanks, hewnPlanks, lacedPlanks, mosaicPlanks, nailedPlanks, naturalPlanks, panelPlanks,
+            peggedPlanks, polishedPlanks, shavingsPlanks, railedPlanks, shiftedPlanks, slantedPlanks, smoothPlanks,
+            stackedPlanks, thinPlanks, tiledPlanks, versaillesPlanks, verticalPlanks, verticallyRailedPlanks,
+            whirlwindPlanks, wickeredPlanks;
+
+    public final SimpleEntrySet<WoodType, Block> barredDoor, beachDoor, boardedDoor, dualPaneledDoor, fortifiedDoor,
+            gatedDoor, glassDoor, heavyDoor, overgrownDoor, paneledDoor, paperDoor, pressedDoor, screenDoor, secretDoor,
+            shackDoor, slidingDoor, supportedDoor, tileWindowedDoor, tiledDoor, windowedDoor;
+
+    public final SimpleEntrySet<WoodType, Block> airyTrapdoor, barredTrapdoor, checkeredTrapdoor, classicTrapdoor,
+            classicWindowedTrapdoor, cobwebTrapdoor, distortedTrapdoor, fancyTrapdoor, goldenBarredTrapdoor,
+            heavyTrapdoor, ironBarredTrapdoor, leafyTrapdoor, meshedTrapdoor, overgrownTrapdoor, pointlessTrapdoor,
+            slottedTrapdoor, solidTrapdoor, suspiciousTrapdoor, twistedTrapdoor, vinedTrapdoor, wartedTrapdoor,
+            windowedTrapdoor, wovenTrapdoor;
+
     public final SimpleEntrySet<WoodType, Block> torch;
     public final SimpleEntrySet<WoodType, Block> wallTorch;
-    public final SimpleEntrySet<WoodType, Block> circleGlass;
-    public final SimpleEntrySet<WoodType, Block> barredGlass;
-    public final SimpleEntrySet<WoodType, Block> borderedGlass;
-    public final SimpleEntrySet<WoodType, Block> diamondBorderedGlass;
-    public final SimpleEntrySet<WoodType, Block> horizontalLinedGlass;
-    public final SimpleEntrySet<WoodType, Block> largeDiamondGlass;
-    public final SimpleEntrySet<WoodType, Block> lineBarredGlass;
-    public final SimpleEntrySet<WoodType, Block> ornateBarredGlass;
-    public final SimpleEntrySet<WoodType, Block> snowflakeGlass;
-    public final SimpleEntrySet<WoodType, Block> squareGlass;
-    public final SimpleEntrySet<WoodType, Block> wovenGlass;
-    public final SimpleEntrySet<WoodType, Block> circleGlassPane;
-    public final SimpleEntrySet<WoodType, Block> barredGlassPane;
-    public final SimpleEntrySet<WoodType, Block> borderedGlassPane;
-    public final SimpleEntrySet<WoodType, Block> diamondBorderedGlassPane;
-    public final SimpleEntrySet<WoodType, Block> horizontalLinedGlassPane;
-    public final SimpleEntrySet<WoodType, Block> largeDiamondGlassPane;
-    public final SimpleEntrySet<WoodType, Block> lineBarredGlassPane;
-    public final SimpleEntrySet<WoodType, Block> ornateBarredGlassPane;
-    public final SimpleEntrySet<WoodType, Block> snowflakeGlassPane;
-    public final SimpleEntrySet<WoodType, Block> squareGlassPane;
-    public final SimpleEntrySet<WoodType, Block> wovenGlassPane;
-//    public final SimpleEntrySet<WoodType, Block> Log;
+
+    public final SimpleEntrySet<WoodType, Block> circleGlass, barredGlass, borderedGlass, diamondBorderedGlass,
+            horizontalLinedGlass, largeDiamondGlass, lineBarredGlass, ornateBarredGlass, snowflakeGlass, squareGlass,
+            wovenGlass;
+
+    public final SimpleEntrySet<WoodType, Block> circleGlassPane, barredGlassPane, borderedGlassPane,
+            diamondBorderedGlassPane, horizontalLinedGlassPane, largeDiamondGlassPane, lineBarredGlassPane,
+            ornateBarredGlassPane, snowflakeGlassPane, squareGlassPane, wovenGlassPane;
 
     public ChippedModule(String modId) {
         super(modId, "ch");
@@ -1833,12 +1750,12 @@ public class ChippedModule extends SimpleModule {
             }
         }
 
-        addChippedRecipe(handler.getPack(), "planks","carpenters_table", "ch/carpenters_table");
-        addChippedRecipe(handler.getPack(), "door","carpenters_table", "ch/carpenters_table");
-        addChippedRecipe(handler.getPack(), "trapdoor","carpenters_table", "ch/carpenters_table");
+        addChippedRecipe(handler.getPack(), "planks","carpenters_table");
+        addChippedRecipe(handler.getPack(), "door","carpenters_table");
+        addChippedRecipe(handler.getPack(), "trapdoor","carpenters_table");
     }
 
-    private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation, String recipeName) {
+    private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation) {
         JsonArray ja = new JsonArray();
 
         for (var w : WoodTypeRegistry.getTypes()) {
@@ -1874,7 +1791,7 @@ public class ChippedModule extends SimpleModule {
         JsonObject jo = new JsonObject();
         jo.addProperty("type", "chipped:"+workStation);
         jo.add("tags", ja);
-        pack.addJson(EveryCompat.res(recipeName + "_" + identifier), jo, ResType.RECIPES);
+        pack.addJson(EveryCompat.res(shortenedId() + "/" + workStation + "_" + identifier), jo, ResType.RECIPES);
     }
 
 }
