@@ -69,7 +69,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           Function<T, B> blockSupplier,
                           Supplier<@Nullable B> baseBlock,
                           Supplier<T> baseType,
-                          Supplier<ResourceKey<CreativeModeTab>> tab,
+                          @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
+                          TabAddMode tabMode,
                           LootTableMode lootMode,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
@@ -78,7 +79,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                           boolean mergedPalette, boolean copyTint,
                           Predicate<T> condition) {
-        super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
+        super(type, name, prefix, baseType, tab, tabMode, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         this.blockFactory = blockSupplier;
         this.tileHolder = tileFactory;
         this.lootMode = lootMode;
@@ -231,7 +232,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
 
-
     @Override
     public void setupExistingTiles() {
         if (tileHolder instanceof ExistingTileHolder<?> et) {
@@ -313,7 +313,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public SimpleEntrySet<T, B> build() {
-            var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, lootMode,
+            var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);

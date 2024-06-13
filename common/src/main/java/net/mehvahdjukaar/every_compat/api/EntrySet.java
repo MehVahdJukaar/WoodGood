@@ -78,5 +78,5 @@ public interface EntrySet<T extends BlockType> {
 
     void registerBlockColors(ClientHelper.BlockColorEvent event);
 
-    void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event);
+    void registerItemsToExistingTabs(CompatModule module, RegHelper.ItemToTabEvent event);
 }

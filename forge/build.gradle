@@ -118,7 +118,7 @@ dependencies {
     modImplementation("curse.maven:resourceful-lib-570073:5361260") // Chipped, Handcrafted
     modImplementation("curse.maven:athena-841890:5176879") // Chipped
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
-    modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
+    modImplementation("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
     modCompileOnly("curse.maven:cloth-config-348521:4973441") // REI
@@ -146,7 +146,7 @@ dependencies {
     modImplementation("curse.maven:jei-238222:4712868")
 
     // ================================================ IMPORTS ===================================================== \\
-    modCompileOnly("curse.maven:another-furniture-610492:4815126")
+    modImplementation("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
@@ -171,11 +171,11 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:5029855")
-    modCompileOnly("curse.maven:quark-243121:5093415")
+    modImplementation("curse.maven:quark-243121:5093415")
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
-    modCompileOnly("curse.maven:twigs-496913:4605097")
+    modImplementation("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060")
     modCompileOnly("curse.maven:woodster-869951:4670471")
@@ -187,7 +187,7 @@ dependencies {
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240521")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5050219")
+    modImplementation("curse.maven:macaws-fences-and-walls-453925:5050219")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618183")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")

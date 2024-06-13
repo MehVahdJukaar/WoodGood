@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
@@ -38,6 +39,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -75,6 +77,7 @@ public abstract class EveryCompat {
 
 
     protected void commonInit() {
+        ModConfigs.init();
         //TODO: this class is a mess. Should be split and cleaned up
         ECNetworking.init();
 
@@ -184,12 +187,15 @@ public abstract class EveryCompat {
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
 
-    public static final RegSupplier<CreativeModeTab> MOD_TAB = RegHelper.registerCreativeModeTab(res(MOD_ID),
+    @Nullable
+    public static final RegSupplier<CreativeModeTab> MOD_TAB =
+            ModConfigs.TAB_ENABLED.get() ?
+            RegHelper.registerCreativeModeTab(res(MOD_ID),
             true,
             builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
                     .backgroundSuffix("item_search.png")
                     .title(Component.translatable("itemGroup.everycomp.everycomp"))
-                    .build());
+                    .build()) : null;
 
 
     public void commonSetup() {
@@ -218,7 +224,7 @@ public abstract class EveryCompat {
     private int prevRegSize;
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
-        ModConfigs.initEarlyButNotSuperEarly(); // add wood stuff once its ready
+        ModEntriesConfigs.initEarlyButNotSuperEarly(); // add wood stuff once its ready
         prevRegSize = BuiltInRegistries.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");
         forAllModules(m -> m.registerWoodBlocks(event, woods));

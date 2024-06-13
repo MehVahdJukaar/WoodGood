@@ -41,12 +41,13 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                             Function<T, I> itemFactory,
                             Supplier<@Nullable I> baseItem,
                             Supplier<T> baseType,
-                            Supplier<ResourceKey<CreativeModeTab>> tab,
+                            @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
+                            TabAddMode tabMode,
                             @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                             @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                             boolean mergedPalette, boolean copyTint,
                             Predicate<T> condition) {
-        super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
+        super(type, name, prefix, baseType, tab, tabMode, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         this.itemFactory = itemFactory;
         this.baseItem = baseItem;
     }
@@ -108,29 +109,29 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             throw new UnsupportedOperationException("Base Item cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = getChildKey(module);
-        baseType.get().addChild(childKey,  base);
+        baseType.get().addChild(childKey, base);
 
         //attempts adding all other children
         Set<String> alreadySupportedMods = new HashSet<>(module.getAlreadySupportedMods());
         alreadySupportedMods.add(module.modId);
-        var possibleNamespaces =  alreadySupportedMods.toArray(String[]::new);
-        for(var w : BlockSetAPI.getTypeRegistry(this.getTypeClass()).getValues()){
-            if(!items.containsKey(w)){
+        var possibleNamespaces = alreadySupportedMods.toArray(String[]::new);
+        for (var w : BlockSetAPI.getTypeRegistry(this.getTypeClass()).getValues()) {
+            if (!items.containsKey(w)) {
                 String path = getItemName(w);
                 Item item = getOptionalItem(path, w.getNamespace());
-                if(item == null) item = getOptionalItem(path, possibleNamespaces);
-                if(item != null) w.addChild(childKey,  item);
+                if (item == null) item = getOptionalItem(path, possibleNamespaces);
+                if (item != null) w.addChild(childKey, item);
             }
         }
     }
 
     @Nullable
-    private static Item getOptionalItem(String path, String ...namespaces) {
+    private static Item getOptionalItem(String path, String... namespaces) {
         ResourceLocation id;
         for (var n : namespaces) {
             id = new ResourceLocation(n, path);
             var i = BuiltInRegistries.ITEM.getOptional(id);
-            if(i.isPresent()){
+            if (i.isPresent()) {
                 return i.get();
             }
         }
@@ -188,7 +189,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         }
 
         public ItemOnlyEntrySet<T, I> build() {
-            var e = new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab,
+            var e = new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab, tabMode,
                     palette, extraModelTransform, useMergedPalette, copyTint, condition);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);

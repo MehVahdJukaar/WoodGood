@@ -3,7 +3,7 @@ package net.mehvahdjukaar.every_compat.api;
 import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.ModConfigs;
+import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -25,13 +25,13 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -65,7 +65,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public final String prefix;
     protected final boolean mergePalette;
 
+    @Nullable
     protected final Supplier<ResourceKey<CreativeModeTab>> tab;
+    protected final TabAddMode tabMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
     protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
@@ -81,7 +83,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected AbstractSimpleEntrySet(Class<T> type,
                                      String name, @Nullable String prefix,
                                      Supplier<T> baseType,
-                                     Supplier<ResourceKey<CreativeModeTab>> tab,
+                                     @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
+                                     TabAddMode tabMode,
                                      @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                      boolean mergePalette, boolean copyTint,
@@ -90,6 +93,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         this.postfix = name;
         this.prefix = prefix;
         this.tab = tab;
+        this.tabMode = tabMode;
         this.baseType = baseType;
         this.type = type;
         this.copyTint = copyTint;
@@ -117,7 +121,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Override
     public @Nullable Item getItemOf(T type) {
         var i = items.get(type);
-        if (ModConfigs.isEntryEnabled(type, i)) return i;
+        if (ModEntriesConfigs.isEntryEnabled(type, i)) return i;
         return null;
     }
 
@@ -161,14 +165,30 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     }
 
     @Override
-    public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
+    public void registerItemsToExistingTabs(CompatModule module, RegHelper.ItemToTabEvent event) {
+        if (tab == null) return;
         ResourceKey<CreativeModeTab> tab = this.tab.get();
-        var reg = BlockSetAPI.getBlockSet(type);
-        for (var e : items.entrySet()) {
-            var item = e.getValue();
-            var wood = e.getKey();
-            //adds after first wooden block it finds. quite bad tbh
-            event.addAfter(tab, s -> reg.getBlockTypeOf(s.getItem()) == wood, item);
+        if (tabMode == TabAddMode.AFTER_ALL) {
+            event.add(tab, items.values().toArray(new Item[0]));
+        } else if (tabMode == TabAddMode.AFTER_SAME_WOOD) {
+            var reg = BlockSetAPI.getBlockSet(type);
+            for (var e : items.entrySet()) {
+                var item = e.getValue();
+                var wood = e.getKey();
+                //adds after first wooden block it finds. quite bad tbh
+                event.addAfter(tab, s -> reg.getBlockTypeOf(s.getItem()) == wood, item);
+            }
+        } else if (tabMode == TabAddMode.AFTER_SAME_TYPE) {
+            var reg = BlockSetAPI.getBlockSet(type);
+            String childKey = getChildKey(module);
+            for (var e : items.entrySet()) {
+                var item = e.getValue();
+                event.addAfter(tab, s -> {
+                    T type = reg.getBlockTypeOf(s.getItem());
+                    return type != null && type.getClass() == this.getTypeClass()
+                            && Objects.equals(type.getChildKey(s.getItem()), childKey);
+                }, item);
+            }
         }
     }
 
@@ -178,7 +198,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             for (var tb : tags.entrySet()) {
                 SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
                 for (var b : getDefaultEntries().entrySet()) {
-                    if (ModConfigs.isEntryEnabled(b.getKey(), b.getValue())) {
+                    if (ModEntriesConfigs.isEntryEnabled(b.getKey(), b.getValue())) {
                         builder.addEntry(b.getValue());
                     }
                 }
@@ -388,7 +408,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected Supplier<ResourceKey<CreativeModeTab>> tab = () -> CreativeModeTabs.BUILDING_BLOCKS;
+        protected Supplier<ResourceKey<CreativeModeTab>> tab = null;
+        protected TabAddMode tabMode = TabAddMode.AFTER_SAME_WOOD;
         @Nullable
         protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
@@ -431,6 +452,17 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         public BL copyParentTint() {
             this.copyTint = true;
+            return (BL) this;
+        }
+
+        public BL setTabMode(TabAddMode mode) {
+            this.tabMode = TabAddMode.AFTER_SAME_WOOD;
+            return (BL) this;
+        }
+
+        public BL setTabKey(ResourceLocation res) {
+            var key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
+            this.tab = () -> key;
             return (BL) this;
         }
 
@@ -529,7 +561,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             });
         }
     }
-
 
 }
 
