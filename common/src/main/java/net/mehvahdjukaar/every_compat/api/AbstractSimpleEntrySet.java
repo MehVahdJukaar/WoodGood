@@ -409,8 +409,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected Supplier<ResourceKey<CreativeModeTab>> tab = ()->CreativeModeTabs.COMBAT; //TODO: once all tabs have been properly added to modules (like should have alreyad been the case), make this null. Just here so we know when stuff is does NOT have a tab
-        protected TabAddMode tabMode = TabAddMode.AFTER_SAME_WOOD;
+        protected Supplier<ResourceKey<CreativeModeTab>> tab = () -> CreativeModeTabs.COMBAT; //TODO: once all tabs have been properly added to modules (like should have alreyad been the case), make this null. Just here so we know when stuff is does NOT have a tab
+        protected TabAddMode tabMode = TabAddMode.AFTER_SAME_TYPE;
         @Nullable
         protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
@@ -467,8 +467,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        @Deprecated(forRemoval = true)
         public BL setTabKey(Supplier<ResourceKey<CreativeModeTab>> tab) {
             this.tab = tab;
+            return (BL) this;
+        }
+
+        public BL setTabKey(ResourceKey<CreativeModeTab> key) {
+            this.tab = () -> key;
             return (BL) this;
         }
 
