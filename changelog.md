@@ -1,5 +1,5 @@
 ## FIXES:
-- Chipped module using tags in a non every compat namespace requiring restart to take effect
+- Chipped (COMMON) - Fixed Tags not improperly loaded requiring re-log into the world to take effect
 - Creative tab config now does something woho!
 ---
 **LEGEND**:
