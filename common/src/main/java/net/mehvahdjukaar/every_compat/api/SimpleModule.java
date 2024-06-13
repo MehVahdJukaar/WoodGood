@@ -139,7 +139,7 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
-
+        getEntries().forEach(e -> e.registerItemsToExistingTabs(event));
     }
 
     @Override

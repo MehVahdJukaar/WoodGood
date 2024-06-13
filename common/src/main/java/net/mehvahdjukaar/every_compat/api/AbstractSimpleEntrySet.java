@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -157,6 +158,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Override
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
         if (copyTint) ColoringUtils.copyBlockTint(event, blocks);
+    }
+
+    @Override
+    public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
+        ResourceKey<CreativeModeTab> tab = this.tab.get();
+        var reg = BlockSetAPI.getBlockSet(type);
+        for (var e : items.entrySet()) {
+            var item = e.getValue();
+            var wood = e.getKey();
+            //adds after first wooden block it finds. quite bad tbh
+            event.addAfter(tab, s -> reg.getBlockTypeOf(s.getItem()) == wood, item);
+        }
     }
 
     @Override
