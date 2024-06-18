@@ -100,6 +100,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
         addOtherCompatMod("lolmcvbop", "biomesoplenty", List.of("lolmcv"));
         addOtherCompatMod("lolmcvbmo", "biomemakeover", List.of("lolmcv"));
+        addOtherCompatMod("natures_delight", "natures_spirit", List.of("farmersdelight"));
 
         // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
