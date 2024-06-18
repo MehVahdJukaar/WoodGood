@@ -1,6 +1,5 @@
 ## FIXES:
-- Chipped (COMMON) - Fixed Tags not improperly loaded requiring re-log into the world to take effect
-- Creative tab config now does something woho!
+- **Farmer's Delight** (FABRIC) - Not supported when **Nature's Delight** is installed
 ---
 **LEGEND**:
 - (COMMON) = FORGE & FABRIC
