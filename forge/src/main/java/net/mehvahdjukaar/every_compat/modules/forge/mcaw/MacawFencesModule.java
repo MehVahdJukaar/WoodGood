@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwfences.kikoz.init.BlockInit;
 import com.mcwfences.kikoz.init.TabInit;
+import com.mcwfences.kikoz.objects.FenceHitbox;
 import com.mcwfences.kikoz.objects.WiredFence;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -108,25 +109,26 @@ public class MacawFencesModule extends SimpleModule {
                             if (w.getNamespace().equals("autumnity")) {
                                 switch (w.getTypeName()) {
                                     case "red_maple" -> {
-                                        return new WallBlock(Utils.copyPropertySafe(w.leaves)
+                                        return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
                                                 .mapColor(MapColor.TERRACOTTA_RED).lightLevel((s) -> 0));
                                     }
 
                                     case "orange_maple" -> {
-                                        return new WallBlock(Utils.copyPropertySafe(w.leaves)
+                                        return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
                                                 .mapColor(MapColor.TERRACOTTA_ORANGE).lightLevel((s) -> 0));
                                     }
 
                                     case "yellow_maple" -> {
-                                        return new WallBlock(Utils.copyPropertySafe(w.leaves)
+                                        return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
                                                 .mapColor(MapColor.TERRACOTTA_YELLOW).lightLevel((s) -> 0));
                                     }
                                 }
                             }
-                            return new WallBlock(Utils.copyPropertySafe(w.leaves).lightLevel((s) -> 0));
+                            return new FenceHitbox(Utils.copyPropertySafe(w.leaves).lightLevel((s) -> 0));
                         })
                 .requiresChildren("leaves")
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
                 .setTab(tab)

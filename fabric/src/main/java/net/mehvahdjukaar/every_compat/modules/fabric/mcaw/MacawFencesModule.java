@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwfences.MacawsFences;
 import net.kikoz.mcwfences.init.BlockInit;
+import net.kikoz.mcwfences.objects.FenceHitbox;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -99,7 +100,7 @@ public class MacawFencesModule extends SimpleModule {
                             if (l == null ||
                                 (w.getNamespace().equals("regions_unexplored") && w.getTypeName().equals("flowering")))
                                     return null;
-                            return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
+                            return new FenceHitbox(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -110,7 +111,8 @@ public class MacawFencesModule extends SimpleModule {
                 .addModelTransform(m -> m.addModifier((s, id, l) -> {
                     /*
                      * EveryComp's code don't account for "mcwfences:block/oak_leaves" when the mod could have used
-                     * "minecraft:block/oak_leaves" for texturing. idk why the dev use this way.
+                     * "minecraft:block/oak_leaves" for texturing. Dev said using "minecraft:block/oak_leaves" lead
+                     * to problems
                      */
                     String namespace = l.getNamespace();
                     String typeName = l.getTypeName();
