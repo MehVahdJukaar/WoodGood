@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.handcrafted;
+package net.mehvahdjukaar.every_compat.modules.handcrafted.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -38,12 +38,12 @@ public class OptimizedChairRenderer implements BlockEntityRenderer<ChairBlockEnt
                        int packedLight, int packedOverlay) {
         Item block = entity.getBlockState().getBlock().asItem();
         Item cushion = entity.getStack().getItem();
-        doRender(block, cushion,
-                entity.getBlockState().getValue(ExpandableCouchBlock.FACING), poseStack, bufferSource, packedLight, packedOverlay);
+        doRender(entity.getBlockState().getValue(ExpandableCouchBlock.FACING), poseStack,
+                bufferSource, packedLight, packedOverlay, block, cushion);
     }
 
-    public void doRender(Item block, Item cushion, Direction direction, PoseStack poseStack,
-                         MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void doRender(Direction direction, PoseStack poseStack,
+                         MultiBufferSource buffer, int packedLight, int packedOverlay, Item block, Item cushion) {
 
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
@@ -53,8 +53,8 @@ public class OptimizedChairRenderer implements BlockEntityRenderer<ChairBlockEnt
         seat.visible = false;
         base.visible = true;
         chair.visible = true;
-        var blockTexture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.get(block); // COMPAT
 
+        var blockTexture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.get(block); // COMPAT
         VertexConsumer vertex = blockTexture.buffer(buffer, RenderType::entityCutout); // COMPAT
 
         model.renderToBuffer(poseStack, vertex, packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
@@ -69,7 +69,6 @@ public class OptimizedChairRenderer implements BlockEntityRenderer<ChairBlockEnt
             var cushionTexture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.get(cushion); // COMPAT
             model.renderToBuffer(poseStack, cushionTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
         }
-
         poseStack.popPose();
     }
 

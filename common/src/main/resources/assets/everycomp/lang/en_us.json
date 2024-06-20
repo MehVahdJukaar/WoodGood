@@ -672,6 +672,8 @@
   "block_type.buildersdelight.glass_pane_7": "%s Glass Pane",
   "tooltip.everycomp.buildersdelight.glass_pane_7": "Diamond",
   "block_type.buildersdelight.glass_pane_8": "%s Glass Pane",
-  "tooltip.everycomp.buildersdelight.glass_pane_8": "Window"
+  "tooltip.everycomp.buildersdelight.glass_pane_8": "Window",
+
+  "item_type.handcrafted.counter": "%s Counter"
 }
 

@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.handcrafted;
+package net.mehvahdjukaar.every_compat.modules.handcrafted.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -23,21 +23,21 @@ public class OptimizedCouchRenderer implements BlockEntityRenderer<CouchBlockEnt
     public static final Map<Item, Material> OBJECT_TO_TEXTURE = new Object2ObjectOpenHashMap<>();
 
     public static OptimizedCouchRenderer INSTANCE = null;
-    private final CouchModel couchSingle;
-    private final CouchModel couchCorner;
-    private final CouchModel couchInvertedCorner;
-    private final CouchModel couchLeft;
-    private final CouchModel couchMiddle;
-    private final CouchModel couchRight;
+    private final CouchModel single;
+    private final CouchModel corner;
+    private final CouchModel invertedCorner;
+    private final CouchModel left;
+    private final CouchModel middle;
+    private final CouchModel right;
 
     public OptimizedCouchRenderer(BlockEntityRendererProvider.Context ctx) {
         EntityModelSet modelSet = ctx.getModelSet();
-        this.couchSingle = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_SINGLE));
-        this.couchCorner = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_CORNER));
-        this.couchInvertedCorner = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_INVERTED_CORNER));
-        this.couchLeft = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_LEFT));
-        this.couchMiddle = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_MIDDLE));
-        this.couchRight = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_RIGHT));
+        this.single = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_SINGLE));
+        this.corner = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_CORNER));
+        this.invertedCorner = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_INVERTED_CORNER));
+        this.left = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_LEFT));
+        this.middle = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_MIDDLE));
+        this.right = new CouchModel(modelSet.bakeLayer(CouchModel.LAYER_LOCATION_RIGHT));
 
         INSTANCE = this;
     }
@@ -46,47 +46,53 @@ public class OptimizedCouchRenderer implements BlockEntityRenderer<CouchBlockEnt
     public void render(CouchBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         Item block = entity.getBlockState().getBlock().asItem();
         Item cushion = entity.getStack().getItem();
+        CouchShape couchShape = entity.getBlockState().getValue(ExpandableCouchBlock.COUCH_SHAPE);
 
-        CouchShape shape = entity.getBlockState().getValue(ExpandableCouchBlock.COUCH_SHAPE);
+        CouchModel model = switch (couchShape) {
+            case SINGLE -> single;
+            case LEFT -> left;
+            case MIDDLE -> middle;
+            case RIGHT -> right;
+            case INNER_LEFT, INNER_RIGHT -> corner;
+            case OUTER_LEFT, OUTER_RIGHT -> invertedCorner;
+        };
 
-        doRender(block, cushion, entity.getBlockState().getValue(ExpandableCouchBlock.FACING), shape, poseStack, bufferSource, packedLight, packedOverlay);
+        doRender(model, entity.getBlockState().getValue(ExpandableCouchBlock.FACING), couchShape, poseStack,
+                bufferSource, packedLight, packedOverlay, block, cushion);
     }
 
-    public void doRender(Item block, Item cushion, Direction direction, CouchShape shape, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        CouchModel model = switch (shape) {
-            case SINGLE -> couchSingle;
-            case LEFT -> couchLeft;
-            case MIDDLE -> couchMiddle;
-            case RIGHT -> couchRight;
-            case INNER_LEFT, INNER_RIGHT -> couchCorner;
-            case OUTER_LEFT, OUTER_RIGHT -> couchInvertedCorner;
-        };
+    public void doRender(CouchModel model, Direction direction, CouchShape couchShape, PoseStack poseStack, MultiBufferSource buffer,
+                         int packedLight, int packedOverlay, Item block, Item cushion) {
+
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
         poseStack.mulPose(switch (direction) {
-            case EAST -> switch (shape) {
+            case EAST -> switch (couchShape) {
                 case OUTER_LEFT, INNER_LEFT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(270);
                 case OUTER_RIGHT, INNER_RIGHT -> Vector3f.YP.rotationDegrees(180);
             };
-            case SOUTH -> switch (shape) {
+            case SOUTH -> switch (couchShape) {
                 case OUTER_LEFT, INNER_LEFT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(180);
                 case OUTER_RIGHT, INNER_RIGHT -> Vector3f.YP.rotationDegrees(90);
             };
-            case WEST -> switch (shape) {
+            case WEST -> switch (couchShape) {
                 case OUTER_LEFT, INNER_LEFT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(90);
                 case OUTER_RIGHT, INNER_RIGHT -> Vector3f.YP.rotationDegrees(0);
             };
-            default -> switch (shape) {
+            default -> switch (couchShape) {
                  case OUTER_LEFT, INNER_LEFT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(0);
                 case OUTER_RIGHT, INNER_RIGHT -> Vector3f.YP.rotationDegrees(270);
             };
         });
         poseStack.mulPose(Vector3f.XP.rotationDegrees(180));
+
         var blockTexture = OBJECT_TO_TEXTURE.get(block);
-        model.renderToBuffer(poseStack, blockTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f); // COMPAT
+        model.renderToBuffer(poseStack, blockTexture.buffer(buffer, RenderType::entityCutout),
+                packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
         if (cushion != Items.AIR) {
             var cushionTexture = OBJECT_TO_TEXTURE.get(cushion);
-            model.renderToBuffer(poseStack, cushionTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f); // COMPAT
+            model.renderToBuffer(poseStack, cushionTexture.buffer(buffer, RenderType::entityCutout),
+                    packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
         }
         poseStack.popPose();
     }

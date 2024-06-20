@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.handcrafted;
+package net.mehvahdjukaar.every_compat.modules.handcrafted.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -8,8 +8,6 @@ import earth.terrarium.handcrafted.common.block.property.TableState;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -19,7 +17,6 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 //this is bad. you should use custom baked models instead...
@@ -51,14 +48,15 @@ public class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEnt
         INSTANCE = this;
     }
 
+    @Override
     public void render(TableBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
 
         var tableState = entity.getBlockState().getValue(TableBlock.TABLE_BLOCK_SHAPE);
         var sheetState = entity.getBlockState().getValue(TableBlock.TABLE_SHEET_SHAPE);
-        Item b = entity.getBlockState().getBlock().asItem();
+        Item block = entity.getBlockState().getBlock().asItem();
         Item sheet = entity.getStack().getItem();
-        doRender(poseStack, buffer, packedLight, packedOverlay, tableState, sheetState, sheet, b);
+        doRender(poseStack, buffer, packedLight, packedOverlay, tableState, sheetState, sheet, block);
     }
 
     public void doRender(PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay,
@@ -220,11 +218,13 @@ public class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEnt
 
         var texture = OBJECT_TO_TEXTURE.get(block);
 
-        model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+        model.renderToBuffer(poseStack, texture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay,
+                1.0F, 1.0F, 1.0F, 1.0F);
         if (sheet != Items.AIR) {
             var sheetTexture = OBJECT_TO_TEXTURE.get(sheet);
             if (sheetTexture != null)
-                model.renderToBuffer(poseStack, sheetTexture.buffer(buffer, RenderType::entityCutout), packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+                model.renderToBuffer(poseStack, sheetTexture.buffer(buffer, RenderType::entityCutout),
+                        packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
         }
         poseStack.popPose();
     }
