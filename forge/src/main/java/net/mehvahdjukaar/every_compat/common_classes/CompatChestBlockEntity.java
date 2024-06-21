@@ -1,13 +1,10 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
-import com.teamresourceful.bytecodecs.base.ByteCodec;
-import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.TrappedChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

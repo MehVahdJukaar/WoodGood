@@ -49,7 +49,7 @@ public class FriendsAndFoesModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .addTile(() -> BlockEntityType.BEEHIVE)
                 .defaultRecipe()
                 .build();

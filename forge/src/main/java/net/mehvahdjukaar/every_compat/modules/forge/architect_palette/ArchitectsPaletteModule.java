@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.forge.architect_palette;
 
 import architectspalette.content.blocks.RailingBlock;
+import architectspalette.core.ArchitectsPalette;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
@@ -33,7 +34,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new RailingBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey( CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
         this.addEntry(railings);
 
@@ -45,7 +46,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.SLABS, Registries.ITEM)
                 .defaultRecipe()
                 .copyParentDrop()
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .createPaletteFromOak(p -> {
 
                     while (p.size() > 7) {
@@ -80,7 +81,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.ITEM)
                 .defaultRecipe()
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
         this.addEntry(boardWalls);
 
@@ -89,7 +90,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
         this.addEntry(boards);
 
@@ -100,7 +101,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.ITEM)
                 .defaultRecipe()
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
         this.addEntry(boardStairs);
 
