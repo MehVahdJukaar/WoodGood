@@ -54,6 +54,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 //SUPPORT: v4.0-435+
@@ -255,6 +256,7 @@ public class QuarkModule extends SimpleModule {
                 .addCondition(l -> l.getWoodType() != null)
 //              Recipe being created below blc the recipe has a tag as an ingredient
                 .setRenderType(() -> RenderType::cutout)
+//                .requiresChildren("log")
                 .build();
         this.addEntry(hedges);
 
@@ -288,9 +290,7 @@ public class QuarkModule extends SimpleModule {
             Block stripped = strippedPosts.blocks.get(w);
             if (stripped != null) ECPlatformStuff.registerStripping(post, stripped);
         });
-        leafCarpets.blocks.forEach((w, leaf) -> {
-            ComposterBlock.COMPOSTABLES.put(leaf, 0.2F);
-        });
+        leafCarpets.blocks.forEach((w, leaf) -> ComposterBlock.COMPOSTABLES.put(leaf, 0.2F));
     }
 
     @Override
@@ -453,56 +453,53 @@ public class QuarkModule extends SimpleModule {
             });
         }
 
-        //  modID:woodType_logs tags
-        for (WoodType wood : WoodTypeRegistry.getTypes()) {
-            boolean ifHasSomething = false;
-            //we have a problem here because of namespace
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(wood.getNamespace(),
-                    wood.getTypeName() + "_logs"));
+        // hedge's recipe & logs' tags
+        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+            LeavesType leavesType = entry.getKey();
+            Block block = entry.getValue();
 
-            // skipping vanilla|quark's woodTypes
-            if (wood.isVanilla()) continue;
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(
+                    EveryCompat.res(shortenedId() + "/" + leavesType.getWoodType().getAppendableId() + "_logs"));
 
-            for (var entry : this.getEntries()) {
-                String name = entry.getName();
-                // adding log, stripped_log, wood, stripped_wood
-                if (name.matches("log|wood")) {
-                    Item item = ((SimpleEntrySet<?, ?>) entry).items.get(wood);
-                    if (item != null) {
-                        ifHasSomething = true;
-                        tagBuilder.addEntry(item);
-                    }
+            Block[] allLogs = {
+                    leavesType.getWoodType().log, leavesType.getWoodType().getBlockOfThis("stripped_log"),
+                    leavesType.getWoodType().getBlockOfThis("wood"), leavesType.getWoodType().getBlockOfThis("stripped_wood")
+            };
+
+            // adding log, stripped_log, wood, stripped_wood
+            for (var log : allLogs) {
+                Item item = log.asItem();
+
+                //noinspection ConstantValue
+                if (item != null) {
+                    tagBuilder.addEntry(item);
                 }
+                else handler.getLogger().warn("{} has no logs for hedge in QuarkModule", leavesType.getTypeName());
             }
 
-            if (ifHasSomething) {
-                handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
-                handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
-            }
-        }
+            handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
+            handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
 
-        // Recipes for hedges
-        ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
-
-        hedges.blocks.forEach((leavesType, block) -> {
-
-            JsonObject recipe;
+// =====================================================================================================================
 
             //noinspection OptionalGetWithoutIsPresent
-            try (InputStream recipeStream = manager.getResource(recipeLoc).get().open()) {
-                recipe = RPUtils.deserializeJson(recipeStream);
+            try (InputStream recipeStream =
+                         manager.getResource(modRes("recipes/building/crafting/oak_hedge.json")).get().open()) {
+                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
                 JsonObject underKey = recipe.getAsJsonObject("key");
                 JsonObject underResult = recipe.getAsJsonObject("result");
 
                 // Editing JSON
-                // Leaves
-                underKey.getAsJsonObject("L").addProperty("item", Utils.getID(leavesType.leaves).toString());
-                // WoodTypes
+                    // Leaves
+                underKey.getAsJsonObject("L")
+                        .addProperty("item", Utils.getID(leavesType.leaves).toString());
+                    // WoodTypes
                 underKey.getAsJsonObject("W").addProperty("tag",
-                        leavesType.getNamespace() + ":" + leavesType.getTypeName() + "_logs");
-                // Hedges
+                EveryCompat.MOD_ID + ":" + shortenedId() + "/" + leavesType.getWoodType().getAppendableId() + "_logs");
+                    // Hedges
                 underResult.addProperty("item", Utils.getID(block).toString());
+
 
                 // Adding the finished recipe to ResourceLocation
                 String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
@@ -512,7 +509,7 @@ public class QuarkModule extends SimpleModule {
             } catch (IOException e) {
                 handler.getLogger().error("QuarkModule - Failed to open the recipe file: {0}", e);
             }
-        });
+        }
     }
 
 }
