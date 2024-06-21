@@ -58,7 +58,7 @@ dependencies {
 
     // ================================================ IMPORTS ===================================================== \\
     // Tools
-    modCompileOnly("curse.maven:roughly-enough-items-310111:4573156")
+    modCompileOnly("curse.maven:roughly-enough-items-310111:5301375")
     modImplementation("curse.maven:modmenu-308702:5162837")
     modImplementation("curse.maven:jei-238222:5101365")
 
@@ -66,7 +66,7 @@ dependencies {
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
     modCompileOnly("curse.maven:macaws-doors-378646:4649888")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5121434")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442191")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618169")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054857")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590013")

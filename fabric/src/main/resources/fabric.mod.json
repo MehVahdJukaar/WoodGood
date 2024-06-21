@@ -35,6 +35,6 @@
   },
   "breaks": {
     "mcwbridges": "<3.0.0",
-    "mcwfences": "<1.1.1"
+    "mcwfences": "<1.1.2"
   }
 }
