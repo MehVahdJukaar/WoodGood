@@ -45,8 +45,9 @@ public class MacawFencesModule extends SimpleModule {
         picketFences = SimpleEntrySet.builder(WoodType.class, "picket_fence",
                         BlockInit.OAK_PICKET_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.FENCES, Registries.BLOCK)
+                .addTag(ItemTags.FENCES, Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
@@ -55,8 +56,9 @@ public class MacawFencesModule extends SimpleModule {
         stockadeFences = SimpleEntrySet.builder(WoodType.class, "stockade_fence",
                         BlockInit.OAK_STOCKADE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.FENCES, Registries.BLOCK)
+                .addTag(ItemTags.FENCES, Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
@@ -65,8 +67,9 @@ public class MacawFencesModule extends SimpleModule {
         horseFences = SimpleEntrySet.builder(WoodType.class, "horse_fence",
                         BlockInit.OAK_HORSE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.FENCES, Registries.BLOCK)
+                .addTag(ItemTags.FENCES, Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
@@ -75,8 +78,9 @@ public class MacawFencesModule extends SimpleModule {
         wiredFences = SimpleEntrySet.builder(WoodType.class, "wired_fence",
                         BlockInit.OAK_WIRED_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WiredFence(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.FENCES, Registries.BLOCK)
+                .addTag(ItemTags.FENCES, Registries.ITEM)
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(tab)
                 .defaultRecipe()
@@ -87,6 +91,8 @@ public class MacawFencesModule extends SimpleModule {
         pyramidGates = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
                         BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak()))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
@@ -96,8 +102,9 @@ public class MacawFencesModule extends SimpleModule {
         highleyGates = SimpleEntrySet.builder(WoodType.class, "highley_gate",
                         BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks),w.toVanillaOrOak()))
-                .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
-                .addTag(ItemTags.WOODEN_FENCES, Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
+                .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
