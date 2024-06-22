@@ -130,7 +130,7 @@ public abstract class EveryCompat {
         addModule("twigs", () -> TwigsModule::new);
         addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
-         addModule("handcrafted", () -> HandcraftedModule::new);
+        addModule("handcrafted", () -> HandcraftedModule::new);
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 
