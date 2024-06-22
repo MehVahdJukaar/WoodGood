@@ -753,6 +753,21 @@
   "block_type.variantvanillablocks.grindstone" : "%s Grindstone",
   "block_type.variantvanillablocks.lectern" : "%s Lectern",
   "block_type.variantvanillablocks.smithing_table" : "%s Smithing Table",
-  "block_type.variantvanillablocks.smoker" : "%s Smoker"
+  "block_type.variantvanillablocks.smoker" : "%s Smoker",
+
+  "block_type.handcrafted.bench" : "%s Bench",
+  "block_type.handcrafted.couch" : "%s Couch",
+  "block_type.handcrafted.chair" : "%s Chair",
+  "block_type.handcrafted.side_table" : "%s Side Table",
+  "block_type.handcrafted.desk" : "%s Desk",
+  "block_type.handcrafted.nightstand" : "%s Nightstand",
+  "block_type.handcrafted.table" : "%s Table",
+  "block_type.handcrafted.fancy_bed" : "%s Fancy Bed",
+  "block_type.handcrafted.counter" : "%s Counter",
+  "block_type.handcrafted.cupboard" : "%s Cupboard",
+  "block_type.handcrafted.drawer" : "%s Drawer",
+  "block_type.handcrafted.shelf" : "%s Shelf",
+  "block_type.handcrafted.pillar_trim" : "%s Pillar Trim",
+  "block_type.handcrafted.corner_trim" : "%s Corner Trim"
 
 }
