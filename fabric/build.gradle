@@ -89,7 +89,7 @@ dependencies {
     modCompileOnly("curse.maven:farmers-delight-refabricated-993166:5215829")
     modCompileOnly("curse.maven:friends-and-foes-551364:4968876")
     modCompileOnly("curse.maven:furnish-547069:4821516")
-    modCompileOnly("curse.maven:handcrafted-538214:4215478")
+    modCompileOnly("curse.maven:handcrafted-538214:5118730")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")

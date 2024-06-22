@@ -118,7 +118,7 @@ dependencies {
     modImplementation("curse.maven:resourceful-lib-570073:5361260") // Chipped, Handcrafted
     modImplementation("curse.maven:athena-841890:5176879") // Chipped
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
-    modImplementation("curse.maven:zeta-968868:5078215") // Quark
+    modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
     modImplementation("curse.maven:cloth-config-348521:4973441") // REI
@@ -187,7 +187,7 @@ dependencies {
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240521")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
-    modImplementation("curse.maven:macaws-fences-and-walls-453925:5442217")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442217")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618183")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
@@ -199,7 +199,7 @@ dependencies {
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
-    modCompileOnly("curse.maven:handcrafted-538214:4437459")
+    modImplementation("curse.maven:handcrafted-538214:5118729")
 
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
