@@ -199,7 +199,7 @@ dependencies {
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
-    modCompileOnly("curse.maven:handcrafted-538214:4437459")
+    modImplementation("curse.maven:handcrafted-538214:4437459")
 
 
     // ======================================== DISABLED FOR A REASON =============================================== \\

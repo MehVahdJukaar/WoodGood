@@ -25,12 +25,11 @@ public class CampChairModule extends SimpleModule {
                                 .strength(2.0F, 3.0F).sound(SoundType.WOOD)))
                 .addTag(modRes("camp_chairs"), Registries.BLOCK)
                 .addTag(modRes("camp_chairs"), Registries.ITEM)
-                .setTabKey(() -> CreativeModeTabs.FOOD_AND_DRINKS)
+                .setTabKey(CreativeModeTabs.FOOD_AND_DRINKS)
                 .defaultRecipe()
                 .build();
 
         this.addEntry(campChairs);
     }
-
 
 }
