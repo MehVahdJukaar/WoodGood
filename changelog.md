@@ -1,7 +1,5 @@
 ## FIXES:
-- **Farmer's Delight** (FABRIC) - Not supported when **Nature's Delight** is installed
-- **Macaw's Fences & Walls** (COMMON) - Updated to support v1.1.2 & won't support older version anymore
-- **Quark** (COMMON) - Improved hedges' recipe & fixed recipe problem with **Biomes O' Plenty** & **Chipped**
+- en_us - forgot to add dining_bench from **Handcrafted**
 
 ---
 **LEGEND**:

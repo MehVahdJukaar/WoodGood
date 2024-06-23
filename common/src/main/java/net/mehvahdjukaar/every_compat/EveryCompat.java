@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
+
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
@@ -20,6 +21,8 @@ import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
+import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
+
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -126,11 +129,10 @@ public abstract class EveryCompat {
         addModule("quark", () -> QuarkModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
-
         addModule("farmersdelight", () -> FarmersDelightModule::new);
+        addModule("handcrafted", () -> HandcraftedModule::new);
 
         // ========================================== WORK IN PROGRESS ============================================== \\
-        // addModule("handcrafted", () -> HandcraftedModule::new);
 
         // ============================================= OTHERS ===================================================== \\
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
