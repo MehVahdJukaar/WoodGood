@@ -768,6 +768,7 @@
   "block_type.handcrafted.drawer" : "%s Drawer",
   "block_type.handcrafted.shelf" : "%s Shelf",
   "block_type.handcrafted.pillar_trim" : "%s Pillar Trim",
-  "block_type.handcrafted.corner_trim" : "%s Corner Trim"
+  "block_type.handcrafted.corner_trim" : "%s Corner Trim",
+  "block_type.handcrafted.dining_bench" : "%s Dining Bench"
 
 }
