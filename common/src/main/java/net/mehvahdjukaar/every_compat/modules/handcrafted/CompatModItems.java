@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
 
-public class compatModItems {
+public class CompatModItems {
 
     public static class TableItem extends BlockItem implements ICustomItemRendererProvider {
 
@@ -18,7 +18,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.TableItemRenderer::new;
+            return CompatItemRenderer.TableItemRenderer::new;
         }
     }
 
@@ -30,7 +30,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.ChairItemRenderer::new;
+            return CompatItemRenderer.ChairItemRenderer::new;
         }
     }
 
@@ -42,7 +42,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.BenchItemRenderer::new;
+            return CompatItemRenderer.BenchItemRenderer::new;
         }
     }
 
@@ -54,7 +54,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.CouchItemRenderer::new;
+            return CompatItemRenderer.CouchItemRenderer::new;
         }
     }
 
@@ -66,7 +66,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.FancyBedItemRenderer::new;
+            return CompatItemRenderer.FancyBedItemRenderer::new;
         }
     }
 
@@ -78,7 +78,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.DiningBenchItemRenderer::new;
+            return CompatItemRenderer.DiningBenchItemRenderer::new;
         }
     }
 
@@ -89,7 +89,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.NightstandItemRenderer::new;
+            return CompatItemRenderer.NightstandItemRenderer::new;
         }
     }
 
@@ -100,7 +100,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.DeskItemRenderer::new;
+            return CompatItemRenderer.DeskItemRenderer::new;
         }
     }
 
@@ -111,7 +111,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.SideTableItemRenderer::new;
+            return CompatItemRenderer.SideTableItemRenderer::new;
         }
     }
 
@@ -122,7 +122,7 @@ public class compatModItems {
 
         @Override
         public Supplier<ItemStackRenderer> getRendererFactory() {
-            return compatItemRenderer.CounterItemRenderer::new;
+            return CompatItemRenderer.CounterItemRenderer::new;
         }
     }
 

@@ -12,7 +12,6 @@ import earth.terrarium.handcrafted.common.block.property.SheetState;
 import earth.terrarium.handcrafted.common.block.property.TableState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.client.*;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.minecraft.client.Minecraft;
@@ -26,7 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 @Environment(EnvType.CLIENT)
-public class compatItemRenderer {
+public class CompatItemRenderer {
 
     public static class TableItemRenderer extends ItemStackRenderer {
         @Override

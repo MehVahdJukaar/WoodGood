@@ -56,11 +56,11 @@ public class HandcraftedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> table; // CLOTHINGS
     public final SimpleEntrySet<WoodType, Block> bench; // CUSHION  DONE
     public final SimpleEntrySet<WoodType, Block> couch; // CUSHION, Multiple-Model DONE
-    public final SimpleEntrySet<WoodType, Block> fancy_bed; // CUSHION & CLOTHINGS DONE
-    public final SimpleEntrySet<WoodType, Block> dining_bench; // Multiple-Model
+    public final SimpleEntrySet<WoodType, Block> fancyBed; // CUSHION & CLOTHINGS DONE
+    public final SimpleEntrySet<WoodType, Block> diningBench; // Multiple-Model
     public final SimpleEntrySet<WoodType, Block> nightstand; // CLOTHINGS  DONE
     public final SimpleEntrySet<WoodType, Block> desk; // CLOTHINGS  DONE
-    public final SimpleEntrySet<WoodType, Block> side_table; // CLOTHINGS  DONE
+    public final SimpleEntrySet<WoodType, Block> sideTable; // CLOTHINGS  DONE
 
     public final ItemOnlyEntrySet<WoodType, Item> counter;
     public final SimpleEntrySet<WoodType, Block> counter_1, counter_2, counter_3;
@@ -75,8 +75,6 @@ public class HandcraftedModule extends SimpleModule {
 
     public final ItemOnlyEntrySet<WoodType, Item> BOARD;
 */
-    public BlockEntityType<? extends compatCounterEntity> tileCounters;
-
 
     public HandcraftedModule(String modId) {
         super(modId, "hc");
@@ -91,7 +89,7 @@ public class HandcraftedModule extends SimpleModule {
                     .addTexture(modRes("block/chair/chair/oak_chair"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                     .setTab(() -> tab)
-                    .addCustomItem((w, b, p) -> new compatModItems.ChairItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.ChairItem(b, p))
 //                .defaultRecipe()
                     .build();
             this.addEntry(chair);
@@ -106,7 +104,7 @@ public class HandcraftedModule extends SimpleModule {
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                     .addTag(ModTags.TABLE_ATTACHMENTS, Registry.BLOCK_REGISTRY)
                     .setTab(() -> tab)
-                    .addCustomItem((w, b, p) -> new compatModItems.TableItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.TableItem(b, p))
 //                .defaultRecipe()
                     .build();
             this.addEntry(table);
@@ -120,7 +118,7 @@ public class HandcraftedModule extends SimpleModule {
                     .addTexture(modRes("block/chair/bench/oak_bench"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                     .setTab(() -> tab)
-                    .addCustomItem((w, b, p) -> new compatModItems.BenchItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.BenchItem(b, p))
 //                .defaultRecipe()
                     .build();
             this.addEntry(bench);
@@ -134,12 +132,12 @@ public class HandcraftedModule extends SimpleModule {
                     .addTexture(modRes("block/chair/couch/oak_couch"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                     .setTab(() -> tab)
-                    .addCustomItem((w, b, p) -> new compatModItems.CouchItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.CouchItem(b, p))
 //                .defaultRecipe()
                     .build();
             this.addEntry(couch);
 
-            fancy_bed = SimpleEntrySet.builder(WoodType.class, "fancy_bed",
+            fancyBed = SimpleEntrySet.builder(WoodType.class, "fancy_bed",
                             ModBlocks.OAK_FANCY_BED, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatFancyBedBlock(Utils.copyPropertySafe(Blocks.WHITE_BED)))
                     .addTile(compatFancyBedEntity::new)
@@ -148,12 +146,12 @@ public class HandcraftedModule extends SimpleModule {
                     .addTexture(modRes("block/bed/double/oak_fancy_bed"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                     .setTab(() -> tab)
-                    .addCustomItem((w, b, p) -> new compatModItems.FancyBedItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.FancyBedItem(b, p))
 //                .defaultRecipe()
                     .build();
-            this.addEntry(fancy_bed);
+            this.addEntry(fancyBed);
 
-            dining_bench = SimpleEntrySet.builder(WoodType.class, "dining_bench",
+            diningBench = SimpleEntrySet.builder(WoodType.class, "dining_bench",
                             ModBlocks.OAK_DINING_BENCH, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatDiningBenchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                     )
@@ -162,10 +160,10 @@ public class HandcraftedModule extends SimpleModule {
                     .addTexture(modRes("block/chair/dining_bench/oak_dining_bench"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                     .setTab(() -> tab)
-                    .addCustomItem((w, b, p) -> new compatModItems.DiningBenchItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.DiningBenchItem(b, p))
 //                .defaultRecipe()
                     .build();
-            this.addEntry(dining_bench);
+            this.addEntry(diningBench);
 
             nightstand = SimpleEntrySet.builder(WoodType.class, "nightstand",
                             ModBlocks.OAK_NIGHTSTAND, () -> WoodTypeRegistry.OAK_TYPE,
@@ -176,7 +174,7 @@ public class HandcraftedModule extends SimpleModule {
                     .setRenderType(() -> RenderType::cutout)
                     .setTab(() -> tab)
 //                .defaultRecipe()
-                    .addCustomItem((w, b, p) -> new compatModItems.NightstandItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.NightstandItem(b, p))
                     .addTile(compatNightstandEntity::new)
                     .build();
 
@@ -191,12 +189,12 @@ public class HandcraftedModule extends SimpleModule {
                     .setRenderType(() -> RenderType::cutout)
                     .setTab(() -> tab)
 //                .defaultRecipe()
-                    .addCustomItem((w, b, p) -> new compatModItems.DeskItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.DeskItem(b, p))
                     .addTile(compatDeskEntity::new)
                     .build();
             this.addEntry(desk);
 
-            side_table = SimpleEntrySet.builder(WoodType.class, "side_table",
+            sideTable = SimpleEntrySet.builder(WoodType.class, "side_table",
                             ModBlocks.OAK_SIDE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatSideTableBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                     )
@@ -205,10 +203,10 @@ public class HandcraftedModule extends SimpleModule {
                     .setRenderType(() -> RenderType::cutout)
                     .setTab(() -> tab)
 //                .defaultRecipe()
-                    .addCustomItem((w, b, p) -> new compatModItems.SideTableItem(b, p))
+                    .addCustomItem((w, b, p) -> new CompatModItems.SideTableItem(b, p))
                     .addTile(compatSideTableEntity::new)
                     .build();
-            this.addEntry(side_table);
+            this.addEntry(sideTable);
 
         }
         counter_1 = SimpleEntrySet.builder(WoodType.class, "counter_1",
@@ -231,7 +229,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/counter/oak_counter_2"))
                 .setRenderType(() -> RenderType::cutout)
-                .addTile(compatCounterEntity::new)
+                .addTile(counter_1.getTileHolder()::get)
                 .noItem()
                 .build();
         this.addEntry(counter_2);
@@ -243,14 +241,14 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/counter/oak_counter_3"))
                 .setRenderType(() -> RenderType::cutout)
-                .addTile(compatCounterEntity::new)
+                .addTile(counter_1.getTileHolder()::get)
                 .noItem()
                 .build();
         this.addEntry(counter_3);
 
         counter = ItemOnlyEntrySet.builder(WoodType.class, "counter",
                         () -> getModItem("oak_counter"), () -> WoodTypeRegistry.OAK_TYPE,
-                w -> new compatModItems.CounterItem(counter_1.blocks.get(w), new Item.Properties().tab(tab))
+                w -> new CompatModItems.CounterItem(counter_1.blocks.get(w), new Item.Properties().tab(tab))
                 )
                 .addCondition(counter_1.blocks::containsKey)
                 .build();
@@ -437,16 +435,6 @@ public class HandcraftedModule extends SimpleModule {
 */
     }
 
-    //TODO: not working because of "Cannot read field "validBlocks" because "be" is null"
-    @Override
-    public void onModSetup() {
-        super.onModSetup();
-
-        appendTileEntityBlocks(tileCounters, counter_1.blocks.values());
-        appendTileEntityBlocks(tileCounters, counter_2.blocks.values());
-        appendTileEntityBlocks(tileCounters, counter_3.blocks.values());
-    }
-
     @Override
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
@@ -454,11 +442,11 @@ public class HandcraftedModule extends SimpleModule {
         event.register(((BlockEntityType) table.getTileHolder().get()), OptimizedTableRenderer::new);
         event.register(((BlockEntityType) bench.getTileHolder().get()), OptimizedBenchRenderer::new);
         event.register(((BlockEntityType) couch.getTileHolder().get()), OptimizedCouchRenderer::new);
-        event.register(((BlockEntityType) fancy_bed.getTileHolder().get()), OptimizedFancyBedRenderer::new);
-        event.register(((BlockEntityType) dining_bench.getTileHolder().get()), OptimizedDiningBenchRenderer::new);
+        event.register(((BlockEntityType) fancyBed.getTileHolder().get()), OptimizedFancyBedRenderer::new);
+        event.register(((BlockEntityType) diningBench.getTileHolder().get()), OptimizedDiningBenchRenderer::new);
         event.register((BlockEntityType) nightstand.getTileHolder().get(), OptimizedNightstandRenderer::new);
         event.register((BlockEntityType) desk.getTileHolder().get(), OptimizedDeskRenderer::new);
-        event.register((BlockEntityType) side_table.getTileHolder().get(), OptimizedSideTableRenderer::new);
+        event.register((BlockEntityType) sideTable.getTileHolder().get(), OptimizedSideTableRenderer::new);
 
         event.register((BlockEntityType) counter_1.getTileHolder().get(), OptimizedCounterRenderer::new);
         event.register((BlockEntityType) counter_2.getTileHolder().get(), OptimizedCounterRenderer::new);
@@ -572,7 +560,7 @@ public class HandcraftedModule extends SimpleModule {
             }
 
                 // FANCY BED
-            for (var t : fancy_bed.items.values()) {
+            for (var t : fancyBed.items.values()) {
                 var singleBed = OptimizedFancyBedRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ignored -> {
                     var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
@@ -591,7 +579,7 @@ public class HandcraftedModule extends SimpleModule {
             }
 
                 // DINING_BENCH
-            for (var t : dining_bench.items.values()) {
+            for (var t : diningBench.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
                     var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
@@ -624,7 +612,7 @@ public class HandcraftedModule extends SimpleModule {
             }
 
                 // SIDE_TABLE
-            for (var t : side_table.items.values()) {
+            for (var t : sideTable.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
                     var blockId = Registry.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
@@ -869,7 +857,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return fancy_bed.getTileHolder().get();
+            return fancyBed.getTileHolder().get();
         }
     }
 
@@ -880,7 +868,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return dining_bench.getTileHolder().get();
+            return diningBench.getTileHolder().get();
         }
     }
 
@@ -913,19 +901,15 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntityType<?> getType() {
-            return side_table.getTileHolder().get();
+            return sideTable.getTileHolder().get();
         }
     }
 
     public class compatCounterEntity extends ItemHoldingBlockEntity  {
         public compatCounterEntity(BlockPos pos, BlockState state) {
-            super(tileCounters, pos, state);
+            super(counter_1.getTileHolder().get(), pos, state);
             this.setStack(Items.CALCITE.getDefaultInstance());
         }
 
-        @Override
-        public BlockEntityType<?> getType() {
-            return tileCounters;
-        }
     }
 }
