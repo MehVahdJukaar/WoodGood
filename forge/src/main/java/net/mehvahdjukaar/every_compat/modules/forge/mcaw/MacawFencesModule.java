@@ -206,6 +206,17 @@ public class MacawFencesModule extends SimpleModule {
                             }
                             return LeavesPath("", "natural", s, l);
                         }
+                        case "malum" -> {
+                            switch (typeName) {
+                                case "budding_soulwood" -> {
+                                    return LeavesPath("","soulwood", s, l);
+                                }
+                                case "azure_runewood" -> {
+                                    return LeavesPath("", "runewood", s, l);
+                                }
+                            }
+                            return LeavesPath("", l.getTypeName(), s, l);
+                        }
                     }
                     return LeavesPath("", "", s, l);
                 }))
