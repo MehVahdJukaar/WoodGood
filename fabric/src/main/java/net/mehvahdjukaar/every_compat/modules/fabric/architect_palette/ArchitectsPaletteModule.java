@@ -103,6 +103,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.STAIRS, Registries.ITEM)
                 .defaultRecipe()
                 //.setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .addCondition(boards.blocks::containsKey)
                 .build();
         this.addEntry(boardStairs);
     }
