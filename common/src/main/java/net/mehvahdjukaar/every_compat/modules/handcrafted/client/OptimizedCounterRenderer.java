@@ -5,11 +5,9 @@ import com.mojang.math.Vector3f;
 import earth.terrarium.handcrafted.Handcrafted;
 import earth.terrarium.handcrafted.client.block.counter.CounterModel;
 import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
-import earth.terrarium.handcrafted.common.block.counter.CounterBlockEntity;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -22,7 +20,6 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 
 import java.util.Map;
 
@@ -48,9 +45,6 @@ public class OptimizedCounterRenderer implements BlockEntityRenderer<Handcrafted
     public void render(HandcraftedModule.compatCounterEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource,
                        int packedLight, int packedOverlay) {
         ResourceLocation blockKey = Registry.BLOCK.getKey(entity.getBlockState().getBlock());
-//        Item block = entity.getBlockState().getBlock().asItem();
-        EntityModelSet modelSet = Minecraft.getInstance().getEntityModels();
-        CounterModel model = main;
 
         doRender(Registry.ITEM.getKey(entity.getStack().getItem()), blockKey, entity.getBlockState().getValue(ExpandableCouchBlock.FACING),
                 poseStack, bufferSource, packedLight, packedOverlay);
