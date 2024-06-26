@@ -108,7 +108,7 @@ public class HandcraftedModule extends SimpleModule {
                             ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatChairBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                     )
-                    .addTile(compatChairEntity::new)
+                    .addTile(CompatChairEntity::new)
                     .setRenderType(() -> RenderType::cutout)
                     .addTexture(modRes("block/chair/chair/oak_chair"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -137,7 +137,7 @@ public class HandcraftedModule extends SimpleModule {
                             ModBlocks.OAK_BENCH, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatBenchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                     )
-                    .addTile(compatBenchEntity::new)
+                    .addTile(CompatBenchEntity::new)
                     .setRenderType(() -> RenderType::cutout)
                     .addTexture(modRes("block/chair/bench/oak_bench"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -151,7 +151,7 @@ public class HandcraftedModule extends SimpleModule {
                             ModBlocks.OAK_COUCH, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatCouchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                     )
-                    .addTile(compatCouchEntity::new)
+                    .addTile(CompatCouchEntity::new)
                     .setRenderType(() -> RenderType::cutout)
                     .addTexture(modRes("block/chair/couch/oak_couch"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -164,7 +164,7 @@ public class HandcraftedModule extends SimpleModule {
             fancyBed = SimpleEntrySet.builder(WoodType.class, "fancy_bed",
                             ModBlocks.OAK_FANCY_BED, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatFancyBedBlock(Utils.copyPropertySafe(Blocks.WHITE_BED)))
-                    .addTile(compatFancyBedEntity::new)
+                    .addTile(CompatFancyBedEntity::new)
                     .setRenderType(() -> RenderType::cutout)
                     .addTexture(modRes("block/bed/single/oak_fancy_bed"))
                     .addTexture(modRes("block/bed/double/oak_fancy_bed"))
@@ -179,7 +179,7 @@ public class HandcraftedModule extends SimpleModule {
                             ModBlocks.OAK_DINING_BENCH, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatDiningBenchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                     )
-                    .addTile(compatDiningBenchEntity::new)
+                    .addTile(CompatDiningBenchEntity::new)
                     .setRenderType(() -> RenderType::cutout)
                     .addTexture(modRes("block/chair/dining_bench/oak_dining_bench"))
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -208,7 +208,7 @@ public class HandcraftedModule extends SimpleModule {
                             ModBlocks.OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatDeskBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                     )
-                    .addTile(compatDeskEntity::new)
+                    .addTile(CompatDeskEntity::new)
                     .setRenderType(() -> RenderType::cutout)
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                     .addTextureM(modRes("block/table/desk/oak_desk"), EveryCompat.res("block/hc/table/oak_desk_m"))
@@ -222,7 +222,7 @@ public class HandcraftedModule extends SimpleModule {
                             ModBlocks.OAK_SIDE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                             w -> new compatSideTableBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                     )
-                    .addTile(compatSideTableEntity::new)
+                    .addTile(CompatSideTableEntity::new)
                     .setRenderType(() -> RenderType::cutout)
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                     .addTextureM(modRes("block/table/side_table/oak_side_table"), EveryCompat.res("block/hc/table/oak_side_table_m"))
@@ -281,7 +281,7 @@ public class HandcraftedModule extends SimpleModule {
 
         cupboard_1 = SimpleEntrySet.builder(WoodType.class, "cupboard_1",
                         ModBlocks.OAK_CUPBOARD_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new compatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(compatCupboardEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -298,7 +298,7 @@ public class HandcraftedModule extends SimpleModule {
 
         cupboard_2 = SimpleEntrySet.builder(WoodType.class, "cupboard_2",
                         ModBlocks.OAK_CUPBOARD_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new compatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTile(cupboard_1.getTileHolder()::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_2"))
@@ -320,7 +320,7 @@ public class HandcraftedModule extends SimpleModule {
                 .build();
         this.addEntry(cupboard);
 
-/*
+
 
         DRAWER_1 = SimpleEntrySet.builder(WoodType.class, "drawer_1",
                         ModBlocks.OAK_DRAWER_1, () -> WoodTypeRegistry.OAK_TYPE,
@@ -347,6 +347,7 @@ public class HandcraftedModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
 //                .defaultRecipe()
+                .addTile(cupboard_1.getTileHolder()::get)
                 .addCustomItem((w, b, p) -> new HammerableBlockItem(b, p))
                 .build();
         this.addEntry(DRAWER_1);
@@ -366,6 +367,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .addTile(cupboard_1.getTileHolder()::get)
 //                .defaultRecipe()
                 .build();
         this.addEntry(DRAWER_2);
@@ -385,6 +387,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .addTile(cupboard_1.getTileHolder()::get)
 //                .defaultRecipe()
                 .build();
         this.addEntry(DRAWER_3);
@@ -401,11 +404,13 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
+                .addTile(cupboard_1.getTileHolder()::get)
+
 //                .defaultRecipe()
                 .build();
         this.addEntry(DRAWER_4);
 
-
+/*
         SHELF_1 = SimpleEntrySet.builder(WoodType.class, "shelf",
                         ModBlocks.OAK_SHELF_1, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new compatShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
@@ -731,7 +736,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new compatChairEntity(pos, state);
+            return new CompatChairEntity(pos, state);
         }
     }
 
@@ -753,7 +758,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new compatBenchEntity(pos, state);
+            return new CompatBenchEntity(pos, state);
         }
     }
 
@@ -764,7 +769,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new compatCouchEntity(pos, state);
+            return new CompatCouchEntity(pos, state);
         }
     }
 
@@ -775,7 +780,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new compatFancyBedEntity(pos, state);
+            return new CompatFancyBedEntity(pos, state);
         }
     }
 
@@ -786,7 +791,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new compatDiningBenchEntity(pos, state);
+            return new CompatDiningBenchEntity(pos, state);
         }
     }
 
@@ -808,7 +813,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new compatDeskEntity(pos, state);
+            return new CompatDeskEntity(pos, state);
         }
     }
 
@@ -819,7 +824,7 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new compatSideTableEntity(pos, state);
+            return new CompatSideTableEntity(pos, state);
         }
     }
 
@@ -841,8 +846,8 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class compatCupboardBlock extends CupboardBlock {
-        public compatCupboardBlock(Properties properties) {
+    public class CompatCupboardBlock extends CupboardBlock {
+        public CompatCupboardBlock(Properties properties) {
             super(properties);
         }
 
@@ -860,8 +865,8 @@ public class HandcraftedModule extends SimpleModule {
     }
 
 //TYPE: ================ BlockEntity
-    public class compatChairEntity extends ChairBlockEntity {
-        public compatChairEntity(BlockPos blockPos, BlockState blockState) {
+    public class CompatChairEntity extends ChairBlockEntity {
+        public CompatChairEntity(BlockPos blockPos, BlockState blockState) {
             super(blockPos, blockState);
         }
 
@@ -882,8 +887,8 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class compatBenchEntity extends WoodenBenchBlockEntity {
-        public compatBenchEntity(BlockPos pos, BlockState state) {
+    public class CompatBenchEntity extends WoodenBenchBlockEntity {
+        public CompatBenchEntity(BlockPos pos, BlockState state) {
             super(pos, state);
         }
 
@@ -893,8 +898,8 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class compatCouchEntity extends CouchBlockEntity {
-        public compatCouchEntity(BlockPos blockPos, BlockState blockState) {
+    public class CompatCouchEntity extends CouchBlockEntity {
+        public CompatCouchEntity(BlockPos blockPos, BlockState blockState) {
             super(blockPos, blockState);
         }
 
@@ -904,8 +909,8 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class compatFancyBedEntity extends FancyBedBlockEntity {
-        public compatFancyBedEntity(BlockPos blockPos, BlockState blockState) {
+    public class CompatFancyBedEntity extends FancyBedBlockEntity {
+        public CompatFancyBedEntity(BlockPos blockPos, BlockState blockState) {
             super(blockPos, blockState);
         }
 
@@ -915,8 +920,8 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class compatDiningBenchEntity extends DiningBenchBlockEntity {
-        public compatDiningBenchEntity(BlockPos pos, BlockState state) {
+    public class CompatDiningBenchEntity extends DiningBenchBlockEntity {
+        public CompatDiningBenchEntity(BlockPos pos, BlockState state) {
             super(pos, state);
         }
 
@@ -937,8 +942,8 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class compatDeskEntity extends DeskBlockEntity {
-        public compatDeskEntity(BlockPos pos, BlockState state) {
+    public class CompatDeskEntity extends DeskBlockEntity {
+        public CompatDeskEntity(BlockPos pos, BlockState state) {
             super(pos, state);
         }
 
@@ -948,8 +953,8 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class compatSideTableEntity extends SideTableBlockEntity {
-        public compatSideTableEntity(BlockPos pos, BlockState state) {
+    public class CompatSideTableEntity extends SideTableBlockEntity {
+        public CompatSideTableEntity(BlockPos pos, BlockState state) {
             super(pos, state);
         }
 
