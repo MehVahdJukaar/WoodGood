@@ -324,7 +324,7 @@ public class HandcraftedModule extends SimpleModule {
 
         DRAWER_1 = SimpleEntrySet.builder(WoodType.class, "drawer_1",
                         ModBlocks.OAK_DRAWER_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/drawer/oak/front_1/drawer_left"))
                 .addTexture(modRes("block/counter/drawer/oak/front_1/drawer_middle"))
@@ -354,7 +354,7 @@ public class HandcraftedModule extends SimpleModule {
 
         DRAWER_2 = SimpleEntrySet.builder(WoodType.class, "drawer_2",
                         ModBlocks.OAK_DRAWER_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_left"))
                 .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_middle"))
@@ -374,7 +374,7 @@ public class HandcraftedModule extends SimpleModule {
 
         DRAWER_3 = SimpleEntrySet.builder(WoodType.class, "drawer_3",
                         ModBlocks.OAK_DRAWER_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_left"))
                 .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_middle"))
@@ -394,7 +394,7 @@ public class HandcraftedModule extends SimpleModule {
 
         DRAWER_4 = SimpleEntrySet.builder(WoodType.class, "drawer_4",
                         ModBlocks.OAK_DRAWER_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/drawer/oak/front_4/drawer"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_back"))
