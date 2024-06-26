@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
-import earth.terrarium.handcrafted.common.item.CounterBlockItem;
 import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.minecraft.ChatFormatting;

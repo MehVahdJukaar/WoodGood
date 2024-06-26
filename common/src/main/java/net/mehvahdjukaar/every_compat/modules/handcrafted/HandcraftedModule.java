@@ -9,10 +9,10 @@ import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlo
 import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.woodenbench.WoodenBenchBlock;
 import earth.terrarium.handcrafted.common.block.chair.woodenbench.WoodenBenchBlockEntity;
-import earth.terrarium.handcrafted.common.block.counter.CounterBlock;
-import earth.terrarium.handcrafted.common.block.counter.CupboardBlock;
+import earth.terrarium.handcrafted.common.block.counter.*;
 import earth.terrarium.handcrafted.common.block.fancybed.FancyBedBlock;
 import earth.terrarium.handcrafted.common.block.fancybed.FancyBedBlockEntity;
+import earth.terrarium.handcrafted.common.block.property.DirectionalBlockSide;
 import earth.terrarium.handcrafted.common.block.table.desk.DeskBlock;
 import earth.terrarium.handcrafted.common.block.table.desk.DeskBlockEntity;
 import earth.terrarium.handcrafted.common.block.table.nightstand.NightstandBlock;
@@ -21,7 +21,9 @@ import earth.terrarium.handcrafted.common.block.table.sidetable.SideTableBlock;
 import earth.terrarium.handcrafted.common.block.table.sidetable.SideTableBlockEntity;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
-import earth.terrarium.handcrafted.common.item.HammerableBlockItem;
+import earth.terrarium.handcrafted.common.block.trim.CornerTrimBlock;
+import earth.terrarium.handcrafted.common.block.trim.TrimBlock;
+import earth.terrarium.handcrafted.common.item.*;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
 import earth.terrarium.handcrafted.common.registry.ModTags;
@@ -41,6 +43,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -52,6 +55,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -66,6 +71,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -90,15 +98,16 @@ public class HandcraftedModule extends SimpleModule {
     public final ItemOnlyEntrySet<WoodType, Item> cupboard;
     public final SimpleEntrySet<WoodType, Block> cupboard_1, cupboard_2;
 
-/*
-    public final SimpleEntrySet<WoodType, Block> DRAWER_1, DRAWER_2, DRAWER_3, DRAWER_4;
+    public final ItemOnlyEntrySet<WoodType, Item> drawer;
+    public final SimpleEntrySet<WoodType, Block> drawer_1, drawer_2, drawer_3, drawer_4;
 
-    public final SimpleEntrySet<WoodType, Block> SHELF_1; // DONE
-    public final SimpleEntrySet<WoodType, Block> PILLAR_TRIM; // DONE
-    public final SimpleEntrySet<WoodType, Block> CORNER_TRIM; // DONE
+    public final ItemOnlyEntrySet<WoodType, Item> shelf;
+    public final SimpleEntrySet<WoodType, Block> shelf_1;
 
-    public final ItemOnlyEntrySet<WoodType, Item> BOARD;
-*/
+    public final SimpleEntrySet<WoodType, Block> pillarTrim; // DONE
+    public final SimpleEntrySet<WoodType, Block> cornerTrim; // DONE
+
+    public final ItemOnlyEntrySet<WoodType, Item> board;
 
     public HandcraftedModule(String modId) {
         super(modId, "hc");
@@ -281,9 +290,9 @@ public class HandcraftedModule extends SimpleModule {
 
         cupboard_1 = SimpleEntrySet.builder(WoodType.class, "cupboard_1",
                         ModBlocks.OAK_CUPBOARD_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        w -> new compatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
-                .addTile(compatCupboardEntity::new)
+                .addTile(comaptStorageEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_1"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_2"))
@@ -298,7 +307,7 @@ public class HandcraftedModule extends SimpleModule {
 
         cupboard_2 = SimpleEntrySet.builder(WoodType.class, "cupboard_2",
                         ModBlocks.OAK_CUPBOARD_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new compatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTile(cupboard_1.getTileHolder()::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_2"))
@@ -320,42 +329,30 @@ public class HandcraftedModule extends SimpleModule {
                 .build();
         this.addEntry(cupboard);
 
-
-
-        DRAWER_1 = SimpleEntrySet.builder(WoodType.class, "drawer_1",
+        drawer_1 = SimpleEntrySet.builder(WoodType.class, "drawer_1",
                         ModBlocks.OAK_DRAWER_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new compatDrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                )
+                .addTile(cupboard_1.getTileHolder()::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/drawer/oak/front_1/drawer_left"))
                 .addTexture(modRes("block/counter/drawer/oak/front_1/drawer_middle"))
                 .addTexture(modRes("block/counter/drawer/oak/front_1/drawer_right"))
                 .addTexture(modRes("block/counter/drawer/oak/front_1/drawer_single"))
-                .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_left"))
-                .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_middle"))
-                .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_right"))
-                .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_single"))
-                .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_left"))
-                .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_middle"))
-                .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_right"))
-                .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_single"))
-                .addTexture(modRes("block/counter/drawer/oak/front_4/drawer"))
-                .addTexture(modRes("block/counter/drawer/oak/drawer_back"))
-                .addTexture(modRes("block/counter/drawer/oak/drawer_bottom"))
-                .addTexture(modRes("block/counter/drawer/oak/drawer_side_left"))
-                .addTexture(modRes("block/counter/drawer/oak/drawer_side_right"))
-                .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
-                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
 //                .defaultRecipe()
-                .addTile(cupboard_1.getTileHolder()::get)
-                .addCustomItem((w, b, p) -> new HammerableBlockItem(b, p))
+                .noItem()
                 .build();
-        this.addEntry(DRAWER_1);
+        this.addEntry(drawer_1);
 
-        DRAWER_2 = SimpleEntrySet.builder(WoodType.class, "drawer_2",
+        drawer_2 = SimpleEntrySet.builder(WoodType.class, "drawer_2",
                         ModBlocks.OAK_DRAWER_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new compatDrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                )
+                .addTile(cupboard_1.getTileHolder()::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_left"))
                 .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_middle"))
                 .addTexture(modRes("block/counter/drawer/oak/front_2/drawer_right"))
@@ -365,17 +362,19 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_left"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_right"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
-                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
-                .addTile(cupboard_1.getTileHolder()::get)
 //                .defaultRecipe()
+                .noItem()
                 .build();
-        this.addEntry(DRAWER_2);
+        this.addEntry(drawer_2);
 
-        DRAWER_3 = SimpleEntrySet.builder(WoodType.class, "drawer_3",
+        drawer_3 = SimpleEntrySet.builder(WoodType.class, "drawer_3",
                         ModBlocks.OAK_DRAWER_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new compatDrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                )
+                .addTile(cupboard_1.getTileHolder()::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_left"))
                 .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_middle"))
                 .addTexture(modRes("block/counter/drawer/oak/front_3/drawer_right"))
@@ -385,35 +384,46 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_left"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_right"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
-                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
-                .addTile(cupboard_1.getTileHolder()::get)
 //                .defaultRecipe()
+                .noItem()
                 .build();
-        this.addEntry(DRAWER_3);
+        this.addEntry(drawer_3);
 
-        DRAWER_4 = SimpleEntrySet.builder(WoodType.class, "drawer_4",
+        drawer_4 = SimpleEntrySet.builder(WoodType.class, "drawer_4",
                         ModBlocks.OAK_DRAWER_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new compatDrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                )
+                .addTile(cupboard_1.getTileHolder()::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/drawer/oak/front_4/drawer"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_back"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_bottom"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_left"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_right"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
-                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
-                .addTile(cupboard_1.getTileHolder()::get)
-
 //                .defaultRecipe()
+                .noItem()
                 .build();
-        this.addEntry(DRAWER_4);
+        this.addEntry(drawer_4);
 
-/*
-        SHELF_1 = SimpleEntrySet.builder(WoodType.class, "shelf",
+        drawer = ItemOnlyEntrySet.builder(WoodType.class, "drawer",
+                        ModItems.OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new HammerableBlockItem(drawer_1.blocks.get(w), new Item.Properties().tab(tab))
+                )
+//                .addRecipe(modRes("oak_drawer"))
+                .addCondition(cupboard_1.blocks::containsKey)
+                .build();
+        this.addEntry(drawer);
+
+        shelf_1 = SimpleEntrySet.builder(WoodType.class, "shelf_1",
                         ModBlocks.OAK_SHELF_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new compatShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new compatShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                )
+                .addTile(compatShelfEntity::new)
+                .setRenderType(() -> RenderType::cutout)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTexture(modRes("block/counter/shelf/oak/shelf_back"))
                 .addTexture(modRes("block/counter/shelf/oak/shelf_left"))
@@ -423,15 +433,22 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/shelf/oak/shelf_side_right"))
                 .addTexture(modRes("block/counter/shelf/oak/shelf_single"))
                 .addTexture(modRes("block/counter/shelf/oak/shelf_top"))
-                .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
 //                .defaultRecipe()
-                .addCustomItem((w, b, p) -> new ShelfBlockItem(b, p))
+                .noItem()
                 .build();
-        this.addEntry(SHELF_1);
+        this.addEntry(shelf_1);
 
+        shelf = ItemOnlyEntrySet.builder(WoodType.class, "shelf",
+                        ModItems.OAK_SHELF, () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ShelfBlockItem(shelf_1.blocks.get(w), new Item.Properties().tab(tab))
+                )
+//                .addRecipe(modRes("oak_shelf"))
+                .addCondition(shelf_1.blocks::containsKey)
+                .build();
+        this.addEntry(shelf);
 
-        PILLAR_TRIM = SimpleEntrySet.builder(WoodType.class, "pillar_trim",
+        pillarTrim = SimpleEntrySet.builder(WoodType.class, "pillar_trim",
                         ModBlocks.OAK_PILLAR_TRIM, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TrimBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -446,9 +463,9 @@ public class HandcraftedModule extends SimpleModule {
 //                .defaultRecipe()
                 .addCustomItem((w, b, p) -> new HammerableBlockItem(b, p))
                 .build();
-        this.addEntry(PILLAR_TRIM);
+        this.addEntry(pillarTrim);
 
-        CORNER_TRIM = SimpleEntrySet.builder(WoodType.class, "corner_trim",
+        cornerTrim = SimpleEntrySet.builder(WoodType.class, "corner_trim",
                         ModBlocks.OAK_CORNER_TRIM, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CornerTrimBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
@@ -460,20 +477,23 @@ public class HandcraftedModule extends SimpleModule {
 //                .defaultRecipe()
                 .addCustomItem((w, b, p) -> new HammerableBlockItem(b, p))
                 .build();
-        this.addEntry(CORNER_TRIM);
+        this.addEntry(cornerTrim);
 
-        BOARD = ItemOnlyEntrySet.builder(WoodType.class, "board",
+        board = ItemOnlyEntrySet.builder(WoodType.class, "board",
                         ModItems.OAK_BOARD, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BoardItem(new Item.Properties())
+                        w -> new BoardItem(new Item.Properties().tab(tab))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(ModTags.BOARDS, Registry.ITEM_REGISTRY)
                 .addTexture(modRes("item/board/oak_board"))
+                .addModelTransform(m -> m.addModifier((s, resLoc, w) -> s.replace(
+            "\"handcrafted:item/board/oak_board\"",
+        "\""+ EveryCompat.res("item/board/" + shortenedId() + "/" + w.getAppendableId() + "_board") + "\"" ))
+                )
 //                .defaultRecipe()
                 .build();
-        this.addEntry(BOARD);
+        this.addEntry(board);
 
 
-*/
     }
 
     @Override
@@ -493,6 +513,8 @@ public class HandcraftedModule extends SimpleModule {
         event.register((BlockEntityType) counter_1.getTileHolder().get(), OptimizedCounterRenderer::new);
         event.register((BlockEntityType) counter_2.getTileHolder().get(), OptimizedCounterRenderer::new);
         event.register((BlockEntityType) counter_3.getTileHolder().get(), OptimizedCounterRenderer::new);
+
+//        event.register((BlockEntityType) shelf_1.getTileHolder().get(), ShelfRenderer::new);
     }
 
     //TYPE: ================ stitchAtlasTextures
@@ -846,14 +868,31 @@ public class HandcraftedModule extends SimpleModule {
         }
     }
 
-    public class CompatCupboardBlock extends CupboardBlock {
-        public CompatCupboardBlock(Properties properties) {
+    public class compatCupboardBlock extends CupboardBlock {
+        public compatCupboardBlock(Properties properties) {
             super(properties);
         }
 
         @Override
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-            return new compatCupboardEntity(pos, state);
+            return new comaptStorageEntity(pos, state);
+        }
+
+        @Override
+        public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
+                                              InteractionHand hand, BlockHitResult hit) {
+            if (player.getMainHandItem().getItem() instanceof HammerItem) {
+                return InteractionResult.PASS;
+            } else if (level.isClientSide) {
+                return InteractionResult.SUCCESS;
+            } else {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof comaptStorageEntity storage) {
+                    player.openMenu(storage);
+                }
+
+                return InteractionResult.CONSUME;
+            }
         }
 
         @Override
@@ -861,6 +900,53 @@ public class HandcraftedModule extends SimpleModule {
             ResourceLocation id = Registry.BLOCK.getKey(state.getBlock());
             return (Registry.ITEM.get(EveryCompat.res(
                     id.getPath().substring(0, id.getPath().length() - 2)))).getDefaultInstance();
+        }
+    }
+
+    public class compatDrawerBlock extends compatCupboardBlock implements Hammerable {
+        public compatDrawerBlock(Properties properties) {
+            super(properties);
+            this.registerDefaultState(this.defaultBlockState().setValue(DrawerBlock.DRAWER_SHAPE, DirectionalBlockSide.SINGLE).setValue(FACING, Direction.NORTH));
+        }
+
+        @Override
+        protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+            builder.add(FACING, DrawerBlock.DRAWER_SHAPE);
+        }
+
+        @Override
+        public void onHammer(Level level, BlockPos pos, BlockState state, Direction side, Player user, Vec3 hitPos) {
+            Block block = state.getBlock();
+            ResourceLocation id = Registry.BLOCK.getKey(block);
+            Block replacement = Registry.BLOCK.get(new ResourceLocation(id.getNamespace(), id.getPath().replaceAll("\\d+",
+                    String.valueOf(Integer.parseInt(id.getPath().replaceAll("\\D+", "")) + 1))));
+            CompoundTag tag = null;
+            if (level.getBlockEntity(pos) instanceof comaptStorageEntity storage) {
+                tag = storage.saveWithoutMetadata();
+            }
+            if (replacement == Blocks.AIR) {
+                level.setBlock(pos, Registry.BLOCK.get(new ResourceLocation(id.getNamespace(), id.getPath().replaceAll("\\d+", "1"))).defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(DrawerBlock.DRAWER_SHAPE, state.getValue(DrawerBlock.DRAWER_SHAPE)), Block.UPDATE_ALL);
+            } else {
+                level.setBlock(pos, replacement.defaultBlockState()
+                        .setValue(FACING, state.getValue(FACING)).setValue(DrawerBlock.DRAWER_SHAPE,
+                                state.getValue(DrawerBlock.DRAWER_SHAPE)), Block.UPDATE_ALL);
+            }
+            if (tag != null) {
+                if (level.getBlockEntity(pos) instanceof comaptStorageEntity storage) {
+                    storage.load(tag);
+                }
+            }
+        }
+    }
+
+    public class compatShelfBlock extends ShelfBlock {
+        public compatShelfBlock(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new compatShelfEntity(pos, state);
         }
     }
 
@@ -972,20 +1058,20 @@ public class HandcraftedModule extends SimpleModule {
     }
 
     @MethodsReturnNonnullByDefault
-    public class compatCupboardEntity extends RandomizableContainerBlockEntity {
+    public class comaptStorageEntity extends RandomizableContainerBlockEntity {
         private NonNullList<ItemStack> items;
         private final ContainerOpenersCounter openersCounter;
 
-        public compatCupboardEntity(BlockPos blockPos, BlockState blockState) {
+        public comaptStorageEntity(BlockPos blockPos, BlockState blockState) {
             super(cupboard_1.getTileHolder().get(), blockPos, blockState);
             this.items = NonNullList.withSize(27, ItemStack.EMPTY);
             this.openersCounter = new ContainerOpenersCounter() {
                 protected void onOpen(Level level, BlockPos pos, BlockState state) {
-                    compatCupboardEntity.this.playSound(SoundEvents.BARREL_OPEN);
+                    comaptStorageEntity.this.playSound(SoundEvents.BARREL_OPEN);
                 }
 
                 protected void onClose(Level level, BlockPos pos, BlockState state) {
-                    compatCupboardEntity.this.playSound(SoundEvents.BARREL_CLOSE);
+                    comaptStorageEntity.this.playSound(SoundEvents.BARREL_CLOSE);
                 }
 
                 protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int count, int openCount) {
@@ -994,7 +1080,7 @@ public class HandcraftedModule extends SimpleModule {
                 protected boolean isOwnContainer(Player player) {
                     if (player.containerMenu instanceof ChestMenu) {
                         Container container = ((ChestMenu)player.containerMenu).getContainer();
-                        return container == compatCupboardEntity.this;
+                        return container == comaptStorageEntity.this;
                     } else {
                         return false;
                     }
@@ -1065,6 +1151,12 @@ public class HandcraftedModule extends SimpleModule {
         void playSound(SoundEvent sound) {
             BlockPos pos = this.getBlockPos();
             this.level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), sound, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+        }
+    }
+
+    public class compatShelfEntity extends ItemHoldingBlockEntity {
+        public compatShelfEntity(BlockPos pos, BlockState state) {
+            super(shelf_1.getTileHolder().get(), pos, state);
         }
     }
 }
