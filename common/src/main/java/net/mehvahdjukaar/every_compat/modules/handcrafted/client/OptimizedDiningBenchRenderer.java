@@ -5,6 +5,8 @@ import com.mojang.math.Vector3f;
 import earth.terrarium.handcrafted.client.block.chair.diningbench.DiningBenchModel;
 import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlock;
 import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlockEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -13,6 +15,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 
+@Environment(EnvType.CLIENT)
 public class OptimizedDiningBenchRenderer implements BlockEntityRenderer<DiningBenchBlockEntity> {
 
     public static OptimizedDiningBenchRenderer INSTANCE = null;

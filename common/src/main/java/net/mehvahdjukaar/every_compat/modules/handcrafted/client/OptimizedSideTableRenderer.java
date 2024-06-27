@@ -5,6 +5,8 @@ import com.mojang.math.Vector3f;
 import earth.terrarium.handcrafted.client.block.table.side_table.SideTableModel;
 import earth.terrarium.handcrafted.common.block.table.sidetable.SideTableBlock;
 import earth.terrarium.handcrafted.common.block.table.sidetable.SideTableBlockEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -14,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
+@Environment(EnvType.CLIENT)
 public class OptimizedSideTableRenderer implements BlockEntityRenderer<SideTableBlockEntity> {
     public static OptimizedSideTableRenderer INSTANCE = null;
     private final SideTableModel model;

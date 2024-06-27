@@ -6,6 +6,8 @@ import com.mojang.math.Vector3f;
 import earth.terrarium.handcrafted.client.block.chair.chair.ChairModel;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -15,6 +17,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
+@Environment(EnvType.CLIENT)
 public class OptimizedChairRenderer implements BlockEntityRenderer<ChairBlockEntity> {
 
     public static OptimizedChairRenderer INSTANCE = null;

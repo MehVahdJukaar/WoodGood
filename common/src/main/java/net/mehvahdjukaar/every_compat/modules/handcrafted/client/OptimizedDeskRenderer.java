@@ -5,6 +5,8 @@ import com.mojang.math.Vector3f;
 import earth.terrarium.handcrafted.client.block.table.desk.DeskModel;
 import earth.terrarium.handcrafted.common.block.table.desk.DeskBlock;
 import earth.terrarium.handcrafted.common.block.table.desk.DeskBlockEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -14,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
+@Environment(EnvType.CLIENT)
 public class OptimizedDeskRenderer implements BlockEntityRenderer<DeskBlockEntity> {
     public static OptimizedDeskRenderer INSTANCE = null;
     private final DeskModel model;

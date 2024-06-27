@@ -674,6 +674,33 @@
   "block_type.buildersdelight.glass_pane_8": "%s Glass Pane",
   "tooltip.everycomp.buildersdelight.glass_pane_8": "Window",
 
-  "item_type.handcrafted.counter": "%s Counter"
+  "item_type.handcrafted.board": "%s Board",
+  "item_type.handcrafted.counter": "%s Counter",
+  "item_type.handcrafted.cupboard": "%s Cupboard",
+  "item_type.handcrafted.drawer": "%s Drawer",
+  "item_type.handcrafted.shelf": "%s Shelf",
+
+  "block_type.handcrafted.counter_1": "%s Counter",
+  "block_type.handcrafted.counter_2": "%s Counter",
+  "block_type.handcrafted.counter_3": "%s Counter",
+  "block_type.handcrafted.cupboard_1": "%s Cupboard",
+  "block_type.handcrafted.cupboard_2": "%s Cupboard",
+  "block_type.handcrafted.drawer_1": "%s Drawer",
+  "block_type.handcrafted.drawer_2": "%s Drawer",
+  "block_type.handcrafted.drawer_3": "%s Drawer",
+  "block_type.handcrafted.drawer_4": "%s Drawer",
+  "block_type.handcrafted.shelf_1": "%s Shelf",
+  "block_type.handcrafted.pillar_trim": "%s Pillar Trim",
+  "block_type.handcrafted.corner_trim": "%s Corner Trim",
+  "block_type.handcrafted.side_table": "%s Side Table",
+  "block_type.handcrafted.desk": "%s Desk",
+  "block_type.handcrafted.nightstand": "%s Nightstand",
+  "block_type.handcrafted.dining_bench": "%s Dining Bench",
+  "block_type.handcrafted.fancy_bed": "%s Fancy Bed",
+  "block_type.handcrafted.couch": "%s Couch",
+  "block_type.handcrafted.bench": "%s Bench",
+  "block_type.handcrafted.table": "%s Table",
+  "block_type.handcrafted.chair": "%s Chair"
+
 }
 

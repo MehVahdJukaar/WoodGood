@@ -9,6 +9,8 @@ import earth.terrarium.handcrafted.common.block.fancybed.FancyBedBlock;
 import earth.terrarium.handcrafted.common.block.fancybed.FancyBedBlockEntity;
 import earth.terrarium.handcrafted.common.block.property.DirectionalBlockSide;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -25,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.BedPart;
 
 import java.util.Map;
 
+@Environment(EnvType.CLIENT)
 public class OptimizedFancyBedRenderer implements BlockEntityRenderer<FancyBedBlockEntity> {
     public static final Map<Item, Material> OBJECT_TO_TEXTURE = new Object2ObjectOpenHashMap<>();
 

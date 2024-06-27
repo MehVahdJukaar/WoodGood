@@ -7,6 +7,8 @@ import earth.terrarium.handcrafted.common.block.chair.couch.CouchBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
 import earth.terrarium.handcrafted.common.block.property.CouchShape;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -19,6 +21,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.Map;
 
+@Environment(EnvType.CLIENT)
 public class OptimizedCouchRenderer implements BlockEntityRenderer<CouchBlockEntity> {
     public static final Map<Item, Material> OBJECT_TO_TEXTURE = new Object2ObjectOpenHashMap<>();
 
