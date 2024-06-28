@@ -110,12 +110,12 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
-    modImplementation("curse.maven:selene-499980:5409387") // v2.11.30
+    modImplementation("curse.maven:selene-499980:5478857") // v2.12.6
 
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modImplementation("curse.maven:architectury-api-419699:5137938") // REI, Furnish
-    modImplementation("curse.maven:resourceful-lib-570073:5361260") // Chipped, Handcrafted
+    modImplementation("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
+    modImplementation("curse.maven:resourceful-lib-570073:5361260")  // v2.1.25 | Required by: Chipped, Handcrafted
     modImplementation("curse.maven:athena-841890:5176879") // Chipped
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
