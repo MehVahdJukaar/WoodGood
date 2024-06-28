@@ -147,7 +147,7 @@ dependencies {
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
-    modCompileOnly("curse.maven:architects-palette-433862:5036133")
+    modImplementation("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
@@ -161,10 +161,12 @@ dependencies {
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
+    modCompileOnly("curse.maven:handcrafted-538214:5118729")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619")
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
@@ -199,7 +201,6 @@ dependencies {
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
-    modImplementation("curse.maven:handcrafted-538214:5118729")
 
 
     // ======================================== DISABLED FOR A REASON =============================================== \\

@@ -13,7 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoor
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModuleOld;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
-import net.mehvahdjukaar.every_compat.modules.fabric.more_crafting_tables.MoreCraftingTablesModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.lieonlion.MoreCraftingTablesModule;
 //import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
