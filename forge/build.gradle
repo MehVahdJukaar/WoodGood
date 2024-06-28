@@ -166,6 +166,7 @@ dependencies {
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619")
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
