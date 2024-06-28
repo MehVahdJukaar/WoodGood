@@ -1,24 +1,16 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.variants;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.JsonObject;
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -27,14 +19,10 @@ import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.xanthian.variantvanillablocks.block.*;
-import net.xanthian.variantvanillablocks.block.custom.VariantChestBlock;
 import net.xanthian.variantvanillablocks.utils.ModCreativeTab;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -45,15 +33,15 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, BeehiveBlock> beehive;
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> cartography;
-//    public final SimpleEntrySet<WoodType, Block> chests;
+    //    public final SimpleEntrySet<WoodType, Block> chests;
     public final SimpleEntrySet<WoodType, ChiseledBookShelfBlock> chiseledBookshelves;
     public final SimpleEntrySet<WoodType, ComposterBlock> composters;
-    public final SimpleEntrySet<WoodType, Block> craftingTable;
-    public final SimpleEntrySet<WoodType, Block> fletchingTable;
-    public final SimpleEntrySet<WoodType, Block> grindstones;
-    public final SimpleEntrySet<WoodType, Block> lectern;
-    public final SimpleEntrySet<WoodType, Block> smithingTable;
-    public final SimpleEntrySet<WoodType, Block> smoker;
+    public final SimpleEntrySet<WoodType, CraftingTableBlock> craftingTable;
+    public final SimpleEntrySet<WoodType, FletchingTableBlock> fletchingTable;
+    public final SimpleEntrySet<WoodType, GrindstoneBlock> grindstones;
+    public final SimpleEntrySet<WoodType, LecternBlock> lectern;
+    public final SimpleEntrySet<WoodType, SmithingTableBlock> smithingTable;
+    public final SimpleEntrySet<WoodType, SmokerBlock> smoker;
 
     protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
     @SuppressWarnings("unused")
@@ -128,7 +116,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
                         () -> CartographyTables.OAK_CARTOGRAPHY_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE))
+                        w -> (Block) new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)) {}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.BLOCK)
@@ -200,7 +188,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         () -> CraftingTables.SPRUCE_CRAFTING_TABLE,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("crafting_tables"), Registries.BLOCK)
@@ -219,7 +207,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         fletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
                         () -> FletchingTables.OAK_FLETCHING_TABLE,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FletchingTableBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new FletchingTableBlock(Utils.copyPropertySafe(w.planks)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("fletching_tables"), Registries.BLOCK)
@@ -238,7 +226,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         grindstones = SimpleEntrySet.builder(WoodType.class, "grindstone",
                         () -> Grindstones.OAK_GRINDSTONE,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GrindstoneBlock(Utils.copyPropertySafe(Blocks.GRINDSTONE))
+                        w -> new GrindstoneBlock(Utils.copyPropertySafe(Blocks.GRINDSTONE)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("grindstones"), Registries.BLOCK)
@@ -252,7 +240,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
                         () -> Lecterns.ACACIA_LECTERN,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new LecternBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new LecternBlock(Utils.copyPropertySafe(w.planks)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("lecterns"), Registries.BLOCK)
@@ -272,7 +260,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         smithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
                         () -> SmithingTables.OAK_SMITHING_TABLE,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SmithingTableBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new SmithingTableBlock(Utils.copyPropertySafe(w.planks)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("smithing_tables"), Registries.BLOCK)
@@ -291,7 +279,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
                         () -> Smokers.ACACIA_SMOKER,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new SmokerBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new SmokerBlock(Utils.copyPropertySafe(w.planks)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("smokers"), Registries.BLOCK)
