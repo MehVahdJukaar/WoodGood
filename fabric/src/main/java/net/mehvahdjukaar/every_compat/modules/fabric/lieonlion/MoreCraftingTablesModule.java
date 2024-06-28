@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.fabric.more_crafting_tables;
+package net.mehvahdjukaar.every_compat.modules.fabric.lieonlion;
 
 import io.github.lieonlion.lolmct.bock.MoreCraftingTableBlock;
 import io.github.lieonlion.lolmct.bock.MoreTableEnum;
@@ -14,7 +14,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
-// SUPPORT: v1.2.6+
+// SUPPORT: v1.2.1+
 // NOTE: More Crafting Table is developed by LieOnLion and has both FORGE & FABRIC
 public class MoreCraftingTablesModule extends SimpleModule {
 
