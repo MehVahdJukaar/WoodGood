@@ -33,13 +33,16 @@ dependencies {
         exclude group: 'net.fabricmc.fabric-api'
     }
     modCompileOnly ("com.terraformersmc:modmenu:4.0.6")
-    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.1"
-    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.1"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.2"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.2"
 
 //    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
     modImplementation("curse.maven:selene-499980:5478855") // v2.12.6
 
     // ============================================== DEPENDENCIES ================================================== \\
+    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
+//    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2") // updated to 1.20.1
+//    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
     modImplementation("curse.maven:athena-841890:5176880") // Chipped
     modCompileOnly("curse.maven:cloth-config-348521:3972420") // REI
     modImplementation("curse.maven:architectury-api-419699:5137936") // REI
@@ -50,9 +53,6 @@ dependencies {
 
         // LOCAL
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
-//    modCompileOnly("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
-//    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2") // updated to 1.20.1
-    modCompileOnly("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
 
@@ -61,7 +61,6 @@ dependencies {
     modCompileOnly("curse.maven:roughly-enough-items-310111:5301375")
     modImplementation("curse.maven:modmenu-308702:5162837")
     modImplementation("curse.maven:jei-238222:5101365")
-
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")

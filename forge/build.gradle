@@ -114,6 +114,8 @@ dependencies {
 
 
     // ============================================== DEPENDENCIES ================================================== \\
+    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // no longer required since 0.5.1
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modImplementation("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
     modImplementation("curse.maven:resourceful-lib-570073:5361260")  // v2.1.25 | Required by: Chipped, Handcrafted
     modImplementation("curse.maven:athena-841890:5176879") // Chipped
@@ -125,14 +127,12 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
-    modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants
+    modImplementation("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
 
         // LOCAL
-    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // no longer required since 0.5.1
-    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
     modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-forge-1.20.1-1.0.0-beta.4")
@@ -147,7 +147,7 @@ dependencies {
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
-    modImplementation("curse.maven:architects-palette-433862:5036133")
+    modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
@@ -166,7 +166,7 @@ dependencies {
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619")
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971")
+    modImplementation("curse.maven:more-crafting-tables-lieonlion-913586:5330971")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
