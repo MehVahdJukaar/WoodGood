@@ -137,7 +137,7 @@ public class MacawFencesModule extends SimpleModule {
                     String typeName = l.getTypeName();
                     switch (namespace) {
                         case "chipped" -> {
-                            return LeavesPath("","", s, l, true);
+                            return LeavesPath("","", s, l, "", true);
                         }
                         case "regions_unexplored" -> {
                             switch (typeName) {
@@ -175,11 +175,17 @@ public class MacawFencesModule extends SimpleModule {
     }
 
     public String LeavesPath(String leavesName, String folderName, String s, LeavesType l) {
-        return LeavesPath(leavesName, folderName, s, l, false);
+        return LeavesPath(leavesName, folderName, s, l,"", false);
     }
 
-    public String LeavesPath(String leavesName, String folderName, String s, LeavesType l, boolean has_CHIPPED) {
-        String path = "\"" + l.getNamespace() + ":block/";
+    public String LeavesPath(String leavesName, String folderName, String s, LeavesType l, String namespace) {
+        return LeavesPath(leavesName, folderName, s, l, namespace,false);
+    }
+
+    public String LeavesPath(String leavesName, String folderName, String s, LeavesType l, String namespace,  boolean has_CHIPPED) {
+        String path = (namespace.isBlank()) ? "\"" + l.getNamespace() : "\"" + namespace;
+        path += ":block/";
+
         String LeavesTypeName = l.getTypeName();
         String folder;
         if (!leavesName.isEmpty()) {

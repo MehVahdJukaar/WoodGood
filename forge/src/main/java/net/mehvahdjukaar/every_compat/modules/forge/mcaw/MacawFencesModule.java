@@ -119,12 +119,10 @@ public class MacawFencesModule extends SimpleModule {
                                         return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
                                                 .mapColor(MapColor.TERRACOTTA_RED).lightLevel((s) -> 0));
                                     }
-
                                     case "orange_maple" -> {
                                         return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
                                                 .mapColor(MapColor.TERRACOTTA_ORANGE).lightLevel((s) -> 0));
                                     }
-
                                     case "yellow_maple" -> {
                                         return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
                                                 .mapColor(MapColor.TERRACOTTA_YELLOW).lightLevel((s) -> 0));
@@ -158,7 +156,7 @@ public class MacawFencesModule extends SimpleModule {
                                 return LeavesPath("maple_leaves", "", s, l);
                         }
                         case "chipped" -> {
-                            return LeavesPath("","", s, l, true);
+                            return LeavesPath("","", s, l, "",  true);
                         }
                         case "blue_skies" -> {
                             if (typeName.equals("comet"))
@@ -217,6 +215,25 @@ public class MacawFencesModule extends SimpleModule {
                             }
                             return LeavesPath("", l.getTypeName(), s, l);
                         }
+                        case "twilightforest" -> {
+                            switch (typeName) {
+                                case "beanstalk" -> {
+                                    return LeavesPath("azalea_leaves", "", s, l, "minecraft");
+                                }
+                                case "canopy" -> {
+                                    return LeavesPath("spruce_leaves", "", s, l, "minecraft");
+                                }
+                                case "dark" -> {
+                                    return LeavesPath("darkwood_leaves", "", s, l);
+                                }
+                                case "mangrove" -> {
+                                    return LeavesPath("birch_leaves", "", s, l, "minecraft");
+                                }
+                                case "rainbow_oak", "twilight_oak", "thorn" -> {
+                                    return LeavesPath("oak_leaves", "", s, l, "minecraft");
+                                }
+                            }
+                        }
                     }
                     return LeavesPath("", "", s, l);
                 }))
@@ -225,11 +242,17 @@ public class MacawFencesModule extends SimpleModule {
     }
 
     public String LeavesPath(String leavesName, String folderName, String s, LeavesType l) {
-        return LeavesPath(leavesName, folderName, s, l, false);
+        return LeavesPath(leavesName, folderName, s, l,"", false);
     }
 
-    public String LeavesPath(String leavesName, String folderName, String s, LeavesType l, boolean has_CHIPPED) {
-        String path = "\"" + l.getNamespace() + ":block/";
+    public String LeavesPath(String leavesName, String folderName, String s, LeavesType l, String namespace) {
+        return LeavesPath(leavesName, folderName, s, l, namespace,false);
+    }
+
+    public String LeavesPath(String leavesName, String folderName, String s, LeavesType l, String namespace, boolean has_CHIPPED) {
+        String path = (namespace.isBlank()) ? "\"" + l.getNamespace() : "\"" + namespace;
+        path += ":block/";
+
         String LeavesTypeName = l.getTypeName();
         String folder;
         if (!leavesName.isEmpty()) { // unique name for leaves texture
