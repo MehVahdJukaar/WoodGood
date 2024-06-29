@@ -4,6 +4,17 @@
   "tooltip.everycomp.mod": "Mod: %s",
   "tooltip.everycomp.wood_type": "Wood Type: %s",
   "tooltip.everycomp.leaf_type": "Leaves Type: %s",
+
+  "block.everycomp.q.extendedmushrooms.hollow_glowshroom_log": "Hollow Glowshroom Stem",
+  "block.everycomp.q.extendedmushrooms.hollow_honey_fungus_log": "Hollow Honey Fungus Stem",
+  "block.everycomp.q.extendedmushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
+  "block.everycomp.q.extendedmushrooms.hollow_poisonous_mushroom_log": "Hollow Poisonous Mushroom Stem",
+
+  "block.everycomp.tf.extendedmushrooms.hollow_glowshroom_log": "Hollow Glowshroom Stem",
+  "block.everycomp.tf.extendedmushrooms.hollow_honey_fungus_log": "Hollow Honey Fungus Stem",
+  "block.everycomp.tf.extendedmushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
+  "block.everycomp.tf.extendedmushrooms.hollow_poisonous_mushroom_log": "Hollow Poisonous Mushroom Stem",
+
   "block_type.twigs.table": "%s Table",
 
   "wood_type.domum_ornamentum.cactus": "Green Cactus",
