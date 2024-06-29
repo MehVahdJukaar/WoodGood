@@ -34,6 +34,21 @@ public class SpriteHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
 
+        addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
+        addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
+
+        // Extended Mushrooms
+        addOptional("extendedmushrooms:glowshroom_stem", "_top", "extendedmushrooms:block/glowshroom_stem");
+        addOptional("extendedmushrooms:poisonous_mushroom_stem", "_top", "extendedmushrooms:block/poisonous_mushroom_stem");
+
+        addOptional("extendedmushrooms:stripped_mushroom_stem", "_side", "extendedmushrooms:block/stripped_mushroom_stem");
+        addOptional("extendedmushrooms:stripped_mushroom_stem", "_top", "extendedmushrooms:block/stripped_mushroom_stem");
+
+        addOptional("extendedmushrooms:honey_fungus_stem", "_side", "extendedmushrooms:block/honey_fungus_stem");
+        addOptional("extendedmushrooms:honey_fungus_stem", "_top", "extendedmushrooms:block/honey_fungus_stem");
+        addOptional("extendedmushrooms:honey_fungus_stem_stripped", "_side", "extendedmushrooms:block/honey_fungus_stem_stripped");
+        addOptional("extendedmushrooms:honey_fungus_stem_stripped", "_top", "extendedmushrooms:block/honey_fungus_stem_stripped");
+
         // Let's Do - Vinery
             // Leaves
         addOptional("vinery:apple_leaves", "_leaves", "vinery:block/apple_leaves_0");
