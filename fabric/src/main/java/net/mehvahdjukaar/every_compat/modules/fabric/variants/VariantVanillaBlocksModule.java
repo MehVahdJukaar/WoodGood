@@ -32,7 +32,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, BarrelBlock> barrel;
     public final SimpleEntrySet<WoodType, BeehiveBlock> beehive;
     public final SimpleEntrySet<WoodType, Block> bookshelves;
-    public final SimpleEntrySet<WoodType, Block> cartography;
+    public final SimpleEntrySet<WoodType, CartographyTableBlock> cartography;
+    //TODO common_class folder from FORGE side need to be added and modified
     //    public final SimpleEntrySet<WoodType, Block> chests;
     public final SimpleEntrySet<WoodType, ChiseledBookShelfBlock> chiseledBookshelves;
     public final SimpleEntrySet<WoodType, ComposterBlock> composters;
@@ -116,15 +117,15 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
                         () -> CartographyTables.OAK_CARTOGRAPHY_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> (Block) new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)) {}
+                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.ITEM)
-                .addTexture(modRes("block/oak_cartography_table_side1"))
-                .addTexture(modRes("block/oak_cartography_table_side2"))
+                .addTextureM(modRes("block/oak_cartography_table_side1"), EveryCompat.res("block/vanilla_cartography_table_side1_m"))
+                .addTextureM(modRes("block/oak_cartography_table_side2"), EveryCompat.res("block/vanilla_cartography_table_side2_m"))
                 .addTexture(modRes("block/oak_cartography_table_side3"))
-                .addTexture(modRes("block/oak_cartography_table_top"))
+                .addTextureM(modRes("block/oak_cartography_table_top"), EveryCompat.res("block/vanilla_cartography_table_top_m"))
                 .defaultRecipe()
                 .setTab(() -> tab)
                 .build();
@@ -160,7 +161,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(modRes("chiseled_bookshelves"), Registries.ITEM)
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_empty"))
                 .addTextureM(modRes("block/acacia_chiseled_bookshelf_occupied"),
-                        EveryCompat.res("block/acacia_chiseled_bookshelf_occupied_m"))
+                        EveryCompat.res("block/vanilla_chiseled_bookshelf_occupied_m"))
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_top"))
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)

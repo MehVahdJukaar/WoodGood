@@ -137,10 +137,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.ITEM)
-                .addTexture(modRes("block/oak_cartography_table_side1"))
-                .addTexture(modRes("block/oak_cartography_table_side2"))
+                .addTextureM(modRes("block/oak_cartography_table_side1"), EveryCompat.res("block/vanilla_cartography_table_side1_m"))
+                .addTextureM(modRes("block/oak_cartography_table_side2"), EveryCompat.res("block/vanilla_cartography_table_side2_m"))
                 .addTexture(modRes("block/oak_cartography_table_side3"))
-                .addTexture(modRes("block/oak_cartography_table_top"))
+                .addTextureM(modRes("block/oak_cartography_table_top"), EveryCompat.res("block/vanilla_cartography_table_top_m"))
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
@@ -176,7 +176,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(modRes("chiseled_bookshelves"), Registries.ITEM)
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_empty"))
                 .addTextureM(modRes("block/acacia_chiseled_bookshelf_occupied"),
-                        EveryCompat.res("block/acacia_chiseled_bookshelf_occupied_m"))
+                        EveryCompat.res("block/vanilla_chiseled_bookshelf_occupied_m"))
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_top"))
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
