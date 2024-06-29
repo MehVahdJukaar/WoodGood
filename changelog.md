@@ -1,6 +1,6 @@
 ## FIXES:
-- **Macaw's Fences & Walls** (COMMON) - Fixed the missing textures with **Malum**
-- **Architect's Palette** (COMMON) - Strange bug regarding the modStairBlock class should be fixed 
+- **Macaw's Fences & Walls** (COMMON) - Fixed *hedge*s' texture problem from **The Twilight Forest**_
+- **Others** (FORGE) - Fixed the texture problem from **Extended Mushroom** for **Quark** & **The Twilight Forest**
 
 ---
 **LEGEND**:
