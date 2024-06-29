@@ -48,10 +48,10 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
+        addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
 
         if (EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
         // ========================================== WORK IN PROGRESS ============================================== \\
-        addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
 
