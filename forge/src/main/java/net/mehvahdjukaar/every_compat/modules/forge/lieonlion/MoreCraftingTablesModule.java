@@ -13,6 +13,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.Tags;
@@ -32,17 +33,16 @@ public class MoreCraftingTablesModule extends SimpleModule {
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new MoreCraftingTableBlock(MapColor.NONE))
+                        w -> new MoreCraftingTableBlock(MapColor.WOOD))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/lolmct/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
-                .addTag(new ResourceLocation("forge:workbenches"), Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:workbench"), Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:workbenches"), Registries.ITEM)
-                .addTag(new ResourceLocation("forge:workbench"), Registries.ITEM)
-                .addTag(new ResourceLocation("charm:crafting_table"), Registries.ITEM)
-                .addTag(modRes("revertable_workbench"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("forge:workbench"), Registries.BLOCK)
+                .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.BLOCK)
+                .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.ITEM)
+                .addTag(new ResourceLocation("forge:workbench"), Registries.ITEM)
+                .addTag(new ResourceLocation("quad:fuel/wood"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
