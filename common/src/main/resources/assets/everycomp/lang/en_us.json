@@ -707,7 +707,8 @@
   "block_type.handcrafted.couch": "%s Couch",
   "block_type.handcrafted.bench": "%s Bench",
   "block_type.handcrafted.table": "%s Table",
-  "block_type.handcrafted.chair": "%s Chair"
+  "block_type.handcrafted.chair": "%s Chair",
 
+  "block_type.mighty_mail.mail_box": "%s Mailbox"
 }
 
