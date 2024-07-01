@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.forge;
 
 import com.google.common.collect.Maps;
 import com.google.gson.*;
-import mezz.jei.forge.platform.PlatformHelper;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
