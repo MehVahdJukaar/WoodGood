@@ -39,7 +39,6 @@ import net.mehvahdjukaar.every_compat.modules.dramaticdoors.DramaticDoorsMacawMo
 import net.mehvahdjukaar.every_compat.modules.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.market_crates.MarketCratesModule;
 import net.mehvahdjukaar.every_compat.modules.productive_bees.ProductiveBeesModule;
-import net.mehvahdjukaar.every_compat.modules.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.corail.PillarModule;
 import net.mehvahdjukaar.every_compat.modules.corail.WoodcutterModule;
 import net.mehvahdjukaar.every_compat.modules.xerca.XercaModule;
