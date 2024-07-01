@@ -180,7 +180,7 @@ dependencies {
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240514")
     modCompileOnly("curse.maven:macaws-doors-378646:4649906")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5050215")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442213")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726294")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618179")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054877")
