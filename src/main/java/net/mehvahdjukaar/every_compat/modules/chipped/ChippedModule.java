@@ -32,123 +32,38 @@ import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static net.mehvahdjukaar.selene.client.asset_generators.textures.SpriteUtils.extrapolateWoodItemPalette;
 
 // TODO: Fix recipes & tags
-// `chipped:oak_planks` tags should be changed to `modid:modded_planks`
-// The same should be done for door & trapdoor variants
 // Mcmeta files are not copied from the base block
 
 // SUPPORT: v2.0.1
 public class ChippedModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> stackedPlanks;
-    public final SimpleEntrySet<WoodType, Block> hewnPlanks;
-    public final SimpleEntrySet<WoodType, Block> verticallyRailedPlanks;
-    public final SimpleEntrySet<WoodType, Block> framedPlanks;
-    public final SimpleEntrySet<WoodType, Block> detailedPlanks;
-    public final SimpleEntrySet<WoodType, Block> brickyPlanks;
-    public final SimpleEntrySet<WoodType, Block> basketWovenPlanks;
-    public final SimpleEntrySet<WoodType, Block> boxedPlanks;
-    public final SimpleEntrySet<WoodType, Block> brickBondPlanks;
-    public final SimpleEntrySet<WoodType, Block> corneredPlanks;
-    public final SimpleEntrySet<WoodType, Block> cratedPlanks;
-    public final SimpleEntrySet<WoodType, Block> crossLacedPlanks;
-    public final SimpleEntrySet<WoodType, Block> crossedPlanks;
-    public final SimpleEntrySet<WoodType, Block> diagonalPlanks;
-    public final SimpleEntrySet<WoodType, Block> diamondPlanks;
-    public final SimpleEntrySet<WoodType, Block> doubleHerringbonePlanks;
-    public final SimpleEntrySet<WoodType, Block> enclosedPlanks;
-    public final SimpleEntrySet<WoodType, Block> finePlanks;
-    public final SimpleEntrySet<WoodType, Block> fineVerticalPlanks;
-    public final SimpleEntrySet<WoodType, Block> herringbonePlanks;
-    public final SimpleEntrySet<WoodType, Block> lacedPlanks;
-    public final SimpleEntrySet<WoodType, Block> mosaicPlanks;
-    public final SimpleEntrySet<WoodType, Block> nailedPlanks;
-    public final SimpleEntrySet<WoodType, Block> naturalPlanks;
-    public final SimpleEntrySet<WoodType, Block> panelPlanks;
-    public final SimpleEntrySet<WoodType, Block> peggedPlanks;
-    public final SimpleEntrySet<WoodType, Block> polishedPlanks;
-    public final SimpleEntrySet<WoodType, Block> shavingsPlanks;
-    public final SimpleEntrySet<WoodType, Block> railedPlanks;
-    public final SimpleEntrySet<WoodType, Block> shiftedPlanks;
-    public final SimpleEntrySet<WoodType, Block> slantedPlanks;
-    public final SimpleEntrySet<WoodType, Block> smoothPlanks;
-    public final SimpleEntrySet<WoodType, Block> thinPlanks;
-    public final SimpleEntrySet<WoodType, Block> tiledPlanks;
-    public final SimpleEntrySet<WoodType, Block> versaillesPlanks;
-    public final SimpleEntrySet<WoodType, Block> verticalPlanks;
-    public final SimpleEntrySet<WoodType, Block> whirlwindPlanks;
-    public final SimpleEntrySet<WoodType, Block> wickeredPlanks;
-    public final SimpleEntrySet<WoodType, Block> zigzagPlanks;
-    public final SimpleEntrySet<WoodType, Block> latticePlanks;
-    public final SimpleEntrySet<WoodType, Block> framedBoardPlanks;
+    public final SimpleEntrySet<WoodType, Block> stackedPlanks, hewnPlanks, verticallyRailedPlanks, framedPlanks,
+            detailedPlanks, brickyPlanks, basketWovenPlanks, boxedPlanks, brickBondPlanks, corneredPlanks, cratedPlanks,
+            crossLacedPlanks, crossedPlanks, diagonalPlanks, diamondPlanks, doubleHerringbonePlanks, enclosedPlanks,
+            finePlanks, fineVerticalPlanks, herringbonePlanks, lacedPlanks, mosaicPlanks, nailedPlanks, naturalPlanks,
+            panelPlanks, peggedPlanks, polishedPlanks, shavingsPlanks, railedPlanks, shiftedPlanks, slantedPlanks,
+            smoothPlanks, thinPlanks, tiledPlanks, versaillesPlanks, verticalPlanks, whirlwindPlanks, wickeredPlanks,
+            zigzagPlanks, latticePlanks, framedBoardPlanks;
 
-    public final SimpleEntrySet<WoodType, Block> beachDoor;
-    public final SimpleEntrySet<WoodType, Block> slidingDoor;
-    public final SimpleEntrySet<WoodType, Block> modernDoor;
-    public final SimpleEntrySet<WoodType, Block> boardedDoor;
-    public final SimpleEntrySet<WoodType, Block> dualPaneledDoor;
-    public final SimpleEntrySet<WoodType, Block> fortifiedDoor;
-    public final SimpleEntrySet<WoodType, Block> gatedDoor;
-    public final SimpleEntrySet<WoodType, Block> glassDoor;
-    public final SimpleEntrySet<WoodType, Block> heavyDoor;
-    public final SimpleEntrySet<WoodType, Block> overgrownDoor;
-    public final SimpleEntrySet<WoodType, Block> paneledDoor;
-    public final SimpleEntrySet<WoodType, Block> paperDoor;
-    public final SimpleEntrySet<WoodType, Block> pressedDoor;
-    public final SimpleEntrySet<WoodType, Block> screenDoor;
-    public final SimpleEntrySet<WoodType, Block> secretDoor;
-    public final SimpleEntrySet<WoodType, Block> shackDoor;
-    public final SimpleEntrySet<WoodType, Block> supportedDoor;
-    public final SimpleEntrySet<WoodType, Block> tileWindowedDoor;
-    public final SimpleEntrySet<WoodType, Block> tiledDoor;
-    public final SimpleEntrySet<WoodType, Block> windowedDoor;
+    public final SimpleEntrySet<WoodType, Block> beachDoor, slidingDoor, modernDoor, boardedDoor, dualPaneledDoor,
+            fortifiedDoor, gatedDoor, glassDoor, heavyDoor, overgrownDoor, paneledDoor, paperDoor, pressedDoor,
+            screenDoor, secretDoor, shackDoor, supportedDoor, tileWindowedDoor, tiledDoor, windowedDoor;
 
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_1;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_2;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_3;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_4;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_5;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_6;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_7;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_8;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_9;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_10;
-    public final SimpleEntrySet<WoodType, Block> Trapdoor_11;
+    public final SimpleEntrySet<WoodType, Block> Trapdoor_1, Trapdoor_2, Trapdoor_3, Trapdoor_4, Trapdoor_5, Trapdoor_6,
+            Trapdoor_7, Trapdoor_8, Trapdoor_9, Trapdoor_10, Trapdoor_11;
 
-    public final SimpleEntrySet<WoodType, Block> Log_1;
-    public final SimpleEntrySet<WoodType, Block> Log_2;
-    public final SimpleEntrySet<WoodType, Block> Log_3;
-    public final SimpleEntrySet<WoodType, Block> Log_4;
-    public final SimpleEntrySet<WoodType, Block> Log_5;
-    public final SimpleEntrySet<WoodType, Block> Log_6;
-    public final SimpleEntrySet<WoodType, Block> Log_7;
-    public final SimpleEntrySet<WoodType, Block> Log_8;
-    public final SimpleEntrySet<WoodType, Block> Log_9;
-    public final SimpleEntrySet<WoodType, Block> Log_10;
-    public final SimpleEntrySet<WoodType, Block> Log_11;
+    public final SimpleEntrySet<WoodType, Block> Log_1, Log_2, Log_3, Log_4, Log_5, Log_6, Log_7, Log_8, Log_9, Log_10,
+            Log_11;
 
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_1;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_2;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_3;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_4;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_5;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_6;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_7;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_8;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_9;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_10;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_11;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_12;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_13;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_14;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_15;
-    public final SimpleEntrySet<WoodType, Block> Stripped_Log_16;
-/*
-*/
+    public final SimpleEntrySet<WoodType, Block> Stripped_Log_1, Stripped_Log_2, Stripped_Log_3, Stripped_Log_4,
+            Stripped_Log_5, Stripped_Log_6, Stripped_Log_7, Stripped_Log_8, Stripped_Log_9, Stripped_Log_10,
+            Stripped_Log_11, Stripped_Log_12, Stripped_Log_13, Stripped_Log_14, Stripped_Log_15, Stripped_Log_16;
 
 // If you are planning to add torch, wallTorch, Glass, GlassPane, Barrel
 // Don't waste your time because they don't have woodtype in the name/ID,
@@ -1722,23 +1637,24 @@ public class ChippedModule extends SimpleModule {
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
-        addSpecialRecipe(handler.getPack(), "planks","carpenters_table", "ch/carpenters_table");
-        addSpecialRecipe(handler.getPack(), "door","carpenters_table", "ch/carpenters_table");
-        addSpecialRecipe(handler.getPack(), "trapdoor","carpenters_table", "ch/carpenters_table");
-        addSpecialRecipe(handler.getPack(), "log","carpenters_table", "ch/carpenters_table");
-        addSpecialRecipe(handler.getPack(), "stripped_log","carpenters_table", "ch/carpenters_table");
+        addSpecialRecipe(handler.getPack(), "planks","carpenters_table");
+        addSpecialRecipe(handler.getPack(), "door","carpenters_table");
+        addSpecialRecipe(handler.getPack(), "trapdoor","carpenters_table");
+        addSpecialRecipe(handler.getPack(), "log","carpenters_table");
+        addSpecialRecipe(handler.getPack(), "stripped_log","carpenters_table");
     }
 
     private JsonArray jsonArray = new JsonArray();
 
-    private void addSpecialRecipe(DynamicDataPack pack, String identifier, String workStation, String recipeName) {
+    private void addSpecialRecipe(DynamicDataPack pack, String identifier, String workStation) {
 
-        WoodTypeRegistry.WOOD_TYPES.forEach((resLoc, w) -> {
+        for (WoodType w : WoodTypeRegistry.WOOD_TYPES.values())  {
             boolean hasSomething = false;
             var id = w.id;
 
-            TagBuilder tagBuilder = TagBuilder.of(new ResourceLocation(id.getNamespace(),
-                    w.getTypeName() + "_" + identifier));
+            if (w.isVanilla()) continue;
+
+            TagBuilder tagBuilder = TagBuilder.of(WoodGood.res(w.getAppendableId() + "_" + identifier));
             for (var e : this.getEntries()) {
                 String name = e.getName();
 
@@ -1770,12 +1686,12 @@ public class ChippedModule extends SimpleModule {
                 jsonArray.add(tagBuilder.getId().toString());
             }
 
-        });
+        };
 
         JsonObject jo = new JsonObject();
         jo.addProperty("type","chipped:" + workStation);
         jo.add("tags", jsonArray);
-        pack.addJson(WoodGood.res(recipeName), jo, ResType.RECIPES);
+        pack.addJson(WoodGood.res(shortenedId() + "/" + workStation), jo, ResType.RECIPES);
     }
 
 }
