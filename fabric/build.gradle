@@ -65,11 +65,12 @@ dependencies {
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:4111426")
     modCompileOnly("curse.maven:friends-and-foes-551364:4429816")
     modCompileOnly("curse.maven:furnish-547069:4449619")
+    modCompileOnly("curse.maven:handcrafted-538214:4437458")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716974")
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4531594")
-    modRuntimeOnly("curse.maven:hearth-and-home-849364:4488851")
+    modCompileOnly("curse.maven:hearth-and-home-849364:4488851")
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240491")
     modCompileOnly("curse.maven:macaws-doors-378646:4649884")
@@ -83,7 +84,6 @@ dependencies {
 
 
     // =========================================== WORK IN PROGRESS ================================================= \\
-    modImplementation("curse.maven:handcrafted-538214:4437458")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")

@@ -1,7 +1,13 @@
 ## UPDATED:
-- **Woodworks** (FORGE) - Fixed bookshelves' behaviours (will have same behaviour as vanilla bookshelf)
-- **EN_US** - Corrected stemTypes' naming from **Gardens of the Dead** & **The Endergetic Expansion**
-- **Farmer's Delight** (FORGE) - Fixed/Removed duplicated cabinet with **Caverns And Chasms** only when **Abnormals Delight** is loaded
+- **Quark** 
+  - Fixed purple_glacia hedge's problem (**Aether: Redux**)
+  - Fixed Hollow CloudCap Stem having _stripped_oak_log_ texture (**Aether: Redux**)
+  - Corrected the display title of Stems (**Aether: Redux**) from "Log" to "Stem"
+- **Woodworks** - Fixed the missing twisted_boards with **Architect's Palette**
+
+## NEW:
+- Handcrafted v2.0.6+
+- Mighty Mail
 
 ### LEGEND: 
 - (COMMON) = FORGE & FABRIC
