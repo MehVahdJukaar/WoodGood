@@ -116,12 +116,12 @@ dependencies {
     modImplementation("curse.maven:selene-499980:4983974") // EVERY COMPAT
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
 
-    modCompileOnly("curse.maven:architectury-api-419699:4104616") // REI, Gardens-Of-The-Dead
-    modCompileOnly("curse.maven:cloth-config-348521:3972423") // REI
+    modImplementation("curse.maven:architectury-api-419699:5137942") // v6.6.92 | REI, Gardens-Of-The-Dead
+    modImplementation("curse.maven:cloth-config-348521:4973444") // v8.3.115 | REI
     modImplementation("curse.maven:configured-457570:4462837")
     modCompileOnly("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure
-    modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
-    modCompileOnly("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic
+    modImplementation("curse.maven:autoreglib-250363:3857246") // Quark
+    modImplementation("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
     modImplementation("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
     modCompileOnly("curse.maven:framework-549225:4718247") // Mighty Mail
@@ -135,8 +135,8 @@ dependencies {
 
 
     // ================================================ IMPORTS ===================================================== \\
-    modImplementation("curse.maven:jei-238222:4712866")
-    modCompileOnly("curse.maven:roughly-enough-items-310111:4812888")
+//    modCompileOnly("curse.maven:jei-238222:4712866")
+    modImplementation("curse.maven:roughly-enough-items-310111:5301352")
 
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
     modCompileOnly("curse.maven:architects-palette-433862:4498448")
@@ -155,6 +155,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4429819")
     modCompileOnly("curse.maven:furnish-547069:4449620")
     modCompileOnly("curse.maven:habitat-422972:4594207")
+    modCompileOnly("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716908")
     modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
@@ -163,7 +164,7 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:4418663")
-    modCompileOnly("curse.maven:quark-243121:4587248")
+    modImplementation("curse.maven:quark-243121:4587248")
     modCompileOnly("curse.maven:rechiseled-558998:4364936")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
@@ -189,7 +190,6 @@ dependencies {
 
 
     // =========================================== WORK IN PROGRESS ================================================= \\
-    modImplementation("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:mighty-mail-902986:4750268")
 
     // ============================================= NOT ADDED YET ================================================== \\
@@ -201,8 +201,8 @@ dependencies {
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
-//     implementation fg.deobf("curse.maven:curios-309927:3670447") // LIBRARY
-//     implementation fg.deobf("curse.maven:geckolib-388172:3856641") // LIBRARY
+//    modImplementation("curse.maven:curios-309927:5302436") // LIBRARY
+//    modImplementation("curse.maven:geckolib-388172:4407241") // LIBRARY
 //     implementation fg.deobf("curse.maven:marg-324494:3723497") // LIBRARY
 //     implementation fg.deobf("curse.maven:ortuslib-616457:3768197") // LIBRARY
 //     implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
@@ -212,13 +212,14 @@ dependencies {
 
     // ============================================= FOR TESTING ==================================================== \\
 //    modImplementation("curse.maven:biomes-o-plenty-220318:3927361"
-    modImplementation("curse.maven:regions-unexplored-659110:4807303")
-    modImplementation("curse.maven:blue-skies-312918:3966273")
+//    modImplementation("curse.maven:regions-unexplored-659110:4807303")
+//    modImplementation("curse.maven:blue-skies-312918:3966273")
+//    modImplementation("curse.maven:caverns-and-chasms-438005:5222972") // Blueprint
 //    modCompileOnly("curse.maven:endless-biomes-667688:4581653")
 //    modImplementation("curse.maven:endergetic-291509:5146370") // Blueprint
-    modCompileOnly("curse.maven:gardens-of-the-dead-683174:4435223") // Architectury-API
+//    modCompileOnly("curse.maven:gardens-of-the-dead-683174:4435223") // Architectury-API
 
     // Dependencies
-    modImplementation("curse.maven:terrablender-563928:4205732") // REQUIRED by: BOP, region-unexplored
-    modImplementation("curse.maven:structure-gel-api-378802:4765558") // REQUIRED by: blue-skies
+    modImplementation("curse.maven:terrablender-563928:4618490") // REQUIRED by: BOP, region-unexplored
+//    modImplementation("curse.maven:structure-gel-api-378802:4765558") // REQUIRED by: blue-skies
 }

@@ -43,18 +43,18 @@ dependencies {
 //    modImplementation ("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric")
 
     // ============================================= DEPENDENCIES =================================================== \\
-    modImplementation("curse.maven:architectury-api-419699:4384405")
-    modImplementation("curse.maven:cloth-config-348521:3972420")
+    modImplementation("curse.maven:architectury-api-419699:5137941") // v6.6.92
+    modImplementation("curse.maven:cloth-config-348521:4973443") // v8.3.115
     modImplementation("curse.maven:resourceful-lib-570073:4434137")
-    modImplementation("curse.maven:roughly-enough-items-310111:4573156")
+    modImplementation("curse.maven:roughly-enough-items-310111:5301351")
     modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
     modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
     modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
+    modCompileOnly("curse.maven:arrp-463113:3829389")
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
-    modCompileOnly("curse.maven:arrp-463113:3829389")
     modCompileOnly("curse.maven:camp-chair-531744:3835679")
     modCompileOnly("curse.maven:chipped-456956:4463478")
     modCompileOnly("curse.maven:cozy-625281:4171816")

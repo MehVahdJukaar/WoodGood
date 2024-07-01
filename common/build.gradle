@@ -15,7 +15,7 @@ dependencies {
 
     // ================================================ IMPORTS ===================================================== \\
     //common. Fabric version that works on both
-    modCompileOnly("curse.maven:architectury-api-419699:4104616")
+    modCompileOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
 
     modCompileOnly("curse.maven:another-furniture-610492:4034011")
     modCompileOnly("curse.maven:camp-chair-531744:3835679")
