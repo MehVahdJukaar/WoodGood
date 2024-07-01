@@ -31,6 +31,7 @@
     "moonlight": ">=1.19-2.1.21"
   },
   "breaks": {
-    "mcwbridges": "<3.0.0"
+    "mcwbridges": "<3.0.0",
+    "mcwfences": "<1.1.2"
   }
 }

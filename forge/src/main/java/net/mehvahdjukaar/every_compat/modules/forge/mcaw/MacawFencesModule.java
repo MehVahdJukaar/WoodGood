@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwfences.kikoz.MacawsFences;
 import com.mcwfences.kikoz.init.BlockInit;
+import com.mcwfences.kikoz.objects.FenceHitbox;
 import com.mcwfences.kikoz.objects.WiredFence;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -25,7 +26,7 @@ import net.minecraft.world.level.block.WallBlock;
 
 import java.util.Map;
 
-//SUPPORT: v1.1.1+
+//SUPPORT: v1.1.2+
 public class MacawFencesModule extends SimpleModule {
 
     public final SimpleEntrySet<LeavesType, Block> HEDGES;
@@ -107,7 +108,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> {
                             var l = w.getBlockOfThis("leaves");
                             if (l == null) return null;
-                            return new WallBlock(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
+                            return new FenceHitbox(Utils.copyPropertySafe(l).lightLevel((s) -> 0));
                         })
                 .addModelTransform(m -> m.addModifier((s, id, l) -> {
                     /*
