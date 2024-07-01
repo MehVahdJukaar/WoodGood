@@ -1,6 +1,12 @@
 {
   "itemGroup.everycomp": "Every Compat",
 
+  "block.everycomp.msw.enhanced_mushrooms.fallen_red_mushroom_log": "Fallen Red Mushroom Stem",
+  "block.everycomp.msw.enhanced_mushrooms.fallen_brown_mushroom_log": "Fallen Brown Mushroom Stem",
+
+  "block.everycomp.msw.byg.fallen_sythian_log": "Fallen Sythian Stem",
+  "block.everycomp.msw.byg.fallen_bulbis_log": "Fallen Bulbis Stem",
+
   "block_type.twigs.table": "%s Table",
 
   "block_type.missingwilds.fallen_log": "Fallen %s Log",
