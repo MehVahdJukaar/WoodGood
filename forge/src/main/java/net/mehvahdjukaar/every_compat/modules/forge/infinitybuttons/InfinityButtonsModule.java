@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
+//SUPPORT: v4.0.4+
 public class InfinityButtonsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> largeButtons;
@@ -31,7 +32,6 @@ public class InfinityButtonsModule extends SimpleModule {
                 .setTab(() -> InfinityButtonsItemGroup.INFINITYBUTTONS)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(largeButtons);
 
         plankSecretButtons = SimpleEntrySet.builder(WoodType.class, "plank_secret_button",
@@ -42,7 +42,6 @@ public class InfinityButtonsModule extends SimpleModule {
                 .setTab(() -> InfinityButtonsItemGroup.INFINITYBUTTONS)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(plankSecretButtons);
     }
 }

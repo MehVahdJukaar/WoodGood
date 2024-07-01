@@ -156,7 +156,7 @@ dependencies {
     modCompileOnly("curse.maven:furnish-547069:4449620")
     modCompileOnly("curse.maven:habitat-422972:4594207")
     modCompileOnly("curse.maven:handcrafted-538214:4437459")
-    modCompileOnly("curse.maven:infinity-buttons-661902:4716908")
+    modCompileOnly("curse.maven:infinitybuttons-661902:5330366")
     modCompileOnly("curse.maven:lauchs-shutters-714019:4328526")
     modCompileOnly("curse.maven:mighty-mail-902986:4750268")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
