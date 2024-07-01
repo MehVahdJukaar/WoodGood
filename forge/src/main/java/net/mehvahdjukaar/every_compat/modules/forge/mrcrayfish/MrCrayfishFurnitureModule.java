@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture;
+package net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish;
 
 import com.mrcrayfish.furniture.FurnitureMod;
 import com.mrcrayfish.furniture.FurnitureModTab;
