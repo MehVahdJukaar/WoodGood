@@ -170,15 +170,20 @@ public class QuarkModule extends SimpleModule {
         this.addEntry(ladders);
 
         hollowLogs = QuarkSimpleEntrySet.builder(WoodType.class, "log", "hollow",
-                        HollowLogsModule.class,
-                        () -> getModBlock("hollow_oak_log"),
-                        () -> WoodTypeRegistry.OAK_TYPE,
-                        (w, m) -> {
-                            String name = shortenedId() + "/" + w.getAppendableId();
-                            return new HollowLogBlock(name, w.log, m, w.canBurn());
-                        }
-                    )
-                .requiresChildren("stripped_log")
+                    HollowLogsModule.class,
+                    () -> getModBlock("hollow_oak_log"),
+                    () -> WoodTypeRegistry.OAK_TYPE,
+                    (w, m) -> {
+                        //TODO: stripped_cloudcap_stem needed to be added to Moonlight's BlockSetFinder stuff
+                        boolean cloudcap = ( w.getNamespace().equals("aether_redux") && w.getTypeName().equals("cloudcap") );
+                        boolean whistlecane = ( w.getNamespace().equals("gardens_of_the_dead") && w.getTypeName().equals("whistlecane") );
+                        if (w.getBlockOfThis("stripped_log") == null && !whistlecane && !cloudcap ) return null;
+
+                        String name = shortenedId() + "/" + w.getAppendableId();
+                        return new HollowLogBlock(name, w.log, m, w.canBurn());
+                    }
+                )
+//                .requiresChildren("stripped_log") //TODO: fix blc it's not working
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hollow_logs"), Registry.BLOCK_REGISTRY)
@@ -187,10 +192,13 @@ public class QuarkModule extends SimpleModule {
                 .addModelTransform(m -> m.addModifier((s, resLoc, w) -> {
                     String namespace = w.getNamespace();
                     String typeName = w.getTypeName();
-                    if (namespace.equals("gardens_of_the_dead") && typeName.equals("whistlecane")) {
+                    if (namespace.equals("gardens_of_the_dead") && typeName.equals("whistlecane"))
                         return s.replace("\"minecraft:block/stripped_oak_log\"",
                                 "\"gardens_of_the_dead:block/whistlecane_block\"");
-                    }
+
+                    else if (namespace.equals("aether_redux") && typeName.equals("cloudcap"))
+                        return s.replace("\"minecraft:block/stripped_oak_log\"",
+                                "\"aether_redux:block/natural/stripped_cloudcap_stem_top\"");
 
                     return s;
                 }))
@@ -298,7 +306,7 @@ public class QuarkModule extends SimpleModule {
             super.registerWoodBlocks(registry, woodTypes);
             data.remove(EveryCompat.MOD_ID);
         } catch (IllegalAccessException e) {
-            EveryCompat.LOGGER.error("Failed to onCommonSetup Wood Good Quark Module");
+            EveryCompat.LOGGER.error("Failed to onCommonSetup Wood Good Quark Module: {0}", e);
         }
     }
 
@@ -310,7 +318,7 @@ public class QuarkModule extends SimpleModule {
             super.registerLeavesBlocks(registry, leavesTypes);
             data.remove(EveryCompat.MOD_ID);
         } catch (IllegalAccessException e) {
-            EveryCompat.LOGGER.error("Failed to onCommonSetup Wood Good Quark Module");
+            EveryCompat.LOGGER.error("Failed to onCommonSetup Wood Good Quark Module: {0}", e);
         }
     }
 
