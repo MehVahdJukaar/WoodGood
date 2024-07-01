@@ -106,6 +106,7 @@ public abstract class CompatModule {
 
         String n1 = woodFrom + "/" + name; //quark/blossom_chair
         String n2 = woodFrom + "_" + name; //quark_blossom_chair
+
         if (woodType.getId().toString().equals("ecologics:azalea")) {
             if (modId.equals("quark")) return false; //ecologics and quark azalea. tbh not sure why needed
         }
@@ -117,7 +118,7 @@ public abstract class CompatModule {
         if (this.shortenedId().equals("af")) return false; //hardcoding
         if (this.shortenedId().equals("ap")) return false; //hardcoding
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
-        if (this.shortenedId().equals("abww") && woodFrom.equals("architects_palette")) return false; //we always register everything for these
+        if (this.shortenedId().equals("abnww") && woodFrom.equals("architects_palette")) return false; //we always register everything for these
 
         if (registry.containsKey(new ResourceLocation(woodFrom, name))) return true;
 
