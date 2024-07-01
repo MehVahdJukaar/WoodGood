@@ -5,6 +5,13 @@
   "block.everycomp.q.endergetic.hollow_poise_log": "Hollow Poise Stem",
   "block.everycomp.q.gardens_of_the_dead.hollow_soulblight_log": "Hollow Soulblight Stem",
 
+  "block.everycomp.q.aether_redux.hollow_fieldsproot_log": "Hollow Fieldsproot Stem",
+  "block.everycomp.q.aether_redux.hollow_blightwillow_log": "Hollow Blightwillow Stem",
+  "block.everycomp.q.aether_redux.hollow_glacia_log": "Hollow Glaica Stem",
+  "block.everycomp.q.aether_redux.hollow_crystal_log": "Hollow Crystsal Stem",
+  "block.everycomp.q.aether_redux.hollow_cloudcap_log": "Hollow Cloudcap Stem",
+  "block.everycomp.q.aether_redux.hollow_skyroot_log": "Hollow Skyroot Stem",
+
   "wood_type.domum_ornamentum.cactus": "Green Cactus",
   "wood_type.domum_ornamentum.cactus_extra": "Cactus",
   "wood_type.twilightforest.dark": "Darkwood",
