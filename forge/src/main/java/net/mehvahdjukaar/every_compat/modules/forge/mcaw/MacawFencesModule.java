@@ -151,6 +151,9 @@ public class MacawFencesModule extends SimpleModule {
                         case "vinery" -> {
                             return LeavesPath("apple_leaves_0", "", s, l);
                         }
+                        case "meadow" -> {
+                            return LeavesPath("pine_leaves_1", "", s, l);
+                        }
                         case "autumnity" -> {
                             if (typeName.equals("red_maple")||typeName.equals("orange_maple")||typeName.equals("yellow_maple"))
                                 return LeavesPath("maple_leaves", "", s, l);
