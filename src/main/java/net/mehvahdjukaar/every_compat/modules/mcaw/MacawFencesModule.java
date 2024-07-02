@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.mcaw;
 
 import com.mcwfences.kikoz.init.BlockInit;
+import com.mcwfences.kikoz.objects.FenceHitbox;
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -116,7 +117,7 @@ public class MacawFencesModule extends SimpleModule {
                     w -> {
                         if (w.getTypeName().equals("flowering")) return null;
                         if (w.getTypeName().equals("joshua")) return null;
-                        return new WallBlock(WoodGood.copySafe(w.leaves).strength(0.2F, 0.3F));
+                        return new FenceHitbox(WoodGood.copySafe(w.leaves).strength(0.2F, 0.3F));
                     }
                 )
                 .addModelTransform(m -> m.addModifier((s, id, l) -> {
