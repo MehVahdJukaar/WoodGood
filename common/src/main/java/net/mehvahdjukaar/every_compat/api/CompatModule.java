@@ -104,7 +104,16 @@ public abstract class CompatModule {
 
         String woodFrom = woodType.getNamespace();
 
+        String n1 = woodFrom + "/" + name; //quark/blossom_chair
+        String n2 = woodFrom + "_" + name; //quark_blossom_chair
+
         if (this.getAlreadySupportedMods().contains(woodFrom)) return true;
+
+        // Quark & Woodworks have chest & trapped_chest
+        if (woodFrom.equals("quark") && shortenedId().equals("abnww") && name.contains("chest")) return true;
+
+        // Macaw's Fences&Walls or MrCrayFish's Furniture - hedges will be skipped because Quark already has hedges
+        if (woodFrom.equals("quark") && (shortenedId().equals("mcf") || shortenedId().equals("cfm"))) return false;
 
         // Create's windows will be skipped blc [Let's do] Blooming Nature already has windows
         if (woodFrom.equals("bloomingnature") && name.contains("window")) return false;
@@ -114,14 +123,15 @@ public abstract class CompatModule {
         if (woodFrom.equals("upgrade_aquatic") && ( name.equals("driftwood_boards") || name.equals("river_boards") ))
             return false;
 
+        // Similar to above, Architect's Palette - boards will be skipped due to the existing boards in Autumnity
+        if (woodFrom.equals("autumnity") && name.equals("maple_boards")) return false;
+
         // check if TerraFirmaCraft (tfc) mod exist, then won't discards wood types
         if (woodFrom.equals("tfc")) return false;
 
         //discards wood types from this mod
         if (woodFrom.equals(modId)) return true; //quark, blossom
 
-        String n1 = woodFrom + "/" + name; //quark/blossom_chair
-        String n2 = woodFrom + "_" + name; //quark_blossom_chair
         if (woodType.getId().toString().equals("ecologics:azalea")) {
             if (modId.equals("quark")) return false; //ecologics and quark azalea. tbh not sure why needed
         }
@@ -153,7 +163,7 @@ public abstract class CompatModule {
         if (this.shortenedId().equals("af")) return false; //hardcoding
         // if (this.shortenedId().equals("ap")) return false; //hardcoding dont remember why i had this. Incase you want o
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
-        if (this.shortenedId().equals("abww") && woodFrom.equals("architects_palette"))
+        if (this.shortenedId().equals("abnww") && woodFrom.equals("architects_palette"))
             return false; //we always register everything for these
 
         if (registry.containsKey(new ResourceLocation(woodFrom, name))) return true;
