@@ -149,10 +149,13 @@ public class MacawFencesModule extends SimpleModule {
                     String typeName = l.getTypeName();
                     switch (namespace) {
                         case "vinery" -> {
-                            return LeavesPath("apple_leaves_0", "", s, l);
+                            if (typeName.equals("apple")) {
+                                return LeavesPath("apple_leaves_0", "", s, l);
+                            }
                         }
                         case "meadow" -> {
-                            return LeavesPath("pine_leaves_1", "", s, l);
+                            if (typeName.equals("pine"))
+                                return LeavesPath("pine_leaves_1", "", s, l);
                         }
                         case "autumnity" -> {
                             if (typeName.equals("red_maple")||typeName.equals("orange_maple")||typeName.equals("yellow_maple"))
