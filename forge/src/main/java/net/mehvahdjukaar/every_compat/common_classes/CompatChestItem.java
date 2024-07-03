@@ -18,7 +18,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
-@OnlyIn(Dist.CLIENT)
 public class CompatChestItem extends BlockItem implements ICustomItemRendererProvider {
 
     public CompatChestItem(Block block, Properties properties) {
@@ -36,6 +35,7 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
                         .newBlockEntity(BlockPos.ZERO, block.defaultBlockState());
 
                 @Override
+                @SuppressWarnings("DataFlowIssue")
                 public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
                     renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
                 }
