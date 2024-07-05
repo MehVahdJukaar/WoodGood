@@ -14,11 +14,10 @@ buildscript {
         classpath "org.parchmentmc:librarian:${project.librarian_version}"
     }
 }
-//
-//plugins { // Publishing plugins
-//    id "com.matthewprenger.cursegradle" version "1.4.0"
-//    id "com.modrinth.minotaur" version "2.+"
-//}
+
+plugins {
+    id "me.modmuss50.mod-publish-plugin" version "0.5.1"
+}
 
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -142,7 +141,7 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
-    implementation fg.deobf("curse.maven:selene-499980:4747959")
+    implementation fg.deobf("curse.maven:selene-499980:4747959") // v1.17.14 (FINAL VERSION)
 
         // ======================================== DEPENDENCIES ==================================================== \\
     compileOnly fg.deobf("curse.maven:flywheel-486392:4341461") // Create
@@ -152,7 +151,12 @@ dependencies {
     compileOnly fg.deobf("curse.maven:ortuslib-616457:3768197")
     compileOnly fg.deobf("curse.maven:geckolib-388172:4215249") // Graveyard
     compileOnly fg.deobf("curse.maven:blueprint-382216:3991478") // Woodworks
-    implementation fg.deobf("curse.maven:ctm-267602:3933537") // chipped
+    compileOnly fg.deobf("curse.maven:ctm-267602:3933537") // chipped
+    compileOnly fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
+    compileOnly fg.deobf("curse.maven:curios-309927:4590652")
+    compileOnly fg.deobf("curse.maven:marg-324494:3723497")
+    compileOnly fg.deobf("curse.maven:texture-dump-319039:3573998")
+    compileOnly fg.deobf("curse.maven:valhelsia-core-416935:3886212") // valhelsia-structure
 
         // TOOLS
     implementation fg.deobf("curse.maven:configured-457570:4462832")
@@ -163,7 +167,7 @@ dependencies {
         // Macaw's
     compileOnly fg.deobf("curse.maven:macaws-bridges-351725:5240511")
     compileOnly fg.deobf("curse.maven:macaws-doors-378646:4649903")
-    implementation fg.deobf("curse.maven:macaws-fences-and-walls-453925:5050212")
+    compileOnly fg.deobf("curse.maven:macaws-fences-and-walls-453925:5442210")
     compileOnly fg.deobf("curse.maven:macaws-lights-and-lamps-502372:4618176")
     compileOnly fg.deobf("curse.maven:macaws-paths-and-pavings-629153:4585113")
     compileOnly fg.deobf("curse.maven:macaws-trapdoors-400933:4841544")
@@ -177,43 +181,37 @@ dependencies {
     compileOnly fg.deobf("curse.maven:backpacked-352835:4480722")
     compileOnly fg.deobf("curse.maven:camp-chair-531744:3548494")
     compileOnly fg.deobf("curse.maven:create-328085:4625533")
-    compileOnly fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
-    compileOnly fg.deobf("curse.maven:curios-309927:4590652")
-    compileOnly fg.deobf("curse.maven:decorativeblocks-362528:3965454")
-    compileOnly fg.deobf("curse.maven:farmersdelight-398521:4636009")
+    compileOnly fg.deobf("curse.maven:decorative-blocks-362528:3965454")
+    compileOnly fg.deobf("curse.maven:farmers-delight-398521:4636009")
     compileOnly fg.deobf("curse.maven:infinity-buttons-661902:4716908")
-    compileOnly fg.deobf("curse.maven:marg-324494:3723497")
     compileOnly fg.deobf("curse.maven:missing-wilds-forge-634277:3835403")
     compileOnly fg.deobf("curse.maven:mrcrayfish-furniture-mod-55438:4374992")
     compileOnly fg.deobf("curse.maven:project-brazier-238326:3836169")
     compileOnly fg.deobf("curse.maven:quark-243121:3840125") // AutoRegLib
-    compileOnly fg.deobf("curse.maven:texture-dump-319039:3573998")
     compileOnly fg.deobf("curse.maven:the-twilight-forest-227639:4337390")
     compileOnly fg.deobf("curse.maven:the-graveyard-forge-531188:4555245")
     compileOnly fg.deobf("curse.maven:twigs-496913:3968055")
-    compileOnly fg.deobf("curse.maven:valhelsia-core-416935:3886212")
     compileOnly fg.deobf("curse.maven:valhelsia-structures-347488:3708292")
     compileOnly fg.deobf("curse.maven:workshop-for-handsome-adventurer-875843:4688655")
     compileOnly fg.deobf("curse.maven:dramatic-doors-380617:4511658")
     compileOnly fg.deobf("curse.maven:corail-pillar-266228:3672409")
     compileOnly fg.deobf("curse.maven:corail-woodcutter-331983:4442684")
-    compileOnly fg.deobf("curse.maven:builders-delight-forge-563734:3857874")
     compileOnly fg.deobf("curse.maven:decoration-delight-687475:4689698")
-
-    compileOnly fg.deobf("curse.maven:exlines-bark-carpets-527296:3776832") // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:lauchs-shutters-714019:4492153")  // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:mosaic-carpentry-690226:4071275") // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:ex-nihilo-sequentia-400012:4556977") // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:premium-wood-353515:3781130")  // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:productivebees-377897:4257307")  // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:woodworks-543610:4396956")  // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:xercamod-341575:4318574") // PORTED FROM 1.19.2
-    compileOnly fg.deobf("curse.maven:chipped-456956:4293291") // PORTED FROM 1.19.2
+    compileOnly fg.deobf("curse.maven:exlines-bark-carpets-527296:3776832")
+    compileOnly fg.deobf("curse.maven:mosaic-carpentry-690226:4071275")
+    compileOnly fg.deobf("curse.maven:ex-nihilo-sequentia-400012:4556977")
+    compileOnly fg.deobf("curse.maven:premium-wood-353515:3781130")
+    compileOnly fg.deobf("curse.maven:productivebees-377897:4257307")
+    compileOnly fg.deobf("curse.maven:woodworks-543610:4396956")
+    compileOnly fg.deobf("curse.maven:xercamod-341575:4318574")
+    compileOnly fg.deobf("curse.maven:chipped-456956:4293291")
 
         // LOCAL
     compileOnly fg.deobf(getModVersion("ironagefurniture-1.18.2-0.2.0.10.jar"))
     compileOnly fg.deobf(getModVersion("marketcrates-1.18.2-1.4.1.jar"))
     compileOnly fg.deobf(getModVersion("stylishstiles-1.1.1-1.18.2.jar"))
+    compileOnly fg.deobf(getModVersion("buildersdelight-1.18.2-1.0.jar"))
+    compileOnly fg.deobf(getModVersion("shutters-1.18.2-1.0.7.jar"))
 
     //=========================================== TODO: NOT ADDED YET =============================================== \\
 //    compileOnly fg.deobf("curse.maven:malum-484064:4631612")
@@ -228,12 +226,15 @@ dependencies {
     // ============================================= FOR TESTING ==================================================== \\
 //    implementation fg.deobf("curse.maven:terrafirmacraft-302973:4843196")
 //    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:3759236")
-    implementation fg.deobf("curse.maven:blue-skies-312918:3788736")
+//    implementation fg.deobf("curse.maven:blue-skies-312918:3788736")
+    implementation fg.deobf("curse.maven:oh-the-biomes-youll-go-247560:4971536")
+    implementation fg.deobf("curse.maven:enhanced-mushrooms-383725:3865521")
 
         // DEPENDENCIES
 //    implementation fg.deobf("curse.maven:patchouli-306770:3846086") // terrafirmacraft
     implementation fg.deobf("curse.maven:terrablender-563928:3957976") // biomesoplenty
-    implementation fg.deobf("curse.maven:structure-gel-api-378802:4804138") // blue-skies
+    implementation fg.deobf("curse.maven:pollen-544350:4337349") // enhanced-mushrooms
+//    implementation fg.deobf("curse.maven:structure-gel-api-378802:4804138") // blue-skies
 
 
     // ================================================ OTHERS ====================================================== \\
@@ -258,31 +259,31 @@ repositories {
 // See the regex pattern.
 def getModVersion(filename) {
     // println(filename);
-    def pattern = /^(?<modid>[^-]+)(?:-(?<mcversion>[0-9.]+))?(?:-(?<modver>[0-9.\-]+))\.jar$/;
+    def pattern = /^(?<modid>[^-]+)(?:-(?<mcversion>[0-9.]+))?(?:-(?<modver>[0-9.\-]+))\.jar$/
 
     def matcher = filename =~ pattern
 
     def found = matcher.find()
 
     if(found) {
-        def mod = matcher.group("modid");
+        def mod = matcher.group("modid")
 
         // Extract MC version or default
-        def mcVersion = matcher.group("mcversion");
+        def mcVersion = matcher.group("mcversion")
 
         // Extract mod version
-        def version = matcher.group("modver");
+        def version = matcher.group("modver")
 
         // println("> mod: ${mod}; mc: ${mcVersion}; version: ${version}");
 
         if(mcVersion == null)
-            return "${mod}:${mod}:${version}";
+            return "${mod}:${mod}:${version}"
         else
-            return "${mod}:${mod}-${mcVersion}:${version}";
+            return "${mod}:${mod}-${mcVersion}:${version}"
 
     } else {
         println(" > not a mod filename")
-        return filename;
+        return filename
     }
 }
 
@@ -310,4 +311,64 @@ repositories{
         dirs dev_mods_dir
     }
     mavenCentral()
+}
+
+
+publishMods {
+    dryRun = false
+    var changelogFile = rootProject.file("changelog.md")
+    var changelogText = changelogFile.exists() ? changelogFile.text : "blank"
+
+    file = jar.archiveFile
+    changelog = changelogText
+    type = STABLE
+    modLoaders.add("forge")
+    displayName = file.map { it.asFile.name }
+
+    curseforge {
+        projectId = "${project_id}"
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        minecraftVersions.add("${minecraft_version}")
+        requires("selene")
+        optional("another-furniture")
+        optional("architects-palette")
+        optional("backpacked")
+        optional("camp-chair")
+        optional("create")
+        optional("decorative-blocks")
+        optional("farmers-delight")
+        optional("infinitybuttons")
+        optional("missing-wilds-forge")
+        optional("mrcrayfish-furniture-mod")
+        optional("project-brazier")
+        optional("quark")
+        optional("the-twilight-forest")
+        optional("the-graveyard-forge")
+        optional("twigs")
+        optional("valhelsia-structures")
+        optional("workshop-for-handsome-adventurer")
+        optional("dramatic-doors")
+        optional("corail-pillar")
+        optional("corail-woodcutter")
+        optional("decoration-delight")
+        optional("exlines-bark-carpets")
+        optional("mosaic-carpentry")
+        optional("exnihilosequentia")
+        optional("premium-wood")
+        optional("productivebees")
+        optional("woodworks")
+        optional("xercamod")
+        optional("chipped")
+        optional("ironagefurniture")
+        optional("market-crates")
+        optional("builders-delight-forge")
+        optional("lauchs-shutters")
+    }
+
+//    modrinth {
+//        projectId = "eiktJyw1"
+//        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+//        minecraftVersions.add("${minecraft_version}")
+//        requires("moonlight")
+//    }
 }
