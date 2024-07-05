@@ -37,6 +37,20 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
 
+        // Fruitful Fun
+            // Leaves
+        addOptional("fruitfulfun:apple_leaves", "_side", "minecraft:block/oak_leaves");
+        addOptional("fruitfulfun:cherry_leaves", "_side", "fruitfulfun:block/cherry_leaves_2");
+        addOptional("fruitfulfun:citron_leaves", "_side", "fruitfulfun:block/citron_leaves");
+        addOptional("fruitfulfun:grapefruit_leaves", "_side", "fruitfulfun:block/grapefruit_leaves");
+        addOptional("fruitfulfun:lemon_leaves", "_side", "fruitfulfun:block/lemon_leaves");
+        addOptional("fruitfulfun:lime_leaves", "_side", "fruitfulfun:block/lime_leaves");
+        addOptional("fruitfulfun:orange_leaves", "_side", "fruitfulfun:block/orange_leaves");
+        addOptional("fruitfulfun:pomegranate_leaves", "_side", "fruitfulfun:block/pomegranate_leaves");
+        addOptional("fruitfulfun:pomelo_leaves", "_side", "fruitfulfun:block/pomelo_leaves");
+        addOptional("fruitfulfun:redlove_leaves", "_side", "fruitfulfun:block/redlove_leaves");
+        addOptional("fruitfulfun:tangerine_leaves", "_side", "fruitfulfun:block/tangerine_leaves");
+
         // Extended Mushrooms
         addOptional("extendedmushrooms:glowshroom_stem", "_top", "extendedmushrooms:block/glowshroom_stem");
         addOptional("extendedmushrooms:poisonous_mushroom_stem", "_top", "extendedmushrooms:block/poisonous_mushroom_stem");
