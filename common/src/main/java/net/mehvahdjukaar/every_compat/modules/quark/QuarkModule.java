@@ -453,63 +453,148 @@ public class QuarkModule extends SimpleModule {
             });
         }
 
+        // is tags generated for logs from FruitFul Fun?
+        boolean isGenerated = false;
+
         // hedge's recipe & logs' tags
         for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
             LeavesType leavesType = entry.getKey();
             Block block = entry.getValue();
 
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(
-                    EveryCompat.res(shortenedId() + "/" + leavesType.getWoodType().getAppendableId() + "_logs"));
+            // general
+            if (!leavesType.getNamespace().equals("fruitfulfun"))
+                generalHedgeRecipe(leavesType, block, handler, manager);
 
-            Block[] allLogs = {
-                    leavesType.getWoodType().log, leavesType.getWoodType().getBlockOfThis("stripped_log"),
-                    leavesType.getWoodType().getBlockOfThis("wood"), leavesType.getWoodType().getBlockOfThis("stripped_wood")
-            };
-
-            // adding log, stripped_log, wood, stripped_wood
-            for (var log : allLogs) {
-                Item item = log.asItem();
-
-                //noinspection ConstantValue
-                if (item != null) {
-                    tagBuilder.addEntry(item);
+            // Fruitful Fun
+            if (leavesType.getNamespace().equals("fruitfulfun")) {
+                switch (leavesType.getTypeName()) {
+                    case "apple" -> specialHedgeRecipe("oak", leavesType, block, handler, manager);
+                    case "grapefruit", "lemon", "tangerine", "lime", "citron", "pomelo", "orange" ->
+                            specialHedgeRecipe("citrus", leavesType, block, handler, manager);
+                    case "pomegranate" -> specialHedgeRecipe("jungle", leavesType, block, handler, manager);
+                    case "redlove" -> specialHedgeRecipe("redlove", leavesType, block, handler, manager);
                 }
-                else handler.getLogger().warn("{} has no logs for hedge in QuarkModule", leavesType.getTypeName());
             }
-
-            handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
-            handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
-
-// =====================================================================================================================
-
-            //noinspection OptionalGetWithoutIsPresent
-            try (InputStream recipeStream =
-                         manager.getResource(modRes("recipes/building/crafting/oak_hedge.json")).get().open()) {
-                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
-
-                JsonObject underKey = recipe.getAsJsonObject("key");
-                JsonObject underResult = recipe.getAsJsonObject("result");
-
-                // Editing JSON
-                    // Leaves
-                underKey.getAsJsonObject("L")
-                        .addProperty("item", Utils.getID(leavesType.leaves).toString());
-                    // WoodTypes
-                underKey.getAsJsonObject("W").addProperty("tag",
-                EveryCompat.MOD_ID + ":" + shortenedId() + "/" + leavesType.getWoodType().getAppendableId() + "_logs");
-                    // Hedges
-                underResult.addProperty("item", Utils.getID(block).toString());
-
-
-                // Adding the finished recipe to ResourceLocation
-                String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
-                handler.dynamicPack.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
-                        ResType.RECIPES);
-
-            } catch (IOException e) {
-                handler.getLogger().error("QuarkModule - Failed to open the recipe file: {0}", e);
+            // Creating tags for FruitFul Fun's logs blc generalHedgeRecipe() can't do the job
+            if (!isGenerated && leavesType.getNamespace().equals("fruitfulfun")) {
+                createTags(new ResourceLocation("minecraft:oak"), handler);
+                createTags(new ResourceLocation("minecraft:jungle"), handler);
+                createTags(new ResourceLocation("fruitfulfun:citrus"), handler);
+                createTags(new ResourceLocation("fruitfulfun:redlove"), handler);
+                isGenerated = true;
             }
         }
     }
 
+    // Correcting logs used to craft hedges
+    public void generalHedgeRecipe(LeavesType leavesType, Block block, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        // Creating tags for logs
+        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(
+                EveryCompat.res(shortenedId() + "/" + leavesType.getWoodType().getAppendableId() + "_logs"));
+
+        Block[] allLogs = {
+                leavesType.getWoodType().log, leavesType.getWoodType().getBlockOfThis("stripped_log"),
+                leavesType.getWoodType().getBlockOfThis("wood"), leavesType.getWoodType().getBlockOfThis("stripped_wood")
+        };
+
+        // adding log, stripped_log, wood, stripped_wood
+        for (var log : allLogs) {
+            Item item = log.asItem();
+
+            //noinspection ConstantValue
+            if (item != null) {
+                tagBuilder.addEntry(item);
+            }
+            else handler.getLogger().warn("{} has no logs for hedge in QuarkModule/generalHedgeRecipe", leavesType.getTypeName());
+        }
+
+        handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
+        handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
+
+// =====================================================================================================================
+
+        //noinspection OptionalGetWithoutIsPresent
+        try (InputStream recipeStream =
+                     manager.getResource(modRes("recipes/building/crafting/oak_hedge.json")).get().open()) {
+            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+
+            JsonObject underKey = recipe.getAsJsonObject("key");
+            JsonObject underResult = recipe.getAsJsonObject("result");
+
+            // Editing JSON
+            // Leaves
+            underKey.getAsJsonObject("L")
+                    .addProperty("item", Utils.getID(leavesType.leaves).toString());
+            // WoodTypes
+            underKey.getAsJsonObject("W").addProperty("tag",
+                    EveryCompat.MOD_ID + ":" + shortenedId() + "/" + leavesType.getWoodType().getAppendableId() + "_logs");
+            // Hedges
+            underResult.addProperty("item", Utils.getID(block).toString());
+
+
+            // Adding the finished recipe to ResourceLocation
+            String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
+            handler.dynamicPack.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
+                    ResType.RECIPES);
+
+        } catch (IOException e) {
+            handler.getLogger().error("QuarkModule - Failed to open the recipe file: {0}", e);
+        }
+    }
+
+    // Creating tags for logs
+    public void createTags(ResourceLocation woodType, ServerDynamicResourcesHandler handler) {
+        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(
+                EveryCompat.res(shortenedId() + "/" + woodType.getPath() + "_logs"));
+
+        Block[] allLogs = {
+                Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).log,
+                Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).getBlockOfThis("stripped_log"),
+                Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).getBlockOfThis("wood"),
+                Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).getBlockOfThis("stripped_wood")
+        };
+
+        // adding log, stripped_log, wood, stripped_wood
+        for (var log : allLogs) {
+            Item item = log.asItem();
+
+            //noinspection ConstantValue
+            if (item != null) {
+                tagBuilder.addEntry(item);
+            }
+            else handler.getLogger().warn("{} has no logs for hedge in QuarkModule/specialHedgeRecipe", woodType);
+        }
+
+        handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
+        handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
+    }
+
+    public void specialHedgeRecipe(String woodType, LeavesType leavesType, Block block, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        //noinspection OptionalGetWithoutIsPresent
+        try (InputStream recipeStream =
+                     manager.getResource(modRes("recipes/building/crafting/oak_hedge.json")).get().open()) {
+            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+
+            JsonObject underKey = recipe.getAsJsonObject("key");
+            JsonObject underResult = recipe.getAsJsonObject("result");
+
+            // Editing JSON
+                // Leaves
+            underKey.getAsJsonObject("L")
+                    .addProperty("item", Utils.getID(leavesType.leaves).toString());
+                // WoodTypes
+            underKey.getAsJsonObject("W").addProperty("tag",
+                    EveryCompat.MOD_ID + ":" + shortenedId() + "/" + woodType + "_logs");
+                // Hedges
+            underResult.addProperty("item", Utils.getID(block).toString());
+
+            // Adding the finished recipe to ResourceLocation
+            String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
+            handler.dynamicPack.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
+                    ResType.RECIPES);
+
+        } catch (IOException e) {
+            handler.getLogger().error("QuarkModule - Failed to open the recipe file: {0}", e);
+        }
+    }
 }
