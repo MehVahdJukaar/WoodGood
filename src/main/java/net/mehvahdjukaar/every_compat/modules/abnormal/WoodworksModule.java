@@ -45,6 +45,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.Tags;
 
@@ -185,6 +187,8 @@ public class WoodworksModule extends SimpleModule {
             }
         });
     }
+
+    @OnlyIn(Dist.CLIENT)
     private static BEWLRBlockItem.LazyBEWLR chestBEWLR(boolean trapped) {
         return trapped
         ? new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) -> new ChestBlockEntityWithoutLevelRenderer<>(
