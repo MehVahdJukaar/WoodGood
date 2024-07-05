@@ -51,10 +51,10 @@ public class MissingWildModule extends SimpleModule {
 
         // correcting the model files for byg & enhanced_mushrooms with blockType: stem
         FALLEN_LOGS.blocks.forEach((woodType, block) -> {
-            String namespace = woodType.getNamespace();
+            String woodFrom = woodType.getNamespace();
             String woodName = woodType.getTypeName();
 
-            switch (namespace) {
+            switch (woodFrom) {
                 case "enhanced_mushrooms" -> correctingModel(woodType, handler, manager);
                 case "byg" -> {
                     switch (woodName) {
@@ -68,19 +68,41 @@ public class MissingWildModule extends SimpleModule {
 
     }
 
-    //NOTE: only modify on woodType which are all "stem"
     private void correctingModel(WoodType woodType, ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        correctingModel("", "", woodType, handler, manager);
+    }
+
+    //NOTE: only modify on woodType which are all "stem"
+    @SuppressWarnings("SameParameterValue")
+    private void correctingModel(String log, String strippedLog, WoodType woodType, ClientDynamicResourcesHandler handler, ResourceManager manager) {
         ResourceLocation resLoc = WoodGood.res(shortenedId() + "/" + woodType.getNamespace() + "/fallen_" + woodType.getTypeName() + "_log");
 
         try (InputStream stream = manager.getResource(ResType.BLOCK_MODELS.getPath(resLoc)).getInputStream()) {
             JsonObject model = RPUtils.deserializeJson(stream);
 
+            String pathTo = woodType.getNamespace() + ":block/";
+
             // Editing the model
             model.getAsJsonObject().addProperty("parent", "missingwilds:block/template/fallen_log_template");
 
-            model.getAsJsonObject("textures").addProperty("log_inner",
-                    woodType.getNamespace() + ":block/stripped_" + woodType.getTypeName() + "_stem");
+            JsonObject underTexture = model.getAsJsonObject("textures");
 
+                // log texture
+            if (!log.isEmpty()) {
+                underTexture.addProperty("log", pathTo + log);
+            }
+
+                // stripped_log texture
+            if (!strippedLog.isEmpty()) {
+                underTexture.addProperty("log_inner", pathTo + strippedLog);
+            }
+            else {
+                pathTo += "stripped_";
+                underTexture.addProperty("log_inner",
+                        pathTo + woodType.getTypeName() + "_stem");
+            }
+
+            // Adding to the resource
             handler.dynamicPack.addJson(resLoc, model, ResType.BLOCK_MODELS);
 
         } catch (IOException e) {
