@@ -126,7 +126,7 @@ subprojects {
                         optionalDependency("domum-ornamentum")
                         optionalDependency("dramatic-doors")
                         optionalDependency("exlines-bark-carpets")
-                        optionalDependency("farmersdelight")
+                        optionalDependency("farmers-delight")
                         optionalDependency("friends-and-foes-forge")
                         optionalDependency("furnish")
                         optionalDependency("handcrafted")
