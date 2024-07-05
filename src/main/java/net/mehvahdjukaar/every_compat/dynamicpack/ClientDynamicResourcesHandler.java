@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.WoodGood;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Respriter;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.TextureImage;
@@ -16,6 +17,8 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider {
+
+    private static boolean init = false;
 
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(WoodGood.res("generated_pack")));
@@ -55,6 +58,10 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
+        if (!init) {
+            SpriteHelper.addHardcodedSprites();
+            init = true;
+        }
         WoodGood.forAllModules(m -> {
             try {
                 m.addDynamicClientResources(this, manager);
