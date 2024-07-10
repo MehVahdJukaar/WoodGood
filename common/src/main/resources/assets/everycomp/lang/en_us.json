@@ -330,6 +330,9 @@
   "block_type.valhelsia_structures.cut_stripped_post": "Cut Stripped %s Post",
   "block_type.valhelsia_structures.post": "%s Post",
   "block_type.valhelsia_structures.stripped_post": "Stripped %s Post",
+  "block_type.valhelsia_structures.bundled_posts": "Bundled %s Posts",
+  "block_type.valhelsia_structures.bundled_stripped_posts": "Bundled Stripped %s Posts",
+
 
   "block_type.backpacked.backpack_shelf": "%s Backpack Shelf",
 
