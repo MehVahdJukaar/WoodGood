@@ -66,7 +66,7 @@ public class SpriteHelper {
         // Let's Do - Vinery
             // Leaves
         addOptional("vinery:apple_leaves", "_leaves", "vinery:block/apple_leaves_0");
-
+        addOptional("vinery:dark_cherry", "_leaves", "vinery:block/dark_cherry_leaves");
 
         // The Twilight Forest
             // Leaves
