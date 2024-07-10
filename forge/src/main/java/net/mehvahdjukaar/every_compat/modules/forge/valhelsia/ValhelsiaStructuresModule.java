@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.valhelsia;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -10,25 +11,37 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.valhelsia.valhelsia_core.api.common.block.StrippableRotatedPillarBlock;
 
+import java.util.List;
+
+//SUPPORT: v1.1.0+
 public class ValhelsiaStructuresModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> posts;
     public final SimpleEntrySet<WoodType, Block> strippedPosts;
     public final SimpleEntrySet<WoodType, Block> cutPosts;
     public final SimpleEntrySet<WoodType, Block> cutStrippedPosts;
+    public final SimpleEntrySet<WoodType, Block> bundledStrippedPosts;
+    public final SimpleEntrySet<WoodType, Block> bundledPosts;
 
     public ValhelsiaStructuresModule(String modId) {
         super(modId, "vs");
@@ -42,7 +55,6 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_oak_posts"))
                 .build();
-
         this.addEntry(posts);
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
@@ -58,7 +70,6 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_stripped_oak_posts"))
                 .build();
-
         this.addEntry(strippedPosts);
 
         cutPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut",
@@ -71,7 +82,6 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(cutPosts);
 
         cutStrippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut_stripped",
@@ -88,17 +98,52 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(cutStrippedPosts);
+
+        bundledStrippedPosts = SimpleEntrySet.builder(WoodType.class, "posts", "bundled_stripped",
+                        getModBlock("bundled_stripped_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> {
+                            Block stripped = w.getBlockOfThis("stripped_log");
+                            if (stripped == null) return null;
+                            return new RotatedPillarBlock(bundledPostProperties(w));
+                        })
+                .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
+                .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
+                .setTab(getModTab("main"))
+                .defaultRecipe()
+                .build();
+        this.addEntry(bundledStrippedPosts);
+
+        bundledPosts = SimpleEntrySet.builder(WoodType.class, "posts", "bundled",
+                        getModBlock("bundled_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> {
+                            if (bundledStrippedPosts.blocks.get(w) == null) return null;
+                            return new StrippableRotatedPillarBlock(() -> bundledStrippedPosts.blocks.get(w), bundledPostProperties(w));
+                        })
+                .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
+                .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
+                .setTab(getModTab("main"))
+                .defaultRecipe()
+                .build();
+        this.addEntry(bundledPosts);
     }
 
     public static BlockBehaviour.Properties cutPostProperties(WoodType woodType) {
         return woodType.copyProperties()
                 .mapColor(
-                        (state) -> state.getValue(DirectionalBlock.FACING).getAxis() == Direction.Axis.Y ?
-                                woodType.planks.defaultMapColor() :
-                                woodType.log.defaultMapColor())
+                        (state) -> state.getValue(DirectionalBlock.FACING).getAxis() == Direction.Axis.Y
+                                ? woodType.planks.defaultMapColor()
+                                : woodType.log.defaultMapColor())
                 .strength(2.0F).noOcclusion();
+    }
+
+    public static BlockBehaviour.Properties bundledPostProperties(WoodType woodType) {
+        return woodType.copyProperties()
+                .mapColor(
+                        (state) -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y
+                                ? MapColor.WOOD
+                                : MapColor.PODZOL
+                );
     }
 
     @Override
@@ -108,6 +153,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     }
 
     @Override
+    // Textures
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
         try {
@@ -120,7 +166,6 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                              RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak");
-
                     var newTexture = logTexture.makeCopy();
 
                     handler.addTextureIfNotPresent(manager, newId, () -> newTexture);
@@ -160,13 +205,101 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                     handler.getLogger().error("Failed to generate Stripped Post block texture for for {} : {}", block, e);
 
                 }
-
             });
+
+            // bundled_<type>_posts
+            try (TextureImage BPTopInnerMask = TextureImage.open(manager,
+                          EveryCompat.res("block/vs/bundledposts_top_inner_m"));
+                 TextureImage BPTopOuterMask = TextureImage.open(manager,
+                          EveryCompat.res("block/vs/bundledposts_top_outer_m"));
+
+                 TextureImage logInnerMask = TextureImage.open(manager,
+                          EveryCompat.res("block/vs/log_top_inner_m"));
+                 TextureImage logOuterMask = TextureImage.open(manager,
+                          EveryCompat.res("block/vs/log_top_outer_m"))
+                  ) {
+
+                bundledPosts.blocks.forEach((w, block) -> {
+
+                    String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_"
+                            + w.getTypeName() + "_posts";
+
+                    createTexture(newPath, w.log, logInnerMask, logOuterMask, BPTopInnerMask, BPTopOuterMask,
+                            modRes("block/bundled_posts/bundled_oak_posts"),
+                            modRes("block/bundled_posts/bundled_oak_posts_top"),
+                            handler, manager, block);
+                });
+
+                bundledStrippedPosts.blocks.forEach((w, block) -> {
+                    String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_stripped_"
+                            + w.getTypeName() + "_posts";
+
+                    createTexture(newPath, w.getBlockOfThis("stripped_log"), logInnerMask, logOuterMask,
+                            BPTopInnerMask, BPTopOuterMask,
+                            modRes("block/bundled_posts/bundled_stripped_oak_posts"),
+                            modRes("block/bundled_posts/bundled_stripped_oak_posts_top"),
+                            handler, manager, block);
+
+                });
+            } catch (Exception e) {
+                handler.getLogger().error("Failed to open bundled_posts texture: ", e);
+            }
+
         } catch (Exception ex) {
             handler.getLogger().error("Could not generate any Table block texture : ", ex);
         }
     }
 
+    private void createTexture(String newPath, Block getLog, TextureImage logInnerMask, TextureImage logOuterMask,
+                               TextureImage BPTopInnerMask, TextureImage BPTopOuterMask,
+                               ResourceLocation getLogSide, ResourceLocation getLogTop,
+            ClientDynamicResourcesHandler handler, ResourceManager manager, Block block
+                               ) {
+        try (TextureImage logSide_texture = TextureImage.open(manager,
+                 RPUtils.findFirstBlockTextureLocation(manager, getLog, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+             TextureImage logTop_texture = TextureImage.open(manager,
+                 RPUtils.findFirstBlockTextureLocation(manager, getLog, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
+             TextureImage BPTextureSide = TextureImage.open(manager, getLogSide);
+             TextureImage BPTextureTop = TextureImage.open(manager, getLogTop)
+        ) {
+
+// Side texture ================================================================================================
+            {
+                AnimationMetadataSection metaSide = logTop_texture.getMetadata();
+                List<Palette> targetSide = Palette.fromAnimatedImage(logSide_texture);
+
+                Respriter respriterSide = Respriter.of(BPTextureSide);
+
+                // Recoloring
+                TextureImage recoloredSIDE = respriterSide.recolorWithAnimation(targetSide, metaSide);
+
+                // Adding to the Resource
+                handler.dynamicPack.addAndCloseTexture(EveryCompat.res(newPath), recoloredSIDE);
+            }
+
+// Top texture =================================================================================================
+            {
+                AnimationMetadataSection metaTop = logSide_texture.getMetadata();
+
+                List<Palette> targetTopInner = Palette.fromAnimatedImage(logTop_texture, logOuterMask, 0);
+                List<Palette> targetTopOuter = Palette.fromAnimatedImage(logTop_texture, logInnerMask, 0);
+
+                // Inner
+                Respriter innerTopResp = Respriter.masked(BPTextureTop, BPTopOuterMask);
+                TextureImage recoloredwithInner = innerTopResp.recolorWithAnimation(targetTopInner, metaTop);
+
+                // Outer
+                Respriter outerTopResp = Respriter.masked(recoloredwithInner, BPTopInnerMask);
+                TextureImage recoloredwithOuter = outerTopResp.recolorWithAnimation(targetTopOuter, metaTop);
+
+                // Adding to the Resource
+                handler.dynamicPack.addAndCloseTexture(EveryCompat.res(newPath + "_top"), recoloredwithOuter);
+            }
+
+        } catch (Exception e) {
+            handler.getLogger().error("Failed to open Bundled Stripped Posts texture for {} : {}", block, e);
+        }
+    }
 
     private void createTopTexture(TextureImage original, TextureImage newImage) {
         original.forEachFramePixel((i, x, y) -> {
@@ -187,7 +320,6 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 newImage.getImage().setPixelRGBA(x, y, 0);
             }
         });
-
-
     }
+
 }
