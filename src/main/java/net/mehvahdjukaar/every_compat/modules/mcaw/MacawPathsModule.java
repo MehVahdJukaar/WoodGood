@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
-
+//SUPPORT: v1.0.3+
 public class MacawPathsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> PLANKS_PATHS;

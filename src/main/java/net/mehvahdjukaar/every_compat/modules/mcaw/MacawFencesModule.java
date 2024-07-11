@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-//SUPPORT v1.1.1+
+//SUPPORT v1.1.2+
 public class MacawFencesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> PICKET_FENCES;

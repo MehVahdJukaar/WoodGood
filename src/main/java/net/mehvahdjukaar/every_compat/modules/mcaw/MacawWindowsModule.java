@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
-//SUPPORT: v2.2.1
+//SUPPORT: v2.2.1+
 public class MacawWindowsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BLINDS;

@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 
-//SUPPORT: v3.2.1
+//SUPPORT: v3.2.0+
 public class MacawFurnitureModule extends SimpleModule {
 
     //TYPE: BOOKSHELF

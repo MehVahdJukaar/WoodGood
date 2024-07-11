@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-//SUPPORT v1.1.2
+//SUPPORT v1.1.2+
 public class MacawTrapdoorsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BARK_TRAPDOORS;

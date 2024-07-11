@@ -32,7 +32,7 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//SUPPORT: v1.0.6+
 public class MacawLightsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> SOUL_TIKI_TORCHES;
