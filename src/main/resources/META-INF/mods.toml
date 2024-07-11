@@ -31,7 +31,6 @@ itemIcon="minecraft:oak_planks" #catalogue icon
 
 
 [[dependencies.everycomp]] #optional
-
     modId="forge" #mandatory
     mandatory=true #mandatory
     versionRange="[40.0.36,)" #mandatory
@@ -39,7 +38,6 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     side="BOTH"
 
 [[dependencies.everycomp]]
-
     modId="minecraft"
     mandatory=true
     versionRange="[1.18,1.19]"
@@ -47,7 +45,6 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     side="BOTH"
 
 [[dependencies.everycomp]]
-
     modId="selene"
     mandatory=true
     versionRange="[1.18.2-1.17.8,]"
@@ -57,7 +54,6 @@ itemIcon="minecraft:oak_planks" #catalogue icon
 # ======================================================== MODS ====================================================== #
 
 [[dependencies.everycomp]]
-
     modId="projectbrazier"
     mandatory=false
     versionRange="[0.6.2,]"
@@ -72,6 +68,41 @@ itemIcon="minecraft:oak_planks" #catalogue icon
     side="BOTH"
 
 [[dependencies.everycomp]]
+    modId="mcwlights"
+    mandatory=false
+    versionRange="[1.0.6,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.everycomp]]
+    modId="mcwdoors"
+    mandatory=false
+    versionRange="[1.1.1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.everycomp]]
+    modId="mcwtrpdoors"
+    mandatory=false
+    versionRange="[1.1.2,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.everycomp]]
+    modId="mcwroofs"
+    mandatory=false
+    versionRange="[2.2.4,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.everycomp]]
+    modId="mcwpaths"
+    mandatory=false
+    versionRange="[1.0.3,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.everycomp]]
     modId="mcwbridges"
     mandatory=false
     versionRange="[3.0.0,)"
@@ -81,9 +112,21 @@ itemIcon="minecraft:oak_planks" #catalogue icon
 [[dependencies.everycomp]]
     modId="mcwfences"
     mandatory=false
-    versionRange="[1.1.1,)"
+    versionRange="[1.1.2,)"
     ordering="AFTER"
     side="BOTH"
 
+[[dependencies.everycomp]]
+    modId="mcwwindows"
+    mandatory=false
+    versionRange="[2.2.1,)"
+    ordering="AFTER"
+    side="BOTH"
 
+[[dependencies.everycomp]]
+    modId="mcwfurnitures"
+    mandatory=false
+    versionRange="[3.2.0,)"
+    ordering="AFTER"
+    side="BOTH"
 
