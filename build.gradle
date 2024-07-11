@@ -165,15 +165,15 @@ dependencies {
 
     // =============================================== IMPORTS ====================================================== \\
         // Macaw's
-    compileOnly fg.deobf("curse.maven:macaws-bridges-351725:5240511")
-    compileOnly fg.deobf("curse.maven:macaws-doors-378646:4649903")
-    compileOnly fg.deobf("curse.maven:macaws-fences-and-walls-453925:5442210")
-    compileOnly fg.deobf("curse.maven:macaws-lights-and-lamps-502372:4618176")
-    compileOnly fg.deobf("curse.maven:macaws-paths-and-pavings-629153:4585113")
-    compileOnly fg.deobf("curse.maven:macaws-trapdoors-400933:4841544")
-    compileOnly fg.deobf("curse.maven:macaws-windows-363569:4961135")
-    compileOnly fg.deobf("curse.maven:macaws-furniture-359540:4726291")
-    compileOnly fg.deobf("curse.maven:macaws-roofs-352039:4590024")
+    compileOnly fg.deobf("curse.maven:macaws-bridges-351725:5240511") // v3.0.0
+    compileOnly fg.deobf("curse.maven:macaws-doors-378646:5439214") // v1.1.1
+    compileOnly fg.deobf("curse.maven:macaws-fences-and-walls-453925:5442210") // v1.1.2
+    compileOnly fg.deobf("curse.maven:macaws-lights-and-lamps-502372:4618176") // v1.0.6
+    compileOnly fg.deobf("curse.maven:macaws-paths-and-pavings-629153:4585113") // v1.0.3
+    compileOnly fg.deobf("curse.maven:macaws-trapdoors-400933:4841544") // v1.1.2
+    compileOnly fg.deobf("curse.maven:macaws-windows-363569:4961135") // v2.2.1
+    compileOnly fg.deobf("curse.maven:macaws-furniture-359540:4726291") // v3.2.0
+    compileOnly fg.deobf("curse.maven:macaws-roofs-352039:4590024") // v2.2.4
 
         // OTHERS
     compileOnly fg.deobf("curse.maven:another-furniture-610492:4034013")
@@ -365,10 +365,10 @@ publishMods {
         optional("lauchs-shutters")
     }
 
-//    modrinth {
-//        projectId = "eiktJyw1"
-//        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-//        minecraftVersions.add("${minecraft_version}")
-//        requires("moonlight")
-//    }
+    modrinth {
+        projectId = "eiktJyw1"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.add("${minecraft_version}")
+        requires("moonlight")
+    }
 }
