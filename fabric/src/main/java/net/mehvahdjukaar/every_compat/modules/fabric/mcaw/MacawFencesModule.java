@@ -183,6 +183,7 @@ public class MacawFencesModule extends SimpleModule {
                     }
                     return LeavesPath("", "", s, l);
                 }))
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(hedges);
     }

@@ -113,6 +113,8 @@ public class MacawFencesModule extends SimpleModule {
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
                         w -> {
+                            if (w.leaves == null) return null;
+
                             if (w.getNamespace().equals("autumnity")) {
                                 switch (w.getTypeName()) {
                                     case "red_maple" -> {
@@ -247,6 +249,7 @@ public class MacawFencesModule extends SimpleModule {
                     }
                     return LeavesPath("", "", s, l);
                 }))
+                .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(hedges);
     }
