@@ -256,7 +256,7 @@ public class QuarkModule extends SimpleModule {
                 .addCondition(l -> l.getWoodType() != null)
 //              Recipe being created below blc the recipe has a tag as an ingredient
                 .setRenderType(() -> RenderType::cutout)
-//                .requiresChildren("log")
+                .requiresChildren("log")
                 .build();
         this.addEntry(hedges);
 
