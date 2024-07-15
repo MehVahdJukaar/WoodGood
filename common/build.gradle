@@ -36,7 +36,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-551364:4639311")
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:handcrafted-538214:5118730")
-    modCompileOnly("curse.maven:the-twilight-forest-227639:4653704")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:4653704") // not available for 1.20.1
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
