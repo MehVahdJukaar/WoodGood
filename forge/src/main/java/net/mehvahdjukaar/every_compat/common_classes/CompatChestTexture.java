@@ -61,18 +61,34 @@ public class CompatChestTexture {
                         RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
                     List<Palette> plankPalette = Palette.fromAnimatedImage(plankTexture);
+
+                    // Remove the lava color from brimwood_planks
+                    if (wood.getId().toString().equals("regions_unexplored:brimwood")) {
+                        plankPalette.forEach(p -> {
+                            p.reduceUp();
+                            p.reduceUp();
+                            p.reduceUp();
+                            p.reduceUp();
+                        });
+                    }
+
                     AnimationMetadataSection plankMeta = plankTexture.getMetadata();
 
                     List<Palette> overlayPalette = new ArrayList<>();
                     for (var p : plankPalette) {
                         var d1 = p.getDarkest();
                         var d2 = p.getDarkest();
-                        switch (removeDarkest) {
-                            case 2:
-                                p.remove(d2);
-                            case 1:
-                                p.remove(d1);
+
+                        // brimwood_chest need to retain their darkness
+                        if (!wood.getId().toString().equals("regions_unexplored:brimwood")) {
+                            switch (removeDarkest) {
+                                case 2:
+                                    p.remove(d2);
+                                case 1:
+                                    p.remove(d1);
+                            }
                         }
+
                         var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
                         var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
                         var pal = Palette.ofColors(List.of(n1, n2));
