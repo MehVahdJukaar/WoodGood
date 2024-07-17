@@ -16,6 +16,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoors
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
+import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
 
@@ -46,6 +47,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         if (PlatformHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
+        addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         // ========================================== WORK IN PROGRESS ============================================== \\
 
         // ============================================= OTHERS ===================================================== \\

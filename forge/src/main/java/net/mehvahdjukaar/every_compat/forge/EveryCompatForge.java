@@ -25,6 +25,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModu
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
@@ -104,6 +105,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
+        addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 //        addModule("carpenter", () -> CarpenterModule::new);

@@ -709,6 +709,9 @@
   "block_type.handcrafted.table": "%s Table",
   "block_type.handcrafted.chair": "%s Chair",
 
-  "block_type.mighty_mail.mail_box": "%s Mailbox"
+  "block_type.mighty_mail.mail_box": "%s Mailbox",
+
+  "block_type.regions_unexplored.branch": "%s Branch",
+  "block_type.regions_unexplored.shrub": "%s Shrub"
 }
 
