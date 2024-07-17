@@ -71,6 +71,8 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4531594")
     modCompileOnly("curse.maven:hearth-and-home-849364:4488851")
+    modCompileOnly("curse.maven:regions-unexplored-659110:4470171")
+
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240491")
     modCompileOnly("curse.maven:macaws-doors-378646:4649884")

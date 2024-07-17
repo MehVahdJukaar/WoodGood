@@ -120,7 +120,7 @@ dependencies {
     modImplementation("curse.maven:cloth-config-348521:4973444") // v8.3.115 | REI
     modImplementation("curse.maven:configured-457570:4462837")
     modCompileOnly("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure
-    modImplementation("curse.maven:autoreglib-250363:3857246") // Quark
+    modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
     modCompileOnly("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
     modImplementation("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
@@ -188,7 +188,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841549")
     modCompileOnly("curse.maven:macaws-windows-363569:4961138")
 
-
+    modImplementation("curse.maven:regions-unexplored-659110:4807303")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 
@@ -212,7 +212,6 @@ dependencies {
 
     // ============================================= FOR TESTING ==================================================== \\
     modImplementation("curse.maven:biomes-o-plenty-220318:3927361")
-//    modImplementation("curse.maven:regions-unexplored-659110:4807303")
 //    modImplementation("curse.maven:blue-skies-312918:3966273")
 //    modImplementation("curse.maven:caverns-and-chasms-438005:5222972") // Blueprint
 //    modCompileOnly("curse.maven:endless-biomes-667688:4581653")
