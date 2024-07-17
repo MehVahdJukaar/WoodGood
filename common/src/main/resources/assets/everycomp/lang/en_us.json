@@ -30,10 +30,18 @@
   "block.everycomp.q.extendedmushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
   "block.everycomp.q.extendedmushrooms.hollow_poisonous_mushroom_log": "Hollow Poisonous Mushroom Stem",
 
+  "block.everycomp.q.neu.hollow_dragon_log": "Hollow Dragon Stem",
+  "block.everycomp.q.neu.hollow_elder_log": "Hollow Elder Stem",
+  "block.everycomp.q.neu.hollow_frosted_log": "Hollow Frosted Stem",
+
   "block.everycomp.tf.extendedmushrooms.hollow_glowshroom_log": "Hollow Glowshroom Stem",
   "block.everycomp.tf.extendedmushrooms.hollow_honey_fungus_log": "Hollow Honey Fungus Stem",
   "block.everycomp.tf.extendedmushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
   "block.everycomp.tf.extendedmushrooms.hollow_poisonous_mushroom_log": "Hollow Poisonous Mushroom Stem",
+
+  "block.everycomp.tf.neu.hollow_dragon_log": "Hollow Dragon Stem",
+  "block.everycomp.tf.neu.hollow_elder_log": "Hollow Elder Stem",
+  "block.everycomp.tf.neu.hollow_frosted_log": "Hollow Frosted Stem",
 
   "block_type.twigs.table": "%s Table",
 
