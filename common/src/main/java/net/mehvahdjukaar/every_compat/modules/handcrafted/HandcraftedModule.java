@@ -203,6 +203,7 @@ public class HandcraftedModule extends SimpleModule {
                 .setTab(() -> tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.FancyBedItem(b, p))
                 .defaultRecipe()
+                .copyParentDrop()
                 .build();
         this.addEntry(fancyBed);
 
