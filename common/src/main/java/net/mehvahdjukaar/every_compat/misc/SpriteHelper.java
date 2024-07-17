@@ -37,6 +37,22 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
 
+        // Nether Update Expanded
+        addOptional("nue:dragon_stem", "_side", "nue:block/dragonstem");
+        addOptional("nue:dragon_stem", "_top", "nue:block/dragonstemtop");
+        addOptional("nue:stripped_dragon_stem", "_side", "nue:block/strippeddragonstem");
+        addOptional("nue:stripped_dragon_stem", "_top", "nue:block/strippeddragonstemtop");
+
+        addOptional("nue:elder_stem", "_side", "nue:block/elderstem");
+        addOptional("nue:elder_stem", "_top", "nue:block/elderstemtop");
+        addOptional("nue:stripped_elder_stem", "_side", "nue:block/strippedelderstem");
+        addOptional("nue:stripped_elder_stem", "_top", "nue:block/strippedelderstemtop");
+
+        addOptional("nue:frosted_stem", "_side", "nue:block/frostedstem");
+        addOptional("nue:frosted_stem", "_top", "nue:block/frostedstem2");
+        addOptional("nue:stripped_frosted_stem", "_side", "nue:block/strippedfrozenstem");
+        addOptional("nue:stripped_frosted_stem", "_top", "nue:block/strippedfrozenstemtop");
+
         // Fruitful Fun
             // Leaves
         addOptional("fruitfulfun:apple_leaves", "_side", "minecraft:block/oak_leaves");
