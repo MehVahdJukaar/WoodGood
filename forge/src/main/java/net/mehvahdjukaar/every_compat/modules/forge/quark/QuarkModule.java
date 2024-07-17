@@ -174,10 +174,8 @@ public class QuarkModule extends SimpleModule {
                     () -> getModBlock("hollow_oak_log"),
                     () -> WoodTypeRegistry.OAK_TYPE,
                     (w, m) -> {
-                        //TODO: stripped_cloudcap_stem needed to be added to Moonlight's BlockSetFinder stuff
-                        boolean cloudcap = ( w.getNamespace().equals("aether_redux") && w.getTypeName().equals("cloudcap") );
                         boolean whistlecane = ( w.getNamespace().equals("gardens_of_the_dead") && w.getTypeName().equals("whistlecane") );
-                        if (w.getBlockOfThis("stripped_log") == null && !whistlecane && !cloudcap ) return null;
+                        if (w.getBlockOfThis("stripped_log") == null && !whistlecane) return null;
 
                         String name = shortenedId() + "/" + w.getAppendableId();
                         return new HollowLogBlock(name, w.log, m, w.canBurn());
@@ -195,10 +193,6 @@ public class QuarkModule extends SimpleModule {
                     if (namespace.equals("gardens_of_the_dead") && typeName.equals("whistlecane"))
                         return s.replace("\"minecraft:block/stripped_oak_log\"",
                                 "\"gardens_of_the_dead:block/whistlecane_block\"");
-
-                    else if (namespace.equals("aether_redux") && typeName.equals("cloudcap"))
-                        return s.replace("\"minecraft:block/stripped_oak_log\"",
-                                "\"aether_redux:block/natural/stripped_cloudcap_stem_top\"");
 
                     return s;
                 }))
