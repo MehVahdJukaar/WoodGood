@@ -12,6 +12,8 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
+import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -35,7 +37,7 @@ import java.io.InputStream;
 // SUPPORT: v0.5.3-FINAL
 public class RegionsUnexploredModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> branchs;
-    public final SimpleEntrySet<WoodType, Block> shrubs;
+    public final SimpleEntrySet<LeavesType, Block> shrubs;
 
     public RegionsUnexploredModule(String modId) {
         super(modId, "ru");
@@ -53,17 +55,16 @@ public class RegionsUnexploredModule extends SimpleModule {
                 .build();
         this.addEntry(branchs);
 
-        shrubs = SimpleEntrySet.builder(WoodType.class, "shrub",
+        shrubs = SimpleEntrySet.builder(LeavesType.class, "shrub",
                         () -> getModBlock("dark_oak_shrub"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
-                        w -> new ShrubBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_SHRUB.get()))
+                        () -> LeavesTypeRegistry.getValue(new ResourceLocation("dark_oak")),
+                        l -> new ShrubBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_SHRUB.get()))
                 )
+                .requiresChildren("leaves", "sapling") // leaves for textures & sapling for recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shrubs"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shrub_can_survive_on"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shrubs"), Registry.ITEM_REGISTRY)
-//                .addRecipe(modRes("dark_oak_shrub"))
-//                .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .build();
         this.addEntry(shrubs);
     }
@@ -89,8 +90,8 @@ public class RegionsUnexploredModule extends SimpleModule {
             JsonObject recipeShrub = RPUtils.deserializeJson(shrubStream);
                 JsonObject recipeSapling_shrub = RPUtils.deserializeJson(sapling_shrubStream);
 
-            shrubs.blocks.forEach((wood, block) -> {
-                String saplingID = wood.getNamespace() + ":" + wood.getTypeName() + "_sapling";
+            shrubs.blocks.forEach((leavesType, block) -> {
+                String saplingID = leavesType.getNamespace() + ":" + leavesType.getTypeName() + "_sapling";
 
                 // Modifying shrub Recipe
                 recipeShrub.getAsJsonObject("key").getAsJsonObject("#")
@@ -107,15 +108,15 @@ public class RegionsUnexploredModule extends SimpleModule {
                         .addProperty("item", saplingID);
 
                 // Adding to the resource
-                String shrubName = wood.getTypeName() + "_shrub";
+                String shrubName = leavesType.getTypeName() + "_shrub";
 
                 handler.dynamicPack.addJson(
-                        EveryCompat.res( shortenedId() + "/" + wood.getNamespace() + "/" + shrubName),
+                        EveryCompat.res( shortenedId() + "/" + leavesType.getNamespace() + "/" + shrubName),
                         recipeShrub,
                         ResType.RECIPES);
 
                 handler.dynamicPack.addJson(
-                        EveryCompat.res(shortenedId() + "/" + wood.getAppendableId() + "_sapling_from_" + shrubName),
+                        EveryCompat.res(shortenedId() + "/" + leavesType.getAppendableId() + "_sapling_from_" + shrubName),
                         recipeSapling_shrub,
                         ResType.RECIPES
                 );
@@ -175,13 +176,13 @@ public class RegionsUnexploredModule extends SimpleModule {
              TextureImage logMask = TextureImage.open(manager, EveryCompat.res("block/regions_unexplored/dark_oak_shrub_logs_m"));
             ) {
 
-            shrubs.blocks.forEach((wood, block) -> {
+            shrubs.blocks.forEach((leavesType, block) -> {
 
                 try (
                      TextureImage leaveTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, wood.getBlockOfThis("leaves"), SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE));
+                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves, SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE));
                      TextureImage logTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.getWoodType().log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
                     Respriter respriterTop = Respriter.masked(shrubTop, leaveMask);
                     Respriter respriterBottom = Respriter.of(shrubBottom);
@@ -195,7 +196,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                     TextureImage recoloredTop = respriterleave.recolorWithAnimationOf(leaveTexture);
 
                     // Adding to the resource
-                    String resLoc = shortenedId() + "/" + wood.getAppendableId() + "_shrub";
+                    String resLoc = shortenedId() + "/" + leavesType.getAppendableId() + "_shrub";
                     handler.dynamicPack.addAndCloseTexture(EveryCompat.res("block/" + resLoc + "_top"), recoloredTop);
                     handler.dynamicPack.addAndCloseTexture(EveryCompat.res("block/" + resLoc + "_bottom"), recoloredBottom);
 
