@@ -136,6 +136,10 @@ public class MacawFencesModule extends SimpleModule {
                     String namespace = l.getNamespace();
                     String typeName = l.getTypeName();
                     switch (namespace) {
+                        case "culturaldelights" -> {
+                            if (typeName.equals("fruiting_avocado"))
+                                return LeavesPath("fruiting_avocado_leaves_0", "", s, l);
+                        }
                         case "fruitfulfun" -> {
                             if (typeName.equals("apple"))
                                 return LeavesPath("oak_leaves", "", s, l, "minecraft");
