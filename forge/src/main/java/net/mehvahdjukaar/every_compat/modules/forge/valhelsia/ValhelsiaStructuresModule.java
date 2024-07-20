@@ -12,7 +12,6 @@ import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -31,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.valhelsia.valhelsia_core.api.common.block.StrippableRotatedPillarBlock;
 
+import java.io.IOException;
 import java.util.List;
 
 //SUPPORT: v1.1.0+
@@ -206,31 +206,33 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
                 }
             });
+        } catch (Exception ex) {
+            handler.getLogger().error("Could not generate any Table block texture : ", ex);
+        }
 
-            // bundled_<type>_posts
-            try (TextureImage BPTopInnerMask = TextureImage.open(manager,
-                          EveryCompat.res("block/vs/bundledposts_top_inner_m"));
-                 TextureImage BPTopOuterMask = TextureImage.open(manager,
-                          EveryCompat.res("block/vs/bundledposts_top_outer_m"));
+        // bundled_<type>_posts
+        try (TextureImage BPTopInnerMask = TextureImage.open(manager,
+                      EveryCompat.res("block/vs/bundledposts_top_inner_m"));
+             TextureImage BPTopOuterMask = TextureImage.open(manager,
+                      EveryCompat.res("block/vs/bundledposts_top_outer_m"));
 
-                 TextureImage logInnerMask = TextureImage.open(manager,
-                          EveryCompat.res("block/vs/log_top_inner_m"));
-                 TextureImage logOuterMask = TextureImage.open(manager,
-                          EveryCompat.res("block/vs/log_top_outer_m"))
-                  ) {
+             TextureImage logInnerMask = TextureImage.open(manager,
+                      EveryCompat.res("block/vs/log_top_inner_m"));
+             TextureImage logOuterMask = TextureImage.open(manager,
+                      EveryCompat.res("block/vs/log_top_outer_m"))
+            ) {
 
-                bundledPosts.blocks.forEach((w, block) -> {
+            bundledPosts.blocks.forEach((w, block) -> {
+                String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_"
+                        + w.getTypeName() + "_posts";
 
-                    String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_"
-                            + w.getTypeName() + "_posts";
+                createTexture(newPath, w.log, logInnerMask, logOuterMask, BPTopInnerMask, BPTopOuterMask,
+                        modRes("block/bundled_posts/bundled_oak_posts"),
+                        modRes("block/bundled_posts/bundled_oak_posts_top"),
+                        handler, manager, block);
+            });
 
-                    createTexture(newPath, w.log, logInnerMask, logOuterMask, BPTopInnerMask, BPTopOuterMask,
-                            modRes("block/bundled_posts/bundled_oak_posts"),
-                            modRes("block/bundled_posts/bundled_oak_posts_top"),
-                            handler, manager, block);
-                });
-
-                bundledStrippedPosts.blocks.forEach((w, block) -> {
+            bundledStrippedPosts.blocks.forEach((w, block) -> {
                     String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_stripped_"
                             + w.getTypeName() + "_posts";
 
@@ -239,36 +241,31 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                             modRes("block/bundled_posts/bundled_stripped_oak_posts"),
                             modRes("block/bundled_posts/bundled_stripped_oak_posts_top"),
                             handler, manager, block);
-
-                });
-            } catch (Exception e) {
-                handler.getLogger().error("Failed to open bundled_posts texture: ", e);
-            }
-
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Table block texture : ", ex);
+            });
+        } catch (Exception e) {
+            handler.getLogger().error("Failed to open bundled_posts texture: ", e);
         }
     }
 
-    private void createTexture(String newPath, Block getLog, TextureImage logInnerMask, TextureImage logOuterMask,
+    private void createTexture(String newPath, Block getLogBlock, TextureImage logInnerMask, TextureImage logOuterMask,
                                TextureImage BPTopInnerMask, TextureImage BPTopOuterMask,
                                ResourceLocation getLogSide, ResourceLocation getLogTop,
-            ClientDynamicResourcesHandler handler, ResourceManager manager, Block block
+                               ClientDynamicResourcesHandler handler, ResourceManager manager, Block block
                                ) {
         try (TextureImage logSide_texture = TextureImage.open(manager,
-                 RPUtils.findFirstBlockTextureLocation(manager, getLog, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                 RPUtils.findFirstBlockTextureLocation(manager, getLogBlock, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
              TextureImage logTop_texture = TextureImage.open(manager,
-                 RPUtils.findFirstBlockTextureLocation(manager, getLog, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
-             TextureImage BPTextureSide = TextureImage.open(manager, getLogSide);
-             TextureImage BPTextureTop = TextureImage.open(manager, getLogTop)
+                 RPUtils.findFirstBlockTextureLocation(manager, getLogBlock, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
+             TextureImage TextureSide = TextureImage.open(manager, getLogSide);
+             TextureImage TextureTop = TextureImage.open(manager, getLogTop);
         ) {
 
 // Side texture ================================================================================================
             {
-                AnimationMetadataSection metaSide = logTop_texture.getMetadata();
+                AnimationMetadataSection metaSide = logSide_texture.getMetadata();
                 List<Palette> targetSide = Palette.fromAnimatedImage(logSide_texture);
 
-                Respriter respriterSide = Respriter.of(BPTextureSide);
+                Respriter respriterSide = Respriter.of(TextureSide);
 
                 // Recoloring
                 TextureImage recoloredSIDE = respriterSide.recolorWithAnimation(targetSide, metaSide);
@@ -279,25 +276,30 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
 // Top texture =================================================================================================
             {
-                AnimationMetadataSection metaTop = logSide_texture.getMetadata();
+                AnimationMetadataSection metaTop = logTop_texture.getMetadata();
 
                 List<Palette> targetTopInner = Palette.fromAnimatedImage(logTop_texture, logOuterMask, 0);
                 List<Palette> targetTopOuter = Palette.fromAnimatedImage(logTop_texture, logInnerMask, 0);
 
                 // Inner
-                Respriter innerTopResp = Respriter.masked(BPTextureTop, BPTopOuterMask);
+                Respriter innerTopResp = Respriter.masked(TextureTop, BPTopOuterMask);
                 TextureImage recoloredwithInner = innerTopResp.recolorWithAnimation(targetTopInner, metaTop);
 
                 // Outer
                 Respriter outerTopResp = Respriter.masked(recoloredwithInner, BPTopInnerMask);
-                TextureImage recoloredwithOuter = outerTopResp.recolorWithAnimation(targetTopOuter, metaTop);
+                TextureImage recoloredwithOuter;
+
+                if (targetTopOuter.size() < 3)
+                    recoloredwithOuter = outerTopResp.recolorWithAnimationOf(logTop_texture);
+                else// stripped_log_top's outer|edge must have 3 color palettes
+                    recoloredwithOuter = outerTopResp.recolorWithAnimation(targetTopOuter, metaTop);
 
                 // Adding to the Resource
                 handler.dynamicPack.addAndCloseTexture(EveryCompat.res(newPath + "_top"), recoloredwithOuter);
             }
 
         } catch (Exception e) {
-            handler.getLogger().error("Failed to open Bundled Stripped Posts texture for {} : {}", block, e);
+            handler.getLogger().error("Failed to generate the texture for {} : {}", block, e);
         }
     }
 
