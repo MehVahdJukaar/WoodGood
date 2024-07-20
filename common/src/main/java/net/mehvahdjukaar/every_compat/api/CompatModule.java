@@ -115,8 +115,8 @@ public abstract class CompatModule {
         // Macaw's Fences&Walls or MrCrayFish's Furniture - hedges will be skipped because Quark already has hedges
         if (woodFrom.equals("quark") && (shortenedId().equals("mcf") || shortenedId().equals("cfm"))) return false;
 
-        // Create's windows will be skipped blc [Let's do] Blooming Nature already has windows
-        if (woodFrom.equals("bloomingnature") && name.contains("window")) return false;
+        // Create's windows will be skipped blc [Let's do] Blooming Nature & Meadow already has windows
+        if (( woodFrom.equals("bloomingnature") || woodFrom.equals("meadow") ) && name.contains("window")) return false;
 
         // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes &
         // no item in CreativeMode
