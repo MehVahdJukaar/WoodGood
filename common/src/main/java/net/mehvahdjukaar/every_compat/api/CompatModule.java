@@ -109,6 +109,9 @@ public abstract class CompatModule {
 
         if (this.getAlreadySupportedMods().contains(woodFrom)) return true;
 
+        // CB: Compressed Blocks must be skipped
+        if (woodFrom.equals("compressedblocks")) return true;
+
         // Quark & Woodworks have chest & trapped_chest
         if (woodFrom.equals("quark") && shortenedId().equals("abnww") && name.contains("chest")) return true;
 
