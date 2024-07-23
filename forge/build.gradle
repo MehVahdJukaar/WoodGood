@@ -110,7 +110,7 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
-    modImplementation("curse.maven:selene-499980:5546852") // v2.12.8
+    modImplementation("curse.maven:selene-499980:5556628") // v2.12.9
 
 
     // ============================================== DEPENDENCIES ================================================== \\
@@ -176,7 +176,7 @@ dependencies {
     modCompileOnly("curse.maven:quark-243121:5093415")
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
-    modImplementation("curse.maven:the-twilight-forest-227639:5468648")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060")
@@ -197,7 +197,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
-    modImplementation("curse.maven:regions-unexplored-659110:5151869")
+    modCompileOnly("curse.maven:regions-unexplored-659110:5151869")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
