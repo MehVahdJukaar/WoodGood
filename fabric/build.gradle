@@ -37,7 +37,7 @@ dependencies {
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.2"
 
 //    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
-    modImplementation("curse.maven:selene-499980:5478855") // v2.12.6
+    modImplementation("curse.maven:selene-499980:5546854") // v2.12.8
 
     // ============================================== DEPENDENCIES ================================================== \\
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")

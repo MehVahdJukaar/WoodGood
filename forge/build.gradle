@@ -110,21 +110,21 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
-    modImplementation("curse.maven:selene-499980:5478857") // v2.12.6
+    modImplementation("curse.maven:selene-499980:5546852") // v2.12.8
 
 
     // ============================================== DEPENDENCIES ================================================== \\
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // no longer required since 0.5.1
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modImplementation("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
-    modImplementation("curse.maven:resourceful-lib-570073:5361260")  // v2.1.25 | Required by: Chipped, Handcrafted
-    modImplementation("curse.maven:athena-841890:5176879") // Chipped
+    modCompileOnly("curse.maven:resourceful-lib-570073:5361260")  // v2.1.25 | Required by: Chipped, Handcrafted
+    modCompileOnly("curse.maven:athena-841890:5176879") // Chipped
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
-    modImplementation("curse.maven:zeta-968868:5078215") // Quark
+    modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
     modImplementation("curse.maven:cloth-config-348521:4973441") // REI
-    modImplementation("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
+    modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
@@ -173,7 +173,7 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:5029855")
-    modImplementation("curse.maven:quark-243121:5093415")
+    modCompileOnly("curse.maven:quark-243121:5093415")
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modImplementation("curse.maven:the-twilight-forest-227639:5468648")
@@ -197,7 +197,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:5151869")
+    modImplementation("curse.maven:regions-unexplored-659110:5151869")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
@@ -217,14 +217,17 @@ dependencies {
     // =========================================== FOR TESTING ===================================================== \\
 //    modCompileOnly("curse.maven:endless-biomes-667688:5109705")
 //    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-    modImplementation("curse.maven:biomes-o-plenty-220318:4707270") // Terrablender
+    modImplementation("curse.maven:biomes-o-plenty-220318:4764804") // Terrablender
 //    modImplementation("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
 //    modImplementation("curse.maven:autumnity-365045:5292346") // Blueprint
 //    modCompileOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint
+//    modImplementation("curse.maven:alexs-caves-924854:5162617") // citadel
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli
 
+
     // Dependencies
+//    modImplementation("curse.maven:citadel-331936:5143956") // Alex's Cave
 //    modImplementation("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
 }
