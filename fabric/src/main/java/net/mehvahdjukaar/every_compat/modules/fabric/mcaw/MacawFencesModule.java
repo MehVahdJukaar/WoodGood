@@ -112,14 +112,13 @@ public class MacawFencesModule extends SimpleModule {
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         () -> BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
-                        w -> {
-                            var l = w.getBlockOfThis("leaves");
-                            if (l == null ||
-                                (w.getNamespace().equals("regions_unexplored") && w.getTypeName().equals("flowering")))
-                                    return null;
-                            return new FenceHitbox(Utils.copyPropertySafe(l).lightLevel((s) -> 0)
-                                    .strength(0.2F, 0.3F).noOcclusion());
+                        l -> {
+                            if (l.getId().toString().equals("regions_unexplored:flowering")) return null;
+                            return new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
+                                    .strength(0.2F, 0.3F).noOcclusion()
+                                    .mapColor(l.leaves.defaultMapColor()));
                         })
+                .requiresChildren("leaves") // Textures & Recipes
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)

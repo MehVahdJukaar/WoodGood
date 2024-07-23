@@ -112,28 +112,10 @@ public class MacawFencesModule extends SimpleModule {
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
-                        w -> {
-                            if (w.leaves == null) return null;
-
-                            if (w.getNamespace().equals("autumnity")) {
-                                switch (w.getTypeName()) {
-                                    case "red_maple" -> {
-                                        return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
-                                                .mapColor(MapColor.TERRACOTTA_RED).lightLevel((s) -> 0));
-                                    }
-                                    case "orange_maple" -> {
-                                        return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
-                                                .mapColor(MapColor.TERRACOTTA_ORANGE).lightLevel((s) -> 0));
-                                    }
-                                    case "yellow_maple" -> {
-                                        return new FenceHitbox(Utils.copyPropertySafe(w.leaves)
-                                                .mapColor(MapColor.TERRACOTTA_YELLOW).lightLevel((s) -> 0));
-                                    }
-                                }
-                            }
-                            return new FenceHitbox(Utils.copyPropertySafe(w.leaves).lightLevel((s) -> 0));
-                        })
-                .requiresChildren("leaves")
+                        l -> new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
+                                .mapColor(l.leaves.defaultMapColor()))
+                )
+                .requiresChildren("leaves") // Textures & Recipes
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
