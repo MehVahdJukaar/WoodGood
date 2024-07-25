@@ -192,6 +192,12 @@ public abstract class CompatModule {
             maybeFlowerAzalea(t, manager, wood);
             return t;
         });
+
+        handler.addTextureIfNotPresent(manager, path, () -> {
+            var t = textureSupplier.get();
+            maybeBrimwood(t, manager, path, wood);
+            return t;
+        });
     }
 
     //for ecologics
@@ -212,6 +218,109 @@ public abstract class CompatModule {
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.warn("failed to apply azalea overlay: ", e);
+                }
+            }
+        }
+    }
+
+    //for Regions-Unexplored's brimwood
+    protected void maybeBrimwood(TextureImage image, ResourceManager manager, String path, WoodType woodType) {
+        if (woodType.getId().toString().equals("regions_unexplored:brimwood")) {
+            WoodType brimwood = WoodTypeRegistry.getValue(new ResourceLocation("regions_unexplored:brimwood"));
+            if (brimwood != null && !path.contains("chest")) {
+                try (TextureImage lavaOverlay = TextureImage.open(manager,
+                        EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"));
+                     TextureImage plankTexture = TextureImage.open(manager,
+                             EveryCompat.res("block/regions_unexplored/brimwood_planks"));
+
+                ) {
+                    String type = path.substring(path.lastIndexOf("brimwood_") + 9);
+
+                    Respriter respriter = switch (type) {
+                        case "barrel_side" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_barrel_side_m")
+                        ));
+                        case "barrel_top" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_barrel_top_m")
+                        ));
+                        case "beehive_front_honey" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_beehive_front_honey_m")
+                        ));
+                        case "beehive_side" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_beehive_side_m")
+                        ));
+                        case "bookshelf" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_bookshelf_m")
+                        ));
+                        case "cartography_table_side1" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_side1_m")
+                        ));
+                        case "cartography_table_side2" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_side2_m")
+                        ));
+                        case "cartography_table_top" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_top_m")
+                        ));
+                        case "chiseled_bookshelf_occupied" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_chiseled_bookshelf_occupied_m")
+                        ));
+                        case "crafting_table_front" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_crafting_table_front_m")
+                        ));
+                        case "crafting_table_side" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_crafting_table_side_m")
+                        ));
+                        case "fletching_table_front" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_front_m")
+                        ));
+                        case "fletching_table_side" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_side_m")
+                        ));
+                        case "fletching_table_top" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_top_m")
+                        ));
+                        case "lectern_base" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_lectern_base_m")
+                        ));
+                        case "lectern_front" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_lectern_front_m")
+                        ));
+                        case "smithing_table_bottom" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_bottom_m")
+                        ));
+                        case "smithing_table_front" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_front_m")
+                        ));
+                        case "smithing_table_side" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_side_m")
+                        ));
+                        case "smoker_bottom" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_smoker_bottom_m")
+                        ));
+                        case "smoker_front" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_smoker_front_m")
+                        ));
+                        case "smoker_side" -> Respriter.masked(image, TextureImage.open(manager,
+                                EveryCompat.res("block/regions_unexplored/brimwood_smoker_side_m")
+                        ));
+                        default -> Respriter.of(image);
+                    };
+
+                    var temp = respriter.recolorWithAnimationOf(plankTexture);
+
+                    if (path.contains("stairs") || path.contains("planks") || path.contains("slab") ||
+                            path.contains("beehive") || path.contains("composter_bottom") || path.contains("composter_side")
+                            || path.contains("lectern_side") || path.contains("lectern_top") || path.contains("bookshelf_side")
+                            || path.contains("bookshelf_top") || path.contains("boards")
+                    )
+                        image.applyOverlayOnExisting(temp, lavaOverlay);
+                    else
+                        image.applyOverlayOnExisting(temp);
+
+                    temp.close();
+
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("failed to open the texture for: ", e);
                 }
             }
         }
