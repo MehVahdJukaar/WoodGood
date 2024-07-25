@@ -1030,7 +1030,7 @@ public class ChippedModule extends SimpleModule {
         classicTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "classic",
                         () -> getModBlock("classic_spruce_trapdoor"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
-                .addTexture(EveryCompat.res("block/spruce_trapdoor/classic_spruce_trapdoor"))
+                .addTexture(EveryCompat.res("block/ch/classic_spruce_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registry.BLOCK_REGISTRY)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registry.ITEM_REGISTRY)
