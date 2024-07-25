@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -428,64 +429,34 @@ public class QuarkModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
-        try (TextureImage normal = TextureImage.open(manager, modRes("model/chest/oak/normal"));
-             TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
-             TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
-             TextureImage left = TextureImage.open(manager, modRes("model/chest/oak/left"));
-             TextureImage left_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_m"));
-             TextureImage left_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_o"));
-             TextureImage right = TextureImage.open(manager, modRes("model/chest/oak/right"));
-             TextureImage right_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_m"));
-             TextureImage right_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_o"));
-             TextureImage left_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_left"));
-             TextureImage right_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_right"));
-             TextureImage normal_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_normal"))
-        ) {
-
-            Respriter respriterNormal = Respriter.masked(normal, normal_m);
-            Respriter respriterLeft = Respriter.masked(left, left_m);
-            Respriter respriterRight = Respriter.masked(right, right_m);
-
-            Respriter respriterNormalO = Respriter.of(normal_o);
-            Respriter respriterLeftO = Respriter.of(left_o);
-            Respriter respriterRightO = Respriter.of(right_o);
 
             trappedChests.blocks.forEach((wood, block) -> {
 
                 CompatTrappedChestBlock b = (CompatTrappedChestBlock) block;
 
-                try (TextureImage plankTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
-
-                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-                    AnimationMetadataSection meta = plankTexture.getMetadata();
-
-                    List<Palette> overlayPalette = new ArrayList<>();
-                    for (var p : targetPalette) {
-                        var d1 = p.getDarkest();
-                        p.remove(d1);
-                        var d2 = p.getDarkest();
-                        p.remove(d2);
-                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
-                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
-                        var pal = Palette.ofColors(List.of(n1, n2));
-                        overlayPalette.add(pal);
-                    }
-
                     {
                         ResourceLocation res = modRes(b.getChestTexturePath() + "normal");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap");
+                        ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap");
 
-                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes);
-                        }
+                        CompatChestTexture.generateChestTexture(handler, manager, wood, b, res, trappedRes,
+                                modRes("model/chest/oak/normal"),
+                                EveryCompat.res("model/oak_chest_normal_m"),
+                                EveryCompat.res("model/oak_chest_normal_o"),
+                                EveryCompat.res("model/trapped_chest_normal")
+                        );
+
                     }
                     {
                         ResourceLocation res = modRes(b.getChestTexturePath() + "left");
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap_left");
 
-                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes);
+                            CompatChestTexture.generateChestTexture(handler, manager, wood, b, res, trappedRes,
+                                    modRes("model/chest/oak/left"),
+                                    EveryCompat.res("model/oak_chest_left_m"),
+                                    EveryCompat.res("model/oak_chest_left_o"),
+                                    EveryCompat.res("model/trapped_chest_left")
+                            );
                         }
                     }
                     {
@@ -493,34 +464,15 @@ public class QuarkModule extends SimpleModule {
                         if (!handler.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getChestTexturePath() + "trap_right");
 
-                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes);
+                            CompatChestTexture.generateChestTexture(handler, manager, wood, b, res, trappedRes,
+                                    modRes("model/chest/oak/right"),
+                                    EveryCompat.res("model/oak_chest_right_m"),
+                                    EveryCompat.res("model/oak_chest_right_o"),
+                                    EveryCompat.res("model/trapped_chest_right")
+                            );
                         }
                     }
-
-
-                } catch (Exception ex) {
-                    handler.getLogger().error("Failed to generate Chest block texture for {} : {}", b, ex);
-                }
             });
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Chest block texture : ", ex);
-        }
-    }
-
-    private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
-                                     Respriter respriterBase, Respriter respriterBase_O,
-                                     AnimationMetadataSection baseMeta, List<Palette> basePalette,
-                                     List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes) {
-
-        TextureImage recoloredBase = respriterBase.recolorWithAnimation(basePalette, baseMeta);
-        TextureImage recoloredOverlay = respriterBase_O.recolorWithAnimation(overlayPalette, baseMeta);
-        recoloredBase.applyOverlay(recoloredOverlay);
-        TextureImage trapped = recoloredBase.makeCopy();
-
-        if (!chests.blocks.isEmpty()) handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
-
-        trapped.applyOverlay(trappedOverlay.makeCopy());
-        handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
     }
 
 }
