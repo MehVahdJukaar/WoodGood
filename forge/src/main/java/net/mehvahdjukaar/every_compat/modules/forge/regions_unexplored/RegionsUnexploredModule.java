@@ -282,7 +282,5 @@ public class RegionsUnexploredModule extends SimpleModule {
         } catch (IOException e) {
             handler.getLogger().error("Failed to open textures for: ", e);
         }
-
-
     }
 }
