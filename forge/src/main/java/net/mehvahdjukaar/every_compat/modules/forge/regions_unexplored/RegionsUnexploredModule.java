@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -22,9 +23,12 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 import net.regions_unexplored.block.RuBlocks;
 import net.regions_unexplored.world.level.block.plant.other.BranchBlock;
 import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
@@ -33,6 +37,7 @@ import javax.json.Json;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 // SUPPORT: v0.5.3-FINAL
 public class RegionsUnexploredModule extends SimpleModule {
@@ -58,17 +63,52 @@ public class RegionsUnexploredModule extends SimpleModule {
         shrubs = SimpleEntrySet.builder(LeavesType.class, "shrub",
                         () -> getModBlock("dark_oak_shrub"),
                         () -> LeavesTypeRegistry.getValue(new ResourceLocation("dark_oak")),
-                        l -> new ShrubBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_SHRUB.get()))
+                        l -> {
+                            EveryCompat.LOGGER.warn("CHECK: {}", l.getBlockOfThis("sapling"));
+                            return new ShrubBlock(Utils.copyPropertySafe(l.leaves).noCollission().instabreak()
+                                    .sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ)
+                            );
+                        }
                 )
-                .requiresChildren("leaves", "sapling") // leaves for textures & sapling for recipes
+                .addCondition(l -> {
+                    boolean log = l.getWoodType().log != null; // for textures
+                    boolean leave = l.leaves != null; // for textures
+                    boolean sapling = l.getItemOfThis("sapling") != null; // for recipes
+                    return log && leave && sapling;
+                })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shrubs"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shrub_can_survive_on"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("shrubs"), Registry.ITEM_REGISTRY)
+                .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
+                .copyParentDrop()
                 .build();
         this.addEntry(shrubs);
     }
 
+    @Override
+    public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
+        super.registerItemColors(event);
+        for (Map.Entry<LeavesType, Block> entry : shrubs.blocks.entrySet()) {
+            LeavesType type = entry.getKey();
+            Block block = entry.getValue();
+            event.register((stack, tintIndex) -> {
+                if (tintIndex > 0) return 0xFFFFFFFF;
+                return event.getColor(new ItemStack(type.leaves), tintIndex);
+            }, block);
+        }
+    }
+
+    @Override
+    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+        super.registerBlockColors(event);
+        for (Map.Entry<LeavesType, Block> entry : shrubs.blocks.entrySet()) {
+            LeavesType type = entry.getKey();
+            Block b = entry.getValue();
+            event.register((blockState, tintGetter, pos, index) ->
+                    event.getColor(type.leaves.defaultBlockState(), tintGetter, pos, index), b);
+        }
+    }
     @Override
     public void onModSetup() {
         branchs.blocks.forEach((woodType, block) -> ComposterBlock.COMPOSTABLES.put(block, 0.3F));
@@ -127,14 +167,15 @@ public class RegionsUnexploredModule extends SimpleModule {
     }
 
     @Override
-    // Textures
+    // Textures & Models
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
+// Generating branch textures ==========================================================================================
         try (TextureImage branch_side = TextureImage.open(manager, EveryCompat.res("item/regions_unexplored/oak_branch_side"));
              TextureImage branch_top = TextureImage.open(manager, EveryCompat.res("item/regions_unexplored/oak_branch_top"));
              TextureImage branch_block = TextureImage.open(manager, modRes("block/oak_branch"))
-            ) {
+        ) {
 
             branchs.blocks.forEach((wood, block) -> {
                 try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
@@ -157,7 +198,6 @@ public class RegionsUnexploredModule extends SimpleModule {
 
                     // Block Texture
                     handler.dynamicPack.addAndCloseTexture(resLocBLOCK, recoloredBLOCK);
-
                     // Item Texture
                     handler.dynamicPack.addAndCloseTexture(resLocITEM, recoloredITEM);
 
@@ -167,45 +207,122 @@ public class RegionsUnexploredModule extends SimpleModule {
             });
         }
         catch (IOException e) {
-            handler.getLogger().error("Failed to get Branch Item Texture for " + e);
+            handler.getLogger().error("Failed to get Branch Item Texture for ", e);
         }
 
-        try (TextureImage shrubTop = TextureImage.open(manager, modRes("block/dark_oak_shrub_top"));
-             TextureImage shrubBottom = TextureImage.open(manager, modRes("block/dark_oak_shrub_bottom"));
-             TextureImage leaveMask = TextureImage.open(manager, EveryCompat.res("block/regions_unexplored/dark_oak_shrub_leaves_m"));
-             TextureImage logMask = TextureImage.open(manager, EveryCompat.res("block/regions_unexplored/dark_oak_shrub_logs_m"));
-            ) {
+// Generating shrub textures ===========================================================================================
+        try (
+                // middle is where the log color is located below the leave via dark_oak_shrub_top
+                TextureImage shrubMiddle = TextureImage.open(manager,
+                        EveryCompat.res("block/regions_unexplored/dark_oak_shrub_middle"));
+                TextureImage shrubBottom = TextureImage.open(manager, modRes("block/dark_oak_shrub_bottom"))
+        ) {
 
             shrubs.blocks.forEach((leavesType, block) -> {
+                // Modifying BLOCK MODEL
+                String shrubPath = shortenedId() + "/" + leavesType.getAppendableId() + "_shrub";
 
-                try (
-                     TextureImage leaveTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves, SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE));
-                     TextureImage logTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.getWoodType().log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
-                ) {
-                    Respriter respriterTop = Respriter.masked(shrubTop, leaveMask);
-                    Respriter respriterBottom = Respriter.of(shrubBottom);
+                String crossModel = """
+                    {
+                        "parent": "minecraft:block/cross",
+                        "render_type": "cutout",
+                        "textures": {
+                            "particle": "[shrub_top]",
+                            "cross_tint": "[shrub_top]",
+                            "cross": "[shrub_middle]"
+                        },
+                        "elements": [
+                            {   "from": [ 0.8, 0, 8 ],
+                                "to": [ 15.2, 16, 8 ],
+                                "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
+                                "shade": false,
+                                "faces": {
+                                    "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" },
+                                    "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" }
+                                }
+                            },
+                            {   "from": [ 8, 0, 0.8 ],
+                                "to": [ 8, 16, 15.2 ],
+                                "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
+                                "shade": false,
+                                "faces": {
+                                    "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" },
+                                    "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" }
+                                }
+                            },
+                            {   "from": [ 0.8, 0, 8 ],
+                                "to": [ 15.2, 16, 8 ],
+                                "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
+                                "shade": false,
+                                "faces": {
+                                    "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross_tint", "tintindex": 0 },
+                                    "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross_tint", "tintindex": 0 }
+                                }
+                            },
+                            {   "from": [ 8, 0, 0.8 ],
+                                "to": [ 8, 16, 15.2 ],
+                                "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
+                                "shade": false,
+                                "faces": {
+                                    "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross_tint", "tintindex": 0 },
+                                    "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross_tint", "tintindex": 0 }
+                                }
+                            }
+                        ]
+                    }
+                    """;
 
-                    // Recoloring the log top & bottom
-                    TextureImage recoloredLog = respriterTop.recolorWithAnimationOf(logTexture);
-                    TextureImage recoloredBottom = respriterBottom.recolorWithAnimationOf(logTexture);
 
-                    // Recoloring the leave
-                    Respriter respriterleave = Respriter.masked(recoloredLog, logMask);
-                    TextureImage recoloredTop = respriterleave.recolorWithAnimationOf(leaveTexture);
+                String blockID = "everycomp:block/" + shrubPath;
 
-                    // Adding to the resource
-                    String resLoc = shortenedId() + "/" + leavesType.getAppendableId() + "_shrub";
-                    handler.dynamicPack.addAndCloseTexture(EveryCompat.res("block/" + resLoc + "_top"), recoloredTop);
-                    handler.dynamicPack.addAndCloseTexture(EveryCompat.res("block/" + resLoc + "_bottom"), recoloredBottom);
+                String newModel = crossModel.replace("[shrub_middle]", blockID + "_middle")
+                        .replace("[shrub_top]", blockID + "_top");
+
+                handler.dynamicPack.addBytes(EveryCompat.res(shrubPath), newModel.getBytes(), ResType.BLOCK_MODELS);
+
+                // Modifying ITEM MODEL ================================================================================
+                var itemPath = ResType.ITEM_MODELS.getPath(EveryCompat.res(shrubPath));
+
+                try (InputStream modelItemStream = manager.getResource(itemPath)
+                        .orElseThrow(FileNotFoundException::new).open()) {
+
+                    JsonObject modelItem = RPUtils.deserializeJson(modelItemStream);
+
+                    modelItem.getAsJsonObject("textures")
+                            .addProperty("layer0", blockID + "_top");
+                    modelItem.getAsJsonObject("textures")
+                            .addProperty("layer1", blockID + "_middle");
+
+                    handler.dynamicPack.addJson(EveryCompat.res(shrubPath), modelItem, ResType.ITEM_MODELS);
 
                 } catch (IOException e) {
-                    handler.getLogger().error("Failed to get texture for {} : {}", block, e);
+                    handler.getLogger().error("Failed to open the item model file via {} : {}", itemPath, e);
+                }
+
+                // Generating textures for shrubs ======================================================================
+                try (TextureImage logTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, leavesType.getWoodType().log,
+                                SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                ) {
+                    Respriter respriterBottom = Respriter.of(shrubBottom);
+
+                    Respriter respriterMiddle= Respriter.of(shrubMiddle);
+
+                    // Recoloring the log middle & bottom
+                    TextureImage recoloredMiddle = respriterMiddle.recolorWithAnimationOf(logTexture);
+                    TextureImage recoloredBottom = respriterBottom.recolorWithAnimationOf(logTexture);
+
+                    // Adding to the resource
+                    String resLoc = "block/" + shrubPath;
+                    handler.dynamicPack.addAndCloseTexture(EveryCompat.res(resLoc + "_middle"), recoloredMiddle);
+                    handler.dynamicPack.addAndCloseTexture(EveryCompat.res(resLoc + "_bottom"), recoloredBottom);
+
+                } catch (IOException e) {
+                    handler.getLogger().error("Failed to get texture for {} : {}", block.toString(), e);
                 }
             });
-        } catch (Exception e) {
-            handler.getLogger().error("Failed to get textures for " + e);
+        } catch (IOException e) {
+            handler.getLogger().error("Failed to open textures for: ", e);
         }
     }
 }

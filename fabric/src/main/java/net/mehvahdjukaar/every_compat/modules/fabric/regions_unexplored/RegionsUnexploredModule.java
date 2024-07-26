@@ -62,8 +62,8 @@ public class RegionsUnexploredModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
-        try (TextureImage branch_side = TextureImage.open(manager, EveryCompat.res("item/oak_branch_side"));
-             TextureImage branch_top = TextureImage.open(manager, EveryCompat.res("item/oak_branch_top"));
+        try (TextureImage branch_side = TextureImage.open(manager, EveryCompat.res("item/regions_unexplored/oak_branch_side"));
+             TextureImage branch_top = TextureImage.open(manager, EveryCompat.res("item/regions_unexplored/oak_branch_top"));
              TextureImage branch_block = TextureImage.open(manager, modRes("block/oak_branch"))
         ) {
 
