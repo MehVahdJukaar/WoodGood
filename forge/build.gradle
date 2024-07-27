@@ -113,7 +113,7 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modImplementation("curse.maven:selene-499980:4983974") // EVERY COMPAT
+    modImplementation("curse.maven:selene-499980:5567102") // v2.3.7
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
 
     modImplementation("curse.maven:architectury-api-419699:5137942") // v6.6.92 | REI, Gardens-Of-The-Dead
@@ -123,8 +123,8 @@ dependencies {
     modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
     modCompileOnly("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
-    modImplementation("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
-    modImplementation("curse.maven:framework-549225:4718247") // Mighty Mail, Furniture
+    modCompileOnly("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
+    modCompileOnly("curse.maven:framework-549225:4718247") // Mighty Mail, Furniture
 
 //    modImplementation("curse.maven:supermartijn642s-config-lib-438332:3871792") // Benched
 //    modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238") // Benched
@@ -177,6 +177,8 @@ dependencies {
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:3947222")
 
+    modCompileOnly("curse.maven:regions-unexplored-659110:4807303")
+
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240514")
     modCompileOnly("curse.maven:macaws-doors-378646:4649906")
@@ -188,7 +190,6 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841549")
     modCompileOnly("curse.maven:macaws-windows-363569:4961138")
 
-    modImplementation("curse.maven:regions-unexplored-659110:4807303")
 
     // =========================================== WORK IN PROGRESS ================================================= \\
 
