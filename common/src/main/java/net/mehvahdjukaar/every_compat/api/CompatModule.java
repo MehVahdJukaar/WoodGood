@@ -107,6 +107,12 @@ public abstract class CompatModule {
         String n1 = woodFrom + "/" + name; //quark/blossom_chair
         String n2 = woodFrom + "_" + name; //quark_blossom_chair
 
+        // Garden-Of-The-dead's whistle must be skipped for branches from Regions-Unexplored
+        // Nether's Exoticism already has branches, branches from Regions-Unexplored is not needed
+        if ( (woodFrom.equals("gardens_of_the_dead") ||
+                woodType.getId().toString().equals("nethers_exoticism:jabuticaba")) && name.contains("branch"))
+            return true;
+
         if (woodType.getId().toString().equals("ecologics:azalea")) {
             if (modId.equals("quark")) return false; //ecologics and quark azalea. tbh not sure why needed
         }
