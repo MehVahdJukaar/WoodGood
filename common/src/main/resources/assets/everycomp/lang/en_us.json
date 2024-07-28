@@ -34,6 +34,9 @@
   "block.everycomp.q.neu.hollow_elder_log": "Hollow Elder Stem",
   "block.everycomp.q.neu.hollow_frosted_log": "Hollow Frosted Stem",
 
+  "block.everycomp.q.enlightened_end.hollow_cerulean_log": "Hollow Cerulean Stem",
+  "block.everycomp.q.enlightened_end.hollow_indigo_log": "Hollow Indigo Stem",
+
   "block.everycomp.tf.extendedmushrooms.hollow_glowshroom_log": "Hollow Glowshroom Stem",
   "block.everycomp.tf.extendedmushrooms.hollow_honey_fungus_log": "Hollow Honey Fungus Stem",
   "block.everycomp.tf.extendedmushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
@@ -42,6 +45,9 @@
   "block.everycomp.tf.neu.hollow_dragon_log": "Hollow Dragon Stem",
   "block.everycomp.tf.neu.hollow_elder_log": "Hollow Elder Stem",
   "block.everycomp.tf.neu.hollow_frosted_log": "Hollow Frosted Stem",
+
+  "block.everycomp.tf.enlightened_end.hollow_cerulean_log": "Hollow Cerulean Stem",
+  "block.everycomp.tf.enlightened_end.hollow_indigo_log": "Hollow Indigo Stem",
 
   "block_type.twigs.table": "%s Table",
 
