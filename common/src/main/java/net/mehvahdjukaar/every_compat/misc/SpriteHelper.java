@@ -34,8 +34,17 @@ public class SpriteHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
 
-        addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
+        addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
+
+        // Born In Chaos
+        addOptional("born_in_chaos_v1:scorched_log", "_side", "born_in_chaos_v1:block/brievno");
+        addOptional("born_in_chaos_v1:scorched_log", "_top", "born_in_chaos_v1:block/brievnovierkh1");
+
+        addOptional("born_in_chaos_v1:stripped_scorched_log", "_side", "born_in_chaos_v1:block/obdreve");
+        addOptional("born_in_chaos_v1:stripped_scorched_log", "_top", "born_in_chaos_v1:block/obtes");
+
+        addOptional("born_in_chaos_v1:scorched_planks", "_planks", "born_in_chaos_v1:block/opdosk");
 
         // Nether Update Expanded
         addOptional("nue:dragon_stem", "_side", "nue:block/dragonstem");
@@ -91,7 +100,8 @@ public class SpriteHelper {
 
         // Regions Unexplored
         addOptional("regions_unexplored:eucalyptus_log", "_side", EveryCompat.MOD_ID+":block/regions_unexplored/eucalyptus_log");
-            // Leaves
+
+// Leaves
         addOptional("regions_unexplored:alpha_leaves", "_leaves", "regions_unexplored:block/alpha_oak_leaves");
         addOptional("regions_unexplored:apple_oak_leaves", "_leaves", "regions_unexplored:block/apple_oak_leaves_stage_0");
         addOptional("regions_unexplored:flowering_leaves", "_leaves", "regions_unexplored:item/flowering_leaves");
