@@ -123,6 +123,7 @@ subprojects {
                         optionalDependency("create")
                         optionalDependency("dawn-of-time")
                         optionalDependency("decorative-blocks")
+                        optionalDependency("decoration-delight")
                         optionalDependency("domum-ornamentum")
                         optionalDependency("dramatic-doors")
                         optionalDependency("exlines-bark-carpets")
