@@ -49,8 +49,6 @@
   "block.everycomp.tf.enlightened_end.hollow_cerulean_log": "Hollow Cerulean Stem",
   "block.everycomp.tf.enlightened_end.hollow_indigo_log": "Hollow Indigo Stem",
 
-  "block_type.twigs.table": "%s Table",
-
   "wood_type.domum_ornamentum.cactus": "Green Cactus",
   "wood_type.domum_ornamentum.cactus_extra": "Cactus",
   "wood_type.twilightforest.dark": "Darkwood",
@@ -72,6 +70,8 @@
   "leaves_type.quark.red":"Fiery",
   "leaves_type.twilightforest.dark": "Darkwood",
   "leaves_type.ulterlands.souldrained": "Petrified",
+
+  "block_type.twigs.table": "%s Table",
 
   "block_type.missingwilds.fallen_log": "Fallen %s Log",
 
