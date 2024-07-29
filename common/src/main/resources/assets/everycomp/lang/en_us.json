@@ -820,6 +820,12 @@
   "block_type.handcrafted.shelf": "%s Shelf",
   "block_type.handcrafted.pillar_trim": "%s Pillar Trim",
   "block_type.handcrafted.corner_trim": "%s Corner Trim",
-  "block_type.handcrafted.dining_bench": "%s Dining Bench"
+  "block_type.handcrafted.dining_bench": "%s Dining Bench",
 
+  "block_type.decoration_delight.counter": "%s Counter",
+  "block_type.decoration_delight.counter_corner": "%s Counter Corner",
+  "block_type.decoration_delight.counter_bend": "%s Counter Bend",
+  "block_type.decoration_delight.countertop": "%s Countertop",
+  "block_type.decoration_delight.stool": "%s Stool",
+  "block_type.decoration_delight.mosaic": "%s Mosaic"
 }

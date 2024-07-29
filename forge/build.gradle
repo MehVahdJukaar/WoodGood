@@ -155,6 +155,7 @@ dependencies {
     modCompileOnly("curse.maven:create-328085:4835191")
     modCompileOnly("curse.maven:dawn-of-time-312359:5374048")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
+    modCompileOnly("curse.maven:decoration-delight-687475:5563942")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
