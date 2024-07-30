@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
+import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.exnihilo.ExNihiloSequentiaModule;
@@ -64,9 +65,10 @@ public class EveryCompatForge extends EveryCompat {
         // ========================================= Add Modules ==================================================== \\
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
+        addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
-
         addModule("create", () -> CreateModule::new);
+        addModule("decoration_delight", () -> DecorationDelightModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         if (PlatformHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
@@ -93,7 +95,6 @@ public class EveryCompatForge extends EveryCompat {
         }
         addModule("xercamod", () -> XercaModule::new);
         addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
-        addModule("buildersdelight", () -> BuildersDelightModule::new);
 
         // Macaw's
         addModule("mcwbridges", () -> MacawBridgesModule::new);
