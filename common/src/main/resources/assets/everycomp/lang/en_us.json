@@ -753,6 +753,20 @@
   "block_type.decoration_delight.counter_bend": "%s Counter Bend",
   "block_type.decoration_delight.countertop": "%s Countertop",
   "block_type.decoration_delight.stool": "%s Stool",
-  "block_type.decoration_delight.mosaic": "%s Mosaic"
+  "block_type.decoration_delight.mosaic": "%s Mosaic",
+
+  "block_type.dawnoftimebuilder.planks_plate": "%s Plate",
+  "block_type.dawnoftimebuilder.planks_edge": "%s Edge",
+  "block_type.dawnoftimebuilder.pergola": "%s Pergola",
+  "block_type.dawnoftimebuilder.lattice": "%s Lattice",
+  "block_type.dawnoftimebuilder.beam": "%s Beam",
+  "block_type.dawnoftimebuilder.wall": "%s Wall",
+  "block_type.dawnoftimebuilder.support_beam": "%s Support Beam",
+  "block_type.dawnoftimebuilder.support_slab": "%s Support Slab",
+  "block_type.dawnoftimebuilder.couch": "%s Couch",
+  "block_type.dawnoftimebuilder.fancy_fence": "Fancy %s Fence",
+  "block_type.dawnoftimebuilder.footstool": "%s Footstool",
+  "block_type.dawnoftimebuilder.low_table": "%s Low Table",
+  "block_type.dawnoftimebuilder.legless_chair": "%s Legless Chair"
 }
 

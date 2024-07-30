@@ -125,6 +125,7 @@ dependencies {
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
     modCompileOnly("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
     modCompileOnly("curse.maven:framework-549225:4718247") // Mighty Mail, Furniture
+    modCompileOnly("curse.maven:fusion-connected-textures-854949:5129280") // Dawn Of Time
 
 //    modImplementation("curse.maven:supermartijn642s-config-lib-438332:3871792") // Benched
 //    modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238") // Benched
@@ -146,6 +147,7 @@ dependencies {
     modCompileOnly("curse.maven:camp-chair-531744:3930598")
     modCompileOnly("curse.maven:chipped-456956:4463479")
     modCompileOnly("curse.maven:create-328085:4547147")
+    modCompileOnly("curse.maven:dawn-of-time-312359:5214071")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:decoration-delight-687475:5563960")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
