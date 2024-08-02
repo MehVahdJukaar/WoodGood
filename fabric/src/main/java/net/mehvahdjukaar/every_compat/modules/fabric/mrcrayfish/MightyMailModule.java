@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.fabric.crayfish;
+package net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish;
 
 import com.mrcrayfish.mightymail.block.MailboxBlock;
 import com.mrcrayfish.mightymail.core.ModBlockEntities;
