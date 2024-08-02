@@ -63,7 +63,7 @@ public class WoodworksModule extends SimpleModule {
                         getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new Block(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.bookshelf()))
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
@@ -77,7 +77,7 @@ public class WoodworksModule extends SimpleModule {
                         getModBlock("chiseled_acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new ChiseledBookShelfBlock(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.chiseledBookshelf()))
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
@@ -94,7 +94,7 @@ public class WoodworksModule extends SimpleModule {
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_boards"))
@@ -106,7 +106,7 @@ public class WoodworksModule extends SimpleModule {
                         getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new LadderBlock(WoodworksBlocks.WoodworksProperties.SPRUCE_WOOD.ladder()))
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
@@ -119,7 +119,7 @@ public class WoodworksModule extends SimpleModule {
                         getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .defaultRecipe()
@@ -136,7 +136,7 @@ public class WoodworksModule extends SimpleModule {
                         w -> new CompatChestBlock(this::getChestTile,
                                 WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest())
                 )
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
@@ -153,7 +153,7 @@ public class WoodworksModule extends SimpleModule {
                         w -> new CompatTrappedChestBlock(this::getTrappedTile,
                                 WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest())
                 )
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_TRAPPED, Registries.ITEM)
@@ -174,7 +174,7 @@ public class WoodworksModule extends SimpleModule {
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK)
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .setRenderType(() -> RenderType::cutout)
                 .copyParentDrop()
                 .defaultRecipe()

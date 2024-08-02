@@ -25,7 +25,6 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
     public Supplier<ItemStackRenderer> getRendererFactory() {
         return () -> {
             ChestBlock block = (ChestBlock) CompatChestItem.this.getBlock();
@@ -35,7 +34,6 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
                         .newBlockEntity(BlockPos.ZERO, block.defaultBlockState());
 
                 @Override
-                @SuppressWarnings("DataFlowIssue")
                 public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
                     renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
                 }
