@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-//SUPPORT: v1.0.3+
+//SUPPORT: v1.0.0-beta4
 public class RefurbishedFurnitureModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chairs;
@@ -164,7 +164,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         getModBlock("oak_mail_box"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new MailboxBlock(w.toVanillaOrOak(), addWoodPropNoFire(w, BlockBehaviour.Properties.of()
                                 .strength(2.5F))))
-                .addRecipe(modRes("constructing/oak_crate"))
+                .addRecipe(modRes("constructing/oak_mail_box"))
                 .addCustomItem((woodType, block, properties) -> new MailboxItem(block, properties))
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.MAIL_BOX::get)
@@ -377,7 +377,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 )
                 .addRecipe(modRes("constructing/oak_desk"))
                 .setTab(ModCreativeTabs.MAIN::get)
-//                .addTile(ModBlockEntities.STORAGE_JAR::get)
                 .addTexture(modRes("block/oak_desk"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tuckable"), Registries.BLOCK)
@@ -423,7 +422,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         l -> new HedgeBlock(LeafType.OAK, BlockBehaviour.Properties.of().strength(0.5f)
                                 .sound(SoundType.AZALEA_LEAVES))
                 )
-                .requiresChildren("leaves")
+                .requiresChildren("leaves") // Textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addRecipe(modRes("constructing/oak_hedge"))
@@ -500,15 +499,25 @@ public class RefurbishedFurnitureModule extends SimpleModule {
             JsonArray materialArray = GsonHelper.getAsJsonArray(json, "materials");
             this.materials = NonNullList.withSize(materialArray.size(), StackedIngredient.EMPTY);
             IntStream.range(0, materialArray.size()).forEach((i) -> materials.set(i, StackedIngredient.fromJson(materialArray.get(i))));
-            String s1 = GsonHelper.getAsString(json, "result");
-            int i = GsonHelper.getAsInt(json, "count", 1);
-            this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i);
+            String s1;
+            int count;
+            if (json.get("result").isJsonObject()) {
+                s1 = GsonHelper.getAsJsonObject(json, "result").get("item").getAsString();
+                count = GsonHelper.getAsJsonObject(json, "result").get("count").getAsInt();
+            }
+            else {
+                s1 = GsonHelper.getAsString(json, "result");
+                count = 1;
+            }
+
+            this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), count);
             this.notification = GsonHelper.getAsBoolean(json, "show_notification", true);
         }
 
         @Override
         public <T extends BlockType> WorkbenchContructingRecipe.Result createSimilar(
                 T originalMat, T destinationMat, Item unlockItem, String id) {
+
             ItemLike newRes = BlockType.changeItemType(this.result.getItem(), originalMat, destinationMat);
             if (newRes == null) {
                 throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
@@ -548,7 +557,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 
             advancement.rewards(AdvancementRewards.Builder.recipe(EveryCompat.res("recipes/" + res.getPath())));
 
-            return new WorkbenchContructingRecipe.Result(res, newResult.getItem(), newResult.getCount(), newMaterials, advancement,
+            return new WorkbenchContructingRecipe.Result(res, newResult.getItem(), result.getCount(), newMaterials, advancement,
                     modRes("recipes/misc/constructing/" + res.getPath()), notification);
         }
 
