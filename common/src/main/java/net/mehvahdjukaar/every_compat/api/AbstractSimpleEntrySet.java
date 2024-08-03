@@ -224,7 +224,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             try {
                 ResourcesUtils.addBlocksRecipes(manager, pack, items, res, baseType.get(), i++);
             } catch (Exception e) {
-                EveryCompat.LOGGER.error("Failed to generate recipes for template at location {} ", res);
+                EveryCompat.LOGGER.error("Failed to generate recipes for template at location {} ", res, e);
             }
         }
     }

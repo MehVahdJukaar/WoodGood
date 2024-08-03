@@ -54,7 +54,6 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
         }
     }
 
-    @Override
     protected @NotNull Material getMaterial(CompatChestBlockEntity blockEntity, ChestType chestType) {
         WoodType w = blockEntity.getWoodType();
         if (blockEntity.isTrapped()) {
