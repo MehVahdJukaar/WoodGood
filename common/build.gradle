@@ -20,7 +20,7 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14
 
 // =============================================== DEPENDENCIES ========================================================
-    modCompileOnly("curse.maven:framework-549225:5180973") // Furniture Refurbished
+    modCompileOnly("curse.maven:framework-549225:5388228") // Furniture Refurbished
 
         // LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")

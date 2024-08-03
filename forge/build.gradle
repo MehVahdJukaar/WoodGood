@@ -125,7 +125,7 @@ dependencies {
     modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
     modImplementation("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
-    modCompileOnly("curse.maven:framework-549225:5180972") //  Refurbished Furniture, Mighty Mail
+    modImplementation("curse.maven:framework-549225:5388226") //  Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
 
@@ -186,6 +186,7 @@ dependencies {
     modCompileOnly("curse.maven:boatload-337396:5292325")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
+//    modImplementation("curse.maven:refurbished-furniture-897116:5570559")
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240521")
