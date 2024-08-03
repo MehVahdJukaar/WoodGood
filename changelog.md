@@ -1,11 +1,7 @@
 ### UPDATED:
-- **EN_US**: Corrected the display title from "log" to "stem" for 2 blocks from **Enlightened End** with
-  - **Quark**'s _hollow_log_
-  - **The Twilight Forest**'s _hollow_log_
-- **Textures**: Fixed the missing textures from **Born In Chaos**'s scorched
+- **MrCrayFish's Furniture: Refurbished**: [Issue#574](https://github.com/MehVahdJukaar/WoodGood/issues/574) Fixed the recipes not being added to Workbench
 
 ### NEW:
-- **Decorative Delight: Refurbished** (FORGE)
 
 ---
 **LEGEND**:
