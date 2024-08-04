@@ -1,16 +1,28 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.variants;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.gson.JsonObject;
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -19,12 +31,17 @@ import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.xanthian.variantvanillablocks.block.*;
 import net.xanthian.variantvanillablocks.utils.ModCreativeTab;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Set;
 import java.util.function.Supplier;
+
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
 
 //SUPPORT: v1.3.6+
@@ -33,8 +50,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, BeehiveBlock> beehive;
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, CartographyTableBlock> cartography;
-    //TODO common_class folder from FORGE side need to be added and modified
-    //    public final SimpleEntrySet<WoodType, Block> chests;
+
+    public final SimpleEntrySet<WoodType, Block> chests;
     public final SimpleEntrySet<WoodType, ChiseledBookShelfBlock> chiseledBookshelves;
     public final SimpleEntrySet<WoodType, ComposterBlock> composters;
     public final SimpleEntrySet<WoodType, CraftingTableBlock> craftingTable;
@@ -131,10 +148,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .build();
         this.addEntry(cartography);
 
-/*        chests = SimpleEntrySet.builder(WoodType.class, "chest",
+        chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         () -> Chests.ACACIA_CHEST,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new VariantChestBlock(Utils.copyPropertySafe(w.planks), )
+                        w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks) )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
@@ -149,7 +166,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .defaultRecipe()
                 .setTab(()  ->tab)
                 .build();
-        this.addEntry(chests);*/
+        this.addEntry(chests);
 
         chiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         () -> ChiseledBookshelves.ACACIA_CHISELED_BOOKSHELF,
@@ -305,16 +322,16 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
     //kind of hacy.dont like but we cant reference chests itself while constructing its own object
     // GetTiles
-//    private BlockEntityType<? extends ChestBlockEntity> getTile() {
-//        return chests.getTile(CompatChestBlockEntity.class);
-//    }
+    private BlockEntityType<? extends ChestBlockEntity> getTile() {
+        return chests.getTile(CompatChestBlockEntity.class);
+    }
 
-    // BlockEntity
-//    private class VariantChestBlockEntity extends CompatChestBlockEntity {
-//        public VariantChestBlockEntity(BlockPos pos, BlockState state) {
-//            super(chests.getTile(), pos, state);
-//        }
-//    }
+//     BlockEntity
+    private class VariantChestBlockEntity extends CompatChestBlockEntity {
+        public VariantChestBlockEntity(BlockPos pos, BlockState state) {
+            super(chests.getTile(), pos, state);
+        }
+    }
 
     private Set<BlockState> getBeehives() {
         var set = new ImmutableSet.Builder<BlockState>();
@@ -335,17 +352,17 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
 
     // Registry --------------------------------------------------------------------------------------------------------
-/*    @Override
+    @Override
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context,
                 shortenedId()));
-    }*/
+    }
 
 //    @Override
     // Textures --------------------------------------------------------------------------------------------------------
-/*    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
         chests.blocks.forEach((wood, block) -> {
             // SINGLE
@@ -389,6 +406,6 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 }
             }
         });
-    }*/
+    }
 
 }
