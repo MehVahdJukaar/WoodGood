@@ -40,13 +40,11 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
 
         // ========================================= Add Modules ==================================================== \\
-        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("lolmct", () -> MoreCraftingTablesModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
 
@@ -54,6 +52,8 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         // ========================================== WORK IN PROGRESS ============================================== \\
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
+//        addModule("twilightforest", () -> TwilightForestModule::new); // Not available
+//        addModule("architects_palette", () -> ArchitectsPaletteModule::new); // Not available
 
         // ============================================= OTHERS ===================================================== \\
         forAllModules(CompatModule::onModInit);
