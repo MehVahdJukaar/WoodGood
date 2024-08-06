@@ -37,6 +37,38 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // Dreamy Cottage
+        addOptional("dreamy_cottage:strawberry_log", "_side", "dreamy_cottage:block/strawberrylogside");
+        addOptional("dreamy_cottage:strawberry_log", "_top", "dreamy_cottage:block/strawberrylog");
+        addOptional("dreamy_cottage:stripped_strawberry_log", "_side", "dreamy_cottage:block/strippedlogsidestrawberry");
+        addOptional("dreamy_cottage:stripped_strawberry_log", "_top", "dreamy_cottage:block/strippedlogstrawberry");
+
+        addOptional("dreamy_cottage:white_oak_log", "_side", "dreamy_cottage:block/untitled416_20240420160357_1");
+        addOptional("dreamy_cottage:white_oak_log", "_top", "dreamy_cottage:block/untitled416_20240420160009_1");
+        addOptional("dreamy_cottage:stripped_white_oak_log", "_side", "dreamy_cottage:block/strippedwhiteoakside");
+        addOptional("dreamy_cottage:stripped_white_oak_log", "_top", "dreamy_cottage:block/strippedwhiteoak");
+
+            // Leaves
+        addOptional("dreamy_cottage:strawberry_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
+        addOptional("dreamy_cottage:white_oak_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
+
+
+
+        // Feywild
+        addOptional("feywild:spring_tree_log", "_side", "feywild:block/spring_tree_wood");
+        addOptional("feywild:spring_tree_log", "_top", "feywild:block/spring_tree_log");
+        addOptional("feywild:summer_tree_log", "_side", "feywild:block/summer_tree_wood");
+        addOptional("feywild:summer_tree_log", "_top", "feywild:block/summer_tree_log");
+        addOptional("feywild:autumn_tree_log", "_side", "feywild:block/autumn_tree_wood");
+        addOptional("feywild:autumn_tree_log", "_top", "feywild:block/autumn_tree_log");
+        addOptional("feywild:winter_tree_log", "_side", "feywild:block/winter_tree_wood");
+        addOptional("feywild:winter_tree_log", "_top", "feywild:block/winter_tree_log");
+        addOptional("feywild:blossom_tree_log", "_side", "feywild:block/blossom_tree_wood");
+        addOptional("feywild:blossom_tree_log", "_top", "feywild:block/blossom_tree_log");
+        addOptional("feywild:hexen_tree_log", "_side", "feywild:block/hexen_tree_wood");
+        addOptional("feywild:hexen_tree_log", "_top", "feywild:block/hexen_tree_log");
+
+
         // Born In Chaos
         addOptional("born_in_chaos_v1:scorched_log", "_side", "born_in_chaos_v1:block/brievno");
         addOptional("born_in_chaos_v1:scorched_log", "_top", "born_in_chaos_v1:block/brievnovierkh1");
@@ -64,17 +96,17 @@ public class SpriteHelper {
 
         // Fruitful Fun
             // Leaves
-        addOptional("fruitfulfun:apple_leaves", "_side", "minecraft:block/oak_leaves");
-        addOptional("fruitfulfun:cherry_leaves", "_side", "fruitfulfun:block/cherry_leaves_2");
-        addOptional("fruitfulfun:citron_leaves", "_side", "fruitfulfun:block/citron_leaves");
-        addOptional("fruitfulfun:grapefruit_leaves", "_side", "fruitfulfun:block/grapefruit_leaves");
-        addOptional("fruitfulfun:lemon_leaves", "_side", "fruitfulfun:block/lemon_leaves");
-        addOptional("fruitfulfun:lime_leaves", "_side", "fruitfulfun:block/lime_leaves");
-        addOptional("fruitfulfun:orange_leaves", "_side", "fruitfulfun:block/orange_leaves");
-        addOptional("fruitfulfun:pomegranate_leaves", "_side", "fruitfulfun:block/pomegranate_leaves");
-        addOptional("fruitfulfun:pomelo_leaves", "_side", "fruitfulfun:block/pomelo_leaves");
-        addOptional("fruitfulfun:redlove_leaves", "_side", "fruitfulfun:block/redlove_leaves");
-        addOptional("fruitfulfun:tangerine_leaves", "_side", "fruitfulfun:block/tangerine_leaves");
+        addOptional("fruitfulfun:apple_leaves", "_leaves", "minecraft:block/oak_leaves");
+        addOptional("fruitfulfun:cherry_leaves", "_leaves", "fruitfulfun:block/cherry_leaves_2");
+        addOptional("fruitfulfun:citron_leaves", "_leaves", "fruitfulfun:block/citron_leaves");
+        addOptional("fruitfulfun:grapefruit_leaves", "_leaves", "fruitfulfun:block/grapefruit_leaves");
+        addOptional("fruitfulfun:lemon_leaves", "_leaves", "fruitfulfun:block/lemon_leaves");
+        addOptional("fruitfulfun:lime_leaves", "_leaves", "fruitfulfun:block/lime_leaves");
+        addOptional("fruitfulfun:orange_leaves", "_leaves", "fruitfulfun:block/orange_leaves");
+        addOptional("fruitfulfun:pomegranate_leaves", "_leaves", "fruitfulfun:block/pomegranate_leaves");
+        addOptional("fruitfulfun:pomelo_leaves", "_leaves", "fruitfulfun:block/pomelo_leaves");
+        addOptional("fruitfulfun:redlove_leaves", "_leaves", "fruitfulfun:block/redlove_leaves");
+        addOptional("fruitfulfun:tangerine_leaves", "_leaves", "fruitfulfun:block/tangerine_leaves");
 
         // Extended Mushrooms
         addOptional("extendedmushrooms:glowshroom_stem", "_top", "extendedmushrooms:block/glowshroom_stem");
