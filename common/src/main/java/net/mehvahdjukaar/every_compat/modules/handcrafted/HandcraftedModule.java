@@ -136,6 +136,7 @@ public class HandcraftedModule extends SimpleModule {
                 .setTab(tab)
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
+                .copyParentDrop()
                 .build();
         this.addEntry(fancy_bed);
 
