@@ -24,6 +24,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -213,6 +215,7 @@ public class StorageDrawersModule extends SimpleModule {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         //TODO: somehow put this in builder instead
         FULL_DRAWERS_1.registerTileRenderer(event, BlockEntityDrawersRenderer::new);

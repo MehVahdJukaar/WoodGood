@@ -172,15 +172,17 @@ public abstract class EveryCompat {
                 }
             }
 
-            CompatModule module = moduleFactory.get().apply(modId);
             try {
+                CompatModule module = moduleFactory.get().apply(modId);
+
                 EveryCompatAPI.registerModule(module);
+
+                DEPENDENCIES.add(modId);
+                DEPENDENCIES.addAll(module.getAlreadySupportedMods());
             } catch (Exception e) {
                 if (PlatHelper.isDev()) throw e;
-                else EveryCompat.LOGGER.error("Failed to register module for mod " + module, e);
+                else EveryCompat.LOGGER.error("Every Compat failed to register module for mod {}", modId, e);
             }
-            DEPENDENCIES.add(modId);
-            DEPENDENCIES.addAll(module.getAlreadySupportedMods());
         }
     }
 
