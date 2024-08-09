@@ -1,6 +1,8 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Suppliers;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -195,10 +197,12 @@ public abstract class CompatModule {
 
     }
 
+    @Environment(EnvType.CLIENT)
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
 
     }
 
+    @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
 
     }

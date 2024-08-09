@@ -22,6 +22,8 @@ import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -46,6 +48,7 @@ import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.g
 
 //SUPPORT: v1.3.6+
 public class VariantVanillaBlocksModule extends SimpleModule {
+
     public final SimpleEntrySet<WoodType, BarrelBlock> barrel;
     public final SimpleEntrySet<WoodType, BeehiveBlock> beehive;
     public final SimpleEntrySet<WoodType, Block> bookshelves;
@@ -134,7 +137,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
                         () -> CartographyTables.OAK_CARTOGRAPHY_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)){}
+                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)) {
+                        }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.BLOCK)
@@ -151,7 +155,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         () -> Chests.ACACIA_CHEST,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks) )
+                        w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
@@ -164,7 +168,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .addTile(VariantChestBlockEntity::new)
                 .defaultRecipe()
-                .setTab(()  ->tab)
+                .setTab(() -> tab)
                 .build();
         this.addEntry(chests);
 
@@ -206,7 +210,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         () -> CraftingTables.SPRUCE_CRAFTING_TABLE,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks)){}
+                        w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks)) {
+                        }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("crafting_tables"), Registries.BLOCK)
@@ -225,7 +230,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         fletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
                         () -> FletchingTables.OAK_FLETCHING_TABLE,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FletchingTableBlock(Utils.copyPropertySafe(w.planks)){}
+                        w -> new FletchingTableBlock(Utils.copyPropertySafe(w.planks)) {
+                        }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("fletching_tables"), Registries.BLOCK)
@@ -244,7 +250,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         grindstones = SimpleEntrySet.builder(WoodType.class, "grindstone",
                         () -> Grindstones.OAK_GRINDSTONE,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GrindstoneBlock(Utils.copyPropertySafe(Blocks.GRINDSTONE)){}
+                        w -> new GrindstoneBlock(Utils.copyPropertySafe(Blocks.GRINDSTONE)) {
+                        }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("grindstones"), Registries.BLOCK)
@@ -258,7 +265,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
                         () -> Lecterns.ACACIA_LECTERN,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new LecternBlock(Utils.copyPropertySafe(w.planks)){}
+                        w -> new LecternBlock(Utils.copyPropertySafe(w.planks)) {
+                        }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("lecterns"), Registries.BLOCK)
@@ -278,7 +286,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         smithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
                         () -> SmithingTables.OAK_SMITHING_TABLE,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SmithingTableBlock(Utils.copyPropertySafe(w.planks)){}
+                        w -> new SmithingTableBlock(Utils.copyPropertySafe(w.planks)) {
+                        }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("smithing_tables"), Registries.BLOCK)
@@ -297,7 +306,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
                         () -> Smokers.ACACIA_SMOKER,
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new SmokerBlock(Utils.copyPropertySafe(w.planks)){}
+                        w -> new SmokerBlock(Utils.copyPropertySafe(w.planks)) {
+                        }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("smokers"), Registries.BLOCK)
@@ -326,7 +336,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         return chests.getTile(CompatChestBlockEntity.class);
     }
 
-//     BlockEntity
+    //     BlockEntity
     private class VariantChestBlockEntity extends CompatChestBlockEntity {
         public VariantChestBlockEntity(BlockPos pos, BlockState state) {
             super(chests.getTile(), pos, state);
@@ -352,40 +362,55 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
 
     // Registry --------------------------------------------------------------------------------------------------------
+
+    public void dumb() {
+        ClientLevel mc = Minecraft.getInstance().level;
+    }
+
     @Override
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context,
-                shortenedId()));
+        Dumb.dumber(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
+        //this is so dumb and IDK why it's needed. that class should never be loaded since it has environment annotation
+        //I tried everything, lambdas, double lambdas, anonymous classes...
     }
 
-//    @Override
+    private static class Dumb {
+
+        public static void dumber(ClientHelper.BlockEntityRendererEvent event, BlockEntityType<CompatChestBlockEntity> tile, String s) {
+            event.register(tile, c -> new CompatChestBlockRenderer(c, s));
+        }
+    }
+
+    //    @Override
     // Textures --------------------------------------------------------------------------------------------------------
+    @Environment(EnvType.CLIENT)
+    @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
         chests.blocks.forEach((wood, block) -> {
             // SINGLE
             generateChestTexture(handler, manager, shortenedId(), wood, block,
-                modRes("entity/chest/acacia_chest"),
-                EveryCompat.res("model/oak_chest_normal_m"),
-                EveryCompat.res("model/oak_chest_normal_o"),
-                null
-                );
+                    modRes("entity/chest/acacia_chest"),
+                    EveryCompat.res("model/oak_chest_normal_m"),
+                    EveryCompat.res("model/oak_chest_normal_o"),
+                    null
+            );
             // LEFT
             generateChestTexture(handler, manager, shortenedId(), wood, block,
-                modRes("entity/chest/acacia_chest_left"),
-                EveryCompat.res("model/oak_chest_left_m"),
-                EveryCompat.res("model/oak_chest_left_o"),
-                null
-                );
+                    modRes("entity/chest/acacia_chest_left"),
+                    EveryCompat.res("model/oak_chest_left_m"),
+                    EveryCompat.res("model/oak_chest_left_o"),
+                    null
+            );
             // RIGHT
             generateChestTexture(handler, manager, shortenedId(), wood, block,
-                modRes("entity/chest/acacia_chest_right"),
-                EveryCompat.res("model/oak_chest_right_m"),
-                EveryCompat.res("model/oak_chest_right_o"),
-                null
-                );
+                    modRes("entity/chest/acacia_chest_right"),
+                    EveryCompat.res("model/oak_chest_right_m"),
+                    EveryCompat.res("model/oak_chest_right_o"),
+                    null
+            );
 
             // MODEL ITEM
             String path = shortenedId() + "/" + wood.getAppendableId() + "_chest"; // path to json for chest
@@ -400,7 +425,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                     modelFile.getAsJsonObject("textures").addProperty("chest", textureID);
 
                     // Add to Resource
-                    handler.dynamicPack.addJson(EveryCompat.res(path), modelFile, ResType.ITEM_MODELS );
+                    handler.dynamicPack.addJson(EveryCompat.res(path), modelFile, ResType.ITEM_MODELS);
                 } catch (IOException e) {
                     handler.getLogger().error("VariantVanillaBlocks: failed to open the model file: {} - {}", modelRLoc, e);
                 }

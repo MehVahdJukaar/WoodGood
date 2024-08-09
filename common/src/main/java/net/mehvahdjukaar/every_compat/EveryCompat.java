@@ -180,8 +180,8 @@ public abstract class EveryCompat {
                 DEPENDENCIES.add(modId);
                 DEPENDENCIES.addAll(module.getAlreadySupportedMods());
             } catch (Exception e) {
+                EveryCompat.LOGGER.error("Every Compat failed to register module for mod {}", modId, e);
                 if (PlatHelper.isDev()) throw e;
-                else EveryCompat.LOGGER.error("Every Compat failed to register module for mod {}", modId, e);
             }
         }
     }
