@@ -22,8 +22,6 @@ import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -363,22 +361,20 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
     // Registry --------------------------------------------------------------------------------------------------------
 
-    public void dumb() {
-        ClientLevel mc = Minecraft.getInstance().level;
-    }
-
     @Override
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-        super.registerBlockEntityRenderers(event);
-        Dumb.dumber(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
+        //apparently due to class verifier issues this is needed since it needs to check if that lambda actually implements that interface and to do so it needs to load the class
+        //now I have no clue why this isn't needed on the other modules (this is only fabric one so maybe that?)
+        //could it be that environment here strips stuff less that on common? or that all classes that use this rendered also happen to be de facto fabric classes
+        ClientProxy.dumb(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
         //this is so dumb and IDK why it's needed. that class should never be loaded since it has environment annotation
         //I tried everything, lambdas, double lambdas, anonymous classes...
     }
 
-    private static class Dumb {
+    private static class ClientProxy {
 
-        public static void dumber(ClientHelper.BlockEntityRendererEvent event, BlockEntityType<CompatChestBlockEntity> tile, String s) {
+        public static void dumb(ClientHelper.BlockEntityRendererEvent event, BlockEntityType<CompatChestBlockEntity> tile, String s) {
             event.register(tile, c -> new CompatChestBlockRenderer(c, s));
         }
     }
