@@ -150,6 +150,7 @@ dependencies {
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
+    modCompileOnly("curse.maven:building-but-better-989479:5362380")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856") // v3.0.1
     modCompileOnly("curse.maven:create-328085:4835191")

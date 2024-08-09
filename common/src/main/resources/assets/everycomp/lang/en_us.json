@@ -90,6 +90,9 @@
 
   "block_type.barkcarpets.bark_carpet": "%s Bark Carpet",
 
+  "block_type.bbb.layer": "%s Layer",
+  "block_type.bbb.trim": "%s Trim",
+
   "block_type.buildersaddition.arcade": "%s Arcade",
   "block_type.buildersaddition.bench": "%s Bench",
   "block_type.buildersaddition.bedside_table": "%s Bedside Table",

@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.Architects
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
+import net.mehvahdjukaar.every_compat.modules.forge.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
@@ -71,6 +72,7 @@ public class EveryCompatForge extends EveryCompat {
         // ========================================= Add Modules ==================================================== \\
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
+        addModule("bbb", () -> BuildingButBetterModule::new);
         addModule("boatload", () -> BoatLoadModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("buildersdelight", () -> BuildersDelightModule::new);
