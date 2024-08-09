@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
+import org.jetbrains.annotations.NotNull;
 
 
 import java.util.function.Supplier;
@@ -25,8 +26,12 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
 
     @Override
     public Supplier<ItemStackRenderer> getRendererFactory() {
-        return () -> {
-            ChestBlock block = (ChestBlock) CompatChestItem.this.getBlock();
+        return () -> ClientProxy.getItemStackRenderer(this);
+    }
+
+    private static class ClientProxy{
+        public static @NotNull ItemStackRenderer getItemStackRenderer(CompatChestItem compatChestItem) {
+            ChestBlock block = (ChestBlock) compatChestItem.getBlock();
             return new ItemStackRenderer() {
                 final BlockEntityRenderDispatcher renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher();
                 final CompatChestBlockEntity dummy = (CompatChestBlockEntity) block
@@ -37,7 +42,9 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
                     renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
                 }
             };
-        };
+        }
     }
+
+
 }
 
