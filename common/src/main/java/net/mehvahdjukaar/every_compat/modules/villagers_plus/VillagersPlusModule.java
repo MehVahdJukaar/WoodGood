@@ -26,6 +26,7 @@ public class VillagersPlusModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_horticulturist_workstation"),
                         EveryCompat.res("block/vp/oak_horticulturist_workstation_m"))
                 .addTile(VPBlockEntities.HORTICULTURIST_TABLE_BLOCK_ENTITY)
+                .defaultRecipe()
                 .build();
         this.addEntry(tub);
 
