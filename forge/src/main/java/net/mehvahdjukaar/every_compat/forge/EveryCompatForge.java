@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
+import net.mehvahdjukaar.every_compat.modules.forge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
@@ -69,6 +70,7 @@ public class EveryCompatForge extends EveryCompat {
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
         // ========================================= Add Modules ==================================================== \\
+        addModule("absentbydesign", () -> AbsentByDesignModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("boatload", () -> BoatLoadModule::new);
