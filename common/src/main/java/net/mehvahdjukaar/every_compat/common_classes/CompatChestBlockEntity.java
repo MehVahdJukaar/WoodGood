@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
@@ -37,4 +38,5 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
     public boolean isTrapped() {
         return trapped;
     }
+
 }

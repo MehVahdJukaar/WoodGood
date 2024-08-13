@@ -354,8 +354,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     @OnlyIn(Dist.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(chests.getTile(CompatChestBlockEntity.class), context -> new CompatChestBlockRenderer(context,
-                shortenedId()));
+        CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
     }
 
     @Override

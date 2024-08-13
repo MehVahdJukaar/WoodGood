@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.model.geom.ModelPart;
@@ -19,6 +20,7 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -120,6 +122,10 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
         lidPart.render(poseStack, consumer, packedLight, packedOverlay);
         lockPart.render(poseStack, consumer, packedLight, packedOverlay);
         bottomPart.render(poseStack, consumer, packedLight, packedOverlay);
+    }
+
+    public static void register(ClientHelper.BlockEntityRendererEvent event, BlockEntityType<CompatChestBlockEntity> tile, String s) {
+        event.register(tile, c -> new CompatChestBlockRenderer(c, s));
     }
 
 }

@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
 import org.jetbrains.annotations.NotNull;
 
-
 import java.util.function.Supplier;
 
 public class CompatChestItem extends BlockItem implements ICustomItemRendererProvider {
@@ -29,7 +28,7 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
         return () -> ClientProxy.getItemStackRenderer(this);
     }
 
-    private static class ClientProxy{
+    private static class ClientProxy {
         public static @NotNull ItemStackRenderer getItemStackRenderer(CompatChestItem compatChestItem) {
             ChestBlock block = (ChestBlock) compatChestItem.getBlock();
             return new ItemStackRenderer() {
