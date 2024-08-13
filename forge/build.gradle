@@ -128,6 +128,7 @@ dependencies {
     modImplementation("curse.maven:framework-549225:5388226") //  Refurbished Furniture, Mighty Mail
     modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
+    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
 
 //    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
@@ -146,9 +147,11 @@ dependencies {
     modCompileOnly("curse.maven:jei-238222:4712868")
 
     // ================================================ IMPORTS ===================================================== \\
-    modCompileOnly("curse.maven:another-furniture-610492:4815126")
+    modCompileOnly("curse.maven:absent-by-design-305840:4616702")
+    modCompileOnly("curse.maven:another-furniture-610492:4815126") //WARNING: fabric-version
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:4691076")
+    modCompileOnly("curse.maven:boatload-337396:5292325")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856") // v3.0.1
@@ -180,10 +183,10 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060")
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
+    modCompileOnly("curse.maven:villagersplus-forge-817272:4996995")
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:woodworks-543610:5228779")
-    modCompileOnly("curse.maven:boatload-337396:5292325")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
 //    modImplementation("curse.maven:refurbished-furniture-897116:5570559")
@@ -207,7 +210,7 @@ dependencies {
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
     // implementation fg.deobf("curse.maven:curios-309927:3670447") // LIBRARY
-    // implementation fg.deobf("curse.maven:geckolib-388172:3856641") // LIBRARY
+//     modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
     // implementation fg.deobf("curse.maven:marg-324494:3723497") // LIBRARY
     // implementation fg.deobf("curse.maven:ortuslib-616457:3768197") // LIBRARY
     // implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
@@ -217,19 +220,19 @@ dependencies {
     // modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBModel
 
     // =========================================== FOR TESTING ===================================================== \\
-//    modCompileOnly("curse.maven:endless-biomes-667688:5109705")
-//    modImplementation("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-    modImplementation("curse.maven:biomes-o-plenty-220318:4764804") // Terrablender
-//    modImplementation("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
-//    modImplementation("curse.maven:autumnity-365045:5292346") // Blueprint
-//    modCompileOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint
-//    modImplementation("curse.maven:alexs-caves-924854:5162617") // citadel
+//    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
+//    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
+    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:4764804") // Terrablender
+//    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
+//    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint
+//    modRuntimeOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint
+//    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel
 
-//    modImplementation("curse.maven:terrafirmacraft-302973:4862659") // patchouli
+//    modRuntimeOnly("curse.maven:terrafirmacraft-302973:4862659") // patchouli
 
 
     // Dependencies
-//    modImplementation("curse.maven:citadel-331936:5143956") // Alex's Cave
-//    modImplementation("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
-//    modImplementation("curse.maven:patchouli-306770:4636277") // TFC
+//    modRuntimeOnly("curse.maven:citadel-331936:5143956") // Alex's Cave
+//    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
+//    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // TFC
 }

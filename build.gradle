@@ -78,6 +78,7 @@ subprojects {
                         requiredDependency "selene"
                         optionalDependency("another-furniture")
                         optionalDependency("architects-palette-fabric")
+//                        optionalDependency("building-but-better") Not finished yet
                         optionalDependency("camp-chair")
                         optionalDependency("chipped")
                         optionalDependency("create-fabric")
@@ -108,16 +109,19 @@ subprojects {
                         optionalDependency("the-twilight-forest")
                         optionalDependency("twigs")
                         optionalDependency("variant-vanilla-blocks")
+                        optionalDependency("villagersplus-fabric")
                     }
                 } else {
                     relations {
                         requiredDependency("selene")
                         optionalDependency("sawmill")
+                        optionalDependency("absent-by-design")
                         optionalDependency("another-furniture")
                         optionalDependency("architects-palette")
                         optionalDependency("backpacked")
                         optionalDependency("boatload")
                         optionalDependency("buildersaddition")
+//                        optionalDependency("building-but-better") not finished yet
                         optionalDependency("camp-chair")
                         optionalDependency("chipped")
                         optionalDependency("create")
@@ -160,6 +164,7 @@ subprojects {
                         optionalDependency("twigs")
                         optionalDependency("variant-crafting-tables")
                         optionalDependency("variant-vanilla-blocks")
+                        optionalDependency("villagersplus-forge")
                         optionalDependency("woodster")
                         optionalDependency("woodworks")
                         optionalDependency("workshop-for-handsome-adventurer")
