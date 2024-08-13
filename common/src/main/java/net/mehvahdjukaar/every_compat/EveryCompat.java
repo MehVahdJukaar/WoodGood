@@ -23,6 +23,7 @@ import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 
+import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -131,6 +132,7 @@ public abstract class EveryCompat {
         addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("handcrafted", () -> HandcraftedModule::new);
+        addModule("villagersplus", () -> VillagersPlusModule::new);
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 
