@@ -39,6 +39,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantVanillaBlock
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
+import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.network.forge.ChannelHandlerImpl;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -93,6 +94,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
+        addModule("stylishstiles", () -> StylishStilesModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
