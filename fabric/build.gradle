@@ -92,6 +92,7 @@ dependencies {
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:missing-wilds-622590:5053651")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
+    modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
     modCompileOnly("curse.maven:twigs-496913:4603805")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")

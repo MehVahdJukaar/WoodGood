@@ -44,6 +44,7 @@ dependencies {
     modCompileOnly("curse.maven:zeta-968868:5078215")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")
+    modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
