@@ -122,6 +122,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(BlueprintItemTags.REVERTABLE_CHESTS, Registry.ITEM_REGISTRY)
                 .addTile(BlueprintChestBlockEntity::new)
                 .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(false), 300))
+//                .defaultRecipe()
                 .build();
         this.addEntry(chests);
 
@@ -140,6 +141,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(Tags.Items.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
                 .addTile(BlueprintTrappedChestBlockEntity::new)
                 .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(true), 300))
+//                .defaultRecipe()
                 .build();
         this.addEntry(trappedChests);
 
@@ -223,6 +225,10 @@ public class WoodworksModule extends SimpleModule {
             craftingShaped_Recipe("spruce_beehive", wood.planks.asItem(), beehives.items.get(wood),
                     handler, manager, wood);
             craftingShaped_Recipe("spruce_ladder", wood.planks.asItem(), ladders.items.get(wood),
+                    handler, manager, wood);
+            craftingShaped_Recipe("oak_chest", wood.planks.asItem(), chests.items.get(wood),
+                    handler, manager, wood);
+            craftingShaped_Recipe("oak_trapped_chest", chests.items.get(wood), trappedChests.items.get(wood),
                     handler, manager, wood);
 
             // sawmill recipes - from LOGS
@@ -334,16 +340,49 @@ public class WoodworksModule extends SimpleModule {
             recipe = RPUtils.deserializeJson(recipeStream);
 
             // VARIABLES
-            JsonObject getRecipe = recipe.getAsJsonArray("recipes")
+            JsonObject underRecipe = recipe.getAsJsonArray("recipes")
                     .get(0).getAsJsonObject().getAsJsonObject("recipe");
 
             // Editing the JSON recipe
-            getRecipe.getAsJsonObject("key").getAsJsonObject("#")
-                    .addProperty("item", Objects.requireNonNull(input.getRegistryName()).toString());
-            getRecipe.getAsJsonObject("result")
+            if (underRecipe.has("key")) {
+                underRecipe.getAsJsonObject("key").getAsJsonObject("#")
+                        .addProperty("item", Objects.requireNonNull(input.getRegistryName()).toString());
+            } else {
+                underRecipe.getAsJsonArray("ingredients").get(0).getAsJsonObject()
+                        .addProperty("item", Objects.requireNonNull(input.getRegistryName()).toString());
+            }
+            underRecipe.getAsJsonObject("result")
                     .addProperty("item", Objects.requireNonNull(output.getRegistryName()).toString());
         } catch (IOException e) {
-            WoodGood.LOGGER.error("{Woodworks Module} craftingShaped_Recipe(): " + e);
+            WoodGood.LOGGER.error("Failed to generate shaped recipe for: {}, {}", output, e);
+        }
+
+        // for filenameBuilder
+        String[] nameSplit = recipeName.split("_");
+        String filenameBuilder = wood.getTypeName() + "_" + nameSplit[1];
+
+        handler.dynamicPack.addJson(WoodGood.res(filenameBuilder), recipe, ResType.RECIPES);
+    }
+
+    public void craftingShapeless_Recipe(String recipeName, Item input, Item output,
+                                      ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
+        ResourceLocation recipeLocation = modRes("recipes/" + recipeName + ".json"); // get Recipe JSON
+        JsonObject recipe = null;
+
+        try (InputStream recipeStream = manager.getResource(recipeLocation).getInputStream()) {
+            recipe = RPUtils.deserializeJson(recipeStream);
+
+            // VARIABLES
+            JsonObject underRecipe = recipe.getAsJsonArray("recipes")
+                    .get(0).getAsJsonObject().getAsJsonObject("recipe");
+
+            // Editing the JSON recipe
+            underRecipe.getAsJsonArray("ingredients").get(0).getAsJsonObject()
+                    .addProperty("item", Objects.requireNonNull(input.getRegistryName()).toString());
+            underRecipe.getAsJsonObject("result")
+                    .addProperty("item", Objects.requireNonNull(output.getRegistryName()).toString());
+        } catch (IOException e) {
+            WoodGood.LOGGER.error("Failed to generate shapeless recipe for: {}, {}", output, e);
         }
 
         // for filenameBuilder
@@ -399,7 +438,7 @@ public class WoodworksModule extends SimpleModule {
             getRecipe.getAsJsonObject("result")
                     .addProperty("item", Objects.requireNonNull(output.getRegistryName()).toString());
         } catch (IOException e) {
-            WoodGood.LOGGER.error("{Woodworks Module} craftingShaped_Recipe(): " + e);
+            WoodGood.LOGGER.error("failed to generate recipe for leaves: {}, {}", output, e);
         }
 
         // filenameBuilder: <leavesType>_leaves_from_leaf_piles
