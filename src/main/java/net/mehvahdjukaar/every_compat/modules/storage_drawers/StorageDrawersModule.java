@@ -4,9 +4,8 @@ package net.mehvahdjukaar.every_compat.modules.storage_drawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockStandardDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
-import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
-import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawersStandard;
-import com.jaquadro.minecraft.storagedrawers.client.renderer.TileEntityDrawersRenderer;
+import com.jaquadro.minecraft.storagedrawers.block.tile.BlockEntityDrawersStandard;
+import com.jaquadro.minecraft.storagedrawers.client.renderer.BlockEntityDrawersRenderer;
 import com.jaquadro.minecraft.storagedrawers.core.ModBlocks;
 import com.jaquadro.minecraft.storagedrawers.core.ModItemGroup;
 import net.mehvahdjukaar.every_compat.WoodGood;
@@ -27,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
-
+//SUPPORT: v10.3.0+
 public class StorageDrawersModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, BlockStandardDrawers> FULL_DRAWERS_1;
@@ -219,7 +218,7 @@ public class StorageDrawersModule extends SimpleModule {
         event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity2>) (HALF_DRAWERS_2.getTileHolder().tile), TileEntityDrawersRenderer::new);
         event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity4>) (HALF_DRAWERS_4.getTileHolder().tile), TileEntityDrawersRenderer::new);
     }
-
+// BLOCK
     private class CompatStandardDrawers extends BlockStandardDrawers {
         public CompatStandardDrawers(int drawerCount, boolean halfDepth, Properties properties) {
             super(drawerCount, halfDepth, properties);
@@ -235,7 +234,8 @@ public class StorageDrawersModule extends SimpleModule {
         }
     }
 
-    class CompatStandardDrawersEntity1 extends TileEntityDrawersStandard.Slot1 {
+// BLOCKENTITY
+    class CompatStandardDrawersEntity1 extends BlockEntityDrawersStandard.Slot1 {
 
         public CompatStandardDrawersEntity1(BlockPos pos, BlockState state) {
             super(pos, state);
@@ -259,7 +259,7 @@ public class StorageDrawersModule extends SimpleModule {
         }
     }
 
-    class CompatStandardDrawersEntity4 extends TileEntityDrawersStandard.Slot4 {
+    class CompatStandardDrawersEntity4 extends BlockEntityDrawersStandard.Slot4 {
 
         public CompatStandardDrawersEntity4(BlockPos pos, BlockState state) {
             super(pos, state);
