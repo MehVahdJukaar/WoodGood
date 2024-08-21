@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.storage_drawers;
 
-/*
 import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockStandardDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
@@ -14,12 +13,12 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.selene.block_set.wood.WoodType;
 import net.mehvahdjukaar.selene.client.asset_generators.textures.Palette;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +38,7 @@ public class StorageDrawersModule extends SimpleModule {
 
     public StorageDrawersModule(String modId) {
         super(modId, "sd");
+        var tab = ModItemGroup.STORAGE_DRAWERS;
 
         FULL_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "full_drawers_1",
                         ModBlocks.OAK_FULL_DRAWERS_1, () -> WoodType.OAK_WOOD_TYPE,
@@ -46,7 +46,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
-                .setTab(()->ModItemGroup.STORAGE_DRAWERS)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity1::new)
                 .createPaletteFromOak(this::drawersPalette)
@@ -65,7 +65,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
-                .setTab(()->ModItemGroup.STORAGE_DRAWERS)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity2::new)
                 .createPaletteFromOak(this::drawersPalette)
@@ -84,7 +84,7 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
-                .setTab(()->ModItemGroup.STORAGE_DRAWERS)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .addTile(CompatStandardDrawersEntity4::new)
                 .createPaletteFromOak(this::drawersPalette)
@@ -103,9 +103,9 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
-                .setTab(()->ModItemGroup.STORAGE_DRAWERS)
+                .setTab(() -> tab)
                 .defaultRecipe()
-                .addTile(CompatStandardDrawersEntity1::new)
+                .addTile(CompatHalfDrawersEntity1::new)
                 .createPaletteFromOak(this::drawersPalette)
                 .addTexture(modRes("blocks/drawers_oak_front_1"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
@@ -124,9 +124,9 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
-                .setTab(()->ModItemGroup.STORAGE_DRAWERS)
+                .setTab(() -> tab)
                 .defaultRecipe()
-                .addTile(CompatStandardDrawersEntity2::new)
+                .addTile(CompatHalfDrawersEntity2::new)
                 .createPaletteFromOak(this::drawersPalette)
                 .addTexture(modRes("blocks/drawers_oak_front_2"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
@@ -145,9 +145,9 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
-                .setTab(()->ModItemGroup.STORAGE_DRAWERS)
+                .setTab(() -> tab)
                 .defaultRecipe()
-                .addTile(CompatStandardDrawersEntity4::new)
+                .addTile(CompatHalfDrawersEntity4::new)
                 .createPaletteFromOak(this::drawersPalette)
                 .addTexture(modRes("blocks/drawers_oak_front_4"))
                 .addTexture(modRes("blocks/drawers_oak_side"))
@@ -164,7 +164,7 @@ public class StorageDrawersModule extends SimpleModule {
                         ModBlocks.OAK_TRIM, () -> WoodType.OAK_WOOD_TYPE,
                         w -> new BlockTrim(WoodGood.copySafe(ModBlocks.OAK_TRIM.get())))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(()->ModItemGroup.STORAGE_DRAWERS)
+                .setTab(() -> tab)
                 .defaultRecipe()
                 .createPaletteFromOak(this::trimPalette)
                 .addTexture(modRes("blocks/drawers_oak_trim"))
@@ -210,13 +210,14 @@ public class StorageDrawersModule extends SimpleModule {
     }
 
     @Override
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity1>) (FULL_DRAWERS_1.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity2>) (FULL_DRAWERS_2.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity4>) (FULL_DRAWERS_4.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity1>) (HALF_DRAWERS_1.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity2>) (HALF_DRAWERS_2.getTileHolder().tile), TileEntityDrawersRenderer::new);
-        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity4>) (HALF_DRAWERS_4.getTileHolder().tile), TileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity1>) (FULL_DRAWERS_1.getTileHolder().tile), CompatTileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity2>) (FULL_DRAWERS_2.getTileHolder().tile), CompatTileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatStandardDrawersEntity4>) (FULL_DRAWERS_4.getTileHolder().tile), CompatTileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatHalfDrawersEntity1>) (HALF_DRAWERS_1.getTileHolder().tile), CompatTileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatHalfDrawersEntity2>) (HALF_DRAWERS_2.getTileHolder().tile), CompatTileEntityDrawersRenderer::new);
+        event.registerBlockEntityRenderer((BlockEntityType<CompatHalfDrawersEntity4>) (HALF_DRAWERS_4.getTileHolder().tile), CompatTileEntityDrawersRenderer::new);
     }
 // BLOCK
     private class CompatStandardDrawers extends BlockStandardDrawers {
@@ -224,7 +225,16 @@ public class StorageDrawersModule extends SimpleModule {
             super(drawerCount, halfDepth, properties);
         }
 
-        public TileEntityDrawers newBlockEntity(BlockPos pos, BlockState state) {
+        @Override
+        public BlockEntityDrawersStandard newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+            if (this.isHalfDepth()) {
+                return switch (this.getDrawerCount()) {
+                    case 1 -> new CompatHalfDrawersEntity1(pos, state);
+                    case 2 -> new CompatHalfDrawersEntity2(pos, state);
+                    case 4 -> new CompatHalfDrawersEntity4(pos, state);
+                    default -> null;
+                };
+            }
             return switch (this.getDrawerCount()) {
                 case 1 -> new CompatStandardDrawersEntity1(pos, state);
                 case 2 -> new CompatStandardDrawersEntity2(pos, state);
@@ -242,18 +252,19 @@ public class StorageDrawersModule extends SimpleModule {
         }
 
         @Override
+        @SuppressWarnings("ConstantConditions")
         public @NotNull BlockEntityType<?> getType() {
             return FULL_DRAWERS_1.getTileHolder().tile;
         }
     }
 
-    class CompatStandardDrawersEntity2 extends TileEntityDrawersStandard.Slot2 {
-
+    class CompatStandardDrawersEntity2 extends BlockEntityDrawersStandard.Slot2 {
         public CompatStandardDrawersEntity2(BlockPos pos, BlockState state) {
             super(pos, state);
         }
 
         @Override
+        @SuppressWarnings("ConstantConditions")
         public @NotNull BlockEntityType<?> getType() {
             return FULL_DRAWERS_2.getTileHolder().tile;
         }
@@ -266,10 +277,57 @@ public class StorageDrawersModule extends SimpleModule {
         }
 
         @Override
+        @SuppressWarnings("ConstantConditions")
         public @NotNull BlockEntityType<?> getType() {
             return FULL_DRAWERS_4.getTileHolder().tile;
         }
 
     }
+
+    class CompatHalfDrawersEntity1 extends BlockEntityDrawersStandard.Slot1 {
+
+        public CompatHalfDrawersEntity1(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        @SuppressWarnings("ConstantConditions")
+        public @NotNull BlockEntityType<?> getType() {
+            return HALF_DRAWERS_1.getTileHolder().tile;
+        }
+    }
+
+    class CompatHalfDrawersEntity2 extends BlockEntityDrawersStandard.Slot2 {
+
+        public CompatHalfDrawersEntity2(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        @SuppressWarnings("ConstantConditions")
+        public @NotNull BlockEntityType<?> getType() {
+            return HALF_DRAWERS_2.getTileHolder().tile;
+        }
+    }
+
+    class CompatHalfDrawersEntity4 extends BlockEntityDrawersStandard.Slot4 {
+
+        public CompatHalfDrawersEntity4(BlockPos pos, BlockState state) {
+            super(pos, state);
+        }
+
+        @Override
+        @SuppressWarnings("ConstantConditions")
+        public @NotNull BlockEntityType<?> getType() {
+            return HALF_DRAWERS_4.getTileHolder().tile;
+        }
+    }
+
+// RENDERER
+    static class CompatTileEntityDrawersRenderer extends BlockEntityDrawersRenderer {
+        CompatTileEntityDrawersRenderer(BlockEntityRendererProvider.Context context) {
+            super(context);
+        }
+    }
+
 }
-*/
