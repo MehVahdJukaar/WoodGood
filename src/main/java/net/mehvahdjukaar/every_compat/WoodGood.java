@@ -28,6 +28,7 @@ import net.mehvahdjukaar.every_compat.modules.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.storage_drawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
@@ -163,6 +164,7 @@ public class WoodGood {
         addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("ironagefurniture", () -> IronAgeFurnitureModule::new);
         addModule("marketcrates", () -> MarketCratesModule::new);
+        addModule("storagedrawers", () -> StorageDrawersModule::new); //Improperly rendering items
         addModule("stylishstiles", () -> StylishStilesModule::new);
         addModule("corail_pillar", () -> PillarModule::new);
         addModule("corail_woodcutter", () -> WoodcutterModule::new);
@@ -179,7 +181,6 @@ public class WoodGood {
 //        addModule("projectbrazier", () -> ProjectBrazierModule::new);
 
         // ======================================= DISABLED FOR A REASON ============================================ \\
-//        addModule("storagedrawers", () -> StorageDrawersModule::new); //Improperly rendering items
 //        addModule("graveyard", () -> GraveyardModule::new);
 //        addModule("benched", () -> BenchedModule::new); # OBJ Format not supported
 
