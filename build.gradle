@@ -157,10 +157,12 @@ dependencies {
     compileOnly fg.deobf("curse.maven:marg-324494:3723497")
     compileOnly fg.deobf("curse.maven:texture-dump-319039:3573998")
     compileOnly fg.deobf("curse.maven:valhelsia-core-416935:3886212") // valhelsia-structure
+    implementation fg.deobf("curse.maven:cloth-config-348521:4973439") // REI
+    implementation fg.deobf("curse.maven:architectury-api-419699:5137931") // REI
 
         // TOOLS
     implementation fg.deobf("curse.maven:configured-457570:4462832")
-    implementation fg.deobf("curse.maven:jei-238222:4593548")
+    implementation fg.deobf("curse.maven:roughly-enough-items-310111:5554160")
     implementation fg.deobf("curse.maven:jade-324717:5079263")
 
     // =============================================== IMPORTS ====================================================== \\
@@ -205,6 +207,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:woodworks-543610:4396956")
     compileOnly fg.deobf("curse.maven:xercamod-341575:4318574")
     compileOnly fg.deobf("curse.maven:chipped-456956:4293291")
+    compileOnly fg.deobf("curse.maven:storage-drawers-223852:5636643")
 
         // LOCAL
     compileOnly fg.deobf(getModVersion("ironagefurniture-1.18.2-0.2.0.10.jar"))
@@ -220,20 +223,20 @@ dependencies {
 //    implementation fg.deobf("curse.maven:floor-mats-413140:3671760")
 
     // ========================================= DISABLED FOR A REASON ============================================== \\
-    compileOnly fg.deobf("curse.maven:storage-drawers-223852:3807626")
 //    implementation fg.deobf("curse.maven:benched-417063:4291393") // Uses OBJ Format
 
     // ============================================= FOR TESTING ==================================================== \\
 //    implementation fg.deobf("curse.maven:terrafirmacraft-302973:4843196")
-//    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:3759236")
+    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:3759236")
+//    implementation fg.deobf("curse.maven:ecologics-570463:4171283")
 //    implementation fg.deobf("curse.maven:blue-skies-312918:3788736")
-    implementation fg.deobf("curse.maven:oh-the-biomes-youll-go-247560:4971536")
-    implementation fg.deobf("curse.maven:enhanced-mushrooms-383725:3865521")
+//    implementation fg.deobf("curse.maven:oh-the-biomes-youll-go-247560:4971536")
+//    implementation fg.deobf("curse.maven:enhanced-mushrooms-383725:3865521")
 
         // DEPENDENCIES
 //    implementation fg.deobf("curse.maven:patchouli-306770:3846086") // terrafirmacraft
     implementation fg.deobf("curse.maven:terrablender-563928:3957976") // biomesoplenty
-    implementation fg.deobf("curse.maven:pollen-544350:4337349") // enhanced-mushrooms
+//    implementation fg.deobf("curse.maven:pollen-544350:4337349") // enhanced-mushrooms
 //    implementation fg.deobf("curse.maven:structure-gel-api-378802:4804138") // blue-skies
 
 
