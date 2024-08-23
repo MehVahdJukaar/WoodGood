@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.lieonlion.MoreCraftingTable
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.variants.VariantVanillaBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
@@ -47,6 +48,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
+        addModule("wilderwild", () -> WilderWildModule::new);
 
         if (EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
         // ========================================== WORK IN PROGRESS ============================================== \\
