@@ -37,31 +37,32 @@ dependencies {
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.2"
 
 //    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
-    modImplementation("curse.maven:selene-499980:5556626") // v2.12.9
+    modImplementation("curse.maven:selene-499980:5640047") // v2.12.14
 
     // ============================================== DEPENDENCIES ================================================== \\
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
 //    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2") // updated to 1.20.1
 //    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
     modCompileOnly("curse.maven:athena-841890:5176880") // Chipped
-    modRuntimeOnly("curse.maven:cloth-config-348521:3972420") // REI
-    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // REI, Gardens-Of-The-Dead
+    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | Required by: REI
+    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | Required by: REI, Garden-Of-The-Dead
     modCompileOnly("curse.maven:framework-549225:5388228") // Refurbished Furniture, Mighty Mail
     modCompileOnly("curse.maven:quad-932715:5146132") // More Crafting Tables
     modCompileOnly("curse.maven:resourceful-lib-570073:5361261") // Chipped, Handcrafted
     modImplementation("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
-//    modCompileOnly("curse.maven:arrp-463113:5018841")
+    modCompileOnly("maven.modrinth:frozenlib:1.7.4-mc1.20.1") // Wilder-Wild
 
         // LOCAL
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
+//    modImplementation("net.frozenblock.wilderwild:wilderwild-2.4.6-mc1.20.1")
 
     // ================================================ IMPORTS ===================================================== \\
-    // Tools
-    modRuntimeOnly("curse.maven:roughly-enough-items-310111:5301375")
-    modImplementation("curse.maven:modmenu-308702:5162837")
-//    modImplementation("curse.maven:jei-238222:5101365")
+        // Tools
+//    modImplementation("curse.maven:roughly-enough-items-310111:5627517")
+    modRuntimeOnly("curse.maven:modmenu-308702:5162837")
+    modRuntimeOnly("curse.maven:jei-238222:5101365")
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
@@ -96,6 +97,7 @@ dependencies {
     modCompileOnly("curse.maven:twigs-496913:4603805")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")
+    modCompileOnly("maven.modrinth:wilder-wild:2.4-mc1.20.1")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151837")
 

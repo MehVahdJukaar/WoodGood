@@ -110,27 +110,28 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
-    modImplementation("curse.maven:selene-499980:5556628") // v2.12.9
+    modImplementation("curse.maven:selene-499980:5640082") // v2.12.14
 
 
     // ============================================== DEPENDENCIES ================================================== \\
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // no longer required since 0.5.1
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
-    modImplementation("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
+    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
+    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | Required by: REI
+    modRuntimeOnly("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
     modCompileOnly("curse.maven:resourceful-lib-570073:5361260")  // v2.1.25 | Required by: Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:5176879") // Chipped
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
-    modImplementation("curse.maven:cloth-config-348521:4973441") // REI
     modCompileOnly("curse.maven:valhelsia-core-416935:4735319") // Valhelsia Structure, Valhelsia Furniture
-    modImplementation("curse.maven:framework-549225:5388226") //  Refurbished Furniture, Mighty Mail
-    modImplementation("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
+    modCompileOnly("curse.maven:framework-549225:5388226") //  Refurbished Furniture, Mighty Mail
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
     modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
+    modRuntimeOnly("curse.maven:titanium-287342:5468426") // Functional-Storage
 
-//    modImplementation("curse.maven:configured-457570:4462894") ## OUTDATED FOR 1.20.1 ##
+    modRuntimeOnly("curse.maven:configured-457570:5180902")
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
 
         // LOCAL
@@ -142,12 +143,24 @@ dependencies {
 //    modImplementation("com.polipo.bookshelf:giacomos_bookshelf-1.20.1-1.3.9") // WIP
 
         // TOOLS
-    modImplementation("curse.maven:roughly-enough-items-310111:5301376")
-    modCompileOnly("curse.maven:worldedit-225608:4586218")
-    modImplementation("curse.maven:jade-324717:4711195")
-    modCompileOnly("curse.maven:jei-238222:4712868")
+//    modRuntimeOnly("curse.maven:roughly-enough-items-310111:5301376")
+    modRuntimeOnly("curse.maven:worldedit-225608:4586218")
+    modRuntimeOnly("curse.maven:jade-324717:4711195")
+    modRuntimeOnly("curse.maven:emi-580555:5619582")
 
     // ================================================ IMPORTS ===================================================== \\
+
+    // MACAW's
+    modCompileOnly("curse.maven:macaws-bridges-351725:5240521")
+    modCompileOnly("curse.maven:macaws-doors-378646:4649910")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442217")
+    modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
+    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618183")
+    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
+    modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
+    modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
+    modCompileOnly("curse.maven:macaws-windows-363569:4961142")
+
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
     modCompileOnly("curse.maven:another-furniture-610492:4815126") //WARNING: fabric-version
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
@@ -164,6 +177,7 @@ dependencies {
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
+    modImplementation("curse.maven:functional-storage-556861:5169765") // WIP
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:handcrafted-538214:5118729")
@@ -193,24 +207,10 @@ dependencies {
     modCompileOnly("curse.maven:xercamod-341575:4667995")
 //    modImplementation("curse.maven:refurbished-furniture-897116:5570559")
 
-        // MACAW's
-    modCompileOnly("curse.maven:macaws-bridges-351725:5240521")
-    modCompileOnly("curse.maven:macaws-doors-378646:4649910")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442217")
-    modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
-    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618183")
-    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
-    modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
-    modCompileOnly("curse.maven:macaws-windows-363569:4961142")
-
     modCompileOnly("curse.maven:regions-unexplored-659110:5151869")
 
-    // =========================================== WORK IN PROGRESS ================================================= \\
-//    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
-
-
     // ======================================== DISABLED FOR A REASON =============================================== \\
+//    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201") // NOT FINISHED
     // implementation fg.deobf("curse.maven:curios-309927:3670447") // LIBRARY
 //     modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
     // implementation fg.deobf("curse.maven:marg-324494:3723497") // LIBRARY
