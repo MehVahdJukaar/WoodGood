@@ -14,6 +14,12 @@ public class SpriteHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
 
+        // Enlightened End
+        addOptional("enlightened_end:stripped_indigo_stem", "_side", "enlightened_end:blocks/stripped_indigo_stem_side");
+        addOptional("enlightened_end:stripped_indigo_stem", "_top", "enlightened_end:blocks/stripped_indigo_stem_top");
+        addOptional("enlightened_end:stripped_cerulean_stalk_block", "_side", "enlightened_end:blocks/stripped_cerulean_stalk_block_side");
+        addOptional("enlightened_end:stripped_cerulean_stalk_block", "_top", "enlightened_end:blocks/stripped_cerulean_stalk_block_top");
+
         // End's Phantasm
         addOptional("phantasm:ebony_packed_stems", "_side" , "phantasm:blocks/ebony_stems_side");
         addOptional("phantasm:ebony_packed_stems", "_top" , "phantasm:blocks/ebony_stems_top");
