@@ -129,7 +129,7 @@ dependencies {
     modCompileOnly("curse.maven:framework-549225:5388226") //  Refurbished Furniture, Mighty Mail
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
     modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
-    modRuntimeOnly("curse.maven:titanium-287342:5468426") // Functional-Storage
+    modImplementation("curse.maven:titanium-287342:5468426") // Functional-Storage
 
     modRuntimeOnly("curse.maven:configured-457570:5180902")
 //    modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped & not required
