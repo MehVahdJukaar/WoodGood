@@ -10,6 +10,9 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.world.level.block.Block;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FunctionalStorageModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> drawer_1;
@@ -32,20 +35,21 @@ public class FunctionalStorageModule extends SimpleModule {
 
     private final Map<WoodType, WoodTypeWrapper> woodTypeWrappers = new HashMap<>();
 
-    private WoodTypeWrapper wrap(WoodType woodType) {
+    private IWoodType wrap(WoodType woodType) {
         return woodTypeWrappers.computeIfAbsent(woodType, WoodTypeWrapper::new);
     }
 
     public record WoodTypeWrapper(WoodType woodType) implements IWoodType {
 
+        @Override
         public Block getWood() {
             return woodType.log;
         }
-
+        @Override
         public Block getPlanks() {
             return woodType.planks;
         }
-
+        @Override
         public String getName() {
             return woodType.getTypeName();
         }

@@ -66,7 +66,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public final String prefix;
     protected final boolean mergePalette;
 
-    @Nullable
     protected final Supplier<ResourceKey<CreativeModeTab>> tab;
     protected final TabAddMode tabMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
@@ -84,7 +83,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected AbstractSimpleEntrySet(Class<T> type,
                                      String name, @Nullable String prefix,
                                      Supplier<T> baseType,
-                                     @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
+                                     Supplier<ResourceKey<CreativeModeTab>> tab,
                                      TabAddMode tabMode,
                                      @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
@@ -113,6 +112,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             nameScheme = Pattern.compile("^(.+?)_" + postfix + "$");
         }
         this.condition = condition;
+
+        if(tab == null && PlatHelper.isDev()){
+            throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+        }
     }
 
     public String getName() {
