@@ -366,7 +366,7 @@ public class ResourcesUtils {
                     newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
                     pack.addRecipe(newR);
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to generate recipe for {}:", i, e);
+                    EveryCompat.LOGGER.error("Failed to generate recipe for {}: {}", i, e.getMessage());
                 }
             }
         });
