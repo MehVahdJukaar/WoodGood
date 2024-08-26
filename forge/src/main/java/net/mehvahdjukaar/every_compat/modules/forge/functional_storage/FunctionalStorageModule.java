@@ -20,7 +20,7 @@ public class FunctionalStorageModule extends SimpleModule {
 
         drawer_1 = SimpleEntrySet.builder(WoodType.class, "1",
                         getModBlock("oak_1"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DrawerBlock(new compatWoodType(w.log, w.planks, w.getTypeName()), FunctionalStorage.DrawerType.X_1, Utils.copyPropertySafe(w.planks))
+                        w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_1, Utils.copyPropertySafe(w.planks))
                 )
                 .addTexture(modRes("block/oak_front_1"))
                 .addTexture(modRes("block/oak_side"))
@@ -30,27 +30,24 @@ public class FunctionalStorageModule extends SimpleModule {
     }
 
 
-    public static class compatWoodType implements IWoodType {
-        private final Block log;
-        private final Block planks;
-        private final String name;
+    private final Map<WoodType, WoodTypeWrapper> woodTypeWrappers = new HashMap<>();
 
-        private compatWoodType(Block log, Block planks, String name) {
-            this.log = log;
-            this.planks = planks;
-            this.name = name;
-        }
+    private WoodTypeWrapper wrap(WoodType woodType) {
+        return woodTypeWrappers.computeIfAbsent(woodType, WoodTypeWrapper::new);
+    }
+
+    public record WoodTypeWrapper(WoodType woodType) implements IWoodType {
 
         public Block getWood() {
-            return this.log;
+            return woodType.log;
         }
 
         public Block getPlanks() {
-            return this.planks;
+            return woodType.planks;
         }
 
         public String getName() {
-            return name;
+            return woodType.getTypeName();
         }
     }
 
