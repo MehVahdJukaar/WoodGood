@@ -40,6 +40,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.PushReaction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -360,13 +361,13 @@ public class FurnishModule extends SimpleModule {
                     handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Log Bench block texture for for {} : {}", block, e);
+                    handler.getLogger().error("Failed to generate coffin block texture for for {} : {}", block, e);
 
                 }
 
             });
         } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Log Bench block textures : ", ex);
+            handler.getLogger().error("Could not generate any block textures: ", ex);
         }
     }
 
@@ -427,12 +428,12 @@ public class FurnishModule extends SimpleModule {
         }
 
         @Override
-        public ResourceLocation getId() {
+        public @NotNull ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public RecipeSerializer<?> getType() {
+        public @NotNull RecipeSerializer<?> getType() {
             return FurnishRegistries.Furniture_Recipe_Serializer.get();
         }
 
