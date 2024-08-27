@@ -843,5 +843,8 @@
   "block_type.stylishstiles.stile": "%s Stile",
 
   "block_type.wilderwild.hollowed_log": "Hollowed %s Log",
-  "block_type.wilderwild.stripped_hollowed_log": "Stripped Hollowed %s Log"
+  "block_type.wilderwild.stripped_hollowed_log": "Stripped Hollowed %s Log",
+
+  "block_type.bc.campfire": "%s Campfire",
+  "block_type.bc.soul_campfire": "%s Soul Campfire"
 }

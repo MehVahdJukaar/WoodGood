@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
@@ -105,6 +106,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("lolmcvbop", "biomesoplenty", List.of("lolmcv"));
         addOtherCompatMod("lolmcvbmo", "biomemakeover", List.of("lolmcv"));
         addOtherCompatMod("natures_delight", "natures_spirit", List.of("farmersdelight"));
+        addOtherCompatMod("arts_and_crafts_compat", "arts_and_crafts", List.of("twigs", "decorative_blocks", "farmersdelight", "dramaticdoors"));
 
         // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
@@ -121,6 +123,7 @@ public abstract class EveryCompat {
         // ========================================= Add Modules ==================================================== \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("barkcarpets", () -> BarkCarpetsModule::new);
+        addModule("bc", () -> BeautifulCampfiresModule::new); // WIP
         addModule("campchair", () -> CampChairModule::new);
         addModule("chipped", () -> ChippedModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
