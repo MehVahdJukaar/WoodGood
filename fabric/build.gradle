@@ -56,7 +56,7 @@ dependencies {
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
-//    modImplementation("net.frozenblock.wilderwild:wilderwild-2.4.6-mc1.20.1")
+    modCompileOnly("com.arcanc.bc:Beautiful-Campfires-fabric-1.20.1-1.0.3")
 
     // ================================================ IMPORTS ===================================================== \\
         // Tools
@@ -76,9 +76,9 @@ dependencies {
     modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
 
         // OTHERS
-    modCompileOnly("curse.maven:another-furniture-610492:4815126") // (AZ)
+    modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:camp-chair-531744:4579676")
-    modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1 (AZ)
+    modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
     modCompileOnly("curse.maven:create-fabric-624165:5168511")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")

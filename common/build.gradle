@@ -25,6 +25,7 @@ dependencies {
         // LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
+    modCompileOnly("com.arcanc.bc:Beautiful-Campfires-fabric-1.20.1-1.0.3")
 
 // ================================================== IMPORTS ==========================================================
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
