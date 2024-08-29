@@ -19,7 +19,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsM
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
-import net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreChestVariantsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
@@ -79,7 +78,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("create", () -> CreateModule::new);
-        addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("decoration_delight", () -> DecorationDelightModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
@@ -122,6 +120,7 @@ public class EveryCompatForge extends EveryCompat {
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 //        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
+//        addModule("functionalstorage", () -> FunctionalStorageModule::new);
 
         // ====================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work

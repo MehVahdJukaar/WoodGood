@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurniture
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
+import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
@@ -122,6 +123,7 @@ public abstract class EveryCompat {
 
         // ========================================= Add Modules ==================================================== \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
+        addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("barkcarpets", () -> BarkCarpetsModule::new);
         addModule("bc", () -> BeautifulCampfiresModule::new); // WIP
         addModule("campchair", () -> CampChairModule::new);
