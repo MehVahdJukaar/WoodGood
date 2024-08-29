@@ -1,15 +1,8 @@
 ### UPDATED:
-- **Special**: Fix the duplicated of blocks from **Arts And Crafts Compatibility** with: 
-  - **Twigs**
-  - **Farmer's Delight**
-  - **Dramatic Doors**
-  - **Decorative Blocks**
-
-NOTE: if **Arts And Crafts** & **Arts And Compatibility** are installed, then the wood, _cork_ won't be included with above
+- **Dawn Of Time Builder Edition**: Fixed the crash & no longer supporting older version than v1.5.8
 
 ### NEW:
-- **Wilder Wild** (FABRIC)
-- **Beautiful Campfires** (COMMON)
+
 
 ---
 **LEGEND**:
