@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time;
+package net.mehvahdjukaar.every_compat.modules.dawn_of_time;
 
 import java.util.function.ToIntFunction;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -33,7 +33,7 @@ import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
 import org.dawnoftimebuilder.util.VoxelShapes;
 
 
-//SUPPORT v1.5.7+
+//SUPPORT v1.5.8+
 public class DawnOfTimeModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BEAM;
@@ -52,7 +52,7 @@ public class DawnOfTimeModule extends SimpleModule {
 
     public DawnOfTimeModule(String modId) {
         super(modId, "dot");
-        var tab = DoTBCreativeModeTabsRegistry.DOT_TAB;
+        var tab = DoTBCreativeModeTabsRegistry.INSTANCE.DOT_TAB;
 
         PLATE = SimpleEntrySet.builder(WoodType.class, "planks_plate",
                         getModBlock("oak_planks_plate"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -179,7 +179,7 @@ public class DawnOfTimeModule extends SimpleModule {
                                 .strength(2.0F, 6.0F).lightLevel(litBlockEmission(14))))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/spruce_low_table"))
-                .addTile(DoTBBlockEntitiesRegistry.DISPLAYER)
+                .addTile(DoTBBlockEntitiesRegistry.INSTANCE.DISPLAYER)
                 .createPaletteFromOak(this::dullPalette)
                 .defaultRecipe()
                 .setTab(tab)
