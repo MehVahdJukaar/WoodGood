@@ -15,7 +15,7 @@
   "icon": "logo.png",
   "environment": "*",
   "mixins": [
-    "${mod_id}-common.mixins.json"
+    "everycomp-common.mixins.json"
   ],
   "entrypoints": {
     "main": [
@@ -35,6 +35,7 @@
   },
   "breaks": {
     "mcwbridges": "<3.0.0",
-    "mcwfences": "<1.1.2"
+    "mcwfences": "<1.1.2",
+    "dawnoftimebuilder": "<1.5.7"
   }
 }
