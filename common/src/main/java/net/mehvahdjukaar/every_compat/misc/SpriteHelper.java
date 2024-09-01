@@ -37,6 +37,13 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // The Abyss: The Other Side
+        addOptional("theabyss:rena_log", "_top", "theabyss:block/rena_log");
+        addOptional("theabyss:stripped_rena_log", "_top", "theabyss:block/rena_log");
+        addOptional("theabyss:luna_log", "_top", "theabyss:block/luna_log");
+        addOptional("theabyss:stripped_luna_log", "_top", "theabyss:block/luna_log");
+
+
         // Dreamy Cottage
         addOptional("dreamy_cottage:strawberry_log", "_side", "dreamy_cottage:block/strawberrylogside");
         addOptional("dreamy_cottage:strawberry_log", "_top", "dreamy_cottage:block/strawberrylog");
