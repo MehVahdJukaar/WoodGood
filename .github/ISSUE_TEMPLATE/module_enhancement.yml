@@ -1,7 +1,7 @@
 name: Module Enhancement
 description: Supported Mod missing a block or an item via new version? 
 title: "[🗃]: "
-labels: ["📦Module", "enhancement"]
+labels: ["Module", "enhancement"]
 body:
   - type: markdown
     attributes:
@@ -11,8 +11,17 @@ body:
   - type: input
     id: version
     attributes:
-      label: Version
-      description: "Current Version of the mod that adds new block/item"
+      label: Minecraft Version
+      description: "Which Minecraft Version are you on?"
+      placeholder: ex. 1.20.1
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Supported Mod Version
+      description: "Current Version of the supported mod that adds new block/item"
       placeholder: ex. v2.2.0
     validations:
       required: true
@@ -20,8 +29,8 @@ body:
   - type: input
     id: curseforge
     attributes:
-      label: Curseforge
-      description: "The link for mod's Curseforge"
+      label: "Supported mod's Curseforge"
+      description: "The link for supported mod's Curseforge"
       placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/macaws-windows
     validations:
       required: true
