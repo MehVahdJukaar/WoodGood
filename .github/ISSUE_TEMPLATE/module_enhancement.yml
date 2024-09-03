@@ -9,7 +9,7 @@ body:
         Module Enhancement
 
   - type: input
-    id: version
+    id: mcVersion
     attributes:
       label: Minecraft Version
       description: "Which Minecraft Version are you on?"
