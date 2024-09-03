@@ -1,7 +1,7 @@
 name: Suggest Mod
 description: Suggest mods to be added to Every Compat
 title: "[📦]: "
-labels: "📦Module"
+labels: "Module"
 body:
   - type: markdown
     attributes:
