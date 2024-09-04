@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.modules.fabric.architect_palette.ArchitectsPaletteModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
@@ -29,7 +30,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         if (PlatHelper.getPhysicalSide().isClient())
             ItemTooltipCallback.EVENT.register(EveryCompatClient::onItemTooltip);
 
-        // ========================================= Macaw's ======================================================== \\
+// ================================================= Macaw's ======================================================== \\
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
@@ -40,7 +41,8 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
 
-        // ========================================= Add Modules ==================================================== \\
+// ================================================= Add Modules ==================================================== \\
+        addModule("bbb", () -> BuildingButBetterModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
@@ -50,14 +52,13 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addModule("wilderwild", () -> WilderWildModule::new);
 
-        if (EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
-        // ========================================== WORK IN PROGRESS ============================================== \\
-
-        // ====================================== DISABLED FOR A REASON ============================================= \\
+// ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("twilightforest", () -> TwilightForestModule::new); // Not available
 //        addModule("architects_palette", () -> ArchitectsPaletteModule::new); // Not available
 
-        // ============================================= OTHERS ===================================================== \\
+// ===================================================== OTHERS ===================================================== \\
+        if (EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
+
         forAllModules(CompatModule::onModInit);
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatClient.init();
