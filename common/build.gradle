@@ -20,7 +20,7 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14
 
 // =============================================== DEPENDENCIES ========================================================
-    modCompileOnly("curse.maven:framework-549225:5388228") // Furniture Refurbished
+    modCompileOnly("curse.maven:framework-549225:5680025") // Furniture Refurbished
 
         // LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
@@ -29,6 +29,7 @@ dependencies {
 
 // ================================================== IMPORTS ==========================================================
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
+    modCompileOnly("curse.maven:backpacked-352835:5401968")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
     modCompileOnly("curse.maven:create-624165:5168511")
@@ -48,7 +49,7 @@ dependencies {
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
 
-    // ======================================== DISABLED FOR A REASON =============================================== \\
+// ======================================== DISABLED FOR A REASON =============================================== \\
 //     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
 }
 
