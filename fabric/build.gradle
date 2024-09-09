@@ -78,6 +78,8 @@ dependencies {
 
         // OTHERS
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
+    modCompileOnly("curse.maven:beautify-refabricated-809311:5405529")
+    modCompileOnly("curse.maven:bewitchment-394915:5205373")
     modCompileOnly("curse.maven:building-but-better-989479:5362379")
     modCompileOnly("curse.maven:backpacked-352835:5401968")
     modCompileOnly("curse.maven:camp-chair-531744:4579676")
