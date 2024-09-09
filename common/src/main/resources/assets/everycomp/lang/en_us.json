@@ -861,5 +861,9 @@
   "block_type.bbb.wall": "%s Wall",
 
   "block_type.bewitchment.poppet_shelf": "%s Poppet Shelf",
-  "item_type.bewitchment.bark": "%s Bark"
+  "item_type.bewitchment.bark": "%s Bark",
+
+  "block_type.beautify.blinds": "%s Blinds",
+  "block_type.beautify.trellis": "%s Lattice",
+  "block_type.beautify.picture_frame": "%s Picture Frame"
 }
