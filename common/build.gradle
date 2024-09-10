@@ -11,7 +11,7 @@ dependencies {
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
     //modImplementation("net.mehvahdjukaar:moonlight:${moonlight_version}")
-    modImplementation("curse.maven:selene-499980:5640047") // v2.12.14
+    modImplementation("curse.maven:selene-499980:5702360") // v2.12.20
 
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
