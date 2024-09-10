@@ -167,7 +167,7 @@ dependencies {
     modCompileOnly("curse.maven:another-furniture-610492:4815126") //WARNING: fabric-version
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:5401965")
-    modImplementation("curse.maven:beautify-decorate-633252:4781709") //WIP
+    modCompileOnly("curse.maven:beautify-decorate-633252:4781709")
     modCompileOnly("curse.maven:boatload-337396:5292325")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:building-but-better-989479:5362380")
@@ -193,6 +193,7 @@ dependencies {
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
+    modCompileOnly("curse.maven:oreberries-replanted-454062:5138729")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:5304827") //v12.5.1 | WIP
