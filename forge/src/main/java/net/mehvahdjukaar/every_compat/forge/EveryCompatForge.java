@@ -34,6 +34,8 @@ import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructure
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
+
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -97,6 +99,7 @@ public class EveryCompatForge extends EveryCompat {
         }
         addModule("xercamod", () -> XercaModule::new);
         addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
+        addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
 
         // Macaw's
         addModule("mcwbridges", () -> MacawBridgesModule::new);

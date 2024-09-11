@@ -745,6 +745,28 @@
 
   "block_type.mighty_mail.mail_box": "%s Mailbox",
 
+  "block_type.refurbished_furniture.chair": "%s Chair",
+  "block_type.refurbished_furniture.table": "%s Table",
+  "block_type.refurbished_furniture.storage_jar": "%s Storage Jar",
+  "block_type.refurbished_furniture.toilet": "%s Toilet",
+  "block_type.refurbished_furniture.crate": "%s Crate",
+  "block_type.refurbished_furniture.mail_box": "%s Mailbox",
+  "block_type.refurbished_furniture.dark_ceiling_fan": "%s Dark Ceiling Fan",
+  "block_type.refurbished_furniture.light_ceiling_fan": "%s Light Ceiling Fan",
+  "block_type.refurbished_furniture.kitchen_cabinetry": "%s Kitchen Cabinetry",
+  "block_type.refurbished_furniture.kitchen_drawer": "%s Kitchen Drawer",
+  "block_type.refurbished_furniture.kitchen_sink": "%s Kitchen Sink",
+  "block_type.refurbished_furniture.kitchen_storage_cabinet": "%s Kitchen Storage Cabinet",
+  "block_type.refurbished_furniture.storage_cabinet": "%s Storage Cabinet",
+  "block_type.refurbished_furniture.basin": "%s Basin",
+  "block_type.refurbished_furniture.bath": "%s Bath",
+  "block_type.refurbished_furniture.lattice_fence": "%s Lattice Fence",
+  "block_type.refurbished_furniture.lattice_fence_gate": "%s Lattice Fence Gate",
+  "block_type.refurbished_furniture.desk": "%s Desk",
+  "block_type.refurbished_furniture.cutting_board": "%s Cutting Board",
+  "block_type.refurbished_furniture.drawer": "%s Drawer",
+  "block_type.refurbished_furniture.hedge": "%s Hedge",
+
   "block_type.regions_unexplored.branch": "%s Branch",
   "block_type.regions_unexplored.shrub": "%s Shrub",
 
