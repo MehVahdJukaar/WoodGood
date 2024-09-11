@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelig
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.lieonlion.MoreCraftingTablesModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.variants.VariantVanillaBlocksModule;
@@ -52,6 +53,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("lolmct", () -> MoreCraftingTablesModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
+        addModule("redbits", () -> RedBitsModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addModule("wilderwild", () -> WilderWildModule::new);

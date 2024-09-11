@@ -867,5 +867,7 @@
   "block_type.beautify.trellis": "%s Lattice",
   "block_type.beautify.picture_frame": "%s Picture Frame",
 
-  "block_type.oreberriesreplanted.vat": "%s Vat"
+  "block_type.oreberriesreplanted.vat": "%s Vat",
+
+  "block_type.redbits.large_button": "Large %s Button"
 }
