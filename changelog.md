@@ -6,6 +6,7 @@
 - **Beautify!** (FORGE)
 - **Beautify Refabricated** (FABRIC)
 - **Oreberries Replanted** (FORGE)
+- **Red Bits** (FABRIC)
 
 ---
 **LEGEND**:
