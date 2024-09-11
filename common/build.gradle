@@ -13,9 +13,13 @@ dependencies {
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
     modImplementation("curse.maven:resourceful-lib-570073:4434139")
 
+
+    // ================================================ DEPENDENCIES ================================================ \\
+    modCompileOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
+    modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
+
     // ================================================ IMPORTS ===================================================== \\
     //common. Fabric version that works on both
-    modCompileOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
 
     modCompileOnly("curse.maven:another-furniture-610492:4034011")
     modCompileOnly("curse.maven:camp-chair-531744:3835679")
@@ -28,6 +32,7 @@ dependencies {
     modCompileOnly("curse.maven:handcrafted-538214:4437458")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4533061")
+    modCompileOnly("curse.maven:refurbished-furniture-897116:5651930")
 
 //    modCompileOnly("curse.maven:missing-wilds-622590:3891602")
 

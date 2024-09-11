@@ -51,7 +51,7 @@ dependencies {
     modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
     modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
     modCompileOnly("curse.maven:arrp-463113:3829389")
-    modCompileOnly("curse.maven:framework-fabric-667391:4718252") // MightyMail
+    modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
@@ -70,9 +70,11 @@ dependencies {
     modCompileOnly("curse.maven:infinitybuttons-661902:5330408")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750267")
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
+    modCompileOnly("curse.maven:refurbished-furniture-897116:5651930")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4531594")
     modCompileOnly("curse.maven:hearth-and-home-849364:4488851")
+
     modCompileOnly("curse.maven:regions-unexplored-659110:4470171")
 
         // MACAW's
