@@ -35,11 +35,10 @@ public class RegionsUnexploredModule extends SimpleModule {
                         () -> getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BranchBlock(BlockBehaviour.Properties.copy(RegionsUnexploredBlocks.OAK_BRANCH))
                 )
-                .addTexture(modRes("block/oak_branch"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("branches"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("branches"), Registry.ITEM_REGISTRY)
-                .addRecipe(modRes("oak_branch_from_oak_log"))
+                .defaultRecipe()
                 .build();
         this.addEntry(branchs);
 
@@ -62,21 +61,24 @@ public class RegionsUnexploredModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
-        try (TextureImage branch_side = TextureImage.open(manager, EveryCompat.res("item/regions_unexplored/oak_branch_side"));
-             TextureImage branch_top = TextureImage.open(manager, EveryCompat.res("item/regions_unexplored/oak_branch_top"));
-             TextureImage branch_block = TextureImage.open(manager, modRes("block/oak_branch"))
+        try (TextureImage branch_side = TextureImage.open(manager, EveryCompat.res("item/regions_unexplored/oak_branch_side_fabric"));
+             TextureImage branch_top = TextureImage.open(manager, EveryCompat.res("item/regions_unexplored/oak_branch_top_fabric"));
+             TextureImage branch_block = TextureImage.open(manager, modRes("block/oak_branch"));
+             TextureImage branch_block_2 = TextureImage.open(manager, modRes("block/oak_branch_2"))
         ) {
 
             branchs.blocks.forEach((wood, block) -> {
                 try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                      TextureImage logTop_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
+                    String blockPath = "block/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
+
                     ResourceLocation resLocITEM = EveryCompat.res("item/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch");
-                    ResourceLocation resLocBLOCK = EveryCompat.res("block/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch");
 
                     Respriter respriterSIDE = Respriter.of(branch_side); // ITEM
                     Respriter respriterTOP = Respriter.of(branch_top); // ITEM
                     Respriter respriterBlock = Respriter.of(branch_block); // BLOCK
+                    Respriter respriterBlock_2 = Respriter.of(branch_block_2); // BLOCK
 
                     // Recoloring ITEM textures
                     TextureImage recoloredITEM = respriterSIDE.recolorWithAnimationOf(logSide_texture);
@@ -85,9 +87,11 @@ public class RegionsUnexploredModule extends SimpleModule {
 
                     // Recoloring BLOCK texture
                     TextureImage recoloredBLOCK = respriterBlock.recolorWithAnimationOf(logSide_texture);
+                    TextureImage recoloredBLOCK_2 = respriterBlock_2.recolorWithAnimationOf(logSide_texture);
 
                     // Block Texture
-                    handler.dynamicPack.addAndCloseTexture(resLocBLOCK, recoloredBLOCK);
+                    handler.dynamicPack.addAndCloseTexture(EveryCompat.res(blockPath), recoloredBLOCK);
+                    handler.dynamicPack.addAndCloseTexture(EveryCompat.res(blockPath + "_2"), recoloredBLOCK_2);
                     // Item Texture
                     handler.dynamicPack.addAndCloseTexture(resLocITEM, recoloredITEM);
 
@@ -97,7 +101,7 @@ public class RegionsUnexploredModule extends SimpleModule {
             });
         }
         catch (IOException e) {
-            handler.getLogger().error("Failed to get Branch Item Texture for " + e);
+            handler.getLogger().error("Failed to get Branch Item Texture for ", e);
         }
     }
 }

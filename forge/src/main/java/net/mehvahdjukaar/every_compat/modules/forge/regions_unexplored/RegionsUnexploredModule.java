@@ -10,7 +10,6 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -28,12 +27,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.PushReaction;
 import net.regions_unexplored.block.RuBlocks;
 import net.regions_unexplored.world.level.block.plant.other.BranchBlock;
 import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 
-import javax.json.Json;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -162,7 +159,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                 );
             });
         } catch (IOException e) {
-            handler.getLogger().error("Failed to open the recipe: " + e);
+            handler.getLogger().error("Failed to open the recipe: ", e);
         }
     }
 
