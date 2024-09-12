@@ -30,6 +30,13 @@ public class SpriteHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log", res("block/stripped_cactus_side"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "stripped_cactus_log_top", res("block/stripped_cactus_top"));
 
+        // Bewitchment
+        addOptional("bewitchment:dragons_blood_log", "_side", "bewitchment:block/dragons_blood_log");
+
+        // Terrestria
+        addOptional("terrestria:sakura_log", "_top", "terrestria:block/sakura_log_section");
+        addOptional("terrestria:yucca_palm_log", "_top", "terrestria:block/yucca_palm_log_section");
+
         // The Aether: Redux
             // Leaves
         addOptional("aether_redux:purple_glacia_leaves", "_leaves", "aether_redux:block/natural/purple_glacia_leaves");
