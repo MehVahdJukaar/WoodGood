@@ -789,6 +789,15 @@
   "block_type.dawnoftimebuilder.fancy_fence": "Fancy %s Fence",
   "block_type.dawnoftimebuilder.footstool": "%s Footstool",
   "block_type.dawnoftimebuilder.low_table": "%s Low Table",
-  "block_type.dawnoftimebuilder.legless_chair": "%s Legless Chair"
+  "block_type.dawnoftimebuilder.legless_chair": "%s Legless Chair",
+
+  "block_type.bewitchment.poppet_shelf": "%s Poppet Shelf",
+  "item_type.bewitchment.bark": "%s Bark",
+
+  "block_type.beautify.blinds": "%s Blinds",
+  "block_type.beautify.trellis": "%s Lattice",
+  "block_type.beautify.picture_frame": "%s Picture Frame",
+
+  "block_type.redbits.large_button": "Large %s Button"
 }
 
