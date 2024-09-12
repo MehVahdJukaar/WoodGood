@@ -144,6 +144,7 @@ dependencies {
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
     modCompileOnly("curse.maven:architects-palette-433862:4498448")
     modCompileOnly("curse.maven:backpacked-352835:3923045")
+    modCompileOnly("curse.maven:beautify-decorate-633252:4036351")
     modCompileOnly("curse.maven:buildersaddition-389697:4008246")
     modCompileOnly("curse.maven:camp-chair-531744:3930598")
     modCompileOnly("curse.maven:chipped-456956:4463479")
