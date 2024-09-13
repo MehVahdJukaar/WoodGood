@@ -77,6 +77,8 @@ subprojects {
                         requiredDependency "selene"
                         optionalDependency("another-furniture")
                         optionalDependency("architects-palette-fabric")
+                        optionalDependency("beautify-refabricated")
+                        optionalDependency("bewitchment")
                         optionalDependency("camp-chair")
                         optionalDependency("chipped")
                         optionalDependency("cozy")
@@ -100,6 +102,8 @@ subprojects {
                         optionalDependency("macaws-trapdoors")
                         optionalDependency("macaws-windows")
                         optionalDependency("missing-wilds")
+                        optionalDependency("red-bits")
+                        optionalDependency("refurbished-furniture")
                         optionalDependency("the-twilight-forest")
                         optionalDependency("twigs")
                     }
@@ -108,6 +112,7 @@ subprojects {
                         requiredDependency("selene")
                         optionalDependency("another-furniture")
                         optionalDependency("architects-palette")
+                        optionalDependency("beautify-decorate")
                         optionalDependency("backpacked")
                         optionalDependency("builders-delight-forge")
                         optionalDependency("buildersaddition")
@@ -144,6 +149,7 @@ subprojects {
                         optionalDependency("productivebees")
                         optionalDependency("quark")
                         optionalDependency("rechiseled")
+                        optionalDependency("refurbished-furniture")
                         optionalDependency("storage-drawers")
                         optionalDependency("the-twilight-forest")
                         optionalDependency("twigs")
