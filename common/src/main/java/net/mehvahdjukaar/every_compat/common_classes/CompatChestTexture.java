@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
