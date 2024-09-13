@@ -1,10 +1,13 @@
 ### UPDATED:
-- **EN_US**: (COMMON) ported fixes from 1.20.1 to correct the _hollow_log_'s display title from **The Twilight Forest** & **Quark** with **mods that have stems**
+- **Chipped**: Fixed the mixxing texture for _classic_trapdoor_
+- **Regions Unexplored** (FABRIC): Updated _branch_'s texture & Fixed the missing recipe
 
 ### NEW:
-- **Decoration Delight: Refurbished** (FORGE) - Forgot to add this
-- **Mighty Mail** (FABRIC)
-- **Dawn Of Time** (FORGE)
+- **MrCrayFish's Refurbished Furniture** (COMMON) done
+- **Red Bits** (FABRIC) done
+- **Bewitchment** (FABRIC) done
+- **Beautify!** (FORGE) done
+- **Beautify Refabricated** (FABRIC) done
 
 ### LEGEND: 
 - (COMMON) = FORGE & FABRIC
