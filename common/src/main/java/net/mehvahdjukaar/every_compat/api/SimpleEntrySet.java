@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -94,6 +95,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     public ITileHolder<?> getTileHolder() {
         return tileHolder;
+    }
+
+    public <E extends BlockEntity> BlockEntityType<E> getTIle(Class<E> tileClass) {
+        Preconditions.checkNotNull(tileHolder, "Entry set has no tile entity!");
+        return (BlockEntityType<E>) tileHolder.get();
     }
 
     @Override
