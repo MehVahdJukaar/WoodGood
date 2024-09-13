@@ -200,7 +200,7 @@ dependencies {
 //    modImplementation("curse.maven:just-a-raft-mod-274350:4688639")
 //    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
     modCompileOnly("curse.maven:functional-storage-556861:4810636")
-    modCompileOnly("curse.maven:carpenter-549446:4673192")
+    modCompileOnly("curse.maven:carpenter-549446:4673192") //WIP
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
