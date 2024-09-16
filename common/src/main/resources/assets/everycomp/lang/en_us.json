@@ -871,6 +871,9 @@
 
   "block_type.redbits.large_button": "Large %s Button",
 
-  "block_type.woodenhoppers": "%s Hopper"
+  "block_type.woodenhoppers.hopper": "%s Hopper",
+
+  "block_type.exlineawnings.awning": "%s Awning",
+  "block_type.exlineawnings.log_awning": "%s Hopper"
 
 }
