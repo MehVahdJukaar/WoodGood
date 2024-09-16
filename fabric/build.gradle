@@ -105,6 +105,7 @@ dependencies {
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")
     modCompileOnly("maven.modrinth:wilder-wild:2.4-mc1.20.1")
+    modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //WIP
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151837")
 

@@ -869,5 +869,8 @@
 
   "block_type.oreberriesreplanted.vat": "%s Vat",
 
-  "block_type.redbits.large_button": "Large %s Button"
+  "block_type.redbits.large_button": "Large %s Button",
+
+  "block_type.woodenhoppers": "%s Hopper"
+
 }

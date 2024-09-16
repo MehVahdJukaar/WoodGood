@@ -22,6 +22,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsU
 import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
@@ -57,6 +58,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addModule("wilderwild", () -> WilderWildModule::new);
+        addModule("woodenhoppers", () -> WoodenHoppersModule::new);
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("twilightforest", () -> TwilightForestModule::new); // Not available
