@@ -17,7 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
-import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
@@ -126,7 +126,7 @@ public abstract class EveryCompat {
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
-        addModule("barkcarpets", () -> BarkCarpetsModule::new);
+        addModule("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
         addModule("bc", () -> BeautifulCampfiresModule::new);
         addModule("campchair", () -> CampChairModule::new);
         addModule("chipped", () -> ChippedModule::new);

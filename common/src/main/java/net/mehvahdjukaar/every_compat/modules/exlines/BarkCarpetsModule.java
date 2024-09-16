@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.exline;
+package net.mehvahdjukaar.every_compat.modules.exlines;
 
 import com.exline.barkcarpets.block.BarkCarpetBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
