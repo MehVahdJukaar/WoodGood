@@ -17,8 +17,8 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
     for (String module in port_lib_modules.split(",")) {
         modImplementation(include("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version"))
     }
@@ -32,7 +32,7 @@ dependencies {
     modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
         exclude group: 'net.fabricmc.fabric-api'
     }
-    modCompileOnly ("com.terraformersmc:modmenu:4.0.6")
+    modImplementation("com.terraformersmc:modmenu:7.2.2")
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.2"
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.2"
 
@@ -41,8 +41,6 @@ dependencies {
 
     // ============================================== DEPENDENCIES ================================================== \\
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
-//    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2") // updated to 1.20.1
-//    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
     modCompileOnly("curse.maven:athena-841890:5176880") // Chipped
     modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | Required by: REI
     modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | Required by: REI, Garden-Of-The-Dead
@@ -52,6 +50,7 @@ dependencies {
     modImplementation("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
     modCompileOnly("maven.modrinth:frozenlib:1.7.4-mc1.20.1") // Wilder-Wild
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
+//    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
 
         // LOCAL
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
@@ -62,9 +61,7 @@ dependencies {
 
     // ================================================ IMPORTS ===================================================== \\
         // Tools
-//    modImplementation("curse.maven:roughly-enough-items-310111:5627517")
-    modRuntimeOnly("curse.maven:modmenu-308702:5162837")
-    modRuntimeOnly("curse.maven:jei-238222:5101365")
+    modRuntimeOnly("curse.maven:emi-580555:5704392")
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
