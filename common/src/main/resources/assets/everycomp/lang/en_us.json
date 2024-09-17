@@ -874,6 +874,11 @@
   "block_type.woodenhoppers.hopper": "%s Hopper",
 
   "block_type.exlineawnings.awning": "%s Awning",
-  "block_type.exlineawnings.log_awning": "%s Log Awning"
+  "block_type.exlineawnings.log_awning": "%s Log Awning",
+
+  "block_type.corail_pillar.pillar_log": "%s Log Pillar",
+  "block_type.corail_pillar.small-pillar_log": "%s Log Pillar",
+  "block_type.corail_pillar.pillar_planks": "%s Planks Pillar",
+  "block_type.corail_pillar.small_pillar_planks": "%s Planks Pillar"
 
 }

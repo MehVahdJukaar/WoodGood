@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.beautify_decorate.BeautifyDe
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.forge.building_but_better.BuildingButBetterModule;
+import net.mehvahdjukaar.every_compat.modules.forge.corail_pillar.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
@@ -81,6 +82,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("bbb", () -> BuildingButBetterModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+        addModule("corail_pillar", () -> CorailPillarModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("decoration_delight", () -> DecorationDelightModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);

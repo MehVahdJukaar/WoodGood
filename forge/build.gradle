@@ -173,12 +173,14 @@ dependencies {
     modCompileOnly("curse.maven:building-but-better-989479:5362380")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856") // v3.0.1
+    modImplementation("curse.maven:corail-pillar-266228:5073954")
     modCompileOnly("curse.maven:create-328085:4835191")
     modCompileOnly("curse.maven:dawn-of-time-312359:5651249")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:decoration-delight-687475:5563942")
     modCompileOnly("curse.maven:dramatic-doors-380617:4815647")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
+//    modImplementation("curse.maven:redeco-897377:5603009") //WIP
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
     modCompileOnly("curse.maven:functional-storage-556861:5169765") // WIP
