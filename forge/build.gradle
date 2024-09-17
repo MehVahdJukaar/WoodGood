@@ -173,7 +173,7 @@ dependencies {
     modCompileOnly("curse.maven:building-but-better-989479:5362380")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856") // v3.0.1
-    modImplementation("curse.maven:corail-pillar-266228:5073954")
+    modCompileOnly("curse.maven:corail-pillar-266228:5073954")
     modCompileOnly("curse.maven:create-328085:4835191")
     modCompileOnly("curse.maven:dawn-of-time-312359:5651249")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
