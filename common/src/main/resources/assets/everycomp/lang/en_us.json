@@ -798,6 +798,11 @@
   "block_type.beautify.trellis": "%s Lattice",
   "block_type.beautify.picture_frame": "%s Picture Frame",
 
-  "block_type.redbits.large_button": "Large %s Button"
+  "block_type.redbits.large_button": "Large %s Button",
+
+  "block_type.corail_pillar.pillar_log": "%s Log Pillar",
+  "block_type.corail_pillar.small_pillar_log": "Small %s Log Pillar",
+  "block_type.corail_pillar.pillar_planks": "%s Planks Pillar",
+  "block_type.corail_pillar.small_pillar_planks": "Small %s Planks Pillar"
 }
 

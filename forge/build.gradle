@@ -137,6 +137,7 @@ dependencies {
 
     // TOOLS
     modRuntimeOnly("curse.maven:emi-580555:5704395")
+//    modRuntimeOnly("curse.maven:jei-238222:5733169")
 
     // ================================================ IMPORTS ===================================================== \\
 
@@ -148,6 +149,7 @@ dependencies {
     modCompileOnly("curse.maven:camp-chair-531744:3930598")
     modCompileOnly("curse.maven:chipped-456956:4463479")
     modCompileOnly("curse.maven:create-328085:4547147")
+    modCompileOnly("curse.maven:corail-pillar-266228:3903803") //WIP ------------------------------------------------
     modCompileOnly("curse.maven:dawn-of-time-312359:5214071")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:decoration-delight-687475:5563960")

@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.beautify_decorate.BeautifyDecorateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
+import net.mehvahdjukaar.every_compat.modules.forge.corail.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
@@ -72,6 +73,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+        addModule("corail_pillar", () -> CorailPillarModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("decoration_delight", () -> DecorationDelightModule::new);
