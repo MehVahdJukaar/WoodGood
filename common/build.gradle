@@ -7,16 +7,17 @@ loom {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
 
     modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
-//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
-    modImplementation("curse.maven:resourceful-lib-570073:4434139")
+//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}") // LOCAL
+
 
 
     // ================================================ DEPENDENCIES ================================================ \\
     modCompileOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
     modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
+    modCompileOnly("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
 
     // ================================================ IMPORTS ===================================================== \\
     //common. Fabric version that works on both

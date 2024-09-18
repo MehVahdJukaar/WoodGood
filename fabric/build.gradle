@@ -21,8 +21,8 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
@@ -39,22 +39,25 @@ dependencies {
     }
 
     // modImplementation(fileTree(dir: 'mods_fabric', include: '*.jar'))
+
     modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
-//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric")
+//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric") // LOCAL
 
     // ============================================= DEPENDENCIES =================================================== \\
-    modImplementation("curse.maven:architectury-api-419699:5137941") // v6.6.92
-    modImplementation("curse.maven:cloth-config-348521:4973443") // v8.3.115
-    modImplementation("curse.maven:resourceful-lib-570073:4434137")
-    modImplementation("curse.maven:roughly-enough-items-310111:5301351")
-    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
     modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
     modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
-    modCompileOnly("curse.maven:arrp-463113:3829389")
+    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
+
+    modImplementation("curse.maven:resourceful-lib-570073:4434137")
+//    modRuntimeOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
+//    modRuntimeOnly("curse.maven:cloth-config-348521:4973443") // v8.3.115
     modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
 
     // ================================================= LOCAL ====================================================== \\
     modCompileOnly("net.darktree.redbits:redbits-1.19.2-1.16.1")
+
+    // TOOLS
+    modRuntimeOnly("curse.maven:emi-580555:5704394")
 
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
@@ -93,9 +96,6 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841530")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726276")
     modCompileOnly("curse.maven:macaws-windows-363569:4750640")
-
-
-    // =========================================== WORK IN PROGRESS ================================================= \\
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
     // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")

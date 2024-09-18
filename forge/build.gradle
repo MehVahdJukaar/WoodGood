@@ -112,9 +112,11 @@ dependencies {
     implementation(include("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
-    // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("curse.maven:selene-499980:5567102") // v2.3.7
-//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
+//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge") // LOCAL
+
+    // ============================================== DEPENDENCIES ================================================== \\
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
 //    modImplementation("curse.maven:architectury-api-419699:5137942") // v6.6.92 | REI, Gardens-Of-The-Dead
 //    modImplementation("curse.maven:cloth-config-348521:4973444") // v8.3.115 | REI
@@ -127,19 +129,16 @@ dependencies {
     modCompileOnly("curse.maven:framework-549225:5692394") //v0.7.12 | Mighty Mail, Furniture, Refurbished-Furniture
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129280") // Dawn Of Time
 
-//    modImplementation("curse.maven:supermartijn642s-config-lib-438332:3871792") // Benched
-//    modImplementation("curse.maven:supermartijn642s-core-lib-454372:4484238") // Benched
-
-    // Local
-    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}")
-    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
+    // ================================================= LOCAL ====================================================== \\
+    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}") // Create
     modCompileOnly("com.tynoxs.buildersdelight:buildersdelight-1.19.2-v.1.1")
     modCompileOnly("net.stehschnitzel.shutter:shutters-1.19.2-1.1.0")
 
 
+    // TOOLS
+    modRuntimeOnly("curse.maven:emi-580555:5704395")
+
     // ================================================ IMPORTS ===================================================== \\
-//    modImplementation("curse.maven:roughly-enough-items-310111:5301352")
-    modRuntimeOnly("curse.maven:emi-580555:5619584")
 
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
     modCompileOnly("curse.maven:architects-palette-433862:4498448")
@@ -209,9 +208,6 @@ dependencies {
 //     implementation fg.deobf("curse.maven:marg-324494:3723497") // LIBRARY
 //     implementation fg.deobf("curse.maven:ortuslib-616457:3768197") // LIBRARY
 //     implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
-
-//     modImplementation("curse.maven:benched-417063:3821546") // Due to OBJ FORMAT for models
-//     modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBMODEL
 
     // ============================================= FOR TESTING ==================================================== \\
     modRuntimeOnly("curse.maven:biomes-o-plenty-220318:3927361")
