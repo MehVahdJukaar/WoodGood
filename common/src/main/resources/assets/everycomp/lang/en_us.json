@@ -307,6 +307,13 @@
   "block_type.valhelsia_structures.post": "%s Post",
   "block_type.valhelsia_structures.stripped_post": "Stripped %s Post",
 
+  "block_type.valhelsia_furniture.table": "%s Table",
+  "block_type.valhelsia_furniture.chair": "%s Chair",
+  "block_type.valhelsia_furniture.hay_chair": "%s Chair",
+  "block_type.valhelsia_furniture.stool": "%s Stool",
+  "block_type.valhelsia_furniture.desk": "%s Desk",
+  "block_type.valhelsia_furniture.desk_drawer": "%s Desk Drawer",
+
   "block_type.backpacked.backpack_shelf": "%s Backpack Shelf",
 
   "block_type.mcwbridges.rail_bridge": "%s Rail Bridge",

@@ -121,7 +121,7 @@ dependencies {
 //    modImplementation("curse.maven:architectury-api-419699:5137942") // v6.6.92 | REI, Gardens-Of-The-Dead
 //    modImplementation("curse.maven:cloth-config-348521:4973444") // v8.3.115 | REI
     modRuntimeOnly("curse.maven:configured-457570:4462837")
-    modCompileOnly("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure
+    modImplementation("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
     modCompileOnly("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
@@ -149,7 +149,7 @@ dependencies {
     modCompileOnly("curse.maven:camp-chair-531744:3930598")
     modCompileOnly("curse.maven:chipped-456956:4463479")
     modCompileOnly("curse.maven:create-328085:4547147")
-    modCompileOnly("curse.maven:corail-pillar-266228:3903803") //WIP ------------------------------------------------
+    modCompileOnly("curse.maven:corail-pillar-266228:3903803")
     modCompileOnly("curse.maven:dawn-of-time-312359:5214071")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:decoration-delight-687475:5563960")
@@ -177,6 +177,7 @@ dependencies {
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389567")
     modCompileOnly("curse.maven:twigs-496913:4533061")
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:4520253")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4799968")
     modCompileOnly("curse.maven:woodster-869951:4575175")
     modCompileOnly("curse.maven:woodworks-543610:4776123")
