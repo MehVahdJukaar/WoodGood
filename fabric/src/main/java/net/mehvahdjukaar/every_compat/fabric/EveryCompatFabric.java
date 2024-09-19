@@ -21,6 +21,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
 
@@ -56,6 +57,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         }
         addModule("redbits", () -> RedBitsModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
+        addModule("woodenhoppers", () -> WoodenHoppersModule::new);
 
         // ============================================= OTHERS ===================================================== \\
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);

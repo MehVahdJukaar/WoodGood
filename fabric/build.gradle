@@ -90,6 +90,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4531594")
     modCompileOnly("curse.maven:hearth-and-home-849364:4488851")
+    modCompileOnly("curse.maven:wooden-hoppers-406021:3836322")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:4470171")
 
