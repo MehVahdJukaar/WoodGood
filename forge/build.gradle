@@ -112,12 +112,13 @@ dependencies {
     implementation(include("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
+
     modImplementation("curse.maven:selene-499980:5567102") // v2.3.7
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge") // LOCAL
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
-
+//
 //    modImplementation("curse.maven:architectury-api-419699:5137942") // v6.6.92 | REI, Gardens-Of-The-Dead
 //    modImplementation("curse.maven:cloth-config-348521:4973444") // v8.3.115 | REI
     modRuntimeOnly("curse.maven:configured-457570:4462837")

@@ -38,20 +38,27 @@ dependencies {
         exclude module: "fabric-api"
     }
 
-    // modImplementation(fileTree(dir: 'mods_fabric', include: '*.jar'))
+    modImplementation("net.moddingplayground.frame:frame-0.26.2+1.19-fabric") { // LOCAL
+        exclude module: "cloth-config-fabric"
+    }
+
+    modImplementation(include("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:${porting_lib_version}"))
+
+    modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
+
 
     modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric") // LOCAL
+    // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
     // ============================================= DEPENDENCIES =================================================== \\
-    modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:2.0.591+1.19.2")
-    modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
-    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19")
 
     modImplementation("curse.maven:resourceful-lib-570073:4434137")
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973443") // v8.3.115
     modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
+    modRuntimeOnly("curse.maven:terrablender-fabric-565956:4095396")
+//    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4401535") // Regions-Unexplored
 
     // ================================================= LOCAL ====================================================== \\
     modCompileOnly("net.darktree.redbits:redbits-1.19.2-1.16.1")
@@ -98,8 +105,11 @@ dependencies {
     modCompileOnly("curse.maven:macaws-windows-363569:4750640")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
-    // modImplementation ("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_version}")
-    // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
+
+    // ======================================= TESTING WITH WOOD MODS =============================================== \\
+    modRuntimeOnly("curse.maven:terrestria-323974:4976672")
+//    modRuntimeOnly("curse.maven:regions-unexplored-659110:4470171") // TerraBlender (FABRIC), Forge-Config-API-Port
+
 }
 
 
