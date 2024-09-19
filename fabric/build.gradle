@@ -59,9 +59,11 @@ dependencies {
     modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
     modRuntimeOnly("curse.maven:terrablender-fabric-565956:4095396")
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4401535") // Regions-Unexplored
+    modCompileOnly("maven.modrinth:frozenlib:1.2.7-mc1.19.2") // Wilder-Wild
 
     // ================================================= LOCAL ====================================================== \\
     modCompileOnly("net.darktree.redbits:redbits-1.19.2-1.16.1")
+    modCompileOnly("net.frozenblock.wildwilder:wilderwild-1.19.2-2.0.7")
 
     // TOOLS
     modRuntimeOnly("curse.maven:emi-580555:5704394")

@@ -812,6 +812,9 @@
   "block_type.corail_pillar.pillar_planks": "%s Planks Pillar",
   "block_type.corail_pillar.small_pillar_planks": "Small %s Planks Pillar",
 
-  "block_type.woodenhoppers.hopper": "%s Hopper"
+  "block_type.woodenhoppers.hopper": "%s Hopper",
+
+  "block_type.wilderwild.hollowed_log": "Hollowed %s Log",
+  "block_type.wilderwild.stripped_hollowed_log": "Stripped Hollowed %s Log"
 }
 
