@@ -37,7 +37,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .addTile(AFBlockEntityTypes.FLOWER_BOX)
-                .setTab(getModTab("tab"))
+                .setTabKey(modRes("tab"))
                 .addTexture(modRes("block/flower_box/oak_bottom"))
                 .addTexture(modRes("block/flower_box/oak_supports"))
                 .addTextureM(modRes("block/flower_box/oak_top_sides"), EveryCompat.res("block/af/planter_box_top_sides_mask"))

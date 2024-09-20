@@ -32,7 +32,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -113,7 +112,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
         this.condition = condition;
 
-        if(tab == null && PlatHelper.isDev()){
+        if (tab == null && PlatHelper.isDev()) {
             throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
         }
     }
@@ -170,8 +169,19 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     @Override
     public void registerItemsToExistingTabs(CompatModule module, RegHelper.ItemToTabEvent event) {
-        if (tab == null) return;
+        if (tab == null) {
+            if (PlatHelper.isDev()) {
+                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+            }
+            return;
+        }
         ResourceKey<CreativeModeTab> tab = this.tab.get();
+        //verify tab
+        if (!BuiltInRegistries.CREATIVE_MODE_TAB.containsKey(tab)) {
+            throw new UnsupportedOperationException("Creative tab " + tab + " not registered found in the registries. " +
+                    "This means that the target mod must have changed its name. " +
+                    "You can either downgrade the mod" + tab.location().getNamespace() + " or wait for an Every Compat update");
+        }
         if (tabMode == TabAddMode.AFTER_ALL) {
             event.add(tab, items.values().toArray(new Item[0]));
         } else if (tabMode == TabAddMode.AFTER_SAME_WOOD) {
@@ -429,79 +439,79 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     Respriter respriter = switch (type) {
                         case "barrel_side" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_barrel_side_m")
-                            ));
+                        ));
                         case "barrel_top" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_barrel_top_m")
-                            ));
+                        ));
                         case "beehive_front_honey" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_beehive_front_honey_m")
-                            ));
+                        ));
                         case "beehive_side" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_beehive_side_m")
-                            ));
+                        ));
                         case "bookshelf" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_bookshelf_m")
-                            ));
+                        ));
                         case "cartography_table_side1" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_side1_m")
-                            ));
+                        ));
                         case "cartography_table_side2" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_side2_m")
-                            ));
+                        ));
                         case "cartography_table_top" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_top_m")
-                            ));
+                        ));
                         case "chiseled_bookshelf_occupied" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_chiseled_bookshelf_occupied_m")
-                            ));
+                        ));
                         case "crafting_table_front" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_crafting_table_front_m")
-                            ));
+                        ));
                         case "crafting_table_side" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_crafting_table_side_m")
-                            ));
+                        ));
                         case "fletching_table_front" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_front_m")
-                            ));
+                        ));
                         case "fletching_table_side" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_side_m")
-                            ));
+                        ));
                         case "fletching_table_top" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_top_m")
-                            ));
+                        ));
                         case "lectern_base" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_lectern_base_m")
-                            ));
+                        ));
                         case "lectern_front" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_lectern_front_m")
-                            ));
+                        ));
                         case "smithing_table_bottom" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_bottom_m")
-                            ));
+                        ));
                         case "smithing_table_front" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_front_m")
-                            ));
+                        ));
                         case "smithing_table_side" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_side_m")
-                            ));
+                        ));
                         case "smoker_bottom" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_smoker_bottom_m")
-                            ));
+                        ));
                         case "smoker_front" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_smoker_front_m")
-                            ));
+                        ));
                         case "smoker_side" -> Respriter.masked(image, TextureImage.open(manager,
                                 EveryCompat.res("block/regions_unexplored/brimwood_smoker_side_m")
-                            ));
+                        ));
                         default -> Respriter.of(image);
                     };
 
                     var temp = respriter.recolorWithAnimationOf(plankTexture);
 
                     if (path.contains("stairs") || path.contains("planks") || path.contains("slab") ||
-                        path.contains("beehive") || path.contains("composter_bottom") || path.contains("composter_side")
-                        || path.contains("lectern_side") || path.contains("lectern_top") || path.contains("bookshelf_side")
-                        || path.contains("bookshelf_top")
+                            path.contains("beehive") || path.contains("composter_bottom") || path.contains("composter_side")
+                            || path.contains("lectern_side") || path.contains("lectern_top") || path.contains("bookshelf_side")
+                            || path.contains("bookshelf_top")
                     )
                         image.applyOverlayOnExisting(temp, lavaOverlay);
                     else
@@ -524,7 +534,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected Supplier<ResourceKey<CreativeModeTab>> tab = () -> CreativeModeTabs.COMBAT; //TODO: once all tabs have been properly added to modules (like should have alreyad been the case), make this null. Just here so we know when stuff is does NOT have a tab
+        protected Supplier<ResourceKey<CreativeModeTab>> tab = null;
         protected TabAddMode tabMode = TabAddMode.AFTER_SAME_TYPE;
         @Nullable
         protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;

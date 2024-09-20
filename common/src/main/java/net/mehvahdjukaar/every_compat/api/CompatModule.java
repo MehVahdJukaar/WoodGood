@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
+import net.mehvahdjukaar.moonlight.api.misc.DataObjectReference;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -113,7 +114,7 @@ public abstract class CompatModule {
 
         // Garden-Of-The-dead's whistle must be skipped for branches from Regions-Unexplored
         // Nether's Exoticism & Snifferent already has branches, branches from Regions-Unexplored is not needed
-        if ( (woodFrom.equals("gardens_of_the_dead") || woodFrom.equals("snifferent") ||
+        if ((woodFrom.equals("gardens_of_the_dead") || woodFrom.equals("snifferent") ||
                 woodType.getId().toString().equals("nethers_exoticism:jabuticaba")) && name.contains("branch"))
             return true;
 
@@ -127,11 +128,11 @@ public abstract class CompatModule {
         if (woodFrom.equals("quark") && (shortenedId().equals("mcf") || shortenedId().equals("cfm"))) return false;
 
         // Create's windows will be skipped blc [Let's do] Blooming Nature & Meadow already has windows
-        if (( woodFrom.equals("bloomingnature") || woodFrom.equals("meadow") ) && name.contains("window")) return false;
+        if ((woodFrom.equals("bloomingnature") || woodFrom.equals("meadow")) && name.contains("window")) return false;
 
         // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes &
         // no item in CreativeMode
-        if (woodFrom.equals("upgrade_aquatic") && ( name.equals("driftwood_boards") || name.equals("river_boards") ))
+        if (woodFrom.equals("upgrade_aquatic") && (name.equals("driftwood_boards") || name.equals("river_boards")))
             return false;
 
         // Similar to above, Architect's Palette - boards will be skipped due to the existing boards in Autumnity
@@ -222,11 +223,11 @@ public abstract class CompatModule {
     //utility functions
 
     protected final <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
-        return Suppliers.memoize(() -> (T) BuiltInRegistries.BLOCK.getOptional(modRes(id)).orElse(null));
+        return memorize(id, BuiltInRegistries.BLOCK);
     }
 
     protected final Supplier<CreativeModeTab> getModTab(String id) {
-        return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.getOptional(modRes(id)).orElse(null));
+        return memorize(id, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
 
     protected final Supplier<Block> getModBlock(String id) {
@@ -234,15 +235,15 @@ public abstract class CompatModule {
     }
 
     protected final Supplier<Item> getModItem(String id) {
-        return Suppliers.memoize(() -> BuiltInRegistries.ITEM.getOptional(modRes(id)).orElse(null));
+        return memorize(id, BuiltInRegistries.ITEM);
     }
 
     protected final <T extends BlockEntityType<?>> Supplier<T> getModTile(String id, Class<T> blockClass) {
-        return Suppliers.memoize(() -> (T) BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(modRes(id)).orElse(null));
+        return memorize(id, BuiltInRegistries.BLOCK_ENTITY_TYPE);
     }
 
     protected final <T extends BlockEntityType<?>> Supplier<T> getModTile(String id) {
-        return (Supplier<T>)(Object) getModTile(id, BlockEntityType.class);
+        return (Supplier<T>) getModTile(id, BlockEntityType.class);
     }
 
     //how much crap this module has registered
@@ -253,5 +254,17 @@ public abstract class CompatModule {
         return List.of();
     }
 
+
+    public <T> Supplier<T> memorize(String id, Registry reg) {
+        return Suppliers.memoize(() -> {
+            try {
+                return (T) reg.getOptional(modRes(id))
+                        .orElseThrow();
+            } catch (Throwable e) {
+                throw new IllegalStateException("Could not find " + id + " in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +
+                        "Either downgrade the mod " + this.modId + " or wait for an Every Compat update");
+            }
+        });
+    }
 
 }
