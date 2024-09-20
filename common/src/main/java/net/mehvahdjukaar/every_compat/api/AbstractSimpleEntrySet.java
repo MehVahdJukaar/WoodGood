@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -342,14 +343,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         //only works for oak type. Will fail if its used on leaves
         public BL createPaletteFromOak(Consumer<Palette> paletteTransform) {
-            return createPaletteFromChild(paletteTransform, "planks");
+            return createPaletteFromChild(paletteTransform, "planks", null);
+        }
+
+        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
+            return createPaletteFromChild(paletteTransform, childKey, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE);
         }
 
         //only works for oak type. Will fail if its used on leaves
-        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
+        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, java.util.function.Predicate<String> whichSide) {
             return this.setPalette((w, m) -> {
                 try (TextureImage plankTexture = TextureImage.open(m,
-                        RPUtils.findFirstBlockTextureLocation(m, w.getBlockOfThis(childKey)))) {
+                        RPUtils.findFirstBlockTextureLocation(m, w.getBlockOfThis(childKey), whichSide))) {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                     targetPalette.forEach(paletteTransform);
