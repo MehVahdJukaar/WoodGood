@@ -51,12 +51,19 @@ dependencies {
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric") // LOCAL
     // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
-    // ============================================= DEPENDENCIES =================================================== \\
+        //SPECIAL DEPENDENCIES: TerraBlender(FABRIC), Framework - REQUIRES below
+    implementation("com.electronwill.night-config:toml:3.6.4")
+    implementation("com.electronwill.night-config:core:3.6.4")
+    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.0.2") // Trinkets
+    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.0.2") // Trinkets
+    modImplementation("org.reflections:reflections:0.10.2") // Framework(ONLY)
 
+    // ============================================= DEPENDENCIES =================================================== \\
     modImplementation("curse.maven:resourceful-lib-570073:4434137")
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973443") // v8.3.115
-    modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
+    modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture, Backpacked
+    modRuntimeOnly("curse.maven:trinkets-341284:4343755")
     modRuntimeOnly("curse.maven:terrablender-fabric-565956:4095396")
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4401535") // Regions-Unexplored
     modCompileOnly("maven.modrinth:frozenlib:1.2.7-mc1.19.2") // Wilder-Wild
@@ -110,7 +117,7 @@ dependencies {
     // ======================================== DISABLED FOR A REASON =============================================== \\
 
     // ======================================= TESTING WITH WOOD MODS =============================================== \\
-    modRuntimeOnly("curse.maven:terrestria-323974:4976672")
+//    modRuntimeOnly("curse.maven:terrestria-323974:4976672")
 //    modRuntimeOnly("curse.maven:regions-unexplored-659110:4470171") // TerraBlender (FABRIC), Forge-Config-API-Port
 
 }
