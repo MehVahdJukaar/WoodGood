@@ -78,6 +78,7 @@ dependencies {
     // ================================================ IMPORTS ===================================================== \\
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
+    modCompileOnly("curse.maven:backpacked-fabric-667380:4728984")
     modCompileOnly("curse.maven:beautify-refabricated-809311:4490065")
     modCompileOnly("curse.maven:bewitchment-394915:4530660")
     modCompileOnly("curse.maven:camp-chair-531744:3835679")

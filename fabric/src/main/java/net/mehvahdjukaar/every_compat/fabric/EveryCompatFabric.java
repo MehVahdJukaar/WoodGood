@@ -18,6 +18,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoors
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
+import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
@@ -46,6 +47,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 
         // ========================================= Add Modules ==================================================== \\
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
+        addModule("backpacked", () -> BackpackedModule::new);
         addModule("beautify", () -> BeautifyRefabricatedModule::new);
         addModule("bewitchment", () -> BewitchmentModule::new);
         addModule("create", () -> CreateModule::new);
