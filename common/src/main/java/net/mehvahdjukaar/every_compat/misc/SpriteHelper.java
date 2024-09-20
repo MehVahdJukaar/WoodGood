@@ -37,6 +37,10 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // Terrestria
+        addOptional("terrestria:sakura_log", "_top", "terrestria:block/sakura_log_section");
+        addOptional("terrestria:yucca_palm_log", "_top", "terrestria:block/yucca_palm_log_section");
+
         // The Abyss: The Other Side
         addOptional("theabyss:rena_log", "_top", "theabyss:block/rena_log");
         addOptional("theabyss:stripped_rena_log", "_top", "theabyss:block/rena_log");

@@ -9,9 +9,11 @@ import net.mehvahdjukaar.every_compat.modules.forge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
-import net.mehvahdjukaar.every_compat.modules.forge.backpacked.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.forge.beautify_decorate.BeautifyDecorateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
+import net.mehvahdjukaar.every_compat.modules.forge.building_but_better.BuildingButBetterModule;
+import net.mehvahdjukaar.every_compat.modules.forge.corail_pillar.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
@@ -27,6 +29,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.more.MoreCraftingTablesForFo
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.forge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
@@ -39,6 +42,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
 import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
+
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.network.forge.ChannelHandlerImpl;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -69,14 +73,16 @@ public class EveryCompatForge extends EveryCompat {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
-        // ========================================= Add Modules ==================================================== \\
+// ================================================= Add Modules ==================================================== \\
         addModule("absentbydesign", () -> AbsentByDesignModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
-        addModule("backpacked", () -> BackpackedModule::new);
+        addModule("beautify", () -> BeautifyDecorateModule::new);
         addModule("boatload", () -> BoatLoadModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
         addModule("buildersdelight", () -> BuildersDelightModule::new);
+        addModule("bbb", () -> BuildingButBetterModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
+        addModule("corail_pillar", () -> CorailPillarModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("decoration_delight", () -> DecorationDelightModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
@@ -87,6 +93,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+        addModule("oreberriesreplanted", () -> OreberriesReplantedModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
         addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
@@ -117,15 +124,12 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
 
-
-        // ========================================== WORK IN PROGRESS ============================================== \\
-//        addModule("productivebees", () -> ProductiveBeesModule::new); // class for both beehive have major changes
-//        addModule("functionalstorage", () -> FunctionalStorageModule::new);
-
-        // ====================================== DISABLED FOR A REASON ============================================= \\
+// ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
+//        addModule("productivebees", () -> ProductiveBeesModule::new); //WIP: class for both beehive have major changes
+//        addModule("functionalstorage", () -> FunctionalStorageModule::new); // WIP
 
-
+// ================================================== OTHERS ======================================================== \\
         MinecraftForge.EVENT_BUS.register(this);
 
         forAllModules(CompatModule::onModInit);

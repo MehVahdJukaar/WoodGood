@@ -14,9 +14,10 @@ import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampf
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
-import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
+import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
@@ -99,7 +100,7 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
 
 
-        // ========================================= Add Other Compat Mods ========================================== \\
+// ================================================= Add Other Compat Mods ========================================== \\
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
@@ -109,7 +110,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("natures_delight", "natures_spirit", List.of("farmersdelight"));
         addOtherCompatMod("arts_and_crafts_compat", "arts_and_crafts", List.of("twigs", "decorative_blocks", "farmersdelight", "dramaticdoors"));
 
-        // Macaw's Addon
+            // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
         addOtherCompatMod("macawbridgesbyg", "byg", List.of("mcwbridges"));
         addOtherCompatMod("mcwfencesbop", "biomesoplenty", List.of("mcwfences"));
@@ -117,15 +118,16 @@ public abstract class EveryCompat {
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
 
-        // Abnormals Delight
+            // Abnormals Delight
         addOtherCompatMod("abnormals_delight", List.of("autumnity", "upgrade_aquatic",
                 "environmental", "atmospheric", "endergetic", "caves_and_chasms"), List.of("farmersdelight"));
 
-        // ========================================= Add Modules ==================================================== \\
+    // ============================================= Add Modules ==================================================== \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
-        addModule("barkcarpets", () -> BarkCarpetsModule::new);
-        addModule("bc", () -> BeautifulCampfiresModule::new); // WIP
+        addModule("backpacked", () -> BackpackedModule::new);
+        addModule("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
+        addModule("bc", () -> BeautifulCampfiresModule::new);
         addModule("campchair", () -> CampChairModule::new);
         addModule("chipped", () -> ChippedModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
@@ -139,9 +141,7 @@ public abstract class EveryCompat {
         addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("villagersplus", () -> VillagersPlusModule::new);
 
-        // ========================================== WORK IN PROGRESS ============================================== \\
-
-        // ============================================= OTHERS ===================================================== \\
+// ===================================================== OTHERS ===================================================== \\
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
 

@@ -78,7 +78,8 @@ subprojects {
                         requiredDependency "selene"
                         optionalDependency("another-furniture")
                         optionalDependency("architects-palette-fabric")
-//                        optionalDependency("building-but-better") Not finished yet
+                        optionalDependency("backpacked")
+                        optionalDependency("building-but-better")
                         optionalDependency("camp-chair")
                         optionalDependency("chipped")
                         optionalDependency("create-fabric")
@@ -121,7 +122,7 @@ subprojects {
                         optionalDependency("backpacked")
                         optionalDependency("boatload")
                         optionalDependency("buildersaddition")
-//                        optionalDependency("building-but-better") not finished yet
+                        optionalDependency("building-but-better")
                         optionalDependency("camp-chair")
                         optionalDependency("chipped")
                         optionalDependency("create")
