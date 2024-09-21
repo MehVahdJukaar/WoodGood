@@ -86,6 +86,7 @@ subprojects {
                         optionalDependency("decorative-blocks")
                         optionalDependency("dramatic-doors")
                         optionalDependency("exlines-bark-carpets")
+                        optionalDependency("exlines-awnings")
                         optionalDependency("farmers-delight-fabric")
                         optionalDependency("farmers-delight-refabricated")
                         optionalDependency("friends-and-foes")
@@ -109,8 +110,10 @@ subprojects {
                         optionalDependency("regions-unexplored")
                         optionalDependency("the-twilight-forest")
                         optionalDependency("twigs")
+                        optionalDependency("valhelsia-furniture")
                         optionalDependency("variant-vanilla-blocks")
                         optionalDependency("villagersplus-fabric")
+                        optionalDependency("wooden-hoppers")
                     }
                 } else {
                     relations {
@@ -125,6 +128,7 @@ subprojects {
                         optionalDependency("building-but-better")
                         optionalDependency("camp-chair")
                         optionalDependency("chipped")
+                        optionalDependency("corail-pillar")
                         optionalDependency("create")
                         optionalDependency("dawn-of-time")
                         optionalDependency("decorative-blocks")
@@ -163,6 +167,7 @@ subprojects {
                         optionalDependency("the-graveyard-forge")
                         optionalDependency("the-twilight-forest")
                         optionalDependency("twigs")
+                        optionalDependency("valhelsia-furniture")
                         optionalDependency("variant-crafting-tables")
                         optionalDependency("variant-vanilla-blocks")
                         optionalDependency("villagersplus-forge")
