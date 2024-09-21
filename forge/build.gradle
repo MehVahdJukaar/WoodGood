@@ -122,9 +122,9 @@ dependencies {
 //    modImplementation("curse.maven:architectury-api-419699:5137942") // v6.6.92 | REI, Gardens-Of-The-Dead
 //    modImplementation("curse.maven:cloth-config-348521:4973444") // v8.3.115 | REI
     modRuntimeOnly("curse.maven:configured-457570:4462837")
-    modImplementation("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure, Valhelsia Furniture
+    modCompileOnly("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
-    modCompileOnly("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic
+    modCompileOnly("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic, Boatload
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
     modCompileOnly("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
     modCompileOnly("curse.maven:framework-549225:5692394") //v0.7.12 | Mighty Mail, Furniture, Refurbished-Furniture
@@ -142,6 +142,7 @@ dependencies {
 
     // ================================================ IMPORTS ===================================================== \\
 
+    modCompileOnly("curse.maven:absent-by-design-305840:3835331")
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
     modCompileOnly("curse.maven:architects-palette-433862:4498448")
     modCompileOnly("curse.maven:backpacked-352835:3923045")
