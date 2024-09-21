@@ -49,6 +49,7 @@ dependencies {
     modCompileOnly("curse.maven:resourceful-lib-570073:5361261") // Chipped, Handcrafted
     modImplementation("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
     modCompileOnly("maven.modrinth:frozenlib:1.7.4-mc1.20.1") // Wilder-Wild
+    modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
 
@@ -100,10 +101,11 @@ dependencies {
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
     modCompileOnly("curse.maven:twigs-496913:4603805")
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603") //WIP
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")
     modCompileOnly("maven.modrinth:wilder-wild:2.4-mc1.20.1")
-    modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //WIP
+    modCompileOnly("curse.maven:wooden-hoppers-406021:4796143")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151837")
 

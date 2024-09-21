@@ -25,6 +25,7 @@ import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModul
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
+import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
 
 import net.mehvahdjukaar.every_compat.type.StoneTypeRegistry;
@@ -142,6 +143,7 @@ public abstract class EveryCompat {
         addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("handcrafted", () -> HandcraftedModule::new);
+        addModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
         addModule("villagersplus", () -> VillagersPlusModule::new);
 
 // ===================================================== OTHERS ===================================================== \\
