@@ -15,7 +15,7 @@
   "icon": "logo.png",
   "environment": "*",
   "mixins": [
-    "everycomp-common.mixins.json"
+    "${mod_id}-common.mixins.json"
   ],
   "entrypoints": {
     "main": [
