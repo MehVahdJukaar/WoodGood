@@ -199,6 +199,11 @@ allprojects {
         maven { url = "https://mvn.devos.one/snapshots/" }
 
         maven { url = "https://jitpack.io/" } // for Porting Lib: Mixin Extras, Fabric ASM
+
+        maven {
+            name = "Ladysnake Mods"
+            url = 'https://maven.ladysnake.org/releases'
+        }
     }
 
     tasks.withType(JavaCompile) {
