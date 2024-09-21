@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.frozenblock.lib.axe.api.AxeBehaviors;
 import net.frozenblock.wilderwild.block.HollowedLogBlock;
+import net.frozenblock.wilderwild.entity.ai.TermiteManager;
 import net.frozenblock.wilderwild.registry.RegisterBlocks;
 import net.frozenblock.wilderwild.tag.WilderBlockTags;
 import net.frozenblock.wilderwild.tag.WilderItemTags;
@@ -32,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+//SUPPORT: v2.4.6+
 public class WilderWildModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, HollowedLogBlock> hollow_log;
@@ -110,17 +112,19 @@ public class WilderWildModule extends SimpleModule {
         hollow_log.blocks.forEach((wood, block) -> {
             StrippableBlockRegistry.register(block, stripped_hollow_log.blocks.get(wood));
 
-            boolean isStem = getLogName(wood.log).contains("stem");
+            boolean isStem = Utils.getID(wood.log).toString().contains("stem");
 
             AxeBehaviors.register(wood.log, (context, level, pos, state, face, horizontal) ->
                     HollowedLogBlock.hollow(level, pos, state, face, hollow_log.blocks.get(wood), isStem));
 
-        });
-    }
+            AxeBehaviors.register(wood.getBlockOfThis("stripped_log"), (context, level, pos, state, face, horizontal) ->
+                    HollowedLogBlock.hollow(level, pos, state, face, stripped_hollow_log.blocks.get(wood), isStem));
 
-    private String getLogName(Block block) {
-        String[] split = block.getDescriptionId().split("\\.");
-        return split[2];
+            if (!isStem) {
+                TermiteManager.Termite.addDegradable(block, stripped_hollow_log.blocks.get(wood));
+            }
+
+        });
     }
 
     @Override
