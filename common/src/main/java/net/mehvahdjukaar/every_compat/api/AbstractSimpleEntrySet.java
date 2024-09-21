@@ -29,6 +29,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.ProviderNotFoundException;
 import java.util.*;
 import java.util.function.*;
 import java.util.regex.Matcher;
@@ -353,8 +354,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         //only works for oak type. Will fail if its used on leaves
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, java.util.function.Predicate<String> whichSide) {
             return this.setPalette((w, m) -> {
+                if (whichSide != null) {
+                    try (TextureImage plankTexture = TextureImage.open(m,
+                            RPUtils.findFirstBlockTextureLocation(m, w.getBlockOfThis(childKey), whichSide))) {
+
+                        List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+                        targetPalette.forEach(paletteTransform);
+                        return Pair.of(targetPalette, plankTexture.getMetadata());
+                    } catch (Exception e) {
+                        throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
+                    }
+                }
+
                 try (TextureImage plankTexture = TextureImage.open(m,
-                        RPUtils.findFirstBlockTextureLocation(m, w.getBlockOfThis(childKey), whichSide))) {
+                        RPUtils.findFirstBlockTextureLocation(m, w.getBlockOfThis(childKey)))) {
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                     targetPalette.forEach(paletteTransform);
