@@ -20,7 +20,7 @@ public class WoodenHoppersModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> hoppers;
 
     public WoodenHoppersModule(String modId) {
-        super(modId, "");
+        super(modId, "wh");
 
         hoppers = SimpleEntrySet.builder(WoodType.class, "hopper",
                         getModBlock("oak_hopper"), () -> WoodTypeRegistry.OAK_TYPE,
