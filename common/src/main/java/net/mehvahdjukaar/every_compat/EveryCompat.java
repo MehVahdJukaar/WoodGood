@@ -27,6 +27,7 @@ import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
 
+import net.mehvahdjukaar.every_compat.type.StoneTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -84,6 +85,8 @@ public abstract class EveryCompat {
 
 
     protected void commonInit() {
+        StoneTypeRegistry.init();
+
         ModConfigs.init();
         //TODO: this class is a mess. Should be split and cleaned up
         ECNetworking.init();
