@@ -18,6 +18,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.Decoratio
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.forge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreChestVariantsModule;
@@ -85,6 +86,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("decoration_delight", () -> DecorationDelightModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
+        addModule("functionalstorage", () -> FunctionalStorageModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("lolmcv", () -> MoreChestVariantsModule::new);
         addModule("mctb", () -> MoreCraftingTablesForForgeModule::new);
