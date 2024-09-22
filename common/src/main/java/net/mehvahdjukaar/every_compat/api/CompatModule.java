@@ -7,7 +7,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
-import net.mehvahdjukaar.moonlight.api.misc.DataObjectReference;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -24,6 +23,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.Collection;
@@ -238,12 +238,12 @@ public abstract class CompatModule {
         return memorize(id, BuiltInRegistries.ITEM);
     }
 
-    protected final <T extends BlockEntityType<?>> Supplier<T> getModTile(String id, Class<T> blockClass) {
+    protected final <B extends BlockEntity> Supplier<BlockEntityType<B>> getModTile(String id, Class<B> blockClass) {
         return memorize(id, BuiltInRegistries.BLOCK_ENTITY_TYPE);
     }
 
-    protected final <T extends BlockEntityType<?>> Supplier<T> getModTile(String id) {
-        return (Supplier<T>) getModTile(id, BlockEntityType.class);
+    protected final Supplier<BlockEntityType<BlockEntity>> getModTile(String id) {
+        return getModTile(id, BlockEntity.class);
     }
 
     //how much crap this module has registered
