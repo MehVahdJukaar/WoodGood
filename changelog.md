@@ -1,13 +1,12 @@
 ### UPDATED:
-- **Chipped**: Fixed the mixxing texture for _classic_trapdoor_
-- **Regions Unexplored** (FABRIC): Updated _branch_'s texture & Fixed the missing recipe
 
 ### NEW:
-- **MrCrayFish's Refurbished Furniture** (COMMON) done
-- **Red Bits** (FABRIC) done
-- **Bewitchment** (FABRIC) done
-- **Beautify!** (FORGE) done
-- **Beautify Refabricated** (FABRIC) done
+- **Corail Pillar** (FORGE)
+- **Valhelsia Furniture** (FORGE)
+- **Wooden Hopper** (FABRIC)
+- **Wilder Wild** (FABRIC)
+- **Backpacked (FABRIC)** (FABRIC)
+- **Absent By Design** (FORGE)
 
 ### LEGEND: 
 - (COMMON) = FORGE & FABRIC
