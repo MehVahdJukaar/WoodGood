@@ -38,7 +38,6 @@ public class FunctionalStorageModule extends SimpleModule {
                 .addTexture(modRes("block/oak_side"))
                 .build();
         this.addEntry(drawer_1);
-
     }
 
 
@@ -80,12 +79,11 @@ public class FunctionalStorageModule extends SimpleModule {
         }
     }
 
-
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
-        try (var front1 = TextureImage.open(manager, modRes("textures/block/oak_front_1.png"))) {
+        try (var front1 = TextureImage.open(manager, modRes("textures/block/oak_front_1"))) {
 
             Respriter front1Respriter = Respriter.of(front1);
 
@@ -98,7 +96,7 @@ public class FunctionalStorageModule extends SimpleModule {
                     TextureImage newImage = front1Respriter.recolor(targetPalette);
 
                     handler.dynamicPack.addAndCloseTexture(
-                            modRes("textures/block/" + wood.getAppendableId() + "_front_1.png"),
+                            modRes("textures/block/" + wood.getAppendableId() + "_front_1"),
                             newImage);
 
                 } catch (Exception ignored) {
