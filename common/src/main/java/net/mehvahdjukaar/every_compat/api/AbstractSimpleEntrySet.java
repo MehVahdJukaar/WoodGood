@@ -262,7 +262,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 try {
                     ResourceLocation maskId = textureLoc.mask();
                     TextureImage main = TextureImage.open(manager, textureId);
-                    if (textureLoc.keepNamespace()) keepNamespace.add(textureId);
+                    if (textureLoc.keepNamespace()){
+                        keepNamespace.add(textureId);
+                    }
                     if (textureLoc.copyTexture()) {
                         respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
                     } else {

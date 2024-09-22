@@ -50,7 +50,7 @@ public class StoneTypeRegistry extends BlockTypeRegistry<StoneType> {
             String stoneName = path.substring(0, path.length() - 7);
             var opt = BuiltInRegistries.BLOCK.getOptional(blockId.withPath(stoneName));
             if (opt.isPresent()) {
-                return Optional.of(new StoneType(blockId, opt.get()));
+                return Optional.of(new StoneType(blockId.withPath(stoneName), opt.get()));
             }
         }
         return Optional.empty();
