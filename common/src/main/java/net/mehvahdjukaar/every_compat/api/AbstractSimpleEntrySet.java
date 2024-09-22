@@ -44,8 +44,6 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder.AUTO_MASK_MARKER;
-
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
@@ -69,7 +67,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected final TabAddMode tabMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
-    protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
+    protected final Set<TextureInfo> textures = new HashSet<>();
     @Nullable
     protected final BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier;
     @Nullable
@@ -256,23 +254,23 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
             Palette globalPalette = Palette.ofColors(new ArrayList<RGBColor>());
 
+            Set<ResourceLocation> keepNamespace = new HashSet<>();
 
-            for (var p : textures) {
-                ResourceLocation textureId = p.getFirst();
+            for (var textureLoc : textures) {
+                ResourceLocation textureId = textureLoc.texture;
 
                 try {
-                    ResourceLocation maskId = p.getSecond();
-                    //Simple texture copy. Ugly... Not even used for more than 1 mod
-                    if (maskId != null && textureId == null) {
-                        TextureImage main = TextureImage.open(manager, maskId);
+                    ResourceLocation maskId = textureLoc.mask;
+                    TextureImage main = TextureImage.open(manager, textureId);
+                    if (textureLoc.keepNamespace) keepNamespace.add(textureId);
+                    if (textureLoc.copyTexture) {
                         respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
                     } else {
-                        TextureImage main = TextureImage.open(manager, textureId);
                         images.add(main);
 
                         if (maskId != null) {
                             TextureImage mask;
-                            if (maskId.equals(AUTO_MASK_MARKER)) {
+                            if (textureLoc.autoMask) {
                                 if (mergePalette) {
                                     globalPalette.addAll(oakPlanksPalette);
                                     partialRespriters.put(textureId, main);
@@ -299,10 +297,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         }
                     }
                 } catch (UnsupportedOperationException e) {
-                    EveryCompat.LOGGER.error("Could not generate textures for {}", p, e);
+                    EveryCompat.LOGGER.error("Could not generate textures for {}", textureLoc, e);
                 } catch (Exception e) {
                     if (PlatHelper.isDev()) throw new RuntimeException(e);
-                    EveryCompat.LOGGER.error("Failed to read block texture at {}", p, e);
+                    EveryCompat.LOGGER.error("Failed to read block texture at {}", textureLoc, e);
                 }
             }
 
@@ -355,9 +353,15 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     if (oldSize != finalTargetPalette.get(0).size()) {
                         throw new RuntimeException("This should not happen");
                     }
-                    String oldPath = re.getKey().getPath();
+                    ResourceLocation oldTextureId = re.getKey();
+                    String oldPath = oldTextureId.getPath();
 
-                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
+                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w,
+                            blockId, baseType.get().getTypeName());
+                    //hack
+                    if (keepNamespace.contains(oldTextureId)) {
+                        newId = oldTextureId.withPath(newId).toString();
+                    }
 
                     Respriter respriter = re.getValue();
                     boolean isOnAtlas = !newId.startsWith("entity/");
@@ -386,16 +390,16 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     //post process some textures. currently only ecologics azalea
     public void addWoodTexture(WoodType wood, DynClientResourcesGenerator handler, ResourceManager manager,
-                               String path, Supplier<TextureImage> textureSupplier, boolean isOnAtlas) {
-        handler.addTextureIfNotPresent(manager, path, () -> {
+                               String relativePath, Supplier<TextureImage> textureSupplier, boolean isOnAtlas) {
+        handler.addTextureIfNotPresent(manager, relativePath, () -> {
             var t = textureSupplier.get();
             maybeFlowerAzalea(t, manager, wood);
             return t;
         }, isOnAtlas);
 
-        handler.addTextureIfNotPresent(manager, path, () -> {
+        handler.addTextureIfNotPresent(manager, relativePath, () -> {
             var t = textureSupplier.get();
-            maybeBrimwood(t, manager, path, wood);
+            maybeBrimwood(t, manager, relativePath, wood);
             return t;
         }, isOnAtlas);
     }
@@ -540,7 +544,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
-        protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
+        protected final Set<TextureInfo> textures = new HashSet<>();
         protected boolean useMergedPalette;
         @Nullable
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
@@ -624,30 +628,25 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        public BL addTexture(ResourceLocation resourceLocation) {
-            this.textures.add(Pair.of(resourceLocation, null));
+        public BL addTexture(TextureInfo.Builder textureLoc) {
+            this.textures.add(textureLoc.build());
             return (BL) this;
+        }
+
+        public BL addTexture(ResourceLocation resourceLocation) {
+            return addTexture(TextureInfo.of(resourceLocation));
         }
 
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
-            this.textures.add(Pair.of(textureLocation, maskLocation));
-            return (BL) this;
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(maskLocation));
         }
-
-        protected static final ResourceLocation AUTO_MASK_MARKER = new ResourceLocation("auto_mask");
 
         // adds a texture with automatic masking. Experimental
         public BL addTextureAutoM(ResourceLocation textureLocation) {
-            this.textures.add(Pair.of(textureLocation, AUTO_MASK_MARKER));
-            return (BL) this;
+            return addTexture(TextureInfo.of(textureLocation)
+                    .autoMask());
         }
-
-        // Experimental. IDK why anybody would reuse the same texture seems like a waste of resources
-        public BL copyTexture(ResourceLocation textureLocation) {
-            this.textures.add(Pair.of(null, textureLocation));
-            return (BL) this;
-        }
-
 
         public BL useMergedPalette() {
             this.useMergedPalette = true;

@@ -3,8 +3,10 @@ package net.mehvahdjukaar.every_compat.modules.forge.functional_storage;
 import com.buuz135.functionalstorage.FunctionalStorage;
 import com.buuz135.functionalstorage.block.DrawerBlock;
 import com.buuz135.functionalstorage.util.IWoodType;
+import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -36,6 +38,8 @@ public class FunctionalStorageModule extends SimpleModule {
                 )
                 .addTexture(modRes("block/oak_front_1"))
                 .addTexture(modRes("block/oak_side"))
+                .addTexture(TextureInfo.of(modRes("textures/block/oak_front_1"))
+                        .keepNamespace())
                 .build();
         this.addEntry(drawer_1);
     }
@@ -77,36 +81,5 @@ public class FunctionalStorageModule extends SimpleModule {
         public String getName() {
             return woodType.getAppendableId();
         }
-    }
-
-    @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-
-        try (var front1 = TextureImage.open(manager, modRes("textures/block/oak_front_1"))) {
-
-            Respriter front1Respriter = Respriter.of(front1);
-
-            drawer_1.blocks.forEach((wood, block) -> {
-
-                try (TextureImage plankTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
-                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-
-                    TextureImage newImage = front1Respriter.recolor(targetPalette);
-
-                    handler.dynamicPack.addAndCloseTexture(
-                            modRes("textures/block/" + wood.getAppendableId() + "_front_1"),
-                            newImage);
-
-                } catch (Exception ignored) {
-                }
-            });
-
-
-        } catch (Exception ignored) {
-
-        }
-
     }
 }
