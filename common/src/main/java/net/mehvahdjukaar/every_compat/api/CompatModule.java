@@ -238,7 +238,7 @@ public abstract class CompatModule {
         return memorize(id, BuiltInRegistries.ITEM);
     }
 
-    protected final <B extends BlockEntity> Supplier<BlockEntityType<B>> getModTile(String id, Class<B> blockClass) {
+    protected final <B extends BlockEntity> Supplier<BlockEntityType<B>> getModTile(String id, Class<B> tileEntityClass) {
         return memorize(id, BuiltInRegistries.BLOCK_ENTITY_TYPE);
     }
 
@@ -255,7 +255,7 @@ public abstract class CompatModule {
     }
 
 
-    public <T> Supplier<T> memorize(String id, Registry reg) {
+    public <T> Supplier<T> memorize(String id, Registry<?> reg) {
         return Suppliers.memoize(() -> {
             try {
                 return (T) reg.getOptional(modRes(id))
