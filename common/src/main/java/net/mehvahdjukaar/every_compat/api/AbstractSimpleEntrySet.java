@@ -257,20 +257,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             Set<ResourceLocation> keepNamespace = new HashSet<>();
 
             for (var textureLoc : textures) {
-                ResourceLocation textureId = textureLoc.texture;
+                ResourceLocation textureId = textureLoc.texture();
 
                 try {
-                    ResourceLocation maskId = textureLoc.mask;
+                    ResourceLocation maskId = textureLoc.mask();
                     TextureImage main = TextureImage.open(manager, textureId);
-                    if (textureLoc.keepNamespace) keepNamespace.add(textureId);
-                    if (textureLoc.copyTexture) {
+                    if (textureLoc.keepNamespace()) keepNamespace.add(textureId);
+                    if (textureLoc.copyTexture()) {
                         respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
                     } else {
                         images.add(main);
 
                         if (maskId != null) {
                             TextureImage mask;
-                            if (textureLoc.autoMask) {
+                            if (textureLoc.autoMask()) {
                                 if (mergePalette) {
                                     globalPalette.addAll(oakPlanksPalette);
                                     partialRespriters.put(textureId, main);
