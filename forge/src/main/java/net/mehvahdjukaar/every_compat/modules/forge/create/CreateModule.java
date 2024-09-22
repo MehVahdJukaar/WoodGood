@@ -7,7 +7,10 @@ import com.simibubi.create.foundation.block.connected.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.type.StoneType;
+import net.mehvahdjukaar.every_compat.type.StoneTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -22,6 +25,8 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
@@ -33,6 +38,9 @@ public class CreateModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
+    public final SimpleEntrySet<StoneType, Block> cut_andesite;
+    public final SimpleEntrySet<StoneType, Block> cut_andesite_stairs;
+    public final SimpleEntrySet<StoneType, Block> cut_andesite_slab;
 
 
     public CreateModule(String modId) {
@@ -52,7 +60,6 @@ public class CreateModule extends SimpleModule {
 
         this.addEntry(windows);
 
-
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
@@ -64,6 +71,47 @@ public class CreateModule extends SimpleModule {
 
         this.addEntry(windowPanes);
 
+
+        cut_andesite = SimpleEntrySet.builder(StoneType.class, "", "cut",
+                        getModBlock("cut_andesite"), () -> StoneTypeRegistry.getValue(new ResourceLocation("andesite")),
+                        stoneType -> new Block(Utils.copyPropertySafe(stoneType.stone)))
+                .addTexture(modRes("block/palettes/stone_types/cut/andesite_cut"))
+//                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+//                .defaultRecipe()
+                .build();
+        this.addEntry(cut_andesite);
+
+        cut_andesite_stairs = SimpleEntrySet.builder(StoneType.class, "slab", "cut",
+                        getModBlock("cut_andesite_slab"), () -> StoneTypeRegistry.getValue(new ResourceLocation("andesite")),
+                        stoneType -> new StairBlock(stoneType.stone.defaultBlockState(), Utils.copyPropertySafe(stoneType.stone)))
+                //TEXTURES: Using cut_andesite's from above
+//                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setRenderType(() -> RenderType::cutout)
+//                .defaultRecipe()
+                .build();
+
+        this.addEntry(cut_andesite_stairs);
+
+        cut_andesite_slab = SimpleEntrySet.builder(StoneType.class, "stairs", "cut",
+                        getModBlock("cut_andesite_stairs"), () -> StoneTypeRegistry.getValue(new ResourceLocation("andesite")),
+                        stoneType -> new SlabBlock(Utils.copyPropertySafe(stoneType.stone)))
+                //TEXTURES: Using cut_andesite's from above
+//                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setRenderType(() -> RenderType::cutout)
+//                .defaultRecipe()
+                .build();
+        this.addEntry(cut_andesite_slab);
+
+
+    }
+
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+        for (var stone : StoneTypeRegistry.getTypes()) {
+            EveryCompat.LOGGER.warn("STONES: {}", stone);
+        }
     }
 
     private WindowBlock makeWindow(WoodType w) {
