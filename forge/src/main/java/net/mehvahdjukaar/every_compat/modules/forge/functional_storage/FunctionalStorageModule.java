@@ -2,25 +2,26 @@ package net.mehvahdjukaar.every_compat.modules.forge.functional_storage;
 
 import com.buuz135.functionalstorage.FunctionalStorage;
 import com.buuz135.functionalstorage.block.DrawerBlock;
-import com.buuz135.functionalstorage.block.tile.DrawerTile;
 import com.buuz135.functionalstorage.util.IWoodType;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class FunctionalStorageModule extends SimpleModule {
 
@@ -79,4 +80,35 @@ public class FunctionalStorageModule extends SimpleModule {
         }
     }
 
+
+    @Override
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+        try (var front1 = TextureImage.open(manager, modRes("textures/block/oak_front_1.png"))) {
+
+            Respriter front1Respriter = Respriter.of(front1);
+
+            drawer_1.blocks.forEach((wood, block) -> {
+
+                try (TextureImage plankTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
+                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+
+                    TextureImage newImage = front1Respriter.recolor(targetPalette);
+
+                    handler.dynamicPack.addAndCloseTexture(
+                            modRes("textures/block/" + wood.getAppendableId() + "_front_1.png"),
+                            newImage);
+
+                } catch (Exception ignored) {
+                }
+            });
+
+
+        } catch (Exception ignored) {
+
+        }
+
+    }
 }
