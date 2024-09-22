@@ -31,7 +31,6 @@ public class FunctionalStorageModule extends SimpleModule {
 
     public FunctionalStorageModule(String modId) {
         super(modId, "fs");
-
         drawer_1 = SimpleEntrySet.builder(WoodType.class, "1",
                         getModBlock("oak_1"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_1, Utils.copyPropertySafe(w.planks))
