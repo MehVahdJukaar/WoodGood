@@ -129,7 +129,7 @@ dependencies {
     modCompileOnly("curse.maven:framework-549225:5680064") // v0.7.7 | Refurbished Furniture, Mighty Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
-    modCompileOnly("curse.maven:titanium-287342:5468426") // Functional-Storage
+    modImplementation("curse.maven:titanium-287342:5468426") // Functional-Storage
 
     modRuntimeOnly("curse.maven:configured-457570:5180902")
 
@@ -182,7 +182,7 @@ dependencies {
 //    modImplementation("curse.maven:redeco-897377:5603009") //WIP
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
     modCompileOnly("curse.maven:farmersdelight-398521:4679319")
-    modCompileOnly("curse.maven:functional-storage-556861:5169765") // WIP
+    modImplementation("curse.maven:functional-storage-556861:5169765") // WIP
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:handcrafted-538214:5118729")
@@ -230,7 +230,7 @@ dependencies {
     modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:4764804") // Terrablender
+    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:4764804") // Terrablender
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
 //    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint
