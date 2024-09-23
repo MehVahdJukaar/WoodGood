@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.api;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.type.StoneType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -81,6 +82,15 @@ public class SimpleModule extends CompatModule {
             if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) bloat += ae.blocks.size();
         });
     }
+
+    @Override
+    public void registerStonesBlocks(Registrator<Block> registry, Collection<StoneType> leavesTypes) {
+        getEntries().forEach(e -> e.registerStonesBlocks(this, registry, leavesTypes));
+        getEntries().forEach(e -> {
+            if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) bloat += ae.blocks.size();
+        });
+    }
+
     @Override
     public void registerItems(Registrator<Item> registry) {
         getEntries().forEach(e -> e.registerItems(this, registry));

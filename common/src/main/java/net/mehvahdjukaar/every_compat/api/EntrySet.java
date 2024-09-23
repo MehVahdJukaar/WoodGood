@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.mehvahdjukaar.every_compat.type.StoneType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -40,6 +41,12 @@ public interface EntrySet<T extends BlockType> {
 
     default void registerLeavesBlocks(CompatModule module, Registrator<Block> registry, Collection<LeavesType> leavesTypes) {
         if (LeavesType.class == getTypeClass()) {
+            registerBlocks(module, registry, (Collection<T>) leavesTypes);
+        }
+    }
+
+    default void registerStonesBlocks(CompatModule module, Registrator<Block> registry, Collection<LeavesType> leavesTypes) {
+        if (StoneType.class == getTypeClass()) {
             registerBlocks(module, registry, (Collection<T>) leavesTypes);
         }
     }
