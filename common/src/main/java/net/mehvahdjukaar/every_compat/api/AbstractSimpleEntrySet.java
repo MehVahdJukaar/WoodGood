@@ -255,7 +255,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
             Palette globalPalette = Palette.ofColors(new ArrayList<RGBColor>());
 
-            Map<ResourceLocation, TextureInfo> infoPerTextures = new HashMap<>();
+            Map<ResourceLocation, Queue<TextureInfo>> infoPerTextures = new HashMap<>();
 
             for (var textureInfo : textures) {
                 ResourceLocation textureId = textureInfo.texture();
@@ -264,7 +264,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     ResourceLocation maskId = textureInfo.mask();
                     TextureImage main = TextureImage.open(manager, textureId);
 
-                    infoPerTextures.put(textureId, textureInfo);
+                    infoPerTextures.computeIfAbsent(textureId, t -> new ArrayDeque<>())
+                            .add(textureInfo);
 
                     if (textureInfo.copyTexture()) {
                         respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
@@ -364,12 +365,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     //hack
                     boolean isOnAtlas = true;
 
-                    TextureInfo info = infoPerTextures.get(oldTextureId);
-                    if (info != null) {
-                        if (info.keepNamespace()) {
+                    var info = infoPerTextures.get(oldTextureId);
+                    if (info != null && !info.isEmpty()) {
+                        var fist = info.peek();
+                        if (fist.keepNamespace()) {
                             newId = oldTextureId.withPath(newId).toString();
                         }
-                        isOnAtlas = info.onAtlas();
+                        isOnAtlas = fist.onAtlas();
                     }
 
                     Respriter respriter = re.getValue();
