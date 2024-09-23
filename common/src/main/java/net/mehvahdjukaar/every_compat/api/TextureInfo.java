@@ -16,7 +16,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         private boolean keepNamespace = false;
         private boolean copyTexture = false;
         private boolean autoMask = false;
-        private boolean onAtlas = true;
+        private boolean onAtlas;
 
         public Builder(ResourceLocation texture) {
             this.texture = texture;

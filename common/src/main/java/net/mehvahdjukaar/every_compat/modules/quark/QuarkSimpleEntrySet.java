@@ -42,7 +42,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
                                LootTableMode tableMode,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
-                               @Nullable Supplier<Supplier<RenderType>> renderType,
+                               @Nullable Object renderType,
                                @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                boolean mergedPalette,

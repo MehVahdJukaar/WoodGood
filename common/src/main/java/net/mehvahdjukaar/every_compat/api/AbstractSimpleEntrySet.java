@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -365,7 +366,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
                     TextureInfo info = infoPerTextures.get(oldTextureId);
                     if (info != null) {
-                        if(info.keepNamespace()) {
+                        if (info.keepNamespace()) {
                             newId = oldTextureId.withPath(newId).toString();
                         }
                         isOnAtlas = info.onAtlas();
@@ -636,7 +637,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         public BL addTexture(TextureInfo.Builder textureLoc) {
-            this.textures.add(textureLoc.build());
+            TextureInfo info = textureLoc.build();
+            this.textures.add(info);
+            if (info.keepNamespace()) {
+                //hack so we assure namespace has been added since it could be NOT Ec one
+                ClientDynamicResourcesHandler.INSTANCE.dynamicPack
+                        .addNamespaces(info.texture().getNamespace());
+            }
             return (BL) this;
         }
 
