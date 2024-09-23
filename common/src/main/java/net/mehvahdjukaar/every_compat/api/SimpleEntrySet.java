@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
@@ -22,7 +23,6 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
@@ -61,7 +61,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     protected final LootTableMode lootMode;
     @Nullable
-    protected final Supplier<Supplier<RenderType>> renderType;
+    protected final Object renderType;
 
 
     public SimpleEntrySet(Class<T> type,
@@ -74,7 +74,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           LootTableMode lootMode,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
-                          @Nullable Supplier<Supplier<RenderType>> renderType,
+                          @Nullable Object renderType,
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                           boolean mergedPalette, boolean copyTint,
@@ -242,7 +242,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     @Override
     public void setRenderLayer() {
         if (renderType != null) {
-            blocks.values().forEach(t -> ClientHelper.registerRenderType(t, renderType.get().get()));
+            blocks.values().forEach(b -> EveryCompatClient.registerRenderType(b, renderType));
         }
     }
 
@@ -303,8 +303,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         protected TriFunction<T, B, Item.Properties, Item> itemFactory;
         @Nullable
         protected SimpleEntrySet.ITileHolder<?> tileHolder;
+
         @Nullable
-        protected Supplier<Supplier<RenderType>> renderType = null;
+        protected Object renderType = null;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
             super(type, name, prefix, baseType);
@@ -360,7 +361,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        public Builder<T, B> setRenderType(Supplier<Supplier<RenderType>> renderType) {
+        @Deprecated(forRemoval = true)
+        public Builder<T, B> setRenderType(Supplier<Supplier<Object>> renderType) {
+            this.renderType = renderType;
+            return this;
+        }
+
+        public Builder<T, B> setRenderType(RenderLayer renderType) {
             this.renderType = renderType;
             return this;
         }
@@ -427,4 +434,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         COPY_FROM_PARENT,
         NO_LOOT
     }
+
+
 }
