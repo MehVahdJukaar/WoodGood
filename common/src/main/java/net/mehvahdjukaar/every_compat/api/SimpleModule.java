@@ -36,7 +36,7 @@ public class SimpleModule extends CompatModule {
         return bloat;
     }
 
-    public <T extends BlockType> EntrySet<T> addEntry(EntrySet<T> entryHolder) {
+    public <T extends BlockType, S extends EntrySet<T>> S addEntry(S entryHolder) {
         var old = this.entries.put(entryHolder.getName(), entryHolder);
         if (old != null) {
             throw new UnsupportedOperationException(String.format("This module already has an entry set with name %s", entryHolder.getName()));
@@ -81,7 +81,6 @@ public class SimpleModule extends CompatModule {
             if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) bloat += ae.blocks.size();
         });
     }
-
     @Override
     public void registerItems(Registrator<Item> registry) {
         getEntries().forEach(e -> e.registerItems(this, registry));

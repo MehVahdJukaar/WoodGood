@@ -28,6 +28,7 @@ import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
 
+import net.mehvahdjukaar.every_compat.type.StoneType;
 import net.mehvahdjukaar.every_compat.type.StoneTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -98,6 +99,7 @@ public abstract class EveryCompat {
 
         BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
         BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
+        BlockSetAPI.addDynamicBlockRegistration(this::registerStonesStuff, StoneType.class);
 
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, BuiltInRegistries.ITEM);
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
@@ -251,6 +253,11 @@ public abstract class EveryCompat {
     public void registerLeavesStuff(Registrator<Block> event, Collection<LeavesType> leaves) {
         LOGGER.info("Registering Compat Leaves Blocks");
         forAllModules(m -> m.registerLeavesBlocks(event, leaves));
+    }
+
+    public void registerStonesStuff(Registrator<Block> event, Collection<StoneType> stones) {
+        LOGGER.info("Registering Compat Stones Blocks");
+        forAllModules(m -> m.registerStonesBlocks(event, stones));
     }
 
     protected void registerItems(Registrator<Item> event) {

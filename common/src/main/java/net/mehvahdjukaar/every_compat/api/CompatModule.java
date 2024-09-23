@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.type.StoneType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -85,6 +86,10 @@ public abstract class CompatModule {
     }
 
     public void registerLeavesBlocks(Registrator<Block> registry, Collection<LeavesType> leavesTypes) {
+
+    }
+
+    public void registerStonesBlocks(Registrator<Block> registry, Collection<StoneType> leavesTypes) {
 
     }
 

@@ -114,7 +114,7 @@ dependencies {
 
 
     // ============================================== DEPENDENCIES ================================================== \\
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create
+    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | Required by: REI
@@ -173,7 +173,7 @@ dependencies {
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856") // v3.0.1
     modCompileOnly("curse.maven:corail-pillar-266228:5073954")
-    modImplementation("curse.maven:create-328085:5689514") //WIP --- STONE TESTING
+    modCompileOnly("curse.maven:create-328085:5689514") //WIP --- STONE TESTING
     modCompileOnly("curse.maven:dawn-of-time-312359:5651249")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:decoration-delight-687475:5563942")
@@ -203,7 +203,7 @@ dependencies {
     modCompileOnly("maven.modrinth:stylish-stiles:l9FFA4BK")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
-    modCompileOnly("curse.maven:twigs-496913:4605097")
+    modImplementation("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:5189602")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
