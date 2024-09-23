@@ -45,7 +45,7 @@ public interface EntrySet<T extends BlockType> {
         }
     }
 
-    default void registerStonesBlocks(CompatModule module, Registrator<Block> registry, Collection<LeavesType> leavesTypes) {
+    default void registerStonesBlocks(CompatModule module, Registrator<Block> registry, Collection<StoneType> leavesTypes) {
         if (StoneType.class == getTypeClass()) {
             registerBlocks(module, registry, (Collection<T>) leavesTypes);
         }
