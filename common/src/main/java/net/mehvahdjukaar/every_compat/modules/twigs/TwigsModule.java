@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.StairBlock;
 
@@ -33,7 +34,7 @@ public class TwigsModule extends SimpleModule {
                         getModBlock("stone_column"), () -> StoneTypeRegistry.getValue(new ResourceLocation("stone")),
                         stoneType -> new StairBlock(stoneType.stone.defaultBlockState(), Utils.copyPropertySafe(stoneType.stone)))
                 //TEXTURES: Using cut_andesite's from above
-//                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey(modRes("twig"))
                 .setRenderType(() -> RenderType::cutout)
 //                .defaultRecipe()
                 .build()
