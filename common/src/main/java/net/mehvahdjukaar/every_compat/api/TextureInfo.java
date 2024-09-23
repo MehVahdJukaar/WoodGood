@@ -4,7 +4,8 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation mask,
-                          boolean keepNamespace, boolean copyTexture, boolean autoMask) {
+                          boolean keepNamespace, boolean copyTexture, boolean autoMask,
+                          boolean onAtlas) {
     public static Builder of(ResourceLocation res) {
         return new Builder(res);
     }
@@ -15,13 +16,21 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         private boolean keepNamespace = false;
         private boolean copyTexture = false;
         private boolean autoMask = false;
+        private boolean onAtlas = true;
 
         public Builder(ResourceLocation texture) {
             this.texture = texture;
+            this.onAtlas = !texture.getPath().startsWith("entity/");
         }
 
         public Builder mask(ResourceLocation mask) {
             this.mask = mask;
+            return this;
+        }
+
+        // for textures not on atlas that won't be cleared
+        public Builder forEntityOrGui(){
+            this.onAtlas = false;
             return this;
         }
 
@@ -41,7 +50,8 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         }
 
         public TextureInfo build() {
-            return new TextureInfo(texture, mask, keepNamespace, copyTexture, autoMask);
+            return new TextureInfo(texture, mask, keepNamespace,
+                    copyTexture, autoMask, onAtlas);
         }
     }
 }

@@ -254,25 +254,25 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
             Palette globalPalette = Palette.ofColors(new ArrayList<RGBColor>());
 
-            Set<ResourceLocation> keepNamespace = new HashSet<>();
+            Map<ResourceLocation, TextureInfo> infoPerTextures = new HashMap<>();
 
-            for (var textureLoc : textures) {
-                ResourceLocation textureId = textureLoc.texture();
+            for (var textureInfo : textures) {
+                ResourceLocation textureId = textureInfo.texture();
 
                 try {
-                    ResourceLocation maskId = textureLoc.mask();
+                    ResourceLocation maskId = textureInfo.mask();
                     TextureImage main = TextureImage.open(manager, textureId);
-                    if (textureLoc.keepNamespace()){
-                        keepNamespace.add(textureId);
-                    }
-                    if (textureLoc.copyTexture()) {
+
+                    infoPerTextures.put(textureId, textureInfo);
+
+                    if (textureInfo.copyTexture()) {
                         respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
                     } else {
                         images.add(main);
 
                         if (maskId != null) {
                             TextureImage mask;
-                            if (textureLoc.autoMask()) {
+                            if (textureInfo.autoMask()) {
                                 if (mergePalette) {
                                     globalPalette.addAll(oakPlanksPalette);
                                     partialRespriters.put(textureId, main);
@@ -299,10 +299,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         }
                     }
                 } catch (UnsupportedOperationException e) {
-                    EveryCompat.LOGGER.error("Could not generate textures for {}", textureLoc, e);
+                    EveryCompat.LOGGER.error("Could not generate textures for {}", textureInfo, e);
                 } catch (Exception e) {
                     if (PlatHelper.isDev()) throw new RuntimeException(e);
-                    EveryCompat.LOGGER.error("Failed to read block texture at {}", textureLoc, e);
+                    EveryCompat.LOGGER.error("Failed to read block texture at {}", textureInfo, e);
                 }
             }
 
@@ -361,10 +361,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w,
                             blockId, baseType.get().getTypeName());
                     //hack
-                    boolean isOnAtlas = !newId.startsWith("entity/");
+                    boolean isOnAtlas = true;
 
-                    if (keepNamespace.contains(oldTextureId)) {
-                        newId = oldTextureId.withPath(newId).toString();
+                    TextureInfo info = infoPerTextures.get(oldTextureId);
+                    if (info != null) {
+                        if(info.keepNamespace()) {
+                            newId = oldTextureId.withPath(newId).toString();
+                        }
+                        isOnAtlas = info.onAtlas();
                     }
 
                     Respriter respriter = re.getValue();
