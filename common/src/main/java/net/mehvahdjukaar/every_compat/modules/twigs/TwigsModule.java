@@ -1,19 +1,19 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
 import com.ninni.twigs.block.TableBlock;
-import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.type.StoneType;
 import net.mehvahdjukaar.every_compat.type.StoneTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.StairBlock;
 
@@ -28,13 +28,14 @@ public class TwigsModule extends SimpleModule {
         super(modId, "tw");
 
         columns = addEntry(SimpleEntrySet.builder(StoneType.class, "column",
-                        getModBlock("stone_column"), () -> StoneTypeRegistry.getValue(new ResourceLocation("stone")),
-                        stoneType -> new StairBlock(stoneType.stone.defaultBlockState(), Utils.copyPropertySafe(stoneType.stone)))
-                //TEXTURES: Using cut_andesite's from above
-                .setTabKey(modRes("twig"))
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                                getModBlock("stone_column"), () -> StoneTypeRegistry.getValue(new ResourceLocation("stone")),
+                                stoneType -> new StairBlock(stoneType.stone.defaultBlockState(), Utils.copyPropertySafe(stoneType.stone)))
+                        //TEXTURES: Using cut_andesite's from above
+                        .setTabKey(modRes("twig"))
+                        .setRenderType(RenderLayer.SOLID)
+                        .createPaletteFromChild("bricks")
 //                .defaultRecipe()
-                .build()
+                        .build()
         );
 
 

@@ -678,6 +678,16 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return createPaletteFromChild(paletteTransform, "planks");
         }
 
+        public BL createPaletteFromOak() {
+            return createPaletteFromOak(p -> {
+            });
+        }
+
+        public BL createPaletteFromChild(String childKey) {
+            return createPaletteFromChild(p -> {
+            }, childKey);
+        }
+
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
             return this.setPalette((w, m) -> {
                 var c = w.getChild(childKey);
