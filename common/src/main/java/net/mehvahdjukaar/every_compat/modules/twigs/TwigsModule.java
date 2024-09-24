@@ -40,7 +40,7 @@ public class TwigsModule extends SimpleModule {
                                         : Blocks.STONE_BRICKS)
                                 )
                         )
-                .createPaletteFromChild(p -> p.changeSizeMatchingLuminanceSpan(0.3F),
+                .createPaletteFromChild(
                         "bricks")
                 .addTexture(modRes("block/stone_column"))
                 .addTexture(modRes("block/stone_column_bottom"))

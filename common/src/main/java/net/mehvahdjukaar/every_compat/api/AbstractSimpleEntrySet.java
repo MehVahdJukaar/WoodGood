@@ -362,12 +362,12 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w,
                             blockId, baseType.get().getTypeName());
-                    //hack
+
                     boolean isOnAtlas = true;
 
                     var info = infoPerTextures.get(oldTextureId);
                     if (info != null && !info.isEmpty()) {
-                        var fist = info.peek();
+                        var fist = info.poll();
                         if (fist.keepNamespace()) {
                             newId = oldTextureId.withPath(newId).toString();
                         }
