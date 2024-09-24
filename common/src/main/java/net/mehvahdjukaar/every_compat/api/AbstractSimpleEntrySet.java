@@ -1,6 +1,10 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Suppliers;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
+import com.google.common.collect.Multimaps;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
@@ -255,7 +259,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
             Palette globalPalette = Palette.ofColors(new ArrayList<RGBColor>());
 
-            Map<ResourceLocation, Queue<TextureInfo>> infoPerTextures = new HashMap<>();
+            Multimap<ResourceLocation, TextureInfo> infoPerTextures = ArrayListMultimap.create();
 
             for (var textureInfo : textures) {
                 ResourceLocation textureId = textureInfo.texture();
@@ -264,8 +268,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     ResourceLocation maskId = textureInfo.mask();
                     TextureImage main = TextureImage.open(manager, textureId);
 
-                    infoPerTextures.computeIfAbsent(textureId, t -> new ArrayDeque<>())
-                            .add(textureInfo);
+                    infoPerTextures.put(textureId, textureInfo);
 
                     if (textureInfo.copyTexture()) {
                         respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
@@ -365,23 +368,23 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
                     boolean isOnAtlas = true;
 
-                    var info = infoPerTextures.get(oldTextureId);
-                    if (info != null && !info.isEmpty()) {
-                        var fist = info.poll();
-                        if (fist.keepNamespace()) {
-                            newId = oldTextureId.withPath(newId).toString();
+                    for(var info : infoPerTextures.get(oldTextureId)) {
+                        if (info != null) {
+                            if (info.keepNamespace()) {
+                                newId = oldTextureId.withPath(newId).toString();
+                            }
+                            isOnAtlas = info.onAtlas();
                         }
-                        isOnAtlas = fist.onAtlas();
-                    }
 
-                    Respriter respriter = re.getValue();
-                    if (type == WoodType.class) {
-                        addWoodTexture((WoodType) w, handler, manager, newId, () ->
-                                respriter.recolorWithAnimation(finalTargetPalette, finalAnimation), isOnAtlas);
+                        Respriter respriter = re.getValue();
+                        if (type == WoodType.class) {
+                            addWoodTexture((WoodType) w, handler, manager, newId, () ->
+                                    respriter.recolorWithAnimation(finalTargetPalette, finalAnimation), isOnAtlas);
 
-                    } else {
-                        handler.addTextureIfNotPresent(manager, newId, () ->
-                                respriter.recolorWithAnimation(finalTargetPalette, finalAnimation), isOnAtlas);
+                        } else {
+                            handler.addTextureIfNotPresent(manager, newId, () ->
+                                    respriter.recolorWithAnimation(finalTargetPalette, finalAnimation), isOnAtlas);
+                        }
                     }
                 }
             }
