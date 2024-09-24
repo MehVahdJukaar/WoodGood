@@ -6,7 +6,6 @@ import com.mcwfences.kikoz.objects.FenceHitbox;
 import com.mcwfences.kikoz.objects.WiredFence;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -16,14 +15,9 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.WallBlock;
-import net.minecraft.world.level.material.MapColor;
-
-import java.util.Map;
 
 
 //SUPPORT v1.1.1+
@@ -115,7 +109,7 @@ public class MacawFencesModule extends SimpleModule {
                         l -> new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
                                 .mapColor(l.leaves.defaultMapColor()))
                 )
-                .requiresChildren("leaves") // Textures & Recipes
+                .requiresChildren("leaves") // Reason: Recipes
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)

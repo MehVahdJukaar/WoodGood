@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 //SUPPORT v1.1.1+
@@ -113,12 +112,13 @@ public class MacawFencesModule extends SimpleModule {
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         () -> BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
                         l -> {
+                            // Reason: Below have no leave texture
                             if (l.getId().toString().equals("regions_unexplored:flowering")) return null;
                             return new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
                                     .strength(0.2F, 0.3F).noOcclusion()
                                     .mapColor(l.leaves.defaultMapColor()));
                         })
-                .requiresChildren("leaves") // Textures & Recipes
+                .requiresChildren("leaves") // Reason: Recipes
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)

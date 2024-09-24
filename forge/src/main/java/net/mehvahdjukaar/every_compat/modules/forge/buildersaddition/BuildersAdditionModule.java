@@ -110,6 +110,7 @@ public class BuildersAdditionModule extends SimpleModule {
                             if (l == null) return null;
                             return new Hedge(shortenedId() + "/" + w.getAppendableId(), l);
                         })
+                .requiresChildren("leaves") // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))

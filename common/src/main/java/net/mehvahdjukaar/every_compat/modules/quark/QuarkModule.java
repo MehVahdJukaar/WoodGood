@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
@@ -244,7 +245,9 @@ public class QuarkModule extends SimpleModule {
                         HedgesModule.class,
                         getModBlock("oak_hedge"),
                         () -> LeavesTypeRegistry.OAK_TYPE,
-                        (w) -> new HedgeBlock("", null, Blocks.OAK_FENCE, w.leaves))
+                        (w) -> new HedgeBlock("", null, Blocks.OAK_FENCE, w.leaves)
+                )
+                .requiresChildren("leaves") // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -253,8 +256,8 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .copyParentTint()
-                .addCondition(l -> l.getWoodType() != null)
 //              Recipe being created below blc the recipe has a tag as an ingredient
+                .addCondition(l -> l.getWoodType() != null) // Reason: RECIPES
                 .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(hedges);
@@ -269,6 +272,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + w.getVariantId("%s_leaf_carpet");
                             return new LeafCarpetBlock(name, w.leaves, null);
                         })
+                .requiresChildren("leaves") // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(modRes("leaf_carpets"), Registries.BLOCK)
@@ -452,7 +456,7 @@ public class QuarkModule extends SimpleModule {
             });
         }
 
-        // is tags generated for logs from FruitFul Fun?
+        // is tags generated for logs from FruitFul Fun? Only need to be generated once.
         boolean isGenerated = false;
 
         // hedge's recipe & logs' tags
@@ -460,27 +464,29 @@ public class QuarkModule extends SimpleModule {
             LeavesType leavesType = entry.getKey();
             Block block = entry.getValue();
 
-            // general
-            if (!leavesType.getNamespace().equals("fruitfulfun"))
-                generalHedgeRecipe(leavesType, block, handler, manager);
+            if (block != null) { // will generate if block is not null
+                // general
+                if (!leavesType.getNamespace().equals("fruitfulfun"))
+                    generalHedgeRecipe(leavesType, block, handler, manager);
 
-            // Fruitful Fun
-            if (leavesType.getNamespace().equals("fruitfulfun")) {
-                switch (leavesType.getTypeName()) {
-                    case "apple" -> specialHedgeRecipe("oak", leavesType, block, handler, manager);
-                    case "grapefruit", "lemon", "tangerine", "lime", "citron", "pomelo", "orange" ->
-                            specialHedgeRecipe("citrus", leavesType, block, handler, manager);
-                    case "pomegranate" -> specialHedgeRecipe("jungle", leavesType, block, handler, manager);
-                    case "redlove" -> specialHedgeRecipe("redlove", leavesType, block, handler, manager);
+                // Fruitful Fun
+                if (leavesType.getNamespace().equals("fruitfulfun")) {
+                    switch (leavesType.getTypeName()) {
+                        case "apple" -> specialHedgeRecipe("oak", leavesType, block, handler, manager);
+                        case "grapefruit", "lemon", "tangerine", "lime", "citron", "pomelo", "orange" ->
+                                specialHedgeRecipe("citrus", leavesType, block, handler, manager);
+                        case "pomegranate" -> specialHedgeRecipe("jungle", leavesType, block, handler, manager);
+                        case "redlove" -> specialHedgeRecipe("redlove", leavesType, block, handler, manager);
+                    }
                 }
-            }
-            // Creating tags for FruitFul Fun's logs blc generalHedgeRecipe() can't do the job
-            if (!isGenerated && leavesType.getNamespace().equals("fruitfulfun")) {
-                createTags(new ResourceLocation("minecraft:oak"), handler);
-                createTags(new ResourceLocation("minecraft:jungle"), handler);
-                createTags(new ResourceLocation("fruitfulfun:citrus"), handler);
-                createTags(new ResourceLocation("fruitfulfun:redlove"), handler);
-                isGenerated = true;
+                // Creating tags for FruitFul Fun's logs blc generalHedgeRecipe() can't do the job
+                if (!isGenerated && leavesType.getNamespace().equals("fruitfulfun")) {
+                    createTags(new ResourceLocation("minecraft:oak"), handler);
+                    createTags(new ResourceLocation("minecraft:jungle"), handler);
+                    createTags(new ResourceLocation("fruitfulfun:citrus"), handler);
+                    createTags(new ResourceLocation("fruitfulfun:redlove"), handler);
+                    isGenerated = true;
+                }
             }
         }
     }
