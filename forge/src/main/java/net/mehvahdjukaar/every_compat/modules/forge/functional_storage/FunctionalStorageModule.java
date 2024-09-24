@@ -57,6 +57,9 @@ public class FunctionalStorageModule extends SimpleModule {
                 )
                 .addTile(getModTile("oak_2"))
                 .addTexture(modRes("block/oak_front_2"))
+                .addTexture(TextureInfo.of(modRes("block/oak_front_2"))
+                        .forEntityOrGui()
+                        .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
                 .setTab(getModTab("main"))
@@ -70,6 +73,9 @@ public class FunctionalStorageModule extends SimpleModule {
                 )
                 .addTile(getModTile("oak_4"))
                 .addTexture(modRes("block/oak_front_4"))
+                .addTexture(TextureInfo.of(modRes("block/oak_front_4"))
+                        .forEntityOrGui()
+                        .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
                 .setTab(getModTab("main"))
@@ -139,4 +145,5 @@ public class FunctionalStorageModule extends SimpleModule {
             return "fs/" + woodType.getAppendableId();
         }
     }
+
 }

@@ -886,6 +886,10 @@
   "block_type.valhelsia_furniture.hay_chair": "%s Chair",
   "block_type.valhelsia_furniture.stool": "%s Stool",
   "block_type.valhelsia_furniture.desk": "%s Desk",
-  "block_type.valhelsia_furniture.desk_drawer": "%s Desk Drawer"
+  "block_type.valhelsia_furniture.desk_drawer": "%s Desk Drawer",
+
+  "block_type.functionalstorage.1": "%s Drawer (1x1)",
+  "block_type.functionalstorage.2": "%s Drawer (1x2)",
+  "block_type.functionalstorage.4": "%s Drawer (1x4)"
 
 }
