@@ -355,8 +355,8 @@ public class HandcraftedModule extends SimpleModule {
 
             for (int num = 1; num<4; num++) {
 
-                String path = "hc/" + w.getAppendableId() + "_counter_oak_planks_" + num;
-                String darkPath = "hc/" + w.getAppendableId() + "_counter_dark_oak_planks_" + num;
+                String path = shortenedId() +"/"+ w.getAppendableId() + "_counter_oak_planks_" + num;
+                String darkPath = shortenedId() +"/"+ w.getAppendableId() + "_counter_dark_oak_planks_" + num;
                 ResourceLocation oakModelFile = EveryCompat.res("models/block/" + path + ".json");
                 ResourceLocation darkModelFile = EveryCompat.res("models/block/" + darkPath + ".json");
 
@@ -378,7 +378,7 @@ public class HandcraftedModule extends SimpleModule {
                     handler.dynamicPack.addJson(EveryCompat.res(darkPath), darkModel, ResType.BLOCK_MODELS);
                 }
                 catch (IOException e) {
-                    handler.getLogger().error("Failed to read the model file for: {}", block);
+                    handler.getLogger().error("Failed to read the model file for: {} : {}", block, e);
                 }
             }
 
