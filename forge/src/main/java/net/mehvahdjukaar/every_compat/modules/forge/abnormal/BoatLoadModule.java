@@ -73,8 +73,4 @@ public class BoatLoadModule extends SimpleModule {
         )));
     }
 
-    @Override
-    public void registerItems(Registrator<Item> registry) {
-        super.registerItems(registry);
-    }
 }
