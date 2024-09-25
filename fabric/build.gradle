@@ -101,7 +101,7 @@ dependencies {
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
     modCompileOnly("curse.maven:twigs-496913:4603805")
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603") //WIP
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")
     modCompileOnly("maven.modrinth:wilder-wild:2.4-mc1.20.1")
