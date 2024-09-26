@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.timber_frames;
 
 import com.google.gson.JsonObject;
-import earth.terrarium.handcrafted.Handcrafted;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -10,30 +9,21 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
 import net.rasanovum.timberframes.block.OakTimberFrameAlphaBlock;
 import net.rasanovum.timberframes.block.OakTimberFrameBetaBlock;
-import net.rasanovum.timberframes.init.TimberFramesModBlocks;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -91,7 +81,7 @@ public class TimberFramesModule extends SimpleModule {
                 .addTag(modRes("timber_frame"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("timber_frame"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTabKey(new ResourceLocation("minecraft:none"))
                 .build();
         this.addEntry(frame_beta);
     }
