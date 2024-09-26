@@ -736,7 +736,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Nullable
     @Override
     public Item getItemForECTab(T type) {
-        if (tab.get().equals(NO_TAB_MARKER)) {
+        if (tab.get().location().equals(NO_TAB_MARKER)) {
             return null;
         }
         return EntrySet.super.getItemForECTab(type);
