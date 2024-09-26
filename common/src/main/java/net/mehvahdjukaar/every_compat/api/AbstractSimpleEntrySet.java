@@ -180,7 +180,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return;
         }
         ResourceKey<CreativeModeTab> tab = this.tab.get();
-        if (tab.location().equals(NO_TAB_MARKER)) return;
+        if (tab.location().equals(NO_TAB_MARKER)) {
+            return;
+        }
         //verify tab
         if (!BuiltInRegistries.CREATIVE_MODE_TAB.containsKey(tab)) {
             throw new UnsupportedOperationException("Creative tab " + tab + " not registered found in the registries. " +
@@ -728,5 +730,16 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
     }
 
+
+    //for null tab
+
+    @Nullable
+    @Override
+    public Item getItemForECTab(T type) {
+        if (tab.get().equals(NO_TAB_MARKER)) {
+            return null;
+        }
+        return EntrySet.super.getItemForECTab(type);
+    }
 }
 

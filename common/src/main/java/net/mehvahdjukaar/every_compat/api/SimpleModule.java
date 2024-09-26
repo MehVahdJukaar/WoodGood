@@ -156,7 +156,7 @@ public class SimpleModule extends CompatModule {
         List<Item> l = new ArrayList<>();
         for (EntrySet<?> entrySet : entries.values()) {
             if (entrySet.getTypeClass().isAssignableFrom(type.getClass())) {
-                Item itemOfType = ((EntrySet<T>) entrySet).getItemOf(type);
+                var itemOfType = ((EntrySet<T>) entrySet).getItemForECTab(type);
                 if (itemOfType != null) l.add(itemOfType);
             }
         }

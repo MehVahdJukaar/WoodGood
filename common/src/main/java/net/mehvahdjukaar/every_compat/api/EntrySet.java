@@ -77,7 +77,7 @@ public interface EntrySet<T extends BlockType> {
 
     //used for tabs
     @Nullable
-    default Item getItemOf(T type){
+    default Item getItemOf(T type) {
         return null;
     }
 
@@ -86,4 +86,9 @@ public interface EntrySet<T extends BlockType> {
     void registerBlockColors(ClientHelper.BlockColorEvent event);
 
     void registerItemsToExistingTabs(CompatModule module, RegHelper.ItemToTabEvent event);
+
+    @Nullable
+    default Item getItemForECTab(T type) {
+        return this.getItemOf(type);
+    }
 }
