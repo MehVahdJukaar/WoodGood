@@ -3,8 +3,6 @@ package net.mehvahdjukaar.every_compat.api;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
-import com.google.common.collect.Multimaps;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
@@ -51,6 +49,9 @@ import java.util.regex.Pattern;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
+
+    protected static final ResourceLocation NO_TAB_MARKER = new ResourceLocation("none");
+
 
     public final Map<T, B> blocks = new HashMap<>();
     public final Map<T, I> items = new HashMap<>();
@@ -179,6 +180,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return;
         }
         ResourceKey<CreativeModeTab> tab = this.tab.get();
+        if (tab.location().equals(NO_TAB_MARKER)) return;
         //verify tab
         if (!BuiltInRegistries.CREATIVE_MODE_TAB.containsKey(tab)) {
             throw new UnsupportedOperationException("Creative tab " + tab + " not registered found in the registries. " +
@@ -368,7 +370,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
                     boolean isOnAtlas = true;
 
-                    for(var info : infoPerTextures.get(oldTextureId)) {
+                    for (var info : infoPerTextures.get(oldTextureId)) {
                         if (info != null) {
                             if (info.keepNamespace()) {
                                 newId = oldTextureId.withPath(newId).toString();
@@ -601,6 +603,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         public BL setTabMode(TabAddMode mode) {
             this.tabMode = mode;
             return (BL) this;
+        }
+
+        public BL noTab() {
+            return setTabKey(NO_TAB_MARKER);
         }
 
         public BL setTabKey(ResourceLocation res) {

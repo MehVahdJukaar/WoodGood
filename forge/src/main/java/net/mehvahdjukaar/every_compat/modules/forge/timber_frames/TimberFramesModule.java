@@ -81,7 +81,7 @@ public class TimberFramesModule extends SimpleModule {
                 .addTag(modRes("timber_frame"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("timber_frame"), Registries.ITEM)
-                .setTabKey(new ResourceLocation("minecraft:none"))
+                .noTab()
                 .build();
         this.addEntry(frame_beta);
     }
