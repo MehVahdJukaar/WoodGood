@@ -23,6 +23,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButt
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreChestVariantsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreCraftingTablesModule;
+import net.mehvahdjukaar.every_compat.modules.forge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.forge.more.MoreCraftingTablesForForgeModule;
@@ -96,6 +97,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addModule("oreberriesreplanted", () -> OreberriesReplantedModule::new);
+        addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
         addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("redeco", () -> ReDecoModule::new);
