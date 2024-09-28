@@ -146,7 +146,7 @@ dependencies {
         // TOOLS
 //    modRuntimeOnly("curse.maven:jei-238222:5718385")
     modRuntimeOnly("curse.maven:worldedit-225608:4586218")
-    modRuntimeOnly("curse.maven:jade-324717:4711195")
+    modRuntimeOnly("curse.maven:jade-324717:5672013")
     modRuntimeOnly("curse.maven:emi-580555:5704396")
 
     // ================================================ IMPORTS ===================================================== \\
@@ -162,7 +162,6 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
-    modImplementation("curse.maven:lightmans-currency-472521:5740209")
         // OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
     modCompileOnly("curse.maven:another-furniture-610492:4815126") //WARNING: fabric-version
@@ -189,6 +188,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:handcrafted-538214:5118729")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
+    modCompileOnly("curse.maven:lightmans-currency-472521:5763615")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619")
