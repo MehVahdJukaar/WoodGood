@@ -916,6 +916,11 @@
   "block_type.redeco.cabinet": "%s Cabinet",
   "block_type.redeco.display_case": "%s Display Case",
   "block_type.redeco.sword_mount": "%s Sword Mount",
-  "block_type.redeco.pedestal": "%s Pedestal"
+  "block_type.redeco.pedestal": "%s Pedestal",
 
+  "block_type.lightmanscurrency.auction_stand": "%s Auction Stand",
+  "block_type.lightmanscurrency.bookshelf_trader": "%s Bookshelf Trader",
+  "block_type.lightmanscurrency.shelf": "%s Shelf",
+  "block_type.lightmanscurrency.shelf_2x2": "%s Double Shelf",
+  "block_type.lightmanscurrency.card_display": "%s Card Display"
 }
