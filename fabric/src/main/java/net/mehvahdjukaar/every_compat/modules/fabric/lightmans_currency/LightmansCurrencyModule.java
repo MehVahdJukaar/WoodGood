@@ -74,23 +74,10 @@ public class LightmansCurrencyModule extends SimpleModule {
 
     }
 
-//    public class CompatShelfBlock extends ShelfBlock implements IItemTraderBlock {
-//        public CompatShelfBlock(Properties properties) {
-//            super(properties);
-//
-//        }
-//
-//    }
-
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         event.register(shelves.getTile(ItemTraderBlockEntity.class), ItemTraderBlockEntityRenderer::new);
     }
 
-
-//    @Override
-//    public List<String> getAlreadySupportedMods() {
-//        return List.of("biomesoplenty", "biomeswevegone", "quark");
-//    }
 }
