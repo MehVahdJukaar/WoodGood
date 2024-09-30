@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.exlines.AwningModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
@@ -47,6 +48,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 // ================================================= Add Modules ==================================================== \\
         addModule("beautify", () -> BeautifyRefabricatedModule::new);
         addModule("bewitchment", () -> BewitchmentModule::new);
+        addModule("clutter", () -> ClutterModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("exlineawnings", () -> AwningModule::new);

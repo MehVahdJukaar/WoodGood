@@ -63,6 +63,9 @@ dependencies {
     modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
 
     // ================================================ IMPORTS ===================================================== \\
+
+    // IMPORTANT: RLM: "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
+
         // Tools
     modRuntimeOnly("curse.maven:emi-580555:5704392")
 //    modRuntimeOnly("curse.maven:jade-324717:5666690")
@@ -86,6 +89,7 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:5401968")
     modCompileOnly("curse.maven:camp-chair-531744:4579676")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
+    modCompileOnly("curse.maven:clutter-826060:5626026") //RML: Geckolib
     modCompileOnly("curse.maven:create-fabric-624165:5168511")
     modCompileOnly("curse.maven:dawn-of-time-312359:5651253")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
