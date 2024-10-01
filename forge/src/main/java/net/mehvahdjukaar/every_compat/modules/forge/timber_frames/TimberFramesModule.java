@@ -127,7 +127,8 @@ public class TimberFramesModule extends SimpleModule {
                 String path = "_timber_frame_" + type;
 
                 try (InputStream mcmetaStream = manager.getResource(ResType.BLOCK_MCMETA.getPath(modRes("oak" + path)))
-                        .orElseThrow(FileNotFoundException::new).open();
+                        .orElseThrow(() -> new FileNotFoundException("failed to open the recipe file @" +
+                                modRes("oak" + path))).open()
                 ) {
                     JsonObject mcmeta = RPUtils.deserializeJson(mcmetaStream);
 
