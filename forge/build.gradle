@@ -121,7 +121,7 @@ dependencies {
     modRuntimeOnly("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
     modCompileOnly("curse.maven:resourceful-lib-570073:5361260")  // v2.1.25 | Required by: Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:5176879") // Chipped
-//    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame
+    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
@@ -130,6 +130,8 @@ dependencies {
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
     modCompileOnly("curse.maven:titanium-287342:5468426") // Functional-Storage
+//    modImplementation("curse.maven:supermartijn642s-core-lib-454372:5668859") // Rechiseled
+//    modImplementation("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
 
     modRuntimeOnly("curse.maven:configured-457570:5180902")
     modRuntimeOnly("curse.maven:patchouli-306770:4636277") // TFC, Timber-Frames
@@ -188,6 +190,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:handcrafted-538214:5118729")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
+//    modCompileOnly("curse.maven:just-a-raft-mod-274350:5768659") //WIP
     modCompileOnly("curse.maven:lightmans-currency-472521:5763615")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")
@@ -206,6 +209,7 @@ dependencies {
     modCompileOnly("curse.maven:timber-frames-606011:5372390")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
+    modCompileOnly("curse.maven:tropicraft-254794:4811116")
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:5189602")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
@@ -232,7 +236,7 @@ dependencies {
     // =========================================== FOR TESTING ===================================================== \\
 //    modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
-    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
+//    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
     modRuntimeOnly("curse.maven:biomes-o-plenty-220318:4764804") // Terrablender
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
 //    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint
@@ -244,5 +248,5 @@ dependencies {
 
     // Dependencies
 //    modRuntimeOnly("curse.maven:citadel-331936:5143956") // Alex's Cave
-    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
+//    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 }

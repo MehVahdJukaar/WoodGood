@@ -20,6 +20,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsM
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreChestVariantsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreCraftingTablesModule;
@@ -37,6 +38,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.timber_frames.TimberFramesModule;
+import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantCraftingTablesModule;
@@ -91,6 +93,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("functionalstorage", () -> FunctionalStorageModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+//        addModule("justaraftmod", () -> JustARaftModule::new);
         addModule("lolmcv", () -> MoreChestVariantsModule::new);
         addModule("mctb", () -> MoreCraftingTablesForForgeModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
@@ -106,6 +109,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("storagedrawers", () -> StorageDrawersModule::new);
         addModule("stylishstiles", () -> StylishStilesModule::new);
         addModule("timber_frames", () -> TimberFramesModule::new);
+        addModule("tropicraft", () -> TropicraftModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);

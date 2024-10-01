@@ -938,5 +938,7 @@
   "block_type.clutter.shelf": "%s Shelf",
   "block_type.clutter.trellis": "%s Trellis",
   "block_type.clutter.wall_cupboard": "%s Wall Cupboard",
-  "block_type.clutter.cupboard": "%s Cupboard"
+  "block_type.clutter.cupboard": "%s Cupboard",
+
+  "block_type.tropicraft.boardwalk": "%s Boardwalk"
 }
