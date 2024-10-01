@@ -117,6 +117,9 @@ public abstract class CompatModule {
 
         if (this.getAlreadySupportedMods().contains(woodFrom)) return true;
 
+        // Discarding Dynamic Trees and its addons
+        if (woodFrom.contains("dynamictrees") || woodFrom.contains("dt")) return true;
+
         // Garden-Of-The-dead's whistle must be skipped for branches from Regions-Unexplored
         // Nether's Exoticism & Snifferent already has branches, branches from Regions-Unexplored is not needed
         if ((woodFrom.equals("gardens_of_the_dead") || woodFrom.equals("snifferent") ||
