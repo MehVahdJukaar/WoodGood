@@ -230,6 +230,9 @@ public class MacawFencesModule extends SimpleModule {
                                 }
                             }
                         }
+                        case "integrateddynamics" -> {
+                            return LeavesPath("menril_leaves_fancy", "", s, l);
+                        }
                     }
                     return LeavesPath("", "", s, l);
                 }))
