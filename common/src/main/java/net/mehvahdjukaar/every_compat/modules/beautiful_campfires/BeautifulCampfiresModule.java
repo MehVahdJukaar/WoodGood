@@ -12,8 +12,10 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -38,6 +40,8 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 .addTextureM(modRes("item/acacia_campfire"), EveryCompat.res("item/bc/campfire_m"))
                 .addTextureM(modRes("item/acacia_soul_campfire"), EveryCompat.res("item/bc/campfire_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
         this.addEntry(campfire);
@@ -51,6 +55,9 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 .createPaletteFromChild(palette -> {}, "log")
                 .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
                 .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
+                .addTag(BlockTags.PIGLIN_REPELLENTS, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
         this.addEntry(soul_campfire);
