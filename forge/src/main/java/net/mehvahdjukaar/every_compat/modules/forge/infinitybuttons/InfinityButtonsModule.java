@@ -10,10 +10,12 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.registries.RegistryObject;
 
 public class InfinityButtonsModule extends SimpleModule {
 
@@ -22,6 +24,7 @@ public class InfinityButtonsModule extends SimpleModule {
 
     public InfinityButtonsModule(String modId) {
         super(modId, "ib");
+        RegistryObject<CreativeModeTab> tab = CreativeTabEvents.INFINITYBUTTONS;
 
         largeButtons = SimpleEntrySet.builder(WoodType.class, "large_button",
                         InfinityButtonsBlocks.OAK_LARGE_BUTTON, () -> WoodTypeRegistry.OAK_TYPE,
@@ -30,7 +33,7 @@ public class InfinityButtonsModule extends SimpleModule {
                                 true, w.canBurn()))
                 .addTag(modRes("wooden_large_buttons"), Registries.BLOCK)
                 .addTag(modRes("wooden_large_buttons"), Registries.ITEM)
-                .setTab( CreativeTabEvents.INFINITYBUTTONS)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 
@@ -43,7 +46,7 @@ public class InfinityButtonsModule extends SimpleModule {
                                 .sound(SoundType.WOOD), w.planks))
                 .addTag(modRes("wooden_secret_buttons"), Registries.BLOCK)
                 .addTag(modRes("wooden_secret_buttons"), Registries.ITEM)
-                .setTab(CreativeTabEvents.INFINITYBUTTONS)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
 

@@ -4,11 +4,11 @@ import com.fizzware.dramaticdoors.forge.DDRegistry;
 import com.fizzware.dramaticdoors.forge.blocks.ShortDoorBlock;
 import com.fizzware.dramaticdoors.forge.blocks.TallDoorBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -34,8 +34,8 @@ public class DramaticDoorsModule extends SimpleModule {
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> DDRegistry.MAIN_TAB)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -50,8 +50,8 @@ public class DramaticDoorsModule extends SimpleModule {
                 .addTag(modRes("short_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("short_wooden_doors"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> DDRegistry.MAIN_TAB)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(DDRegistry.MAIN_TAB)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();

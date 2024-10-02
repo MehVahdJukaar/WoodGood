@@ -3,9 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight;
 import com.google.gson.JsonObject;
 import com.nhoryzon.mc.farmersdelight.FarmersDelightMod;
 import com.nhoryzon.mc.farmersdelight.block.CabinetBlock;
-import com.nhoryzon.mc.farmersdelight.entity.block.CabinetBlockEntity;
 import com.nhoryzon.mc.farmersdelight.registry.BlockEntityTypesRegistry;
-import com.nhoryzon.mc.farmersdelight.registry.BlocksRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -41,7 +39,7 @@ public class FarmersDelightModuleOld extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .addTile(BlockEntityTypesRegistry.CABINET::get)
-                .setTabKey(() -> FarmersDelightMod.ITEM_GROUP)
+                .setTabKey(FarmersDelightMod.ITEM_GROUP)
                 .createPaletteFromOak(Palette::increaseDown)
                 .addTexture(EveryCompat.res("block/oak_cabinet_front"))
                 .addTexture(EveryCompat.res("block/oak_cabinet_side"))

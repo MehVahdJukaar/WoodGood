@@ -5,22 +5,19 @@ import net.kikoz.mcwdoors.init.BlockInit;
 import net.kikoz.mcwdoors.objects.JapaneseDoors;
 import net.kikoz.mcwdoors.objects.StableDoor;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -52,16 +49,17 @@ public class MacawDoorsModule extends SimpleModule {
 
     public MacawDoorsModule(String modId) {
         super(modId, "mcd");
+        ResourceKey<CreativeModeTab> tab = MacawsDoors.DOORITEMGROUP;
 
         WAFFLE_DOORS = SimpleEntrySet.builder(WoodType.class, "waffle_door",
                         () -> BlockInit.OAK_WAFFLE_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("item/oak_waffle_door_lower"), EveryCompat.res("item/mcaw/doors/oak_waffle_door_lower_m"))
                 .addTextureM(modRes("item/oak_waffle_door_upper"), EveryCompat.res("item/mcaw/doors/oak_waffle_door_upper_m"))
                 .build();
@@ -71,10 +69,10 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("item/oak_bark_glass_door"), EveryCompat.res("item/mcaw/doors/oak_bark_glass_door_m"))
                 .build();
 
@@ -85,10 +83,10 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_barn_door_lower"), EveryCompat.res("block/mcaw/doors/oak_barn_door_lower_m"))
                 .addTextureM(modRes("block/oak_barn_door_upper"), EveryCompat.res("block/mcaw/doors/oak_barn_door_upper_m"))
                 .addTextureM(modRes("item/oak_barn_door"), EveryCompat.res("item/mcaw/doors/oak_barn_door_m"))
@@ -101,11 +99,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_barn_door_lower"), EveryCompat.res("block/mcaw/doors/oak_barn_door_lower_m"))
                 .addTextureM(modRes("block/oak_barn_glass_door_upper"), EveryCompat.res("block/mcaw/doors/oak_barn_glass_door_upper_m"))
                 .addTextureM(modRes("item/oak_barn_glass_door"), EveryCompat.res("item/mcaw/doors/oak_barn_glass_door_m"))
@@ -118,11 +116,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_beach_door_lower"), EveryCompat.res("block/mcaw/doors/oak_beach_door_lower_m"))
                 .addTextureM(modRes("block/oak_beach_door_upper"), EveryCompat.res("block/mcaw/doors/oak_beach_door_upper_m"))
                 .addTextureM(modRes("item/oak_beach_door"), EveryCompat.res("item/mcaw/doors/oak_beach_door_m"))
@@ -135,11 +133,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/spruce_classic_door_lower"), EveryCompat.res("block/mcaw/doors/spruce_classic_door_lower_m"))
                 .addTextureM(modRes("block/spruce_classic_door_upper"), EveryCompat.res("block/mcaw/doors/spruce_classic_door_upper_m"))
                 .addTextureM(modRes("item/spruce_classic_door"), EveryCompat.res("item/mcaw/doors/spruce_classic_door_m"))
@@ -152,11 +150,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_cottage_door_lower"), EveryCompat.res("block/mcaw/doors/oak_cottage_door_lower_m"))
                 .addTextureM(modRes("block/oak_cottage_door_upper"), EveryCompat.res("block/mcaw/doors/oak_cottage_door_upper_m"))
                 .addTextureM(modRes("item/oak_cottage_door"), EveryCompat.res("item/mcaw/doors/oak_cottage_door_m"))
@@ -169,11 +167,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_four_panel_door_lower"), EveryCompat.res("block/mcaw/doors/oak_four_panel_door_lower_m"))
                 .addTextureM(modRes("block/oak_four_panel_door_upper"), EveryCompat.res("block/mcaw/doors/oak_four_panel_door_upper_m"))
                 .addTextureM(modRes("item/oak_four_panel_door"), EveryCompat.res("item/mcaw/doors/oak_four_panel_door_m"))
@@ -186,11 +184,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/glass/oak_glass_door_lower"), EveryCompat.res("block/mcaw/doors/oak_glass_door_lower_m"))
                 .addTextureM(modRes("block/glass/oak_glass_door_upper"), EveryCompat.res("block/mcaw/doors/oak_glass_door_upper_m"))
                 .addTextureM(modRes("item/oak_glass_door"), EveryCompat.res("item/mcaw/doors/oak_glass_door_m"))
@@ -206,13 +204,13 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.DOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .addTextureM(modRes("block/oak_bamboo_door_lower"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_lower_m"))
                 .addTextureM(modRes("block/oak_bamboo_door_upper"), EveryCompat.res("block/mcaw/doors/oak_bamboo_door_upper_m"))
                 .addTextureM(modRes("item/oak_bamboo_door"), EveryCompat.res("item/mcaw/doors/oak_bamboo_door_m"))
                 .createPaletteFromOak(this::darkerPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
 
@@ -223,11 +221,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_modern_door_lower"), EveryCompat.res("block/mcaw/doors/oak_modern_door_lower_m"))
                 .addTextureM(modRes("block/oak_modern_door_upper"), EveryCompat.res("block/mcaw/doors/oak_modern_door_upper_m"))
                 .addTextureM(modRes("item/oak_modern_door"), EveryCompat.res("item/mcaw/doors/oak_modern_door_m"))
@@ -240,11 +238,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_mystic_door_lower"), EveryCompat.res("block/mcaw/doors/oak_mystic_door_lower_m"))
                 .addTextureM(modRes("block/oak_mystic_door_upper"), EveryCompat.res("block/mcaw/doors/oak_mystic_door_upper_m"))
                 .addTextureM(modRes("item/oak_mystic_door"), EveryCompat.res("item/mcaw/doors/oak_mystic_door_m"))
@@ -257,11 +255,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_nether_door_lower"), EveryCompat.res("block/mcaw/doors/oak_nether_door_lower_m"))
                 .addTextureM(modRes("block/oak_nether_door_upper"), EveryCompat.res("block/mcaw/doors/oak_nether_door_upper_m"))
                 .addTextureM(modRes("item/oak_nether_door"), EveryCompat.res("item/mcaw/doors/oak_nether_door_m"))
@@ -274,11 +272,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_paper_door_lower"), EveryCompat.res("block/mcaw/doors/oak_paper_door_lower_m"))
                 .addTextureM(modRes("block/oak_paper_door_upper"), EveryCompat.res("block/mcaw/doors/oak_paper_door_upper_m"))
                 .addTextureM(modRes("item/oak_paper_door"), EveryCompat.res("item/mcaw/doors/oak_paper_door_m"))
@@ -292,11 +290,11 @@ public class MacawDoorsModule extends SimpleModule {
                                 w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/japanese_oak_lower"), EveryCompat.res("block/mcaw/doors/japanese_oak_lower_m"))
                 .addTextureM(modRes("block/japanese_oak_upper"), EveryCompat.res("block/mcaw/doors/japanese_oak_upper_m"))
                 .addTextureM(modRes("item/oak_japanese_door"), EveryCompat.res("item/mcaw/doors/japanese_oak_door_m"))
@@ -310,11 +308,11 @@ public class MacawDoorsModule extends SimpleModule {
                                 w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_japanese_door_lower"), EveryCompat.res("block/mcaw/doors/oak_japanese_door_lower_m"))
                 .addTextureM(modRes("block/oak_japanese_door_upper"), EveryCompat.res("block/mcaw/doors/oak_japanese_door_upper_m"))
                 .addTextureM(modRes("item/oak_japanese2_door"), EveryCompat.res("item/mcaw/doors/oak_japanese_door_m"))
@@ -328,11 +326,11 @@ public class MacawDoorsModule extends SimpleModule {
                                 w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
 //                .addTexture(modRes("block/oak_barn_door_lower"))
                 .addTextureM(modRes("block/stable/oak_stable_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_door_lower_m"))
                 .addTextureM(modRes("block/stable/oak_stable_door_upper"), EveryCompat.res("block/mcaw/doors/oak_stable_door_upper_m"))
@@ -347,11 +345,11 @@ public class MacawDoorsModule extends SimpleModule {
                                 w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .addRecipe(modRes("oak_stable_head_door"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
 //                .addTexture(modRes("block/oak_barn_door_lower"))
                 .addTextureM(modRes("block/stable_head/oak_stable_head_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_head_door_lower_m"))
                 .addTextureM(modRes("block/stable/oak_stable_door_lower"), EveryCompat.res("block/mcaw/doors/oak_stable_door_lower_m"))
@@ -365,11 +363,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .addRecipe(modRes("oak_swamp_door"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .createPaletteFromOak(this::darkerPalette)
                 .addTextureM(EveryCompat.res("block/oak_swamp_door_lower"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_lower_m"))
                 .addTextureM(EveryCompat.res("block/oak_swamp_door_upper"), EveryCompat.res("block/mcaw/doors/oak_swamp_door_upper_m"))
@@ -383,11 +381,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .addRecipe(modRes("oak_tropical_door"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/oak_tropical_door_lower"), EveryCompat.res("block/mcaw/doors/oak_tropical_door_lower_m"))
                 .addTextureM(modRes("block/oak_tropical_door_upper"), EveryCompat.res("block/mcaw/doors/oak_tropical_door_upper_m"))
                 .addTextureM(modRes("item/oak_tropical_door"), EveryCompat.res("item/mcaw/doors/oak_tropical_door_m"))
@@ -400,11 +398,11 @@ public class MacawDoorsModule extends SimpleModule {
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setTabKey(() -> MacawsDoors.DOORITEMGROUP)
+                .setTabKey(tab)
 
                 .copyParentDrop()
                 .addRecipe(modRes("oak_western_door"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/western/oak_western_door_lower"), EveryCompat.res("block/mcaw/doors/oak_western_door_lower_m"))
                 .addTextureM(modRes("block/western/oak_western_door_upper"), EveryCompat.res("block/mcaw/doors/oak_western_door_upper_m"))
                 .addTextureM(modRes("item/oak_western_door"), EveryCompat.res("item/mcaw/doors/oak_western_door_m"))
