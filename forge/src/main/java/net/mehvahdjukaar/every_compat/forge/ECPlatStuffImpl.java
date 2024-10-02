@@ -1,5 +1,7 @@
 package net.mehvahdjukaar.every_compat.forge;
 
+import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.AuctionStandBlockEntityRenderer;
+import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.ItemTraderBlockEntityRenderer;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +14,7 @@ import java.util.List;
 public class ECPlatStuffImpl {
     public static List<ItemStack> modifyLoot(ResourceLocation id, List<ItemStack> stacks, LootParams lootContext) {
         ItemStack[] array = stacks.toArray(ItemStack[]::new);
+        AuctionStandBlockEntityRenderer
         return ForgeHooks.modifyLoot(id, ObjectArrayList.wrap(array),
                 (new LootContext.Builder(lootContext)).create(id));
     }

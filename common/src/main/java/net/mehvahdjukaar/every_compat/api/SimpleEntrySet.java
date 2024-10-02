@@ -69,7 +69,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           Function<T, B> blockSupplier,
                           Supplier<@Nullable B> baseBlock,
                           Supplier<T> baseType,
-                          @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
+                          @NotNull Supplier<ResourceKey<CreativeModeTab>> tab,
                           TabAddMode tabMode,
                           LootTableMode lootMode,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
@@ -314,6 +314,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public SimpleEntrySet<T, B> build() {
+            if(tab == null) {
+
+                throw new IllegalStateException("Tab for module "+name+" was null!");
+            };
             var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition);
             e.recipeLocations.addAll(this.recipes);
