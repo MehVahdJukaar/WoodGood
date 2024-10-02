@@ -12,6 +12,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
+//SUPPORT: v1.1.8+
 public class AwningModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, AwningBlock> awnings;
@@ -31,6 +32,7 @@ public class AwningModule extends SimpleModule {
                                         .blockVision(AwningModule::never)
                         )
                 )
+                //TEXTURE: using planks
                 .requiresChildren("stairs")
                 .setTabKey(ExlineAwningsMain.FURNITURE_GROUP)
                 .addRecipe(modRes("oak_awning_recipe"))
@@ -47,9 +49,11 @@ public class AwningModule extends SimpleModule {
                                         .blockVision(AwningModule::never)
                         )
                 )
+                //TEXTURE: using logs
                 .requiresChildren("stairs")
-                // terrestria:sakura_log's texture do not have the full 16x16x. Take a look, you'll understand why.
-                .addCondition(w -> !w.getId().toString().equals("terrestria:sakura_log"))
+                //REASON:  Take a look @ Terrestria's logs' non-standard 16x16 texture, you'll get why
+                //EXCLUDED: sakura
+                .addCondition(w -> !w.getId().toString().equals("terrestria:sakura"))
                 .setTabKey(ExlineAwningsMain.FURNITURE_GROUP)
                 .addRecipe(modRes("oak_log_awning_recipe"))
                 .build();

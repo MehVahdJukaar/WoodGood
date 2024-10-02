@@ -13,9 +13,11 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
@@ -35,6 +37,7 @@ public class MacawFencesModule extends SimpleModule {
 
     public MacawFencesModule(String modId) {
         super(modId, "mcf");
+        ResourceKey<CreativeModeTab> tab = MacawsFences.FENCESGROUP;
 
         picketFences = SimpleEntrySet.builder(WoodType.class, "picket_fence",
                         () -> BlockInit.OAK_PICKET_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
@@ -43,7 +46,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setTabKey(() -> MacawsFences.FENCESGROUP)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(picketFences);
@@ -55,7 +58,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setTabKey(() -> MacawsFences.FENCESGROUP)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(stockadeFences);
@@ -67,7 +70,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setTabKey(() -> MacawsFences.FENCESGROUP)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(horseFences);
@@ -79,7 +82,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setTabKey(() -> MacawsFences.FENCESGROUP)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -92,7 +95,7 @@ public class MacawFencesModule extends SimpleModule {
                                 .strength(1.4F, 2.0F).noOcclusion(), w.toVanillaOrOak()))
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
-                .setTabKey(() -> MacawsFences.FENCESGROUP)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(pyramidGates);
@@ -104,7 +107,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(() -> MacawsFences.FENCESGROUP)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(highleyGates);
@@ -123,7 +126,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
-                .setTabKey(() -> MacawsFences.FENCESGROUP)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentTint()
                 .addModelTransform(m -> m.addModifier((s, id, l) -> {

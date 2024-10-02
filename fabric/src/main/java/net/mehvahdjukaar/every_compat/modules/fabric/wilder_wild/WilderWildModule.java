@@ -9,6 +9,7 @@ import net.frozenblock.wilderwild.registry.RegisterBlocks;
 import net.frozenblock.wilderwild.tag.WilderBlockTags;
 import net.frozenblock.wilderwild.tag.WilderItemTags;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -18,7 +19,6 @@ import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +27,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.block.Block;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,7 +38,6 @@ public class WilderWildModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, HollowedLogBlock> hollow_log;
     public final SimpleEntrySet<WoodType, HollowedLogBlock> stripped_hollow_log;
 
-    @SuppressWarnings("removal")
     public WilderWildModule(String modId) {
         super(modId, "ww");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
@@ -53,8 +51,8 @@ public class WilderWildModule extends SimpleModule {
                 .addTexture(modRes("block/hollowed_oak_log"))
                 .addTexture(modRes("block/hollowed_oak_log_top"))
                 // TEXTURE: using stripped_hollowed_oak_log from below
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> tab)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(tab)
                 .addTag(modRes("hollowed_logs"), Registries.ITEM)
                 .addTag(modRes("hollowed_logs_that_burn"), Registries.ITEM)
                 .addTag(ItemTags.LOGS_THAT_BURN, Registries.ITEM)
@@ -82,8 +80,8 @@ public class WilderWildModule extends SimpleModule {
                 .addTexture(modRes("block/stripped_hollowed_oak_log"))
                 .addTexture(modRes("block/stripped_hollowed_oak_log_top"))
                 .addTexture(modRes("block/stripped_hollowed_oak_log"))
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> tab)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
                 .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)

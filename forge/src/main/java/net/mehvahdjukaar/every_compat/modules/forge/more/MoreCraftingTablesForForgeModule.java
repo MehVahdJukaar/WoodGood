@@ -39,7 +39,7 @@ public class MoreCraftingTablesForForgeModule extends SimpleModule {
                 .addTag(new ResourceLocation("charm:crafting_table"), Registries.ITEM)
                 .addTag(modRes("revertable_workbench"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
 

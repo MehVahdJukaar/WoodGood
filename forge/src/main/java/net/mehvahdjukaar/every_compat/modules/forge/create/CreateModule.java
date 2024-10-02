@@ -45,30 +45,29 @@ public class CreateModule extends SimpleModule {
 
     public CreateModule(String modId) {
         super(modId, "c");
+        var tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         this::makeWindow)
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
-                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/palettes/oak_window_m"))
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/palettes/oak_window_connected_m"))
                 .build();
-
         this.addEntry(windows);
 
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
                 .addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
-                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(() -> RenderType::cutout)
                 .build();
-
         this.addEntry(windowPanes);
 
 

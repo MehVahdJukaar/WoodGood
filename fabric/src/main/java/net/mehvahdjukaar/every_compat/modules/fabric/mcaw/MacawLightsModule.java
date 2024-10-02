@@ -3,15 +3,17 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 import net.kikoz.mcwlights.MacawsLights;
 import net.kikoz.mcwlights.init.BlockInit;
 import net.kikoz.mcwlights.objects.TikiTorch;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
 
@@ -22,15 +24,16 @@ public class MacawLightsModule extends SimpleModule {
 
     public MacawLightsModule(String modId) {
         super(modId, "mcl");
+        ResourceKey<CreativeModeTab> tab = MacawsLights.LIGHTSGROUP;
 
         SOUL_TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class, "tiki_torch", "soul",
                         () -> BlockInit.SOUL_OAK_TIKI_TORCH, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TikiTorch(Utils.copyPropertySafe(w.planks)
                                 .strength(0.2f, 2.5f), ParticleTypes.SOUL_FIRE_FLAME))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
-                .setTabKey(() -> MacawsLights.LIGHTSGROUP)
+                .setTabKey(tab)
                 .build();
 
         this.addEntry(SOUL_TIKI_TORCHES);
@@ -40,8 +43,8 @@ public class MacawLightsModule extends SimpleModule {
                         w -> new TikiTorch(Utils.copyPropertySafe(w.planks)
                                 .strength(0.2f, 2.5f), ParticleTypes.FLAME))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> MacawsLights.LIGHTSGROUP)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
 

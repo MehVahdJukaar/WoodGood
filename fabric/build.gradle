@@ -32,9 +32,11 @@ dependencies {
     modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
         exclude group: 'net.fabricmc.fabric-api'
     }
+
+    // Special dumb stuff required by TerraBlender
     modImplementation("com.terraformersmc:modmenu:7.2.2")
-    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.2"
-    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.2"
+    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.2")
+    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.2")
 
 //    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
     modImplementation("curse.maven:selene-499980:5731104") // v2.13.0
@@ -42,12 +44,12 @@ dependencies {
     // ============================================== DEPENDENCIES ================================================== \\
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
     modCompileOnly("curse.maven:athena-841890:5176880") // Chipped
-    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | Required by: REI
-    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | Required by: REI, Garden-Of-The-Dead
+//    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | Required by: REI
+//    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | Required by: REI, Garden-Of-The-Dead
     modCompileOnly("curse.maven:framework-549225:5680025") // v0.7.7 | Refurbished Furniture, Mighty Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5146132") // More Crafting Tables
     modCompileOnly("curse.maven:resourceful-lib-570073:5361261") // Chipped, Handcrafted
-    modImplementation("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
+    modRuntimeOnly("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
     modCompileOnly("maven.modrinth:frozenlib:1.7.4-mc1.20.1") // Wilder-Wild
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
@@ -61,8 +63,12 @@ dependencies {
     modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
 
     // ================================================ IMPORTS ===================================================== \\
+
+    // IMPORTANT: RLM: "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
+
         // Tools
     modRuntimeOnly("curse.maven:emi-580555:5704392")
+//    modRuntimeOnly("curse.maven:jade-324717:5666690")
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
@@ -83,6 +89,7 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:5401968")
     modCompileOnly("curse.maven:camp-chair-531744:4579676")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
+    modCompileOnly("curse.maven:clutter-826060:5626026") //RML: Geckolib
     modCompileOnly("curse.maven:create-fabric-624165:5168511")
     modCompileOnly("curse.maven:dawn-of-time-312359:5651253")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
@@ -96,6 +103,7 @@ dependencies {
     modCompileOnly("curse.maven:handcrafted-538214:5118730")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
+    modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:missing-wilds-622590:5053651")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
@@ -114,8 +122,7 @@ dependencies {
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") // Not available
 
     // ============================================ FOR TESTING ===================================================== \\
-    modRuntimeOnly("curse.maven:terrestria-323974:4965840")
-    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
+//    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
 
         // Dependencies
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4583000") // Required: unknown

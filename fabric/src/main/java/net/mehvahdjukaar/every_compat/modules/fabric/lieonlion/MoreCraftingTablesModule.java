@@ -10,8 +10,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
 // SUPPORT: v1.2.1+
@@ -36,7 +34,7 @@ public class MoreCraftingTablesModule extends SimpleModule {
                 .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.ITEM)
                 .addTag(new ResourceLocation("c:workbench"), Registries.ITEM)
                 .addTag(new ResourceLocation("quad:fuel/wood"), Registries.ITEM)
-//                .setTabKey(() -> tab)
+//                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
 

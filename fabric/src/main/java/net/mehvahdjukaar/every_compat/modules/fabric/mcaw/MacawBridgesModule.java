@@ -3,12 +3,12 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 import net.kikoz.mcwbridges.MacawsBridges;
 import net.kikoz.mcwbridges.init.BlockInit;
 import net.kikoz.mcwbridges.objects.*;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -31,7 +31,7 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Bridge_Support(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_piers"), Registries.BLOCK)
-                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
+                .setTabKey(MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -42,8 +42,8 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Bridge_Block_Rope(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_bridges"), Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -54,8 +54,8 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("log_bridges"), Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -67,8 +67,8 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Rail_Bridge(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rail_bridges"), Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -80,8 +80,8 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Bridge_Stairs(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("log_stairs"), Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 
@@ -92,8 +92,8 @@ public class MacawBridgesModule extends SimpleModule {
                         w -> new Bridge_Stairs(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_stairs"), Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
-                .setTabKey(() -> MacawsBridges.BRIDGEGROUP)
+                .setRenderType(RenderLayer.CUTOUT)
+                .setTabKey(MacawsBridges.BRIDGEGROUP)
                 .defaultRecipe()
                 .build();
 

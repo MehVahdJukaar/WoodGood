@@ -6,37 +6,29 @@ import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.Aucti
 import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.BookTraderBlockEntityRenderer;
 import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.ItemTraderBlockEntityRenderer;
 import io.github.lightman314.lightmanscurrency.common.blockentity.AuctionStandBlockEntity;
-import io.github.lightman314.lightmanscurrency.common.blockentity.ItemTraderInterfaceBlockEntity;
 import io.github.lightman314.lightmanscurrency.common.blockentity.trader.BookTraderBlockEntity;
 import io.github.lightman314.lightmanscurrency.common.blockentity.trader.ItemTraderBlockEntity;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.BookTraderBlock;
-import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.CardDisplayBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.ShelfBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.reference.AuctionStandBlock;
 import io.github.lightman314.lightmanscurrency.common.core.ModBlockEntities;
-import io.github.lightman314.lightmanscurrency.common.core.util.BlockEntityBlockHelper;
-import io.github.lightman314.lightmanscurrency.common.core.variants.Color;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
 
-//SUPPORT: v2.2.3.2+
+//SUPPORT: v2.2.3.3+
 public class LightmansCurrencyModule extends SimpleModule {
-    //TODO: auction_stand | auction_shelf | shelf_2x2 | card_display | bookshelf_trader | BOP supported
+
     public final SimpleEntrySet<WoodType, Block> auction_stands;
     public final SimpleEntrySet<WoodType, Block> shelves;
     public final SimpleEntrySet<WoodType, Block> shelves_2x2;
@@ -56,6 +48,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 //TEXTURE: Using log & log_top
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
+                .addTag(LCTags.Blocks.AUCTION_STAND, Registries.BLOCK)
                 .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.AUCTION_STAND, Registries.ITEM)
                 .setTab(tab)
@@ -66,7 +59,8 @@ public class LightmansCurrencyModule extends SimpleModule {
         shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
                         getModBlock("shelf_oak"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)
-                                .mapColor(w.getColor()).strength(2.0F, Float.POSITIVE_INFINITY)
+                                .mapColor(w.getColor()).strength(2.0F, Float.POSITIVE_INFINITY),
+                                1
                         )
                 )
                 .addTile(ModBlockEntities.ITEM_TRADER)
@@ -76,6 +70,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.OWNER_PROTECTED, Registries.BLOCK)
+                .addTag(LCTags.Blocks.SHELF, Registries.BLOCK)
                 .addTag(new ResourceLocation("carryon:block_blacklist"), Registries.BLOCK)
                 .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.TRADER_SHELF, Registries.ITEM)
@@ -100,6 +95,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.OWNER_PROTECTED, Registries.BLOCK)
+                .addTag(LCTags.Blocks.SHELF_2x2, Registries.BLOCK)
                 .addTag(new ResourceLocation("carryon:block_blacklist"), Registries.BLOCK)
                 .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.TRADER_SHELF_2x2, Registries.ITEM)
@@ -140,7 +136,7 @@ public class LightmansCurrencyModule extends SimpleModule {
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-//        event.register(auction_stands.getTile(AuctionStandBlockEntity.class), AuctionStandBlockEntityRenderer::new);
+        event.register(auction_stands.getTile(AuctionStandBlockEntity.class), AuctionStandBlockEntityRenderer::new);
         event.register(shelves.getTile(ItemTraderBlockEntity.class), ItemTraderBlockEntityRenderer::new);
         event.register(shelves_2x2.getTile(ItemTraderBlockEntity.class), ItemTraderBlockEntityRenderer::new);
         event.register(bookshelf_traders.getTile(BookTraderBlockEntity.class), BookTraderBlockEntityRenderer::new);

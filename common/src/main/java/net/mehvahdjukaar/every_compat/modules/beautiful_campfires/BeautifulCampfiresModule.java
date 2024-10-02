@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.beautiful_campfires;
 
-import com.arcanc.bc.BeautifulCampfires;
 import com.arcanc.bc.content.BlockDatabase;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -13,14 +12,17 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.io.IOException;
 
+//SUPPORT: v1.0.2+
 public class BeautifulCampfiresModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, CampfireBlock> campfire;
@@ -28,6 +30,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
 
     public BeautifulCampfiresModule(String modId) {
         super(modId, "bc");
+        var tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         campfire = SimpleEntrySet.builder(WoodType.class, "campfire",
                         () -> BlockDatabase.CAMPFIRE_ACACIA, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
@@ -37,6 +40,9 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 .addTextureM(modRes("item/acacia_campfire"), EveryCompat.res("item/bc/campfire_m"))
                 .addTextureM(modRes("item/acacia_soul_campfire"), EveryCompat.res("item/bc/campfire_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
+                .setTabKey(tab)
                 .build();
         this.addEntry(campfire);
 
@@ -49,6 +55,10 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 .createPaletteFromChild(palette -> {}, "log")
                 .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
                 .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
+                .addTag(BlockTags.PIGLIN_REPELLENTS, Registries.BLOCK)
+                .setTabKey(tab)
                 .build();
         this.addEntry(soul_campfire);
 

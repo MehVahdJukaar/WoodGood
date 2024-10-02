@@ -38,7 +38,7 @@ public class VariantCraftingTablesModule extends SimpleModule {
                 .addTag(new ResourceLocation("forge:workbench"), Registries.ITEM)
                 .addTag(new ResourceLocation("charm:crafting_table"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
 
