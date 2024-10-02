@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.forge.tropicraft;
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -70,9 +69,6 @@ public class TropicraftModule extends SimpleModule {
                 JsonObject underKey = recipe.getAsJsonObject("key").getAsJsonObject("X");
 
                 // Editing the JSON
-    //                if (wood.getNamespace().equals("tfc")) {
-    //                    underKey.addProperty("item", Utils.getID(wood.getBlockOfThis("slab")).toString());
-    //                }
                 underKey.addProperty("item", Utils.getID(wood.getBlockOfThis("slab")).toString());
                 recipe.getAsJsonObject("result").addProperty("item", Utils.getID(block).toString());
 
