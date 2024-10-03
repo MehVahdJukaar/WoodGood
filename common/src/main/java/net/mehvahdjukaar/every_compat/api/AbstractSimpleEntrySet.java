@@ -749,8 +749,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             if (tagKey.location().equals(NO_TAB_MARKER)) {
                 return null;
             }
-        }catch (Exception e){
-            if(PlatHelper.isDev()) throw e;
+        } catch (Exception e) {
+            if (PlatHelper.isDev()) throw e;
             EveryCompat.LOGGER.error("Failed to get creative tab for entry set {}", this.getName(), e);
             return null;
         }
