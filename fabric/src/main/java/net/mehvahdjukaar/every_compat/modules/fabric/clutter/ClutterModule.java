@@ -414,7 +414,8 @@ public class ClutterModule extends SimpleModule {
         }
 
         private BlockState getStrippedState(BlockState state) {
-            return mapBenches.get(state.getBlock()).defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(LEGPOSITIONS, state.getValue(LEGPOSITIONS));
+            return mapBenches.get(state.getBlock()).defaultBlockState().setValue(FACING, state.getValue(FACING))
+                    .setValue(LEGPOSITIONS, state.getValue(LEGPOSITIONS));
         }
 
         @Override

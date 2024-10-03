@@ -8,26 +8,24 @@ import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
-
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
-import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
-import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
+import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
-import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
-
 import net.mehvahdjukaar.every_compat.type.StoneType;
 import net.mehvahdjukaar.every_compat.type.StoneTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
@@ -116,7 +114,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("natures_delight", "natures_spirit", List.of("farmersdelight"));
         addOtherCompatMod("arts_and_crafts_compat", "arts_and_crafts", List.of("twigs", "decorative_blocks", "farmersdelight", "dramaticdoors"));
 
-            // Macaw's Addon
+        // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
         addOtherCompatMod("macawbridgesbyg", "byg", List.of("mcwbridges"));
         addOtherCompatMod("mcwfencesbop", "biomesoplenty", List.of("mcwfences"));
@@ -124,11 +122,11 @@ public abstract class EveryCompat {
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
 
-            // Abnormals Delight
+        // Abnormals Delight
         addOtherCompatMod("abnormals_delight", List.of("autumnity", "upgrade_aquatic",
                 "environmental", "atmospheric", "endergetic", "caves_and_chasms"), List.of("farmersdelight"));
 
-    // ============================================= Add Modules ==================================================== \\
+        // ============================================= Add Modules ==================================================== \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
@@ -186,17 +184,12 @@ public abstract class EveryCompat {
                 }
             }
 
-            try {
-                CompatModule module = moduleFactory.get().apply(modId);
+            CompatModule module = moduleFactory.get().apply(modId);
 
-                EveryCompatAPI.registerModule(module);
+            EveryCompatAPI.registerModule(module);
 
-                DEPENDENCIES.add(modId);
-                DEPENDENCIES.addAll(module.getAlreadySupportedMods());
-            } catch (Exception e) {
-                EveryCompat.LOGGER.error("Every Compat failed to register module for mod {}", modId, e);
-                if (PlatHelper.isDev()) throw e;
-            }
+            DEPENDENCIES.add(modId);
+            DEPENDENCIES.addAll(module.getAlreadySupportedMods());
         }
     }
 
@@ -209,12 +202,12 @@ public abstract class EveryCompat {
     @Nullable
     public static final RegSupplier<CreativeModeTab> MOD_TAB =
             ModConfigs.TAB_ENABLED.get() ?
-            RegHelper.registerCreativeModeTab(res(MOD_ID),
-            true,
-            builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
-                    .backgroundSuffix("item_search.png")
-                    .title(Component.translatable("itemGroup.everycomp.everycomp"))
-                    .build()) : null;
+                    RegHelper.registerCreativeModeTab(res(MOD_ID),
+                            true,
+                            builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
+                                    .backgroundSuffix("item_search.png")
+                                    .title(Component.translatable("itemGroup.everycomp.everycomp"))
+                                    .build()) : null;
 
 
     public void commonSetup() {
@@ -233,7 +226,7 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
         }
 
-        if(am == 0){
+        if (am == 0) {
             EveryCompat.LOGGER.error("EVERY COMPAT REGISTERED 0 BLOCKS! This means that you dont need the mod and should remove it!");
         }
         forAllModules(CompatModule::onModSetup);
