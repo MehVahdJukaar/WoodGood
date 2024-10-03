@@ -3,10 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.chipped;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.EntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.api.TextureInfo;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -16,7 +13,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -185,7 +181,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::dullPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(mosaicPlanks);
 
         panelPlanks = SimpleEntrySet.builder(WoodType.class, "planks_panel",
@@ -202,7 +197,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::panelPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(panelPlanks);
 
         shavingsPlanks = SimpleEntrySet.builder(WoodType.class, "planks_shavings",
@@ -214,7 +208,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .setTab(tab)
                 .build();
-
         this.addEntry(shavingsPlanks);
 
         basketWovenPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "basket_woven",
@@ -227,7 +220,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(basketWovenPlanks);
 
         boxedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "boxed",
@@ -240,7 +232,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(boxedPlanks);
 
         brickBondPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "brick_bond",
@@ -253,7 +244,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::dullerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(brickBondPlanks);
 
         brickyPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "bricky",
@@ -266,7 +256,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(brickyPlanks);
 
         corneredPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "cornered",
@@ -283,7 +272,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(corneredPlanks);
 
         cratedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "crated",
@@ -300,7 +288,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::dullerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(cratedPlanks);
 
         crossLacedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "cross_laced",
@@ -312,7 +299,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .setTab(tab)
                 .build();
-
         this.addEntry(crossLacedPlanks);
 
         crossedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "crossed",
@@ -324,7 +310,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .setTab(tab)
                 .build();
-
         this.addEntry(crossedPlanks);
 
         detailedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "detailed",
@@ -337,7 +322,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(detailedPlanks);
 
         diagonalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "diagonal",
@@ -350,7 +334,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(diagonalPlanks);
 
         diamondPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "diamond",
@@ -362,7 +345,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .setTab(tab)
                 .build();
-
         this.addEntry(diamondPlanks);
 
         doubleHerringbonePlanks = SimpleEntrySet.builder(WoodType.class, "planks", "double_herringbone",
@@ -375,7 +357,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkestPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(doubleHerringbonePlanks);
 
         enclosedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "enclosed",
@@ -392,7 +373,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::dullerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(enclosedPlanks);
 
         finePlanks = SimpleEntrySet.builder(WoodType.class, "planks", "fine",
@@ -405,7 +385,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::dullPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(finePlanks);
 
         fineVerticalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "fine_vertical",
@@ -418,7 +397,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::dullPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(fineVerticalPlanks);
 
         framedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "framed",
@@ -435,7 +413,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(framedPlanks);
 
         herringbonePlanks = SimpleEntrySet.builder(WoodType.class, "planks", "herringbone",
@@ -448,7 +425,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkestPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(herringbonePlanks);
 
         hewnPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "hewn",
@@ -461,7 +437,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(hewnPlanks);
 
         lacedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "laced",
@@ -474,7 +449,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(lacedPlanks);
 
         nailedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "nailed",
@@ -487,7 +461,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(nailedPlanks);
 
         naturalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "natural",
@@ -504,7 +477,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(naturalPlanks);
 
         peggedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "pegged",
@@ -521,7 +493,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::dullPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(peggedPlanks);
 
         polishedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "polished",
@@ -534,7 +505,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::dullerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(polishedPlanks);
 
         railedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "railed",
@@ -546,7 +516,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .setTab(tab)
                 .build();
-
         this.addEntry(railedPlanks);
 
         shiftedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "shifted",
@@ -559,7 +528,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(shiftedPlanks);
 
         slantedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "slanted",
@@ -572,7 +540,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkestPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(slantedPlanks);
 
         smoothPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "smooth",
@@ -585,7 +552,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(smoothPlanks);
 
         stackedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "stacked",
@@ -598,7 +564,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(stackedPlanks);
 
         thinPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "thin",
@@ -611,7 +576,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(thinPlanks);
 
         tiledPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "tiled",
@@ -624,7 +588,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(tiledPlanks);
 
         versaillesPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "versailles",
@@ -637,7 +600,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(versaillesPlanks);
 
         verticalPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "vertical",
@@ -649,7 +611,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .setTab(tab)
                 .build();
-
         this.addEntry(verticalPlanks);
 
         verticallyRailedPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "vertically_railed",
@@ -661,7 +622,6 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .setTab(tab)
                 .build();
-
         this.addEntry(verticallyRailedPlanks);
 
         whirlwindPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "whirlwind",
@@ -678,7 +638,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(whirlwindPlanks);
 
         wickeredPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "wickered",
@@ -691,7 +650,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(wickeredPlanks);
 
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
@@ -707,7 +665,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkerPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(barrel);
 
         crate = SimpleEntrySet.builder(WoodType.class, "crate",
@@ -721,7 +678,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(crate);
 
         reinforcedCrate = SimpleEntrySet.builder(WoodType.class, "crate", "reinforced",
@@ -735,7 +691,6 @@ public class ChippedModule extends SimpleModule {
                 .createPaletteFromOak(this::darkPalette)
                 .setTab(tab)
                 .build();
-
         this.addEntry(reinforcedCrate);
 
         //TYPE: door
@@ -751,11 +706,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(barredDoor);
 
         beachDoor = SimpleEntrySet.builder(WoodType.class, "door", "beach",
@@ -770,11 +724,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(beachDoor);
 
         boardedDoor = SimpleEntrySet.builder(WoodType.class, "door", "boarded",
@@ -790,11 +743,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(boardedDoor);
 
         dualPaneledDoor = SimpleEntrySet.builder(WoodType.class, "door", "dual_paneled",
@@ -810,11 +762,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(dualPaneledDoor);
 
         fortifiedDoor = SimpleEntrySet.builder(WoodType.class, "door", "fortified",
@@ -830,11 +781,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(fortifiedDoor);
 
         gatedDoor = SimpleEntrySet.builder(WoodType.class, "door", "gated",
@@ -850,11 +800,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(gatedDoor);
 
         glassDoor = SimpleEntrySet.builder(WoodType.class, "door", "glass",
@@ -869,11 +818,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(glassDoor);
 
         heavyDoor = SimpleEntrySet.builder(WoodType.class, "door", "heavy",
@@ -889,11 +837,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(heavyDoor);
 
         overgrownDoor = SimpleEntrySet.builder(WoodType.class, "door", "overgrown",
@@ -908,11 +855,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(overgrownDoor);
 
         paneledDoor = SimpleEntrySet.builder(WoodType.class, "door", "paneled",
@@ -928,11 +874,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(paneledDoor);
 
         paperDoor = SimpleEntrySet.builder(WoodType.class, "door", "paper",
@@ -948,11 +893,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(paperDoor);
 
         pressedDoor = SimpleEntrySet.builder(WoodType.class, "door", "pressed",
@@ -968,11 +912,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(pressedDoor);
 
         screenDoor = SimpleEntrySet.builder(WoodType.class, "door", "screen",
@@ -988,11 +931,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(screenDoor);
 
         secretDoor = SimpleEntrySet.builder(WoodType.class, "door", "secret",
@@ -1008,11 +950,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(secretDoor);
 
         shackDoor = SimpleEntrySet.builder(WoodType.class, "door", "shack",
@@ -1028,11 +969,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(shackDoor);
 
         slidingDoor = SimpleEntrySet.builder(WoodType.class, "door", "sliding",
@@ -1048,11 +988,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(slidingDoor);
 
         supportedDoor = SimpleEntrySet.builder(WoodType.class, "door", "supported",
@@ -1068,11 +1007,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkerPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(supportedDoor);
 
         tileWindowedDoor = SimpleEntrySet.builder(WoodType.class, "door", "tile_windowed",
@@ -1088,11 +1026,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(tileWindowedDoor);
 
         tiledDoor = SimpleEntrySet.builder(WoodType.class, "door", "tiled",
@@ -1108,11 +1045,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(tiledDoor);
 
         windowedDoor = SimpleEntrySet.builder(WoodType.class, "door", "windowed",
@@ -1128,11 +1064,10 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noDrops()
                 .build();
-
         this.addEntry(windowedDoor);
 
         //TYPE: trapdoor
@@ -1144,10 +1079,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(airyTrapdoor);
 
         barredTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "barred",
@@ -1158,10 +1092,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(barredTrapdoor);
 
         checkeredTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "checkered",
@@ -1172,10 +1105,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(checkeredTrapdoor);
 
         classicTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "classic",
@@ -1186,10 +1118,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(classicTrapdoor);
 
         classicWindowedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "classic_windowed",
@@ -1200,10 +1131,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(classicWindowedTrapdoor);
 
         cobwebTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "cobweb",
@@ -1214,10 +1144,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(cobwebTrapdoor);
 
         distortedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "distorted",
@@ -1228,10 +1157,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(distortedTrapdoor);
 
         fancyTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "fancy",
@@ -1242,10 +1170,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(fancyTrapdoor);
 
         goldenBarredTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "golden_barred",
@@ -1257,10 +1184,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(goldenBarredTrapdoor);
 
         heavyTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "heavy",
@@ -1271,10 +1197,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(heavyTrapdoor);
 
         ironBarredTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "iron_barred",
@@ -1286,10 +1211,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .createPaletteFromOak(this::darkPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(ironBarredTrapdoor);
 
         leafyTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "leafy",
@@ -1300,10 +1224,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(leafyTrapdoor);
 
         meshedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "meshed",
@@ -1314,10 +1237,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(meshedTrapdoor);
 
         overgrownTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "overgrown",
@@ -1328,10 +1250,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(overgrownTrapdoor);
 
         pointlessTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "pointless",
@@ -1342,10 +1263,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(pointlessTrapdoor);
 
         slottedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "slotted",
@@ -1356,10 +1276,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(slottedTrapdoor);
 
         solidTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "solid",
@@ -1370,10 +1289,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(solidTrapdoor);
 
         suspiciousTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "suspicious",
@@ -1384,10 +1302,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(suspiciousTrapdoor);
 
         twistedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "twisted",
@@ -1398,10 +1315,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(twistedTrapdoor);
 
         vinedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "vined",
@@ -1412,10 +1328,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(vinedTrapdoor);
 
         wartedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "warted",
@@ -1426,10 +1341,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(wartedTrapdoor);
 
         windowedTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "windowed",
@@ -1440,10 +1354,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(windowedTrapdoor);
 
         wovenTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "woven",
@@ -1454,10 +1367,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(wovenTrapdoor);
 
         wallTorch = SimpleEntrySet.builder(WoodType.class, "wall_torch",
@@ -1465,11 +1377,10 @@ public class ChippedModule extends SimpleModule {
                         w -> new WallTorchBlock(Utils.copyPropertySafe(w.planks).noCollission().instabreak().lightLevel(l -> 14), ParticleTypes.FLAME))
                 .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
                 .addTag(modRes("wall_torch"), Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .noItem()
                 .build();
-
         this.addEntry(wallTorch);
 
         torch = SimpleEntrySet.builder(WoodType.class, "torch",
@@ -1480,10 +1391,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.WALL_POST_OVERRIDE, Registries.BLOCK)
                 .addTag(modRes("torch"), Registries.BLOCK)
                 .addTag(modRes("torch"), Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(torch);
 
         //TYPE: glass
@@ -1497,10 +1407,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(circleGlass);
 
         barredGlass = SimpleEntrySet.builder(WoodType.class, "bared_glass",
@@ -1517,10 +1426,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(barredGlass);
 
         borderedGlass = SimpleEntrySet.builder(WoodType.class, "bordered_glass",
@@ -1537,10 +1445,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(borderedGlass);
 
         diamondBorderedGlass = SimpleEntrySet.builder(WoodType.class, "diamond_bordered_glass",
@@ -1557,10 +1464,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(diamondBorderedGlass);
 
         horizontalLinedGlass = SimpleEntrySet.builder(WoodType.class, "horizontal_lined_glass",
@@ -1577,10 +1483,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(horizontalLinedGlass);
 
         largeDiamondGlass = SimpleEntrySet.builder(WoodType.class, "large_diamond_glass",
@@ -1597,10 +1502,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(largeDiamondGlass);
 
         lineBarredGlass = SimpleEntrySet.builder(WoodType.class, "line_bared_glass",
@@ -1617,10 +1521,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(lineBarredGlass);
 
         ornateBarredGlass = SimpleEntrySet.builder(WoodType.class, "ornate_bared_glass",
@@ -1637,10 +1540,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(ornateBarredGlass);
 
         snowflakeGlass = SimpleEntrySet.builder(WoodType.class, "snowflake_glass",
@@ -1653,10 +1555,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(snowflakeGlass);
 
         wovenGlass = SimpleEntrySet.builder(WoodType.class, "woven_glass",
@@ -1673,10 +1574,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(wovenGlass);
 
         squareGlass = SimpleEntrySet.builder(WoodType.class, "glass", "square",
@@ -1693,10 +1593,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(squareGlass);
 
         //TYPE glass_pane
@@ -1709,10 +1608,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(circleGlassPane);
 
         barredGlassPane = SimpleEntrySet.builder(WoodType.class, "bared_glass_pane",
@@ -1724,10 +1622,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(barredGlassPane);
 
         borderedGlassPane = SimpleEntrySet.builder(WoodType.class, "bordered_glass_pane",
@@ -1739,10 +1636,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(borderedGlassPane);
 
         diamondBorderedGlassPane = SimpleEntrySet.builder(WoodType.class, "diamond_bordered_glass_pane",
@@ -1754,10 +1650,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(diamondBorderedGlassPane);
 
         horizontalLinedGlassPane = SimpleEntrySet.builder(WoodType.class, "horizontal_lined_glass_pane",
@@ -1769,10 +1664,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(horizontalLinedGlassPane);
 
         largeDiamondGlassPane = SimpleEntrySet.builder(WoodType.class, "large_diamond_glass_pane",
@@ -1784,10 +1678,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(largeDiamondGlassPane);
 
         lineBarredGlassPane = SimpleEntrySet.builder(WoodType.class, "line_bared_glass_pane",
@@ -1799,10 +1692,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(lineBarredGlassPane);
 
         ornateBarredGlassPane = SimpleEntrySet.builder(WoodType.class, "ornate_bared_glass_pane",
@@ -1814,10 +1706,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(ornateBarredGlassPane);
 
         snowflakeGlassPane = SimpleEntrySet.builder(WoodType.class, "snowflake_glass_pane",
@@ -1829,10 +1720,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(snowflakeGlassPane);
 
         wovenGlassPane = SimpleEntrySet.builder(WoodType.class, "woven_glass_pane",
@@ -1844,10 +1734,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(wovenGlassPane);
 
         squareGlassPane = SimpleEntrySet.builder(WoodType.class, "glass_pane", "square",
@@ -1859,10 +1748,9 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTab(tab)
                 .build();
-
         this.addEntry(squareGlassPane);
 
         //TYPE: log

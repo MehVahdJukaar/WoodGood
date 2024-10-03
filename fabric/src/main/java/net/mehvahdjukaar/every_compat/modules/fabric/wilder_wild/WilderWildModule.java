@@ -146,7 +146,6 @@ public class WilderWildModule extends SimpleModule {
                 tagBuilder.addEntry(block.asItem());
                 tagBuilder.addEntry(stripped_hollow_log.blocks.get(wood).asItem());
                 isTagFull = true;
-                EveryCompat.LOGGER.warn("TAGS: PASSED - {}", wood.getTypeName());
             }
 
             // Adding to the resources

@@ -4,12 +4,12 @@ import com.mrcrayfish.mightymail.block.MailboxBlock;
 import com.mrcrayfish.mightymail.core.ModBlockEntities;
 import com.mrcrayfish.mightymail.core.ModCreativeTabs;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -32,7 +32,7 @@ public class MightyMailModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_mail_box"),
                         EveryCompat.res("block/mm/oak_mail_box_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
         this.addEntry(mailboxes);

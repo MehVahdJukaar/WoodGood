@@ -1,12 +1,12 @@
 package net.mehvahdjukaar.every_compat.modules.forge.lauchs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.stehschnitzel.shutter.common.blocks.Shutter;
@@ -36,7 +36,7 @@ public class LauchsShuttersModule extends SimpleModule {
                 .addTexture(modRes("block/oak_shutter_middle"))
                 .addTexture(modRes("block/oak_shutter_middle_big"))
                 .addTexture(modRes("item/oak_shutter"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(CreativTabInit.SHUTTER_TAB)
                 .defaultRecipe()
                 .build();

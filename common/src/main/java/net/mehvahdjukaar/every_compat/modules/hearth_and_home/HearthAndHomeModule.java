@@ -1,12 +1,12 @@
 package net.mehvahdjukaar.every_compat.modules.hearth_and_home;
 
 import com.starfish_studios.hearth_and_home.block.LatticeBlock;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -79,7 +79,7 @@ public class HearthAndHomeModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("lattices"), Registries.BLOCK)
                 .addTag(modRes("lattices"), Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/lattice/oak"))
                 .addTexture(modRes("block/lattice/oak_bar"))
                 .defaultRecipe()

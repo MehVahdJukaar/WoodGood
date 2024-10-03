@@ -19,12 +19,12 @@ import com.mcwfurnitures.kikoz.objects.chairs.StripedChair;
 import com.mcwfurnitures.kikoz.objects.counters.Counter;
 import com.mcwfurnitures.kikoz.objects.counters.CupboardCounter;
 import com.mcwfurnitures.kikoz.objects.counters.StorageCounter;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -307,7 +307,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
@@ -341,7 +341,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new StripedChair(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
@@ -399,7 +399,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new CupboardCounter(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
                 .addTag(modRes("cupboard_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::solid)
+                .setRenderType(RenderLayer.SOLID)
                 .setTab(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
@@ -634,7 +634,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
@@ -671,7 +671,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
@@ -734,7 +734,7 @@ public class MacawFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(modRes("cupboard_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::solid)
+                .setRenderType(RenderLayer.SOLID)
                 .setTab(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()

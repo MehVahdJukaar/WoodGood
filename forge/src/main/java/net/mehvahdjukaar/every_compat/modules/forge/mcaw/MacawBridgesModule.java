@@ -3,12 +3,12 @@ package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 import com.mcwbridges.kikoz.init.BlockInit;
 import com.mcwbridges.kikoz.init.TabInit;
 import com.mcwbridges.kikoz.objects.*;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -34,7 +34,6 @@ public class MacawBridgesModule extends SimpleModule {
                 .setTab(TabInit.BRIDGEITEMGROUP)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(bridgePiers);
 
         ropeBridges = SimpleEntrySet.builder(WoodType.class, "bridge", "rope",
@@ -43,10 +42,9 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_bridges"), Registries.BLOCK)
                 .setTab(TabInit.BRIDGEITEMGROUP)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(ropeBridges);
 
         bridgeMiddles = SimpleEntrySet.builder(WoodType.class, "log_bridge_middle",
@@ -55,10 +53,9 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("log_bridges"), Registries.BLOCK)
                 .setTab(TabInit.BRIDGEITEMGROUP)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(bridgeMiddles);
 
 
@@ -68,10 +65,9 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rail_bridges"), Registries.BLOCK)
                 .setTab(TabInit.BRIDGEITEMGROUP)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(railBridges);
 
 
@@ -81,10 +77,9 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("log_stairs"), Registries.BLOCK)
                 .setTab(TabInit.BRIDGEITEMGROUP)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(bridgeStairs);
 
         ropeStairs = SimpleEntrySet.builder(WoodType.class, "rope_bridge_stair",
@@ -93,10 +88,9 @@ public class MacawBridgesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_stairs"), Registries.BLOCK)
                 .setTab(TabInit.BRIDGEITEMGROUP)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(ropeStairs);
 
 
