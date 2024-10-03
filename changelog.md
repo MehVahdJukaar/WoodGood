@@ -1,1 +1,1 @@
-- fixed an crash due to a null tab in a EC module
+-updated decorative blocks module to use the new mod tab from newer versions

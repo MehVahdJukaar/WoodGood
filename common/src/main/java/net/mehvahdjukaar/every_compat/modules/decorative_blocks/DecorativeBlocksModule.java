@@ -20,6 +20,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -41,6 +42,8 @@ public class DecorativeBlocksModule extends SimpleModule {
     public DecorativeBlocksModule(String modId) {
         super(modId, "db");
 
+        ResourceLocation tab = modRes(modId);
+
         beams = SimpleEntrySet.builder(WoodType.class, "beam",
                         () -> DBBlocks.BEAMS.get(VanillaWoodTypes.OAK).get(), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.BEAM))
@@ -51,7 +54,7 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTag(modRes("logs_that_burn"), Registries.BLOCK)
                 .addTag(modRes("logs_that_burn"), Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> DBItems.ITEM_GROUP)
+                .setTabKey(tab)
                 .setPalette(this::makeDBPalette)
                 .addTexture(modRes("block/oak_beam_end"))
                 .addTexture(modRes("block/oak_beam_side"))
@@ -66,7 +69,7 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTag(modRes("palisades"), Registries.BLOCK)
                 .addTag(modRes("palisades"), Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> DBItems.ITEM_GROUP)
+                .setTabKey(tab)
                 .setPalette(this::makeDBPalette)
                 .addTexture(modRes("block/oak_palisade_end"))
                 .addTexture(modRes("block/oak_palisade_side"))
@@ -82,7 +85,7 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTag(modRes("supports"), Registries.ITEM)
                 .addCustomItem((w, b, p) -> new SupportItem(b, p))
                 .defaultRecipe()
-                .setTab(() -> DBItems.ITEM_GROUP)
+                .setTabKey(tab)
                 .setPalette(this::makeDBPalette)
                 .addTexture(modRes("block/oak_support_end"))
                 .addTexture(modRes("block/oak_support_side"))
@@ -99,7 +102,7 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTag(modRes("seats"), Registries.ITEM)
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new SeatItem(b, p))
-                .setTab(() -> DBItems.ITEM_GROUP)
+                .setTabKey(tab)
                 .setPalette(this::makeDBPalette)
                 .addTexture(modRes("block/oak_seat"))
                 .build();

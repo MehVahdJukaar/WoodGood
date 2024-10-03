@@ -234,6 +234,7 @@ public abstract class CompatModule {
         return memorize(id, BuiltInRegistries.BLOCK);
     }
 
+    @Deprecated(forRemoval = true)
     protected final Supplier<CreativeModeTab> getModTab(String id) {
         return memorize(id, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
