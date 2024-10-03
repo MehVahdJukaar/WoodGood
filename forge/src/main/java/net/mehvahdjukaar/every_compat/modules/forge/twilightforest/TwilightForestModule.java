@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.twilightforest;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
@@ -66,7 +67,7 @@ public class TwilightForestModule extends SimpleModule {
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem()
                 .requiresChildren("stripped_log")
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
 
         this.addEntry(hollowLogsHorizontal);
@@ -94,7 +95,7 @@ public class TwilightForestModule extends SimpleModule {
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .noItem()
                 .requiresChildren("stripped_log")
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
 
         this.addEntry(hollowLogsClimbable);

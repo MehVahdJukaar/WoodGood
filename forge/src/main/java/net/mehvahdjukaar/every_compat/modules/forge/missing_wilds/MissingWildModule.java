@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.missing_wilds;
 
 import me.ultrusmods.missingwilds.block.FallenLogBlock;
 import me.ultrusmods.missingwilds.register.MissingWildsBlocks;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -27,7 +28,7 @@ public class MissingWildModule extends SimpleModule {
                 .addTag(modRes("fallen_logs"), Registries.ITEM)
                 .setTab(getModTab("items"))
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(fallenLogs);
     }

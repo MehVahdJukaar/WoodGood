@@ -4,6 +4,7 @@ import com.starfish_studios.another_furniture.block.*;
 import com.starfish_studios.another_furniture.registry.AFBlockEntityTypes;
 import com.starfish_studios.another_furniture.registry.AFBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -110,7 +111,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .setTab(getModTab("tab"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .useMergedPalette()
                 .createPaletteFromOak(palette -> palette.remove(palette.getDarkest()))
                 .addTexture(modRes("block/table/oak_bottom"))
@@ -128,7 +129,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("chairs"), Registries.ITEM)
                 .defaultRecipe()
                 .setTab(getModTab("tab"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .useMergedPalette()
                 .addTexture(modRes("block/chair/back_1/oak"))
                 .addTexture(modRes("block/chair/back_2/oak"))
@@ -172,7 +173,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTile(AFBlockEntityTypes.DRAWER)
                 .defaultRecipe()
                 .setTab(getModTab("tab"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTextureM(modRes("block/drawer/oak_front"), EveryCompat.res("block/af/oak_front_m"))
                 .addTextureM(modRes("block/drawer/oak_front_open"), EveryCompat.res("block/af/oak_front_open_m"))
                 .addTexture(modRes("block/drawer/oak_side"))
@@ -188,7 +189,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("benches"), Registries.ITEM)
                 .defaultRecipe()
                 .setTab(getModTab("tab"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/bench/oak"))
                 .build();
 

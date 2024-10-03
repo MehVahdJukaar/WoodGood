@@ -4,6 +4,7 @@ import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -80,7 +81,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .setTab(getModTab("main"))
                 .defaultRecipe()
                 .copyParentDrop()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(cutPosts);
 
@@ -96,7 +97,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .setTab(getModTab("main"))
                 .defaultRecipe()
                 .copyParentDrop()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(cutStrippedPosts);
 

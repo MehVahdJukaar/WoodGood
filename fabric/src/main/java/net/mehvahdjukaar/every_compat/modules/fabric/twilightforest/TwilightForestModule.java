@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.twilightforest;
 
 import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
@@ -62,7 +63,7 @@ public class TwilightForestModule extends SimpleModule {
                         w -> ifHasStripped(w, () -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))))
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
 
         this.addEntry(hollowLogsHorizontal);
@@ -88,7 +89,7 @@ public class TwilightForestModule extends SimpleModule {
                                 makeRegObj(Utils.getID(hollowLogsVertical.blocks.get(w))))))
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .noItem()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
 
         this.addEntry(hollowLogsClimbable);
