@@ -38,7 +38,7 @@ public class CreateModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
-   // public final SimpleEntrySet<StoneType, Block> cut_andesite;
+    //public final SimpleEntrySet<StoneType, Block> cut_andesite;
     //public final SimpleEntrySet<StoneType, Block> cut_andesite_stairs;
     //public final SimpleEntrySet<StoneType, Block> cut_andesite_slab;
 
