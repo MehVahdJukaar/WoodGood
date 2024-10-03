@@ -121,7 +121,7 @@ dependencies {
     modRuntimeOnly("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
     modCompileOnly("curse.maven:resourceful-lib-570073:5361260")  // v2.1.25 | Required by: Chipped, Handcrafted
     modCompileOnly("curse.maven:athena-841890:5176879") // Chipped
-    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
+//    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload
@@ -166,7 +166,7 @@ dependencies {
 
         // OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
-    modCompileOnly("curse.maven:another-furniture-610492:4815126") //WARNING: fabric-version
+    modCompileOnly("curse.maven:another-furniture-610492:4034009") //WARNING: version 2.1.2-1.19.2
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:backpacked-352835:5401965")
     modCompileOnly("curse.maven:beautify-decorate-633252:4781709")
@@ -190,7 +190,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
     modCompileOnly("curse.maven:handcrafted-538214:5118729")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
-//    modCompileOnly("curse.maven:just-a-raft-mod-274350:5768659") //WIP
+    modImplementation("curse.maven:just-a-raft-mod-274350:5777239")
     modCompileOnly("curse.maven:lightmans-currency-472521:5763615")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:5053677")

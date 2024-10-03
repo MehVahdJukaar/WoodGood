@@ -20,6 +20,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsM
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreChestVariantsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreCraftingTablesModule;
@@ -92,7 +93,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("functionalstorage", () -> FunctionalStorageModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
-//        addModule("justaraftmod", () -> JustARaftModule::new);
+        addModule("justaraftmod", () -> JustARaftModule::new);
         addModule("lolmcv", () -> MoreChestVariantsModule::new);
         addModule("mctb", () -> MoreCraftingTablesForForgeModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
@@ -136,7 +137,6 @@ public class EveryCompatForge extends EveryCompat {
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
 //        addModule("productivebees", () -> ProductiveBeesModule::new); //WIP: class for both beehive have major changes
-//        addModule("functionalstorage", () -> FunctionalStorageModule::new); // WIP
 
 // ================================================== OTHERS ======================================================== \\
         MinecraftForge.EVENT_BUS.register(this);
