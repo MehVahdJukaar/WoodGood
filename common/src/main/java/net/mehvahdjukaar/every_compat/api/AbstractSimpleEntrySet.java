@@ -736,6 +736,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Nullable
     @Override
     public Item getItemForECTab(T type) {
+        if (tab == null) {
+            if (PlatHelper.isDev()) {
+                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+            }
+            EveryCompat.LOGGER.error("Creative tab cant be null. Found null one for entry set {}", this.getName());
+            return null;
+        }
         if (tab.get().location().equals(NO_TAB_MARKER)) {
             return null;
         }
