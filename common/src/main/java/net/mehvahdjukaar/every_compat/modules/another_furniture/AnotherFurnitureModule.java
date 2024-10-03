@@ -7,14 +7,14 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class AnotherFurnitureModule extends SimpleModule {
@@ -30,6 +30,9 @@ public class AnotherFurnitureModule extends SimpleModule {
     public AnotherFurnitureModule(String modId) {
         super(modId, "af");
 
+        ResourceLocation tabKey = PlatHelper.getPlatform().isForge() ?
+                modRes(modId) : modRes("tab");
+
         flowerBoxes = SimpleEntrySet.builder(WoodType.class, "flower_box",
                         AFBlocks.OAK_FLOWER_BOX, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FlowerBoxBlock(Utils.copyPropertySafe(w.planks)))
@@ -38,7 +41,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .addTile(AFBlockEntityTypes.FLOWER_BOX)
-                .setTabKey(modRes("tab"))
+                .setTabKey(tabKey)
                 .addTexture(modRes("block/flower_box/oak_bottom"))
                 .addTexture(modRes("block/flower_box/oak_supports"))
                 .addTextureM(modRes("block/flower_box/oak_top_sides"), EveryCompat.res("block/af/planter_box_top_sides_mask"))
@@ -53,7 +56,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("shutters"), Registries.ITEM)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
+                .setTabKey(tabKey)
                 .addTexture(modRes("block/shutter/variant_1/oak_bottom"))
                 .addTexture(modRes("block/shutter/variant_1/oak_middle"))
                 .addTexture(modRes("block/shutter/variant_1/oak_single"))
@@ -110,7 +113,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("tables"), Registries.ITEM)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
+                .setTabKey(tabKey)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .useMergedPalette()
                 .createPaletteFromOak(palette -> palette.remove(palette.getDarkest()))
@@ -128,7 +131,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("chairs"), Registries.BLOCK)
                 .addTag(modRes("chairs"), Registries.ITEM)
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
+                .setTabKey(tabKey)
                 .setRenderType(RenderLayer.CUTOUT)
                 .useMergedPalette()
                 .addTexture(modRes("block/chair/back_1/oak"))
@@ -155,7 +158,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("shelves"), Registries.ITEM)
                 .addTile(AFBlockEntityTypes.SHELF)
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
+                .setTabKey(tabKey)
                 .useMergedPalette()
                 .addTexture(modRes("block/shelf/oak_sides"))
                 .addTexture(modRes("block/shelf/oak_top"))
@@ -172,7 +175,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("drawers"), Registries.ITEM)
                 .addTile(AFBlockEntityTypes.DRAWER)
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
+                .setTabKey(tabKey)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTextureM(modRes("block/drawer/oak_front"), EveryCompat.res("block/af/oak_front_m"))
                 .addTextureM(modRes("block/drawer/oak_front_open"), EveryCompat.res("block/af/oak_front_open_m"))
@@ -188,7 +191,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("benches"), Registries.BLOCK)
                 .addTag(modRes("benches"), Registries.ITEM)
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
+                .setTabKey(tabKey)
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/bench/oak"))
                 .build();

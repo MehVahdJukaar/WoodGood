@@ -628,6 +628,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        @Deprecated(forRemoval = true)
         public BL setTab(Supplier<CreativeModeTab> tab) {
             this.tab = Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab.get()).get());
             return (BL) this;

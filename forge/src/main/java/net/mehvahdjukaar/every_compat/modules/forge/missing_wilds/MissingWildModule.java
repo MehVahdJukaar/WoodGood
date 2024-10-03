@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.missing_wilds;
 
+import com.starfish_studios.another_furniture.AnotherFurniture;
 import me.ultrusmods.missingwilds.block.FallenLogBlock;
 import me.ultrusmods.missingwilds.register.MissingWildsBlocks;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -26,7 +27,7 @@ public class MissingWildModule extends SimpleModule {
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(modRes("fallen_logs"), Registries.BLOCK)
                 .addTag(modRes("fallen_logs"), Registries.ITEM)
-                .setTab(getModTab("items"))
+                .setTabKey(modRes("items"))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
