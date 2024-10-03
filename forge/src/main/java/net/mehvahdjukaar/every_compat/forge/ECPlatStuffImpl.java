@@ -1,7 +1,5 @@
 package net.mehvahdjukaar.every_compat.forge;
 
-import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.AuctionStandBlockEntityRenderer;
-import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.ItemTraderBlockEntityRenderer;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
