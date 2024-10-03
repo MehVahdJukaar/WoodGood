@@ -15,8 +15,10 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
+//SUPPORT: v3.0.1+
 public class AnotherFurnitureModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> tables;
@@ -30,6 +32,10 @@ public class AnotherFurnitureModule extends SimpleModule {
     public AnotherFurnitureModule(String modId) {
         super(modId, "af");
 
+        // FOR NOW, there is no solution to fix the difference between FORGE & FABRIC's tab. Plus, on FORGE's side, the mod
+        // can't be imported because of AccessWidener error, it's dumb, tho.
+        var tab = CreativeModeTabs.BUILDING_BLOCKS;
+
         flowerBoxes = SimpleEntrySet.builder(WoodType.class, "flower_box",
                         AFBlocks.OAK_FLOWER_BOX, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FlowerBoxBlock(Utils.copyPropertySafe(w.planks)))
@@ -38,12 +44,11 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .addTile(AFBlockEntityTypes.FLOWER_BOX)
-                .setTabKey(modRes("tab"))
                 .addTexture(modRes("block/flower_box/oak_bottom"))
                 .addTexture(modRes("block/flower_box/oak_supports"))
                 .addTextureM(modRes("block/flower_box/oak_top_sides"), EveryCompat.res("block/af/planter_box_top_sides_mask"))
+                .setTabKey(tab)
                 .build();
-
         this.addEntry(flowerBoxes);
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
@@ -53,7 +58,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("shutters"), Registries.ITEM)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
                 .addTexture(modRes("block/shutter/variant_1/oak_bottom"))
                 .addTexture(modRes("block/shutter/variant_1/oak_middle"))
                 .addTexture(modRes("block/shutter/variant_1/oak_single"))
@@ -99,8 +103,8 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/shutter/variant_11/oak_single"))
                 .addTexture(modRes("block/shutter/variant_11/oak_top"))
 //                .createPaletteFromOak(this::shuttersPalette)
+                .setTabKey(tab)
                 .build();
-
         this.addEntry(shutters);
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
@@ -110,7 +114,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("tables"), Registries.ITEM)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .useMergedPalette()
                 .createPaletteFromOak(palette -> palette.remove(palette.getDarkest()))
@@ -118,8 +121,8 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/table/oak_sides"))
                 .addTexture(modRes("block/table/oak_supports"))
                 .addTexture(modRes("block/table/oak_top"))
+                .setTabKey(tab)
                 .build();
-
         this.addEntry(tables);
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
@@ -128,7 +131,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("chairs"), Registries.BLOCK)
                 .addTag(modRes("chairs"), Registries.ITEM)
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .useMergedPalette()
                 .addTexture(modRes("block/chair/back_1/oak"))
@@ -144,8 +146,8 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/chair/back_11/oak"))
                 .addTexture(modRes("block/chair/bottom/oak"))
                 .addTexture(modRes("block/chair/seat/oak"))
+                .setTabKey(tab)
                 .build();
-
         this.addEntry(chairs);
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
@@ -155,14 +157,13 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("shelves"), Registries.ITEM)
                 .addTile(AFBlockEntityTypes.SHELF)
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
                 .useMergedPalette()
                 .addTexture(modRes("block/shelf/oak_sides"))
                 .addTexture(modRes("block/shelf/oak_top"))
                 .addTexture(modRes("block/shelf/oak_bottom"))
                 .addTexture(modRes("block/shelf/oak_supports"))
+                .setTabKey(tab)
                 .build();
-
         this.addEntry(shelves);
 
         drawers = SimpleEntrySet.builder(WoodType.class, "drawer",
@@ -172,14 +173,13 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("drawers"), Registries.ITEM)
                 .addTile(AFBlockEntityTypes.DRAWER)
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTextureM(modRes("block/drawer/oak_front"), EveryCompat.res("block/af/oak_front_m"))
                 .addTextureM(modRes("block/drawer/oak_front_open"), EveryCompat.res("block/af/oak_front_open_m"))
                 .addTexture(modRes("block/drawer/oak_side"))
                 .addTexture(modRes("block/drawer/oak_top"))
+                .setTabKey(tab)
                 .build();
-
         this.addEntry(drawers);
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
@@ -188,11 +188,10 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTag(modRes("benches"), Registries.BLOCK)
                 .addTag(modRes("benches"), Registries.ITEM)
                 .defaultRecipe()
-                .setTab(getModTab("tab"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/bench/oak"))
+                .setTabKey(tab)
                 .build();
-
         this.addEntry(benches);
 
     }
