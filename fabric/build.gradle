@@ -89,7 +89,7 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:5401968")
     modCompileOnly("curse.maven:camp-chair-531744:4579676")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
-    modCompileOnly("curse.maven:clutter-826060:5626026") //RML: Geckolib
+    modCompileOnly("curse.maven:clutter-826060:5776595") //RML: Geckolib
     modCompileOnly("curse.maven:create-fabric-624165:5168511")
     modCompileOnly("curse.maven:dawn-of-time-312359:5651253")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
