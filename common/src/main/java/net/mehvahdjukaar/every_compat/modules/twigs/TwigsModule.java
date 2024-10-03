@@ -26,11 +26,12 @@ import java.util.Collection;
 public class TwigsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> tables;
-    public final SimpleEntrySet<StoneType, Block> columns;
+    //public final SimpleEntrySet<StoneType, Block> columns;
 
     public TwigsModule(String modId) {
         super(modId, "tw");
-
+StoneType
+        /*
         //noinspection DataFlowIssue
         columns = addEntry(SimpleEntrySet.builder(StoneType.class, "column",
                         getModBlock("stone_column"), () -> StoneTypeRegistry.getValue(new ResourceLocation("stone")),
@@ -51,7 +52,7 @@ public class TwigsModule extends SimpleModule {
                 .defaultRecipe()
                 .addRecipe(modRes("stone_column_stonecutting"))
                 .build()
-        );
+        );*/
 
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",

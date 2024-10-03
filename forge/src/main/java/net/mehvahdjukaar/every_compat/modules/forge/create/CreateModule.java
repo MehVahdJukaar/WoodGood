@@ -5,6 +5,7 @@ import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import com.simibubi.create.foundation.block.connected.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -38,9 +39,9 @@ public class CreateModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
-    public final SimpleEntrySet<StoneType, Block> cut_andesite;
-    public final SimpleEntrySet<StoneType, Block> cut_andesite_stairs;
-    public final SimpleEntrySet<StoneType, Block> cut_andesite_slab;
+   // public final SimpleEntrySet<StoneType, Block> cut_andesite;
+    //public final SimpleEntrySet<StoneType, Block> cut_andesite_stairs;
+    //public final SimpleEntrySet<StoneType, Block> cut_andesite_slab;
 
 
     public CreateModule(String modId) {
@@ -53,7 +54,7 @@ public class CreateModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/palettes/oak_window_m"))
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/palettes/oak_window_connected_m"))
@@ -66,11 +67,11 @@ public class CreateModule extends SimpleModule {
                 .addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(windowPanes);
 
-
+/*
         cut_andesite = SimpleEntrySet.builder(StoneType.class, "", "cut",
                         getModBlock("cut_andesite"), () -> StoneTypeRegistry.getValue(new ResourceLocation("andesite")),
                         stoneType -> new Block(Utils.copyPropertySafe(stoneType.stone)))
@@ -100,7 +101,7 @@ public class CreateModule extends SimpleModule {
 //                .defaultRecipe()
                 .build();
         this.addEntry(cut_andesite_slab);
-
+*/
 
     }
 
