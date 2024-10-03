@@ -30,7 +30,7 @@ public class TwigsModule extends SimpleModule {
 
     public TwigsModule(String modId) {
         super(modId, "tw");
-StoneType
+
         /*
         //noinspection DataFlowIssue
         columns = addEntry(SimpleEntrySet.builder(StoneType.class, "column",
@@ -52,7 +52,8 @@ StoneType
                 .defaultRecipe()
                 .addRecipe(modRes("stone_column_stonecutting"))
                 .build()
-        );*/
+        );
+        */
 
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
