@@ -2,13 +2,13 @@ package net.mehvahdjukaar.every_compat.modules.dawn_of_time;
 
 import java.util.function.ToIntFunction;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -78,7 +78,7 @@ public class DawnOfTimeModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_pergola"), EveryCompat.res("block/dot/oak_pergola_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .createPaletteFromOak(this::dullPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
@@ -89,7 +89,7 @@ public class DawnOfTimeModule extends SimpleModule {
                         w -> new LatticeBlock(Utils.copyPropertySafe(w.planks).noOcclusion().ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_lattice"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
@@ -101,7 +101,7 @@ public class DawnOfTimeModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_beam"), EveryCompat.res("block/dot/oak_beam_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .createPaletteFromOak(this::dullPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .setTab(tab)
                 .build();
@@ -209,8 +209,6 @@ public class DawnOfTimeModule extends SimpleModule {
     }
 
     private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
-        return (state) -> {
-            return (Boolean)state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
-        };
+        return (state) -> (Boolean)state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
     }
 }

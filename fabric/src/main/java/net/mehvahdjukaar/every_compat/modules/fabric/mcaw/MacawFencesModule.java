@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 import net.kikoz.mcwfences.MacawsFences;
 import net.kikoz.mcwfences.init.BlockInit;
 import net.kikoz.mcwfences.objects.FenceHitbox;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -10,7 +11,6 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -84,7 +84,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.FENCES, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(wiredFences);
 
@@ -189,7 +189,7 @@ public class MacawFencesModule extends SimpleModule {
                     }
                     return LeavesPath("", "", s, l);
                 }))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(hedges);
     }

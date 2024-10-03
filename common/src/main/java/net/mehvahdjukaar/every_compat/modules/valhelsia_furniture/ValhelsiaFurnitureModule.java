@@ -1,13 +1,13 @@
 package net.mehvahdjukaar.every_compat.modules.valhelsia_furniture;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -42,7 +42,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                         getModBlock("oak_table", TableBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
                 )
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/table/oak/oak_table"))
                 // the oak_table_connected texutre is in desk_drawers' EntrySet
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -55,7 +55,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                         getModBlock("oak_chair", ChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new compatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), false)
                 )
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/chair/oak/oak_chair"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
@@ -67,7 +67,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                         getModBlock("hay_oak_chair", ChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new compatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), true)
                 )
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/chair/oak/hay_oak_chair"),
                         EveryCompat.res("block/vf/hay_oak_chair_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -80,7 +80,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                         getModBlock("oak_stool", StoolBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StoolBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
                 )
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/stool/oak_stool"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.STOOLS, Registries.BLOCK)
@@ -134,7 +134,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
 
     // Had to create this because of appendHoverText, "Hay Seat" is showing up on both chairs & hay_chairs
     // chairs shouldn't have "Hay Seat"
-    public class compatChairBlock extends ChairBlock {
+    public static class compatChairBlock extends ChairBlock {
         private final boolean isHayCHair;
 
         public compatChairBlock(net.minecraft.world.level.block.state.properties.WoodType woodType, Properties properties, boolean isHayCHair) {

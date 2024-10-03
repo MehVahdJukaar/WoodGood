@@ -34,7 +34,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import java.util.HashMap;
 import java.util.function.ToIntFunction;
 
-//SUPPORT: v0.5.10+
+//SUPPORT: v0.5.11+
 public class ClutterModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> wall_bookshelves;
@@ -55,7 +55,7 @@ public class ClutterModule extends SimpleModule {
 
     public final HashMap<Block, Block> mapTables = new HashMap<>();
     public final HashMap<Block, Block> mapChairs = new HashMap<>();
-//    public final HashMap<Block, Block> mapBenches = new HashMap<>();
+    public final HashMap<Block, Block> mapBenches = new HashMap<>();
 
     public ClutterModule(String modId) {
         super(modId, "clu");
@@ -208,7 +208,7 @@ public class ClutterModule extends SimpleModule {
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .build();
         this.addEntry(shelves);
-//TODO
+
         trellises = SimpleEntrySet.builder(WoodType.class, "trellis",
                         getModBlock("oak_trellis"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TrellisBlock(FabricBlockSettings.copyOf(w.planks)
@@ -228,7 +228,7 @@ public class ClutterModule extends SimpleModule {
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
                         getModBlock("oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WoodenBenchBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new CompatBenchBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURE: Using log & planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
@@ -245,7 +245,7 @@ public class ClutterModule extends SimpleModule {
 
         stripped_benches = SimpleEntrySet.builder(WoodType.class, "bench", "stripped",
                         getModBlock("stripped_oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WoodenBenchBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new CompatBenchBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
                 //TEXTURE: Using stripped_log & planks
@@ -330,10 +330,12 @@ public class ClutterModule extends SimpleModule {
 
         tables.blocks.forEach((wood, block) -> {
             putBlocksIn(mapTables, block, stripped_tables.blocks.get(wood));
+
             //CHAIRS
             putBlocksIn(mapChairs, chairs.blocks.get(wood), stripped_chairs.blocks.get(wood));
+
             //BENCHES
-//            putBlocksIn(mapBenches, benches.blocks.get(wood), stripped_benches.blocks.get(wood));
+            putBlocksIn(mapBenches, benches.blocks.get(wood), stripped_benches.blocks.get(wood));
         });
     }
 
@@ -405,8 +407,7 @@ public class ClutterModule extends SimpleModule {
         }
     }
 
-    //TODO: Wait until Clutter's newer version than 0.5.10 is out
-/*    public class CompatBenchBlock extends WoodenBenchBlock {
+    public class CompatBenchBlock extends WoodenBenchBlock {
 
         public CompatBenchBlock(Properties properties) {
             super(properties);
@@ -416,6 +417,7 @@ public class ClutterModule extends SimpleModule {
             return mapBenches.get(state.getBlock()).defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(LEGPOSITIONS, state.getValue(LEGPOSITIONS));
         }
 
+        @Override
         public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
             ItemStack itemStack = player.getItemInHand(hand);
             if (itemStack.getItem() instanceof AxeItem && state.is(ModBlockTags.STRIPPABLE_BENCHES)) {
@@ -423,7 +425,9 @@ public class ClutterModule extends SimpleModule {
                 world.setBlockAndUpdate(pos, strippedState);
                 world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
                 if (!player.isCreative()) {
-                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                    itemStack.hurtAndBreak(1, player, (p) -> {
+                        p.broadcastBreakEvent(hand);
+                    });
                 }
 
                 return InteractionResult.SUCCESS;
@@ -432,5 +436,5 @@ public class ClutterModule extends SimpleModule {
             }
         }
 
-    }*/
+    }
 }

@@ -8,19 +8,18 @@ import net.kikoz.mcwwindows.objects.Parapet;
 import net.kikoz.mcwwindows.objects.Shutter;
 import net.kikoz.mcwwindows.objects.Window;
 import net.kikoz.mcwwindows.objects.WindowBarred;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
-import java.util.function.Supplier;
 
 public class MacawWindowsModule extends SimpleModule {
 
@@ -45,7 +44,7 @@ public class MacawWindowsModule extends SimpleModule {
 
     public MacawWindowsModule(String modId) {
         super(modId, "mcw");
-        final Supplier<ResourceKey<CreativeModeTab>> tab = () -> MacawsWindows.WINDOWSGROUP;
+        final ResourceKey<CreativeModeTab> tab = MacawsWindows.WINDOWSGROUP;
 
         window = SimpleEntrySet.builder(WoodType.class, "window",
                         () -> BlockInit.OAK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
@@ -53,7 +52,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -65,7 +64,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows_two"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -77,7 +76,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows_four"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -89,7 +88,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -101,7 +100,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows_two"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -113,7 +112,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows_four"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -125,7 +124,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -137,7 +136,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows_two"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -149,7 +148,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(modRes("windows_four"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -162,7 +161,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -175,7 +174,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -188,7 +187,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
 
@@ -231,7 +230,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_shutter"))
                 .setTabKey(tab)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
 
@@ -245,7 +244,7 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTexture(modRes("block/oak_louvered_shutter"))
                 .setTabKey(tab)
                 .createPaletteFromOak(this::shutterPalette)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
 

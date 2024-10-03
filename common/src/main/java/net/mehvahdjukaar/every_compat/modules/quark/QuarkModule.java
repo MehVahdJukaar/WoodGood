@@ -10,7 +10,6 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
-import net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
@@ -31,7 +30,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -95,7 +93,6 @@ public class QuarkModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .setPalette(this::bookshelfPalette)
                 .build();
-
         this.addEntry(bookshelves);
 
         posts = QuarkSimpleEntrySet.builder(WoodType.class, "post",
@@ -116,7 +113,6 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/oak_post"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
-
         this.addEntry(posts);
 
         strippedPosts = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
@@ -137,9 +133,8 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/stripped_oak_post"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
-
         this.addEntry(strippedPosts);
 
         verticalPlanks = QuarkSimpleEntrySet.builder(WoodType.class, "planks", "vertical",
@@ -157,7 +152,6 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.PLANKS, Registries.ITEM)
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
-
         this.addEntry(verticalPlanks);
 
         ladders = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
@@ -173,9 +167,8 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("ladders"), Registries.ITEM)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addRecipe(modRes("building/crafting/spruce_ladder"))
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .build();
-
         this.addEntry(ladders);
 
         hollowLogs = QuarkSimpleEntrySet.builder(WoodType.class, "log", "hollow",
@@ -192,7 +185,6 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("hollow_logs"), Registries.ITEM)
                 .addRecipe(modRes("building/crafting/hollowlogs/hollow_oak_log"))
                 .build();
-
         this.addEntry(hollowLogs);
 
         chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
@@ -213,7 +205,6 @@ public class QuarkModule extends SimpleModule {
                 .addCondition(w -> !w.getId().toString().equals("twilightforest:dark"))
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .build();
-
         this.addEntry(chests);
 
         trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
@@ -238,7 +229,6 @@ public class QuarkModule extends SimpleModule {
                 .addTile(CompatTrappedChestBlockTile::new)
                 .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
                 .build();
-
         this.addEntry(trappedChests);
 
         //doing it this way because for some reason its nuking whatever block item I throw in here
@@ -259,7 +249,7 @@ public class QuarkModule extends SimpleModule {
                 .copyParentTint()
 //              Recipe being created below blc the recipe has a tag as an ingredient
                 .addCondition(l -> l.getWoodType() != null) // Reason: RECIPES
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(hedges);
 
@@ -281,7 +271,7 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/oak_leaf_carpet"))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentTint()
                 .build();
         this.addEntry(leafCarpets);

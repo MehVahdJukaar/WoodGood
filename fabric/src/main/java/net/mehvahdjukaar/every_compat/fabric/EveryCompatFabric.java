@@ -10,7 +10,9 @@ import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyR
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.exlines.AwningModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency.LightmansCurrencyModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
@@ -56,8 +58,10 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
         addModule("lolmct", () -> MoreCraftingTablesModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
+        addModule("missingwilds", () -> MissingWildModule::new);
         addModule("redbits", () -> RedBitsModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
+        addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addModule("wilderwild", () -> WilderWildModule::new);
         addModule("woodenhoppers", () -> WoodenHoppersModule::new);

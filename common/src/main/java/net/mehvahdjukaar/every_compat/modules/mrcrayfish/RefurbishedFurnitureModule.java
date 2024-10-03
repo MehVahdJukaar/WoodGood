@@ -10,6 +10,7 @@ import com.mrcrayfish.furniture.refurbished.crafting.StackedIngredient;
 import com.mrcrayfish.furniture.refurbished.crafting.WorkbenchContructingRecipe;
 import com.mrcrayfish.furniture.refurbished.item.MailboxItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -29,7 +30,6 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -123,7 +123,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_dark_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .build();
         this.addEntry(darkFans);
 
@@ -141,7 +141,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_light_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
-                .setRenderType(() -> RenderType::translucent)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .build();
         this.addEntry(lightFans);
 
@@ -173,7 +173,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
                 .addTag(modRes("storage"), Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(mailboxes);
 
@@ -189,7 +189,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("wooden_toilets"), Registries.ITEM)
                 .addTag(modRes("bathroom"), Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(toilets);
 
@@ -206,7 +206,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(jars);
 
@@ -346,7 +346,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(lattice_fence);
 
@@ -365,7 +365,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(lattice_fence_gate);
 
@@ -429,7 +429,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .setTab(ModCreativeTabs.MAIN::get)
                 .addTile(ModBlockEntities.DRAWER::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentTint()
                 .build();
         this.addEntry(hedges);

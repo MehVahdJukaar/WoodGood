@@ -3,12 +3,12 @@ package net.mehvahdjukaar.every_compat.modules.fabric.create;
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -30,7 +30,7 @@ public class CreateModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 //.setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/palettes/oak_window_m"))
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/palettes/oak_window_connected_m"))
@@ -44,7 +44,7 @@ public class CreateModule extends SimpleModule {
                 //.addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
                 //.setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .defaultRecipe()
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
 
         this.addEntry(windowPanes);

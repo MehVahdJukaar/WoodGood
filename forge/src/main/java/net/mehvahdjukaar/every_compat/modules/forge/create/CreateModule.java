@@ -17,7 +17,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -86,7 +85,7 @@ public class CreateModule extends SimpleModule {
                         stoneType -> new StairBlock(stoneType.stone.defaultBlockState(), Utils.copyPropertySafe(stoneType.stone)))
                 //TEXTURES: Using cut_andesite's from above
 //                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
 //                .defaultRecipe()
                 .build();
 
@@ -97,7 +96,7 @@ public class CreateModule extends SimpleModule {
                         stoneType -> new SlabBlock(Utils.copyPropertySafe(stoneType.stone)))
                 //TEXTURES: Using cut_andesite's from above
 //                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
 //                .defaultRecipe()
                 .build();
         this.addEntry(cut_andesite_slab);

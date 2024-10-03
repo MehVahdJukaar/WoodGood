@@ -4,6 +4,7 @@ import com.mcwfences.kikoz.init.BlockInit;
 import com.mcwfences.kikoz.init.TabInit;
 import com.mcwfences.kikoz.objects.FenceHitbox;
 import com.mcwfences.kikoz.objects.WiredFence;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -11,7 +12,6 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -75,7 +75,7 @@ public class MacawFencesModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(ItemTags.FENCES, Registries.ITEM)
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
                 .build();
@@ -236,7 +236,7 @@ public class MacawFencesModule extends SimpleModule {
                     }
                     return LeavesPath("", "", s, l);
                 }))
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(hedges);
     }
