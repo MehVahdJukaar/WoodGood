@@ -36,6 +36,7 @@
   "breaks": {
     "mcwbridges": "<3.0.0",
     "mcwfences": "<1.1.2",
-    "dawnoftimebuilder": "<1.5.7"
+    "dawnoftimebuilder": "<1.5.7",
+    "clutter": "<0.5.11"
   }
 }
