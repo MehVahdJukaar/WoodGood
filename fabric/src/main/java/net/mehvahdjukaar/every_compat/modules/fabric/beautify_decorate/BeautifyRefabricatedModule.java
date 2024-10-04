@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate;
 
+import io.github.suel_ki.beautify.Beautify;
 import io.github.suel_ki.beautify.common.block.Blinds;
 import io.github.suel_ki.beautify.common.block.PictureFrame;
 import io.github.suel_ki.beautify.common.block.Trellis;
@@ -23,6 +24,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
 
     public BeautifyRefabricatedModule(String modId) {
         super(modId, "bd");
+        var tab = modRes("group");
 
         tellis = SimpleEntrySet.builder(WoodType.class, "trellis",
                         () -> BlockInit.OAK_TRELLIS, () -> WoodTypeRegistry.OAK_TYPE,
@@ -33,6 +35,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(tellis);
 
@@ -46,6 +49,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
                 .requiresChildren("slab") // Recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(blinds);
 
@@ -60,6 +64,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
                 .requiresChildren("slab") // Recipes
                 .addTexture(modRes("block/oak_frame_texture"))
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(picture_frames);
 
