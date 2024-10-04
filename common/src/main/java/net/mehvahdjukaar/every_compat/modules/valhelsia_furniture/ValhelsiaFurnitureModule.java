@@ -37,6 +37,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
 
     public ValhelsiaFurnitureModule(String modId) {
         super(modId, "vf");
+        var tab = modRes("main");
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table", TableBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
@@ -48,6 +49,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.TABLES, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(tables);
 
@@ -60,6 +62,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(chairs);
 
@@ -73,6 +76,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(hay_chairs);
 
@@ -85,6 +89,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.STOOLS, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(stools);
 
@@ -102,6 +107,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(desks);
 
@@ -121,7 +127,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 */
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
                 .addTexture(modRes("block/table/oak/oak_table_connected"))
-
+                .setTabKey(tab)
                 .build();
         this.addEntry(desk_drawers);
 
