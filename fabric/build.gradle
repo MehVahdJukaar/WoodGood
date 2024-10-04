@@ -19,9 +19,6 @@ configurations {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
-    for (String module in port_lib_modules.split(",")) {
-        modImplementation(include("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version"))
-    }
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
@@ -55,6 +52,10 @@ dependencies {
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
 
+
+    for (String module in port_lib_modules.split(",")) {
+        modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
+    }
         // LOCAL
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
@@ -101,7 +102,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-551364:4968876")
     modCompileOnly("curse.maven:furnish-547069:4821516")
     modCompileOnly("curse.maven:handcrafted-538214:5118730")
-    modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
+    modImplementation("curse.maven:hearth-and-home-849364:4828281")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
