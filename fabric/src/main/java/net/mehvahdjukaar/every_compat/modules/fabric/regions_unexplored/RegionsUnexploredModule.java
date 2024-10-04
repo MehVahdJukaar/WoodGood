@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored;
 
 import com.google.gson.JsonObject;
 import io.github.uhq_games.regions_unexplored.block.RuBlocks;
+import io.github.uhq_games.regions_unexplored.item.tab.RuTabs;
 import io.github.uhq_games.regions_unexplored.world.level.block.plant.branch.BranchBlock;
 import io.github.uhq_games.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -24,9 +25,11 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -46,6 +49,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
     public RegionsUnexploredModule(String modId) {
         super(modId, "ru");
+        var tab = modRes("regions_unexplored_main");
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
                         getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -57,6 +61,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                 .addTag(modRes("branches"), Registries.BLOCK)
                 .addTag(modRes("branches"), Registries.ITEM)
                 .addRecipe(modRes("oak_branch_from_oak_log"))
+                .setTabKey(tab)
                 .build();
         this.addEntry(branchs);
 
@@ -81,6 +86,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                 .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
                 .copyParentDrop()
+                .setTabKey(tab)
                 .build();
         this.addEntry(shrubs);
     }
