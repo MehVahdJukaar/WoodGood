@@ -46,15 +46,15 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
     public ValhelsiaStructuresModule(String modId) {
         super(modId, "vs");
+        var tab = modRes("main");
 
         posts = SimpleEntrySet.builder(WoodType.class, "post",
                         getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new PostBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("posts"), Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
-                //.addRecipe(modRes("bundled_oak_posts"))
                 .build();
         this.addEntry(posts);
 
@@ -67,9 +67,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("stripped_posts"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
-                //.addRecipe(modRes("bundled_stripped_oak_posts"))
                 .build();
         this.addEntry(strippedPosts);
 
@@ -78,7 +77,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_posts"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -94,7 +93,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -110,7 +109,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(bundledStrippedPosts);
@@ -123,7 +122,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(bundledPosts);
