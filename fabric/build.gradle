@@ -48,7 +48,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | Required by: REI, Garden-Of-The-Dead
     modCompileOnly("curse.maven:framework-549225:5680025") // v0.7.7 | Refurbished Furniture, Mighty Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5146132") // More Crafting Tables
-    modCompileOnly("curse.maven:resourceful-lib-570073:5361261") // Chipped, Handcrafted
+    modCompileOnly("curse.maven:resourceful-lib-570073:5659872") //v2.1.29 | Chipped, Handcrafted, Cozy
     modRuntimeOnly("curse.maven:terrablender-fabric-565956:5068219") // v3.0.1.4 | Required by: Regions-Unexplored
     modCompileOnly("maven.modrinth:frozenlib:1.7.4-mc1.20.1") // Wilder-Wild
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
@@ -90,6 +90,7 @@ dependencies {
     modCompileOnly("curse.maven:camp-chair-531744:4579676")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
     modCompileOnly("curse.maven:clutter-826060:5776595") //RML: Geckolib
+//    modCompileOnly("curse.maven:cozy-625281:4728202")
     modCompileOnly("curse.maven:create-fabric-624165:5168511")
     modCompileOnly("curse.maven:dawn-of-time-312359:5651253")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")

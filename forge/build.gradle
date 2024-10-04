@@ -119,7 +119,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | Required by: REI
     modRuntimeOnly("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
-    modCompileOnly("curse.maven:resourceful-lib-570073:5361260")  // v2.1.25 | Required by: Chipped, Handcrafted
+    modImplementation("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Chipped, Handcrafted, Cozy
     modCompileOnly("curse.maven:athena-841890:5176879") // Chipped
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
@@ -164,6 +164,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
+//    modImplementation("curse.maven:cozy-625281:4728204") //Failed to process jar when running jar processor: fabric-loom:access-widener
         // OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
     modCompileOnly("curse.maven:another-furniture-610492:4034009") //WARNING: version 2.1.2-1.19.2
