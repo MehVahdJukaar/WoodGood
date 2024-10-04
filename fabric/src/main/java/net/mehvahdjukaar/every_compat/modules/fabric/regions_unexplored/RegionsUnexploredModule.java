@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored;
 
 import com.google.gson.JsonObject;
 import io.github.uhq_games.regions_unexplored.block.RuBlocks;
-import io.github.uhq_games.regions_unexplored.item.tab.RuTabs;
 import io.github.uhq_games.regions_unexplored.world.level.block.plant.branch.BranchBlock;
 import io.github.uhq_games.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -15,7 +14,6 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -23,13 +21,10 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -39,7 +34,6 @@ import net.minecraft.world.level.material.PushReaction;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 // SUPPORT: v0.5.5+
@@ -49,7 +43,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
     public RegionsUnexploredModule(String modId) {
         super(modId, "ru");
-        var tab = modRes("regions_unexplored_main");
+        var tab = modRes("main");
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
                         getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
