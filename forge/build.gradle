@@ -220,6 +220,7 @@ dependencies {
     modCompileOnly("curse.maven:woodworks-543610:5228779")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
+    modCompileOnly("curse.maven:table-top-craft-467136:5318681")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151869")
 
