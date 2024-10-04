@@ -46,7 +46,7 @@ public class JustARaftModule extends SimpleModule {
                 .createPaletteFromChild(p -> {}, "log")
                 .addTextureM(modRes("entity/raft/oak_raft"), EveryCompat.res("entity/raft/oak_raft_m"))
                 .addTag(modRes("rafts"), Registries.ITEM)
-                .setTabKey(RaftRegistry.RAFT_TAB.getId()) //TODO: Update the tab later
+                .setTabKey(RaftRegistry.RAFT_TAB.getId())
                 .build();
         this.addEntry(rafts);
     }
