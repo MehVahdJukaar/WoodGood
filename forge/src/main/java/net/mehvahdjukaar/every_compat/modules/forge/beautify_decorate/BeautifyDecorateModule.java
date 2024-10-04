@@ -4,6 +4,7 @@ import com.github.Pandarix.beautify.common.block.OakBlinds;
 import com.github.Pandarix.beautify.common.block.OakPictureFrame;
 import com.github.Pandarix.beautify.common.block.OakTrellis;
 import com.github.Pandarix.beautify.core.init.BlockInit;
+import com.github.Pandarix.beautify.core.init.ItemGroupInit;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -23,6 +24,7 @@ public class BeautifyDecorateModule extends SimpleModule {
 
     public BeautifyDecorateModule(String modId) {
         super(modId, "bd");
+        var tab = ItemGroupInit.BEAUTIFY_TAB.getId();
 
         tellis = SimpleEntrySet.builder(WoodType.class, "trellis",
                         BlockInit.OAK_TRELLIS, () -> WoodTypeRegistry.OAK_TYPE,
@@ -33,6 +35,7 @@ public class BeautifyDecorateModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(tellis);
 
@@ -46,6 +49,7 @@ public class BeautifyDecorateModule extends SimpleModule {
                 .requiresChildren("slab") // Recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(blinds);
 
@@ -59,6 +63,7 @@ public class BeautifyDecorateModule extends SimpleModule {
                 .requiresChildren("slab") // Recipes
                 .addTexture(modRes("block/oak_frame_texture"))
                 .defaultRecipe()
+                .setTabKey(tab)
                 .build();
         this.addEntry(picture_frames);
 

@@ -366,9 +366,7 @@ public class ClutterModule extends SimpleModule {
                 world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
 
                 if (!player.isCreative()) {
-                    itemStack.hurtAndBreak(1, player, (p) -> {
-                        p.broadcastBreakEvent(hand);
-                    });
+                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
                 }
 
                 return InteractionResult.SUCCESS;
@@ -395,9 +393,7 @@ public class ClutterModule extends SimpleModule {
                 world.setBlockAndUpdate(pos, strippedState);
                 world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
                 if (!player.isCreative()) {
-                    itemStack.hurtAndBreak(1, player, (p) -> {
-                        p.broadcastBreakEvent(hand);
-                    });
+                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
                 }
 
                 return InteractionResult.SUCCESS;
@@ -426,9 +422,7 @@ public class ClutterModule extends SimpleModule {
                 world.setBlockAndUpdate(pos, strippedState);
                 world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
                 if (!player.isCreative()) {
-                    itemStack.hurtAndBreak(1, player, (p) -> {
-                        p.broadcastBreakEvent(hand);
-                    });
+                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
                 }
 
                 return InteractionResult.SUCCESS;

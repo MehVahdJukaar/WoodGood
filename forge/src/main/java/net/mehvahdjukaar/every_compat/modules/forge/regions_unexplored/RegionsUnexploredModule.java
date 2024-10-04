@@ -38,6 +38,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.regions_unexplored.block.RuBlocks;
+import net.regions_unexplored.item.tab.RuTabs;
 import net.regions_unexplored.world.level.block.plant.branch.BranchBlock;
 import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 
@@ -57,6 +58,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
     public RegionsUnexploredModule(String modId) {
         super(modId, "ru");
+        var tab = RuTabs.REGIONS_UNEXPLORED_MAIN_TAB.getId();
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
             getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -67,6 +69,7 @@ public class RegionsUnexploredModule extends SimpleModule {
             .addTag(modRes("branches"), Registries.BLOCK)
             .addTag(modRes("branches"), Registries.ITEM)
             .addRecipe(modRes("oak_branch_from_oak_log"))
+            .setTabKey(tab)
             .build();
         this.addEntry(branchs);
 
@@ -91,6 +94,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                 .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
                 .copyParentDrop()
+                .setTabKey(tab)
                 .build();
         this.addEntry(shrubs);
     }

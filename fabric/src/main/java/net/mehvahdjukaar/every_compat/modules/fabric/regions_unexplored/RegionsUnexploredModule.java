@@ -14,7 +14,6 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -22,7 +21,6 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -36,7 +34,6 @@ import net.minecraft.world.level.material.PushReaction;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 // SUPPORT: v0.5.5+
@@ -46,6 +43,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
     public RegionsUnexploredModule(String modId) {
         super(modId, "ru");
+        var tab = modRes("main");
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
                         getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -57,6 +55,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                 .addTag(modRes("branches"), Registries.BLOCK)
                 .addTag(modRes("branches"), Registries.ITEM)
                 .addRecipe(modRes("oak_branch_from_oak_log"))
+                .setTabKey(tab)
                 .build();
         this.addEntry(branchs);
 
@@ -81,6 +80,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                 .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
                 .copyParentDrop()
+                .setTabKey(tab)
                 .build();
         this.addEntry(shrubs);
     }
