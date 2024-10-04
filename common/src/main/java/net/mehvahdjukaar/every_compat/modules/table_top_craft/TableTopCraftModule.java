@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.fabric.table_top_craft;
+package net.mehvahdjukaar.every_compat.modules.table_top_craft;
 
 import andrews.table_top_craft.objects.blocks.ChessBlock;
 import andrews.table_top_craft.objects.blocks.ChessTimerBlock;
@@ -12,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
+//SUPPORT: FORGE-v6.1.2+ | FABRIC-v5.0.2
 public class TableTopCraftModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chessBoards;
@@ -20,6 +21,7 @@ public class TableTopCraftModule extends SimpleModule {
 
     public TableTopCraftModule(String modId) {
         super(modId, "ttc");
+        var tab = modRes("tab");
 
         chessBoards = SimpleEntrySet.builder(WoodType.class, "chess",
                         getModBlock("oak_chess"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -27,7 +29,7 @@ public class TableTopCraftModule extends SimpleModule {
                 .addTile(() -> TTCBlockEntities.CHESS)
                 .addTag(modRes("chess_boards"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(modRes("tab"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(chessBoards);
@@ -38,7 +40,7 @@ public class TableTopCraftModule extends SimpleModule {
                 .addTile(() -> TTCBlockEntities.CHESS_TIMER)
                 .addTag(modRes("chess_timers"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(modRes("tab"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(chessTimers);
@@ -49,7 +51,7 @@ public class TableTopCraftModule extends SimpleModule {
                 .addTile(() -> TTCBlockEntities.CONNECT_FOUR)
                 .addTag(modRes("connect_four"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(modRes("tab"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(connectFours);

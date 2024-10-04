@@ -37,7 +37,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModu
 import net.mehvahdjukaar.every_compat.modules.forge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
-import net.mehvahdjukaar.every_compat.modules.forge.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.timber_frames.TimberFramesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
@@ -123,7 +122,6 @@ public class EveryCompatForge extends EveryCompat {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("lolmct", () -> MoreCraftingTablesModule::new);
-        addModule("table_top_craft", () -> TableTopCraftModule::new);
 
         // ========================================= Macaw's ======================================================== \\
         addModule("mcwbridges", () -> MacawBridgesModule::new);
