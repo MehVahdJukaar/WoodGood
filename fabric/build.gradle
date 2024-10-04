@@ -115,6 +115,7 @@ dependencies {
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")
     modCompileOnly("maven.modrinth:wilder-wild:2.4-mc1.20.1")
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143")
+    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //RLM: exp4j
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151837")
 
