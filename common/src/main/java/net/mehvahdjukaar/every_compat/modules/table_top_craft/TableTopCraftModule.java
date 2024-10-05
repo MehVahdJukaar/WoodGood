@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.table_top_craft;
 import andrews.table_top_craft.objects.blocks.ChessBlock;
 import andrews.table_top_craft.objects.blocks.ChessTimerBlock;
 import andrews.table_top_craft.objects.blocks.ConnectFourBlock;
-import andrews.table_top_craft.registry.TTCBlockEntities;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -12,7 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
-//SUPPORT: FORGE-v6.1.2+ | FABRIC-v5.0.2
+//SUPPORT: FORGE-v6.1.0+ | FABRIC-v5.0.0+
 public class TableTopCraftModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chessBoards;
@@ -26,7 +25,7 @@ public class TableTopCraftModule extends SimpleModule {
         chessBoards = SimpleEntrySet.builder(WoodType.class, "chess",
                         getModBlock("oak_chess"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChessBlock(w.getColor(), w.getSound()))
-                .addTile(() -> TTCBlockEntities.CHESS)
+                .addTile(getModTile("chess"))
                 .addTag(modRes("chess_boards"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -37,7 +36,7 @@ public class TableTopCraftModule extends SimpleModule {
         chessTimers = SimpleEntrySet.builder(WoodType.class, "chess_timer",
                         getModBlock("oak_chess_timer"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChessTimerBlock(w.getColor(), w.getSound()))
-                .addTile(() -> TTCBlockEntities.CHESS_TIMER)
+                .addTile(getModTile("chess_timer"))
                 .addTag(modRes("chess_timers"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -48,7 +47,7 @@ public class TableTopCraftModule extends SimpleModule {
         connectFours = SimpleEntrySet.builder(WoodType.class, "connect_four",
                         getModBlock("oak_connect_four"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ConnectFourBlock(w.getColor(), w.getSound()))
-                .addTile(() -> TTCBlockEntities.CONNECT_FOUR)
+                .addTile(getModTile("connect_four"))
                 .addTag(modRes("connect_four"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
