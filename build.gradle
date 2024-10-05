@@ -104,6 +104,7 @@ subprojects {
                         optionalDependency("missing-wilds")
                         optionalDependency("red-bits")
                         optionalDependency("refurbished-furniture")
+                        optionalDependency("table-top-craft-fabric")
                         optionalDependency("the-twilight-forest")
                         optionalDependency("twigs")
                     }
@@ -151,6 +152,7 @@ subprojects {
                         optionalDependency("rechiseled")
                         optionalDependency("refurbished-furniture")
                         optionalDependency("storage-drawers")
+                        optionalDependency("table-top-craft")
                         optionalDependency("the-twilight-forest")
                         optionalDependency("twigs")
                         optionalDependency("valhelsia-structures")
