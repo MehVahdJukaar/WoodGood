@@ -19,6 +19,7 @@ import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModul
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 // LIB
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
@@ -130,6 +131,7 @@ public abstract class EveryCompat {
         addModule("furnish", () -> FurnishModule::new);
         addModule( "hnh" , () -> HearthAndHomeModule::new);
         addModule("twigs", () -> TwigsModule::new);
+        addModule("table_top_craft", () -> TableTopCraftModule::new);
 
         // =========================================== WORK IN PROGRESS ============================================  \\
         addModule("handcrafted", () -> HandcraftedModule::new);

@@ -820,6 +820,9 @@
   "block_type.absentbydesign.fence_log": "%s Log Fence",
   "block_type.absentbydesign.wall_stripped_log": "Stripped %s Wall",
   "block_type.absentbydesign.wall_log": "%s Wood Wall",
-  "block_type.absentbydesign.wall_planks": "%s Wall"
-}
+  "block_type.absentbydesign.wall_planks": "%s Wall",
 
+  "block_type.table_top_craft.chess": "%s Chess Board",
+  "block_type.table_top_craft.chess_timer": "%s Chess Timer",
+  "block_type.table_top_craft.connect_four": "%s Connect Four"
+}

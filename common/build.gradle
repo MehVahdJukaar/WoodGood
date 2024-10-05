@@ -35,6 +35,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4533061")
     modCompileOnly("curse.maven:refurbished-furniture-897116:5651930")
+    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5694015")
 
 //    modCompileOnly("curse.maven:missing-wilds-622590:3891602")
 
