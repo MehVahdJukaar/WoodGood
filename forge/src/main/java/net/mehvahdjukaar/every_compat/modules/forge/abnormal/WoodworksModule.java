@@ -43,6 +43,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
+import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
 
 //SUPPORT: v3.0.0+
 public class WoodworksModule extends SimpleModule {
@@ -267,9 +268,10 @@ public class WoodworksModule extends SimpleModule {
     public void createRecipeIfNotNull(String recipeName, boolean usingLog, String output,
                                       ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
         Item input = (usingLog) ? wood.log.asItem() : wood.planks.asItem();
-        if (Objects.nonNull(wood.getItemOfThis(output))) {
+        boolean skipAir = !Utils.getID(wood.getItemOfThis(output)).toString().equals("minecraft:air");
+        if (Objects.nonNull(wood.getItemOfThis(output)) || skipAir) {
             sawmillRecipe(recipeName, input, wood.getItemOfThis(output), handler, manager, wood);
-        } else if (Objects.nonNull(wood.getBlockOfThis(output))) {
+        } else if (Objects.nonNull(wood.getBlockOfThis(output)) || skipAir) {
             sawmillRecipe(recipeName, input, wood.getBlockOfThis(output).asItem(), handler, manager, wood);
         }
     }
@@ -292,7 +294,8 @@ public class WoodworksModule extends SimpleModule {
 
             // Editing the JSON recipe
             if (getIngredient.has("tag")) {
-                getIngredient.addProperty("tag", wood.getNamespace() + ":" + wood.getTypeName() + "_logs");
+                getIngredient.addProperty("tag",
+                        whichTags("logs", "caps", wood, handler, manager).toString());
             } else { // getIngredient.has("item")
                 getIngredient.addProperty("item", Utils.getID(input).toString());
             }
@@ -309,6 +312,7 @@ public class WoodworksModule extends SimpleModule {
         handler.dynamicPack.addJson(EveryCompat.res(this.shortenedId() + "/" + wood.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
     }
 
+    @Override
     // Textures
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
