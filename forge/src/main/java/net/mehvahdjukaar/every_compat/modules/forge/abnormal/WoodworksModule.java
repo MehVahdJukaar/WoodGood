@@ -21,6 +21,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -221,12 +222,17 @@ public class WoodworksModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
         bookshelves.items.forEach((wood, item) -> {
+            // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
+            Item getLadder = ladders.items.get(wood);
+            Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
+                    new ResourceLocation(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+
             // sawmill recipes - from LOGS
             sawmillRecipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
                     handler, manager, wood);
             sawmillRecipe("oak_boards_from_oak_logs_sawing", wood.log.asItem(), boards.items.get(wood),
                     handler, manager, wood);
-            sawmillRecipe("spruce_ladder_from_spruce_logs_sawing", wood.log.asItem(), ladders.items.get(wood),
+            sawmillRecipe("spruce_ladder_from_spruce_logs_sawing", wood.log.asItem(), ladder,
                     handler, manager, wood);
             createRecipeIfNotNull("oak_button_from_oak_logs_sawing", true, "button",
                     handler, manager, wood);
@@ -250,7 +256,7 @@ public class WoodworksModule extends SimpleModule {
             // - from PLANKS
             sawmillRecipe("oak_boards_from_oak_planks_sawing", wood.planks.asItem(), boards.items.get(wood),
                     handler, manager, wood);
-            sawmillRecipe("spruce_ladder_from_spruce_planks_sawing", wood.planks.asItem(), ladders.items.get(wood),
+            sawmillRecipe("spruce_ladder_from_spruce_planks_sawing", wood.planks.asItem(), ladder,
                     handler, manager, wood);
             createRecipeIfNotNull("oak_button_from_oak_planks_sawing", false, "button",
                     handler, manager, wood);
@@ -260,7 +266,6 @@ public class WoodworksModule extends SimpleModule {
                     handler, manager, wood);
             createRecipeIfNotNull("oak_stairs_from_oak_planks_sawing", false, "stairs",
                     handler, manager, wood);
-
         });
     }
 
@@ -268,10 +273,10 @@ public class WoodworksModule extends SimpleModule {
     public void createRecipeIfNotNull(String recipeName, boolean usingLog, String output,
                                       ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
         Item input = (usingLog) ? wood.log.asItem() : wood.planks.asItem();
-        boolean skipAir = !Utils.getID(wood.getItemOfThis(output)).toString().equals("minecraft:air");
-        if (Objects.nonNull(wood.getItemOfThis(output)) || skipAir) {
+
+        if (Objects.nonNull(wood.getItemOfThis(output))) {
             sawmillRecipe(recipeName, input, wood.getItemOfThis(output), handler, manager, wood);
-        } else if (Objects.nonNull(wood.getBlockOfThis(output)) || skipAir) {
+        } else if (Objects.nonNull(wood.getBlockOfThis(output))) {
             sawmillRecipe(recipeName, input, wood.getBlockOfThis(output).asItem(), handler, manager, wood);
         }
     }
