@@ -15,7 +15,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
-//SUPPORT: FORGE-v3.1.0+ | FABRIC-v2.1.0+
+//SUPPORT: FORGE-v3.1.2+ | FABRIC-v2.1.1+
 public class TableTopCraftModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> chessBoards;
     public final SimpleEntrySet<WoodType, Block> chessTimers;
