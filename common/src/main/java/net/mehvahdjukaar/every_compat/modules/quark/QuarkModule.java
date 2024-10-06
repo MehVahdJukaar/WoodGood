@@ -19,7 +19,6 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -31,21 +30,17 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import org.violetmoon.quark.base.QuarkClient;
 import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
@@ -60,6 +55,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.createTags;
+import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
 
 //SUPPORT: v4.0-435+
 public class QuarkModule extends SimpleModule {
@@ -451,9 +449,6 @@ public class QuarkModule extends SimpleModule {
             });
         }
 
-        // is tags generated for logs from FruitFul Fun? Only need to be generated once.
-        boolean isGenerated = false;
-
         // hedge's recipe & logs' tags
         for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
             LeavesType leavesType = entry.getKey();
@@ -468,19 +463,13 @@ public class QuarkModule extends SimpleModule {
                 if (leavesType.getNamespace().equals("fruitfulfun")) {
                     switch (leavesType.getTypeName()) {
                         case "apple" -> specialHedgeRecipe("minecraft:oak", leavesType, block, handler, manager);
+
                         case "grapefruit", "lemon", "tangerine", "lime", "citron", "pomelo", "orange" ->
                                 specialHedgeRecipe("fruitfulfun:citrus", leavesType, block, handler, manager);
+
                         case "pomegranate" -> specialHedgeRecipe("minecraft:jungle", leavesType, block, handler, manager);
                         case "redlove" -> specialHedgeRecipe("fruitfulfun:redlove", leavesType, block, handler, manager);
                     }
-                }
-                // Creating tags for FruitFul Fun's logs blc generalHedgeRecipe() can't do the job
-                if (!isGenerated && leavesType.getNamespace().equals("fruitfulfun")) {
-                    createTags(new ResourceLocation("minecraft:oak"), handler);
-                    createTags(new ResourceLocation("minecraft:jungle"), handler);
-                    createTags(new ResourceLocation("fruitfulfun:citrus"), handler);
-                    createTags(new ResourceLocation("fruitfulfun:redlove"), handler);
-                    isGenerated = true;
                 }
             }
         }
@@ -488,43 +477,9 @@ public class QuarkModule extends SimpleModule {
 
     // Correcting logs used to craft hedges
     public void generalHedgeRecipe(LeavesType leavesType, Block block, ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        ResourceLocation tagEC = EveryCompat.res(shortenedId() + "/" + leavesType.getWoodType().getAppendableId() + "_logs");
-        ResourceLocation tagMOD = new ResourceLocation(leavesType.getNamespace(), leavesType.getWoodType().getTypeName() + "_logs");
 
-        TagKey<Block> tagKey = TagKey.create(Registries.BLOCK, tagMOD);
-        boolean hasTagWood = leavesType.getWoodType().log.defaultBlockState().is(tagKey);
-
-// TAGS ====================================================================================================
-        if (!hasTagWood) {
-            // Creating tags for logs
-            boolean isTagFull = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tagEC);
-
-            Block[] woods = {
-                    leavesType.getWoodType().log, leavesType.getWoodType().getBlockOfThis("stripped_log"),
-                    leavesType.getWoodType().getBlockOfThis("wood"), leavesType.getWoodType().getBlockOfThis("stripped_wood")
-            };
-
-            // adding log, stripped_log, wood, stripped_wood
-            for (var log : woods) {
-                Item item = log.asItem();
-
-                //noinspection ConstantValue
-                if (item != null) {
-                    tagBuilder.addEntry(item);
-                    isTagFull = true;
-                }
-                else handler.getLogger().warn("{} has no logs for hedge in QuarkModule/generalHedgeRecipe", leavesType.getTypeName());
-            }
-
-            if (isTagFull) {
-                handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
-                handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
-            }
-        }
-
-// RECIPES =============================================================================================================
         ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
+        WoodType woodType = leavesType.getWoodType();
 
         try (InputStream recipeStream = manager.getResource(recipeLoc)
                 .orElseThrow(() -> new FileNotFoundException("Failed to open recipe @ " + recipeLoc)).open()) {
@@ -533,15 +488,13 @@ public class QuarkModule extends SimpleModule {
             JsonObject underKey = recipe.getAsJsonObject("key");
             JsonObject underResult = recipe.getAsJsonObject("result");
 
-            // Deciding which tagID to use
-            String tag = (hasTagWood) ? tagMOD.toString() : tagEC.toString();
-
         // Editing JSON
             // Leaves
             underKey.getAsJsonObject("L")
                     .addProperty("item", Utils.getID(leavesType.leaves).toString());
             // WoodTypes
-            underKey.getAsJsonObject("W").addProperty("tag", tag);
+            underKey.getAsJsonObject("W").addProperty("tag",
+                    whichTags("logs", "caps", woodType, handler, manager).toString());
             // Hedges
             underResult.addProperty("item", Utils.getID(block).toString());
 
@@ -552,59 +505,14 @@ public class QuarkModule extends SimpleModule {
                     ResType.RECIPES);
 
         } catch (IOException e) {
-            handler.getLogger().error("QuarkModule - Failed to open the recipe file: {0}", e);
+            handler.getLogger().error("Failed to open the recipe file @ {} : {}", recipeLoc, e);
         }
     }
 
-    // Creating tags for logs
-    @SuppressWarnings("ConstantValue")
-    public void createTags(ResourceLocation woodType, ServerDynamicResourcesHandler handler) {
-        ResourceLocation modResLoc = new ResourceLocation(woodType.getNamespace(), woodType.getPath() + "_logs");
+    public void specialHedgeRecipe(String reslocWood, LeavesType leavesType,
+                                   Block block, ServerDynamicResourcesHandler handler,
+                                   ResourceManager manager) {
 
-        TagKey<Block> tagKey = TagKey.create(Registries.BLOCK, modResLoc);
-        boolean hasTagWood = Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).log.defaultBlockState().is(tagKey);
-
-        ResourceLocation ecResLoc = EveryCompat.res(shortenedId() +"/"+ woodType.getNamespace() +"/"+
-                woodType.getPath() + "_logs");
-        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(ecResLoc);
-
-        // Checking if a tag, #<namespace>:<type>_logs exist, then skip
-        if (!hasTagWood) {
-            boolean isTagFull = false;
-
-            Block[] woods = {
-                    Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).log,
-                    Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).getBlockOfThis("stripped_log"),
-                    Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).getBlockOfThis("wood"),
-                    Objects.requireNonNull(WoodTypeRegistry.getValue(woodType)).getBlockOfThis("stripped_wood")
-            };
-
-            // adding log, stripped_log, wood, stripped_wood
-            for (var log : woods) {
-                Item item = log.asItem();
-
-                if (item != null) {
-                    tagBuilder.addEntry(item);
-                    isTagFull = true;
-                }
-                else handler.getLogger().warn("{} has no logs for hedge in QuarkModule.specialHedgeRecipe()", woodType);
-            }
-
-            if (isTagFull) {
-                handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
-                handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
-            }
-        }
-    }
-
-    public void specialHedgeRecipe(String woodType, LeavesType leavesType, Block block, ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        ResourceLocation tagMOD = new ResourceLocation(woodType);
-        ResourceLocation tagEC = EveryCompat.res(shortenedId() +"/"+ tagMOD.getNamespace() +"/"+ tagMOD.getPath() + "_logs");
-
-        TagKey<Block> tagKey = TagKey.create(Registries.BLOCK, tagMOD);
-        boolean hasTagWood = Objects.requireNonNull(WoodTypeRegistry.getValue(tagMOD)).log.defaultBlockState().is(tagKey);
-
-        // Creating recipe
         ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
         try (InputStream recipeStream = manager.getResource(recipeLoc)
                 .orElseThrow(() -> new FileNotFoundException("Failed to open recipe @ " + recipeLoc)).open()) {
@@ -612,16 +520,15 @@ public class QuarkModule extends SimpleModule {
             JsonObject recipe = RPUtils.deserializeJson(recipeStream);
             JsonObject underKey = recipe.getAsJsonObject("key");
             JsonObject underResult = recipe.getAsJsonObject("result");
-
-            // Deciding which tagID to use
-            String tag = (hasTagWood) ? tagMOD + "_logs" : tagEC.toString();
+            WoodType woodType = leavesType.getWoodType();
 
             // Editing JSON
                 // Leaves
             underKey.getAsJsonObject("L")
                     .addProperty("item", Utils.getID(leavesType.leaves).toString());
                 // WoodTypes
-            underKey.getAsJsonObject("W").addProperty("tag", tag);
+            underKey.getAsJsonObject("W").addProperty("tag",
+                    whichSpecialTags("logs", woodType, reslocWood, handler, manager ).toString());
                 // Hedges
             underResult.addProperty("item", Utils.getID(block).toString());
 
@@ -632,5 +539,23 @@ public class QuarkModule extends SimpleModule {
         } catch (IOException e) {
             handler.getLogger().error("Failed to open the recipe file: {} : {}", recipeLoc, e);
         }
+    }
+
+    public static ResourceLocation whichSpecialTags(String suffixTag, WoodType woodType, String wood, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        // If a namespace:<type>_logs already exist, then it will be used as an ingredient in the recipe, otherwise will
+        // generate a tag for logs/stems that don't have the tags.
+
+        // ResourceLocation of log/planks tags
+        ResourceLocation RLocLogsTag = new ResourceLocation(wood +"_"+ suffixTag);
+        // ~ of generated tags
+        ResourceLocation RLocECTag = EveryCompat.res(woodType.getAppendableId() +"_"+ suffixTag);
+
+        if (manager.getResource(ResType.TAGS.getPath(RLocLogsTag.withPrefix("blocks/"))).isPresent())
+            return RLocLogsTag;
+        else if (manager.getResource(ResType.TAGS.getPath(RLocECTag.withPrefix("blocks/"))).isPresent())
+            return RLocECTag;
+        else // if RLocECTags is empty, then it will be generated
+            return createTags(RLocECTag, woodType, handler);
+
     }
 }
