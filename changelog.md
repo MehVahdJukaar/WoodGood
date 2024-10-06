@@ -8,8 +8,11 @@
   - Fixed the missing texture for both _campfires_ with **Ad Astra**
   - Fixed the missing recipes
   - Fixed both _campfires_' not turned off when unlit or turned on when lit
-
-# WARNING: NOT FINISHED & DO NOT UPLOAD - Beautiful Campfires is still WIP 
+- **EveryComp**: Improved the recipes using tags as ingredient via 
+  - **Wilder Wild** (FABRIC)
+  - **Woodworks** (FORGE)
+  - **Quark** (COMMON)
+  - **Just A Raft** (FORGE)
 
 ---
 
