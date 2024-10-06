@@ -613,5 +613,7 @@
   "block_type.chipped.stripped_log_8": "Stripped %s Log",
   "block_type.chipped.stripped_log_9": "Stripped %s Log",
   "block_type.chipped.stripped_log_10": "Stripped %s Log",
-  "block_type.chipped.stripped_log_11": "Stripped %s Log"
+  "block_type.chipped.stripped_log_11": "Stripped %s Log",
+
+  "block_type.table_top_craft.chess": "%s Chess Board"
 }

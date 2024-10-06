@@ -205,6 +205,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:woodworks-543610:4396956")
     compileOnly fg.deobf("curse.maven:xercamod-341575:4318574")
     compileOnly fg.deobf("curse.maven:chipped-456956:4293291")
+    compileOnly fg.deobf("curse.maven:table-top-craft-467136:5699783")
 
         // LOCAL
     compileOnly fg.deobf(getModVersion("ironagefurniture-1.18.2-0.2.0.10.jar"))
@@ -342,6 +343,7 @@ publishMods {
         optional("mrcrayfish-furniture-mod")
         optional("project-brazier")
         optional("quark")
+        optional("table-top-craft")
         optional("the-twilight-forest")
         optional("the-graveyard-forge")
         optional("twigs")
