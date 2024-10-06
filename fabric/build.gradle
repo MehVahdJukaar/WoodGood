@@ -42,13 +42,11 @@ dependencies {
         exclude module: "cloth-config-fabric"
     }
 
-    modImplementation(include("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:${porting_lib_version}"))
+    modImplementation("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:${porting_lib_version}")
 
     modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
 
-
-    modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
-//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric") // LOCAL
+// IMPORT SUPPLEMENTARIES (ONLY FOR TESTING PURPOSE)
     // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
         //SPECIAL DEPENDENCIES: TerraBlender(FABRIC), Framework - REQUIRES below
@@ -58,7 +56,11 @@ dependencies {
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.0.2") // Trinkets
     modImplementation("org.reflections:reflections:0.10.2") // Framework(ONLY)
 
-    // ============================================= DEPENDENCIES =================================================== \\
+// ============================================= DEPENDENCIES =================================================== \\
+//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-fabric") // LOCAL
+    modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
+
+
     modImplementation("curse.maven:resourceful-lib-570073:4434137")
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973443") // v8.3.115
@@ -75,7 +77,9 @@ dependencies {
     // TOOLS
     modRuntimeOnly("curse.maven:emi-580555:5704394")
 
-    // ================================================ IMPORTS ===================================================== \\
+// ================================================ IMPORTS ===================================================== \\
+    // NOTE: mods with modRunTimeOnly are in compiled in build.gradle (COMMON), modRunTimeOnly is only for testing
+
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
     modCompileOnly("curse.maven:backpacked-fabric-667380:4728984")
@@ -97,12 +101,13 @@ dependencies {
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750267")
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:refurbished-furniture-897116:5651930")
+//    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5694015")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4531594")
     modCompileOnly("curse.maven:hearth-and-home-849364:4488851")
     modCompileOnly("curse.maven:wooden-hoppers-406021:3836322")
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:4470171")
+    modCompileOnly("curse.maven:regions-unexplored-659110:4470171") // TerraBlender (FABRIC), Forge-Config-API-Port
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240491")
@@ -119,8 +124,6 @@ dependencies {
 
     // ======================================= TESTING WITH WOOD MODS =============================================== \\
 //    modRuntimeOnly("curse.maven:terrestria-323974:4976672")
-//    modRuntimeOnly("curse.maven:regions-unexplored-659110:4470171") // TerraBlender (FABRIC), Forge-Config-API-Port
-
 }
 
 

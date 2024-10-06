@@ -176,6 +176,7 @@ dependencies {
     modCompileOnly("curse.maven:quark-243121:4587248")
     modCompileOnly("curse.maven:rechiseled-558998:4364936")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
+//    modRuntimeOnly("curse.maven:table-top-craft-467136:4616489")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389567")
     modCompileOnly("curse.maven:twigs-496913:4533061")
