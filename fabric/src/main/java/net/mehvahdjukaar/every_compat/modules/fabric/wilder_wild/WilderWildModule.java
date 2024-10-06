@@ -32,6 +32,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
+
 //SUPPORT: v2.4.6+
 public class WilderWildModule extends SimpleModule {
 
@@ -126,51 +128,29 @@ public class WilderWildModule extends SimpleModule {
     }
 
     @Override
-    // Recipes & Tags
+    // Recipes
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
         hollow_log.blocks.forEach((wood, block) -> {
                 // Variables
             ResourceLocation recipeLoc = ResType.RECIPES.getPath( "wilderwild:oak_planks_from_hollowed");
-            ResourceLocation tagRLoc = EveryCompat.res(shortenedId() + "/" + wood.getNamespace() + "/" + "hollowed_" +
-                    wood.getTypeName() + "_logs");
             ResourceLocation newRecipeLoc = EveryCompat.res(wood.getTypeName() + "_planks_from_hollowed");
-            boolean isTagFull = false;
 
-                // TAGS ================================================================================================
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tagRLoc);
-
-            // Adding to tag's list
-            if (block != null) {
-                tagBuilder.addEntry(block.asItem());
-                tagBuilder.addEntry(stripped_hollow_log.blocks.get(wood).asItem());
-                isTagFull = true;
-            }
-
-            // Adding to the resources
-            if (isTagFull) {
-                handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
-                handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
-            }
-
-            // RECIPE ==============================================================================================
+// RECIPE ==============================================================================================
             try (InputStream recipeStream = manager.getResource(recipeLoc)
                     .orElseThrow(() -> new FileNotFoundException("ResourceLocation: " + recipeLoc)).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
                 // Editing the recipe
                 recipe.getAsJsonArray("ingredients").get(0).getAsJsonObject()
-                        .addProperty("tag", tagRLoc.toString());
+                        .addProperty("tag", whichTags("logs", "caps", wood, handler, manager).toString());
 
                 recipe.getAsJsonObject("result")
                         .addProperty("item", Utils.getID(wood.planks).toString());
 
                 // Adding to the resources
-                if (isTagFull) {
-                    handler.dynamicPack.addJson(newRecipeLoc, recipe, ResType.RECIPES);
-                    EveryCompat.LOGGER.warn("RECIPES: PASSED - {}", wood.getTypeName());
-                }
+                handler.dynamicPack.addJson(newRecipeLoc, recipe, ResType.RECIPES);
 
             } catch (IOException e) {
                 handler.getLogger().error("Failed to open the recipe file: ", e);
