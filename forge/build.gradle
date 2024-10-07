@@ -179,6 +179,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:4616489")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389567")
+    modCompileOnly("curse.maven:tropicraft-254794:5312670") //WIP
     modCompileOnly("curse.maven:twigs-496913:4533061")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4520253")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4799968")

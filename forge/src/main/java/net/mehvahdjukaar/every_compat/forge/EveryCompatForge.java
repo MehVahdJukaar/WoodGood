@@ -32,6 +32,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBe
 import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
+import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
@@ -71,6 +72,7 @@ public class EveryCompatForge extends EveryCompat {
 
         // ========================================= Add Modules ==================================================== \\
         addModule("absentbydesign", () -> AbsentByDesignModule::new);
+        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("beautify", () -> BeautifyDecorateModule::new);
         addModule("buildersaddition", () -> BuildersAdditionModule::new);
@@ -80,10 +82,11 @@ public class EveryCompatForge extends EveryCompat {
         addModule("create", () -> CreateModule::new);
         addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("decoration_delight", () -> DecorationDelightModule::new);
-        addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         if (PlatformHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
+        addModule("dramaticdoors", () -> DramaticDoorsModule::new);
+        addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
@@ -93,21 +96,21 @@ public class EveryCompatForge extends EveryCompat {
         addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("quark", () -> QuarkModule::new);
+        addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
+        addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
+        addModule("tropicraft", () -> TropicraftModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("woodster", () -> WoodsterModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
-        addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         if (ModList.get().getModContainerById("workshop_for_handsome_adventurer") // Won't enabled if version is 1.14.7
                 .map(v->v.getModInfo().getVersion()).toString().compareTo("1.14.7") < 0) {
             addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         }
         addModule("xercamod", () -> XercaModule::new);
-        addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
-        addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
 
         // Macaw's
         addModule("mcwbridges", () -> MacawBridgesModule::new);
@@ -119,7 +122,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwroofs", () -> MacawRoofsModule::new);
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
-        addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 //        addModule("carpenter", () -> CarpenterModule::new);
