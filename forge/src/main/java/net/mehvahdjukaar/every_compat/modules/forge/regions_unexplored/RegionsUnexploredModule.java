@@ -58,7 +58,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
     public RegionsUnexploredModule(String modId) {
         super(modId, "ru");
-        var tab = RuTabs.REGIONS_UNEXPLORED_MAIN_TAB.getId();
+        var tab = modRes("ru_main");
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
             getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
