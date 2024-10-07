@@ -826,5 +826,17 @@
   "block_type.table_top_craft.chess_timer": "%s Chess Timer",
   "block_type.table_top_craft.connect_four": "%s Connect Four",
 
-  "block_type.tropicraft.boardwalk": "%s Boardwalk"
+  "block_type.tropicraft.boardwalk": "%s Boardwalk",
+
+  "block_type.clutter.wall_bookshelf": "%s Wall Bookshelf",
+  "block_type.clutter.window_sill": "%s Window Sill",
+  "block_type.clutter.chair": "%s Chair",
+  "block_type.clutter.stripped_chair": "Stripped %s Chair",
+  "block_type.clutter.table": "%s Table",
+  "block_type.clutter.stripped_table": "Stripped %s Table",
+  "block_type.clutter.bench": "%s Bench",
+  "block_type.clutter.stripped_bench": "Stripped %s Bench",
+  "block_type.clutter.trellis": "%s Trellis",
+  "block_type.clutter.wall_cupboard": "%s Wall Cupboard",
+  "block_type.clutter.cupboard": "%s Cupboard"
 }

@@ -1,17 +1,14 @@
 package net.mehvahdjukaar.every_compat.fabric;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
-import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
-import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
-import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
-import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsModule;
@@ -33,6 +30,9 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
     public void onInitialize() {
         this.commonInit();
 
+        if (PlatformHelper.getEnv().isClient())
+            ItemTooltipCallback.EVENT.register(EveryCompatClient::onItemTooltip);
+
         // ========================================= Add Other Compat Mods ========================================== \\
                 // Macaw's
         addModule("mcwbridges", () -> MacawBridgesModule::new);
@@ -50,6 +50,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("beautify", () -> BeautifyRefabricatedModule::new);
         addModule("bewitchment", () -> BewitchmentModule::new);
+        addModule("clutter", () -> ClutterModule::new);
         addModule("create", () -> CreateModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);

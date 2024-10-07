@@ -88,6 +88,7 @@ dependencies {
     modCompileOnly("curse.maven:camp-chair-531744:3835679")
     modCompileOnly("curse.maven:carpenter-549446:4673195") //WIP
     modCompileOnly("curse.maven:chipped-456956:4463478")
+    modCompileOnly("curse.maven:clutter-826060:4494992")
     modCompileOnly("curse.maven:cozy-625281:4171816")
     modCompileOnly("curse.maven:create-fabric-624165:4597892")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941637")
