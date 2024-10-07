@@ -109,17 +109,17 @@ dependencies {
     implementation(include("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
-//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
+    // ============================================== DEPENDENCIES ================================================== \\
+//    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge") // LOCAL
     modImplementation("curse.maven:selene-499980:5731106") // v2.13.0
 
 
-    // ============================================== DEPENDENCIES ================================================== \\
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | Required by: REI
     modRuntimeOnly("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored
-    modImplementation("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Chipped, Handcrafted, Cozy
+//    modImplementation("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Chipped, Handcrafted, Cozy
     modCompileOnly("curse.maven:athena-841890:5176879") // Chipped
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
@@ -164,7 +164,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
 
-//    modImplementation("curse.maven:cozy-625281:4728204") //Failed to process jar when running jar processor: fabric-loom:access-widener
+//    modImplementation("tech.thatgravyboat.cozy:cozy-1.1.1-forge") //Failed to process jar when running jar processor: fabric-loom:access-widener
         // OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
     modCompileOnly("curse.maven:another-furniture-610492:4034009") //WARNING: version 2.1.2-1.19.2
@@ -207,6 +207,7 @@ dependencies {
     modCompileOnly("curse.maven:quark-243121:5093415")
     modCompileOnly("curse.maven:storage-drawers-223852:4668552")
     modCompileOnly("maven.modrinth:stylish-stiles:l9FFA4BK")
+    modCompileOnly("curse.maven:table-top-craft-467136:5318681")
     modCompileOnly("curse.maven:timber-frames-606011:5372390")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
@@ -220,7 +221,6 @@ dependencies {
     modCompileOnly("curse.maven:woodworks-543610:5228779")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
-    modCompileOnly("curse.maven:table-top-craft-467136:5318681")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151869")
 
