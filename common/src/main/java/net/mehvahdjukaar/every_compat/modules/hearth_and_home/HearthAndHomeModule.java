@@ -5,6 +5,7 @@ import com.starfish_studios.hearth_and_home.block.LatticeBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -12,7 +13,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.valhelsia.valhelsia_core.api.common.helper.PlatformHelper;
 
 // SUPPORT v2.0.1
 public class HearthAndHomeModule extends SimpleModule {
@@ -25,7 +25,7 @@ public class HearthAndHomeModule extends SimpleModule {
 
     public HearthAndHomeModule(String modId) {
         super(modId, "hnhome");
-        var tab = (PlatformHelper.isForge()) ? modRes(HearthAndHome.MOD_ID) : modRes("tab");
+        var tab = (PlatHelper.getPlatform().isForge()) ? modRes(HearthAndHome.MOD_ID) : modRes("tab");
 
         sanded_wood = SimpleEntrySet.builder(WoodType.class, "sanded_wood",
                         getModBlock("oak_sanded_wood"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
