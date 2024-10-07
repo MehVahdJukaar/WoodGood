@@ -48,7 +48,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -132,7 +134,7 @@ public class EveryCompatForge extends EveryCompat {
             // addModule("graveyard", () -> GraveyardModule::new);
 
 
-        // ========================================================================================================== \\
+// ===================================================== OTHERS ===================================================== \\
         if (PlatformHelper.getEnv().isClient()) {
             EveryCompatClient.commonInit();
         }
@@ -142,6 +144,12 @@ public class EveryCompatForge extends EveryCompat {
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onDataSync);
 
         forAllModules(CompatModule::onModInit);
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void itemTooltipEvent(ItemTooltipEvent event) {
+        EveryCompatClient.onItemTooltip(event.getItemStack(),event.getFlags(), event.getToolTip());
+
     }
 
     @SubscribeEvent
