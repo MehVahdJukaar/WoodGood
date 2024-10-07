@@ -1,26 +1,13 @@
 ### UPDATED:
-- Blocks will be included in tab (this should prevent the crash due to "tab being null" or similar)
-  - **Reguions Unexplored** (COMMON)
-  - **Valhelsia Furniture** (FABRIC)
-  - **Beautify** (COMMON)
-- **Building But Better** (FORGE): Restored blc the mod's _FORGE side_ doesn't have the module built-in. [Fixed Issue#627](https://github.com/MehVahdJukaar/WoodGood/issues/627)
-- **Beautiful Campfires**(COMMON):
-  - Fixed the missing texture for both _campfires_ with **Ad Astra**
-  - Fixed the missing recipes
-  - Fixed both _campfires_' not turned off when unlit or turned on when lit
-- **EveryComp**: Improved the recipes using tags as ingredient via 
-  - **Wilder Wild** (FABRIC)
-  - **Woodworks** (FORGE)
-  - **Quark** (COMMON)
-  - **Just A Raft** (FORGE)
+- **Region Unexplored** (FORGE): Fixed the tab being null
+- **Hearth And Home** (COMMON): Removed the wrong library where **Valhelsia Core** is required
 
 ---
 
 ### NEW:
-- **Table Top Craft** (COMMON) - thanks to _andrew0030_
-- **TRANSLATION**: es_cl.json - thanks to _Ganbare-Lucifer_
+- N/A
 
 ---
 
 **LEGEND**:
-- (COMMON) = FORGE & FABRIC
+- (COMMON) = FORGE & FABRI
