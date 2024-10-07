@@ -23,6 +23,7 @@ import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModul
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
@@ -145,6 +146,7 @@ public abstract class EveryCompat {
         addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
         addModule("villagersplus", () -> VillagersPlusModule::new);
+        addModule("table_top_craft", () -> TableTopCraftModule::new);
 
 // ===================================================== OTHERS ===================================================== \\
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));

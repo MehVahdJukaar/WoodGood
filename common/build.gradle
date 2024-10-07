@@ -51,6 +51,7 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603")
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993")
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
+    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819")
 
 // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modCompileOnly("curse.maven:missing-wilds-622590:3891602")

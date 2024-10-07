@@ -1,20 +1,24 @@
 ### UPDATED:
-- **Every Compat** (COMMON): Changed system to check for if a moudle have no tab set for blocks, then will crash instead of keep going on
-- **Chipped** (COMMON): 
-  - Fixed the missing texture for _classic\_\<type\>\_trapdoor_
-  - Fixed the disappearance **Chipped**'s compatibility with any Wood mods
-- **Beautiful Campfires** (COMMON): (Since v2.6.79)
-  - Added campfires to creative tab 
-  - Added tags to Campfires - [Fixed Issue#618](https://github.com/MehVahdJukaar/WoodGood/issues/618)
-- **Another Furniture (AF)** (FORGE): [Fixed issue#621](https://github.com/MehVahdJukaar/WoodGood/issues/621) (Since v2.6.79)
-- **Clutter** (FABRIC): _benches_ are now strippable. It must have the version of `clutter v0.5.11` or newer (Since v2.6.79)
+- Blocks will be included in tab (this should prevent the crash due to "tab being null" or similar)
+  - **Reguions Unexplored** (COMMON)
+  - **Valhelsia Furniture** (FABRIC)
+  - **Beautify** (COMMON)
+- **Building But Better** (FORGE): Restored blc the mod's _FORGE side_ doesn't have the module built-in. [Fixed Issue#627](https://github.com/MehVahdJukaar/WoodGood/issues/627)
+- **Beautiful Campfires**(COMMON):
+  - Fixed the missing texture for both _campfires_ with **Ad Astra**
+  - Fixed the missing recipes
+  - Fixed both _campfires_' not turned off when unlit or turned on when lit
+- **EveryComp**: Improved the recipes using tags as ingredient via 
+  - **Wilder Wild** (FABRIC)
+  - **Woodworks** (FORGE)
+  - **Quark** (COMMON)
+  - **Just A Raft** (FORGE)
 
 ---
 
 ### NEW:
-- **Just A Raft** (FORGE)
-- **The New Shutter** (FABRIC) - Forgot to add (Since v2.6.79)
-- **Missing Wild** (FABRIC) - Forgot to add (Since v2.6.79)
+- **Table Top Craft** (COMMON) - thanks to _andrew0030_
+- **TRANSLATION**: es_cl.json - thanks to _Ganbare-Lucifer_
 
 ---
 

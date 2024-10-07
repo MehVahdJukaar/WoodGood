@@ -10,20 +10,19 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
 
 //SUPPORT: v3.1.0+
 public class JustARaftModule extends SimpleModule {
@@ -63,60 +62,19 @@ public class JustARaftModule extends SimpleModule {
     }
 
     @Override
-    // RECIPES & TAGS
+    // RECIPES
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
+        ResourceLocation recipeLoc = ResType.RECIPES.getPath(modRes("oak_raft"));
 
         rafts.items.forEach((wood, item ) -> {
-            // Variables
-            ResourceLocation recipeLoc = ResType.RECIPES.getPath(modRes("oak_raft"));
-            ResourceLocation tagEC = EveryCompat.res(shortenedId() + "/" + wood.getAppendableId() + "_logs");
-
-// TAGS ====================================================================================================
-
-            // Check for logs having a tag with #<namespace>:<type>_logs
-            ResourceLocation tagMOD = new ResourceLocation(wood.getNamespace(), wood.getTypeName() + "_logs");
-            TagKey<Block> tagKey = TagKey.create(Registries.BLOCK, tagMOD);
-            boolean hasTagWood = wood.log.defaultBlockState().is(tagKey);
-
-            if (!hasTagWood) { // If don't have the tag mentioned above, below will generate a tag
-                boolean isTagFull = false;
-
-                SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tagEC);
-                Block[] woods = {
-                        wood.log,
-                        wood.getBlockOfThis("stripped_log"),
-                        wood.getBlockOfThis("wood"),
-                        wood.getBlockOfThis("stripped_log")
-                };
-
-                // Adding to tag's list
-                for (Block block : woods) {
-                    if (block != null) {
-                        tagBuilder.addEntry(block.asItem());
-                        isTagFull = true;
-                    }
-                }
-
-                // Adding to the resources
-                if (isTagFull) {
-                    handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
-                    handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
-                }
-            }
-
-// RECIPES =================================================================================================
-
             try (InputStream recipeStrem = manager.getResource(recipeLoc)
                     .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipeLoc)).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStrem);
 
-                // Deciding which tagID to use
-                String tag = (hasTagWood) ? tagMOD.toString() : tagEC.toString();
-
                 // Editing the recipe
                 recipe.getAsJsonObject("key").getAsJsonObject("L")
-                        .addProperty("tag", tag);
+                        .addProperty("tag", whichTags("logs", "caps", wood, handler, manager).toString());
 
                 recipe.getAsJsonObject("result").addProperty("item", Utils.getID(item).toString());
 

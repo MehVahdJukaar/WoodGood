@@ -35,10 +35,17 @@ dependencies {
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.2")
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.2")
 
-//    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
-    modImplementation("curse.maven:selene-499980:5731104") // v2.13.0
+    // porting_lib required by fabric & everycomp
+    for (String module in port_lib_modules.split(",")) {
+        modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
+    }
+
 
     // ============================================== DEPENDENCIES ================================================== \\
+//    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}") // LOCAL
+    modImplementation("curse.maven:selene-499980:5731104") // v2.13.0
+
+
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
     modCompileOnly("curse.maven:athena-841890:5176880") // Chipped
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | Required by: REI
@@ -52,10 +59,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
 
-
-    for (String module in port_lib_modules.split(",")) {
-        modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
-    }
         // LOCAL
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
@@ -64,7 +67,6 @@ dependencies {
     modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
 
     // ================================================ IMPORTS ===================================================== \\
-
     // IMPORTANT: RLM: "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
 
         // Tools
@@ -103,13 +105,14 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-551364:4968876")
     modCompileOnly("curse.maven:furnish-547069:4821516")
     modCompileOnly("curse.maven:handcrafted-538214:5118730")
-    modImplementation("curse.maven:hearth-and-home-849364:4828281")
+    modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:missing-wilds-622590:5053651")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
+    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //RLM: exp4j
     modCompileOnly("curse.maven:twigs-496913:4603805")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8

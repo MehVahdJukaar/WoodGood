@@ -37,6 +37,10 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // Ad Astra
+        addOptional("ad_astra:strophar_stem", "_side", "ad_astra:block/strophar_stem");
+        addOptional("ad_astra:strophar_stem", "_top", "ad_astra:block/strophar_stem");
+
         // Terrestria
         addOptional("terrestria:sakura_log", "_top", "terrestria:block/sakura_log_section");
         addOptional("terrestria:yucca_palm_log", "_top", "terrestria:block/yucca_palm_log_section");
@@ -46,7 +50,6 @@ public class SpriteHelper {
         addOptional("theabyss:stripped_rena_log", "_top", "theabyss:block/rena_log");
         addOptional("theabyss:luna_log", "_top", "theabyss:block/luna_log");
         addOptional("theabyss:stripped_luna_log", "_top", "theabyss:block/luna_log");
-
 
         // Dreamy Cottage
         addOptional("dreamy_cottage:strawberry_log", "_side", "dreamy_cottage:block/strawberrylogside");
@@ -59,11 +62,9 @@ public class SpriteHelper {
         addOptional("dreamy_cottage:stripped_white_oak_log", "_side", "dreamy_cottage:block/strippedwhiteoakside");
         addOptional("dreamy_cottage:stripped_white_oak_log", "_top", "dreamy_cottage:block/strippedwhiteoak");
 
-            // Leaves
+// Leaves
         addOptional("dreamy_cottage:strawberry_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
         addOptional("dreamy_cottage:white_oak_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
-
-
 
         // Feywild
         addOptional("feywild:spring_tree_log", "_side", "feywild:block/spring_tree_wood");
