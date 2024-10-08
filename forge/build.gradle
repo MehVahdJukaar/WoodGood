@@ -141,12 +141,14 @@ dependencies {
 //    modRuntimeOnly("curse.maven:jei-238222:5733169")
 
     // ================================================ IMPORTS ===================================================== \\
+    // NOTE: mods with modRunTimeOnly are in compiled in build.gradle (COMMON), modRunTimeOnly is only for testing
 
     modCompileOnly("curse.maven:absent-by-design-305840:3835331")
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
     modCompileOnly("curse.maven:architects-palette-433862:4498448")
     modCompileOnly("curse.maven:backpacked-352835:3923045")
     modCompileOnly("curse.maven:beautify-decorate-633252:4036351")
+//    modCompileOnly("curse.maven:boatload-337396:4776091") //WIP --------- Entity Texturing issue
     modCompileOnly("curse.maven:buildersaddition-389697:4008246")
     modCompileOnly("curse.maven:camp-chair-531744:3930598")
     modCompileOnly("curse.maven:chipped-456956:4463479")
@@ -168,8 +170,9 @@ dependencies {
     modCompileOnly("curse.maven:mighty-mail-902986:4750268")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
-    modCompileOnly("curse.maven:refurbished-furniture-897116:5651931")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4374996") // LEGACY
+    modCompileOnly("curse.maven:oreberries-replanted-454062:4614499")
+    modCompileOnly("curse.maven:refurbished-furniture-897116:5651931")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:4418663")

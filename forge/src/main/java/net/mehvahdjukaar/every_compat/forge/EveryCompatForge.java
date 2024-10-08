@@ -26,6 +26,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildMod
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish.MrCrayfishFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.forge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
@@ -94,6 +95,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+        addModule("oreberriesreplanted", () -> OreberriesReplantedModule::new);
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
         addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("productivebees", () -> ProductiveBeesModule::new);
@@ -146,11 +148,11 @@ public class EveryCompatForge extends EveryCompat {
         forAllModules(CompatModule::onModInit);
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void itemTooltipEvent(ItemTooltipEvent event) {
-        EveryCompatClient.onItemTooltip(event.getItemStack(),event.getFlags(), event.getToolTip());
-
-    }
+//    @SubscribeEvent(priority = EventPriority.LOWEST)
+//    public void itemTooltipEvent(ItemTooltipEvent event) {
+//        EveryCompatClient.onItemTooltip(event.getItemStack(),event.getFlags(), event.getToolTip());
+//
+//    }
 
     @SubscribeEvent
     public void onCommonSetup(FMLCommonSetupEvent event) {

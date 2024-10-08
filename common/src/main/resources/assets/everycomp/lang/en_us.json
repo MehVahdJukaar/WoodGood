@@ -838,5 +838,7 @@
   "block_type.clutter.stripped_bench": "Stripped %s Bench",
   "block_type.clutter.trellis": "%s Trellis",
   "block_type.clutter.wall_cupboard": "%s Wall Cupboard",
-  "block_type.clutter.cupboard": "%s Cupboard"
+  "block_type.clutter.cupboard": "%s Cupboard",
+
+  "block_type.oreberriesreplanted.vat": "%s Vat"
 }
