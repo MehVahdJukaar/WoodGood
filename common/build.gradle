@@ -9,12 +9,11 @@ loom {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
 
-    modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
+// ================================================ DEPENDENCIES ================================================ \\
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}") // LOCAL
+    modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
 
 
-
-    // ================================================ DEPENDENCIES ================================================ \\
     modCompileOnly("curse.maven:architectury-api-419699:5137941") // v6.6.92
     modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
     modCompileOnly("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
@@ -37,7 +36,6 @@ dependencies {
     modCompileOnly("curse.maven:refurbished-furniture-897116:5651930")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5694015")
 
-//    modCompileOnly("curse.maven:missing-wilds-622590:3891602")
 
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")
