@@ -40,11 +40,9 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.apache.logging.log4j.LogManager;
@@ -95,7 +93,7 @@ public abstract class EveryCompat {
 
         }
 
-        // ============================================ addOtherCompatMod =========================================== \\
+// ============================================ addOtherCompatMod =========================================== \\
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
@@ -103,6 +101,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "endergetic", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "atmospheric", List.of("farmersdelight"));
+        addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
 
         // Macaw's
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
@@ -112,8 +111,6 @@ public abstract class EveryCompat {
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
 
-        addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", List.of("storagedrawers"));
-
         // Abnormals Delight
         addOtherCompatMod("abnormals_delight", "atmospheric", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "autumnity", List.of("farmersdelight"));
@@ -121,7 +118,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("abnormals_delight", "environmental", List.of("farmersdelight"));
         addOtherCompatMod("abnormals_delight", "upgrade_aquatic", List.of("farmersdelight"));
 
-        // ============================================== addModule ================================================= \\
+// ============================================== addModule ================================================= \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("barkcarpets", () -> BarkCarpetsModule::new);
         addModule("campchair", () -> CampChairModule::new);
@@ -129,14 +126,12 @@ public abstract class EveryCompat {
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("furnish", () -> FurnishModule::new);
+        addModule("handcrafted", () -> HandcraftedModule::new);
         addModule( "hnh" , () -> HearthAndHomeModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("table_top_craft", () -> TableTopCraftModule::new);
 
-        // =========================================== WORK IN PROGRESS ============================================  \\
-        addModule("handcrafted", () -> HandcraftedModule::new);
-
-        // ========================================= DISABLED FOR A REASON =========================================  \\
+// ========================================= DISABLED FOR A REASON =========================================  \\
 
 
         // ========================================================================================================== \\

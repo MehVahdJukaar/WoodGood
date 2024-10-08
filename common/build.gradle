@@ -18,7 +18,7 @@ dependencies {
     modCompileOnly("curse.maven:framework-549225:5692376") //v0.7.12 | MightyMail, Refurbished-Furniture
     modCompileOnly("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
 
-    // ================================================ IMPORTS ===================================================== \\
+// ================================================ IMPORTS ===================================================== \\
     //common. Fabric version that works on both
 
     modCompileOnly("curse.maven:another-furniture-610492:4034011")
