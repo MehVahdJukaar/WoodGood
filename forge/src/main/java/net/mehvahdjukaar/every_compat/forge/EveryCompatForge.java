@@ -37,6 +37,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
+import net.mehvahdjukaar.every_compat.modules.forge.villagers_plus.VillagersPlusModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
@@ -108,6 +109,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
+        addModule("villagersplus", () -> VillagersPlusModule::new);
         addModule("woodster", () -> WoodsterModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
         if (ModList.get().getModContainerById("workshop_for_handsome_adventurer") // Won't enabled if version is 1.14.7
@@ -144,15 +146,18 @@ public class EveryCompatForge extends EveryCompat {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onRemap);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onDataSync);
+        if (PlatformHelper.isDev()) {
+            MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::itemTooltipEvent);
+        }
 
         forAllModules(CompatModule::onModInit);
     }
 
-//    @SubscribeEvent(priority = EventPriority.LOWEST)
-//    public void itemTooltipEvent(ItemTooltipEvent event) {
-//        EveryCompatClient.onItemTooltip(event.getItemStack(),event.getFlags(), event.getToolTip());
-//
-//    }
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void itemTooltipEvent(ItemTooltipEvent event) {
+        EveryCompatClient.onItemTooltip(event.getItemStack(),event.getFlags(), event.getToolTip());
+
+    }
 
     @SubscribeEvent
     public void onCommonSetup(FMLCommonSetupEvent event) {

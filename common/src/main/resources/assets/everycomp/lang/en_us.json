@@ -840,5 +840,7 @@
   "block_type.clutter.wall_cupboard": "%s Wall Cupboard",
   "block_type.clutter.cupboard": "%s Cupboard",
 
-  "block_type.oreberriesreplanted.vat": "%s Vat"
+  "block_type.oreberriesreplanted.vat": "%s Vat",
+
+  "block_type.villagersplus.horticulturist_table": "%s Flower Tub"
 }
