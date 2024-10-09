@@ -358,7 +358,7 @@
   "block_type.mctb.crafting_table": "Mesa de crafteo de %s",
 
   "block_type.mcwbridges.rail_bridge": "Puente ferroviario de %s",
-  "block_type.mcwbridges.bridge_pier": "Soporte de puente de %s",
+  "block_type.mcwbridges.bridge_pier": "Puente de muelle de %s",
   "block_type.mcwbridges.log_bridge_middle": "Puente de %s",
   "block_type.mcwbridges.log_bridge_stair": "Escalera de puente de %s",
   "block_type.mcwbridges.rope_bridge_stair": "Escalera de puente de cuerda de %s",
