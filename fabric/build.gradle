@@ -113,6 +113,7 @@ dependencies {
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5104629")
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //RLM: exp4j
+    modCompileOnly("curse.maven:the-twilight-forest-unofficial-1111023:5791503") // Use RLM
     modCompileOnly("curse.maven:twigs-496913:4603805")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
@@ -124,7 +125,6 @@ dependencies {
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") // Not available & Currently "The Twilight Forest Unofficial" is available
-    modCompileOnly("curse.maven:the-twilight-forest-unofficial-1111023:5791503") // Due to an issue @ Line 114
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") // Not available
 
     // ============================================ FOR TESTING ===================================================== \\
