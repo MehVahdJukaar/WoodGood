@@ -22,6 +22,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.lieonlion.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
@@ -67,7 +68,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("woodenhoppers", () -> WoodenHoppersModule::new);
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
-//        addModule("twilightforest", () -> TwilightForestModule::new); // Not available
+//        addModule("twilightforest", () -> TwilightForestModule::new); // Support The Twilight Forest Unofficial & Due to an issue @ Line 114
 //        addModule("architects_palette", () -> ArchitectsPaletteModule::new); // Not available
 
 // ===================================================== OTHERS ===================================================== \\

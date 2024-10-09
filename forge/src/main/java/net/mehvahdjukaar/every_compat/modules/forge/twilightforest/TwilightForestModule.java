@@ -1,22 +1,17 @@
 package net.mehvahdjukaar.every_compat.modules.forge.twilightforest;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -29,8 +24,6 @@ import twilightforest.block.HollowLogHorizontal;
 import twilightforest.block.HollowLogVertical;
 import twilightforest.enums.HollowLogVariants;
 import twilightforest.init.TFBlocks;
-import twilightforest.init.TFCreativeTabs;
-import twilightforest.init.TFItems;
 import twilightforest.item.HollowLogItem;
 
 import java.util.function.Supplier;
@@ -42,34 +35,34 @@ public class TwilightForestModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, HollowLogVertical> hollowLogsVertical;
     public final SimpleEntrySet<WoodType, HollowLogHorizontal> hollowLogsHorizontal;
     public final SimpleEntrySet<WoodType, HollowLogClimbable> hollowLogsClimbable;
-    //public final ItemOnlyEntrySet<WoodType, Item> hollowLogsItems;
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
+        var tab = modRes("blocks");
 
         //TODO: check face culling
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                )
                 .addTag(modRes("banisters"), Registries.BLOCK)
                 .addTag(modRes("banisters"), Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
-                .setTab( TFCreativeTabs.BLOCKS)
+                .setTabKey(tab)
                 .build();
-
         this.addEntry(banisters);
 
 
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, getBirch(),
-                        w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log)))
+                        w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: Textures
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
-                .noItem()
-                .requiresChildren("stripped_log")
+                .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
-
         this.addEntry(hollowLogsHorizontal);
 
 
@@ -79,37 +72,26 @@ public class TwilightForestModule extends SimpleModule {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return new HollowLogVertical(Utils.copyPropertySafe(w.log), RegistryObject.create(id, ForgeRegistries.BLOCKS));
                         })
+                .requiresChildren("stripped_log") //REASON: Textures
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
-                .requiresChildren("stripped_log")
                 .noItem()
-                .setTab(TFCreativeTabs.BLOCKS)
+                .setTabKey(tab)
                 .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log"))
                 .build();
-
         this.addEntry(hollowLogsVertical);
 
         hollowLogsClimbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, getBirch(),
                         w  -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
-                                RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS)))
+                                RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS))
+                )
+                .requiresChildren("stripped_log") //REASON: Textures
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
-                .noItem()
-                .requiresChildren("stripped_log")
+                .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
-
         this.addEntry(hollowLogsClimbable);
 
-        /*
-        hollowLogsItems = ItemOnlyEntrySet.builder(WoodType.class, "log_vertical", "hollow",
-                TFItems.HOLLOW_BIRCH_LOG, getBirch(),
-                        w->new HollowLogItem(
-                                RegistryObject.create(Utils.getID(hollowLogsHorizontal.blocks.get(w)), ForgeRegistries.BLOCKS),
-                                RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS),
-                                RegistryObject.create(Utils.getID(hollowLogsClimbable.blocks.get(w)), ForgeRegistries.BLOCKS),
-                                new Item.Properties()))
-
-                .build();*/
     }
 
     @NotNull

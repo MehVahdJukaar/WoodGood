@@ -123,7 +123,8 @@ dependencies {
     modCompileOnly("curse.maven:regions-unexplored-659110:5151837")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
-    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") // Not available
+//    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") // Not available & Currently "The Twilight Forest Unofficial" is available
+    modCompileOnly("curse.maven:the-twilight-forest-unofficial-1111023:5791503") // Due to an issue @ Line 114
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") // Not available
 
     // ============================================ FOR TESTING ===================================================== \\
