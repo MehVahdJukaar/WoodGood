@@ -11,6 +11,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +27,8 @@ import twilightforest.block.HollowLogVertical;
 import twilightforest.init.TFBlocks;
 import twilightforest.item.HollowLogItem;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 //SUPPORT: v1.2+ | Currently, The Twilight Forest Unofficial
@@ -96,9 +99,19 @@ public class TwilightForestModule extends SimpleModule {
 
     }
 
+   static  Field portingLibBadAPI = Arrays.stream(RegistryObject.class.getDeclaredFields())
+            .filter(f -> f.getType().equals(Supplier.class)).findFirst().get();
+
     @NotNull
     private static<T extends Block> RegistryObject<T> makeRegObj(ResourceLocation id) {
-        return new RegistryObject<>(id, ResourceKey.create(Registries.BLOCK, id));
+        RegistryObject<T> r = new RegistryObject<>(id, ResourceKey.create(Registries.BLOCK, id));
+        portingLibBadAPI.setAccessible(true);
+        try {
+            portingLibBadAPI.set(r, (Supplier<Block>) () -> BuiltInRegistries.BLOCK.get(id));
+        } catch (IllegalAccessException e) {
+           throw new RuntimeException(e);
+        }
+        return r;
     }
 
     @Override
