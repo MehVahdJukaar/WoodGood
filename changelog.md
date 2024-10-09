@@ -1,6 +1,5 @@
 ### UPDATED:
-- **Region Unexplored** (FORGE): Fixed the tab being null
-- **Hearth And Home** (COMMON): Removed the wrong library where **Valhelsia Core** is required
+- **The Twilight Forest** (FORGE): Fixed the spam logging due to "tab null"
 
 ---
 
