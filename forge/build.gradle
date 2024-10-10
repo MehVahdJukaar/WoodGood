@@ -132,6 +132,8 @@ dependencies {
     modCompileOnly("curse.maven:titanium-287342:5468426") // Functional-Storage
 //    modImplementation("curse.maven:supermartijn642s-core-lib-454372:5668859") // Rechiseled
 //    modImplementation("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
+//    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum
+//    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum
 
     modRuntimeOnly("curse.maven:configured-457570:5180902")
     modRuntimeOnly("curse.maven:patchouli-306770:4636277") // TFC, Timber-Frames
@@ -219,13 +221,12 @@ dependencies {
     modCompileOnly("curse.maven:villagersplus-forge-817272:4996995")
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:woodworks-543610:5228779")
-    modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
+    modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:5713529")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5151869")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
-    // implementation fg.deobf("curse.maven:curios-309927:3670447") // LIBRARY
 //     modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
     // implementation fg.deobf("curse.maven:marg-324494:3723497") // LIBRARY
     // implementation fg.deobf("curse.maven:ortuslib-616457:3768197") // LIBRARY
@@ -233,7 +234,7 @@ dependencies {
 
     // modImplementation("curse.maven:benched-417063:3821546") // Use OBJ Format
 
-    // modImplementation("curse.maven:malum-484064:3768401") // MAGIC MOD & use BBModel
+//     modRuntimeOnly("curse.maven:malum-484064:5718038") // MAGIC MOD & use BBModel
 
     // =========================================== FOR TESTING ===================================================== \\
 //    modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES
