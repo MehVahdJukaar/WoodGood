@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.type.StoneType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SimpleModule extends CompatModule {
 
@@ -70,25 +72,37 @@ public class SimpleModule extends CompatModule {
     @Override
     public void registerWoodBlocks(Registrator<Block> registry, Collection<WoodType> woodTypes) {
         getEntries().forEach(e -> e.registerWoodBlocks(this, registry, woodTypes));
+        AtomicInteger blockCount = new AtomicInteger();
         getEntries().forEach(e -> {
-            if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) bloat += ae.blocks.size();
+            blockCount.addAndGet(e.getBlockCount());
         });
+        bloat += blockCount.get();
+        if (blockCount.get() > 0)
+            EveryCompat.LOGGER.info("{}: registered {} wood blocks", this, blockCount.get());
     }
 
     @Override
     public void registerLeavesBlocks(Registrator<Block> registry, Collection<LeavesType> leavesTypes) {
         getEntries().forEach(e -> e.registerLeavesBlocks(this, registry, leavesTypes));
+        AtomicInteger blockCount = new AtomicInteger();
         getEntries().forEach(e -> {
-            if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) bloat += ae.blocks.size();
+            blockCount.addAndGet(e.getBlockCount());
         });
+        bloat += blockCount.get();
+        if (blockCount.get() > 0)
+            EveryCompat.LOGGER.info("{}: registered {} leaves blocks", this, blockCount.get());
     }
 
     @Override
     public void registerStonesBlocks(Registrator<Block> registry, Collection<StoneType> leavesTypes) {
         getEntries().forEach(e -> e.registerStonesBlocks(this, registry, leavesTypes));
+        AtomicInteger blockCount = new AtomicInteger();
         getEntries().forEach(e -> {
-            if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) bloat += ae.blocks.size();
+            blockCount.addAndGet(e.getBlockCount());
         });
+        bloat += blockCount.get();
+        if (blockCount.get() > 0)
+            EveryCompat.LOGGER.info("{}: registered {} stone blocks", this, blockCount.get());
     }
 
     @Override
@@ -112,8 +126,22 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> e.generateModels(this, handler, manager));
-        getEntries().forEach(e -> e.generateTextures(this, handler, manager));
+        getEntries().forEach(e -> {
+            try {
+                e.generateModels(this, handler, manager);
+            } catch (Exception ex) {
+                EveryCompat.LOGGER.error("Failed to generate models for entry set {}:", e, ex);
+                if (PlatHelper.isDev()) throw ex;
+            }
+        });
+        getEntries().forEach(e -> {
+            try {
+                e.generateTextures(this, handler, manager);
+            } catch (Exception ex) {
+                EveryCompat.LOGGER.error("Failed to generate textures for entry set {}:", e, ex);
+                if (PlatHelper.isDev()) throw ex;
+            }
+        });
     }
 
     @Override

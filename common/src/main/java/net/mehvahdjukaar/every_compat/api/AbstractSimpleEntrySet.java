@@ -121,6 +121,12 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
     }
 
+    @Override
+    public int getBlockCount() {
+        return this.blocks.size();
+    }
+
+    @Override
     public String getName() {
         return typeName;
     }

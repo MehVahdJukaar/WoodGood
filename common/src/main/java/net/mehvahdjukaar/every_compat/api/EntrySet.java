@@ -91,4 +91,6 @@ public interface EntrySet<T extends BlockType> {
     default Item getItemForECTab(T type) {
         return this.getItemOf(type);
     }
+
+    int getBlockCount();
 }
