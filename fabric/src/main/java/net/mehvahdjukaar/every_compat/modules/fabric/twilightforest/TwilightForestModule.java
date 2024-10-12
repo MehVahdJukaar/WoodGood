@@ -56,19 +56,19 @@ public class TwilightForestModule extends SimpleModule {
                 .build();
         this.addEntry(banisters);
 
-
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         getModBlock("hollow_acacia_log_horizontal", HollowLogHorizontal.class),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: Textures
+                //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
+                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(hollowLogsHorizontal);
-
 
         hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
@@ -77,6 +77,8 @@ public class TwilightForestModule extends SimpleModule {
                             return new HollowLogVertical(Utils.copyPropertySafe(w.log), makeRegObj(id));
                         })
                 .requiresChildren("stripped_log") //REASON: Textures
+                //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
+                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .noItem()
                 .setTabKey(tab)
@@ -90,6 +92,8 @@ public class TwilightForestModule extends SimpleModule {
                                 makeRegObj(Utils.getID(hollowLogsVertical.blocks.get(w))))
                 )
                 .requiresChildren("stripped_log") //REASON: Textures
+                //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
+                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -99,7 +103,7 @@ public class TwilightForestModule extends SimpleModule {
 
     }
 
-   static  Field portingLibBadAPI = Arrays.stream(RegistryObject.class.getDeclaredFields())
+   static Field portingLibBadAPI = Arrays.stream(RegistryObject.class.getDeclaredFields())
             .filter(f -> f.getType().equals(Supplier.class)).findFirst().get();
 
     @NotNull
@@ -123,11 +127,11 @@ public class TwilightForestModule extends SimpleModule {
             Item i = new HollowLogItem(
                     makeRegObj(Utils.getID(hollowLogsHorizontal.blocks.get(w))),
                     makeRegObj(Utils.getID(b)),
-                    makeRegObj(EveryCompat.res(itemName + "_climbable")), // here, idk what's the cause of this: Cannot invoke "java.util.function.Supplier.get()" because "this.getter" is null
+                    makeRegObj(EveryCompat.res(itemName + "_climbable")),
                     new Item.Properties());
             hollowLogsVertical.items.put(w, i);
             w.addChild(childKey, i);
-            registry.register(EveryCompat.res(itemName + "_vertical"), i);
+            registry.register(EveryCompat.res(itemName), i);
         });
     }
 
@@ -144,11 +148,4 @@ public class TwilightForestModule extends SimpleModule {
                 hollowLogsHorizontal.blocks.values().toArray(Block[]::new));
     }
 
-    @Nullable
-    private <B extends Block> B ifHasStripped(WoodType woodType, Supplier<B> supplier) {
-        if (woodType.getChild("stripped_log") != null) {
-            return supplier.get();
-        }
-        return null;
-    }
 }

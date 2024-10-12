@@ -1,27 +1,22 @@
 package net.mehvahdjukaar.every_compat.modules.forge.workshop;
 
-import moonfather.workshop_for_handsome_adventurer.Constants;
 import moonfather.workshop_for_handsome_adventurer.blocks.*;
 import moonfather.workshop_for_handsome_adventurer.initialization.ExternalWoodSupport;
 import moonfather.workshop_for_handsome_adventurer.initialization.Registration;
 import moonfather.workshop_for_handsome_adventurer.items.BlockItemEx;
 import moonfather.workshop_for_handsome_adventurer.items.WorkstationPlacerItem;
-import moonfather.workshop_for_handsome_adventurer.other.CreativeTab;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.resources.*;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fml.InterModComms;
@@ -30,219 +25,240 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
 
+//SUPPORT: v1.15.2+
 public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
     private static final ResourceLocation SPRUCE = new ResourceLocation("spruce");
     private static final ResourceLocation TAG_FORGE_WORKBENCH = new ResourceLocation("forge", "workbench");
     private static final ResourceLocation TAG_PACKINGTAPE_BLACKLIST = new ResourceLocation("packingtape", "te_blacklist");
-    public final SimpleEntrySet<WoodType, Block> BOOKSHELVES1, BOOKSHELVES2, BOOKSHELVES3, BOOKSHELVES4, BOOKSHELVES5;
-    public final SimpleEntrySet<WoodType, Block> SIMPLE_TABLES, POTIONSHELVES1, DUAL_TABLE_PARTS_BL, DUAL_TABLE_PARTS_BR, DUAL_TABLE_PARTS_TL, DUAL_TABLE_PARTS_TR;
-    public final SimpleEntrySet<WoodType, Block> TOOLRACKS1, TOOLRACKS2, TOOLRACKS3, TOOLRACKS4;
-    public final ItemOnlyEntrySet<WoodType, Item> STATION_PLACERS;
+    public final SimpleEntrySet<WoodType, Block> double_bookshelves, open_double_bookshelves, min_bookshelves, open_min_bookshelves, lantern_bookshelves;
+    public final SimpleEntrySet<WoodType, Block> simple_tables, potionshelves1, dual_table_parts_bl, dual_table_parts_br, dual_table_parts_tl, dual_table_parts_tr;
+    public final SimpleEntrySet<WoodType, Block> framed_toolracks, pframed_toolracks, double_toolracks, single_toolracks;
+    public final ItemOnlyEntrySet<WoodType, Item> station_placers;
 
     public WorkshopForHandsomeAdventurerModule(String modId) {
         super(modId, "wfha");
+        var tab = modRes(modId);
 
-        BOOKSHELVES1 = SimpleEntrySet.builder(WoodType.class,
-                        "", "book_shelf_double",
+        double_bookshelves = SimpleEntrySet.builder(WoodType.class, "", "book_shelf_double",
                         getModBlock("book_shelf_double_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new BookShelf.Dual("double"))
+                        w -> new BookShelf.Dual("double")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .addRecipe(modRes("book_shelf_double_spruce"))
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
+                .setTabKey(tab)
                 .addTile(Registration.BOOK_SHELF_BE)
                 .addCustomItem((wood, block, prop) -> new BlockItemEx( block, prop))
                 .build();
-        this.addEntry(BOOKSHELVES1);
-        BOOKSHELVES2 = SimpleEntrySet.builder(WoodType.class,
-                        "", "book_shelf_open_double",
+        this.addEntry(double_bookshelves);
+
+        open_double_bookshelves = SimpleEntrySet.builder(WoodType.class, "", "book_shelf_open_double",
                         getModBlock("book_shelf_open_double_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new BookShelf.Dual("open_double"))
+                        w -> new BookShelf.Dual("open_double")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .addRecipe(modRes("book_shelf_open_double_spruce"))
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.BOOK_SHELF_BE)
                 .build();
-        this.addEntry(BOOKSHELVES2);
-        BOOKSHELVES3 = SimpleEntrySet.builder(WoodType.class,
-                        "", "book_shelf_minimal",
+        this.addEntry(open_double_bookshelves);
+
+        min_bookshelves = SimpleEntrySet.builder(WoodType.class, "", "book_shelf_minimal",
                         getModBlock("book_shelf_minimal_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new BookShelf.TopSimple("minimal"))
+                        w -> new BookShelf.TopSimple("minimal")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.BOOK_SHELF_BE)
                 .build();
-        this.addEntry(BOOKSHELVES3);
-        BOOKSHELVES4 = SimpleEntrySet.builder(WoodType.class,
-                        "", "book_shelf_open_minimal",
+        this.addEntry(min_bookshelves);
+
+        open_min_bookshelves = SimpleEntrySet.builder(WoodType.class, "", "book_shelf_open_minimal",
                         getModBlock("book_shelf_open_minimal_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new BookShelf.TopSimple("open_minimal"))
+                        w -> new BookShelf.TopSimple("open_minimal")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .addRecipe(modRes("book_shelf_open_minimal_spruce"))
                 .addRecipe(modRes("book_shelf_open_minimal_from_double_spruce"))
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.BOOK_SHELF_BE)
                 .build();
-        this.addEntry(BOOKSHELVES4);
-        BOOKSHELVES5 = SimpleEntrySet.builder(WoodType.class,
-                        "", "book_shelf_with_lanterns",
+        this.addEntry(open_min_bookshelves);
+
+        lantern_bookshelves = SimpleEntrySet.builder(WoodType.class, "", "book_shelf_with_lanterns",
                         getModBlock("book_shelf_with_lanterns_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new BookShelf.TopWithLanterns("with_lanterns"))
+                        w -> new BookShelf.TopWithLanterns("with_lanterns")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.BOOK_SHELF_BE)
                 .build();
-        this.addEntry(BOOKSHELVES5);
-        SIMPLE_TABLES = SimpleEntrySet.builder(WoodType.class,
-                        "", "simple_table",
+        this.addEntry(lantern_bookshelves);
+
+        simple_tables = SimpleEntrySet.builder(WoodType.class, "", "simple_table",
                         getModBlock("simple_table_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        (w) -> new SimpleTable())
+                        (w) -> new SimpleTable()
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .requiresChildren("stripped_log")
                 .addTag(TAG_FORGE_WORKBENCH, Registries.BLOCK)
                 .addTag(TAG_FORGE_WORKBENCH, Registries.ITEM)
                 .addRecipe(modRes("simple_table_normal_spruce"))
                 .addRecipe(modRes("simple_table_replacement_spruce"))
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.SIMPLE_TABLE_BE)
                 .build();
-        this.addEntry(SIMPLE_TABLES);
-        TOOLRACKS1 = SimpleEntrySet.builder(WoodType.class,
-                        "", "tool_rack_framed",
+        this.addEntry(simple_tables);
+
+        framed_toolracks = SimpleEntrySet.builder(WoodType.class, "", "tool_rack_framed",
                         getModBlock("tool_rack_framed_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new DualToolRack(6, "framed"))
+                        w -> new DualToolRack(6, "framed")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.TOOL_RACK_BE)
+                .copyParentDrop()
                 .build();
-        this.addEntry(TOOLRACKS1);
-        TOOLRACKS2 = SimpleEntrySet.builder(WoodType.class,
-                        "", "tool_rack_pframed",
+        this.addEntry(framed_toolracks);
+
+        pframed_toolracks = SimpleEntrySet.builder(WoodType.class, "", "tool_rack_pframed",
                         getModBlock("tool_rack_pframed_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new DualToolRack(6, "pframed"))
+                        w -> new DualToolRack(6, "pframed")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.TOOL_RACK_BE)
+                .copyParentDrop()
                 .build();
-        this.addEntry(TOOLRACKS2);
-        TOOLRACKS3 = SimpleEntrySet.builder(WoodType.class,
-                        "", "tool_rack_double",
+        this.addEntry(pframed_toolracks);
+
+        double_toolracks = SimpleEntrySet.builder(WoodType.class, "", "tool_rack_double",
                         getModBlock("tool_rack_double_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new DualToolRack(6, "double"))
+                        w -> new DualToolRack(6, "double")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.TOOL_RACK_BE)
+                .copyParentDrop()
                 .build();
-        this.addEntry(TOOLRACKS3);
-        TOOLRACKS4 = SimpleEntrySet.builder(WoodType.class,
-                        "", "tool_rack_single",
+        this.addEntry(double_toolracks);
+
+        single_toolracks = SimpleEntrySet.builder(WoodType.class, "", "tool_rack_single",
                         getModBlock("tool_rack_single_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new ToolRack(2, "single"))
+                        w -> new ToolRack(2, "single")
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
                 .addRecipe(modRes("tool_rack_single_from_multi_spruce"))
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.TOOL_RACK_BE)
                 .build();
-        this.addEntry(TOOLRACKS4);
-        POTIONSHELVES1 = SimpleEntrySet.builder(WoodType.class,
-                        "", "potion_shelf",
+        this.addEntry(single_toolracks);
+
+        potionshelves1 = SimpleEntrySet.builder(WoodType.class, "", "potion_shelf",
                         getModBlock("potion_shelf_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new PotionShelf())
+                        w -> new PotionShelf()
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeTab.TAB_WORKSHOP)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx((Block) block, (Item.Properties) prop))
+                .setTabKey(tab)
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .addTile(Registration.POTION_SHELF_BE)
                 .build();
-        this.addEntry(POTIONSHELVES1);
-        DUAL_TABLE_PARTS_TR = SimpleEntrySet.builder(WoodType.class,
-                        "", "dual_table_top_right",
+        this.addEntry(potionshelves1);
+
+        dual_table_parts_tr = SimpleEntrySet.builder(WoodType.class, "", "dual_table_top_right",
                         getModBlock("dual_table_top_right_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new AdvancedTableTopSecondary())
+                        w -> new AdvancedTableTopSecondary()
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .noItem()
+                .noItem().noTab()
                 .requiresChildren("stripped_log")
                 .build();
-        this.addEntry(DUAL_TABLE_PARTS_TR);
-        DUAL_TABLE_PARTS_TL = SimpleEntrySet.builder(WoodType.class,
-                        "", "dual_table_top_left",
+        this.addEntry(dual_table_parts_tr);
+
+        dual_table_parts_tl = SimpleEntrySet.builder(WoodType.class, "", "dual_table_top_left",
                         getModBlock("dual_table_top_left_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new AdvancedTableTopSecondary())
+                        w -> new AdvancedTableTopSecondary()
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .noItem()
+                .noItem().noTab()
                 .requiresChildren("stripped_log")
                 .build();
-        this.addEntry(DUAL_TABLE_PARTS_TL);
-        DUAL_TABLE_PARTS_BR = SimpleEntrySet.builder(WoodType.class,
-                        "", "dual_table_bottom_right",
+        this.addEntry(dual_table_parts_tl);
+
+        dual_table_parts_br = SimpleEntrySet.builder(WoodType.class, "", "dual_table_bottom_right",
                         getModBlock("dual_table_bottom_right_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new AdvancedTableBottomSecondary())
+                        w -> new AdvancedTableBottomSecondary()
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .noItem()
+                .noItem().noTab()
                 .requiresChildren("stripped_log")
                 .build();
-        this.addEntry(DUAL_TABLE_PARTS_BR);
-        DUAL_TABLE_PARTS_BL = SimpleEntrySet.builder(WoodType.class,
-                        "", "dual_table_bottom_left",
+        this.addEntry(dual_table_parts_br);
+
+        dual_table_parts_bl = SimpleEntrySet.builder(WoodType.class, "", "dual_table_bottom_left",
                         getModBlock("dual_table_bottom_left_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new AdvancedTableBottomPrimary())
+                        w -> new AdvancedTableBottomPrimary()
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .requiresChildren("stripped_log")
-                .noItem()
+                .noItem().noTab()
                 .addTile(Registration.DUAL_TABLE_BE)
                 .build();
-        this.addEntry(DUAL_TABLE_PARTS_BL);
+        this.addEntry(dual_table_parts_bl);
 
-        STATION_PLACERS = ItemOnlyEntrySet.builder(WoodType.class,"", "workstation_placer",
+        station_placers = ItemOnlyEntrySet.builder(WoodType.class,"", "workstation_placer",
                         getModItem("workstation_placer_spruce"),
                         () -> WoodTypeRegistry.getValue(SPRUCE),
-                        w -> new WorkstationPlacerItem(w.getTypeName(), new Item.Properties()))
+                        w -> new WorkstationPlacerItem(w.getTypeName(), new Item.Properties())
+                )
+                .noTab()
                 .addRecipe(modRes("workstation_placer_spruce"))
-                .addCondition(DUAL_TABLE_PARTS_BL.blocks::containsKey)
+                .addCondition(dual_table_parts_bl.blocks::containsKey)
                 .build();
-        this.addEntry(STATION_PLACERS);
+        this.addEntry(station_placers);
 
     }
 
@@ -252,7 +268,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
 
         // we need to generate tag file for supported planks
         SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(modRes("supported_planks"));
-        SIMPLE_TABLES.blocks.forEach((w, value) -> tagBuilder.add(ForgeRegistries.ITEMS.getKey(w.planks.asItem())));
+        simple_tables.blocks.forEach((w, value) -> tagBuilder.add(ForgeRegistries.ITEMS.getKey(w.planks.asItem())));
         handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
     }
 
