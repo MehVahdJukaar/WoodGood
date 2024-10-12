@@ -4,13 +4,15 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
@@ -95,7 +97,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
 
         desks = SimpleEntrySet.builder(WoodType.class, "desk",
                         getModBlock("oak_desk", DeskBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DeskBlock(w.toVanillaOrOak(), modTag(w.getTypeName() + "_desks"), Utils.copyPropertySafe(w.planks))
+                        w -> new DeskBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(modRes("block/desk/oak/front"),
                         EveryCompat.res("block/vf/desk_front_m"))
@@ -106,6 +108,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/desk/oak/top_side"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
+                .addTag(ModTags.Items.DESKS, Registries.ITEM)
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -113,12 +116,13 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
 
         desk_drawers = SimpleEntrySet.builder(WoodType.class, "desk_drawer",
                         getModBlock("oak_desk_drawer", DeskDrawerBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new DeskDrawerBlock(w.toVanillaOrOak(), modTag(w.getTypeName() + "_desks"), Utils.copyPropertySafe(w.planks))
+                        w -> new DeskDrawerBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(ModBlockEntities.DESK_DRAWER)
                 // Using the same textures from desk's above
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
+                .addTag(ModTags.Items.DESKS, Registries.ITEM)
                 .defaultRecipe()
                 /*
                 * Below is a bit special. has to be separated from the Table's EntrySet above. It has 5 color palettes
@@ -135,7 +139,52 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
 
     // Tags
     private TagKey<Block> modTag(String name) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(EveryCompat.MOD_ID, name));
+        return TagKey.create(Registries.BLOCK, EveryCompat.res(name));
+    }
+
+    @Override
+    // Tags
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicServerResources(handler, manager);
+
+        createTagFor("desks", desks, desk_drawers, handler);
+        createTagFor("chairs", chairs, hay_chairs, handler);
+        for (var w : tables.blocks.keySet()) {
+            boolean isTagFull = false;
+            SimpleTagBuilder tag = SimpleTagBuilder.of(EveryCompat.res(w.getAppendableId() + "_tables"));
+
+             Block block = tables.blocks.get(w);
+                if (block != null) {
+                    isTagFull = true;
+                    tag.addEntry(block);
+                }
+            if (isTagFull) {
+                handler.dynamicPack.addTag(tag, Registries.ITEM);
+                handler.dynamicPack.addTag(tag, Registries.BLOCK);
+            }
+        }
+    }
+
+    public void createTagFor(String blockType, SimpleEntrySet<?,?> firstBlock, SimpleEntrySet<?,?> secondBlock, ServerDynamicResourcesHandler handler) {
+        for (var w : firstBlock.blocks.keySet()) {
+            boolean isTagFull = false;
+            SimpleTagBuilder tag = SimpleTagBuilder.of(EveryCompat.res(w.getAppendableId() + "_" + blockType));
+            Block firstB = firstBlock.blocks.get(w);
+            Block secondB = secondBlock.blocks.get(w);
+
+            if (firstB != null) {
+                isTagFull = true;
+                tag.addEntry(firstB);
+            }
+            if (secondB != null) {
+                isTagFull = true;
+                tag.addEntry(secondB);
+            }
+            if (isTagFull) {
+                handler.dynamicPack.addTag(tag, Registries.ITEM);
+                handler.dynamicPack.addTag(tag, Registries.BLOCK);
+            }
+        }
     }
 
     // Had to create this because of appendHoverText, "Hay Seat" is showing up on both chairs & hay_chairs
