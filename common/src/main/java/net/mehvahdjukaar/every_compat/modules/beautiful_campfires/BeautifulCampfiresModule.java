@@ -67,7 +67,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 //TEXTURE: using acacia_soul_campfire above
-                .createPaletteFromChild(palette -> {}, "log")
+                .createPaletteFromChild("log")
                 .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
                 .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

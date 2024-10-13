@@ -49,7 +49,7 @@ public class WilderWildModule extends SimpleModule {
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(RegisterBlocks.HOLLOWED_OAK_LOG))
                 )
                 .requiresChildren("stripped_log") // Textures
-                .createPaletteFromChild(pallete -> {}, "log")
+                .createPaletteFromChild("log")
                 .addTexture(modRes("block/hollowed_oak_log"))
                 .addTexture(modRes("block/hollowed_oak_log_top"))
                 // TEXTURE: using stripped_hollowed_oak_log from below
@@ -78,7 +78,7 @@ public class WilderWildModule extends SimpleModule {
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(RegisterBlocks.STRIPPED_HOLLOWED_OAK_LOG))
                 )
                 .requiresChildren("stripped_log") // Textures
-                .createPaletteFromChild(pallete -> {}, "stripped_log")
+                .createPaletteFromChild("stripped_log")
                 .addTexture(modRes("block/stripped_hollowed_oak_log"))
                 .addTexture(modRes("block/stripped_hollowed_oak_log_top"))
                 .addTexture(modRes("block/stripped_hollowed_oak_log"))

@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -53,7 +54,7 @@ public class BewitchmentModule extends SimpleModule {
                         w -> new Item(new Item.Properties())
                 )
                 .requiresChildren("stripped_log") // Recipes
-                .createPaletteFromChild(p -> {}, "log")
+                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .addTexture(modRes("item/oak_bark"))
                 .addTag(BWTags.BARKS, Registries.ITEM)
                 .build();

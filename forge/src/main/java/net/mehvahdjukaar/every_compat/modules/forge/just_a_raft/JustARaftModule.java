@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -42,7 +43,7 @@ public class JustARaftModule extends SimpleModule {
                             return new RaftItem(newRaft, new Item.Properties());
                         }
                 )
-                .createPaletteFromChild(p -> {}, "log")
+                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .addTextureM(modRes("entity/raft/oak_raft"), EveryCompat.res("entity/raft/oak_raft_m"))
                 .addTag(modRes("rafts"), Registries.ITEM)
                 .setTabKey(RaftRegistry.RAFT_TAB.getId())

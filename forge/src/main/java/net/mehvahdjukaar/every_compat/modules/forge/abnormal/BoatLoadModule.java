@@ -54,8 +54,7 @@ public class BoatLoadModule extends SimpleModule {
                 .addRecipe(modRes("oak_furnace_boat"))
                 .addTexture(modRes("item/large_oak_boat"))
                 .addTextureM(modRes("item/oak_furnace_boat"), EveryCompat.res("item/furnace_boat_mask"))
-                .createPaletteFromChild(p -> {
-                }, "boat")
+                .createPaletteFromChild("boat")
                 .build();
         this.addEntry(furnaceBoats);
     }
