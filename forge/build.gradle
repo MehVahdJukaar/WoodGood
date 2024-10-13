@@ -166,6 +166,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
+    modCompileOnly("curse.maven:macaws-stairs-1119394:5802535")
 
 //    modImplementation("tech.thatgravyboat.cozy:cozy-1.1.1-forge") //Failed to process jar when running jar processor: fabric-loom:access-widener
         // OTHERS
