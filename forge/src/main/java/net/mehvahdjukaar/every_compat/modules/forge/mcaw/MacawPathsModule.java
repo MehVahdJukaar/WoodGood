@@ -21,14 +21,14 @@ public class MacawPathsModule extends SimpleModule {
 
     public MacawPathsModule(String modId) {
         super(modId, "mcp");
-        var tab = TabInit.PATHSITEMGROUP;
+        var tab = modRes("pathsitemgroup");
 
 
         PLANKS_PATHS = SimpleEntrySet.builder(WoodType.class, "planks_path",
                         BlockInit.OAK_PLANKS_PATH, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FacingPathBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/oak_planks_path"))
