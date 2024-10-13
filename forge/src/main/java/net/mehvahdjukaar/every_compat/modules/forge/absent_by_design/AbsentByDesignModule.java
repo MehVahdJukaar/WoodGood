@@ -22,14 +22,17 @@ public class AbsentByDesignModule extends SimpleModule {
 
     public AbsentByDesignModule(String modId) {
         super(modId, "abd");
+        var tab = modRes("tab");
 
         fence_log = SimpleEntrySet.builder(WoodType.class, "", "fence_log",
                         getModBlock("fence_log_oak"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentFence(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
+                //TEXTURE: using the oak_log
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ItemTags.FENCES, Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(fence_log);
@@ -38,10 +41,12 @@ public class AbsentByDesignModule extends SimpleModule {
                         getModBlock("wall_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
+                //TEXTURE: using the oak_log
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_log);
@@ -50,10 +55,12 @@ public class AbsentByDesignModule extends SimpleModule {
                         getModBlock("wall_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
+                //TEXTURE: using the stripped_oak_log
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_stripped_log);
@@ -62,10 +69,12 @@ public class AbsentByDesignModule extends SimpleModule {
                         getModBlock("wall_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.planks).ignitedByLava())
                 )
+                //TEXTURE: using the oak_planks
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_planks);

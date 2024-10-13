@@ -21,6 +21,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -63,6 +64,7 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
                 .addTag(modRes("chests/normal"), Registries.ITEM)
                 .addTag(modRes("chests/wooden"), Registries.ITEM)
+                .setTabKey(CreativeModeTabs.FUNCTIONAL_BLOCKS)
                 .defaultRecipe()
                 .build();
         this.addEntry(chests);
@@ -84,6 +86,7 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(modRes("chests/wooden"), Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
+                .setTabKey(CreativeModeTabs.REDSTONE_BLOCKS)
                 .defaultRecipe()
                 .build();
         this.addEntry(trappedChests);
