@@ -2,7 +2,7 @@
 - **Macaw's Lights & Lamps** (COMMON): 
   - Fixed the light source not shining in darkness
   - Added a new furniture: _ceiling_fan_light_
-- **Updated the tab stuff** - NEED TESTING
+- **The Tab Stuff** - Fixed the spam logging due to tab being null
   - **Absent By Design** (FORGE) 
   - **Villagers Plus** (COMMON)
   - **More Chest Variants (lieonlion)** (FORGE)
@@ -12,7 +12,7 @@
 ---
 
 ### NEW:
-- N/A
+- **Macaw's Stairs** (COMMON)
 
 ---
 
