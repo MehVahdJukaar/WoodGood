@@ -74,6 +74,14 @@ side="BOTH"
 
 [[dependencies.everycomp]] #optional
 
+modId="mcwlights"
+mandatory=false
+versionRange="[1.1.0,)" #mandatory
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.everycomp]] #optional
+
 modId="dawnoftimebuilder"
 mandatory=false
 versionRange="[1.5.7,)" #mandatory
