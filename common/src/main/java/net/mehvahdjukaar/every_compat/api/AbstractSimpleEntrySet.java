@@ -703,23 +703,43 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             });
         }
 
-        public BL createPaletteFromChild(String childKey) {
-            return createPaletteFromChild(p -> {
-            }, childKey);
+        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
+            return createPaletteFromChild(paletteTransform, childKey, null);
         }
 
-        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
+        public BL createPaletteFromChild(String childKey, Predicate<String> whichSide) {
+            return createPaletteFromChild(p -> {}, childKey, whichSide);
+        }
+
+        public BL createPaletteFromChild(String childKey) {
+            return createPaletteFromChild(p -> {}, childKey, null);
+        }
+
+        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, Predicate<String> whichSide) {
             return this.setPalette((w, m) -> {
                 var c = w.getChild(childKey);
                 if (c instanceof Block b) {
-                    try (TextureImage plankTexture = TextureImage.open(m,
-                            RPUtils.findFirstBlockTextureLocation(m, b))) {
+                    if (whichSide != null) {
+                        try (TextureImage blockTexture = TextureImage.open(m,
+                                RPUtils.findFirstBlockTextureLocation(m, b, whichSide))) {
 
-                        List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-                        targetPalette.forEach(paletteTransform);
-                        return Pair.of(targetPalette, plankTexture.getMetadata());
-                    } catch (Exception e) {
-                        throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
+                            List<Palette> targetPalette = Palette.fromAnimatedImage(blockTexture);
+                            targetPalette.forEach(paletteTransform);
+                            return Pair.of(targetPalette, blockTexture.getMetadata());
+                        } catch (Exception e) {
+                            throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
+                        }
+                    }
+                    else { // whichSide should be defaulted to use top_texture -Xelbayria's assumption
+                        try (TextureImage plankTexture = TextureImage.open(m,
+                                RPUtils.findFirstBlockTextureLocation(m, b))) {
+
+                            List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+                            targetPalette.forEach(paletteTransform);
+                            return Pair.of(targetPalette, plankTexture.getMetadata());
+                        } catch (Exception e) {
+                            throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
+                        }
                     }
                 } else if (c instanceof Item i) {
                     try (TextureImage plankTexture = TextureImage.open(m,
