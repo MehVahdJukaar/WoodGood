@@ -65,7 +65,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallBarnDoors);
 
         tallBarnGlassedDoors = SimpleEntrySet.builder(WoodType.class, "barn_glass_door", "tall_macaw",
@@ -84,7 +83,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallBarnGlassedDoors);
 
         tallStableDoors = SimpleEntrySet.builder(WoodType.class, "stable_door", "tall_macaw",
@@ -103,7 +101,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallStableDoors);
 
         tallStableHorseDoors = SimpleEntrySet.builder(WoodType.class, "stable_head_door", "tall_macaw",
@@ -122,7 +119,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallStableHorseDoors);
 
         tallBarkGlassDoors = SimpleEntrySet.builder(WoodType.class, "bark_glass_door", "tall_macaw",
@@ -138,7 +134,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallBarkGlassDoors);
 
         tallGlassDoors = SimpleEntrySet.builder(WoodType.class, "glass_door", "tall_macaw",
@@ -157,7 +152,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallGlassDoors);
 
         tallModernDoors = SimpleEntrySet.builder(WoodType.class, "modern_door", "tall_macaw",
@@ -176,7 +170,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallModernDoors);
 
         tallShojiDoors = SimpleEntrySet.builder(WoodType.class, "japanese_door", "tall_macaw",
@@ -195,7 +188,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallShojiDoors);
 
         tallShojiWholeDoors = SimpleEntrySet.builder(WoodType.class, "japanese2_door", "tall_macaw",
@@ -214,7 +206,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallShojiWholeDoors);
 
         tallClassicDoors = SimpleEntrySet.builder(WoodType.class, "classic_door", "tall_macaw",
@@ -233,7 +224,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallClassicDoors);
 
         tallCottageDoors = SimpleEntrySet.builder(WoodType.class, "cottage_door", "tall_macaw",
@@ -252,7 +242,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallCottageDoors);
 
         tallPaperDoors = SimpleEntrySet.builder(WoodType.class, "paper_door", "tall_macaw",
@@ -271,7 +260,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallPaperDoors);
 
         tallBeachDoors = SimpleEntrySet.builder(WoodType.class, "beach_door", "tall_macaw",
@@ -290,7 +278,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallBeachDoors);
 
         tallTropicalDoors = SimpleEntrySet.builder(WoodType.class, "tropical_door", "tall_macaw",
@@ -309,7 +296,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallTropicalDoors);
 
         tallFourPanelDoors = SimpleEntrySet.builder(WoodType.class, "four_panel_door", "tall_macaw",
@@ -328,14 +314,13 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallFourPanelDoors);
 
         tallSwampDoors = SimpleEntrySet.builder(WoodType.class, "swamp_door", "tall_macaw",
                         getModBlock("tall_macaw_oak_swamp_door"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallDoorBlock(BlockInit.OAK_SWAMP_DOOR.get(), w.toVanillaOrOak().setType()))
-                .addTextureM(EveryCompat.res("block/macaw/tall_oak_swamp_door_lower"), EveryCompat.res("block/ddm/tall_oak_swamp_door_lower_m"))
-                .addTextureM(EveryCompat.res("block/macaw/tall_oak_swamp_door_middle"), EveryCompat.res("block/ddm/tall_oak_swamp_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_swamp_door_lower"), EveryCompat.res("block/ddm/tall_oak_swamp_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_swamp_door_middle"), EveryCompat.res("block/ddm/tall_oak_swamp_door_middle_m"))
                 .addTextureM(modRes("block/macaw/tall_oak_swamp_door_upper"), EveryCompat.res("block/ddm/tall_oak_swamp_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_swamp_door"), EveryCompat.res("item/ddm/tall_oak_swamp_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
@@ -348,7 +333,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallSwampDoors);
 
         tallNetherDoors = SimpleEntrySet.builder(WoodType.class, "nether_door", "tall_macaw",
@@ -367,7 +351,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallNetherDoors);
 
         tallMysticDoors = SimpleEntrySet.builder(WoodType.class, "mystic_door", "tall_macaw",
@@ -386,7 +369,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(tallMysticDoors);
     }
 
