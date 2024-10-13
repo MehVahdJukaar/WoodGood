@@ -5,13 +5,15 @@ import com.starfish_studios.bbb.item.DescriptionBlockItem;
 import com.starfish_studios.bbb.registry.BBBTags.BBBBlockTags;
 import com.starfish_studios.bbb.registry.BBBTags.BBBItemTags;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -22,12 +24,14 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.material.PushReaction;
 
-// IMPORTANT:
-// FABRIC's side has a texture named "oak_frames_sticks" while
-// FORGE's side which is "oak_sticks" for the same texture
-// Unfortunately, FORGE and FABRIC has to be separated into their folder, not in COMMON
+import java.util.Objects;
 
-//SUPPORT: v1.0.2+
+// IMPORTANT:
+// FABRIC version of this module is already included in the mod.
+
+// The v1.1.1 is only available on
+
+//SUPPORT: v1.1.1+
 public class BuildingButBetterModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> layers;
@@ -50,6 +54,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_layer"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new LayerBlock(Utils.copyPropertySafe(w.planks))
                 )
+                .requiresChildren("slab") //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("wooden_layers"), Registries.BLOCK)
@@ -85,6 +90,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_beam"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks))
                 )
+                .requiresChildren("stripped_log") //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))
                 .addTexture(modRes("block/beam/oak_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -100,6 +106,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_beam_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StairBlock(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks))
                 )
+                .addCondition(w -> (beams.blocks.get(w) != null)) //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))
                 .addTexture(modRes("block/beam/oak_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -116,6 +123,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_beam_slab"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FacingSlabBlock(Utils.copyPropertySafe(w.planks))
                 )
+                .addCondition(w -> (beams.blocks.get(w) != null)) //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))
                 .addTexture(modRes("block/beam/oak_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -148,6 +156,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_frame"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FrameBlock(Utils.copyPropertySafe(w.planks).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY))
                 )
+                .requiresChildren("slab") //REASON: recipes
                 .addTexture(modRes("block/frame/oak"))
                 .addTexture(modRes("block/frame/oak_sticks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -180,6 +189,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_lantern"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WoodenLanternBlock(Utils.copyPropertySafe(w.planks).lightLevel((blockStatex) -> 15))
                 )
+                .requiresChildren("slab") //REASON: recipes
                 .addTextureM(modRes("block/lantern/oak"), EveryCompat.res("block/bbb/oak_lantern_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_lanterns"), Registries.BLOCK)
@@ -195,7 +205,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_ladder"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BBBLadderBlock(1, Utils.copyPropertySafe(Blocks.LADDER))
                 )
-                .setRenderType(() -> RenderType::cutout)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/ladder/acacia/oak"))
                 .addTexture(modRes("block/ladder/birch/oak"))
                 .addTexture(modRes("block/ladder/cherry/oak"))
@@ -204,7 +214,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTexture(modRes("block/ladder/jungle/oak"))
                 .addTexture(modRes("block/ladder/mangrove/oak"))
                 .addTexture(modRes("block/ladder/oak/oak"))
-                .addTextureM(modRes("block/ladder/spruce/oak"), EveryCompat.res("block/bbb/spruce_ladder_m"))
+                .addTextureM(modRes("block/ladder/spruce/oak"), EveryCompat.res("block/bbb/spruce-oak_ladder_m"))
                 .addTexture(modRes("block/ladder/warped/oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.BLOCK)
@@ -222,6 +232,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_wall"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WoodenWallBlock(Utils.copyPropertySafe(w.planks))
                 )
+                .requiresChildren("stripped_log") //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))
                 .addTexture(modRes("block/beam/oak_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)

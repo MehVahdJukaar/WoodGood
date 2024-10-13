@@ -134,6 +134,7 @@ dependencies {
 //    modImplementation("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
 //    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum
+//    modRuntimeOnly("maven.modrinth:midnightlib:UhRAdyzr") // Building-But-Better
 
     modRuntimeOnly("curse.maven:configured-457570:5180902")
     modRuntimeOnly("curse.maven:patchouli-306770:4636277") // TFC, Timber-Frames
@@ -175,7 +176,7 @@ dependencies {
     modCompileOnly("curse.maven:beautify-decorate-633252:4781709")
     modCompileOnly("curse.maven:boatload-337396:5292325")
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
-    modCompileOnly("curse.maven:building-but-better-989479:5362380")
+    modCompileOnly("maven.modrinth:building-but-better:zGMhmLYb") // v1.1.1 | MidnightLib
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634856") // v3.0.1
     modCompileOnly("curse.maven:corail-pillar-266228:5073954")
@@ -187,7 +188,7 @@ dependencies {
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:redeco-897377:5603009")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
-    modImplementation("curse.maven:farmersdelight-398521:4679319")
+    modCompileOnly("curse.maven:farmersdelight-398521:4679319")
     modCompileOnly("curse.maven:functional-storage-556861:5169765")
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4712044")
@@ -212,7 +213,7 @@ dependencies {
     modCompileOnly("curse.maven:table-top-craft-467136:5318681")
     modCompileOnly("curse.maven:timber-frames-606011:5372390")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
-    modImplementation("curse.maven:the-twilight-forest-227639:5468648")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
     modCompileOnly("curse.maven:tropicraft-254794:4811116")
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:5189602")
