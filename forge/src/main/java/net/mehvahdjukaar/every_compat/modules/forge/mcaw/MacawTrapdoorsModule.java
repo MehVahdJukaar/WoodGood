@@ -102,7 +102,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
-                .addTextureM(modRes("block/beach/oak_beach_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_beach_trapdoor_m"))
+                .addTextureM(modRes("block/beach/oak_beach_trapdoor"), EveryCompat.res("block/mcw/trapdoors/oak_beach_trapdoor_m"))
                 .build();
         this.addEntry(BEACH_TRAPDOORS);
 
@@ -134,7 +134,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
-                .addTextureM(modRes("block/cottage/oak_cottage_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_cottage_trapdoor_m"))
+                .addTextureM(modRes("block/cottage/oak_cottage_trapdoor"), EveryCompat.res("block/mcw/trapdoors/oak_cottage_trapdoor_m"))
                 .build();
         this.addEntry(COTTAGE_TRAPDOORS);
 
@@ -167,7 +167,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
-                .addTextureM(modRes("block/glass/oak_glass_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_glass_trapdoor_m"))
+                .addTextureM(modRes("block/glass/oak_glass_trapdoor"), EveryCompat.res("block/mcw/trapdoors/oak_glass_trapdoor_m"))
                 .build();
         this.addEntry(GLASS_TRAPDOORS);
 
@@ -217,7 +217,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .createPaletteFromOak(p -> p.remove(p.getDarkest()))
-                .addTextureM(modRes("block/paper/oak_paper_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_paper_trapdoor_m"))
+                .addTextureM(modRes("block/paper/oak_paper_trapdoor"), EveryCompat.res("block/mcw/trapdoors/oak_paper_trapdoor_m"))
                 .build();
         this.addEntry(PAPER_TRAPDOORS);
 
@@ -265,7 +265,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
-                .addTextureM(modRes("block/tropical/oak_tropical_trapdoor"), EveryCompat.res("block/mcaw/trapdoors/oak_tropical_trapdoor_m"))
+                .addTextureM(modRes("block/tropical/oak_tropical_trapdoor"), EveryCompat.res("block/mcw/trapdoors/oak_tropical_trapdoor_m"))
                 .build();
         this.addEntry(TROPICAL_TRAPDOORS);
 
