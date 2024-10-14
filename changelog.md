@@ -1,12 +1,12 @@
 ### UPDATED:
 
 ### NEW:
-- **Corail Pillar** (FORGE)
-- **Valhelsia Furniture** (FORGE)
-- **Wooden Hopper** (FABRIC)
-- **Wilder Wild** (FABRIC)
-- **Backpacked (FABRIC)** (FABRIC)
-- **Absent By Design** (FORGE)
+- **Table Top Craft** (COMMON) - 
+- **Tropicraft** (FORGE)
+- **Clutter** (FABRIC)
+- **Oreberries Replanted** (FORGE)
+- **Lightman's Currency** (FORGE)
+- **Lightman's Currency Fabric** (FABRIC)
 
 ### LEGEND: 
 - (COMMON) = FORGE & FABRIC
