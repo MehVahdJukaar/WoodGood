@@ -99,6 +99,7 @@ dependencies {
     modCompileOnly("curse.maven:furnish-547069:4449619")
     modCompileOnly("curse.maven:handcrafted-538214:4437458")
     modCompileOnly("curse.maven:infinitybuttons-661902:5330408")
+    modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544642")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750267")
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
     modCompileOnly("curse.maven:refurbished-furniture-897116:5651930")

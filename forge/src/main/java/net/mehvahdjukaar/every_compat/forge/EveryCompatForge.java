@@ -21,6 +21,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.exnihilo.ExNihiloSequentiaMo
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
+import net.mehvahdjukaar.every_compat.modules.forge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
@@ -75,6 +76,18 @@ public class EveryCompatForge extends EveryCompat {
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
         // ========================================= Add Modules ==================================================== \\
+            // Macaw's
+        addModule("mcwbridges", () -> MacawBridgesModule::new);
+        addModule("mcwdoors", () -> MacawDoorsModule::new);
+        addModule("mcwfences", () -> MacawFencesModule::new);
+        addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
+        addModule("mcwlights", () -> MacawLightsModule::new);
+        addModule("mcwpaths", () -> MacawPathsModule::new);
+        addModule("mcwroofs", () -> MacawRoofsModule::new);
+        addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
+        addModule("mcwwindows", () -> MacawWindowsModule::new);
+
+            // OTHERS
         addModule("absentbydesign", () -> AbsentByDesignModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
@@ -93,6 +106,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mosaic_carpentry", () -> MosaicCarpentryModule::new);
@@ -117,17 +131,6 @@ public class EveryCompatForge extends EveryCompat {
             addModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         }
         addModule("xercamod", () -> XercaModule::new);
-
-        // Macaw's
-        addModule("mcwbridges", () -> MacawBridgesModule::new);
-        addModule("mcwdoors", () -> MacawDoorsModule::new);
-        addModule("mcwfences", () -> MacawFencesModule::new);
-        addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
-        addModule("mcwlights", () -> MacawLightsModule::new);
-        addModule("mcwpaths", () -> MacawPathsModule::new);
-        addModule("mcwroofs", () -> MacawRoofsModule::new);
-        addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
-        addModule("mcwwindows", () -> MacawWindowsModule::new);
 
         // ========================================== WORK IN PROGRESS ============================================== \\
 //        addModule("carpenter", () -> CarpenterModule::new);

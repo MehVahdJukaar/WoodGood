@@ -842,5 +842,11 @@
 
   "block_type.oreberriesreplanted.vat": "%s Vat",
 
-  "block_type.villagersplus.horticulturist_table": "%s Flower Tub"
+  "block_type.villagersplus.horticulturist_table": "%s Flower Tub",
+
+  "block_type.lightmanscurrency.shelf": "%s Shelf",
+  "block_type.lightmanscurrency.shelf_2x2": "%s 2x2 Shelf",
+  "block_type.lightmanscurrency.bookshelf_trader": "%s Bookshelf Trader",
+  "block_type.lightmanscurrency.auction_stand": "%s Auction Stand",
+  "block_type.lightmanscurrency.card_display": "%s Card Display"
 }

@@ -167,6 +167,7 @@ dependencies {
     modCompileOnly("curse.maven:habitat-422972:4594207")
     modCompileOnly("curse.maven:handcrafted-538214:4437459")
     modCompileOnly("curse.maven:infinitybuttons-661902:5330366")
+    modCompileOnly("curse.maven:lightmans-currency-472521:5793387")
     modCompileOnly("curse.maven:mighty-mail-902986:4750268")
     modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
@@ -186,7 +187,7 @@ dependencies {
     modCompileOnly("curse.maven:twigs-496913:4533061")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4520253")
     modCompileOnly("curse.maven:valhelsia-structures-347488:4799968")
-    modImplementation("curse.maven:villagersplus-forge-817272:4370425")
+    modCompileOnly("curse.maven:villagersplus-forge-817272:4370425")
     modCompileOnly("curse.maven:woodster-869951:4575175")
     modCompileOnly("curse.maven:woodworks-543610:4776123")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
@@ -221,8 +222,8 @@ dependencies {
 //     implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
 
     // ============================================= FOR TESTING ==================================================== \\
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:3927361")
-//    modImplementation("curse.maven:blue-skies-312918:3966273")
+//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:3927361")
+    modRuntimeOnly("curse.maven:blue-skies-312918:3966273")
 //    modImplementation("curse.maven:caverns-and-chasms-438005:5222972") // Blueprint
 //    modCompileOnly("curse.maven:endless-biomes-667688:4581653")
 //    modImplementation("curse.maven:endergetic-291509:5146370") // Blueprint
@@ -230,5 +231,5 @@ dependencies {
 
     // Dependencies
     modRuntimeOnly("curse.maven:terrablender-563928:4618490") // REQUIRED by: BOP, region-unexplored
-//    modImplementation("curse.maven:structure-gel-api-378802:4765558") // REQUIRED by: blue-skies
+    modRuntimeOnly("curse.maven:structure-gel-api-378802:4765558") // REQUIRED by: blue-skies
 }

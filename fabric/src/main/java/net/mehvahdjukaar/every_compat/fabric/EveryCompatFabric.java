@@ -14,6 +14,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoors
 import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
@@ -34,8 +35,8 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         if (PlatformHelper.getEnv().isClient())
             ItemTooltipCallback.EVENT.register(EveryCompatClient::onItemTooltip);
 
-        // ========================================= Add Other Compat Mods ========================================== \\
-                // Macaw's
+// ========================================= Add Modules ==================================================== \\
+            // Macaw's
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
@@ -46,7 +47,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
 
-        // ========================================= Add Modules ==================================================== \\
+            // OTHERS
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
         addModule("beautify", () -> BeautifyRefabricatedModule::new);
@@ -65,6 +66,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("villagersplus", () -> VillagersPlusModule::new);
         addModule("wilderwild", () -> WilderWildModule::new);
         addModule("woodenhoppers", () -> WoodenHoppersModule::new);
+        addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
 
         // ============================================= OTHERS ===================================================== \\
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
