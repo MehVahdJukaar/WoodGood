@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.MacawStairsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
@@ -46,6 +47,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
+        addModule("mcwstairs", () -> MacawStairsModule::new);
 
             // OTHERS
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
