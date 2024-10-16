@@ -23,7 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.whichTags;
 
 //SUPPORT: v3.1.0+
 public class JustARaftModule extends SimpleModule {
