@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.ToIntFunction;
 
-import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.whichTags;
 
 //SUPPORT: v1.0.2+
 public class BeautifulCampfiresModule extends SimpleModule {
