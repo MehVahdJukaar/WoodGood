@@ -30,6 +30,7 @@ import net.mehvahdjukaar.every_compat.modules.mrcrayfish_furniture.MrCrayfishFur
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.storage_drawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
+import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_structures.ValhelsiaStructuresModule;
@@ -173,6 +174,7 @@ public class WoodGood {
         addModule("xercamod", () -> XercaModule::new);
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("chipped", () -> ChippedModule::new);
+        addModule("table_top_craft", () -> TableTopCraftModule::new);
 
         // =========================================== CURRENTLY WIP ================================================ \\
 
