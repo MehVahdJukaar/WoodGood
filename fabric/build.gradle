@@ -69,6 +69,7 @@ dependencies {
     modRuntimeOnly("curse.maven:terrablender-fabric-565956:4095396")
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4401535") // Regions-Unexplored
     modCompileOnly("maven.modrinth:frozenlib:1.2.7-mc1.19.2") // Wilder-Wild
+//    modRuntimeOnly("curse.maven:nbt-crafting-314633:4104838") // Wilder-Wild
 
     // ================================================= LOCAL ====================================================== \\
     modCompileOnly("net.darktree.redbits:redbits-1.19.2-1.16.1")
