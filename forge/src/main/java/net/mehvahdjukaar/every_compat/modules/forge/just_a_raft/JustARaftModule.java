@@ -23,7 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.whichTags;
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 
 //SUPPORT: v3.1.0+
 public class JustARaftModule extends SimpleModule {
@@ -75,7 +75,7 @@ public class JustARaftModule extends SimpleModule {
 
                 // Editing the recipe
                 recipe.getAsJsonObject("key").getAsJsonObject("L")
-                        .addProperty("tag", whichTags("logs", "caps", wood, handler, manager).toString());
+                        .addProperty("tag", getATagOrCreateANew("logs", "caps", wood, handler, manager).toString());
 
                 recipe.getAsJsonObject("result").addProperty("item", Utils.getID(item).toString());
 
