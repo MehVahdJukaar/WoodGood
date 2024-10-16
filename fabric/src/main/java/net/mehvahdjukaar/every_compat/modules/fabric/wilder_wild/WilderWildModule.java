@@ -12,10 +12,10 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -32,7 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createCustomTags;
 
 //SUPPORT: v2.4.6+
 public class WilderWildModule extends SimpleModule {
@@ -128,7 +128,7 @@ public class WilderWildModule extends SimpleModule {
     }
 
     @Override
-    // Recipes
+    // Recipes & Tags
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
@@ -136,6 +136,12 @@ public class WilderWildModule extends SimpleModule {
                 // Variables
             ResourceLocation recipeLoc = ResType.RECIPES.getPath( "wilderwild:oak_planks_from_hollowed");
             ResourceLocation newRecipeLoc = EveryCompat.res(wood.getTypeName() + "_planks_from_hollowed");
+            ResourceLocation tagRLoc = EveryCompat.res(shortenedId() + "/" + wood.getNamespace() + "/" + "hollowed_" +
+                    wood.getTypeName() + "_logs");
+
+// TAGS ================================================================================================
+            boolean isTagFull = TagUtility.isTagFull;
+            createCustomTags(tagRLoc, handler, block, stripped_hollow_log.blocks.get(wood));
 
 // RECIPE ==============================================================================================
             try (InputStream recipeStream = manager.getResource(recipeLoc)
@@ -144,13 +150,14 @@ public class WilderWildModule extends SimpleModule {
 
                 // Editing the recipe
                 recipe.getAsJsonArray("ingredients").get(0).getAsJsonObject()
-                        .addProperty("tag", whichTags("logs", "caps", wood, handler, manager).toString());
+                        .addProperty("tag", tagRLoc.toString());
 
                 recipe.getAsJsonObject("result")
                         .addProperty("item", Utils.getID(wood.planks).toString());
 
                 // Adding to the resources
-                handler.dynamicPack.addJson(newRecipeLoc, recipe, ResType.RECIPES);
+                if (isTagFull) handler.dynamicPack.addJson(newRecipeLoc, recipe, ResType.RECIPES);
+
 
             } catch (IOException e) {
                 handler.getLogger().error("Failed to open the recipe file: ", e);
