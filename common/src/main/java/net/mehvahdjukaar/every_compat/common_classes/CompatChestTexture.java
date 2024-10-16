@@ -114,7 +114,7 @@ public class CompatChestTexture {
             handler.dynamicPack.addAndCloseTexture(trappedRLoc, trapped);
         }
 
-        if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
+        if (!wood.getNamespace().equals("blue_skies") || (wood.getId().toString().equals("blue_skies:crystallized")) )
             handler.dynamicPack.addAndCloseTexture(normalRLoc, recoloredBase);
     }
 
