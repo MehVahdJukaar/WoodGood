@@ -44,7 +44,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
-import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.whichTags;
 
 //SUPPORT: v3.0.0+
 public class WoodworksModule extends SimpleModule {
