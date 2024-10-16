@@ -30,7 +30,6 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -40,14 +39,19 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.whichTags;
 
 //SUPPORT v2.2.2+
 public class WoodworksModule extends SimpleModule {
@@ -75,7 +79,6 @@ public class WoodworksModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
         this.addEntry(bookshelves);
-
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
@@ -148,7 +151,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(Tags.Items.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
                 .addTile(BlueprintTrappedChestBlockEntity::new)
                 .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(true), 300))
-                .defaultRecipe()
+                //RECIPE: it's manaully being created via addDynamicServerResources()
                 .build();
         this.addEntry(trappedChests);
 
@@ -171,7 +174,7 @@ public class WoodworksModule extends SimpleModule {
         this.addEntry(leafPiles);
     }
 
-
+// METHODS
     @OnlyIn(Dist.CLIENT)
     private static BEWLRBlockItem.LazyBEWLR chestBEWLR(boolean trapped) {
         return trapped
@@ -181,18 +184,6 @@ public class WoodworksModule extends SimpleModule {
                 : new BEWLRBlockItem.LazyBEWLR((dispatcher, entityModelSet) ->
                     new ChestBlockEntityWithoutLevelRenderer<>(dispatcher, entityModelSet,
                     new BlueprintChestBlockEntity(BlockPos.ZERO, Blocks.CHEST.defaultBlockState())));
-    }
-
-    public void onFirstClientTick1 () {
-        var ic = Minecraft.getInstance().getItemColors();
-        var bc = Minecraft.getInstance().getBlockColors();
-        leafPiles.blocks.forEach((t, b) -> {
-            var leaf = t.getChild("leaves");
-            if (leaf instanceof Block block) {
-                bc.register((s, l, p, i) -> bc.getColor(block.defaultBlockState(), l, p, i), b);
-                ic.register((stack, tintIndex) -> ic.getColor(new ItemStack(block.asItem()), tintIndex), b.asItem());
-            }
-        });
     }
 
     @Override
@@ -213,8 +204,20 @@ public class WoodworksModule extends SimpleModule {
 
     @Override
     // Recipes
+    @SuppressWarnings("deprecation")
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
+
+        // trapped_chests' recipes
+        for (WoodType wood : trappedChests.blocks.keySet()) {
+
+            // Some mods already have chests, it can be used instead of EveryCompat's
+            Block chest = (chests.blocks.get(wood) == null)
+                    ? Registry.BLOCK.get(new ResourceLocation(wood.getNamespace(), wood.getTypeName() + "_chest"))
+                    : chests.blocks.get(wood);
+
+            createChestRecipe(chest, trappedChests.blocks.get(wood), handler, manager, wood);
+        }
 
         bookshelves.items.forEach((wood, item) -> {
             // sawmill recipes - from LOGS
@@ -258,10 +261,36 @@ public class WoodworksModule extends SimpleModule {
                     handler, manager, wood);
 
         });
-
     }
 
-    @SuppressWarnings("DataFlowIssue")
+
+    public void createChestRecipe(Block input, Block output, ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
+        String trappedChest = "oak_trapped_chest";
+        ResourceLocation recipeLoc = modRes(trappedChest);
+
+        try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipeLoc))
+                .orElseThrow(() -> new FileNotFoundException("File not found @ " + recipeLoc)).open()) {
+            JsonObject jsonObj = RPUtils.deserializeJson(recipeStream);
+            JsonObject underRecipes = jsonObj.getAsJsonArray("recipes").get(0).getAsJsonObject();
+
+            JsonObject underIngredients = underRecipes.getAsJsonObject("recipe")
+                    .getAsJsonArray("ingredients").get(0).getAsJsonObject();
+
+            String newTrappedChest = trappedChest.replace("oak", wood.getAppendableId());
+            ResourceLocation newResLoc = EveryCompat.res(shortenedId() +"/"+ newTrappedChest);
+
+            // Editing the recipe
+            underIngredients.addProperty("item", Utils.getID(input).toString());
+            underRecipes.getAsJsonObject("recipe").getAsJsonObject("result").addProperty("item", Utils.getID(output).toString());
+
+            // Adding to the resource
+            handler.dynamicPack.addJson(newResLoc, jsonObj, ResType.RECIPES);
+        }
+        catch (IOException e) {
+            handler.getLogger().error("Failed to generate recipe for {} : {}", Utils.getID(output), e);
+        }
+    }
+
     public void createRecipe_ifNotNull(String recipeName, boolean usingLog, String output,
                                        ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
         Item input = (usingLog) ? wood.log.asItem() : wood.planks.asItem();
@@ -269,7 +298,8 @@ public class WoodworksModule extends SimpleModule {
             sawmill_Recipe(recipeName, input, wood.getItemOfThis(output), handler, manager, wood);
         }
         else if (Objects.nonNull(wood.getBlockOfThis(output))) {
-            sawmill_Recipe(recipeName, input, wood.getBlockOfThis(output).asItem(), handler, manager, wood);
+            sawmill_Recipe(recipeName, input, Objects.requireNonNull(wood.getBlockOfThis(output)).asItem(),
+                    handler, manager, wood);
         }
     }
 
@@ -290,7 +320,8 @@ public class WoodworksModule extends SimpleModule {
 
             // Editing the JSON recipe
             if (getIngredient.has("tag")) {
-                getIngredient.addProperty("tag", wood.getNamespace() + ":" + wood.getTypeName() + "_logs");
+                getIngredient.addProperty("tag",
+                        whichTags("logs", "caps", wood, handler, manager).toString());
             } else { // getIngredient.has("item")
                 getIngredient.addProperty("item", Utils.getID(input).toString());
             }
@@ -353,7 +384,9 @@ public class WoodworksModule extends SimpleModule {
                     );
                 }
 
-                ChestManager.putChestInfo(EveryCompat.MOD_ID, wood.getTypeName(), false);
+                if (chests.blocks.get(wood) != null) {
+                    ChestManager.putChestInfo(EveryCompat.MOD_ID, wood.getTypeName(), false);
+                }
                 ChestManager.putChestInfo(EveryCompat.MOD_ID, wood.getTypeName(), true);
 
             });
