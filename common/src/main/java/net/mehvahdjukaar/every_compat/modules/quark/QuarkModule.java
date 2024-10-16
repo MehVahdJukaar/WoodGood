@@ -56,8 +56,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.createTags;
-import static net.mehvahdjukaar.every_compat.common_classes.RecipeWithTags.whichTags;
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.*;
 
 //SUPPORT: v4.0-435+
 public class QuarkModule extends SimpleModule {
@@ -555,7 +554,6 @@ public class QuarkModule extends SimpleModule {
         else if (manager.getResource(ResType.TAGS.getPath(RLocECTag.withPrefix("blocks/"))).isPresent())
             return RLocECTag;
         else // if RLocECTags is empty, then it will be generated
-            return createTags(RLocECTag, woodType, handler);
-
+            return createDefaultTags(RLocECTag, handler, woodType);
     }
 }
