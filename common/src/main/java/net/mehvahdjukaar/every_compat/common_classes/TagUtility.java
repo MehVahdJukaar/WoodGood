@@ -10,7 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 
-public class RecipeWithTags {
+public class TagUtility {
+
+    public static boolean isTagFull;
 
     /**
      * It is checking for namespace:TYPE_logs tag in mods and will use them as an ingredient in the recipe if
@@ -27,6 +29,8 @@ public class RecipeWithTags {
         ResourceLocation RLocLogsTag = new ResourceLocation(resLocMOD +"_"+ suffixTag);
         // ~ of stem or others tags
         ResourceLocation RLocStemsTag = new ResourceLocation(resLocMOD +"_"+ suffixAlt);
+        // ~ of logs folder tag : namespace:logs/<type>
+        ResourceLocation RLocFoldersTag = new ResourceLocation(wood.getNamespace() +":"+ suffixTag +"/"+ wood.getTypeName());
         // ~ of generated tags
         ResourceLocation RLocECTag = EveryCompat.res(wood.getAppendableId() +"_"+ suffixTag);
 
@@ -36,35 +40,41 @@ public class RecipeWithTags {
             return RLocStemsTag;
         else if (manager.getResource(ResType.TAGS.getPath(RLocECTag.withPrefix("blocks/"))).isPresent())
             return RLocECTag;
+        else if (manager.getResource(ResType.TAGS.getPath(RLocFoldersTag.withPrefix("blocks/"))).isPresent())
+            return RLocFoldersTag;
         else // if RLocECTags is empty, then it will be generated
-            return createTags(RLocECTag, wood, handler);
+            return createDefaultTags(RLocECTag, handler, wood);
 
     }
 
-    public static ResourceLocation createTags(ResourceLocation RLocECTag, WoodType woodType, ServerDynamicResourcesHandler handler) {
-        boolean isTagFull = false;
+    /**
+     * The method is to create a custom Tag file with
+     * DEFAULT BLOCKS - log, stripped_log, wood, stripped_wood
+    **/
+    public static ResourceLocation createDefaultTags(ResourceLocation resLoc, ServerDynamicResourcesHandler handler, WoodType wood) {
+        return createCustomTags(resLoc, handler, wood.log, wood.getBlockOfThis("stripped_log"), wood.getBlockOfThis("wood"), wood.getBlockOfThis("stripped_wood"));
+    }
 
-        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(RLocECTag);
-        Block[] woods = {
-                woodType.log,
-                woodType.getBlockOfThis("stripped_log"),
-                woodType.getBlockOfThis("wood"),
-                woodType.getBlockOfThis("stripped_log")
-        };
+    /**
+     * The method is to create a custom Tag file with any blocks added.
+     **/
+    public static ResourceLocation createCustomTags(ResourceLocation resLoc, ServerDynamicResourcesHandler handler, Block ... blocks) {
+        isTagFull = false;
 
-        // Adding to tag's list
-        for (Block block : woods) {
+        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(resLoc);
+        // Adding blocks to tag file
+        for (Block block : blocks) {
             if (block != null) {
-                tagBuilder.addEntry(block.asItem());
+                tagBuilder.addEntry(block);
                 isTagFull = true;
             }
         }
-
         // Adding to the resources
         if (isTagFull) {
             handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
             handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
         }
-        return RLocECTag;
+        return resLoc;
     }
+
 }
