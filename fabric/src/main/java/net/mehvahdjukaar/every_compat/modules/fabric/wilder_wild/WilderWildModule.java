@@ -14,7 +14,6 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -30,6 +29,8 @@ import net.minecraft.world.level.block.Block;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createCustomTags;
 
 //SUPPORT: v2.0.7-FINAL
 public class WilderWildModule extends SimpleModule {
@@ -115,21 +116,26 @@ public class WilderWildModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
 
-        hollow_log.blocks.forEach((wood, block) -> {
-            if (wood.getBlockOfThis("stripped_log") != null) {
-                StrippableBlockRegistry.register(block, stripped_hollow_log.blocks.get(wood));
+        for (WoodType wood : hollow_log.blocks.keySet()) {
+            boolean isStem = getLogName(wood.log).contains("stem");
+            Block block = wood.log;
+            Block hollowBlock = hollow_log.blocks.get(wood);
+            Block strippedBlock = wood.getBlockOfThis("stripped_log");
+            Block strippedHollowBlock = stripped_hollow_log.blocks.get(wood);
 
-                boolean isStem = getLogName(wood.log).contains("stem");
+            AxeBehaviors.AXE_BEHAVIORS.put(block, (context, level, pos, state, face, horizontal) ->
+                    HollowedLogBlock.hollow(level, pos, state, face, hollowBlock, isStem));
 
-                AxeBehaviors.AXE_BEHAVIORS.put(wood.log, (context, level, pos, state, face, horizontal) ->
-                        HollowedLogBlock.hollow(level, pos, state, face, hollow_log.blocks.get(wood), isStem));
+            if (strippedBlock != null) {
+                StrippableBlockRegistry.register(hollowBlock, strippedHollowBlock);
 
-                AxeBehaviors.AXE_BEHAVIORS.put(wood.getBlockOfThis("stripped_log"), (context, level, pos, state, face, horizontal) ->
-                        HollowedLogBlock.hollow(level, pos, state, face, stripped_hollow_log.blocks.get(wood), isStem));
+                AxeBehaviors.AXE_BEHAVIORS.put(strippedBlock, (context, level, pos, state, face, horizontal) ->
+                        HollowedLogBlock.hollow(level, pos, state, face, strippedHollowBlock, isStem));
 
-                TermiteManager.Termite.addDegradable(block, stripped_hollow_log.blocks.get(wood));
+                TermiteManager.Termite.addDegradable(block, strippedBlock);
+                TermiteManager.Termite.addDegradable(hollowBlock, strippedHollowBlock);
             }
-        });
+        }
     }
 
     private String getLogName(Block block) {
@@ -146,40 +152,17 @@ public class WilderWildModule extends SimpleModule {
             if (wood.getBlockOfThis("stripped_log") != null) {
                 // Variables
                 ResourceLocation recipeLoc = ResType.RECIPES.getPath( "wilderwild:oak_planks_from_hollowed");
-                ResourceLocation tagRLoc = EveryCompat.res(shortenedId() + "/" + wood.getNamespace() + "/" + "hollowed_" +
+                ResourceLocation tagRLoc = EveryCompat.res(wood.getNamespace() + "/" + "hollowed_" +
                         wood.getTypeName() + "_logs");
-                ResourceLocation logTagRLoc = EveryCompat.res(shortenedId() + "/" + wood.getAppendableId() + "_logs");
                 ResourceLocation newRecipeLoc = EveryCompat.res(wood.getTypeName() + "_planks_from_hollowed");
-                boolean isTagEmpty = true;
-
                 Block strippedBlock = stripped_hollow_log.blocks.get(wood);
 
-                // TAGS ================================================================================================
-                SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tagRLoc);
-                SimpleTagBuilder logTagBuilder = SimpleTagBuilder.of(logTagRLoc);
+// TAGS ================================================================================================
+                boolean isTagFull = createCustomTags(tagRLoc, handler, block, strippedBlock);
 
-                // Adding to tag's list
-                if (block != null) {
-                    tagBuilder.addEntry(block);
-                    tagBuilder.addEntry(strippedBlock);
-
-                    logTagBuilder.addEntry(block);
-                    logTagBuilder.addEntry(strippedBlock);
-                    isTagEmpty = false;
-                }
-
-                // Adding to the resources
-                if (!isTagEmpty) {
-                    handler.dynamicPack.addTag(tagBuilder, Registry.BLOCK_REGISTRY);
-                    handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
-
-                    handler.dynamicPack.addTag(logTagBuilder, Registry.BLOCK_REGISTRY);
-                    handler.dynamicPack.addTag(logTagBuilder, Registry.ITEM_REGISTRY);
-                }
-
-                // RECIPE ==============================================================================================
+// RECIPE ==============================================================================================
                 try (InputStream recipeStream = manager.getResource(recipeLoc)
-                        .orElseThrow(() -> new FileNotFoundException("ResourceLocation: " + recipeLoc)).open()) {
+                        .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe file @ " + recipeLoc)).open()) {
                     JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
                     // Editing the recipe
@@ -190,12 +173,12 @@ public class WilderWildModule extends SimpleModule {
                             .addProperty("item", Utils.getID(wood.planks).toString());
 
                     // Adding to the resources
-                    if (isTagEmpty) {
+                    if (isTagFull) {
                         handler.dynamicPack.addJson(newRecipeLoc, recipe, ResType.RECIPES);
                     }
 
                 } catch (IOException e) {
-                    handler.getLogger().error("Failed to open the recipe file: ", e);
+                    handler.getLogger().error("Failed to generate the recipe file for {} : {}", Utils.getID(block), e);
                 }
             }
         });
