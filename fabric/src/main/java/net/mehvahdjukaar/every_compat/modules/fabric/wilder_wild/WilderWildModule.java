@@ -32,7 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createCustomTags;
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
 
 //SUPPORT: v2.4.6+
 public class WilderWildModule extends SimpleModule {
@@ -140,8 +140,7 @@ public class WilderWildModule extends SimpleModule {
                     wood.getTypeName() + "_logs");
 
 // TAGS ================================================================================================
-            boolean isTagFull = TagUtility.isTagFull;
-            createCustomTags(tagRLoc, handler, block, stripped_hollow_log.blocks.get(wood));
+            boolean hasAddedNewTag = createAndAddCustomTags(tagRLoc, handler, block, stripped_hollow_log.blocks.get(wood));
 
 // RECIPE ==============================================================================================
             try (InputStream recipeStream = manager.getResource(recipeLoc)
@@ -156,7 +155,7 @@ public class WilderWildModule extends SimpleModule {
                         .addProperty("item", Utils.getID(wood.planks).toString());
 
                 // Adding to the resources
-                if (isTagFull) handler.dynamicPack.addJson(newRecipeLoc, recipe, ResType.RECIPES);
+                if (hasAddedNewTag) handler.dynamicPack.addJson(newRecipeLoc, recipe, ResType.RECIPES);
 
 
             } catch (IOException e) {

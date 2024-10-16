@@ -554,6 +554,6 @@ public class QuarkModule extends SimpleModule {
         else if (manager.getResource(ResType.TAGS.getPath(RLocECTag.withPrefix("blocks/"))).isPresent())
             return RLocECTag;
         else // if RLocECTags is empty, then it will be generated
-            return createDefaultTags(RLocECTag, handler, woodType);
+            return createAndAddDefaultTags(RLocECTag, handler, woodType);
     }
 }
