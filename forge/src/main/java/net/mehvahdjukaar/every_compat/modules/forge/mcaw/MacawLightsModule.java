@@ -35,7 +35,7 @@ public class MacawLightsModule extends SimpleModule {
         soul_tiki_torches = SimpleEntrySet.builder(WoodType.class, "tiki_torch", "soul",
                         BlockInit.SOUL_OAK_TIKI_TORCH, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TikiTorch(BlockBehaviour.Properties.of()
-                                .lightLevel(blockOffLightValue())
+                                .lightLevel(blockOffLightValue(10))
                                 .mapColor(MapColor.WOOD)
                                 .strength(1.5F, 2.5F)
                                 .sound(SoundType.WOOD)
@@ -54,7 +54,7 @@ public class MacawLightsModule extends SimpleModule {
         tiki_torches = SimpleEntrySet.builder(WoodType.class, "tiki_torch",
                         BlockInit.OAK_TIKI_TORCH, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TikiTorch(BlockBehaviour.Properties.of()
-                                .lightLevel(blockOffLightValue())
+                                .lightLevel(blockOffLightValue(15))
                                 .mapColor(MapColor.WOOD)
                                 .strength(1.5F, 2.5F)
                                 .sound(SoundType.WOOD)
@@ -73,7 +73,7 @@ public class MacawLightsModule extends SimpleModule {
         ceiling_fan_lights = SimpleEntrySet.builder(WoodType.class, "ceiling_fan_light",
                         BlockInit.OAK_CEILING_FAN_LIGHT, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new LightBaseShort(BlockBehaviour.Properties.of()
-                                .lightLevel(blockOffLightValue())
+                                .lightLevel(blockOffLightValue(15))
                                 .mapColor(MapColor.WOOD)
                                 .strength(1.5F, 2.5F)
                                 .sound(SoundType.WOOD)
@@ -91,7 +91,7 @@ public class MacawLightsModule extends SimpleModule {
     }
 
     // METHODS
-    private static ToIntFunction<BlockState> blockOffLightValue() {
-        return (state) -> (Boolean)state.getValue(BlockStateProperties.LIT) ? 15 : 0;
+    private static ToIntFunction<BlockState> blockOffLightValue(int lightLevel) {
+        return (state) -> (Boolean)state.getValue(BlockStateProperties.LIT) ? lightLevel : 0;
     }
 }
