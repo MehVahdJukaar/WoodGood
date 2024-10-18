@@ -27,7 +27,7 @@ public class LightmansCurrencyModule extends SimpleModule {
 
     public LightmansCurrencyModule(String modId) {
         super(modId, "lc");
-        var tab = ModCreativeGroups.TRADER_GROUP;
+        var tab = modRes("trading");
 
         shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
                         getModBlock("shelf_oak"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -45,7 +45,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.SOLID)
                 .build();
@@ -67,7 +67,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(card_displays);

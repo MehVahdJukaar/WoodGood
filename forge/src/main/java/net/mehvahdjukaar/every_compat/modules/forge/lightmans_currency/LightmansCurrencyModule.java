@@ -36,7 +36,7 @@ public class LightmansCurrencyModule extends SimpleModule {
 
     public LightmansCurrencyModule(String modId) {
         super(modId, "lc");
-        var tab = ModCreativeGroups.EXTRA_GROUP;
+        var tab = modRes("extra");
 
         auction_stands = SimpleEntrySet.builder(WoodType.class, "", "auction_stand",
                         getModBlock("auction_stand_oak"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -51,7 +51,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(LCTags.Blocks.AUCTION_STAND, Registries.BLOCK)
                 .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.AUCTION_STAND, Registries.ITEM)
-                .setTab(tab)
+                .setTabKey(tab)
                 .addRecipe(modRes("auction_stand/oak"))
                 .build();
         this.addEntry(auction_stands);
@@ -76,7 +76,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(LCTags.Items.TRADER_SHELF, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_NORMAL, Registries.ITEM)
-                .setTab(tab)
+                .setTabKey(tab)
                 .addRecipe(modRes("traders/shelf/oak"))
                 .build();
         this.addEntry(shelves);
@@ -101,7 +101,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(LCTags.Items.TRADER_SHELF_2x2, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_NORMAL, Registries.ITEM)
-                .setTab(tab)
+                .setTabKey(tab)
                 .addRecipe(modRes("traders/shelf2/oak"))
                 .build();
         this.addEntry(shelves_2x2);
@@ -125,7 +125,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(LCTags.Items.TRADER_SPECIALTY, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_SPECIALTY_BOOKSHELF, Registries.ITEM)
-                .setTab(tab)
+                .setTabKey(tab)
                 .addRecipe(modRes("traders/bookshelf/oak"))
                 .build();
         this.addEntry(bookshelf_traders);
