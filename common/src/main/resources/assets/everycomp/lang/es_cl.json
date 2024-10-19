@@ -358,7 +358,7 @@
   "block_type.mctb.crafting_table": "Mesa de crafteo de %s",
 
   "block_type.mcwbridges.rail_bridge": "Puente ferroviario de %s",
-  "block_type.mcwbridges.bridge_pier": "Puente de muelle de %s",
+  "block_type.mcwbridges.bridge_pier": "Muelle de puente de %s",
   "block_type.mcwbridges.log_bridge_middle": "Puente de %s",
   "block_type.mcwbridges.log_bridge_stair": "Escalera de puente de %s",
   "block_type.mcwbridges.rope_bridge_stair": "Escalera de puente de cuerda de %s",
@@ -454,7 +454,8 @@
 
   "block_type.mcwlights.soul_tiki_torch": "Antorcha Tiki de almas de %s",
   "block_type.mcwlights.tiki_torch": "Antorcha Tiki de %s",
-
+  "block_type.mcwlights.ceiling_fan_light": "Luz de ventilador de techo de %s",
+  
   "block_type.mcwpaths.planks_path": "Camino de tablas de %s",
 
   "block_type.mcwroofs.attic_roof": "Techo de ático de %s",
@@ -489,15 +490,15 @@
   "block_type.mcwtrpdoors.tropical_trapdoor": "Trampilla tropical de %s",
   "block_type.mcwtrpdoors.barrel_trapdoor": "Trampilla de barril de %s",
 
-  "block_type.mcwwindows.window": "Ventana de %s redimensionable",
+  "block_type.mcwwindows.window": "Ventana redimensionable de %s",
   "block_type.mcwwindows.window2": "Ventana rectangular de %s",
-  "block_type.mcwwindows.four_window": "Ventana de %s de cuatro paneles",
-  "block_type.mcwwindows.stripped_log_window": "Ventana de %s sin corteza redimensionable",
+  "block_type.mcwwindows.four_window": "Ventana de cuatro paneles de %s",
+  "block_type.mcwwindows.stripped_log_window": "Ventana redimensionable de %s sin corteza",
   "block_type.mcwwindows.stripped_log_window2": "Ventana rectangular de %s sin corteza",
-  "block_type.mcwwindows.stripped_log_four_window": "Ventana de %s sin corteza de cuatro paneles",
-  "block_type.mcwwindows.plank_window": "Ventana de tablas de %s redimensionable",
+  "block_type.mcwwindows.stripped_log_four_window": "Ventana de cuatro paneles de %s sin corteza",
+  "block_type.mcwwindows.plank_window": "Ventana redimensionable de tablas de %s",
   "block_type.mcwwindows.plank_window2": "Ventana rectangular de tablas de %s",
-  "block_type.mcwwindows.plank_four_window": "Ventana de tablas de %s de cuatro paneles",
+  "block_type.mcwwindows.plank_four_window": "Ventana de cuatro paneles de tablas de %s",
   "block_type.mcwwindows.log_parapet": "Parapeto de %s",
   "block_type.mcwwindows.plank_parapet": "Parapeto de tablas de %s",
   "block_type.mcwwindows.blinds": "Persianas de %s",
@@ -506,8 +507,15 @@
   "block_type.mcwwindows.pane_window": "Ventana de panel de %s",
   "block_type.mcwwindows.stripped_pane_window": "Ventana de panel de %s sin corteza",
   "block_type.mcwwindows.plank_pane_window": "Ventana de panel de tablas de %s",
-
-  "block_type.benched.bench": "Banco de %s",
+  
+  "block_type.mcwstairs.terrace_stairs":"Escaleras de terraza de %s",
+  "block_type.mcwstairs.skyline_stairs":"Escaleras con vista de %s",
+  "block_type.mcwstairs.compact_stairs":"Escaleras compactas de %s",
+  "block_type.mcwstairs.bulk_stairs":"Escaleras a granel de %s",
+  "block_type.mcwstairs.loft_stairs":"Escaleras para buhardilla de %s",
+  "block_type.mcwstairs.railing":"Barandilla de escalera de %s",
+  "block_type.mcwstairs.balcony":"Balcón de %s",
+  "block_type.mcwstairs.platform":"Plataforma de %s",
 
   "block_type.create.window": "Ventana de %s",
   "block_type.create.window_pane": "Ventana de panel de %s",
@@ -942,5 +950,9 @@
 
   "block_type.tropicraft.boardwalk": "Muelle de %s",
 
-  "item_type.justaraftmod.raft": "Balsa de tronco de %s"
+  "item_type.justaraftmod.raft": "Balsa de tronco de %s",
+
+  "block_type.table_top_craft.chess": "Tablero de ajedrez de %s",
+  "block_type.table_top_craft.chess_timer": "Temporizador de ajedrez de %s",
+  "block_type.table_top_craft.connect_four": "Conecta cuatro de %s"
 }
