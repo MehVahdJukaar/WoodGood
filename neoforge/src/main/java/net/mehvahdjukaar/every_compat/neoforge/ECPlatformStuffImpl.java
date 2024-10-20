@@ -1,0 +1,12 @@
+package net.mehvahdjukaar.every_compat.neoforge;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.ToolActions;
+import org.violetmoon.zeta.util.handler.ToolInteractionHandler;
+
+public class ECPlatformStuffImpl {
+
+    public static void registerStripping(Block post, Block stripped) {
+        ToolInteractionHandler.registerInteraction(ToolActions.AXE_STRIP,post, stripped);
+    }
+}
