@@ -2,20 +2,15 @@ package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
-import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
-import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.level.ItemLike;
-import org.jetbrains.annotations.Nullable;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
 
 import java.util.function.Supplier;
 
 //loaded after registry
 public class ModConfigs {
 
-    public static ConfigSpec SPEC;
+    public static ModConfigHolder SPEC;
 
     public static final Supplier<Boolean> TAB_ENABLED;
     public static final Supplier<Boolean> DEPEND_ON_PACKS;
@@ -56,9 +51,9 @@ public class ModConfigs {
         builder.pop();
 
 
-        SPEC = builder.buildAndRegister();
+        SPEC = builder.build();
 
-        SPEC.loadFromFile(); //manually load early
+        SPEC.forceLoad();
     }
 
     public static void init() {

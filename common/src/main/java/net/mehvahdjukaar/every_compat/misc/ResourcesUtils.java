@@ -13,14 +13,12 @@ import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -124,7 +122,7 @@ public class ResourcesUtils {
 
             for (var m : modelsLoc) {
                 //remove the ones from mc namespace
-                ResourceLocation modelRes = new ResourceLocation(m);
+                ResourceLocation modelRes = ResourceLocation.parse(m);
                 if (!modelRes.getNamespace().equals("minecraft")) {
                     StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(m));
                     if (model != null) oakModels.add(model);
@@ -233,7 +231,7 @@ public class ResourcesUtils {
 
         for (var m : modelsLoc) {
             //remove the ones from mc namespace
-            ResourceLocation modelRes = new ResourceLocation(m);
+            ResourceLocation modelRes = ResourceLocation.parse(m);
             if (!modelRes.getNamespace().equals("minecraft")) {
                 StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(m));
                 if (model != null) oakModels.add(model);
@@ -339,7 +337,7 @@ public class ResourcesUtils {
      */
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
                                                                               Map<T, B> blocks, String oakRecipe, T fromType) {
-        addBlocksRecipes(manager, pack, blocks, new ResourceLocation(modId, oakRecipe), fromType, 0);
+        addBlocksRecipes(manager, pack, blocks, ResourceLocation.fromNamespaceAndPath(modId, oakRecipe), fromType, 0);
     }
 
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,

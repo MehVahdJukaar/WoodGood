@@ -3,14 +3,15 @@ package net.mehvahdjukaar.every_compat;
 import io.netty.buffer.Unpooled;
 import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
 import net.mehvahdjukaar.moonlight.api.platform.network.Message;
-import net.mehvahdjukaar.moonlight.api.platform.network.NetworkDir;
+import net.mehvahdjukaar.moonlight.api.platform.network.NetworkHelper;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,15 +23,20 @@ import java.util.Objects;
 public class ECNetworking {
 
     public static void init() {
+        NetworkHelper.addNetworkRegistration(ECNetworking::registerMessages, 3);
     }
 
-    public static final ChannelHandler CHANNEL = ChannelHandler.builder(EveryCompat.MOD_ID)
-            .register(NetworkDir.PLAY_TO_CLIENT, S2CBlockStateCheckMessage.class, S2CBlockStateCheckMessage::new)
-            .register(NetworkDir.BOTH, S2CModVersionCheckMessage.class, S2CModVersionCheckMessage::new)
-            .version(2)
-            .build();
+    private static void registerMessages(NetworkHelper.RegisterMessagesEvent event) {
+        event.registerBidirectional(S2CModVersionCheckMessage.CODEC);
+        event.registerClientBound(S2CBlockStateCheckMessage.CODEC);
+    }
+
 
     public static class S2CModVersionCheckMessage implements Message {
+
+        public static final TypeAndCodec<RegistryFriendlyByteBuf, S2CModVersionCheckMessage> CODEC = Message.makeType(
+                EveryCompat.res("mod_version_check"), S2CModVersionCheckMessage::new);
+
         private final Map<String, String> mods = new HashMap<>();
 
         public S2CModVersionCheckMessage() {
@@ -42,17 +48,17 @@ public class ECNetworking {
             }
         }
 
-        public S2CModVersionCheckMessage(FriendlyByteBuf buf) {
+        public S2CModVersionCheckMessage(RegistryFriendlyByteBuf buf) {
             this.mods.putAll(buf.readMap(buf1 -> buf.readUtf(), buf1 -> buf.readUtf()));
         }
 
         @Override
-        public void writeToBuffer(FriendlyByteBuf buf) {
+        public void write(RegistryFriendlyByteBuf buf) {
             buf.writeMap(mods, (buf1, s) -> buf.writeUtf(s), (buf1, s) -> buf.writeUtf(s));
         }
 
         @Override
-        public void handle(ChannelHandler.Context context) {
+        public void handle(Context context) {
             for (var m : mods.entrySet()) {
                 String clientVersion = PlatHelper.getModVersion(m.getKey());
                 String serverVersion = m.getValue();
@@ -62,11 +68,19 @@ public class ECNetworking {
                 }
             }
         }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return CODEC.type();
+        }
     }
 
     public static class S2CBlockStateCheckMessage implements Message {
 
-        public S2CBlockStateCheckMessage(FriendlyByteBuf buf) {
+        public static final TypeAndCodec<RegistryFriendlyByteBuf, S2CBlockStateCheckMessage> CODEC = Message.makeType(
+                EveryCompat.res("blockstate_check"), S2CBlockStateCheckMessage::new);
+
+        public S2CBlockStateCheckMessage(RegistryFriendlyByteBuf buf) {
             int start = buf.readVarInt();
             int size = buf.readVarInt();
 
@@ -81,12 +95,12 @@ public class ECNetworking {
                     BlockState exp = Block.BLOCK_STATE_REGISTRY.byId(i);
                     if (b != exp) {
                         if (!mismatched) {
-                            EveryCompat.LOGGER.error("Found blockstate id mismatch from " + b + "at id " + i + ". Was expecting: " + exp);
+                            EveryCompat.LOGGER.error("Found blockstate id mismatch from {}at id {}. Was expecting: {}", b, i, exp);
                         }
                         mismatched = true;
                     } else {
                         if (mismatched) {
-                            EveryCompat.LOGGER.error("to" + b + "at id " + i);
+                            EveryCompat.LOGGER.error("to{}at id {}", b, i);
                         }
                         mismatched = false;
                     }
@@ -102,7 +116,7 @@ public class ECNetworking {
         }
 
         @Override
-        public void writeToBuffer(FriendlyByteBuf buf) {
+        public void write(RegistryFriendlyByteBuf buf) {
             FriendlyByteBuf dummy = new FriendlyByteBuf(Unpooled.buffer());
             int start = lastInd;
             for (int i = lastInd; i < Block.BLOCK_STATE_REGISTRY.size(); i++) {
@@ -120,10 +134,14 @@ public class ECNetworking {
         }
 
         @Override
-        public void handle(ChannelHandler.Context context) {
+        public void handle(Context context) {
 
         }
 
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return CODEC.type();
+        }
     }
 
 
@@ -134,7 +152,7 @@ public class ECNetworking {
             lastInd = 0;
             EveryCompat.LOGGER.warn("Starting Blockstate Map validity check:");
             while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {
-                CHANNEL.sendToClientPlayer(s, new S2CBlockStateCheckMessage());
+                NetworkHelper.sendToClientPlayer(s, new S2CBlockStateCheckMessage());
             }
         }
     }

@@ -2,8 +2,8 @@ package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
-import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -23,7 +23,7 @@ public class ModEntriesConfigs {
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> BLOCK_TYPE_CONFIGS = new HashMap<>();
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> CHILD_CONFIGS = new HashMap<>();
 
-    public static ConfigSpec SPEC;
+    public static ModConfigHolder SPEC;
 
     // default as we are initializing it late
 
@@ -62,9 +62,9 @@ public class ModEntriesConfigs {
         }
         builder.pop();
 
-        SPEC = builder.buildAndRegister();
+        SPEC = builder.build();
 
-        SPEC.loadFromFile(); //manually load later
+        SPEC.forceLoad(); //manually load later
     }
 
     public static <T extends BlockType> boolean isEntryEnabled(T w, Object o) {
