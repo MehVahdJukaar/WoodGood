@@ -110,7 +110,7 @@ public class DawnOfTimeModule extends SimpleModule {
         WALL = SimpleEntrySet.builder(WoodType.class, "wall",
                         getModBlock("oak_wall"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WallBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(new ResourceLocation("minecraft:decoration_blocks/fences_and_walls"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("minecraft:decoration_blocks/fences_and_walls"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
@@ -141,7 +141,7 @@ public class DawnOfTimeModule extends SimpleModule {
         this.addEntry(SUPPORT_SLAB);
 
         FANCY_FENCE = SimpleEntrySet.builder(WoodType.class, "fancy_fence",
-                        getModBlock("birch_fancy_fence"), () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        getModBlock("birch_fancy_fence"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("birch")),
                         w -> new PlateBlock(Utils.copyPropertySafe(w.planks)
                                 .ignitedByLava().noOcclusion().strength(3.0F, 5.0F),
                                 VoxelShapes.THIN_PLATE_SHAPES))
@@ -153,7 +153,7 @@ public class DawnOfTimeModule extends SimpleModule {
         this.addEntry(FANCY_FENCE);
 
         FOOTSTOOL = SimpleEntrySet.builder(WoodType.class, "footstool",
-                        getModBlock("birch_footstool"), () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        getModBlock("birch_footstool"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("birch")),
                         w -> new BirchFootstoolBlock(Utils.copyPropertySafe(w.planks), 9.0F))
                 .addTextureM(modRes("block/birch_footstool"), EveryCompat.res("block/dot/birch_footstool_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -163,7 +163,7 @@ public class DawnOfTimeModule extends SimpleModule {
         this.addEntry(FOOTSTOOL);
 
         COUCH = SimpleEntrySet.builder(WoodType.class, "couch",
-                        getModBlock("birch_couch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        getModBlock("birch_couch"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("birch")),
                         w -> new BirchCouchBlock(Utils.copyPropertySafe(w.planks), 13.0F,
                                 VoxelShapes.ROMAN_COUCH_SHAPES))
                 .addTextureM(modRes("block/birch_couch"), EveryCompat.res("block/dot/birch_couch_m"))
@@ -174,7 +174,7 @@ public class DawnOfTimeModule extends SimpleModule {
         this.addEntry(COUCH);
 
         LOW_TABLE = SimpleEntrySet.builder(WoodType.class, "low_table",
-                        getModBlock("spruce_low_table"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_low_table"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new SpruceLowTableBlock(Utils.copyPropertySafe(w.log).noOcclusion()
                                 .strength(2.0F, 6.0F).lightLevel(litBlockEmission(14))))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -187,7 +187,7 @@ public class DawnOfTimeModule extends SimpleModule {
         this.addEntry(LOW_TABLE);
 
         LEGLESS_CHAIR = SimpleEntrySet.builder(WoodType.class, "legless_chair",
-                        getModBlock("spruce_legless_chair"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_legless_chair"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new ChairBlock(Utils.copyPropertySafe(w.log).noOcclusion()
                                 .strength(2.0F, 6.0F), 3.0F,
                                 VoxelShapes.SPRUCE_LEGLESS_CHAIR_SHAPES))

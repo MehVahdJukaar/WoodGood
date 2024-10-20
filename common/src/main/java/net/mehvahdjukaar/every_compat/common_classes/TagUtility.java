@@ -21,9 +21,9 @@ public class TagUtility {
         String resLocMOD = wood.getNamespace() + ":" + wood.getTypeName();
 
         // ResourceLocation
-        ResourceLocation RLocLogs = new ResourceLocation(resLocMOD + "_" + suffixTag);
-        ResourceLocation RLocStems = new ResourceLocation(resLocMOD + "_" + suffixAlt);
-        ResourceLocation RLocFolders = new ResourceLocation(wood.getNamespace() + ":" + suffixTag + "/" + wood.getTypeName());
+        ResourceLocation RLocLogs = ResourceLocation.parse(resLocMOD + "_" + suffixTag);
+        ResourceLocation RLocStems = ResourceLocation.parse(resLocMOD + "_" + suffixAlt);
+        ResourceLocation RLocFolders = ResourceLocation.parse(wood.getNamespace() + ":" + suffixTag + "/" + wood.getTypeName());
         ResourceLocation RLocEC = EveryCompat.res(wood.getAppendableId() + "_" + suffixTag);
 
         if (manager.getResource(ResType.TAGS.getPath(RLocLogs.withPrefix("blocks/"))).isPresent())

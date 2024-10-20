@@ -31,7 +31,7 @@ public class AxeCraftingRecipeTemplate implements IRecipeTemplate<AxeCraftingRec
 
         JsonObject output = json.get("output").getAsJsonObject();
 
-        ResourceLocation item = new ResourceLocation(output.get("item").getAsString());
+        ResourceLocation item = ResourceLocation.parse(output.get("item").getAsString());
         int count = 1;
         var c = output.get("count");
         if (c != null) count = c.getAsInt();

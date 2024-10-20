@@ -62,7 +62,7 @@ public abstract class EveryCompat {
     public static final String MOD_ID = "everycomp";
 
     public static ResourceLocation res(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 
     public static final Logger LOGGER = LogManager.getLogger("Every Compat");
@@ -207,7 +207,7 @@ public abstract class EveryCompat {
                     RegHelper.registerCreativeModeTab(res(MOD_ID),
                             true,
                             builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
-                                    .backgroundSuffix("item_search.png")
+                                    .backgroundTexture(ResourceLocation.withDefaultNamespace( "item_search.png"))
                                     .title(Component.translatable("itemGroup.everycomp.everycomp"))
                                     .build()) : null;
 

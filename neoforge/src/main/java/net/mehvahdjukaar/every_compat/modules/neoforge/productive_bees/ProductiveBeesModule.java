@@ -13,7 +13,7 @@ public class ProductiveBeesModule extends SimpleModule {
 
         //TODO: all these are invalid now
         advancedBeehives = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
-                        ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new AdvancedBeehive(Utils.copyPropertySafe(w.planks)))
                 // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))
@@ -49,7 +49,7 @@ public class ProductiveBeesModule extends SimpleModule {
         this.addEntry(advancedBeehives);
 
         expansionBoxes = SimpleEntrySet.builder(WoodType.class, "", "expansion_box",
-                        ModBlocks.EXPANSION_BOX_SPRUCE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        ModBlocks.EXPANSION_BOX_SPRUCE, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new ExpansionBox(Utils.copyPropertySafe(w.planks)))
                 // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))

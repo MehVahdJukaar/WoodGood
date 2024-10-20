@@ -63,7 +63,7 @@ public class WoodworksModule extends SimpleModule {
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new Block(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.bookshelf()))
                 .setTabKey(tab)
                 .copyParentDrop()
@@ -77,7 +77,7 @@ public class WoodworksModule extends SimpleModule {
 
         chiseled_bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf", "chiseled",
                         getModBlock("chiseled_acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new ChiseledBookShelfBlock(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.chiseledBookshelf()))
                 .setTabKey(tab)
                 .copyParentDrop()
@@ -106,12 +106,12 @@ public class WoodworksModule extends SimpleModule {
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("spruce_ladder"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new LadderBlock(WoodworksBlocks.WoodworksProperties.SPRUCE_WOOD.ladder()))
                 .setTabKey(tab)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
-                .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("quark:ladders"), Registries.ITEM)
                 .defaultRecipe()
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
@@ -119,7 +119,7 @@ public class WoodworksModule extends SimpleModule {
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                         getModBlock("spruce_beehive"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
                 .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -142,8 +142,8 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
-                .addTag(new ResourceLocation("quark:revertable_chests"), Registries.ITEM)
-                .addTag(new ResourceLocation("quark:boatable_chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
                 .addTile(abwwChestBlockEntity::new)
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .defaultRecipe()
@@ -225,7 +225,7 @@ public class WoodworksModule extends SimpleModule {
             // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
             Item getLadder = ladders.items.get(wood);
             Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
-                    new ResourceLocation(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+                    ResourceLocation.parse(wood.getNamespace(), wood.getTypeName() +"_ladder"));
 
             // sawmill recipes - from LOGS
             sawmillRecipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),

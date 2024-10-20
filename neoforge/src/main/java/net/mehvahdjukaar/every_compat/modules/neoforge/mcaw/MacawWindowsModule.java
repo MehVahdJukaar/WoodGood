@@ -39,7 +39,7 @@ public class MacawWindowsModule extends SimpleModule {
 
     public MacawWindowsModule(String modId) {
         super(modId, "mcw");
-        var tab = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("mcwwindows:mcwwindows"));
+        var tab = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.parse("mcwwindows:mcwwindows"));
 
         window = SimpleEntrySet.builder(WoodType.class, "window",
                         BlockInit.OAK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,

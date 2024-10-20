@@ -50,7 +50,7 @@ import java.util.regex.Pattern;
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
-    protected static final ResourceLocation NO_TAB_MARKER = new ResourceLocation("none");
+    protected static final ResourceLocation NO_TAB_MARKER = ResourceLocation.parse("none");
 
 
     public final Map<T, B> blocks = new HashMap<>();
@@ -149,7 +149,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
         String wood = parseWoodType(oldName);
         if (wood != null) {
-            var w = BlockSetAPI.getBlockSet(this.getTypeClass()).get(new ResourceLocation(woodFrom, wood));
+            var w = BlockSetAPI.getBlockSet(this.getTypeClass()).get(ResourceLocation.fromNamespaceAndPath(woodFrom, wood));
             if (w != null) {
                 return module.shortenedId() + "/" + w.getNamespace() + "/" + oldName;
             }
@@ -430,7 +430,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     //for ecologics
     protected void maybeFlowerAzalea(TextureImage image, ResourceManager manager, WoodType woodType) {
         if (woodType.getId().toString().equals("ecologics:flowering_azalea")) {
-            WoodType azalea = WoodTypeRegistry.getValue(new ResourceLocation("ecologics:azalea"));
+            WoodType azalea = WoodTypeRegistry.getValue(ResourceLocation.parse("ecologics:azalea"));
             if (azalea != null) {
                 try (TextureImage mask = TextureImage.open(manager,
                         EveryCompat.res("block/ecologics_overlay"));
@@ -453,7 +453,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     //for Regions-Unexplored's brimwood
     protected void maybeBrimwood(TextureImage image, ResourceManager manager, String path, WoodType woodType) {
         if (woodType.getId().toString().equals("regions_unexplored:brimwood")) {
-            WoodType brimwood = WoodTypeRegistry.getValue(new ResourceLocation("regions_unexplored:brimwood"));
+            WoodType brimwood = WoodTypeRegistry.getValue(ResourceLocation.parse("regions_unexplored:brimwood"));
             if (brimwood != null) {
                 try (TextureImage lavaOverlay = TextureImage.open(manager,
                         EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"));

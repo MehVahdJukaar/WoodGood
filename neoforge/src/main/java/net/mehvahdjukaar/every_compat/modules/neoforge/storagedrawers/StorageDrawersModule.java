@@ -43,7 +43,7 @@ public class StorageDrawersModule extends SimpleModule {
 
     public StorageDrawersModule(String modId) {
         super(modId, "sd");
-        var tab = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("storagedrawers", "storagedrawers"));
+        var tab = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.parse("storagedrawers", "storagedrawers"));
 
         FULL_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "full_drawers_1",
                         ModBlocks.OAK_FULL_DRAWERS_1, () -> WoodTypeRegistry.OAK_TYPE,

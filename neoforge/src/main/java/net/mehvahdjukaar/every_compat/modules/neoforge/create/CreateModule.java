@@ -68,7 +68,7 @@ public class CreateModule extends SimpleModule {
 
 /*
         cut_andesite = SimpleEntrySet.builder(StoneType.class, "", "cut",
-                        getModBlock("cut_andesite"), () -> StoneTypeRegistry.getValue(new ResourceLocation("andesite")),
+                        getModBlock("cut_andesite"), () -> StoneTypeRegistry.getValue(ResourceLocation.parse("andesite")),
                         stoneType -> new Block(Utils.copyPropertySafe(stoneType.stone)))
                 .addTexture(modRes("block/palettes/stone_types/cut/andesite_cut"))
 //                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
@@ -77,7 +77,7 @@ public class CreateModule extends SimpleModule {
         this.addEntry(cut_andesite);
 
         cut_andesite_stairs = SimpleEntrySet.builder(StoneType.class, "slab", "cut",
-                        getModBlock("cut_andesite_slab"), () -> StoneTypeRegistry.getValue(new ResourceLocation("andesite")),
+                        getModBlock("cut_andesite_slab"), () -> StoneTypeRegistry.getValue(ResourceLocation.parse("andesite")),
                         stoneType -> new StairBlock(stoneType.stone.defaultBlockState(), Utils.copyPropertySafe(stoneType.stone)))
                 //TEXTURES: Using cut_andesite's from above
 //                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
@@ -88,7 +88,7 @@ public class CreateModule extends SimpleModule {
         this.addEntry(cut_andesite_stairs);
 
         cut_andesite_slab = SimpleEntrySet.builder(StoneType.class, "stairs", "cut",
-                        getModBlock("cut_andesite_stairs"), () -> StoneTypeRegistry.getValue(new ResourceLocation("andesite")),
+                        getModBlock("cut_andesite_stairs"), () -> StoneTypeRegistry.getValue(ResourceLocation.parse("andesite")),
                         stoneType -> new SlabBlock(Utils.copyPropertySafe(stoneType.stone)))
                 //TEXTURES: Using cut_andesite's from above
 //                .setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
@@ -144,7 +144,7 @@ public class CreateModule extends SimpleModule {
             if (w.getBlockOfThis("stairs") != null)
                 sawRecipe(1, w.planks.asItem(), Objects.requireNonNull(w.getBlockOfThis("stairs")).asItem(),null,  w, handler);
 
-            sawRecipe(6, w.planks.asItem(), null, new ResourceLocation("minecraft", "stick"), w, handler);
+            sawRecipe(6, w.planks.asItem(), null, ResourceLocation.parse("minecraft", "stick"), w, handler);
         }
 
     }

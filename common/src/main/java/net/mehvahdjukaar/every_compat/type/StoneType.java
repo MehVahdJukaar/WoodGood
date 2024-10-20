@@ -88,7 +88,7 @@ public class StoneType extends BlockType {
         }
 
         public static StoneType.Finder simple(String modId, String woodTypeName, String planksName) {
-            return simple(new ResourceLocation(modId, woodTypeName), new ResourceLocation(modId, planksName));
+            return simple(ResourceLocation.fromNamespaceAndPath(modId, woodTypeName), ResourceLocation.fromNamespaceAndPath(modId, planksName));
         }
 
         public static StoneType.Finder simple(ResourceLocation woodTypeName, ResourceLocation planksName) {
@@ -97,7 +97,7 @@ public class StoneType extends BlockType {
         }
 
         public void addChild(String childType, String childName) {
-            addChild(childType, new ResourceLocation(id.getNamespace(), childName));
+            addChild(childType, id.withPath(childName));
         }
 
         public void addChild(String childType, ResourceLocation childName) {

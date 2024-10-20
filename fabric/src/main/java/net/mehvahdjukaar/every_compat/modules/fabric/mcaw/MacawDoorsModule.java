@@ -129,7 +129,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(BEACH_DOORS);
 
         CLASSIC_DOORS = SimpleEntrySet.builder(WoodType.class, "classic_door",
-                        () -> BlockInit.SPRUCE_CLASSIC_DOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> BlockInit.SPRUCE_CLASSIC_DOOR, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)

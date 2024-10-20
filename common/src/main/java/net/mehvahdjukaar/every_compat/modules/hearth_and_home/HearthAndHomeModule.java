@@ -28,7 +28,7 @@ public class HearthAndHomeModule extends SimpleModule {
         var tab = (PlatHelper.getPlatform().isForge()) ? modRes(HearthAndHome.MOD_ID) : modRes("tab");
 
         sanded_wood = SimpleEntrySet.builder(WoodType.class, "sanded_wood",
-                        getModBlock("oak_sanded_wood"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
+                        getModBlock("oak_sanded_wood"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("sanded_wood"), Registries.BLOCK)
@@ -40,7 +40,7 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(sanded_wood);
 
         parquet = SimpleEntrySet.builder(WoodType.class, "parquet",
-                        getModBlock("oak_parquet"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
+                        getModBlock("oak_parquet"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("parquet"), Registries.BLOCK)
@@ -52,7 +52,7 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(parquet);
 
         trim = SimpleEntrySet.builder(WoodType.class, "trim",
-                        getModBlock("oak_trim"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
+                        getModBlock("oak_trim"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("trims"), Registries.BLOCK)
@@ -65,7 +65,7 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(trim);
 
         vertical_trim = SimpleEntrySet.builder(WoodType.class, "vertical_trim",
-                        getModBlock("oak_vertical_trim"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
+                        getModBlock("oak_vertical_trim"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("oak")),
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("trims"), Registries.BLOCK)
@@ -77,7 +77,7 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(vertical_trim);
 
         lattice = SimpleEntrySet.builder(WoodType.class, "lattice",
-                        getModBlock("oak_lattice"), () -> WoodTypeRegistry.getValue(new ResourceLocation("oak")),
+                        getModBlock("oak_lattice"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("oak")),
                         w -> new LatticeBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("lattices"), Registries.BLOCK)

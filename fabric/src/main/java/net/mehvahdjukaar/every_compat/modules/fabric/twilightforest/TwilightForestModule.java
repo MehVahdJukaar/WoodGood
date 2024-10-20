@@ -58,7 +58,7 @@ public class TwilightForestModule extends SimpleModule {
 
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         getModBlock("hollow_acacia_log_horizontal", HollowLogHorizontal.class),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: Textures
@@ -71,7 +71,7 @@ public class TwilightForestModule extends SimpleModule {
         this.addEntry(hollowLogsHorizontal);
 
         hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
-                        TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return new HollowLogVertical(Utils.copyPropertySafe(w.log), makeRegObj(id));
@@ -87,7 +87,7 @@ public class TwilightForestModule extends SimpleModule {
         this.addEntry(hollowLogsVertical);
 
         hollowLogsClimbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
-                        TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
                                 makeRegObj(Utils.getID(hollowLogsVertical.blocks.get(w))))
                 )

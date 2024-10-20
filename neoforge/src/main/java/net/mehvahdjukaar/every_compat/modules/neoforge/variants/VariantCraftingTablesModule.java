@@ -27,16 +27,16 @@ public class VariantCraftingTablesModule extends SimpleModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new VCTCraftingTableBlock(Utils.copyPropertySafe(w.planks).strength(2.5F).sound(SoundType.WOOD)))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
                 .addTexture(EveryCompat.res("block/spruce_crafting_table_top"))
-                .addTag(new ResourceLocation("forge:workbenches"), Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:workbench"), Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:workbenches"), Registries.ITEM)
-                .addTag(new ResourceLocation("forge:workbench"), Registries.ITEM)
-                .addTag(new ResourceLocation("charm:crafting_table"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("forge:workbenches"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("forge:workbench"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("forge:workbenches"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("forge:workbench"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("charm:crafting_table"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()

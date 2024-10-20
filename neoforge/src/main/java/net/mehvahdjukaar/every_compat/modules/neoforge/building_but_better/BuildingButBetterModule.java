@@ -156,7 +156,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTexture(modRes("block/frame/oak"))
                 .addTexture(modRes("block/frame/oak_sticks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(new ResourceLocation("create", "movable_empty_collider"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("create", "movable_empty_collider"), Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("frames"), Registries.BLOCK)
                 .addTag(modRes("frames"), Registries.ITEM)

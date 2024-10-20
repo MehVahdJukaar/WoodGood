@@ -209,7 +209,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
         this.addEntry(tallShojiWholeDoors);
 
         tallClassicDoors = SimpleEntrySet.builder(WoodType.class, "classic_door", "tall_macaw",
-                        getModBlock("tall_macaw_spruce_classic_door"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("tall_macaw_spruce_classic_door"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new TallDoorBlock(BlockInit.SPRUCE_CLASSIC_DOOR.get(), w.toVanillaOrOak().setType()))
                 .addTextureM(modRes("block/macaw/tall_spruce_classic_door_lower"), EveryCompat.res("block/ddm/tall_oak_classic_door_lower_m"))
                 .addTextureM(modRes("block/macaw/tall_spruce_classic_door_middle"), EveryCompat.res("block/ddm/tall_oak_classic_door_middle_m"))
@@ -394,7 +394,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                     var t = mask.makeCopy();
                     t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());
 
-                    handler.dynamicPack.addAndCloseTexture(new ResourceLocation(id.getNamespace(),
+                    handler.dynamicPack.addAndCloseTexture(ResourceLocation.parse(id.getNamespace(),
                             "item/macaw/" + id.getPath().replace("_macaw", "")), t);
 
                 } catch (Exception ignored) {

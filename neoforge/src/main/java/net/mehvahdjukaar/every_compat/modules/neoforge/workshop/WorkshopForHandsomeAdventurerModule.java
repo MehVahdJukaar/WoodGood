@@ -30,9 +30,9 @@ import java.util.List;
 
 //SUPPORT: v1.15.2+
 public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
-    private static final ResourceLocation SPRUCE = new ResourceLocation("spruce");
-    private static final ResourceLocation TAG_FORGE_WORKBENCH = new ResourceLocation("forge", "workbench");
-    private static final ResourceLocation TAG_PACKINGTAPE_BLACKLIST = new ResourceLocation("packingtape", "te_blacklist");
+    private static final ResourceLocation SPRUCE = ResourceLocation.parse("spruce");
+    private static final ResourceLocation TAG_FORGE_WORKBENCH = ResourceLocation.parse("forge", "workbench");
+    private static final ResourceLocation TAG_PACKINGTAPE_BLACKLIST = ResourceLocation.parse("packingtape", "te_blacklist");
     public final SimpleEntrySet<WoodType, Block> double_bookshelves, open_double_bookshelves, min_bookshelves, open_min_bookshelves, lantern_bookshelves;
     public final SimpleEntrySet<WoodType, Block> simple_tables, potionshelves1, dual_table_parts_bl, dual_table_parts_br, dual_table_parts_tl, dual_table_parts_tr;
     public final SimpleEntrySet<WoodType, Block> framed_toolracks, pframed_toolracks, double_toolracks, single_toolracks;

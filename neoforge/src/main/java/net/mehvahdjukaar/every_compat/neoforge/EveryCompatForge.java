@@ -158,7 +158,7 @@ public class EveryCompatForge extends EveryCompat {
             for (var m : EveryCompat.ACTIVE_MODULES.values()) {
                 if (path.startsWith(m.shortenedId() + "_")) {
                     String newPath = path.substring((m.shortenedId() + "_").length());
-                    ResourceLocation newId = new ResourceLocation(m.getModId(), newPath);
+                    ResourceLocation newId = ResourceLocation.parse(m.getModId(), newPath);
                     Optional<BlockEntityType<?>> optional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(newId);
                     optional.ifPresent(mapping::remap);
                     break;

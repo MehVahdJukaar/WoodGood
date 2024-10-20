@@ -31,7 +31,7 @@ public class TropicraftModule extends SimpleModule {
         super(modId, "tc");
 
         boardwalks = SimpleEntrySet.builder(WoodType.class, "boardwalk",
-                        getModBlock("mangrove_boardwalk"), () -> WoodTypeRegistry.getValue(new ResourceLocation("mangrove")),
+                        getModBlock("mangrove_boardwalk"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("mangrove")),
                         w -> new BoardwalkBlock(BlockBehaviour.Properties.of().noOcclusion())
                 )
                 //TEXTURE: using planks

@@ -170,8 +170,8 @@ public class PokecubeLegendsModule extends SimpleModule {
 
             this.inputElement = GsonHelper.isArrayNode(json, "input") ? GsonHelper.getAsJsonArray(json, "input") : GsonHelper.getAsJsonObject(json, "input");
             this.result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
-            this.blockId = new ResourceLocation(GsonHelper.getAsString(json, "blockId"));
-            this.dimID = new ResourceLocation(GsonHelper.getAsString(json, "dimId"));
+            this.blockId = ResourceLocation.parse(GsonHelper.getAsString(json, "blockId"));
+            this.dimID = ResourceLocation.parse(GsonHelper.getAsString(json, "dimId"));
             this.block = ForgeRegistries.BLOCKS.getValue(blockId);
             this.input = Ingredient.fromJson((JsonElement)inputElement);
         }
@@ -193,7 +193,7 @@ public class PokecubeLegendsModule extends SimpleModule {
             Advancement.Builder advancement = Advancement.Builder.advancement();
 
             advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
-            var res = new ResourceLocation(id);
+            var res = ResourceLocation.parse(id);
             return new MirrorFinishedRecipe(res, newIng, newResult, block, advancement,
                     modRes("recipes/" + "pokecube_legends/" + "distortic_planks" + "/" + res.getPath()), dimID);
         }

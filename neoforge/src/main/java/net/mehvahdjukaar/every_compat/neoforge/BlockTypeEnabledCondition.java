@@ -50,7 +50,7 @@ public record BlockTypeEnabledCondition(BlockType type) implements ICondition {
             var name = json.getAsJsonPrimitive(TYPE_NAME).getAsString();
             for (var r : BlockSetAPI.getRegistries()) {
                 if (r.getType().getSimpleName().toLowerCase(Locale.ROOT).equals(type)) {
-                    return new BlockTypeEnabledCondition(r.get(new ResourceLocation(name)));
+                    return new BlockTypeEnabledCondition(r.get(ResourceLocation.parse(name)));
                 }
             }
             EveryCompat.LOGGER.error(new UnsupportedOperationException("Unrecognized block type " + type));

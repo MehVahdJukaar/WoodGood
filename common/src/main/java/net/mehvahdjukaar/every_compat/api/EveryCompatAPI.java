@@ -27,12 +27,12 @@ public class EveryCompatAPI {
         SimpleModule mod = new SimpleModule("twigs", "tw");
         SimpleEntrySet<?, ?> e = SimpleEntrySet.builder(WoodType.class,"table", TwigsBlocks.OAK_TABLE, ()->WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
-                .addTag(new ResourceLocation("twigs:tables"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("twigs:tables"), Registries.BLOCK)
                 .useLootFromBase()
                 .setTab(()->Twigs.ITEM_GROUP)
-                .addTexture(new ResourceLocation("twigs:block/oak_table"))
-                .addTexture(new ResourceLocation("twigs:block/oak_table_top"))
-                .addTexture(new ResourceLocation("twigs:block/oak_table_bottom"))
+                .addTexture(ResourceLocation.parse("twigs:block/oak_table"))
+                .addTexture(ResourceLocation.parse("twigs:block/oak_table_top"))
+                .addTexture(ResourceLocation.parse("twigs:block/oak_table_bottom"))
                 .build();
         mod.addEntry(e);
 

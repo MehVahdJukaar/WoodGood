@@ -22,7 +22,7 @@ public class MissingWildModule extends SimpleModule {
         super(modId, "msw");
 
         fallenLogs = SimpleEntrySet.builder(WoodType.class, "log", "fallen",
-                        MissingWildsBlocks.FALLEN_ACACIA_LOG, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        MissingWildsBlocks.FALLEN_ACACIA_LOG, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(modRes("fallen_logs"), Registries.BLOCK)
                 .addTag(modRes("fallen_logs"), Registries.ITEM)

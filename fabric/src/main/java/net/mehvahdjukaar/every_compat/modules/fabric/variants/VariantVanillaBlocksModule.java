@@ -97,7 +97,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         beehive = SimpleEntrySet.builder(WoodType.class, "beehive",
                         () -> Beehives.SPRUCE_BEEHIVE,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -118,7 +118,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         () -> Bookshelves.ACACIA_BOOKSHELF,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new Block(Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -152,7 +152,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         () -> Chests.ACACIA_CHEST,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -172,7 +172,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         chiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         () -> ChiseledBookshelves.ACACIA_CHISELED_BOOKSHELF,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -207,7 +207,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         () -> CraftingTables.SPRUCE_CRAFTING_TABLE,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks)) {
                         }
                 )
@@ -262,7 +262,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
                         () -> Lecterns.ACACIA_LECTERN,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new LecternBlock(Utils.copyPropertySafe(w.planks)) {
                         }
                 )
@@ -303,7 +303,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
                         () -> Smokers.ACACIA_SMOKER,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new SmokerBlock(Utils.copyPropertySafe(w.planks)) {
                         }
                 )

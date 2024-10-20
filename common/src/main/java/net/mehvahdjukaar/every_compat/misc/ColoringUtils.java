@@ -13,9 +13,9 @@ import java.util.Set;
 public final class ColoringUtils {
 
     static final Set<ResourceLocation> HARDCODED_NO_TINT = Set.of(
-            new ResourceLocation("regions_unexplored", "flowering"),
-            new ResourceLocation("blue_skies", "cherry"),
-            new ResourceLocation("twilightforest", "beanstalk")
+            ResourceLocation.fromNamespaceAndPath("regions_unexplored", "flowering"),
+            ResourceLocation.fromNamespaceAndPath("blue_skies", "cherry"),
+            ResourceLocation.fromNamespaceAndPath("twilightforest", "beanstalk")
     );
 
     public static void copyBlockTint(ClientHelper.ItemColorEvent event, Map<? extends BlockType, ? extends Block> blocks) {

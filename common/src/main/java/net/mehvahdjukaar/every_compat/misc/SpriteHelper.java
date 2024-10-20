@@ -14,16 +14,16 @@ import java.util.function.Predicate;
 public class SpriteHelper {
 
     public static final @NotNull Predicate<String> LOOKS_LIKE_TOP_LOG_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = (ResourceLocation.parse(s)).getPath();
         if (s.contains("_overlay")) return false;
         return s.contains("_top") || s.contains("_end") || s.contains("_up");
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_SIDE_LOG_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = (ResourceLocation.parse(s)).getPath();
         return (!LOOKS_LIKE_TOP_LOG_TEXTURE.test(s) && !(s.contains("_overlay") && !(s.contains("_leaves"))));
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_LEAF_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = (ResourceLocation.parse(s)).getPath();
         return !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow");
     };
 
@@ -185,8 +185,8 @@ public class SpriteHelper {
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(blockId))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
+        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(texturePath)));
     }
 
 }

@@ -49,7 +49,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
         var tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         campfires = SimpleEntrySet.builder(WoodType.class, "campfire",
-                        () -> BlockDatabase.CAMPFIRE_ACACIA, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> BlockDatabase.CAMPFIRE_ACACIA, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new CampfireBlock(true, 1, copyProperties(15))
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
@@ -62,7 +62,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
         this.addEntry(campfires);
 
         soul_campfires = SimpleEntrySet.builder(WoodType.class, "soul_campfire",
-                        () -> BlockDatabase.SOUL_CAMPFIRE_ACACIA, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> BlockDatabase.SOUL_CAMPFIRE_ACACIA, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new CampfireBlock(true, 2, copyProperties(10))
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)

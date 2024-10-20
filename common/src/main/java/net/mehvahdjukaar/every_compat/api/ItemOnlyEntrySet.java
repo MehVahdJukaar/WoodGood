@@ -129,7 +129,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     private static Item getOptionalItem(String path, String... namespaces) {
         ResourceLocation id;
         for (var n : namespaces) {
-            id = new ResourceLocation(n, path);
+            id = ResourceLocation.fromNamespaceAndPath(n, path);
             var i = BuiltInRegistries.ITEM.getOptional(id);
             if (i.isPresent()) {
                 return i.get();

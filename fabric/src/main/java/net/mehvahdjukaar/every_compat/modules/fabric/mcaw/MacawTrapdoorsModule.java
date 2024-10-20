@@ -107,7 +107,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(BEACH_TRAPDOORS);
 
         CLASSIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "classic_trapdoor",
-                        () -> BlockInit.SPRUCE_CLASSIC_TRAPDOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> BlockInit.SPRUCE_CLASSIC_TRAPDOOR, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
@@ -286,7 +286,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(WAFFLE_TRAPDOORS);
 
         BARREL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barrel_trapdoor",
-                        () -> BlockInit.SPRUCE_BARREL_TRAPDOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> BlockInit.SPRUCE_BARREL_TRAPDOOR, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){})
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)

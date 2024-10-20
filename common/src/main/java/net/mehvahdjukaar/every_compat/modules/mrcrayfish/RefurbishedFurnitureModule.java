@@ -79,8 +79,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     public RefurbishedFurnitureModule(String modId) {
         super(modId, "rfm");
 
-        TemplateRecipeManager.registerTemplate(modRes("workbench_constructing"), ConstructingTemplate::new);
-
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of().strength(2.0F))))
@@ -482,91 +480,5 @@ public class RefurbishedFurnitureModule extends SimpleModule {
             event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
             event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
         }));
-    }
-
-    public class ConstructingTemplate implements IRecipeTemplate<WorkbenchContructingRecipe.Result> {
-
-        private final List<Object> conditions = new ArrayList<>();
-
-        public final ItemStack result;
-        public final NonNullList<StackedIngredient> materials;
-        private final boolean notification;
-
-        public ConstructingTemplate(JsonObject json) {
-
-            JsonArray materialArray = GsonHelper.getAsJsonArray(json, "materials");
-            this.materials = NonNullList.withSize(materialArray.size(), StackedIngredient.EMPTY);
-            IntStream.range(0, materialArray.size()).forEach((i) -> materials.set(i, StackedIngredient.fromJson(materialArray.get(i))));
-            String s1;
-            int count;
-            if (json.get("result").isJsonObject()) {
-                s1 = GsonHelper.getAsJsonObject(json, "result").get("item").getAsString();
-                count = GsonHelper.getAsJsonObject(json, "result").get("count").getAsInt();
-            }
-            else {
-                s1 = GsonHelper.getAsString(json, "result");
-                count = 1;
-            }
-
-            this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), count);
-            this.notification = GsonHelper.getAsBoolean(json, "show_notification", true);
-        }
-
-        @Override
-        public <T extends BlockType> WorkbenchContructingRecipe.Result createSimilar(
-                T originalMat, T destinationMat, Item unlockItem, String id) {
-
-            ItemLike newRes = BlockType.changeItemType(this.result.getItem(), originalMat, destinationMat);
-            if (newRes == null) {
-                throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
-                        this.result, originalMat, destinationMat));
-            }
-            ItemStack newResult = new ItemStack(newRes);
-            if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
-            if (id == null) id = BuiltInRegistries.ITEM.getKey(newRes.asItem()).toString();
-
-            List<StackedIngredient> newMaterials = new ArrayList<>();
-            for (StackedIngredient ing : this.materials) {
-                Ingredient converted = ResourcesUtils.convertIngredient(ing.ingredient(), originalMat, destinationMat);
-                newMaterials.add(new StackedIngredient(converted, ing.count()));
-            }
-
-            Advancement.Builder advancement = Advancement.Builder.advancement();
-
-            List<String> requirements = new ArrayList<>();
-            for (var m : newMaterials) {
-                String name = "has_" + m.ingredient().getItems()[0].getItem();
-                requirements.add(name);
-                var items = Arrays.stream(m.ingredient().getItems()).map(ItemStack::getItem).collect(Collectors.toSet());
-                advancement.addCriterion(name, new InventoryChangeTrigger.TriggerInstance(
-                        ContextAwarePredicate.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
-                        new ItemPredicate[]{new ItemPredicate(null, items,
-                                MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
-                                EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, null, NbtPredicate.ANY)}
-                ));
-            }
-
-            requirements.add("has_the_recipe");
-
-            var res = new ResourceLocation(id);
-
-            advancement.requirements(new String[][]{requirements.toArray(new String[0])});
-            advancement.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(res));
-
-            advancement.rewards(AdvancementRewards.Builder.recipe(EveryCompat.res("recipes/" + res.getPath())));
-
-            return new WorkbenchContructingRecipe.Result(res, newResult.getItem(), result.getCount(), newMaterials, advancement,
-                    modRes("recipes/misc/constructing/" + res.getPath()), notification);
-        }
-
-        @Override
-        public void addCondition(Object condition) {
-            this.conditions.add(condition);
-        }
-
-        @Override
-        public List<Object> getConditions() {
-            return conditions;
-        }
     }
 }

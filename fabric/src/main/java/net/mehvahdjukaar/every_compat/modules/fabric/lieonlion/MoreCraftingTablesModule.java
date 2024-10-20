@@ -24,16 +24,16 @@ public class MoreCraftingTablesModule extends SimpleModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new MoreCraftingTableBlock(MoreTableEnum.valueOf(w.planks.toString()), Utils.copyPropertySafe(w.planks)))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/lolmct/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
-                .addTag(new ResourceLocation("c:workbench"), Registries.BLOCK)
-                .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.BLOCK)
-                .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.ITEM)
-                .addTag(new ResourceLocation("c:workbench"), Registries.ITEM)
-                .addTag(new ResourceLocation("quad:fuel/wood"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("c:workbench"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("lieonstudio:crafting_tables"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("lieonstudio:crafting_tables"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("c:workbench"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
 //                .setTabKey(tab)
                 .defaultRecipe()
                 .build();

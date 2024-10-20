@@ -96,7 +96,7 @@ public class TwilightForestModule extends SimpleModule {
 
     @NotNull
     private static Supplier<WoodType> getBirch() {
-        return () -> WoodTypeRegistry.getValue(new ResourceLocation("birch"));
+        return () -> WoodTypeRegistry.getValue(ResourceLocation.parse("birch"));
     }
 
     @Override

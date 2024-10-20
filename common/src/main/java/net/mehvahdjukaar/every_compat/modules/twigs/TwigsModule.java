@@ -34,7 +34,7 @@ public class TwigsModule extends SimpleModule {
         /*
         //noinspection DataFlowIssue
         columns = addEntry(SimpleEntrySet.builder(StoneType.class, "column",
-                        getModBlock("stone_column"), () -> StoneTypeRegistry.getValue(new ResourceLocation("stone")),
+                        getModBlock("stone_column"), () -> StoneTypeRegistry.getValue(ResourceLocation.parse("stone")),
                         stoneType -> new ColumnBlock(Utils.copyPropertySafe(
                                         (stoneType.getBlockOfThis("bricks") != null)
                                         ? stoneType.getBlockOfThis("bricks")

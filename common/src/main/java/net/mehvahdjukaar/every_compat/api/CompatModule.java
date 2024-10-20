@@ -59,7 +59,7 @@ public abstract class CompatModule {
     }
 
     public ResourceLocation modRes(String string) {
-        return new ResourceLocation(modId, string);
+        return ResourceLocation.fromNamespaceAndPath(modId, string);
     }
 
     public List<String> getAlreadySupportedMods() {
@@ -175,23 +175,23 @@ public abstract class CompatModule {
             return name.equals("vct:walnut_crafting_table");
         }
 
-        if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types
-                registry.containsKey(new ResourceLocation(modId, n2))) return true;
+        if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(modId, name)) || //ones from the mod they are from. usually include vanilla types
+                registry.containsKey(ResourceLocation.fromNamespaceAndPath(modId, n2))) return true;
         if (this.shortenedId().equals("af")) return false; //hardcoding
         // if (this.shortenedId().equals("ap")) return false; //hardcoding dont remember why i had this. Incase you want o
         if (this.shortenedId().equals("vs")) return false; //we always register everything for these
         if (this.shortenedId().equals("abnww") && woodFrom.equals("architects_palette"))
             return false; //we always register everything for these
 
-        if (registry.containsKey(new ResourceLocation(woodFrom, name))) return true;
+        if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(woodFrom, name))) return true;
 
         for (var c : EveryCompat.COMPAT_MODS) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
             //if the wood is from the mod this adds compat for && it supports this block type
             if (c.woodsFrom().contains(woodFrom) && c.blocksFrom().contains(modId)) {
-                if (registry.containsKey(new ResourceLocation(compatModId, name))) return true;
-                if (registry.containsKey(new ResourceLocation(compatModId, n1))) return true;
-                if (registry.containsKey(new ResourceLocation(compatModId, n2))) return true;
+                if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(compatModId, name))) return true;
+                if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(compatModId, n1))) return true;
+                if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(compatModId, n2))) return true;
             }
         }
         return false;

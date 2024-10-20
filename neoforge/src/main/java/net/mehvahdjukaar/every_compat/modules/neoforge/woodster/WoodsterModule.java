@@ -25,7 +25,7 @@ public class WoodsterModule extends SimpleModule {
         super(modId, "wdst");
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        WoodsterBlocks.DARK_OAK_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
+                        WoodsterBlocks.DARK_OAK_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("dark_oak")),
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTextureM(modRes("block/dark_oak_chiseled_bookshelf_6"),modRes("block/everycomp_chiseled_bookshelf_6"))
                 .addTexture(modRes("block/dark_oak_chiseled_bookshelf_side"))
@@ -40,7 +40,7 @@ public class WoodsterModule extends SimpleModule {
         this.addEntry(chiseled_books);
 
         books = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        WoodsterBlocks.ACACIA_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        WoodsterBlocks.ACACIA_BOOKSHELF, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
                         w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -52,10 +52,10 @@ public class WoodsterModule extends SimpleModule {
         this.addEntry(books);
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        WoodsterBlocks.SPRUCE_LADDER, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        WoodsterBlocks.SPRUCE_LADDER, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new LadderBlock(Utils.copyPropertySafe(WoodsterBlocks.SPRUCE_LADDER.get())))
-                .addTag(new ResourceLocation("minecraft:ladders"), Registries.BLOCK)
-                .addTag(new ResourceLocation("minecraft:ladders"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("minecraft:ladders"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("minecraft:ladders"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))

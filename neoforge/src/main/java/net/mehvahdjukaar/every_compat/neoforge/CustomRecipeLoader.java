@@ -23,7 +23,7 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
 
         for (ResourceLocation resourcelocation : manager.listResources(directory, (s) -> s.endsWith(".json"))) {
             String s = resourcelocation.getPath();
-            ResourceLocation location = new ResourceLocation(resourcelocation.getNamespace(), s.substring(i, s.length() - PATH_SUFFIX_LENGTH));
+            ResourceLocation location = ResourceLocation.parse(resourcelocation.getNamespace(), s.substring(i, s.length() - PATH_SUFFIX_LENGTH));
             try (Resource resource = manager.getResource(resourcelocation)) {
                 try (InputStream inputstream = resource.getInputStream()) {
                     try (Reader reader = new BufferedReader(new InputStreamReader(inputstream, StandardCharsets.UTF_8))) {

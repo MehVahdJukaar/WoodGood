@@ -17,7 +17,7 @@ public class StoneTypeRegistry extends BlockTypeRegistry<StoneType> {
 
     public static final StoneTypeRegistry INSTANCE = new StoneTypeRegistry();
 
-    public static final StoneType STONE_TYPE = new StoneType(new ResourceLocation("stone"), Blocks.STONE);
+    public static final StoneType STONE_TYPE = new StoneType(ResourceLocation.parse("stone"), Blocks.STONE);
 
     public static Collection<StoneType> getTypes() {
         return INSTANCE.getValues();
