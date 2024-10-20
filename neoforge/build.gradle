@@ -98,16 +98,12 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:${mixin_squared_version}"))
-    implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-forge:${mixin_squared_version}"))
-
     modImplementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}")
-
 
     // ============================================== DEPENDENCIES ================================================== \\
 
-    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
-    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create
+   // modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
+   // modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | Required by: REI, Furnish
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | Required by: REI
     modRuntimeOnly("curse.maven:terrablender-563928:5068218") // v3.0.1.4 | Required by: BOP, Regions-Unexplored

@@ -27,8 +27,6 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${mixin_squared_version}")))
-
     //modImplementation("curse.maven:selene-499980:5651442")
     modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
 
@@ -43,16 +41,16 @@ dependencies {
 
     // porting_lib required by fabric & everycomp
     for (String module in port_lib_modules.split(",")) {
-        modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
+       // modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
     }
 
 
     // ============================================== DEPENDENCIES ================================================== \\
-//    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}") // LOCAL
-    modImplementation("curse.maven:selene-499980:5731104") // v2.13.0
+    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}") // LOCAL
+//    modImplementation("curse.maven:selene-499980:5731104") // v2.13.0
 
 
-    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
+   // modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
     modCompileOnly("curse.maven:athena-841890:5176880") // Chipped
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | Required by: REI
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | Required by: REI, Garden-Of-The-Dead
