@@ -26,6 +26,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 //SUPPORT: v1.15.2+
 public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
@@ -277,6 +278,11 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(WorkshopForHandsomeAdventurerModule::sendIMC);
     }
 
+
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of("biomesoplenty");
+    }
 
     public static void sendIMC(final InterModEnqueueEvent event) {
         ArrayList<String> blacklist = new ArrayList<>();
