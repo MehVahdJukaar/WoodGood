@@ -493,7 +493,7 @@ public class QuarkModule extends SimpleModule {
                     .addProperty("item", Utils.getID(leavesType.leaves).toString());
             // WoodTypes
             underKey.getAsJsonObject("W").addProperty("tag",
-                    whichTags("logs", "caps", woodType, handler, manager).toString());
+                    getATagOrCreateANew("logs", "caps", woodType, handler, manager).toString());
             // Hedges
             underResult.addProperty("item", Utils.getID(block).toString());
 
@@ -554,6 +554,8 @@ public class QuarkModule extends SimpleModule {
         else if (manager.getResource(ResType.TAGS.getPath(RLocECTag.withPrefix("blocks/"))).isPresent())
             return RLocECTag;
         else // if RLocECTags is empty, then it will be generated
-            return createAndAddDefaultTags(RLocECTag, handler, woodType);
+            createAndAddDefaultTags(RLocECTag, handler, woodType);
+
+        return RLocECTag;
     }
 }

@@ -44,7 +44,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.whichTags;
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 
 //SUPPORT: v3.0.0+
 public class WoodworksModule extends SimpleModule {
@@ -300,7 +300,7 @@ public class WoodworksModule extends SimpleModule {
             // Editing the JSON recipe
             if (getIngredient.has("tag")) {
                 getIngredient.addProperty("tag",
-                        whichTags("logs", "caps", wood, handler, manager).toString());
+                        getATagOrCreateANew("logs", "caps", wood, handler, manager).toString());
             } else { // getIngredient.has("item")
                 getIngredient.addProperty("item", Utils.getID(input).toString());
             }
