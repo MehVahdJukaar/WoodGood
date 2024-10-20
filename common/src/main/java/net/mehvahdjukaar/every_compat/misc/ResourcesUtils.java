@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.misc;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.ModConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.ForgeHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
@@ -25,6 +24,8 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class ResourcesUtils {
 
@@ -343,8 +343,7 @@ public class ResourcesUtils {
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,
                                                                               Map<T, B> items, ResourceLocation oakRecipe, T fromType,
                                                                               int index) {
-        IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
-                ResType.RECIPES.getPath(oakRecipe));
+        Recipe<?> template = RPUtils.readRecipe(manager, oakRecipe);
 
         items.forEach((w, i) -> {
 
@@ -352,16 +351,13 @@ public class ResourcesUtils {
                 try {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     String id = RecipeBuilder.getDefaultRecipeId(i).toString();
-                    FinishedRecipe newR;
+                    RecipeHolder<?> newR;
                     if (index != 0) {
                         id += "_" + index;
-                        newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
-                    } else {
-                        newR = template.createSimilar(fromType, w, w.mainChild().asItem());
                     }
-                    if (newR == null) return;
+                    newR = RPUtils.makeSimilarRecipe(template, fromType, w, id);
                     //not even needed
-                    newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
+                    newR = ForgeHelper.copyRecipeConditions(template, newR);
                     pack.addRecipe(newR);
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate recipe for {}: {}", i, e.getMessage());
@@ -382,8 +378,7 @@ public class ResourcesUtils {
     }
 
 
-
-    public static   <T extends BlockType> Ingredient convertIngredient(Ingredient ingredient, T originalMat, T destinationMat ) {
+    public static <T extends BlockType> Ingredient convertIngredient(Ingredient ingredient, T originalMat, T destinationMat) {
         Ingredient newIng = ingredient;
         for (var in : ingredient.getItems()) {
             Item it = in.getItem();
