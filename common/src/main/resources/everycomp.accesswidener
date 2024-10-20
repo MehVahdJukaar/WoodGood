@@ -5,6 +5,9 @@ mutable field net/minecraft/world/level/block/entity/BlockEntityType validBlocks
 
 ## chest renderer stuff
 
+accessible class net/minecraft/world/level/block/WallTorchBlock
+accessible class net/minecraft/world/level/block/TorchBlock
+
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftLid Lnet/minecraft/client/model/geom/ModelPart;
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleRightLid Lnet/minecraft/client/model/geom/ModelPart;
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftLock Lnet/minecraft/client/model/geom/ModelPart;

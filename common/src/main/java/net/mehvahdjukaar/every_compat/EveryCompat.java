@@ -39,6 +39,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -278,7 +279,7 @@ public abstract class EveryCompat {
 
     private void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         if (ModConfigs.TAB_ENABLED.get()) {
-            var tab = EveryCompat.MOD_TAB.getKey();
+            ResourceKey<CreativeModeTab> tab = EveryCompat.MOD_TAB.getHolder().unwrapKey().get();
             Map<BlockType, List<Item>> typeToEntrySet = new LinkedHashMap<>();
             for (var r : BlockSetAPI.getRegistries()) {
                 for (var type : r.getValues()) {
