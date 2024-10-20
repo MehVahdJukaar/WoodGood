@@ -1,22 +1,19 @@
 {
   "schemaVersion": 1,
-  "id": "everycomp",
-  "version": "${version}",
-  "name": "Every Compat",
-  "description": "Ultimate Wood Compat Mod",
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
   "authors": [
-    "MehVahdJukaar"
+    "${mod_authors}"
   ],
   "contact": {
-    "homepage": "https://github.com/MehVahdJukaar/every_compat",
-    "sources": "https://github.com/MehVahdJukaar/WoodGood"
+    "homepage": "${mod_homepage}",
+    "sources": "${mod_github}"
   },
-  "license": "ARR",
-  "icon": "logo.png",
+  "license": "${mod_license}",
+  "icon": "icon.png",
   "environment": "*",
-  "mixins": [
-    "${mod_id}-common.mixins.json"
-  ],
   "entrypoints": {
     "main": [
       "net.mehvahdjukaar.every_compat.fabric.EveryCompatFabric"
@@ -25,19 +22,16 @@
       "net.mehvahdjukaar.every_compat.modmenu.ModMenuCompat"
     ]
   },
+  "mixins": [
+    "${mod_id}.mixins.json",
+    "${mod_id}-common.mixins.json"
+  ],
   "depends": {
-    "fabric": "*",
-    "minecraft": ">=1.20",
-    "moonlight": ">=1.20-2.8.4"
+    "fabric": ">=0.92.0+1.20.1",
+    "minecraft": ">=${minecraft_min_version} <${minecraft_max_version}",
+    "moonlight": ">=${moonlight_version_range}"
   },
   "recommends": {
     "sawmill": "*"
-  },
-  "breaks": {
-    "mcwbridges": "<3.0.0",
-    "mcwfences": "<1.1.2",
-    "mcwlights": "<1.1.0",
-    "dawnoftimebuilder": "<1.5.7",
-    "clutter": "<0.5.11"
   }
 }

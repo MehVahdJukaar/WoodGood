@@ -1,3 +1,7 @@
+plugins {
+    id "com.github.johnrengelman.shadow"
+}
+
 architectury {
     platformSetupLoomIde()
     fabric()
@@ -6,7 +10,6 @@ architectury {
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 }
-
 
 configurations {
     common
@@ -17,14 +20,17 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}")))
-    annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${mixin_squared_version}")))
+
+    //modImplementation("curse.maven:selene-499980:5651442")
+    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
 
     modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
         exclude group: 'net.fabricmc.fabric-api'
@@ -59,7 +65,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
 
-        // LOCAL
+    // LOCAL
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
@@ -69,11 +75,11 @@ dependencies {
     // ================================================ IMPORTS ===================================================== \\
     // IMPORTANT: RLM: "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
 
-        // Tools
+    // Tools
     modRuntimeOnly("curse.maven:emi-580555:5704392")
 //    modRuntimeOnly("curse.maven:jade-324717:5666690")
 
-        // MACAW's
+    // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
     modCompileOnly("curse.maven:macaws-doors-378646:4649888")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442191")
@@ -85,7 +91,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802479")
 
-        // OTHERS
+    // OTHERS
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:beautify-refabricated-809311:5405529")
     modCompileOnly("curse.maven:bewitchment-394915:5205373")
@@ -131,18 +137,14 @@ dependencies {
     // ============================================ FOR TESTING ===================================================== \\
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
 
-        // Dependencies
+    // Dependencies
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4583000") // Required: unknown
 }
 
 
-
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mod_id", rootProject.mod_id
-
     filesMatching("fabric.mod.json") {
-        expand "version": project.version, "mod_id": rootProject.mod_id
+        expand rootProject.ext.replaceProperties + [project: project]
     }
 }
 
@@ -152,6 +154,8 @@ shadowJar {
 
     configurations = [project.configurations.shadowCommon]
     archiveClassifier = "dev-shadow"
+
+    zip64 true
 }
 
 remapJar {
@@ -192,31 +196,5 @@ publishing {
             url = "https://www.cursemaven.com"
             allowInsecureProtocol = true
         }
-        maven {
-            name = "TerraformersMC"
-            url = "https://maven.terraformersmc.com/releases"
-        }
-        maven {
-            url = "https://maven.shedaniel.me"
-        }
-
-        maven {
-            name = "ModdingPlayground"
-            url  = "https://raw.githubusercontent.com/moddingplayground/maven/main/"
-        }
-    }
-}
-repositories {
-    maven { url "https://maven.shedaniel.me/" }
-    maven { url "https://maven.terraformersmc.com/releases" }
-
-    maven {
-        name = 'ModdingPlayground'
-        url  = 'https://raw.githubusercontent.com/moddingplayground/maven/main/'
-    }
-    maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
-    maven { // Reach Entity Attributes
-        url = "https://maven.jamieswhiteshirt.com/libs-release"
-        content { includeGroup("com.jamieswhiteshirt") }
     }
 }
