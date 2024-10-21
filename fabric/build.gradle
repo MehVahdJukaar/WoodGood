@@ -42,13 +42,14 @@ dependencies {
        // modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
     }
 
-// MOONLIGHT LIB -------------------------------------------------------------------------------------------------------
-        // DEFAULT
-    //modImplementation("curse.maven:selene-499980:5824029") // v2.14.34
-        // LOCAL - only for testing
-    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}") // LOCAL
+//!! MOONLIGHT LIB -----------------------------------------------------------------------------------------------------
 
-// ================================================== DEPENDENCIES ================================================== \\
+        //!! DEFAULT
+    modImplementation("curse.maven:selene-499980:5824029") // v2.14.34
+        //!! LOCAL - only for testing
+//    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}") // LOCAL
+
+//!!================================================= DEPENDENCIES ================================================== \\
 
    // modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
     modCompileOnly("curse.maven:athena-841890:5176880") // Chipped
@@ -63,22 +64,22 @@ dependencies {
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modImplementation("net.moddingplayground.frame:frame-fabric:0.22.2+1.19") // is no longer maintained
 
-        // Tools
+        //!! Tools
     modRuntimeOnly("curse.maven:emi-580555:5704392")
 //    modRuntimeOnly("curse.maven:jade-324717:5666690")
 
-// ==================================================== IMPORTS ===================================================== \\
+//!!=================================================== IMPORTS ===================================================== \\
 
     // IMPORTANT: RLM: "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
 
-        // LOCAL
+        //!! LOCAL
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
     modCompileOnly("com.arcanc.bc:Beautiful-Campfires-fabric-1.20.1-1.0.3")
     modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
 
-        // MACAW's
+        //!! MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
     modCompileOnly("curse.maven:macaws-doors-378646:4649888")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442191")
@@ -90,7 +91,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802479")
 
-        // OTHERS
+        //!! OTHERS
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:beautify-refabricated-809311:5405529")
     modCompileOnly("curse.maven:bewitchment-394915:5205373")
@@ -133,7 +134,8 @@ dependencies {
 //    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") // Not available & Currently "The Twilight Forest Unofficial" is available
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") // Not available
 
-    // ============================================ FOR TESTING ===================================================== \\
+//!!=============================================== FOR TESTING ===================================================== \\
+
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
 
     // Dependencies

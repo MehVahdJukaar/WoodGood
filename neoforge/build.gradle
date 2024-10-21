@@ -97,14 +97,14 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-// MOONLIGHT LIB -------------------------------------------------------------------------------------------------------
+//!! MOONLIGHT LIB -----------------------------------------------------------------------------------------------------
 
-        // DEFAULT
+        //!! DEFAULT
     modImplementation("curse.maven:selene-499980:5824031") // v2.14.34 (BETA)
-        // LOCAL - only for testing
+        //!! LOCAL - only for testing
 //    modImplementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}")
 
-// ================================================== DEPENDENCIES ================================================== \\
+//!!================================================= DEPENDENCIES ================================================== \\
 
    // modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
    // modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create
@@ -131,15 +131,15 @@ dependencies {
     modRuntimeOnly("curse.maven:configured-457570:5180902")
     modRuntimeOnly("curse.maven:patchouli-306770:4636277") // TFC, Timber-Frames
 
-    // TOOLS
+    //!! TOOLS
 //    modRuntimeOnly("curse.maven:jei-238222:5718385")
     modRuntimeOnly("curse.maven:worldedit-225608:4586218")
     modRuntimeOnly("curse.maven:jade-324717:5672013")
     modRuntimeOnly("curse.maven:emi-580555:5704396")
 
-// ==================================================== IMPORTS ===================================================== \\
+//!!=================================================== IMPORTS ===================================================== \\
 
-        // LOCAL
+        //!! LOCAL
 //    modImplementation("com.teamresourceful.bytecodecs:bytecodecs-1.0.2")
     modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
     modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
@@ -148,7 +148,7 @@ dependencies {
     modCompileOnly("com.arcanc.bc:Beautiful-Campfires-forge-1.20.1-1.0.2")
     //modCompileOnly("com.polipo.bookshelf:giacomos_bookshelf-1.20.1-1.3.9") // WIP
 
-        // MACAW's
+        //!! MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240521")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442217")
@@ -161,7 +161,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802535")
 
 //    modImplementation("tech.thatgravyboat.cozy:cozy-1.1.1-forge") //Failed to process jar when running jar processor: fabric-loom:access-widener
-        // OTHERS
+        //!! OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
     modCompileOnly("curse.maven:another-furniture-610492:4034009") //WARNING: version 2.1.2-1.19.2
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
@@ -230,7 +230,8 @@ dependencies {
 
 //     modRuntimeOnly("curse.maven:malum-484064:5718038") // MAGIC MOD & use BBModel
 
-    // =========================================== FOR TESTING ===================================================== \\
+//!!=============================================== FOR TESTING ===================================================== \\
+
 //    modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
