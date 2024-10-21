@@ -1,11 +1,12 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency;
 
 import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.ItemTraderBlockEntityRenderer;
-import io.github.lightman314.lightmanscurrency.common.ModCreativeGroups;
 import io.github.lightman314.lightmanscurrency.common.blockentity.trader.ItemTraderBlockEntity;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.CardDisplayBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.ShelfBlock;
 import io.github.lightman314.lightmanscurrency.common.core.ModBlockEntities;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -75,6 +76,7 @@ public class LightmansCurrencyModule extends SimpleModule {
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         event.register(shelves.getTile(ItemTraderBlockEntity.class), ItemTraderBlockEntityRenderer::new);
