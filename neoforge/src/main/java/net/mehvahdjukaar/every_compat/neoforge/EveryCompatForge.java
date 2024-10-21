@@ -70,7 +70,7 @@ public class EveryCompatForge extends EveryCompat {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
-// ================================================= Add Modules ==================================================== \\
+//!!================================================ Add Modules ==================================================== \\
         addModule("absentbydesign", () -> AbsentByDesignModule::new);
         addModule("architects_palette", () -> ArchitectsPaletteModule::new);
         addModule("beautify", () -> BeautifyDecorateModule::new);
@@ -128,11 +128,12 @@ public class EveryCompatForge extends EveryCompat {
         addModule("mcwwindows", () -> MacawWindowsModule::new);
         addModule("mcwstairs", () -> MacawStairsModule::new);
 
-// ============================================== DISABLED FOR A REASON ============================================= \\
+//!!============================================= DISABLED FOR A REASON ============================================= \\
+
 //        addModule("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
 //        addModule("productivebees", () -> ProductiveBeesModule::new); //WIP: class for both beehive have major changes
 
-// ================================================== OTHERS ======================================================== \\
+//!!================================================= OTHERS ======================================================== \\
         NeoForge.EVENT_BUS.register(this);
 
         forAllModules(CompatModule::onModInit);
@@ -145,7 +146,7 @@ public class EveryCompatForge extends EveryCompat {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void itemTooltipEvent(ItemTooltipEvent event) {
-        EveryCompatClient.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());
+        EveryCompatClient.onItemTooltip(event.getItemStack(), event.getContext(), event.getFlags(), event.getToolTip());
 
     }
 
