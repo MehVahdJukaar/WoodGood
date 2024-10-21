@@ -23,16 +23,15 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.Tags;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Objects;
 
 // SUPPORT: v0.5.1+
 public class CreateModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> windows;
+//    public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
     //public final SimpleEntrySet<StoneType, Block> cut_andesite;
     //public final SimpleEntrySet<StoneType, Block> cut_andesite_stairs;
@@ -43,6 +42,7 @@ public class CreateModule extends SimpleModule {
         super(modId, "c");
         var tab = CreativeModeTabs.BUILDING_BLOCKS;
 
+/*
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         this::makeWindow)
@@ -55,11 +55,12 @@ public class CreateModule extends SimpleModule {
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/palettes/oak_window_connected_m"))
                 .build();
         this.addEntry(windows);
+*/
 
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
-                .addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
+//                .addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -109,17 +110,17 @@ public class CreateModule extends SimpleModule {
         }
     }
 
-    private WindowBlock makeWindow(WoodType w) {
+    public WindowBlock makeWindow(WoodType w) {
         return new WindowBlock(Utils.copyPropertySafe(Blocks.GLASS)
                 .isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false), false);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void onClientSetup() {
         super.onClientSetup();
-        windows.blocks.forEach((w, b) -> {
+/*        windows.blocks.forEach((w, b) -> {
             String path = "block/" + shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window";
 
             CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
@@ -129,7 +130,7 @@ public class CreateModule extends SimpleModule {
                     (model) -> new CTModel(model, new HorizontalCTBehaviour(spriteShift)));
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(windowPanes.blocks.get(w)),
                     (model) -> new CTModel(model, new GlassPaneCTBehaviour(spriteShift)));
-        });
+        });*/
     }
 
     @Override
@@ -144,7 +145,7 @@ public class CreateModule extends SimpleModule {
             if (w.getBlockOfThis("stairs") != null)
                 sawRecipe(1, w.planks.asItem(), Objects.requireNonNull(w.getBlockOfThis("stairs")).asItem(),null,  w, handler);
 
-            sawRecipe(6, w.planks.asItem(), null, ResourceLocation.parse("minecraft", "stick"), w, handler);
+            sawRecipe(6, w.planks.asItem(), null, ResourceLocation.withDefaultNamespace("stick"), w, handler);
         }
 
     }
