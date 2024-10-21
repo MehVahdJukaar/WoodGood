@@ -5,6 +5,7 @@ import com.buuz135.functionalstorage.block.DrawerBlock;
 import com.buuz135.functionalstorage.block.tile.DrawerTile;
 import com.buuz135.functionalstorage.client.DrawerRenderer;
 import com.buuz135.functionalstorage.util.IWoodType;
+import com.ibm.icu.impl.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -16,11 +17,8 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.apache.commons.lang3.tuple.Pair;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +31,7 @@ public class FunctionalStorageModule extends SimpleModule {
 
     public FunctionalStorageModule(String modId) {
         super(modId, "fs");
+        var tab = modRes("main");
 
         drawer_1 = SimpleEntrySet.builder(WoodType.class, "1",
                         getModBlock("oak_1"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -46,7 +45,7 @@ public class FunctionalStorageModule extends SimpleModule {
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(drawer_1);
@@ -62,7 +61,7 @@ public class FunctionalStorageModule extends SimpleModule {
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(drawer_2);
@@ -78,7 +77,7 @@ public class FunctionalStorageModule extends SimpleModule {
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
-                .setTab(getModTab("main"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(drawer_4);
