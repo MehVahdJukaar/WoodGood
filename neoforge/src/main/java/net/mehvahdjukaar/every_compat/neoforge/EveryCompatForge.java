@@ -80,7 +80,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("corail_pillar", () -> CorailPillarModule::new);
-        addModule("create", () -> CreateModule::new);
+//        addModule("create", () -> CreateModule::new); //!! NOT AVAILABLE
         addModule("decoration_delight", () -> DecorationDelightModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);

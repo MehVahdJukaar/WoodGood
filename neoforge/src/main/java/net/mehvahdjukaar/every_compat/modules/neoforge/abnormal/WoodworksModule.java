@@ -35,9 +35,9 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.Tags;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,12 +50,12 @@ import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOr
 public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> chiseled_bookshelves;
-    public final SimpleEntrySet<WoodType, Block> boards;
+    public final SimpleEntrySet<WoodType, RotatedPillarBlock> boards;
     public final SimpleEntrySet<WoodType, Block> ladders;
     public final SimpleEntrySet<WoodType, Block> beehives;
     public final SimpleEntrySet<WoodType, Block> chests;
     public final SimpleEntrySet<WoodType, Block> trappedChests;
-    public final SimpleEntrySet<LeavesType, Block> leafPiles;
+    public final SimpleEntrySet<LeavesType, LeafPileBlock> leafPiles;
 
     public WoodworksModule(String modId) {
         super(modId, "abnww");
@@ -125,7 +125,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .defaultRecipe()
-                .addTile(BlueprintBlockEntityTypes.BEEHIVE)
+                .addTile(getModTile("beehive"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
@@ -225,7 +225,7 @@ public class WoodworksModule extends SimpleModule {
             // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
             Item getLadder = ladders.items.get(wood);
             Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
-                    ResourceLocation.parse(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+                    ResourceLocation.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
 
             // sawmill recipes - from LOGS
             sawmillRecipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
