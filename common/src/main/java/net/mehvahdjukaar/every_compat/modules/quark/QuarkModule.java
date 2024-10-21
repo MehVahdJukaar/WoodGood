@@ -103,7 +103,7 @@ public class QuarkModule extends SimpleModule {
                         (w) -> {
                             Block fence = w.getBlockOfThis("fence");
                             return new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/",
-                                    Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
+                                    Objects.requireNonNull(fence).defaultBlockState().getSoundType());
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
@@ -125,7 +125,7 @@ public class QuarkModule extends SimpleModule {
                             Block fence = w.getBlockOfThis("fence");
                             // required stripped_log texture & fence as an ingredients
                             return new WoodPostBlock(null, fence, shortenedId() + "/" + w.getNamespace() + "/stripped_",
-                                    Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
+                                    Objects.requireNonNull(fence).defaultBlockState().getSoundType());
                         })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
@@ -160,7 +160,7 @@ public class QuarkModule extends SimpleModule {
                         getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         (w) -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
-                                null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
+                                null, BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
                 .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
