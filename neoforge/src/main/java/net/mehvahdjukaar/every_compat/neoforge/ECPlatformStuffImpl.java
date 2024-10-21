@@ -7,6 +7,7 @@ import org.violetmoon.zeta.util.handler.ToolInteractionHandler;
 public class ECPlatformStuffImpl {
 
     public static void registerStripping(Block post, Block stripped) {
-        ToolInteractionHandler.registerInteraction(ItemAbilities.AXE_STRIP,post, stripped);
+        //TODO: add back
+      //  ToolInteractionHandler.registerInteraction(ItemAbilities.AXE_STRIP,post, stripped);
     }
 }

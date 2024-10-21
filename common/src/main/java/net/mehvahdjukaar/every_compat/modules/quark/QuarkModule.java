@@ -47,6 +47,7 @@ import org.violetmoon.quark.content.building.client.render.be.VariantChestRender
 import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
 import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
+import org.violetmoon.zeta.util.handler.ToolInteractionHandler;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -283,7 +284,9 @@ public class QuarkModule extends SimpleModule {
     public void onModSetup() {
         posts.blocks.forEach((w, post) -> {
             Block stripped = strippedPosts.blocks.get(w);
-            if (stripped != null) ECPlatformStuff.registerStripping(post, stripped);
+            if (stripped != null){
+                ECPlatformStuff.registerStripping(post, stripped);
+            }
         });
         leafCarpets.blocks.forEach((w, leaf) -> ComposterBlock.COMPOSTABLES.put(leaf, 0.2F));
     }

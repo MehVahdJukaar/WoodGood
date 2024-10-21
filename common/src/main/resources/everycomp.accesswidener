@@ -7,6 +7,7 @@ mutable field net/minecraft/world/level/block/entity/BlockEntityType validBlocks
 
 accessible class net/minecraft/world/level/block/WallTorchBlock
 accessible class net/minecraft/world/level/block/TorchBlock
+accessible method net/minecraft/world/level/block/TransparentBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
 
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftLid Lnet/minecraft/client/model/geom/ModelPart;
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleRightLid Lnet/minecraft/client/model/geom/ModelPart;

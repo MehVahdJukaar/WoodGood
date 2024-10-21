@@ -1355,7 +1355,7 @@ public class ChippedModule extends SimpleModule {
         //TYPE: glass
         circleGlass = SimpleEntrySet.builder(WoodType.class, "glass", "circle",
                         getModBlock("circle_oak_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/circle_oak_glass"), EveryCompat.res("block/ch/glass/circle_oak_glass_m"))
@@ -1370,7 +1370,7 @@ public class ChippedModule extends SimpleModule {
 
         barredGlass = SimpleEntrySet.builder(WoodType.class, "bared_glass",
                         getModBlock("oak_bared_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_bared_glass"), EveryCompat.res("block/ch/glass/oak_bared_glass_m"))
@@ -1389,7 +1389,7 @@ public class ChippedModule extends SimpleModule {
 
         borderedGlass = SimpleEntrySet.builder(WoodType.class, "bordered_glass",
                         getModBlock("oak_bordered_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_bordered_glass"), EveryCompat.res("block/ch/glass/oak_bordered_glass_m"))
@@ -1408,7 +1408,7 @@ public class ChippedModule extends SimpleModule {
 
         diamondBorderedGlass = SimpleEntrySet.builder(WoodType.class, "diamond_bordered_glass",
                         getModBlock("oak_diamond_bordered_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_diamond_bordered_glass"), EveryCompat.res("block/ch/glass/oak_diamond_bordered_glass_m"))
@@ -1427,7 +1427,7 @@ public class ChippedModule extends SimpleModule {
 
         horizontalLinedGlass = SimpleEntrySet.builder(WoodType.class, "horizontal_lined_glass",
                         getModBlock("oak_horizontal_lined_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_horizontal_lined_glass"), EveryCompat.res("block/ch/glass/oak_horizontal_lined_glass_m"))
@@ -1446,7 +1446,7 @@ public class ChippedModule extends SimpleModule {
 
         largeDiamondGlass = SimpleEntrySet.builder(WoodType.class, "large_diamond_glass",
                         getModBlock("oak_large_diamond_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_large_diamond_glass"), EveryCompat.res("block/ch/glass/oak_large_diamond_glass_m"))
@@ -1465,7 +1465,7 @@ public class ChippedModule extends SimpleModule {
 
         lineBarredGlass = SimpleEntrySet.builder(WoodType.class, "line_bared_glass",
                         getModBlock("oak_line_bared_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_line_bared_glass"), EveryCompat.res("block/ch/glass/oak_line_bared_glass_m"))
@@ -1484,7 +1484,7 @@ public class ChippedModule extends SimpleModule {
 
         ornateBarredGlass = SimpleEntrySet.builder(WoodType.class, "ornate_bared_glass",
                         getModBlock("oak_ornate_bared_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_ornate_bared_glass"), EveryCompat.res("block/ch/glass/oak_ornate_bared_glass_m"))
@@ -1503,7 +1503,7 @@ public class ChippedModule extends SimpleModule {
 
         snowflakeGlass = SimpleEntrySet.builder(WoodType.class, "snowflake_glass",
                         getModBlock("oak_snowflake_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_snowflake_glass"), EveryCompat.res("block/ch/glass/oak_snowflake_glass_m"))
@@ -1518,7 +1518,7 @@ public class ChippedModule extends SimpleModule {
 
         wovenGlass = SimpleEntrySet.builder(WoodType.class, "woven_glass",
                         getModBlock("oak_woven_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/oak_woven_glass"), EveryCompat.res("block/ch/glass/oak_woven_glass_m"))
@@ -1537,7 +1537,7 @@ public class ChippedModule extends SimpleModule {
 
         squareGlass = SimpleEntrySet.builder(WoodType.class, "glass", "square",
                         getModBlock("square_oak_glass"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new GlassBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false)))
                 .addTextureM(modRes("block/glass/square_oak_glass"), EveryCompat.res("block/ch/glass/square_oak_glass_m"))

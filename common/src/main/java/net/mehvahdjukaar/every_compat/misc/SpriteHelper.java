@@ -2,10 +2,16 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
+import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
@@ -107,7 +113,7 @@ public class SpriteHelper {
         addOptional("nue:stripped_frosted_stem", "_top", "nue:block/strippedfrozenstemtop");
 
         // Fruitful Fun
-            // Leaves
+        // Leaves
         addOptional("fruitfulfun:apple_leaves", "_leaves", "minecraft:block/oak_leaves");
         addOptional("fruitfulfun:cherry_leaves", "_leaves", "fruitfulfun:block/cherry_leaves_2");
         addOptional("fruitfulfun:citron_leaves", "_leaves", "fruitfulfun:block/citron_leaves");
@@ -133,17 +139,17 @@ public class SpriteHelper {
         addOptional("extendedmushrooms:honey_fungus_stem_stripped", "_top", "extendedmushrooms:block/honey_fungus_stem_stripped");
 
         // Let's Do - Vinery
-            // Leaves
+        // Leaves
         addOptional("vinery:apple_leaves", "_leaves", "vinery:block/apple_leaves_0");
         addOptional("vinery:dark_cherry", "_leaves", "vinery:block/dark_cherry_leaves");
 
         // The Twilight Forest
-            // Leaves
+        // Leaves
         addOptional("twilightforest:beanstalk_leaves", "_leaves", "minecraft:block/azalea_leaves");
         addOptional("twilightforest:thorn_leaves", "_leaves", "minecraft:block/oak_leaves");
 
         // Regions Unexplored
-        addOptional("regions_unexplored:eucalyptus_log", "_side", EveryCompat.MOD_ID+":block/regions_unexplored/eucalyptus_log");
+        addOptional("regions_unexplored:eucalyptus_log", "_side", EveryCompat.MOD_ID + ":block/regions_unexplored/eucalyptus_log");
 
 // Leaves
         addOptional("regions_unexplored:alpha_leaves", "_leaves", "regions_unexplored:block/alpha_oak_leaves");
@@ -188,5 +194,61 @@ public class SpriteHelper {
         BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
                 .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(texturePath)));
     }
+
+
+    public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakLeaves(BlockTypeResTransformer<T> t) {
+        return t.replaceWithTextureFromChild("minecraft:block/oak_leaves", "leaves", s -> {
+            return !s.contains("_snow") && !s.contains("snow_") && !s.contains("snowy_");
+        });
+    }
+
+    /**
+     * Replaces the oak planks texture with the plank texture of the 'planks' child of this block type. Meant for wood types
+     */
+    public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakPlanks(BlockTypeResTransformer<T> t) {
+        return t.replaceWithTextureFromChild("minecraft:block/oak_planks", "planks");
+    }
+
+    /**
+     * Replaces the oak log textures with the log texture of the 'log' child of this block type. Meant for wood types
+     */
+    public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakBark(BlockTypeResTransformer<T> t) {
+        return t.replaceWithTextureFromChild("minecraft:block/oak_log", "log", LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/oak_log_top", "log", LOOKS_LIKE_TOP_LOG_TEXTURE);
+    }
+
+    public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakStripped(BlockTypeResTransformer<T> t) {
+        return t.replaceWithTextureFromChild("minecraft:block/stripped_oak_log", "stripped_log", LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/stripped_oak_log_top", "stripped_log", LOOKS_LIKE_TOP_LOG_TEXTURE);
+    }
+
+    public static <T extends BlockType> BlockTypeResTransformer<T> replaceWoodTextures(BlockTypeResTransformer<T> t, WoodType woodType) {
+        String n = woodType.getTypeName();
+        return t.replaceWithTextureFromChild("minecraft:block/" + n + "_planks", "planks")
+                .replaceWithTextureFromChild("minecraft:block/stripped_" + n + "_log", "stripped_log", LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/stripped_" + n + "_log_top", "stripped_log", LOOKS_LIKE_TOP_LOG_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/" + n + "_log", "log", LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/" + n + "_log_top", "log", LOOKS_LIKE_TOP_LOG_TEXTURE);
+
+    }
+
+    public static <T extends BlockType> BlockTypeResTransformer<T> replaceLeavesTextures(BlockTypeResTransformer<T> t, LeavesType woodType) {
+        String n = woodType.getTypeName();
+        return t.replaceWithTextureFromChild("minecraft:block/" + n + "_leaves", "leaves", LOOKS_LIKE_LEAF_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/stripped_" + n + "_log", l -> wfl(l, "stripped_log"), LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/stripped_" + n + "_log_top", l -> wfl(l, "stripped_log"), LOOKS_LIKE_TOP_LOG_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/" + n + "_log", l -> wfl(l, "log"), LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .replaceWithTextureFromChild("minecraft:block/" + n + "_log_top", l -> wfl(l, "log"), LOOKS_LIKE_TOP_LOG_TEXTURE);
+
+    }
+
+    private static  <T extends BlockType> @Nullable ItemLike wfl(T t, String s) {
+        if (t instanceof LeavesType l && l.getWoodType() != null) {
+            var c = l.getWoodType().getChild(s);
+            return c instanceof ItemLike il ? il : null;
+        }
+        return null;
+    }
+
 
 }

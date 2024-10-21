@@ -263,13 +263,13 @@ public class ResourcesUtils {
         if (extraTransform != null) extraTransform.accept(modelModifier);
         modelModifier.IDReplaceType(oldTypeName);
         if (baseType instanceof LeavesType leavesType) {
-            modelModifier.replaceLeavesTextures(leavesType);
+            SpriteHelper.replaceLeavesTextures(modelModifier, leavesType);
             var woodT = leavesType.getWoodType();
             if (woodT != null) {
-                modelModifier.replaceWoodTextures(woodT);
+                SpriteHelper.replaceWoodTextures(modelModifier, woodT);
             }
         } else if (baseType instanceof WoodType woodType) {
-            modelModifier.replaceWoodTextures(woodType);
+            SpriteHelper.replaceWoodTextures(modelModifier, woodType);
         }
 
         modelModifier.replaceGenericType(oldTypeName, "block");
@@ -357,7 +357,7 @@ public class ResourcesUtils {
                     }
                     newR = RPUtils.makeSimilarRecipe(template, fromType, w, id);
                     //not even needed
-                    newR = ForgeHelper.copyRecipeConditions(template, newR);
+                    //newR = ForgeHelper.copyRecipeConditions(template, newR.value());
                     pack.addRecipe(newR);
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate recipe for {}: {}", i, e.getMessage());

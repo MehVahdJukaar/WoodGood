@@ -16,7 +16,9 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.moonlight.api.client.util.RenderUtil;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -465,11 +467,15 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         super.onClientSetup();
         darkFans.blocks.forEach((key, value) -> {
             ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(Minecraft.getInstance().getModelManager(), res));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () ->
+                    ClientHelper.getModel(Minecraft.getInstance().getModelManager(),
+                            RenderUtil.getStandaloneModelLocation(res)));
         });
         lightFans.blocks.forEach((key, value) -> {
             ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(Minecraft.getInstance().getModelManager(), res));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () ->
+                    ClientHelper.getModel(Minecraft.getInstance().getModelManager(),
+                            RenderUtil.getStandaloneModelLocation(res)));
         });
     }
 
