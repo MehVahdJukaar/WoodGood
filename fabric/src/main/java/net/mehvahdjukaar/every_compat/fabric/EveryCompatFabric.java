@@ -37,7 +37,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         if (PlatHelper.getPhysicalSide().isClient())
             ItemTooltipCallback.EVENT.register(EveryCompatClient::onItemTooltip);
 
-// ================================================= Macaw's ======================================================== \\
+//!!================================================ Macaw's ======================================================== \\
         addModule("mcwbridges", () -> MacawBridgesModule::new);
         addModule("mcwdoors", () -> MacawDoorsModule::new);
         addModule("mcwfences", () -> MacawFencesModule::new);
@@ -49,7 +49,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("mcwfurnitures", () -> MacawFurnitureModule::new);
         addModule("mcwstairs", () -> MacawStairsModule::new);
 
-// ================================================= Add Modules ==================================================== \\
+//!!================================================ Add Modules ==================================================== \\
         addModule("beautify", () -> BeautifyRefabricatedModule::new);
         addModule("bewitchment", () -> BewitchmentModule::new);
         addModule("clutter", () -> ClutterModule::new);
@@ -69,10 +69,11 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("woodenhoppers", () -> WoodenHoppersModule::new);
         addModule("twilightforest", () -> TwilightForestModule::new); // Support The-Twilight-Forest-Unofficial
 
-// ============================================== DISABLED FOR A REASON ============================================= \\
+//!!============================================= DISABLED FOR A REASON ============================================= \\
+
 //        addModule("architects_palette", () -> ArchitectsPaletteModule::new); // Not available
 
-// ===================================================== OTHERS ===================================================== \\
+//!!==================================================== OTHERS ===================================================== \\
         if (EveryCompat.OLD_FD) EveryCompatAPI.registerModule(new FarmersDelightModuleOld("farmersdelight"));
 
         forAllModules(CompatModule::onModInit);
