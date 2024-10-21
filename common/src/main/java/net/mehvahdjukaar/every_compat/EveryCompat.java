@@ -106,7 +106,7 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
 
 
-// ================================================= Add Other Compat Mods ========================================== \\
+//!!================================================ Add Other Compat Mods ========================================== \\
         addOtherCompatMod("compatoplenty", "biomesoplenty", List.of("twigs", "farmersdelight", "quark", "woodworks"));
         addOtherCompatMod("compat_makeover", "biomemakeover", List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
         addOtherCompatMod("decorative_compat", "biomesoplenty", List.of("decorative_blocks"));
@@ -116,7 +116,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("natures_delight", "natures_spirit", List.of("farmersdelight"));
         addOtherCompatMod("arts_and_crafts_compat", "arts_and_crafts", List.of("twigs", "decorative_blocks", "farmersdelight", "dramaticdoors"));
 
-        // Macaw's Addon
+        //!! Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", List.of("mcwbridges"));
         addOtherCompatMod("macawbridgesbyg", "byg", List.of("mcwbridges"));
         addOtherCompatMod("mcwfencesbop", "biomesoplenty", List.of("mcwfences"));
@@ -124,11 +124,11 @@ public abstract class EveryCompat {
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
 
-        // Abnormals Delight
+        //!! Abnormals Delight
         addOtherCompatMod("abnormals_delight", List.of("autumnity", "upgrade_aquatic",
                 "environmental", "atmospheric", "endergetic", "caves_and_chasms"), List.of("farmersdelight"));
 
-        // ============================================= Add Modules ==================================================== \\
+//!!=============================================== Add Modules ==================================================== \\
         addModule("another_furniture", () -> AnotherFurnitureModule::new);
         addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("backpacked", () -> BackpackedModule::new);
@@ -149,7 +149,7 @@ public abstract class EveryCompat {
         addModule("villagersplus", () -> VillagersPlusModule::new);
         addModule("table_top_craft", () -> TableTopCraftModule::new);
 
-// ===================================================== OTHERS ===================================================== \\
+//!!==================================================== OTHERS ===================================================== \\
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
 
 
