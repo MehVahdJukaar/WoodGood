@@ -12,23 +12,29 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
-    //modImplementation("curse.maven:selene-common:499980:5651445")
-    modImplementation("net.mehvahdjukaar:moonlight:${moonlight_version}")
+// MOONLIGHT LIB -------------------------------------------------------------------------------------------------------
+
+        // DEFAULT
+    modImplementation("curse.maven:selene-common:499980:5824029") // v2.14.34
+        // LOCAL - only for testing
+//    modImplementation("net.mehvahdjukaar:moonlight:${moonlight_version}")
+
+// =============================================== DEPENDENCIES ========================================================
 
     //common. Fabric version that works on both
     modCompileOnly("curse.maven:resourceful-lib-570073:5659872") // v2.1.29
     modCompileOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14
-
-// =============================================== DEPENDENCIES ========================================================
     modCompileOnly("curse.maven:framework-549225:5680025") // Furniture Refurbished
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
 
-    // LOCAL
+// ================================================== IMPORTS ==========================================================
+
+        // LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
     modCompileOnly("com.arcanc.bc:Beautiful-Campfires-fabric-1.20.1-1.0.3")
 
-// ================================================== IMPORTS ==========================================================
+        // OTHERS
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:backpacked-352835:5401968")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
