@@ -30,6 +30,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -316,6 +317,15 @@ public class QuarkModule extends SimpleModule {
                 .build();
         this.addEntry(leafCarpets);
 
+    }
+
+    @Override
+    public boolean isEntryAlreadyRegistered(String name, BlockType woodType, Registry<?> registry) {
+        if (woodType.getNamespace().equals("alexscaves") && woodType.getTypeName().equals("ancient")) {
+            // Unrelated to Quark's ancient_leaves (Ashen Leaves)
+            return false;
+        }
+        return super.isEntryAlreadyRegistered(name, woodType, registry);
     }
 
     @Override
