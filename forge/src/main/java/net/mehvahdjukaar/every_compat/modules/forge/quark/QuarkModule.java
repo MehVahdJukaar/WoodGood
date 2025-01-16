@@ -11,7 +11,6 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -19,13 +18,13 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -47,7 +46,10 @@ import vazkii.quark.content.building.client.render.be.VariantChestRenderer;
 import vazkii.quark.content.building.module.*;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 //SUPPORT: v3.4-418+
 public class QuarkModule extends SimpleModule {
@@ -148,6 +150,7 @@ public class QuarkModule extends SimpleModule {
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
+                .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("building/crafting/vertplanks/vertical_oak_planks"))
                 .build();
         this.addEntry(verticalPlanks);
