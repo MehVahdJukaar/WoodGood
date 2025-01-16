@@ -1,5 +1,5 @@
 ### UPDATED:
-- **Macaw's Fences & Walls** (COMMON): Added _hedges_' missing tags with #minecraft:fences and also fixed [#712](https://github.com/MehVahdJukaar/WoodGood/issues/712)
+- **QuarkModule** (FORGE): Added ItemTags, `#minecraft:planks` to _vertical_planks_
 
 ### NEW:
 - N/A
