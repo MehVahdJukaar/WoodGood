@@ -1,5 +1,5 @@
 ### UPDATED:
-- **QuarkModule** (FORGE): Added ItemTags, `#minecraft:planks` to _vertical_planks_
+- **Friends And Foes** (COMMON): Fixed the beehives not being generated with **Abnormals'** (**Environmental**, **Upgrade-Aquatic**, Others)
 
 ### NEW:
 - N/A
