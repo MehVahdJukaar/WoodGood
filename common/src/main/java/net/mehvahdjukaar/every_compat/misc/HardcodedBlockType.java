@@ -41,6 +41,9 @@ public class HardcodedBlockType {
 
 
         /// ========== INCLUDE ========== \\\
+        // Friends&Foes' blocks aren't generated with Abnormals' mods
+        if (isWoodRegistryOf("friendsandfoes", "", "upgrade_aquatic|autumnity|atmospheric|environmental", "", "")) return false;
+
         // Quark's blocks with Caverns-And-Chasms aren't generated
         if (isWoodRegistryOf("quark", "", "caverns_and_chasms", "", "")) return false;
 
