@@ -61,6 +61,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void registerBlocks(CompatModule module, Registrator<Block> registry, Collection<T> woodTypes) {
         Block base = baseBlock.get();
         if (base == null)
@@ -70,7 +71,7 @@ class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEn
         for (T w : woodTypes) {
             String n = getBlockName(w);
             String name = module.shortenedId() + "/" + w.getNamespace() + "/" + n;
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
+            if (module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
             var m = ModuleLoader.INSTANCE.getModuleInstance(quarkModule);
             B block = blockSupplier.apply(w, m);
             if (block != null) {

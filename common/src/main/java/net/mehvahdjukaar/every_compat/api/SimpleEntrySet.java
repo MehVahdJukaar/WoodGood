@@ -160,7 +160,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         for (T w : woodTypes) {
             String name = getBlockName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
+            if (module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
 
             if(condition.test(w)) {
                 B block = blockFactory.apply(w);

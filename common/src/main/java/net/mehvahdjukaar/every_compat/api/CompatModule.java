@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.api;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
@@ -92,49 +93,48 @@ public abstract class CompatModule {
 
     }
 
-    //TODO: improve
-    public final boolean isEntryAlreadyRegistered(String name, BlockType woodType, Registry<?> registry) {
-        //ec:twigs/bop/willow_table
-        name = name.substring(name.lastIndexOf("/") + 1); //gets the base name
+    public final boolean isEntryAlreadyRegistered(String blockId, BlockType blockType, Registry<?> registry) {
+        //!! NOTE: blockType is either: WoodType, LeavesType, or StoneTYpe
+        if (blockType.isVanilla()) return true; // Exclude all of Vanilla Types
 
-        String woodFrom = woodType.getNamespace();
+        // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
+        String blockName = blockId.substring(blockId.lastIndexOf("/") + 1);
 
-        if (this.getAlreadySupportedMods().contains(woodFrom)) return true;
+        String blockTypeFrom = blockType.getNamespace();
 
-        //discards wood types from this mod
-        if (woodFrom.equals(modId)) return true; //quark, blossom
+        String slashConvention = blockTypeFrom + "/" + blockName; // quark/blossom_chair
+        String underscoreConvention = blockTypeFrom + "_" + blockName; // quark_blossom_chair
 
-        String n1 = woodFrom + "/" + name; //quark/blossom_chair
-        String n2 = woodFrom + "_" + name; //quark_blossom_chair
-
-        // Garden-Of-The-dead's whistle must be skipped for branches from Regions-Unexplored
-        // Nether's Exoticism already has branches, branches from Regions-Unexplored is not needed
-        if ( (woodFrom.equals("gardens_of_the_dead") ||
-                woodType.getId().toString().equals("nethers_exoticism:jabuticaba")) && name.contains("branch"))
-            return true;
-
-        if (woodType.getId().toString().equals("ecologics:azalea")) {
-            if (modId.equals("quark")) return false; //ecologics and quark azalea. tbh not sure why needed
+        // ugly hardcoded stuff
+        if (blockType instanceof WoodType wt) {
+            Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(blockName, wt, modId, shortenedId());
+            if (hardcoded != null) return hardcoded;
+        } else if (blockType instanceof LeavesType lt) {
+            Boolean hardcoded = HardcodedBlockType.isLeavesBlockAlreadyRegistered(blockName, lt, modId, shortenedId());
+            if (hardcoded != null) return hardcoded;
         }
-        if (woodType.getId().toString().equals("twilightforest:mangrove")) {
-            return name.equals("mangrove_chest");//mangrove waaa so much pain
-        }
-        if (registry.containsKey(new ResourceLocation(modId, name)) || //ones from the mod they are from. usually include vanilla types
-                registry.containsKey(new ResourceLocation(modId, n2))) return true;
-        if (this.shortenedId().equals("af")) return false; //hardcoding
-        if (this.shortenedId().equals("ap")) return false; //hardcoding
-        if (this.shortenedId().equals("vs")) return false; //we always register everything for these
-        if (this.shortenedId().equals("abnww") && woodFrom.equals("architects_palette")) return false; //we always register everything for these
 
-        if (registry.containsKey(new ResourceLocation(woodFrom, name))) return true;
+        /// ========== EXCLUDE ========== \\\
+        if (this.getAlreadySupportedMods().contains(blockTypeFrom)) return true;
+
+        // Discard the blocks that are already in the supportedModId from blockTypeFrom
+        if (blockTypeFrom.equals(modId)) return true; // quark, blossom
+
+        // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType
+        if (registry.containsKey(new ResourceLocation(modId, blockName)) ||
+                registry.containsKey(new ResourceLocation(modId, underscoreConvention))) return true;
+
+
+        // Checking if supportedBlockName exists in the blockTypeFrom
+        if (registry.containsKey(new ResourceLocation(blockTypeFrom, blockName))) return true;
 
         for (var c : EveryCompat.COMPAT_MODS) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
             //if the wood is from the mod this adds compat for && it supports this block type
-            if (woodFrom.equals(c.woodFrom()) && c.blocksFrom().contains(modId)) {
-                if (registry.containsKey(new ResourceLocation(compatModId, name))) return true;
-                if (registry.containsKey(new ResourceLocation(compatModId, n1))) return true;
-                if (registry.containsKey(new ResourceLocation(compatModId, n2))) return true;
+            if (c.woodFrom().contains(blockTypeFrom) && c.blocksFrom().contains(modId)) {
+                if (registry.containsKey(new ResourceLocation(compatModId, blockName))) return true;
+                if (registry.containsKey(new ResourceLocation(compatModId, slashConvention))) return true;
+                if (registry.containsKey(new ResourceLocation(compatModId, underscoreConvention))) return true;
             }
         }
         return false;

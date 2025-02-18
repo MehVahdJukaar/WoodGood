@@ -108,7 +108,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         for (T w : typeRegistry.getValues()) {
             String name = getItemName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            if (w.isVanilla() || module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
+            if (module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
 
             if(condition.test(w)) {
                 I item = itemFactory.apply(w);
