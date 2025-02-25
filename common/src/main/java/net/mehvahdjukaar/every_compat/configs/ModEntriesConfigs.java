@@ -51,7 +51,8 @@ public class ModEntriesConfigs {
         builder.comment("Disables specific entries")
                 .push("entries");
         for (var reg : BlockSetAPI.getRegistries()) {
-            if (reg.getType() == WoodType.class || reg.getType() == LeavesType.class) {
+            if (reg.getType() == WoodType.class || reg.getType() == LeavesType.class ||
+            reg.typeName().equals("mud_type") || reg.typeName().equals("stone_type")) {
                 builder.push(reg.typeName().replace(" ", "_"));
                 for (var c : EveryCompat.getChildKeys(reg.getType())) {
                     String key = c.replace(":", ".");
