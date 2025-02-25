@@ -182,6 +182,7 @@ dependencies {
 
             //- OTHER MAVENs
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK")
+//    modRuntimeOnly("fuzs.diagonalblocks:diagonalblocks-forge:8.0.6")
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN FORGE
         // ~/forge/mods LOCAL
