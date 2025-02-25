@@ -110,6 +110,7 @@ public abstract class EveryCompat {
         addOtherCompatMod("mcwfencesbyg", "byg", List.of("mcwfences"));
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", List.of("mcwroofs"));
         addOtherCompatMod("macawsroofsbyg", "byg", List.of("mcwroofs"));
+
         addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"),
                 "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs");
         addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty",
@@ -162,8 +163,20 @@ public abstract class EveryCompat {
         ENTRY_TYPES.computeIfAbsent(type, t -> new HashSet<>()).add(childId);
     }
 
-    private void addOtherCompatMod(String modId, String woodFrom, List<String> blocksFrom) {
-        COMPAT_MODS.add(new CompatMod(modId, woodFrom, blocksFrom));
+    private void addOtherCompatMod(String compatModId, String fromModId, List<String> supportedModId) {
+        COMPAT_MODS.add(new CompatMod(compatModId, List.of(fromModId), supportedModId));
+    }
+
+    public static void addOtherCompatMod(String compatModId, List<String> fromModId, String... supportedModId) {
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list, supportedModId);
+        COMPAT_MODS.add(new CompatMod(compatModId, fromModId, list));
+    }
+
+    public static void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list, supportedModId);
+        COMPAT_MODS.add(new CompatMod(compatModId, List.of(fromModId), list));
     }
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
@@ -229,7 +242,7 @@ public abstract class EveryCompat {
     }
 
 
-    public record CompatMod(String modId, String woodFrom, List<String> blocksFrom) {
+    public record CompatMod(String modId, List<String> woodFrom, List<String> blocksFrom) {
     }
 
 
