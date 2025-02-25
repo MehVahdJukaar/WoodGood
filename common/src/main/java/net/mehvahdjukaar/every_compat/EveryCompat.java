@@ -187,9 +187,12 @@ public abstract class EveryCompat {
         if (AFFECTED_TYPES.add(t)) {
             BlockSetAPI.addDynamicBlockRegistration((r, c) -> {
                 if (prevRegSize == 0) prevRegSize = BuiltInRegistries.BLOCK.size();
-                ModEntriesConfigs.initEarlyButNotSuperEarly(); // assure configs are loaded since they depend on wood stuff being init
                 LOGGER.info("Registering Compat {} Blocks", t.getSimpleName());
                 forAllModules(m -> m.registerBlocks(t, r, c));
+            }, t);
+
+            BlockSetAPI.addDynamicItemRegistration((r, c) -> {
+                ModEntriesConfigs.initEarlyButNotSuperEarly(); // assure configs are loaded since they depend on wood stuff being init
             }, t);
         }
     }

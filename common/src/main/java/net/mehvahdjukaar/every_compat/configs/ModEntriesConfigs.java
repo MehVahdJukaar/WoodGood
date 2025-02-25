@@ -14,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Supplier;
 
 //loaded after registry
@@ -86,6 +85,7 @@ public class ModEntriesConfigs {
     }
 
     public static <T extends BlockType> boolean isTypeEnabled(T w, @Nullable String childType) {
+        if (!wasInit) initEarlyButNotSuperEarly();
         try {
             if (childType != null && !CHILD_CONFIGS.get(w.getClass()).getOrDefault(childType, () -> true).get())
                 return false;
