@@ -62,6 +62,16 @@ public class ModEntriesConfigs {
                 }
                 builder.pop();
             }
+            else {
+                builder.push(reg.typeName().replace(" ", "_"));
+                for (var c : EveryCompat.getChildKeys(reg.getType())) {
+                    String key = c.replace(":", ".");
+                    var config = builder.define(key, true);
+                    var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
+                    map.put(c, config);
+                }
+                builder.pop();
+            }
         }
         builder.pop();
 
@@ -70,17 +80,18 @@ public class ModEntriesConfigs {
         SPEC.loadFromFile(); //manually load later
     }
 
-    public static <T extends BlockType> boolean isEntryEnabled(T w, Object o) {
+    public static <T extends BlockType> boolean isEntryEnabled(T blockType, Object o) {
         if (o instanceof BlockItem bi) o = bi.getBlock();
-        return isTypeEnabled(w, w.getChildKey(o));
+        return isTypeEnabled(blockType, blockType.getChildKey(o));
     }
 
     public static <T extends BlockType> boolean isEntryEnabled(Class<T> typeClass, Object o) {
         if (o instanceof BlockItem bi) o = bi.getBlock();
-        var w = BlockSetAPI.getBlockTypeOf((ItemLike) o, typeClass);
-        return isTypeEnabled(w, w.getChildKey(o));
+        var blockType = BlockSetAPI.getBlockTypeOf((ItemLike) o, typeClass);
+        return isTypeEnabled(blockType, blockType.getChildKey(o));
     }
 
+    // currently not being used
     public static <T extends BlockType> boolean isTypeEnabled(T w) {
         return isTypeEnabled(w, null);
     }
