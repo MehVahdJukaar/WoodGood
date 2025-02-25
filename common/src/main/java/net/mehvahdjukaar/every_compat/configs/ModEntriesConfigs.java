@@ -90,6 +90,7 @@ public class ModEntriesConfigs {
         return isTypeEnabled(blockType, blockType.getChildKey(o));
     }
 
+    // currently not being used
     public static <T extends BlockType> boolean isTypeEnabled(T w) {
         return isTypeEnabled(w, null);
     }
