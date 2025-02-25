@@ -40,8 +40,9 @@ public class BeautifyRefabricatedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTabKey(tab)
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(tellis);
 

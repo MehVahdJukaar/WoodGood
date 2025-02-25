@@ -1,14 +1,25 @@
 ### UPDATED:
-- **SpirteHelper** (COMMON): Added Eternal Tales to fix the _hedge_'s missing texture via **Macaw's Fences & Walls**
-- **Tropicraft** (COMMON): Improved the code to fix the *boardwalk*s' missing texture with **Productive Trees** and other wood mods
-- **Refurbished Furniture** (COMMON): Fixed the _table_ not being generated with **Dawn Of Time**'s _waxed_oak_ & Also fixed the missing particle texture shown in log
-- **Chipped** (COMMON): 
-  - Added the missing BlockEntity to _barrels_ & _crates_
-  - Tweaked the Palette stuff to remove (the code, `.matchSize()` blc it's buggy 
-- **Valhelsia Structure** (FORGE): Fixed the crash when stripping either cut_post or post - related to [#785](https://github.com/MehVahdJukaar/WoodGood/issues/785)
+- **LANG**: zh_cn - @222858
+- **ChippedModule** (COMMON): Tweaked the texture code to fix the missing textures with **Productive Trees**
+- **Corail Pillar** (COMMON): Outdated CreativeTab's resourceKey 
+- **EveryCompat** (COMMON):
+  - Path of textures for **Blue Skies**' comet_leaves
+  - Path of textures for **Malum**'s azure_runewood & budding_soulwood
 
 ---
 
+### ADDED:
+- **Every Compat** (COMMON): 
+  - the correct path of **eternal_tales**'s carved_pure_wood texture - [#787](https://github.com/MehVahdJukaar/WoodGood/issues/787)
+  - correct path of texture for **Promenade** - [#831](https://github.com/MehVahdJukaar/WoodGood/issues/831)
+  - correct path of texture for **Simple Mango** - [#831](https://github.com/MehVahdJukaar/WoodGood/issues/831)
+  - Included vanilla variant (except BIRCH) of **Dawn Of Time BUilder Edition**'a _fancy_fence_ - [#823](https://github.com/MehVahdJukaar/WoodGood/issues/823)
+    - In the future, please let me know when DEV have added the vanilla variant so I can exclude them to avoid duplication 
+- **Building But Better** (FABRIC): RE-ADDED because the built-in module is not updated to work with the latest version of EveryCompat - [#825](https://github.com/MehVahdJukaar/WoodGood/issues/825)
+
+### INCOMPATIBLE:
+- **VMinus Mod** (FORGE): From this version onward, it is marked as INCOMPATIBLE
+  
 ### NEW:
 - N/A
 

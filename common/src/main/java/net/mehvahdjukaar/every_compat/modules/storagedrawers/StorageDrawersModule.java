@@ -69,9 +69,9 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTile(getModTile("standard_drawers_2"))
                 .createPaletteFromPlanks(this::drawersPalette)
                 .addTexture(modRes("block/drawers_oak_front_2"))
-                .addTexture(modRes("block/drawers_oak_side"))
-                .addTexture(modRes("block/drawers_oak_sort"))
-                .addTexture(modRes("block/drawers_oak_trim"))
+//                .addTexture(modRes("block/drawers_oak_side"))
+//                .addTexture(modRes("block/drawers_oak_sort"))
+//                .addTexture(modRes("block/drawers_oak_trim"))
                 .build();
         this.addEntry(FULL_DRAWERS_2);
 
@@ -88,9 +88,9 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTile(getModTile("standard_drawers_4"))
                 .createPaletteFromPlanks(this::drawersPalette)
                 .addTexture(modRes("block/drawers_oak_front_4"))
-                .addTexture(modRes("block/drawers_oak_side"))
-                .addTexture(modRes("block/drawers_oak_sort"))
-                .addTexture(modRes("block/drawers_oak_trim"))
+//                .addTexture(modRes("block/drawers_oak_side"))
+//                .addTexture(modRes("block/drawers_oak_sort"))
+//                .addTexture(modRes("block/drawers_oak_trim"))
                 .build();
 
         this.addEntry(FULL_DRAWERS_4);
@@ -107,12 +107,12 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_1"))
                 .createPaletteFromPlanks(this::drawersPalette)
-                .addTexture(modRes("block/drawers_oak_front_1"))
-                .addTexture(modRes("block/drawers_oak_side"))
+//                .addTexture(modRes("block/drawers_oak_front_1"))
+//                .addTexture(modRes("block/drawers_oak_side"))
                 .addTexture(modRes("block/drawers_oak_side_h"))
                 .addTexture(modRes("block/drawers_oak_side_v"))
-                .addTexture(modRes("block/drawers_oak_sort"))
-                .addTexture(modRes("block/drawers_oak_trim"))
+//                .addTexture(modRes("block/drawers_oak_sort"))
+//                .addTexture(modRes("block/drawers_oak_trim"))
                 .build();
         this.addEntry(HALF_DRAWERS_1);
 
@@ -128,12 +128,12 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_2"))
                 .createPaletteFromPlanks(this::drawersPalette)
-                .addTexture(modRes("block/drawers_oak_front_2"))
-                .addTexture(modRes("block/drawers_oak_side"))
-                .addTexture(modRes("block/drawers_oak_side_h"))
-                .addTexture(modRes("block/drawers_oak_side_v"))
-                .addTexture(modRes("block/drawers_oak_sort"))
-                .addTexture(modRes("block/drawers_oak_trim"))
+//                .addTexture(modRes("block/drawers_oak_front_2"))
+//                .addTexture(modRes("block/drawers_oak_side"))
+//                .addTexture(modRes("block/drawers_oak_side_h"))
+//                .addTexture(modRes("block/drawers_oak_side_v"))
+//                .addTexture(modRes("block/drawers_oak_sort"))
+//                .addTexture(modRes("block/drawers_oak_trim"))
                 .build();
         this.addEntry(HALF_DRAWERS_2);
 
@@ -149,12 +149,12 @@ public class StorageDrawersModule extends SimpleModule {
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_4"))
                 .createPaletteFromPlanks(this::drawersPalette)
-                .addTexture(modRes("block/drawers_oak_front_4"))
-                .addTexture(modRes("block/drawers_oak_side"))
-                .addTexture(modRes("block/drawers_oak_side_h"))
-                .addTexture(modRes("block/drawers_oak_side_v"))
-                .addTexture(modRes("block/drawers_oak_sort"))
-                .addTexture(modRes("block/drawers_oak_trim"))
+//                .addTexture(modRes("block/drawers_oak_front_4"))
+//                .addTexture(modRes("block/drawers_oak_side"))
+//                .addTexture(modRes("block/drawers_oak_side_h"))
+//                .addTexture(modRes("block/drawers_oak_side_v"))
+//                .addTexture(modRes("block/drawers_oak_sort"))
+//                .addTexture(modRes("block/drawers_oak_trim"))
                 .build();
         this.addEntry(HALF_DRAWERS_4);
 

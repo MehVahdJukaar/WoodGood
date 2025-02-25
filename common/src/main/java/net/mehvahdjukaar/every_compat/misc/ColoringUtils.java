@@ -1,9 +1,9 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
@@ -17,6 +17,17 @@ public final class ColoringUtils {
             new ResourceLocation("blue_skies", "cherry"),
             new ResourceLocation("twilightforest", "beanstalk")
     );
+
+    public static void copyItemTint(ClientHelper.ItemColorEvent event, Map<? extends BlockType, ? extends Item> items) {
+        items.forEach((type, item) -> {
+            event.register((stack, tintIndex) -> {
+                        ItemStack parentItem = new ItemStack(type.mainChild());
+                        if (parentItem.isEmpty()) return 1;
+                        return event.getColor(parentItem, tintIndex);
+                    },
+                    item.asItem());
+        });
+    }
 
     public static void copyBlockTint(ClientHelper.ItemColorEvent event, Map<? extends BlockType, ? extends Block> blocks) {
         blocks.forEach((type, item) -> {

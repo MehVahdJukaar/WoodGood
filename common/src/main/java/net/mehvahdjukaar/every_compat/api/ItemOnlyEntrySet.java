@@ -12,6 +12,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -199,6 +200,11 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
             return e;
+        }
+
+        public ItemOnlyEntrySet.Builder<T, I> defaultRecipe() {
+            this.recipes.add(() -> Utils.getID(this.baseItem.get()));
+            return this;
         }
     }
 }

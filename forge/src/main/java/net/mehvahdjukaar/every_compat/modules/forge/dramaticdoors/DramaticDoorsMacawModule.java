@@ -1,9 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
+import com.fizzware.dramaticdoors.forge.DDRegistry;
 import com.fizzware.dramaticdoors.forge.blocks.TallDoorBlock;
 import com.fizzware.dramaticdoors.forge.blocks.TallSlidingDoorBlock;
 import com.fizzware.dramaticdoors.forge.blocks.TallStableDoorBlock;
-import com.fizzware.dramaticdoors.forge.DDRegistry;
 import com.mcwdoors.kikoz.MacawsDoors;
 import com.mcwdoors.kikoz.init.BlockInit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.Objects;
 
 //SUPPORT: DramaticDoors v3.2.7+ | Macaw's Door v1.1.1+
+//NOTE: The library of FABRIC and FORGE are not the same, must be in separated folders
 public class DramaticDoorsMacawModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> tallBarkGlassDoors;

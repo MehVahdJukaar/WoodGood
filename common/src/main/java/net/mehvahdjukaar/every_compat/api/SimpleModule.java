@@ -189,8 +189,8 @@ public class SimpleModule extends CompatModule {
 
     //TODO: improve
     public boolean isEntryAlreadyRegistered(String blockId, BlockType blockType, Registry<?> registry) {
-        //!! NOTE: blockType is either: WoodType, LeavesType, or StoneTYpe
-        if (blockType.isVanilla()) return true; // Exclude all of Vanilla Types
+//        //!! NOTE: blockType is either: WoodType, LeavesType, or StoneTYpe
+//        if (blockType.isVanilla()) return true; // is moved to HardcodedBlockType
 
         // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
         String blockName = blockId.substring(blockId.lastIndexOf("/") + 1);

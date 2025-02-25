@@ -88,7 +88,10 @@ versionRange="[1.5.7,)" #mandatory
 ordering="AFTER"
 side="BOTH"
 
+[[dependencies.everycomp]] #optional
 
-
-
-
+modId="vminus"
+mandatory=false
+versionRange="[9.-INCOMPATIBLE,]" #mandatory
+ordering="NONE"
+side="BOTH"

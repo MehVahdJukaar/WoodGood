@@ -123,6 +123,7 @@ subprojects {
                     }
                 } else {
                     relations {
+                        incompatible("vminus")
                         requiredDependency("selene")
                         optionalDependency("sawmill")
                         optionalDependency("absent-by-design")

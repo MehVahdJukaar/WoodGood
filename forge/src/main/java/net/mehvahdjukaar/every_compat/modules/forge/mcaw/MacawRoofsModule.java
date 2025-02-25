@@ -1,13 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
 import com.mcwroofs.kikoz.init.BlockInit;
-import com.mcwroofs.kikoz.init.TabInit;
-import com.mcwroofs.kikoz.objects.roofs.BaseRoof;
-import com.mcwroofs.kikoz.objects.roofs.Lower;
-import com.mcwroofs.kikoz.objects.roofs.RoofGlass;
-import com.mcwroofs.kikoz.objects.roofs.RoofTopNew;
-import com.mcwroofs.kikoz.objects.roofs.Steep;
-import com.mcwroofs.kikoz.objects.roofs.SteepRoof;
+import com.mcwroofs.kikoz.objects.roofs.*;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;

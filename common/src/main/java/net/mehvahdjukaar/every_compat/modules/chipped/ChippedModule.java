@@ -354,7 +354,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .createPaletteFromPlanks(this::matchSizeAndModifyLuminance)
+                .createPaletteFromPlanks(this::dullLuminance)
                 .setTabKey(tab)
                 .build();
         this.addEntry(doubleHerringbonePlanks);
@@ -422,7 +422,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .createPaletteFromPlanks(this::matchSizeAndModifyLuminance)
+//                .createPaletteFromPlanks(this::dullLuminance
                 .setTabKey(tab)
                 .build();
         this.addEntry(herringbonePlanks);
@@ -502,23 +502,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .createPaletteFromPlanks(p -> {
-                    p.reduceDown();
-                    PaletteColor darker = p.getDarkest(); // 2nd darkest after 1st darkest
-                    p.reduceDown();
-                    p.matchLuminanceStep(0.03F);
-                    if (p.size() < 11) {
-                        while (p.size() <= 11) {
-                            p.increaseInner();
-                        }
-                    }
-                    else {
-                        while (p.size() >= 11) {
-                            p.reduce();
-                        }
-                    }
-                    p.add(darker);
-                })
+                .createPaletteFromPlanks(this::polishedPalette)
                 .setTabKey(tab)
                 .build();
         this.addEntry(polishedPlanks);
@@ -553,7 +537,7 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .createPaletteFromPlanks(this::matchSizeAndModifyLuminance)
+                .createPaletteFromPlanks(this::dullLuminance)
                 .setTabKey(tab)
                 .build();
         this.addEntry(slantedPlanks);
@@ -1887,35 +1871,69 @@ public class ChippedModule extends SimpleModule {
         }
     }
 
-    private void matchSizeAndModifyLuminance(Palette p) {
-        p.remove(p.getDarkest(2));
-        p.remove(p.getDarkest(2));
-        p.remove(p.getDarkest(2));
-        p.changeSizeMatchingLuminanceSpan(0.25F);
+    private void dullLuminance(Palette p) {
+        while (p.size() < 8) p.increaseInner(); // necessary due to fewer than 7 paletteColors
+        if (p.size() < 17) { // Not necessary for more than 16
+            for (int i = 0; i < 8; i++) {
+                p.increaseInner();
+            }
+            for (int i = 0; i < 4; i++) {
+                p.reduceUp();
+            }
+            p.reduceDown();
+            p.reduceDown();
+        }
+    }
+
+    private void polishedPalette(Palette p) {
+        if (6 < p.size() && p.size() < 33) {
+            p.reduceDown();
+            PaletteColor darker = p.getDarkest().getLightened();
+            p.reduceDown();
+            PaletteColor dark = p.getDarkest().getLightened();
+            p.reduceDown();
+            if (p.size() < 10) {
+                while (p.size() < 10) {
+                    p.increaseInner();
+                }
+            }
+            else {
+                while (p.size() > 8) {
+                    p.reduce();
+                }
+            }
+            p.add(dark);
+            p.add(darker);
+        }
     }
 
     private void darkerPalette(Palette p) {
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
+        p.reduceDown();
+        p.reduceUp();
     }
 
     private void darkPalette(Palette p) {
+        if (p.size() > 25) {
+            while (p.size() > 6) {
+                p.reduce();
+            }
+        }
         p.increaseInner();
         p.increaseInner();
         p.increaseInner();
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-        p.remove(p.getDarkest());
+        p.reduceUp();
+        p.reduceUp();
+        p.reduceDown();
     }
 
     private void panelPalette(Palette p) {
-        p.remove(p.getDarkest());
+        p.reduceDown();
         p.increaseInner();
-        p.remove(p.getDarkest());
+        p.reduceDown();
         p.increaseInner();
-        p.remove(p.getDarkest());
+        p.reduceDown();
         p.increaseInner();
-        p.remove(p.getLightest());
+        p.reduceUp();
     }
 
     @Override
@@ -1926,7 +1944,8 @@ public class ChippedModule extends SimpleModule {
         // why do we need this instead of copy parent drop? macaw has doors too and they work
         // chipped adds their loot not via loot table. this is why we need this. no other mod should need this stuff
         // this shouldnt be needed.... why isnt copy parent loot working?
-        List<EntrySet<?>> doors = this.getEntries().stream().filter(e -> e.getName().contains("door")).toList();
+        List<EntrySet<?>> doors = this.getEntries().stream().filter(
+                e -> e.getName().contains("door") && !e.getName().contains("trapdoor")).toList();
         for (var e : doors) {
             if (e instanceof SimpleEntrySet<?, ?> se) {
                 for (var d : se.blocks.values()) {
@@ -1957,32 +1976,32 @@ public class ChippedModule extends SimpleModule {
     private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation) {
         JsonArray jsonArray = new JsonArray();
 
-        for (var w : WoodTypeRegistry.getTypes()) {
-            if (w.isVanilla()) continue;
+        for (var woodType : WoodTypeRegistry.getTypes()) {
+            if (woodType.isVanilla()) continue;
             boolean hasSomething = false;
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
-                    shortenedId() + "/" + w.getAppendableId() + "_" + identifier));
+                    shortenedId() + "/" + woodType.getAppendableId() + "_" + identifier));
 
-            for (var e : this.getEntries()) {
-                String name = e.getName();
+            for (var entry : this.getEntries()) {
+                String name = entry.getName();
                 if (name.matches(".*(_" + identifier + "|" + identifier + "_).*")) {
                     if (identifier.equals("door") && name.matches(".*(_trapdoor|trapdoor_).*")) continue;
                     if (identifier.equals("log") && name.matches(".*(_stripped_log|stripped_).*")) continue;
-                    Item b = ((SimpleEntrySet<?, ?>) e).items.get(w);
-                    if (b != null) {
+                    Item item = ((SimpleEntrySet<?, ?>) entry).items.get(woodType);
+                    if (item != null) {
                         hasSomething = true;
-                        tagBuilder.addEntry(b);
+                        tagBuilder.addEntry(item);
                     }
                 }
             }
 
             // Checking for Child of wood type exist
-            if (w.getChild(identifier) != null) {
+            if (woodType.getChild(identifier) != null) {
                 switch (identifier) { // Adds normal or modded blockType
-                    case "planks" -> tagBuilder.addEntry(w.planks);
-                    case "door" -> tagBuilder.addEntry(w.getChild("door"));
-                    case "trapdoor" -> tagBuilder.addEntry(w.getChild("trapdoor"));
-                    case "log" -> tagBuilder.addEntry(w.log);
+                    case "planks" -> tagBuilder.addEntry(woodType.planks);
+                    case "door" -> tagBuilder.addEntry(woodType.getChild("door"));
+                    case "trapdoor" -> tagBuilder.addEntry(woodType.getChild("trapdoor"));
+                    case "log" -> tagBuilder.addEntry(woodType.log);
                 }
             }
 

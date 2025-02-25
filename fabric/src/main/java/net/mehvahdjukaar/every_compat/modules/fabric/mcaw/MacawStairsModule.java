@@ -38,14 +38,16 @@ public class MacawStairsModule extends SimpleModule {
                         getModBlock("oak_terrace_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TerraceStairs(copyProperties())
                 )
-                .requiresChildren("stripped_log") //REASON: recipes & textures
+                .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("terrace_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(terrace_stairs);
 
@@ -53,14 +55,16 @@ public class MacawStairsModule extends SimpleModule {
                         getModBlock("oak_skyline_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SkylineStairs(copyProperties())
                 )
-                .requiresChildren("stripped_log") //REASON: recipes & textures
+                .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("skyline_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(skyline_stairs);
 
@@ -68,14 +72,16 @@ public class MacawStairsModule extends SimpleModule {
                         getModBlock("oak_compact_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompactStairs(copyProperties())
                 )
-                .requiresChildren("stripped_log") //REASON: recipes & textures
+                .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("compact_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(compact_stairs);
 
@@ -83,14 +89,16 @@ public class MacawStairsModule extends SimpleModule {
                         getModBlock("oak_bulk_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BulkStairs(copyProperties())
                 )
-                .requiresChildren("stripped_log") //REASON: recipes & textures
+                .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("bulk_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(bulk_stairs);
 
@@ -98,14 +106,16 @@ public class MacawStairsModule extends SimpleModule {
                         getModBlock("oak_loft_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new LoftStairs(copyProperties())
                 )
-                .requiresChildren("stripped_log") //REASON: recipes & textures
+                .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("loft_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(loft_stairs);
 
@@ -113,14 +123,16 @@ public class MacawStairsModule extends SimpleModule {
                         getModBlock("oak_balcony"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BalconyRailing(copyProperties())
                 )
-                .requiresChildren("fence", "stripped_log") //REASON: recipes & textures
+                .requiresChildren("fence", "stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("balconies"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(balconies);
 
@@ -133,10 +145,12 @@ public class MacawStairsModule extends SimpleModule {
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("railings"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(railings);
 
@@ -144,14 +158,16 @@ public class MacawStairsModule extends SimpleModule {
                         getModBlock("oak_platform"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StairPlatform(copyProperties())
                 )
-                .requiresChildren("slab", "stripped_log") //REASON: recipes & textures
+                .requiresChildren("slab", "stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("platforms"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)"))
+                //REASON: take a look at their //TEXTURES, you'll see why.
+                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
         this.addEntry(platforms);
 

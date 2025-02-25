@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 
-//SUPPORT: v3.2.8+
+//SUPPORT: v3.2.9_1+
 public class DramaticDoorsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> shortDoors;

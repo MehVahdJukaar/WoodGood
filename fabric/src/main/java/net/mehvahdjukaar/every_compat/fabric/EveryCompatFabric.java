@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 
 import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
@@ -55,6 +56,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
 
 //!!================================================ Add Modules ==================================================== \\
+        addIfLoaded("bbb", () -> BuildingButBetterModule::new);
         addIfLoaded("beautify", () -> BeautifyRefabricatedModule::new);
         addIfLoaded("bewitchment", () -> BewitchmentModule::new);
         addIfLoaded("clutter", () -> ClutterModule::new);

@@ -307,6 +307,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
     }
 
+//!! SUBCLASS
     public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T, B>, T, B, Item> {
         protected final Supplier<@Nullable B> baseBlock;
         protected LootTableMode lootMode = LootTableMode.DROP_SELF;

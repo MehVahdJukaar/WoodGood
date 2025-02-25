@@ -48,16 +48,16 @@ public class EveryCompatCommon {
 
 //!! =============================================== Add Other Compat Mods ========================================== \\
         addOtherCompatMod("compatoplenty", "biomesoplenty",
-                List.of("twigs", "farmersdelight", "quark", "woodworks"));
+                "twigs", "farmersdelight", "quark", "woodworks");
         addOtherCompatMod("compat_makeover", "biomemakeover",
-                List.of("habitat", "farmersdelight", "quark", "decorative_blocks"));
+                "habitat", "farmersdelight", "quark", "decorative_blocks");
         addOtherCompatMod("decorative_compat", "biomesoplenty", "decorative_blocks");
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", "storagedrawers");
         addOtherCompatMod("lolmcvbop", "biomesoplenty", "lolmcv");
         addOtherCompatMod("lolmcvbmo", "biomemakeover", "lolmcv");
-        addOtherCompatMod("natures_delight", "natures_spirit", List.of("farmersdelight"));
-        addOtherCompatMod("arts_and_crafts_compat", "arts_and_crafts",
-                List.of("twigs", "decorative_blocks", "farmersdelight", "dramaticdoors"));
+        addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
+        addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
+                "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
 
         // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
@@ -66,10 +66,16 @@ public class EveryCompatCommon {
         addOtherCompatMod("mcwfencesbyg", "biomeswevegone", "mcwfences");
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", "mcwroofs");
         addOtherCompatMod("macawsroofsbyg", "biomeswevegone", "mcwroofs");
+        addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"),
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs");
+        addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty",
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs");
+        addOtherCompatMod("mcwmoddinglegacy", List.of("blue_skies", "premium_wood"),
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs");
 
         // Abnormals Delight
-        addOtherCompatMod("abnormals_delight", List.of("autumnity", "upgrade_aquatic", "environmental",
-                /* compatModID */ "atmospheric", "endergetic", "caves_and_chasms"),
+        addOtherCompatMod("abnormals_delight",
+                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caves_and_chasms"),
                 "farmersdelight");
 
     //!! =========================================== Add Modules ==================================================== \\

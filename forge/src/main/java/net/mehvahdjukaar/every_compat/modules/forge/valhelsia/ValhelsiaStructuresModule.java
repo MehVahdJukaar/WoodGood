@@ -18,7 +18,6 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -40,7 +39,6 @@ import java.util.List;
 import java.util.Objects;
 
 //SUPPORT: v1.1.2+
-@SuppressWarnings("removal")
 public class ValhelsiaStructuresModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> strippedPosts;
@@ -85,6 +83,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         getModBlock("cut_stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CutPostBlock(cutPostProperties(w))
                 )
+                .requiresFromMap(strippedPosts.blocks) //REASON: recipes
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: manual generation (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -101,6 +100,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         getModBlock("cut_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatCutPostBlock(cutPostProperties(w), w)
                 )
+                .requiresFromMap(posts.blocks) //REASON: recipes
                 //TEXTURES: manual generation (BELOW)
                 .addTag(modRes("cut_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_posts"), Registries.ITEM)
@@ -115,6 +115,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         getModBlock("bundled_stripped_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(bundledPostProperties(w))
                 )
+                .requiresFromMap(strippedPosts.blocks) //REASON: recipes
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: manual generation (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -127,7 +128,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         getModBlock("bundled_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StrippableRotatedPillarBlock(() -> bundledStrippedPosts.blocks.get(w), bundledPostProperties(w))
                 )
-                .requiresFromMap(bundledStrippedPosts.blocks)
+                .requiresFromMap(posts.blocks) //REASON: recipes
+                .requiresFromMap(bundledStrippedPosts.blocks) //REASON: strippable_block
                 //TEXTURES: manual generation (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -165,6 +167,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
         try {
+            // oak_posts's TEXTURES ------------------------------------------------------------------------------------
             posts.blocks.forEach((w, block) -> {
                 ResourceLocation id = Utils.getID(block);
 
@@ -184,12 +187,13 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                     handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Post block texture for for {} : {}", block, e);
+                    handler.getLogger().error("Failed to generate Post texture for for {} : {}", block, e);
 
                 }
 
             });
 
+            // stripped_oak_posts' TEXTURES ----------------------------------------------------------------------------
             strippedPosts.blocks.forEach((w, block) -> {
                 ResourceLocation id = Utils.getID(block);
 
@@ -210,15 +214,15 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                     handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Stripped Post block texture for for {} : {}", block, e);
+                    handler.getLogger().error("Failed to generate Stripped-Post texture for {} : {}", block, e);
 
                 }
             });
         } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Table block texture : ", ex);
+            handler.getLogger().error("Could not generate block texture: ", ex);
         }
 
-        // bundled_<type>_posts
+        // bundled_<type>_posts' TEXTURES ------------------------------------------------------------------------------
         try (TextureImage BPTopInnerMask = TextureImage.open(manager,
                       EveryCompat.res("block/vs/bundledposts_top_inner_m"));
              TextureImage BPTopOuterMask = TextureImage.open(manager,
@@ -334,7 +338,6 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
     @SuppressWarnings("deprecation")
     public static class CompatPostBlock extends PostBlock {
-//        public final ResourceLocation blockId;
         public final WoodType woodType;
 
         public CompatPostBlock(Properties properties, WoodType woodType) {

@@ -1,8 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.forge.corail_pillar;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -10,20 +7,13 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.Util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import ovh.corail.corail_pillar.block.BlockPillar;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Objects;
-import java.util.function.Supplier;
+import ovh.corail.corail_pillar.registry.ModTabs;
 
 //SUPPORT: v5.9.1+
 public class CorailPillarModule extends SimpleModule {
@@ -33,7 +23,7 @@ public class CorailPillarModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> SMALL_PLANK_PILLAR;
     public CorailPillarModule(String modId) {
         super(modId, "cpr");
-        Supplier<CreativeModeTab> tab = getModTab("corail_pillar");
+        ResourceLocation tab = ModTabs.TAB_ID;
 
         LOG_PILLAR = SimpleEntrySet.builder(WoodType.class, "log", "pillar",
                 getModBlock("pillar_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -42,7 +32,7 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
-                .setTab(tab)
+                .setTabKey(tab)
                 .addRecipe(modRes("stonecutting/pillar_oak_log"))
                 .build();
         this.addEntry(LOG_PILLAR);
@@ -54,7 +44,7 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
-                .setTab(tab)
+                .setTabKey(tab)
                 .addRecipe(modRes("stonecutting/pillar_oak_planks"))
                 .build();
         this.addEntry(SMALL_LOG_PILLAR);
@@ -66,7 +56,7 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
-                .setTab(tab)
+                .setTabKey(tab)
                 .build();
         this.addEntry(PLANK_PILLAR);
 
@@ -77,7 +67,7 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
-                .setTab(tab)
+                .setTabKey(tab)
 //                .addRecipe(modRes("stonecutting/"))
                 .build();
         this.addEntry(SMALL_PLANK_PILLAR);

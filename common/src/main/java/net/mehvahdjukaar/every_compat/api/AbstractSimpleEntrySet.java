@@ -29,7 +29,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -180,7 +179,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     @Override
     public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        if (copyTint) ColoringUtils.copyBlockTint(event, blocks);
+        if (copyTint) {
+            ColoringUtils.copyBlockTint(event, blocks);
+            ColoringUtils.copyItemTint(event, items);
+        }
     }
 
     @Override
@@ -424,10 +426,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     }
 
     //post process some textures.
-    public Supplier<TextureImage> postProcessTexture(T wood, String newId, ResourceManager manager,
+    public Supplier<TextureImage> postProcessTexture(T blockType, String newId, ResourceManager manager,
                                                      Supplier<TextureImage> textureSupplier) {
-        if (wood.getClass() == WoodType.class) {
-            var changed = SpriteHelper.maybePostProcessWoodTexture((WoodType) wood, newId, manager, textureSupplier);
+        if (blockType.getClass() == WoodType.class) {
+            var changed = SpriteHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, textureSupplier);
             if (changed != null) {
                 return changed;
             }
@@ -505,14 +507,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         // Exclude Leaves | Wood | Stone - exclusive with addCondition
-        public BL excludeBlockTypes(String modId, String... ids) {
+        public BL excludeBlockTypes(String regEx) {
+            this.addCondition(blockType -> !blockType.getId().toString().matches(regEx));
+            return (BL) this;
+        }
+
+        // Exclude Leaves | Wood | Stone - exclusive with addCondition
+        public BL excludeBlockTypes(String modId, String... typeIds) {
             StringBuilder regexBuilder = new StringBuilder();
 
             // create "biomesoplenty:(fir)" or "biomesoplenty:(fir|dead|...)
             regexBuilder.append(modId).append(":(");
-            for (int i = 0; i < ids.length; i++) {
-                regexBuilder.append(ids[i]);
-                if (i != (ids.length - 1)) regexBuilder.append("|"); // Don't append "|" to the last word's
+            for (int i = 0; i < typeIds.length; i++) {
+                regexBuilder.append(typeIds[i]);
+                if (i != (typeIds.length - 1)) regexBuilder.append("|"); // Don't append "|" to the last word's
             }
             regexBuilder.append(")");
 
