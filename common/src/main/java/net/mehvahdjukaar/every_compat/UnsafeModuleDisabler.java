@@ -18,9 +18,16 @@ public class UnsafeModuleDisabler {
 
     public UnsafeModuleDisabler() {
         this.properties = new Properties();
-        this.propertiesFile = PlatHelper.getGamePath().resolve("config/everycomp-hazardous.properties").toFile();
+        Path configPath = PlatHelper.getGamePath().resolve("config");
+        this.propertiesFile = configPath.resolve("everycomp-hazardous.properties").toFile();
 
         try {
+            // Ensure the config directory exists
+            File configDir = configPath.toFile();
+            if (!configDir.exists()) {
+                configDir.mkdirs(); // Create directories if they do not exist
+            }
+
             if (propertiesFile.exists()) {
                 try (FileInputStream fis = new FileInputStream(propertiesFile)) {
                     properties.load(fis);
@@ -29,13 +36,12 @@ public class UnsafeModuleDisabler {
                 propertiesFile.createNewFile();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error initializing EC properties", e);
+            throw new RuntimeException("Error initializing EC properties at path " + propertiesFile.getAbsolutePath(), e);
         }
     }
 
     public void save() {
         try (FileOutputStream output = new FileOutputStream(propertiesFile)) {
-            properties.put("a", "false");
             properties.store(output, "Hard disable entire modules. Use at your own risk and don't ask for support if you use this. Write modid = false to disable modules");
         } catch (IOException e) {
             e.printStackTrace();
