@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -26,27 +27,27 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
+import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
 
 //SUPPORT: v3.0.7+
 public class WilderWildModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, HollowedLogBlock> hollow_log;
-    public final SimpleEntrySet<WoodType, HollowedLogBlock> stripped_hollow_log;
+    public final SimpleEntrySet<WoodType, HollowedLogBlock> hollow_logs;
+    public final SimpleEntrySet<WoodType, HollowedLogBlock> stripped_hollow_logs;
 
     public WilderWildModule(String modId) {
         super(modId, "ww");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
-        hollow_log = SimpleEntrySet.builder(WoodType.class, "log", "hollowed",
+        hollow_logs = SimpleEntrySet.builder(WoodType.class, "log", "hollowed",
                         getModBlock("hollowed_oak_log", HollowedLogBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("hollowed_oak_log").get()))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
-                .createPaletteFromChild("log")
+                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .addTexture(modRes("block/hollowed_oak_log"))
-                //TEXTURES: stripped_hollowed_log, log_top
+                //TEXTURES: stripped_oak_log, log_top
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -67,16 +68,15 @@ public class WilderWildModule extends SimpleModule {
                 //REASON: The top texture is not a standard 16x16. Take a look, you'll see why
                 .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
-        this.addEntry(hollow_log);
+        this.addEntry(hollow_logs);
 
-        stripped_hollow_log = SimpleEntrySet.builder(WoodType.class, "log", "stripped_hollowed",
+        stripped_hollow_logs = SimpleEntrySet.builder(WoodType.class, "log", "stripped_hollowed",
                         getModBlock("stripped_hollowed_oak_log", HollowedLogBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("stripped_hollowed_oak_log").get()))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
-                .createPaletteFromChild("stripped_log")
+                .createPaletteFromChild("stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 //TEXTURES: stripped_log, stripped_log_top
-                .addTexture(modRes("block/stripped_hollowed_oak_log"))
                 .addTexture(modRes("block/stripped_hollowed_oak_log"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
@@ -99,7 +99,7 @@ public class WilderWildModule extends SimpleModule {
                 //REASON: The top texture is not a standard 16x16. Take a look, you'll see why
                 .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
-        this.addEntry(stripped_hollow_log);
+        this.addEntry(stripped_hollow_logs);
 
     }
 
@@ -107,22 +107,22 @@ public class WilderWildModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
 
-        hollow_log.blocks.forEach((wood, block) -> {
-            if (doChildrenExistFor(wood, stripped_hollow_log)) // For stripping the logs
-                StrippableBlockRegistry.register(block, stripped_hollow_log.blocks.get(wood));
-
+        hollow_logs.blocks.forEach((wood, block) -> {
             boolean isStem = Utils.getID(wood.log).toString().contains("stem");
             if (isStem) {
-                HollowedLogBlock.registerAxeHollowBehaviorStem(wood.log, hollow_log.blocks.get(wood));
-                if (doChildrenExistFor(wood, "stripped_log"))
-                    HollowedLogBlock.registerAxeHollowBehaviorStem(wood.getBlockOfThis("stripped_log"), stripped_hollow_log.blocks.get(wood));
+                HollowedLogBlock.registerAxeHollowBehaviorStem(wood.log, hollow_logs.blocks.get(wood));
+                if (doChildrenExistFor(wood,"stripped_log"))
+                    HollowedLogBlock.registerAxeHollowBehaviorStem(wood.getBlockOfThis("stripped_log"), stripped_hollow_logs.blocks.get(wood));
             }
             else {
-                HollowedLogBlock.registerAxeHollowBehavior(wood.log, hollow_log.blocks.get(wood));
-                if (doChildrenExistFor(wood, "stripped_log")) {
-                    HollowedLogBlock.registerAxeHollowBehavior(wood.getBlockOfThis("stripped_log"), stripped_hollow_log.blocks.get(wood));
+                HollowedLogBlock.registerAxeHollowBehavior(wood.log, hollow_logs.blocks.get(wood));
+                if (doChildrenExistFor(wood,"stripped_log")) {
+                    HollowedLogBlock.registerAxeHollowBehavior(wood.getBlockOfThis("stripped_log"), stripped_hollow_logs.blocks.get(wood));
                 }
             }
+
+            if (doChildrenExistFor(wood, stripped_hollow_logs)) // For stripping the logs
+                StrippableBlockRegistry.register(block, stripped_hollow_logs.blocks.get(wood));
         });
     }
 
@@ -131,7 +131,7 @@ public class WilderWildModule extends SimpleModule {
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
-        hollow_log.blocks.forEach((wood, block) -> {
+        hollow_logs.blocks.forEach((wood, block) -> {
             // Variables
             ResourceLocation recipeLoc = ResType.RECIPES.getPath("wilderwild:oak_planks_from_hollowed");
             ResourceLocation newRecipeLoc = EveryCompat.res(wood.getTypeName() + "_planks_from_hollowed");
@@ -139,11 +139,11 @@ public class WilderWildModule extends SimpleModule {
                     wood.getTypeName() + "_logs");
 
 // TAGS ================================================================================================
-            boolean hasAddedNewTag = createAndAddCustomTags(tagRLoc, handler, block, stripped_hollow_log.blocks.get(wood));
+            boolean hasAddedNewTag = createAndAddCustomTags(tagRLoc, handler, block, stripped_hollow_logs.blocks.get(wood));
 
 // RECIPE ==============================================================================================
             try (InputStream recipeStream = manager.getResource(recipeLoc)
-                    .orElseThrow(() -> new FileNotFoundException("ResourceLocation: " + recipeLoc)).open()) {
+                    .orElseThrow(() -> new FileNotFoundException("Failed to get the recipe file @: " + recipeLoc)).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
                 // Editing the recipe
