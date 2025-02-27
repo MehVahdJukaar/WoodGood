@@ -18,15 +18,22 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
-    //- Repository LOCAL
     String path = System.getenv('REPOS20_1')
-//    modImplementation(files(path  + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
+    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
+    print "isMyPc: $usesMavenLocalML"
 
-    //- ~/fabric/mods LOCAL
-//    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_testVersion}")
-
-    //+ MAVEN
-    modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.13.65
+        //- Repository LOCAL
+    if (enable_moonlight_test) {
+        if (usesMavenLocalML) {
+            //- ~/fabric/mods LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}") // LOCAL
+        } else {
+            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
+        }
+    } else {
+        //+ MAVEN
+        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.13.70
+    }
 
 //!! ============================================ DEPENDENCIES ====================================================== \\
     //+ REQUIRED - The modules access libaries from below

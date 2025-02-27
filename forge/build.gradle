@@ -106,15 +106,22 @@ dependencies {
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
-    //- Repository LOCAL
     String path = System.getenv('REPOS20_1')
-//    modImplementation(files(path  + "\\Moonlight\\forge\\build\\libs\\moonlight-${moonlight_testVersion}-forge.jar"))
+    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
+    print "isMyPc: $usesMavenLocalML"
 
-    //- ~/forge/mods LOCAL
-//    modImplementation("net.mehvahdjukaar:moonlight-forge:${moonlight_testVersion}")
-
-    //+ MAVEN
-    modImplementation("maven.modrinth:moonlight:forge_${moonlight_mavenVersion}") // v2.13.65
+        //- Repository LOCAL
+    if (enable_moonlight_test) {
+        if (usesMavenLocalML) {
+            //- ~/forge/mods LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_testVersion}") // LOCAL
+        } else {
+            modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-${moonlight_testVersion}-forge.jar"))
+        }
+    } else {
+        //+ MAVEN
+        modImplementation("maven.modrinth:moonlight:forge_${moonlight_mavenVersion}") // v2.13.70
+    }
 
 //!! TOOLS ========================================================================================================== \\
     modRuntimeOnly("curse.maven:worldedit-225608:4586218")
@@ -200,7 +207,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
-    modCompileOnly("curse.maven:macaws-windows-363569:4961142")
+    modImplementation("curse.maven:macaws-windows-363569:4961142")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802535")
 
         // OTHERS
