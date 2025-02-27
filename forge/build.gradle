@@ -111,7 +111,7 @@ dependencies {
     print "isMyPc: $usesMavenLocalML"
 
         //- Repository LOCAL
-    if (enable_moonlight_test) {
+    if (enable_moonlight_test.toBoolean()) {
         if (usesMavenLocalML) {
             //- ~/forge/mods LOCAL
             modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_testVersion}") // LOCAL

@@ -47,7 +47,7 @@ dependencies {
     print "isMyPc: $usesMavenLocalML"
 
         //- Repository LOCAL
-    if (enable_moonlight_test) {
+    if (enable_moonlight_test.toBoolean()) {
         if (usesMavenLocalML) {
             //- ~/fabric/mods LOCAL
             modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}") // LOCAL
