@@ -45,9 +45,13 @@ public class WilderWildModule extends SimpleModule {
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("hollowed_oak_log").get()))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
-                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-                .addTexture(modRes("block/hollowed_oak_log"))
                 //TEXTURES: stripped_oak_log, log_top
+                .addModelTransform(m -> m.replaceWithTextureFromChild(
+                        "wilderwild:block/hollowed_oak_log", "log",
+                        SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
+                ))
+//                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
+//                .addTexture(modRes("block/hollowed_oak_log"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -75,9 +79,13 @@ public class WilderWildModule extends SimpleModule {
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("stripped_hollowed_oak_log").get()))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
-                .createPaletteFromChild("stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 //TEXTURES: stripped_log, stripped_log_top
-                .addTexture(modRes("block/stripped_hollowed_oak_log"))
+                .addModelTransform(m -> m.replaceWithTextureFromChild(
+                        "wilderwild:block/stripped_hollowed_oak_log", "stripped_log",
+                        SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
+                ))
+//                .createPaletteFromChild("stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
+//                .addTexture(modRes("block/stripped_hollowed_oak_log"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
