@@ -405,8 +405,8 @@ public class MacawDoorsModule extends SimpleModule {
                 .addRecipe(modRes("oak_swamp_door"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .createPaletteFromPlanks(this::darkerPalette)
-                .addTextureM(EveryCompat.res("block/oak_swamp_door_lower"), EveryCompat.res("block/mcw/doors/oak_swamp_door_lower_m"))
-                .addTextureM(EveryCompat.res("block/oak_swamp_door_upper"), EveryCompat.res("block/mcw/doors/oak_swamp_door_upper_m"))
+                .addTextureM(modRes("block/oak_swamp_door_lower"), EveryCompat.res("block/mcw/doors/oak_swamp_door_lower_m"))
+                .addTextureM(modRes("block/oak_swamp_door_upper"), EveryCompat.res("block/mcw/doors/oak_swamp_door_upper_m"))
                 .addTextureM(modRes("item/oak_swamp_door"), EveryCompat.res("item/mcw/doors/oak_swamp_door_m"))
                 .build();
         this.addEntry(SwampDoors);
