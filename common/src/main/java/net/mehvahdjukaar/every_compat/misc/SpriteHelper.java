@@ -383,7 +383,7 @@ public class SpriteHelper {
         if (wood.getNamespace().equals("ecologics")) {
             return () -> {
                 var t = textureSupplier.get();
-                maybeFlowerAzalea(t, manager, wood);
+                maybeFlowerAzalea(t, manager, newId, wood);
                 return t;
             };
         }
@@ -407,7 +407,7 @@ public class SpriteHelper {
     }
 
     //for ecologics
-    private static void maybeFlowerAzalea(TextureImage image, ResourceManager manager, WoodType woodType) {
+    private static void maybeFlowerAzalea(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
         if (woodType.getId().toString().equals("ecologics:flowering_azalea")) {
             WoodType azalea = WoodTypeRegistry.getValue(new ResourceLocation("ecologics:azalea"));
             if (azalea != null) {
@@ -423,24 +423,24 @@ public class SpriteHelper {
                     temp.close();
 
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.warn("failed to apply azalea overlay for wood type {} and image {}", woodType, image);
+                    EveryCompat.LOGGER.warn("Failed to apply {} overlay to {}: {}", woodType, textureId, String.valueOf(e));
                 }
             }
         }
     }
 
     //for Regions-Unexplored's brimwood
-    private static void maybeBrimwood(TextureImage image, ResourceManager manager, String path, WoodType woodType) {
+    private static void maybeBrimwood(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
         if (woodType.getId().toString().equals("regions_unexplored:brimwood")) {
             WoodType brimwood = WoodTypeRegistry.getValue(new ResourceLocation("regions_unexplored:brimwood"));
             if (brimwood != null) {
                 try (TextureImage lavaOverlay = TextureImage.open(manager,
                         EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"));
                      TextureImage plankTexture = TextureImage.open(manager,
-                             EveryCompat.res("block/regions_unexplored/brimwood_planks"));
+                             EveryCompat.res("block/regions_unexplored/brimwood_planks"))
 
                 ) {
-                    String type = path.substring(path.lastIndexOf("brimwood_") + 9);
+                    String type = textureId.substring(textureId.lastIndexOf("brimwood_") + 9);
 
                     Respriter respriter = switch (type) {
                         case "barrel_side" -> Respriter.masked(image, TextureImage.open(manager,
@@ -514,10 +514,10 @@ public class SpriteHelper {
 
                     var temp = respriter.recolorWithAnimationOf(plankTexture);
 
-                    if (path.contains("stairs") || path.contains("planks") || path.contains("slab") ||
-                            path.contains("beehive") || path.contains("composter_bottom") || path.contains("composter_side")
-                            || path.contains("lectern_side") || path.contains("lectern_top") || path.contains("bookshelf_side")
-                            || path.contains("bookshelf_top")
+                    if (textureId.contains("stairs") || textureId.contains("planks") || textureId.contains("slab") ||
+                            textureId.contains("beehive") || textureId.contains("composter_bottom") || textureId.contains("composter_side")
+                            || textureId.contains("lectern_side") || textureId.contains("lectern_top") || textureId.contains("bookshelf_side")
+                            || textureId.contains("bookshelf_top")
                     )
                         image.applyOverlayOnExisting(temp, lavaOverlay);
                     else
@@ -526,7 +526,7 @@ public class SpriteHelper {
                     temp.close();
 
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to process {}'s texture: {}", path, e);
+                    EveryCompat.LOGGER.error("Failed to process {}'s texture: {}", textureId, e);
                 }
             }
         }
