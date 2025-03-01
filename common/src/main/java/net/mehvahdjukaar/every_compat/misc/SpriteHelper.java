@@ -410,7 +410,7 @@ public class SpriteHelper {
     private static void maybeFlowerAzalea(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
         if (woodType.getId().toString().equals("ecologics:flowering_azalea")) {
             WoodType azalea = WoodTypeRegistry.getValue(new ResourceLocation("ecologics:azalea"));
-            if (azalea != null) {
+            if (azalea != null && !(image.imageWidth() > 32) && !(image.imageHeight() > 32)) {
                 try (TextureImage mask = TextureImage.open(manager,
                         EveryCompat.res("block/ecologics_overlay"));
                      TextureImage plankTexture = TextureImage.open(manager,
