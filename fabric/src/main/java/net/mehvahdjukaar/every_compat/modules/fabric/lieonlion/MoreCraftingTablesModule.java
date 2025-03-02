@@ -25,9 +25,10 @@ public class MoreCraftingTablesModule extends SimpleModule {
                         getModBlock("spruce_crafting_table"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new MoreCraftingTableBlock(w.planks.defaultMapColor()))
-                .addTextureM(modRes("block/spruce_crafting_table_front"), EveryCompat.res("block/lolmct/spruce_crafting_table_front_m"))
-                .addTextureM(modRes("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
-                .addTextureM(modRes("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
+                //TEXTURE: texture is oak_craftng_table's texture
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/lolmct/spruce_crafting_table_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
                 .addTag(new ResourceLocation("c:workbench"), Registries.BLOCK)
                 .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.BLOCK)
                 .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.ITEM)
