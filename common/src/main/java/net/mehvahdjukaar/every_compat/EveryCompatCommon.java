@@ -86,7 +86,7 @@ public class EveryCompatCommon {
         addIfLoaded("bc", () -> BeautifulCampfiresModule::new);
         addIfLoaded("campchair", () -> CampChairModule::new);
         addIfLoaded("chipped", () -> ChippedModule::new);
-        addIfLoaded("create", () -> CreateModule::new);
+//        addIfLoaded("create", () -> CreateModule::new); //!! TEMP: DISABLED for now until FABRIC version is updated to v6.0.0
         addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule::new);
         addIfLoaded("friendsandfoes", () -> FriendsAndFoesModule::new);
         addIfLoaded("furnish", () -> FurnishModule::new);

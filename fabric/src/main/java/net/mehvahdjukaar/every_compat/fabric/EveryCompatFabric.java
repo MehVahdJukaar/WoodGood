@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 
+import net.mehvahdjukaar.every_compat.modules.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
@@ -78,6 +79,8 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         if (PlatHelper.isModLoaded("mcwdoors")) {
             addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
+
+        addIfLoaded("create", () -> CreateModule::new); // ONLY TEMP until FABRIC v6.0.0 is out
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("twilightforest", () -> TwilightForestModule::new); //!! NOT AVAILABLE

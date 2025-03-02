@@ -15,6 +15,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDel
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.forge.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.corail_pillar.CorailPillarModule;
+import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
@@ -126,6 +127,8 @@ public class EveryCompatForge extends EveryCompatCommon {
         if (PlatHelper.isModLoaded("mcwdoors")) {
             addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
+
+        addIfLoaded("create", () -> CreateModule::new); //TEMP: DISABLED due to version difference
 
         // ========================================= Macaw's ======================================================== \\
         addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);

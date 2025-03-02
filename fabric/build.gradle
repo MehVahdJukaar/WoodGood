@@ -82,7 +82,7 @@ dependencies {
             //- OTHER MAVENS
     modRuntimeOnly("net.jodah:typetools:0.6.3") // BOP
 //    modRuntimeOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create
-//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_version}") // Create
+//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN fABRIC
     modCompileOnly("curse.maven:framework-549225:5680025") // v0.7.7 | Refurbished Furniture, Mighty Mail, Backpacked

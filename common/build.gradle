@@ -71,6 +71,10 @@ dependencies {
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
     modCompileOnly("curse.maven:missing-wilds-622590:5053651")
 
+    //+ OTHER MAVENs
+    //!! FABRIC is not out & currently WIP
+//    modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false } // Registrate, Flywheel
+
 //!! ========================================== DISABLED FOR A REASON =============================================== \\
 
 //    modCompileOnly("curse.maven:the-twilight-forest-227639:4653704") //!! NOT AVAILABLE
