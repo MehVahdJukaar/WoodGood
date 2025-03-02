@@ -18,6 +18,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.corail_pillar.CorailPillarMo
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.excessive_building.ExcessiveBuildingModule;
 import net.mehvahdjukaar.every_compat.modules.forge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.just_a_raft.JustARaftModule;
@@ -95,6 +96,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
         addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
+        addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
         addIfLoaded("functionalstorage", () -> FunctionalStorageModule::new);
         addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
         addIfLoaded("justaraftmod", () -> JustARaftModule::new);

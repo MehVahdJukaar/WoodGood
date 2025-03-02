@@ -154,7 +154,7 @@ dependencies {
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
 //    modRuntimeOnly("com.tterrag.registrate:Registrate:${registrate_version}") // Create, The-Twilight-Forest, Tropicraft
-//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create
+//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("com.teamresourceful.bytecodecs:bytecodecs-1.0.2") // Chipped
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN FORGE
@@ -185,11 +185,11 @@ dependencies {
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:5318681")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097")
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995")
-//    modRuntimeOnly("curse.maven:create-328085:5689514") // Registrate, Flywheel
 
-            //- OTHER MAVENs
+            //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK")
 //    modRuntimeOnly("fuzs.diagonalblocks:diagonalblocks-forge:8.0.6")
+//    modRuntimeOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false } // Registrate, Flywheel
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN FORGE
         // ~/forge/mods LOCAL
@@ -207,7 +207,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
-    modImplementation("curse.maven:macaws-windows-363569:4961142")
+    modCompileOnly("curse.maven:macaws-windows-363569:4961142")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802535")
 
         // OTHERS
@@ -220,6 +220,7 @@ dependencies {
     modCompileOnly("curse.maven:decoration-delight-687475:5563942")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:dramatic-doors-380617:6115857")
+    modCompileOnly("curse.maven:excessive-building-845097:5442075")
     modCompileOnly("curse.maven:functional-storage-556861:5373105") // Titanium
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983")
     modCompileOnly("curse.maven:just-a-raft-mod-274350:5777239")
@@ -265,7 +266,7 @@ dependencies {
 
 //!! ============================================== FOR TESTING ===================================================== \\
 
-//    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")`
+//    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
     modRuntimeOnly("curse.maven:biomes-o-plenty-220318:5773031") // Terrablender, Glitchcore
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
@@ -273,7 +274,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5812948") // Blueprint
 //    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel
 //    modRuntimeOnly("curse.maven:rats-323596:5904296")
-//    modRuntimeOnly("curse.maven:mo-shiz-mod-
+//    modRuntimeOnly("curse.maven:mo-shiz-mod-62536:5587177")
 //    modRuntimeOnly("curse.maven:aether-255308:5889509") // Curios
 //    modRuntimeOnly("curse.maven:ancient-aether-886751:6013933") // Aether
 //    modRuntimeOnly("curse.maven:pfw-aesthetic-gems-906404:6023817")

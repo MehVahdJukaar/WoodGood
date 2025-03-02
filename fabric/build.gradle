@@ -75,14 +75,14 @@ dependencies {
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | REI
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | REI, Garden-Of-The-Dead
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
-//    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4583000") // v8.0.1 | Regions-Unexplored, Chipped
+    modCompileOnly("curse.maven:forge-config-api-port-fabric-547434:4583000") // v8.0.1 | Regions-Unexplored, Chipped, Excessive-Building
 //    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659872") //v2.1.29 | Chipped, Handcrafted, Cozy
 
             //- OTHER MAVENS
     modRuntimeOnly("net.jodah:typetools:0.6.3") // BOP
-//    modRuntimeOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
-//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create
+//    modRuntimeOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create
+//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_version}") // Create
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN fABRIC
     modCompileOnly("curse.maven:framework-549225:5680025") // v0.7.7 | Refurbished Furniture, Mighty Mail, Backpacked
@@ -114,6 +114,9 @@ dependencies {
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189603")
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68")
 
+    //- OTHER MAVENS
+//    modRuntimeOnly("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}:slim") { transitive = false } // Registrate, Flywheel
+
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
         // ~/fabric/mods LOCAL
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
@@ -139,9 +142,9 @@ dependencies {
     modCompileOnly("curse.maven:bewitchment-394915:5205373")
     modCompileOnly("curse.maven:building-but-better-989479:5382599")
     modCompileOnly("curse.maven:clutter-826060:5828924") //RML: Geckolib
-    modCompileOnly("curse.maven:create-fabric-624165:5245234") //v0.5.1f
     modCompileOnly("curse.maven:dramatic-doors-380617:6115857")
     modCompileOnly("curse.maven:exlines-awnings-526698:4668406")
+    modCompileOnly("curse.maven:excessive-building-845097:6051029") // Forge-Config-Api-Port
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:4939709") // legacy
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643")
