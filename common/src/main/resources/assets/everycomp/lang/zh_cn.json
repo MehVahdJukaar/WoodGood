@@ -888,7 +888,7 @@
   "block_type.excessive_building.chiseled": "雕纹%s板",
   "block_type.excessive_building.mosaic": "%s马赛克",
   "block_type.excessive_building.mosaic_slab": "%s马赛克台阶",
-  "block_type.excessive_building.mosaic_stairs": "%s马赛克台阶",
+  "block_type.excessive_building.mosaic_stairs": "%s马赛克楼梯",
   "block_type.excessive_building.mosaic_vertical_stairs": "%s马赛克竖直楼梯",
   "block_type.excessive_building.ladder": "%s梯子",
   "block_type.excessive_building.bookshelf": "%s书架",
