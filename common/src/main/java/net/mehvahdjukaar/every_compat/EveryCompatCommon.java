@@ -83,7 +83,7 @@ public class EveryCompatCommon {
         addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("backpacked", () -> BackpackedModule::new);
         addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
-        addIfLoaded("bc", () -> BeautifulCampfiresModule::new);
+        addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
         addIfLoaded("campchair", () -> CampChairModule::new);
         addIfLoaded("chipped", () -> ChippedModule::new);
 //        addIfLoaded("create", () -> CreateModule::new); //!! TEMP: DISABLED for now until FABRIC version is updated to v6.0.0
