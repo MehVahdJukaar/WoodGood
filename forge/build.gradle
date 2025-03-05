@@ -193,12 +193,15 @@ dependencies {
     //!! TEMP
     modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false } // Registrate, Flywheel
 
+            //- ~/forge/mods LOCAL
+//    modRuntimeOnly("com.arcanc.bc:beautifulcampfires-forge-1.20.1-1.0.1")
+
+
     //+ REQUIRED - The modules access libraries from below - ONLY IN FORGE
         // ~/forge/mods LOCAL
     modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-forge-1.20.1-1.0.0-beta.4")
     modCompileOnly("com.tynoxs.buildersdelight:BuildersDelight-1.20.1-v.1.3")
-    modCompileOnly("com.arcanc.bc:Beautiful-Campfires-forge-1.20.1-1.0.2")
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240521")

@@ -45,7 +45,7 @@ dependencies {
     //+ ~/common/mods LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
-    modCompileOnly("com.arcanc.bc:Beautiful-Campfires-fabric-1.20.1-1.0.3")
+    modCompileOnly("com.arcanc.bc:beautifulcampfires-fabric-1.20.1-1.0.0")
 
 //!! ================================================== IMPORTS ===================================================== \\
     //+ REQUIRED - The modules access libaries from below

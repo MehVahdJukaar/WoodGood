@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.beautiful_campfires;
 
-import com.arcanc.bc.content.BlockDatabase;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -17,9 +16,11 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CampfireBlock;
@@ -39,7 +40,8 @@ import java.util.function.ToIntFunction;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 
-//SUPPORT: v1.0.2+
+//SUPPORT: v1.0.0+
+//NOTE: The Project ID is 1085950
 public class BeautifulCampfiresModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, CampfireBlock> campfires;
@@ -47,10 +49,10 @@ public class BeautifulCampfiresModule extends SimpleModule {
 
     public BeautifulCampfiresModule(String modId) {
         super(modId, "bc");
-        var tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         campfires = SimpleEntrySet.builder(WoodType.class, "campfire",
-                        () -> BlockDatabase.CAMPFIRE_ACACIA, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        getModBlock("acacia_campfire", CampfireBlock.class), () -> WoodTypeRegistry.getValue("acacia"),
                         w -> new CampfireBlock(true, 1, copyProperties(15))
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
@@ -59,11 +61,12 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
                 .setTabKey(tab)
+                //RECIPES: Manully created below
                 .build();
         this.addEntry(campfires);
 
         soul_campfires = SimpleEntrySet.builder(WoodType.class, "soul_campfire",
-                        () -> BlockDatabase.SOUL_CAMPFIRE_ACACIA, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        getModBlock("acacia_soul_campfire", CampfireBlock.class), () -> WoodTypeRegistry.getValue("acacia"),
                         w -> new CampfireBlock(true, 2, copyProperties(10))
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
@@ -75,6 +78,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
                 .addTag(BlockTags.PIGLIN_REPELLENTS, Registries.BLOCK)
                 .setTabKey(tab)
+                //RECIPES: Manully created below
                 .build();
         this.addEntry(soul_campfires);
 
@@ -114,7 +118,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                              ServerDynamicResourcesHandler handler, ResourceManager manager) {
 
         try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipeLoc))
-                .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipeLoc)).open()) {
+                .orElseThrow(() -> new FileNotFoundException("File not found @ " + recipeLoc)).open()) {
 
             JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
@@ -133,7 +137,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
 
         }
         catch (IOException e) {
-            handler.getLogger().error("Failed to generate the recipe @ {} : {}", recipeLoc, e);
+            handler.getLogger().error("Failed to generate the {} recipe for {} : {}", recipeName, woodType.getId(), e);
         }
 
     }
