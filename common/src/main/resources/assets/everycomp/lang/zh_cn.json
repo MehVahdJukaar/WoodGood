@@ -12,7 +12,7 @@
   "block_type.regions_unexplored.branch": "%s树枝",
   "block_type.regions_unexplored.shrub": "%s灌木",
 
-  "block_type.campchair.camp_chair": "%s露营椅",
+  "block_type.campchair.camp_chair": "%s野营凳",
 
   "block_type.another_furniture.table": "%s桌",
   "block_type.another_furniture.chair": "%s椅子",
@@ -892,7 +892,7 @@
   "block_type.excessive_building.mosaic_vertical_stairs": "%s马赛克竖直楼梯",
   "block_type.excessive_building.ladder": "%s梯子",
   "block_type.excessive_building.bookshelf": "%s书架",
-  "block_type.excessive_building.empty_shelf": "空的%s书架",
+  "block_type.excessive_building.empty_shelf": "空的%s架子",
   "block_type.excessive_building.empty_potion_shelf": "空的%s瓶架",
   "block_type.excessive_building.water_potion_shelf": "%s水瓶架",
   "block_type.excessive_building.potion_shelf": "%s药水架",
