@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.create;
+package net.mehvahdjukaar.every_compat.modules.fabric.create;
 
 import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
