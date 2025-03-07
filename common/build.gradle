@@ -17,14 +17,17 @@ dependencies {
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
     String path = System.getenv('REPOS21_1')
 
-    if (usesMavenLocalML) {
-        //- ~/forge/mods LOCAL
-        modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_testVersion}")
+    //- Repository LOCAL
+    if (enable_moonlight_test.toBoolean()) {
+        if (usesMavenLocalML) {
+            //- ~/fabric/mods LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_testVersion}") // LOCAL
+        } else {
+            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
+        }
     } else {
-        //- Repository LOCAL
-//        modImplementation(files(path  + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}")  // v2.17.20
+        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.17.20
     }
 
 //!! ============================================= DEPENDENCIES ========================================================

@@ -44,14 +44,17 @@ dependencies {
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
     String path = System.getenv('REPOS21_1')
 
-    if (usesMavenLocalML) {
-        //- ~/forge/mods LOCAL
-        modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_testVersion}")
+    //- Repository LOCAL
+    if (enable_moonlight_test.toBoolean()) {
+        if (usesMavenLocalML) {
+            //- ~/fabric/mods LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_testVersion}") // LOCAL
+        } else {
+            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
+        }
     } else {
-        //- Repository LOCAL
-//        modImplementation(files(path  + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}")  // v2.17.20
+        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.17.20
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -71,16 +74,18 @@ dependencies {
 
         //- OTHER LIBRARIES
 //    modRuntimeOnly("org.reflections:reflections:0.10.2") // Refurbished-Furniture
+//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
-    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create, The-Twilight-Forest
     modCompileOnly("curse.maven:athena-841890:5176880") // Chipped
-    modImplementation("curse.maven:framework-549225:5911983") // v0.9.4 | Refurbished Furniture, +Mighty-Mail, Backpacked
+    modCompileOnly("curse.maven:framework-549225:5911983") // v0.9.4 | Refurbished Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5146132") // More Crafting Tables
-    modCompileOnly("maven.modrinth:frozenlib:1.9-mc1.21.1") // Wilder-Wild
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
+    modCompileOnly("maven.modrinth:frozenlib:1.9-mc1.21.1") // Wilder-Wild
 
         //+ OTHER MAVENS
+    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create, The-Twilight-Forest
+
             // Special dumb stuff required by TerraBlender
     modImplementation("com.terraformersmc:modmenu:11.0.3")
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:6.1.1")
@@ -154,6 +159,7 @@ dependencies {
 
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:wilder-wild:3.0.4-mc1.21.1")
+//    modCompileOnly("com.simibubi.create:create-fabric-1.20.1:$create_fabric_version") // Registrate, Flywheel //!! Need to update maven to get other libraries & the old maven are outdated
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 

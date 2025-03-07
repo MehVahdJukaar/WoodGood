@@ -36,6 +36,8 @@ processResources {
 }
 
 shadowJar {
+    exclude "architectury.common.json"
+
     configurations = [project.configurations.shadowBundle]
     archiveClassifier = 'dev-shadow'
 }
@@ -44,7 +46,7 @@ remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
     archiveClassifier = "neoforge"
-    atAccessWideners.add("${rootProject.mod_id}.accesswidener") // this is a path inside the mod jar
+    atAccessWideners.add("${mod_id}.accesswidener") // this is a path inside the mod jar
 }
 
 jar {
@@ -98,14 +100,17 @@ dependencies {
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
     String path = System.getenv('REPOS21_1')
 
-    if (usesMavenLocalML) {
-        //- ~/forge/mods LOCAL
-        modImplementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_testVersion}")
+    //- Repository LOCAL
+    if (enable_moonlight_test.toBoolean()) {
+        if (usesMavenLocalML) {
+            //- ~/neoforge/mods LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_testVersion}") // LOCAL
+        } else {
+            modImplementation(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
+        }
     } else {
-        //- Repository LOCAL
-//        modImplementation(files(path  + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:neoforge_${moonlight_mavenVersion}")  // v2.17.20
+        modImplementation("maven.modrinth:moonlight:neoforge_${moonlight_mavenVersion}") // v2.17.20
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -136,6 +141,8 @@ dependencies {
 
         // OTHER MAVENs
 //    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Resourceful-Lib
+//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
+//    modRuntimeOnly("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}") // Create
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     modImplementation("curse.maven:athena-841890:5629395") // v4.0.1 | Chipped
@@ -146,8 +153,7 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-core-416935:5526890") // v1.1.3 | Valhelsia Structure, Valhelsia Furniture
 
         //+ OTHER MAVENs
-//    modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}") // Create //!! NOT AVAILABLE
-//    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}") // Create //!! NOT AVAILABLE
+    modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}") // Create, The-Twilight-Forest, Tropicraft
 
 //!! =================================================== IMPORTS ==================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
@@ -195,7 +201,6 @@ dependencies {
     modCompileOnly("curse.maven:beautify-decorate-633252:5810850")
     modCompileOnly("curse.maven:boatload-337396:5292325") //!! 1.20.1
     modCompileOnly("curse.maven:buildersaddition-389697:5544431")
-    modCompileOnly("curse.maven:create-328085:5689514") //!! 1.20.1
     modCompileOnly("curse.maven:decoration-delight-687475:5563942") //!! 1.20.1
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257") //!! 1.20.1
     modCompileOnly("curse.maven:dramatic-doors-380617:5740379")
@@ -232,6 +237,7 @@ dependencies {
 
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:zGMhmLYb") // v1.1.1 | MidnightLib //!! 1.20.1
+    modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false } // Registrate, Flywheel
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
