@@ -37,7 +37,6 @@ dependencies {
 
 //!! ============================================ DEPENDENCIES ====================================================== \\
     //+ REQUIRED - The modules access libaries from below
-    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create
     modCompileOnly("curse.maven:framework-549225:5680025") // Furniture Refurbished
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
     modCompileOnly("curse.maven:zeta-968868:5078215") // v1.0-13 | Quark
@@ -53,7 +52,6 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:5401968")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
-    modCompileOnly("curse.maven:create-624165:5168511")
     modCompileOnly("curse.maven:dawn-of-time-312359:5651253")
     modCompileOnly("curse.maven:decorative-blocks-362528:5089408")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550")
@@ -72,8 +70,6 @@ dependencies {
     modCompileOnly("curse.maven:missing-wilds-622590:5053651")
 
     //+ OTHER MAVENs
-    //!! FABRIC is not out & currently WIP
-//    modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false } // Registrate, Flywheel
 
 //!! ========================================== DISABLED FOR A REASON =============================================== \\
 

@@ -81,7 +81,6 @@ dependencies {
 
             //- OTHER MAVENS
     modRuntimeOnly("net.jodah:typetools:0.6.3") // BOP
-//    modRuntimeOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create
 //    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN fABRIC
@@ -89,6 +88,9 @@ dependencies {
     modCompileOnly("curse.maven:quad-932715:5146132") // More Crafting Tables
     modCompileOnly("maven.modrinth:frozenlib:1.9.3-mc1.20.1") // Wilder-Wild
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
+
+            // OTHER MAVENS
+    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create
 
     // IMPORTANT: RLM: "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
 //!! ================================================== IMPORTS ===================================================== \\
@@ -115,7 +117,6 @@ dependencies {
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68")
 
         //- OTHER MAVENS
-//    modRuntimeOnly("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}:slim") { transitive = false } // Registrate, Flywheel
 
         //- ~/fabric/mods LOCAL
 //    modRuntimeOnly("com.arcanc.bc:beautifulcampfires-fabric-1.20.1-1.0.0")
@@ -144,6 +145,7 @@ dependencies {
     modCompileOnly("curse.maven:bewitchment-394915:5205373")
     modCompileOnly("curse.maven:building-but-better-989479:5382599")
     modCompileOnly("curse.maven:clutter-826060:5828924") //RML: Geckolib
+    modCompileOnly("curse.maven:create-fabric-624165:5982726") // Do not use for RunTime
     modCompileOnly("curse.maven:dramatic-doors-380617:6115857")
     modCompileOnly("curse.maven:exlines-awnings-526698:4668406")
     modCompileOnly("curse.maven:excessive-building-845097:6051029") // Forge-Config-Api-Port
@@ -153,11 +155,13 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969")
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
-    modCompileOnly("maven.modrinth:wilder-wild:3.0.7-mc1.20.1") // FrozenLib
-    modCompileOnly("curse.maven:wooden-hoppers-406021:4796143")
-
     modCompileOnly("curse.maven:regions-unexplored-659110:5558172") // Forge-Config-Api-Port
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
+    modCompileOnly("curse.maven:wooden-hoppers-406021:4796143")
+    modCompileOnly("maven.modrinth:wilder-wild:3.0.7-mc1.20.1") // FrozenLib
+
+        // OTHER MAVENS
+//    modCompileOnly("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}:slim") { transitive = false }  // Registrate, Flywheel, Ponder //!! maven is outdated & not available
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 
@@ -174,10 +178,10 @@ dependencies {
 
 processResources {
     inputs.property "version", project.version
-    inputs.property "mod_id", rootProject.mod_id
+    inputs.property "mod_id", mod_id
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version, "mod_id": rootProject.mod_id
+        expand "version": project.version, "mod_id": mod_id
     }
 }
 
