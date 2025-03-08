@@ -35,6 +35,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -336,20 +337,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
             /// Swapping out the old palettes of the texture with new plattes
             for (var entry : getDefaultEntries().entrySet()) {
-                var b = entry.getValue();
-                T w = entry.getKey();
+                var block = entry.getValue();
+                T blockType = entry.getKey();
                 // skips disabled ones
                 // actually we dont otherwise we get missign texture log spam. TODO: replace models with empty dummy instead
                 // if (!ModConfigs.isEntryEnabled(w, b)) continue;
-                ResourceLocation blockId = Utils.getID(b);
+                ResourceLocation blockId = Utils.getID(block);
 
                 // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
-                var pal = paletteSupplier.apply(w, manager);
+                var pal = paletteSupplier.apply(blockType, manager);
                 McMetaFile targetAnimation = pal.getSecond();
                 List<Palette> targetPalette = pal.getFirst();
 
                 if (targetPalette == null) {
-                    EveryCompat.LOGGER.error("Could not get texture palette for block {} : ", b);
+                    EveryCompat.LOGGER.error("Could not get texture palette for block {} : ", block);
                     continue;
                 }
 
@@ -366,9 +367,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
                     // boatload's texture path has 2 folder
                     String newPath = (oldPath.startsWith("entity/") && module.modId.equals("boatload"))
-                            ? BlockTypeResTransformer.replaceFullGenericType(oldPath, w, blockId, baseType.get().getTypeName(), null, 2)
+                            ? BlockTypeResTransformer.replaceFullGenericType(oldPath, blockType, blockId, baseType.get().getTypeName(), null, 2)
                             // Default
-                            : BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
+                            : BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.get().getTypeName());
 
                     String newId = "";
 
@@ -408,7 +409,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         Respriter respriter = re.getValue();
 
                         Supplier<TextureImage> textureSupplier = () -> respriter.recolorWithAnimation(targetPalette, targetAnimation);
-                        textureSupplier = postProcessTexture(w, newId, manager, textureSupplier);
+                        textureSupplier = postProcessTexture(blockType, newId, manager, textureSupplier);
 
                         handler.addTextureIfNotPresent(manager, newId, textureSupplier, isOnAtlas);
                     }
