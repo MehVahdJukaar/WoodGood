@@ -245,6 +245,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 }
             }
         }
+
+        // Adding tag to a specific WoodType of all generated blocks
+        if (PlatHelper.isModLoaded("sullysmod")) {
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(BlockTags.MINEABLE_WITH_PICKAXE);
+            for (Map.Entry<T, B> e : blocks.entrySet()) {
+                T woodType = e.getKey();
+                B block = e.getValue();
+                if (woodType.getTypeName().equals("petrified")) {
+                    tagBuilder.addEntry(block);
+                }
+            }
+
+            pack.addTag(tagBuilder, Registries.BLOCK);
+        }
     }
 
     public Map<T, ?> getDefaultEntries() {
