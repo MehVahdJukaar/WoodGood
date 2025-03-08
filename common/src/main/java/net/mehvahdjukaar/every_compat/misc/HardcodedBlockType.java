@@ -73,8 +73,7 @@ public class HardcodedBlockType {
         // Create's windows will be skipped blc [Let's do] Blooming Nature & Meadow already has windows
         if (isWoodRegistryOf("", "", "bloomingnature|meadow", "", "window")) return false;
 
-        // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes &
-        // no item in CreativeMode
+        // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes & no item in CreativeMode
         if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic", "", "driftwood_boards|river_boards")) return false;
 
         // Similar to above, Architect's Palette - boards will be skipped due to the existing boards in Autumnity
@@ -90,7 +89,7 @@ public class HardcodedBlockType {
         if (isWoodRegistryOf("", "abnww", "architects_palette", "", "")) return false;
 
         // Ensure the Architects-Palette's boards are generated with Abnormal mods (Upgrade Aquatic, Woodworks)
-        if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic|autumnity|atmospheric|environmental", "", "")) return false;
+        if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
 
         return null;
     }
