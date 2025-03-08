@@ -28,13 +28,11 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChiseledBookShelfBlock;
-import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
@@ -64,7 +62,10 @@ public class WoodworksModule extends SimpleModule {
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new Block(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.bookshelf()))
+                        woodType -> new Block(Utils.copyPropertySafe(woodType.log)
+                                .strength(1.5F)
+                        )
+                )
                 .setTabKey(tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -78,7 +79,10 @@ public class WoodworksModule extends SimpleModule {
         chiseled_bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf", "chiseled",
                         getModBlock("chiseled_acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new ChiseledBookShelfBlock(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.chiseledBookshelf()))
+                        woodType -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(woodType.log)
+                                .strength(1.5F)
+                        )
+                )
                 .setTabKey(tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -95,7 +99,9 @@ public class WoodworksModule extends SimpleModule {
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
+                        woodType -> new RotatedPillarBlock(Utils.copyPropertySafe(woodType.planks)
+                                .strength(2.0F, 3.0F))
+                )
                 .setTabKey(tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -107,21 +113,29 @@ public class WoodworksModule extends SimpleModule {
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new LadderBlock(WoodworksBlocks.WoodworksProperties.SPRUCE_WOOD.ladder()))
-                .setTabKey(tab)
+                        woodType -> new LadderBlock(Utils.copyPropertySafe(Blocks.LADDER)
+                                .strength(0.4F)
+                                .noOcclusion()
+                                .pushReaction(PushReaction.DESTROY))
+                )
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
-                .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
         this.addEntry(ladders);
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                         getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
-                        w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
+                        woodType -> new BlueprintBeehiveBlock(Utils.copyPropertySafe(woodType.log)
+                                .strength(0.6F)
+                        )
+                )
                 .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
@@ -136,8 +150,9 @@ public class WoodworksModule extends SimpleModule {
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatChestBlock(this::getChestTile,
-                                WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest())
+                        woodType -> new CompatChestBlock(this::getChestTile,
+                                Utils.copyPropertySafe(woodType.planks).strength(2.5F)
+                        )
                 )
                 .setTabKey(tab)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
@@ -153,8 +168,9 @@ public class WoodworksModule extends SimpleModule {
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "chest", "trapped",
                         getModBlock("trapped_oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatTrappedChestBlock(this::getTrappedTile,
-                                WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest())
+                        woodType -> new CompatTrappedChestBlock(this::getTrappedTile,
+                                Utils.copyPropertySafe(woodType.planks).strength(2.5F)
+                        )
                 )
                 .setTabKey(tab)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
@@ -169,10 +185,15 @@ public class WoodworksModule extends SimpleModule {
 
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> LeavesTypeRegistry.OAK_TYPE,
-                        (w) -> {
-                            if (w.getWoodType() == null) return null;
-                            return new LeafPileBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.leafPile());
-                        })
+                        leavesType -> {
+                            if (leavesType.getWoodType() == null) return null;
+                            return new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
+                                    .strength(0.2F)
+                                    .ignitedByLava()
+                                    .pushReaction(PushReaction.DESTROY)
+                            );
+                        }
+                )
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)

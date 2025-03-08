@@ -90,7 +90,9 @@ public class QuarkModule extends SimpleModule {
                         VerticalSlabsModule.class,
                         getModBlock("oak_vertical_slab"),
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new VerticalSlabBlock(() -> w.getBlockOfThis("slab"), Utils.copyPropertySafe(w.planks))
+                        w -> new VerticalSlabBlock(() -> w.getBlockOfThis("slab"),
+                                Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")))
+                        )
                 )
                 .requiresChildren("slab")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -235,7 +237,7 @@ public class QuarkModule extends SimpleModule {
                         () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatChestBlock(w,
                                 shortenedId() + "/" + w.getAppendableId(),
-                                Utils.copyPropertySafe(w.planks)))
+                                Utils.copyPropertySafe(Blocks.CHEST)))
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(new ResourceLocation("forge:chests/wooden"), Registries.BLOCK)
@@ -258,7 +260,7 @@ public class QuarkModule extends SimpleModule {
                                     || w.getNamespace().equals("blue_skies");
                             if (!chests.blocks.containsKey(w) && !isNamespaceLoaded) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatTrappedChestBlock(w, name, Utils.copyPropertySafe(w.planks));
+                            return new CompatTrappedChestBlock(w, name, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
                         })
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
