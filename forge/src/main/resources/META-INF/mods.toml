@@ -58,6 +58,14 @@ side="BOTH"
 
 [[dependencies.everycomp]] #optional
 
+modId="create"
+mandatory=false
+versionRange="[6.0.0,)" #mandatory
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.everycomp]] #optional
+
 modId="mcwbridges"
 mandatory=false
 versionRange="[3.0.0,)" #mandatory
@@ -88,10 +96,21 @@ versionRange="[1.5.7,)" #mandatory
 ordering="AFTER"
 side="BOTH"
 
+# -------------------------------------------------- INCOMPATIBLE ------------------------------------------------------
+
+[[dependencies.everycomp]] #optional
+
+modId="vmp"
+mandatory=false
+versionRange="[9.-IT-IS-INCOMPATIBLE,]" #mandatory
+ordering="NONE"
+side="BOTH"
+
+
 [[dependencies.everycomp]] #optional
 
 modId="vminus"
 mandatory=false
-versionRange="[9.-INCOMPATIBLE,]" #mandatory
+versionRange="[9.-IT-IS-INCOMPATIBLE,]" #mandatory
 ordering="NONE"
 side="BOTH"
