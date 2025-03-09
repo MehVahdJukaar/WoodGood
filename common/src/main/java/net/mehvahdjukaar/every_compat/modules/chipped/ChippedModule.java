@@ -1569,6 +1569,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/circle_oak_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1583,6 +1584,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_bared_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1597,6 +1599,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_bordered_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1611,6 +1614,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_diamond_bordered_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1625,6 +1629,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_horizontal_lined_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1639,6 +1644,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_large_diamond_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1653,6 +1659,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_line_bared_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1667,6 +1674,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_ornate_bared_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1681,6 +1689,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_snowflake_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1695,6 +1704,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_woven_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
@@ -1709,6 +1719,7 @@ public class ChippedModule extends SimpleModule {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/square_oak_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(new ResourceLocation("diagonalwindows:non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
