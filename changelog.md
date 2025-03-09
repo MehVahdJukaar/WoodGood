@@ -1,7 +1,7 @@
 ### UPDATED:
-- **Every Compat** (COMMON): Backported the fixes for missing/incorrect textures from 1.20.1 for varying wood mods
-- **Chipped** (COMMON): Fixed the missing textures for _doors_
-- **Refurbished Furniture (MrCrayFish)** (COMMON): Fixed [the crash](https://github.com/MehVahdJukaar/WoodGood/issues/794) when creating/loading a world
+- **LANG**: zh_cn - @ChuijkYahus
+- **Create** (NEOFORGE): Uncomment the code and Updated library to v6.0.0+ & Fixed [#846](https://github.com/MehVahdJukaar/WoodGood/issues/846)
+  - NOTE: FABRIC v6.0.0+ is not out yet. the v0.5.1+ will be remain supported.  
 
 #### LEGENDS:
 - (COMMON): NEOFORGE & FABRIC
