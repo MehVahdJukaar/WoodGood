@@ -780,8 +780,8 @@
   "block_type.wilderwild.hollowed_log": "空心%s原木",
   "block_type.wilderwild.stripped_hollowed_log": "去皮空心%s原木",
 
-  "block_type.bc.campfire": "%s营火",
-  "block_type.bc.soul_campfire": "%s灵魂营火",
+  "block_type.beautifulcampfires.campfire": "%s营火",
+  "block_type.beautifulcampfires.soul_campfire": "%s灵魂营火",
 
   "block_type.bbb.layer": "%s层板",
   "block_type.bbb.trim": "%s框沿板",
@@ -881,7 +881,7 @@
 
   "block_type.table_top_craft.chess": "%s棋盘",
   "block_type.table_top_craft.chess_timer": "%s棋钟",
-  "block_type.table_top_craft.connect_four": "%s四子棋"
+  "block_type.table_top_craft.connect_four": "%s四子棋",
   
   "block_type.excessive_building.crafting_table": "%s工作台",
   "block_type.excessive_building.vertical_stairs": "%s竖直楼梯",
