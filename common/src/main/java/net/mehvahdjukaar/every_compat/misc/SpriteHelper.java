@@ -144,7 +144,7 @@ public class SpriteHelper {
         addOptional("eternal_tales:stripped_khagris_log","_top","eternal_tales:block/khagris_log_stripped_top_new");
         addOptional("eternal_tales:purgatorium_log","_side","eternal_tales:block/purgatorium_log_new");
         addOptional("eternal_tales:purgatorium_log","_top","eternal_tales:block/purglogtop");
-        addOptional("eternal_tales:purgatorium_stripped_log","_side","eternal_tales:block/purgatorium_stripped_log_new");
+        addOptional("eternal_tales:purgatorium_stripped_log","_side","eternal_tales:block/purgatorium_log_stripped_new");
         addOptional("eternal_tales:purgatorium_stripped_log","_top","eternal_tales:block/purgatorium_log_stripped_top_new");
         addOptional("eternal_tales:petrified_log","_side","eternal_tales:block/petrifiedlogside");
         addOptional("eternal_tales:petrified_log","_top","eternal_tales:block/petrifiedlogtop");
