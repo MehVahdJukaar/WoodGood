@@ -44,6 +44,10 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem","_side","minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem","_top","minecraft:block/mushroom_stem");
 
+        // Astral Dimension
+        addOptional("astral_dimension:sick_log","_side","astral_dimension:block/sick_log");
+        addOptional("astral_dimension:sick_log","_top","astral_dimension:block/sick_log");
+
         // Promenade
         addOptional("promenade:sakura_log","_side","promenade:block/sakura/log/side");
         addOptional("promenade:sakura_log","_top","promenade:block/sakura/log/top");
