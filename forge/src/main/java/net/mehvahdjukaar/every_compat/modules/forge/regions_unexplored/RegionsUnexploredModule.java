@@ -6,50 +6,34 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColor;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.regions_unexplored.block.RuBlocks;
-import net.regions_unexplored.item.tab.RuTabs;
 import net.regions_unexplored.world.level.block.plant.branch.BranchBlock;
 import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
 
@@ -143,13 +127,16 @@ public class RegionsUnexploredModule extends SimpleModule {
                     Respriter respriterTOP = Respriter.of(branch_top); // ITEM
                     Respriter respriterBlock = Respriter.of(branch_block); // BLOCK
 
+                    List<Palette> list_logSide = Palette.fromAnimatedImage(logSide_texture);
+                    List<Palette> list_logTop = Palette.fromAnimatedImage(logTop_texture);
+
                     // Recoloring ITEM textures
-                    TextureImage recoloredITEM = respriterSIDE.recolorWithAnimationOf(logSide_texture);
-                    TextureImage recoloredTOP = respriterTOP.recolorWithAnimationOf(logTop_texture);
+                    TextureImage recoloredITEM = respriterSIDE.recolor(list_logSide);
+                    TextureImage recoloredTOP = respriterTOP.recolor(list_logTop);
                     recoloredITEM.applyOverlay(recoloredTOP);
 
                     // Recoloring BLOCK texture
-                    TextureImage recoloredBLOCK = respriterBlock.recolorWithAnimationOf(logSide_texture);
+                    TextureImage recoloredBLOCK = respriterBlock.recolor(list_logSide);
 
                     // Block Texture
                     handler.dynamicPack.addAndCloseTexture(resLocBLOCK, recoloredBLOCK);
@@ -263,9 +250,11 @@ public class RegionsUnexploredModule extends SimpleModule {
 
                     Respriter respriterMiddle= Respriter.of(shrubMiddle);
 
+                    List<Palette> list_logSide = Palette.fromAnimatedImage(logTexture);
+
                     // Recoloring the log middle & bottom
-                    TextureImage recoloredMiddle = respriterMiddle.recolorWithAnimationOf(logTexture);
-                    TextureImage recoloredBottom = respriterBottom.recolorWithAnimationOf(logTexture);
+                    TextureImage recoloredMiddle = respriterMiddle.recolor(list_logSide);
+                    TextureImage recoloredBottom = respriterBottom.recolor(list_logSide);
 
                     // Adding to the resource
                     String resLoc = "block/" + shrubPath;
