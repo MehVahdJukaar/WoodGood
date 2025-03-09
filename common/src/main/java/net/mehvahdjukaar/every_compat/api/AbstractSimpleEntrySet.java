@@ -707,7 +707,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
             }
         }
-        throw new RuntimeException("No child with key " + childKey + " found");
+        throw new RuntimeException("No child with key \"" + childKey + "\" found for" + blockType.getId());
     }
 
 
