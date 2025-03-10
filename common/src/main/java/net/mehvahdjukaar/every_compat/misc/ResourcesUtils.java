@@ -350,7 +350,11 @@ public class ResourcesUtils {
         Matcher matcher = RES_PATTERN.matcher(text);
         return matcher.replaceAll(m -> {
             var item = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(m.group(1)));
-            return item.map(value -> "\"" + Utils.getID(BlockType.changeItemType(value, fromType, toType)).toString() + "\"")
+            return item.map(value -> {
+                // Skip the item because it will return "minecraft:air"
+                if (item.get().toString().equals("shulker_box")) return "\"minecraft:shulker_box\"";
+                return "\"" + Utils.getID(BlockType.changeItemType(value, fromType, toType)).toString() + "\"";
+            })
                     .orElseGet(() -> m.group(0));
         });
     }
