@@ -4,12 +4,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -32,6 +37,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
+import java.io.IOException;
 import java.util.List;
 
 //TODO:
@@ -1836,8 +1842,13 @@ public class ChippedModule extends SimpleModule {
                         getModBlock("planked_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTexture(modRes("block/oak_log/planked_oak_log"))
-                .addTexture(modRes("block/oak_log/planked_oak_log_top"))
+//                .createPaletteFromChild(p -> {
+//                    p.reduceDown();
+//                    p.reduceDown();
+//                    p.reduceDown();
+//                }, "log", SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE)
+//                .addTexture(modRes("block/oak_log/planked_oak_log"))
+//                .addTexture(modRes("block/oak_log/planked_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -1948,6 +1959,7 @@ public class ChippedModule extends SimpleModule {
     }
 
     @Override
+    // RECIPES & LOOT_TABLES
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
@@ -2029,4 +2041,66 @@ public class ChippedModule extends SimpleModule {
 
     }
 
+    @Override
+    // TEXTURES
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        super.addDynamicClientResources(handler, manager);
+
+        String PlankedLogFilename = "planked_oak_log";
+        ResourceLocation innerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_inner_m")).withPrefix("block/ch/");
+        ResourceLocation outerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_outer_m")).withPrefix("block/ch/");
+        ResourceLocation innerTopM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_top_inner_m")).withPrefix("block/ch/");
+        ResourceLocation outerTopM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_top_outer_m")).withPrefix("block/ch/");
+
+        //REASON: The generated textures are not correct, so below is the best way to get the correct generated texture
+        createLogTexture(modRes(PlankedLogFilename).withPrefix("block/oak_log/"), innerSideM_ResLoc, outerSideM_ResLoc,
+                PlankedLogFilename, "log", "", PlankedLog, "planks", "log",
+                handler, manager);
+
+        createLogTexture(modRes(PlankedLogFilename + "_top").withPrefix("block/oak_log/"), innerTopM_ResLoc, outerTopM_ResLoc,
+                PlankedLogFilename, "log", "top", PlankedLog, "planks", "log",
+                handler, manager);
+    }
+
+    public void createLogTexture(ResourceLocation textureResLoc, ResourceLocation innerMaskResLoc, ResourceLocation outerMaskResLoc,
+                                 String textureFilename, String folderName, String suffix,
+                                 SimpleEntrySet<WoodType, Block> mainBlock, String innerType, String outerType,
+                                 ClientDynamicResourcesHandler handler, ResourceManager manager) {
+        try (
+             TextureImage mainTexture = TextureImage.open(manager, textureResLoc);
+             TextureImage innerMask = TextureImage.open(manager, innerMaskResLoc);
+             TextureImage outerMask = TextureImage.open(manager, outerMaskResLoc)
+        ) {
+            mainBlock.blocks.forEach((woodType, block) -> {
+                try (
+                     TextureImage innerColoring = TextureImage.open(manager,
+                             RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(innerType)));
+                     TextureImage outerColoring = TextureImage.open(manager,
+                             RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(outerType), SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                ) {
+                    // Recoloring the texture - TOP
+                    Respriter innerResprite = Respriter.masked(mainTexture, innerMask);
+
+                    TextureImage recoloredInner = innerResprite.recolorWithAnimationOf(innerColoring);
+
+                    Respriter outerResprite = Respriter.masked(recoloredInner, outerMask);
+
+                    TextureImage finiahedTexture = outerResprite.recolorWithAnimationOf(outerColoring);
+
+                    // Adding to the resource
+                    String suffixed = "";
+                    if (!suffix.isEmpty()) suffixed = "_"+suffix;
+                    String newPath = "block/"+ shortenedId()+"/"+woodType.getAppendableId() +"_"+folderName+"/"+ textureFilename.replace("oak", woodType.getTypeName()) + suffixed;
+
+                    handler.dynamicPack.addAndCloseTexture( EveryCompat.res(newPath), finiahedTexture);
+                }
+                catch (IOException e) {
+                    handler.getLogger().error("Failed to generate planked_log texture for {} : {}", woodType.getId(), String.valueOf(e));
+                }
+            });
+        } catch (Exception e) {
+            handler.getLogger().error("Failed to get textures for planked_logs: {}", String.valueOf(e));
+        }
+
+    }
 }
