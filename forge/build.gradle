@@ -138,7 +138,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:athena-841890:5176879") // Chipped
 //    modRuntimeOnly("curse.maven:aeroblender-879879:4789008") // Aether
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | REI
-//    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish
+    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Chipped, Handcrafted, Cozy
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
@@ -233,7 +233,7 @@ dependencies {
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619") // Quad
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971")  // Quad
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971") // Quad
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:oreberries-replanted-454062:5138729")
@@ -275,6 +275,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
     modRuntimeOnly("curse.maven:biomes-o-plenty-220318:5773031") // Terrablender, Glitchcore
+//    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
 //    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5812948") // Blueprint

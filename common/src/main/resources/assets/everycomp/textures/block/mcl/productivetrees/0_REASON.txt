@@ -1,4 +1,0 @@
-The amount of frames from Productive-Trees' with Macaw's oak_ceiling_fan is greater than 4 frames.
-NOTE:
-oak_ceiling_fan has 4 frames via MCMETA. EveryCompat's system for MCMETA generation doesn't account for 2 MCMETA files
-and the system chose the MCMETA of oak_ceiling_fan over the planks' MCMETA (more like didn't combine them)
