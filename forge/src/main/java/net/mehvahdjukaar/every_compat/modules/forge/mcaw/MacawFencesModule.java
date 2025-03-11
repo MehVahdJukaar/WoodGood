@@ -128,7 +128,6 @@ public class MacawFencesModule extends SimpleModule {
                                 .mapColor(l.leaves.defaultMapColor()))
                 )
                 //TEXTURES: leaves
-                .requiresChildren("leaves") // Reason: Recipes
 //                .addCondition(l -> !l.getId().toString().equals("regions_unexplored:apple_oak")) // there should be a way to fix the color of the leave being grey
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)

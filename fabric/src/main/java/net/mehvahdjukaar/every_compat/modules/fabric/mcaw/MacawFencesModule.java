@@ -159,7 +159,6 @@ public class MacawFencesModule extends SimpleModule {
                                     .mapColor(l.leaves.defaultMapColor()));
                         })
                 //TEXTURES: leaves
-                .requiresChildren("leaves") //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
