@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -21,26 +22,23 @@ import net.minecraft.world.item.Item;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 
-//SUPPORT: v3.1.0+
+//SUPPORT: v7.0.3+
 public class JustARaftModule extends SimpleModule {
 
     public final ItemOnlyEntrySet<WoodType, Item> rafts;
+    public final Map<WoodType, RaftType> raftTypes = new HashMap<>();
 
     public JustARaftModule(String modId) {
         super(modId, "jar");
 
         rafts = ItemOnlyEntrySet.builder(WoodType.class, "raft",
                         getModItem("oak_raft"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> {
-                            RaftType newRaft = getRaft(w);
-
-                            RaftType.registerRaftType(newRaft);
-
-                            return new RaftItem(newRaft, new Item.Properties());
-                        }
+                        woodType -> new RaftItem(getRaftType(woodType), new Item.Properties())
                 )
                 .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .addTextureM(modRes("entity/raft/oak_raft"), EveryCompat.res("entity/raft/oak_raft_m"))
@@ -50,15 +48,17 @@ public class JustARaftModule extends SimpleModule {
         this.addEntry(rafts);
     }
 
-    public RaftType getRaft(WoodType w) {
+    private RaftType getRaftType(WoodType w) {
         String name = shortenedId() + "/" + w.getAppendableId();
 
-        return new RaftType(
-                w.planks,
-                () -> rafts.items.get(w),
-                name,
-                EveryCompat.res("textures/entity/raft/" + name + "_raft.png")
-        );
+        return raftTypes.computeIfAbsent(w, woodType -> RaftType.registerRaftType(
+                new RaftType(
+                        w.planks,
+                        (Holder<Item>) rafts.items.get(w), //TODO: This is returning null when "getRaft()" is called
+                        name,
+                        EveryCompat.res("textures/entity/" + name + "_raft.png")
+                )
+        ));
     }
 
     @Override
