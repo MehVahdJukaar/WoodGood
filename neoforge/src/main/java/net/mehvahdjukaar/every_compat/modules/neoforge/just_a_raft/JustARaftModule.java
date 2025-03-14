@@ -55,7 +55,7 @@ public class JustARaftModule extends SimpleModule {
                         w.planks,
                         DeferredHolder.create(Registries.ITEM, EveryCompat.res(name + "_raft")),
                         name,
-                        EveryCompat.res("textures/entity/" + name + "_raft.png")
+                        EveryCompat.res("textures/entity/raft/" + name + "_raft.png")
                 )
         ));
     }
