@@ -18,6 +18,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,7 +36,6 @@ public class JustARaftModule extends SimpleModule {
 
     public JustARaftModule(String modId) {
         super(modId, "jar");
-
         rafts = ItemOnlyEntrySet.builder(WoodType.class, "raft",
                         getModItem("oak_raft"), () -> WoodTypeRegistry.OAK_TYPE,
                         woodType -> new RaftItem(getRaftType(woodType), new Item.Properties())
@@ -54,7 +54,7 @@ public class JustARaftModule extends SimpleModule {
         return raftTypes.computeIfAbsent(w, woodType -> RaftType.registerRaftType(
                 new RaftType(
                         w.planks,
-                        (Holder<Item>) rafts.items.get(w), //TODO: This is returning null when "getRaft()" is called
+                        DeferredHolder.create(Registries.ITEM, EveryCompat.res(woodType.getAppendableId()+"_raft")),
                         name,
                         EveryCompat.res("textures/entity/" + name + "_raft.png")
                 )
