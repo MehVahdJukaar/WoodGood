@@ -13,7 +13,6 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -54,7 +53,7 @@ public class JustARaftModule extends SimpleModule {
         return raftTypes.computeIfAbsent(w, woodType -> RaftType.registerRaftType(
                 new RaftType(
                         w.planks,
-                        DeferredHolder.create(Registries.ITEM, EveryCompat.res(woodType.getAppendableId()+"_raft")),
+                        DeferredHolder.create(Registries.ITEM, EveryCompat.res(name + "_raft")),
                         name,
                         EveryCompat.res("textures/entity/" + name + "_raft.png")
                 )
@@ -67,7 +66,7 @@ public class JustARaftModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
         ResourceLocation recipeLoc = ResType.RECIPES.getPath(modRes("oak_raft"));
 
-        rafts.items.forEach((wood, item ) -> {
+        rafts.items.forEach((wood, item) -> {
             try (InputStream recipeStrem = manager.getResource(recipeLoc)
                     .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipeLoc)).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStrem);
@@ -79,7 +78,7 @@ public class JustARaftModule extends SimpleModule {
                 recipe.getAsJsonObject("result").addProperty("item", Utils.getID(item).toString());
 
                 // Adding to the resources
-                String newRecipeLoc = shortenedId() +"/"+ wood.getAppendableId() + "_raft";
+                String newRecipeLoc = shortenedId() + "/" + wood.getAppendableId() + "_raft";
 
                 handler.dynamicPack.addJson(EveryCompat.res(newRecipeLoc), recipe, ResType.RECIPES);
 
