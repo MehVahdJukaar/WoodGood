@@ -359,10 +359,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     ResourceLocation oldTextureId = re.getKey();
                     String oldPath = oldTextureId.getPath();
 
-                    // boatload's texture path has 2 folder
-                    String newPath = (oldPath.startsWith("entity/") && module.modId.equals("boatload"))
+                    // boatload or justaraftmod's texture path has 2 folder
+                    String newPath = (oldPath.startsWith("entity/") && (module.modId.equals("boatload") || module.modId.equals("justaraftmod")))
                             ? BlockTypeResTransformer.replaceFullGenericType(oldPath, w, blockId, baseType.get().getTypeName(), null, 2)
-                            // Default
+                    // Default
                             : BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
 
                     String newId = "";
