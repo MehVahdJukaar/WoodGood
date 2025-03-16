@@ -47,7 +47,7 @@ public class EveryCompatCommon {
 
 //!! =============================================== Add Other Compat Mods ========================================== \\
         addOtherCompatMod("compatoplenty", "biomesoplenty",
-                "twigs", "farmersdelight", "quark", "woodworks");
+                "twigs", "farmersdelight", "quark", "woodworks", "boatload");
         addOtherCompatMod("compat_makeover", "biomemakeover",
                 "habitat", "farmersdelight", "quark", "decorative_blocks");
         addOtherCompatMod("decorative_compat", "biomesoplenty", "decorative_blocks");
