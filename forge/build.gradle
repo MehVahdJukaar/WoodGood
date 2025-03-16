@@ -120,7 +120,7 @@ dependencies {
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:forge_${moonlight_mavenVersion}") // v2.13.71
+        modImplementation("maven.modrinth:moonlight:forge_${moonlight_mavenVersion}") // v2.13.75
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -213,7 +213,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
-    modCompileOnly("curse.maven:macaws-stairs-1119394:5802535")
+    modImplementation("curse.maven:macaws-stairs-1119394:5802535")
 
         // OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
@@ -286,6 +286,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:ancient-aether-886751:6013933") // Aether
 //    modRuntimeOnly("curse.maven:pfw-aesthetic-gems-906404:6023817")
 //    modRuntimeOnly("curse.maven:sullys-mod-386534:6005769") // Blueprint
+//    modRuntimeOnly("curse.maven:deeperdarker-659011:5906086") // Terrablender, Glitchcore
 
 //    modRuntimeOnly("curse.maven:terrafirmacraft-302973:4862659") // patchouli
 
