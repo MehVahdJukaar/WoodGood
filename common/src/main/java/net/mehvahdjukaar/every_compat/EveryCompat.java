@@ -164,7 +164,7 @@ public abstract class EveryCompat {
                 EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
                 EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
             } else {
-                EveryCompat.LOGGER.error("\n\nATTENION: No supported mods are installed. You don't need Every Compat and should remove it.\n");
+                EveryCompat.LOGGER.error("\n\nATTENTION: No supported mods are installed. You don't need Every Compat and should remove it.\n");
             }
         }
 

@@ -12,14 +12,13 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import pokecube.core.init.ItemGenerator;
-import pokecube.legends.init.BlockInit;
 
 
 public class PokecubeAOIModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> distorticPlanks;
     public final SimpleEntrySet<WoodType, Block> distorticStairs;
-    public final SimpleEntrySet<WoodType, Block> DISTORTICSLABS;
+    public final SimpleEntrySet<WoodType, Block> distorticSlabs;
 
     public PokecubeAOIModule(String modId) {
         super(modId, "pcl");
@@ -53,7 +52,7 @@ public class PokecubeAOIModule extends SimpleModule {
 
         this.addEntry(distorticStairs);
 
-        DISTORTICSLABS = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
+        distorticSlabs = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
                         getModBlock("distortic_oak_slab"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_slab"))
@@ -64,6 +63,6 @@ public class PokecubeAOIModule extends SimpleModule {
                 .setTabKey(tab)
                 .build();
 
-        this.addEntry(DISTORTICSLABS);
+        this.addEntry(distorticSlabs);
     }
 }
