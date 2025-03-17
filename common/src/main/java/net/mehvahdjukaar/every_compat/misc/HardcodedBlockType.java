@@ -25,7 +25,7 @@ public class HardcodedBlockType {
 
             /// ========== INCLUDE VANILLA TYPE ========== \\\
         // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
-        if (isWoodRegistryOf("dawnoftimebuilder", "", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
+        if (isWoodFrom("dawnoftimebuilder", "", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
 
 
             /// ========== EXCLUDE ========== \\\
@@ -33,63 +33,63 @@ public class HardcodedBlockType {
         if (woodType.isVanilla()) return true;
 
         // Nature's-Spirit's joshua texture is a 8x8, it's currently excluded in Valhelaia-Structure for now - the texture generation could be improved
-        if (isWoodRegistryOf("valhelsia_structures", "", "natures_spirit:joshua", "", "")) return true;
+        if (isWoodFrom("valhelsia_structures", "", "natures_spirit:joshua", "", "")) return true;
 
         // Discarding Dynamic Trees and its addons
-        if (isWoodRegistryOf("", "", "dynamictrees|dt", "", "")) return true;
+        if (isWoodFrom("", "", "dynamictrees|dt", "", "")) return true;
 
         // Garden-Of-The-dead's whistle & Snifferent already has branches, branches from Regions-Unexplored is not needed
-        if (isWoodRegistryOf("", "", "gardens_of_the_dead|snifferent", "", "branch")) return true;
+        if (isWoodFrom("", "", "gardens_of_the_dead|snifferent", "", "branch")) return true;
 
         // Nether's Exoticism already has branches, branches from Regions-Unexplored is not needed
-        if (isWoodRegistryOf("", "", "", "nethers_exoticism:jabuticaba", "branch")) return true;
+        if (isWoodFrom("", "", "", "nethers_exoticism:jabuticaba", "branch")) return true;
 
         // Quark & Woodworks have chest & trapped_chest. | is this needed? shouldnt it be covered by the next statements?
-        if (isWoodRegistryOf("", "abnww", "quark", "", "chest")) return true;
+        if (isWoodFrom("", "abnww", "quark", "", "chest")) return true;
 
         // Quark's stripped_post with Ecologics must be excluded beacuse azalea_post and stripped_azalea_post's texture are identical
-        if (isWoodRegistryOf("quark", "", "ecologics", "", "stripped_flowering_azalea_post")) return true;
+        if (isWoodFrom("quark", "", "ecologics", "", "stripped_flowering_azalea_post")) return true;
 
 
             /// ========== INCLUDE ========== \\\
         // Minecraft's CHERRY prevent the generation of blocks with Terraqueous's CHERRY
-        if (isWoodRegistryOf("", "", "", "terraqueous:cherry", "")) return false;
+        if (isWoodFrom("", "", "", "terraqueous:cherry", "")) return false;
 
         // Quark's blocks with Caverns-And-Chasms' AZALEA aren't generated due to Quark's AZALEA
-        if (isWoodRegistryOf("quark", "", "caverns_and_chasms", "", "")) return false;
+        if (isWoodFrom("quark", "", "caverns_and_chasms", "", "")) return false;
 
         // Refurbished-Furniture's oak_table wasn't generated due to Dawn-Of-Time's waxed_oak_table
-        if (isWoodRegistryOf("", "rfm", "", "dawnoftimebuilder:waxed_oak", "")) return false;
+        if (isWoodFrom("", "rfm", "", "dawnoftimebuilder:waxed_oak", "")) return false;
 
         // Minecraft has "mangrove" that caused the generation of blocks with The-Twilight-Forest's mangrove to be skipped.
-        if (isWoodRegistryOf("", "", "", "twilightforest:mangrove", "")) return false;
+        if (isWoodFrom("", "", "", "twilightforest:mangrove", "")) return false;
 
         // Quark's chests & ladders aren't generated with Abnormal's Wood mods | Quark's blocks with Caverns-And-Chasms' AZALEA aren't generated due to Quark's AZALEA
-        if (isWoodRegistryOf("quark", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
+        if (isWoodFrom("quark", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
 
         // Better Nether & Better End have stripped_bark as stripped_wood but bark from Bewitchment caused EC to skip
-        if (isWoodRegistryOf("", "bw", "betternether|betterend", "", "")) return false;
+        if (isWoodFrom("", "bw", "betternether|betterend", "", "")) return false;
 
         // Create's windows will be skipped blc [Let's do] Blooming Nature & Meadow already has windows
-        if (isWoodRegistryOf("", "", "bloomingnature|meadow", "", "window")) return false;
+        if (isWoodFrom("", "", "bloomingnature|meadow", "", "window")) return false;
 
         // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes & no item in CreativeMode
-        if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic", "", "driftwood_boards|river_boards")) return false;
+        if (isWoodFrom("architects_palette", "", "upgrade_aquatic", "", "driftwood_boards|river_boards")) return false;
 
         // Similar to above, Architect's Palette - boards will be skipped due to the existing boards in Autumnity
-        if (isWoodRegistryOf("architects_palette", "", "autumnity", "", "maple_boards")) return false;
+        if (isWoodFrom("architects_palette", "", "autumnity", "", "maple_boards")) return false;
 
         // Ensure blocks to be generated because TerraFirmaCraft has similar name of vanilla woodType (oak, acacia, so on)
-        if (isWoodRegistryOf("", "", "tfc", "", "")) return false;
+        if (isWoodFrom("", "", "tfc", "", "")) return false;
 
         //ecologics and quark azalea. tbh not sure why needed
-        if (isWoodRegistryOf("quark", "", "", "ecologics:azalea", "")) return false;
+        if (isWoodFrom("quark", "", "", "ecologics:azalea", "")) return false;
 
         // we always register everything for these (mehvahdjukaar)
-        if (isWoodRegistryOf("", "abnww", "architects_palette", "", "")) return false;
+        if (isWoodFrom("", "abnww", "architects_palette", "", "")) return false;
 
         // Ensure the Architects-Palette's boards are generated with Abnormal mods (Upgrade Aquatic, Woodworks)
-        if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
+        if (isWoodFrom("architects_palette", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
 
         return null;
     }
@@ -107,19 +107,19 @@ public class HardcodedBlockType {
         if (leavesType.isVanilla()) return true;
 
         // Traversable-Leaves' leaves is a testing item and should be excluded
-        if (isLeavesRegistryOf("", "", "", "traversable_leaves:dev_leaves", "")) return true;
+        if (isLeavesFrom("", "", "", "traversable_leaves:dev_leaves", "")) return true;
 
                 /// ========== INCLUDE ========== \\\
         // Unrelated to Quark's ancient_leaves & Alex's Cave (ancient_leaves) should be included
-        if (isLeavesRegistryOf("quark", "", "", "alexscaves:ancient", "")) return false;
+        if (isLeavesFrom("quark", "", "", "alexscaves:ancient", "")) return false;
 
         // Macaw's Fences&Walls or MrCrayFish's Furniture - hedges will be skipped because Quark already has hedges
-        if (isLeavesRegistryOf("", "mcf|cfm", "quark", "", "")) return false;
+        if (isLeavesFrom("", "mcf|cfm", "quark", "", "")) return false;
 
         return null;
     }
 
-    public static Boolean isWoodRegistryOf(String whichSupportedModId, String shortenedId, String woodtypeFromMod, String woodTypeId, String whichSupportedBlockName) {
+    public static Boolean isWoodFrom(String whichSupportedModId, String shortenedId, String woodtypeFromMod, String woodTypeId, String whichSupportedBlockName) {
 
         String[] expressions = {
                 whichSupportedModId,
@@ -148,7 +148,7 @@ public class HardcodedBlockType {
         return true;
     }
 
-    public static Boolean isLeavesRegistryOf(String whichSupportedModId, String shortenedId, String woodtypeFromMod, String leavesTypeId, String whichSupportedBlockName) {
+    public static Boolean isLeavesFrom(String whichSupportedModId, String shortenedId, String woodtypeFromMod, String leavesTypeId, String whichSupportedBlockName) {
 
         String[] expressions = {
                 whichSupportedModId,
