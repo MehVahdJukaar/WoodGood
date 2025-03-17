@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-import static net.mehvahdjukaar.every_compat.EveryCompat.doChildrenExistFor;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
+import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
 
 //SUPPORT: v3.0.4+
 //NOTE: Could be supported in NEOFORGE via Sinytra Connector
