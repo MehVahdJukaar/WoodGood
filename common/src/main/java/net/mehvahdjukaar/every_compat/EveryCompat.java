@@ -236,18 +236,4 @@ public abstract class EveryCompat {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
     }
-
-    //do all childen exist for all wood types for this child type
-    //TODO: you sure this is correct? we arent using this anywhere else. its fine to have stuf generate JUST for the wood types that have the chlidren. imagine adding a mod without "fences" and all your other "fences" reliant blocks from other mod suddenly dont wok anymore
-    //!! ATTENTION: Meh, it's working properly and if you look at its usage, there are 6 usages for it. Dont worry about this, i'll move it later
-    public static boolean doChildrenExistFor(WoodType w, String... blockTypes) {
-        for (String type : blockTypes) {
-            if (w.getBlockOfThis(type) == null) return false;
-        }
-        return true;
-    }
-
-    public static boolean doChildrenExistFor(WoodType w, SimpleEntrySet<WoodType, ?> blockType) {
-        return (blockType.blocks.get(w) != null);
-    }
 }
