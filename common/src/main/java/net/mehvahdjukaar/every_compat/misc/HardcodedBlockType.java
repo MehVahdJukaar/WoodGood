@@ -37,6 +37,9 @@ public class HardcodedBlockType {
 
 
                     /// ========== INCLUDE ========== \\\
+        // Makes it so the guita's Branches block still registers if another mod adds a branch block/item
+        if (isWoodRegistryOf("branches", "", "", "", "branch")) return false;
+
         // Minecraft has "mangrove" that caused the generation of blocks with The-Twilight-Forest's mangrove to be skipped.
         if (isWoodRegistryOf("", "", "", "twilightforest:mangrove", "")) return false;
 
