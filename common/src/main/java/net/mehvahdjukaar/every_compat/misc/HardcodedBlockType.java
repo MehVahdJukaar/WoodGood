@@ -51,7 +51,7 @@ public class HardcodedBlockType {
         if (isWoodRegistryOf("quark", "", "ecologics", "", "stripped_flowering_azalea_post")) return true;
 
 
-            /// ========== INCLUDE ========== \\\
+        /// ========== INCLUDE ========== \\\
         // Minecraft's CHERRY prevent the generation of blocks with Terraqueous's CHERRY
         if (isWoodRegistryOf("", "", "", "terraqueous:cherry", "")) return false;
 
@@ -74,7 +74,8 @@ public class HardcodedBlockType {
         if (isWoodRegistryOf("", "", "bloomingnature|meadow", "", "window")) return false;
 
         // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes & no item in CreativeMode
-        if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic", "", "driftwood_boards|river_boards")) return false;
+        if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic", "", "driftwood_boards|river_boards"))
+            return false;
 
         // Similar to above, Architect's Palette - boards will be skipped due to the existing boards in Autumnity
         if (isWoodRegistryOf("architects_palette", "", "autumnity", "", "maple_boards")) return false;
@@ -89,7 +90,8 @@ public class HardcodedBlockType {
         if (isWoodRegistryOf("", "abnww", "architects_palette", "", "")) return false;
 
         // Ensure the Architects-Palette's boards are generated with Abnormal mods (Upgrade Aquatic, Woodworks)
-        if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
+        if (isWoodRegistryOf("architects_palette", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", ""))
+            return false;
 
         return null;
     }
@@ -102,14 +104,14 @@ public class HardcodedBlockType {
         supportedBlockName = blockName;
         shortenedIdenfity = shortenedId;
 
-                /// ========== EXCLUDE ========== \\\
+        /// ========== EXCLUDE ========== \\\
         // Exclude all of Vanilla Types
         if (leavesType.isVanilla()) return true;
 
         // Traversable-Leaves' leaves is a testing item and should be excluded
         if (isLeavesRegistryOf("", "", "", "traversable_leaves:dev_leaves", "")) return true;
 
-                /// ========== INCLUDE ========== \\\
+        /// ========== INCLUDE ========== \\\
         // Unrelated to Quark's ancient_leaves & Alex's Cave (ancient_leaves) should be included
         if (isLeavesRegistryOf("quark", "", "", "alexscaves:ancient", "")) return false;
 
@@ -119,7 +121,8 @@ public class HardcodedBlockType {
         return null;
     }
 
-    public static Boolean isWoodRegistryOf(String whichSupportedModId, String shortenedId, String woodtypeFromMod, String woodTypeId, String whichSupportedBlockName) {
+    public static Boolean isWoodRegistryOf(String whichSupportedModId, String shortenedId, String woodtypeFromMod, String woodTypeId,
+                                           String whichSupportedBlockName) {
 
         String[] expressions = {
                 whichSupportedModId,
@@ -137,10 +140,10 @@ public class HardcodedBlockType {
                 supportedBlockName
         };
 
-        for (int idx = 0; idx < values.length; idx++ ) {
+        for (int idx = 0; idx < values.length; idx++) {
 
             if (!expressions[idx].isEmpty()) { // Skip the blank expressions
-                boolean isNotMatched = !(values[idx].matches(expressions[idx])|values[idx].contains(expressions[idx]));
+                boolean isNotMatched = !(values[idx].matches(expressions[idx]) | values[idx].contains(expressions[idx]));
                 if (isNotMatched) return false;
             }
         }
@@ -166,10 +169,10 @@ public class HardcodedBlockType {
                 supportedBlockName
         };
 
-        for (int idx = 0; idx < values.length; idx++ ) {
+        for (int idx = 0; idx < values.length; idx++) {
 
             if (!expressions[idx].isEmpty()) { // Skip the blank expressions
-                boolean isNotMatched = !(values[idx].matches(expressions[idx])|values[idx].contains(expressions[idx]));
+                boolean isNotMatched = !(values[idx].matches(expressions[idx]) | values[idx].contains(expressions[idx]));
                 if (isNotMatched) return false;
             }
         }

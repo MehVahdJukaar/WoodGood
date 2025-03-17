@@ -24,6 +24,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -35,7 +36,7 @@ public abstract class EveryCompat {
     public static final String MOD_ID = "everycomp";
     public static final Logger LOGGER = LogManager.getLogger("Every Compat");
 
-    private static final List<CompatModule> ACTIVE_MODULES = new ArrayList<>();
+    private static final Map< String, CompatModule> ACTIVE_MODULES = new LinkedHashMap<>();
     private static final List<CompatMod> COMPAT_MODS = new ArrayList<>();
     // all mod that EC directly or indirectly depends on
     private static final Set<String> DEPENDENCIES = new HashSet<>();
@@ -52,7 +53,7 @@ public abstract class EveryCompat {
     }
 
     public static void forAllModules(Consumer<CompatModule> action) {
-        ACTIVE_MODULES.forEach(action);
+        ACTIVE_MODULES.values().forEach(action);
     }
 
     public static CompatModule getModuleOfItem(Item item) {
@@ -96,7 +97,7 @@ public abstract class EveryCompat {
 
     public static void addModule(CompatModule module) {
         if (MODULE_DISABLER.isModuleOn(module.getModId())) { //maybe turn into supplier
-            ACTIVE_MODULES.add(module);
+            ACTIVE_MODULES.put(module.getModId(), module);
             DEPENDENCIES.add(module.getModId());
             DEPENDENCIES.addAll(module.getAlreadySupportedMods());
 
@@ -165,7 +166,7 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myBlocksSize, String.format("%.2f", p));
         }
         if (p > 33) {
-            Optional<CompatModule> compatbloated = ACTIVE_MODULES.stream().max(Comparator.comparing(CompatModule::bloatAmount));
+            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(CompatModule::bloatAmount));
             if (compatbloated.isPresent()) {
                 CompatModule bloated = compatbloated.get();
                 //no freaking clue why this was returned as null once
@@ -214,6 +215,11 @@ public abstract class EveryCompat {
 
     public static boolean isMyIdOrAddon(String namespace) {
         return ADDON_IDS.contains(namespace);
+    }
+
+    @Nullable
+    public static CompatModule getModule(String modId) {
+        return ACTIVE_MODULES.get(modId);
     }
 
 

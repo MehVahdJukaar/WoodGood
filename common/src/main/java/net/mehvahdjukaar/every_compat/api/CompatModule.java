@@ -191,4 +191,5 @@ public abstract class CompatModule {
     public String[] getClientResourcesNamespaces() {
         return new String[]{myNamespace};
     }
+
 }

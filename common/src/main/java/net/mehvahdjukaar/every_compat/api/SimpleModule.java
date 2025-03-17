@@ -195,10 +195,10 @@ public class SimpleModule extends CompatModule {
         // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
         String blockName = blockId.substring(blockId.lastIndexOf("/") + 1);
 
-        String blockTypeFrom = blockType.getNamespace();
+        String woodTypeFrom = blockType.getNamespace();
 
-        String slashConvention = blockTypeFrom + "/" + blockName; // quark/blossom_chair
-        String underscoreConvention = blockTypeFrom + "_" + blockName; // quark_blossom_chair
+        String slashConvention = woodTypeFrom + "/" + blockName; // quark/blossom_chair
+        String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
 
         // ugly hardcoded stuff
         if (blockType instanceof WoodType wt) {
@@ -209,24 +209,34 @@ public class SimpleModule extends CompatModule {
             if (hardcoded != null) return hardcoded;
         }
 
-                /// ========== EXCLUDE ========== \\\
-        if (this.getAlreadySupportedMods().contains(blockTypeFrom)) return true;
+        /// ========== EXCLUDE ========== \\\
+        if (this.getAlreadySupportedMods().contains(woodTypeFrom)) return true;
 
-        // Discard the blocks that are already in the supportedModId from blockTypeFrom
-        if (blockTypeFrom.equals(modId)) return true; // quark, blossom
+        // Discard the blocks that are already in the supportedModId from woodTypeFrom
+        if (woodTypeFrom.equals(modId)) return true; // quark, blossom
 
         // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType
         if (registry.containsKey(new ResourceLocation(modId, blockName)) ||
-                registry.containsKey(new ResourceLocation(modId, underscoreConvention))) return true;
+                registry.containsKey(new ResourceLocation(modId, underscoreConvention))) {
+            return true;
+        }
 
 
-        // Checking if supportedBlockName exists in the blockTypeFrom
-        if (registry.containsKey(new ResourceLocation(blockTypeFrom, blockName))) return true;
+        // Checking if block exists in the mod that adds its wood type (mod has builtin compat with block type mod or the block type is added by that own mod)
+        if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) {
+            //check for false positives (block types with same names)
+            var module = EveryCompat.getModule(woodTypeFrom);
+            //upsies, mod itself defined ANOTHER block type with same name so this is a false positive
+            if (!(module instanceof SimpleModule sm && sm.getEntry(blockName) != null)) {
+                //above checks for false positives. if false we proceede
+                return true;
+            }
+        }
 
         for (var c : EveryCompat.getCompatMods()) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
             //if the wood is from the mod this adds compat for && it supports this block type
-            if (c.woodsFrom().contains(blockTypeFrom) && c.blocksFrom().contains(modId)) {
+            if (c.woodsFrom().contains(woodTypeFrom) && c.blocksFrom().contains(modId)) {
                 if (registry.containsKey(new ResourceLocation(compatModId, blockName))) return true;
                 if (registry.containsKey(new ResourceLocation(compatModId, slashConvention))) return true;
                 if (registry.containsKey(new ResourceLocation(compatModId, underscoreConvention))) return true;
