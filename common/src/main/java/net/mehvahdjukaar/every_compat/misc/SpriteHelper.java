@@ -44,6 +44,10 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem","_side","minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem","_top","minecraft:block/mushroom_stem");
 
+        // Piglin Ruins
+        addOptional("piglin_ruins:ominous_stalk_block","_side","piglin_ruins:block/ominous_stalk_block_side");
+        addOptional("piglin_ruins:ominous_stalk_block","_top","piglin_ruins:block/ominous_stalk_block_top");
+
         // Astral Dimension
         addOptional("astral_dimension:sick_log","_side","astral_dimension:block/sick_log");
         addOptional("astral_dimension:sick_log","_top","astral_dimension:block/sick_log");

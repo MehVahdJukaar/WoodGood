@@ -92,6 +92,7 @@ public class QuarkModule extends SimpleModule {
                         () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new VerticalSlabBlock(() -> w.getBlockOfThis("slab"),
                                 Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("slab")))
+                                        .sound(w.getSound())
                         )
                 )
                 .requiresChildren("slab")
@@ -282,7 +283,7 @@ public class QuarkModule extends SimpleModule {
                         () -> LeavesTypeRegistry.OAK_TYPE,
                         leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
                 )
-                .requiresChildren("leaves") // Reason: RECIPES
+                .addCondition(l -> l.getWoodType() != null) // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -291,8 +292,7 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .copyParentTint()
-//              Recipe being created below blc the recipe has a tag as an ingredient
-                .addCondition(l -> l.getWoodType() != null) // Reason: RECIPES
+                //RECIPES: Manually created below blc the recipe has a tag as an ingredient
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(hedges);
