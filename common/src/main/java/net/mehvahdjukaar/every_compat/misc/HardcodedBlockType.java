@@ -64,8 +64,8 @@ public class HardcodedBlockType {
         // Minecraft has "mangrove" that caused the generation of blocks with The-Twilight-Forest's mangrove to be skipped.
         if (isWoodRegistryOf("", "", "", "twilightforest:mangrove", "")) return false;
 
-        // chests & ladders from Quark aren't generated with Abnormal's Wood mods
-        if (isWoodRegistryOf("quark", "", "upgrade_aquatic|autumnity|atmospheric|environmental", "", "")) return false;
+        // Quark's chests & ladders aren't generated with Abnormal's Wood mods | Quark's blocks with Caverns-And-Chasms' AZALEA aren't generated due to Quark's AZALEA
+        if (isWoodRegistryOf("quark", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
 
         // Better Nether & Better End have stripped_bark as stripped_wood but bark from Bewitchment caused EC to skip
         if (isWoodRegistryOf("", "bw", "betternether|betterend", "", "")) return false;
