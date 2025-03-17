@@ -69,10 +69,7 @@ public class SimpleModule extends CompatModule {
     }
 
     public EntrySet<?> getEntry(String name) {
-        var e = entries.get(name);
-        if (e == null)
-            throw new UnsupportedOperationException(String.format("This module does not have entries of type %s", name));
-        return e;
+        return entries.get(name);
     }
 
     @Override
