@@ -30,10 +30,10 @@ public class WoodsterModule extends SimpleModule {
                         getModBlock("dark_oak_chiseled_bookshelf"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("dark_oak")),
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addTextureM(modRes("block/dark_oak_chiseled_bookshelf_6"),modRes("block/everycomp_chiseled_bookshelf_6"))
-                .addTexture(modRes("block/dark_oak_chiseled_bookshelf_side"))
-                .addTexture(modRes("block/dark_oak_chiseled_bookshelf_top"))
-                .addTexture(modRes("block/dark_oak_chiseled_bookshelf_0"))
+                .addTextureM(modRes("block/everycomp_dark_oak_chiseled_bookshelf_6"),modRes("block/everycomp_dark_oak_chiseled_bookshelf_overlay"))
+                .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_side"))
+                .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_top"))
+                .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_0"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentDrop()
@@ -59,12 +59,10 @@ public class WoodsterModule extends SimpleModule {
                         getModBlock("spruce_ladder"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new LadderBlock(Utils.copyPropertySafe(getModBlock("spruce_ladder").get()))
                 )
-                .addTag(ResourceLocation.parse("minecraft:ladders"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("minecraft:ladders"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
-                .setTabKey( tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
 
