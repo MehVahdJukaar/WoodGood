@@ -45,7 +45,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/flower_box/oak_supports"))
                 .addTextureM(modRes("block/flower_box/oak_top_sides"), EveryCompat.res("block/af/planter_box_top_sides_mask"))
                 .build();
-
         this.addEntry(flowerBoxes);
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
@@ -102,7 +101,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/shutter/variant_11/oak_top"))
 //                .createPaletteFromOak(this::shuttersPalette)
                 .build();
-
         this.addEntry(shutters);
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
@@ -121,7 +119,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/table/oak_supports"))
                 .addTexture(modRes("block/table/oak_top"))
                 .build();
-
         this.addEntry(tables);
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
@@ -147,7 +144,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/chair/bottom/oak"))
                 .addTexture(modRes("block/chair/seat/oak"))
                 .build();
-
         this.addEntry(chairs);
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
@@ -164,7 +160,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/shelf/oak_bottom"))
                 .addTexture(modRes("block/shelf/oak_supports"))
                 .build();
-
         this.addEntry(shelves);
 
         drawers = SimpleEntrySet.builder(WoodType.class, "drawer",
@@ -181,7 +176,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/drawer/oak_side"))
                 .addTexture(modRes("block/drawer/oak_top"))
                 .build();
-
         this.addEntry(drawers);
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
@@ -194,7 +188,6 @@ public class AnotherFurnitureModule extends SimpleModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/bench/oak"))
                 .build();
-
         this.addEntry(benches);
 
     }
