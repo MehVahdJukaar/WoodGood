@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.ChiseledBookShelfBlock;
 import net.salju.woodster.WoodsterMod;
-import net.salju.woodster.block.BookshelfBlock;
 import net.salju.woodster.init.WoodsterBlocks;
 import net.salju.woodster.init.WoodsterTabs;
 
@@ -44,9 +43,10 @@ public class WoodsterModule extends SimpleModule {
 
         books = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
-                        w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
+                .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentDrop()
