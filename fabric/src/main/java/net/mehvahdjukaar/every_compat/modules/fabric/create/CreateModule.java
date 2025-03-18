@@ -31,7 +31,8 @@ public class CreateModule extends SimpleModule {
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
-                        this::makeWindow)
+                        this::makeWindow
+                )
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -44,7 +45,9 @@ public class CreateModule extends SimpleModule {
 
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
-                        s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
+                        s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE))
+                )
+                .requiresFromMap(windows.blocks) //REASON: textures
                 .addTag(new ResourceLocation("c:glass_panes"), Registries.BLOCK)
                 .addTag(new ResourceLocation("c:glass_panes"), Registries.ITEM)
                 .setTabKey(tab)
