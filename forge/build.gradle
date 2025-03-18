@@ -138,7 +138,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:athena-841890:5176879") // Chipped
 //    modRuntimeOnly("curse.maven:aeroblender-879879:4789008") // Aether
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | REI
-    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish
+//    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Chipped, Handcrafted, Cozy
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
@@ -164,7 +164,7 @@ dependencies {
     modCompileOnly("curse.maven:framework-549225:5680064") // v0.7.7 | Refurbished Furniture, Mighty Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
     modCompileOnly("curse.maven:titanium-287342:5468426") // v3.8.32 | Functional-Storage
-    modCompileOnly("curse.maven:zeta-968868:5597406") // v1.0-24 | Quark
+    modCompileOnly("curse.maven:zeta-968868:6312779") // v1.0-28 | Quark
 
             // OTHER MAVENS
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}") // Create, The-Twilight-Forest, Tropicraft
@@ -213,7 +213,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
-    modImplementation("curse.maven:macaws-stairs-1119394:5802535")
+    modCompileOnly("curse.maven:macaws-stairs-1119394:5802535")
 
         // OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
@@ -249,7 +249,7 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-structures-347488:5195707") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
-    modCompileOnly("curse.maven:quark-243121:5093415")
+    modImplementation("curse.maven:quark-243121:6312787") // Zeta
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:woodworks-543610:5228779")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:5713529")
@@ -276,17 +276,18 @@ dependencies {
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
     modRuntimeOnly("curse.maven:biomes-o-plenty-220318:5773031") // Terrablender, Glitchcore
 //    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore
-//    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
-//    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint
-//    modRuntimeOnly("curse.maven:the-outer-end-430404:5812948") // Blueprint
 //    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel
 //    modRuntimeOnly("curse.maven:rats-323596:5904296")
 //    modRuntimeOnly("curse.maven:mo-shiz-mod-62536:5587177")
 //    modRuntimeOnly("curse.maven:aether-255308:5889509") // Curios
 //    modRuntimeOnly("curse.maven:ancient-aether-886751:6013933") // Aether
 //    modRuntimeOnly("curse.maven:pfw-aesthetic-gems-906404:6023817")
+//    modRuntimeOnly("curse.maven:deeperdarker-659011:5906086")
 //    modRuntimeOnly("curse.maven:sullys-mod-386534:6005769") // Blueprint
-//    modRuntimeOnly("curse.maven:deeperdarker-659011:5906086") // Terrablender, Glitchcore
+//    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
+//    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint
+//    modRuntimeOnly("curse.maven:the-outer-end-430404:5812948") // Blueprint
+//    modRuntimeOnly("curse.maven:caverns-and-chasms-438005:6040957") // Blueprint
 
 //    modRuntimeOnly("curse.maven:terrafirmacraft-302973:4862659") // patchouli
 
