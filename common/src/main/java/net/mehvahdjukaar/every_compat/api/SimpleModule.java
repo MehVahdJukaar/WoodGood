@@ -173,6 +173,7 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
         List<Item> l = new ArrayList<>();
         for (EntrySet<?> entrySet : entries.values()) {
@@ -213,7 +214,7 @@ public class SimpleModule extends CompatModule {
         if (woodTypeFrom.equals(modId)) return true; // quark, blossom
 
         // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType
-        if (registry.containsKey(new ResourceLocation(modId, blockName)) ||
+        if (    registry.containsKey(new ResourceLocation(modId, blockName)) ||
                 registry.containsKey(new ResourceLocation(modId, underscoreConvention))) {
             return true;
         }
@@ -224,7 +225,7 @@ public class SimpleModule extends CompatModule {
             //check for false positives (block types with same names)
             CompatModule module = EveryCompat.getModule(woodTypeFrom);
             //upsies, mod itself defined ANOTHER block type with same name so this is a false positive
-            if (!(module instanceof SimpleModule sm && sm.getEntry(blockName) != null)) {
+            if (!(module instanceof SimpleModule sm && sm.getEntry(blockName) != null)) { // TODO: here is the issue where module is null, case: Caverns&Chasms's azalea and Quark's chest
                 //above checks for false positives. if false we proceede
                 return true;
             }
@@ -241,6 +242,5 @@ public class SimpleModule extends CompatModule {
         }
         return false;
     }
-
 
 }
