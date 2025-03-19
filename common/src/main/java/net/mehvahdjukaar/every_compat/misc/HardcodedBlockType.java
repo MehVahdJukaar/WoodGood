@@ -39,7 +39,7 @@ public class HardcodedBlockType {
         if (isWoodFrom("", "", "dynamictrees|dt", "", "")) return true;
 
         // Garden-Of-The-dead's whistle, Snifferent's globar, Nethers-Exoticism's jabuticaba already has branches, Regions-Unexplored's branches is not needed
-        if (isWoodFrom("regions_unexplored", "", "gardens_of_the_dead|snifferent|nethers_exoticism", "", "(whistle|globar|jabuticaba)_branch")) return true;
+        if (isWoodFrom("regions_unexplored", "", "gardens_of_the_dead|snifferent|nethers_exoticism", "", "(whistlecane|globar|jabuticaba)_branch")) return true;
 
         // Quark's stripped_post with Ecologics must be excluded beacuse azalea_post and stripped_azalea_post's texture are identical
         if (isWoodFrom("quark", "", "ecologics", "", "stripped_flowering_azalea_post")) return true;
