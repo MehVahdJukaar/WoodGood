@@ -220,16 +220,20 @@ public class SimpleModule extends CompatModule {
         }
 
 
+        // Checking if supportedBlockName exists in the woodTypeFrom
+        if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) return true;
+
+//TODO: Currently disabled due to: https://github.com/MehVahdJukaar/WoodGood/issues/874 & it need more works
         // Checking if block exists in the mod that adds its wood type (mod has builtin compat with block type mod or the block type is added by that own mod)
-        if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) {
-            //check for false positives (block types with same names)
-            CompatModule module = EveryCompat.getModule(woodTypeFrom);
-            //upsies, mod itself defined ANOTHER block type with same name so this is a false positive
-            if (!(module instanceof SimpleModule sm && sm.getEntry(blockName) != null)) { // TODO: here is the issue where module is null, case: Caverns&Chasms's azalea and Quark's chest
-                //above checks for false positives. if false we proceede
-                return true;
-            }
-        }
+//        if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) {
+//            //check for false positives (block types with same names)
+//            CompatModule module = EveryCompat.getModule(woodTypeFrom);
+//            //upsies, mod itself defined ANOTHER block type with same name so this is a false positive
+//            if (!(module instanceof SimpleModule sm && sm.getEntry(blockName) != null)) { //!! here is the issue where module is null, case: Caverns&Chasms's azalea & Quark's chest AND case: StoneZone
+//                //above checks for false positives. if false we proceede
+//                return true;
+//            }
+//        }
 
         for (var c : EveryCompat.getCompatMods()) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
