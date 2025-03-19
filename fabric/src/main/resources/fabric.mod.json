@@ -32,5 +32,13 @@
   },
   "recommends": {
     "sawmill": "*"
+  },
+  "breaks": {
+    "mcwbridges": "<3.0.0",
+    "mcwfences": "<1.1.2",
+    "mcwlights": "<1.1.0",
+    "dawnoftimebuilder": "<1.5.7",
+    "clutter": "<0.5.11",
+    "wilderwild": "<4.0"
   }
 }
