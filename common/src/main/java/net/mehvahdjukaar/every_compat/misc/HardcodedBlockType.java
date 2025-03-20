@@ -22,24 +22,27 @@ public class HardcodedBlockType {
         supportedBlockName = blockName;
         shortenedIdenfity = shortenedId;
 
-        /// ========== EXCLUDE ========== \\\
+                    /// ========== EXCLUDE ========== \\\
         // Nature's-Spirit's joshua texture is a 8x8, it's currently excluded in Valhelaia-Structure for now - the texture generation could be improved
         if (isWoodFrom("valhelsia_structures", "", "natures_spirit:joshua", "", "")) return true;
 
         // Discarding Dynamic Trees and its addons
         if (isWoodFrom("", "", "dynamictrees|dt", "", "")) return true;
 
-        // Garden-Of-The-dead's whistle, Snifferent's globar, Nethers-Exoticism's jabuticaba already has branches, Regions-Unexplored's branches is not needed
-        if (isWoodFrom("regions_unexplored", "", "gardens_of_the_dead|snifferent|nethers_exoticism", "", "(whistlecane|globar|jabuticaba)_branch")) return true;
+        // Garden-Of-The-dead's whistle & Snifferent already has branches, branches from Regions-Unexplored is not needed
+        if (isWoodFrom("", "", "gardens_of_the_dead|snifferent", "", "branch")) return true;
+
+        // Nether's Exoticism already has branches, branches from Regions-Unexplored is not needed
+        if (isWoodFrom("", "", "", "nethers_exoticism:jabuticaba", "branch")) return true;
+
+        // Quark & Woodworks have chest & trapped_chest. | is this needed? shouldnt it be covered by the next statements?
+        if (isWoodFrom("", "abnww", "quark", "", "chest")) return true;
 
         // Quark's stripped_post with Ecologics must be excluded beacuse azalea_post and stripped_azalea_post's texture are identical
         if (isWoodFrom("quark", "", "ecologics", "", "stripped_flowering_azalea_post")) return true;
 
 
-        /// ========== INCLUDE ========== \\\
-        // Makes it so the Guita's Branches block still registers if another mod adds a branch block/item
-        if (isWoodFrom("branches", "", "", "", "branch")) return false;
-
+                    /// ========== INCLUDE ========== \\\
         // Minecraft's CHERRY prevent the generation of blocks with Terraqueous's CHERRY
         if (isWoodFrom("", "", "", "terraqueous:cherry", "")) return false;
 
@@ -87,14 +90,14 @@ public class HardcodedBlockType {
         supportedBlockName = blockName;
         shortenedIdenfity = shortenedId;
 
-        /// ========== EXCLUDE ========== \\\
+                /// ========== EXCLUDE ========== \\\
         // Exclude all of Vanilla Types
         if (leavesType.isVanilla()) return true;
 
         // Traversable-Leaves' leaves is a testing item and should be excluded
         if (isLeavesFrom("", "", "", "traversable_leaves:dev_leaves", "")) return true;
 
-        /// ========== INCLUDE ========== \\\
+                /// ========== INCLUDE ========== \\\
         // Unrelated to Quark's ancient_leaves & Alex's Cave (ancient_leaves) should be included
         if (isLeavesFrom("quark", "", "", "alexscaves:ancient", "")) return false;
 
@@ -104,8 +107,7 @@ public class HardcodedBlockType {
         return null;
     }
 
-    public static Boolean isWoodFrom(String whichSupportedModId, String shortenedId, String woodtypeFromMod,
-                                     String woodTypeId, String whichSupportedBlockName) {
+    public static Boolean isWoodFrom(String whichSupportedModId, String shortenedId, String woodtypeFromMod, String woodTypeId, String whichSupportedBlockName) {
 
         String[] expressions = {
                 whichSupportedModId,
@@ -123,10 +125,10 @@ public class HardcodedBlockType {
                 supportedBlockName
         };
 
-        for (int idx = 0; idx < values.length; idx++) {
+        for (int idx = 0; idx < values.length; idx++ ) {
 
             if (!expressions[idx].isEmpty()) { // Skip the blank expressions
-                boolean isNotMatched = !(values[idx].matches(expressions[idx]) | values[idx].contains(expressions[idx]));
+                boolean isNotMatched = !(values[idx].matches(expressions[idx])|values[idx].contains(expressions[idx]));
                 if (isNotMatched) return false;
             }
         }
@@ -152,10 +154,10 @@ public class HardcodedBlockType {
                 supportedBlockName
         };
 
-        for (int idx = 0; idx < values.length; idx++) {
+        for (int idx = 0; idx < values.length; idx++ ) {
 
             if (!expressions[idx].isEmpty()) { // Skip the blank expressions
-                boolean isNotMatched = !(values[idx].matches(expressions[idx]) | values[idx].contains(expressions[idx]));
+                boolean isNotMatched = !(values[idx].matches(expressions[idx])|values[idx].contains(expressions[idx]));
                 if (isNotMatched) return false;
             }
         }
