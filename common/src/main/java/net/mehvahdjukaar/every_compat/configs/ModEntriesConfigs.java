@@ -6,6 +6,7 @@ import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.world.item.BlockItem;
@@ -51,26 +52,14 @@ public class ModEntriesConfigs {
         builder.comment("Disables specific entries")
                 .push("entries");
         for (var reg : BlockSetAPI.getRegistries()) {
-            if (reg.getType() == WoodType.class || reg.getType() == LeavesType.class || reg.typeName().matches("mud_type|stone_type")) {
-                builder.push(reg.typeName().replace(" ", "_"));
-                for (var c : EveryCompat.getChildKeys(reg.getType())) {
-                    String key = c.replace(":", ".");
-                    var config = builder.define(key, true);
-                    var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
-                    map.put(c, config);
-                }
-                builder.pop();
+            builder.push(reg.typeName().replace(" ", "_"));
+            for (var c : EveryCompat.getChildKeys(reg.getType())) {
+                String key = c.replace(":", ".");
+                var config = builder.define(key, true);
+                var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
+                map.put(c, config);
             }
-            else {
-                builder.push(reg.typeName().replace(" ", "_"));
-                for (var c : EveryCompat.getChildKeys(reg.getType())) {
-                    String key = c.replace(":", ".");
-                    var config = builder.define(key, true);
-                    var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
-                    map.put(c, config);
-                }
-                builder.pop();
-            }
+            builder.pop();
         }
         builder.pop();
 
