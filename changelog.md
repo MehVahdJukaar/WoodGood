@@ -1,5 +1,5 @@
 ### UPDATED:
-- **JustARaft** (NF): Updated for 1.21.1 - Fixed [#861](https://github.com/MehVahdJukaar/WoodGood/issues/861)
+- **Wilder Wild** (FB): Updated to support v4.0.0+ & No longer supporting older version than v4.0.0
 
 #### LEGENDS:
 - (COMMON): NEOFORGE & FABRIC
