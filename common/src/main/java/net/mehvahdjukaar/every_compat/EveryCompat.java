@@ -1,9 +1,10 @@
 package net.mehvahdjukaar.every_compat;
 
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -36,7 +37,8 @@ public abstract class EveryCompat {
     public static final String MOD_ID = "everycomp";
     public static final Logger LOGGER = LogManager.getLogger("Every Compat");
 
-    private static final Map< String, CompatModule> ACTIVE_MODULES = new LinkedHashMap<>();
+    private static final Multimap<String, CompatModule> ACTIVE_MODULES = MultimapBuilder
+            .linkedHashKeys().arrayListValues().build();
     private static final List<CompatMod> COMPAT_MODS = new ArrayList<>();
     // all mod that EC directly or indirectly depends on
     private static final Set<String> DEPENDENCIES = new HashSet<>();
@@ -217,8 +219,7 @@ public abstract class EveryCompat {
         return ADDON_IDS.contains(namespace);
     }
 
-    @Nullable
-    public static CompatModule getModule(String modId) {
+    public static Collection<CompatModule> getModulesOfMod(String modId) {
         return ACTIVE_MODULES.get(modId);
     }
 

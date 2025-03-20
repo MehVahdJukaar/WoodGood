@@ -225,12 +225,18 @@ public class SimpleModule extends CompatModule {
         // Checking if block exists in the mod that adds its wood type (mod has builtin compat with block type mod or the block type is added by that own mod)
         if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) {
             //check for false positives (block types with same names)
-            CompatModule module = EveryCompat.getModule(woodTypeFrom);
-            //upsies, mod itself defined ANOTHER block type with same name so this is a false positive
-            if (!(module instanceof SimpleModule sm && sm.getEntry(blockName) != null)) {
-                //above checks for false positives. if false we proceede
-                return true;
+            boolean isOwnBlock = false;
+            var modules = EveryCompat.getModulesOfMod(woodTypeFrom);
+            for (var module : modules) {
+                if (module instanceof SimpleModule sm) {
+                    EntrySet<?> entry = sm.getEntry(blockName);
+                    if (entry != null && entry.getTypeClass() == blockType.getClass()) {
+                        isOwnBlock = true;
+                        break;
+                    }
+                }
             }
+            if (!isOwnBlock) return true;
         }
 
         for (var c : EveryCompat.getCompatMods()) {
