@@ -44,14 +44,15 @@ public class WilderWildModule extends SimpleModule {
                         getModBlock("hollowed_oak_log", HollowedLogBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("hollowed_oak_log").get()))
                 )
-                .requiresChildren("stripped_log") //REASON: textures
+                .requiresChildren("stripped_log", "wood") //REASON: textures, recipes
                 //TEXTURES: stripped_oak_log, log_top
+                //REASON: using the vanilla textures instead of generated textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild(
                         "wilderwild:block/hollowed_oak_log", "log",
                         SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
                 ))
-//                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-//                .addTexture(modRes("block/hollowed_oak_log"))
+//-                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
+//-                .addTexture(modRes("block/hollowed_oak_log"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -78,14 +79,15 @@ public class WilderWildModule extends SimpleModule {
                         getModBlock("stripped_hollowed_oak_log", HollowedLogBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("stripped_hollowed_oak_log").get()))
                 )
-                .requiresChildren("stripped_log") //REASON: textures
+                .requiresChildren("stripped_log", "stripped_wood") //REASON: textures, recipes
                 //TEXTURES: stripped_log, stripped_log_top
+                //REASON: using the vanilla textures instead of generated textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild(
                         "wilderwild:block/stripped_hollowed_oak_log", "stripped_log",
                         SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
                 ))
-//                .createPaletteFromChild("stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-//                .addTexture(modRes("block/stripped_hollowed_oak_log"))
+//-                .createPaletteFromChild("stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
+//-                .addTexture(modRes("block/stripped_hollowed_oak_log"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

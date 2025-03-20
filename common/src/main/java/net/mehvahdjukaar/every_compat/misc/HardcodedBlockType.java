@@ -28,35 +28,26 @@ public class HardcodedBlockType {
         if (isWoodFrom("dawnoftimebuilder", "", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
 
 
-            /// ========== EXCLUDE ========== \\\
+        /// ========== EXCLUDE ========== \\\
         // Exclude all of Vanilla Types
         if (woodType.isVanilla()) return true;
 
         // Nature's-Spirit's joshua texture is a 8x8, it's currently excluded in Valhelaia-Structure for now - the texture generation could be improved
         if (isWoodFrom("valhelsia_structures", "", "natures_spirit:joshua", "", "")) return true;
 
-        // Discarding Dynamic Trees and its addons
-        if (isWoodFrom("", "", "dynamictrees|dt", "", "")) return true;
-
-        // Garden-Of-The-dead's whistle & Snifferent already has branches, branches from Regions-Unexplored is not needed
-        if (isWoodFrom("", "", "gardens_of_the_dead|snifferent", "", "branch")) return true;
-
-        // Nether's Exoticism already has branches, branches from Regions-Unexplored is not needed
-        if (isWoodFrom("", "", "", "nethers_exoticism:jabuticaba", "branch")) return true;
-
-        // Quark & Woodworks have chest & trapped_chest. | is this needed? shouldnt it be covered by the next statements?
-        if (isWoodFrom("", "abnww", "quark", "", "chest")) return true;
+        // Garden-Of-The-dead's whistle, Snifferent's globar, Nethers-Exoticism's jabuticaba already has branches, Regions-Unexplored's branches is not needed
+        if (isWoodFrom("regions_unexplored", "", "gardens_of_the_dead|snifferent|nethers_exoticism", "", "(whistlecane|globar|jabuticaba)_branch")) return true;
 
         // Quark's stripped_post with Ecologics must be excluded beacuse azalea_post and stripped_azalea_post's texture are identical
         if (isWoodFrom("quark", "", "ecologics", "", "stripped_flowering_azalea_post")) return true;
 
 
         /// ========== INCLUDE ========== \\\
+        // Makes it so the Guita's Branches block still registers if another mod adds a branch block/item
+        if (isWoodFrom("branches", "", "", "", "branch")) return false;
+
         // Minecraft's CHERRY prevent the generation of blocks with Terraqueous's CHERRY
         if (isWoodFrom("", "", "", "terraqueous:cherry", "")) return false;
-
-        // Quark's blocks with Caverns-And-Chasms' AZALEA aren't generated due to Quark's AZALEA
-        if (isWoodFrom("quark", "", "caverns_and_chasms", "", "")) return false;
 
         // Refurbished-Furniture's oak_table wasn't generated due to Dawn-Of-Time's waxed_oak_table
         if (isWoodFrom("", "rfm", "", "dawnoftimebuilder:waxed_oak", "")) return false;
@@ -151,12 +142,12 @@ public class HardcodedBlockType {
         return true;
     }
 
-    public static Boolean isLeavesFrom(String whichSupportedModId, String shortenedId, String woodtypeFromMod, String leavesTypeId, String whichSupportedBlockName) {
+    public static Boolean isLeavesFrom(String whichSupportedModId, String shortenedId, String leavestypeFromMod, String leavesTypeId, String whichSupportedBlockName) {
 
         String[] expressions = {
                 whichSupportedModId,
                 shortenedId,
-                woodtypeFromMod,
+                leavestypeFromMod,
                 leavesTypeId,
                 whichSupportedBlockName
         };

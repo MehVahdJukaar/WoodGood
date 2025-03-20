@@ -69,10 +69,7 @@ public class SimpleModule extends CompatModule {
     }
 
     public EntrySet<?> getEntry(String name) {
-        var e = entries.get(name);
-        if (e == null)
-            throw new UnsupportedOperationException(String.format("This module does not have entries of type %s", name));
-        return e;
+        return entries.get(name);
     }
 
     @Override
@@ -176,6 +173,7 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
         List<Item> l = new ArrayList<>();
         for (EntrySet<?> entrySet : entries.values()) {
@@ -216,12 +214,16 @@ public class SimpleModule extends CompatModule {
         if (woodTypeFrom.equals(modId)) return true; // quark, blossom
 
         // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType
-        if (registry.containsKey(new ResourceLocation(modId, blockName)) ||
+        if (    registry.containsKey(new ResourceLocation(modId, blockName)) ||
                 registry.containsKey(new ResourceLocation(modId, underscoreConvention))) {
             return true;
         }
 
 
+        // Checking if supportedBlockName exists in the woodTypeFrom
+        if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) return true;
+
+//TODO: Currently disabled due to: https://github.com/MehVahdJukaar/WoodGood/issues/874 & it need more works
         // Checking if block exists in the mod that adds its wood type (mod has builtin compat with block type mod or the block type is added by that own mod)
         if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) {
             //check for false positives (block types with same names)
@@ -250,6 +252,5 @@ public class SimpleModule extends CompatModule {
         }
         return false;
     }
-
 
 }

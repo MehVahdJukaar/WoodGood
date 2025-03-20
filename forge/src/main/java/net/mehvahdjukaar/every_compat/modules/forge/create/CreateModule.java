@@ -32,11 +32,12 @@ public class CreateModule extends SimpleModule {
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
-                        this::makeWindow)
+                        this::makeWindow
+                )
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .createPaletteFromPlanks(p -> p.remove(p.getDarkest()))
                 .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/c/palettes/oak_window_m"))
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/c/palettes/oak_window_connected_m"))
@@ -45,12 +46,14 @@ public class CreateModule extends SimpleModule {
 
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
-                        s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
+                        s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE))
+                )
+                .requiresFromMap(windows.blocks) //REASON: textures
                 .addTag(new ResourceLocation("c:glass_panes"), Registries.BLOCK)
                 .addTag(new ResourceLocation("c:glass_panes"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
                 .build();
         this.addEntry(windowPanes);
