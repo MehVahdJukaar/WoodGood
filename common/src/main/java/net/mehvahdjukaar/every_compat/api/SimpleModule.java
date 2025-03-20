@@ -223,7 +223,6 @@ public class SimpleModule extends CompatModule {
         // Checking if supportedBlockName exists in the woodTypeFrom
         if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) return true;
 
-//TODO: Currently disabled due to: https://github.com/MehVahdJukaar/WoodGood/issues/874 & it need more works
         // Checking if block exists in the mod that adds its wood type (mod has builtin compat with block type mod or the block type is added by that own mod)
         if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) {
             //check for false positives (block types with same names)
