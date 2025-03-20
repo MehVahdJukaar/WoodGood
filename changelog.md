@@ -1,3 +1,10 @@
+# v2.7.24
+
+### UPDATED:
+- **Every Compat** (COMMON): Disabled an experimental code - Apparently, it need more polishment and works
+  - Fixed [#874](https://github.com/MehVahdJukaar/WoodGood/issues/874)
+  - Also Fixed StoneZone's blocks not being generated
+
 # v2.7.23
 
 ### UPDATED:
