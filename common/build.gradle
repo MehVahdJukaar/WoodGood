@@ -82,7 +82,7 @@ dependencies {
 
         //!! OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
-    modCompileOnly("maven.modrinth:wilder-wild:3.0.4-mc1.21.1") //FABRIC
+    modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1") //FABRIC
 
 }
 
