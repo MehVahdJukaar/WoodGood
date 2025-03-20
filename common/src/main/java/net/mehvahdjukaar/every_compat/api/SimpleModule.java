@@ -214,7 +214,7 @@ public class SimpleModule extends CompatModule {
         if (woodTypeFrom.equals(modId)) return true; // quark, blossom
 
         // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType
-        if (    registry.containsKey(new ResourceLocation(modId, blockName)) ||
+        if (registry.containsKey(new ResourceLocation(modId, blockName)) ||
                 registry.containsKey(new ResourceLocation(modId, underscoreConvention))) {
             return true;
         }
@@ -226,18 +226,10 @@ public class SimpleModule extends CompatModule {
         // Checking if block exists in the mod that adds its wood type (mod has builtin compat with block type mod or the block type is added by that own mod)
         if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) {
             //check for false positives (block types with same names)
-            boolean isOwnBlock = false;
-            var modules = EveryCompat.getModulesOfMod(woodTypeFrom);
-            for (var module : modules) {
-                if (module instanceof SimpleModule sm) {
-                    EntrySet<?> entry = sm.getEntry(blockName);
-                    if (entry != null && entry.getTypeClass() == blockType.getClass()) {
-                        isOwnBlock = true;
-                        break;
-                    }
-                }
+            EntrySet<?> entry = this.getEntry(blockName);
+            if (!(entry != null && entry.getTypeClass() == blockType.getClass())) {
+                return true;
             }
-            if (!isOwnBlock) return true;
         }
 
         for (var c : EveryCompat.getCompatMods()) {
