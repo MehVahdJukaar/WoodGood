@@ -12,6 +12,7 @@ import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -211,25 +212,25 @@ public class SimpleModule extends CompatModule {
         if (this.getAlreadySupportedMods().contains(woodTypeFrom)) return true;
 
         // Discard the blocks that are already in the supportedModId from woodTypeFrom
+        // a mod shouldadd its own blocks in its own wood types
         if (woodTypeFrom.equals(modId)) return true; // quark, blossom
 
-        // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType
+        // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType (mod has builtin compat)
         if (registry.containsKey(new ResourceLocation(modId, blockName)) ||
                 registry.containsKey(new ResourceLocation(modId, underscoreConvention))) {
-            return true;
+            //check for false positives (block types with same names)
+            if (WoodTypeRegistry.INSTANCE.get(modRes(blockType.getTypeName())) == null) {
+                return true;
+                //if my own mod adds mymod:that_wood it means that block I found its actually mine, hence a new one should be added as they are different
+            }
         }
 
 
         // Checking if supportedBlockName exists in the woodTypeFrom
         if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) return true;
 
-        // Checking if block exists in the mod that adds its wood type (mod has builtin compat with block type mod or the block type is added by that own mod)
         if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) {
-            //check for false positives (block types with same names)
-            EntrySet<?> entry = this.getEntry(blockName);
-            if (!(entry != null && entry.getTypeClass() == blockType.getClass())) {
-                return true;
-            }
+            return true;
         }
 
         for (var c : EveryCompat.getCompatMods()) {
