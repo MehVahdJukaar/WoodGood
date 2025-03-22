@@ -225,10 +225,6 @@ public class SimpleModule extends CompatModule {
             }
         }
 
-
-        // Checking if supportedBlockName exists in the woodTypeFrom
-        if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) return true;
-
         for (var c : EveryCompat.getCompatMods()) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
             //if the wood is from the mod this adds compat for && it supports this block type
