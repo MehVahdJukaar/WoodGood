@@ -38,6 +38,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
                 )
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTabKey(tab)
                 //REASON: take a look at their //TEXTURES, you'll see why.
