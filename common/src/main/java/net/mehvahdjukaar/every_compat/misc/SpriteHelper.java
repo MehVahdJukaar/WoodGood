@@ -44,6 +44,10 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem","_side","minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem","_top","minecraft:block/mushroom_stem");
 
+        // Deeper And Darker
+        addOptional("deeperdarker:blooming_stem","_top","deeperdarker:block/blooming_stem");
+        addOptional("deeperdarker:stripped_blooming_stem","_top","deeperdarker:block/stripped_blooming_stem");
+
         // Piglin Ruins
         addOptional("piglin_ruins:ominous_stalk_block","_side","piglin_ruins:block/ominous_stalk_block_side");
         addOptional("piglin_ruins:ominous_stalk_block","_top","piglin_ruins:block/ominous_stalk_block_top");
