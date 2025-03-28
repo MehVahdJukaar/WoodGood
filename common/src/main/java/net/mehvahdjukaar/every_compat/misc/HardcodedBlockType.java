@@ -65,8 +65,7 @@ public class HardcodedBlockType {
         if (isWoodFrom("", "", "bloomingnature|meadow", "", "window")) return false;
 
         // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes & no item in CreativeMode
-        if (isWoodFrom("architects_palette", "", "upgrade_aquatic", "", "driftwood_boards|river_boards"))
-            return false;
+        if (isWoodFrom("architects_palette", "", "upgrade_aquatic", "", "driftwood_boards|river_boards")) return false;
 
         // Similar to above, Architect's Palette - boards will be skipped due to the existing boards in Autumnity
         if (isWoodFrom("architects_palette", "", "autumnity", "", "maple_boards")) return false;
@@ -81,8 +80,7 @@ public class HardcodedBlockType {
         if (isWoodFrom("", "abnww", "architects_palette", "", "")) return false;
 
         // Ensure the Architects-Palette's boards are generated with Abnormal mods (Upgrade Aquatic, Woodworks)
-        if (isWoodFrom("architects_palette", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", ""))
-            return false;
+        if (isWoodFrom("architects_palette", "", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
 
         return null;
     }
