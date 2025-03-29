@@ -1,6 +1,10 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Use this to register new wood type blocks and module
@@ -15,6 +19,15 @@ public class EveryCompatAPI {
      */
     public static synchronized void registerModule(CompatModule module) {
         EveryCompat.addModule(module);
+    }
+
+
+    public static Collection<CompatModule> getModule(String modId) {
+        return EveryCompat.getModulesOfMod(modId);
+    }
+
+    public static void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId){
+        EveryCompat.addOtherCompatMod(compatModId, fromModId, supportedModId);
     }
 
 
