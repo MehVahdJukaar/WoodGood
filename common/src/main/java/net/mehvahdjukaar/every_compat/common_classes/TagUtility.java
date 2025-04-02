@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -17,14 +18,14 @@ public class TagUtility {
      *
      * @return ResourceLocation
      **/
-    public static ResourceLocation getATagOrCreateANew(String suffixTag, String suffixAlt, WoodType wood, ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        String resLocMOD = wood.getNamespace() + ":" + wood.getTypeName();
+    public static ResourceLocation getATagOrCreateANew(String suffixTag, String suffixAlt, BlockType blockType, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+        String resLocMOD = blockType.getNamespace() + ":" + blockType.getTypeName();
 
         // ResourceLocation
         ResourceLocation RLocLogs = new ResourceLocation(resLocMOD + "_" + suffixTag);
         ResourceLocation RLocStems = new ResourceLocation(resLocMOD + "_" + suffixAlt);
-        ResourceLocation RLocFolders = new ResourceLocation(wood.getNamespace() + ":" + suffixTag + "/" + wood.getTypeName());
-        ResourceLocation RLocEC = EveryCompat.res(wood.getAppendableId() + "_" + suffixTag);
+        ResourceLocation RLocFolders = new ResourceLocation(blockType.getNamespace() + ":" + suffixTag + "/" + blockType.getTypeName());
+        ResourceLocation RLocEC = EveryCompat.res(blockType.getAppendableId() + "_" + suffixTag);
 
         if (manager.getResource(ResType.TAGS.getPath(RLocLogs.withPrefix("blocks/"))).isPresent())
             return RLocLogs;
@@ -35,7 +36,7 @@ public class TagUtility {
         else if (manager.getResource(ResType.TAGS.getPath(RLocFolders.withPrefix("blocks/"))).isPresent())
             return RLocFolders;
         else // if RLocECTags is not available, then it will be generated
-            createAndAddDefaultTags(RLocEC, handler, wood);
+            createAndAddDefaultTags(RLocEC, handler, blockType);
 
         return RLocEC;
 
@@ -47,8 +48,11 @@ public class TagUtility {
      *
      * @return true if tag was added successfully
      **/
-    public static boolean createAndAddDefaultTags(ResourceLocation resLoc, ServerDynamicResourcesHandler handler, WoodType wood) {
-        return createAndAddCustomTags(resLoc, handler, wood.log, wood.getBlockOfThis("stripped_log"), wood.getBlockOfThis("wood"), wood.getBlockOfThis("stripped_wood"));
+    public static boolean createAndAddDefaultTags(ResourceLocation resLoc, ServerDynamicResourcesHandler handler, BlockType blockType, Block ... blocks) {
+        if (blockType instanceof WoodType woodType)
+            return createAndAddCustomTags(resLoc, handler, woodType.log, woodType.getBlockOfThis("stripped_log"), woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"));
+        else
+            return createAndAddCustomTags(resLoc, handler, blocks);
     }
 
     /**
@@ -57,22 +61,22 @@ public class TagUtility {
      * @return true if tag was added successfully
      **/
     public static boolean createAndAddCustomTags(ResourceLocation resLoc, ServerDynamicResourcesHandler handler, Block... blocks) {
-        boolean containsSomething = false;
+        boolean isTagCreated = false;
 
         SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(resLoc);
         // Adding blocks to tag file
         for (Block block : blocks) {
             if (block != null) {
                 tagBuilder.addEntry(block);
-                containsSomething = true;
+                isTagCreated = true;
             }
         }
         // Adding to the resources
-        if (containsSomething) {
+        if (isTagCreated) {
             handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
             handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
         }
-        return containsSomething;
+        return isTagCreated;
     }
 
 }
