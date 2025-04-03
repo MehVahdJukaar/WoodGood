@@ -41,9 +41,10 @@ public class BeautifyRefabricatedModule extends SimpleModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTabKey(tab)
-                //REASON: take a look at their //TEXTURES, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(tellis);
 

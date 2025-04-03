@@ -45,9 +45,10 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("terrace_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(terrace_stairs);
 
@@ -79,9 +80,10 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("compact_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(compact_stairs);
 
@@ -113,9 +115,10 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("loft_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(loft_stairs);
 
@@ -148,9 +151,10 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("railings"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(railings);
 
