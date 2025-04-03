@@ -249,7 +249,7 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-structures-347488:5195707") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
-    modImplementation("curse.maven:quark-243121:6312787") // Zeta
+    modCompileOnly("curse.maven:quark-243121:6312787") // Zeta - IMPORTANT: modRuntimeOnly mustn't be set blc it causes issue in production
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:woodworks-543610:5228779")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:5713529")
@@ -290,5 +290,8 @@ dependencies {
 //    modRuntimeOnly("curse.maven:caverns-and-chasms-438005:6040957") // Blueprint
 
 //    modRuntimeOnly("curse.maven:terrafirmacraft-302973:4862659") // patchouli
+
+    //!! OTHERS
+//    modRuntimeOnly("maven.modrinth:stone-zone:1.20-2.7.14") //REQUIRE: Stone Mods
 
 }
