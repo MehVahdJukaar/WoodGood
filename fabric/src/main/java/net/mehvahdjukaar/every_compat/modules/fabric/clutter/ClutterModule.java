@@ -94,9 +94,9 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                //EXCLUDED: sakura & yucca_palm
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(tables);
 
@@ -112,9 +112,9 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                //EXCLUDED: sakura & yucca_palm
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(stripped_tables);
 
@@ -130,9 +130,9 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                //EXCLUDED: sakura & yucca_palm
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(chairs);
 
@@ -147,9 +147,9 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                //EXCLUDED: sakura & yucca_palm
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(stripped_chairs);
 
@@ -194,9 +194,9 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                //EXCLUDED: sakura & yucca_palm
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(shelves);
 
@@ -228,9 +228,9 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                //EXCLUDED: sakura & yucca_palm
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(benches);
 
@@ -245,9 +245,9 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                //EXCLUDED: sakura & yucca_palm
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(stripped_benches);
 

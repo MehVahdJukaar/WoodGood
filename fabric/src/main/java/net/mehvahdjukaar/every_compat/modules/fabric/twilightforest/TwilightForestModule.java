@@ -48,11 +48,12 @@ public class TwilightForestModule extends SimpleModule {
                         w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: Textures
-                //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(hollowLogsHorizontal);
 
@@ -80,11 +81,12 @@ public class TwilightForestModule extends SimpleModule {
                                 makeRegObj(Utils.getID(hollowLogsVertical.blocks.get(w))))
                 )
                 .requiresChildren("stripped_log") //REASON: Textures
-                //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
-                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
+                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(hollowLogsClimbable);
 */
