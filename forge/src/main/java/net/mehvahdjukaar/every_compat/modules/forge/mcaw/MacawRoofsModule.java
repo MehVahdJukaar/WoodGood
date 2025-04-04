@@ -38,7 +38,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         ATTIC_ROOFS = SimpleEntrySet.builder(WoodType.class, "attic_roof",
                         BlockInit.OAK_ATTIC_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RoofGlass(Utils.copyPropertySafe(w.log)))
+                        w -> new RoofGlass(Utils.copyPropertySafe(w.log))
+                )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
@@ -48,7 +50,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "lower_roof",
                         BlockInit.OAK_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
+                )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -58,7 +62,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         ROOFS = SimpleEntrySet.builder(WoodType.class, "roof",
                         BlockInit.OAK_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
+                )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -68,7 +74,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "steep_roof",
                         BlockInit.OAK_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SteepRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                        w -> new SteepRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
+                )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -78,7 +86,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         TOP_ROOFS = SimpleEntrySet.builder(WoodType.class, "top_roof",
                         BlockInit.OAK_TOP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RoofTopNew(Utils.copyPropertySafe(w.log)))
+                        w -> new RoofTopNew(Utils.copyPropertySafe(w.log))
+                )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -88,7 +98,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         UPPER_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "upper_lower_roof",
                         BlockInit.OAK_UPPER_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Lower(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                        w -> new Lower(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
+                )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -98,7 +110,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         UPPER_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "upper_steep_roof",
                         BlockInit.OAK_UPPER_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Steep(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)))
+                        w -> new Steep(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
+                )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -108,7 +122,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         PLANKS_ATTIC_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_attic_roof",
                         BlockInit.OAK_PLANKS_ATTIC_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RoofGlass(Utils.copyPropertySafe(w.planks)))
+                        w -> new RoofGlass(Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
@@ -118,7 +134,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         PLANKS_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_lower_roof",
                         BlockInit.OAK_PLANKS_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -128,7 +146,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         PLANKS_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_roof",
                         BlockInit.OAK_PLANKS_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                        w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -138,7 +158,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         PLANKS_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_steep_roof",
                         BlockInit.OAK_PLANKS_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SteepRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                        w -> new SteepRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -148,7 +170,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         PLANKS_TOP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_top_roof",
                         BlockInit.OAK_PLANKS_TOP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RoofTopNew(Utils.copyPropertySafe(w.planks)))
+                        w -> new RoofTopNew(Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -158,7 +182,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         PLANKS_UPPER_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_upper_lower_roof",
                         BlockInit.OAK_PLANKS_UPPER_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Lower(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                        w -> new Lower(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
@@ -168,7 +194,9 @@ public class MacawRoofsModule extends SimpleModule {
 
         PLANKS_UPPER_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_upper_steep_roof",
                         BlockInit.OAK_PLANKS_UPPER_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Steep(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                        w -> new Steep(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
