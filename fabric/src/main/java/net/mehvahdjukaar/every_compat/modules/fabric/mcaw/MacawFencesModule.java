@@ -84,7 +84,8 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)
                                 .strength(1.4F, 2.0F).noOcclusion())
                 )
-                //TEXTURES: log
+                .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log (inventory), planks (inventory)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)

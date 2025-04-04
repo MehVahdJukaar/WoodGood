@@ -69,7 +69,8 @@ public class MacawFencesModule extends SimpleModule {
                         BlockInit.OAK_HORSE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks))
                 )
-                //TEXTURES: log
+                .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log (inventory), planks (inventory)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(ItemTags.FENCES, Registries.ITEM)
