@@ -306,7 +306,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     infoPerTextures.put(textureId, textureInfo);
 
                     if (textureInfo.copyTexture()) {
-                        respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
+                        respriters.put(textureId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(0))))));
                     } else {
                         images.add(main);
 

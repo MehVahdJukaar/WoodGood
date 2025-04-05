@@ -41,7 +41,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         }
 
         public Builder copyTexture() {
-            this.copyTexture = false;
+            this.copyTexture = true;
             return this;
         }
 
