@@ -172,6 +172,24 @@ public class ChippedModule extends SimpleModule {
             PlankedLog,
             ReinforcedLog;
 
+    public final SimpleEntrySet<WoodType, Block> carvedStrippedLog,
+            ChippedStrippedLog,
+            DSignStrippedLog,
+            edgedStrippedLog,
+            FSignStrippedLog,
+            ISignStrippedLog,
+            KSignStrippedLog,
+            knottedStrippedLog,
+            LSignStrippedLog,
+            LayeredStrippedLog,
+            LumpyStrippedLog,
+            PatientStrippedLog,
+            ReinforcedStrippedLog,
+            signStrippedLog,
+            sternStrippedLog,
+            wiseStrippedLog
+            ;
+
 
     public ChippedModule(String modId) {
         super(modId, "ch");
@@ -1936,6 +1954,215 @@ public class ChippedModule extends SimpleModule {
                 .build();
         this.addEntry(ReinforcedLog);
 
+        //TYPE: stripped_log
+        carvedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "carved_stripped",
+                        getModBlock("carved_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(carvedStrippedLog);
+
+        ChippedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "chipped_stripped",
+                        getModBlock("chipped_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(ChippedStrippedLog);
+
+        DSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "d_sign_stripped",
+                        getModBlock("d_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(DSignStrippedLog);
+
+        edgedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "edged_stripped",
+                        getModBlock("edged_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(edgedStrippedLog);
+
+        FSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "f_sign_stripped",
+                        getModBlock("f_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(FSignStrippedLog);
+
+        ISignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "i_sign_stripped",
+                        getModBlock("i_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(ISignStrippedLog);
+
+        KSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "k_sign_stripped",
+                        getModBlock("k_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(KSignStrippedLog);
+
+        knottedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "knotted_stripped",
+                        getModBlock("knotted_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(knottedStrippedLog);
+
+        LSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "l_sign_stripped",
+                        getModBlock("l_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(LSignStrippedLog);
+
+        LayeredStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "layered_stripped",
+                        getModBlock("layered_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(LayeredStrippedLog);
+
+        LumpyStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "lumpy_stripped",
+                        getModBlock("lumpy_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(LumpyStrippedLog);
+
+        PatientStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "patient_stripped",
+                        getModBlock("patient_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(PatientStrippedLog);
+
+        ReinforcedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "reinforced_stripped",
+                        getModBlock("reinforced_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/reinforced_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/reinforced_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(ReinforcedStrippedLog);
+
+        signStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "sign_stripped",
+                        getModBlock("sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(signStrippedLog);
+
+        sternStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "stern_stripped",
+                        getModBlock("stern_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(sternStrippedLog);
+
+        wiseStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "wise_stripped",
+                        getModBlock("wise_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures, recipes
+                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log"))
+                .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .build();
+        this.addEntry(wiseStrippedLog);
+
 
     }
 
@@ -2051,6 +2278,7 @@ public class ChippedModule extends SimpleModule {
         addChippedRecipe(handler.getPack(), "door", "carpenters_table");
         addChippedRecipe(handler.getPack(), "trapdoor", "carpenters_table");
         addChippedRecipe(handler.getPack(), "log", "carpenters_table");
+        addChippedRecipe(handler.getPack(), "stripped_log", "carpenters_table");
 
     }
 
@@ -2071,22 +2299,32 @@ public class ChippedModule extends SimpleModule {
 
         for (var woodType : WoodTypeRegistry.getTypes()) {
             if (woodType.isVanilla()) continue;
-            boolean hasSomething = false;
+
+            boolean isTagCreated = false;
+            String suffixedFile = (identifier.equals("stripped_log"))
+                    ? woodType.getAppendableIdWith("stripped", "log")
+                    : woodType.getAppendableIdWith(identifier);
+
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
-                    shortenedId() + "/" + woodType.getAppendableId() + "_" + identifier));
+                    shortenedId() + "/" + suffixedFile));
 
             for (var entry : this.getEntries()) {
                 String name = entry.getName();
-                if (name.matches(".*(_" + identifier + "|" + identifier + "_).*")) {
+
+                boolean isStrippedLog = identifier.equals("stripped_log") && name.contains("stripped");
+
+                if (name.matches(".*(_" + identifier + "|" + identifier + "_).*") || isStrippedLog) {
                     if (identifier.equals("door") && name.matches(".*(_trapdoor|trapdoor_).*")) continue;
                     if (identifier.equals("log") && name.matches(".*(_stripped_log|stripped_).*")) continue;
+                    if (identifier.equals("stripped_log") && !name.contains("stripped")) continue;
                     Item item = ((SimpleEntrySet<?, ?>) entry).items.get(woodType);
                     if (item != null) {
-                        hasSomething = true;
+                        isTagCreated = true;
                         tagBuilder.addEntry(item);
                     }
                 }
             }
+
 
             // Checking for Child of wood type exist
             if (woodType.getChild(identifier) != null) {
@@ -2095,10 +2333,11 @@ public class ChippedModule extends SimpleModule {
                     case "door" -> tagBuilder.addEntry(woodType.getChild("door"));
                     case "trapdoor" -> tagBuilder.addEntry(woodType.getChild("trapdoor"));
                     case "log" -> tagBuilder.addEntry(woodType.log);
+                    case "stripped_log" -> tagBuilder.addEntry(woodType.getChild("stripped_log"));
                 }
             }
 
-            if (hasSomething) {
+            if (isTagCreated) {
                 pack.addTag(tagBuilder, Registries.ITEM);
                 pack.addTag(tagBuilder, Registries.BLOCK);
                 jsonArray.add(tagBuilder.getId().toString());

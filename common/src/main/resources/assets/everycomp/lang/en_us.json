@@ -125,6 +125,7 @@
   "block_type.buildersaddition.table": "%s Table",
   "block_type.buildersaddition.vertical_slab": "%s Panel",
 
+
   "block_type.chipped.barred_door": "Barred %s Door",
   "block_type.chipped.beach_door": "Beach %s Door",
   "block_type.chipped.boarded_door": "Boarded %s Door",
@@ -251,6 +252,23 @@
   "block_type.chipped.overgrown_log": "Overgrown %s Log",
   "block_type.chipped.planked_log": "Planked %s Log",
   "block_type.chipped.reinforced_log": "Reinforced %s Log",
+
+  "block_type.chipped.carved_stripped_log": "Carved Stripped %s Log",
+  "block_type.chipped.chipped_stripped_log": "Chipped Stripped %s Log",
+  "block_type.chipped.d_sign_stripped_log": "D Sign Stripped %s Log",
+  "block_type.chipped.edged_stripped_log": "Edged Stripped %s Log",
+  "block_type.chipped.f_sign_stripped_log": "F Sign Stripped %s Log",
+  "block_type.chipped.i_sign_stripped_log": "I Sign Stripped %s Log",
+  "block_type.chipped.k_sign_stripped_log": "K Sign Stripped %s Log",
+  "block_type.chipped.knotted_stripped_log": "Knotted Stripped %s Log",
+  "block_type.chipped.l_sign_stripped_log": "L Sign Stripped %s Log",
+  "block_type.chipped.layered_stripped_log": "Layered Stripped %s Log",
+  "block_type.chipped.lumpy_stripped_log": "Lumpy Stripped %s Log",
+  "block_type.chipped.patient_stripped_log": "Patient Stripped %s Log",
+  "block_type.chipped.reinforced_stripped_log": "Reinforced Stripped %s Log",
+  "block_type.chipped.sign_stripped_log": "Sign Stripped %s Log",
+  "block_type.chipped.stern_stripped_log": "Stern Stripped %s Log",
+  "block_type.chipped.wise_stripped_log": "Wise Stripped %s Log",
 
 
   "block_type.graveyard.coffin": "%s Coffin",
