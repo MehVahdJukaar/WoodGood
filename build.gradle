@@ -260,6 +260,10 @@ allprojects {
             name = "ModMaven"
             url = "https://modmaven.dev"
         }
+
+        maven { // Chipped
+            url = "https://maven.teamresourceful.com/repository/maven-public/"
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {
