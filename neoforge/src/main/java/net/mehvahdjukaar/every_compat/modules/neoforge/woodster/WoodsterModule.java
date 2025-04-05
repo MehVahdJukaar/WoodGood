@@ -29,6 +29,7 @@ public class WoodsterModule extends SimpleModule {
                         getModBlock("dark_oak_chiseled_bookshelf"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("dark_oak")),
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
+                .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
                 .addTextureM(modRes("block/everycomp_dark_oak_chiseled_bookshelf_6"),modRes("block/everycomp_dark_oak_chiseled_bookshelf_overlay"))
                 .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_top"))
