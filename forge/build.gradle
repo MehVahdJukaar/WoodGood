@@ -153,7 +153,7 @@ dependencies {
 
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
-//    modRuntimeOnly("com.teamresourceful.bytecodecs:bytecodecs-1.0.2") // Chipped
+//    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}") // Create
 
@@ -174,7 +174,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4034009") //WARNING: v2.1.2-1.19.2 -> 1.20.1: Cannot remap access widener from namespace 'srg'. Expected: 'intermediary'
 //    modRuntimeOnly("curse.maven:backpacked-352835:5401965")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679")
-//    modRuntimeOnly("curse.maven:chipped-456956:4634856") // v3.0.1 | Athena, Resourceful-Lib, Bytecodecs
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:5651249")
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:5089406")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399")
@@ -192,6 +191,7 @@ dependencies {
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK")
 //    modRuntimeOnly("fuzs.diagonalblocks:diagonalblocks-forge:8.0.6")
+//    modRuntimeOnly("earth.terrarium.chipped:chipped-forge-${minecraft_version}:3.0.7") //INCLUDED: Athena, Resourceful-Lib, REQUIRE: Bytecodecs
 
             //- ~/forge/mods LOCAL
 //    modRuntimeOnly("com.arcanc.bc:beautifulcampfires-forge-1.20.1-1.0.1")
