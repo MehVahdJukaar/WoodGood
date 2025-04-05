@@ -54,7 +54,7 @@ dependencies {
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.17.20
+        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.18.2
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -105,6 +105,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:chipped-456956:5813118")
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:5651253") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:3941637") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:excessive-building-845097:6075987")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4062547") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:exlines-awnings-526698:4668406") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:farmers-delight-refabricated-993166:5967586")
@@ -118,6 +119,9 @@ dependencies {
 //    modRuntimeOnly("curse.maven:twigs-496913:4603805") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189603") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
+
+        //- OTHER MAVENS
+//    modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1")
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
         // ~/forge/mods LOCAL
@@ -158,7 +162,6 @@ dependencies {
     modCompileOnly("curse.maven:regions-unexplored-659110:5579923")
 
         // OTHER MAVENS
-    modCompileOnly("maven.modrinth:wilder-wild:3.0.4-mc1.21.1")
 //    modCompileOnly("com.simibubi.create:create-fabric-1.20.1:$create_fabric_version") // Registrate, Flywheel //!! Need to update maven to get other libraries & the old maven are outdated
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
