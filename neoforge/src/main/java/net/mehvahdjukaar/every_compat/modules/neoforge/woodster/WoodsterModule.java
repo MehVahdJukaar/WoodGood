@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.ChiseledBookShelfBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.salju.woodster.WoodsterMod;
 import net.salju.woodster.init.WoodsterBlocks;
 import net.salju.woodster.init.WoodsterTabs;
 
@@ -24,7 +23,7 @@ public class WoodsterModule extends SimpleModule {
 
     public WoodsterModule(String modId) {
         super(modId, "wdst");
-        ResourceLocation tab = modRes(WoodsterMod.MODID);
+        ResourceLocation tab = modRes(modId);
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         getModBlock("dark_oak_chiseled_bookshelf"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("dark_oak")),
