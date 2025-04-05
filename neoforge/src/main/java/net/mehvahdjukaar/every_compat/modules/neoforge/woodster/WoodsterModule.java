@@ -1,24 +1,22 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.woodster;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChiseledBookShelfBlock;
 import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.ChiseledBookShelfBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
-import net.salju.woodster.block.BookshelfBlock;
+import net.salju.woodster.WoodsterMod;
+import net.salju.woodster.init.WoodsterBlocks;
+import net.salju.woodster.init.WoodsterTabs;
 
-//SUPPORT: v2.0.0
 public class WoodsterModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> chiseled_books;
     public final SimpleEntrySet<WoodType, Block> books;
@@ -26,11 +24,11 @@ public class WoodsterModule extends SimpleModule {
 
     public WoodsterModule(String modId) {
         super(modId, "wdst");
-        ResourceLocation tab = modRes(modId);
+        ResourceLocation tab = modRes(WoodsterMod.MODID);
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         getModBlock("dark_oak_chiseled_bookshelf"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("dark_oak")),
-                        w -> new ChiseledBookShelfBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.CHISELED_BOOKSHELF))
+                        w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
                 .addTextureM(modRes("block/everycomp_dark_oak_chiseled_bookshelf_6"),modRes("block/everycomp_dark_oak_chiseled_bookshelf_overlay"))
@@ -39,38 +37,37 @@ public class WoodsterModule extends SimpleModule {
                 .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_0"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .defaultRecipe()
                 .copyParentDrop()
+                .defaultRecipe()
                 .build();
+
         this.addEntry(chiseled_books);
 
         books = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
-                        w -> new BookshelfBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.WOOD))
+                        w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
-                .defaultRecipe()
                 .copyParentDrop()
+                .defaultRecipe()
                 .build();
+
         this.addEntry(books);
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("spruce_ladder"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
-                        w -> new LadderBlock(BlockBehaviour.Properties.of().strength(0.4F).sound(SoundType.LADDER).noOcclusion())
+                        w -> new LadderBlock(Utils.copyPropertySafe(getModBlock("spruce_ladder").get()))
                 )
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .addTexture(EveryCompat.res("block/spruce_ladder"))
-                .addTag(ResourceLocation.parse("minecraft:ladders"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("minecraft:ladders"), Registries.ITEM)
-                .setTabKey( tab)
+                .addTexture(EveryCompat.res("block/spruce_ladder"))
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
+
         this.addEntry(ladders);
     }
 }
