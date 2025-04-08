@@ -150,6 +150,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:citadel-331936:5633260") // Alex's Cave, Rats
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // v81 | TFC, Timber-Frames
+//    modRuntimeOnly("curse.maven:monolib-968432:6123976") // v2.0.0 | More-Beautiful-Torches
 
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
@@ -182,6 +183,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
 //    modRuntimeOnly("curse.maven:missing-wilds-forge-634277:5053677")
+//    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5263631") // Monolib
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:5915486")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:5318681")
