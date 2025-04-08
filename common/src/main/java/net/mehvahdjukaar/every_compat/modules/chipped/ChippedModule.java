@@ -1416,7 +1416,7 @@ public class ChippedModule extends SimpleModule {
                         getModBlock("spruce_torch"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new TorchBlock( Utils.copyPropertySafe(w.planks).noCollission().instabreak().lightLevel(l -> 14), ParticleTypes.FLAME)
                 )
-                .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
+                //TEXTURES: wallTorch
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, wallTorch.blocks.get(w), p, Direction.DOWN))
                 .addTag(BlockTags.WALL_POST_OVERRIDE, Registries.BLOCK)
                 .addTag(modRes("torch"), Registries.BLOCK)
