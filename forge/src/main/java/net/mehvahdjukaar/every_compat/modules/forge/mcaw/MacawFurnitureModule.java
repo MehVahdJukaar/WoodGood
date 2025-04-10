@@ -107,6 +107,8 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
                 )
+                .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wardrobe"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -120,6 +122,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("modern_wardrobe"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -133,6 +136,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TallFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("double_wardrobe"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -146,6 +150,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new BookCabinet(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bookshelf"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -159,6 +164,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new BookCabinetHinge(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("bookshelf_cupboard"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -172,6 +178,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -185,6 +192,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("double_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -198,6 +206,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new BookDrawer(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -211,6 +220,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new BookDrawer(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("lower_bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -224,6 +234,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("large_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -237,6 +248,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("lower_triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -250,6 +262,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -262,6 +275,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Desk(Utils.copyPropertySafe(w.log))
                 )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("desk"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -273,6 +287,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_COVERED_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Desk(Utils.copyPropertySafe(w.log))
                 )
+                //TEXTURES: log
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -284,6 +299,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_MODERN_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Desk(Utils.copyPropertySafe(w.log))
                 )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("modern_desk"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -295,6 +311,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log))
                 )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -306,6 +323,8 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_END_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log))
                 )
+                .requiresChildren("stripped_log")
+                //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("end_table"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -317,6 +336,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_COFFEE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Table(Utils.copyPropertySafe(w.log))
                 )
+                //TEXTURES: log
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -328,6 +348,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_GLASS_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log))
                 )
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
@@ -340,6 +361,8 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ClassicChair(Utils.copyPropertySafe(w.log))
                 )
+                .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -351,6 +374,8 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_MODERN_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ModernChair(Utils.copyPropertySafe(w.log))
                 )
+                .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -362,6 +387,8 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_STRIPED_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StripedChair(Utils.copyPropertySafe(w.log))
                 )
+                .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
@@ -374,6 +401,8 @@ public class MacawFurnitureModule extends SimpleModule {
                         BlockInit.OAK_STOOL_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Chair(Utils.copyPropertySafe(w.log))
                 )
+                .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool_chair"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -386,6 +415,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new Counter(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("counter"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -398,6 +428,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped
                 .addTag(modRes("drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -411,6 +442,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped
                 .addTag(modRes("double_drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -424,6 +456,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new CupboardCounter(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped
                 .addTag(modRes("cupboard_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
@@ -438,6 +471,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wardrobe"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -451,6 +485,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("modern_wardrobe"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -464,6 +499,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TallFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("double_wardrobe"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -477,6 +513,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new BookCabinet(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bookshelf"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -490,6 +527,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new BookCabinetHinge(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("bookshelf_cupboard"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -503,6 +541,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -516,6 +555,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("double_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -529,6 +569,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new BookDrawer(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -542,6 +583,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new BookDrawer(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("lower_bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -555,6 +597,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("large_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -568,6 +611,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("lower_triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -581,6 +625,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new WideFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -594,6 +639,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new Desk(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("desk"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -606,6 +652,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new Desk(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -618,6 +665,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new Desk(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("modern_desk"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -630,6 +678,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -642,6 +691,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("end_table"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -654,6 +704,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new Table(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -666,6 +717,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
@@ -679,6 +731,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new ClassicChair(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -691,6 +744,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new ModernChair(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -703,6 +757,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new StripedChair(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
@@ -716,6 +771,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new Chair(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool_chair"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -728,6 +784,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new Counter(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("counter"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -740,6 +797,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -753,6 +811,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("double_drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -766,6 +825,7 @@ public class MacawFurnitureModule extends SimpleModule {
                         w -> new CupboardCounter(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("cupboard_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
