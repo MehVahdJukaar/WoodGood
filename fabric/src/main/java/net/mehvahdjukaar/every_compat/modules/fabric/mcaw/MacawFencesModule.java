@@ -53,9 +53,8 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
                 .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(picketFences);
@@ -72,9 +71,8 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
                 .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(stockadeFences);
@@ -92,9 +90,8 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
                 .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(horseFences);
@@ -112,9 +109,8 @@ public class MacawFencesModule extends SimpleModule {
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
                 .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(wiredFences);
@@ -130,9 +126,8 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
                 .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(pyramidGates);
@@ -149,9 +144,8 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
                 .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(highleyGates);
