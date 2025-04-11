@@ -32,7 +32,7 @@ dependencies {
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.13.75
+        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.13.81
     }
 
 //!! ============================================ DEPENDENCIES ====================================================== \\
