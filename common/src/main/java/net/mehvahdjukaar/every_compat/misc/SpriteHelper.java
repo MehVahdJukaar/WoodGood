@@ -44,6 +44,22 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem","_side","minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem","_top","minecraft:block/mushroom_stem");
 
+        // Abyssal Decor
+        addOptional("abyssal_decor:white_wood_log","_side","abyssal_decor:block/whitewoodstrippedlog");
+        addOptional("abyssal_decor:white_wood_log","_top","abyssal_decor:block/whitewoodstrippedlogtop");
+        addOptional("abyssal_decor:white_wood_wood","_side","abyssal_decor:block/whitewoodstrippedlog");
+        addOptional("abyssal_decor:white_wood_wood","_top","abyssal_decor:block/whitewoodstrippedlog");
+        addOptional("abyssal_decor:cinnamon_log","_side","abyssal_decor:block/cinnamonlogside");
+        addOptional("abyssal_decor:cinnamon_log","_top","abyssal_decor:block/cinnamonlogtop");
+        addOptional("abyssal_decor:stripped_cinnamon_log","_side","abyssal_decor:block/strippedcinnamonlogside");
+        addOptional("abyssal_decor:stripped_cinnamon_log","_top","abyssal_decor:block/strippedcinnamonlogtop");
+        addOptional("abyssal_decor:blackwood_log","_side","abyssal_decor:block/moldylogside");
+        addOptional("abyssal_decor:blackwood_log","_top","abyssal_decor:block/moldylogtop");
+        addOptional("abyssal_decor:stripped_blackwood_log","_side","abyssal_decor:block/blackwoodstrippedlogside");
+        addOptional("abyssal_decor:stripped_blackwood_log","_top","abyssal_decor:block/blackwoodstrippedlogtop");
+        addOptional("abyssal_decor:blackwood_wood","_side","abyssal_decor:block/moldylogside");
+        addOptional("abyssal_decor:blackwood_wood","_top","abyssal_decor:block/moldylogside");
+
         // Deeper And Darker
         addOptional("deeperdarker:blooming_stem","_top","deeperdarker:block/blooming_stem");
         addOptional("deeperdarker:stripped_blooming_stem","_top","deeperdarker:block/stripped_blooming_stem");
