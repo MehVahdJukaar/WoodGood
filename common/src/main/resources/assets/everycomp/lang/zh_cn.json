@@ -906,9 +906,9 @@
   "block_type.more_beautiful_torches.log_torch": "%s原木火把",
   "block_type.more_beautiful_torches.log_soul_torch": "%s原木灵魂火把",
   "block_type.more_beautiful_torches.log_redstone_torch": "%s原木红石火把",
-  "block_type.more_beautiful_torches.planks_torch": "%s木板火把",
-  "block_type.more_beautiful_torches.planks_soul_torch": "%s木板灵魂火把",
-  "block_type.more_beautiful_torches.planks_redstone_torch": "%s木板红石火把",
+  "block_type.more_beautiful_torches.planks_torch": "%s板火把",
+  "block_type.more_beautiful_torches.planks_soul_torch": "%s板灵魂火把",
+  "block_type.more_beautiful_torches.planks_redstone_torch": "%s板红石火把",
   "block_type.more_beautiful_torches.stripped_log_torch": "去皮%s原木火把",
   "block_type.more_beautiful_torches.stripped_log_soul_torch": "去皮%s原木灵魂火把",
   "block_type.more_beautiful_torches.stripped_log_redstone_torch": "去皮%s原木红石火把"
