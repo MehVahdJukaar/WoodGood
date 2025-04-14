@@ -18,7 +18,6 @@ import net.salju.woodster.init.WoodsterTabs;
 
 public class WoodsterModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> chiseled_books;
-    public final SimpleEntrySet<WoodType, Block> books;
     public final SimpleEntrySet<WoodType, Block> ladders;
 
     public WoodsterModule(String modId) {
@@ -42,26 +41,13 @@ public class WoodsterModule extends SimpleModule {
 
         this.addEntry(chiseled_books);
 
-        books = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        getModBlock("acacia_bookshelf"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
-                        w -> new Block(Utils.copyPropertySafe(w.planks))
-                )
-                .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
-                .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .copyParentDrop()
-                .defaultRecipe()
-                .build();
-
-        this.addEntry(books);
-
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("spruce_ladder"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
                         w -> new LadderBlock(Utils.copyPropertySafe(getModBlock("spruce_ladder").get()))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
+                .addTag(BlockTags.create(ResourceLocation.fromNamespaceAndPath("quill", "ladders")), Registries.BLOCK)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .setTabKey(tab)
                 .defaultRecipe()
