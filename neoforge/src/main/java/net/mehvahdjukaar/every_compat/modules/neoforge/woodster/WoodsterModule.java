@@ -10,12 +10,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.ChiseledBookShelfBlock;
+import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.salju.woodster.init.WoodsterBlocks;
-import net.salju.woodster.init.WoodsterTabs;
 
+//SUPPORT: v2.0.1+
 public class WoodsterModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> chiseled_books;
     public final SimpleEntrySet<WoodType, Block> ladders;
