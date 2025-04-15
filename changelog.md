@@ -1,16 +1,13 @@
 ### UPDATED:
-- **Woodster**: Fixed _chiseled_books_' missing BlockEntityType (When you placed, the crash happened) - [#880](https://github.com/MehVahdJukaar/WoodGood/issues/880)
-
----
-
-### ADDED:
-- **neoforge.mods.toml**: **Create**'s required version to be v6.0.o or newer
+- **LANG**: zh_cn - @ChuijkYahus
+- **Woodster** (NF): Updated to support v2.0.1+ - @Jusey1
+- **Storage Drawers** (COMMON): Updated to ensure HeavyDrawers are applied to ITEM & related to [#890](https://github.com/MehVahdJukaar/WoodGood/issues/890)
+- **Clutter** (FB): UPDATED for 1.21.1
 
 ---
 
 ### NEW SUPPORTED MOD:
-- **Excessive Building** (FB)
-  - NOTE: you can use Sinytra Connector via FORGE to include it
+- **More Beautiful Torches** (COMMON)
 
 ---
 
