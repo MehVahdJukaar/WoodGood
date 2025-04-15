@@ -146,7 +146,7 @@ dependencies {
     modCompileOnly("curse.maven:beautify-refabricated-809311:5405529") //!! 1.20.1
     modCompileOnly("curse.maven:bewitchment-394915:5205373") //!! 1.20.1
     modCompileOnly("curse.maven:building-but-better-989479:5362379") //!! 1.20.1
-    modCompileOnly("curse.maven:clutter-826060:5776595") //RML: Geckolib //!! 1.20.1
+    modCompileOnly("curse.maven:clutter-826060:6211358") //RML: Geckolib
     modCompileOnly("curse.maven:create-fabric-624165:5168511") //!! 1.20.1
     modCompileOnly("curse.maven:dramatic-doors-380617:5740379")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987") //!! 1.20.1

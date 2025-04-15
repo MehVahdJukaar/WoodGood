@@ -4,15 +4,26 @@ import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.*;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.emilsg.clutter.util.ModItemGroups;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
@@ -20,11 +31,13 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.function.ToIntFunction;
 
-//SUPPORT: //!! NOT AVAILABLE
+//SUPPORT: v0.6.5+
 public class ClutterModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> wall_bookshelves;
@@ -49,16 +62,16 @@ public class ClutterModule extends SimpleModule {
 
     public ClutterModule(String modId) {
         super(modId, "clu");
-        var tab = ModItemGroups.CLUTTER_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = ModItemGroups.CLUTTER_BLOCKS;
 
         wall_bookshelves = SimpleEntrySet.builder(WoodType.class, "wall_bookshelf",
                         getModBlock("oak_wall_bookshelf"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WallBookshelfBlock(FabricBlockSettings.copyOf(w.planks)
-                                .luminance(createLightLevelFromLitBlockState())
+                        w -> new WallBookshelfBlock(BlockBehaviour.Properties.ofFullCopy(w.planks)
+                                .lightLevel(createLightLevelFromLitBlockState())
                         )
                 )
                 .addTile(() -> ModBlockEntities.WALL_BOOKSHELF)
-                //TEXTURE: Using planks
+                //TEXTURE: planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.BOOKSHELVES, Registries.BLOCK)
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
@@ -74,7 +87,7 @@ public class ClutterModule extends SimpleModule {
                         w -> new WindowSillBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
-                //TEXTURE: Using planks
+                //TEXTURE: planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.WINDOW_SILLS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -87,7 +100,7 @@ public class ClutterModule extends SimpleModule {
                         getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatTableBlock(Utils.copyPropertySafe(w.planks))
                 )
-                //TEXTURE: Using log & planks
+                //TEXTURE: log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.TABLES, Registries.BLOCK)
                 .addTag(ModBlockTags.STRIPPABLE_TABLES, Registries.BLOCK)
@@ -106,7 +119,7 @@ public class ClutterModule extends SimpleModule {
                         w -> new CompatTableBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
-                //TEXTURE: Using stripped_log & planks
+                //TEXTURE: stripped_log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.TABLES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -123,7 +136,7 @@ public class ClutterModule extends SimpleModule {
                         getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatChairBlock(Utils.copyPropertySafe(w.planks))
                 )
-                //TEXTURE: Using log & planks
+                //TEXTURE: log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.STRIPPABLE_CHAIRS, Registries.BLOCK)
                 .addTag(ModBlockTags.WOODEN_CHAIRS, Registries.BLOCK)
@@ -141,7 +154,7 @@ public class ClutterModule extends SimpleModule {
                         w -> new CompatChairBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
-                //TEXTURE: Using stripped_log & planks
+                //TEXTURE: stripped_log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.WOODEN_CHAIRS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -156,15 +169,15 @@ public class ClutterModule extends SimpleModule {
 
         cupboards = SimpleEntrySet.builder(WoodType.class, "cupboard",
                         getModBlock("oak_cupboard"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CupboardBlock(FabricBlockSettings.copyOf(w.planks).nonOpaque())
+                        w -> new CupboardBlock(BlockBehaviour.Properties.ofFullCopy(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.CUPBOARD)
-                //TEXTURE: Using planks
+                //TEXTURE: planks
+                .addTexture(modRes("block/oak_cupboard_inside"))
+                .addTexture(modRes("block/oak_cupboard_door"))
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.CUPBOARDS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTexture(modRes("block/oak_cupboard_inside"))
-                .addTexture(modRes("block/oak_cupboard_doors"))
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -172,10 +185,10 @@ public class ClutterModule extends SimpleModule {
 
         wall_cupboards = SimpleEntrySet.builder(WoodType.class, "wall_cupboard",
                         getModBlock("oak_wall_cupboard"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WallCupboardBlock(FabricBlockSettings.copyOf(w.planks).nonOpaque())
+                        w -> new WallCupboardBlock(BlockBehaviour.Properties.ofFullCopy(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.WALL_CUPBOARD)
-                //TEXTURE: using cupboards' above
+                //TEXTURE: planks, cupboard_door (cupboards), cupboard_inside (cupboards)
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.CUPBOARDS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -186,10 +199,10 @@ public class ClutterModule extends SimpleModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
                         getModBlock("oak_shelf"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ShelfBlock(FabricBlockSettings.copyOf(w.planks).nonOpaque())
+                        w -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.SHELF)
-                //TEXTURE: Using log & planks
+                //TEXTURE: log, planks
                 .addTag(ModBlockTags.SHELVES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -202,11 +215,11 @@ public class ClutterModule extends SimpleModule {
 
         trellises = SimpleEntrySet.builder(WoodType.class, "trellis",
                         getModBlock("oak_trellis"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrellisBlock(FabricBlockSettings.copyOf(w.planks)
-                                .luminance(TrellisBlock.createLightLevelFromLitBlockState()))
+                        w -> new TrellisBlock(BlockBehaviour.Properties.ofFullCopy(w.planks)
+                                .lightLevel(createLightLevelFromLitBlockState()))
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURE: Using log
+                //TEXTURE: log
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.TRELLISES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -221,7 +234,7 @@ public class ClutterModule extends SimpleModule {
                         getModBlock("oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatBenchBlock(Utils.copyPropertySafe(w.planks))
                 )
-                //TEXTURE: Using log & planks
+                //TEXTURE: log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.BENCHES, Registries.BLOCK)
                 .addTag(ModBlockTags.STRIPPABLE_BENCHES, Registries.BLOCK)
@@ -239,7 +252,7 @@ public class ClutterModule extends SimpleModule {
                         w -> new CompatBenchBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
-                //TEXTURE: Using stripped_log & planks
+                //TEXTURE: stripped_log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.BENCHES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -269,8 +282,9 @@ public class ClutterModule extends SimpleModule {
                         w -> new StairBlock(copyStairs(w),
                                 Utils.copyPropertySafe(w.planks))
                 )
+                .requiresFromMap(mosaic_planks.blocks) //REASON: textures
                 .setRenderType(RenderLayer.CUTOUT)
-                //TEXTURE: using mosaic_planks' above
+                //TEXTURE: mosaic_planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.WOODEN_MOSAICS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -284,8 +298,9 @@ public class ClutterModule extends SimpleModule {
                         getModBlock("oak_mosaic_slab"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabBlock(copySlabs(w))
                 )
+                .requiresFromMap(mosaic_planks.blocks) //REASON: textures
                 .setRenderType(RenderLayer.CUTOUT)
-                //TEXTURE: using mosaic_planks' above
+                //TEXTURE: mosaic_planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.WOODEN_MOSAICS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -346,25 +361,24 @@ public class ClutterModule extends SimpleModule {
             return mapTables.get(state.getBlock()).defaultBlockState().setValue(LEGS, state.getValue(LEGS)).setValue(LEG_POSITIONS, state.getValue(LEG_POSITIONS));
         }
 
-        /*@Override
-        public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        @Override
+        public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+            InteractionHand hand = player.getUsedItemHand();
             ItemStack itemStack = player.getItemInHand(hand);
 
             if (itemStack.getItem() instanceof AxeItem && state.is(ModBlockTags.STRIPPABLE_TABLES)) {
                 BlockState strippedState = this.getStrippedState(state);
-
                 world.setBlockAndUpdate(pos, strippedState);
                 world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
-
                 if (!player.isCreative()) {
-                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                    itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 }
 
                 return InteractionResult.SUCCESS;
             } else {
-                return InteractionResult.PASS;
+                return super.useWithoutItem(state, world, pos, player, hit);
             }
-        }*/
+        }
     }
 
     public class CompatChairBlock extends WoodenChairBlock {
@@ -376,22 +390,24 @@ public class ClutterModule extends SimpleModule {
             return mapChairs.get(state.getBlock()).defaultBlockState().setValue(FACING, state.getValue(FACING));
         }
 
-        /*@Override
-        public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        @Override
+        public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+            InteractionHand hand = player.getUsedItemHand();
             ItemStack itemStack = player.getItemInHand(hand);
+
             if (itemStack.getItem() instanceof AxeItem && state.is(ModBlockTags.STRIPPABLE_CHAIRS)) {
                 BlockState strippedState = this.getStrippedState(state);
                 world.setBlockAndUpdate(pos, strippedState);
                 world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
                 if (!player.isCreative()) {
-                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                    itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 }
 
                 return InteractionResult.SUCCESS;
             } else {
-                return InteractionResult.PASS;
+                return super.useWithoutItem(state, world, pos, player, hit);
             }
-        }*/
+        }
     }
 
     public class CompatBenchBlock extends WoodenBenchBlock {
@@ -402,25 +418,27 @@ public class ClutterModule extends SimpleModule {
 
         private BlockState getStrippedState(BlockState state) {
             return mapBenches.get(state.getBlock()).defaultBlockState().setValue(FACING, state.getValue(FACING))
-                    .setValue(LEGPOSITIONS, state.getValue(LEGPOSITIONS));
+                    .setValue(LEG_POSITIONS, state.getValue(LEG_POSITIONS));
         }
 
-        /*@Override
-        public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        @Override
+        public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+            InteractionHand hand = player.getUsedItemHand();
             ItemStack itemStack = player.getItemInHand(hand);
+
             if (itemStack.getItem() instanceof AxeItem && state.is(ModBlockTags.STRIPPABLE_BENCHES)) {
                 BlockState strippedState = this.getStrippedState(state);
                 world.setBlockAndUpdate(pos, strippedState);
                 world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
                 if (!player.isCreative()) {
-                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                    itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 }
 
                 return InteractionResult.SUCCESS;
             } else {
-                return InteractionResult.PASS;
+                return super.useWithoutItem(state, world, pos, player, hit);
             }
-        }*/
+        }
 
     }
 }
