@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.ChiseledBookShelfBlock;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-//SUPPORT: v2.0.1+
+//SUPPORT: v2.0.2+
 public class WoodsterModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> chiseled_books;
     public final SimpleEntrySet<WoodType, Block> ladders;
@@ -28,10 +28,10 @@ public class WoodsterModule extends SimpleModule {
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
-                .addTextureM(modRes("block/everycomp_dark_oak_chiseled_bookshelf_6"),modRes("block/everycomp_dark_oak_chiseled_bookshelf_overlay"))
-                .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_side"))
-                .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_top"))
-                .addTexture(modRes("block/everycomp_dark_oak_chiseled_bookshelf_0"))
+                .addTextureM(modRes("block/everycomp/dark_oak_chiseled_bookshelf_6"),modRes("block/everycomp/dark_oak_chiseled_bookshelf_overlay"))
+                .addTexture(modRes("block/everycomp/dark_oak_chiseled_bookshelf_side"))
+                .addTexture(modRes("block/everycomp/dark_oak_chiseled_bookshelf_top"))
+                .addTexture(modRes("block/everycomp/dark_oak_chiseled_bookshelf_0"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentDrop()
