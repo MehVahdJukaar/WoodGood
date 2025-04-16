@@ -372,7 +372,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     /// Adding the textures to the resource
                     for (var info : infoPerTextures.get(oldTextureId)) {
                         if (info != null) {
-                            if (info.keepNamespace()) newId = oldTextureId.withPath(newPath).toString();
+                            if (Objects.nonNull(info.customTexturePath())) {
+                                oldPath = info.customTexturePath();
+                                newId = EveryCompat.MOD_ID +":"+ BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, w, blockId, baseType.get().getTypeName());
+                            }
+                            else if (info.keepNamespace()) newId = oldTextureId.withPath(newPath).toString();
                             else
                                 newId = ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), newPath).toString();
 
