@@ -44,6 +44,10 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem","_side","minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem","_top","minecraft:block/mushroom_stem");
 
+        // Botanic Pledge
+        addOptional("botanicpledge:yggdrasil_log", "_side", "botanicpledge:block/yggdrasil_log");
+        addOptional("botanicpledge:stripped_yggdrasil_log", "_side", "botanicpledge:block/stripped_yggdrasil_log");
+
         // Abyssal Decor
         addOptional("abyssal_decor:white_wood_log","_side","abyssal_decor:block/whitewoodstrippedlog");
         addOptional("abyssal_decor:white_wood_log","_top","abyssal_decor:block/whitewoodstrippedlogtop");
@@ -333,7 +337,10 @@ public class SpriteHelper {
 
         // Extended Mushrooms
         addOptional("extendedmushrooms:glowshroom_stem","_top","extendedmushrooms:block/glowshroom_stem");
+        addOptional("extendedmushrooms:glowshroom_stem_stripped","_top","extendedmushrooms:block/glowshroom_stem_stripped");
+
         addOptional("extendedmushrooms:poisonous_mushroom_stem","_top","extendedmushrooms:block/poisonous_mushroom_stem");
+        addOptional("extendedmushrooms:poisonous_mushroom_stem_stripped","_top","extendedmushrooms:block/poisonous_mushroom_stem_stripped");
 
         addOptional("extendedmushrooms:stripped_mushroom_stem","_side","extendedmushrooms:block/stripped_mushroom_stem");
         addOptional("extendedmushrooms:stripped_mushroom_stem","_top","extendedmushrooms:block/stripped_mushroom_stem");
