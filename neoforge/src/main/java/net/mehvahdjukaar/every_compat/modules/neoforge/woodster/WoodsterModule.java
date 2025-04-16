@@ -3,6 +3,8 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.woodster;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.api.TextureInfo;
+import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -14,7 +16,7 @@ import net.minecraft.world.level.block.ChiseledBookShelfBlock;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-//SUPPORT: v2.0.2+
+//SUPPORT: v2.0.1+
 public class WoodsterModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> chiseled_books;
     public final SimpleEntrySet<WoodType, Block> ladders;
@@ -28,16 +30,16 @@ public class WoodsterModule extends SimpleModule {
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
-                .addTextureM(modRes("block/everycomp/dark_oak_chiseled_bookshelf_6"),modRes("block/everycomp/dark_oak_chiseled_bookshelf_overlay"))
-                .addTexture(modRes("block/everycomp/dark_oak_chiseled_bookshelf_side"))
-                .addTexture(modRes("block/everycomp/dark_oak_chiseled_bookshelf_top"))
-                .addTexture(modRes("block/everycomp/dark_oak_chiseled_bookshelf_0"))
+                .addTexture(TextureInfo.of(modRes("block/everycomp_dark_oak_chiseled_bookshelf_6"), "block/dark_oak_chiseled_bookshelf_6")
+                        .mask(modRes("block/everycomp_dark_oak_chiseled_bookshelf_overlay")))
+                .addTexture(TextureInfo.of(modRes("block/everycomp_dark_oak_chiseled_bookshelf_side"), "block/dark_oak_chiseled_bookshelf_side"))
+                .addTexture(TextureInfo.of(modRes("block/everycomp_dark_oak_chiseled_bookshelf_top"), "block/dark_oak_chiseled_bookshelf_top"))
+                .addTexture(TextureInfo.of(modRes("block/everycomp_dark_oak_chiseled_bookshelf_0"), "block/dark_oak_chiseled_bookshelf_0"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
-
         this.addEntry(chiseled_books);
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
@@ -51,7 +53,6 @@ public class WoodsterModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(ladders);
     }
 }

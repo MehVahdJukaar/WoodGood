@@ -232,7 +232,7 @@ dependencies {
     modCompileOnly("curse.maven:tropicraft-254794:5658664")
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //!! 1.20.1
-    modCompileOnly("curse.maven:woodster-869951:6427677")
+    modImplementation("curse.maven:woodster-869951:6425772")
     modCompileOnly("curse.maven:woodworks-543610:5228779") //!! 1.20.1
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:5752681")
     modCompileOnly("curse.maven:xercamod-341575:4667995") //!! 1.20.1
