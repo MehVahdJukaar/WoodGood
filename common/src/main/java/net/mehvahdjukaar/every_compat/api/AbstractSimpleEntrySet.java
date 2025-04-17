@@ -123,7 +123,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         this.condition = condition;
 
         if (tab == null && PlatHelper.isDev()) {
-            throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+            throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString() );
         }
     }
 
@@ -190,7 +190,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public void registerItemsToExistingTabs(SimpleModule module, RegHelper.ItemToTabEvent event) {
         if (tab == null) {
             if (PlatHelper.isDev()) {
-                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString());
             }
             return;
         }
@@ -717,9 +717,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public Item getItemForECTab(T type) {
         if (tab == null) {
             if (PlatHelper.isDev()) {
-                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString());
             }
-            EveryCompat.LOGGER.error("Creative tab cant be null. Found null one for entry set {}", this.getName());
+            EveryCompat.LOGGER.error("Creative tab cant be null. Found null one for entry set: {}", Utils.getID(this.getBaseType()).toString());
             return null;
         }
         try {
@@ -729,7 +729,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
         } catch (Exception e) {
             if (PlatHelper.isDev()) throw e;
-            EveryCompat.LOGGER.error("Failed to get creative tab for entry set {}", this.getName(), e);
+            EveryCompat.LOGGER.error("Failed to get creative tab for EntrySet - {} : {}", Utils.getID(this.getBaseType()).toString(), e);
             return null;
         }
 
