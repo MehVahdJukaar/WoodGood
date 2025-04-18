@@ -27,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.Set;
 
 // SUPPORT: v1.2.6+
 // SUPPORT: FABRIC-v2.2.7+
@@ -64,9 +65,11 @@ public class FarmersDelightModule extends SimpleModule {
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
+        Set<String> blacklistedWoodType = Set.of("extradelight:cinnamon");
+
         // Creating cutting_board recipes
         for (var woodType : WoodTypeRegistry.getTypes()) {
-            if (woodType.isVanilla()) continue;
+            if (woodType.isVanilla() || blacklistedWoodType.contains(woodType.getId().toString())) continue;
 
             createCuttingRecipe("door", woodType.getBlockOfThis("door"), woodType.planks,
                     woodType, handler, manager);
@@ -82,10 +85,6 @@ public class FarmersDelightModule extends SimpleModule {
                     woodType, handler, manager);
         }
 
-//        cabinets.items.forEach(((woodType, item) -> {
-//
-//
-//        }));
     }
 
     public void createCuttingRecipe(String recipeType, Block input, Block output,
