@@ -5,6 +5,8 @@
   "tooltip.everycomp.wood_type": "Wood Type: %s",
   "tooltip.everycomp.leaf_type": "Leaves Type: %s",
 
+  "block.everycomp.q.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
+
   "block.everycomp.q.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
 
   "block.everycomp.q.enhanced_mushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
@@ -57,6 +59,8 @@
   "block.everycomp.tf.enlightened_end.hollow_indigo_log": "Hollow Indigo Stem",
 
   "block.everycomp.tf.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
+
+  "block.everycomp.tf.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
 
 
   "wood_type.blocksplus.bamboo": "Green Bamboo",
