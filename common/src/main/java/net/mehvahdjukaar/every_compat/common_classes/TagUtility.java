@@ -2,14 +2,20 @@ package net.mehvahdjukaar.every_compat.common_classes;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+
+import java.util.Map;
 
 public class TagUtility {
 
@@ -77,6 +83,64 @@ public class TagUtility {
             handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
         }
         return isTagCreated;
+    }
+
+    /// The tag will be added if the mod is loaded
+    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String nameStone, String modId, String tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
+        if (PlatHelper.isModLoaded(modId)) {
+            boolean isTagCreated = false;
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(modId, tag));
+            for (Map.Entry<T, B> e : blocks.entrySet()) {
+                T stoneType = e.getKey();
+                B block = e.getValue();
+                if (stoneType.getTypeName().equals(nameStone)) {
+                    tagBuilder.addEntry(block);
+                    isTagCreated = true;
+                }
+            }
+            if (isTagCreated) {
+                if (includeBlock) pack.addTag(tagBuilder, Registries.BLOCK);
+                if (includeItem) pack.addTag(tagBuilder, Registries.ITEM);
+            }
+        }
+    }
+    /// The tag will be added if the mod is loaded
+    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String nameStone, String modId, TagKey<Block> tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
+        if (PlatHelper.isModLoaded(modId)) {
+            boolean isTagCreated = false;
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
+            for (Map.Entry<T, B> e : blocks.entrySet()) {
+                T stoneType = e.getKey();
+                B block = e.getValue();
+                if (stoneType.getTypeName().equals(nameStone)) {
+                    tagBuilder.addEntry(block);
+                    isTagCreated = true;
+                }
+            }
+            if (isTagCreated) {
+                if (includeBlock) pack.addTag(tagBuilder, Registries.BLOCK);
+                if (includeItem) pack.addTag(tagBuilder, Registries.ITEM);
+            }
+        }
+    }
+    /// The tag will be added if the mod is loaded
+    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String typeBlock, String nameStone, String modId, TagKey<Block> tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
+        if (PlatHelper.isModLoaded(modId)) {
+            boolean isTagCreated = false;
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
+            for (Map.Entry<T, B> e : blocks.entrySet()) {
+                T stoneType = e.getKey();
+                B block = e.getValue();
+                if (stoneType.getTypeName().equals(nameStone) && Utils.getID(block).toString().contains(typeBlock)) {
+                    tagBuilder.addEntry(block);
+                    isTagCreated = true;
+                }
+            }
+            if (isTagCreated) {
+                if (includeBlock) pack.addTag(tagBuilder, Registries.BLOCK);
+                if (includeItem) pack.addTag(tagBuilder, Registries.ITEM);
+            }
+        }
     }
 
 }
