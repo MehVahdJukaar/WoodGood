@@ -41,7 +41,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
 
-    if(project.parchment_enabled == "true"){
+    if(parchment_enabled.toBoolean()){
         mappings channel: 'parchment', version: "${project.parchment_version}-${project.minecraft_version}"
     }else{
         mappings channel: 'official', version: "${project.minecraft_version}"
@@ -58,7 +58,7 @@ minecraft {
 
             jvmArg '-Xmx7G'
 
-            workingDirectory project.file('run')
+            workingDirectory file('run')
 
             // Recommendedo logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -73,7 +73,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             arg "-mixin.config=${project.mod_id}.mixins.json".toString()
 
-            workingDirectory project.file('run')
+            workingDirectory file('run')
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -87,7 +87,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            workingDirectory project.file('run')
+            workingDirectory file('run')
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
