@@ -90,9 +90,9 @@ public class TagUtility {
         if (PlatHelper.isModLoaded(modId)) {
             boolean isTagCreated = false;
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(modId, tag));
-            for (Map.Entry<T, B> e : blocks.entrySet()) {
-                T stoneType = e.getKey();
-                B block = e.getValue();
+            for (Map.Entry<T, B> entry : blocks.entrySet()) {
+                T stoneType = entry.getKey();
+                B block = entry.getValue();
                 if (stoneType.getTypeName().equals(nameStone)) {
                     tagBuilder.addEntry(block);
                     isTagCreated = true;
@@ -109,9 +109,9 @@ public class TagUtility {
         if (PlatHelper.isModLoaded(modId)) {
             boolean isTagCreated = false;
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
-            for (Map.Entry<T, B> e : blocks.entrySet()) {
-                T stoneType = e.getKey();
-                B block = e.getValue();
+            for (Map.Entry<T, B> entry : blocks.entrySet()) {
+                T stoneType = entry.getKey();
+                B block = entry.getValue();
                 if (stoneType.getTypeName().equals(nameStone)) {
                     tagBuilder.addEntry(block);
                     isTagCreated = true;
@@ -124,14 +124,18 @@ public class TagUtility {
         }
     }
     /// The tag will be added if the mod is loaded
-    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String typeBlock, String nameStone, String modId, TagKey<Block> tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
+    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String regexBlockId, String nameStone, String modId, TagKey<Block> tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
         if (PlatHelper.isModLoaded(modId)) {
             boolean isTagCreated = false;
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
-            for (Map.Entry<T, B> e : blocks.entrySet()) {
-                T stoneType = e.getKey();
-                B block = e.getValue();
-                if (stoneType.getTypeName().equals(nameStone) && Utils.getID(block).toString().contains(typeBlock)) {
+            for (Map.Entry<T, B> entry : blocks.entrySet()) {
+                T stoneType = entry.getKey();
+                B block = entry.getValue();
+
+                String blockPath = Utils.getID(block).getPath();
+                String blockId = blockPath.substring(blockPath.lastIndexOf("/") + 1);
+
+                if (stoneType.getTypeName().equals(nameStone) && blockId.matches(regexBlockId)) {
                     tagBuilder.addEntry(block);
                     isTagCreated = true;
                 }
