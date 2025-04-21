@@ -252,7 +252,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         addTagToAllBlocks(blocks, "petrified", "sullysmod", BlockTags.MINEABLE_WITH_PICKAXE,
                 true, false, pack);
 
-        addTagToAllBlocks(blocks, "planks", "fright", "soulfulnether", BlockTags.SOUL_FIRE_BASE_BLOCKS,
+        String regEx = "\\w+_(log|planks|beehive|boards|sanded_wood|beam|parquet|trim|bookshelf|window|drawer|table|bookshelf|shelf|table|support|cabinet|board_stairs|board_slab|boards)";
+        addTagToAllBlocks(blocks, regEx, "fright", "soulfulnether", BlockTags.SOUL_FIRE_BASE_BLOCKS,
                 true, false, pack);
 
     }
