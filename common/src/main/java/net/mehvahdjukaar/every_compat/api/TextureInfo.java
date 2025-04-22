@@ -4,10 +4,19 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation mask,
-                          boolean keepNamespace, boolean copyTexture, boolean copyMCMETA, boolean autoMask,
+                          boolean keepNamespace, boolean copyTexture, String customTexturePath, boolean copyMCMETA, boolean autoMask,
                           boolean onAtlas) {
+
     public static Builder of(ResourceLocation res) {
         return new Builder(res);
+    }
+
+    public static Builder of(ResourceLocation res, ResourceLocation mask) {
+        return new Builder(res).mask(mask);
+    }
+
+    public static Builder of(ResourceLocation res, String customTexturePath) {
+        return new Builder(res).customTexture(customTexturePath);
     }
 
     public static final class Builder {
@@ -18,6 +27,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         private boolean copyMCMETA = false;
         private boolean autoMask = false;
         private boolean onAtlas;
+        private String customTexturePath;
 
         public Builder(ResourceLocation texture) {
             this.texture = texture;
@@ -41,7 +51,12 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         }
 
         public Builder copyTexture() {
-            this.copyTexture = false;
+            this.copyTexture = true;
+            return this;
+        }
+
+        public Builder customTexture(String customTexturePath) {
+            this.customTexturePath = customTexturePath;
             return this;
         }
 
@@ -57,7 +72,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
 
         public TextureInfo build() {
             return new TextureInfo(texture, mask, keepNamespace,
-                    copyTexture, copyMCMETA, autoMask, onAtlas);
+                    copyTexture, customTexturePath, copyMCMETA, autoMask, onAtlas);
         }
     }
 }

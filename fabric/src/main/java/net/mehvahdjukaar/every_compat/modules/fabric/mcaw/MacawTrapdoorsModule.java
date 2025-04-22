@@ -56,7 +56,8 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
                 .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(BARK_TRAPDOORS);
@@ -249,7 +250,8 @@ public class MacawTrapdoorsModule extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
                 .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(RANCH_TRAPDOORS);

@@ -41,3 +41,19 @@ referralUrl = "https://www.curseforge.com/minecraft/mc-mods/selene"
 versionRange = "[1.21-2.17.9,]"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "create"
+type = "optional"
+referralUrl = "https://www.curseforge.com/minecraft/mc-mods/create"
+versionRange = "[1.21.1-6.0.2,]"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "woodster"
+type = "optional"
+referralUrl = "https://www.curseforge.com/minecraft/mc-mods/woodster"
+versionRange = "[2.0.1,]"
+ordering = "AFTER"
+side = "BOTH"

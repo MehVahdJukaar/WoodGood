@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.wilder_wild;
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.frozenblock.wilderwild.block.HollowedLogBlock;
-import net.frozenblock.wilderwild.entity.ai.TermiteManager;
 import net.frozenblock.wilderwild.tag.WWBlockTags;
 import net.frozenblock.wilderwild.tag.WWItemTags;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -32,10 +31,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-import static net.mehvahdjukaar.every_compat.EveryCompat.doChildrenExistFor;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
+import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
 
-//SUPPORT: v3.0.4+
+//SUPPORT: v4.0.0+
 //NOTE: Could be supported in NEOFORGE via Sinytra Connector
 public class WilderWildModule extends SimpleModule {
 
@@ -71,7 +70,8 @@ public class WilderWildModule extends SimpleModule {
                 .addTag(modRes("hollowed_logs"), Registries.BLOCK)
                 .addTag(modRes("splits_coconut"), Registries.BLOCK)
                 .addRecipe(modRes("oak_wood_from_hollowed"))
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
                 .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(hollow_log);
@@ -102,7 +102,8 @@ public class WilderWildModule extends SimpleModule {
                 .addTag(ItemTags.LOGS, Registries.ITEM)
                 .addTag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.ITEM)
                 .addRecipe(modRes("stripped_oak_wood_from_hollowed"))
-                //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
                 .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(stripped_hollow_log);
@@ -125,13 +126,9 @@ public class WilderWildModule extends SimpleModule {
             }
             else {
                 HollowedLogBlock.registerAxeHollowBehavior(wood.log, hollow_log.blocks.get(wood));
-                if (doChildrenExistFor(wood, "stripped_log")) {
+                if (doChildrenExistFor(wood, "stripped_log"))
                     HollowedLogBlock.registerAxeHollowBehavior(wood.getBlockOfThis("stripped_log"), stripped_hollow_log.blocks.get(wood));
-                    TermiteManager.Termite.addDegradable(block, stripped_hollow_log.blocks.get(wood));
-                }
             }
-            if (doChildrenExistFor(wood,  "wood", "stripped_wood"))
-                TermiteManager.Termite.addDegradable(wood.getBlockOfThis("wood"), wood.getBlockOfThis("stripped_wood"));
         });
     }
 
@@ -170,7 +167,69 @@ public class WilderWildModule extends SimpleModule {
             } catch (IOException e) {
                 handler.getLogger().error("Failed to generate the recipe file for {} : {} ", Utils.getID(block), e);
             }
+
+// TERMITE_BLOCK =======================================================================================================
+
+            ResourceLocation baseFile = modRes("wilderwild/termite_block_behavior/hollowed_oak_log");
+            String baseResLoc = "wilderwild/termite_block_behavior/termite_block_behaviour/";
+
+            JsonObject hollowedLogFile = createTermiteBehaviour(baseFile, "edible_blocks", Utils.getID(hollow_log.blocks.get(wood)).toString(), manager);
+            if (Objects.nonNull(hollowedLogFile)) {
+                hollowedLogFile = modifyJsonObject(baseFile, hollowedLogFile, "output_block", Utils.getID(stripped_hollow_log.blocks.get(wood)).toString());
+                handler.dynamicPack.addJson(modRes(baseResLoc +"hollowed_"+ wood.getTypeName() + "_log"), hollowedLogFile, ResType.GENERIC);
+            }
+
+            if (Objects.nonNull(wood.getBlockOfThis("stripped_log"))) {
+                JsonObject logFile = createTermiteBehaviour(baseFile, "edible_blocks", Utils.getID(wood.getBlockOfThis("log")).toString(), manager);
+                if (Objects.nonNull(logFile)) {
+                    logFile = modifyJsonObject(baseFile, logFile, "output_block", Utils.getID(wood.getBlockOfThis("stripped_log")).toString());
+                    handler.dynamicPack.addJson(modRes(baseResLoc + wood.getTypeName() + "_log"), logFile, ResType.GENERIC);
+                }
+
+                JsonObject strippedLogFile = createTermiteBehaviour(baseFile, "edible_blocks", Utils.getID(wood.getBlockOfThis("stripped_log")).toString(), manager);
+                if (Objects.nonNull(strippedLogFile)) {
+                    strippedLogFile = modifyJsonObject(baseFile, strippedLogFile, "output_block", Utils.getID(hollow_log.blocks.get(wood)).toString());
+                    handler.dynamicPack.addJson(modRes(baseResLoc +"stripped_"+ wood.getTypeName() + "_log"), strippedLogFile, ResType.GENERIC);
+                }
+            }
+
+            if (Objects.nonNull(wood.getBlockOfThis("wood")) && Objects.nonNull(wood.getBlockOfThis("stripped_wood"))) {
+                JsonObject woodFile = createTermiteBehaviour(baseFile, "edible_blocks", Utils.getID(wood.getBlockOfThis("wood")).toString(), manager);
+                if (Objects.nonNull(woodFile)) {
+                    woodFile = modifyJsonObject(baseFile, woodFile, "output_block", Utils.getID(wood.getBlockOfThis("stripped_wood")).toString());
+                    handler.dynamicPack.addJson(modRes(baseResLoc + wood.getTypeName() + "_wood"), woodFile, ResType.GENERIC);
+                }
+            }
+
         });
 
+    }
+
+    public JsonObject createTermiteBehaviour(ResourceLocation resLoc, String key, String value, ResourceManager manager) {
+        try (InputStream fileStream = manager.getResource(resLoc)
+                .orElseThrow(() -> new FileNotFoundException("Failed to open the file @ " + resLoc)).open()) {
+
+            JsonObject file = RPUtils.deserializeJson(fileStream);
+
+            file.addProperty(key, value);
+
+            return file;
+        }
+        catch (IOException e) {
+            EveryCompat.LOGGER.error("Failed to generate the file @ {0}", e);
+        }
+        return null;
+    }
+
+    /// Continous of modifying JsonObject
+    public JsonObject modifyJsonObject(ResourceLocation resLoc, JsonObject jsonObject, String key, String value) {
+
+        if (jsonObject.has(key)) {
+            jsonObject.addProperty(key, value);
+        }
+        else
+            EveryCompat.LOGGER.error("Failed to modify JsonObject for {}: it do not have the {}", resLoc, key);
+
+        return jsonObject;
     }
 }

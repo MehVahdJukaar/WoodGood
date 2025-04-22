@@ -54,7 +54,7 @@ dependencies {
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.17.20
+        modImplementation("maven.modrinth:moonlight:fabric_${moonlight_mavenVersion}") // v2.18.2
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -71,6 +71,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:5772128") // v21.1.1 | Regions Unexplored
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5793501") //v3.0.11 | Chipped, Handcrafted, Cozy
+//    modRuntimeOnly("curse.maven:monolib-968432:6123972") //v2.0.0 | More-Beautiful-Torches
 
         //- OTHER LIBRARIES
 //    modRuntimeOnly("org.reflections:reflections:0.10.2") // Refurbished-Furniture
@@ -105,19 +106,24 @@ dependencies {
 //    modRuntimeOnly("curse.maven:chipped-456956:5813118")
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:5651253") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:3941637") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4062547") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:excessive-building-845097:6075987")
 //    modRuntimeOnly("curse.maven:exlines-awnings-526698:4668406") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4062547") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:farmers-delight-refabricated-993166:5967586")
 //    modRuntimeOnly("curse.maven:friends-and-foes-551364:4968876") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:handcrafted-538214:5617253")
 //    modRuntimeOnly("curse.maven:furnish-547069:5683297")
-//    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:handcrafted-538214:5617253")
+//    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:5890178")
 //    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5319819") //RLM: exp4j //!! 1.20.1
 //    modRuntimeOnly("curse.maven:twigs-496913:4603805") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189603") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
+
+        //- OTHER MAVENS
+//    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
+//    modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1")
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
         // ~/forge/mods LOCAL
@@ -142,7 +148,7 @@ dependencies {
     modCompileOnly("curse.maven:beautify-refabricated-809311:5405529") //!! 1.20.1
     modCompileOnly("curse.maven:bewitchment-394915:5205373") //!! 1.20.1
     modCompileOnly("curse.maven:building-but-better-989479:5362379") //!! 1.20.1
-    modCompileOnly("curse.maven:clutter-826060:5776595") //RML: Geckolib //!! 1.20.1
+    modCompileOnly("curse.maven:clutter-826060:6211358") //RML: Geckolib
     modCompileOnly("curse.maven:create-fabric-624165:5168511") //!! 1.20.1
     modCompileOnly("curse.maven:dramatic-doors-380617:5740379")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987") //!! 1.20.1
@@ -158,7 +164,6 @@ dependencies {
     modCompileOnly("curse.maven:regions-unexplored-659110:5579923")
 
         // OTHER MAVENS
-    modCompileOnly("maven.modrinth:wilder-wild:3.0.4-mc1.21.1")
 //    modCompileOnly("com.simibubi.create:create-fabric-1.20.1:$create_fabric_version") // Registrate, Flywheel //!! Need to update maven to get other libraries & the old maven are outdated
 
     // ======================================== DISABLED FOR A REASON =============================================== \\

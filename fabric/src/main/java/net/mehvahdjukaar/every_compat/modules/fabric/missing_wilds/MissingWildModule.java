@@ -28,7 +28,8 @@ public class MissingWildModule extends SimpleModule {
                 .setTabKey(modRes("items"))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //REASON: The top texture is not a standard 16x16. Take a look, you'll see why
+                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
+                .excludeBlockTypes("deeperdarker", "bloom")
                 .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
                 .build();
         this.addEntry(fallenLogs);
