@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -39,12 +40,12 @@ public class ECRegistry {
     @Deprecated(forRemoval = true)
     //call in setup when you have blocks
     public static void addBlocksToPOI(ResourceKey<PoiType> poi, Iterable<? extends Block> blocks) {
-        var beehivePOI = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poi);
+        Holder.Reference<PoiType> holderPOI = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poi);
         ImmutableSet.Builder<BlockState> builder = ImmutableSet.builder();
-        builder.addAll(beehivePOI.value().matchingStates());
+        builder.addAll(holderPOI.value().matchingStates());
         for (var block : blocks) {
             builder.addAll(block.getStateDefinition().getPossibleStates());
         }
-        PoiTypes.registerBlockStates(beehivePOI, builder.build());
+        PoiTypes.registerBlockStates(holderPOI, builder.build());
     }
 }
