@@ -101,7 +101,7 @@ dependencies {
     String path = System.getenv('REPOS21_1')
 
     //- Repository LOCAL
-    if (enable_moonlight_test.toBoolean()) {
+    if (enable_moonlight_test.toBoolean() || usesMavenLocalML) {
         if (usesMavenLocalML) {
             //- ~/neoforge/mods LOCAL
             modImplementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_testVersion}") // LOCAL
@@ -128,7 +128,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | Required by: REI
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5793500")  // v3.0.11 | Chipped, Handcrafted, Cozy
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5679902") // v1.1.1a | Dawn of Time, Timber-Frame, Rechiseled
-//    modRuntimeOnly("curse.maven:framework-549225:5911998") // v0.9.4 | Refurbished Furniture, Mighty Mail, Backpacked
+    modRuntimeOnly("curse.maven:framework-549225:5911998") // v0.9.4 | Refurbished Furniture, Mighty Mail, Backpacked
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5713682") // v1.1.17i | Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:YeePowOJ") // v1.6.3 | Building-But-Better
@@ -215,12 +215,12 @@ dependencies {
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473305") //CRAFTING_TABLES
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212") //CRAFTING_TABLES for FORGE //!! 1.20.1
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673") //!! 1.20.1
-    modCompileOnly("curse.maven:oreberries-replanted-454062:5817304")
+    modImplementation("curse.maven:oreberries-replanted-454062:5817304")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899") //!! 1.20.1
     modCompileOnly("curse.maven:premium-wood-353515:3905203") //!! 1.20.1
     modCompileOnly("curse.maven:productivebees-377897:5304827") //v12.5.1 | WIP //!! 1.20.1
     modCompileOnly("curse.maven:quark-243121:5093415") //!! 1.20.1
-    modCompileOnly("curse.maven:refurbished-furniture-897116:5893840")
+    modImplementation("curse.maven:refurbished-furniture-897116:5893840")
     modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847") //!! 1.20.1

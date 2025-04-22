@@ -45,7 +45,7 @@ dependencies {
     String path = System.getenv('REPOS21_1')
 
     //- Repository LOCAL
-    if (enable_moonlight_test.toBoolean()) {
+    if (enable_moonlight_test.toBoolean() || usesMavenLocalML) {
         if (usesMavenLocalML) {
             //- ~/fabric/mods LOCAL
             modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_testVersion}") // LOCAL
