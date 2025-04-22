@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.forge.valhelsia;
 
+import com.mojang.blaze3d.platform.NativeImage;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
@@ -18,6 +19,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -274,8 +276,19 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
 // Side texture ================================================================================================
             {
-                var metaSide = logSide_texture.getMcMeta();
-                List<Palette> targetSide = Palette.fromAnimatedImage(logSide_texture);
+                McMetaFile metaSide = logSide_texture.getMcMeta();
+
+                TextureImage sideImage; // Creating a 16x16 texture from an animated log's texture
+                if (Objects.nonNull(logSide_texture.getMcMeta())) {
+                    NativeImage standardSize = new NativeImage(16, 16, false);
+                    standardSize.copyFrom(logSide_texture.getImage());
+                    sideImage = TextureImage.of(standardSize);
+                }
+                else {
+                    sideImage = logTop_texture;
+                }
+
+                List<Palette> targetSide = Palette.fromAnimatedImage(sideImage);
 
                 Respriter respriterSide = Respriter.of(TextureSide);
 
@@ -288,10 +301,20 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
 // Top texture =================================================================================================
             {
-                var metaTop = logTop_texture.getMcMeta();
+                McMetaFile metaTop = logTop_texture.getMcMeta();
 
-                List<Palette> targetTopInner = Palette.fromAnimatedImage(logTop_texture, logOuterMask, 0);
-                List<Palette> targetTopOuter = Palette.fromAnimatedImage(logTop_texture, logInnerMask, 0);
+                TextureImage topImage; // Creating a 16x16 texture from an animated log's texture
+                if (Objects.nonNull(logTop_texture.getMcMeta())) {
+                    NativeImage standardSize = new NativeImage(16, 16, false);
+                    standardSize.copyFrom(logTop_texture.getImage());
+                    topImage = TextureImage.of(standardSize);
+                }
+                else {
+                    topImage = logTop_texture;
+                }
+
+                List<Palette> targetTopInner = Palette.fromAnimatedImage(topImage, logOuterMask, 0);
+                List<Palette> targetTopOuter = Palette.fromAnimatedImage(topImage, logInnerMask, 0);
 
                 // Inner
                 Respriter innerTopResp = Respriter.masked(TextureTop, BPTopOuterMask);

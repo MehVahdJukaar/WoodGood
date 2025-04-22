@@ -1,29 +1,24 @@
-# v2.7.24
-
 ### UPDATED:
-- **Every Compat** (COMMON): Disabled an experimental code - Apparently, it need more polishment and works
-  - Fixed [#874](https://github.com/MehVahdJukaar/WoodGood/issues/874)
-  - Also Fixed StoneZone's blocks not being generated
-
-# v2.7.23
-
-### UPDATED:
-- **LANG**: **Jaden's Nether Expansion**'s Cerebrage Claret for **Quark** & **The Twilight Forest**'s hollow_log & stripped_hollow_log
-  - REASON: Moonlight Lib have been updated to detect the children of Claret from **Jaden's Nether Expansion**
-
-# v2.7.22
-
-### UPDATED:
-- **Create** (COMMON): Changed renderType to TRANSLUCENT for both _windows_ & _window_panes_ because custom ResourcePack can be properly shown.
-- **Wilder Wild** (FABRIC): _hollowed_log_ & _stripped_hollowed_log_ now required _wood_ & _stripped_wood_ for recipes
+- **Storage Drawers** (COMMON): Fixed Drawers not being applied with "HeavyDrawers" when being carried as an item - [#890](https://github.com/MehVahdJukaar/WoodGood/issues/890)
+- **Macaw's Furniture** (COMMON): Updated some blocks that required children (stripped_log) for textures
+- **Absent By Design** (FORGE): Updated some blocks that required children (wood or stripped_wood) for recipes
 
 ---
 
-### ADDED:
-- **Piglin Ruins** (FORGE): _ominous_stalk_block_'s textures **(IT)**
-- **LANG** (COMMON): Corrected the  - @Derpgamer22
-  - WoodType: Cerebrage_claret
-  - Blocks: **Quark**'s hollow_log with **Nether Exp**, **My Nether's Delight**, **Enhanced Mushrooms**
+### ADDED: 
+- **Deeper And Darker** (IT): blooming_stem
+- **Abyssal Decor** (IT): Added 3 WoodTypes: cinnamon, blackwood, & white_wood
+- **LANG**: zh_cn for More Beautiful Torches - @Libu2333
+- **TEXTURES** (IT): 
+  - **Burnt**'s yggdrasil_log & stripped_yggdrasil_log
+  - **Extended Mushroom**'s glowshroom_stem_stripped & poisonous_mushroom_stem_stripped
+- **Valhelsia Structure** (FORGE): Improved the texture generation for bundled_posts & bundled_stripped_posts 
+  - this should fix some blocks' missing texture 
+
+---
+
+#### NEW SUPPORTED MOD:
+- **More Beautiful Torches** (COMMON)
 
 ---
 
@@ -35,4 +30,4 @@
 
 **LEGEND**:
 - (COMMON) = FORGE & FABRIC
-- (IT) - Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
+- (IT) - Included Texture: Added the ResourceLocation of tfhe missing textures required for blocks or generating a new texture

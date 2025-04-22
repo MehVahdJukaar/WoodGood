@@ -53,6 +53,8 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.addTagToAllBlocks;
+
 //contrary to popular belief this class is indeed not simple. Its usage however is
 @SuppressWarnings({"unused", "removal"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
@@ -123,7 +125,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         this.condition = condition;
 
         if (tab == null && PlatHelper.isDev()) {
-            throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+            throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString() );
         }
     }
 
@@ -190,7 +192,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public void registerItemsToExistingTabs(SimpleModule module, RegHelper.ItemToTabEvent event) {
         if (tab == null) {
             if (PlatHelper.isDev()) {
-                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString());
             }
             return;
         }
@@ -247,18 +249,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         // Adding tag to a specific WoodType of all generated blocks
-        if (PlatHelper.isModLoaded("sullysmod")) {
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(BlockTags.MINEABLE_WITH_PICKAXE);
-            for (Map.Entry<T, B> e : blocks.entrySet()) {
-                T woodType = e.getKey();
-                B block = e.getValue();
-                if (woodType.getTypeName().equals("petrified")) {
-                    tagBuilder.addEntry(block);
-                }
-            }
+        addTagToAllBlocks(blocks, "petrified", "sullysmod", BlockTags.MINEABLE_WITH_PICKAXE,
+                true, false, pack);
 
-            pack.addTag(tagBuilder, Registries.BLOCK);
-        }
+        String regEx = "\\w+_(log|planks|beehive|boards|sanded_wood|beam|parquet|trim|bookshelf|window|drawer|table|bookshelf|shelf|table|support|cabinet|board_stairs|board_slab|boards)";
+        addTagToAllBlocks(blocks, regEx, "fright", "soulfulnether", BlockTags.SOUL_FIRE_BASE_BLOCKS,
+                true, false, pack);
+
     }
 
     public Map<T, ?> getDefaultEntries() {
@@ -306,7 +303,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     infoPerTextures.put(textureId, textureInfo);
 
                     if (textureInfo.copyTexture()) {
-                        respriters.put(maskId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(1))))));
+                        respriters.put(textureId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(0))))));
                     } else {
                         images.add(main);
 
@@ -717,9 +714,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public Item getItemForECTab(T type) {
         if (tab == null) {
             if (PlatHelper.isDev()) {
-                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set " + this.getName());
+                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString());
             }
-            EveryCompat.LOGGER.error("Creative tab cant be null. Found null one for entry set {}", this.getName());
+            EveryCompat.LOGGER.error("Creative tab cant be null. Found null one for entry set: {}", Utils.getID(this.getBaseType()).toString());
             return null;
         }
         try {
@@ -729,7 +726,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
         } catch (Exception e) {
             if (PlatHelper.isDev()) throw e;
-            EveryCompat.LOGGER.error("Failed to get creative tab for entry set {}", this.getName(), e);
+            EveryCompat.LOGGER.error("Failed to get creative tab for EntrySet - {} : {}", Utils.getID(this.getBaseType()).toString(), e);
             return null;
         }
 

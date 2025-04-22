@@ -293,20 +293,30 @@ public class ResourcesUtils {
 
         items.forEach((w, i) -> {
 
+            //check for disabled ones. //
             if (ModEntriesConfigs.isEntryEnabled(w, i)) {
+                // Will actually crash if its null since vanilla recipe builder expects a non-null one
                 try {
-                    //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
-                    String id = RecipeBuilder.getDefaultRecipeId(i).toString();
+                    String blockId = RecipeBuilder.getDefaultRecipeId(i).toString();
                     FinishedRecipe newR;
-                    if (index != 0) {
-                        id += "_" + index;
-                        newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
-                    } else {
+
+                    String oakRecipePath = oakRecipe.getPath();
+                    String modifiedRecipe = oakRecipePath.substring(oakRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), w.getTypeName());
+                    String target = blockId.substring(blockId.lastIndexOf("/") + 1);
+                    // Replaced the >text< with modifiedRecipe: everycomp:q/biomesoplenty/ >fir_vertical_slab<
+                    String newId = blockId.replace(target, modifiedRecipe);
+
+                    if (!blockId.equals(newId)) {
+                        newR = template.createSimilar(fromType, w, w.mainChild().asItem(), newId);
+                    }
+                    else {
                         newR = template.createSimilar(fromType, w, w.mainChild().asItem());
                     }
                     if (newR == null) return;
-                    //not even needed
-                    newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
+
+                    newR = ForgeHelper.addRecipeConditions(newR, template.getConditions()); //not even needed
+
+                    // Adding to the resources
                     pack.addRecipe(newR);
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate recipe @ {} for {}: {}", oakRecipe, i, e.getMessage());

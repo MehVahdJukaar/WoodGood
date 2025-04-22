@@ -46,7 +46,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)
                                 .strength(1.4F, 2.0F).noOcclusion())
                 )
-                //TEXTURES: logs, planks
+                //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
@@ -64,7 +64,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)
                                 .strength(1.4F, 2.0F).noOcclusion())
                 )
-                //TEXTURES: logs, planks
+                //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
@@ -82,7 +82,8 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks)
                                 .strength(1.4F, 2.0F).noOcclusion())
                 )
-                //TEXTURES: logs
+                .requiresChildren("stripped_log") //REASON: textures
+                //TEXTURES: log, stripped_log (inventory), planks (inventory)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
@@ -100,7 +101,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new WiredFence(Utils.copyPropertySafe(w.planks)
                                 .strength(1.5F, 2.5F).noOcclusion())
                 )
-                //TEXTURES: logs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
@@ -119,7 +120,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks)
                                 .strength(1.4F, 2.0F).noOcclusion(), w.toVanillaOrOak())
                 )
-                //TEXTURES: logs, planks
+                //TEXTURES: log, planks
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .setTabKey(tab)
@@ -136,7 +137,7 @@ public class MacawFencesModule extends SimpleModule {
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks)
                                 .strength(1.4F, 2.0F).noOcclusion(), w.toVanillaOrOak())
                 )
-                //TEXTURES: logs
+                //TEXTURES: log
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -151,13 +152,10 @@ public class MacawFencesModule extends SimpleModule {
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         () -> BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
-                        l -> {
-                            // Reason: Below have no leave texture
-                            if (l.getId().toString().equals("regions_unexplored:flowering")) return null;
-                            return new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
-                                    .strength(0.2F, 0.3F).noOcclusion()
-                                    .mapColor(l.leaves.defaultMapColor()));
-                        })
+                        l -> new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
+                                .strength(0.2F, 0.3F).noOcclusion()
+                                .mapColor(l.leaves.defaultMapColor()))
+                )
                 //TEXTURES: leaves
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
@@ -170,6 +168,8 @@ public class MacawFencesModule extends SimpleModule {
                         "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                //REASON: Below have no leave texture
+                .excludeBlockTypes("regions_unexplored", "flowering")
                 .build();
         this.addEntry(hedges);
     }

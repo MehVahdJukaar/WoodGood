@@ -6,6 +6,8 @@
   "tooltip.everycomp.leaf_type": "Leaves Type: %s",
   "container.everycomp.chest.name": "%s Chest",
 
+  "block.everycomp.q.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
+
   "block.everycomp.q.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
 
   "block.everycomp.q.enhanced_mushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
@@ -58,6 +60,8 @@
   "block.everycomp.tf.enlightened_end.hollow_indigo_log": "Hollow Indigo Stem",
 
   "block.everycomp.tf.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
+
+  "block.everycomp.tf.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
 
 
   "wood_type.blocksplus.bamboo": "Green Bamboo",
@@ -125,6 +129,7 @@
   "block_type.buildersaddition.support_bracket": "%s Support Bracket",
   "block_type.buildersaddition.table": "%s Table",
   "block_type.buildersaddition.vertical_slab": "%s Panel",
+
 
   "block_type.chipped.barred_door": "Barred %s Door",
   "block_type.chipped.beach_door": "Beach %s Door",
@@ -252,6 +257,23 @@
   "block_type.chipped.overgrown_log": "Overgrown %s Log",
   "block_type.chipped.planked_log": "Planked %s Log",
   "block_type.chipped.reinforced_log": "Reinforced %s Log",
+
+  "block_type.chipped.carved_stripped_log": "Carved Stripped %s Log",
+  "block_type.chipped.chipped_stripped_log": "Chipped Stripped %s Log",
+  "block_type.chipped.d_sign_stripped_log": "D Sign Stripped %s Log",
+  "block_type.chipped.edged_stripped_log": "Edged Stripped %s Log",
+  "block_type.chipped.f_sign_stripped_log": "F Sign Stripped %s Log",
+  "block_type.chipped.i_sign_stripped_log": "I Sign Stripped %s Log",
+  "block_type.chipped.k_sign_stripped_log": "K Sign Stripped %s Log",
+  "block_type.chipped.knotted_stripped_log": "Knotted Stripped %s Log",
+  "block_type.chipped.l_sign_stripped_log": "L Sign Stripped %s Log",
+  "block_type.chipped.layered_stripped_log": "Layered Stripped %s Log",
+  "block_type.chipped.lumpy_stripped_log": "Lumpy Stripped %s Log",
+  "block_type.chipped.patient_stripped_log": "Patient Stripped %s Log",
+  "block_type.chipped.reinforced_stripped_log": "Reinforced Stripped %s Log",
+  "block_type.chipped.sign_stripped_log": "Sign Stripped %s Log",
+  "block_type.chipped.stern_stripped_log": "Stern Stripped %s Log",
+  "block_type.chipped.wise_stripped_log": "Wise Stripped %s Log",
 
 
   "block_type.graveyard.coffin": "%s Coffin",
@@ -986,5 +1008,15 @@
   "block_type.excessive_building.nether_brickshelf": "%s Nether Brickshelf",
   "block_type.excessive_building.hollow_log": "Hollow %s Log",
   "block_type.excessive_building.hollow_stripped_log": "Hollow Stripped %s Log",
-  "block_type.excessive_building.decorative_shelf": "%s Decorative Shelf"
+  "block_type.excessive_building.decorative_shelf": "%s Decorative Shelf",
+
+  "block_type.more_beautiful_torches.log_torch": "%s Log Torch",
+  "block_type.more_beautiful_torches.log_soul_torch": "%s Log Soul Torch",
+  "block_type.more_beautiful_torches.log_redstone_torch": "%s Log Redstone Torch",
+  "block_type.more_beautiful_torches.planks_torch": "%s Planks Torch",
+  "block_type.more_beautiful_torches.planks_soul_torch": "%s Planks Soul Torch",
+  "block_type.more_beautiful_torches.planks_redstone_torch": "%s Planks Redstone Torch",
+  "block_type.more_beautiful_torches.stripped_log_torch": "Stripped %s Log Torch",
+  "block_type.more_beautiful_torches.stripped_log_soul_torch": "Stripped %s Log Soul Torch",
+  "block_type.more_beautiful_torches.stripped_log_redstone_torch": "Stripped %s Log Redstone Torch"
 }

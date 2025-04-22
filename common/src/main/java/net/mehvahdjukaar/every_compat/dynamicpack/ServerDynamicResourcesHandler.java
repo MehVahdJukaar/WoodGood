@@ -14,10 +14,15 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
 
     public ServerDynamicResourcesHandler() {
         super(new DynamicDataPack(EveryCompat.res("generated_pack")));
-        //needed for tags
+
+        /// Ensure the tags to be loaded first time into the world, not second time
         getPack().addNamespaces("minecraft");
         getPack().addNamespaces("forge");
         getPack().addNamespaces(EveryCompat.MOD_ID);
+
+        if (PlatHelper.isModLoaded("lolmcv")) {
+            getPack().addNamespaces("lieonstudio");
+        }
     }
 
     @Override
@@ -41,6 +46,13 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
                 getLogger().error("Failed to generate server dynamic assets for module {}: {}", m, e);
             }
         });
+    }
+
+    /// Will be added to DynamicPack if the mod is loaded
+    public void addModToDynamicPack(String modId) {
+        if (PlatHelper.isModLoaded(modId)) {
+            getPack().addNamespaces(modId);
+        }
     }
 
 }
