@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 
 import com.google.common.collect.ImmutableSet;
+import net.mehvahdjukaar.every_compat.ECRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -16,6 +17,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
@@ -29,7 +31,6 @@ import java.util.function.Supplier;
 public class FriendsAndFoesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> beehives;
-
 
     public FriendsAndFoesModule(String modId) {
         super(modId, "faf");
@@ -53,32 +54,9 @@ public class FriendsAndFoesModule extends SimpleModule {
 
     }
 
-    protected final ResourceLocation POI_ID = EveryCompat.res("faf_beehive");
-
-    private final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(POI_ID,
-            () -> new PoiType(getBeehives(), 1, 1));
-
-    private Set<BlockState> getBeehives() {
-        var set = new ImmutableSet.Builder<BlockState>();
-        beehives.blocks.values().forEach(b->set.addAll(b.getStateDefinition().getPossibleStates()));
-        return set.build();
-    }
-
     @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
-
-        SimpleTagBuilder bee_home = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
-        //Bee.BeeGoToHiveGoal
-        bee_home.add(POI_ID);
-
-        handler.dynamicPack.addTag(bee_home, Registries.POINT_OF_INTEREST_TYPE);
-
-        SimpleTagBuilder acquirable_job_site = SimpleTagBuilder.of(PoiTypeTags.ACQUIRABLE_JOB_SITE);
-        // Villager.POI_MEMORIES map entry: MemoryModuleType.POTENTIAL_JOB_SITE,
-        //                                  (villager, holder) -> VillagerProfession.ALL_ACQUIRABLE_JOBS.test(holder),
-        acquirable_job_site.add(POI_ID);
-
-        handler.dynamicPack.addTag(acquirable_job_site, Registries.POINT_OF_INTEREST_TYPE);
+    public void onModSetup() {
+        super.onModSetup();
+        ECRegistry.addBlocksToPOI(PoiTypes.BEEHIVE, beehives.blocks.values());
     }
 }

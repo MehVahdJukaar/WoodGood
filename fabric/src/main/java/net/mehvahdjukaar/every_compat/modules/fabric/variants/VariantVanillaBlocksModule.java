@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.mehvahdjukaar.every_compat.ECRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -12,12 +13,10 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -26,8 +25,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.PoiTypeTags;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -38,12 +36,12 @@ import net.xanthian.variantvanillablocks.block.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
-import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
 
 //SUPPORT: v1.3.6+
+//why isn't this in common??
 public class VariantVanillaBlocksModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, BarrelBlock> barrel;
@@ -60,17 +58,14 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, LecternBlock> lectern;
     public final SimpleEntrySet<WoodType, SmithingTableBlock> smithingTable;
     public final SimpleEntrySet<WoodType, SmokerBlock> smoker;
-
-    protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
-    @SuppressWarnings("unused")
-    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
-            () -> new PoiType(getBeehives(), 1, 1));
+    //LOOM?
 
     public VariantVanillaBlocksModule(String modID) {
         super(modID, "vvb");
         var tab = modRes(Initialise.MOD_ID);
-
-        barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
+        PoiTypes
+                //Barrel
+                barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
                         () -> Barrels.OAK_BARREL, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BarrelBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
@@ -346,16 +341,19 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
     @Override
-    // Tags
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
+    public void onModSetup() {
+        super.onModSetup();
 
-        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(PoiTypeTags.BEE_HOME);
-        tagBuilder.add(poiId);
-
-        handler.dynamicPack.addTag(tagBuilder, Registries.POINT_OF_INTEREST_TYPE);
+        //POI
+        FriendsAndFoesModule
+        ECRegistry.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
+        ECRegistry.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
+        ECRegistry.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+        ECRegistry.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
+        ECRegistry.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
+        ECRegistry.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
+        ECRegistry.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
     }
-
 
     // Registry --------------------------------------------------------------------------------------------------------
 

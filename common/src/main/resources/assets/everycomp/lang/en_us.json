@@ -4,6 +4,7 @@
   "tooltip.everycomp.mod": "Mod: %s",
   "tooltip.everycomp.wood_type": "Wood Type: %s",
   "tooltip.everycomp.leaf_type": "Leaves Type: %s",
+  "container.everycomp.chest.name": "%s Chest",
 
   "block.everycomp.q.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
 
