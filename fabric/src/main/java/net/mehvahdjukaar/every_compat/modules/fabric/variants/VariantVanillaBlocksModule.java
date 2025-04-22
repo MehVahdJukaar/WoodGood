@@ -13,8 +13,8 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -25,6 +25,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -36,6 +37,7 @@ import net.xanthian.variantvanillablocks.block.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
@@ -60,12 +62,22 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, SmokerBlock> smoker;
     //LOOM?
 
+    // Point-Of-Interest for Beehives - Removed when Moonlight LIb is updated
+    protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
+    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
+            () -> new PoiType(getBeehives(), 1, 1));
+    private Set<BlockState> getBeehives() {
+        var set = new ImmutableSet.Builder<BlockState>();
+        beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
+        return set.build();
+    }
+
     public VariantVanillaBlocksModule(String modID) {
         super(modID, "vvb");
-        var tab = modRes(Initialise.MOD_ID);
-        PoiTypes
-                //Barrel
-                barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
+        ResourceLocation tab = modRes(Initialise.MOD_ID);
+
+        //Barrel
+        barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
                         () -> Barrels.OAK_BARREL, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BarrelBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
@@ -91,7 +103,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         beehive = SimpleEntrySet.builder(WoodType.class, "beehive",
                         () -> Beehives.SPRUCE_BEEHIVE,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue("spruce"),
                         w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -112,7 +124,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         () -> Bookshelves.ACACIA_BOOKSHELF,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue("acacia"),
                         w -> new Block(Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -146,7 +158,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         () -> Chests.ACACIA_CHEST,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue("acacia"),
                         w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -166,7 +178,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         chiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         () -> ChiseledBookshelves.ACACIA_CHISELED_BOOKSHELF,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue("acacia"),
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -186,7 +198,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         composters = SimpleEntrySet.builder(WoodType.class, "composter",
                         () -> Composters.OAK_COMPOSTER,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ComposterBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new ComposterBlock(Utils.copyPropertySafe(Blocks.COMPOSTER))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("composters"), Registries.BLOCK)
@@ -201,7 +213,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         () -> CraftingTables.SPRUCE_CRAFTING_TABLE,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue("spruce"),
                         w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks)) {
                         }
                 )
@@ -221,7 +233,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         fletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
                         () -> FletchingTables.OAK_FLETCHING_TABLE,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FletchingTableBlock(Utils.copyPropertySafe(w.planks)) {
+                        w -> new FletchingTableBlock(Utils.copyPropertySafe(Blocks.FLETCHING_TABLE)) {
                         }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
@@ -255,8 +267,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
                         () -> Lecterns.ACACIA_LECTERN,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new LecternBlock(Utils.copyPropertySafe(w.planks)) {
+                        () -> WoodTypeRegistry.getValue("acacia"),
+                        w -> new LecternBlock(Utils.copyPropertySafe(Blocks.LECTERN)) {
                         }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -277,7 +289,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         smithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
                         () -> SmithingTables.OAK_SMITHING_TABLE,
                         () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SmithingTableBlock(Utils.copyPropertySafe(w.planks)) {
+                        w -> new SmithingTableBlock(Utils.copyPropertySafe(Blocks.SMITHING_TABLE)) {
                         }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -296,8 +308,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
                         () -> Smokers.ACACIA_SMOKER,
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> new SmokerBlock(Utils.copyPropertySafe(w.planks)) {
+                        () -> WoodTypeRegistry.getValue("acacia"),
+                        w -> new SmokerBlock(Utils.copyPropertySafe(Blocks.SMOKER)) {
                         }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
@@ -327,25 +339,18 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         return chests.getTile(CompatChestBlockEntity.class);
     }
 
-    //     BlockEntity
+    // BlockEntity
     private class VariantChestBlockEntity extends CompatChestBlockEntity {
         public VariantChestBlockEntity(BlockPos pos, BlockState state) {
             super(chests.getTile(), pos, state);
         }
     }
 
-    private Set<BlockState> getBeehives() {
-        var set = new ImmutableSet.Builder<BlockState>();
-        beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
-        return set.build();
-    }
-
     @Override
     public void onModSetup() {
         super.onModSetup();
 
-        //POI
-        FriendsAndFoesModule
+        //POI & ACQUIREABLE_JOB
         ECRegistry.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
         ECRegistry.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
         ECRegistry.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
@@ -369,9 +374,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
     }
 
-    //    @Override
     // Textures --------------------------------------------------------------------------------------------------------
-    @Environment(EnvType.CLIENT)
+
     @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
