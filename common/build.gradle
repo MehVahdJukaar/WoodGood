@@ -44,12 +44,12 @@ dependencies {
     //+ ~/common/mods LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
     modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
-    modCompileOnly("com.arcanc.bc:beautifulcampfires-fabric-1.20.1-1.0.0")
 
 //!! ================================================== IMPORTS ===================================================== \\
     //+ REQUIRED - The modules access libaries from below
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
     modCompileOnly("curse.maven:backpacked-352835:5401968")
+    modCompileOnly("curse.maven:beautiful-campfires-1085950:6162183")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
     modCompileOnly("curse.maven:dawn-of-time-312359:5651253")
