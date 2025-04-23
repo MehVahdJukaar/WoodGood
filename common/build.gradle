@@ -44,7 +44,7 @@ dependencies {
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
         // MACAW's
-//    modCompileOnly("curse.maven:macaws-bridges-351725:5465222") //!! All haven't moved to COMMON yet
+//    modCompileOnly("curse.maven:macaws-bridges-351725:5465222")
 //    modCompileOnly("curse.maven:macaws-doors-378646:5439190")
 //    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442197")
 //    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5473592")
