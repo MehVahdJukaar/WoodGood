@@ -39,10 +39,7 @@ import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.*;
 
 
@@ -150,7 +147,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         Set<String> alreadySupportedMods = new HashSet<>(module.getAlreadySupportedMods());
         alreadySupportedMods.add(module.modId);
         var possibleNamespaces = alreadySupportedMods.toArray(String[]::new);
-        for (var w : BlockSetAPI.getTypeRegistry(this.getTypeClass()).getValues()) {
+        for (var w : Objects.requireNonNull(BlockSetAPI.getTypeRegistry(this.getTypeClass())).getValues()) {
             if (!items.containsKey(w) && w.getChild(childKey) == null) {
                 String path = getBlockName(w);
                 Block block = getOptionalBlock(path, w.getNamespace());
@@ -390,6 +387,16 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         public Builder<T, B> defaultRecipe() {
             this.recipes.add(() -> Utils.getID(this.baseBlock.get()));
+            return this;
+        }
+
+        public Builder<T, B> defaultBlockTexture() {
+            this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("block/")).build());
+            return this;
+        }
+
+        public Builder<T, B> defaultItemTexture() {
+            this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("item/")).build());
             return this;
         }
     }
