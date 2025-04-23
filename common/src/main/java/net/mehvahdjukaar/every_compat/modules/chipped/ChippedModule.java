@@ -1139,7 +1139,7 @@ public class ChippedModule extends SimpleModule {
         this.addEntry(checkeredTrapdoor);
 
         classicTrapdoor = SimpleEntrySet.builder(WoodType.class, "trapdoor", "classic",
-                        getModBlock("classic_spruce_trapdoor"), () -> WoodTypeRegistry.getValue( ResourceLocation.withDefaultNamespace("spruce")),
+                        getModBlock("classic_spruce_trapdoor"), () -> WoodTypeRegistry.getValue( VanillaWoods.SPRUCE),
                         w -> new TrapDoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.planks).noOcclusion()) {}
                 )
                 .addTexture(modRes("block/spruce_trapdoor/classic_spruce_trapdoor"))

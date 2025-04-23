@@ -273,7 +273,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(ladder);
 
         coffin = SimpleEntrySet.builder(WoodType.class, "coffin",
-                        FurnishBlocks.Jungle_Coffin, () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("jungle")),
+                        FurnishBlocks.Jungle_Coffin, () -> WoodTypeRegistry.getValue(VanillaWoods.JUNGLE),
                         w -> new Coffin(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
@@ -285,7 +285,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(coffin);
 
         bookshelfChest = SimpleEntrySet.builder(WoodType.class, "bookshelf_chest",
-                        FurnishBlocks.Dark_Oak_Bookshelf_Chest, () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("dark_oak")),
+                        FurnishBlocks.Dark_Oak_Bookshelf_Chest, () -> WoodTypeRegistry.getValue(VanillaWoods.DARK_OAK),
                         w -> new BookshelfChest(Utils.copyPropertySafe(w.planks).pushReaction(PushReaction.BLOCK))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

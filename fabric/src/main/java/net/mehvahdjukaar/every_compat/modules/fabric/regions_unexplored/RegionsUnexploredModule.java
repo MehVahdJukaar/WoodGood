@@ -63,7 +63,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
         shrubs = SimpleEntrySet.builder(LeavesType.class, "shrub",
                         getModBlock("dark_oak_shrub"),
-                        () -> LeavesTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("dark_oak")),
+                        () -> LeavesTypeRegistry.getValue(VanillaWoods.DARK_OAK),
                         l -> new ShrubBlock(Utils.copyPropertySafe(l.leaves).pushReaction(PushReaction.DESTROY)
                                 .ignitedByLava().noCollission().instabreak().sound(SoundType.AZALEA)
                                 .offsetType(BlockBehaviour.OffsetType.XZ))

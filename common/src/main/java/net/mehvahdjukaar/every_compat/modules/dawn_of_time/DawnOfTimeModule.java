@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -108,7 +109,7 @@ public class DawnOfTimeModule extends SimpleModule {
         WALL = SimpleEntrySet.builder(WoodType.class, "wall",
                         getModBlock("oak_wall"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WallBlock(Utils.copyPropertySafe(w.planks)))
-                .addTag(new ResourceLocation("minecraft:decoration_blocks/fences_and_walls"), Registries.ITEM)
+                .addTag(ResourceLocation.withDefaultNamespace("decoration_blocks/fences_and_walls"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
@@ -172,7 +173,7 @@ public class DawnOfTimeModule extends SimpleModule {
         this.addEntry(COUCH);
 
         LOW_TABLE = SimpleEntrySet.builder(WoodType.class, "low_table",
-                        getModBlock("spruce_low_table"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_low_table"), () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
                         w -> new SpruceLowTableBlock(Utils.copyPropertySafe(w.log).noOcclusion()
                                 .strength(2.0F, 6.0F).lightLevel(litBlockEmission(14))))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -185,7 +186,7 @@ public class DawnOfTimeModule extends SimpleModule {
         this.addEntry(LOW_TABLE);
 
         LEGLESS_CHAIR = SimpleEntrySet.builder(WoodType.class, "legless_chair",
-                        getModBlock("spruce_legless_chair"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_legless_chair"), () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
                         w -> new ChairBlock(Utils.copyPropertySafe(w.log).noOcclusion()
                                 .strength(2.0F, 6.0F), 3.0F,
                                 VoxelShapes.SPRUCE_LEGLESS_CHAIR_SHAPES))

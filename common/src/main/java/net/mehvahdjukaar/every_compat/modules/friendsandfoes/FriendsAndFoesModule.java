@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -37,7 +38,7 @@ public class FriendsAndFoesModule extends SimpleModule {
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                         getModBlock("spruce_beehive"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
                         w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE)))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
@@ -57,6 +58,6 @@ public class FriendsAndFoesModule extends SimpleModule {
     @Override
     public void onModSetup() {
         super.onModSetup();
-        ECRegistry.addBlocksToPOI(PoiTypes.BEEHIVE, beehives.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehives.blocks.values());
     }
 }
