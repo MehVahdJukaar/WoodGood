@@ -51,7 +51,7 @@ public class EveryCompatClient {
         EveryCompat.forAllModules(CompatModule::onClientSetup);
     }
 
-    public static void onItemTooltip(ItemStack stack, TooltipFlag tooltipFlag, List<Component> components) {
+    public static void onItemTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, List<Component> components) {
         boolean mod = ECConfigs.MOD_TOOPTIP.get();
         boolean block = ECConfigs.BLOCK_TYPE_TOOLTIP.get();
 
@@ -84,10 +84,11 @@ public class EveryCompatClient {
         }
     }
 
-    public static <B extends Block> void registerRenderType(B b, BlockType bt, Object type) {
-        if(bt.id.equals(ResourceLocation.tryParse("rats:pirat"))){
+    public static <B extends Block> void registerRenderType(B b, BlockType bt, @Nullable Object type) {
+        if(bt.id.equals(ResourceLocation.parse("rats:pirat"))){
             type = RenderLayer.TRANSLUCENT;
         }
+
         if (type == null) return;
         if (type instanceof RenderLayer rl) {
             switch (rl) {

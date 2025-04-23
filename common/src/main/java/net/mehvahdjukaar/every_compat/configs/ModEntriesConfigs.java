@@ -23,7 +23,7 @@ public class ModEntriesConfigs {
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> BLOCK_TYPE_CONFIGS = new HashMap<>();
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> CHILD_CONFIGS = new HashMap<>();
 
-    public static ConfigSpec SPEC;
+    public static ModConfigHolder SPEC;
     private static boolean wasInit = false;
 
     // default as we are initializing it late
@@ -63,9 +63,9 @@ public class ModEntriesConfigs {
         }
         builder.pop();
 
-        SPEC = builder.buildAndRegister();
+        SPEC = builder.build();
 
-        SPEC.loadFromFile(); //manually load later
+        SPEC.forceLoad(); //manually load later
     }
 
     public static <T extends BlockType> boolean isEntryEnabled(T blockType, Object o) {

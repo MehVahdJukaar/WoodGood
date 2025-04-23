@@ -41,7 +41,7 @@ public class SimpleModule extends CompatModule {
     }
 
     public ResourceLocation makeMyRes(String name) {
-        return new ResourceLocation(getMyNamespace(), name);
+        return ResourceLocation.fromNamespaceAndPath(getMyNamespace(), name);
     }
 
     @Override
@@ -70,6 +70,9 @@ public class SimpleModule extends CompatModule {
     }
 
     public EntrySet<?> getEntry(String name) {
+//        var e = entries.get(name);
+//        if (e == null)
+//            throw new UnsupportedOperationException(String.format("This module does not have entries of type %s", name));
         return entries.get(name);
     }
 

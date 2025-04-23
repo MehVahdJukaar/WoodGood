@@ -29,13 +29,13 @@ public abstract class LootTablesHackMixin {
 
     @Inject(method = "getDrops", cancellable = true,
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"
-            ), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
-    public void addSimpleFastECdrops(BlockState state, LootParams.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir, ResourceLocation resId,
-                                     LootParams lootParams, ServerLevel serverLevel, LootTable lootTable) {
-        if (lootTable == LootTable.EMPTY && EveryCompat.isMyIdOrAddon(Utils.getID(state.getBlock()).getNamespace())) {
+            ))
+    public void everyComp$addFastDrops(BlockState state, LootParams.Builder params, CallbackInfoReturnable<List<ItemStack>> cir,
+                                       @Local LootTable lootTable, @Local LootParams lootParams,
+                                       @Local ResourceKey<LootTable> resId) {
+        if (lootTable == LootTable.EMPTY && Utils.getID(state.getBlock()).getNamespace().equals(EveryCompat.MOD_ID)) {
             if (SimpleEntrySet.isSimpleDrop(state.getBlock())) {
-                cir.setReturnValue(ECPlatStuff.modifyLoot(resId, List.of(this.asItem().getDefaultInstance()),
-                        lootParams));
+                cir.setReturnValue(ECPlatStuff.modifyLoot(resId.location(), List.of(this.asItem().getDefaultInstance()), lootParams));
             }
         }
     }

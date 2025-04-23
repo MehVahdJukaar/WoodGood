@@ -70,7 +70,7 @@ public abstract class CompatModule {
     }
 
     public ResourceLocation modRes(String string) {
-        return new ResourceLocation(modId, string);
+        return ResourceLocation.fromNamespaceAndPath(modId, string);
     }
 
     public List<String> getAlreadySupportedMods() {
@@ -178,7 +178,7 @@ public abstract class CompatModule {
 
     // Ec tab
     public ResourceKey<CreativeModeTab> getDedicatedTab() {
-        return ECRegistry.MOD_TAB.getKey();
+        return (ResourceKey<CreativeModeTab>) ECRegistry.MOD_TAB.getKey();
     }
 
     public abstract Collection<Class<? extends BlockType>> getAffectedTypes();
@@ -191,5 +191,4 @@ public abstract class CompatModule {
     public String[] getClientResourcesNamespaces() {
         return new String[]{myNamespace};
     }
-
 }

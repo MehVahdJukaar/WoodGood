@@ -72,7 +72,7 @@ subprojects {
             } else loaders = [modLoader]
 
             changelog = changelogText
-            versionNumber = modLoader +"_"+ mod_version
+            versionNumber = modLoader + "_" + mod_version
             versionType = release_type
 
             if (modLoader == "fabric") {
@@ -95,7 +95,7 @@ subprojects {
                 id = project_id
                 changelog = changelogText
                 releaseType = release_type
-                for (var ver : versions){
+                for (var ver : versions) {
                     addGameVersion ver
                 }
                 if (modLoader == "neoforge") {
@@ -253,7 +253,8 @@ allprojects {
         maven { url = "https://maven.shedaniel.me/" } // Cloth Config
         maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
         maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
-        maven { url = "https://maven.jamieswhiteshirt.com/libs-release"; content { includeGroup("com.jamieswhiteshirt") } } // Reach Entity Attributes
+        maven { url = "https://maven.jamieswhiteshirt.com/libs-release";
+            content { includeGroup("com.jamieswhiteshirt") } } // Reach Entity Attributes
         maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
         maven { name = 'Ladysnake Mods'; url = 'https://maven.ladysnake.org/releases' }
         maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" } // JEI
@@ -261,10 +262,7 @@ allprojects {
         maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
         maven { url = "https://maven.firstdarkdev.xyz/snapshots" }
         maven { name = "TerraformersMC"; url = "https://maven.terraformersmc.com/" }
-        maven {
-            name = "ModdingPlayground"
-            url  = "https://raw.githubusercontent.com/moddingplayground/maven/main/"
-        }
+        maven { url = "https://raw.githubusercontent.com/moddingplayground/maven/main/" }
     }
 
     tasks.withType(JavaCompile).configureEach {
@@ -278,27 +276,27 @@ allprojects {
 }
 
 ext {
-    usesMavenLocalML =  System.getenv().MY_PC == "1"
+    usesMavenLocalML = System.getenv().MY_PC == "1"
     print "isMyPc: $usesMavenLocalML"
     replaceProperties = [
-            minecraft_version      : minecraft_version,
-            minecraft_min_version  : minecraft_min_version,
-            minecraft_max_version  : minecraft_max_version,
-            pack_format_number     : pack_format_number,
+            minecraft_version    : minecraft_version,
+            minecraft_min_version: minecraft_min_version,
+            minecraft_max_version: minecraft_max_version,
+            pack_format_number   : pack_format_number,
 
-            mod_id                 : mod_id,
-            mod_name               : mod_name,
-            mod_version            : mod_version,
-            mod_license            : mod_license,
-            mod_authors            : mod_authors,
-            mod_description        : mod_description,
-            mod_credits            : mod_credits,
-            mod_homepage           : mod_homepage,
-            mod_github             : mod_github,
+            mod_id               : mod_id,
+            mod_name             : mod_name,
+            mod_version          : mod_version,
+            mod_license          : mod_license,
+            mod_authors          : mod_authors,
+            mod_description      : mod_description,
+            mod_credits          : mod_credits,
+            mod_homepage         : mod_homepage,
+            mod_github           : mod_github,
 
-            neo_version            : neo_version,
-            neo_version_range      : neo_version_range,
-            loader_version_range   : loader_version_range
+            neo_version          : neo_version,
+            neo_version_range    : neo_version_range,
+            loader_version_range : loader_version_range
     ]
 }
 

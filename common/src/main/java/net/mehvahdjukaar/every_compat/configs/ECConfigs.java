@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 //loaded after registry
 public class ECConfigs {
 
-    public static ConfigSpec SPEC;
+    public static ModConfigHolder SPEC;
 
     public static final Supplier<Boolean> TAB_ENABLED;
     public static final Supplier<Boolean> DEPEND_ON_PACKS;
@@ -51,9 +51,9 @@ public class ECConfigs {
         builder.pop();
 
 
-        SPEC = builder.buildAndRegister();
+        SPEC = builder.build();
 
-        SPEC.loadFromFile(); //manually load early
+        SPEC.forceLoad();
     }
 
     public static void init() {

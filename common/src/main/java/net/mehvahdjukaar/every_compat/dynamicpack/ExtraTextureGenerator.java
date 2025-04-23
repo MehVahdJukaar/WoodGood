@@ -31,7 +31,7 @@ public class ExtraTextureGenerator {
 
         public static final Codec<RecolorableTexture> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Text.TEXT_CODEC.listOf().fieldOf("textures").forGetter(RecolorableTexture::textures),
-                StrOpt.of(Codec.BOOL, "merge_palette", true).forGetter(RecolorableTexture::mergePalette),
+                Codec.BOOL.optionalFieldOf("merge_palette", true).forGetter(RecolorableTexture::mergePalette),
                 BuiltInRegistries.BLOCK.byNameCodec().fieldOf("planks_block").forGetter(RecolorableTexture::block)
         ).apply(instance, RecolorableTexture::new));
     }
@@ -39,7 +39,7 @@ public class ExtraTextureGenerator {
     public record Text(ResourceLocation text, @Nullable ResourceLocation mask) {
         public static final Codec<Text> TEXT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ResourceLocation.CODEC.fieldOf("texture").forGetter(Text::text),
-                StrOpt.of(ResourceLocation.CODEC, "mask").forGetter(t -> Optional.ofNullable(t.mask))
+                ResourceLocation.CODEC.optionalFieldOf("mask").forGetter(t -> Optional.ofNullable(t.mask))
         ).apply(instance, (a, b) -> new Text(a, b.orElse(null))));
     }
 
@@ -50,7 +50,7 @@ public class ExtraTextureGenerator {
         map.forEach((id, json) -> {
 
             RecolorableTexture modifier = RecolorableTexture.CODEC.decode(JsonOps.INSTANCE, json)
-                    .getOrThrow(false, errorMsg -> EveryCompat.LOGGER.warn("Failed to load recolorable texture {}: {}", id, errorMsg))
+                    .getOrThrow()
                     .getFirst();
             extraTextures.add(modifier);
         });

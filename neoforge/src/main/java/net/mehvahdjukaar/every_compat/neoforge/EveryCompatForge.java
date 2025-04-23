@@ -48,19 +48,16 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.workshop.WorkshopForHands
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.platform.network.forge.ChannelHandlerImpl;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerNegotiationEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.registries.MissingMappingsEvent;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
 
 import java.util.Optional;
 
@@ -72,12 +69,14 @@ import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
  */
 @Mod(EveryCompat.MOD_ID)
 public class EveryCompatForge extends EveryCompatCommon {
+    private static WeakReference<IEventBus> BUS = new WeakReference<>(null);
 
-    public EveryCompatForge() {
+    public EveryCompatForge(IEventBus bus) {
+        RegHelper.startRegisteringFor(bus);
+        BUS = new WeakReference<>(bus);
         this.initialize();
 
-        CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
-        Neofo.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
     }
 
     @Override
@@ -147,12 +146,15 @@ public class EveryCompatForge extends EveryCompatCommon {
 
     }
 
+    public static IEventBus getModEventBus() {
+        return BUS.get();
+    }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void itemTooltipEvent(ItemTooltipEvent event) {
-        EveryCompatClient.onItemTooltip(event.getItemStack(),event.getFlags(), event.getToolTip());
+        EveryCompatClient.onItemTooltip(event.getItemStack(), event.getContext(), event.getFlags(), event.getToolTip());
     }
-
+/*
     @SubscribeEvent
     public void onRemap(MissingMappingsEvent event) {
         for (var mapping : event.getMappings(Registries.BLOCK_ENTITY_TYPE, EveryCompat.MOD_ID)) {
@@ -167,16 +169,19 @@ public class EveryCompatForge extends EveryCompatCommon {
                 }
             });
         }
-    }
+    }*/
 
 
     @SubscribeEvent
     public void onPlayerNegotiation(PlayerNegotiationEvent playerNegotiationEvent) {
-        if(ECConfigs.CHECK_PACKET.get()) {
-            ((ChannelHandlerImpl) ECNetworking.CHANNEL).channel.sendTo(new ECNetworking.S2CModVersionCheckMessage(),
+        if (ECConfigs.CHECK_PACKET.get()) {
+            /*
+            ((ChannelHandlerImpl) NetworkHelper.channel.sendTo(new ECNetworking.S2CModVersionCheckMessage(),
                     playerNegotiationEvent.getConnection(),
                     NetworkDirection.LOGIN_TO_CLIENT
             );
+            */
+            //TODO: add back
         }
     }
 }

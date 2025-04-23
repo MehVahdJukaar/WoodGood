@@ -118,7 +118,7 @@ public class ResourcesUtils {
 
         for (var m : modelsLoc) {
             //remove the ones from mc namespace
-            ResourceLocation modelRes = new ResourceLocation(m);
+            ResourceLocation modelRes = ResourceLocation.parse(m);
             if (!modelRes.getNamespace().equals("minecraft")) {
                 StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(m));
                 if (model != null) models.add(model);
@@ -288,33 +288,21 @@ public class ResourcesUtils {
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,
                                                                               Map<T, B> items, ResourceLocation oakRecipe, T fromType,
                                                                               int index) {
-        IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
-                ResType.RECIPES.getPath(oakRecipe));
-
+        Recipe<?> template = RPUtils.readRecipe(manager, oakRecipe);
         items.forEach((w, i) -> {
 
-            //check for disabled ones. //
             if (ModEntriesConfigs.isEntryEnabled(w, i)) {
-                // Will actually crash if its null since vanilla recipe builder expects a non-null one
                 try {
-                    String blockId = RecipeBuilder.getDefaultRecipeId(i).toString();
-                    FinishedRecipe newR;
-
-                    String oakRecipePath = oakRecipe.getPath();
-                    String modifiedRecipe = oakRecipePath.substring(oakRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), w.getTypeName());
-                    String target = blockId.substring(blockId.lastIndexOf("/") + 1);
-                    // Replaced the >text< with modifiedRecipe: everycomp:q/biomesoplenty/ >fir_vertical_slab<
-                    String newId = blockId.replace(target, modifiedRecipe);
-
-                    if (!blockId.equals(newId)) {
-                        newR = template.createSimilar(fromType, w, w.mainChild().asItem(), newId);
+                    //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
+                    ResourceLocation id = RecipeBuilder.getDefaultRecipeId(i);
+                    RecipeHolder<?> newR;
+                    if (index != 0) {
+                        id = id.withSuffix("_" + index);
                     }
-                    else {
-                        newR = template.createSimilar(fromType, w, w.mainChild().asItem());
-                    }
-                    if (newR == null) return;
+                    newR = RPUtils.makeSimilarRecipe(template, fromType, w, id);
 
-                    newR = ForgeHelper.addRecipeConditions(newR, template.getConditions()); //not even needed
+                    //not even needed
+                    //newR = ForgeHelper.copyRecipeConditions(template, newR.value());
 
                     // Adding to the resources
                     pack.addRecipe(newR);

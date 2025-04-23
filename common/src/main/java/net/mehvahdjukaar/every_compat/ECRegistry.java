@@ -31,21 +31,8 @@ public class ECRegistry {
                     RegHelper.registerCreativeModeTab(EveryCompat.res(EveryCompat.MOD_ID),
                             true,
                             builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
-                                    .backgroundSuffix("item_search.png")
+                                    .backgroundTexture(CreativeModeTab.createTextureLocation("item_search"))
                                     .title(Component.translatable("itemGroup.everycomp.everycomp"))
                                     .build())
                     : null;
-
-    //TODO: use ML one when it updates
-    @Deprecated(forRemoval = true)
-    //call in setup when you have blocks
-    public static void addBlocksToPOI(ResourceKey<PoiType> poi, Iterable<? extends Block> blocks) {
-        Holder.Reference<PoiType> holderPOI = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poi);
-        ImmutableSet.Builder<BlockState> builder = ImmutableSet.builder();
-        builder.addAll(holderPOI.value().matchingStates());
-        for (var block : blocks) {
-            builder.addAll(block.getStateDefinition().getPossibleStates());
-        }
-        PoiTypes.registerBlockStates(holderPOI, builder.build());
-    }
 }

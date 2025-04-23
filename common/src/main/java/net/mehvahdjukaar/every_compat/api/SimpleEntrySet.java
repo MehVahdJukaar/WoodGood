@@ -169,7 +169,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     private static Block getOptionalBlock(String path, String... namespaces) {
         ResourceLocation id;
         for (var n : namespaces) {
-            id = new ResourceLocation(n, path);
+            id = ResourceLocation.fromNamespaceAndPath(n, path);
             var i = BuiltInRegistries.BLOCK.getOptional(id);
             if (i.isPresent()) {
                 return i.get();
@@ -300,8 +300,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Environment(EnvType.CLIENT)
-    @SuppressWarnings({"rawtypes"})
-    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider aNew) {
+    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> aNew) {
         if (tileHolder != null) {
             tileHolder.registerRenderer(event, aNew);
         }
