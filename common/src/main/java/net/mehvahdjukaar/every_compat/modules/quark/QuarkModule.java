@@ -114,7 +114,7 @@ public class QuarkModule extends SimpleModule {
         bookshelves = QuarkSimpleEntrySet.builder(WoodType.class, "bookshelf",
                         VariantBookshelvesModule.class,
                         getModBlock("acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("acacia")),
+                        () -> WoodTypeRegistry.getValue(VanillaWoods.ACACIA),
                         w -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, w.canBurn(), w.getSound()))
                 .setTabKey(tab)
@@ -202,7 +202,7 @@ public class QuarkModule extends SimpleModule {
         ladders = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
                         VariantLaddersModule.class,
                         getModBlock("spruce_ladder"),
-                        () -> WoodTypeRegistry.getValue(  ResourceLocation.withDefaultNamespace("spruce")),
+                        () -> WoodTypeRegistry.getValue(  VanillaWoods.SPRUCE),
                         w -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
                 .setTabKey(tab)
