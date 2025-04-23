@@ -53,7 +53,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerNegotiationEvent;
@@ -78,7 +77,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         this.initialize();
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
-        MinecraftForge.EVENT_BUS.register(this);
+        Neofo.EVENT_BUS.register(this);
     }
 
     @Override

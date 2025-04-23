@@ -127,9 +127,9 @@ dependencies {
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
     // ~/forge/mods LOCAL
-    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
-    modCompileOnly("com.arcanc.bc:Beautiful-Campfires-fabric-1.20.1-1.0.3")
-    modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
+    //modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
+    //modCompileOnly("com.arcanc.bc:Beautiful-Campfires-fabric-1.20.1-1.0.3")
+    //modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
 
     // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5465222")
