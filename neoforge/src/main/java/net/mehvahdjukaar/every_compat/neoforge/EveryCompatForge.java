@@ -48,17 +48,20 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.workshop.WorkshopForHands
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
 
+import java.lang.ref.WeakReference;
 import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;

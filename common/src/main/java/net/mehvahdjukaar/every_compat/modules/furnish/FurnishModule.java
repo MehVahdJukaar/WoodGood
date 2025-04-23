@@ -18,8 +18,6 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -136,7 +134,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(kitchenCabinet);
 
         cabinet = SimpleEntrySet.builder(WoodType.class, "cabinet",
-                        FurnishBlocks.Birch_Cabinet, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        FurnishBlocks.Birch_Cabinet, () -> WoodTypeRegistry.getValue( ResourceLocation.withDefaultNamespace("birch")),
                         w -> new Cabinet(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound)
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -151,7 +149,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(cabinet);
 
         wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
-                        FurnishBlocks.Birch_Wardrobe, () -> WoodTypeRegistry.getValue(new ResourceLocation("birch")),
+                        FurnishBlocks.Birch_Wardrobe, () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("birch")),
                         w -> new Wardrobe(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound)
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -278,7 +276,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(ladder);
 
         coffin = SimpleEntrySet.builder(WoodType.class, "coffin",
-                        FurnishBlocks.Jungle_Coffin, () -> WoodTypeRegistry.getValue(new ResourceLocation("jungle")),
+                        FurnishBlocks.Jungle_Coffin, () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("jungle")),
                         w -> new Coffin(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
@@ -290,7 +288,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(coffin);
 
         bookshelfChest = SimpleEntrySet.builder(WoodType.class, "bookshelf_chest",
-                        FurnishBlocks.Dark_Oak_Bookshelf_Chest, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
+                        FurnishBlocks.Dark_Oak_Bookshelf_Chest, () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("dark_oak")),
                         w -> new BookshelfChest(Utils.copyPropertySafe(w.planks).pushReaction(PushReaction.BLOCK))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

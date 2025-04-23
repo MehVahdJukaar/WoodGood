@@ -30,7 +30,7 @@ public class WoodsterModule extends SimpleModule {
         var tab = modRes(modId);
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        WoodsterBlocks.DARK_OAK_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
+                        WoodsterBlocks.DARK_OAK_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("dark_oak")),
                         w -> new ChiseledBookShelfBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.CHISELED_BOOKSHELF))
                 )
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
