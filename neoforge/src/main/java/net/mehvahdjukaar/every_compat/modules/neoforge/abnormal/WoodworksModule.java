@@ -61,7 +61,7 @@ public class WoodworksModule extends SimpleModule {
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("acacia")),
                         woodType -> new Block(Utils.copyPropertySafe(woodType.log)
                                 .strength(1.5F)
                         )
@@ -78,7 +78,7 @@ public class WoodworksModule extends SimpleModule {
 
         chiseled_bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf", "chiseled",
                         getModBlock("chiseled_acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("acacia")),
                         woodType -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(woodType.log)
                                 .strength(1.5F)
                         )

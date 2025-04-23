@@ -114,15 +114,15 @@ public class QuarkModule extends SimpleModule {
         bookshelves = QuarkSimpleEntrySet.builder(WoodType.class, "bookshelf",
                         VariantBookshelvesModule.class,
                         getModBlock("acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("acacia")),
                         w -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, w.canBurn(), w.getSound()))
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:bookshelves"), Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:bookshelves"), Registries.ITEM)
+                .addTag(  ResourceLocation.fromNamespaceAndPath("c","bookshelves"), Registries.BLOCK)
+                .addTag(  ResourceLocation.fromNamespaceAndPath("c","bookshelves"), Registries.ITEM)
                 .addRecipe(modRes("building/crafting/acacia_bookshelf"))
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .setPalette(this::bookshelfPalette)
@@ -202,7 +202,7 @@ public class QuarkModule extends SimpleModule {
         ladders = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
                         VariantLaddersModule.class,
                         getModBlock("spruce_ladder"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(  ResourceLocation.withDefaultNamespace("spruce")),
                         w -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
                 .setTabKey(tab)
@@ -241,11 +241,11 @@ public class QuarkModule extends SimpleModule {
                                 Utils.copyPropertySafe(Blocks.CHEST)))
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addTag(new ResourceLocation("forge:chests/wooden"), Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:chests/wooden"), Registries.ITEM)
+                .addTag(  ResourceLocation.fromNamespaceAndPath("c","chests/wooden"), Registries.BLOCK)
+                .addTag(  ResourceLocation.fromNamespaceAndPath("c","chests/wooden"), Registries.ITEM)
                 .addTag(modRes("revertable_chests"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(new ResourceLocation("quark:revertable_chests"), Registries.ITEM)
+                .addTag(  ResourceLocation.fromNamespaceAndPath("quark","revertable_chests"), Registries.ITEM)
                 .addTile(CompatChestBlockTile::new)
                 .excludeBlockTypes("twilightforest", "dark")
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
@@ -265,10 +265,10 @@ public class QuarkModule extends SimpleModule {
                         })
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addTag(new ResourceLocation("forge:chests/trapped"), Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:chests/trapped"), Registries.ITEM)
-                .addTag(new ResourceLocation("forge:chests/wooden"), Registries.ITEM)
-                .addTag(new ResourceLocation("forge:chests/wooden"), Registries.BLOCK)
+                .addTag( ResourceLocation.fromNamespaceAndPath("forge","chests/trapped"), Registries.BLOCK)
+                .addTag( ResourceLocation.fromNamespaceAndPath("forge","chests/trapped"), Registries.ITEM)
+                .addTag( ResourceLocation.fromNamespaceAndPath("forge","chests/wooden"), Registries.ITEM)
+                .addTag( ResourceLocation.fromNamespaceAndPath("forge","chests/wooden"), Registries.BLOCK)
                 .addTag(modRes("revertable_trapped_chests"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(CompatTrappedChestBlockTile::new)
@@ -593,7 +593,7 @@ public class QuarkModule extends SimpleModule {
         // generate a tag for logs/stems that don't have the tags.
 
         // ResourceLocation of log/planks tags
-        ResourceLocation RLocLogsTag = new ResourceLocation(wood +"_"+ suffixTag);
+        ResourceLocation RLocLogsTag =   ResourceLocation.parse(wood +"_"+ suffixTag);
         // ~ of generated tags
         ResourceLocation RLocECTag = EveryCompat.res(woodType.getAppendableId() +"_"+ suffixTag);
 

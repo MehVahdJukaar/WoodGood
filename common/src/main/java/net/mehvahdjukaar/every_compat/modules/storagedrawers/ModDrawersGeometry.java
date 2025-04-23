@@ -91,7 +91,7 @@ public class ModDrawersGeometry {
 
     //FORGE use StorageDrawers.rl() and FABRIC use ModConstants.loc()
     private static ResourceLocation modLoc(String path) {
-        return new ResourceLocation("storagedrawers", path);
+        return ResourceLocation.fromNamespaceAndPath("storagedrawers", path);
     }
 
     private static void populateGeometryData(ResourceLocation locationIcon,

@@ -50,7 +50,7 @@ public abstract class EveryCompat {
     private static final UnsafeModuleDisabler MODULE_DISABLER = new UnsafeModuleDisabler();
 
     public static ResourceLocation res(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 
     public static void forAllModules(Consumer<CompatModule> action) {

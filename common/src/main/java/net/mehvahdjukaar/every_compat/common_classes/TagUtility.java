@@ -28,9 +28,9 @@ public class TagUtility {
         String resLocMOD = blockType.getNamespace() + ":" + blockType.getTypeName();
 
         // ResourceLocation
-        ResourceLocation RLocLogs = new ResourceLocation(resLocMOD + "_" + suffixTag);
-        ResourceLocation RLocStems = new ResourceLocation(resLocMOD + "_" + suffixAlt);
-        ResourceLocation RLocFolders = new ResourceLocation(blockType.getNamespace() + ":" + suffixTag + "/" + blockType.getTypeName());
+        ResourceLocation RLocLogs = ResourceLocation.parse(resLocMOD + "_" + suffixTag);
+        ResourceLocation RLocStems = ResourceLocation.parse(resLocMOD + "_" + suffixAlt);
+        ResourceLocation RLocFolders = ResourceLocation.parse(blockType.getNamespace() + ":" + suffixTag + "/" + blockType.getTypeName());
         ResourceLocation RLocEC = EveryCompat.res(blockType.getAppendableId() + "_" + suffixTag);
 
         if (manager.getResource(ResType.TAGS.getPath(RLocLogs.withPrefix("blocks/"))).isPresent())
@@ -89,7 +89,7 @@ public class TagUtility {
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String nameStone, String modId, String tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
         if (PlatHelper.isModLoaded(modId)) {
             boolean isTagCreated = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(modId, tag));
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(ResourceLocation.fromNamespaceAndPath(modId, tag));
             for (Map.Entry<T, B> entry : blocks.entrySet()) {
                 T stoneType = entry.getKey();
                 B block = entry.getValue();

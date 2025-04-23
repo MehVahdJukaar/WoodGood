@@ -46,7 +46,7 @@ public class WoodsterModule extends SimpleModule {
         this.addEntry(chiseled_books);
 
         books = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        WoodsterBlocks.ACACIA_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        WoodsterBlocks.ACACIA_BOOKSHELF, () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("acacia")),
                         w -> new BookshelfBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.WOOD))
                 )
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))

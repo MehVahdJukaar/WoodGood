@@ -59,7 +59,7 @@ import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.addTagToA
 @SuppressWarnings({"unused", "removal"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
-    protected static final ResourceLocation NO_TAB_MARKER = new ResourceLocation("none");
+    protected static final ResourceLocation NO_TAB_MARKER = ResourceLocation.withDefaultNamespace("none");
 
 
     public final Map<T, B> blocks = new HashMap<>();
@@ -157,7 +157,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
         String wood = parseWoodType(oldName);
         if (wood != null) {
-            var w = BlockSetAPI.getBlockSet(this.getTypeClass()).get(new ResourceLocation(woodFrom, wood));
+            var w = BlockSetAPI.getBlockSet(this.getTypeClass()).get(ResourceLocation.fromNamespaceAndPath(woodFrom, wood));
             if (w != null) {
                 return module.shortenedId() + "/" + w.getNamespace() + "/" + oldName;
             }
@@ -391,7 +391,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         if (info != null) {
                             if (info.keepNamespace()) newId = oldTextureId.withPath(newPath).toString();
                             else
-                                newId = new ResourceLocation(blockId.getNamespace(), newPath).toString();
+                                newId = ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), newPath).toString();
 
                             if (newId.isEmpty()) {
                                 EveryCompat.LOGGER.error("The path of new texture is empty for: {}", info.texture());
