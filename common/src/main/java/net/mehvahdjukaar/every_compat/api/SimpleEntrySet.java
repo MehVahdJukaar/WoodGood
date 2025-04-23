@@ -22,7 +22,6 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -297,10 +296,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Environment(EnvType.CLIENT)
-    @SuppressWarnings({"rawtypes"})
-    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider aNew) {
+    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> renderer) {
         if (tileHolder != null) {
-            tileHolder.registerRenderer(event, aNew);
+            tileHolder.registerRenderer(event, renderer);
         }
     }
 
@@ -407,8 +405,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         BlockEntityType<H> get();
 
         @Environment(EnvType.CLIENT)
-        @SuppressWarnings({"unchecked", "rawtypes"})
-        default void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider renderer) {
+        default void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> renderer) {
             event.register(get(), renderer);
         }
     }
