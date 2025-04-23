@@ -1,11 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.mrcrayfish;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.mrcrayfish.furniture.refurbished.block.*;
 import com.mrcrayfish.furniture.refurbished.client.renderer.blockentity.CeilingFanBlockEntityRenderer;
 import com.mrcrayfish.furniture.refurbished.core.ModBlockEntities;
-import com.mrcrayfish.furniture.refurbished.core.ModCreativeTabs;
 import com.mrcrayfish.furniture.refurbished.crafting.StackedIngredient;
 import com.mrcrayfish.furniture.refurbished.crafting.WorkbenchContructingRecipe;
 import com.mrcrayfish.furniture.refurbished.item.MailboxItem;
@@ -14,7 +11,6 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.client.util.RenderUtil;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -27,23 +23,15 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.critereon.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -51,12 +39,9 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-//SUPPORT: v1.0.0-beta4
+//SUPPORT: v1.0.12+
 public class RefurbishedFurnitureModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chairs;

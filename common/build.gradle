@@ -32,6 +32,7 @@ dependencies {
 
 //!! ============================================= DEPENDENCIES ========================================================
     //+ REQUIRED - The modules access libaries from below
+    modCompileOnly("curse.maven:framework-549225:5911983") // v0.9.4 | +Refurbished-Furniture, Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:resourceful-lib-570073:5659872") // v2.1.29
     modCompileOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
@@ -77,6 +78,7 @@ dependencies {
     modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304")
     modCompileOnly("curse.maven:quark-243121:5093415") //!! 1.20.1
+    modCompileOnly("curse.maven:refurbished-furniture-897116:6272856") // Framework
     modCompileOnly("curse.maven:storage-drawers-223852:5840297")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
