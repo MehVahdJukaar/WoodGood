@@ -73,7 +73,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5793501") //v3.0.11 | Chipped, Handcrafted, Cozy
 //    modRuntimeOnly("curse.maven:monolib-968432:6123972") //v2.0.0 | More-Beautiful-Torches
 
-    //- OTHER LIBRARIES
+        //- OTHER LIBRARIES
 //    modRuntimeOnly("org.reflections:reflections:0.10.2") // Refurbished-Furniture
 //    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
 
@@ -84,14 +84,14 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
     modCompileOnly("maven.modrinth:frozenlib:1.9-mc1.21.1") // Wilder-Wild
 
-    //+ OTHER MAVENS
+        //+ OTHER MAVENS
     modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create, The-Twilight-Forest
 
-    // Special dumb stuff required by TerraBlender
+            // Special dumb stuff required by TerraBlender
     modImplementation("com.terraformersmc:modmenu:11.0.3")
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:6.1.1")
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:6.1.1")
-    // so dumber stuff requird by GlitchCore
+            // so dumber stuff requird by GlitchCore
     modImplementation('net.jodah:typetools:0.6.3')
     modImplementation('com.electronwill.night-config:core:3.8.1')
     modImplementation('com.electronwill.night-config:toml:3.8.1')
@@ -101,9 +101,11 @@ dependencies {
 
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162192")
 //    modRuntimeOnly("curse.maven:backpacked-352835:5852971") //!! BETA
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579676") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:chipped-456956:5813118")
+//    modRuntimeOnly("curse.maven:corail-pillar-266228:5613351")
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:5651253") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:3941637") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:excessive-building-845097:6075987")
@@ -121,17 +123,16 @@ dependencies {
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189603") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
 
-    //- OTHER MAVENS
+        //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
 //    modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1")
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
-    // ~/forge/mods LOCAL
-    //modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
-    //modCompileOnly("com.arcanc.bc:Beautiful-Campfires-fabric-1.20.1-1.0.3")
-    //modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
+        // ~/forge/mods LOCAL
+    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
+    modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
 
-    // MACAW's
+        // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5465222")
     modCompileOnly("curse.maven:macaws-doors-378646:5439190")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442197")
@@ -143,7 +144,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-furniture-359540:5589849")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802484")
 
-    // GENERAL
+        //+ GENERAL
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:beautify-refabricated-809311:5405529") //!! 1.20.1
     modCompileOnly("curse.maven:bewitchment-394915:5205373") //!! 1.20.1
@@ -163,7 +164,7 @@ dependencies {
 
     modCompileOnly("curse.maven:regions-unexplored-659110:5579923")
 
-    // OTHER MAVENS
+        // OTHER MAVENS
 //    modCompileOnly("com.simibubi.create:create-fabric-1.20.1:$create_fabric_version") // Registrate, Flywheel //!! Need to update maven to get other libraries & the old maven are outdated
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
