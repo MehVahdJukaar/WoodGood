@@ -170,6 +170,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511") //!! 1.20.1 -> 1.21.1 Cannot remap access widener from namespace 'mojang'. Expected: 'intermediary'
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617252") // Resourceful-Lib
+//    modRuntimeOnly("curse.maven:missing-wilds-622590:6302230")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:5890187")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1

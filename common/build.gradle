@@ -73,6 +73,7 @@ dependencies {
     modCompileOnly("curse.maven:furnish-547069:5683297")
     modCompileOnly("curse.maven:handcrafted-538214:5617253")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
+    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
     modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304")
     modCompileOnly("curse.maven:quark-243121:5093415") //!! 1.20.1
