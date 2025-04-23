@@ -27,7 +27,6 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -68,8 +67,6 @@ public class FurnishModule extends SimpleModule {
     public FurnishModule(String modId) {
         super(modId, "fur");
         ResourceLocation tab = modRes(Furnish.MODID);
-
-        TemplateRecipeManager.registerTemplate(modRes("furniture_making"), FurnishRecipeTemplate::new);
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -410,114 +407,4 @@ public class FurnishModule extends SimpleModule {
         });
     }
 
-    //!! RECIPES
-    public static class FurnishFinishedRecipe implements FinishedRecipe {
-        protected final Ingredient ingredient;
-        protected final ItemStack result;
-        protected final ResourceLocation id;
-        protected final String group;
-        private final Advancement.Builder advancement;
-        protected final ResourceLocation advancementId;
-
-
-        public FurnishFinishedRecipe(
-                ResourceLocation resourceLocation,
-                String group,
-                Ingredient ingredient,
-                ItemStack result, Advancement.Builder advancement, ResourceLocation advancementId
-        ) {
-            this.id = resourceLocation;
-            this.group = group;
-            this.ingredient = ingredient;
-            this.result = result;
-            this.advancement = advancement;
-            this.advancementId = advancementId;
-        }
-
-
-        public void serializeRecipeData(@NotNull JsonObject json) {
-            if (!this.group.isEmpty()) {
-                json.addProperty("group", this.group);
-            }
-            json.addProperty("id", this.id.toString());
-
-            json.add("ingredient", ingredient.toJson());
-
-            json.addProperty("result", Utils.getID(result.getItem()).toString());
-            json.addProperty("count", result.getCount());
-        }
-
-        @Override
-        public @NotNull ResourceLocation getId() {
-            return id;
-        }
-
-        @Override
-        public @NotNull RecipeSerializer<?> getType() {
-            return FurnishRegistries.Furniture_Recipe_Serializer.get();
-        }
-
-        @Nullable
-        @Override
-        public JsonObject serializeAdvancement() {
-            return advancement.serializeToJson();
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return advancementId;
-        }
-    }
-
-    public class FurnishRecipeTemplate implements IRecipeTemplate<FurnishFinishedRecipe> {
-
-        private final List<Object> conditions = new ArrayList<>();
-
-        public final ItemStack result;
-        public final String group;
-        public final Ingredient ingredient;
-
-        public FurnishRecipeTemplate(JsonObject json) {
-            var g = json.get("group");
-            this.group = g == null ? "" : g.getAsString();
-
-            this.ingredient = Ingredient.fromJson(json.get("ingredient"));
-            String s1 = GsonHelper.getAsString(json, "result");
-            int i = GsonHelper.getAsInt(json, "count");
-            this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i);
-        }
-
-        @Override
-        public <T extends BlockType> FurnishFinishedRecipe createSimilar(
-                T originalMat, T destinationMat, Item unlockItem, String id) {
-            ItemLike newRes = BlockType.changeItemType(this.result.getItem(), originalMat, destinationMat);
-            if (newRes == null) {
-                throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
-                        this.result, originalMat, destinationMat));
-            }
-            ItemStack newResult = new ItemStack(newRes);
-            if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
-            if (id == null) id = BuiltInRegistries.ITEM.getKey(newRes.asItem()).toString();
-
-            Ingredient newIng = ResourcesUtils.convertIngredient(this.ingredient, originalMat, destinationMat);
-
-            Advancement.Builder advancement = Advancement.Builder.advancement();
-
-            advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
-            var res = new ResourceLocation(id);
-            return new FurnishFinishedRecipe(res, group, newIng, newResult, advancement,
-                    modRes("recipes/" + "furnish" + "/" + res.getPath()));
-        }
-
-        @Override
-        public void addCondition(Object condition) {
-            this.conditions.add(condition);
-        }
-
-        @Override
-        public List<Object> getConditions() {
-            return conditions;
-        }
-    }
 }
