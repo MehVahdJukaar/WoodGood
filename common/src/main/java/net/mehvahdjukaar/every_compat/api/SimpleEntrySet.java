@@ -298,9 +298,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return new Builder<>(type, name, prefix, baseType, baseBlock, blockSupplier);
     }
 
-    @Environment(EnvType.CLIENT)
-    @SuppressWarnings({"rawtypes"})
-    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider aNew) {
+    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> aNew) {
         if (tileHolder != null) {
             tileHolder.registerRenderer(event, aNew);
         }
@@ -397,9 +395,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         BlockEntityType<H> get();
 
-        @Environment(EnvType.CLIENT)
-        @SuppressWarnings({"unchecked", "rawtypes"})
-        default void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider renderer) {
+        default void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> renderer) {
             event.register(get(), renderer);
         }
     }
