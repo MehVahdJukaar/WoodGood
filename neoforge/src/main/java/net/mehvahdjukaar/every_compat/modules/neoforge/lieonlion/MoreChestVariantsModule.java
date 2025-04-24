@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.lieonlion;
 
 import com.google.gson.JsonObject;
-import io.github.lieonlion.mcv.init.McvBlockInit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -28,9 +27,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.Tags;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,46 +43,46 @@ public class MoreChestVariantsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> trappedChests;
 
     public MoreChestVariantsModule(String modID) {
-        super(modID, "mcv");
+        super(modID, "lolmcv");
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
-                        McvBlockInit.OAK_CHEST, () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatChestBlock(this::getChestTile,
                                 Utils.copyPropertySafe(Blocks.CHEST).mapColor(MapColor.WOOD))
                 )
                 .addTile(MoreChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
-                .addTag(new ResourceLocation("lieonstudio:chests/wooden"), Registries.BLOCK)
-                .addTag(new ResourceLocation("lieonstudio:chests/normal"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("lieonstudio:chests/normal"), Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("quad", "cats_on_blocks/sit"), Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("quad", "fuel/wood"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quad:cats_on_blocks/sit"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
-                .addTag(new ResourceLocation("lieonstudio:chests/normal"), Registries.ITEM)
-                .addTag(new ResourceLocation("lieonstudio:chests/wooden"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("lieonstudio:chests/normal"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.ITEM)
                 .setTabKey(CreativeModeTabs.FUNCTIONAL_BLOCKS)
                 .defaultRecipe()
                 .build();
         this.addEntry(chests);
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
-                        McvBlockInit.OAK_TRAPPED_CHEST, () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatTrappedChestBlock(this::getTrappedTile,
                                 Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
                 )
                 .addTile(MoreTrappedBlockEntity::new)
-                .addTag(new ResourceLocation("lieonstudio:chests/wooden"), Registries.BLOCK)
-                .addTag(new ResourceLocation("lieonstudio:chests/trapped"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("lieonstudio:chests/trapped"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("quad", "fuel/wood"), Registries.ITEM)
-                .addTag(new ResourceLocation("lieonstudio:chests/trapped"), Registries.ITEM)
-                .addTag(new ResourceLocation("lieonstudio:chests/wooden"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("lieonstudio:chests/trapped"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
                 .setTabKey(CreativeModeTabs.REDSTONE_BLOCKS)

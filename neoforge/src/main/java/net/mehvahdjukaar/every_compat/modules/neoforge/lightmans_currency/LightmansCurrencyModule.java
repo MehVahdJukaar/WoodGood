@@ -10,7 +10,6 @@ import io.github.lightman314.lightmanscurrency.common.blockentity.trader.ItemTra
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.BookTraderBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.ShelfBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.reference.AuctionStandBlock;
-import io.github.lightman314.lightmanscurrency.common.core.ModBlockEntities;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -35,7 +34,7 @@ public class LightmansCurrencyModule extends SimpleModule {
 
     public LightmansCurrencyModule(String modId) {
         super(modId, "lc");
-        var tab = modRes("extra");
+        ResourceLocation tab = modRes("extra");
 
         auction_stands = SimpleEntrySet.builder(WoodType.class, "", "auction_stand",
                         getModBlock("auction_stand_oak"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -43,12 +42,12 @@ public class LightmansCurrencyModule extends SimpleModule {
                                 .mapColor(w.getColor()).strength(2.0F)
                         )
                 )
-                .addTile(ModBlockEntities.AUCTION_STAND)
-                //TEXTURE: Using log & log_top
+                .addTile(getModTile("auction_stand"))
+                //TEXTURES: log, log_top
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.AUCTION_STAND, Registries.BLOCK)
-                .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.AUCTION_STAND, Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("auction_stand/oak"))
@@ -62,16 +61,16 @@ public class LightmansCurrencyModule extends SimpleModule {
                                 1
                         )
                 )
-                .addTile(ModBlockEntities.ITEM_TRADER)
-                //TEXTURE: Using planks
+                .addTile(getModTile("item_trader"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.OWNER_PROTECTED, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SHELF, Registries.BLOCK)
-                .addTag(new ResourceLocation("carryon:block_blacklist"), Registries.BLOCK)
-                .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("carryon:block_blacklist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.TRADER_SHELF, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_NORMAL, Registries.ITEM)
@@ -87,16 +86,16 @@ public class LightmansCurrencyModule extends SimpleModule {
                                 4
                         )
                 )
-                .addTile(ModBlockEntities.ITEM_TRADER)
-                //TEXTURE: Using planks
+                .addTile(getModTile("item_trader"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.OWNER_PROTECTED, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SHELF_2x2, Registries.BLOCK)
-                .addTag(new ResourceLocation("carryon:block_blacklist"), Registries.BLOCK)
-                .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("carryon:block_blacklist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.TRADER_SHELF_2x2, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_NORMAL, Registries.ITEM)
@@ -112,15 +111,15 @@ public class LightmansCurrencyModule extends SimpleModule {
                                 .sound(SoundType.WOOD)
                         )
                 )
-                .addTile(ModBlockEntities.BOOK_TRADER)
-                //TEXTURE: Using planks
+                .addTile(getModTile("book_trader"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.OWNER_PROTECTED, Registries.BLOCK)
-                .addTag(new ResourceLocation("carryon:block_blacklist"), Registries.BLOCK)
-                .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("carryon:block_blacklist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.TRADER_SPECIALTY, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_SPECIALTY_BOOKSHELF, Registries.ITEM)
@@ -131,16 +130,6 @@ public class LightmansCurrencyModule extends SimpleModule {
 
 
     }
-
-    @Override
-    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-        super.registerBlockEntityRenderers(event);
-        event.register(auction_stands.getTile(AuctionStandBlockEntity.class), AuctionStandBlockEntityRenderer::new);
-        event.register(shelves.getTile(ItemTraderBlockEntity.class), ItemTraderBlockEntityRenderer::new);
-        event.register(shelves_2x2.getTile(ItemTraderBlockEntity.class), ItemTraderBlockEntityRenderer::new);
-        event.register(bookshelf_traders.getTile(BookTraderBlockEntity.class), BookTraderBlockEntityRenderer::new);
-    }
-
 
     @Override
     public List<String> getAlreadySupportedMods() {

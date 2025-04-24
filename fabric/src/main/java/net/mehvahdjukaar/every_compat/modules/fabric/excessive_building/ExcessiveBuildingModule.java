@@ -17,7 +17,7 @@ import net.yirmiri.excessive_building.block.VerticalStairsBlock;
 import net.yirmiri.excessive_building.block.configurable.EBBookshelfBlock;
 import net.yirmiri.excessive_building.block.configurable.EBLadderBlock;
 
-//SUPPORT: v3.0.1+
+//SUPPORT: v3.3.10+
 // DIFFERENCE: The classes for blocks are not same in FABRIC & FORGE
 //             FABRIC do not have hollow_log & hollow_stripped_log
 public class ExcessiveBuildingModule extends SimpleModule {
@@ -125,7 +125,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
                                 .sound(SoundType.WOOD)
                         )
                 )
-                //TEXTURE: texture is oak_craftng_table's texture
+                //TEXTURES:texture is oak_craftng_table's texture
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/eb/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/eb/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/eb/spruce_crafting_table_top_m"))

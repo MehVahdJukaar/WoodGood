@@ -1,17 +1,26 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition;
 
-import com.google.gson.JsonObject;
-import com.mrh0.buildersaddition.Index;
-import com.mrh0.buildersaddition.blocks.*;
-import com.mrh0.buildersaddition.event.CreativeModeTabRegistry;
-import net.mehvahdjukaar.every_compat.EveryCompat;
+import github.mrh0.buildersaddition2.blocks.arcade.ArcadeBlock;
+import github.mrh0.buildersaddition2.blocks.bedside_table.BedsideTableBlock;
+import github.mrh0.buildersaddition2.blocks.bench.BenchBlock;
+import github.mrh0.buildersaddition2.blocks.bookshelf.BookshelfBlock;
+import github.mrh0.buildersaddition2.blocks.cabinet.CabinetBlock;
+import github.mrh0.buildersaddition2.blocks.chair.ChairBlock;
+import github.mrh0.buildersaddition2.blocks.counter.CounterBlock;
+import github.mrh0.buildersaddition2.blocks.cupboard.CupboardBlock;
+import github.mrh0.buildersaddition2.blocks.hedge.HedgeBlock;
+import github.mrh0.buildersaddition2.blocks.panel.PanelBlock;
+import github.mrh0.buildersaddition2.blocks.post.PostBlock;
+import github.mrh0.buildersaddition2.blocks.shelf.ShelfBlock;
+import github.mrh0.buildersaddition2.blocks.shop_sign.ShopSignBlock;
+import github.mrh0.buildersaddition2.blocks.stool.StoolBlock;
+import github.mrh0.buildersaddition2.blocks.stripped_fence.StrippedFenceBlock;
+import github.mrh0.buildersaddition2.blocks.support_beam.SupportBeamBlock;
+import github.mrh0.buildersaddition2.blocks.table.TableBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -19,303 +28,325 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-//SUPPORT: v20230928a+
+//TODO: Test this module
+//SUPPORT: v2.1.0+
 public class BuildersAdditionModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> panels;
     public final SimpleEntrySet<WoodType, Block> arcades;
     public final SimpleEntrySet<WoodType, Block> bedsideTables;
     public final SimpleEntrySet<WoodType, Block> benches;
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> cabinets;
     public final SimpleEntrySet<WoodType, Block> chairs;
+    public final SimpleEntrySet<WoodType, Block> counters;
     public final SimpleEntrySet<WoodType, Block> countersAndesite;
     public final SimpleEntrySet<WoodType, Block> countersBlackstone;
     public final SimpleEntrySet<WoodType, Block> countersDeepslate;
     public final SimpleEntrySet<WoodType, Block> countersDiorite;
     public final SimpleEntrySet<WoodType, Block> countersGranite;
+    public final SimpleEntrySet<WoodType, Block> countersBasal;
     public final SimpleEntrySet<WoodType, Block> cupboards;
     public final SimpleEntrySet<LeavesType, Block> hedges;
     public final SimpleEntrySet<WoodType, Block> shelves;
-    public final SimpleEntrySet<WoodType, Block> smallCupboards;
     public final SimpleEntrySet<WoodType, Block> stools;
-    public final SimpleEntrySet<WoodType, Block> supportsBracket;
+    public final SimpleEntrySet<WoodType, Block> supportBeams;
     public final SimpleEntrySet<WoodType, Block> tables;
-    public final SimpleEntrySet<WoodType, Block> verticalSlab;
+    public final SimpleEntrySet<WoodType, Block> shopSigns;
+    public final SimpleEntrySet<WoodType, Block> posts;
+    public final SimpleEntrySet<WoodType, Block> stripped_fences;
 
     public BuildersAdditionModule(String modId) {
         super(modId, "bca");
-        var tab = CreativeModeTabRegistry.MAIN_TAB.getId();
+        ResourceLocation tab = modRes("builders_addition_group");
 
 
-        verticalSlab = SimpleEntrySet.builder(WoodType.class, "vertical_slab",
-                        Index.OAK_VERTICAL_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
-                        (w) -> {
-                            if (PlatHelper.isModLoaded("v_slab_compat")) return null;
-                            return new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks);
-                        })
+        panels = SimpleEntrySet.builder(WoodType.class, "panel",
+                        getModBlock("oak_panel"), () -> WoodTypeRegistry.OAK_TYPE,
+                        (w) -> new PanelBlock(Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("vertical_slab/oak_vertical_slab"))
-//              Recipe added by a manual code below
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
+        this.addEntry(panels);
 
-        this.addEntry(verticalSlab);
-
-        tables = SimpleEntrySet.builder(WoodType.class, "", "table",
-                        Index.TABLE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Table(shortenedId() + "/" + w.getAppendableId(), w.planks))
+        tables = SimpleEntrySet.builder(WoodType.class,"table",
+                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TableBlock(Utils.copyPropertySafe(w.planks))
+                )
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("table/table_oak"))
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(tables);
 
-        stools = SimpleEntrySet.builder(WoodType.class, "", "stool",
-                        Index.STOOL_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Stool(shortenedId() + "/" + w.getAppendableId(), w.planks))
+        stools = SimpleEntrySet.builder(WoodType.class, "stool",
+                        getModBlock("oak_stool"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new StoolBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("stool/stool_oak"))
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(stools);
 
-        chairs = SimpleEntrySet.builder(WoodType.class, "", "chair",
-                        Index.CHAIR_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Chair(shortenedId() + "/" + w.getAppendableId(), w.planks))
+        chairs = SimpleEntrySet.builder(WoodType.class, "chair",
+                        getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ChairBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("chair/chair_oak"))
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(chairs);
 
-        hedges = SimpleEntrySet.builder(LeavesType.class, "", "hedge",
-                        Index.HEDGE_OAK, () -> LeavesTypeRegistry.OAK_TYPE,
-                        w -> {
-                            var l = w.getBlockOfThis("leaves");
-                            if (l == null) return null;
-                            return new Hedge(shortenedId() + "/" + w.getAppendableId(), l);
-                        })
+        hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
+                        getModBlock("oak_hedge"), () -> LeavesTypeRegistry.OAK_TYPE,
+                        w -> new HedgeBlock(Utils.copyPropertySafe(w.leaves))
+                )
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                //TEXTURES: leaves
                 .requiresChildren("leaves") // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
-                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
-                .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
+                        "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
+//                .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.LEAVES, Registries.BLOCK)
                 .addTag(ItemTags.LEAVES, Registries.ITEM)
-                .addRecipe(modRes("hedge/hedge_oak"))
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .setTabKey(tab)
                 .copyParentTint()
+                .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(hedges);
 
-        countersAndesite = SimpleEntrySet.builder(WoodType.class, "andesite", "counter",
-                        getModBlock("counter_oak_andesite"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("counter/counter_oak_andesite"))
+        counters = SimpleEntrySet.builder(WoodType.class, "counter",
+                        getModBlock("oak_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
+        this.addEntry(counters);
 
+        countersAndesite = SimpleEntrySet.builder(WoodType.class, "andesite_counter",
+                        getModBlock("oak_andesite_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .build();
         this.addEntry(countersAndesite);
 
-        countersDiorite = SimpleEntrySet.builder(WoodType.class, "diorite", "counter",
-                        getModBlock("counter_oak_diorite"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("counter/counter_oak_diorite"))
+        countersDiorite = SimpleEntrySet.builder(WoodType.class, "diorite_counter",
+                        getModBlock("oak_diorite_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(countersDiorite);
 
-        countersGranite = SimpleEntrySet.builder(WoodType.class, "granite", "counter",
-                        getModBlock("counter_oak_granite"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("counter/counter_oak_granite"))
+        countersGranite = SimpleEntrySet.builder(WoodType.class, "granite_counter",
+                        getModBlock("oak_granite_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(countersGranite);
 
-        countersBlackstone = SimpleEntrySet.builder(WoodType.class, "blackstone", "counter",
-                        getModBlock("counter_oak_blackstone"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("counter/counter_oak_blackstone"))
+        countersBlackstone = SimpleEntrySet.builder(WoodType.class, "blackstone_counter",
+                        getModBlock("oak_blackstone_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(countersBlackstone);
 
-        countersDeepslate = SimpleEntrySet.builder(WoodType.class, "deepslate", "counter",
-                        getModBlock("counter_oak_deepslate"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Counter(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("counter/counter_oak_deepslate"))
+        countersDeepslate = SimpleEntrySet.builder(WoodType.class, "deepslate_counter",
+                        getModBlock("oak_deepslate_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(countersDeepslate);
 
-        bookshelves = SimpleEntrySet.builder(WoodType.class, "", "bookshelf",
-                        Index.BOOKSHELF_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatBookshelf(shortenedId() + "/" + w.getAppendableId(), w.planks))
+        countersBasal = SimpleEntrySet.builder(WoodType.class, "basal_counter",
+                        getModBlock("oak_basal_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("bookshelf/bookshelf_oak"))
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
+        this.addEntry(countersBasal);
 
+        bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
+                        getModBlock("oak_bookshelf"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log", "slab") //REASON: textures, recipes
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .build();
         this.addEntry(bookshelves);
 
-        shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
-                        Index.SHELF_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Shelf(shortenedId() + "/" + w.getAppendableId()))
+        shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
+                        getModBlock("oak_shelf"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("slab") //REASON: recipes
+                .addTile(getModTile("shelf"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("shelf/shelf_oak"))
-                .addTile(Index.SHELF_TILE_ENTITY_TYPE)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(shelves);
 
-        cabinets = SimpleEntrySet.builder(WoodType.class, "", "cabinet",
-                        Index.CABINET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCabinet(shortenedId() + "/" + w.getAppendableId(), w.planks))
+        cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
+                        getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CabinetBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("cabinet/cabinet_oak"))
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(cabinets);
 
-        cupboards = SimpleEntrySet.builder(WoodType.class, "", "cupboard",
-                        Index.CUPBOARD_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Cupboard(shortenedId() + "/" + w.getAppendableId(), w.planks))
+        cupboards = SimpleEntrySet.builder(WoodType.class, "cupboard",
+                        getModBlock("oak_cupboard"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CupboardBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .addTile(getModTile("cupboard"))
+                .requiresChildren("stripped_log")
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addRecipe(modRes("cupboard/cupboard_oak_left"))
                 .addRecipe(modRes("cupboard/cupboard_oak_right"))
-                .setTabKey(tab)
                 .build();
-
         this.addEntry(cupboards);
 
-        smallCupboards = SimpleEntrySet.builder(WoodType.class, "", "small_cupboard",
-                        Index.SMALL_CUPBOARD_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SmallCupboard(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("small_cupboard/small_cupboard_oak_left"))
-                .addRecipe(modRes("small_cupboard/small_cupboard_oak_right"))
+        benches = SimpleEntrySet.builder(WoodType.class, "bench",
+                        getModBlock("oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BenchBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log") //REASON: recipes
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
-        this.addEntry(smallCupboards);
-
-        benches = SimpleEntrySet.builder(WoodType.class, "", "bench",
-                        Index.BENCH_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Bench(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("bench/bench_oak"))
-                .setTabKey(tab)
-                .build();
-
         this.addEntry(benches);
 
-        supportsBracket = SimpleEntrySet.builder(WoodType.class, "", "support_bracket",
-                        Index.SUPPORT_BRACKET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new SupportBracket(shortenedId() + "/" + w.getAppendableId(), w.planks)).requiresChildren("stripped_log")
-                .addRecipe(modRes("support_bracket/support_bracket_oak_left"))
-                .addRecipe(modRes("support_bracket/support_bracket_oak_right"))
+        supportBeams = SimpleEntrySet.builder(WoodType.class, "support_bracket",
+                        getModBlock("oak_support_bracket"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new SupportBeamBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log") //REASON: recipes
+                //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
+        this.addEntry(supportBeams);
 
-        this.addEntry(supportsBracket);
-
-        bedsideTables = SimpleEntrySet.builder(WoodType.class, "", "bedside_table",
-                        getModBlock("bedside_table_oak"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BedsideTable(shortenedId() + "/" + w.getAppendableId(), w.planks))
-                .addRecipe(modRes("bedside_table/bedside_table_oak"))
+        bedsideTables = SimpleEntrySet.builder(WoodType.class, "bedside_table",
+                        getModBlock("oak_bedside_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new BedsideTableBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log") //REASON: recipes
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(bedsideTables);
 
-        arcades = SimpleEntrySet.builder(WoodType.class, "", "arcade",
-                        Index.ARCADE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatArcade(shortenedId() + "/" + w.getAppendableId(), w.log))
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+        arcades = SimpleEntrySet.builder(WoodType.class, "arcade",
+                        getModBlock("oak_arcade"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ArcadeBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log") //REASON: recipes
+                //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addRecipe(modRes("arcade/arcade_oak"))
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
-
         this.addEntry(arcades);
+
+        shopSigns = SimpleEntrySet.builder(WoodType.class, "shop_sign",
+                        getModBlock("oak_shop_sign"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ShopSignBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log") //REASON: recipes
+                //TEXTURES: stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .build();
+        this.addEntry(shopSigns);
+
+        posts = SimpleEntrySet.builder(WoodType.class, "post",
+                        getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new PostBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log") //REASON: recipes
+                //TEXTURES: stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .build();
+        this.addEntry(posts);
+
+        stripped_fences = SimpleEntrySet.builder(WoodType.class, "stripped_fence",
+                        getModBlock("oak_stripped_fence"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new StrippedFenceBlock(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren("stripped_log") //REASON: recipes
+                //TEXTURES: planks, stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .build();
+        this.addEntry(stripped_fences);
+
+
     }
 
-    private static class CompatBookshelf extends Bookshelf {
-        public CompatBookshelf(String name, Block source) {
-            super("bookshelf_" + name);
-        }
-    }
-
-//    @Override
-//    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-//        event.register((BlockEntityType<CompatShelfTileEntity>) (SHELVES.getTileHolder().tile), ShelfRenderer::new);
-//    }
-
-    private static class CompatCabinet extends Cabinet {
-        public CompatCabinet(String name, Block source) {
-            super("cabinet_" + name);
-        }
-    }
-
-    private static class CompatArcade extends Arcade {
-        public CompatArcade(String name, Block source) {
-            super("arcade_" + name);
-
-        }
-    }
-
-    @Override
-    // Recipes for vertical_slab (from 2 v-slab to plank)
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
-
-        ResourceLocation recipeLoc = modRes("recipes/vertical_slab/reverse/oak_vertical_slab.json");
-        JsonObject recipe;
-
-        try (InputStream recipeStream = manager.getResource(recipeLoc).get().open()) {
-            recipe = RPUtils.deserializeJson(recipeStream);
-
-            verticalSlab.items.forEach((woodType, item) -> {
-                // Editing JSON
-                JsonObject underIngredient = recipe.getAsJsonObject("key").getAsJsonObject("P");
-                underIngredient.addProperty("item", Utils.getID(item).toString());
-
-                JsonObject underResult = recipe.getAsJsonObject("result");
-                underResult.addProperty("item", Utils.getID(woodType.planks).toString());
-                // Adding finished recipe
-                handler.dynamicPack.addJson(EveryCompat.res(this.shortenedId() +"/" + woodType.getAppendableId() + "_vertical_slab_reversed"), recipe, ResType.RECIPES);
-            });
-
-        } catch (IOException e) {
-            handler.getLogger().error("BuilderAdditional - failed to open the reverse/vertical_slab recipe: {0}", e );
-        }
-    }
 }

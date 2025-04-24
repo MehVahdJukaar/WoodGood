@@ -19,8 +19,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class GraveyardModule extends SimpleModule {
 
@@ -33,16 +33,14 @@ public class GraveyardModule extends SimpleModule {
 
         COFFINS = SimpleEntrySet.builder(WoodType.class, "coffin",
                         getModBlock("oak_coffin"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCoffinfBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), w))
+                        w -> new CompatCoffinfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion(), w))
                 .addTag(modRes("coffins"), Registries.BLOCK)
                 .addTag(modRes("coffins"), Registries.ITEM)
                 .defaultRecipe()
                 .setTab(() -> TheGraveyard.GROUP)
                 .addTile(CompatCoffinBlockTile::new)
                 .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("model/oak_coffin_m"))
-
                 .build();
-
         this.addEntry(COFFINS);
 
     }

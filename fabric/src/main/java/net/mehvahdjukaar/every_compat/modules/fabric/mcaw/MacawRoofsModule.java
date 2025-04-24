@@ -16,7 +16,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-//SUPPORT: v2.2.4+
+//SUPPORT: v2.3.1+
 public class MacawRoofsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> ATTIC_ROOFS;

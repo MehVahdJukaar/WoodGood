@@ -76,7 +76,7 @@ public class TimberFramesModule extends SimpleModule {
                         getModBlock("oak_timber_frame_beta"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatTimberFrameBetaBlock(frame_alpha.blocks.get(w))
                 )
-                // TEXTURES: Using the same texture above
+                //TEXTURES: Using the same texture above
                 .addTag(modRes("timber_frame"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("timber_frame"), Registries.ITEM)

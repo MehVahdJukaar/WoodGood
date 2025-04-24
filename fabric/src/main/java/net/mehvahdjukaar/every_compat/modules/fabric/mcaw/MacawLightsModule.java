@@ -47,7 +47,7 @@ public class MacawLightsModule extends SimpleModule {
                         )
                 )
                 .requiresChildren("fence") //REASON: recipes
-                //TEXTURES: using oak_log
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
@@ -67,7 +67,7 @@ public class MacawLightsModule extends SimpleModule {
                         )
                 )
                 .requiresChildren("fence") //REASON: recipes
-                //TEXTURES: using oak_log
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)

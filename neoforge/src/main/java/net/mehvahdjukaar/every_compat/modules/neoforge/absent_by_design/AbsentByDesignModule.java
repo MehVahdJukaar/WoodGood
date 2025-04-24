@@ -29,7 +29,7 @@ public class AbsentByDesignModule extends SimpleModule {
                         getModBlock("fence_log_oak"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentFence(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
-                //TEXTURE: using the oak_log
+                //TEXTURES: oak_log
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ItemTags.FENCES, Registries.ITEM)
@@ -43,7 +43,7 @@ public class AbsentByDesignModule extends SimpleModule {
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
                 .requiresChildren("wood") //REASON: recipes
-                //TEXTURE: using the oak_log
+                //TEXTURES: oak_log
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
@@ -59,7 +59,7 @@ public class AbsentByDesignModule extends SimpleModule {
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
                 .requiresChildren("stripped_wood") //REASON: recipes
-                //TEXTURE: stripped_log
+                //TEXTURES: stripped_log
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
@@ -74,7 +74,7 @@ public class AbsentByDesignModule extends SimpleModule {
                         getModBlock("wall_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.planks).ignitedByLava())
                 )
-                //TEXTURE: planks
+                //TEXTURES: planks
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)

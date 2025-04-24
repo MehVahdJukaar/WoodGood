@@ -70,7 +70,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                         w -> new CampfireBlock(true, 2, copyProperties(10))
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
-                //TEXTURE: using acacia_soul_campfire above
+                //TEXTURES: acacia_soul_campfire above
                 .createPaletteFromChild("log")
                 .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
                 .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))

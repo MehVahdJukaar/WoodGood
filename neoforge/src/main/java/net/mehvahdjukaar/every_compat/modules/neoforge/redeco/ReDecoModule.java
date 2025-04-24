@@ -5,12 +5,10 @@ import com.delta.redeco.DisplayCaseRenderer;
 import com.delta.redeco.PedestalRenderer;
 import com.delta.redeco.ShelfRenderer;
 import com.delta.redeco.block.custom.*;
-import com.delta.redeco.block.entity.ModBlockEntities;
 import com.delta.redeco.block.entity.custom.CrateBlockEntity;
 import com.delta.redeco.block.entity.custom.DisplayCaseBlockEntity;
 import com.delta.redeco.block.entity.custom.PedestalBlockEntity;
 import com.delta.redeco.block.entity.custom.ShelfBlockEntity;
-import com.delta.redeco.item.ModCreativeModeTab;
 import com.delta.redeco.tags.ModTags;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -20,11 +18,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -60,7 +57,7 @@ public class ReDecoModule extends SimpleModule {
     public ReDecoModule(String modId) {
         super(modId, "rd");
 
-        ResourceKey<CreativeModeTab> tab = ModCreativeModeTab.REDECO_TAB.getKey();
+        ResourceLocation tab = modRes("redeco_tab");;
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -77,7 +74,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_side_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SideTableBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.SIDE_TABLE_BLOCK_ENTITY)
+                .addTile(getModTile("side_table_block_entity"))
                 .addTextureM(modRes("block/sidetable/oak_side_table"), EveryCompat.res("block/rd/oak_side_table_m"))
                 .addTextureM(modRes("block/drawer_oak"), EveryCompat.res("block/rd/drawer_oak_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -90,9 +87,9 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_drawers"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DrawersBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.DRAWERS_BLOCK_ENTITY)
+                .addTile(getModTile("drawers_block_entity"))
                 .addTextureM(modRes("block/drawers/oak_drawers"), EveryCompat.res("block/rd/oak_drawers_m"))
-                //TEXTURE: Using the side_tables' drawer_oak -above
+                //TEXTURES: side_tables' drawer_oak (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -103,7 +100,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_coffee_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CoffeeTableBlock(copyProperties(w, 1.0F))
                 )
-                //TEXTURE: using the tables' oak_table -above
+                //TEXTURES: tables' oak_table (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -114,7 +111,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChairBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.CHAIR_BLOCK_ENTITY)
+                .addTile(getModTile("chair_block_entity"))
                 .addTexture(modRes("block/chair/oak_chair"))
                 .addTexture(modRes("block/chair/oak_back_0"))
                 .addTexture(modRes("block/chair/oak_back_1"))
@@ -133,7 +130,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_stool"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new StoolBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.STOOL_BLOCK_ENTITY)
+                .addTile(getModTile("stool_block_entity"))
                 .addTexture(modRes("block/stool/oak_stool"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -145,7 +142,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BenchBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.BENCH_BLOCK_ENTITY)
+                .addTile(getModTile("bench_block_entity"))
                 .addTexture(modRes("block/bench/oak_bench"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -157,7 +154,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_shelf"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ShelfBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.SHELF_BLOCK_ENTITY)
+                .addTile(getModTile("shelf_block_entity"))
                 .addTexture(modRes("block/shelf/oak_shelf"))
                 .addTexture(modRes("block/shelf/oak_shelf_support"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -170,7 +167,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_crate"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CrateBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.CRATE_BLOCK_ENTITY)
+                .addTile(getModTile("crate_block_entity"))
                 .addTexture(modRes("block/crate/oak_crate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.UNCRATEABLE, Registries.ITEM)
@@ -183,7 +180,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_display_case"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DisplayCaseBlock(copyProperties(w, 1.0F).noOcclusion())
                 )
-                .addTile(ModBlockEntities.DISPLAY_CASE_BLOCK_ENTITY)
+                .addTile(getModTile("display_case_block_entity"))
                 .addTexture(modRes("block/displaycase/oak_display_case"))
                 .addTexture(modRes("block/displaycase/oak_inside"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -196,7 +193,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_sword_mount"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SwordMountBlock(copyProperties(w, 1.0F).noOcclusion())
                 )
-                .addTile(ModBlockEntities.SWORD_MOUNT_BLOCK_ENTITY)
+                .addTile(getModTile("sword_mount_block_entity"))
                 .addTexture(modRes("block/swordmount/oak_sword_mount"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -208,7 +205,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_pedestal"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new PedestalBlock(copyProperties(w, 1.0F).noOcclusion())
                 )
-                .addTile(ModBlockEntities.PEDESTAL_BLOCK_ENTITY)
+                .addTile(getModTile("pedestal_block_entity"))
                 .addTexture(modRes("block/pedestal/oak_pedestal"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -233,7 +230,7 @@ public class ReDecoModule extends SimpleModule {
                         w -> new PlankGateBlock(copyProperties(w, 1.0F),
                                 SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN)
                 )
-                //TEXTURE: using plank_fences' oak_plank_fence -above
+                //TEXTURES: plank_fences' oak_plank_fence (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -260,7 +257,7 @@ public class ReDecoModule extends SimpleModule {
                         w -> new CounterBlock(copyProperties(w, 1.0F))
                 )
                 .addTextureM(modRes("block/counters/oak_counters"), EveryCompat.res("block/rd/oak_counters_m"))
-                //TEXTURE: Using polished_planks' polished_oak_planks
+                //TEXTURES: polished_planks' polished_oak_planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -271,10 +268,10 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_drawer_counter"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DrawerCounterBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.DRAWERS_BLOCK_ENTITY)
-                //TEXTURE: Using counters' oak_counters -above
-                //TEXTURE: Using drawers' drawer_oak -above
-                //TEXTURE: Using polished_planks' polished_oak_planks -below
+                .addTile(getModTile("drawers_block_entity"))
+                //TEXTURES: counters' oak_counters (above)
+                //TEXTURES: drawers' drawer_oak (above)
+                //TEXTURES: polished_planks' polished_oak_planks -below
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -285,10 +282,10 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_cabinet_counter"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CabinetCounterBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.CABINET_BLOCK_ENTITY)
-                //TEXTURE: Using counters' oak_counters -above
-                //TEXTURE: Using polished_planks' polished_oak_planks -below
-                //TEXTURE: Using cabinets' cabinet_doors_oak -below
+                .addTile(getModTile("cabinet_block_entity"))
+                //TEXTURES: counters' oak_counters (above)
+                //TEXTURES: polished_planks' polished_oak_planks -below
+                //TEXTURES: cabinets' cabinet_doors_oak -below
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -299,7 +296,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CabinetBlock(copyProperties(w, 1.0F))
                 )
-                .addTile(ModBlockEntities.CABINET_BLOCK_ENTITY)
+                .addTile(getModTile("cabinet_block_entity"))
                 .addTextureM(modRes("block/cabinet/oak_cabinet"), EveryCompat.res("block/rd/oak_cabinet_m"))
                 .addTextureM(modRes("block/cabinet_doors_oak"), EveryCompat.res("block/rd/cabinet_doors_oak_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -325,7 +322,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("polished_oak_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new PolishedPlankStairs(() -> copyState(w), stairsProperties(w))
                 )
-                //TEXTURE: Using polished_planks' polished_oak_planks -above
+                //TEXTURES: polished_planks' polished_oak_planks (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
@@ -340,7 +337,7 @@ public class ReDecoModule extends SimpleModule {
                         getModBlock("polished_oak_slab"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new PolishedPlankSlab(copyProperties(w, 1.0F))
                 )
-                //TEXTURE: Using polished_planks' polished_oak_planks -above
+                //TEXTURES: polished_planks' polished_oak_planks (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)

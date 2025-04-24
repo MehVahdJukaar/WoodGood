@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors;
 
 import com.fizzware.dramaticdoors.fabric.blocks.ShortDoorBlock;
 import com.fizzware.dramaticdoors.fabric.blocks.TallDoorBlock;
-import com.fizzware.dramaticdoors.fabric.DDRegistry;
+import com.fizzware.dramaticdoors.fabric.registry.DDCreativeTabs;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -17,8 +17,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
+import java.util.Objects;
 
-//SUPPORT: v3.2.9_1+
+//SUPPORT: v3.2.7+
+//NOTE: The library of FABRIC and FORGE are not the same, must be in separated folders
 public class DramaticDoorsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> shortDoors;
@@ -26,11 +28,14 @@ public class DramaticDoorsModule extends SimpleModule {
 
     public DramaticDoorsModule(String modId) {
         super(modId, "dd");
-        ResourceKey<CreativeModeTab> tab = DDRegistry.MAIN_TAB;
+        ResourceKey<CreativeModeTab> tab = DDCreativeTabs.MAIN_TAB;
 
         tallDoors = SimpleEntrySet.builder(WoodType.class, "door", "tall",
-                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new TallDoorBlock(Blocks.OAK_DOOR,
-                                w.toVanillaOrOak().setType()))
+                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(w.toVanillaOrOak().setType(),
+                                (w.getBlockOfThis("door") != null) ? Objects.requireNonNull(w.getBlockOfThis("door"))
+                                : Blocks.OAK_DOOR)
+                )
                 .addTextureM(modRes("block/tall_oak_door_bottom"), EveryCompat.res("block/dd/tall_oak_door_bottom_m"))
                 .addTextureM(modRes("block/tall_oak_door_middle"), EveryCompat.res("block/dd/tall_oak_door_middle_m"))
                 .addTextureM(modRes("block/tall_oak_door_top"), EveryCompat.res("block/dd/tall_oak_door_top_m"))
@@ -46,8 +51,11 @@ public class DramaticDoorsModule extends SimpleModule {
         this.addEntry(tallDoors);
 
         shortDoors = SimpleEntrySet.builder(WoodType.class, "door", "short",
-                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new ShortDoorBlock(Blocks.OAK_DOOR,
-                                w.toVanillaOrOak().setType()))
+                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ShortDoorBlock(w.toVanillaOrOak().setType(),
+                                (w.getBlockOfThis("door") != null) ? Objects.requireNonNull(w.getBlockOfThis("door"))
+                                : Blocks.OAK_DOOR)
+                )
                 .addTextureM(modRes("block/short_oak_door"), EveryCompat.res("block/dd/short_oak_door_m"))
                 .addTextureM(modRes("item/short_oak_door"), EveryCompat.res("item/dd/short_oak_door_m"))
                 .addTag(modRes("short_wooden_doors"), Registries.BLOCK)

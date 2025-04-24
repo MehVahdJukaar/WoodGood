@@ -16,33 +16,31 @@ import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.yirmiri.excessive_building.block.DecorativeShelfBlock;
-import net.yirmiri.excessive_building.block.EBCraftingTableBlock;
-import net.yirmiri.excessive_building.block.flammable.*;
 
-//SUPPORT: v3.0.1+
+//SUPPORT: //!! NOT AVAILABLE
 // DIFFERENCE: The classes for blocks are not same in FABRIC & FORGE
 //             FABRIC do not have hollow_log & hollow_stripped_log
 public class ExcessiveBuildingModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> vertical_stairs;
-    public final SimpleEntrySet<WoodType, Block> mosaics;
-    public final SimpleEntrySet<WoodType, Block> mosaic_stairs;
-    public final SimpleEntrySet<WoodType, Block> mosaic_slabs;
-    public final SimpleEntrySet<WoodType, Block> mosaic_vertical_stairs;
-    public final SimpleEntrySet<WoodType, Block> chiseled_planks;
-    public final SimpleEntrySet<WoodType, Block> hollow_logs;
-    public final SimpleEntrySet<WoodType, Block> hollow_stripped_logs;
+//    public final SimpleEntrySet<WoodType, Block> vertical_stairs;
+//    public final SimpleEntrySet<WoodType, Block> mosaics;
+//    public final SimpleEntrySet<WoodType, Block> mosaic_stairs;
+//    public final SimpleEntrySet<WoodType, Block> mosaic_slabs;
+//    public final SimpleEntrySet<WoodType, Block> mosaic_vertical_stairs;
+//    public final SimpleEntrySet<WoodType, Block> chiseled_planks;
+//    public final SimpleEntrySet<WoodType, Block> hollow_logs;
+//    public final SimpleEntrySet<WoodType, Block> hollow_stripped_logs;
 
-    public final SimpleEntrySet<WoodType, Block> crafting_tables;
-    public final SimpleEntrySet<WoodType, Block> decorative_shelves;
-    public final SimpleEntrySet<WoodType, Block> bookshelves;
+//    public final SimpleEntrySet<WoodType, Block> crafting_tables;
+//    public final SimpleEntrySet<WoodType, Block> decorative_shelves;
+//    public final SimpleEntrySet<WoodType, Block> bookshelves;
 
-    public final SimpleEntrySet<WoodType, Block> ladders;
+//    public final SimpleEntrySet<WoodType, Block> ladders;
 
     public ExcessiveBuildingModule(String modId) {
         super(modId, "eb");
         ResourceLocation tab = modRes(modId);
+/*
 
 //!! OAK
         vertical_stairs = SimpleEntrySet.builder(WoodType.class, "vertical_stairs",
@@ -169,7 +167,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
                                 .ignitedByLava()
                         )
                 )
-                //TEXTURE: texture is oak_craftng_table's texture
+                //TEXTURES: oak_craftng_table - BaseTexture
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/eb/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/eb/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/eb/spruce_crafting_table_top_m"))
@@ -224,6 +222,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
         this.addEntry(ladders);
+*/
 
     }
 

@@ -15,15 +15,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.valhelsia.valhelsia_furniture.common.block.*;
 import net.valhelsia.valhelsia_furniture.core.registry.ModBlockEntities;
 import net.valhelsia.valhelsia_furniture.core.registry.ModTags;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -47,7 +45,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/table/oak/oak_table"))
-                //TEXTURES: oak_table_connected is via desk_drawers' EntrySet
+                // the oak_table_connected texutre is in desk_drawers' EntrySet
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.TABLES, Registries.BLOCK)
                 .defaultRecipe()
@@ -119,6 +117,11 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                         w -> new DeskDrawerBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(ModBlockEntities.DESK_DRAWER)
+                // Using the same textures from desk's above
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
+                .addTag(ModTags.Items.DESKS, Registries.ITEM)
+                .defaultRecipe()
                 /*
                 * Below is a bit special. has to be separated from the Table's EntrySet above. It has 5 color palettes
                 * while the other texture for table is 7 color palettes. Below will only remove one darkest from
@@ -126,12 +129,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 */
                 .createPaletteFromPlanks(p -> p.remove(p.getDarkest()))
                 .addTexture(modRes("block/table/oak/oak_table_connected"))
-                //TEXTURE: desks' textures
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
-                .addTag(ModTags.Items.DESKS, Registries.ITEM)
                 .setTabKey(tab)
-                .defaultRecipe()
                 .build();
         this.addEntry(desk_drawers);
 
@@ -198,9 +196,10 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         }
 
         @Override
-        public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+        public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+            super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
             if (isHayCHair) {
-                tooltip.add(Component.translatable("tooltip.valhelsia_furniture.hay_seat").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.add(Component.translatable("tooltip.valhelsia_furniture.hay_seat").withStyle(ChatFormatting.GRAY));
             }
 
         }

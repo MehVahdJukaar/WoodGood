@@ -10,14 +10,13 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 //SUPPORT: v0.5.2+
 public class OreberriesReplantedModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> vats;
+    public final SimpleEntrySet<WoodType, VatBlock> vats;
 
     public OreberriesReplantedModule(String modId) {
         super(modId, "or");
@@ -32,6 +31,7 @@ public class OreberriesReplantedModule extends SimpleModule {
                                 .isSuffocating(OreBerryBushBlock::isntSolid)
                                 .isViewBlocking(OreBerryBushBlock::isntSolid))
                 )
+                //TEXTURES: planks
                 .addTile(OreBerryRegistry.VAT_BLOCK_ENTITY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)

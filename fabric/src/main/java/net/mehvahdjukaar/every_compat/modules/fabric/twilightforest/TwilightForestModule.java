@@ -9,6 +9,8 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import twilightforest.block.BanisterBlock;
 import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.HollowLogHorizontal;
@@ -22,18 +24,18 @@ import java.util.function.Supplier;
 //SUPPORT: //!! NOT AVAILABLE
 public class TwilightForestModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, BanisterBlock> banisters;
+    public final SimpleEntrySet<WoodType, Block> banisters;
 //    public final SimpleEntrySet<WoodType, HollowLogVertical> hollowLogsVertical;
     public final SimpleEntrySet<WoodType, HollowLogHorizontal> hollowLogsHorizontal;
 //    public final SimpleEntrySet<WoodType, HollowLogClimbable> hollowLogsClimbable;
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
-        var tab = modRes("blocks");
+        ResourceLocation tab = modRes("blocks");
 
         //TODO: check face culling
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
-                        TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_banister"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTag(modRes("banisters"), Registries.BLOCK)

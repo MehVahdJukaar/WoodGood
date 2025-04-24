@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.neoforge;
 
-import net.mehvahdjukaar.every_compat.ECNetworking;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
@@ -30,10 +29,9 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.Lightm
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.more.MoreCraftingTablesForForgeModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mosaic_carpentry.MosaicCarpentryModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish_furniture.MightyMailModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeLegendsModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeAOIModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.RegionsUnexploredModule;
@@ -49,10 +47,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -62,10 +56,8 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
 
 import java.lang.ref.WeakReference;
-import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
-import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
 
 /**
  * Author: MehVahdJukaar
@@ -94,7 +86,6 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
         addIfLoaded("bbb", () -> BuildingButBetterModule::new);
         addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
-        addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
         addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
         addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
@@ -108,7 +99,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
         addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
-        addIfLoaded("pokecube_legends", () -> PokecubeLegendsModule::new);
+        addIfLoaded("pokecube_legends", () -> PokecubeAOIModule::new);
         addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
         addIfLoaded("redeco", () -> ReDecoModule::new);
         addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);

@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft;
 
 import com.google.gson.JsonObject;
 import com.mrbysco.justaraftmod.entities.RaftType;
-import com.mrbysco.justaraftmod.init.RaftRegistry;
 import com.mrbysco.justaraftmod.items.RaftItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
@@ -18,48 +17,49 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 
-//SUPPORT: v3.1.0+
+//SUPPORT: v7.0.3+
 public class JustARaftModule extends SimpleModule {
 
     public final ItemOnlyEntrySet<WoodType, Item> rafts;
+    public final Map<WoodType, RaftType> raftTypes = new HashMap<>();
 
     public JustARaftModule(String modId) {
         super(modId, "jar");
+        ResourceLocation tab = modRes("tab");
 
         rafts = ItemOnlyEntrySet.builder(WoodType.class, "raft",
                         getModItem("oak_raft"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> {
-                            RaftType newRaft = getRaft(w);
-
-                            RaftType.registerRaftType(newRaft);
-
-                            return new RaftItem(newRaft, new Item.Properties());
-                        }
+                        woodType -> new RaftItem(getRaftType(woodType), new Item.Properties())
                 )
                 .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .addTextureM(modRes("entity/raft/oak_raft"), EveryCompat.res("entity/raft/oak_raft_m"))
                 .addTag(modRes("rafts"), Registries.ITEM)
-                .setTabKey(RaftRegistry.RAFT_TAB.getId())
+                .setTabKey(tab)
                 .build();
         this.addEntry(rafts);
     }
 
-    public RaftType getRaft(WoodType w) {
+    private RaftType getRaftType(WoodType w) {
         String name = shortenedId() + "/" + w.getAppendableId();
 
-        return new RaftType(
-                w.planks,
-                () -> rafts.items.get(w),
-                name,
-                EveryCompat.res("textures/entity/raft/" + name + "_raft.png")
-        );
+        return raftTypes.computeIfAbsent(w, woodType -> RaftType.registerRaftType(
+                new RaftType(
+                        w.planks,
+                        DeferredHolder.create(Registries.ITEM, EveryCompat.res(name + "_raft")),
+                        name,
+                        EveryCompat.res("textures/entity/raft/" + name + "_raft.png")
+                )
+        ));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class JustARaftModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
         ResourceLocation recipeLoc = ResType.RECIPES.getPath(modRes("oak_raft"));
 
-        rafts.items.forEach((wood, item ) -> {
+        rafts.items.forEach((wood, item) -> {
             try (InputStream recipeStrem = manager.getResource(recipeLoc)
                     .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipeLoc)).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStrem);
@@ -80,7 +80,7 @@ public class JustARaftModule extends SimpleModule {
                 recipe.getAsJsonObject("result").addProperty("item", Utils.getID(item).toString());
 
                 // Adding to the resources
-                String newRecipeLoc = shortenedId() +"/"+ wood.getAppendableId() + "_raft";
+                String newRecipeLoc = shortenedId() + "/" + wood.getAppendableId() + "_raft";
 
                 handler.dynamicPack.addJson(EveryCompat.res(newRecipeLoc), recipe, ResType.RECIPES);
 

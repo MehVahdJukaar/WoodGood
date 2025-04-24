@@ -31,10 +31,10 @@ public class TropicraftModule extends SimpleModule {
         super(modId, "tc");
 
         boardwalks = SimpleEntrySet.builder(WoodType.class, "boardwalk",
-                        getModBlock("mangrove_boardwalk"), () -> WoodTypeRegistry.getValue(new ResourceLocation("mangrove")),
+                        getModBlock("mangrove_boardwalk"), () -> WoodTypeRegistry.getValue("mangrove"),
                         w -> new BoardwalkBlock(BlockBehaviour.Properties.of().noOcclusion())
                 )
-                //TEXTURE: planks
+                //TEXTURES: planks
                 //REASON: tropicraft has its own planks texture for mangrove, Below is use mod's planks texture
                 .addModelTransform(m -> m.replaceWithTextureFromChild("tropicraft:block/mangrove_planks",
                         "planks"))

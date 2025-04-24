@@ -10,13 +10,12 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-
-import java.util.Objects;
 
 //SUPPORT: v1.0.0+
 public class MacawStairsModule extends SimpleModule {
@@ -32,7 +31,7 @@ public class MacawStairsModule extends SimpleModule {
 
     public MacawStairsModule(String modId) {
         super(modId, "mws");
-        var tab = modRes(modId);
+        ResourceLocation tab = modRes(modId);
 
         terrace_stairs = SimpleEntrySet.builder(WoodType.class, "terrace_stairs",
                         getModBlock("oak_terrace_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -40,7 +39,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: logs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("terrace_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -57,7 +56,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: logs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("skyline_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -74,7 +73,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: logs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("compact_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -91,7 +90,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: logs
+                //TEXTURES: loglogs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bulk_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -108,7 +107,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: logs
+                //TEXTURES: loglogs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("loft_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -125,7 +124,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("fence", "stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: logs
+                //TEXTURES: loglogs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("balconies"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -143,7 +142,7 @@ public class MacawStairsModule extends SimpleModule {
                 .requiresChildren("stripped_log") //REASON: textures
                 .requiresFromMap(balconies.blocks) //REASON: recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: logs
+                //TEXTURES: loglogs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("railings"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -160,7 +159,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("slab", "stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: logs
+                //TEXTURES: loglogs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("platforms"), Registries.BLOCK)
                 .setTabKey(tab)

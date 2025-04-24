@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish_furniture;
+package net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish;
 
 import com.mrcrayfish.mightymail.block.MailboxBlock;
 import com.mrcrayfish.mightymail.core.ModBlockEntities;

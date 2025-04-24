@@ -36,7 +36,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
                                 .noOcclusion()
                         )
                 )
-                //TEXTURES: logs
+                //TEXTURES: loglogs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .defaultRecipe()

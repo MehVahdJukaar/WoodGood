@@ -31,18 +31,19 @@ public class LightmansCurrencyModule extends SimpleModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
                         getModBlock("shelf_oak"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ShelfBlock(FabricBlockSettings.create().nonOpaque()
+                        w -> new ShelfBlock(FabricBlockSettings.create()
+                                .nonOpaque()
                                 .strength(2.0F, Float.POSITIVE_INFINITY)
                                 .sound(SoundType.WOOD)
                         )
                 )
                 .addTile(() -> ModBlockEntities.ITEM_TRADER)
-                //TEXTURE: Using planks
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
-                .addTag(new ResourceLocation("create:non_movable"), Registries.BLOCK)
-                .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("create:non_movable"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
                 .setTabKey(tab)
@@ -53,18 +54,19 @@ public class LightmansCurrencyModule extends SimpleModule {
 
         card_displays = SimpleEntrySet.builder(WoodType.class, "", "card_display",
                         getModBlock("card_display_oak"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CardDisplayBlock(FabricBlockSettings.create().nonOpaque()
+                        w -> new CardDisplayBlock(FabricBlockSettings.create()
+                                .nonOpaque()
                                 .strength(2.0F, Float.POSITIVE_INFINITY)
                                 .sound(SoundType.WOOD)
                         )
                 )
                 .addTile(() -> ModBlockEntities.ITEM_TRADER)
-                //TEXTURE: Using log, log_top, & planks
+                //TEXTURES: log, log_top, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
-                .addTag(new ResourceLocation("create:non_movable"), Registries.BLOCK)
-                .addTag(new ResourceLocation("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("create:non_movable"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
                 .setTabKey(tab)

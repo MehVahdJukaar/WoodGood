@@ -34,7 +34,6 @@ public class MacawFencesModule extends SimpleModule {
 
     public MacawFencesModule(String modId) {
         super(modId, "mcf");
-
         ResourceLocation tab = modRes("fenceitemgroup");
 
         picketFences = SimpleEntrySet.builder(WoodType.class, "picket_fence",
@@ -97,7 +96,7 @@ public class MacawFencesModule extends SimpleModule {
 
         pyramidGates = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
                         BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak())
+                        w -> new FenceGateBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -111,7 +110,7 @@ public class MacawFencesModule extends SimpleModule {
 
         highleyGates = SimpleEntrySet.builder(WoodType.class, "highley_gate",
                         BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks),w.toVanillaOrOak())
+                        w -> new FenceGateBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

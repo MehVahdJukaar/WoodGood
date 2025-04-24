@@ -1,9 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.create;
 
-import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
-import com.simibubi.create.foundation.block.connected.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -12,15 +10,17 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.Tags;
 
-//SUPPORT: v6.0.0+
-//REASON: only TEMP until FABRIC version is updated to v6.0.0+
+import java.util.function.Function;
+
+// SUPPORT: v6.0.2+
 public class CreateModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> windows;
@@ -28,19 +28,19 @@ public class CreateModule extends SimpleModule {
 
     public CreateModule(String modId) {
         super(modId, "c");
-        var tab = modRes("palettes");
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
-                        this::makeWindow
+                        (Function<WoodType, Block>) this::makeWindow
                 )
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .createPaletteFromPlanks(p -> p.remove(p.getDarkest()))
+                .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/palettes/oak_window_m"))
+                .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/palettes/oak_window_connected_m"))
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
-                .createPaletteFromPlanks(p -> p.remove(p.getDarkest()))
-                .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/c/palettes/oak_window_m"))
-                .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/c/palettes/oak_window_connected_m"))
                 .build();
         this.addEntry(windows);
 
@@ -49,12 +49,10 @@ public class CreateModule extends SimpleModule {
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE))
                 )
                 .requiresFromMap(windows.blocks) //REASON: textures
-                .addTag(new ResourceLocation("c:glass_panes"), Registries.BLOCK)
-                .addTag(new ResourceLocation("c:glass_panes"), Registries.ITEM)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
-                .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
                 .build();
         this.addEntry(windowPanes);
 
@@ -67,27 +65,9 @@ public class CreateModule extends SimpleModule {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
     public void onClientSetup() {
         super.onClientSetup();
-        CreateClientModule.clientStuff(this);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    private static class CreateClientModule {
-        private static void clientStuff(CreateModule module) {
-            module.windows.blocks.forEach((w, b) -> {
-                String path = "block/" + module.shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window";
-
-                CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
-                        EveryCompat.res(path), EveryCompat.res(path + "_connected"));
-
-                CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(b),
-                        model -> new CTModel(model, new HorizontalCTBehaviour(spriteShift)));
-                CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(module.windowPanes.blocks.get(w)),
-                        model -> new CTModel(model, new GlassPaneCTBehaviour(spriteShift)));
-            });
-        }
+        CreateClientModule.onClientSetup(this);
     }
 
 }

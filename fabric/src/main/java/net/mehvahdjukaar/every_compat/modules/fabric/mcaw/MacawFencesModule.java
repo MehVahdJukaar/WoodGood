@@ -117,8 +117,8 @@ public class MacawFencesModule extends SimpleModule {
 
         pyramidGates = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
                         () -> BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks)
-                                .strength(1.4F, 2.0F).noOcclusion(), w.toVanillaOrOak())
+                        w -> new FenceGateBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks)
+                                .strength(1.4F, 2.0F).noOcclusion())
                 )
                 //TEXTURES: log, planks
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
@@ -134,8 +134,8 @@ public class MacawFencesModule extends SimpleModule {
 
         highleyGates = SimpleEntrySet.builder(WoodType.class, "highley_gate",
                         () -> BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks)
-                                .strength(1.4F, 2.0F).noOcclusion(), w.toVanillaOrOak())
+                        w -> new FenceGateBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks)
+                                .strength(1.4F, 2.0F).noOcclusion())
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)

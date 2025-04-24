@@ -4,6 +4,7 @@ import io.github.lieonlion.lolmct.block.MoreCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
@@ -25,22 +26,21 @@ public class MoreCraftingTablesModule extends SimpleModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
                         w -> new MoreCraftingTableBlock(MapColor.WOOD))
-                //TEXTURE: texture is oak_craftng_table's texture
+                //TEXTURES: oak_craftng_table - BaseTexture
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/lolmct/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(new ResourceLocation("forge:workbench"), Registries.BLOCK)
-                .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.BLOCK)
-                .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.ITEM)
-                .addTag(new ResourceLocation("forge:workbench"), Registries.ITEM)
-                .addTag(new ResourceLocation("quad:fuel/wood"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("c:player_workstations/crafting_tables"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("lieonstudio:crafting_tables"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("lieonstudio:crafting_tables"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("c:player_workstations/crafting_tables"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(craftingTable);
     }
 }

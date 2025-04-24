@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -16,16 +17,14 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.PushReaction;
 import net.regions_unexplored.block.RuBlocks;
 import net.regions_unexplored.world.level.block.plant.branch.BranchBlock;
 import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
@@ -34,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
 
@@ -48,41 +48,66 @@ public class RegionsUnexploredModule extends SimpleModule {
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
             getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
-            w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()), "branch")
-        )
-            .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-            .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
-            .addTag(modRes("branches"), Registries.BLOCK)
-            .addTag(modRes("branches"), Registries.ITEM)
-            .setTabKey(tab)
-            .addRecipe(modRes("oak_branch_from_oak_log"))
-            .build();
+            w -> new BranchBlock(BlockBehaviour.Properties.ofFullCopy(RuBlocks.ACACIA_BRANCH.get()), BranchBlock.BranchType.BRANCH)
+                )
+                //TEXTURES: manual-texture-generation
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.LOGS, Registries.BLOCK)
+                .addTag(modRes("replaceable_blocks"), Registries.BLOCK)
+                .addTag(modRes("branches"), Registries.BLOCK)
+                .addTag(modRes("branches"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("oak_branch_from_oak_log"))
+                .build();
         this.addEntry(branchs);
 
         shrubs = SimpleEntrySet.builder(LeavesType.class, "shrub",
                         getModBlock("dark_oak_shrub"),
-                        () -> LeavesTypeRegistry.getValue(VanillaWoods.DARK_OAK),
-                        l -> new ShrubBlock(Utils.copyPropertySafe(l.leaves).pushReaction(PushReaction.DESTROY)
-                                .ignitedByLava().noCollission().instabreak().sound(SoundType.AZALEA)
-                                .offsetType(BlockBehaviour.OffsetType.XZ))
+                        () -> LeavesTypeRegistry.getValue(ResourceLocation.parse("dark_oak")),
+                        l -> new ShrubBlock(BlockBehaviour.Properties.ofFullCopy(RuBlocks.ACACIA_SHRUB.get()))
                 )
                 .addCondition(l -> {
                     boolean log = l.getWoodType() != null; //REASON: textures
                     boolean sapling = l.getItemOfThis("sapling") != null; //REASON: recipes
                     return log && sapling;
                 })
+                .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shrubs"), Registries.BLOCK)
-                .addTag(modRes("shrub_can_survive_on"), Registries.BLOCK)
+                .addTag(modRes("replaceable_blocks"), Registries.BLOCK)
                 .addTag(modRes("shrubs"), Registries.ITEM)
-                .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
                 .setTabKey(tab)
-                .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .addRecipe(modRes("dark_oak_shrub"))
+                .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .copyParentDrop()
-                .copyParentTint()
                 .build();
         this.addEntry(shrubs);
+    }
+
+    @Override
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
+        super.registerItemColors(event);
+        for (Map.Entry<LeavesType, Block> entry : shrubs.blocks.entrySet()) {
+            LeavesType type = entry.getKey();
+            Block block = entry.getValue();
+            event.register((stack, tintIndex) -> {
+                if (tintIndex > 0) return 0xFFFFFFFF;
+                return event.getColor(new ItemStack(type.leaves), tintIndex);
+            }, block);
+        }
+    }
+
+    @Override
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
+        super.registerBlockColors(event);
+        for (Map.Entry<LeavesType, Block> entry : shrubs.blocks.entrySet()) {
+            LeavesType type = entry.getKey();
+            Block b = entry.getValue();
+            event.register((blockState, tintGetter, pos, index) ->
+                    event.getColor(type.leaves.defaultBlockState(), tintGetter, pos, index), b);
+        }
     }
 
     @Override
@@ -99,8 +124,8 @@ public class RegionsUnexploredModule extends SimpleModule {
             if (woodType.isVanilla() || woodType.getNamespace().equals("regions_unexplored")) continue;
 
             //Tagging the planks as ingredient to get painted_planks
-            createAndAddCustomTags(new ResourceLocation("planks"), handler, woodType.planks);
-            createAndAddCustomTags(new ResourceLocation("forge:planks"), handler, woodType.planks);
+            createAndAddCustomTags(ResourceLocation.parse("planks"), handler, woodType.planks);
+            createAndAddCustomTags(ResourceLocation.parse("forge:planks"), handler, woodType.planks);
         }
 
     }

@@ -35,4 +35,17 @@ public class ECRegistry {
                                     .title(Component.translatable("itemGroup.everycomp.everycomp"))
                                     .build())
                     : null;
+
+    //TODO: use ML one when it updates
+    @Deprecated(forRemoval = true)
+    //call in setup when you have blocks
+    public static void addBlocksToPOI(ResourceKey<PoiType> poi, Iterable<? extends Block> blocks) {
+        Holder.Reference<PoiType> holderPOI = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poi);
+        ImmutableSet.Builder<BlockState> builder = ImmutableSet.builder();
+        builder.addAll(holderPOI.value().matchingStates());
+        for (var block : blocks) {
+            builder.addAll(block.getStateDefinition().getPossibleStates());
+        }
+        PoiTypes.registerBlockStates(holderPOI, builder.build());
+    }
 }

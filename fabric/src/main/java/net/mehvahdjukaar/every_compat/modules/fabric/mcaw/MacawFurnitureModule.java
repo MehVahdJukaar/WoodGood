@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
+import net.kikoz.mcwfurnitures.MacawsFurniture;
 import net.kikoz.mcwfurnitures.init.BlockInit;
 import net.kikoz.mcwfurnitures.objects.*;
 import net.kikoz.mcwfurnitures.objects.chairs.ModernChair;
@@ -12,20 +13,20 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 
-//SUPPORT: 3.2.0+
+// SUPPORT: v3.3.0+
 public class MacawFurnitureModule extends SimpleModule {
 
     //TYPE: BOOKSHELF
     public final SimpleEntrySet<WoodType, Block> bookshelf;
     public final SimpleEntrySet<WoodType, Block> cupboardBookshelf;
     public final SimpleEntrySet<WoodType, Block> strippedBookshelf;
-    public final SimpleEntrySet<WoodType, Block> stripped_cupboard_bookshelf;
+    public final SimpleEntrySet<WoodType, Block> strippedCupboardBookshelf;
 
     //TYPE: CHAIR
     public final SimpleEntrySet<WoodType, Block> chair;
@@ -59,7 +60,7 @@ public class MacawFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> tripleDrawer;
 
     public final SimpleEntrySet<WoodType, Block> strippedBookshelfDrawer;
-    public final SimpleEntrySet<WoodType, Block> stripped_double_drawer;
+    public final SimpleEntrySet<WoodType, Block> strippedDoubleDrawer;
     public final SimpleEntrySet<WoodType, Block> strippedDrawer;
     public final SimpleEntrySet<WoodType, Block> strippedLargeDrawer;
     public final SimpleEntrySet<WoodType, Block> strippedLowerBookshelfDrawer;
@@ -95,11 +96,11 @@ public class MacawFurnitureModule extends SimpleModule {
 
     public MacawFurnitureModule(String modId) {
         super(modId, "mcfur");
-        ResourceLocation tab = modRes("furnitures");
+        var tab = MacawsFurniture.FURNITUREGROUP;
 
         wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         () -> BlockInit.OAK_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurnitureHinge(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -112,7 +113,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         modernWardrobe = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe",
                         () -> BlockInit.OAK_MODERN_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurnitureHinge(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -125,7 +126,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         doubleWardrobe = SimpleEntrySet.builder(WoodType.class, "double_wardrobe",
                         () -> BlockInit.OAK_DOUBLE_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -138,8 +139,9 @@ public class MacawFurnitureModule extends SimpleModule {
 
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         () -> BlockInit.OAK_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurniture(copyProperties())
                 )
+                .addTile(getModTile("box_block"))
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -151,7 +153,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         cupboardBookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf_cupboard",
                         () -> BlockInit.OAK_BOOKSHELF_CUPBOARD, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurnitureHinge(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -164,7 +166,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
                         () -> BlockInit.OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -177,7 +179,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         doubleDrawer = SimpleEntrySet.builder(WoodType.class, "double_drawer",
                         () -> BlockInit.OAK_DOUBLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -190,7 +192,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         bookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "bookshelf_drawer",
                         () -> BlockInit.OAK_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -203,7 +205,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         lowerBookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "lower_bookshelf_drawer",
                         () -> BlockInit.OAK_LOWER_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -216,7 +218,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         largeDrawer = SimpleEntrySet.builder(WoodType.class, "large_drawer",
                         () -> BlockInit.OAK_LARGE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -229,7 +231,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         lowerTripleDrawer = SimpleEntrySet.builder(WoodType.class, "lower_triple_drawer",
                         () -> BlockInit.OAK_LOWER_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -242,7 +244,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         tripleDrawer = SimpleEntrySet.builder(WoodType.class, "triple_drawer",
                         () -> BlockInit.OAK_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -255,7 +257,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         desk = SimpleEntrySet.builder(WoodType.class, "desk",
                         () -> BlockInit.OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))
+                        w -> new Desk(copyProperties())
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -267,7 +269,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         coveredDesk = SimpleEntrySet.builder(WoodType.class, "covered_desk",
                         () -> BlockInit.OAK_COVERED_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))
+                        w -> new Desk(copyProperties())
                 )
                 //TEXTURES: log
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
@@ -279,7 +281,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         modernDesk = SimpleEntrySet.builder(WoodType.class, "modern_desk",
                         () -> BlockInit.OAK_MODERN_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))
+                        w -> new Desk(copyProperties())
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -291,7 +293,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
                         () -> BlockInit.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))
+                        w -> new TableHitbox(copyProperties())
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -303,7 +305,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         endTable = SimpleEntrySet.builder(WoodType.class, "end_table",
                         () -> BlockInit.OAK_END_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))
+                        w -> new TableHitbox(copyProperties())
                 )
                 .requiresChildren("stripped_log")
                 //TEXTURES: stripped_log
@@ -316,7 +318,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         coffeeTable = SimpleEntrySet.builder(WoodType.class, "coffee_table",
                         () -> BlockInit.OAK_COFFEE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Table(Utils.copyPropertySafe(w.log))
+                        w -> new Table(copyProperties())
                 )
                 //TEXTURES: log
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
@@ -328,7 +330,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         glassTable = SimpleEntrySet.builder(WoodType.class, "glass_table",
                         () -> BlockInit.OAK_GLASS_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))
+                        w -> new TableHitbox(copyProperties())
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -341,33 +343,35 @@ public class MacawFurnitureModule extends SimpleModule {
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         () -> BlockInit.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StripedChair(Utils.copyPropertySafe(w.log))
+                        w -> new StripedChair(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.BLOCK)
                 .setTabKey(tab)
+                .requiresChildren("stripped_log") //REASON: textures
                 .defaultRecipe()
                 .build();
         this.addEntry(chair);
 
         modernChair = SimpleEntrySet.builder(WoodType.class, "modern_chair",
                         () -> BlockInit.OAK_MODERN_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ModernChair(Utils.copyPropertySafe(w.log))
+                        w -> new ModernChair(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
+                .requiresChildren("stripped_log") //REASON: textures
                 .defaultRecipe()
                 .build();
         this.addEntry(modernChair);
 
         stripedChair = SimpleEntrySet.builder(WoodType.class, "striped_chair",
                         () -> BlockInit.OAK_STRIPED_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StripedChair(Utils.copyPropertySafe(w.log))
+                        w -> new StripedChair(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped
@@ -375,26 +379,28 @@ public class MacawFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
+                .requiresChildren("stripped_log") //REASON: textures
                 .defaultRecipe()
                 .build();
         this.addEntry(stripedChair);
 
         stool = SimpleEntrySet.builder(WoodType.class, "stool_chair",
                         () -> BlockInit.OAK_STOOL_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Chair(Utils.copyPropertySafe(w.log))
+                        w -> new Chair(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool_chair"), Registries.BLOCK)
                 .setTabKey(tab)
+                .requiresChildren("stripped_log") //REASON: textures
                 .defaultRecipe()
                 .build();
         this.addEntry(stool);
 
         counter = SimpleEntrySet.builder(WoodType.class, "counter",
                         () -> BlockInit.OAK_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Counter(Utils.copyPropertySafe(w.log))
+                        w -> new Counter(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped
@@ -407,7 +413,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         drawerCounter = SimpleEntrySet.builder(WoodType.class, "drawer_counter",
                         () -> BlockInit.OAK_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StorageCounter(Utils.copyPropertySafe(w.log))
+                        w -> new StorageCounter(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped
@@ -420,7 +426,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         doubleDrawerCounter = SimpleEntrySet.builder(WoodType.class, "double_drawer_counter",
                         () -> BlockInit.OAK_DOUBLE_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StorageCounter(Utils.copyPropertySafe(w.log))
+                        w -> new StorageCounter(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped
@@ -433,7 +439,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         cupboardCounter = SimpleEntrySet.builder(WoodType.class, "cupboard_counter",
                         () -> BlockInit.OAK_CUPBOARD_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CupboardCounter(Utils.copyPropertySafe(w.log))
+                        w -> new CupboardCounter(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped
@@ -447,7 +453,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedWardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe", "stripped",
                         () -> BlockInit.STRIPPED_OAK_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurnitureHinge(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped
@@ -460,7 +466,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedModernWardrobe = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe", "stripped",
                         () -> BlockInit.STRIPPED_OAK_MODERN_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurnitureHinge(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -473,7 +479,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedDoubleWardrobe = SimpleEntrySet.builder(WoodType.class, "double_wardrobe", "stripped",
                         () -> BlockInit.STRIPPED_OAK_DOUBLE_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -486,7 +492,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedBookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf", "stripped",
                         () -> BlockInit.STRIPPED_OAK_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -497,9 +503,9 @@ public class MacawFurnitureModule extends SimpleModule {
                 .build();
         this.addEntry(strippedBookshelf);
 
-        stripped_cupboard_bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf_cupboard", "stripped",
+        strippedCupboardBookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf_cupboard", "stripped",
                         () -> BlockInit.STRIPPED_OAK_BOOKSHELF_CUPBOARD, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log))
+                        w -> new TallFurnitureHinge(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -508,11 +514,11 @@ public class MacawFurnitureModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
-        this.addEntry(stripped_cupboard_bookshelf);
+        this.addEntry(strippedCupboardBookshelf);
 
         strippedDrawer = SimpleEntrySet.builder(WoodType.class, "drawer", "stripped",
                         () -> BlockInit.STRIPPED_OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -523,9 +529,9 @@ public class MacawFurnitureModule extends SimpleModule {
                 .build();
         this.addEntry(strippedDrawer);
 
-        stripped_double_drawer = SimpleEntrySet.builder(WoodType.class, "double_drawer", "stripped",
+        strippedDoubleDrawer = SimpleEntrySet.builder(WoodType.class, "double_drawer", "stripped",
                         () -> BlockInit.STRIPPED_OAK_DOUBLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -534,11 +540,11 @@ public class MacawFurnitureModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
-        this.addEntry(stripped_double_drawer);
+        this.addEntry(strippedDoubleDrawer);
 
         strippedBookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "bookshelf_drawer", "stripped",
                         () -> BlockInit.STRIPPED_OAK_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -551,7 +557,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedLowerBookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "lower_bookshelf_drawer", "stripped",
                         () -> BlockInit.STRIPPED_OAK_LOWER_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -564,7 +570,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedLargeDrawer = SimpleEntrySet.builder(WoodType.class, "large_drawer", "stripped",
                         () -> BlockInit.STRIPPED_OAK_LARGE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -577,7 +583,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedLowerTripleDrawer = SimpleEntrySet.builder(WoodType.class, "lower_triple_drawer", "stripped",
                         () -> BlockInit.STRIPPED_OAK_LOWER_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -590,7 +596,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedTripleDrawer = SimpleEntrySet.builder(WoodType.class, "triple_drawer", "stripped",
                         () -> BlockInit.STRIPPED_OAK_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WideFurniture(Utils.copyPropertySafe(w.log))
+                        w -> new WideFurniture(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -603,7 +609,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedDesk = SimpleEntrySet.builder(WoodType.class, "desk", "stripped",
                         () -> BlockInit.STRIPPED_OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))
+                        w -> new Desk(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -616,7 +622,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedCoveredDesk = SimpleEntrySet.builder(WoodType.class, "covered_desk", "stripped",
                         () -> BlockInit.STRIPPED_OAK_COVERED_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))
+                        w -> new Desk(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -629,7 +635,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedModernDesk = SimpleEntrySet.builder(WoodType.class, "modern_desk", "stripped",
                         () -> BlockInit.STRIPPED_OAK_MODERN_DESK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Desk(Utils.copyPropertySafe(w.log))
+                        w -> new Desk(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -642,7 +648,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedTable = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
                         () -> BlockInit.STRIPPED_OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))
+                        w -> new TableHitbox(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -655,7 +661,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedEndTable = SimpleEntrySet.builder(WoodType.class, "end_table", "stripped",
                         () -> BlockInit.STRIPPED_OAK_END_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))
+                        w -> new TableHitbox(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -668,7 +674,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedCoffeeTable = SimpleEntrySet.builder(WoodType.class, "coffee_table", "stripped",
                         () -> BlockInit.STRIPPED_OAK_COFFEE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Table(Utils.copyPropertySafe(w.log))
+                        w -> new Table(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -681,7 +687,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedGlassTable = SimpleEntrySet.builder(WoodType.class, "glass_table", "stripped",
                         () -> BlockInit.STRIPPED_OAK_GLASS_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableHitbox(Utils.copyPropertySafe(w.log))
+                        w -> new TableHitbox(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -695,7 +701,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedChair = SimpleEntrySet.builder(WoodType.class, "chair", "stripped",
                         () -> BlockInit.STRIPPED_OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StripedChair(Utils.copyPropertySafe(w.log))
+                        w -> new StripedChair(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -708,11 +714,12 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedModernChair = SimpleEntrySet.builder(WoodType.class, "modern_chair", "stripped",
                         () -> BlockInit.STRIPPED_OAK_MODERN_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ModernChair(Utils.copyPropertySafe(w.log))
+                        w -> new ModernChair(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
+                .requiresChildren("stripped_log") //REASON: textures
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -721,7 +728,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedStripedChair = SimpleEntrySet.builder(WoodType.class, "striped_chair", "stripped",
                         () -> BlockInit.STRIPPED_OAK_STRIPED_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StripedChair(Utils.copyPropertySafe(w.log))
+                        w -> new StripedChair(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -735,7 +742,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedStool = SimpleEntrySet.builder(WoodType.class, "stool_chair", "stripped",
                         () -> BlockInit.STRIPPED_OAK_STOOL_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Chair(Utils.copyPropertySafe(w.log))
+                        w -> new Chair(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -748,7 +755,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedCounter = SimpleEntrySet.builder(WoodType.class, "counter", "stripped",
                         () -> BlockInit.STRIPPED_OAK_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Counter(Utils.copyPropertySafe(w.log))
+                        w -> new Counter(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -761,7 +768,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedDrawerCounter = SimpleEntrySet.builder(WoodType.class, "drawer_counter", "stripped",
                         () -> BlockInit.STRIPPED_OAK_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StorageCounter(Utils.copyPropertySafe(w.log))
+                        w -> new StorageCounter(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -774,7 +781,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedDoubleDrawerCounter = SimpleEntrySet.builder(WoodType.class, "double_drawer_counter", "stripped",
                         () -> BlockInit.STRIPPED_OAK_DOUBLE_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StorageCounter(Utils.copyPropertySafe(w.log))
+                        w -> new StorageCounter(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -787,7 +794,7 @@ public class MacawFurnitureModule extends SimpleModule {
 
         strippedCupboardCounter = SimpleEntrySet.builder(WoodType.class, "cupboard_counter", "stripped",
                         () -> BlockInit.STRIPPED_OAK_CUPBOARD_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CupboardCounter(Utils.copyPropertySafe(w.log))
+                        w -> new CupboardCounter(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log
@@ -798,5 +805,9 @@ public class MacawFurnitureModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedCupboardCounter);
+    }
+
+    public BlockBehaviour.Properties copyProperties() {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 2.3F);
     }
 }

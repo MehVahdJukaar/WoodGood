@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
-import com.stal111.valhelsia_structures.core.init.ModRecipes;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -12,7 +11,6 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -21,20 +19,15 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.common.ToolAction;
-import net.minecraftforge.common.ToolActions;
 import net.valhelsia.valhelsia_core.api.common.block.StrippableRotatedPillarBlock;
 
 import java.util.List;
@@ -54,25 +47,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         super(modId, "vs");
         var tab = modRes("main");
 
-        strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
-                        getModBlock("stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new PostBlock(Utils.copyPropertySafe(w.log))
-                )
-                .requiresChildren("stripped_log") //REASON: textures
-                //TEXTURES: manual generation (BELOW)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("posts"), Registries.BLOCK)
-                .addTag(modRes("posts"), Registries.ITEM)
-                .setTabKey(tab)
-                .defaultRecipe()
-                .build();
-        this.addEntry(strippedPosts);
-
         posts = SimpleEntrySet.builder(WoodType.class, "post",
                         getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new CompatPostBlock(Utils.copyPropertySafe(woodType.log), woodType)
+                        woodType -> new PostBlock(Utils.copyPropertySafe(woodType.log))
                 )
-                //TEXTURES: manual generation (BELOW)
+                //TEXTURES: manual-texture-generation
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.ITEM)
@@ -81,29 +60,21 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .build();
         this.addEntry(posts);
 
-        cutStrippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut_stripped",
-                        getModBlock("cut_stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CutPostBlock(cutPostProperties(w))
+        strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
+                        getModBlock("stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new PostBlock(Utils.copyPropertySafe(w.log))
                 )
-                .requiresFromMap(strippedPosts.blocks) //REASON: recipes
-                .requiresChildren("stripped_log") //REASON: textures
-                //TEXTURES: manual generation (BELOW)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("cut_posts"), Registries.BLOCK)
-                .addTag(modRes("cut_posts"), Registries.ITEM)
+                .requiresChildren("stripped_log") //REASON: recipes
+                .addTag(modRes("stripped_posts"), Registries.BLOCK)
+                .addTag(modRes("stripped_posts"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .copyParentDrop()
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
-        this.addEntry(cutStrippedPosts);
+        this.addEntry(strippedPosts);
 
         cutPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut",
                         getModBlock("cut_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCutPostBlock(cutPostProperties(w), w)
-                )
-                .requiresFromMap(posts.blocks) //REASON: recipes
-                //TEXTURES: manual generation (BELOW)
+                        w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_posts"), Registries.ITEM)
                 .setTabKey(tab)
@@ -113,14 +84,27 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .build();
         this.addEntry(cutPosts);
 
+        cutStrippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut_stripped",
+                        getModBlock("cut_stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new CutPostBlock(cutPostProperties(w))
+                        )
+                .requiresChildren("stripped_log") //REASON: recipes
+                .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
+                .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .copyParentDrop()
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .build();
+        this.addEntry(cutStrippedPosts);
+
         bundledStrippedPosts = SimpleEntrySet.builder(WoodType.class, "posts", "bundled_stripped",
                         getModBlock("bundled_stripped_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(bundledPostProperties(w))
-                )
-                .requiresFromMap(strippedPosts.blocks) //REASON: recipes
-                .requiresChildren("stripped_log") //REASON: textures
-                //TEXTURES: manual generation (BELOW)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                        )
+                .requiresChildren("stripped_log") //REASON: recipes
+                .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
+                .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -128,12 +112,10 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         bundledPosts = SimpleEntrySet.builder(WoodType.class, "posts", "bundled",
                         getModBlock("bundled_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StrippableRotatedPillarBlock(() -> bundledStrippedPosts.blocks.get(w), bundledPostProperties(w))
-                )
-                .requiresFromMap(posts.blocks) //REASON: recipes
-                .requiresFromMap(bundledStrippedPosts.blocks) //REASON: strippable_block
-                //TEXTURES: manual generation (BELOW)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                        w -> new StrippableRotatedPillarBlock(() -> bundledStrippedPosts.blocks.get(w), bundledPostProperties(w)))
+                .requiresFromMap(bundledStrippedPosts.blocks)
+                .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
+                .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -159,17 +141,10 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     }
 
     @Override
-    public void onModSetup() {
-        TemplateRecipeManager.registerTemplate(ModRecipes.AXE_CRAFTING_SERIALIZER.get(), AxeCraftingRecipeTemplate::new);
-        super.onModSetup();
-    }
-
-    @Override
     // Textures
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
         try {
-            // oak_posts's TEXTURES ------------------------------------------------------------------------------------
             posts.blocks.forEach((w, block) -> {
                 ResourceLocation id = Utils.getID(block);
 
@@ -189,14 +164,13 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                     handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Post texture for for {} : {}", block, e);
+                    handler.getLogger().error("Failed to generate Post block texture for for {} : {}", block, e);
 
                 }
 
             });
 
-            // stripped_oak_posts' TEXTURES ----------------------------------------------------------------------------
-            strippedPosts.blocks.forEach((w, block) -> {
+            posts.blocks.forEach((w, block) -> {
                 ResourceLocation id = Utils.getID(block);
 
                 try (TextureImage logTexture = TextureImage.open(manager,
@@ -216,15 +190,15 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                     handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Stripped-Post texture for {} : {}", block, e);
+                    handler.getLogger().error("Failed to generate Stripped Post block texture for for {} : {}", block, e);
 
                 }
             });
         } catch (Exception ex) {
-            handler.getLogger().error("Could not generate block texture: ", ex);
+            handler.getLogger().error("Could not generate any Table block texture : ", ex);
         }
 
-        // bundled_<type>_posts' TEXTURES ------------------------------------------------------------------------------
+        // bundled_<type>_posts
         try (TextureImage BPTopInnerMask = TextureImage.open(manager,
                       EveryCompat.res("block/vs/bundledposts_top_inner_m"));
              TextureImage BPTopOuterMask = TextureImage.open(manager,
@@ -357,65 +331,6 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 newImage.getImage().setPixelRGBA(x, y, 0);
             }
         });
-    }
-
-    @SuppressWarnings("deprecation")
-    public static class CompatPostBlock extends PostBlock {
-        public final WoodType woodType;
-
-        public CompatPostBlock(Properties properties, WoodType woodType) {
-            super(properties);
-            this.woodType = woodType;
-        }
-
-        @Override
-        public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-            ResourceLocation location = BuiltInRegistries.BLOCK.getKey(this);
-            Block strippedPost = woodType.getBlockOfThis("valhelsia_structures:stripped_post");
-
-            if (!context.getItemInHand().canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
-                return null;
-            }
-
-            if (toolAction == ToolActions.AXE_STRIP && Objects.nonNull(strippedPost)) {
-                return BuiltInRegistries.BLOCK.get(Utils.getID(strippedPost)).defaultBlockState()
-                        .setValue(AXIS, state.getValue(AXIS))
-                        .setValue(ATTACHED, state.getValue(ATTACHED))
-                        .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
-            }
-
-            return null;
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    public static class CompatCutPostBlock extends CutPostBlock {
-        public final WoodType woodType;
-
-        public CompatCutPostBlock(Properties properties, WoodType woodType) {
-            super(properties);
-            this.woodType = woodType;
-        }
-
-        @Override
-        public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-            ResourceLocation location = BuiltInRegistries.BLOCK.getKey(this);
-            Block strippedCutPost = woodType.getBlockOfThis("valhelsia_structures:cut_stripped_post");
-
-            if (!context.getItemInHand().canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
-                return null;
-            }
-
-            if (toolAction == ToolActions.AXE_STRIP && Objects.nonNull(strippedCutPost)) {
-                return Objects.requireNonNull(BuiltInRegistries.BLOCK.get(Utils.getID(strippedCutPost))).defaultBlockState()
-                        .setValue(FACING, state.getValue(FACING))
-                        .setValue(ATTACHED, state.getValue(ATTACHED))
-                        .setValue(PARTS, state.getValue(PARTS))
-                        .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
-            }
-
-            return null;
-        }
     }
 
 }

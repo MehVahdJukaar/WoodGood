@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.workshop;
 
 import moonfather.workshop_for_handsome_adventurer.blocks.*;
-import moonfather.workshop_for_handsome_adventurer.initialization.ExternalWoodSupport;
 import moonfather.workshop_for_handsome_adventurer.initialization.Registration;
 import moonfather.workshop_for_handsome_adventurer.items.BlockItemEx;
 import moonfather.workshop_for_handsome_adventurer.items.WorkstationPlacerItem;
@@ -10,28 +9,28 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.neoforge.EveryCompatForge;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.fml.InterModComms;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-//SUPPORT: v1.15.2+
+//SUPPORT: v1.31.2+
 public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
-    private static final ResourceLocation SPRUCE = new ResourceLocation("spruce");
-    private static final ResourceLocation TAG_FORGE_WORKBENCH = ResourceLocation.fromNamespaceAndPath("forge", "workbench");
+    private static final ResourceLocation SPRUCE = ResourceLocation.parse("spruce");
+    private static final ResourceLocation TAG_FORGE_WORKBENCH = ResourceLocation.fromNamespaceAndPath("c", "workbench");
     private static final ResourceLocation TAG_PACKINGTAPE_BLACKLIST = ResourceLocation.fromNamespaceAndPath("packingtape", "te_blacklist");
     public final SimpleEntrySet<WoodType, Block> double_bookshelves, open_double_bookshelves, min_bookshelves, open_min_bookshelves, lantern_bookshelves;
     public final SimpleEntrySet<WoodType, Block> simple_tables, potionshelves1, dual_table_parts_bl, dual_table_parts_br, dual_table_parts_tl, dual_table_parts_tr;
@@ -269,13 +268,13 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
 
         // we need to generate tag file for supported planks
         SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(modRes("supported_planks"));
-        simple_tables.blocks.forEach((w, value) -> tagBuilder.add(ForgeRegistries.ITEMS.getKey(w.planks.asItem())));
+        simple_tables.blocks.forEach((w, value) -> tagBuilder.add(Utils.getID(w.planks.asItem())));
         handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
     }
 
     @Override
     public void onModInit() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(WorkshopForHandsomeAdventurerModule::sendIMC);
+        EveryCompatForge.getModEventBus().addListener(WorkshopForHandsomeAdventurerModule::sendIMC);
     }
 
 
@@ -297,9 +296,9 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                     blacklist.add(MessageFormat.format("{0}:wfha/{1}/dual_table_bottom_right_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                     blacklist.add(MessageFormat.format("{0}:wfha/{1}/dual_table_top_left_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                     blacklist.add(MessageFormat.format("{0}:wfha/{1}/dual_table_top_right_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
-                    // we need to register things for the workstation placer item - so that it knows what blocks to use
-                    ExternalWoodSupport.registerHostMod(w.getTypeName(), EveryCompat.MOD_ID);
-                    ExternalWoodSupport.registerPrefix(w.getTypeName(), "wfha/" + w.getNamespace() + "/");
+
+//                    ExternalWoodSupport.registerHostMod(w.getTypeName(), EveryCompat.MOD_ID);
+//                    ExternalWoodSupport.registerPrefix(w.getTypeName(), "wfha/" + w.getNamespace() + "/");
                 }
             }
         }

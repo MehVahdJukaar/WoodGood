@@ -22,38 +22,35 @@ import net.minecraft.world.level.block.Blocks;
 // SUPPORT: v0.5.1+
 public class CreateModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> windows;
+//    public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
 
     public CreateModule(String modId) {
         super(modId, "c");
-        var tab = modRes("palettes");
+        ResourceLocation tab = modRes("palettes");
 
+/*
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
-                        this::makeWindow
-                )
+                        this::makeWindow)
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
-                .setTabKey(tab)
+                //.setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .createPaletteFromPlanks(p -> p.remove(p.getDarkest()))
-                .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/c/palettes/oak_window_m"))
-                .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/c/palettes/oak_window_connected_m"))
+                .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/palettes/oak_window_m"))
+                .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/palettes/oak_window_connected_m"))
                 .build();
         this.addEntry(windows);
+*/
 
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
-                        s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE))
-                )
-                .requiresFromMap(windows.blocks) //REASON: textures
-                .addTag(new ResourceLocation("c:glass_panes"), Registries.BLOCK)
-                .addTag(new ResourceLocation("c:glass_panes"), Registries.ITEM)
-                .setTabKey(tab)
+                        s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE)))
+//                .addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
+                //.setTabKey(() -> CreativeModeTabs.BUILDING_BLOCKS)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
-                .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(windowPanes);
 
@@ -66,27 +63,9 @@ public class CreateModule extends SimpleModule {
     }
 
     @Override
-    @Environment(EnvType.CLIENT)
     public void onClientSetup() {
         super.onClientSetup();
-        CreateClientModule.clientStuff(this);
-    }
-
-    @Environment(EnvType.CLIENT)
-    private static class CreateClientModule {
-        private static void clientStuff(CreateModule module) {
-            module.windows.blocks.forEach((w, b) -> {
-                String path = "block/" + module.shortenedId() + "/" + w.getNamespace() + "/palettes/" + w.getTypeName() + "_window";
-
-                CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
-                        EveryCompat.res(path), EveryCompat.res(path + "_connected"));
-
-                CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(b),
-                        (model) -> new CTModel(model, new HorizontalCTBehaviour(spriteShift)));
-                CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(module.windowPanes.blocks.get(w)),
-                        (model) -> new CTModel(model, new GlassPaneCTBehaviour(spriteShift)));
-            });
-        }
+        CreateClientModule.onClientSetup(this);
     }
 
 }
