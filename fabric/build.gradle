@@ -125,7 +125,6 @@ dependencies {
 
         //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
-//    modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1")
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
         // ~/forge/mods LOCAL
@@ -166,6 +165,7 @@ dependencies {
     modCompileOnly("curse.maven:regions-unexplored-659110:5579923")
 
         // OTHER MAVENS
+    modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1") // Frozen-Lib
 //    modCompileOnly("com.simibubi.create:create-fabric-1.20.1:$create_fabric_version") // Registrate, Flywheel //!! Need to update maven to get other libraries & the old maven are outdated
 
     // ======================================== DISABLED FOR A REASON =============================================== \\

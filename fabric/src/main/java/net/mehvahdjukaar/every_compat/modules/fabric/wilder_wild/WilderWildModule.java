@@ -30,7 +30,7 @@ import java.io.InputStream;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
 import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
 
-//SUPPORT: v3.0.7+
+//SUPPORT: v4.0+
 public class WilderWildModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, HollowedLogBlock> hollow_logs;
