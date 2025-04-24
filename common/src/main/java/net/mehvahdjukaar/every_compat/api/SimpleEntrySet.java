@@ -333,6 +333,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return e;
         }
 
+        public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {
+            this.tileHolder = new ExistingTileHolder<>(
+                    () -> BuiltInRegistries.BLOCK_ENTITY_TYPE.get(ResourceLocation.parse(idTile))
+            );
+            return this;
+        }
+
         public <H extends BlockEntity> Builder<T, B> addTile(Supplier<BlockEntityType<H>> tile) {
             this.tileHolder = new ExistingTileHolder<>(tile);
             return this;
