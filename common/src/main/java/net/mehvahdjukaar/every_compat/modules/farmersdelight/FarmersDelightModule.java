@@ -17,14 +17,17 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
+import vectorwing.farmersdelight.common.item.FuelBlockItem;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.Set;
 
-// SUPPORT: v1.2.4+
-// SUPPORT: FABRIC-v2.0.5+
+// SUPPORT: v1.2.6+
+// SUPPORT: FABRIC-v2.2.7+
 public class FarmersDelightModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> cabinets;
@@ -62,6 +65,7 @@ public class FarmersDelightModule extends SimpleModule {
                 .addTexture(modRes("block/oak_cabinet_side"))
                 .addTexture(modRes("block/oak_cabinet_top"))
                 .addTexture(modRes("block/oak_cabinet_front_open"))
+                .addCustomItem((w, block, p) -> new FuelBlockItem(block, ModItems.basicItem(), 300))
                 .build();
         this.addEntry(cabinets);
     }
@@ -71,8 +75,11 @@ public class FarmersDelightModule extends SimpleModule {
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicServerResources(handler, manager);
 
+        Set<String> blacklistedWoodType = Set.of("extradelight:cinnamon");
+
         // Creating cutting_board recipes
-        cabinets.items.forEach(((woodType, item) -> {
+        for (var woodType : WoodTypeRegistry.getTypes()) {
+            if (woodType.isVanilla() || blacklistedWoodType.contains(woodType.getId().toString())) continue;
 
             createCuttingRecipe("door", woodType.getBlockOfThis("door"), woodType.planks,
                     woodType, handler, manager);
@@ -94,21 +101,21 @@ public class FarmersDelightModule extends SimpleModule {
                                     WoodType woodType, ServerDynamicResourcesHandler handler, ResourceManager manager) {
 
         if (Objects.nonNull(input) && Objects.nonNull(output)) {
-        ResourceLocation recipeLocation = modRes("recipes/cutting/oak_"+recipeType+".json");
+            ResourceLocation recipeLocation = ResType.RECIPES.getPath(modRes("cutting/oak_"+recipeType));
 
             try (InputStream recipeStream = manager.getResource(recipeLocation)
                     .orElseThrow(() -> new FileNotFoundException(recipeLocation.toString())).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
                 // EDITING RECIPE
-                JsonObject getItem = recipe.getAsJsonArray("ingredients").get(0).getAsJsonObject();
-                getItem.addProperty("item", Utils.getID(input).toString());
+                JsonObject underIngredients = recipe.getAsJsonArray("ingredients").get(0).getAsJsonObject();
+                underIngredients.addProperty("item", Utils.getID(input).toString());
 
-                JsonObject getResult = recipe.getAsJsonArray("result").get(0).getAsJsonObject();
-                getResult.addProperty("item", Utils.getID(output).toString());
+                JsonObject underResult = recipe.getAsJsonArray("result").get(0).getAsJsonObject().getAsJsonObject("item");
+                underResult.addProperty("id", Utils.getID(output).toString());
 
                 // Adding to ResourceLocation
-                String path = this.shortenedId() + "/cutting/" + woodType.getAppendableId() +"_"+recipeType;
+                String path = this.shortenedId() + "/cutting/" + woodType.getAppendableId() +"_"+ recipeType;
 
                 handler.dynamicPack.addJson(EveryCompat.res(path), recipe, ResType.RECIPES);
             } catch (IOException e) {
