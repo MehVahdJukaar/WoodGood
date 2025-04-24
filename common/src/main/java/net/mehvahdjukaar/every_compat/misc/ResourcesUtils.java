@@ -217,7 +217,7 @@ public class ResourcesUtils {
 
         // Modifying the model files' content
         if (baseType instanceof LeavesType leavesType) {
-            transformerS.replaceLeavesTextures(leavesType);
+            transformer.replaceLeavesTextures(leavesType);
             var woodT = leavesType.getWoodType();
             if (woodT != null) {
                 transformer.replaceWoodTextures(woodT);
