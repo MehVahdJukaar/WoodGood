@@ -1,15 +1,13 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored;
 
 import com.google.gson.JsonObject;
-import io.github.uhq_games.regions_unexplored.block.RuBlocks;
-import io.github.uhq_games.regions_unexplored.world.level.block.plant.branch.BranchBlock;
-import io.github.uhq_games.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -30,6 +28,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
+import net.regions_unexplored.block.RuBlocks;
+import net.regions_unexplored.world.level.block.plant.branch.BranchBlock;
+import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
                         getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH),
+                        w -> new BranchBlock(BlockBehaviour.Properties.ofFullCopy(RuBlocks.ACACIA_BRANCH.get()),
                                 BranchBlock.BranchType.BRANCH)
                 )
                 .addTexture(modRes("block/oak_branch"))
@@ -121,8 +122,8 @@ public class RegionsUnexploredModule extends SimpleModule {
             handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
 
             //Tagging the planks as ingredient to get painted_planks
-            createAndAddCustomTags(new ResourceLocation("planks"), handler, wood.planks);
-            createAndAddCustomTags(new ResourceLocation("c:planks"), handler, wood.planks);
+            createAndAddCustomTags(ResourceLocation.parse("planks"), handler, wood.planks);
+            createAndAddCustomTags(ResourceLocation.parse("c:planks"), handler, wood.planks);
         });
     }
 
