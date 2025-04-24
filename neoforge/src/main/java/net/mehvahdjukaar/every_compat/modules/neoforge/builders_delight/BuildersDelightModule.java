@@ -575,7 +575,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: GLASS
         GLASS_1 = SimpleEntrySet.builder(WoodType.class, "glass_1",
                         BdBlocks.OAK_GLASS_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlockGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_1"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS_BLOCKS, Registries.BLOCK)
@@ -589,7 +589,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_2 = SimpleEntrySet.builder(WoodType.class, "glass_2",
                         BdBlocks.OAK_GLASS_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlockGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_2"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
@@ -604,7 +604,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_3 = SimpleEntrySet.builder(WoodType.class, "glass_3",
                         BdBlocks.OAK_GLASS_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlockGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_3"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
@@ -619,7 +619,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_4 = SimpleEntrySet.builder(WoodType.class, "glass_4",
                         BdBlocks.OAK_GLASS_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlockGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_4"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
@@ -633,7 +633,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_5 = SimpleEntrySet.builder(WoodType.class, "glass_5",
                         BdBlocks.OAK_GLASS_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlockGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_5"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
@@ -648,7 +648,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_6 = SimpleEntrySet.builder(WoodType.class, "glass_6",
                         BdBlocks.OAK_GLASS_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlockGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_6"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
@@ -663,7 +663,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_7 = SimpleEntrySet.builder(WoodType.class, "glass_7",
                         BdBlocks.OAK_GLASS_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlockGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_7"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
@@ -678,7 +678,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_8 = SimpleEntrySet.builder(WoodType.class, "glass_8",
                         BdBlocks.OAK_GLASS_8, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BlockGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_8"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
@@ -694,7 +694,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: GLASS_PANE
         GLASS_PANE_1 = SimpleEntrySet.builder(WoodType.class, "glass_pane_1",
                         BdBlocks.OAK_GLASS_PANE_1, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_1"))
                 .setTabKey(tabBlock)
@@ -707,7 +707,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_2 = SimpleEntrySet.builder(WoodType.class, "glass_pane_2",
                         BdBlocks.OAK_GLASS_PANE_2, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_2"))
                 .setTabKey(tabBlock)
@@ -720,7 +720,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_3 = SimpleEntrySet.builder(WoodType.class, "glass_pane_3",
                         BdBlocks.OAK_GLASS_PANE_3, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_3"))
                 .setTabKey(tabBlock)
@@ -733,7 +733,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_4 = SimpleEntrySet.builder(WoodType.class, "glass_pane_4",
                         BdBlocks.OAK_GLASS_PANE_4, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_4"))
                 .setTabKey(tabBlock)
@@ -746,7 +746,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_5 = SimpleEntrySet.builder(WoodType.class, "glass_pane_5",
                         BdBlocks.OAK_GLASS_PANE_5, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_5"))
                 .setTabKey(tabBlock)
@@ -759,7 +759,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_6 = SimpleEntrySet.builder(WoodType.class, "glass_pane_6",
                         BdBlocks.OAK_GLASS_PANE_6, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_6"))
                 .setTabKey(tabBlock)
@@ -772,7 +772,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_7 = SimpleEntrySet.builder(WoodType.class, "glass_pane_7",
                         BdBlocks.OAK_GLASS_PANE_7, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_7"))
                 .setTabKey(tabBlock)
@@ -785,7 +785,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         GLASS_PANE_8 = SimpleEntrySet.builder(WoodType.class, "glass_pane_8",
                         BdBlocks.OAK_GLASS_PANE_8, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS))
+                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_8"))
                 .setTabKey(tabBlock)

@@ -17,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -24,7 +25,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.regions_unexplored.block.RuBlocks;
 import net.regions_unexplored.world.level.block.plant.branch.BranchBlock;
 import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
@@ -48,7 +48,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
             getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
-            w -> new BranchBlock(BlockBehaviour.Properties.ofFullCopy(RuBlocks.ACACIA_BRANCH.get()), BranchBlock.BranchType.BRANCH)
+            w -> new BranchBlock(Utils.copyPropertySafe(RuBlocks.ACACIA_BRANCH.get()), BranchBlock.BranchType.BRANCH)
                 )
                 //TEXTURES: manual-texture-generation
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -66,7 +66,7 @@ public class RegionsUnexploredModule extends SimpleModule {
         shrubs = SimpleEntrySet.builder(LeavesType.class, "shrub",
                         getModBlock("dark_oak_shrub"),
                         () -> LeavesTypeRegistry.getValue(ResourceLocation.parse("dark_oak")),
-                        l -> new ShrubBlock(BlockBehaviour.Properties.ofFullCopy(RuBlocks.ACACIA_SHRUB.get()))
+                        l -> new ShrubBlock(Utils.copyPropertySafe(RuBlocks.ACACIA_SHRUB.get()))
                 )
                 .addCondition(l -> {
                     boolean log = l.getWoodType() != null; //REASON: textures

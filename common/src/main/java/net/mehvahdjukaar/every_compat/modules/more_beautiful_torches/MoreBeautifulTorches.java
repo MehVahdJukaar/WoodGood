@@ -7,13 +7,13 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 
 
 //SUPPORT: v3.0.0+
@@ -49,7 +49,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         log_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_wall_torch",
                         getModBlock("oak_log_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new WallTorchBlock(ParticleTypes.FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH))
+                        woodType -> new WallTorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.WALL_TORCH))
                 )
                 .addTextureM(modRes("block/oak_log_torch"), EveryCompat.res("block/common_torch_m"))
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
@@ -61,7 +61,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         log_torch = SimpleEntrySet.builder(WoodType.class, "log_torch",
                         getModBlock("oak_log_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new TorchBlock(ParticleTypes.FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH))
+                        woodType -> new TorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.TORCH))
                 )
                 //TEXTURES: wall_torch
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
@@ -74,7 +74,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         log_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_soul_wall_torch",
                         getModBlock("oak_log_soul_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_WALL_TORCH))
+                        woodType -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_WALL_TORCH))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
@@ -86,7 +86,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         log_soul_torch = SimpleEntrySet.builder(WoodType.class, "log_soul_torch",
                         getModBlock("oak_log_soul_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_TORCH))
+                        woodType -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_TORCH))
                 )
                 //TEXTURES: soul_wall_torch
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
@@ -99,7 +99,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         log_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_redstone_wall_torch",
                         getModBlock("oak_log_redstone_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new RedstoneWallTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.REDSTONE_WALL_TORCH))
+                        woodType -> new RedstoneWallTorchBlock(Utils.copyPropertySafe(Blocks.REDSTONE_WALL_TORCH))
                 )
                 .addTextureM(modRes("block/oak_log_redstone_torch"), EveryCompat.res("block/common_redstone_torch_m"))
                 .addTextureM(modRes("block/oak_log_redstone_torch_off"), EveryCompat.res("block/common_torch_m"))
@@ -111,7 +111,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         log_redstone_torch = SimpleEntrySet.builder(WoodType.class, "log_redstone_torch",
                         getModBlock("oak_log_redstone_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new RedstoneTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.REDSTONE_TORCH))
+                        woodType -> new RedstoneTorchBlock(Utils.copyPropertySafe(Blocks.REDSTONE_TORCH))
                 )
                 //TEXTURES: redstone_wall_torch
                 .setTabKey(tab)
@@ -124,7 +124,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 //!!--PLANKS--
         planks_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_wall_torch",
                         getModBlock("oak_planks_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new WallTorchBlock(ParticleTypes.FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH))
+                        woodType -> new WallTorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.WALL_TORCH))
                 )
                 .addTextureM(modRes("block/oak_planks_torch"), EveryCompat.res("block/common_torch_m"))
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
@@ -136,7 +136,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         planks_torch = SimpleEntrySet.builder(WoodType.class, "planks_torch",
                         getModBlock("oak_planks_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new TorchBlock(ParticleTypes.FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH))
+                        woodType -> new TorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.TORCH))
                 )
                 //TEXTURES: planks_wall_torch
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
@@ -149,7 +149,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         planks_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_soul_wall_torch",
                         getModBlock("oak_planks_soul_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_WALL_TORCH))
+                        woodType -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_WALL_TORCH))
                 )
                 .addTextureM(modRes("block/oak_planks_soul_torch"), EveryCompat.res("block/common_torch_m"))
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
@@ -161,7 +161,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         planks_soul_torch = SimpleEntrySet.builder(WoodType.class, "planks_soul_torch",
                         getModBlock("oak_planks_soul_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_TORCH))
+                        woodType -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_TORCH))
                 )
                 //TEXTURES: planks_soul_wall_torch
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
@@ -174,7 +174,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         planks_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_redstone_wall_torch",
                         getModBlock("oak_planks_redstone_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new RedstoneWallTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.REDSTONE_WALL_TORCH))
+                        woodType -> new RedstoneWallTorchBlock(Utils.copyPropertySafe(Blocks.REDSTONE_WALL_TORCH))
                 )
                 .addTextureM(modRes("block/oak_planks_redstone_torch"), EveryCompat.res("block/common_redstone_torch_m"))
                 .addTextureM(modRes("block/oak_planks_redstone_torch_off"), EveryCompat.res("block/common_torch_m"))
@@ -186,7 +186,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         planks_redstone_torch = SimpleEntrySet.builder(WoodType.class, "planks_redstone_torch",
                         getModBlock("oak_planks_redstone_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new RedstoneTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.REDSTONE_TORCH))
+                        woodType -> new RedstoneTorchBlock(Utils.copyPropertySafe(Blocks.REDSTONE_TORCH))
                 )
                 //TEXTURES: planks_redstone_wall_torch
                 .setTabKey(tab)
@@ -199,7 +199,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 //!!--STRIPPED-LOG--
         stripped_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_wall_torch", "stripped",
                         getModBlock("stripped_oak_log_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new WallTorchBlock(ParticleTypes.FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH))
+                        woodType -> new WallTorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.WALL_TORCH))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .createPaletteFromChild("stripped_log")
@@ -213,7 +213,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         stripped_torch = SimpleEntrySet.builder(WoodType.class, "log_torch", "stripped",
                         getModBlock("stripped_oak_log_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new TorchBlock(ParticleTypes.FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH))
+                        woodType -> new TorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.TORCH))
                 )
                 //TEXTURES: stripped_wall_torch
                 .requiresChildren("stripped_log") //REASON: recipes
@@ -227,7 +227,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         stripped_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_soul_wall_torch", "stripped",
                         getModBlock("stripped_oak_log_soul_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_WALL_TORCH))
+                        woodType -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_WALL_TORCH))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .createPaletteFromChild("stripped_log")
@@ -241,7 +241,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         stripped_soul_torch = SimpleEntrySet.builder(WoodType.class, "log_soul_torch", "stripped",
                         getModBlock("stripped_oak_log_soul_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_TORCH))
+                        woodType -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_TORCH))
                 )
                 //TEXTURES: stripped_soul_wall_torch
                 .requiresChildren("stripped_log") //REASON: recipes
@@ -255,7 +255,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         stripped_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_redstone_wall_torch", "stripped",
                         getModBlock("stripped_oak_log_redstone_wall_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new RedstoneWallTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.REDSTONE_WALL_TORCH))
+                        woodType -> new RedstoneWallTorchBlock(Utils.copyPropertySafe(Blocks.REDSTONE_WALL_TORCH))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .createPaletteFromChild("stripped_log")
@@ -269,7 +269,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
         stripped_redstone_torch = SimpleEntrySet.builder(WoodType.class, "log_redstone_torch", "stripped",
                         getModBlock("stripped_oak_log_redstone_torch"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new RedstoneTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.REDSTONE_TORCH))
+                        woodType -> new RedstoneTorchBlock(Utils.copyPropertySafe(Blocks.REDSTONE_TORCH))
                 )
                 //TEXTURES: stripped_redstone_wall_torch
                 .requiresChildren("stripped_log") //REASON: recipes

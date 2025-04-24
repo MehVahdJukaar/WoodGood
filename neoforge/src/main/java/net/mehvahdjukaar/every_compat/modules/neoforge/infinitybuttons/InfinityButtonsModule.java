@@ -26,7 +26,7 @@ public class InfinityButtonsModule extends SimpleModule {
 
         largeButtons = SimpleEntrySet.builder(WoodType.class, "large_button",
                         getModBlock("oak_large_button"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WoodenButton(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_BUTTON)
+                        w -> new WoodenButton(Utils.copyPropertySafe(Blocks.OAK_BUTTON)
                                 .strength(0.5f).noCollission().sound(SoundType.WOOD),
                                 true, w.canBurn())
                 )

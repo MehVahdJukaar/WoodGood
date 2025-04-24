@@ -66,7 +66,7 @@ public class ClutterModule extends SimpleModule {
 
         wall_bookshelves = SimpleEntrySet.builder(WoodType.class, "wall_bookshelf",
                         getModBlock("oak_wall_bookshelf"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WallBookshelfBlock(BlockBehaviour.Properties.ofFullCopy(w.planks)
+                        w -> new WallBookshelfBlock(Utils.copyPropertySafe(w.planks)
                                 .lightLevel(createLightLevelFromLitBlockState())
                         )
                 )
@@ -168,7 +168,7 @@ public class ClutterModule extends SimpleModule {
 
         cupboards = SimpleEntrySet.builder(WoodType.class, "cupboard",
                         getModBlock("oak_cupboard"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CupboardBlock(BlockBehaviour.Properties.ofFullCopy(w.planks).noOcclusion())
+                        w -> new CupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.CUPBOARD)
                 //TEXTURES: planks
@@ -184,7 +184,7 @@ public class ClutterModule extends SimpleModule {
 
         wall_cupboards = SimpleEntrySet.builder(WoodType.class, "wall_cupboard",
                         getModBlock("oak_wall_cupboard"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WallCupboardBlock(BlockBehaviour.Properties.ofFullCopy(w.planks).noOcclusion())
+                        w -> new WallCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.WALL_CUPBOARD)
                 //TEXTURES: planks, cupboard_door (cupboards), cupboard_inside (cupboards)
@@ -198,7 +198,7 @@ public class ClutterModule extends SimpleModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
                         getModBlock("oak_shelf"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(w.planks).noOcclusion())
+                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.SHELF)
                 //TEXTURES: log, planks
@@ -214,7 +214,7 @@ public class ClutterModule extends SimpleModule {
 
         trellises = SimpleEntrySet.builder(WoodType.class, "trellis",
                         getModBlock("oak_trellis"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new TrellisBlock(BlockBehaviour.Properties.ofFullCopy(w.planks)
+                        w -> new TrellisBlock(Utils.copyPropertySafe(w.planks)
                                 .lightLevel(createLightLevelFromLitBlockState()))
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

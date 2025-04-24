@@ -205,7 +205,7 @@ public class QuarkModule extends SimpleModule {
                         getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(  VanillaWoods.SPRUCE),
                         w -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
-                                null, BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
+                                null, Utils.copyPropertySafe(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
