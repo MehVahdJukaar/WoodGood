@@ -2,7 +2,9 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.abnormal;
 
 import com.google.gson.JsonObject;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
+import com.teamabnormals.blueprint.common.block.BlueprintChiseledBookShelfBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
+import com.teamabnormals.blueprint.core.registry.BlueprintBlockEntityTypes;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -23,12 +25,17 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,12 +64,13 @@ public class WoodworksModule extends SimpleModule {
 
     public WoodworksModule(String modId) {
         super(modId, "abnww");
-        var tab = CreativeModeTabs.BUILDING_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(VanillaWoods.ACACIA),
                         woodType -> new Block(Utils.copyPropertySafe(woodType.log)
+                                .sound(woodType.getSound())
                                 .strength(1.5F)
                         )
                 )
@@ -79,7 +87,8 @@ public class WoodworksModule extends SimpleModule {
         chiseled_bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf", "chiseled",
                         getModBlock("chiseled_acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(VanillaWoods.ACACIA),
-                        woodType -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(woodType.log)
+                        woodType -> new BlueprintChiseledBookShelfBlock(Utils.copyPropertySafe(woodType.log)
+                                .sound(woodType.getSound())
                                 .strength(1.5F)
                         )
                 )
@@ -126,6 +135,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(ResourceLocation.parse("quark:ladders"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
         this.addEntry(ladders);
 
@@ -133,6 +143,7 @@ public class WoodworksModule extends SimpleModule {
                         getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
                         woodType -> new BlueprintBeehiveBlock(Utils.copyPropertySafe(woodType.log)
+                                .sound(woodType.getSound())
                                 .strength(0.6F)
                         )
                 )
@@ -140,7 +151,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .defaultRecipe()
-                .addTile(getModTile("beehive"))
+                .addTile(BlueprintBlockEntityTypes.BEEHIVE)
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
