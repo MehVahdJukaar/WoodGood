@@ -6,10 +6,10 @@ import net.minecraft.resources.ResourceLocation;
 public class VanillaWoods {
     
     public static final ResourceLocation OAK = ResourceLocation.withDefaultNamespace("oak");
-    public static final ResourceLocation SPRUCE = VanillaWoods.SPRUCE;
+    public static final ResourceLocation SPRUCE = ResourceLocation.withDefaultNamespace("spruce");
     public static final ResourceLocation BIRCH = ResourceLocation.withDefaultNamespace("birch");
-    public static final ResourceLocation JUNGLE = VanillaWoods.JUNGLE;
-    public static final ResourceLocation ACACIA = VanillaWoods.ACACIA;
-    public static final ResourceLocation DARK_OAK = VanillaWoods.DARK_OAK;
+    public static final ResourceLocation JUNGLE = ResourceLocation.withDefaultNamespace("jungle");
+    public static final ResourceLocation ACACIA = ResourceLocation.withDefaultNamespace("acacia");
+    public static final ResourceLocation DARK_OAK = ResourceLocation.withDefaultNamespace("dark_oak");
     
 }
