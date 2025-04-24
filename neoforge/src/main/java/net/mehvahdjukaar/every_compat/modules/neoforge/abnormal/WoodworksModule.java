@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.abnormal;
 import com.google.gson.JsonObject;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
-import com.teamabnormals.blueprint.core.registry.BlueprintBlockEntityTypes;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -12,6 +11,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -33,9 +33,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.Tags;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +44,7 @@ import java.util.Objects;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 
-//SUPPORT: v3.0.0+
+//SUPPORT: v4.0.0+
 public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> chiseled_bookshelves;
@@ -112,7 +112,7 @@ public class WoodworksModule extends SimpleModule {
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("spruce_ladder"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
                         woodType -> new LadderBlock(Utils.copyPropertySafe(Blocks.LADDER)
                                 .strength(0.4F)
                                 .noOcclusion()
@@ -122,8 +122,8 @@ public class WoodworksModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
-                .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("quark:ladders"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -131,7 +131,7 @@ public class WoodworksModule extends SimpleModule {
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                         getModBlock("spruce_beehive"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
                         woodType -> new BlueprintBeehiveBlock(Utils.copyPropertySafe(woodType.log)
                                 .strength(0.6F)
                         )
@@ -140,7 +140,7 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .defaultRecipe()
-                .addTile(BlueprintBlockEntityTypes.BEEHIVE)
+                .addTile(getModTile("beehive"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
@@ -158,8 +158,8 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
-                .addTag(new ResourceLocation("quark:revertable_chests"), Registries.ITEM)
-                .addTag(new ResourceLocation("quark:boatable_chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
                 .addTile(abwwChestBlockEntity::new)
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .defaultRecipe()
@@ -249,7 +249,7 @@ public class WoodworksModule extends SimpleModule {
             // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
             Item getLadder = ladders.items.get(wood);
             Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
-                    new ResourceLocation(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+                    ResourceLocation.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
 
             // sawmill recipes - from LOGS
             sawmillRecipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
