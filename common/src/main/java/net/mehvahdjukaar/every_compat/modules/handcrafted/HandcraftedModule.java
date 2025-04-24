@@ -292,7 +292,7 @@ public class HandcraftedModule extends SimpleModule {
 
         pillarTrim = SimpleEntrySet.builder(WoodType.class, "pillar_trim",
                         ModBlocks.OAK_PILLAR_TRIM, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new PillarTrimBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), true)
+                        w -> new PillarTrimBlock(true, Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/trim/pillar/oak_pillar_trim_normal"))
@@ -314,7 +314,7 @@ public class HandcraftedModule extends SimpleModule {
 
         cornerTrim = SimpleEntrySet.builder(WoodType.class, "corner_trim",
                         ModBlocks.OAK_CORNER_TRIM, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CornerTrimBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), true)
+                        w -> new CornerTrimBlock(true, Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/trim/corner/oak_corner_trim_normal"))

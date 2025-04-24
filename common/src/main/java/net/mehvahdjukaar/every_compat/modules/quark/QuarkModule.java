@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -136,7 +137,7 @@ public class QuarkModule extends SimpleModule {
                         w -> {
                             Block fence = w.getBlockOfThis("fence");
                             return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/",
-                                    Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
+                                    Objects.requireNonNull(fence).defaultBlockState().getSoundType());
                         })
                 .requiresChildren("fence", "wood") //REASON: recipes
                 //TEXTURES: log
@@ -159,7 +160,7 @@ public class QuarkModule extends SimpleModule {
                             Block fence = w.getBlockOfThis("fence");
                             // required stripped_log texture & fence as an ingredients
                             return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/stripped_",
-                                    Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
+                                    Objects.requireNonNull(fence).defaultBlockState().getSoundType());
                         })
                 .requiresChildren("fence", "stripped_log", "stripped_wood") //REASON: textures, recipes
                 //TEXTURES: stripped_log
@@ -204,7 +205,7 @@ public class QuarkModule extends SimpleModule {
                         getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(  VanillaWoods.SPRUCE),
                         w -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
-                                null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
+                                null, BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
