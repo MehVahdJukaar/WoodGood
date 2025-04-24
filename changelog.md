@@ -5,12 +5,6 @@
 
 ---
 
-### INCOMPATIBLE:
-- **VMinus Mod** (FORGE): From v2.7.19 onward, it is marked as INCOMPATIBLE
-- **Very Many Players** (FORGE|FABRIC): it is marked as INCOMPATIBLE
-
----
-
 #### LEGENDS:
 - (COMMON): NEOFORGE & FABRIC
 - (FB): FABRIC
