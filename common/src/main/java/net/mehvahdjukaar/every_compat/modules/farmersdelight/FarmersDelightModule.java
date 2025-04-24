@@ -94,7 +94,7 @@ public class FarmersDelightModule extends SimpleModule {
             createCuttingRecipe("wood", woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"),
                     woodType, handler, manager);
 
-        }));
+        }
     }
 
     public void createCuttingRecipe(String recipeType, Block input, Block output,
