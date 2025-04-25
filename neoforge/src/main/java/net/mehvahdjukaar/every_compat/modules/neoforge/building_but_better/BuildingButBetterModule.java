@@ -8,14 +8,17 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -45,7 +48,7 @@ public class BuildingButBetterModule extends SimpleModule {
 
     public BuildingButBetterModule(String modId) {
         super(modId, "bbb");
-        var tab = CreativeModeTabs.BUILDING_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         layers = SimpleEntrySet.builder(WoodType.class, "layer",
                         getModBlock("oak_layer"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -62,7 +65,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .copyParentDrop()
-                .addModelTransform(BlockTypeResTransformer::replaceOakPlanks)
+                .addModelTransform(SpriteHelper::replaceOakLeaves)
                 .build();
         this.addEntry(layers);
 
