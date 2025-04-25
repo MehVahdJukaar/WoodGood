@@ -8,8 +8,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
+import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -62,7 +61,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .copyParentDrop()
-                .addModelTransform(BlockTypeResTransformer::replaceOakPlanks)
+                .addModelTransform(SpriteHelper::replaceOakPlanks)
                 .build();
         this.addEntry(layers);
 
