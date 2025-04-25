@@ -1,10 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.variants;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.ECRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -25,7 +23,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -36,8 +33,6 @@ import net.xanthian.variantvanillablocks.block.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Set;
-import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
@@ -61,16 +56,6 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, SmithingTableBlock> smithingTable;
     public final SimpleEntrySet<WoodType, SmokerBlock> smoker;
     //LOOM?
-
-    // Point-Of-Interest for Beehives - Removed when Moonlight LIb is updated
-    protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
-    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
-            () -> new PoiType(getBeehives(), 1, 1));
-    private Set<BlockState> getBeehives() {
-        var set = new ImmutableSet.Builder<BlockState>();
-        beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
-        return set.build();
-    }
 
     public VariantVanillaBlocksModule(String modID) {
         super(modID, "vvb");
@@ -351,13 +336,13 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         super.onModSetup();
 
         //POI & ACQUIREABLE_JOB
-        ECRegistry.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
     }
 
     // Registry --------------------------------------------------------------------------------------------------------
