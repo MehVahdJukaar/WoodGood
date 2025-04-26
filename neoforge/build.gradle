@@ -141,7 +141,7 @@ dependencies {
 
         // OTHER MAVENs
 //    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Resourceful-Lib
-//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
+//    modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}") // Create
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
