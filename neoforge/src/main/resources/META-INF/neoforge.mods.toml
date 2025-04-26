@@ -18,7 +18,7 @@ authors = "${mod_authors}"
 credits = "${mod_credits}"
 description = '''${mod_description}'''
 modUrl = "${mod_homepage}"
-itemIcon = "supplementaries:globe" #catalogue icon
+itemIcon = "everycomp:all_woods" #catalogue icon
 
 [[dependencies.${mod_id}]]
 modId = "neoforge"
