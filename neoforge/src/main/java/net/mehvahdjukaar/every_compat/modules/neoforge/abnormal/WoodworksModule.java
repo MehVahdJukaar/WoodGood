@@ -326,22 +326,19 @@ public class WoodworksModule extends SimpleModule {
             recipe = RPUtils.deserializeJson(recipeStream);
 
             // VARIABLES
-            JsonObject getRecipe = recipe.getAsJsonArray("recipes")
-                    .get(0).getAsJsonObject().getAsJsonObject("recipe");
-
-            JsonObject getIngredient = getRecipe.getAsJsonObject("ingredient");
+            JsonObject underIngredient = recipe.getAsJsonObject("ingredient");
 
             // Editing the JSON recipe
-            if (getIngredient.has("tag")) {
-                getIngredient.addProperty("tag",
+            if (underIngredient.has("tag")) {
+                underIngredient.addProperty("tag",
                         getATagOrCreateANew("logs", "caps", wood, handler, manager).toString());
-            } else { // getIngredient.has("item")
-                getIngredient.addProperty("item", Utils.getID(input).toString());
+            } else { // underIngredient.has("item")
+                underIngredient.addProperty("item", Utils.getID(input).toString());
             }
-            getRecipe.addProperty("result", Utils.getID(output).toString());
+            recipe.getAsJsonObject("result").addProperty("id", Utils.getID(output).toString());
 
         } catch (IOException e) {
-            EveryCompat.LOGGER.error("Woodworks Module/sawmill_recipe() - failed to open the recipe: {0}", e);
+            EveryCompat.LOGGER.error("Failed to open the recipe for {}: {}", recipeLocation,  e);
         }
 
         // filenameBuilder: <woodType>_<blockType>_from_<woodType>_<logs|planks>_sawing
