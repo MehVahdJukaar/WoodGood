@@ -115,19 +115,19 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = getChildKey(module);
-        for (T w : types) {
-            String name = getBlockName(w);
-            String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            if (module.isEntryAlreadyRegistered(name, w, BuiltInRegistries.BLOCK)) continue;
+        for (T currentType : types) {
+            String name = getBlockName(currentType);
+            String fullName = module.shortenedId() + "/" + currentType.getNamespace() + "/" + name;
+            if (module.isEntryAlreadyRegistered(name, currentType, BuiltInRegistries.BLOCK)) continue;
 
-            if (condition.test(w)) {
-                B block = blockFactory.apply(w);
+            if (condition.test(currentType)) {
+                B block = blockFactory.apply(currentType);
                 //for blocks that fail
                 if (block != null) {
-                    this.blocks.put(w, block);
+                    this.blocks.put(currentType, block);
 
                     registry.register(module.makeMyRes(fullName), block);
-                    w.addChild(childKey, block);
+                    currentType.addChild(childKey, block);
 
                     if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
                         SIMPLE_DROPS.add(block);
@@ -188,17 +188,17 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void registerItems(SimpleModule module, Registrator<Item> registry) {
-        blocks.forEach((w, value) -> {
+        blocks.forEach((type, value) -> {
             Item i;
 
             if (itemFactory != null) {
-                i = itemFactory.apply(w, value, new Item.Properties());
+                i = itemFactory.apply(type, value, new Item.Properties());
             } else {
-                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), w);
+                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), type);
             }
             //for ones that don't have item
             if (i != null) {
-                this.items.put(w, i);
+                this.items.put(type, i);
                 registry.register(Utils.getID(value), i);
             }
         });
