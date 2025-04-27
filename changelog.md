@@ -1,3 +1,10 @@
+### UPDATED:
+- **Woodworks** (NF): Fixed the recipes not being generated
+- **Every Compat** (COMMON): Recipe Generation for 1.21
+- **Create** (COMMON): Corrected the path for the mask texture, so the texture can be generated
+
+## V2.10.1
+
 ### UPDATED: 
 - **Building But Better** (NF): Updated an outdated method
 - **Every Compat** (COMMON): CompatChestTexture Class - Updated deprecated methods to use new methods
