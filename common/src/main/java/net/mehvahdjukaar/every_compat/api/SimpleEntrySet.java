@@ -388,15 +388,18 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        public Builder<T, B> defaultBlockTexture() {
-            this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("block/")).build());
-            return this;
-        }
+        /// Is there a way to get baseBlock?
+//        public Builder<T, B> defaultBlockTexture() {
+//            var test = this.baseBlock;
+//            this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("block/")).build());
+//            return this;
+//        }
 
-        public Builder<T, B> defaultItemTexture() {
-            this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("item/")).build());
-            return this;
-        }
+//        public Builder<T, B> defaultItemTexture() {
+//            this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("item/")).build());
+//            return this;
+//        }
+
     }
 
 
