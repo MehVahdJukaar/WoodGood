@@ -109,6 +109,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118730")
 //    modRuntimeOnly("curse.maven:furnish-547069:4821516")
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:5053651")
+//    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
 //    modRuntimeOnly("curse.maven:villagersplus-fabric-809542:4996993")
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:5915606")
 //    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5319819") //RLM: exp4j
@@ -124,7 +125,6 @@ dependencies {
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
         // ~/fabric/mods LOCAL
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
-    modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
     modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
 
         // MACAW's

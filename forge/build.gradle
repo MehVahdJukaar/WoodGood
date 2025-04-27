@@ -184,6 +184,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
 //    modRuntimeOnly("curse.maven:missing-wilds-forge-634277:5053677")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5263631") // Monolib
+//    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272885") // Framework
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:5915486")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:5318681")
@@ -202,7 +203,6 @@ dependencies {
     //+ REQUIRED - The modules access libraries from below - ONLY IN FORGE
         // ~/forge/mods LOCAL
     modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
-    modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-forge-1.20.1-1.0.0-beta.4")
     modCompileOnly("com.tynoxs.buildersdelight:BuildersDelight-1.20.1-v.1.3")
 
         // MACAW's

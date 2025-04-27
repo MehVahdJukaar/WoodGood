@@ -43,7 +43,6 @@ dependencies {
 
     //+ ~/common/mods LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
-    modCompileOnly("com.mrcrayfish.furniture.refurbished:refurbished_furniture-fabric-1.20.1-1.0.0-beta.4")
 
 //!! ================================================== IMPORTS ===================================================== \\
     //+ REQUIRED - The modules access libaries from below
@@ -61,6 +60,7 @@ dependencies {
     modCompileOnly("curse.maven:handcrafted-538214:5118730")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
 //    modCompileOnly("curse.maven:more-beautiful-torches-860325:5263631") // MonoLib - Not really needed
+    modCompileOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
     modCompileOnly("curse.maven:quark-243121:5093415")
     modCompileOnly("curse.maven:storage-drawers-223852:5915606")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819")
