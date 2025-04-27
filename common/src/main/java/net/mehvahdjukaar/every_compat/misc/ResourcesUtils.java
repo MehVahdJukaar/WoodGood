@@ -216,13 +216,13 @@ public class ResourcesUtils {
 
         // Modifying the model files' content
         if (baseType instanceof LeavesType leavesType) {
-            transformer.replaceLeavesTextures(leavesType);
+            SpriteHelper.replaceLeavesTextures(transformer, leavesType);
             var woodT = leavesType.getWoodType();
             if (woodT != null) {
-                transformer.replaceWoodTextures(woodT);
+                SpriteHelper.replaceWoodTextures(transformer, woodT);
             }
         } else if (baseType instanceof WoodType woodType) {
-            transformer.replaceWoodTextures(woodType);
+            SpriteHelper.replaceWoodTextures(transformer, woodType);
         }
 
         transformer.replaceGenericType(oldTypeName, "block");
