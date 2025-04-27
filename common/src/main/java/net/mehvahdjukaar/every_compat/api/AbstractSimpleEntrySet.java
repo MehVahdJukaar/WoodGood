@@ -336,10 +336,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         }
                     }
                 } catch (UnsupportedOperationException e) {
-                    EveryCompat.LOGGER.error("Could not generate textures for {}", textureInfo, e);
+                    EveryCompat.LOGGER.error("Could not generate textures for {}: {}", textureInfo, e);
                 } catch (Exception e) {
                     if (PlatHelper.isDev()) throw new RuntimeException(e);
-                    EveryCompat.LOGGER.error("Failed to read block texture at {}", textureInfo, e);
+                    EveryCompat.LOGGER.error("Failed to read block texture at {}: {}", textureInfo, e);
                 }
             }
 
@@ -428,7 +428,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
 
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Could not generate any block texture for entry set {}: {}",
+            EveryCompat.LOGGER.error("Could not generate the block texture for {}: {}",
                     module == null ? "dummy" : module.modRes(this.getName()), e.getMessage());
         } finally {
             for (var t : images) {
