@@ -267,6 +267,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     protected BlockTypeResTransformer<T> makeBlockStateTransformer(SimpleModule module, ResourceManager manager) {
         String baseBlockName = baseType.get().getTypeName();
         return BlockTypeResTransformer.<T>create(module.modId, manager)
+                .replaceWithTextureFromChild("minecraft:block/"+baseBlockName+"_planks", "planks")
                 .replaceBlockType(baseBlockName)
                 .IDReplaceType(baseBlockName);
     }
@@ -331,6 +332,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
             return e;
+        }
+
+        public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {
+            this.tileHolder = new ExistingTileHolder<>(
+                    () -> BuiltInRegistries.BLOCK_ENTITY_TYPE.get(new ResourceLocation(idTile))
+            );
+            return this;
         }
 
         public <H extends BlockEntity> Builder<T, B> addTile(Supplier<BlockEntityType<H>> tile) {
