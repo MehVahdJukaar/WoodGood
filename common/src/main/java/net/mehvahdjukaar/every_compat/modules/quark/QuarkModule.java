@@ -108,6 +108,7 @@ public class QuarkModule extends SimpleModule {
                 .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab"))
                 .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab_revert"))
                 .addCondition(woodType -> !PlatHelper.isModLoaded("v_slab_compat"))
+                .copyParentDrop()
                 .build();
         this.addEntry(verticalSlabs);
 
