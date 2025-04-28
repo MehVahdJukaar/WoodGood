@@ -200,6 +200,10 @@ remapJar {
     archiveClassifier = "fabric"
 }
 
+remapSourcesJar {
+    archiveClassifier = "fabric-sources"
+}
+
 jar {
     archiveClassifier = "dev"
 }
