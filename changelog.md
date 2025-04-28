@@ -1,4 +1,13 @@
 ### UPDATED:
+- **Every Compat**: Updated the ECRegistry.addBlocksToPOI to use the code from Moonlight lib - Fixed [Moonlight#339](https://github.com/MehVahdJukaar/Moonlight/issues/339)
+  - **Friends And Foes** (COMMON): beehives to act as beehome for bees
+  - **Variant Vanilla Blocks** (COMMON): Blocks that has job_acquireable for villagers to be an employee in
+
+<span style="color: YELLOW;">NOTE: **Moonlight Lib v2.13.83** is now required</span>
+
+## v2.7.27
+
+### UPDATED:
 - **Every Compat** (COMMON): 
   - Added tag, #minecraft:soul_fire_base_block to **Soulful Nether**'s fright (only applied to PLANKS)
   - Fixed the blockstate generation not applying to "block/oak_planks" for other wood mods - Related to Quark & [#907](https://github.com/MehVahdJukaar/WoodGood/issues/907)
