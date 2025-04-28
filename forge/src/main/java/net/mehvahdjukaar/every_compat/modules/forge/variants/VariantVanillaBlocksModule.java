@@ -339,13 +339,13 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         super.onModSetup();
 
         //POI & ACQUIREABLE_JOBS
-        ECRegistry.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-        ECRegistry.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
     }
 
 
