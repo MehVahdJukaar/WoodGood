@@ -1,24 +1,19 @@
 ### UPDATED:
-- **Storage Drawers** (COMMON): Fixed Drawers not being applied with "HeavyDrawers" when being carried as an item - [#890](https://github.com/MehVahdJukaar/WoodGood/issues/890)
-- **Macaw's Furniture** (COMMON): Updated some blocks that required children (stripped_log) for textures
-- **Absent By Design** (FORGE): Updated some blocks that required children (wood or stripped_wood) for recipes
+- **Every Compat** (COMMON): 
+  - Added tag, #minecraft:soul_fire_base_block to **Soulful Nether**'s fright (only applied to PLANKS)
+  - Fixed the blockstate generation not applying to "block/oak_planks" for other wood mods - Related to Quark & [#907](https://github.com/MehVahdJukaar/WoodGood/issues/907)
+- **Quark** (FORGE): Fixed vertical_slabs not dropping 2 slabs when broken as double-slab - [#907](https://github.com/MehVahdJukaar/WoodGood/issues/907)
 
 ---
 
 ### ADDED: 
-- **Deeper And Darker** (IT): blooming_stem
-- **Abyssal Decor** (IT): Added 3 WoodTypes: cinnamon, blackwood, & white_wood
-- **LANG**: zh_cn for More Beautiful Torches - @Libu2333
-- **TEXTURES** (IT): 
-  - **Burnt**'s yggdrasil_log & stripped_yggdrasil_log
-  - **Extended Mushroom**'s glowshroom_stem_stripped & poisonous_mushroom_stem_stripped
-- **Valhelsia Structure** (FORGE): Improved the texture generation for bundled_posts & bundled_stripped_posts 
-  - this should fix some blocks' missing texture 
+- **LANG**: en_us - corrected name for _hollow_log_ with "stem" for **Soulful Nether**'s fright
+- **LANG**: zh_cn - Blocks Plus @libu2333
 
 ---
 
 #### NEW SUPPORTED MOD:
-- **More Beautiful Torches** (COMMON)
+- **Blocks Plus** (FORGE)
 
 ---
 
