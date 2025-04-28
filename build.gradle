@@ -46,7 +46,7 @@ subprojects {
             gameVersions = [minecraft_version]
             loaders = [modLoader]
             changelog = changelogText
-            versionName = mod_version+'-'+modLoader
+            versionNumber = mod_version+'-'+modLoader
 
             if (modLoader == "fabric") {
                 dependencies {
@@ -72,7 +72,11 @@ subprojects {
                 addGameVersion minecraft_version
                 addGameVersion modLoader.capitalize()
 
-                mainArtifact(tasks.remapJar)
+                mainArtifact(tasks.remapJar) {
+                    if (modLoader == "fabric") {
+                        displayName = mod_id +"-"+ mod_version + "-fabric"
+                    }
+                }
 
                 if (modLoader == "fabric") {
                     relations {
