@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.forge.variants;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
-import net.mehvahdjukaar.every_compat.ECRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -57,7 +56,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> smithingTable;
     public final SimpleEntrySet<WoodType, Block> smoker;
 
-    // Point-Of-Interest for Beehives - Removed when Moonlight LIb is updated
+    // Point-Of-Interest for Beehives - //TODO: remove when the addBlocksToPOI() is enabled below
     protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
     public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
             () -> new PoiType(getBeehives(), 1, 1));
@@ -338,14 +337,14 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
 
-        //POI & ACQUIREABLE_JOBS
-        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        //POI & ACQUIREABLE_JOBS //!! Dont use below until the issue on FORGE is fixed
+//        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
     }
 
 

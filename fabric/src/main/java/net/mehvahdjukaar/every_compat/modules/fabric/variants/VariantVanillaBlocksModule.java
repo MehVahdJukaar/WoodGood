@@ -62,7 +62,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, SmokerBlock> smoker;
     //LOOM?
 
-    // Point-Of-Interest for Beehives - Removed when Moonlight LIb is updated
+    // Point-Of-Interest for Beehives - //TODO: remove when the addBlocksToPOI() is enabled below
     protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
     public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
             () -> new PoiType(getBeehives(), 1, 1));
@@ -351,13 +351,13 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         super.onModSetup();
 
         //POI & ACQUIREABLE_JOB
-        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
     }
 
     // Registry --------------------------------------------------------------------------------------------------------
