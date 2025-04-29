@@ -48,6 +48,25 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // Mofu's Better End
+        addOptional("mofus_better_end_:weepingstar_log", "_side", "mofus_better_end_:block/weepingstarlogside");
+        addOptional("mofus_better_end_:weepingstar_log", "_top", "mofus_better_end_:block/weepingstarlogup");
+        addOptional("mofus_better_end_:weepingstar_stripped_log", "_side", "mofus_better_end_:block/weepingstarrefinedplanks");
+        addOptional("mofus_better_end_:weepingstar_stripped_log", "_top", "mofus_better_end_:block/stipedweepingstarlogup");
+
+        addOptional("mofus_better_end_:frost_root_log", "_side", "mofus_better_end_:block/frostrootlogside");
+        addOptional("mofus_better_end_:frost_root_log", "_top", "mofus_better_end_:block/frostrootlogup");
+        addOptional("mofus_better_end_:stripped_frost_root_log", "_side", "mofus_better_end_:block/strippedfrostrootlog");
+        addOptional("mofus_better_end_:stripped_frost_root_log", "_top", "mofus_better_end_:block/strippedfrostrootup");
+
+            // Planks
+        addOptional("mofus_better_end_:weepingstar_planks", "all", "mofus_better_end_:block/weeoingstarplanks");
+        addOptional("mofus_better_end_:frost_root_plank", "all", "mofus_better_end_:block/frostrootplank");
+
+            // Leaves
+        addOptional("mofus_better_end_:weepingstar_leaf", "_leavse", "mofus_better_end_:block/weepingstarleafs2");
+        addOptional("mofus_better_end_:frost_root_leaves", "_leavse", "mofus_better_end_:block/frostrootleaves");
+
         // Botanic Pledge
         addOptional("botanicpledge:yggdrasil_log", "_side", "botanicpledge:block/yggdrasil_log");
         addOptional("botanicpledge:stripped_yggdrasil_log", "_side", "botanicpledge:block/stripped_yggdrasil_log");
@@ -101,10 +120,10 @@ public class SpriteHelper {
         addOptional("promenade:stripped_maple_log", "_side", "promenade:block/maple/stripped_log/side");
         addOptional("promenade:stripped_maple_log", "_top", "promenade:block/maple/stripped_log/top");
 
-        addOptional("promenade:sakura_planks", "_side", "promenade:block/sakura/planks");
-        addOptional("promenade:dark_amaranth_planks", "_side", "promenade:block/dark_amaranth/planks");
-        addOptional("promenade:palm_planks", "_side", "promenade:block/palm/planks");
-        addOptional("promenade:maple_planks", "_side", "promenade:block/maple/planks");
+        addOptional("promenade:sakura_planks", "all", "promenade:block/sakura/planks");
+        addOptional("promenade:dark_amaranth_planks", "all", "promenade:block/dark_amaranth/planks");
+        addOptional("promenade:palm_planks", "all", "promenade:block/palm/planks");
+        addOptional("promenade:maple_planks", "all", "promenade:block/maple/planks");
 
         // Simple Mango
         addOptional("simplemango:mango_log", "_top", "simplemango:block/mango_log_horizontal");
