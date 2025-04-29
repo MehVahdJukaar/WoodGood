@@ -1,4 +1,9 @@
 ### UPDATED:
+- **Variant Vanilla Blocks** (COMMON): Disable the `addBlocksToPOI()` for now until the solution is applied
+
+## v2.7.28
+
+### UPDATED:
 - **Every Compat**: Updated the ECRegistry.addBlocksToPOI to use the code from Moonlight lib - Fixed [Moonlight#339](https://github.com/MehVahdJukaar/Moonlight/issues/339)
   - **Friends And Foes** (COMMON): beehives to act as beehome for bees
   - **Variant Vanilla Blocks** (COMMON): Blocks that has job_acquireable for villagers to be an employee in
