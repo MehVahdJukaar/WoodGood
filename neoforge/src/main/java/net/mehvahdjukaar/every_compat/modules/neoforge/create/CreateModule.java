@@ -34,7 +34,7 @@ public class CreateModule extends SimpleModule {
                         getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
                         (Function<WoodType, Block>) this::makeWindow
                 )
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .createPaletteFromPlanks(p -> p.remove(p.getDarkest()))
                 .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/c/palettes/oak_window_m"))
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/c/palettes/oak_window_connected_m"))
@@ -49,7 +49,7 @@ public class CreateModule extends SimpleModule {
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE))
                 )
                 .requiresFromMap(windows.blocks) //REASON: textures
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .addTag(Tags.Items.GLASS_PANES, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
