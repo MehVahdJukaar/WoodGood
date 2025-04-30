@@ -1,4 +1,11 @@
 ### UPDATED:
+- **Create** (NF): Changed RenderType to TRANSLUCENT for windows & window_panes
+- **Dramatic Doors Macaw** (COMMON): Fixed the outdated tab that caused the crash
+  - NOTE: Dramatic Doors + Macaw's Doors
+
+## v2.10.2
+
+### UPDATED:
 - **Woodworks** (NF): Fixed the recipes not being generated
 - **Every Compat** (COMMON): Recipe Generation for 1.21
 - **Create** (COMMON): Corrected the path for the mask texture, so the texture can be generated
