@@ -17,8 +17,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
+import java.util.Objects;
 
-//SUPPORT: v3.2.9_1+
+//SUPPORT: v3.3.2+
 //NOTE: The library of FABRIC and FORGE are not the same, must be in separated folders
 public class DramaticDoorsModule extends SimpleModule {
 
@@ -30,8 +31,9 @@ public class DramaticDoorsModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = DDCreativeTabs.MAIN_TAB;
 
         tallDoors = SimpleEntrySet.builder(WoodType.class, "door", "tall",
-                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new TallDoorBlock(w.toVanillaOrOak().setType(),
-                                Blocks.OAK_DOOR))
+                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(w.toVanillaOrOak().setType(), getDoorSafe(w))
+                )
                 .addTextureM(modRes("block/tall_oak_door_bottom"), EveryCompat.res("block/dd/tall_oak_door_bottom_m"))
                 .addTextureM(modRes("block/tall_oak_door_middle"), EveryCompat.res("block/dd/tall_oak_door_middle_m"))
                 .addTextureM(modRes("block/tall_oak_door_top"), EveryCompat.res("block/dd/tall_oak_door_top_m"))
@@ -48,8 +50,9 @@ public class DramaticDoorsModule extends SimpleModule {
         this.addEntry(tallDoors);
 
         shortDoors = SimpleEntrySet.builder(WoodType.class, "door", "short",
-                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new ShortDoorBlock(w.toVanillaOrOak().setType(),
-                                Blocks.OAK_DOOR))
+                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ShortDoorBlock(w.toVanillaOrOak().setType(), getDoorSafe(w))
+                )
                 .addTextureM(modRes("block/short_oak_door"), EveryCompat.res("block/dd/short_oak_door_m"))
                 .addTextureM(modRes("item/short_oak_door"), EveryCompat.res("item/dd/short_oak_door_m"))
                 .addTag(modRes("short_wooden_doors"), Registries.BLOCK)
@@ -62,6 +65,11 @@ public class DramaticDoorsModule extends SimpleModule {
                 .build();
 
         this.addEntry(shortDoors);
+    }
+
+    public Block getDoorSafe(WoodType woodType) {
+        Block door = woodType.getBlockOfThis("door");
+        return (door != null) ? Objects.requireNonNull(door) : Blocks.OAK_DOOR;
     }
 
     @Override
