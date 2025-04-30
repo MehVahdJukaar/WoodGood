@@ -202,6 +202,10 @@ remapJar {
     archiveClassifier = "fabric"
 }
 
+remapSourcesJar {
+    archiveClassifier = "fabric-sources"
+}
+
 jar {
     archiveClassifier = "dev"
 }
@@ -210,6 +214,8 @@ sourcesJar {
     def commonSources = project(":common").sourcesJar
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
+
+    archiveClassifier = "fabric-sources"
 }
 
 components.java {
