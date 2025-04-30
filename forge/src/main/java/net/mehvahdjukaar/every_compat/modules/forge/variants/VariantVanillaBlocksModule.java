@@ -56,7 +56,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> smithingTable;
     public final SimpleEntrySet<WoodType, Block> smoker;
 
-    // Point-Of-Interest for Beehives - //TODO: remove when the addBlocksToPOI() is enabled below
+    // Point-Of-Interest for Beehives -  //!! - remove when the addBlocksToPOI() is fixed & enabled below
     protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
     public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
             () -> new PoiType(getBeehives(), 1, 1));
@@ -337,7 +337,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
 
-        //POI & ACQUIREABLE_JOBS //!! Dont use below until the issue on FORGE is fixed
+        //POI & ACQUIREABLE_JOBS //!! Dont use below until the problem is fixed
 //        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
 //        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
 //        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
