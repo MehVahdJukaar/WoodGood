@@ -2260,11 +2260,11 @@ public class ChippedModule extends SimpleModule {
             }
         }
 
-        addChippedRecipe(handler.getPack(), "planks", "carpenters_table");
-        addChippedRecipe(handler.getPack(), "door", "carpenters_table");
-        addChippedRecipe(handler.getPack(), "trapdoor", "carpenters_table");
-        addChippedRecipe(handler.getPack(), "log", "carpenters_table");
-        addChippedRecipe(handler.getPack(), "stripped_log", "carpenters_table");
+        addChippedRecipe(handler.getPack(), "planks");
+        addChippedRecipe(handler.getPack(), "door");
+        addChippedRecipe(handler.getPack(), "trapdoor");
+        addChippedRecipe(handler.getPack(), "log");
+        addChippedRecipe(handler.getPack(), "stripped_log");
 
     }
 
@@ -2279,9 +2279,10 @@ public class ChippedModule extends SimpleModule {
     }
 
 
+    public JsonObject jo = new JsonObject();
     @SuppressWarnings("SameParameterValue")
-    private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation) {
-        JsonArray jsonArray = new JsonArray();
+    private void addChippedRecipe(DynamicDataPack pack, String identifier) {
+        JsonArray ingredients = new JsonArray();
 
         for (var woodType : WoodTypeRegistry.getTypes()) {
             if (woodType.isVanilla()) continue;
@@ -2305,8 +2306,8 @@ public class ChippedModule extends SimpleModule {
                     if (identifier.equals("stripped_log") && !name.contains("stripped")) continue;
                     Item item = ((SimpleEntrySet<?, ?>) entry).items.get(woodType);
                     if (item != null) {
-                        isTagCreated = true;
                         tagBuilder.addEntry(item);
+                        isTagCreated = true;
                     }
                 }
             }
@@ -2323,16 +2324,19 @@ public class ChippedModule extends SimpleModule {
                 }
             }
 
+            JsonObject tagObject = new JsonObject();
             if (isTagCreated) {
                 pack.addTag(tagBuilder, Registries.ITEM);
                 pack.addTag(tagBuilder, Registries.BLOCK);
-                jsonArray.add(tagBuilder.getId().toString());
+                tagObject.addProperty("tag", tagBuilder.getId().toString());
+                ingredients.add(tagObject);
             }
+
         }
-        JsonObject jo = new JsonObject();
-        jo.addProperty("type", "chipped:" + workStation);
-        jo.add("tags", jsonArray);
-        pack.addJson(EveryCompat.res(shortenedId() + "/" + workStation + "_" + identifier), jo, ResType.RECIPES);
+        JsonObject recipeJO = new JsonObject();
+        recipeJO.addProperty("type", "chipped:" + "workbench");
+        recipeJO.add("ingredients", ingredients);
+        if (!ingredients.isEmpty()) pack.addJson(EveryCompat.res(shortenedId() + "/" + "carpenters_table" + "_" + identifier), recipeJO, ResType.RECIPES);
 
     }
 
