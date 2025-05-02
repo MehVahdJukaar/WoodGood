@@ -57,7 +57,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     }
 
     @Override
-    public void regenerateDynamicAssets(Consumer<ResourceGenTak> executor) {
+    public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         EveryCompat.forAllModules(m -> {
             try {
                 executor.accept((man, sink) -> {
