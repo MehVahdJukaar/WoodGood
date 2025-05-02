@@ -1,4 +1,9 @@
 ### UPDATED:
+- **Chipped** (COMMON): Updated an outdated recipe system & Fixed [#909](https://github.com/MehVahdJukaar/WoodGood/issues/909)
+
+## v2.10.3
+
+### UPDATED:
 - **Create** (NF): Changed RenderType to TRANSLUCENT for windows & window_panes
 - **Dramatic Doors Macaw** (COMMON): Fixed the outdated tab that caused the crash
   - NOTE: Dramatic Doors + Macaw's Doors
