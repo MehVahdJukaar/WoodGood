@@ -45,7 +45,7 @@ import java.util.List;
 //TODO:
 // Mcmeta files are not copied from the base block
 
-//SUPPORT: v3.0.1+
+//SUPPORT: v4.0.2+
 public class ChippedModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> barrel,
@@ -189,9 +189,7 @@ public class ChippedModule extends SimpleModule {
             ReinforcedStrippedLog,
             signStrippedLog,
             sternStrippedLog,
-            wiseStrippedLog
-            ;
-
+            wiseStrippedLog;
 
     public ChippedModule(String modId) {
         super(modId, "ch");
@@ -2279,7 +2277,6 @@ public class ChippedModule extends SimpleModule {
     }
 
 
-    public JsonObject jo = new JsonObject();
     @SuppressWarnings("SameParameterValue")
     private void addChippedRecipe(DynamicDataPack pack, String identifier) {
         JsonArray ingredients = new JsonArray();
