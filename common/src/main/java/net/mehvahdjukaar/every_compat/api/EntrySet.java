@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -46,7 +47,7 @@ public interface EntrySet<T extends BlockType> {
 
     void generateModels(SimpleModule module, DynClientResourcesGenerator handler, ResourceManager manager);
 
-    void generateTextures(SimpleModule module, DynClientResourcesGenerator handler, ResourceManager manager);
+    void generateTextures(SimpleModule module, ClientDynamicResourcesHandler handler, ResourceManager manager);
 
     default void setupExistingTiles() {
     }

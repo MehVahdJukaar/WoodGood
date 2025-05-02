@@ -5,10 +5,18 @@ import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
@@ -62,8 +70,24 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
                 if (PlatHelper.isDev()) throw e;
             }
         });
+        this.paletteCache.clear();
 
         ExtraTextureGenerator.generateExtraTextures(this, manager);
+
+    }
+
+    //needs to be thread safe
+    private final Map<BlockType, Palette> paletteCache = new ConcurrentHashMap<>();
+
+    public Palette getCachedBaseBlockTexturePalette(ResourceManager manager, BlockType baseType) {
+        return paletteCache.computeIfAbsent(baseType, k -> {
+            try (TextureImage oakPlanksTexture = TextureImage.open(manager,
+                    RPUtils.findFirstBlockTextureLocation(manager, (Block) baseType.mainChild()))) {
+                return Palette.fromImage(oakPlanksTexture);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
     }
 

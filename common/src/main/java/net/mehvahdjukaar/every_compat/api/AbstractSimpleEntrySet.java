@@ -277,13 +277,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     // i have no fucking clue whats going on here
     @Override
-    public void generateTextures(SimpleModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
+    public void generateTextures(SimpleModule module, ClientDynamicResourcesHandler handler, ResourceManager manager) {
         if (textures.isEmpty()) return;
 
         List<TextureImage> images = new ArrayList<>();
-        try (TextureImage oakPlanksTexture = TextureImage.open(manager,
-                RPUtils.findFirstBlockTextureLocation(manager, (Block) this.getBaseType().mainChild()))) {
-            Palette oakPlanksPalette = Palette.fromImage(oakPlanksTexture);
+        try {
+            // Oak Planks Palette
+            Palette oakPlanksPalette = handler.getCachedBaseBlockTexturePalette(manager, baseType.get());
 
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
