@@ -109,7 +109,7 @@ public abstract class CompatModule {
     }
 
     @Environment(EnvType.CLIENT)
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceGenTak sink) {
     }
 
     @Environment(EnvType.CLIENT)

@@ -43,7 +43,7 @@ public class ExtraTextureGenerator {
         ).apply(instance, (a, b) -> new Text(a, b.orElse(null))));
     }
 
-    public static void generateExtraTextures(DynClientResourcesGenerator generator, ResourceManager manager) {
+    public static void generateExtraTextures(ClientDynamicResourcesHandler generator, ResourceManager manager) {
         Map<ResourceLocation, JsonElement> map = new HashMap();
         SimpleJsonResourceReloadListener.scanDirectory(manager, "recolorable_textures", GSON, map);
         var extraTextures = new ArrayList<RecolorableTexture>();

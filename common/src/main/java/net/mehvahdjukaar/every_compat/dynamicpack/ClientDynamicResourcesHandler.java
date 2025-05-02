@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 
 public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
@@ -56,24 +57,31 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     }
 
     @Override
+    public void regenerateDynamicAssets(Consumer<ResourceGenTak> executor) {
+        EveryCompat.forAllModules(m -> {
+            try {
+                executor.accept((man, sink) -> {
+                    m.addDynamicClientResources(this, man, sink);
+                });
+            } catch (Exception e) {
+                getLogger().error("Failed to generate client dynamic assets for module {}:", m, e);
+                if (PlatHelper.isDev()) throw e;
+            }
+        });
+    }
+
+
+    @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
         if (!firstInit) {
             SpriteHelper.addHardcodedSprites();
             firstInit = true;
         }
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
-        EveryCompat.forAllModules(m -> {
-            try {
-                m.addDynamicClientResources(this, manager);
-            } catch (Exception e) {
-                getLogger().error("Failed to generate client dynamic assets for module {}:", m, e);
-                if (PlatHelper.isDev()) throw e;
-            }
-        });
+        super.regenerateDynamicAssets(manager);
         this.paletteCache.clear();
 
         ExtraTextureGenerator.generateExtraTextures(this, manager);
-
     }
 
     //needs to be thread safe
