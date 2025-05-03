@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.ECRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -12,22 +11,19 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -38,6 +34,7 @@ import net.xanthian.variantvanillablocks.block.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
@@ -347,80 +344,88 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         }
     }
 
+    @SuppressWarnings("CommentedOutCode")
     @Override
     public void onModSetup() {
         super.onModSetup();
 
-        //POI & ACQUIREABLE_JOB //!! Dont use below until the problem is fixed
-//        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        // POI & ACQUIREABLE_JOB //!! Dont use below until the problem is fixed
+        /*
+        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        */
     }
 
-    // Registry --------------------------------------------------------------------------------------------------------
+    // REGISTRY --------------------------------------------------------------------------------------------------------
 
     @Override
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-        //apparently due to class verifier issues this is needed since it needs to check if that lambda actually implements that interface and to do so it needs to load the class
-        //now I have no clue why this isn't needed on the other modules (this is only fabric one so maybe that?)
-        //could it be that environment here strips stuff less that on common? or that all classes that use this rendered also happen to be de facto fabric classes
-        //ClientProxy.shutUpClassVerifier(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
-        //this is so dumb and IDK why it's needed. that class should never be loaded since it has environment annotation
-        //I tried everything, lambdas, double lambdas, anonymous classes...
+        /*
+        apparently due to class verifier issues this is needed since it needs to check if that lambda actually implements that interface and to do so it needs to load the class
+        now I have no clue why this isn't needed on the other modules (this is only fabric one so maybe that?)
+        could it be that environment here strips stuff less that on common? or that all classes that use this rendered also happen to be de facto fabric classes
+        ClientProxy.shutUpClassVerifier(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
+        this is so dumb and IDK why it's needed. that class should never be loaded since it has environment annotation
+        I tried everything, lambdas, double lambdas, anonymous classes...
+        */
         CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
     }
 
-    // Textures --------------------------------------------------------------------------------------------------------
 
     @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
-        chests.blocks.forEach((wood, block) -> {
-            // SINGLE
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/acacia_chest"),
-                    EveryCompat.res("model/oak_chest_normal_m"),
-                    EveryCompat.res("model/oak_chest_normal_o"),
-                    null
-            );
-            // LEFT
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/acacia_chest_left"),
-                    EveryCompat.res("model/oak_chest_left_m"),
-                    EveryCompat.res("model/oak_chest_left_o"),
-                    null
-            );
-            // RIGHT
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/acacia_chest_right"),
-                    EveryCompat.res("model/oak_chest_right_m"),
-                    EveryCompat.res("model/oak_chest_right_o"),
-                    null
-            );
+    // TEXTURES
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+        executor.accept((manager, sink) -> {
+            chests.blocks.forEach((wood, block) -> {
+                // SINGLE
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/acacia_chest"),
+                        EveryCompat.res("model/oak_chest_normal_m"),
+                        EveryCompat.res("model/oak_chest_normal_o"),
+                        null
+                );
+                // LEFT
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/acacia_chest_left"),
+                        EveryCompat.res("model/oak_chest_left_m"),
+                        EveryCompat.res("model/oak_chest_left_o"),
+                        null
+                );
+                // RIGHT
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/acacia_chest_right"),
+                        EveryCompat.res("model/oak_chest_right_m"),
+                        EveryCompat.res("model/oak_chest_right_o"),
+                        null
+                );
 
-            // MODEL ITEM
-            String path = shortenedId() + "/" + wood.getAppendableId() + "_chest"; // path to json for chest
-            JsonObject modelFile;
-            ResourceLocation modelRLoc = EveryCompat.res("models/item/" + path + ".json");
+                // MODEL ITEM
+                String path = shortenedId() + "/" + wood.getAppendableId() + "_chest"; // path to json for chest
+                JsonObject modelFile;
+                ResourceLocation modelRLoc = EveryCompat.res("models/item/" + path + ".json");
 
-            if (manager.getResource(modelRLoc).isPresent()) {
-                try (InputStream modelStream = manager.getResource(modelRLoc).get().open()) {
-                    modelFile = RPUtils.deserializeJson(modelStream);
-                    String textureID = EveryCompat.MOD_ID + ":chest/" + path;
-                    // Editing
-                    modelFile.getAsJsonObject("textures").addProperty("chest", textureID);
+                if (manager.getResource(modelRLoc).isPresent()) {
+                    try (InputStream modelStream = manager.getResource(modelRLoc).get().open()) {
+                        modelFile = RPUtils.deserializeJson(modelStream);
+                        String textureID = EveryCompat.MOD_ID + ":chest/" + path;
+                        // Editing
+                        modelFile.getAsJsonObject("textures").addProperty("chest", textureID);
 
-                    // Add to Resource
-                    handler.dynamicPack.addJson(EveryCompat.res(path), modelFile, ResType.ITEM_MODELS);
-                } catch (IOException e) {
-                    handler.getLogger().error("VariantVanillaBlocks: failed to open the model file: {} - {}", modelRLoc, e);
+                        // Add to Resource
+                        sink.addJson(EveryCompat.res(path), modelFile, ResType.ITEM_MODELS);
+                    } catch (IOException e) {
+                        EveryCompat.LOGGER.error("VariantVanillaBlocks: failed to open the model file: {} - {}", modelRLoc, e);
+                    }
                 }
-            }
+            });
+
         });
     }
 

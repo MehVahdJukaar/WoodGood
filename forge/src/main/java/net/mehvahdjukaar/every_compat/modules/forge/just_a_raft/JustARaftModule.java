@@ -7,22 +7,21 @@ import com.mrbysco.justaraftmod.items.RaftItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 
@@ -65,29 +64,32 @@ public class JustARaftModule extends SimpleModule {
 
     @Override
     // RECIPES
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
         ResourceLocation recipeLoc = ResType.RECIPES.getPath(modRes("oak_raft"));
 
-        rafts.items.forEach((wood, item ) -> {
-            try (InputStream recipeStrem = manager.getResource(recipeLoc)
-                    .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipeLoc)).open()) {
-                JsonObject recipe = RPUtils.deserializeJson(recipeStrem);
+        executor.accept((manager, sink) -> {
+            rafts.items.forEach((wood, item) -> {
+                try (InputStream recipeStrem = manager.getResource(recipeLoc)
+                        .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipeLoc)).open()) {
+                    JsonObject recipe = RPUtils.deserializeJson(recipeStrem);
 
-                // Editing the recipe
-                recipe.getAsJsonObject("key").getAsJsonObject("L")
-                        .addProperty("tag", getATagOrCreateANew("logs", "caps", wood, handler, manager).toString());
+                    // Editing the recipe
+                    recipe.getAsJsonObject("key").getAsJsonObject("L")
+                            .addProperty("tag", getATagOrCreateANew("logs", "caps", wood, sink, manager).toString());
 
-                recipe.getAsJsonObject("result").addProperty("item", Utils.getID(item).toString());
+                    recipe.getAsJsonObject("result").addProperty("item", Utils.getID(item).toString());
 
-                // Adding to the resources
-                String newRecipeLoc = shortenedId() +"/"+ wood.getAppendableId() + "_raft";
+                    // Adding to the resources
+                    String newRecipeLoc = shortenedId() + "/" + wood.getAppendableId() + "_raft";
 
-                handler.dynamicPack.addJson(EveryCompat.res(newRecipeLoc), recipe, ResType.RECIPES);
+                    sink.addJson(EveryCompat.res(newRecipeLoc), recipe, ResType.RECIPES);
 
-            } catch (IOException e) {
-                handler.getLogger().error("Failed to generate recipes for {} : {}", item, e);
-            }
+                } catch (IOException e) {
+                    EveryCompat.LOGGER.error("Failed to generate recipes for {} : {}", item, e);
+                }
+            });
+
         });
     }
 

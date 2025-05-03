@@ -4,25 +4,27 @@ import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import xerca.xercamod.common.block.BlockCarvedLog;
 import xerca.xercamod.common.block.Blocks;
+
+import java.util.function.Consumer;
 
 
 public class XercaModule extends SimpleModule {
@@ -40,10 +42,10 @@ public class XercaModule extends SimpleModule {
 
     public XercaModule(String modId) {
         super(modId, "x");
-        var tab = CreativeModeTabs.BUILDING_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         carved1 = SimpleEntrySet.builder(WoodType.class, "1", "carved",
-                        Blocks.CARVED_WARPED_1, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
+                        Blocks.CARVED_WARPED_1, () -> WoodTypeRegistry.getValue("warped"),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -57,7 +59,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved1);
 
         carved2 = SimpleEntrySet.builder(WoodType.class, "2", "carved",
-                        Blocks.CARVED_WARPED_2, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
+                        Blocks.CARVED_WARPED_2, () -> WoodTypeRegistry.getValue("warped"),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -71,7 +73,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved2);
 
         carved3 = SimpleEntrySet.builder(WoodType.class, "3", "carved",
-                        Blocks.CARVED_WARPED_3, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
+                        Blocks.CARVED_WARPED_3, () -> WoodTypeRegistry.getValue("warped"),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -85,7 +87,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved3);
 
         carved4 = SimpleEntrySet.builder(WoodType.class, "4", "carved",
-                        Blocks.CARVED_WARPED_4, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
+                        Blocks.CARVED_WARPED_4, () -> WoodTypeRegistry.getValue("warped"),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -99,7 +101,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved4);
 
         carved5 = SimpleEntrySet.builder(WoodType.class, "5", "carved",
-                        Blocks.CARVED_WARPED_5, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
+                        Blocks.CARVED_WARPED_5, () -> WoodTypeRegistry.getValue("warped"),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -114,7 +116,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved5);
 
         carved6 = SimpleEntrySet.builder(WoodType.class, "6", "carved",
-                        Blocks.CARVED_WARPED_6, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
+                        Blocks.CARVED_WARPED_6, () -> WoodTypeRegistry.getValue("warped"),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -132,7 +134,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved6);
 
         carved7 = SimpleEntrySet.builder(WoodType.class, "7", "carved",
-                        Blocks.CARVED_WARPED_7, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
+                        Blocks.CARVED_WARPED_7, () -> WoodTypeRegistry.getValue("warped"),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -147,7 +149,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved7);
 
         carved8 = SimpleEntrySet.builder(WoodType.class, "8", "carved",
-                        Blocks.CARVED_WARPED_8, () -> WoodTypeRegistry.getValue(new ResourceLocation("warped")),
+                        Blocks.CARVED_WARPED_8, () -> WoodTypeRegistry.getValue("warped"),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -192,17 +194,21 @@ public class XercaModule extends SimpleModule {
     }
 
     @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    // RECIPES
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        JsonObject json = new JsonObject();
-        json.addProperty("type","xercamod:carving");
-        json.add("ingredient", Ingredient.fromJson(json.get("ingredient")).toJson());
-        String s1 = GsonHelper.getAsString(json, "result");
-        int i = GsonHelper.getAsInt(json, "count");
-        json.addProperty("result", Utils.getID((new ItemStack( BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i)).getItem()).toString());
-        json.addProperty("count", (new ItemStack( BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i)).getCount());
+        executor.accept((manager, sink) -> {
+            JsonObject json = new JsonObject();
+            json.addProperty("type", "xercamod:carving");
+            json.add("ingredient", Ingredient.fromJson(json.get("ingredient")).toJson());
+            String s1 = GsonHelper.getAsString(json, "result");
+            int i = GsonHelper.getAsInt(json, "count");
+            json.addProperty("result", Utils.getID((new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(s1)), i)).getItem()).toString());
+            json.addProperty("count", (new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(s1)), i)).getCount());
 
-        handler.dynamicPack.addJson(EveryCompat.res("carving"), json, ResType.RECIPES);
+            sink.addJson(EveryCompat.res("carving"), json, ResType.RECIPES);
+
+        });
     }
 }

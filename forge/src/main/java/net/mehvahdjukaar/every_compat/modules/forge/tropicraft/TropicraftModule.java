@@ -4,16 +4,14 @@ import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -22,6 +20,7 @@ import net.tropicraft.core.common.block.BoardwalkBlock;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Consumer;
 
 //SUPPORT: v9.6.3+
 public class TropicraftModule extends SimpleModule {
@@ -48,30 +47,33 @@ public class TropicraftModule extends SimpleModule {
 
     @Override
     // RECIPES
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         ResourceLocation recipePath = modRes("mangrove_boardwalk");
 
-        boardwalks.blocks.forEach((wood, block) -> {
+        executor.accept((manager, sink) -> {
+            boardwalks.blocks.forEach((wood, block) -> {
 
-            try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipePath))
-                    .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipePath)).open()) {
+                try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipePath))
+                        .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipePath)).open()) {
 
-                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+                    JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
-                JsonObject underKey = recipe.getAsJsonObject("key").getAsJsonObject("X");
+                    JsonObject underKey = recipe.getAsJsonObject("key").getAsJsonObject("X");
 
-                // Editing the JSON
-                underKey.addProperty("item", Utils.getID(wood.getBlockOfThis("slab")).toString());
-                recipe.getAsJsonObject("result").addProperty("item", Utils.getID(block).toString());
+                    // Editing the JSON
+                    underKey.addProperty("item", Utils.getID(wood.getBlockOfThis("slab")).toString());
+                    recipe.getAsJsonObject("result").addProperty("item", Utils.getID(block).toString());
 
-                // Adding to the resource
-                String newPath = shortenedId() +"/"+ wood.getAppendableId() + "_boardwalk";
+                    // Adding to the resource
+                    String newPath = shortenedId() + "/" + wood.getAppendableId() + "_boardwalk";
 
-                handler.dynamicPack.addJson(EveryCompat.res(newPath), recipe, ResType.RECIPES);
+                    sink.addJson(EveryCompat.res(newPath), recipe, ResType.RECIPES);
 
-            } catch (IOException e) {
-                handler.getLogger().error("Failed to generate the boardwalk recipe: ", e);
-            }
+                } catch (IOException e) {
+                    EveryCompat.LOGGER.error("Failed to generate the boardwalk recipe for {}: {}", wood.getId(), e);
+                }
+            });
+
         });
     }
 }

@@ -2,19 +2,20 @@ package net.mehvahdjukaar.every_compat.modules.forge.corail_pillar;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import ovh.corail.corail_pillar.block.BlockPillar;
 import ovh.corail.corail_pillar.registry.ModTabs;
+
+import java.util.function.Consumer;
 
 //SUPPORT: v5.9.1+
 public class CorailPillarModule extends SimpleModule {
@@ -75,23 +76,26 @@ public class CorailPillarModule extends SimpleModule {
 
     }
 
-    @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    // RECIPES
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        LOG_PILLAR.blocks.forEach((wood, item) -> {
-            // LOG
-            stonecuttingRecipe(handler, wood.log, item, 2);
-            stonecuttingRecipe(handler, wood.log, SMALL_LOG_PILLAR.blocks.get(wood), 4);
+        executor.accept((manager, sink) -> {
+            LOG_PILLAR.blocks.forEach((wood, item) -> {
+                // LOG
+                stonecuttingRecipe(sink, wood.log, item, 2);
+                stonecuttingRecipe(sink, wood.log, SMALL_LOG_PILLAR.blocks.get(wood), 4);
 
-            // PLANKS
-            stonecuttingRecipe(handler, wood.planks, PLANK_PILLAR.blocks.get(wood), 2);
-            stonecuttingRecipe(handler, wood.planks, SMALL_PLANK_PILLAR.blocks.get(wood), 4);
+                // PLANKS
+                stonecuttingRecipe(sink, wood.planks, PLANK_PILLAR.blocks.get(wood), 2);
+                stonecuttingRecipe(sink, wood.planks, SMALL_PLANK_PILLAR.blocks.get(wood), 4);
+
+            });
 
         });
     }
 
-    public void stonecuttingRecipe(ServerDynamicResourcesHandler handler, Block input, Block output, int count) {
+    public void stonecuttingRecipe(ResourceSink sink, Block input, Block output, int count) {
         String recipeJSON = """
             {   
                 "type":"minecraft:stonecutting",
@@ -110,7 +114,7 @@ public class CorailPillarModule extends SimpleModule {
 
         ResourceLocation resLoc = Utils.getID(output); // provide everycomp:cpr/namespace/BlockID
 
-        handler.getPack().addBytes(resLoc, newJson.getBytes(), ResType.RECIPES);
+        sink.addBytes(resLoc, newJson.getBytes(), ResType.RECIPES);
     }
 
 }

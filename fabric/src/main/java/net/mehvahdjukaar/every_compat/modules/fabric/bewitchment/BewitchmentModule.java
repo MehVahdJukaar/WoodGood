@@ -11,17 +11,15 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -31,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystemNotFoundException;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 //SUPPORT: v1.20-8
 public class BewitchmentModule extends SimpleModule {
@@ -72,59 +71,62 @@ public class BewitchmentModule extends SimpleModule {
     }
 
     @Override
-    // Recipes
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    // RECIPES
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        String recipePath_1 = "athame_stripping/oak_bark_from_oak_log";
-        String recipePath_2 = "athame_stripping/oak_bark_from_oak_wood";
+        executor.accept((manager, sink) -> {
 
+            String recipePath_1 = "athame_stripping/oak_bark_from_oak_log";
+            String recipePath_2 = "athame_stripping/oak_bark_from_oak_wood";
 
-        try (InputStream recipeStream_1 = manager.getResource(ResType.RECIPES.getPath(modRes(recipePath_1)))
-                .orElseThrow(() -> new FileSystemNotFoundException(
-                        "Failed to get recipe at location: " + recipePath_1)).open();
-             InputStream recipeStream_2 = manager.getResource(ResType.RECIPES.getPath(modRes(recipePath_2)))
-                     .orElseThrow(() -> new FileSystemNotFoundException(
-                             "Failed to get recipe at location: " + recipePath_2)).open()
-        ) {
-            JsonObject recipe_1 = RPUtils.deserializeJson(recipeStream_1);
-            JsonObject recipe_2 = RPUtils.deserializeJson(recipeStream_2);
+            try (InputStream recipeStream_1 = manager.getResource(ResType.RECIPES.getPath(modRes(recipePath_1)))
+                    .orElseThrow(() -> new FileSystemNotFoundException(
+                            "Failed to get recipe at location: " + modRes(recipePath_1).toString())).open();
+                 InputStream recipeStream_2 = manager.getResource(ResType.RECIPES.getPath(modRes(recipePath_2)))
+                         .orElseThrow(() -> new FileSystemNotFoundException(
+                                 "Failed to get recipe at location: " + modRes(recipePath_2).toString())).open()
+            ) {
+                JsonObject recipe_1 = RPUtils.deserializeJson(recipeStream_1);
+                JsonObject recipe_2 = RPUtils.deserializeJson(recipeStream_2);
 
-            bark.items.forEach((wood, item) -> {
-                // Replacing "oak" in the path
-                String prefix = shortenedId() + "/" + wood.getNamespace() + "/";
+                bark.items.forEach((wood, item) -> {
+                    // Replacing "oak" in the path
+                    String prefix = shortenedId() + "/" + wood.getNamespace() + "/";
 
-                String newPath_1 = prefix + recipePath_1.replace("oak", wood.getTypeName());
-                String newPath_2 = prefix + recipePath_2.replace("oak", wood.getTypeName());
+                    String newPath_1 = prefix + recipePath_1.replace("oak", wood.getTypeName());
+                    String newPath_2 = prefix + recipePath_2.replace("oak", wood.getTypeName());
 
-                // Editing recipe_1
-                recipe_1.addProperty("log",
-                        Utils.getID(wood.log).toString());
-                recipe_1.addProperty("stripped_log",
-                        Utils.getID(wood.getBlockOfThis("stripped_log")).toString());
-                recipe_1.getAsJsonObject("result").addProperty("item",
-                        Utils.getID(item).toString());
-
-                // Adding to Resources
-                handler.dynamicPack.addJson(EveryCompat.res(newPath_1), recipe_1, ResType.RECIPES);
-
-                // Null check for wood - some wood mods doesn't include <type>_wood
-                if (Objects.nonNull(wood.getBlockOfThis("wood"))) {
-                    // Editing recipe_2
-                    recipe_2.addProperty("log",
-                            Utils.getID(wood.getBlockOfThis("wood")).toString());
-                    recipe_2.addProperty("stripped_log",
-                            Utils.getID(wood.getBlockOfThis("stripped_wood")).toString());
-                    recipe_2.getAsJsonObject("result").addProperty("item",
+                    // Editing recipe_1
+                    recipe_1.addProperty("log",
+                            Utils.getID(wood.log).toString());
+                    recipe_1.addProperty("stripped_log",
+                            Utils.getID(wood.getBlockOfThis("stripped_log")).toString());
+                    recipe_1.getAsJsonObject("result").addProperty("item",
                             Utils.getID(item).toString());
 
                     // Adding to Resources
-                    handler.dynamicPack.addJson(EveryCompat.res(newPath_2), recipe_2, ResType.RECIPES);
-                }
-            });
-        } catch (IOException e) {
-            handler.getLogger().error("Failed to open the recipe: ", e);
-        }
+                    sink.addJson(EveryCompat.res(newPath_1), recipe_1, ResType.RECIPES);
+
+                    // Null check for wood - some wood mods doesn't include <type>_wood
+                    if (Objects.nonNull(wood.getBlockOfThis("wood"))) {
+                        // Editing recipe_2
+                        recipe_2.addProperty("log",
+                                Utils.getID(wood.getBlockOfThis("wood")).toString());
+                        recipe_2.addProperty("stripped_log",
+                                Utils.getID(wood.getBlockOfThis("stripped_wood")).toString());
+                        recipe_2.getAsJsonObject("result").addProperty("item",
+                                Utils.getID(item).toString());
+
+                        // Adding to Resources
+                        sink.addJson(EveryCompat.res(newPath_2), recipe_2, ResType.RECIPES);
+                    }
+                });
+            } catch (IOException e) {
+                EveryCompat.LOGGER.error("Failed to open the recipe: ", e);
+            }
+
+        });
 
     }
 }

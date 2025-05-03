@@ -7,18 +7,16 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -27,6 +25,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
 import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
@@ -138,39 +137,42 @@ public class WilderWildModule extends SimpleModule {
     }
 
     @Override
-    // Recipes & Tags
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    // RECIPES & TAGS
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        hollow_logs.blocks.forEach((wood, block) -> {
-            // Variables
-            ResourceLocation recipeLoc = ResType.RECIPES.getPath("wilderwild:oak_planks_from_hollowed");
-            ResourceLocation newRecipeLoc = EveryCompat.res(wood.getTypeName() + "_planks_from_hollowed");
-            ResourceLocation tagRLoc = EveryCompat.res(shortenedId() + "/" + wood.getNamespace() + "/" + "hollowed_" +
-                    wood.getTypeName() + "_logs");
+        executor.accept((manager, sink) -> {
+            hollow_logs.blocks.forEach((wood, block) -> {
+                // Variables
+                ResourceLocation recipeLoc = ResType.RECIPES.getPath("wilderwild:oak_planks_from_hollowed");
+                ResourceLocation newRecipeLoc = EveryCompat.res(wood.createPathWith(shortenedId(), "", "planks_from_hollowed"));
+                ResourceLocation tagRLoc = EveryCompat.res(shortenedId() + "/" + wood.getNamespace() + "/" + "hollowed_" +
+                        wood.getTypeName() + "_logs");
 
-// TAGS ================================================================================================
-            boolean hasAddedNewTag = createAndAddCustomTags(tagRLoc, handler, block, stripped_hollow_logs.blocks.get(wood));
+                // TAGS ================================================================================================
+                boolean hasAddedNewTag = createAndAddCustomTags(tagRLoc, sink, block, stripped_hollow_logs.blocks.get(wood));
 
-// RECIPE ==============================================================================================
-            try (InputStream recipeStream = manager.getResource(recipeLoc)
-                    .orElseThrow(() -> new FileNotFoundException("Failed to get the recipe file @: " + recipeLoc)).open()) {
-                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+                // RECIPE ==============================================================================================
+                try (InputStream recipeStream = manager.getResource(recipeLoc)
+                        .orElseThrow(() -> new FileNotFoundException("Failed to get the recipe file @: " + recipeLoc)).open()) {
+                    JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
-                // Editing the recipe
-                recipe.getAsJsonArray("ingredients").get(0).getAsJsonObject()
-                        .addProperty("tag", tagRLoc.toString());
+                    // Editing the recipe
+                    recipe.getAsJsonArray("ingredients").get(0).getAsJsonObject()
+                            .addProperty("tag", tagRLoc.toString());
 
-                recipe.getAsJsonObject("result")
-                        .addProperty("item", Utils.getID(wood.planks).toString());
+                    recipe.getAsJsonObject("result")
+                            .addProperty("item", Utils.getID(wood.planks).toString());
 
-                // Adding to the resources
-                if (hasAddedNewTag) handler.dynamicPack.addJson(newRecipeLoc, recipe, ResType.RECIPES);
+                    // Adding to the resources
+                    if (hasAddedNewTag) sink.addJson(newRecipeLoc, recipe, ResType.RECIPES);
 
 
-            } catch (IOException e) {
-                handler.getLogger().error("Failed to open the recipe file: ", e);
-            }
+                } catch (IOException e) {
+                    EveryCompat.LOGGER.error("Failed to generate the recipe for {}: {}", newRecipeLoc.toString(), e);
+                }
+            });
+
         });
 
     }

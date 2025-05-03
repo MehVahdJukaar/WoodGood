@@ -1,14 +1,14 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
+import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CompatChestTexture {
 
-    public static void generateChestTexture(ClientDynamicResourcesHandler handler, ResourceManager manager,
+    public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
                                             String shortenedID, WoodType wood, Block block,
                                             ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
                                             ResourceLocation trappedORLoc) {
@@ -29,7 +29,7 @@ public class CompatChestTexture {
     * Generate a texture for chest and trapped_chest
     * @param removeDarkest 0: none removed, 1: removed once, 2: removed twice
     */
-    public static void generateChestTexture(ClientDynamicResourcesHandler handler, ResourceManager manager,
+    public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
                                     String shortenedID, WoodType wood, Block block,
                                 ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
                                     ResourceLocation trappedORLoc, int removeDarkest) {
@@ -72,7 +72,7 @@ public class CompatChestTexture {
                         });
                     }
 
-                    AnimationMetadataSection plankMeta = plankTexture.getMetadata();
+                    McMetaFile plankMeta = plankTexture.getMcMeta();
 
                     List<Palette> overlayPalette = new ArrayList<>();
                     for (var p : plankPalette) {
@@ -105,16 +105,16 @@ public class CompatChestTexture {
                     }
 
                 } catch (Exception ex) {
-                    handler.getLogger().error("Failed to generate Chest block texture for for: {} - {}", block, ex);
+                    EveryCompat.LOGGER.error("Failed to generate Chest block texture for for: {} - {}", block, ex);
                 }
         } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Chest block texture: ", ex);
+            EveryCompat.LOGGER.error("Could not generate any Chest block texture: ", ex);
         }
     }
 
-    private static void createChestTextures(ClientDynamicResourcesHandler handler,
+    private static void createChestTextures(ResourceSink handler,
                                             Respriter respriter, Respriter respriterO,
-                                            AnimationMetadataSection baseMeta, List<Palette> basePalette,
+                                            McMetaFile baseMeta, List<Palette> basePalette,
                                             List<Palette> overlayPalette, ResourceLocation normalRLoc,
                                             ResourceLocation trappedRLoc, TextureImage trappedOverlay,
                                             WoodType wood) {
@@ -126,11 +126,11 @@ public class CompatChestTexture {
         if (trappedOverlay != null) {
             TextureImage trapped = recoloredBase.makeCopy();
             trapped.applyOverlay(trappedOverlay.makeCopy());
-            handler.dynamicPack.addAndCloseTexture(trappedRLoc, trapped);
+            handler.addAndCloseTexture(trappedRLoc, trapped);
         }
 
         if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
-            handler.dynamicPack.addAndCloseTexture(normalRLoc, recoloredBase);
+            handler.addAndCloseTexture(normalRLoc, recoloredBase);
     }
 
 }

@@ -9,10 +9,10 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -35,6 +35,7 @@ import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
@@ -125,46 +126,48 @@ public class MoreChestVariantsModule extends SimpleModule {
         CompatChestBlockRenderer.register(event, trappedChests.getTile(CompatChestBlockEntity.class), shortenedId());
     }
 
-    @Deprecated(forRemoval = true)
-    @Override
     // Textures
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
+    @Override
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
 
-        trappedChests.blocks.forEach((wood, block) -> {
-            // SINGLE
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/oak"),
-                    EveryCompat.res("entity/mcv_chest_normal_m"),
-                    EveryCompat.res("entity/mcv_chest_normal_o"),
-                    EveryCompat.res("entity/mcv_trapped_normal_o"), 0
-            );
-            // LEFT
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/oak_left"),
-                    EveryCompat.res("entity/mcv_chest_left_m"),
-                    EveryCompat.res("entity/mcv_chest_left_o"),
-                    EveryCompat.res("entity/mcv_trapped_left_o"), 0
-            );
-            // RIGHT
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/oak_right"),
-                    EveryCompat.res("entity/mcv_chest_right_m"),
-                    EveryCompat.res("entity/mcv_chest_right_o"),
-                    EveryCompat.res("entity/mcv_trapped_right_o"), 0
-            );
+        executor.accept((manager, sink) -> {
+            trappedChests.blocks.forEach((wood, block) -> {
+                // SINGLE
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak"),
+                        EveryCompat.res("entity/mcv_chest_normal_m"),
+                        EveryCompat.res("entity/mcv_chest_normal_o"),
+                        EveryCompat.res("entity/mcv_trapped_normal_o"), 0
+                );
+                // LEFT
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak_left"),
+                        EveryCompat.res("entity/mcv_chest_left_m"),
+                        EveryCompat.res("entity/mcv_chest_left_o"),
+                        EveryCompat.res("entity/mcv_trapped_left_o"), 0
+                );
+                // RIGHT
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak_right"),
+                        EveryCompat.res("entity/mcv_chest_right_m"),
+                        EveryCompat.res("entity/mcv_chest_right_o"),
+                        EveryCompat.res("entity/mcv_trapped_right_o"), 0
+                );
 
 
-            // MODEL BLOCK
-            String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
-            String trapped_path = shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
+                // MODEL BLOCK
+                String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
+                String trapped_path = shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
 
-            customModel(path, handler, manager);
-            customModel(trapped_path, handler, manager);
+                customModel(path, sink, manager);
+                customModel(trapped_path, sink, manager);
+            });
+
         });
     }
 
-    public void customModel(String path, ClientDynamicResourcesHandler handler, ResourceManager manager) {
+    public void customModel(String path, ResourceSink sink, ResourceManager manager) {
         JsonObject modelFile;
         ResourceLocation modelRLoc = EveryCompat.res("models/block/" + path + ".json");
 
@@ -178,9 +181,9 @@ public class MoreChestVariantsModule extends SimpleModule {
                 modelFile.getAsJsonObject("textures").addProperty("wood_type", textureID);
 
                 // Add to Resource
-                handler.dynamicPack.addJson(EveryCompat.res(path), modelFile, ResType.BLOCK_MODELS);
+                sink.addJson(EveryCompat.res(path), modelFile, ResType.BLOCK_MODELS);
             } catch (IOException e) {
-                handler.getLogger().error("MoreChestVariantsModule: failed to open the model file: {} - {}", modelRLoc, e);
+                EveryCompat.LOGGER.error("MoreChestVariantsModule: failed to open the model file: {} - {}", modelRLoc, e);
             }
         }
     }

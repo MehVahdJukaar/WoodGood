@@ -10,10 +10,9 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -21,12 +20,12 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 //SUPPORT: DramaticDoors v3.2.7+ | Macaw's Door v1.1.1+
 //NOTE: The library of FABRIC and FORGE are not the same, must be in separated folders
@@ -476,7 +475,8 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 
     @Override
     // RECIPES
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
         String recipe = """
                 {
@@ -499,28 +499,31 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 }
         """;
 
-        for (WoodType woodType : WoodTypeRegistry.getTypes()) {
-            if (woodType.isVanilla()) continue;
+        executor.accept((manager, sink) -> {
+            for (WoodType woodType : WoodTypeRegistry.getTypes()) {
+                if (woodType.isVanilla()) continue;
 
-            for (var entry : this.getEntries()) {
-                String newRecipe = recipe;
+                for (var entry : this.getEntries()) {
+                    String newRecipe = recipe;
 
-                SimpleEntrySet<?, ?> currentEntry = ((SimpleEntrySet<?, ?>) entry);
-                Block currentDDMdoor = currentEntry.blocks.get(woodType);
+                    SimpleEntrySet<?, ?> currentEntry = ((SimpleEntrySet<?, ?>) entry);
+                    Block currentDDMdoor = currentEntry.blocks.get(woodType);
 
-                // Macaw's Doors' Entries
-                String childNameMCD =  currentEntry.typeName.replace("tall_macaw_", "");
-                Block currentMCDoor = woodType.getBlockOfThis(MacawsDoors.MOD_ID +":"+ childNameMCD);
+                    // Macaw's Doors' Entries
+                    String childNameMCD = currentEntry.typeName.replace("tall_macaw_", "");
+                    Block currentMCDoor = woodType.getBlockOfThis(MacawsDoors.MOD_ID + ":" + childNameMCD);
 
-                if (Objects.nonNull(currentDDMdoor) && Objects.nonNull(currentMCDoor)) {
-                    newRecipe = newRecipe.replace("[ddm_doors]", Utils.getID(currentDDMdoor).toString())
-                            .replace("[mcwdoors]", Utils.getID(currentMCDoor).toString());
+                    if (Objects.nonNull(currentDDMdoor) && Objects.nonNull(currentMCDoor)) {
+                        newRecipe = newRecipe.replace("[ddm_doors]", Utils.getID(currentDDMdoor).toString())
+                                .replace("[mcwdoors]", Utils.getID(currentMCDoor).toString());
 
-                    ResourceLocation newResLoc =  Utils.getID(currentDDMdoor);
+                        ResourceLocation newResLoc = Utils.getID(currentDDMdoor);
 
-                    handler.dynamicPack.addBytes(newResLoc, newRecipe.getBytes(), ResType.RECIPES);
+                        sink.addBytes(newResLoc, newRecipe.getBytes(), ResType.RECIPES);
+                    }
                 }
             }
-        }
+
+        });
     }
 }

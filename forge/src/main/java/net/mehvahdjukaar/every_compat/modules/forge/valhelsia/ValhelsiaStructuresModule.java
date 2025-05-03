@@ -8,10 +8,10 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -40,6 +40,7 @@ import net.valhelsia.valhelsia_core.api.common.block.StrippableRotatedPillarBloc
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 //SUPPORT: v1.1.2+
 public class ValhelsiaStructuresModule extends SimpleModule {
@@ -53,7 +54,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
     public ValhelsiaStructuresModule(String modId) {
         super(modId, "vs");
-        var tab = modRes("main");
+        ResourceLocation tab = modRes("main");
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         getModBlock("stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -167,87 +168,88 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
     @Override
     // Textures
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
-        try {
-            // oak_posts's TEXTURES ------------------------------------------------------------------------------------
-            posts.blocks.forEach((w, block) -> {
-                ResourceLocation id = Utils.getID(block);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+        executor.accept((manager, sink) -> {
+            try {
+                // oak_posts's TEXTURES ------------------------------------------------------------------------------------
+                posts.blocks.forEach((w, block) -> {
+                    ResourceLocation id = Utils.getID(block);
 
-                try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
-                     TextureImage topTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                    try (TextureImage logTexture = TextureImage.open(manager,
+                            RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                         TextureImage topTexture = TextureImage.open(manager,
+                                 RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
-                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak");
-                    var newTexture = logTexture.makeCopy();
+                        String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak");
+                        var newTexture = logTexture.makeCopy();
 
-                    handler.addTextureIfNotPresent(manager, newId, () -> newTexture);
+                        sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
 
-                    var newTop = topTexture.makeCopy();
-                    createTopTexture(topTexture, newTop);
+                        var newTop = topTexture.makeCopy();
+                        createTopTexture(topTexture, newTop);
 
-                    handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                        sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
-                } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Post texture for for {} : {}", block, e);
+                    } catch (Exception e) {
+                        EveryCompat.LOGGER.error("Failed to generate Post texture for for {} : {}", block, e);
 
-                }
+                    }
 
-            });
+                });
 
-            // stripped_oak_posts' TEXTURES ----------------------------------------------------------------------------
-            strippedPosts.blocks.forEach((w, block) -> {
-                ResourceLocation id = Utils.getID(block);
+                // stripped_oak_posts' TEXTURES ----------------------------------------------------------------------------
+                strippedPosts.blocks.forEach((w, block) -> {
+                    ResourceLocation id = Utils.getID(block);
 
-                try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
-                     TextureImage topTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                    try (TextureImage logTexture = TextureImage.open(manager,
+                            RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                         TextureImage topTexture = TextureImage.open(manager,
+                                 RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
-                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak");
+                        String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak");
 
-                    var newTexture = logTexture.makeCopy();
+                        var newTexture = logTexture.makeCopy();
 
-                    handler.addTextureIfNotPresent(manager, newId, () -> newTexture);
+                        sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
 
-                    var newTop = topTexture.makeCopy();
-                    createTopTexture(topTexture, newTop);
+                        var newTop = topTexture.makeCopy();
+                        createTopTexture(topTexture, newTop);
 
-                    handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                        sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
-                } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Stripped-Post texture for {} : {}", block, e);
+                    } catch (Exception e) {
+                        EveryCompat.LOGGER.error("Failed to generate Stripped-Post texture for {} : {}", block, e);
 
-                }
-            });
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate block texture: ", ex);
-        }
+                    }
+                });
+            } catch (Exception ex) {
+                EveryCompat.LOGGER.error("Could not generate block texture: ", ex);
+            }
 
-        // bundled_<type>_posts' TEXTURES ------------------------------------------------------------------------------
-        try (TextureImage BPTopInnerMask = TextureImage.open(manager,
-                      EveryCompat.res("block/vs/bundledposts_top_inner_m"));
-             TextureImage BPTopOuterMask = TextureImage.open(manager,
-                      EveryCompat.res("block/vs/bundledposts_top_outer_m"));
+            // bundled_<type>_posts' TEXTURES ------------------------------------------------------------------------------
+            try (TextureImage BPTopInnerMask = TextureImage.open(manager,
+                    EveryCompat.res("block/vs/bundledposts_top_inner_m"));
+                 TextureImage BPTopOuterMask = TextureImage.open(manager,
+                         EveryCompat.res("block/vs/bundledposts_top_outer_m"));
 
-             TextureImage logInnerMask = TextureImage.open(manager,
-                      EveryCompat.res("block/vs/log_top_inner_m"));
-             TextureImage logOuterMask = TextureImage.open(manager,
-                      EveryCompat.res("block/vs/log_top_outer_m"))
+                 TextureImage logInnerMask = TextureImage.open(manager,
+                         EveryCompat.res("block/vs/log_top_inner_m"));
+                 TextureImage logOuterMask = TextureImage.open(manager,
+                         EveryCompat.res("block/vs/log_top_outer_m"))
             ) {
 
-            bundledPosts.blocks.forEach((w, block) -> {
-                String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_"
-                        + w.getTypeName() + "_posts";
+                bundledPosts.blocks.forEach((w, block) -> {
+                    String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_"
+                            + w.getTypeName() + "_posts";
 
-                createTexture(newPath, w.log, logInnerMask, logOuterMask, BPTopInnerMask, BPTopOuterMask,
-                        modRes("block/bundled_posts/bundled_oak_posts"),
-                        modRes("block/bundled_posts/bundled_oak_posts_top"),
-                        handler, manager, block);
-            });
+                    createTexture(newPath, w.log, logInnerMask, logOuterMask, BPTopInnerMask, BPTopOuterMask,
+                            modRes("block/bundled_posts/bundled_oak_posts"),
+                            modRes("block/bundled_posts/bundled_oak_posts_top"),
+                            sink, manager, block);
+                });
 
-            bundledStrippedPosts.blocks.forEach((w, block) -> {
+                bundledStrippedPosts.blocks.forEach((w, block) -> {
                     String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_stripped_"
                             + w.getTypeName() + "_posts";
 
@@ -255,24 +257,26 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                             BPTopInnerMask, BPTopOuterMask,
                             modRes("block/bundled_posts/bundled_stripped_oak_posts"),
                             modRes("block/bundled_posts/bundled_stripped_oak_posts_top"),
-                            handler, manager, block);
-            });
-        } catch (Exception e) {
-            handler.getLogger().error("Failed to open bundled_posts texture: ", e);
-        }
+                            sink, manager, block);
+                });
+            } catch (Exception e) {
+                EveryCompat.LOGGER.error("Failed to open bundled_posts texture: ", e);
+            }
+
+        });
     }
 
     private void createTexture(String newPath, Block getLogBlock, TextureImage logInnerMask, TextureImage logOuterMask,
                                TextureImage BPTopInnerMask, TextureImage BPTopOuterMask,
                                ResourceLocation getLogSide, ResourceLocation getLogTop,
-                               ClientDynamicResourcesHandler handler, ResourceManager manager, Block block
+                               ResourceSink sink, ResourceManager manager, Block block
                                ) {
         try (TextureImage logSide_texture = TextureImage.open(manager,
                  RPUtils.findFirstBlockTextureLocation(manager, getLogBlock, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
              TextureImage logTop_texture = TextureImage.open(manager,
                  RPUtils.findFirstBlockTextureLocation(manager, getLogBlock, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
              TextureImage TextureSide = TextureImage.open(manager, getLogSide);
-             TextureImage TextureTop = TextureImage.open(manager, getLogTop);
+             TextureImage TextureTop = TextureImage.open(manager, getLogTop)
         ) {
 
 // Side texture ================================================================================================
@@ -297,7 +301,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 TextureImage recoloredSIDE = respriterSide.recolorWithAnimation(targetSide, metaSide);
 
                 // Adding to the Resource
-                handler.dynamicPack.addAndCloseTexture(EveryCompat.res(newPath), recoloredSIDE);
+                sink.addAndCloseTexture(EveryCompat.res(newPath), recoloredSIDE);
             }
 
 // Top texture =================================================================================================
@@ -331,11 +335,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                     recoloredwithOuter = outerTopResp.recolorWithAnimation(targetTopOuter, metaTop);
 
                 // Adding to the Resource
-                handler.dynamicPack.addAndCloseTexture(EveryCompat.res(newPath + "_top"), recoloredwithOuter);
+                sink.addAndCloseTexture(EveryCompat.res(newPath + "_top"), recoloredwithOuter);
             }
 
         } catch (Exception e) {
-            handler.getLogger().error("Failed to generate the texture for {} : {}", block, e);
+            EveryCompat.LOGGER.error("Failed to generate the texture for {} : {}", block, e);
         }
     }
 

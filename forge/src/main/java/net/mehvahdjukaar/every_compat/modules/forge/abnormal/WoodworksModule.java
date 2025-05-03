@@ -10,11 +10,10 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.common_classes.*;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
@@ -41,6 +40,7 @@ import net.minecraftforge.common.Tags;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
@@ -62,7 +62,7 @@ public class WoodworksModule extends SimpleModule {
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue("acacia"),
                         woodType -> new Block(Utils.copyPropertySafe(woodType.log)
                                 .strength(1.5F)
                         )
@@ -79,7 +79,7 @@ public class WoodworksModule extends SimpleModule {
 
         chiseled_bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf", "chiseled",
                         getModBlock("chiseled_acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> WoodTypeRegistry.getValue("acacia"),
                         woodType -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(woodType.log)
                                 .strength(1.5F)
                         )
@@ -113,7 +113,7 @@ public class WoodworksModule extends SimpleModule {
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("spruce_ladder"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue("spruce"),
                         woodType -> new LadderBlock(Utils.copyPropertySafe(Blocks.LADDER)
                                 .strength(0.4F)
                                 .noOcclusion()
@@ -123,8 +123,8 @@ public class WoodworksModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
-                .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("quark:ladders"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -132,7 +132,7 @@ public class WoodworksModule extends SimpleModule {
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                         getModBlock("spruce_beehive"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        () -> WoodTypeRegistry.getValue("spruce"),
                         woodType -> new BlueprintBeehiveBlock(Utils.copyPropertySafe(woodType.log)
                                 .strength(0.6F)
                         )
@@ -159,8 +159,8 @@ public class WoodworksModule extends SimpleModule {
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
-                .addTag(new ResourceLocation("quark:revertable_chests"), Registries.ITEM)
-                .addTag(new ResourceLocation("quark:boatable_chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
                 .addTile(abwwChestBlockEntity::new)
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .defaultRecipe()
@@ -243,72 +243,74 @@ public class WoodworksModule extends SimpleModule {
 
     @Override
     // Recipes
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        bookshelves.items.forEach((wood, item) -> {
-            // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
-            Item getLadder = ladders.items.get(wood);
-            Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
-                    new ResourceLocation(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+        executor.accept((manager, sink) -> {
+            bookshelves.items.forEach((wood, item) -> {
+                // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
+                Item getLadder = ladders.items.get(wood);
+                Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
+                        ResourceLocation.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
 
-            // sawmill recipes - from LOGS
-            sawmillRecipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
-                    handler, manager, wood);
-            sawmillRecipe("oak_boards_from_oak_logs_sawing", wood.log.asItem(), boards.items.get(wood),
-                    handler, manager, wood);
-            sawmillRecipe("spruce_ladder_from_spruce_logs_sawing", wood.log.asItem(), ladder,
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_button_from_oak_logs_sawing", true, "button",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_door_from_oak_logs_sawing", true, "door",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_fence_from_oak_logs_sawing", true, "fence",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_fence_gate_from_oak_logs_sawing", true, "fence_gate",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_pressure_plate_from_oak_logs_sawing", true, "pressure_plate",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_sign_from_oak_logs_sawing", true, "sign",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_slab_from_oak_logs_sawing", true, "slab",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_stairs_from_oak_logs_sawing", true, "stairs",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_trapdoor_from_oak_logs_sawing", true, "trapdoor",
-                    handler, manager, wood);
+                // sawmill recipes - from LOGS
+                sawmillRecipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
+                        sink, manager, wood);
+                sawmillRecipe("oak_boards_from_oak_logs_sawing", wood.log.asItem(), boards.items.get(wood),
+                        sink, manager, wood);
+                sawmillRecipe("spruce_ladder_from_spruce_logs_sawing", wood.log.asItem(), ladder,
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_button_from_oak_logs_sawing", true, "button",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_door_from_oak_logs_sawing", true, "door",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_fence_from_oak_logs_sawing", true, "fence",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_fence_gate_from_oak_logs_sawing", true, "fence_gate",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_pressure_plate_from_oak_logs_sawing", true, "pressure_plate",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_sign_from_oak_logs_sawing", true, "sign",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_slab_from_oak_logs_sawing", true, "slab",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_stairs_from_oak_logs_sawing", true, "stairs",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_trapdoor_from_oak_logs_sawing", true, "trapdoor",
+                        sink, manager, wood);
 
-            // - from PLANKS
-            sawmillRecipe("oak_boards_from_oak_planks_sawing", wood.planks.asItem(), boards.items.get(wood),
-                    handler, manager, wood);
-            sawmillRecipe("spruce_ladder_from_spruce_planks_sawing", wood.planks.asItem(), ladder,
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_button_from_oak_planks_sawing", false, "button",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_fence_from_oak_planks_sawing", false, "fence",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_slab_from_oak_planks_sawing", false, "slab",
-                    handler, manager, wood);
-            createRecipeIfNotNull("oak_stairs_from_oak_planks_sawing", false, "stairs",
-                    handler, manager, wood);
+                // - from PLANKS
+                sawmillRecipe("oak_boards_from_oak_planks_sawing", wood.planks.asItem(), boards.items.get(wood),
+                        sink, manager, wood);
+                sawmillRecipe("spruce_ladder_from_spruce_planks_sawing", wood.planks.asItem(), ladder,
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_button_from_oak_planks_sawing", false, "button",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_fence_from_oak_planks_sawing", false, "fence",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_slab_from_oak_planks_sawing", false, "slab",
+                        sink, manager, wood);
+                createRecipeIfNotNull("oak_stairs_from_oak_planks_sawing", false, "stairs",
+                        sink, manager, wood);
+            });
         });
     }
 
     @SuppressWarnings("DataFlowIssue")
     public void createRecipeIfNotNull(String recipeName, boolean usingLog, String output,
-                                      ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
+                                      ResourceSink sink, ResourceManager manager, WoodType wood) {
         Item input = (usingLog) ? wood.log.asItem() : wood.planks.asItem();
 
         if (Objects.nonNull(wood.getItemOfThis(output))) {
-            sawmillRecipe(recipeName, input, wood.getItemOfThis(output), handler, manager, wood);
+            sawmillRecipe(recipeName, input, wood.getItemOfThis(output), sink, manager, wood);
         } else if (Objects.nonNull(wood.getBlockOfThis(output))) {
-            sawmillRecipe(recipeName, input, wood.getBlockOfThis(output).asItem(), handler, manager, wood);
+            sawmillRecipe(recipeName, input, wood.getBlockOfThis(output).asItem(), sink, manager, wood);
         }
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public void sawmillRecipe(String recipeName, Item input, Item output,
-                              ServerDynamicResourcesHandler handler, ResourceManager manager, WoodType wood) {
+                              ResourceSink sink, ResourceManager manager, WoodType wood) {
 
         ResourceLocation recipeLocation = modRes("recipes/" + recipeName + ".json"); // get Recipe JSON
         JsonObject recipe = null;
@@ -325,7 +327,7 @@ public class WoodworksModule extends SimpleModule {
             // Editing the JSON recipe
             if (getIngredient.has("tag")) {
                 getIngredient.addProperty("tag",
-                        getATagOrCreateANew("logs", "caps", wood, handler, manager).toString());
+                        getATagOrCreateANew("logs", "caps", wood, sink, manager).toString());
             } else { // getIngredient.has("item")
                 getIngredient.addProperty("item", Utils.getID(input).toString());
             }
@@ -339,36 +341,40 @@ public class WoodworksModule extends SimpleModule {
         String[] nameSplit = recipeName.split("_(?!gate|plate)");
         String filenameBuilder = "_" + nameSplit[1] + "_from_" + wood.getTypeName() + "_" + nameSplit[4] + "_sawing";
 
-        handler.dynamicPack.addJson(EveryCompat.res(this.shortenedId() + "/" + wood.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
+        sink.addJson(EveryCompat.res(this.shortenedId() + "/" + wood.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
     }
 
-    @Override
-    // Textures
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
 
-        trappedChests.blocks.forEach((wood, block) -> {
-            // SINGLE
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/oak/normal"),
-                    EveryCompat.res("model/oak_chest_normal_m"),
-                    EveryCompat.res("model/oak_chest_normal_o"),
-                    EveryCompat.res("model/trapped_chest_normal")
-            );
-            // LEFT
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/oak/normal_left"),
-                    EveryCompat.res("model/oak_chest_left_m"),
-                    EveryCompat.res("model/oak_chest_left_o"),
-                    EveryCompat.res("model/trapped_chest_left")
-            );
-            // RIGHT
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/oak/normal_right"),
-                    EveryCompat.res("model/oak_chest_right_m"),
-                    EveryCompat.res("model/oak_chest_right_o"),
-                    EveryCompat.res("model/trapped_chest_right")
-            );
+
+    // Textures
+    @Override
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+
+        executor.accept((manager, sink) -> {
+            trappedChests.blocks.forEach((wood, block) -> {
+                // SINGLE
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak/normal"),
+                        EveryCompat.res("model/oak_chest_normal_m"),
+                        EveryCompat.res("model/oak_chest_normal_o"),
+                        EveryCompat.res("model/trapped_chest_normal")
+                );
+                // LEFT
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak/normal_left"),
+                        EveryCompat.res("model/oak_chest_left_m"),
+                        EveryCompat.res("model/oak_chest_left_o"),
+                        EveryCompat.res("model/trapped_chest_left")
+                );
+                // RIGHT
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/oak/normal_right"),
+                        EveryCompat.res("model/oak_chest_right_m"),
+                        EveryCompat.res("model/oak_chest_right_o"),
+                        EveryCompat.res("model/trapped_chest_right")
+                );
+            });
         });
     }
 

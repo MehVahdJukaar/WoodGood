@@ -8,11 +8,10 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -20,13 +19,13 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Consumer;
 
 //SUPPORT: v20230928a+
 public class BuildersAdditionModule extends SimpleModule {
@@ -195,7 +194,7 @@ public class BuildersAdditionModule extends SimpleModule {
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "", "cabinet",
                         Index.CABINET_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCabinet(shortenedId() + "/" + w.getAppendableId(), w.planks))
+                        w -> new CompatCabinet(shortenedId() + "/" + w.getAppendableId()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("cabinet/cabinet_oak"))
                 .setTabKey(tab)
@@ -258,7 +257,7 @@ public class BuildersAdditionModule extends SimpleModule {
 
         arcades = SimpleEntrySet.builder(WoodType.class, "", "arcade",
                         Index.ARCADE_OAK, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatArcade(shortenedId() + "/" + w.getAppendableId(), w.log))
+                        w -> new CompatArcade(shortenedId() + "/" + w.getAppendableId()))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("arcade/arcade_oak"))
@@ -280,43 +279,45 @@ public class BuildersAdditionModule extends SimpleModule {
 //    }
 
     private static class CompatCabinet extends Cabinet {
-        public CompatCabinet(String name, Block source) {
+        public CompatCabinet(String name) {
             super("cabinet_" + name);
         }
     }
 
     private static class CompatArcade extends Arcade {
-        public CompatArcade(String name, Block source) {
+        public CompatArcade(String name) {
             super("arcade_" + name);
-
         }
     }
 
     @Override
-    // Recipes for vertical_slab (from 2 v-slab to plank)
+    // RECIPES
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
         ResourceLocation recipeLoc = modRes("recipes/vertical_slab/reverse/oak_vertical_slab.json");
-        JsonObject recipe;
 
-        try (InputStream recipeStream = manager.getResource(recipeLoc).get().open()) {
-            recipe = RPUtils.deserializeJson(recipeStream);
+        // 2 vertical-slab to plank recipes
+        executor.accept((manager, sink) -> {
+            try (InputStream recipeStream = manager.getResource(recipeLoc).get().open()) {
+                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
-            verticalSlab.items.forEach((woodType, item) -> {
-                // Editing JSON
-                JsonObject underIngredient = recipe.getAsJsonObject("key").getAsJsonObject("P");
-                underIngredient.addProperty("item", Utils.getID(item).toString());
+                verticalSlab.items.forEach((woodType, item) -> {
+                    // Editing JSON
+                    JsonObject underIngredient = recipe.getAsJsonObject("key").getAsJsonObject("P");
+                    underIngredient.addProperty("item", Utils.getID(item).toString());
 
-                JsonObject underResult = recipe.getAsJsonObject("result");
-                underResult.addProperty("item", Utils.getID(woodType.planks).toString());
-                // Adding finished recipe
-                handler.dynamicPack.addJson(EveryCompat.res(this.shortenedId() +"/" + woodType.getAppendableId() + "_vertical_slab_reversed"), recipe, ResType.RECIPES);
-            });
+                    JsonObject underResult = recipe.getAsJsonObject("result");
+                    underResult.addProperty("item", Utils.getID(woodType.planks).toString());
+                    // Adding finished recipe
+                    sink.addJson(EveryCompat.res(woodType.createPathWith(shortenedId(), "_vertical_slab_reversed")), recipe, ResType.RECIPES);
+                });
 
-        } catch (IOException e) {
-            handler.getLogger().error("BuilderAdditional - failed to open the reverse/vertical_slab recipe: {0}", e );
-        }
+            } catch (IOException e) {
+                EveryCompat.LOGGER.error("BuilderAdditional - failed to open the reverse/vertical_slab recipe: {0}", e);
+            }
+
+        });
     }
 }

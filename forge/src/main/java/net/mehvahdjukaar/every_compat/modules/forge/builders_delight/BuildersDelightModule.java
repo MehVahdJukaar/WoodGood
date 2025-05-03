@@ -14,10 +14,9 @@ import com.tynoxs.buildersdelight.content.init.BdDecoration;
 import com.tynoxs.buildersdelight.content.init.BdTabs;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
@@ -46,6 +45,9 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.function.Consumer;
+
+import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
 
 //SUPPORT: v1.3+
 public class BuildersDelightModule extends SimpleModule {
@@ -840,89 +842,104 @@ public class BuildersDelightModule extends SimpleModule {
         }
     }
 
-    @SafeVarargs
+//    @SafeVarargs
     // Create a tag file for wood types of planks
-    public final void planksTags(WoodType wood, DynamicDataPack DDPack, EntrySet<WoodType>... entries) {
-        /*
-        planksTags is used as ingredient for crafting Glass_1
-        */
-        JsonArray tagList = new JsonArray();
-
-        var vanilla = wood.getItemOfThis("planks"); // Add Normal blocks to the list
-        if (vanilla != null) tagList.add(Utils.getID(vanilla).toString());
-
-        for (var e : entries) { // Add blocks to the list
-            Item obj = e.getItemOf(wood);
-            if (obj != null) tagList.add(Utils.getID(obj).toString());
-        }
-
-        if (!tagList.isEmpty()) {
-            ResourceLocation resLoc = EveryCompat.res("items/" + wood.getTypeName() + "_planks");
-            JsonObject file = new JsonObject();
-            file.addProperty("replace", "false");
-            file.add("values", tagList);
-            DDPack.addJson(resLoc, file, ResType.TAGS);
-        }
-
-    }
+//    public final void planksTags(WoodType wood, ResourceSink sink, EntrySet<WoodType>... entries) {
+//        /*
+//        planksTags is used as ingredient for crafting Glass_1
+//        */
+//        JsonArray tagList = new JsonArray();
+//
+//        var vanilla = wood.getItemOfThis("planks"); // Add Normal blocks to the list
+//        if (vanilla != null) tagList.add(Utils.getID(vanilla).toString());
+//
+//        for (var e : entries) { // Add blocks to the list
+//            Item obj = e.getItemOf(wood);
+//            if (obj != null) tagList.add(Utils.getID(obj).toString());
+//        }
+//
+//        if (!tagList.isEmpty()) {
+//            ResourceLocation resLoc = EveryCompat.res("items/" + wood.getTypeName() + "_planks");
+//            JsonObject file = new JsonObject();
+//            file.addProperty("replace", "false");
+//            file.add("values", tagList);
+//            sink.addJson(resLoc, file, ResType.TAGS);
+//        }
+//
+//    }
 
     @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
-        var pack = handler.getPack();
-        for (var w : WoodTypeRegistry.getTypes()) {
-            if (!w.isVanilla()) {
-                addChiselRecipe(pack, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7 );
-                addChiselRecipe(pack, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7 );
-                addChiselRecipe(pack, w, "slab", SLAB_1, SLAB_2, SLAB_3, SLAB_4, SLAB_5, SLAB_6, SLAB_7 );
-                addChiselRecipe(pack, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
-                addChiselRecipe(pack, w, "glass", GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8);
-                addChiselRecipe(pack, w, "glass_pane", GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-                // Used in recipe of glass_1, frame_1, & furniture_kit
-                planksTags(w, pack, PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
+        executor.accept((manager, sink) -> {
+            for (var w : WoodTypeRegistry.getTypes()) {
+                if (!w.isVanilla()) {
+                    addChiselRecipe(sink, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
+                    addChiselRecipe(sink, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7);
+                    addChiselRecipe(sink, w, "slab", SLAB_1, SLAB_2, SLAB_3, SLAB_4, SLAB_5, SLAB_6, SLAB_7);
+                    addChiselRecipe(sink, w, "frame", FRAME_1, FRAME_2, FRAME_3, FRAME_4, FRAME_5, FRAME_6, FRAME_7, FRAME_8);
+                    addChiselRecipe(sink, w, "glass", GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8);
+                    addChiselRecipe(sink, w, "glass_pane", GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8);
 
-                // crafting Recipe
-                craftingWithTagsRecipe("glass_1", "planks", GLASS_1.items.get(w), w, pack, manager);
-                craftingWithTagsRecipe("frame_1", "planks", FRAME_1.items.get(w), w, pack, manager);
-            }
-        }
+                    // Used in recipe of glass_1, frame_1, & furniture_kit
+//                    planksTags(w, sink, PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
 
-        String recipe = """
-            {
-                "group": "buildersdelight",
-                "type": "minecraft:crafting_shaped",
-                "pattern": [
-                    " 0 ",
-                    \t"010",
-                    \t" 0 "
-                ],
-                "key": {
-                    "0": {
-                        "item": "minecraft:string"
-                    },
-                    \t"1": {
-                        "tag": "[planks]"
-                    }
-                },
-                "result": {
-                    "item": "[result]",
-                    "count": 2
+                    ResourceLocation resLoc = EveryCompat.res("items/" + w.getTypeName() + "_planks");
+                    createAndAddCustomTags(resLoc, sink,
+                            w.planks,
+                            PLANKS_1.blocks.get(w),
+                            PLANKS_2.blocks.get(w),
+                            PLANKS_3.blocks.get(w),
+                            PLANKS_4.blocks.get(w),
+                            PLANKS_5.blocks.get(w),
+                            PLANKS_6.blocks.get(w),
+                            PLANKS_7.blocks.get(w)
+                    );
+
+                    // crafting Recipe
+                    craftingWithTagsRecipe("glass_1", "planks", GLASS_1.items.get(w), w, sink, manager);
+                    craftingWithTagsRecipe("frame_1", "planks", FRAME_1.items.get(w), w, sink, manager);
                 }
             }
-        """;
-        for (var v : this.FURNITURE_KIT.items.entrySet()) {
-            WoodType wood = v.getKey();
-            String r = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
-                    .replace("[planks]", EveryCompat.MOD_ID + ":" + wood.getTypeName() +"_planks");
 
-            ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "_furniture_kit");
-            pack.addBytes(res, r.getBytes(), ResType.RECIPES);
-        }
+            String recipe = """
+                        {
+                            "group": "buildersdelight",
+                            "type": "minecraft:crafting_shaped",
+                            "pattern": [
+                                " 0 ",
+                                \t"010",
+                                \t" 0 "
+                            ],
+                            "key": {
+                                "0": {
+                                    "item": "minecraft:string"
+                                },
+                                \t"1": {
+                                    "tag": "[planks]"
+                                }
+                            },
+                            "result": {
+                                "item": "[result]",
+                                "count": 2
+                            }
+                        }
+                    """;
+            for (var v : this.FURNITURE_KIT.items.entrySet()) {
+                WoodType wood = v.getKey();
+                String r = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
+                        .replace("[planks]", EveryCompat.MOD_ID + ":" + wood.getTypeName() + "_planks");
+
+                ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "_furniture_kit");
+                sink.addBytes(res, r.getBytes(), ResType.RECIPES);
+            }
+
+        });
 
     }
 
-    public void craftingWithTagsRecipe(String baseName, String input, Item output, WoodType wood, DynamicDataPack pack, ResourceManager manager) {
+    public void craftingWithTagsRecipe(String baseName, String input, Item output, WoodType wood, ResourceSink sink, ResourceManager manager) {
         // bdl/namespace/<type>_glass_1;
         String pathBuilder = this.shortenedId() + "/" + wood.getVariantId(baseName,false);
 
@@ -945,14 +962,14 @@ public class BuildersDelightModule extends SimpleModule {
             underKey.addProperty("tag", inputTag);
             underResult.addProperty("item", Utils.getID(output).toString());
 
-            pack.addJson(EveryCompat.res(pathBuilder), recipe, ResType.RECIPES);
+            sink.addJson(EveryCompat.res(pathBuilder), recipe, ResType.RECIPES);
         }
         catch (IOException ex) {
             EveryCompat.LOGGER.error("{BuildersDelight Module} TagsRecipe(): ", ex);
         }
     }
 
-    private static void addChiselRecipe(DynamicDataPack pack, WoodType w, String name, AbstractSimpleEntrySet<?, ?, ?>... entries) {
+    private static void addChiselRecipe(ResourceSink sink, WoodType w, String name, AbstractSimpleEntrySet<?, ?, ?>... entries) {
         JsonArray arr = new JsonArray();
         for (var e : entries) {         // Add blocks from buildersdelight to JsonArray
             var o = e.items.get(w);
@@ -966,7 +983,7 @@ public class BuildersDelightModule extends SimpleModule {
             JsonObject jo = new JsonObject();
             ResourceLocation res = EveryCompat.res("chisel/" + w.getVariantId(name) + ".json");
             jo.add("variants", arr);
-            pack.addJson(res, jo, ResType.GENERIC);
+            sink.addJson(res, jo, ResType.GENERIC);
         }
     }
 

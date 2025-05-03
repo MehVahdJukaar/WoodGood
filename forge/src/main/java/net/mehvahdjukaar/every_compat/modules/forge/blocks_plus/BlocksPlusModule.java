@@ -6,15 +6,13 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.common_classes.*;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -28,6 +26,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
@@ -294,31 +293,33 @@ public class BlocksPlusModule extends SimpleModule {
 
     @Override
     // Textures
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
 
-        trapped_chest.blocks.forEach((wood, block) -> {
-            // SINGLE
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/acacia/acacia"),
-                    EveryCompat.res("entity/bp/chest_normal_m"),
-                    EveryCompat.res("model/oak_chest_normal_o"),
-                    EveryCompat.res("model/trapped_chest_normal")
-            );
-            // LEFT
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/acacia/left"),
-                    EveryCompat.res("entity/bp/chest_left_m"),
-                    EveryCompat.res("model/oak_chest_left_o"),
-                    EveryCompat.res("model/trapped_chest_left")
-            );
-            // RIGHT
-            generateChestTexture(handler, manager, shortenedId(), wood, block,
-                    modRes("entity/chest/acacia/right"),
-                    EveryCompat.res("entity/bp/chest_right_m"),
-                    EveryCompat.res("model/oak_chest_right_o"),
-                    EveryCompat.res("model/trapped_chest_right")
-            );
-        });
+        executor.accept((manager, sink) ->
+            trapped_chest.blocks.forEach((wood, block) -> {
+                // SINGLE
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/acacia/acacia"),
+                        EveryCompat.res("entity/bp/chest_normal_m"),
+                        EveryCompat.res("model/oak_chest_normal_o"),
+                        EveryCompat.res("model/trapped_chest_normal")
+                );
+                // LEFT
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/acacia/left"),
+                        EveryCompat.res("entity/bp/chest_left_m"),
+                        EveryCompat.res("model/oak_chest_left_o"),
+                        EveryCompat.res("model/trapped_chest_left")
+                );
+                // RIGHT
+                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                        modRes("entity/chest/acacia/right"),
+                        EveryCompat.res("entity/bp/chest_right_m"),
+                        EveryCompat.res("model/oak_chest_right_o"),
+                        EveryCompat.res("model/trapped_chest_right")
+                );
+            })
+        );
     }
 }
