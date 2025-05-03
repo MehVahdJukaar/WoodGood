@@ -345,7 +345,8 @@ public class FurnishModule extends SimpleModule {
     @Override
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
-        try {
+
+        executor.accept((manager, handler) -> {
             logBenches.blocks.forEach((w, block) -> {
                 var id = Utils.getID(block);
 
@@ -364,7 +365,7 @@ public class FurnishModule extends SimpleModule {
                     handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Log Bench block texture for for {} : {}", block, e);
+                    EveryCompat.LOGGER.error("Failed to generate Log Bench block texture for for {} : {}", block, e);
 
                 }
 
@@ -387,14 +388,12 @@ public class FurnishModule extends SimpleModule {
                     handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate coffin block texture for for {} : {}", block, e);
+                    EveryCompat.LOGGER.error("Failed to generate coffin block texture for for {} : {}", block, e);
 
                 }
 
             });
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any block textures: ", ex);
-        }
+        });
     }
 
     private void createTopTexture(TextureImage original, TextureImage newImage) {

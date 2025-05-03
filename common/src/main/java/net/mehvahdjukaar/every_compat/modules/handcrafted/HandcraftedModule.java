@@ -11,16 +11,14 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -29,6 +27,7 @@ import net.minecraft.world.level.block.Blocks;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Consumer;
 
 //SUPPORT: v3.0.6+
 public class HandcraftedModule extends SimpleModule {
@@ -304,9 +303,9 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/trim/pillar/oak_pillar_trim_2_thin"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar_trims"), Registries.BLOCK)
-                                .addTag(modRes("trims"), Registries.BLOCK)
+                .addTag(modRes("trims"), Registries.BLOCK)
                 .addTag(modRes("pillar_trims"), Registries.ITEM)
-                                .addTag(modRes("trims"), Registries.ITEM)
+                .addTag(modRes("trims"), Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
@@ -323,9 +322,9 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/trim/corner/oak_corner_trim_thin"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("corner_trims"), Registries.BLOCK)
-                                .addTag(modRes("trims"), Registries.BLOCK)
+                .addTag(modRes("trims"), Registries.BLOCK)
                 .addTag(modRes("corner_trims"), Registries.ITEM)
-                                .addTag(modRes("trims"), Registries.ITEM)
+                .addTag(modRes("trims"), Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
@@ -334,47 +333,45 @@ public class HandcraftedModule extends SimpleModule {
     }
 
     @Override
-    // Models
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+        executor.accept((manager, handler) -> {
+            /*
+             * Correcting the texture for "top" in counters' model to use for counter's top/surface
+             * There is no way to prevent oak_planks or dark_oak_planks from being changed to other woodtypes
+             */
+            counter.blocks.forEach((w, block) -> {
 
-        /*
-        * Correcting the texture for "top" in counters' model to use for counter's top/surface
-        * There is no way to prevent oak_planks or dark_oak_planks from being changed to other woodtypes
-        */
-        counter.blocks.forEach((w, block) -> {
+                for (int num = 1; num < 4; num++) {
 
-            for (int num = 1; num < 4; num++) {
+                    // shortenedID / namespace / <woodType>_counter
+                    String path = Utils.getID(block).getPath() + "_" + w.getTypeName() + "_planks_" + num;
+                    String darkPath = Utils.getID(block).getPath() + "_dark_" + w.getTypeName() + "_planks_" + num;
+                    ResourceLocation oakModelFile = ResType.BLOCK_MODELS.getPath(EveryCompat.res(path));
+                    ResourceLocation darkModelFile = ResType.BLOCK_MODELS.getPath(EveryCompat.res(darkPath));
 
-                // shortenedID / namespace / <woodType>_counter
-                String path = Utils.getID(block).getPath() +"_"+ w.getTypeName() +"_planks_"+ num;
-                String darkPath = Utils.getID(block).getPath()+"_dark_" + w.getTypeName() +"_planks_"+ num;
-                ResourceLocation oakModelFile = ResType.BLOCK_MODELS.getPath(EveryCompat.res(path));
-                ResourceLocation darkModelFile = ResType.BLOCK_MODELS.getPath(EveryCompat.res(darkPath));
+                    try (InputStream oakStream = manager.getResource(oakModelFile)
+                            .orElseThrow(() -> new FileNotFoundException("File not found @ " + oakModelFile)).open();
+                         InputStream darkStream = manager.getResource(darkModelFile)
+                                 .orElseThrow(() -> new FileNotFoundException("File not found @ " + darkModelFile)).open()
+                    ) {
+                        JsonObject oakModel = RPUtils.deserializeJson(oakStream);
+                        JsonObject darkModel = RPUtils.deserializeJson(darkStream);
 
-                try (InputStream oakStream = manager.getResource(oakModelFile)
-                        .orElseThrow(() -> new FileNotFoundException("File not found @ " + oakModelFile)).open();
-                     InputStream darkStream = manager.getResource(darkModelFile)
-                        .orElseThrow(() -> new FileNotFoundException("File not found @ " + darkModelFile)).open()
-                ) {
-                    JsonObject oakModel = RPUtils.deserializeJson(oakStream);
-                    JsonObject darkModel = RPUtils.deserializeJson(darkStream);
+                        oakModel.getAsJsonObject("textures").addProperty("top",
+                                Handcrafted.MOD_ID + ":block/counter/top/oak_planks");
+                        darkModel.getAsJsonObject("textures").addProperty("top",
+                                Handcrafted.MOD_ID + ":block/counter/top/dark_oak_planks");
 
-                    oakModel.getAsJsonObject("textures").addProperty("top",
-                            Handcrafted.MOD_ID + ":block/counter/top/oak_planks");
-                    darkModel.getAsJsonObject("textures").addProperty("top",
-                            Handcrafted.MOD_ID + ":block/counter/top/dark_oak_planks");
-
-                    // Adding to the resources
-                    handler.dynamicPack.addJson(EveryCompat.res(path), oakModel, ResType.BLOCK_MODELS);
-                    handler.dynamicPack.addJson(EveryCompat.res(darkPath), darkModel, ResType.BLOCK_MODELS);
+                        // Adding to the resources
+                        handler.addJson(EveryCompat.res(path), oakModel, ResType.BLOCK_MODELS);
+                        handler.addJson(EveryCompat.res(darkPath), darkModel, ResType.BLOCK_MODELS);
+                    } catch (IOException e) {
+                        EveryCompat.LOGGER.error("Failed to modify content of the model file for: {} : {}", Utils.getID(block), e);
+                    }
                 }
-                catch (IOException e) {
-                    handler.getLogger().error("Failed to modify content of the model file for: {} : {}", Utils.getID(block), e);
-                }
-            }
+            });
         });
-
 
     }
 }

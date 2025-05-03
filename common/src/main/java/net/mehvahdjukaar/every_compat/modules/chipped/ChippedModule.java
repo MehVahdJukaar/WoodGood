@@ -11,6 +11,7 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
@@ -40,6 +41,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Consumer;
 
 //TODO:
 // Mcmeta files are not copied from the base block
@@ -2257,30 +2259,30 @@ public class ChippedModule extends SimpleModule {
     }
 
     @Override
-    // RECIPES & LOOT_TABLES
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        // use this. also set the entry to no drop so we don't have 2.
-        // why do we need this instead of copy parent drop? macaw has doors too and they work
-        // chipped adds their loot not via loot table. this is why we need this. no other mod should need this stuff
-        // this shouldnt be needed.... why isnt copy parent loot working?
-        List<EntrySet<?>> doors = this.getEntries().stream().filter(
-                e -> e.getName().contains("door") && !e.getName().contains("trapdoor")).toList();
-        for (var e : doors) {
-            if (e instanceof SimpleEntrySet<?, ?> se) {
-                for (var d : se.blocks.values()) {
-                    handler.getPack().addLootTable(d, createDoorLoot(d));
+        executor.accept((manager, handler)-> {
+            // use this. also set the entry to no drop so we don't have 2.
+            // why do we need this instead of copy parent drop? macaw has doors too and they work
+            // chipped adds their loot not via loot table. this is why we need this. no other mod should need this stuff
+            // this shouldnt be needed.... why isnt copy parent loot working?
+            List<EntrySet<?>> doors = this.getEntries().stream().filter(
+                    e -> e.getName().contains("door") && !e.getName().contains("trapdoor")).toList();
+            for (var e : doors) {
+                if (e instanceof SimpleEntrySet<?, ?> se) {
+                    for (var d : se.blocks.values()) {
+                        handler.addLootTable(d, createDoorLoot(d));
+                    }
                 }
             }
-        }
 
-        addCarpenterRecipe(handler.getPack(), "planks");
-        addCarpenterRecipe(handler.getPack(), "door");
-        addCarpenterRecipe(handler.getPack(), "trapdoor");
-        addCarpenterRecipe(handler.getPack(), "log");
-        addCarpenterRecipe(handler.getPack(), "stripped_log");
-
+            addCarpenterRecipe(handler, "planks");
+            addCarpenterRecipe(handler, "door");
+            addCarpenterRecipe(handler, "trapdoor");
+            addCarpenterRecipe(handler, "log");
+            addCarpenterRecipe(handler, "stripped_log");
+        });
     }
 
     public static LootTable.Builder createDoorLoot(Block block) {
@@ -2295,7 +2297,7 @@ public class ChippedModule extends SimpleModule {
 
 
     @SuppressWarnings("SameParameterValue")
-    private void addCarpenterRecipe(DynamicDataPack pack, String identifier) {
+    private void addCarpenterRecipe(ResourceSink pack, String identifier) {
         JsonArray jsonArray = new JsonArray();
 
         for (var woodType : WoodTypeRegistry.getTypes()) {
@@ -2352,30 +2354,31 @@ public class ChippedModule extends SimpleModule {
     }
 
     @Override
-    // TEXTURES
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
 
-        String PlankedLogFilename = "planked_oak_log";
-        ResourceLocation innerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_inner_m")).withPrefix("block/ch/");
-        ResourceLocation outerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_outer_m")).withPrefix("block/ch/");
-        ResourceLocation innerTopM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_top_inner_m")).withPrefix("block/ch/");
-        ResourceLocation outerTopM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_top_outer_m")).withPrefix("block/ch/");
+        executor.accept((manager, handler) -> {
+            String PlankedLogFilename = "planked_oak_log";
+            ResourceLocation innerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_inner_m")).withPrefix("block/ch/");
+            ResourceLocation outerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_outer_m")).withPrefix("block/ch/");
+            ResourceLocation innerTopM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_top_inner_m")).withPrefix("block/ch/");
+            ResourceLocation outerTopM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_top_outer_m")).withPrefix("block/ch/");
 
-        //REASON: The generated textures are not correct, so below is the best way to get the correct generated texture
-        createLogTexture(modRes(PlankedLogFilename).withPrefix("block/oak_log/"), innerSideM_ResLoc, outerSideM_ResLoc,
-                PlankedLogFilename, "log", "", PlankedLog, "planks", "log",
-                handler, manager);
+            //REASON: The generated textures are not correct, so below is the best way to get the correct generated texture
+            createLogTexture(modRes(PlankedLogFilename).withPrefix("block/oak_log/"), innerSideM_ResLoc, outerSideM_ResLoc,
+                    PlankedLogFilename, "log", "", PlankedLog, "planks", "log",
+                    handler, manager);
 
-        createLogTexture(modRes(PlankedLogFilename + "_top").withPrefix("block/oak_log/"), innerTopM_ResLoc, outerTopM_ResLoc,
-                PlankedLogFilename, "log", "top", PlankedLog, "planks", "log",
-                handler, manager);
+            createLogTexture(modRes(PlankedLogFilename + "_top").withPrefix("block/oak_log/"), innerTopM_ResLoc, outerTopM_ResLoc,
+                    PlankedLogFilename, "log", "top", PlankedLog, "planks", "log",
+                    handler, manager);
+        });
     }
 
     public void createLogTexture(ResourceLocation textureResLoc, ResourceLocation innerMaskResLoc, ResourceLocation outerMaskResLoc,
                                  String textureFilename, String folderName, String suffix,
                                  SimpleEntrySet<WoodType, Block> mainBlock, String innerType, String outerType,
-                                 ClientDynamicResourcesHandler handler, ResourceManager manager) {
+                                 ResourceSink handler, ResourceManager manager) {
         try (
              TextureImage mainTexture = TextureImage.open(manager, textureResLoc);
              TextureImage innerMask = TextureImage.open(manager, innerMaskResLoc);
@@ -2402,14 +2405,14 @@ public class ChippedModule extends SimpleModule {
                     if (!suffix.isEmpty()) suffixed = "_"+suffix;
                     String newPath = "block/"+ shortenedId()+"/"+woodType.getAppendableId() +"_"+folderName+"/"+ textureFilename.replace("oak", woodType.getTypeName()) + suffixed;
 
-                    handler.dynamicPack.addAndCloseTexture( EveryCompat.res(newPath), finiahedTexture);
+                    handler.addAndCloseTexture( EveryCompat.res(newPath), finiahedTexture);
                 }
                 catch (IOException e) {
-                    handler.getLogger().error("Failed to generate planked_log texture for {} : {}", woodType.getId(), String.valueOf(e));
+                    EveryCompat.LOGGER.error("Failed to generate planked_log texture for {} : {}", woodType.getId(), String.valueOf(e));
                 }
             });
         } catch (Exception e) {
-            handler.getLogger().error("Failed to get textures for planked_logs: {}", String.valueOf(e));
+            EveryCompat.LOGGER.error("Failed to get textures for planked_logs: {}", String.valueOf(e));
         }
 
     }
