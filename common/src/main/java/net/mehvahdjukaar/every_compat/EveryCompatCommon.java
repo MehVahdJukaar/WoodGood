@@ -78,6 +78,8 @@ public class EveryCompatCommon {
                 "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
         addOtherCompatMod("mcwaurora", "enhanced_mushrooms",
                 "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+        addOtherCompatMod("mcwquark", "quark",
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
 
         // Abnormals Delight
         addOtherCompatMod("abnormals_delight",
