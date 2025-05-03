@@ -7,20 +7,19 @@ import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
 import com.jaquadro.minecraft.storagedrawers.item.ItemDrawers;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 //SUPPORT: v12.10.4+ (FABRIC) | 12.9.12+ (FORGE)
@@ -177,14 +176,15 @@ public class StorageDrawersModule extends SimpleModule {
         p.increaseUp();
     }
 
+
     @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
-        ModDrawersGeometry.loadGeometryData(this, manager);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+        executor.accept((manager, s) -> ModDrawersGeometry.loadGeometryData(this, manager));
     }
 
     private <B extends Block> Stream<B> getBlocksOfType(Class<B> blockClass) {
-        Stream<Block> allBlocks = this.getEntries().stream().map(e-> ((SimpleEntrySet<?, B>) e)
+        Stream<Block> allBlocks = this.getEntries().stream().map(e -> ((SimpleEntrySet<?, B>) e)
                 .blocks.values()).flatMap(Collection::stream);
         Objects.requireNonNull(blockClass);
         allBlocks = allBlocks.filter(blockClass::isInstance);

@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
@@ -47,6 +48,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 // SUPPORT: v24+
 public class FurnishModule extends SimpleModule {
@@ -316,32 +318,33 @@ public class FurnishModule extends SimpleModule {
     }
 
     @Override
-    // Tags
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicServerResources(handler, manager, sink);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        for (var w : WoodTypeRegistry.getTypes()) {
-            boolean hasSomething = false;
-            SimpleTagBuilder itemTag = SimpleTagBuilder.of(modRes(w.getTypeName() + "_" + "furniture"));
+        executor.accept((manager, handler) -> {
 
-            for (var entry : this.getEntries()) {
-                Item b = ((SimpleEntrySet<?, ?>) entry).items.get(w);
-                if (b != null) {
-                    hasSomething = true;
-                    itemTag.addEntry(b);
+            for (var w : WoodTypeRegistry.getTypes()) {
+                boolean hasSomething = false;
+                SimpleTagBuilder itemTag = SimpleTagBuilder.of(modRes(w.getTypeName() + "_" + "furniture"));
+
+                for (var entry : this.getEntries()) {
+                    Item b = ((SimpleEntrySet<?, ?>) entry).items.get(w);
+                    if (b != null) {
+                        hasSomething = true;
+                        itemTag.addEntry(b);
+                    }
+                }
+                if (hasSomething) {
+                    handler.addTag(itemTag, Registries.ITEM);
+                    handler.addTag(itemTag, Registries.BLOCK);
                 }
             }
-            if (hasSomething) {
-                handler.dynamicPack.addTag(itemTag, Registries.ITEM);
-                handler.dynamicPack.addTag(itemTag, Registries.BLOCK);
-            }
-        }
+        });
     }
 
     @Override
-    // Textures
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
         try {
             logBenches.blocks.forEach((w, block) -> {
                 var id = Utils.getID(block);

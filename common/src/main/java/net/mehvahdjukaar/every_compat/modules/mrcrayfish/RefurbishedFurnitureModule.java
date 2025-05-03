@@ -18,6 +18,7 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
@@ -49,6 +50,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -437,22 +439,24 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     }
 
     @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
-        super.addDynamicClientResources(handler, manager, sink);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
 
-        // code copied from ResourceUtils.addStandardResources
-        StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
-                modRes("extra/oak_dark_ceiling_fan_blade")
-        ));
-        addFanModels(handler, manager, darkBlade, darkFans);
-        StaticResource lightBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
-                modRes("extra/oak_light_ceiling_fan_blade")
-        ));
-        addFanModels(handler, manager, lightBlade, lightFans);
+        executor.accept((manager, handler) -> {
 
+            // code copied from ResourceUtils.addStandardResources
+            StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                    modRes("extra/oak_dark_ceiling_fan_blade")
+            ));
+            addFanModels(handler, manager, darkBlade, darkFans);
+            StaticResource lightBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                    modRes("extra/oak_light_ceiling_fan_blade")
+            ));
+            addFanModels(handler, manager, lightBlade, lightFans);
+        });
     }
 
-    private void addFanModels(ClientDynamicResourcesHandler handler, ResourceManager manager, StaticResource darkBlade, SimpleEntrySet<WoodType, Block> darkFans) {
+    private void addFanModels(ResourceSink handler, ResourceManager manager, StaticResource darkBlade, SimpleEntrySet<WoodType, Block> darkFans) {
         darkFans.blocks.forEach((w, b) -> {
             try {
                 handler.addSimilarJsonResource(manager, darkBlade, s ->
@@ -489,8 +493,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 
     public static BlockBehaviour.Properties addWoodProp(WoodType w, BlockBehaviour.Properties p) {
         if (w.canBurn()) p.ignitedByLava();
-        p.mapColor(w.planks.defaultMapColor()).sound(w.getSound()).instrument(NoteBlockInstrument.BASS);
-        return p;
+        return addWoodPropNoFire(w, p);
     }
 
     public static BlockBehaviour.Properties addWoodPropNoFire(WoodType w, BlockBehaviour.Properties p) {
@@ -517,8 +520,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
             if (json.get("result").isJsonObject()) {
                 s1 = GsonHelper.getAsJsonObject(json, "result").get("item").getAsString();
                 count = GsonHelper.getAsJsonObject(json, "result").get("count").getAsInt();
-            }
-            else {
+            } else {
                 s1 = GsonHelper.getAsString(json, "result");
                 count = 1;
             }
