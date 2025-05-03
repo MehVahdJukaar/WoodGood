@@ -13,6 +13,8 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynResourceGenerator;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Registry;
@@ -29,6 +31,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 
@@ -106,11 +109,11 @@ public abstract class CompatModule {
 
     //resource pack stuff
 
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
     }
 
     @Environment(EnvType.CLIENT)
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
     }
 
     @Environment(EnvType.CLIENT)

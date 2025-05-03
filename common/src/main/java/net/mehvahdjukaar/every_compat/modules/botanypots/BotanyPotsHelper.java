@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +17,7 @@ import java.io.InputStream;
 
 public class BotanyPotsHelper {
 
-    public static void crop_quarkhedge_recipe(QuarkModule module, Item input, Item output, ServerDynamicResourcesHandler handler, ResourceManager manager, LeavesType leaves) {
+    public static void cropQuarkHedgeRecipe(QuarkModule module, Item input, Item output, ResourceSink handler, ResourceManager manager, LeavesType leaves) {
 
         ResourceLocation recipeLocation = EveryCompat.res("template_recipes/botanypots/crop/leaves_from_quark_hedge_crop.json"); // get Recipe JSON
         JsonObject recipe = null;
@@ -34,10 +35,10 @@ public class BotanyPotsHelper {
             getDrops.addProperty("item", Utils.getID(output).toString());
 
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("{BotanyPots Helper} crop_quarkhedge_recipe(): " + e);
+            EveryCompat.LOGGER.error("{BotanyPots Helper} crop_quarkhedge_recipe(): {}", String.valueOf(e));
         }
 
         String filenameBuilder = "_from_quark_hedge_crop";
-        handler.dynamicPack.addJson(EveryCompat.res(module.shortenedId() + "/" + leaves.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
+        handler.addJson(EveryCompat.res(module.shortenedId() + "/" + leaves.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
     }
 }

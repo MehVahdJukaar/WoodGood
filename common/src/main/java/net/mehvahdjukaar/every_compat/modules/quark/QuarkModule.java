@@ -10,8 +10,6 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -19,6 +17,8 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -60,6 +60,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddDefaultTags;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
@@ -384,10 +385,14 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
-    // Textures
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
 
+        //extra task
+        executor.accept((this::generateChestTextures));
+    }
+
+    private void generateChestTextures(ResourceManager manager, ResourceSink handler) {
         try (TextureImage normal = TextureImage.open(manager, modRes("quark_variant_chests/oak/normal"));
              TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
              TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
@@ -459,15 +464,15 @@ public class QuarkModule extends SimpleModule {
 
 
                 } catch (Exception ex) {
-                    handler.getLogger().error("Failed to generate Chest block texture for for {} : {}", b, ex);
+                    EveryCompat.LOGGER.error("Failed to generate Chest block texture for for {} : {}", b, ex);
                 }
             });
         } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any Chest block texture : ", ex);
+            EveryCompat.LOGGER.error("Could not generate any Chest block texture : ", ex);
         }
     }
 
-    private void createChestTextures(ClientDynamicResourcesHandler handler, TextureImage trappedOverlay,
+    private void createChestTextures(ResourceSink handler, TextureImage trappedOverlay,
                                      Respriter respriterLeft, Respriter respriterLeftO,
                                      McMetaFile baseMeta, List<Palette> basePalette,
                                      List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes,
@@ -479,52 +484,57 @@ public class QuarkModule extends SimpleModule {
         TextureImage trapped = recoloredBase.makeCopy();
 
         if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
-            handler.dynamicPack.addAndCloseTexture(res, recoloredBase);
+            handler.addAndCloseTexture(res, recoloredBase);
 
         trapped.applyOverlay(trappedOverlay.makeCopy());
-        handler.dynamicPack.addAndCloseTexture(trappedRes, trapped);
+        handler.addAndCloseTexture(trappedRes, trapped);
     }
 
     @Override
-    // Recipes & Tags
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        // Recipes & Tags
+        super.addDynamicServerResources(executor);
 
-        if (PlatHelper.isModLoaded("botanypots")) {
-            hedges.items.forEach((leaves, item) -> {
-                var leavesItem = leaves.leaves.asItem();
-                BotanyPotsHelper.crop_quarkhedge_recipe(this, item, leavesItem, handler, manager, leaves);
-            });
-        }
+        //extra tasks
+        executor.accept((manager, handler) -> {
+            if (PlatHelper.isModLoaded("botanypots")) {
+                hedges.items.forEach((leaves, item) -> {
+                    var leavesItem = leaves.leaves.asItem();
+                    BotanyPotsHelper.cropQuarkHedgeRecipe(this, item, leavesItem, handler, manager, leaves);
+                });
+            }
 
-        // hedge's recipe & logs' tags
-        for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-            LeavesType leavesType = entry.getKey();
-            Block block = entry.getValue();
+            // hedge's recipe & logs' tags
+            for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
+                LeavesType leavesType = entry.getKey();
+                Block block = entry.getValue();
 
-            if (block != null) { // will generate if block is not null
-                // general
-                if (!leavesType.getNamespace().equals("fruitfulfun"))
-                    generalHedgeRecipe(leavesType, block, handler, manager);
+                if (block != null) { // will generate if block is not null
+                    // general
+                    if (!leavesType.getNamespace().equals("fruitfulfun"))
+                        generalHedgeRecipe(leavesType, block, handler, manager);
 
-                // Fruitful Fun
-                if (leavesType.getNamespace().equals("fruitfulfun")) {
-                    switch (leavesType.getTypeName()) {
-                        case "apple" -> specialHedgeRecipe("minecraft:oak", leavesType, block, handler, manager);
+                    // Fruitful Fun
+                    if (leavesType.getNamespace().equals("fruitfulfun")) {
+                        switch (leavesType.getTypeName()) {
+                            case "apple" -> specialHedgeRecipe("minecraft:oak", leavesType, block, handler, manager);
 
-                        case "grapefruit", "lemon", "tangerine", "lime", "citron", "pomelo", "orange" ->
-                                specialHedgeRecipe("fruitfulfun:citrus", leavesType, block, handler, manager);
+                            case "grapefruit", "lemon", "tangerine", "lime", "citron", "pomelo", "orange" ->
+                                    specialHedgeRecipe("fruitfulfun:citrus", leavesType, block, handler, manager);
 
-                        case "pomegranate" -> specialHedgeRecipe("minecraft:jungle", leavesType, block, handler, manager);
-                        case "redlove" -> specialHedgeRecipe("fruitfulfun:redlove", leavesType, block, handler, manager);
+                            case "pomegranate" ->
+                                    specialHedgeRecipe("minecraft:jungle", leavesType, block, handler, manager);
+                            case "redlove" ->
+                                    specialHedgeRecipe("fruitfulfun:redlove", leavesType, block, handler, manager);
+                        }
                     }
                 }
             }
-        }
+        });
     }
 
     // Correcting logs used to craft hedges
-    public void generalHedgeRecipe(LeavesType leavesType, Block block, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+    public void generalHedgeRecipe(LeavesType leavesType, Block block, ResourceSink handler, ResourceManager manager) {
 
         ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
         WoodType woodType = leavesType.getWoodType();
@@ -536,7 +546,7 @@ public class QuarkModule extends SimpleModule {
             JsonObject underKey = recipe.getAsJsonObject("key");
             JsonObject underResult = recipe.getAsJsonObject("result");
 
-        // Editing JSON
+            // Editing JSON
             // Leaves
             underKey.getAsJsonObject("L")
                     .addProperty("item", Utils.getID(leavesType.leaves).toString());
@@ -549,16 +559,16 @@ public class QuarkModule extends SimpleModule {
 
             // Adding the finished recipe to ResourceLocation
             String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
-            handler.dynamicPack.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
+            handler.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
                     ResType.RECIPES);
 
         } catch (IOException e) {
-            handler.getLogger().error("Failed to open the recipe file @ {} : {}", recipeLoc, e);
+            EveryCompat.LOGGER.error("Failed to open the recipe file @ {} : {}", recipeLoc, e);
         }
     }
 
     public void specialHedgeRecipe(String reslocWood, LeavesType leavesType,
-                                   Block block, ServerDynamicResourcesHandler handler,
+                                   Block block, ResourceSink handler,
                                    ResourceManager manager) {
 
         ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
@@ -571,32 +581,32 @@ public class QuarkModule extends SimpleModule {
             WoodType woodType = leavesType.getWoodType();
 
             // Editing JSON
-                // Leaves
+            // Leaves
             underKey.getAsJsonObject("L")
                     .addProperty("item", Utils.getID(leavesType.leaves).toString());
-                // WoodTypes
+            // WoodTypes
             underKey.getAsJsonObject("W").addProperty("tag",
-                    whichSpecialTags("logs", woodType, reslocWood, handler, manager ).toString());
-                // Hedges
+                    whichSpecialTags("logs", woodType, reslocWood, handler, manager).toString());
+            // Hedges
             underResult.addProperty("item", Utils.getID(block).toString());
 
             // Adding the finished recipe to ResourceLocation
-            ResourceLocation newLoc = EveryCompat.res(shortenedId() +"/"+ leavesType.getAppendableId() + "_hedge");
-            handler.dynamicPack.addJson(newLoc, recipe, ResType.RECIPES);
+            ResourceLocation newLoc = EveryCompat.res(shortenedId() + "/" + leavesType.getAppendableId() + "_hedge");
+            handler.addJson(newLoc, recipe, ResType.RECIPES);
 
         } catch (IOException e) {
-            handler.getLogger().error("Failed to open the recipe file: {} : {}", recipeLoc, e);
+            EveryCompat.LOGGER.error("Failed to open the recipe file: {} : {}", recipeLoc, e);
         }
     }
 
-    public static ResourceLocation whichSpecialTags(String suffixTag, WoodType woodType, String wood, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+    public static ResourceLocation whichSpecialTags(String suffixTag, WoodType woodType, String wood, ResourceSink handler, ResourceManager manager) {
         // If a namespace:<type>_logs already exist, then it will be used as an ingredient in the recipe, otherwise will
         // generate a tag for logs/stems that don't have the tags.
 
         // ResourceLocation of log/planks tags
-        ResourceLocation RLocLogsTag = new ResourceLocation(wood +"_"+ suffixTag);
+        ResourceLocation RLocLogsTag = new ResourceLocation(wood + "_" + suffixTag);
         // ~ of generated tags
-        ResourceLocation RLocECTag = EveryCompat.res(woodType.getAppendableId() +"_"+ suffixTag);
+        ResourceLocation RLocECTag = EveryCompat.res(woodType.getAppendableId() + "_" + suffixTag);
 
         if (manager.getResource(ResType.TAGS.getPath(RLocLogsTag.withPrefix("blocks/"))).isPresent())
             return RLocLogsTag;

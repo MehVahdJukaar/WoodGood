@@ -2,20 +2,20 @@ package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynResourceGenerator;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -116,43 +116,37 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> {
-            e.generateLootTables(this, handler.dynamicPack, manager);
-            e.generateRecipes(this, handler.dynamicPack, manager);
-            e.generateTags(this, handler.dynamicPack, manager);
-        });
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        getEntries().forEach(e -> executor.accept((manager, sink) -> {
+            try {
+                e.generateLootTables(this, manager,sink);
+                e.generateRecipes(this, manager,sink);
+                e.generateTags(this, manager,sink);
+            } catch (Exception ex) {
+                EveryCompat.LOGGER.error("Failed to generate server resources for entry set {} from module {}:", e, this, ex);
+                if (PlatHelper.isDev()) throw ex;
+            }
+        }));
     }
 
     @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, Consumer<ResGenTas> executor) {
-        try {
-
-            executor.accept(() ->
-                    getEntries().forEach(e -> {
-                        try {
-                            e.generateModels(this, handler, manager);
-                        } catch (Exception ex) {
-                            EveryCompat.LOGGER.error("Failed to generate models for entry set {}:", e, ex);
-                            if (PlatHelper.isDev()) throw ex;
-                        }
-                    })
-            );
-            executor.accept(() ->
-                    getEntries().forEach(e -> {
-                        try {
-                            e.generateTextures(this, handler, manager);
-                        } catch (Exception ex) {
-                            EveryCompat.LOGGER.error("Failed to generate textures for entry set {}:", e, ex);
-                            if (PlatHelper.isDev()) throw ex;
-                        }
-                    })
-            );
-        } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed to generate client dynamic assets for module {}:", m, e);
-            if (PlatHelper.isDev()) throw e;
-        }
+    public String toString() {
+        return "[module: " + modId + "]";
     }
+
+    @Override
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        getEntries().forEach(e -> executor.accept((manager, sink) -> {
+            try {
+                e.generateTextures(this, manager, sink);
+                e.generateModels(this, manager, sink);
+            } catch (Exception ex) {
+                EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", e, this, ex);
+                if (PlatHelper.isDev()) throw ex;
+            }
+        }));
+    }
+
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {

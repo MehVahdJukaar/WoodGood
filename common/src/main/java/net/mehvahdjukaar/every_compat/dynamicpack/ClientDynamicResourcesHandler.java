@@ -8,6 +8,7 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -58,7 +59,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
-        EveryCompat.forAllModules(m -> m.addDynamicClientResources(this,  executor));
+        EveryCompat.forAllModules(m -> m.addDynamicClientResources(executor));
     }
 
     @Override
@@ -70,8 +71,6 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
         super.regenerateDynamicAssets(manager);
         this.paletteCache.clear();
-
-        ExtraTextureGenerator.generateExtraTextures(this, manager);
     }
 
     //needs to be thread safe

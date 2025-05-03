@@ -7,6 +7,7 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
@@ -39,15 +40,15 @@ public interface EntrySet<T extends BlockType> {
 
     void setRenderLayer();
 
-    void generateTags(SimpleModule module, DynamicDataPack pack, ResourceManager manager);
+    void generateTags(SimpleModule module,  ResourceManager manager, ResourceSink pack);
 
-    void generateLootTables(SimpleModule module, DynamicDataPack pack, ResourceManager manager);
+    void generateLootTables(SimpleModule module,  ResourceManager manager, ResourceSink pack);
 
-    void generateRecipes(SimpleModule module, DynamicDataPack pack, ResourceManager manager);
+    void generateRecipes(SimpleModule module, ResourceManager manager, ResourceSink pack);
 
-    void generateModels(SimpleModule module, DynClientResourcesGenerator handler, ResourceManager manager);
+    void generateModels(SimpleModule module, ResourceManager manager, ResourceSink sink);
 
-    void generateTextures(SimpleModule module, ClientDynamicResourcesHandler handler, ResourceManager manager);
+    void generateTextures(SimpleModule module, ResourceManager manager, ResourceSink sink);
 
     default void setupExistingTiles() {
     }

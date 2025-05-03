@@ -8,6 +8,8 @@ import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -22,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 // SUPPORT: v1.2.4+
 // SUPPORT: FABRIC-v2.0.5+
@@ -67,31 +70,32 @@ public class FarmersDelightModule extends SimpleModule {
     }
 
     @Override
-    // Recipes
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        // Creating cutting_board recipes
-        cabinets.items.forEach(((woodType, item) -> {
+        executor.accept((manager, handler) -> {
+            // Creating cutting_board recipes
+            cabinets.items.forEach(((woodType, item) -> {
 
-            createCuttingRecipe("door", woodType.getBlockOfThis("door"), woodType.planks,
-                    woodType, handler, manager);
-            createCuttingRecipe("hanging_sign", woodType.getBlockOfThis("hanging_sign"), woodType.planks,
-                    woodType, handler, manager);
-            createCuttingRecipe("sign", woodType.getBlockOfThis("sign"), woodType.planks,
-                    woodType, handler, manager);
-            createCuttingRecipe("trapdoor", woodType.getBlockOfThis("trapdoor"), woodType.planks,
-                    woodType, handler, manager);
-            createCuttingRecipe("log", woodType.log, woodType.getBlockOfThis("stripped_log"),
-                    woodType, handler, manager);
-            createCuttingRecipe("wood", woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"),
-                    woodType, handler, manager);
+                createCuttingRecipe("door", woodType.getBlockOfThis("door"), woodType.planks,
+                        woodType, handler, manager);
+                createCuttingRecipe("hanging_sign", woodType.getBlockOfThis("hanging_sign"), woodType.planks,
+                        woodType, handler, manager);
+                createCuttingRecipe("sign", woodType.getBlockOfThis("sign"), woodType.planks,
+                        woodType, handler, manager);
+                createCuttingRecipe("trapdoor", woodType.getBlockOfThis("trapdoor"), woodType.planks,
+                        woodType, handler, manager);
+                createCuttingRecipe("log", woodType.log, woodType.getBlockOfThis("stripped_log"),
+                        woodType, handler, manager);
+                createCuttingRecipe("wood", woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"),
+                        woodType, handler, manager);
 
-        }));
+            }));
+        });
     }
 
     public void createCuttingRecipe(String recipeType, Block input, Block output,
-                                    WoodType woodType, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+                                    WoodType woodType, ResourceSink handler, ResourceManager manager) {
 
         if (Objects.nonNull(input) && Objects.nonNull(output)) {
         ResourceLocation recipeLocation = modRes("recipes/cutting/oak_"+recipeType+".json");
@@ -110,9 +114,9 @@ public class FarmersDelightModule extends SimpleModule {
                 // Adding to ResourceLocation
                 String path = this.shortenedId() + "/cutting/" + woodType.getAppendableId() +"_"+recipeType;
 
-                handler.dynamicPack.addJson(EveryCompat.res(path), recipe, ResType.RECIPES);
+                handler.addJson(EveryCompat.res(path), recipe, ResType.RECIPES);
             } catch (IOException e) {
-                handler.getLogger().error("Failed to generate the cutting recipe for {} - {}", Utils.getID(output), e);
+                EveryCompat.LOGGER.error("Failed to generate the cutting recipe for {} - {}", Utils.getID(output), e);
             }
         }
     }

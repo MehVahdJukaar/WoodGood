@@ -5,8 +5,11 @@ import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.function.Consumer;
 
 public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
 
@@ -36,12 +39,12 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
     }
 
     @Override
-    public void regenerateDynamicAssets(ResourceManager manager) {
+    public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
 
         EveryCompat.forAllModules(m -> {
             try {
-                m.addDynamicServerResources(this, manager);
+                m.addDynamicServerResources(executor);
             } catch (Exception e) {
                 getLogger().error("Failed to generate server dynamic assets for module {}: {}", m, e);
             }

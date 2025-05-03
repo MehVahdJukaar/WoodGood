@@ -5,7 +5,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class TagUtility {
      *
      * @return ResourceLocation
      **/
-    public static ResourceLocation getATagOrCreateANew(String suffixTag, String suffixAlt, BlockType blockType, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+    public static ResourceLocation getATagOrCreateANew(String suffixTag, String suffixAlt, BlockType blockType, ResourceSink handler, ResourceManager manager) {
         String resLocMOD = blockType.getNamespace() + ":" + blockType.getTypeName();
 
         // ResourceLocation
@@ -54,11 +55,11 @@ public class TagUtility {
      *
      * @return true if tag was added successfully
      **/
-    public static boolean createAndAddDefaultTags(ResourceLocation resLoc, ServerDynamicResourcesHandler handler, BlockType blockType, Block ... blocks) {
+    public static boolean createAndAddDefaultTags(ResourceLocation resLoc, ResourceSink sink, BlockType blockType, Block... blocks) {
         if (blockType instanceof WoodType woodType)
-            return createAndAddCustomTags(resLoc, handler, woodType.log, woodType.getBlockOfThis("stripped_log"), woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"));
+            return createAndAddCustomTags(resLoc, sink, woodType.log, woodType.getBlockOfThis("stripped_log"), woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"));
         else
-            return createAndAddCustomTags(resLoc, handler, blocks);
+            return createAndAddCustomTags(resLoc, sink, blocks);
     }
 
     /**
@@ -66,7 +67,7 @@ public class TagUtility {
      *
      * @return true if tag was added successfully
      **/
-    public static boolean createAndAddCustomTags(ResourceLocation resLoc, ServerDynamicResourcesHandler handler, Block... blocks) {
+    public static boolean createAndAddCustomTags(ResourceLocation resLoc, ResourceSink sink, Block... blocks) {
         boolean isTagCreated = false;
 
         SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(resLoc);
@@ -79,52 +80,34 @@ public class TagUtility {
         }
         // Adding to the resources
         if (isTagCreated) {
-            handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
-            handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
+            sink.addTag(tagBuilder, Registries.BLOCK);
+            sink.addTag(tagBuilder, Registries.ITEM);
         }
         return isTagCreated;
     }
 
     /// The tag will be added if the mod is loaded
-    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String nameStone, String modId, String tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
-        if (PlatHelper.isModLoaded(modId)) {
-            boolean isTagCreated = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(modId, tag));
-            for (Map.Entry<T, B> entry : blocks.entrySet()) {
-                T stoneType = entry.getKey();
-                B block = entry.getValue();
-                if (stoneType.getTypeName().equals(nameStone)) {
-                    tagBuilder.addEntry(block);
-                    isTagCreated = true;
-                }
-            }
-            if (isTagCreated) {
-                if (includeBlock) pack.addTag(tagBuilder, Registries.BLOCK);
-                if (includeItem) pack.addTag(tagBuilder, Registries.ITEM);
-            }
-        }
+    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
+            Map<T, B> blocks, String nameStone, String modId, String tag,
+            boolean includeBlock, boolean includeItem, ResourceSink pack) {
+        addTagToAllBlocks(blocks, nameStone, modId,
+                TagKey.create(Registries.BLOCK, new ResourceLocation(tag)),
+                includeBlock, includeItem, pack);
     }
+
     /// The tag will be added if the mod is loaded
-    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String nameStone, String modId, TagKey<Block> tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
-        if (PlatHelper.isModLoaded(modId)) {
-            boolean isTagCreated = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
-            for (Map.Entry<T, B> entry : blocks.entrySet()) {
-                T stoneType = entry.getKey();
-                B block = entry.getValue();
-                if (stoneType.getTypeName().equals(nameStone)) {
-                    tagBuilder.addEntry(block);
-                    isTagCreated = true;
-                }
-            }
-            if (isTagCreated) {
-                if (includeBlock) pack.addTag(tagBuilder, Registries.BLOCK);
-                if (includeItem) pack.addTag(tagBuilder, Registries.ITEM);
-            }
-        }
+    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
+            Map<T, B> blocks, String nameStone, String modId, TagKey<Block> tag,
+            boolean includeBlock, boolean includeItem, ResourceSink pack) {
+        addTagToAllBlocks(blocks, nameStone, modId,
+                tag, includeBlock, includeItem, pack, null);
     }
+
     /// The tag will be added if the mod is loaded
-    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(Map<T, B> blocks, String regexBlockId, String nameStone, String modId, TagKey<Block> tag, boolean includeBlock, boolean includeItem, DynamicDataPack pack) {
+    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
+            Map<T, B> blocks, String nameStone, String modId,
+            TagKey<Block> tag, boolean includeBlock, boolean includeItem, ResourceSink pack,
+            @Nullable String regexBlockId) {
         if (PlatHelper.isModLoaded(modId)) {
             boolean isTagCreated = false;
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
@@ -135,7 +118,8 @@ public class TagUtility {
                 String blockPath = Utils.getID(block).getPath();
                 String blockId = blockPath.substring(blockPath.lastIndexOf("/") + 1);
 
-                if (stoneType.getTypeName().equals(nameStone) && blockId.matches(regexBlockId)) {
+                if (stoneType.getTypeName().equals(nameStone) &&
+                        (regexBlockId == null || blockId.matches(regexBlockId))) {
                     tagBuilder.addEntry(block);
                     isTagCreated = true;
                 }

@@ -20,6 +20,7 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -233,7 +234,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     }
 
     @Override
-    public void generateTags(SimpleModule module, DynamicDataPack pack, ResourceManager manager) {
+    public void generateTags(SimpleModule module,  ResourceManager manager, ResourceSink sink) {
         if (!tags.isEmpty()) {
             for (var tb : tags.entrySet()) {
                 SimpleTagBuilder builder = SimpleTagBuilder.of(tb.getKey());
@@ -243,18 +244,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     }
                 }
                 for (var t : tb.getValue()) {
-                    pack.addTag(builder, t);
+                    sink.addTag(builder, t);
                 }
             }
         }
 
         // Adding tag to a specific WoodType of all generated blocks
         addTagToAllBlocks(blocks, "petrified", "sullysmod", BlockTags.MINEABLE_WITH_PICKAXE,
-                true, false, pack);
+                true, false, sink);
 
         String regEx = "\\w+_(log|planks|beehive|boards|sanded_wood|beam|parquet|trim|bookshelf|window|drawer|table|bookshelf|shelf|table|support|cabinet|board_stairs|board_slab|boards)";
-        addTagToAllBlocks(blocks, regEx, "fright", "soulfulnether", BlockTags.SOUL_FIRE_BASE_BLOCKS,
-                true, false, pack);
+        addTagToAllBlocks(blocks , "fright", "soulfulnether", BlockTags.SOUL_FIRE_BASE_BLOCKS,
+                true, false, sink, regEx);
 
     }
 
@@ -263,12 +264,12 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     }
 
     @Override
-    public void generateRecipes(SimpleModule module, DynamicDataPack pack, ResourceManager manager) {
+    public void generateRecipes(SimpleModule module,ResourceManager manager, ResourceSink sink) {
         int i = 0;
         for (var r : this.recipeLocations) {
             var res = r.get();
             try {
-                ResourcesUtils.addBlocksRecipes(manager, pack, items, res, baseType.get(), i++);
+                ResourcesUtils.addBlocksRecipes(manager, sink, items, res, baseType.get(), i++);
             } catch (Exception e) {
                 EveryCompat.LOGGER.error("Failed to generate recipes for template at location {} ", res, e);
             }
@@ -277,13 +278,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     // i have no fucking clue whats going on here
     @Override
-    public void generateTextures(SimpleModule module, ClientDynamicResourcesHandler handler, ResourceManager manager) {
+    public void generateTextures(SimpleModule module, ResourceManager manager,  ResourceSink sik) {
         if (textures.isEmpty()) return;
 
         List<TextureImage> images = new ArrayList<>();
         try {
             // Oak Planks Palette
-            Palette oakPlanksPalette = handler.getCachedBaseBlockTexturePalette(manager, baseType.get());
+            Palette oakPlanksPalette = ClientDynamicResourcesHandler.getInstance()
+                    .getCachedBaseBlockTexturePalette(manager, baseType.get());
 
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
@@ -410,10 +412,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                                     JsonObject mcmetaFile = RPUtils.deserializeJson(mcmetaStream);
 
                                     // Adding to the resources next to newtextures
-                                    handler.dynamicPack.addJson(ResourceLocation.tryParse(newId), mcmetaFile, ResType.MCMETA);
+                                    sik.addJson(ResourceLocation.tryParse(newId), mcmetaFile, ResType.MCMETA);
                                     mcmetaStream.close();
                                 } else
-                                    handler.getLogger().error("The MCMETA file may no longer existing, check @ {}", mcmetaLoc);
+                                    EveryCompat.LOGGER.error("The MCMETA file may no longer existing, check @ {}", mcmetaLoc);
                             }
                         }
 
@@ -422,7 +424,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         Supplier<TextureImage> textureSupplier = () -> respriter.recolorWithAnimation(targetPalette, targetAnimation);
                         textureSupplier = postProcessTexture(blockType, newId, manager, textureSupplier);
 
-                        handler.addTextureIfNotPresent(manager, newId, textureSupplier, isOnAtlas);
+                        sik.addTextureIfNotPresent(manager, newId, textureSupplier, isOnAtlas);
                     }
                 }
             }

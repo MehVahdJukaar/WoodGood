@@ -10,6 +10,8 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -36,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
@@ -100,22 +103,23 @@ public class BeautifulCampfiresModule extends SimpleModule {
     }
 
     @Override
-    // RECIPES
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
-        ResourceLocation campfireLoc = modRes("acacia_campfire");
-        ResourceLocation soulCampfireLoc = modRes("acacia_soul_campfire");
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        campfires.blocks.forEach((wood, block) ->{
-            createRecipe("campfire", wood, block, campfireLoc, handler, manager);
-            createRecipe("soul_campfire", wood, soul_campfires.blocks.get(wood), soulCampfireLoc,
-                    handler, manager);
+        executor.accept((manager, handler) -> {
+            ResourceLocation campfireLoc = modRes("acacia_campfire");
+            ResourceLocation soulCampfireLoc = modRes("acacia_soul_campfire");
+
+            campfires.blocks.forEach((wood, block) -> {
+                createRecipe("campfire", wood, block, campfireLoc, handler, manager);
+                createRecipe("soul_campfire", wood, soul_campfires.blocks.get(wood), soulCampfireLoc,
+                        handler, manager);
+            });
         });
-
     }
 
     public void createRecipe(String recipeName, WoodType woodType, Block output, ResourceLocation recipeLoc,
-                             ServerDynamicResourcesHandler handler, ResourceManager manager) {
+                             ResourceSink handler, ResourceManager manager) {
 
         try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipeLoc))
                 .orElseThrow(() -> new FileNotFoundException("File not found @ " + recipeLoc)).open()) {
@@ -129,7 +133,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
             recipe.getAsJsonObject("result").addProperty("item", Utils.getID(output).toString());
 
             // Adding to resources
-            handler.dynamicPack.addJson(
+            handler.addJson(
                     EveryCompat.res(shortenedId() +"/"+ woodType.getAppendableId() +"_"+ recipeName),
                     recipe,
                     ResType.RECIPES
@@ -137,16 +141,19 @@ public class BeautifulCampfiresModule extends SimpleModule {
 
         }
         catch (IOException e) {
-            handler.getLogger().error("Failed to generate the {} recipe for {} : {}", recipeName, woodType.getId(), e);
+            EveryCompat.LOGGER.error("Failed to generate the {} recipe for {} : {}", recipeName, woodType.getId(), e);
         }
 
     }
 
     @Override
-    // TEXTURES
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
 
+        executor.accept(this::makeCampfireTextures);
+    }
+
+    private void makeCampfireTextures(ResourceManager manager, ResourceSink handler) {
         String campfirePath = "block/acacia_campfire_log";
         ResourceLocation campfireImage = modRes(campfirePath);
         ResourceLocation targetLogMask = EveryCompat.res("block/bc/campfire_log_m"); // Focus on the log part
@@ -178,15 +185,14 @@ public class BeautifulCampfiresModule extends SimpleModule {
                     TextureImage finishedImage = respriterPlank.recolorWithAnimationOf(plankTexture);
 
                     // Adding to the resource
-                    handler.dynamicPack.addAndCloseTexture(newResLoc, finishedImage);
+                    handler.addAndCloseTexture(newResLoc, finishedImage);
 
                 } catch (IOException e) {
-                    handler.getLogger().error("Failed to open log/plank texture file: ", e);
+                    EveryCompat.LOGGER.error("Failed to open log/plank texture file: ", e);
                 }
             });
         } catch (IOException e) {
-            handler.getLogger().error("Failed to open texture file: ", e);
+            EveryCompat.LOGGER.error("Failed to open texture file: ", e);
         }
-
     }
 }

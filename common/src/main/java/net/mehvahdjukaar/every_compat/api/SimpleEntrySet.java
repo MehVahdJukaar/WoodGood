@@ -16,6 +16,7 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -231,23 +232,23 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Override
-    public void generateLootTables(SimpleModule module, DynamicDataPack pack, ResourceManager manager) {
+    public void generateLootTables(SimpleModule module, ResourceManager manager, ResourceSink sink) {
         if (lootMode == LootTableMode.COPY_FROM_PARENT) {
             ResourceLocation reg = Utils.getID(getBaseBlock());
-            ResourcesUtils.addBlockResources(manager, pack, blocks,
+            ResourcesUtils.addBlockResources(manager, sink, blocks,
                     makeLootTableTransformer(module, manager),
                     ResType.BLOCK_LOOT_TABLES.getPath(reg));
 
         } else if (lootMode == LootTableMode.DROP_SELF) {
             //drop self
             if (!YEET_JSONS) {
-                blocks.forEach((wood, value) -> pack.addSimpleBlockLootTable(value));
+                blocks.forEach((wood, value) -> sink.addSimpleBlockLootTable(value));
             }
         }
     }
 
     @Override
-    public void generateModels(SimpleModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
+    public void generateModels(SimpleModule module,  ResourceManager manager,ResourceSink handler) {
         ResourcesUtils.generateStandardBlockModels(manager, handler, blocks, baseType.get(),
                 makeModelTransformer(module, manager), makeBlockStateTransformer(module, manager));
         ResourcesUtils.generateStandardItemModels(manager, handler, items, baseType.get(),

@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -43,7 +44,7 @@ public class ResourcesUtils {
 
     @SuppressWarnings("PointlessBooleanExpression")
     public static <B extends Block, T extends BlockType> void generateStandardBlockModels(
-            ResourceManager manager, DynClientResourcesGenerator d,
+            ResourceManager manager, ResourceSink sink,
             Map<T, B> blocks, T baseType,
             BlockTypeResTransformer<T> modelTransformer,
             BlockTypeResTransformer<T> blockStateTransformer) {
@@ -82,7 +83,7 @@ public class ResourcesUtils {
                         Preconditions.checkArgument(newBlockState.location != oakBlockstate.location,
                                 "ids cant be the same: " + newBlockState.location);
                         //Adding to the resources
-                        d.addResourceIfNotPresent(manager, newBlockState);
+                        sink.addResourceIfNotPresent(manager, newBlockState);
 
                         //creates block model
                         for (StaticResource model : oakBlockModels) {
@@ -93,14 +94,14 @@ public class ResourcesUtils {
                                 Preconditions.checkArgument(newModel.location != model.location,
                                         "ids cant be the same: " + newModel.location);
                                 //Adding to the resources
-                                d.addResourceIfNotPresent(manager, newModel);
+                                sink.addResourceIfNotPresent(manager, newModel);
                             } catch (Exception exception) {
                                 EveryCompat.LOGGER.error("Failed to add {} model json file:", block, exception);
                             }
                         }
                     } else {
                         //dummy blockstate so we don't generate models for this
-                        d.getPack().addJson(blockId, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
+                        sink.addJson(blockId, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
 
                 } catch (Exception e) {
@@ -131,7 +132,7 @@ public class ResourcesUtils {
     //same as above just with just item models. a bunch of copy paste here... ugly
     @SuppressWarnings("PointlessBooleanExpression")
     public static <I extends Item, T extends BlockType> void generateStandardItemModels(
-            ResourceManager manager, DynClientResourcesGenerator d,
+            ResourceManager manager, ResourceSink sink,
             Map<T, I> items, T baseType, BlockTypeResTransformer<T> itemModelTransformer) {
 
         if (items.isEmpty()) return;
@@ -173,7 +174,7 @@ public class ResourcesUtils {
                     StaticResource newRes = itemModelTransformer.transform(oakItemModel, id, w);
                     Preconditions.checkArgument(newRes.location != oakItemModel.location,
                             "ids cant be the same: " + newRes.location);
-                    d.addResourceIfNotPresent(manager, newRes);
+                    sink.addResourceIfNotPresent(manager, newRes);
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to add {} item model json file:", b, e);
                 }
@@ -195,7 +196,7 @@ public class ResourcesUtils {
                     try {
                         StaticResource newModel = itemModelTransformer.transform(model, id, w);
                         assert newModel.location != model.location : "ids cant be the same";
-                        d.addResourceIfNotPresent(manager, newModel);
+                        sink.addResourceIfNotPresent(manager, newModel);
                     } catch (Exception exception) {
                         EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
                     }
@@ -232,7 +233,7 @@ public class ResourcesUtils {
 
 
     //creates and add new jsons based off the ones at the given resources with the provided modifiers
-    public static <B extends Block, T extends BlockType> void addBlockResources(ResourceManager manager, DynamicResourcePack pack,
+    public static <B extends Block, T extends BlockType> void addBlockResources(ResourceManager manager, ResourceSink pack,
                                                                                 Map<T, B> blocks,
                                                                                 BlockTypeResTransformer<T> modifier, ResourceLocation... jsonsLocations) {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).toList();
@@ -263,7 +264,7 @@ public class ResourcesUtils {
     /**
      * Adds recipes based off an oak leaves based one
      */
-    public static void addLeavesRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
+    public static void addLeavesRecipes(String modId, ResourceManager manager, ResourceSink pack,
                                         Map<LeavesType, Item> blocks, String oakRecipe) {
         addBlocksRecipes(modId, manager, pack, blocks, oakRecipe, LeavesTypeRegistry.OAK_TYPE);
     }
@@ -271,7 +272,7 @@ public class ResourcesUtils {
     /**
      * Adds recipes based off an oak planks based one
      */
-    public static <B extends Item> void addWoodRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
+    public static <B extends Item> void addWoodRecipes(String modId, ResourceManager manager, ResourceSink pack,
                                                        Map<WoodType, B> blocks, String oakRecipe) {
         addBlocksRecipes(modId, manager, pack, blocks, oakRecipe, WoodTypeRegistry.OAK_TYPE);
     }
@@ -279,13 +280,13 @@ public class ResourcesUtils {
     /**
      * Adds recipes based off a given one
      */
-    public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, DynamicDataPack pack,
+    public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, ResourceSink pack,
                                                                               Map<T, B> blocks, String oakRecipe, T fromType) {
         addBlocksRecipes(manager, pack, blocks, new ResourceLocation(modId, oakRecipe), fromType, 0);
     }
 
     @SuppressWarnings("removal")
-    public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,
+    public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, ResourceSink pack,
                                                                               Map<T, B> items, ResourceLocation oakRecipe, T fromType,
                                                                               int index) {
         IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
