@@ -58,18 +58,8 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTak> executor) {
-        EveryCompat.forAllModules(m -> {
-            try {
-                executor.accept((man, sink) -> {
-                    m.addDynamicClientResources(this, man, sink);
-                });
-            } catch (Exception e) {
-                getLogger().error("Failed to generate client dynamic assets for module {}:", m, e);
-                if (PlatHelper.isDev()) throw e;
-            }
-        });
+        EveryCompat.forAllModules(m -> m.addDynamicClientResources(this,  executor));
     }
-
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {

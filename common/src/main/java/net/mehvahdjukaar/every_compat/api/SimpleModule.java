@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class SimpleModule extends CompatModule {
 
@@ -124,23 +125,33 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> {
-            try {
-                e.generateModels(this, handler, manager);
-            } catch (Exception ex) {
-                EveryCompat.LOGGER.error("Failed to generate models for entry set {}:", e, ex);
-                if (PlatHelper.isDev()) throw ex;
-            }
-        });
-        getEntries().forEach(e -> {
-            try {
-                e.generateTextures(this, handler, manager);
-            } catch (Exception ex) {
-                EveryCompat.LOGGER.error("Failed to generate textures for entry set {}:", e, ex);
-                if (PlatHelper.isDev()) throw ex;
-            }
-        });
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, Consumer<ResGenTas> executor) {
+        try {
+
+            executor.accept(() ->
+                    getEntries().forEach(e -> {
+                        try {
+                            e.generateModels(this, handler, manager);
+                        } catch (Exception ex) {
+                            EveryCompat.LOGGER.error("Failed to generate models for entry set {}:", e, ex);
+                            if (PlatHelper.isDev()) throw ex;
+                        }
+                    })
+            );
+            executor.accept(() ->
+                    getEntries().forEach(e -> {
+                        try {
+                            e.generateTextures(this, handler, manager);
+                        } catch (Exception ex) {
+                            EveryCompat.LOGGER.error("Failed to generate textures for entry set {}:", e, ex);
+                            if (PlatHelper.isDev()) throw ex;
+                        }
+                    })
+            );
+        } catch (Exception e) {
+            EveryCompat.LOGGER.error("Failed to generate client dynamic assets for module {}:", m, e);
+            if (PlatHelper.isDev()) throw e;
+        }
     }
 
     @Override
@@ -225,7 +236,8 @@ public class SimpleModule extends CompatModule {
             }
         }
 
-        if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName))) return true; //REASON: prevent duplicated blocks for now & above is WIP for now
+        if (registry.containsKey(new ResourceLocation(woodTypeFrom, blockName)))
+            return true; //REASON: prevent duplicated blocks for now & above is WIP for now
 
         for (var c : EveryCompat.getCompatMods()) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
