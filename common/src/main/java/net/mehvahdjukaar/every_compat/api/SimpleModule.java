@@ -143,9 +143,10 @@ public class SimpleModule extends CompatModule {
             batch.add(e);
             currentBatch++;
             if (currentBatch >= batchSize || currentBatch == entries.size()) {
+                var listCopy = new ArrayList<>(batch);
                 executor.accept((manager, sink) -> {
                     try {
-                        for (var entry : batch) {
+                        for (var entry : listCopy) {
                             entry.generateTextures(this, manager, sink);
                             entry.generateModels(this, manager, sink);
                         }
