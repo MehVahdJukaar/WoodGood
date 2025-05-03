@@ -391,7 +391,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     /// Adding the textures to the resource
                     for (var info : infoPerTextures.get(oldTextureId)) {
                         if (info != null) {
-                            if (info.keepNamespace()) newId = oldTextureId.withPath(newPath).toString();
+                            if (Objects.nonNull(info.customTexturePath())) {
+                                oldPath = info.customTexturePath();
+                                newId = blockId.getNamespace() +":"+ BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.get().getTypeName());
+                            }
+                            else if (info.keepNamespace()) newId = oldTextureId.withPath(newPath).toString();
                             else
                                 newId = new ResourceLocation(blockId.getNamespace(), newPath).toString();
 
@@ -622,6 +626,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation));
+        }
+
+        /// Custom Texture Path is for placing the texture in the correct ResourceLocation
+        public BL addTextureC(ResourceLocation textureLocation, String customTexturePath) {
+            return addTexture(TextureInfo.of(textureLocation, customTexturePath));
         }
 
         // adds a texture with automatic masking. Experimental
