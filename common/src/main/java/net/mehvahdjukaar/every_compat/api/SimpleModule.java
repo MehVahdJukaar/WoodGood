@@ -142,7 +142,7 @@ public class SimpleModule extends CompatModule {
         for (var e : entries) {
             batch.add(e);
             currentBatch++;
-            if (currentBatch >= batchSize) {
+            if (currentBatch >= batchSize || currentBatch == entries.size()) {
                 executor.accept((manager, sink) -> {
                     try {
                         for (var entry : batch) {
