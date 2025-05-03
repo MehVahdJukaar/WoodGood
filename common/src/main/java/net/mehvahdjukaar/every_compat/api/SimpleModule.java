@@ -136,7 +136,7 @@ public class SimpleModule extends CompatModule {
     @Override
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         var entries = getEntries();
-        int batchSize = 10;
+        int batchSize = Math.min(entries.size(), 10);
         int currentBatch = 0;
         List<EntrySet> batch = new ArrayList<>();
         for (var e : entries) {
