@@ -116,7 +116,7 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
         getEntries().forEach(e -> {
             e.generateLootTables(this, handler.dynamicPack, manager);
             e.generateRecipes(this, handler.dynamicPack, manager);
