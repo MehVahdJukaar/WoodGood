@@ -11,6 +11,7 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -2257,8 +2258,8 @@ public class ChippedModule extends SimpleModule {
 
     @Override
     // RECIPES & LOOT_TABLES
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
+        super.addDynamicServerResources(handler, manager, sink);
 
         // use this. also set the entry to no drop so we don't have 2.
         // why do we need this instead of copy parent drop? macaw has doors too and they work
@@ -2269,16 +2270,16 @@ public class ChippedModule extends SimpleModule {
         for (var e : doors) {
             if (e instanceof SimpleEntrySet<?, ?> se) {
                 for (var d : se.blocks.values()) {
-                    handler.dynamicPack.addLootTable(d, createDoorLoot(d));
+                    handler.getPack().addLootTable(d, createDoorLoot(d));
                 }
             }
         }
 
-        addChippedRecipe(handler.getPack(), "planks", "carpenters_table");
-        addChippedRecipe(handler.getPack(), "door", "carpenters_table");
-        addChippedRecipe(handler.getPack(), "trapdoor", "carpenters_table");
-        addChippedRecipe(handler.getPack(), "log", "carpenters_table");
-        addChippedRecipe(handler.getPack(), "stripped_log", "carpenters_table");
+        addCarpenterRecipe(handler.getPack(), "planks");
+        addCarpenterRecipe(handler.getPack(), "door");
+        addCarpenterRecipe(handler.getPack(), "trapdoor");
+        addCarpenterRecipe(handler.getPack(), "log");
+        addCarpenterRecipe(handler.getPack(), "stripped_log");
 
     }
 
@@ -2294,7 +2295,7 @@ public class ChippedModule extends SimpleModule {
 
 
     @SuppressWarnings("SameParameterValue")
-    private void addChippedRecipe(DynamicDataPack pack, String identifier, String workStation) {
+    private void addCarpenterRecipe(DynamicDataPack pack, String identifier) {
         JsonArray jsonArray = new JsonArray();
 
         for (var woodType : WoodTypeRegistry.getTypes()) {
@@ -2344,16 +2345,16 @@ public class ChippedModule extends SimpleModule {
             }
         }
         JsonObject jo = new JsonObject();
-        jo.addProperty("type", "chipped:" + workStation);
+        jo.addProperty("type", "chipped:" + "carpenters_table");
         jo.add("tags", jsonArray);
-        pack.addJson(EveryCompat.res(shortenedId() + "/" + workStation + "_" + identifier), jo, ResType.RECIPES);
+        pack.addJson(EveryCompat.res(shortenedId() + "/" + "carpenters_table" + "_" + identifier), jo, ResType.RECIPES);
 
     }
 
     @Override
     // TEXTURES
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
+        super.addDynamicClientResources(handler, manager, sink);
 
         String PlankedLogFilename = "planked_oak_log";
         ResourceLocation innerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_inner_m")).withPrefix("block/ch/");

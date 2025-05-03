@@ -106,7 +106,7 @@ public abstract class CompatModule {
 
     //resource pack stuff
 
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
     }
 
     @Environment(EnvType.CLIENT)

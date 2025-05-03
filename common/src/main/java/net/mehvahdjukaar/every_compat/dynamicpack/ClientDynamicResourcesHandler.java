@@ -60,9 +60,9 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         EveryCompat.forAllModules(m -> {
             try {
-                executor.accept((man, sink) -> {
-                    m.addDynamicClientResources(this, man, sink);
-                });
+                executor.accept((man, sink) ->
+                        m.addDynamicClientResources(this, man, sink)
+                );
             } catch (Exception e) {
                 getLogger().error("Failed to generate client dynamic assets for module {}:", m, e);
                 if (PlatHelper.isDev()) throw e;
@@ -77,7 +77,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
             SpriteHelper.addHardcodedSprites();
             firstInit = true;
         }
-        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
+//        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
         super.regenerateDynamicAssets(manager);
         this.paletteCache.clear();
 
