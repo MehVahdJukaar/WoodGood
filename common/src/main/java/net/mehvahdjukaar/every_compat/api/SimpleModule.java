@@ -135,15 +135,30 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-        getEntries().forEach(e -> executor.accept((manager, sink) -> {
-            try {
-                e.generateTextures(this, manager, sink);
-                e.generateModels(this, manager, sink);
-            } catch (Exception ex) {
-                EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", e, this, ex);
-                if (PlatHelper.isDev()) throw ex;
+        var entries = getEntries();
+        int batchSize = 10;
+        int currentBatch = 0;
+        List<EntrySet> batch = new ArrayList<>();
+        for (var e : entries) {
+            batch.add(e);
+            currentBatch++;
+            if (currentBatch >= batchSize) {
+                executor.accept((manager, sink) -> {
+                    try {
+                        for (var entry : batch) {
+                            entry.generateTextures(this, manager, sink);
+                            entry.generateModels(this, manager, sink);
+                        }
+                    } catch (Exception ex) {
+                        EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", e, this, ex);
+                        if (PlatHelper.isDev()) throw ex;
+                    }
+                });
+                currentBatch = 0;
+                batch.clear();
             }
-        }));
+
+        }
     }
 
 
