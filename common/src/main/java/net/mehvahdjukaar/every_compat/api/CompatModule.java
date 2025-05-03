@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -109,7 +110,7 @@ public abstract class CompatModule {
     }
 
     @Environment(EnvType.CLIENT)
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, Consumer<ResourceGenTas> executor) {
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager, ResourceSink sink) {
     }
 
     @Environment(EnvType.CLIENT)
