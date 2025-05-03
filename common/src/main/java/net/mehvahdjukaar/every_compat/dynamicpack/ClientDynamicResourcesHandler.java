@@ -77,7 +77,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
             SpriteHelper.addHardcodedSprites();
             firstInit = true;
         }
-//        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
         super.regenerateDynamicAssets(manager);
         this.paletteCache.clear();
 
