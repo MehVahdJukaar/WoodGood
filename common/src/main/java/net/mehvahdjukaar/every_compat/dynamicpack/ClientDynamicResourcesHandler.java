@@ -72,8 +72,9 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
-        int batchSize = 1;
+        int batchSize =  Math.max(10, tasks.size()/(Runtime.getRuntime().availableProcessors()));
         //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
+        EveryCompat.LOGGER.info("Dynamic resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
         for (int i = 0; i < tasks.size(); i += batchSize) {
             int end = Math.min(i + batchSize, tasks.size());
             var subList = tasks.subList(i, end);
