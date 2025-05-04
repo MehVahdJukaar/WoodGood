@@ -13,7 +13,10 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -67,26 +70,26 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
-        boolean singleThread = false;
-        if(singleThread) {
-            List<ResourceGenTask> tasks = new ArrayList<>();
-            var fakeExec = new Consumer<ResourceGenTask>() {
-                @Override
-                public void accept(ResourceGenTask resourceGenTask) {
-                    tasks.add(resourceGenTask);
-                }
-            };
-            EveryCompat.forAllModules(m -> m.addDynamicClientResources(fakeExec));
-
-            //submit 2 tasks that wait each 1 sec
-            executor.accept((manager, sink) -> {
-                for (ResourceGenTask task : tasks) {
-                    task.accept(manager, sink);
+        List<ResourceGenTask> tasks = new ArrayList<>();
+        var dummyExec = new Consumer<ResourceGenTask>() {
+            @Override
+            public void accept(ResourceGenTask resourceGenTask) {
+                tasks.add(resourceGenTask);
+            }
+        };
+        EveryCompat.forAllModules(m -> m.addDynamicClientResources(dummyExec));
+        int maxBatch = 50;
+        //submit tasks in batches. to do so split that list in sizes of that maxBatch then subit a task to the exeuto where that list is iterated and executed
+        for (int i = 0; i < tasks.size(); i += maxBatch) {
+            int end = Math.min(i + maxBatch, tasks.size());
+            var subList = tasks.subList(i, end);
+            executor.accept((resourceManager, resourceSink) -> {
+                for (ResourceGenTask task : subList) {
+                    task.accept(resourceManager, resourceSink);
                 }
             });
-        }else{
-            EveryCompat.forAllModules(m -> m.addDynamicClientResources(executor));
         }
+
     }
 
     private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();

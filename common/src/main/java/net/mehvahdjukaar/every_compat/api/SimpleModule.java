@@ -118,9 +118,9 @@ public class SimpleModule extends CompatModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         getEntries().forEach(e -> executor.accept((manager, sink) -> {
             try {
-                e.generateLootTables(this, manager,sink);
-                e.generateRecipes(this, manager,sink);
-                e.generateTags(this, manager,sink);
+                e.generateLootTables(this, manager, sink);
+                e.generateRecipes(this, manager, sink);
+                e.generateTags(this, manager, sink);
             } catch (Exception ex) {
                 EveryCompat.LOGGER.error("Failed to generate server resources for entry set {} from module {}:", e, this, ex);
                 if (PlatHelper.isDev()) throw ex;
@@ -135,30 +135,17 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-        var entries = getEntries();
-        int batchSize = Math.min(entries.size(), 10);
-        int currentBatch = 0;
-        List<EntrySet> batch = new ArrayList<>();
-        for (var e : entries) {
-            batch.add(e);
-            currentBatch++;
-            if (currentBatch >= batchSize || currentBatch == entries.size()) {
-                var listCopy = new ArrayList<>(batch);
-                executor.accept((manager, sink) -> {
-                    try {
-                        for (var entry : listCopy) {
-                            entry.generateTextures(this, manager, sink);
-                            entry.generateModels(this, manager, sink);
-                        }
-                    } catch (Exception ex) {
-                        EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", e, this, ex);
-                        if (PlatHelper.isDev()) throw ex;
-                    }
-                });
-                currentBatch = 0;
-                batch.clear();
-            }
 
+        for (var entry : getEntries()) {
+            executor.accept((manager, sink) -> {
+                try {
+                    entry.generateTextures(this, manager, sink);
+                    entry.generateModels(this, manager, sink);
+                } catch (Exception ex) {
+                    EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", entry, this, ex);
+                    if (PlatHelper.isDev()) throw ex;
+                }
+            });
         }
     }
 
