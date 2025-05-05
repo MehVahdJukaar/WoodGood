@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 
 
-//SUPPORT v1.1.1+
+//SUPPORT v1.2.0+
 public class MacawFencesModule extends SimpleModule {
 
     public final SimpleEntrySet<LeavesType, Block> hedges;

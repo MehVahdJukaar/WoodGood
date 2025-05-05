@@ -160,7 +160,7 @@ dependencies {
 
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
-//    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped
+    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}") // Create
 
@@ -168,7 +168,7 @@ dependencies {
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // The-Outer-End, Woodworks, Boatload, Sully Mod
     modCompileOnly("curse.maven:valhelsia-core-416935:5189548") // v1.1.2 | Valhelsia Structure, Valhelsia Furniture
-    modCompileOnly("curse.maven:framework-549225:5680064") // v0.7.7 | Refurbished Furniture, Mighty Mail, Backpacked
+    modImplementation("curse.maven:framework-549225:5911986") // v0.7.12 | Refurbished Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
     modCompileOnly("curse.maven:titanium-287342:5468426") // v3.8.32 | Functional-Storage
     modCompileOnly("curse.maven:zeta-968868:6312779") // v1.0-28 | Quark
@@ -186,12 +186,12 @@ dependencies {
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399")
 //    modRuntimeOnly("curse.maven:farmersdelight-398521:4679319")
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511")
-//    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib
+//    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib //TODO: fix the addDynamicClientResource() stuff
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
 //    modRuntimeOnly("curse.maven:missing-wilds-forge-634277:5053677")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5263631") // Monolib
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272885") // Framework
-//    modRuntimeOnly("curse.maven:storage-drawers-223852:5915486")
+//    modRuntimeOnly("curse.maven:storage-drawers-223852:5981672")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:5318681")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097")
@@ -210,12 +210,12 @@ dependencies {
         // ~/forge/mods LOCAL
     modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
     modCompileOnly("com.tynoxs.buildersdelight:BuildersDelight-1.20.1-v.1.3")
-  //  modCompileOnly("blocks_plus:blocks+1.20.1-1.7")
+    modCompileOnly("blocks_plus:blocks+1.20.1-1.7")
 
         // MACAW's
-    modCompileOnly("curse.maven:macaws-bridges-351725:5240521")
+    modCompileOnly("curse.maven:macaws-bridges-351725:5240518")
     modCompileOnly("curse.maven:macaws-doors-378646:4649910")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442217")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:6363155")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450327")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
