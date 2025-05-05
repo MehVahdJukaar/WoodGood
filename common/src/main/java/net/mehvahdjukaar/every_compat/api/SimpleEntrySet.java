@@ -14,8 +14,6 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
@@ -133,6 +131,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                     if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
                         SIMPLE_DROPS.add(block);
                     }
+                    totalChildren++;
                 }
             }
         }

@@ -4,6 +4,7 @@ package net.mehvahdjukaar.every_compat;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
@@ -153,28 +154,44 @@ public abstract class EveryCompat {
         }
         //log registered stuff size
         int newSize = BuiltInRegistries.BLOCK.size();
-        int myBlocksSize = newSize - prevRegSize;
+        int myChildrenSize = AbstractSimpleEntrySet.totalChildren; // This include ITEMS and BLOCKS
 
-        float p = (myBlocksSize / (float) newSize) * 100f;
-        if (myBlocksSize == 0) {
-            EveryCompat.LOGGER.error("\n\nATTENTION: EVERY COMPAT REGISTERED 0 BLOCKS! No Wood mods (Biomes O' Plenty or others) are installed.\nYou dont need EveryCompat and should remove it.\n");
+        float p = (myChildrenSize / (float) newSize) * 100f;
+        if (myChildrenSize == 0) {
+            String log = """
+            ###########################################################################################################
+            #                                                                                                         #
+            # ATTENTION: EVERY COMPAT REGISTERED 0 CHILDREN! No Wood mods (Biomes O' Plenty or others) are installed. #
+            #                           You dont need EveryCompat and should remove it.                               #
+            #                                                                                                         #
+            ###########################################################################################################
+            """;
+            EveryCompat.LOGGER.error("\n{}", log);
             return;
         }
 
         if (p > 25) {
-            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myBlocksSize, String.format("%.2f", p));
+            EveryCompat.LOGGER.warn("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
         } else {
-            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myBlocksSize, String.format("%.2f", p));
+            EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
         }
         if (p > 33) {
             Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(CompatModule::bloatAmount));
             if (compatbloated.isPresent()) {
                 CompatModule bloated = compatbloated.get();
                 //no freaking clue why this was returned as null once
-                EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
-                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
+                EveryCompat.LOGGER.error("Every Compat registered children make up more than one third of your registered children, taking up memory and load time.");
+                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} children)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
             } else {
-                EveryCompat.LOGGER.error("\n\nATTENION: No supported mods are installed. You don't need Every Compat and should remove it.\n");
+                String log = """
+                #######################################################
+                #                                                     #
+                #     ATTENTION: No supported mods are installed.     #
+                #   You dont need EveryCompat and should remove it.   #
+                #                                                     #
+                #######################################################
+                """;
+                EveryCompat.LOGGER.error("\n{}", log);
             }
         }
 
