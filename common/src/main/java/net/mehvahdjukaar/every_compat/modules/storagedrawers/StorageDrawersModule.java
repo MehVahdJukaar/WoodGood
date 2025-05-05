@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-//SUPPORT: v12.10.4+ (FABRIC) | 12.9.12+ (FORGE)
+//SUPPORT: v12.10.5+ (FABRIC) | v12.9.13+ (FORGE)
 public class StorageDrawersModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, BlockStandardDrawers> FULL_DRAWERS_1;
@@ -127,7 +127,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_2"))
-                .createPaletteFromPlanks(this::drawersPalette)
                 .build();
         this.addEntry(HALF_DRAWERS_2);
 
@@ -144,7 +143,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_4"))
-                .createPaletteFromPlanks(this::drawersPalette)
                 .build();
         this.addEntry(HALF_DRAWERS_4);
 
