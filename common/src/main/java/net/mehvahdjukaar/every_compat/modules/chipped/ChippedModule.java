@@ -4,13 +4,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -32,6 +29,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -41,6 +39,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 //TODO:
@@ -1960,7 +1959,7 @@ public class ChippedModule extends SimpleModule {
         //TYPE: stripped_log
         carvedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "carved_stripped",
                         getModBlock("carved_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -1973,7 +1972,7 @@ public class ChippedModule extends SimpleModule {
 
         ChippedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "chipped_stripped",
                         getModBlock("chipped_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -1986,7 +1985,7 @@ public class ChippedModule extends SimpleModule {
 
         DSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "d_sign_stripped",
                         getModBlock("d_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -1999,7 +1998,7 @@ public class ChippedModule extends SimpleModule {
 
         edgedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "edged_stripped",
                         getModBlock("edged_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2012,7 +2011,7 @@ public class ChippedModule extends SimpleModule {
 
         FSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "f_sign_stripped",
                         getModBlock("f_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2025,7 +2024,7 @@ public class ChippedModule extends SimpleModule {
 
         ISignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "i_sign_stripped",
                         getModBlock("i_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2038,7 +2037,7 @@ public class ChippedModule extends SimpleModule {
 
         KSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "k_sign_stripped",
                         getModBlock("k_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2051,7 +2050,7 @@ public class ChippedModule extends SimpleModule {
 
         knottedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "knotted_stripped",
                         getModBlock("knotted_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2064,7 +2063,7 @@ public class ChippedModule extends SimpleModule {
 
         LSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "l_sign_stripped",
                         getModBlock("l_sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2077,7 +2076,7 @@ public class ChippedModule extends SimpleModule {
 
         LayeredStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "layered_stripped",
                         getModBlock("layered_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2090,7 +2089,7 @@ public class ChippedModule extends SimpleModule {
 
         LumpyStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "lumpy_stripped",
                         getModBlock("lumpy_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2103,7 +2102,7 @@ public class ChippedModule extends SimpleModule {
 
         PatientStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "patient_stripped",
                         getModBlock("patient_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2116,7 +2115,7 @@ public class ChippedModule extends SimpleModule {
 
         ReinforcedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "reinforced_stripped",
                         getModBlock("reinforced_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2129,7 +2128,7 @@ public class ChippedModule extends SimpleModule {
 
         signStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "sign_stripped",
                         getModBlock("sign_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2142,7 +2141,7 @@ public class ChippedModule extends SimpleModule {
 
         sternStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "stern_stripped",
                         getModBlock("stern_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2155,7 +2154,7 @@ public class ChippedModule extends SimpleModule {
 
         wiseStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "wise_stripped",
                         getModBlock("wise_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .createPaletteFromChild(Palette::reduceDown,"stripped_log")
@@ -2167,6 +2166,10 @@ public class ChippedModule extends SimpleModule {
         this.addEntry(wiseStrippedLog);
 
 
+    }
+
+    public BlockBehaviour.Properties copyStrippedLogSafe(WoodType woodType) {
+        return Utils.copyPropertySafe(Objects.requireNonNull(woodType.getBlockOfThis("stripped_log")));
     }
 
     // TYPE: methods
