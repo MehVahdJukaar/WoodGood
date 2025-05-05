@@ -96,7 +96,7 @@ public abstract class EveryCompat {
         DEPENDENCIES.addAll(supportedModId);
     }
 
-    public static void addModule(CompatModule module) {
+    public static synchronized void addModule(CompatModule module) {
         if (MODULE_DISABLER.isModuleOn(module.getModId())) { //maybe turn into supplier
             ACTIVE_MODULES.put(module.getModId(), module);
             DEPENDENCIES.add(module.getModId());

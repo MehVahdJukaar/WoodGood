@@ -111,7 +111,5 @@ public class EveryCompatCommon {
         addIfLoaded("stylishstiles", () -> StylishStilesModule::new);
         addIfLoaded("missingwilds", () -> MissingWildModule::new);
 
-//!! =================================================== OTHERS ===================================================== \\
-        forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
     }
 }
