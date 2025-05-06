@@ -50,7 +50,7 @@ side="BOTH"
 
 modId="moonlight"
 mandatory=true
-versionRange="[1.20-2.13.84,]"
+versionRange="[1.20-2.14.0,]"
 ordering="NONE"
 side="BOTH"
 
