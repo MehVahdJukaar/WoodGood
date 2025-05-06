@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -89,7 +88,8 @@ public class TagUtility {
     /// The tag will be added if the mod is loaded
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
             Map<T, B> blocks, String nameStone, String modId, String tag,
-            boolean includeBlock, boolean includeItem, ResourceSink pack) {
+            boolean includeBlock, boolean includeItem, ResourceSink pack
+    ) {
         addTagToAllBlocks(blocks, nameStone, modId,
                 TagKey.create(Registries.BLOCK, new ResourceLocation(tag)),
                 includeBlock, includeItem, pack);
@@ -98,7 +98,8 @@ public class TagUtility {
     /// The tag will be added if the mod is loaded
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
             Map<T, B> blocks, String nameStone, String modId, TagKey<Block> tag,
-            boolean includeBlock, boolean includeItem, ResourceSink pack) {
+            boolean includeBlock, boolean includeItem, ResourceSink pack
+    ) {
         addTagToAllBlocks(blocks, nameStone, modId,
                 tag, includeBlock, includeItem, pack, null);
     }
@@ -107,7 +108,8 @@ public class TagUtility {
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
             Map<T, B> blocks, String nameStone, String modId,
             TagKey<Block> tag, boolean includeBlock, boolean includeItem, ResourceSink pack,
-            @Nullable String regexBlockId) {
+            @Nullable String regexBlockId
+    ) {
         if (PlatHelper.isModLoaded(modId)) {
             boolean isTagCreated = false;
             SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
