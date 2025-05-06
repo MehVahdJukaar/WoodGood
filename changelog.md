@@ -1,3 +1,8 @@
+### UPDATED: 
+- **Every Compat** (COMMON): Forgot to update the recipe system for **Stone Zone** to use the new Resource Generator
+
+## 2.8.0
+
 ### UPDATED:
 - **EveryCompat** (COMMON):
   - **SERVER-side**: Fixed 
@@ -16,11 +21,6 @@
 ### ADDED: 
 - **Mofu's Better End** (IT): frost_root & weepingstar for log, stripped_log, leaves, and planks
 - **Friends & Foes** (COMMON): Disable the `addBlocksToPOI()` for now until the solution is applied
-
-## v2.7.29
-
-### UPDATED:
-- **Variant Vanilla Blocks** (COMMON): Disable the `addBlocksToPOI()` for now until the solution is applied
 
 ---
 
