@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted;
 
-import com.google.gson.JsonObject;
-import earth.terrarium.handcrafted.Handcrafted;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import earth.terrarium.handcrafted.common.blocks.*;
 import earth.terrarium.handcrafted.common.blocks.trims.CornerTrimBlock;
 import earth.terrarium.handcrafted.common.blocks.trims.PillarTrimBlock;
@@ -11,8 +11,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -24,9 +22,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.function.Consumer;
 
 //SUPPORT: v3.0.6+
@@ -200,19 +195,20 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(side_table);
 
         counter = SimpleEntrySet.builder(WoodType.class, "counter",
-                        ModBlocks.OAK_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.ACACIA_COUNTER, () -> WoodTypeRegistry.getValue("acacia"),
                         w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(getModTile("container"))
-                .addTextureM(modRes("block/counter/oak_counter_1"), EveryCompat.res("block/hc/counter/oak_counter_1_m"))
-                .addTextureM(modRes("block/counter/oak_counter_2"), EveryCompat.res("block/hc/counter/oak_counter_2_m"))
-                .addTextureM(modRes("block/counter/oak_counter_3"), EveryCompat.res("block/hc/counter/oak_counter_3_m"))
+                .addTextureM(modRes("block/counter/acacia_counter_1"), EveryCompat.res("block/hc/counter/oak_counter_1_m"))
+                .addTextureM(modRes("block/counter/acacia_counter_2"), EveryCompat.res("block/hc/counter/oak_counter_2_m"))
+                .addTextureM(modRes("block/counter/acacia_counter_3"), EveryCompat.res("block/hc/counter/oak_counter_3_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("counters"), Registries.BLOCK)
                 .addTag(modRes("counters"), Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
+                //NOTE: the models/block files are modified below to correct the texture for "top"
                 .build();
         this.addEntry(counter);
 
@@ -335,41 +331,46 @@ public class HandcraftedModule extends SimpleModule {
     @Override
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
-        executor.accept((manager, handler) -> {
-            /*
-             * Correcting the texture for "top" in counters' model to use for counter's top/surface
-             * There is no way to prevent oak_planks or dark_oak_planks from being changed to other woodtypes
-             */
-            counter.blocks.forEach((w, block) -> {
 
+        /*
+         * Creating a new model file to replace the acacia_counter_acacia_planks_X because the "top" is using incorrect
+         * texture. The "top" shouldn't be modified but there is no solution
+        */
+        String modelFile = """
+                    {
+                      "parent": "handcrafted:block/counter",
+                      "textures": {
+                        "particle": "[planks]",
+                        "top": "[modTexture]",
+                        "wood": "[blockTexture]"
+                      }
+                    }
+                    """;
+
+        executor.accept((manager, sink) -> {
+
+            counter.blocks.forEach((woodType, block) -> {
                 for (int num = 1; num < 4; num++) {
 
-                    // shortenedID / namespace / <woodType>_counter
-                    String path = Utils.getID(block).getPath() + "_" + w.getTypeName() + "_planks_" + num;
-                    String darkPath = Utils.getID(block).getPath() + "_dark_" + w.getTypeName() + "_planks_" + num;
-                    ResourceLocation oakModelFile = ResType.BLOCK_MODELS.getPath(EveryCompat.res(path));
-                    ResourceLocation darkModelFile = ResType.BLOCK_MODELS.getPath(EveryCompat.res(darkPath));
+                    //ID: everycomp:block/ shortenedId / namespace / counter/ TYPE_ counter_ num
+                    String texturePath = woodType.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(), "counter/",
+                            "counter_" + num);
 
-                    try (InputStream oakStream = manager.getResource(oakModelFile)
-                            .orElseThrow(() -> new FileNotFoundException("File not found @ " + oakModelFile)).open();
-                         InputStream darkStream = manager.getResource(darkModelFile)
-                                 .orElseThrow(() -> new FileNotFoundException("File not found @ " + darkModelFile)).open()
-                    ) {
-                        JsonObject oakModel = RPUtils.deserializeJson(oakStream);
-                        JsonObject darkModel = RPUtils.deserializeJson(darkStream);
+                    //PATH: shortenedId / namespace / TYPE _counter_ TYPE _planks_ num
+                    String path = woodType.createPathWith(shortenedId(), "",
+                            "counter_" + woodType.getTypeName() + "_planks_" + num);
 
-                        oakModel.getAsJsonObject("textures").addProperty("top",
-                                Handcrafted.MOD_ID + ":block/counter/top/oak_planks");
-                        darkModel.getAsJsonObject("textures").addProperty("top",
-                                Handcrafted.MOD_ID + ":block/counter/top/dark_oak_planks");
+                    // Replace the strings
+                    String modelOak = modelFile
+                            .replace("[planks]", Utils.getID(woodType.planks).withPrefix("block/").toString())
+                            .replace("[modTexture]", modId + ":block/counter/top/acacia_planks")
+                            .replace("[blockTexture]", texturePath);
 
-                        // Adding to the resources
-                        handler.addJson(EveryCompat.res(path), oakModel, ResType.BLOCK_MODELS);
-                        handler.addJson(EveryCompat.res(darkPath), darkModel, ResType.BLOCK_MODELS);
-                    } catch (IOException e) {
-                        EveryCompat.LOGGER.error("Failed to modify content of the model file for: {} : {}", Utils.getID(block), e);
-                    }
+                    // Adding to the Resources
+                    JsonElement oakJson = JsonParser.parseString(modelOak);
+                    sink.addBlockModel(EveryCompat.res(path), oakJson);
                 }
+
             });
         });
 
