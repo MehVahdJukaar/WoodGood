@@ -18,8 +18,6 @@ import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -60,8 +58,9 @@ import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.addTagToA
 @SuppressWarnings({"unused", "removal"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
-    protected static final ResourceLocation NO_TAB_MARKER = new ResourceLocation("none");
+    public static int totalChildren = 0;
 
+    protected static final ResourceLocation NO_TAB_MARKER = new ResourceLocation("none");
 
     public final Map<T, B> blocks = new HashMap<>();
     public final Map<T, I> items = new HashMap<>();

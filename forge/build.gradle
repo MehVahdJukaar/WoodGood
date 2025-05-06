@@ -126,7 +126,7 @@ dependencies {
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-forge") // v2.13.83
+        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-forge") // v2.14.0
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -186,7 +186,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399")
 //    modRuntimeOnly("curse.maven:farmersdelight-398521:4679319")
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511")
-//    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib //TODO: fix the addDynamicClientResource() stuff
+//    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
 //    modRuntimeOnly("curse.maven:missing-wilds-forge-634277:5053677")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5263631") // Monolib
@@ -283,7 +283,7 @@ dependencies {
 
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:5773031") // Terrablender, Glitchcore
+    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6364065") // Terrablender, Glitchcore
 //    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore
 //    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel
 //    modRuntimeOnly("curse.maven:rats-323596:5904296")

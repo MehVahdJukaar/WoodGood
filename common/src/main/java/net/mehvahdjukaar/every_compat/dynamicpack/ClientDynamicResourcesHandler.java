@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
-import com.google.common.base.Stopwatch;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
@@ -13,20 +12,14 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 
@@ -48,7 +41,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         //since we place chests textures in its namespace to use its renderer
         if (PlatHelper.isModLoaded("quark")) getPack().addNamespaces("quark");
 
-        this.dynamicPack.setGenerateDebugResources(false);
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
     }
 
     @Override
@@ -74,27 +67,32 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
         EveryCompat.forAllModules(m -> m.addDynamicClientResourcesLast(tasks::add));
 
-        int batchSize = Math.max(10, tasks.size()/(Runtime.getRuntime().availableProcessors()));
+        int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
+        int batchSize =  Math.max(10, maxBatches);
+
+//        EveryCompat.LOGGER.info("Dynamic resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
+//        EveryCompat.LOGGER.info("Dynamic resources generation threads: {} ", tasks.size() / batchSize);
+
         //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
-        EveryCompat.LOGGER.info("Dynamic client resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
+        EveryCompat.LOGGER.info("Dynamic resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
         for (int i = 0; i < tasks.size(); i += batchSize) {
             int end = Math.min(i + batchSize, tasks.size());
             var subList = tasks.subList(i, end);
             executor.accept((resourceManager, resourceSink) -> {
-                for (ResourceGenTask task : subList) {
-                    task.accept(resourceManager, resourceSink);
+                for (ResourceGenTask subtask : subList) {
+                    subtask.accept(resourceManager, resourceSink);
                 }
             });
         }
 
     }
 
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
-
-    @Override
-    protected @NotNull ExecutorService getExecutors() {
-        return EXECUTOR_SERVICE;
-    }
+//    private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
+//
+//    @Override
+//    protected @NotNull ExecutorService getExecutors() {
+//        return EXECUTOR_SERVICE;
+//    }
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
@@ -102,10 +100,10 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
             SpriteHelper.addHardcodedSprites();
             firstInit = true;
         }
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        this.dynamicPack.setGenerateDebugResources(false); //PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get()
+//        Stopwatch stopwatch = Stopwatch.createStarted();
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
         super.regenerateDynamicAssets(manager);
-        EveryCompat.LOGGER.info("Dynamic client assets generation took: {}", stopwatch.stop().toString());
+//        EveryCompat.LOGGER.info("Dynamic client assets generation took: {}", stopwatch.stop().toString());
         this.paletteCache.clear();
     }
 

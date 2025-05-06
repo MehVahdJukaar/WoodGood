@@ -31,7 +31,6 @@ itemIcon="everycomp:all_woods" #catalogue icon
 
 
 [[dependencies.everycomp]] #optional
-
 modId="forge" #mandatory
 mandatory=true #mandatory
 versionRange="[41.0.100,)" #mandatory
@@ -39,7 +38,6 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.everycomp]]
-
 modId="minecraft"
 mandatory=true
 versionRange="[1.20,1.21]"
@@ -47,17 +45,15 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.everycomp]]
-
 modId="moonlight"
 mandatory=true
-versionRange="[1.20-2.13.84,]"
+versionRange="[1.20-2.14.0,]"
 ordering="NONE"
 side="BOTH"
 
 # ----------------------------------------------------- MODS -----------------------------------------------------------
 
 [[dependencies.everycomp]] #optional
-
 modId="create"
 mandatory=false
 versionRange="[6.0.0,)" #mandatory
@@ -65,7 +61,6 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies.everycomp]] #optional
-
 modId="mcwbridges"
 mandatory=false
 versionRange="[3.0.0,)" #mandatory
@@ -73,7 +68,6 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies.everycomp]] #optional
-
 modId="mcwfences"
 mandatory=false
 versionRange="[1.1.2,)" #mandatory
@@ -81,7 +75,6 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies.everycomp]] #optional
-
 modId="mcwlights"
 mandatory=false
 versionRange="[1.1.0,)" #mandatory
@@ -89,7 +82,6 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies.everycomp]] #optional
-
 modId="dawnoftimebuilder"
 mandatory=false
 versionRange="[1.5.7,)" #mandatory
@@ -99,7 +91,6 @@ side="BOTH"
 # -------------------------------------------------- INCOMPATIBLE ------------------------------------------------------
 
 [[dependencies.everycomp]] #optional
-
 modId="vmp"
 mandatory=false
 versionRange="[9.-IT-IS-INCOMPATIBLE,]" #mandatory
@@ -108,7 +99,6 @@ side="BOTH"
 
 
 [[dependencies.everycomp]] #optional
-
 modId="vminus"
 mandatory=false
 versionRange="[9.-IT-IS-INCOMPATIBLE,]" #mandatory
