@@ -108,7 +108,6 @@ public abstract class CompatModule {
 
 
     //resource pack stuff
-
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
     }
 
