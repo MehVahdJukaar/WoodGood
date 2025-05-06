@@ -40,13 +40,11 @@ public class FarmersDelightModule extends SimpleModule {
                         w -> new CabinetBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("trapdoor", "slab") //REASON: recipes
-                .addTag(modRes("cabinets"), Registries.BLOCK)
-                .addTag(modRes("cabinets"), Registries.ITEM)
-                .addTag(modRes("cabinets/wooden"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("cabinets/wooden"), Registries.ITEM)
                 .defaultRecipe()
                 .addTile(getModTile("cabinet"))
-                .setTabKey(modRes( "farmersdelight"))
+                .setTabKey(modRes("farmersdelight"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .createPaletteFromPlanks(p -> {
                     p.reduceDown();
