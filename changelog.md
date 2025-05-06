@@ -1,4 +1,13 @@
 ### UPDATED:
+- **Variant Vanilla Blocks** (COMMON): Disabled addBlocksToPOI() and restored the old code for Beehives' POI (Point of interest) to act as bee's home
+- **Regions Unexplored** (FABRIC): Fixed the shrub & branches' RenderType not being transparent - [#913](https://github.com/MehVahdJukaar/WoodGood/issues/913)
+
+### ADDED: 
+- **Create** (COMMON): Custom Textures for windows & window_panes with **Ecologics** & **Biomes O' Plenty** - @leftchaotix (from discord)
+
+## v2.10.4
+
+### UPDATED:
 - **Chipped** (COMMON): Updated an outdated recipe system & Fixed [#909](https://github.com/MehVahdJukaar/WoodGood/issues/909)
 
 ## v2.10.3
