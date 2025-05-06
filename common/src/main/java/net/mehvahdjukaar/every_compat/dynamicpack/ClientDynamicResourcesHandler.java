@@ -72,9 +72,11 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
-        int batchSize =  Math.max(10, tasks.size()/(Runtime.getRuntime().availableProcessors()));
+        EveryCompat.forAllModules(m -> m.addDynamicClientResourcesLast(tasks::add));
+
+        int batchSize = Math.max(10, tasks.size()/(Runtime.getRuntime().availableProcessors()));
         //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
-        EveryCompat.LOGGER.info("Dynamic resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
+        EveryCompat.LOGGER.info("Dynamic client resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
         for (int i = 0; i < tasks.size(); i += batchSize) {
             int end = Math.min(i + batchSize, tasks.size());
             var subList = tasks.subList(i, end);
@@ -103,7 +105,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         Stopwatch stopwatch = Stopwatch.createStarted();
         this.dynamicPack.setGenerateDebugResources(false); //PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get()
         super.regenerateDynamicAssets(manager);
-        EveryCompat.LOGGER.info("Dynamic assets generation took: " + stopwatch.stop().toString());
+        EveryCompat.LOGGER.info("Dynamic client assets generation took: {}", stopwatch.stop().toString());
         this.paletteCache.clear();
     }
 

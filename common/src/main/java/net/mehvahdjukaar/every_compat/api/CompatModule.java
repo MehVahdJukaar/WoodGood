@@ -112,8 +112,21 @@ public abstract class CompatModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
     }
 
+    //dont use. All task should be run concurrenly and be independent of eachother. If a task fails it should be fixed rather than try to correct it here as that would also be more inefficent
+    @Deprecated(forRemoval = true)
+    @Environment(EnvType.CLIENT)
+    public void addDynamicServerResourcesLast(Consumer<ResourceGenTask> executor) {
+    }
+
+
     @Environment(EnvType.CLIENT)
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+    }
+
+    //don't use. All task should be run concurrenly and be independent of eachother. If a task fails it should be fixed rather than try to correct it here as that would also be more inefficent
+    @Deprecated(forRemoval = true)
+    @Environment(EnvType.CLIENT)
+    public void addDynamicClientResourcesLast(Consumer<ResourceGenTask> executor) {
     }
 
     @Environment(EnvType.CLIENT)
