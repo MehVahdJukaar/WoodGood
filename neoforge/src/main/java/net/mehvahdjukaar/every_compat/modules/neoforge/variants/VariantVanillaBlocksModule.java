@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.variants;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -21,6 +22,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -32,6 +34,8 @@ import net.neoforged.neoforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
+import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
@@ -50,6 +54,16 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> lectern;
     public final SimpleEntrySet<WoodType, Block> smithingTable;
     public final SimpleEntrySet<WoodType, Block> smoker;
+
+    // Point-Of-Interest for Beehives -  //!! - remove when the addBlocksToPOI() is fixed & enabled below
+    protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
+    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
+            () -> new PoiType(getBeehives(), 1, 1));
+    private Set<BlockState> getBeehives() {
+        var set = new ImmutableSet.Builder<BlockState>();
+        beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
+        return set.build();
+    }
 
     public VariantVanillaBlocksModule(String modID) {
         super(modID, "vvb");
@@ -323,14 +337,14 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
 
-        //POI & ACQUIREABLE_JOBS
-        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        //POI & ACQUIREABLE_JOBS //!! Dont use below until the problem is fixed
+//        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
+//        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
     }
 
 
