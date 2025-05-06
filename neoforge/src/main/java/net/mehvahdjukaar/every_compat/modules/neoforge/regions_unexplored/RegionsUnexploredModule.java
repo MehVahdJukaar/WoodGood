@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored;
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -44,13 +45,14 @@ public class RegionsUnexploredModule extends SimpleModule {
 
     public RegionsUnexploredModule(String modId) {
         super(modId, "ru");
-        var tab = modRes("ru_main");
+        ResourceLocation tab = modRes("ru_main");
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
             getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
             w -> new BranchBlock(Utils.copyPropertySafe(RuBlocks.ACACIA_BRANCH.get()), BranchBlock.BranchType.BRANCH)
                 )
                 //TEXTURES: manual-texture-generation
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
                 .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
@@ -73,6 +75,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                     boolean sapling = l.getItemOfThis("sapling") != null; //REASON: recipes
                     return log && sapling;
                 })
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shrubs"), Registries.BLOCK)
