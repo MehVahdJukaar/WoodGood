@@ -78,6 +78,7 @@ dependencies {
     modCompileOnly("curse.maven:forge-config-api-port-fabric-547434:4583000") // v8.0.1 | Regions-Unexplored, Chipped, Excessive-Building
 //    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659872") //v2.1.29 | Chipped, Handcrafted, Cozy
+//    modRuntimeOnly("curse.maven:owo-lib-532610:4749199") //v0.11.2 | Infinity-Buttons
 
             //- OTHER MAVENS
     modRuntimeOnly("net.jodah:typetools:0.6.3") // BOP
@@ -150,7 +151,7 @@ dependencies {
     modCompileOnly("curse.maven:exlines-awnings-526698:4668406")
     modCompileOnly("curse.maven:excessive-building-845097:6051029") // Forge-Config-Api-Port
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:4939709") // legacy
-    modCompileOnly("curse.maven:infinity-buttons-661902:4716987")
+    modCompileOnly("curse.maven:infinity-buttons-661902:5409967") // Owo-Lib
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
