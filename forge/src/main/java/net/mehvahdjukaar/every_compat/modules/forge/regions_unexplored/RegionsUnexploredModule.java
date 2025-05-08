@@ -104,7 +104,7 @@ public class RegionsUnexploredModule extends SimpleModule {
 
                 //Tagging the planks as ingredient to get painted_planks
                 createAndAddCustomTags(new ResourceLocation("planks"), sink, woodType.planks);
-                createAndAddCustomTags(ResourceLocation.parse("forge","planks"), sink, woodType.planks);
+                createAndAddCustomTags(new ResourceLocation("forge:planks"), sink, woodType.planks);
             }
 
         });
