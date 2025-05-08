@@ -1,3 +1,7 @@
+- **Every Compat**: Restored the old method used by an older FORGE version 
+
+## v2.8.1
+
 ### UPDATED: 
 - **Every Compat** (COMMON): Forgot to update the recipe system for **Stone Zone** to use the new Resource Generator
 
