@@ -81,13 +81,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         this.renderType = renderType;
     }
 
-
-    //use get tile
-    @Deprecated(forRemoval = true)
-    public @Nullable ITileHolder<?> getTileHolder() {
-        return tileHolder;
-    }
-
     public <E extends BlockEntity> BlockEntityType<E> getTile(Class<E> tileClass) {
         Preconditions.checkNotNull(tileHolder, "Entry set has no tile entity!");
         return (BlockEntityType<E>) tileHolder.get();
