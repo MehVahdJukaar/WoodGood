@@ -103,8 +103,8 @@ public class RegionsUnexploredModule extends SimpleModule {
                 if (woodType.isVanilla() || woodType.getNamespace().equals("regions_unexplored")) continue;
 
                 //Tagging the planks as ingredient to get painted_planks
-                createAndAddCustomTags(ResourceLocation.parse("planks"), sink, woodType.planks);
-                createAndAddCustomTags(ResourceLocation.parse("forge:planks"), sink, woodType.planks);
+                createAndAddCustomTags(new ResourceLocation("planks"), sink, woodType.planks);
+                createAndAddCustomTags(ResourceLocation.parse("forge","planks"), sink, woodType.planks);
             }
 
         });

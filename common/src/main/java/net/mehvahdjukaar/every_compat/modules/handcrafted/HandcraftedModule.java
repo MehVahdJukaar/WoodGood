@@ -366,7 +366,9 @@ public class HandcraftedModule extends SimpleModule {
                             .replace("[modTexture]", modId + ":block/counter/top/acacia_planks")
                             .replace("[blockTexture]", texturePath);
 
-                    // Adding to the Resources
+
+
+                        // Adding to the Resources
                     JsonElement oakJson = JsonParser.parseString(modelOak);
                     sink.addBlockModel(EveryCompat.res(path), oakJson);
                 }

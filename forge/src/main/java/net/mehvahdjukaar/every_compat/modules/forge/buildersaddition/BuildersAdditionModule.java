@@ -311,7 +311,7 @@ public class BuildersAdditionModule extends SimpleModule {
                     JsonObject underResult = recipe.getAsJsonObject("result");
                     underResult.addProperty("item", Utils.getID(woodType.planks).toString());
                     // Adding finished recipe
-                    sink.addJson(EveryCompat.res(woodType.createPathWith(shortenedId(), "_vertical_slab_reversed")), recipe, ResType.RECIPES);
+                   // sink.addJson(EveryCompat.res(woodType.createPathWith(shortenedId(), "_vertical_slab_reversed")), recipe, ResType.RECIPES);
                 });
 
             } catch (IOException e) {
