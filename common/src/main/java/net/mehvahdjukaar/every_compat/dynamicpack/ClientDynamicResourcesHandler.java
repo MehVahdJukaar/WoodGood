@@ -9,6 +9,7 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -65,7 +66,6 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
-        EveryCompat.forAllModules(m -> m.addDynamicClientResourcesLast(tasks::add));
 
         int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
         int batchSize =  Math.max(10, maxBatches);
@@ -103,6 +103,8 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 //        Stopwatch stopwatch = Stopwatch.createStarted();
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
         super.regenerateDynamicAssets(manager);
+        EveryCompat.forAllModules(m -> m.addDynamicClientResourcesLast(manager, this.dynamicPack));
+
 //        EveryCompat.LOGGER.info("Dynamic client assets generation took: {}", stopwatch.stop().toString());
         this.paletteCache.clear();
     }
