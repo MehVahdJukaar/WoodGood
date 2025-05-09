@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
@@ -11,6 +12,7 @@ import java.util.function.Supplier;
 public class ECConfigs {
 
     public static ConfigSpec SPEC;
+    public static ConfigSpec CLIENT_SPED;
 
     public static final Supplier<Boolean> TAB_ENABLED;
     public static final Supplier<Boolean> DEPEND_ON_PACKS;
@@ -20,12 +22,29 @@ public class ECConfigs {
     public static final Supplier<Boolean> BLOCK_TYPE_TOOLTIP;
     public static final Supplier<Boolean> MOD_TOOPTIP;
     public static final Supplier<Boolean> TOOLTIPS_ADVANCED;
+    public static final Supplier<Boolean> GENERATE_DYNAMIC_SERVER;
+    public static final Supplier<Boolean> GENERATE_DYNAMIC_CLIENT;
 
 
     static {
+
+        if(PlatHelper.getPhysicalSide().isClient()) {
+            ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.CLIENT);
+            builder.push("general");
+            GENERATE_DYNAMIC_CLIENT = builder.comment("Enables the generation of dynamic assets. This is required for the mod to work properly. Turn off if you chose to add all the generated assets via datapack manually. This can speedup boot times for modpacks. Note that the generated assets will depend on loaded datapacks")
+                    .define("generate_dynamic_assets", true);
+            builder.pop();
+            CLIENT_SPED = builder.buildAndRegister();
+            CLIENT_SPED.loadFromFile(); //manually load early
+        }else{
+            GENERATE_DYNAMIC_CLIENT = () -> false;
+        }
+
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.COMMON);
 
         builder.push("general");
+        GENERATE_DYNAMIC_SERVER = builder.comment("Enables the generation of dynamic assets. This is required for the mod to work properly. Turn off if you chose to add all the generated assets via datapack manually. This can speedup boot times for modpacks. Note that the generated assets will depend on loaded datapacks")
+                .define("generate_dynamic_assets", true);
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .define("creative_tab", true);
         // REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")

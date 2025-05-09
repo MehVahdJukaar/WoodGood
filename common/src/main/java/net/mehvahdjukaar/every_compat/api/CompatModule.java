@@ -13,10 +13,7 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynResourceGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.*;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -115,7 +112,7 @@ public abstract class CompatModule {
     //dont use. All task should be run concurrenly and be independent of eachother. If a task fails it should be fixed rather than try to correct it here as that would also be more inefficent
     @Deprecated(forRemoval = true)
     @Environment(EnvType.CLIENT)
-    public void addDynamicServerResourcesLast(Consumer<ResourceGenTask> executor) {
+    public void addDynamicServerResourcesLast(ResourceManager manager, DynamicDataPack dynamicPack) {
     }
 
 

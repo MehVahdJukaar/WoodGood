@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
+import com.google.common.base.Stopwatch;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
@@ -100,12 +101,13 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
             SpriteHelper.addHardcodedSprites();
             firstInit = true;
         }
-//        Stopwatch stopwatch = Stopwatch.createStarted();
+        if (!ECConfigs.GENERATE_DYNAMIC_CLIENT.get())return;
+        Stopwatch stopwatch = Stopwatch.createStarted();
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
         super.regenerateDynamicAssets(manager);
         EveryCompat.forAllModules(m -> m.addDynamicClientResourcesLast(manager, this.dynamicPack));
 
-//        EveryCompat.LOGGER.info("Dynamic client assets generation took: {}", stopwatch.stop().toString());
+        EveryCompat.LOGGER.info("Dynamic client assets generation took: {}", stopwatch.stop().toString());
         this.paletteCache.clear();
     }
 
