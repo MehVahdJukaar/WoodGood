@@ -68,7 +68,6 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
         Stopwatch stopwatch = Stopwatch.createStarted();
         this.dynamicPack.setGenerateDebugResources(false); //PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get()
         super.regenerateDynamicAssets(manager);
-        EveryCompat.forAllModules(m -> m.addDynamicServerResourcesLast(manager, dynamicPack));
 
         EveryCompat.LOGGER.info("Dynamic server assets generation took: {}", stopwatch.stop().toString());
     }

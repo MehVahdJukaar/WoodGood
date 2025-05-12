@@ -68,8 +68,9 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
 
+        int minBatches = Runtime.getRuntime().availableProcessors();
         int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
-        int batchSize =  Math.max(10, maxBatches);
+        int batchSize =  Math.max(minBatches, maxBatches);
 
 //        EveryCompat.LOGGER.info("Dynamic resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
 //        EveryCompat.LOGGER.info("Dynamic resources generation threads: {} ", tasks.size() / batchSize);
@@ -105,7 +106,6 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         Stopwatch stopwatch = Stopwatch.createStarted();
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
         super.regenerateDynamicAssets(manager);
-        EveryCompat.forAllModules(m -> m.addDynamicClientResourcesLast(manager, this.dynamicPack));
 
         EveryCompat.LOGGER.info("Dynamic client assets generation took: {}", stopwatch.stop().toString());
         this.paletteCache.clear();
