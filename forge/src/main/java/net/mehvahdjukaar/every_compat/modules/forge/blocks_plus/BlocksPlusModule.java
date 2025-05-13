@@ -30,25 +30,8 @@ import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
-//SUPPORT: v
+//SUPPORT: v1.7+
 public class BlocksPlusModule extends SimpleModule {
-
-    /**
-     * cracked_acacia_planks
-     * mossy_acacia_planks
-     * acacia_crafting_table
-     * acacia_chest
-     * acacia_trapped_chest
-     * acacia_bookshelf
-     * acacia_wooden_crate
-     * acacia_ladder
-     * acacia_mosaic
-     * cracked_acacia_mosaic
-     * mossy_acacia_mosaic
-     * acacia_mosaic_stairs
-     * acacia_mosaic_slab
-     * acacia_mosaic_pressure_plate
-     */
 
     public final SimpleEntrySet<WoodType, Block> cracked_planks;
     public final SimpleEntrySet<WoodType, Block> mossy_planks;
