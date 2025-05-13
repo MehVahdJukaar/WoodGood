@@ -248,7 +248,7 @@ dependencies {
     modCompileOnly("curse.maven:oreberries-replanted-454062:5138729")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
-    modCompileOnly("curse.maven:productivebees-377897:5304827") //v12.5.1 | WIP
+    modCompileOnly("curse.maven:productivebees-377897:5566102") //v12.6.0 | WIP
     modCompileOnly("curse.maven:redeco-897377:5603009")
     modCompileOnly("curse.maven:regions-unexplored-659110:5558225")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")

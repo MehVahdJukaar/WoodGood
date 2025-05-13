@@ -1,25 +1,24 @@
 package net.mehvahdjukaar.every_compat.modules.forge.productive_bees;
 
-import cy.jdkdigital.productivebees.common.block.AdvancedBeehive;
-import cy.jdkdigital.productivebees.common.block.ExpansionBox;
-import cy.jdkdigital.productivebees.init.ModBlockEntityTypes;
-import cy.jdkdigital.productivebees.init.ModBlocks;
-import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.block.Block;
+//import cy.jdkdigital.productivebees.common.block.AdvancedBeehive;
+//import cy.jdkdigital.productivebees.common.block.ExpansionBox;
+//import cy.jdkdigital.productivebees.init.ModBlockEntityTypes;
+//import cy.jdkdigital.productivebees.init.ModBlocks;
+//import net.mehvahdjukaar.every_compat.EveryCompat;
+//import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+//import net.mehvahdjukaar.every_compat.api.SimpleModule;
+//import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+//import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+//import net.mehvahdjukaar.moonlight.api.util.Utils;
+//import net.minecraft.core.Registry;
+//import net.minecraft.core.registries.Registries;
+//import net.minecraft.resources.ResourceLocation;
+//import net.minecraft.tags.BlockTags;
+//import net.minecraft.world.item.CreativeModeTab;
+//import net.minecraft.world.level.block.Block;
 
 /*
 public class ProductiveBeesModule extends SimpleModule {
-
     public final SimpleEntrySet<WoodType, Block> advancedBeehives;
     public final SimpleEntrySet<WoodType, Block> expansionBoxes;
 
@@ -27,8 +26,6 @@ public class ProductiveBeesModule extends SimpleModule {
         super(modId, "pb");
         CreativeModeTab tab = ModItemGroups.PRODUCTIVE_BEES;
 
-
-        //TODO: all these are invalid now
         advancedBeehives = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
                         ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new AdvancedBeehive(Utils.copyPropertySafe(w.planks)))
