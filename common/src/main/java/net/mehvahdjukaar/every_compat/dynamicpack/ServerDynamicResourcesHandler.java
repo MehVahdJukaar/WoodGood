@@ -66,14 +66,14 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
         if (!ECConfigs.GENERATE_DYNAMIC_SERVER.get())return;
 
         Stopwatch stopwatch = Stopwatch.createStarted();
-        this.dynamicPack.setGenerateDebugResources(false); //PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get()
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
         super.regenerateDynamicAssets(manager);
 
         EveryCompat.LOGGER.info("Dynamic server assets generation took: {}", stopwatch.stop().toString());
     }
 
 
-    /// Will be added to DynamicPack if the mod is loaded
+    /// Will be added to DynamicPack if the mod is loaded - it's for tags stuff
     public void addModToDynamicPack(String modId) {
         if (PlatHelper.isModLoaded(modId)) {
             getPack().addNamespaces(modId);
