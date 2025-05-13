@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.forge.beautify_decorate.BeautifyDecorateModule;
+import net.mehvahdjukaar.every_compat.modules.forge.blocks_plus.BlocksPlusModule;
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.forge.building_but_better.BuildingButBetterModule;
@@ -89,7 +90,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
         addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
         addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
-     //   addIfLoaded("blocksplus", () -> BlocksPlusModule::new);
+        addIfLoaded("blocksplus", () -> BlocksPlusModule::new);
         addIfLoaded("boatload", () -> BoatLoadModule::new);
         addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
         addIfLoaded("bbb", () -> BuildingButBetterModule::new);
