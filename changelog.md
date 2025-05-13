@@ -1,3 +1,10 @@
+### UPDATED: 
+- **Lightman's Currency** (FORGE): Supporting v2.2.5.2+ 
+  - <span style="color: RED;">NOTE: Older version of Lightman's Currency will be no longer supported</span>
+- **MODULE** (FORGE): Re-enable Blocks Plus (Blocks+)
+
+## v2.8.2
+
 - **Every Compat**: Restored the old method used by an older FORGE version 
 
 ## v2.8.1
