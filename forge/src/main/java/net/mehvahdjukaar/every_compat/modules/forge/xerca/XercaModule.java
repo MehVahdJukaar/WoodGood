@@ -204,8 +204,8 @@ public class XercaModule extends SimpleModule {
             json.add("ingredient", Ingredient.fromJson(json.get("ingredient")).toJson());
             String s1 = GsonHelper.getAsString(json, "result");
             int i = GsonHelper.getAsInt(json, "count");
-            json.addProperty("result", Utils.getID((new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(s1)), i)).getItem()).toString());
-            json.addProperty("count", (new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(s1)), i)).getCount());
+            json.addProperty("result", Utils.getID((new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i)).getItem()).toString());
+            json.addProperty("count", (new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i)).getCount());
 
             sink.addJson(EveryCompat.res("carving"), json, ResType.RECIPES);
 
