@@ -1,17 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.forge.lightmans_currency;
 
 import io.github.lightman314.lightmanscurrency.LCTags;
-import io.github.lightman314.lightmanscurrency.ModCreativeGroups;
 import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.AuctionStandBlockEntityRenderer;
-import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.BookTraderBlockEntityRenderer;
-import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.ItemTraderBlockEntityRenderer;
 import io.github.lightman314.lightmanscurrency.common.blockentity.AuctionStandBlockEntity;
-import io.github.lightman314.lightmanscurrency.common.blockentity.trader.BookTraderBlockEntity;
-import io.github.lightman314.lightmanscurrency.common.blockentity.trader.ItemTraderBlockEntity;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.BookTraderBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.ShelfBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.reference.AuctionStandBlock;
-import io.github.lightman314.lightmanscurrency.common.core.ModBlockEntities;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -26,7 +20,7 @@ import net.minecraft.world.level.block.SoundType;
 
 import java.util.List;
 
-//SUPPORT: v2.2.3.3+
+//SUPPORT: v2.2.5.2+
 public class LightmansCurrencyModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> auction_stands;
@@ -36,7 +30,7 @@ public class LightmansCurrencyModule extends SimpleModule {
 
     public LightmansCurrencyModule(String modId) {
         super(modId, "lc");
-        var tab = modRes("extra");
+        ResourceLocation tab = modRes("extra");
 
         auction_stands = SimpleEntrySet.builder(WoodType.class, "", "auction_stand",
                         getModBlock("auction_stand_oak"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -44,7 +38,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                                 .mapColor(w.getColor()).strength(2.0F)
                         )
                 )
-                .addTile(ModBlockEntities.AUCTION_STAND)
+                .addTile(getModTile("auction_stand"))
                 //TEXTURE: Using log & log_top
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
@@ -63,7 +57,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                                 1
                         )
                 )
-                .addTile(ModBlockEntities.ITEM_TRADER)
+                .addTile(getModTile("item_trader"))
                 //TEXTURE: Using planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
@@ -81,14 +75,14 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .build();
         this.addEntry(shelves);
 
-        shelves_2x2 = SimpleEntrySet.builder(WoodType.class, "","shelf_2x2",
+        shelves_2x2 = SimpleEntrySet.builder(WoodType.class, "", "shelf_2x2",
                         getModBlock("shelf_2x2_oak"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)
                                 .mapColor(w.getColor()).strength(2.0F, Float.POSITIVE_INFINITY),
                                 4
                         )
                 )
-                .addTile(ModBlockEntities.ITEM_TRADER)
+                .addTile(getModTile("item_trader"))
                 //TEXTURE: Using planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
@@ -113,7 +107,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                                 .sound(SoundType.WOOD)
                         )
                 )
-                .addTile(ModBlockEntities.BOOK_TRADER)
+                .addTile(getModTile("book_trader"))
                 //TEXTURE: Using planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
@@ -130,18 +124,14 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .build();
         this.addEntry(bookshelf_traders);
 
-
     }
 
     @Override
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(auction_stands.getTile(AuctionStandBlockEntity.class), AuctionStandBlockEntityRenderer::new);
-        event.register(shelves.getTile(ItemTraderBlockEntity.class), ItemTraderBlockEntityRenderer::new);
-        event.register(shelves_2x2.getTile(ItemTraderBlockEntity.class), ItemTraderBlockEntityRenderer::new);
-        event.register(bookshelf_traders.getTile(BookTraderBlockEntity.class), BookTraderBlockEntityRenderer::new);
-    }
 
+        event.register(auction_stands.getTile(AuctionStandBlockEntity.class), AuctionStandBlockEntityRenderer::create);
+    }
 
     @Override
     public List<String> getAlreadySupportedMods() {
