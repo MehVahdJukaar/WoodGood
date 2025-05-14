@@ -23,6 +23,7 @@ import java.util.function.Supplier;
 
 // Used to identify textures "types" only based off their name.
 // feed into "findFirstBlockTextureLocation()"
+@SuppressWarnings({"unused", "CommentedOutCode", "UnusedReturnValue"})
 public class SpriteHelper {
 
     public static final @NotNull Predicate<String> LOOKS_LIKE_TOP_LOG_TEXTURE = (s) -> {
