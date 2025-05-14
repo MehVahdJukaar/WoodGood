@@ -49,6 +49,10 @@ public class SpriteHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // Frightful Winter
+            // Leaves
+        addOptional("frightful_winter:snowy_pine_leaves", "_leaves", "frightful_winter:block/snowy_pine_leaves");
+
         // Botanic Pledge
         addOptional("botanicpledge:yggdrasil_log", "_side", "botanicpledge:block/yggdrasil_log");
         addOptional("botanicpledge:stripped_yggdrasil_log", "_side", "botanicpledge:block/stripped_yggdrasil_log");
@@ -114,38 +118,38 @@ public class SpriteHelper {
         addOptional("rainbowoaks:rainbow_leaves", "_leaves", "minecraft:block/oak_leaves");
 
         // Cultural Delights
-        // Leaves
+            // Leaves
         addOptional("culturaldelights:fruiting_avocado_leaves", "_leaves", "culturaldelights:block/fruiting_avocado_leaves_0");
 
         // Meadow
-        // Leaves
+            // Leaves
         addOptional("meadow:pine_leaves", "_leaves", "meadow:block/pine_leaves_1");
 
         // Autumnity
-        // Leaves
+            // Leaves
         addOptional("autumnity:red_maple_leaves", "_leaves", "autumnity:block/maple_leaves");
         addOptional("autumnity:orange_maple_leaves", "_leaves", "autumnity:block/maple_leaves");
         addOptional("autumnity:yellow_maple_leaves", "_leaves", "autumnity:block/maple_leaves");
 
         // Blue Skies
-        // Leaves
+            // Leaves
         addOptional("blue_skies:comet_leaves", "_leaves", "blue_skies:block/leaves/comet_leaves_grown");
 
         // Aether Redux
-        // Leaves
+            // Leaves
         addOptional("aether_redux:azure_fieldsproot_leaves", "_leaves", "aether_redux:block/natural/fieldsproot_leaves");
 
         // Integrated Dynamics
-        // Leaves
+            // Leaves
         addOptional("integrateddynamics:menril_leaves", "_leaves", "integrateddynamics:block/menril_leaves_fancy");
 
         // Malum
-        // Leaves
+            // Leaves
         addOptional("malum:budding_soulwood_leaves", "_leaves", "malum:block/soulwood/budding_soulwood_leaves");
         addOptional("malum:azure_runewood_leaves", "_leaves", "malum:block/runewood/azure_runewood_leaves");
 
         // Oh The Biomes We've Gone
-        // Leaves
+            // Leaves
         addOptional("biomeswevegone:aspen_leaves", "_leaves", "biomeswevegone:block/aspen/leaves");
         addOptional("biomeswevegone:baobab_leaves", "_leaves", "biomeswevegone:block/baobab/leaves");
         addOptional("biomeswevegone:blue_enchanted_leaves", "_leaves", "biomeswevegone:block/blue_enchanted/leaves");
@@ -193,7 +197,7 @@ public class SpriteHelper {
         addOptional("eternal_tales:carved_pure_wood", "_top", "eternal_tales:block/pure_log_carved_top");
 
         // Biomes O' Plenty
-        // Leaves
+            // Leaves
         addOptional("biomesoplenty:null_leaves", "_leaves", "biomesoplenty:block/null_overlay");
         addOptional("biomesoplenty:snowblossom_leaves", "_leaves", "biomesoplenty:block/snowblossom_leaves");
 
@@ -214,7 +218,7 @@ public class SpriteHelper {
         addOptional("shadowlands:vellium_log", "_side", "shadowlands:block/velliumlogside");
         addOptional("shadowlands:vellium_log", "_top", "shadowlands:block/log");
         addOptional("shadowlands:vellium_planks", "_all", "shadowlands:block/velliumplanks");
-        // Leaves
+            // Leaves
         addOptional("shadowlands:vellium_leaves", "_top", "shadowlands:block/velliumleaves");
 
         // The Midnight
@@ -282,7 +286,7 @@ public class SpriteHelper {
         addOptional("dreamy_cottage:stripped_white_oak_log", "_side", "dreamy_cottage:block/strippedwhiteoakside");
         addOptional("dreamy_cottage:stripped_white_oak_log", "_top", "dreamy_cottage:block/strippedwhiteoak");
 
-        // Leaves
+            // Leaves
         addOptional("dreamy_cottage:strawberry_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
         addOptional("dreamy_cottage:white_oak_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
 
@@ -327,7 +331,7 @@ public class SpriteHelper {
         addOptional("nue:stripped_frosted_stem", "_top", "nue:block/strippedfrozenstemtop");
 
         // Fruitful Fun
-        // Leaves
+            // Leaves
         addOptional("fruitfulfun:apple_leaves", "_leaves", "minecraft:block/oak_leaves");
         addOptional("fruitfulfun:cherry_leaves", "_leaves", "fruitfulfun:block/cherry_leaves_2");
         addOptional("fruitfulfun:citron_leaves", "_leaves", "fruitfulfun:block/citron_leaves");
@@ -356,19 +360,19 @@ public class SpriteHelper {
         addOptional("extendedmushrooms:honey_fungus_stem_stripped", "_top", "extendedmushrooms:block/honey_fungus_stem_stripped");
 
         // Let's Do - Vinery
-        // Leaves
+            // Leaves
         addOptional("vinery:apple_leaves", "_leaves", "vinery:block/apple_leaves_0");
         addOptional("vinery:dark_cherry", "_leaves", "vinery:block/dark_cherry_leaves");
 
         // The Twilight Forest
-        // Leaves
+            // Leaves
         addOptional("twilightforest:beanstalk_leaves", "_leaves", "minecraft:block/azalea_leaves");
         addOptional("twilightforest:thorn_leaves", "_leaves", "minecraft:block/oak_leaves");
 
         // Regions Unexplored
         addOptional("regions_unexplored:eucalyptus_log", "_side", EveryCompat.MOD_ID + ":block/regions_unexplored/eucalyptus_log");
 
-        // Leaves
+            // Leaves
         addOptional("regions_unexplored:alpha_leaves", "_leaves", "regions_unexplored:block/alpha_oak_leaves");
         addOptional("regions_unexplored:apple_oak_leaves", "_leaves", "regions_unexplored:block/apple_oak_leaves_stage_0");
         addOptional("regions_unexplored:flowering_leaves", "_leaves", "regions_unexplored:item/flowering_leaves");
