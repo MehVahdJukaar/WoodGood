@@ -28,7 +28,7 @@ public class FriendsAndFoesModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> beehives;
 
     // Point-Of-Interest for Beehives - //!! - remove when the addBlocksToPOI() is fixed & enabled below
-    protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
+    protected final ResourceLocation poiId = EveryCompat.res("faf_beehive");
     public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
             () -> new PoiType(getBeehives(), 1, 1));
     private Set<BlockState> getBeehives() {
