@@ -155,7 +155,7 @@ dependencies {
     modCompileOnly("curse.maven:titanium-287342:5726400") // Functional-Storage
     modCompileOnly("curse.maven:zeta-968868:5078215") // Quark
     modCompileOnly("curse.maven:blueprint-382216:6449863") // v8.0.3 | The-Outer-End, Woodworks, Boatload
-    modCompileOnly("curse.maven:valhelsia-core-416935:5526890") // v1.1.3 | Valhelsia Structure, Valhelsia Furniture
+    modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // v1.1.5 | Valhelsia Structure, Valhelsia Furniture
 
         //+ OTHER MAVENs
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}") // Create, The-Twilight-Forest, Tropicraft
@@ -187,7 +187,6 @@ dependencies {
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
         // ~/forge/mods LOCAL
-    modCompileOnly("com.stal111.valhelsia_structures:valhelsia_structures-forge-1.20.1-1.1.0")
     modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
     modCompileOnly("com.tynoxs.buildersdelight:BuildersDelight-1.20.1-v.1.3")
     //modCompileOnly("com.polipo.bookshelf:giacomos_bookshelf-1.20.1-1.3.9") // WIP
@@ -235,6 +234,7 @@ dependencies {
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847") //!! 1.20.1
     modCompileOnly("curse.maven:the-twilight-forest-227639:5759335")
     modCompileOnly("curse.maven:tropicraft-254794:5658664")
+    modCompileOnly("curse.maven:valhelsia-structures-347488:6360484") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //!! 1.20.1
     modCompileOnly("curse.maven:woodster-869951:6425772")
@@ -268,6 +268,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint //!! 1.20.1
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint //!! 1.20.1
 //    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel //!! 1.20.1
+//    modRuntimeOnly("curse.maven:deeperdarker-659011:6463247")
 
 //    modRuntimeOnly("curse.maven:terrafirmacraft-302973:4862659") // patchouli //!! 1.20.1
 
