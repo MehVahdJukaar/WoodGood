@@ -417,9 +417,8 @@ public class SpriteHelper {
 
 
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakLeaves(BlockTypeResTransformer<T> t) {
-        return t.replaceWithTextureFromChild("minecraft:block/oak_leaves", "leaves", s -> {
-            return !s.contains("_snow") && !s.contains("snow_") && !s.contains("snowy_");
-        });
+        return t.replaceWithTextureFromChild("minecraft:block/oak_leaves", "leaves", s ->
+                !s.contains("_snow") && !s.contains("snow_") && !s.contains("snowy_"));
     }
 
     /**
