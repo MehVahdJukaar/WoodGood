@@ -154,7 +154,7 @@ dependencies {
     modCompileOnly("curse.maven:excessive-building-845097:6075987")
     modCompileOnly("curse.maven:exlines-awnings-526698:5478883")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716987") //!! 1.20.1
-    modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643") //!! 1.20.1
+    modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643") //!! Not maintained since 1.20.1
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:5579073")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304")

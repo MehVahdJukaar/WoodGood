@@ -1,18 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency;
 
 import io.github.lightman314.lightmanscurrency.LCTags;
-import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.AuctionStandBlockEntityRenderer;
-import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.BookTraderBlockEntityRenderer;
-import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.ItemTraderBlockEntityRenderer;
-import io.github.lightman314.lightmanscurrency.common.blockentity.AuctionStandBlockEntity;
-import io.github.lightman314.lightmanscurrency.common.blockentity.trader.BookTraderBlockEntity;
-import io.github.lightman314.lightmanscurrency.common.blockentity.trader.ItemTraderBlockEntity;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.BookTraderBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.ShelfBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.reference.AuctionStandBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -24,7 +17,7 @@ import net.minecraft.world.level.block.SoundType;
 
 import java.util.List;
 
-//SUPPORT: v2.2.3.3+
+//SUPPORT: v2.2.5.2+
 public class LightmansCurrencyModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> auction_stands;
@@ -127,7 +120,6 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addRecipe(modRes("traders/bookshelf/oak"))
                 .build();
         this.addEntry(bookshelf_traders);
-
 
     }
 
