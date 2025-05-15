@@ -311,7 +311,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 TextureImage recoloredSIDE = respriterSide.recolorWithAnimation(targetSide, metaSide);
 
                 // Adding to the Resource
-                sink.addAndCloseTexture(EveryCompat.res(newPath), recoloredSIDE);
+                sink.addTextureIfNotPresent(manager, newPath, () -> recoloredSIDE);
+                recoloredSIDE.close();
             }
 
 // Top texture =================================================================================================
@@ -340,12 +341,13 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 TextureImage recoloredOuter;
 
                 // stripped_log_top's outer|edge must have 3 color palettes
-                if (targetTopOuter.size() < 3) targetTopOuter.getLast().increaseInner();
+                while (targetTopOuter.get(0).size() < 3) targetTopOuter.get(0).increaseInner();
 
                 recoloredOuter = outerTopResp.recolorWithAnimation(targetTopOuter, metaTop);
 
                 // Adding to the Resource
-                sink.addAndCloseTexture(EveryCompat.res(newPath + "_top"), recoloredOuter);
+                sink.addTextureIfNotPresent(manager, newPath + "_top", () -> recoloredOuter);
+                recoloredOuter.close();
             }
 
         } catch (Exception e) {
