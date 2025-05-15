@@ -172,7 +172,7 @@ dependencies {
 
 //!!=============================================== FOR TESTING ===================================================== \\
 
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:5855569")
+    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6501143")
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
 //    modRuntimeOnly("curse.maven:terrestria-323974:5799166")
 

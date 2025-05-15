@@ -263,7 +263,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES //!! 1.20.1
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api //!! 1.20.1
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:5645384") // Terrablender, GlitchCore
+    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6501142") // Terrablender, GlitchCore
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint //!! 1.20.1
 //    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint //!! 1.20.1
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint //!! 1.20.1
