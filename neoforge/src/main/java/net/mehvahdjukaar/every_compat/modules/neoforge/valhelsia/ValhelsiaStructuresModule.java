@@ -308,9 +308,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 // Outer
                 Respriter outerTopResp = Respriter.masked(recoloredInner, BPTopInnerMask);
                 TextureImage recoloredOuter;
-
                 // stripped_log_top's outer|edge must have 3 color palettes
-                if (targetTopOuter.size() < 3) targetTopOuter.getLast().increaseInner();
+                if (targetTopOuter.getFirst().size() < 3) targetTopOuter.getFirst().increaseInner();
 
                 recoloredOuter = outerTopResp.recolorWithAnimation(targetTopOuter, metaTop);
 
