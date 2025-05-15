@@ -4,8 +4,8 @@
   </div>
   <div style="text-align: left;">
     <ul style="list-style-type: disc; padding-left: 20px;">
-      <li>(COMMON) = FORGE & FABRIC</li>
-      <li>(IT) - Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
+      <li>(COMMON): FORGE & FABRIC</li>
+      <li>(IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
     </ul>
   </div>
 </div>
@@ -13,11 +13,19 @@
 ---
 
 ### UPDATED: 
+- **LANG**: zh_cn - @ChuijkYahus
+- **Valhelsia Structures** (FORGE): Improved & Corrected the side of bundled_posts' texture
+
+---
+
+## v2.8.4
+
+### UPDATED: 
 - **FriendsAndFoes** (COMMON): Fixed the crash with **Variant Vanilla Blocks** -  [#921](https://github.com/MehVahdJukaar/WoodGood/issues/921)
 
 ---
 
-### v2.8.3
+## v2.8.3
 
 ### UPDATED: 
 - **Lightman's Currency** (FORGE): Supporting v2.2.5.2+ 
