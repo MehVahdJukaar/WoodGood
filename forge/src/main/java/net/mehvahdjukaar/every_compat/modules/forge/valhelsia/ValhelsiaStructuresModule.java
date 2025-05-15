@@ -59,7 +59,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         getModBlock("stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new PostBlock(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("stripped_log"))).noOcclusion())
+                        woodType -> new PostBlock(postProperties(woodType))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: manual generation (BELOW)
@@ -73,7 +73,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         posts = SimpleEntrySet.builder(WoodType.class, "post",
                         getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
-                        woodType -> new StrippablePostBlock(woodType, Utils.copyPropertySafe(woodType.log).noOcclusion())
+                        woodType -> new StrippablePostBlock(woodType, postProperties(woodType))
                 )
                 //TEXTURES: manual generation (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -131,7 +131,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
         bundledPosts = SimpleEntrySet.builder(WoodType.class, "posts", "bundled",
                         getModBlock("bundled_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new StrippableRotatedPillarBlock(() -> bundledStrippedPosts.blocks.get(w), bundledPostProperties(w))
+                        woodType -> new StrippableRotatedPillarBlock(() -> bundledStrippedPosts.blocks.get(woodType), bundledPostProperties(woodType))
                 )
                 .requiresFromMap(posts.blocks) //REASON: recipes
                 .requiresFromMap(bundledStrippedPosts.blocks) //REASON: strippable_block
@@ -141,6 +141,15 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 .defaultRecipe()
                 .build();
         this.addEntry(bundledPosts);
+    }
+
+    public static BlockBehaviour.Properties postProperties(WoodType woodType) {
+        return woodType.copyProperties()
+                .mapColor(
+                        Objects.nonNull(woodType.getBlockOfThis("stripped_log"))
+                                ? Objects.requireNonNull(woodType.getBlockOfThis("stripped_log")).defaultMapColor()
+                                : woodType.log.defaultMapColor())
+                .strength(2.0F).noOcclusion();
     }
 
     public static BlockBehaviour.Properties cutPostProperties(WoodType woodType) {
