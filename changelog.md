@@ -14,6 +14,13 @@
 
 ---
 
+### UPDATED:
+- **Every Compat** (FB): Fixed the crash when either creating a world or loading into a world with **MrCrayFish's Refurbished Furniture** - [#927](https://github.com/MehVahdJukaar/WoodGood/issues/927) 
+
+---
+
+## v2.10.6
+
 ### UPDATED: 
 - **LANG**: zh_cn - @ChuijkYahus
 - **Valhelsia Structures** (NF): 
