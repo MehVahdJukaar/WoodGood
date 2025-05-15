@@ -269,6 +269,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint //!! 1.20.1
 //    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel //!! 1.20.1
 //    modRuntimeOnly("curse.maven:deeperdarker-659011:6463247")
+//    modRuntimeOnly("curse.maven:frightful-winter-1241289:6447798")
 
 //    modRuntimeOnly("curse.maven:terrafirmacraft-302973:4862659") // patchouli //!! 1.20.1
 
