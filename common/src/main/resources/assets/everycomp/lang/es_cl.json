@@ -4,8 +4,18 @@
   "tooltip.everycomp.mod": "Mod: %s",
   "tooltip.everycomp.wood_type": "Tipo de madera: %s",
   "tooltip.everycomp.leaf_type": "Tipo de hojas: %s",
+  "container.everycomp.chest.name": "Cofre de %s",
 
+  "block.everycomp.q.soulfulnether.hollow_fright_log": "Tallo hueco del susto",
+
+  "block.everycomp.q.netherexp.hollow_claret_log": "Tallo de clarete de cerebraje hueco",
+
+  "block.everycomp.q.enhanced_mushrooms.hollow_mushroom_log": "Tallo de callampa hueco",
+
+  "block.everycomp.q.mynethersdelight.hollow_powdery_log": "Cañón de pólvora hueco",
+  
   "block.everycomp.q.endergetic.hollow_poise_log": "Tallo equilibrado hueco",
+  
   "block.everycomp.q.gardens_of_the_dead.hollow_soulblight_log": "Tallo hueco de plaga del alma",
 
   "block.everycomp.q.outer_end.hollow_azure_log": "Tallo hueco azur",
@@ -37,8 +47,6 @@
   "block.everycomp.q.enlightened_end.hollow_cerulean_log": "Tallo cerúleo hueco",
   "block.everycomp.q.enlightened_end.hollow_indigo_log": "Tallo de índigo hueco",
 
-  "block.everycomp.q.biomeswevegone.hollow_florus_log": "Tallo de florus hueco",
-
   "block.everycomp.tf.extendedmushrooms.hollow_glowshroom_log": "Tallo de brillampa hueco",
   "block.everycomp.tf.extendedmushrooms.hollow_honey_fungus_log": "Tallo de callampa de miel hueco",
   "block.everycomp.tf.extendedmushrooms.hollow_mushroom_log": "Tallo de callampa hueco",
@@ -51,11 +59,15 @@
   "block.everycomp.tf.enlightened_end.hollow_cerulean_log": "Tallo cerúleo hueco",
   "block.everycomp.tf.enlightened_end.hollow_indigo_log": "Tallo de índigo hueco",
 
-  "wood_type.blocksplus.bamboo": "Green Bamboo",
+  "block.everycomp.tf.netherexp.hollow_claret_log": "Tallo de clarete de cerebraje hueco",
+
+  "block.everycomp.tf.soulfulnether.hollow_fright_log": "Tallo de susto hueco",
+
+
+  "wood_type.blocksplus.bamboo": "Bambú verde",
 
   "wood_type.atlantis.atlantean": "Ninfa",
   "leaves_type.atlantis.atlantean": "Ninfa",
-  "block.everycomp.tf.biomeswevegone.hollow_florus_log": "Tallo de florus hueco",
 
   "wood_type.domum_ornamentum.cactus": "Cactus verde",
   "wood_type.domum_ornamentum.cactus_extra": "Cactus",
@@ -117,6 +129,7 @@
   "block_type.buildersaddition.support_bracket": "Soporte de apoyo de %s",
   "block_type.buildersaddition.table": "Mesa de %s",
   "block_type.buildersaddition.vertical_slab": "Panel de %s",
+  
 
   "block_type.chipped.barred_door": "Puerta enrejada de %s",
   "block_type.chipped.beach_door": "Puerta playera de %s",
@@ -245,6 +258,23 @@
   "block_type.chipped.planked_log": "Tronco de %s entablado",
   "block_type.chipped.reinforced_log": "Tronco de %s reforzado",
 
+  "block_type.chipped.carved_stripped_log": "Tronco tallado de %s sin corteza",
+  "block_type.chipped.chipped_stripped_log": "Tronco astillado de %s sin corteza",
+  "block_type.chipped.d_sign_stripped_log": "Tronco de cartel D de %s sin corteza",
+  "block_type.chipped.edged_stripped_log": "Troncos de borde de %s sin corteza",
+  "block_type.chipped.f_sign_stripped_log": "Tronco de cartel F de %s sin corteza",
+  "block_type.chipped.i_sign_stripped_log": "Tronco de cartel I de %s sin corteza",
+  "block_type.chipped.k_sign_stripped_log": "Tronco de cartel K de %s sin corteza",
+  "block_type.chipped.knotted_stripped_log": "Tronco anudado de %s sin corteza",
+  "block_type.chipped.l_sign_stripped_log": "Tronco de cartel L de %s sin corteza",
+  "block_type.chipped.layered_stripped_log": "Tronco en capas de %s sin corteza",
+  "block_type.chipped.lumpy_stripped_log": "Tronco grumoso de %s sin corteza",
+  "block_type.chipped.patient_stripped_log": "Tronco pacientee de %s sin corteza",
+  "block_type.chipped.reinforced_stripped_log": "Tronco reforzado de %s sin corteza",
+  "block_type.chipped.sign_stripped_log": "Cartel de tronco de %s sin corteza",
+  "block_type.chipped.stern_stripped_log": "Popa de %s sin corteza",
+  "block_type.chipped.wise_stripped_log": "Tronco de sabia de %s sin corteza",
+
 
   "block_type.graveyard.coffin": "Ataúd de %s",
 
@@ -362,7 +392,7 @@
   "block_type.mctb.crafting_table": "Mesa de crafteo de %s",
 
   "block_type.mcwbridges.rail_bridge": "Puente ferroviario de %s",
-  "block_type.mcwbridges.bridge_pier": "Muelle de puente de %s",
+  "block_type.mcwbridges.bridge_pier": "Soporte de puente de %s",
   "block_type.mcwbridges.log_bridge_middle": "Puente de %s",
   "block_type.mcwbridges.log_bridge_stair": "Escalera de puente de %s",
   "block_type.mcwbridges.rope_bridge_stair": "Escalera de puente de cuerda de %s",
@@ -459,7 +489,7 @@
   "block_type.mcwlights.soul_tiki_torch": "Antorcha Tiki de almas de %s",
   "block_type.mcwlights.tiki_torch": "Antorcha Tiki de %s",
   "block_type.mcwlights.ceiling_fan_light": "Luz de ventilador de techo de %s",
-  
+
   "block_type.mcwpaths.planks_path": "Camino de tablas de %s",
 
   "block_type.mcwroofs.attic_roof": "Techo de ático de %s",
@@ -494,15 +524,15 @@
   "block_type.mcwtrpdoors.tropical_trapdoor": "Trampilla tropical de %s",
   "block_type.mcwtrpdoors.barrel_trapdoor": "Trampilla de barril de %s",
 
-  "block_type.mcwwindows.window": "Ventana redimensionable de %s",
+  "block_type.mcwwindows.window": "Ventana de %s redimensionable",
   "block_type.mcwwindows.window2": "Ventana rectangular de %s",
-  "block_type.mcwwindows.four_window": "Ventana de cuatro paneles de %s",
-  "block_type.mcwwindows.stripped_log_window": "Ventana redimensionable de %s sin corteza",
+  "block_type.mcwwindows.four_window": "Ventana de %s de cuatro paneles",
+  "block_type.mcwwindows.stripped_log_window": "Ventana de %s sin corteza redimensionable",
   "block_type.mcwwindows.stripped_log_window2": "Ventana rectangular de %s sin corteza",
-  "block_type.mcwwindows.stripped_log_four_window": "Ventana de cuatro paneles de %s sin corteza",
-  "block_type.mcwwindows.plank_window": "Ventana redimensionable de tablas de %s",
+  "block_type.mcwwindows.stripped_log_four_window": "Ventana de %s sin corteza de cuatro paneles",
+  "block_type.mcwwindows.plank_window": "Ventana de tablas de %s redimensionable",
   "block_type.mcwwindows.plank_window2": "Ventana rectangular de tablas de %s",
-  "block_type.mcwwindows.plank_four_window": "Ventana de cuatro paneles de tablas de %s",
+  "block_type.mcwwindows.plank_four_window": "Ventana de tablas de %s de cuatro paneles",
   "block_type.mcwwindows.log_parapet": "Parapeto de %s",
   "block_type.mcwwindows.plank_parapet": "Parapeto de tablas de %s",
   "block_type.mcwwindows.blinds": "Persianas de %s",
@@ -511,15 +541,15 @@
   "block_type.mcwwindows.pane_window": "Ventana de panel de %s",
   "block_type.mcwwindows.stripped_pane_window": "Ventana de panel de %s sin corteza",
   "block_type.mcwwindows.plank_pane_window": "Ventana de panel de tablas de %s",
-  
-  "block_type.mcwstairs.terrace_stairs":"Escaleras de terraza de %s",
-  "block_type.mcwstairs.skyline_stairs":"Escaleras con vista de %s",
-  "block_type.mcwstairs.compact_stairs":"Escaleras compactas de %s",
-  "block_type.mcwstairs.bulk_stairs":"Escaleras a granel de %s",
-  "block_type.mcwstairs.loft_stairs":"Escaleras para buhardilla de %s",
-  "block_type.mcwstairs.railing":"Barandilla de escalera de %s",
-  "block_type.mcwstairs.balcony":"Balcón de %s",
-  "block_type.mcwstairs.platform":"Plataforma de %s",
+
+  "block_type.mcwstairs.terrace_stairs": "Escaleras de terraza de %s",
+  "block_type.mcwstairs.skyline_stairs": "Escaleras con vista de %s",
+  "block_type.mcwstairs.compact_stairs": "Escaleras compactas de %s",
+  "block_type.mcwstairs.bulk_stairs": "Escaleras a granel de %s",
+  "block_type.mcwstairs.loft_stairs": "Escaleras para buhardilla de %s",
+  "block_type.mcwstairs.railing": "Barandilla de escalera de %s",
+  "block_type.mcwstairs.balcony": "Balcón de %s",
+  "block_type.mcwstairs.platform": "Plataforma de %s",
 
   "block_type.create.window": "Ventana de %s",
   "block_type.create.window_pane": "Ventana de panel de %s",
@@ -852,7 +882,7 @@
 
   "block_type.villagersplus.horticulturist_table": "Maceta de %s",
 
-  "block_type.stylishstiles.stile": "Montante de %s",
+  "block_type.stylishsEmbaldosadas.stile": "Montante de %s",
 
   "block_type.wilderwild.hollowed_log": "Tronco de %s ahuecado",
   "block_type.wilderwild.stripped_hollowed_log": "Tronco de %s ahuecado sin corteza",
@@ -920,7 +950,7 @@
   "block_type.redeco.shelf": "Estante de %s",
   "block_type.redeco.crate": "Caja de %s",
   "block_type.redeco.plank_fence": "Valla de tablas de %s",
-  "block_type.redeco.plank_gate": "Puerta de valla de tablas%s",
+  "block_type.redeco.plank_gate": "Puerta de valla de tablas de %s",
   "block_type.redeco.lattice": "Rejilla de %s",
   "block_type.redeco.counter": "Encimera de %s",
   "block_type.redeco.drawer_counter": "Cajón de encimera de %s",
@@ -937,8 +967,8 @@
   "block_type.lightmanscurrency.card_display": "Vitrina de tarjetas de %s",
 
   "block_type.clutter.mosaic": "Mosaico de %s",
-  "block_type.clutter.mosaic_slab": "Mosaico de losa de %s",
-  "block_type.clutter.mosaic_stairs": "Mosaico de escaleras de %s",
+  "block_type.clutter.mosaic_slab": "Losa de mosaico de %s",
+  "block_type.clutter.mosaic_stairs": "Escaleras de mosaico de %s",
   "block_type.clutter.wall_bookshelf": "Pared de librería de %s",
   "block_type.clutter.window_sill": "Alféizar de ventana de %s",
   "block_type.clutter.chair": "Silla de %s",
@@ -958,5 +988,50 @@
 
   "block_type.table_top_craft.chess": "Tablero de ajedrez de %s",
   "block_type.table_top_craft.chess_timer": "Temporizador de ajedrez de %s",
-  "block_type.table_top_craft.connect_four": "Conecta cuatro de %s"
+  "block_type.table_top_craft.connect_four": "Conecta cuatro de %s",
+
+  "block_type.excessive_building.crafting_table": "Mesa de crafteo de %s",
+  "block_type.excessive_building.vertical_stairs": "Escaleras verticales de %s",
+  "block_type.excessive_building.chiseled": "Tablas cinceladas de %s",
+  "block_type.excessive_building.mosaic": "Mosaico de %s",
+  "block_type.excessive_building.mosaic_slab": "Losa de mosaico de %s",
+  "block_type.excessive_building.mosaic_stairs": "Escaleras de mosaico de %s",
+  "block_type.excessive_building.mosaic_vertical_stairs": "Escaleras verticales de mosaico de %s",
+  "block_type.excessive_building.ladder": "Escalera de mano de %s",
+  "block_type.excessive_building.bookshelf": "Librería de %s",
+  "block_type.excessive_building.empty_shelf": "Estante vacío de %s",
+  "block_type.excessive_building.empty_potion_shelf": "Estante de botellas vacío de %s",
+  "block_type.excessive_building.water_potion_shelf": "Estante de botellas con agua de %s",
+  "block_type.excessive_building.potion_shelf": "Estante de pociones de %s",
+  "block_type.excessive_building.alchemist_shelf": "Estante alquimista de %s",
+  "block_type.excessive_building.brickshelf": "Estante de ladrillos de %s",
+  "block_type.excessive_building.nether_brickshelf": "Estante de ladrillos del Nether de %s",
+  "block_type.excessive_building.hollow_log": "Tronco hueco de %s",
+  "block_type.excessive_building.hollow_stripped_log": "Tronco hueco de %s sin corteza",
+  "block_type.excessive_building.decorative_shelf": "Estante decorativo de %s",
+
+  "block_type.more_beautiful_torches.log_torch": "Antorcha de tronco de %s",
+  "block_type.more_beautiful_torches.log_soul_torch": "Antorcha de almas de tronco de %s",
+  "block_type.more_beautiful_torches.log_redstone_torch": "Antorcha de redstone de tronco de %s",
+  "block_type.more_beautiful_torches.planks_torch": "Antorcha de tablas de %s",
+  "block_type.more_beautiful_torches.planks_soul_torch": "Antorcha de almas de tablas de %s",
+  "block_type.more_beautiful_torches.planks_redstone_torch": "Antorcha de redstone de tablas de %s",
+  "block_type.more_beautiful_torches.stripped_log_torch": "Antorcha de tronco de %s sin corteza",
+  "block_type.more_beautiful_torches.stripped_log_soul_torch": "Antorcha de almas de tronco de %s sin corteza",
+  "block_type.more_beautiful_torches.stripped_log_redstone_torch": "Antorcha de redstone de tronco de %s sin corteza",
+
+  "block_type.blocksplus.cracked_planks": "Tablas agrietadas de %s",
+  "block_type.blocksplus.mossy_planks": "Tablas musgosas de %s",
+  "block_type.blocksplus.crafting_table": "Mesa de crafteo de %s",
+  "block_type.blocksplus.chest": "Cofre de %s",
+  "block_type.blocksplus.trapped_chest": "Cofre trampa de %s",
+  "block_type.blocksplus.bookshelf": "Librería de %s",
+  "block_type.blocksplus.wooden_crate": "Caja de madera de %s",
+  "block_type.blocksplus.ladder": "Escalera de mano de %s",
+  "block_type.blocksplus.mosaic": "Mosaico de %s",
+  "block_type.blocksplus.mosaic_stairs": "Escaleras de mosaico de %s",
+  "block_type.blocksplus.mosaic_slab": "Losa de mosaico de %s",
+  "block_type.blocksplus.cracked_mosaic": "Mosaico de %s agrietado",
+  "block_type.blocksplus.mossy_mosaic": "Mosaico musgoso de %s",
+  "block_type.blocksplus.mosaic_pressure_plate": "Placa de presión de mosaico de %s"
 }
