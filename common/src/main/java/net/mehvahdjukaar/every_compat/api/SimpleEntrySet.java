@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
+import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
@@ -56,6 +57,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     @Nullable
     protected final Object renderType;
 
+    protected ModelConfiguration modelConfiguration;
+
 
     public SimpleEntrySet(Class<T> type,
                           String name, @Nullable String prefix,
@@ -71,7 +74,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                           boolean mergedPalette, boolean copyTint,
-                          Predicate<T> condition) {
+                          Predicate<T> condition,
+                          ModelConfiguration modelConfig
+    ) {
         super(type, name, prefix, baseType, tab, tabMode, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         this.blockFactory = blockSupplier;
         this.tileHolder = tileFactory;
@@ -79,8 +84,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         this.baseBlock = baseBlock;
         this.itemFactory = itemFactory;
         this.renderType = renderType;
+        this.modelConfiguration = modelConfig;
     }
 
+    @SuppressWarnings("unchecked")
     public <E extends BlockEntity> BlockEntityType<E> getTile(Class<E> tileClass) {
         Preconditions.checkNotNull(tileHolder, "Entry set has no tile entity!");
         return (BlockEntityType<E>) tileHolder.get();
@@ -107,6 +114,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = getChildKey(module);
+        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", "");
         for (T w : types) {
             String name = getBlockName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
@@ -242,9 +250,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     @Override
     public void generateModels(SimpleModule module,  ResourceManager manager,ResourceSink handler) {
         ResourcesUtils.generateStandardBlockModels(manager, handler, blocks, baseType.get(),
-                makeModelTransformer(module, manager), makeBlockStateTransformer(module, manager));
+                makeModelTransformer(module, manager), makeBlockStateTransformer(module, manager), this.modelConfiguration
+        );
         ResourcesUtils.generateStandardItemModels(manager, handler, items, baseType.get(),
-                makeModelTransformer(module, manager));
+                makeModelTransformer(module, manager), this.modelConfiguration
+        );
     }
 
     // items and blocks
@@ -309,6 +319,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         @Nullable
         protected Object renderType = null;
 
+        protected ModelConfiguration modelConfig = ModelConfiguration.EMPTY;
+
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
             super(type, name, prefix, baseType);
             this.baseBlock = baseBlock;
@@ -320,7 +332,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 throw new IllegalStateException("Tab for module " + name + " was null!");
             }
             var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
-                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition);
+                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition,
+                    this.modelConfig
+            );
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
@@ -388,6 +402,27 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             this.recipes.add(() -> Utils.getID(this.baseBlock.get()));
             return this;
         }
+
+
+    /// Add models/block files so it can be generated - Only MINECRAFT's
+    public Builder<T, B> generateBlockModels(ResourceLocation... blockModels) {
+        if (this.modelConfig == ModelConfiguration.EMPTY) {
+            this.modelConfig = ModelConfiguration.createNew();
+        }
+        this.modelConfig.addBlockModel(blockModels);
+//            GemsRealmModule.putInModelsToModify(blockModels);
+        return this;
+    }
+
+    /// Add models/item files so it can be generated - Only MINECRAFT's
+    public Builder<T, B> generateItemModels(ResourceLocation... itemModels) {
+        if (this.modelConfig == ModelConfiguration.EMPTY) {
+            this.modelConfig = ModelConfiguration.createNew();
+        }
+        this.modelConfig.addItemModel(itemModels);
+        return this;
+    }
+
 
         /// Is there a way to get baseBlock?
 //        public Builder<T, B> defaultBlockTexture() {

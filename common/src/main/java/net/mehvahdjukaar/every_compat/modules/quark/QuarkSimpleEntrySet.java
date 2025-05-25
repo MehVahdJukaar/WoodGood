@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
+import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
@@ -28,8 +29,10 @@ import org.violetmoon.zeta.module.IDisableable;
 import org.violetmoon.zeta.module.ZetaModule;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.*;
 
+@SuppressWarnings("DataFlowIssue")
 public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEntrySet<T, B> {
 
     private final Supplier<ZetaModule> zetaModule;
@@ -50,9 +53,11 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                boolean mergedPalette,
                                boolean copyTint,
-                               Predicate<T> condition) {
+                               Predicate<T> condition,
+                               ModelConfiguration modelConfig
+    ) {
         super(type, name, prefix, blockSupplier, baseBlock, baseType, tab, tabMode, tableMode, itemFactory,
-                tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
+                tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, copyTint, condition, modelConfig);
         var m = Preconditions.checkNotNull(module);
         this.zetaModule = Suppliers.memoize(() -> Quark.ZETA.modules.get(m));
     }
@@ -116,7 +121,9 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
         public QuarkSimpleEntrySet<T, B> build() {
             var e = new QuarkSimpleEntrySet<>(type, name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, tabMode, lootMode,
-                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition);
+                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition,
+                    modelConfig
+            );
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
