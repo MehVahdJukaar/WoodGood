@@ -9,16 +9,19 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.List;
+import java.util.Objects;
 
-//SUPPORT: v3.2.9_1+
+//SUPPORT: v3.3.1+
 public class DramaticDoorsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> shortDoors;
@@ -29,8 +32,10 @@ public class DramaticDoorsModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = DDRegistry.MAIN_TAB;
 
         tallDoors = SimpleEntrySet.builder(WoodType.class, "door", "tall",
-                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new TallDoorBlock(Blocks.OAK_DOOR,
-                                w.toVanillaOrOak().setType()))
+                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new TallDoorBlock(copyDoorSafe(w), w.toVanillaOrOak().setType())
+                )
+                .requiresChildren("door") //REASON: recipes
                 .addTextureM(modRes("block/tall_oak_door_bottom"), EveryCompat.res("block/dd/tall_oak_door_bottom_m"))
                 .addTextureM(modRes("block/tall_oak_door_middle"), EveryCompat.res("block/dd/tall_oak_door_middle_m"))
                 .addTextureM(modRes("block/tall_oak_door_top"), EveryCompat.res("block/dd/tall_oak_door_top_m"))
@@ -46,8 +51,10 @@ public class DramaticDoorsModule extends SimpleModule {
         this.addEntry(tallDoors);
 
         shortDoors = SimpleEntrySet.builder(WoodType.class, "door", "short",
-                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE, w -> new ShortDoorBlock(Blocks.OAK_DOOR,
-                                w.toVanillaOrOak().setType()))
+                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        w -> new ShortDoorBlock(copyDoorSafe(w), w.toVanillaOrOak().setType())
+                )
+                .requiresChildren("door") //REASON: recipes
                 .addTextureM(modRes("block/short_oak_door"), EveryCompat.res("block/dd/short_oak_door_m"))
                 .addTextureM(modRes("item/short_oak_door"), EveryCompat.res("item/dd/short_oak_door_m"))
                 .addTag(modRes("short_wooden_doors"), Registries.BLOCK)
@@ -61,11 +68,16 @@ public class DramaticDoorsModule extends SimpleModule {
         this.addEntry(shortDoors);
     }
 
+    public BlockBehaviour.Properties copyDoorSafe(WoodType woodType) {
+        Block door = woodType.getBlockOfThis("door");
+        return (Objects.nonNull(door)) ? Utils.copyPropertySafe(door) : Utils.copyPropertySafe(Blocks.OAK_DOOR);
+    }
+
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of(
                 "abundant_atmosphere", "ad_astra", "aether", "aether_redux",
-                "alexscaves", "alloyed", "architects_palette", "atum",
+                "alexscaves", "alloyed", "architects_palette", "arts_and_crafts",  "atum",
                 "aurorasdeco", "automaticdoors", "bambooeverything", "betterarcheology",
                 "betterend", "betternether", "bewitchment", "biomancy",
                 "biomemakeover", "biomesoplenty", "blocksplus", "blockus",
