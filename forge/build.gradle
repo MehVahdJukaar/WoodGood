@@ -100,7 +100,7 @@ publishing {
 //}
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
+    forge "net.minecraftforge:forge:${forge_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
@@ -233,7 +233,7 @@ dependencies {
     modCompileOnly("curse.maven:corail-pillar-266228:5073954")
     modCompileOnly("curse.maven:decoration-delight-687475:5563942")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
-    modCompileOnly("curse.maven:dramatic-doors-380617:6115857")
+    modCompileOnly("curse.maven:dramatic-doors-380617:6438745")
     modCompileOnly("curse.maven:excessive-building-845097:5442075")
     modCompileOnly("curse.maven:functional-storage-556861:5373105") // Titanium
     modCompileOnly("curse.maven:infinity-buttons-661902:5330420") // Cloth-Config
