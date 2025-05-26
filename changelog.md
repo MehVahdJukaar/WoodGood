@@ -12,6 +12,18 @@
 
 ---
 
+### UPDATE: 
+- **LANG**: es_cl - @Ganbare-Lucifer
+
+### ADDED: 
+- **TEXTURES** (IT): **Luminous Nether**'s withered - [#929](https://github.com/MehVahdJukaar/WoodGood/issues/929)
+- **Every Compat**: New CLASS for supporting the new addon, Gems-Realm
+- **Dramatic Doors** (COMMON): **Arts And Crafts** as AlreadySupportedMods
+
+---
+
+## v2.8.5
+
 ### UPDATED: 
 - **LANG**: zh_cn - @ChuijkYahus
 - **Valhelsia Structures** (FORGE): Improved & Corrected the side of bundled_posts' texture
