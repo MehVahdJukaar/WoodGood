@@ -42,7 +42,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.villagers_plus.VillagersPlus
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
-import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.core.Registry;
@@ -116,7 +115,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("productivebees", () -> ProductiveBeesModule::new);
         addModule("quark", () -> QuarkModule::new);
-        addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);

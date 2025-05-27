@@ -19,6 +19,7 @@ import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModul
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 // LIB
@@ -137,6 +138,7 @@ public abstract class EveryCompat {
         addModule( "hnh" , () -> HearthAndHomeModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("table_top_craft", () -> TableTopCraftModule::new);
+        addModule("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
 
 // ========================================= DISABLED FOR A REASON =========================================  \\
 
