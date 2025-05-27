@@ -40,10 +40,10 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-551364:4429816")
     modCompileOnly("curse.maven:furnish-547069:4449619")
     modCompileOnly("curse.maven:handcrafted-538214:4437458")
+    modCompileOnly("curse.maven:refurbished-furniture-897116:6186452")
+    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5694015")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4533061")
-    modCompileOnly("curse.maven:refurbished-furniture-897116:5651930")
-    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5694015")
 
 }
 

@@ -149,6 +149,11 @@ dependencies {
 //!! ================================================== IMPORTS ===================================================== \\
     // NOTE: mods with modRunTimeOnly are in compiled in build.gradle (COMMON), modRunTimeOnly is only for testing
 
+    //- ONLY FOR TESTING - can be commented out or enabled
+//    modRuntimeOnly("curse.maven:table-top-craft-467136:4616489")
+//    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6186454")
+
+    //+ REQUIRED - The modules access libaries from below - ONLY IN FORGE
         //!! MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240514")
     modCompileOnly("curse.maven:macaws-doors-378646:4649906")
@@ -192,14 +197,12 @@ dependencies {
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4374996") // LEGACY
     modCompileOnly("curse.maven:oreberries-replanted-454062:4614499")
-    modCompileOnly("curse.maven:refurbished-furniture-897116:5651931")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:4418663")
     modCompileOnly("curse.maven:quark-243121:4587248")
     modCompileOnly("curse.maven:rechiseled-558998:4364936")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
-//    modRuntimeOnly("curse.maven:table-top-craft-467136:4616489")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389567")
     modCompileOnly("curse.maven:tropicraft-254794:5312670")

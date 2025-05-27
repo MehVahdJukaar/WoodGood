@@ -83,9 +83,14 @@ dependencies {
     //!! TOOLS
     modRuntimeOnly("curse.maven:emi-580555:5704394")
 
-//!! ================================================== IMPORTS ===================================================== \\
+//!! =================================================== IMPORTS ==================================================== \\
     // NOTE: mods with modRunTimeOnly are in compiled in build.gradle (COMMON), modRunTimeOnly is only for testing
+    //- ONLY FOR TESTING - can be commented out or enabled
+//    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6186452")
+//    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5694015")
 
+
+    //+ REQUIRED - The modules access libaries from below - ONLY IN FORGE
         //!! MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240491")
     modCompileOnly("curse.maven:macaws-doors-378646:4649884")
@@ -121,8 +126,6 @@ dependencies {
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544642")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750267")
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
-    modCompileOnly("curse.maven:refurbished-furniture-897116:5651930")
-//    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5694015")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
     modCompileOnly("curse.maven:twigs-496913:4531594")
     modCompileOnly("curse.maven:hearth-and-home-849364:4488851")

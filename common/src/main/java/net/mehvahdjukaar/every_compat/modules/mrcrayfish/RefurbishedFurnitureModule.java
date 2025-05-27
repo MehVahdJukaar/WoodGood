@@ -53,7 +53,7 @@ import java.util.stream.IntStream;
 
 import static com.mrcrayfish.furniture.refurbished.core.ModBlockEntities.*;
 
-//SUPPORT: v1.0.6+
+//SUPPORT: v1.0.9+
 public class RefurbishedFurnitureModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chairs;
