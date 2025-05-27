@@ -126,7 +126,7 @@ dependencies {
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544642")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750267")
     modCompileOnly("curse.maven:missing-wilds-622590:3891602")
-    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:4490392")
     modCompileOnly("curse.maven:twigs-496913:4531594")
     modCompileOnly("curse.maven:hearth-and-home-849364:4488851")
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4713374")
