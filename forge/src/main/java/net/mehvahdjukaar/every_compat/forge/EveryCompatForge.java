@@ -171,6 +171,7 @@ public class EveryCompatForge extends EveryCompat {
 
     }
 
+    @SuppressWarnings("deprecation")
     public static void onRemap(MissingMappingsEvent event) {
         for (var mapping : event.getMappings(Registry.BLOCK_ENTITY_TYPE_REGISTRY, EveryCompat.MOD_ID)) {
             ResourceLocation key = mapping.getKey();
