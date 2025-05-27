@@ -10,6 +10,13 @@
   </div>
 </div>
 
+### ADDED: 
+-**Every Compat**: Re-enabled **The Fwilight Forest** for FABRIC
+
+---
+
+## v2.5.34
+
 ### ADDED:
 - **MrCrayFish's Refurbished Furniture** (FABRIC): this mod was overlook and wasn't added for FABRIC - [#932](https://github.com/MehVahdJukaar/WoodGood/issues/932)
 
@@ -22,9 +29,3 @@
   - **Macaw's Oh The Biomes You'll Go**
   - **Macaw's Biomes O' Plenty**
   - **Macaw's Modding Legacy**
-
-### NEW:
-- N/A
-
-### LEGEND: 
-- (COMMON) = FORGE & FABRIC
