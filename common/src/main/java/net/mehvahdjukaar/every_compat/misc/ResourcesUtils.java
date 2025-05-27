@@ -363,12 +363,22 @@ public class ResourcesUtils {
         Matcher matcher = RES_PATTERN.matcher(text);
         return matcher.replaceAll(m -> {
             var item = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(m.group(1)));
-            return item.map(value -> {
-                // Skip the item because it will return "minecraft:air"
-                if (item.get().toString().equals("shulker_box")) return "\"minecraft:shulker_box\"";
-                return "\"" + Utils.getID(BlockType.changeItemType(value, fromType, toType)).toString() + "\"";
-            })
-                    .orElseGet(() -> m.group(0));
+            return item.map(value ->
+                    mapOfItem.getOrDefault(item.get().toString(),
+                            "\"" + Utils.getID(BlockType.changeItemType(value, fromType, toType)).toString() + "\"")
+                    ).orElseGet(() -> m.group(0));
         });
     }
+
+    /**
+     * if item (key) matched the following below, then instead of "minecraft:air", the value will be used
+     * NOTE:
+     * Quark's bookshelf and it's loot_table where it has "minecraft:booK" will be replaced with
+     * "minecraft:air" for every new bookshelf. A similar case with "minecraft:shulker_box" also happened, too.
+    **/
+    private static final Map<String, String> mapOfItem = Map.of(
+            "shulker_box", "\"minecraft:shulker_box\"",
+            "book", "\"minecraft:book\""
+    );
+
 }
