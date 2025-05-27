@@ -61,7 +61,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     @Override
     public void addTranslations(SimpleModule module, AfterLanguageLoadEvent lang) {
-        items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "item_type." + module.getModId() + "." + typeName, w, v));
+        items.forEach((blockType, item) -> LangBuilder.addDynamicEntry(lang, "item_type." + module.getModId() + "." + typeName, blockType, item));
     }
 
     @Override
@@ -95,11 +95,11 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                 if (item != null) {
                     this.items.put(blockType, item);
 
-                    String childkey = getChildKey(module);
-                    if (childkey.contains("minecraft")) childkey = childkey.replace("minecraft:", "");
+                    String childKey = getChildKey(module);
+                    if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", "");
 
                     registry.register(module.makeMyRes(fullName), item);
-                    blockType.addChild(childkey, item);
+                    blockType.addChild(childKey, item);
                     totalChildren++;
                 }
             }
@@ -115,6 +115,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             throw new UnsupportedOperationException("Base Item cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = getChildKey(module);
+        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", "");
         baseType.get().addChild(childKey, base);
 
         //attempts adding all other children
