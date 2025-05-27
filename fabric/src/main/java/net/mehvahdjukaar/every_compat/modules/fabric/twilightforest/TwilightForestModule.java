@@ -19,7 +19,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import twilightforest.block.BanisterBlock;
 import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.HollowLogHorizontal;
@@ -28,8 +27,9 @@ import twilightforest.init.TFBlocks;
 import twilightforest.init.TFItems;
 import twilightforest.item.HollowLogItem;
 
-import java.util.function.Supplier;
+import java.util.Objects;
 
+//SUPPORT: v4.2.357+
 public class TwilightForestModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, BanisterBlock> banisters;
@@ -43,25 +43,28 @@ public class TwilightForestModule extends SimpleModule {
         //TODO: check face culling
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                )
                 .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
                 .setTab(() -> TFItems.creativeTab)
                 .build();
-
         this.addEntry(banisters);
 
 
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_HORIZONTAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> ifHasStripped(w, () -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))))
-                .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
-                .noItem()
+                        w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
+                )
+                .requiresChildren("stripped_log") //REASON: textures
                 .setRenderType(() -> RenderType::cutout)
+                .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
+                //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
+                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                .noItem()
                 .build();
-
         this.addEntry(hollowLogsHorizontal);
 
 
@@ -69,30 +72,39 @@ public class TwilightForestModule extends SimpleModule {
                         TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
-                            return ifHasStripped(w, () -> new HollowLogVertical(Utils.copyPropertySafe(w.log), makeRegObj(id)));
-                        })
-                .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
-                .noItem()
-                .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log_vertical"))
-                .build();
+                            return new HollowLogVertical(Utils.copyPropertySafe(w.log), makeRegObj(id));
 
+                        }
+                )
+                .requiresChildren("stripped_log") //REASON: textures
+                .setRenderType(() -> RenderType::cutout)
+                .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
+                .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log_vertical"))
+                //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
+                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                .noItem()
+                .build();
         this.addEntry(hollowLogsVertical);
 
         hollowLogsClimbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
-                        w -> ifHasStripped(w, () -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
-                                makeRegObj(Utils.getID(hollowLogsVertical.blocks.get(w))))))
-                .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)
-                .noItem()
+                        w -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
+                                makeRegObj(Utils.getID(hollowLogsVertical.blocks.get(w)))
+                        )
+                )
+                .requiresChildren("stripped_log") //REASON: textures
                 .setRenderType(() -> RenderType::cutout)
+                .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)
+                .setRenderType(() -> RenderType::cutout)
+                //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
+                .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
+                .noItem()
                 .build();
-
         this.addEntry(hollowLogsClimbable);
-
-
     }
 
     @NotNull
+    @SuppressWarnings({"removal", "unchecked"})
     private static<T extends Block> RegistryObject<T> makeRegObj(ResourceLocation id) {
         return new RegistryObject<>(id, () ->(T) Registry.BLOCK.get(id), Registry.BLOCK_REGISTRY);
     }
@@ -107,7 +119,7 @@ public class TwilightForestModule extends SimpleModule {
                     makeRegObj(EveryCompat.res(itemName + "_horizontal")),
                     makeRegObj(Utils.getID(b)),
                     makeRegObj(EveryCompat.res(itemName + "_climbable")),
-                    new Item.Properties().tab(getTab(w, childKey + "_vertical")));
+                    new Item.Properties().tab(Objects.requireNonNull(getTab(w, childKey + "_vertical"))));
             hollowLogsVertical.items.put(w, i);
             w.addChild(childKey, (Object) i);
             registry.register(EveryCompat.res(itemName + "_vertical"), i);
@@ -129,13 +141,5 @@ public class TwilightForestModule extends SimpleModule {
                 (s, l, pos, i) -> l != null && pos != null ?
                         BiomeColors.getAverageGrassColor(l, pos) : -1,
                 hollowLogsHorizontal.blocks.values().toArray(Block[]::new));
-    }
-
-    @Nullable
-    private <B extends Block> B ifHasStripped(WoodType woodType, Supplier<B> supplier) {
-        if (woodType.getChild("stripped_log") != null) {
-            return supplier.get();
-        }
-        return null;
     }
 }
