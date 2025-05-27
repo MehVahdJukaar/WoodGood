@@ -57,20 +57,20 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("bewitchment", () -> BewitchmentModule::new);
         addModule("clutter", () -> ClutterModule::new);
         addModule("create", () -> CreateModule::new);
-        addModule("farmersdelight", () -> FarmersDelightModule::new);
-        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
-        addModule("mighty_mail", () -> MightyMailModule::new);
         if (PlatformHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
+        addModule("farmersdelight", () -> FarmersDelightModule::new);
+        addModule("infinitybuttons", () -> InfinityButtonsModule::new);
+        addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
+        addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("redbits", () -> RedBitsModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
+        addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("villagersplus", () -> VillagersPlusModule::new);
         addModule("wilderwild", () -> WilderWildModule::new);
         addModule("woodenhoppers", () -> WoodenHoppersModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
-        addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
 
         // ============================================= OTHERS ===================================================== \\
         FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
