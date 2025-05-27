@@ -21,6 +21,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.BackpackedModule
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.villagers_plus.VillagersPlusModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
@@ -68,6 +69,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("villagersplus", () -> VillagersPlusModule::new);
         addModule("wilderwild", () -> WilderWildModule::new);
         addModule("woodenhoppers", () -> WoodenHoppersModule::new);
+        addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
 
         // ============================================= OTHERS ===================================================== \\
