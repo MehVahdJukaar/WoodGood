@@ -6,13 +6,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/// ONLY Minecraft's models/block & models/item that need to be generated - Used by Gems-Realm
-public record ModelConfiguration(Set<ResourceLocation> blockModel, Set<ResourceLocation> itemModel) {
+/// Add models/block & models/item that need to be generated - Used by Gems-Realm
+public record ModelConfiguration(Set<ResourceLocation> blockModel, Set<ResourceLocation> itemModel,
+                                 boolean includeInGeneration) {
 
-    public static final ModelConfiguration EMPTY = new ModelConfiguration(Set.of(), Set.of());
+    public static final ModelConfiguration EMPTY = new ModelConfiguration(Set.of(), Set.of(), false);
 
     public static ModelConfiguration createNew() {
-        return new ModelConfiguration(new HashSet<>(), new HashSet<>());
+        return new ModelConfiguration(new HashSet<>(), new HashSet<>(), false);
+    }
+
+    public static ModelConfiguration createNew(boolean includeInGeneration) {
+        return new ModelConfiguration(new HashSet<>(), new HashSet<>(), includeInGeneration);
     }
 
     /**

@@ -410,7 +410,14 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             this.modelConfig = ModelConfiguration.createNew();
         }
         this.modelConfig.addBlockModel(blockModels);
-//            GemsRealmModule.putInModelsToModify(blockModels);
+        return this;
+    }
+    /// Add models/block files to a List so it can be generated BUT it's not Minecraft's
+    public Builder<T, B> generateBlockModels(boolean includeInGeneration, ResourceLocation... blockModels) {
+        if (this.modelConfig == ModelConfiguration.EMPTY) {
+            this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
+        }
+        this.modelConfig.addBlockModel(blockModels);
         return this;
     }
 

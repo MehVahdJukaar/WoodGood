@@ -122,7 +122,13 @@ public class ResourcesUtils {
             ResourceLocation modelRes = new ResourceLocation(m);
             if (!modelRes.getNamespace().equals("minecraft") || modelConfig.blockModel().contains(modelRes) || modelConfig.itemModel().contains(modelRes)) {
                 StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(m));
-                if (model != null) models.add(model);
+                if (Objects.nonNull(model)) models.add(model);
+            }
+        }
+        if (modelConfig.includeInGeneration()) {
+            for (var currentModel : modelConfig.blockModel()) {
+                StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(currentModel));
+                if (Objects.nonNull(model)) models.add(model);
             }
         }
         return models;
