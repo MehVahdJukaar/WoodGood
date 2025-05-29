@@ -75,6 +75,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:4401535") // Regions-Unexplored
     modCompileOnly("maven.modrinth:frozenlib:1.2.7-mc1.19.2") // Wilder-Wild
 //    modRuntimeOnly("curse.maven:nbt-crafting-314633:4104838") // Wilder-Wild
+//    modRuntimeOnly("curse.maven:owo-lib-532610:4152949") // v0.9.3 | Architects-Palette
 
     //!! ================================================= LOCAL ====================================================== \\
     modCompileOnly("net.darktree.redbits:redbits-1.19.2-1.16.1")
@@ -105,7 +106,7 @@ dependencies {
 
         //!! OTHERS
     modCompileOnly("curse.maven:another-furniture-610492:4032093")
-    modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046")
+    modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") // Owo-Lib
     modCompileOnly("curse.maven:backpacked-fabric-667380:4728984")
     modCompileOnly("curse.maven:beautify-refabricated-809311:4490065")
     modCompileOnly("curse.maven:bewitchment-394915:4530660")

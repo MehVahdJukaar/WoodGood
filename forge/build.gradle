@@ -169,7 +169,7 @@ dependencies {
         //!! OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:3835331")
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
-    modCompileOnly("curse.maven:architects-palette-433862:4498448")
+    modCompileOnly("curse.maven:architects-palette-433862:5038498")
     modCompileOnly("curse.maven:backpacked-352835:3923045")
     modCompileOnly("curse.maven:beautify-decorate-633252:4036351")
 //    modCompileOnly("curse.maven:boatload-337396:4776091") //WIP --------- Entity Texturing issue
