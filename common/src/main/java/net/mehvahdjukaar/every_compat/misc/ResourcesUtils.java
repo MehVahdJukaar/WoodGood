@@ -374,7 +374,7 @@ public class ResourcesUtils {
      * if item (key) matched the following below, then instead of "minecraft:air", the value will be used
      * NOTE:
      * Quark's bookshelf and it's loot_table where it has "minecraft:booK" will be replaced with
-     * "minecraft:air" for every new bookshelf. A similar case with "minecraft:shulker_box" also happened, too.
+     * "minecraft:air". A similar case with "minecraft:shulker_box" also happened, too.
     **/
     private static final Map<String, String> mapOfItem = Map.of(
             "shulker_box", "\"minecraft:shulker_box\"",
