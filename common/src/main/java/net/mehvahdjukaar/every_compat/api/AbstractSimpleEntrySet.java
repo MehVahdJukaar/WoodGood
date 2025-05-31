@@ -277,7 +277,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     // i have no fucking clue whats going on here
     @Override
-    public void generateTextures(SimpleModule module, ResourceManager manager,  ResourceSink sik) {
+    public void generateTextures(SimpleModule module, ResourceManager manager,  ResourceSink sink) {
         if (textures.isEmpty()) return;
 
         List<TextureImage> images = new ArrayList<>();
@@ -415,7 +415,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                                     JsonObject mcmetaFile = RPUtils.deserializeJson(mcmetaStream);
 
                                     // Adding to the resources next to newtextures
-                                    sik.addJson(ResourceLocation.tryParse(newId), mcmetaFile, ResType.MCMETA);
+                                    sink.addJson(ResourceLocation.tryParse(newId), mcmetaFile, ResType.MCMETA);
                                     mcmetaStream.close();
                                 } else
                                     EveryCompat.LOGGER.error("The MCMETA file may no longer existing, check @ {}", mcmetaLoc);
@@ -427,7 +427,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         Supplier<TextureImage> textureSupplier = () -> respriter.recolorWithAnimation(targetPalette, targetAnimation);
                         textureSupplier = postProcessTexture(blockType, newId, manager, textureSupplier);
 
-                        sik.addTextureIfNotPresent(manager, newId, textureSupplier, isOnAtlas);
+                        sink.addTextureIfNotPresent(manager, newId, textureSupplier, isOnAtlas);
                     }
                 }
             }
