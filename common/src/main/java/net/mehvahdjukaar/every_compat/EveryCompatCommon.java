@@ -67,11 +67,19 @@ public class EveryCompatCommon {
         addOtherCompatMod("macawsroofsbop", "biomesoplenty", "mcwroofs");
         addOtherCompatMod("macawsroofsbyg", "biomeswevegone", "mcwroofs");
         addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"),
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs");
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
         addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty",
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs");
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
         addOtherCompatMod("mcwmoddinglegacy", List.of("blue_skies", "premium_wood"),
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs");
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+        addOtherCompatMod("mcwabnormals", List.of("buzzier_bees", "environmental", "upgrade_aquatic", "autumnity", "endergetic", "atmospheric", "caverns_and_chasms"),
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+        addOtherCompatMod("mcwterraformersmc", List.of("terrestria", "traverse", "cinderscape"),
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+        addOtherCompatMod("mcwaurora", "enhanced_mushrooms",
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+        addOtherCompatMod("mcwquark", "quark",
+                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
 
         // Abnormals Delight
         addOtherCompatMod("abnormals_delight",
