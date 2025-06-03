@@ -362,7 +362,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 List<Palette> targetPalette = pal.getFirst();
 
                 if (targetPalette == null) {
-                    EveryCompat.LOGGER.error("Could not get texture palette for block {} : ", block);
+                    EveryCompat.LOGGER.error("Could not get texture palette for block {} because the targetPalette is null", block);
                     continue;
                 }
 
