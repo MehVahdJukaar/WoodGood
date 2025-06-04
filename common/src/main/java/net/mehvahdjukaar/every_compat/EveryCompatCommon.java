@@ -56,6 +56,7 @@ public class EveryCompatCommon {
         addOtherCompatMod("lolmcvbop", "biomesoplenty", "lolmcv");
         addOtherCompatMod("lolmcvbmo", "biomemakeover", "lolmcv");
         addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
+        addOtherCompatMod("twilightdelight", "twilightforest", "farmersdelight");
         addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
                 "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
 
