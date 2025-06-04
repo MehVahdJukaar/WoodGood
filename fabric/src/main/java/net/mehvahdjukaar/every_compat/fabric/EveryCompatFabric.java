@@ -66,7 +66,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
         addIfLoaded("exlineawnings", () -> AwningModule::new);
         addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
-        addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
+        addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new); //!! Not maintained since 1.20.1
         addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
         addIfLoaded("mighty_mail", () -> MightyMailModule::new);
         addIfLoaded("redbits", () -> RedBitsModule::new);
