@@ -59,8 +59,6 @@ public class EveryCompatClient {
             Item item = stack.getItem();
             var compatModule = EveryCompat.getModuleOfItem(item);
             if (compatModule != null) {
-                if (modTooltip)
-                    components.add(Component.translatable("tooltip.everycomp.mod", compatModule.getModName()).withStyle(ChatFormatting.BLUE));
                 if (blockTooltip) {
                     BlockType woodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
                     if (woodType == null) woodType = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);
@@ -68,6 +66,8 @@ public class EveryCompatClient {
                         components.add(Component.translatable("tooltip.everycomp.wood_type", woodType.toString()).withStyle(ChatFormatting.BLUE));
                     }
                 }
+                if (modTooltip)
+                    components.add(Component.translatable("tooltip.everycomp.mod", compatModule.getModName()).withStyle(ChatFormatting.BLUE));
             }
         }
         if (PlatHelper.isDev()) {
