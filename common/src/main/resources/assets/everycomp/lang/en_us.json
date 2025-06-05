@@ -1,7 +1,7 @@
 {
   "itemGroup.everycomp": "Every Compat",
   "itemGroup.everycomp.everycomp": "Every Compat",
-  "tooltip.everycomp.mod": "Mod: %s",
+  "tooltip.everycomp.mod": "Supported Mod: %s",
   "tooltip.everycomp.wood_type": "Wood Type: %s",
   "tooltip.everycomp.leaf_type": "Leaves Type: %s",
   "container.everycomp.chest.name": "%s Chest",
