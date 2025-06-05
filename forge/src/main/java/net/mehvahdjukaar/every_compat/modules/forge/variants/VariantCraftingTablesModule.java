@@ -8,8 +8,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -23,16 +25,19 @@ public class VariantCraftingTablesModule extends SimpleModule {
 
     public VariantCraftingTablesModule(String modId) {
         super(modId, "vct");
-        var tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new VCTCraftingTableBlock(Utils.copyPropertySafe(w.planks).strength(2.5F).sound(SoundType.WOOD)))
                 //TEXTURE: texture is oak_craftng_table's texture
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
-                .addTexture(EveryCompat.res("block/spruce_crafting_table_top"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_top_m"))
                 .addTag(new ResourceLocation("forge:workbenches"), Registries.BLOCK)
                 .addTag(new ResourceLocation("forge:workbench"), Registries.BLOCK)
                 .addTag(new ResourceLocation("forge:workbenches"), Registries.ITEM)

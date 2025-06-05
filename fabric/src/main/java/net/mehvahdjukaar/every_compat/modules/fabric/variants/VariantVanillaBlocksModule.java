@@ -219,9 +219,12 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(modRes("crafting_tables"), Registries.BLOCK)
                 .addTag(modRes("crafting_tables"), Registries.ITEM)
                 //TEXTURE: texture is oak_craftng_table's texture
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
-                .addTexture(EveryCompat.res("block/spruce_crafting_table_top"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_top_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTabKey(tab)
