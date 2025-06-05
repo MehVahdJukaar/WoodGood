@@ -10,7 +10,19 @@
   </div>
 </div>
 
+### UPDATED: 
+- **Quark** (FORGE): 
+  - Fixed the Bookshelf's not dropping books wtih a normal axe - [#933](https://github.com/MehVahdJukaar/WoodGood/issues/933)
+  - Added the missing `#minecraft:mineable/axe` to ladder - [#945](https://github.com/MehVahdJukaar/WoodGood/issues/945)
+- **TEXTURE**: Improved the mask texture for crafting_table from **Variant Vanilla Blocks** & **Variant Crafting Tables** - [#942](https://github.com/MehVahdJukaar/WoodGood/issues/942)
+- **Every Compat** (COMMON): 
+  - More Updates for **GemsRealm** (It's currently 75% done) 
+  - Improved some codes 
+  - Improved tooltip via EN_US, "Mod: ???" to "Supported Mod: ???"
+
 ---
+
+## v2.8.6
 
 ### UPDATE: 
 - **LANG**: es_cl - @Ganbare-Lucifer
