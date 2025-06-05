@@ -150,7 +150,7 @@ public class ResourcesUtils {
         Item oakItem = BlockType.changeItemType(first.getValue(), first.getKey(), baseType);
 
         if (oakItem == null) {
-            EveryCompat.LOGGER.error("Skipped generating some item assets because oakItem is null");
+            EveryCompat.LOGGER.error("Skipped generating some item assets because oakItem is NULL for {}", Utils.getID(first.getValue()));
             return;
         }
         String baseItemName = baseType.getTypeName();
