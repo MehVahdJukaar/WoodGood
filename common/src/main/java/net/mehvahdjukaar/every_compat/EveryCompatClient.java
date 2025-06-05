@@ -52,20 +52,20 @@ public class EveryCompatClient {
     }
 
     public static void onItemTooltip(ItemStack stack, TooltipFlag tooltipFlag, List<Component> components) {
-        boolean mod = ECConfigs.MOD_TOOPTIP.get();
-        boolean block = ECConfigs.BLOCK_TYPE_TOOLTIP.get();
+        boolean modTooltip = ECConfigs.MOD_TOOPTIP.get();
+        boolean blockTooltip = ECConfigs.BLOCK_TYPE_TOOLTIP.get();
 
-        if (mod || block && (tooltipFlag.isAdvanced() || !ECConfigs.TOOLTIPS_ADVANCED.get())) {
+        if (modTooltip || blockTooltip && (tooltipFlag.isAdvanced() || !ECConfigs.TOOLTIPS_ADVANCED.get())) {
             Item item = stack.getItem();
-            var m = EveryCompat.getModuleOfItem(item);
-            if (m != null) {
-                if (mod)
-                    components.add(Component.translatable("tooltip.everycomp.mod", m.getModName()).withStyle(ChatFormatting.BLUE));
-                if (block) {
-                    BlockType w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
-                    if (w == null) w = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);
-                    if (w != null) {
-                        components.add(Component.translatable("tooltip.everycomp.wood_type", w.toString()).withStyle(ChatFormatting.BLUE));
+            var compatModule = EveryCompat.getModuleOfItem(item);
+            if (compatModule != null) {
+                if (modTooltip)
+                    components.add(Component.translatable("tooltip.everycomp.mod", compatModule.getModName()).withStyle(ChatFormatting.BLUE));
+                if (blockTooltip) {
+                    BlockType woodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
+                    if (woodType == null) woodType = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);
+                    if (woodType != null) {
+                        components.add(Component.translatable("tooltip.everycomp.wood_type", woodType.toString()).withStyle(ChatFormatting.BLUE));
                     }
                 }
             }
