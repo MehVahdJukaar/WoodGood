@@ -412,7 +412,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         this.modelConfig.addBlockModel(blockModels);
         return this;
     }
-    /// Add models/block files to a List so it can be generated BUT it's not Minecraft's
+    /// Add models/block files to a List so it can be generated BUT Minecraft is excluded
     public Builder<T, B> generateBlockModels(boolean includeInGeneration, ResourceLocation... blockModels) {
         if (this.modelConfig == ModelConfiguration.EMPTY) {
             this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
@@ -425,6 +425,15 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public Builder<T, B> generateItemModels(ResourceLocation... itemModels) {
         if (this.modelConfig == ModelConfiguration.EMPTY) {
             this.modelConfig = ModelConfiguration.createNew();
+        }
+        this.modelConfig.addItemModel(itemModels);
+        return this;
+    }
+
+    /// Add models/item files to a List so it can be generated BUT Minecraft is excluded
+    public Builder<T, B> generateItemModels(boolean includeInGeneration, ResourceLocation... itemModels) {
+        if (this.modelConfig == ModelConfiguration.EMPTY) {
+            this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
         }
         this.modelConfig.addItemModel(itemModels);
         return this;
