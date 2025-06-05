@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
+import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -12,6 +13,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,25 +26,25 @@ public class TagUtility {
      *
      * @return ResourceLocation
      **/
-    public static ResourceLocation getATagOrCreateANew(String suffixTag, String suffixAlt, BlockType blockType, ResourceSink handler, ResourceManager manager) {
+    public static ResourceLocation getATagOrCreateANew(String suffixTag, String suffixAlt, BlockType blockType, ResourceSink sink, ResourceManager manager) {
         String resLocMOD = blockType.getNamespace() + ":" + blockType.getTypeName();
 
         // ResourceLocation
-        ResourceLocation RLocLogs = new ResourceLocation(resLocMOD + "_" + suffixTag);
-        ResourceLocation RLocStems = new ResourceLocation(resLocMOD + "_" + suffixAlt);
-        ResourceLocation RLocFolders = new ResourceLocation(blockType.getNamespace() + ":" + suffixTag + "/" + blockType.getTypeName());
-        ResourceLocation RLocEC = EveryCompat.res(blockType.getAppendableId() + "_" + suffixTag);
+        ResourceLocation RLocLogs = new ResourceLocation(resLocMOD +"_"+ suffixTag); // modId:TYPE_suffix
+        ResourceLocation RLocStems = new ResourceLocation(resLocMOD +"_"+ suffixAlt);
+        ResourceLocation RLocFolders = new ResourceLocation(blockType.getNamespace() +":"+ suffixTag +"/"+ blockType.getTypeName()); // modId:suffix/TYPE
+        ResourceLocation RLocEC = EveryCompat.res(blockType.getAppendableId() +"_"+ suffixTag); // everycomp:modId/TYPE_suffix
 
-        if (manager.getResource(ResType.TAGS.getPath(RLocLogs.withPrefix("blocks/"))).isPresent())
+        if (doTagExistFor(RLocLogs, manager))
             return RLocLogs;
-        else if (manager.getResource(ResType.TAGS.getPath(RLocStems.withPrefix("blocks/"))).isPresent())
+        else if (doTagExistFor(RLocStems, manager))
             return RLocStems;
-        else if (manager.getResource(ResType.TAGS.getPath(RLocEC.withPrefix("blocks/"))).isPresent())
+        else if (doTagExistFor(RLocEC, manager))
             return RLocEC;
-        else if (manager.getResource(ResType.TAGS.getPath(RLocFolders.withPrefix("blocks/"))).isPresent())
+        else if (doTagExistFor(RLocFolders, manager))
             return RLocFolders;
         else // if RLocECTags is not available, then it will be generated
-            createAndAddDefaultTags(RLocEC, handler, blockType);
+            createAndAddDefaultTags(RLocEC, sink, blockType);
 
         return RLocEC;
 
@@ -80,6 +82,29 @@ public class TagUtility {
         // Adding to the resources
         if (isTagCreated) {
             sink.addTag(tagBuilder, Registries.BLOCK);
+            sink.addTag(tagBuilder, Registries.ITEM);
+        }
+        return isTagCreated;
+    }
+
+    /**
+     * Add any items to newly created tag
+     *
+     * @return true if tag was added successfully
+     **/
+    public static boolean createAndAddCustomTags(ResourceLocation resLoc, ResourceSink sink, Item... items) {
+        boolean isTagCreated = false;
+
+        SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(resLoc);
+        // Adding blocks to tag file
+        for (Item item : items) {
+            if (item != null) {
+                tagBuilder.addEntry(item);
+                isTagCreated = true;
+            }
+        }
+        // Adding to the resources
+        if (isTagCreated) {
             sink.addTag(tagBuilder, Registries.ITEM);
         }
         return isTagCreated;
@@ -131,6 +156,31 @@ public class TagUtility {
                 if (includeItem) pack.addTag(tagBuilder, Registries.ITEM);
             }
         }
+    }
+
+    /**
+     * Get the id tag from the mods
+     *
+     * @return Pair of ResourceLocation, Boolean
+     **/
+    public static Pair<ResourceLocation, Boolean> getATagId(String idTag, String idAlt, ResourceManager manager) {
+        // ResourceLocation
+        ResourceLocation RLocId = new ResourceLocation(idTag); // forge:suffix/EXTRA_TYPE or c:TYPE_ingot
+        ResourceLocation RLocIdAlt = new ResourceLocation(idAlt); // forge:suffix/EXTRATYPE or c:TYPEingot
+
+        if (doTagExistFor(RLocId, manager))
+            return Pair.of(RLocId, true);
+        else if (doTagExistFor(RLocIdAlt, manager))
+            return Pair.of(RLocIdAlt, true);
+
+        return Pair.of(null, false);
+    }
+
+    /// Checking if a tag exist for a block or an item
+    private static boolean doTagExistFor(ResourceLocation resLoc, ResourceManager manager) {
+        boolean blockTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("blocks/"))).isPresent();
+        boolean itemTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
+        return blockTag || itemTag;
     }
 
 }
