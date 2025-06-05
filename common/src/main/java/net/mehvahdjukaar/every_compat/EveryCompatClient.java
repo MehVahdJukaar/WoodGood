@@ -63,7 +63,7 @@ public class EveryCompatClient {
                     BlockType woodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
                     if (woodType == null) woodType = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);
                     if (woodType != null) {
-                        components.add(Component.translatable("tooltip.everycomp.wood_type", woodType.toString()).withStyle(ChatFormatting.BLUE));
+                        components.add(Component.translatable("tooltip.everycomp.wood_type", woodType.toString()).withStyle(ChatFormatting.DARK_GREEN));
                     }
                 }
                 if (modTooltip)
