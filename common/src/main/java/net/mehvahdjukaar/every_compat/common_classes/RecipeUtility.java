@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -25,7 +26,7 @@ public class RecipeUtility {
                                                  ResourceLocation newRecipeLoc, ResourceSink sink, ResourceManager manager) {
         if (Objects.nonNull(output)) {
             try (InputStream recipeStream = manager.getResource(recipeLoc)
-                    .orElseThrow(() -> new FileNotFoundException("Failed to get " + recipeLoc)).open()) {
+                    .orElseThrow(() -> new FileNotFoundException("File Not Found: " + recipeLoc)).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
                 // Editing the recipe
@@ -40,4 +41,59 @@ public class RecipeUtility {
             }
         }
     }
+
+    /**
+     * Create Recipe that use tag as an ingredient. Note the recipe has more than 1 tag
+     */
+    public static void createRecipeWithTag(ResourceLocation recipeLoc, ResourceLocation newRecipeLoc,
+                                           String oldTagIngredient, String newTagIngredient, Object newResult,
+                                           ResourceSink sink, ResourceManager manager) {
+        if (Objects.nonNull(newResult)) {
+            try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipeLoc))
+                    .orElseThrow(() -> new FileNotFoundException("File Not Found: " + recipeLoc)).open()) {
+                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+
+                // Editing the recipe
+                parseAndModifyRecipe(recipe, oldTagIngredient, newTagIngredient, Utils.getID(newResult).toString());
+
+                // Adding to the resources
+                sink.addJson(newRecipeLoc, recipe, ResType.RECIPES);
+
+            } catch (IOException e) {
+                EveryCompat.LOGGER.error("Failed to generate the recipe @ {} : {}", recipeLoc, e);
+            }
+        }
+    }
+
+    /// Parsing the recipe and modifying elements
+    public static void parseAndModifyRecipe(Object object, String oldIngredient, String newIngredien, String newResult) {
+
+        if (object instanceof JsonObject jsonObject) {
+            for (String key : jsonObject.keySet()) {
+                switch (key) {
+                    case "ingredients", "ingredient", "results" ->
+                            parseAndModifyRecipe(jsonObject.getAsJsonArray(key), oldIngredient, newIngredien, newResult);
+                    // modifying
+                    case "result" -> jsonObject.addProperty("result", newResult);
+                }
+            }
+        }
+        // Modifying ingredient or result
+        else if (object instanceof JsonArray jsonArray) {
+            for (int idx = 0; idx < jsonArray.size(); idx++) {
+                JsonObject jsonObject = jsonArray.get(idx).getAsJsonObject();
+                if (jsonObject.has("tag") && jsonObject.get("tag").getAsString().equals(oldIngredient)) {
+                    jsonObject.addProperty("tag", newIngredien);
+                }
+                else if (jsonObject.has("item") && jsonObject.get("item").getAsString().equals(oldIngredient)) {
+                    jsonObject.addProperty("item", newIngredien);
+                }
+                else if (jsonObject.has("item")) {
+                    jsonObject.addProperty("item", newResult);
+                }
+            }
+        }
+    }
+
+
 }
