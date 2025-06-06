@@ -54,8 +54,8 @@ body:
   - type: textarea
     id: list_of_woods
     attributes:
-      label: "List of Undetected GemTypes"
-      description: "GemRealms failed to detect GemTypes that should be included. The example below is an excellent to follow"
+      label: "List of Undetected WoodTypes"
+      description: "GemRealms failed to detect WoodTypes that should be included. The example below is an excellent to follow"
       placeholder: "- [ ] modID:nameGemType \n- [ ] betternether:anchor_tree (stripped_log: stripped_bark_anchor_tree | planks: anchor_tree_planks)\n- [ ] betternether:stalagnate (stripped_log: stripped_bark_stalagnate | planks: stalagnate_planks)"
     validations:
       required: true
