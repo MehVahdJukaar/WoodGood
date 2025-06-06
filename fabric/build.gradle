@@ -217,7 +217,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841534")
     modCompileOnly("curse.maven:macaws-windows-363569:4750644")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
-    modCompileOnly("curse.maven:macaws-stairs-1119394:5802479")
+    modCompileOnly("curse.maven:macaws-stairs-1119394:6155218")
 
         // OTHERS
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") //!! NOT AVAILABLE

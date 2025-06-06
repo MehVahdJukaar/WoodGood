@@ -10,15 +10,14 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
-import java.util.Objects;
-
-//SUPPORT: v1.0.0+
+//SUPPORT: v1.0.1+
 public class MacawStairsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> terrace_stairs;
@@ -32,7 +31,7 @@ public class MacawStairsModule extends SimpleModule {
 
     public MacawStairsModule(String modId) {
         super(modId, "mws");
-        var tab = modRes(modId);
+        ResourceLocation tab = modRes(modId);
 
         terrace_stairs = SimpleEntrySet.builder(WoodType.class, "terrace_stairs",
                         getModBlock("oak_terrace_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -130,6 +129,7 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("balconies"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .copyParentDrop()
                 //REASON: take a look at their //TEXTURES, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")

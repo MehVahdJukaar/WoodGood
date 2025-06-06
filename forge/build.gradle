@@ -222,7 +222,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:4841553")
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
-    modCompileOnly("curse.maven:macaws-stairs-1119394:5802535")
+    modCompileOnly("curse.maven:macaws-stairs-1119394:6155181")
 
         // OTHERS
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
