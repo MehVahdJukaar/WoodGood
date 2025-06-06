@@ -313,8 +313,9 @@ public class QuarkModule extends SimpleModule {
                 .requiresChildren("leaves") // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
-                .addTag(modRes("leaf_carpets"), Registries.BLOCK)
-                .addTag(modRes("leaf_carpets"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(new ResourceLocation("forge:mineable/sickle"), Registries.BLOCK)
+                .addTag(new ResourceLocation("mynethersdelight:resurgent_soil_plant"), Registries.BLOCK)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/oak_leaf_carpet"))
