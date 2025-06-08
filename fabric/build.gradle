@@ -157,6 +157,7 @@ dependencies {
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643") //!! Not maintained since 1.20.1
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:5579073")
+    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304")
     modCompileOnly("curse.maven:refurbished-furniture-897116:6272856") // Framework, Reflection - @DNU
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
