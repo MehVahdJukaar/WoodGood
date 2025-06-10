@@ -159,6 +159,14 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue("acacia"),
                         w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks))
                 )
+                .addTile(VariantChestBlockEntity::new)
+                .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
+                                s.replace(
+                                        "\"variantvanillablocks:chest/acacia_chest\"",
+                                        "\""+woodType.createFullIdWith(EveryCompat.MOD_ID, "chest", shortenedId(), "", "chest") +"\""
+                                )
+                        )
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("chests"), Registries.BLOCK)
@@ -167,10 +175,9 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(modRes("chests"), Registries.ITEM)
                 .addTag(new ResourceLocation("c:chests_wooden"), Registries.ITEM)
                 .addTag(new ResourceLocation("c:chests"), Registries.ITEM)
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
-                .addTile(VariantChestBlockEntity::new)
                 .defaultRecipe()
                 .setTabKey(tab)
+                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(chests);
 
@@ -409,24 +416,6 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                         null
                 );
 
-                // MODEL ITEM
-                String path = shortenedId() + "/" + wood.getAppendableId() + "_chest"; // path to json for chest
-                JsonObject modelFile;
-                ResourceLocation modelRLoc = EveryCompat.res("models/item/" + path + ".json");
-
-                if (manager.getResource(modelRLoc).isPresent()) {
-                    try (InputStream modelStream = manager.getResource(modelRLoc).get().open()) {
-                        modelFile = RPUtils.deserializeJson(modelStream);
-                        String textureID = EveryCompat.MOD_ID + ":chest/" + path;
-                        // Editing
-                        modelFile.getAsJsonObject("textures").addProperty("chest", textureID);
-
-                        // Add to Resource
-                        sink.addJson(EveryCompat.res(path), modelFile, ResType.ITEM_MODELS);
-                    } catch (IOException e) {
-                        EveryCompat.LOGGER.error("VariantVanillaBlocks: failed to open the model file: {} - {}", modelRLoc, e);
-                    }
-                }
             });
 
         });
