@@ -166,9 +166,10 @@ public class ResourcesUtils {
                     ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
 
             JsonObject json = RPUtils.deserializeJson(new ByteArrayInputStream(oakItemModel.data));
-            //adds models referenced from here. not recursive
+            //adds models/item references from here. not recursive
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
 
+            /// Modifying the parent inside models/item
             if (json.has("parent")) {
                 String parent = json.get("parent").getAsString();
                 if (parent.contains("item/generated")) {
