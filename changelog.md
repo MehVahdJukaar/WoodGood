@@ -8,11 +8,28 @@
       <li>(FB): FABRIC</li>
       <li>(NF): NEOFORGE</li>
       <li>(IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
+      <li>(COMPAT): Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod</li>
     </ul>
   </div>
 </div>
 
 ---
+
+### UPDATED: 
+- **Woodster** (NF): 
+  - Fixed the chiseled_bookshelf's missing texture - [#955](https://github.com/MehVahdJukaar/WoodGood/issues/955)
+  - ladders' properties
+  - chiseled_bookshelf's properties
+
+### ADDED: 
+- **Twilight Delight** (COMPAT): **Twilight Forest** & **Farmer's Delight** - @MehVahdJukaar
+
+### NEW SUPPORTED MOD: 
+- **More Chest Variants (LieonLion)** (FB) - @Dustine Camacho*
+
+---
+
+## v2.10.7
 
 ### UPDATED:
 - **Every Compat** (FB): Fixed the crash when either creating a world or loading into a world with **MrCrayFish's Refurbished Furniture** - [#927](https://github.com/MehVahdJukaar/WoodGood/issues/927) 
