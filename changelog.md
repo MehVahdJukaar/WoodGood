@@ -6,9 +6,23 @@
     <ul style="list-style-type: disc; padding-left: 20px;">
       <li>(COMMON): FORGE & FABRIC</li>
       <li>(IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
+      <li>(TEX): New hand-made texture for specific block or item</li>
     </ul>
   </div>
 </div>
+
+### UPDATED: 
+- **LANG**: us_en - Corrected the name for full storage drawer - [#949](https://github.com/MehVahdJukaar/WoodGood/issues/949)
+- **Quark** (COMMON): Added the missing tags to leaf_carpet - [#947](https://github.com/MehVahdJukaar/WoodGood/issues/947)
+- **Macaw's Stairs** (COMMON): Fixed the balcony's duplicated dropping - [#950](https://github.com/MehVahdJukaar/WoodGood/issues/950)
+- **Variant Vanilla Blocks** (COMMON): Fixed the chests' incorrect texture as an item in inventory - [#954](https://github.com/MehVahdJukaar/WoodGood/issues/954)
+
+### ADDED: 
+- **Abnormal's Boatload** with **Vanilla Backport** (TEX): boat & boat_with_chests - @qwerty9745 (via Discord)
+
+---
+
+## v2.8.7
 
 ### UPDATED: 
 - **Quark** (FORGE): 
