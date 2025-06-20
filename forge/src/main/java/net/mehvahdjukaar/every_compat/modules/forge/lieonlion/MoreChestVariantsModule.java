@@ -1,30 +1,40 @@
 package net.mehvahdjukaar.every_compat.modules.forge.lieonlion;
 
 import com.google.gson.JsonObject;
+import io.github.lieonlion.mcv.block.MoreChestBlock;
+import io.github.lieonlion.mcv.block.entity.MoreChestBlockEntity;
+import io.github.lieonlion.mcv.client.renderer.MoreChestRenderer;
 import io.github.lieonlion.mcv.init.McvBlockInit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
-import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
-import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
-import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
+import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
+import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,6 +45,8 @@ import net.minecraftforge.common.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
@@ -47,12 +59,18 @@ public class MoreChestVariantsModule extends SimpleModule {
 
     public MoreChestVariantsModule(String modID) {
         super(modID, "mcv");
+        ResourceKey<CreativeModeTab> functionalTab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
+        ResourceKey<CreativeModeTab> redstoneTab = CreativeModeTabs.REDSTONE_BLOCKS;
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         McvBlockInit.OAK_CHEST, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatChestBlock(this::getChestTile,
                                 Utils.copyPropertySafe(Blocks.CHEST).mapColor(MapColor.WOOD))
                 )
+                .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
+                    s.replace("\"lolmcv:entity/chest/oak\"",
+                            "\""+woodType.createFullIdWith(EveryCompat.MOD_ID, "entity/chest", shortenedId(), "", "chest")+"\"" )
+                ))
                 .addTile(MoreChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
@@ -66,7 +84,7 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
                 .addTag(new ResourceLocation("lieonstudio:chests/normal"), Registries.ITEM)
                 .addTag(new ResourceLocation("lieonstudio:chests/wooden"), Registries.ITEM)
-                .setTabKey(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+                .setTabKey(functionalTab)
                 .defaultRecipe()
                 .build();
         this.addEntry(chests);
@@ -76,6 +94,10 @@ public class MoreChestVariantsModule extends SimpleModule {
                         w -> new CompatTrappedChestBlock(this::getTrappedTile,
                                 Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
                 )
+                .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
+                    s.replace("\"lolmcv:entity/chest/trapped/oak\"",
+                            "\""+woodType.createFullIdWith(EveryCompat.MOD_ID, "entity/chest", shortenedId(), "", "trapped_chest")+"\"" )
+                ))
                 .addTile(MoreTrappedBlockEntity::new)
                 .addTag(new ResourceLocation("lieonstudio:chests/wooden"), Registries.BLOCK)
                 .addTag(new ResourceLocation("lieonstudio:chests/trapped"), Registries.BLOCK)
@@ -88,7 +110,7 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(new ResourceLocation("lieonstudio:chests/wooden"), Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
-                .setTabKey(CreativeModeTabs.REDSTONE_BLOCKS)
+                .setTabKey(redstoneTab)
                 .defaultRecipe()
                 .build();
         this.addEntry(trappedChests);
@@ -154,7 +176,6 @@ public class MoreChestVariantsModule extends SimpleModule {
                         EveryCompat.res("entity/mcv_chest_right_o"),
                         EveryCompat.res("entity/mcv_trapped_right_o"), 0
                 );
-
 
                 // MODEL BLOCK
                 String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
