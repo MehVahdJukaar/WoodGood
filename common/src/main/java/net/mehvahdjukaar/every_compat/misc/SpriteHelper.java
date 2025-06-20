@@ -291,6 +291,7 @@ public class SpriteHelper {
         // Terrestria
         addOptional("terrestria:sakura_log", "_top", "terrestria:block/sakura_log_section");
         addOptional("terrestria:yucca_palm_log", "_top", "terrestria:block/yucca_palm_log_section");
+        addOptional("terrestria:stripped_yucca_palm_log", "_top", "terrestria:block/stripped_yucca_palm_log_section");
 
         // The Abyss: The Other Side
         addOptional("theabyss:rena_log", "_top", "theabyss:block/rena_log");
