@@ -11,6 +11,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -22,6 +24,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.io.FileNotFoundException;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 //SUPPORT: v3.0.6+
@@ -356,20 +360,27 @@ public class HandcraftedModule extends SimpleModule {
                     String texturePath = woodType.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(), "counter/",
                             "counter_" + num);
 
-                    //PATH: shortenedId / namespace / TYPE _counter_ TYPE _planks_ num
+                    //PATH: shortenedId / namespace / TYPE _counter_acacia_planks_ num
                     String path = woodType.createPathWith(shortenedId(), "",
-                            "counter_" + woodType.getTypeName() + "_planks_" + num);
+                            "counter_acacia_planks_" + num);
 
-                    // Replace the strings
-                    String modelOak = modelFile
-                            .replace("[planks]", Utils.getID(woodType.planks).withPrefix("block/").toString())
+                    String planksTexture = "";
+
+                    try {
+                        planksTexture = RPUtils.findFirstBlockTextureLocation(manager, woodType.planks).toString();
+                        if (planksTexture.isEmpty()) planksTexture = "particlesIsMissing";
+                    } catch (FileNotFoundException ignored) {}
+
+                    String modifiedModel = modelFile
+                            .replace("[planks]", planksTexture)
                             .replace("[modTexture]", modId + ":block/counter/top/acacia_planks")
                             .replace("[blockTexture]", texturePath);
+                    // Replace the strings
 
 
 
                         // Adding to the Resources
-                    JsonElement oakJson = JsonParser.parseString(modelOak);
+                    JsonElement oakJson = JsonParser.parseString(modifiedModel);
                     sink.addBlockModel(EveryCompat.res(path), oakJson);
                 }
 
