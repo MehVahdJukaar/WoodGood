@@ -73,7 +73,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: log
+                //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("compact_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -90,7 +90,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: loglogs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bulk_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -107,7 +107,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: loglogs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("loft_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -124,11 +124,12 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("fence", "stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: loglogs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("balconies"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .copyParentDrop()
                 //REASON: take a look at their //TEXTURES, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
@@ -142,7 +143,7 @@ public class MacawStairsModule extends SimpleModule {
                 .requiresChildren("stripped_log") //REASON: textures
                 .requiresFromMap(balconies.blocks) //REASON: recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: loglogs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("railings"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -159,7 +160,7 @@ public class MacawStairsModule extends SimpleModule {
                 )
                 .requiresChildren("slab", "stripped_log") //REASON: textures, recipes
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //TEXTURES: loglogs
+                //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("platforms"), Registries.BLOCK)
                 .setTabKey(tab)
