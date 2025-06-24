@@ -58,8 +58,8 @@ dependencies {
 
         //+ GENERAL
     modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
-    modCompileOnly("curse.maven:beautiful-campfires-1085950:6162192")
     modCompileOnly("curse.maven:backpacked-352835:5852971") //!! BETA
+    modCompileOnly("curse.maven:beautiful-campfires-1085950:6162192")
     modCompileOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
     modCompileOnly("curse.maven:chipped-456956:5813118")
     modCompileOnly("curse.maven:create-624165:5168511") //!! 1.20.1
@@ -76,6 +76,7 @@ dependencies {
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:6302231")
     modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
+    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304")
     modCompileOnly("curse.maven:quark-243121:5093415") //!! 1.20.1
     modCompileOnly("curse.maven:refurbished-furniture-897116:6272856") // Framework
