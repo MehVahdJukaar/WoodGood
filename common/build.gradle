@@ -84,6 +84,7 @@ dependencies {
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
     modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603") //!! 1.20.1
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //FABRIC //!! 1.20.1
 

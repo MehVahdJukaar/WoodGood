@@ -184,6 +184,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:5890187")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //@ 1.20.1-NOT_AVAILABLE
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995") //!! 1.20.1
 
         //- OTHER MAVENS
@@ -239,7 +240,6 @@ dependencies {
     modCompileOnly("curse.maven:tropicraft-254794:5658664")
     modCompileOnly("curse.maven:valhelsia-structures-347488:6360484") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //!! 1.20.1
     modCompileOnly("curse.maven:woodster-869951:6425772")
     modCompileOnly("curse.maven:woodworks-543610:6449924") // Blueprint
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:5752681")
