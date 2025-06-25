@@ -190,6 +190,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
 //    modRuntimeOnly("curse.maven:missing-wilds-forge-634277:5053677")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5263631") // Monolib
+//    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272885") // Framework
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:5981672")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core
@@ -240,7 +241,6 @@ dependencies {
     modCompileOnly("curse.maven:just-a-raft-mod-274350:5777239")
     modCompileOnly("curse.maven:lightmans-currency-472521:6524190")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
-    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619") // Quad
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971") // Quad
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")

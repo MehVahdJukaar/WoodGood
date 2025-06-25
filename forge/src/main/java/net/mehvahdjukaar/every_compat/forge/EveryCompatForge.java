@@ -26,7 +26,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButt
 import net.mehvahdjukaar.every_compat.modules.forge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreChestVariantsModule;
-import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.more.MoreCraftingTablesForForgeModule;
@@ -124,7 +123,6 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("woodworks", () -> WoodworksModule::new);
         addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addIfLoaded("xercamod", () -> XercaModule::new);
-        addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
 
         if (PlatHelper.isModLoaded("mcwdoors")) {
             addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);

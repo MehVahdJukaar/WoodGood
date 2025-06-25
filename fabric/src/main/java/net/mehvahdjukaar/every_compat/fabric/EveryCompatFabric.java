@@ -16,7 +16,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.excessive_building.Excessiv
 import net.mehvahdjukaar.every_compat.modules.fabric.exlines.AwningModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lauchs.LauchsShuttersModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.lieonlion.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
@@ -67,7 +66,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         addIfLoaded("exlineawnings", () -> AwningModule::new);
         addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
         addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
-        addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
         addIfLoaded("mighty_mail", () -> MightyMailModule::new);
         addIfLoaded("redbits", () -> RedBitsModule::new);
         addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);

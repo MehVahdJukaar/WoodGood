@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModul
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.lieonlion.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.more_beautiful_torches.MoreBeautifulTorches;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
@@ -99,6 +100,7 @@ public class EveryCompatCommon {
         addIfLoaded("furnish", () -> FurnishModule::new);
         addIfLoaded("hearth_and_home", () -> HearthAndHomeModule::new);
         addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches::new);
+        addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
         addIfLoaded("quark", () -> QuarkModule::new);
         addIfLoaded("twigs", () -> TwigsModule::new);
         addIfLoaded("refurbished_furniture", () -> RefurbishedFurnitureModule::new);

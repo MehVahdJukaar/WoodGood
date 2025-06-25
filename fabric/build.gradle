@@ -188,6 +188,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118730")
 //    modRuntimeOnly("curse.maven:furnish-547069:4821516")
+//    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:5053651")
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
 //    modRuntimeOnly("curse.maven:villagersplus-fabric-809542:4996993")
@@ -234,7 +235,6 @@ dependencies {
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969")
     modCompileOnly("curse.maven:regions-unexplored-659110:5558172") // Forge-Config-Api-Port
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143")

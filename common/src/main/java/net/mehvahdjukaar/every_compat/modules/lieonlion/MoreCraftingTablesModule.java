@@ -1,13 +1,17 @@
-package net.mehvahdjukaar.every_compat.modules.fabric.lieonlion;
+package net.mehvahdjukaar.every_compat.modules.lieonlion;
 
 import io.github.lieonlion.lolmct.block.MoreCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
@@ -19,7 +23,9 @@ public class MoreCraftingTablesModule extends SimpleModule {
 
     public MoreCraftingTablesModule(String modId) {
         super(modId, "lolmct");
-        var tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
+
+        String namespace = (PlatHelper.getPlatform().isForge()) ? "forge" : "c";
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"),
@@ -29,10 +35,11 @@ public class MoreCraftingTablesModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/lolmct/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
-                .addTag(new ResourceLocation("c:workbench"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(new ResourceLocation(namespace,"workbench"), Registries.BLOCK)
                 .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.BLOCK)
                 .addTag(new ResourceLocation("lieonstudio:crafting_tables"), Registries.ITEM)
-                .addTag(new ResourceLocation("c:workbench"), Registries.ITEM)
+                .addTag(new ResourceLocation(namespace,"workbench"), Registries.ITEM)
                 .addTag(new ResourceLocation("quad:fuel/wood"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
