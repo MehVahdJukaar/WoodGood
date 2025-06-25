@@ -60,7 +60,8 @@ dependencies {
     modCompileOnly("curse.maven:handcrafted-538214:5118730")
     modCompileOnly("curse.maven:hearth-and-home-849364:4828281")
 //    modCompileOnly("curse.maven:more-beautiful-torches-860325:5263631") // MonoLib - Not really needed
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969")
+    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476602") // Quad - LieOnLion
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969") // Quad - LieOnLion
     modCompileOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
     modCompileOnly("curse.maven:quark-243121:5093415")
     modCompileOnly("curse.maven:storage-drawers-223852:5981394")

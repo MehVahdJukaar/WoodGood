@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModul
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
+import net.mehvahdjukaar.every_compat.modules.lieonlion.MoreChestVariantsModule;
 import net.mehvahdjukaar.every_compat.modules.lieonlion.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.more_beautiful_torches.MoreBeautifulTorches;
@@ -89,29 +90,30 @@ public class EveryCompatCommon {
 
     //!! =========================================== Add Modules ==================================================== \\
         addIfLoaded("another_furniture", () -> AnotherFurnitureModule::new);
-        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("backpacked", () -> BackpackedModule::new);
         addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
         addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
         addIfLoaded("campchair", () -> CampChairModule::new);
         addIfLoaded("chipped", () -> ChippedModule::new);
+        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule::new);
+        addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);
         addIfLoaded("friendsandfoes", () -> FriendsAndFoesModule::new);
         addIfLoaded("furnish", () -> FurnishModule::new);
-        addIfLoaded("hearth_and_home", () -> HearthAndHomeModule::new);
-        addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches::new);
-        addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
-        addIfLoaded("quark", () -> QuarkModule::new);
-        addIfLoaded("twigs", () -> TwigsModule::new);
-        addIfLoaded("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
-        addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);
         addIfLoaded("handcrafted", () -> HandcraftedModule::new);
-        addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
-        addIfLoaded("villagersplus", () -> VillagersPlusModule::new);
-        addIfLoaded("table_top_craft", () -> TableTopCraftModule::new);
+        addIfLoaded("hearth_and_home", () -> HearthAndHomeModule::new);
+        addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
+        addIfLoaded("lolmcv", () -> MoreChestVariantsModule::new);
+        addIfLoaded("missingwilds", () -> MissingWildModule::new);
+        addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches::new);
+        addIfLoaded("quark", () -> QuarkModule::new);
+        addIfLoaded("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
         addIfLoaded("storagedrawers", () -> StorageDrawersModule::new);
         addIfLoaded("stylishstiles", () -> StylishStilesModule::new);
-        addIfLoaded("missingwilds", () -> MissingWildModule::new);
+        addIfLoaded("table_top_craft", () -> TableTopCraftModule::new);
+        addIfLoaded("twigs", () -> TwigsModule::new);
+        addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
+        addIfLoaded("villagersplus", () -> VillagersPlusModule::new);
 
     }
 }

@@ -25,7 +25,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.functional_storage.Functiona
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
-import net.mehvahdjukaar.every_compat.modules.forge.lieonlion.MoreChestVariantsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.more.MoreCraftingTablesForForgeModule;
@@ -88,11 +87,11 @@ public class EveryCompatForge extends EveryCompatCommon {
 //!! =============================================== Add Modules ==================================================== \\
         addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
         addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
+        addIfLoaded("bbb", () -> BuildingButBetterModule::new);
         addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
         addIfLoaded("blocksplus", () -> BlocksPlusModule::new);
         addIfLoaded("boatload", () -> BoatLoadModule::new);
         addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
-        addIfLoaded("bbb", () -> BuildingButBetterModule::new);
         addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
         addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
         addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
@@ -102,12 +101,11 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("functionalstorage", () -> FunctionalStorageModule::new);
         addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
         addIfLoaded("justaraftmod", () -> JustARaftModule::new);
-        addIfLoaded("lolmcv", () -> MoreChestVariantsModule::new);
+        addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
         addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
         addIfLoaded("mighty_mail", () -> MightyMailModule::new);
         addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
-        addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
         addIfLoaded("pokecube_legends", () -> PokecubeLegendsModule::new);
         addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
         addIfLoaded("redeco", () -> ReDecoModule::new);

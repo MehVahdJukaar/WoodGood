@@ -188,6 +188,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118730")
 //    modRuntimeOnly("curse.maven:furnish-547069:4821516")
+//    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5476602") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:5053651")
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework

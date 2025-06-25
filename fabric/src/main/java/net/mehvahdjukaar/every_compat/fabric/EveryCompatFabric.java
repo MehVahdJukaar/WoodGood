@@ -61,6 +61,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         addIfLoaded("beautify", () -> BeautifyRefabricatedModule::new);
         addIfLoaded("bewitchment", () -> BewitchmentModule::new);
         addIfLoaded("clutter", () -> ClutterModule::new);
+        addIfLoaded("create", () -> CreateModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
         addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
         addIfLoaded("exlineawnings", () -> AwningModule::new);
@@ -78,7 +79,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
 
-        addIfLoaded("create", () -> CreateModule::new); // ONLY TEMP until FABRIC v6.0.0 is out
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("twilightforest", () -> TwilightForestModule::new); //!! NOT AVAILABLE
