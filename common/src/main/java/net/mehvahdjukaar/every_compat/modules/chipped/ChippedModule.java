@@ -1963,7 +1963,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -1976,7 +1976,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -1989,7 +1989,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2002,7 +2002,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2015,7 +2015,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2028,7 +2028,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2041,7 +2041,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2054,7 +2054,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2067,7 +2067,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2080,7 +2080,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2093,7 +2093,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2106,7 +2106,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2119,7 +2119,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/reinforced_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/reinforced_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2132,7 +2132,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2145,7 +2145,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2158,7 +2158,7 @@ public class ChippedModule extends SimpleModule {
                         w -> new RotatedPillarBlock(copyStrippedLogSafe(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
-                .createPaletteFromChild(Palette::reduceDown,"stripped_log")
+                .createPaletteFromChild(this::lightPalette,"stripped_log")
                 .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log"))
                 .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -2174,6 +2174,18 @@ public class ChippedModule extends SimpleModule {
     }
 
     // TYPE: methods
+    private void lightPalette(Palette p) {
+        int leftover = p.size() - 1;
+
+        if (leftover > 2) {
+            p.reduceDown();
+        }
+        else { // paletteColor must have 2 colors
+            PaletteColor paletteColor = p.get(0);
+            p.add(paletteColor);
+        }
+    }
+
     private void dullPalette(Palette p) {
         int leftover = p.size() - 3;
 
