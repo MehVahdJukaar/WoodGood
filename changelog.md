@@ -5,11 +5,36 @@
   <div style="text-align: left;">
     <ul style="list-style-type: disc; padding-left: 20px;">
       <li>(COMMON): FORGE & FABRIC</li>
+      <li>(FB): FABRIC</li>
+      <li>(FG): FORGE</li>
       <li>(IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
       <li>(TEX): New hand-made texture for specific block or item</li>
     </ul>
   </div>
 </div>
+
+### ADDED:
+- **TEXTURE** (TEX): Applying the chest's texture for AP's twisted from **Quark** with **Architect's Palette (AP)** to **Woodworks** with **Architect's Palette**
+- **Terrestria** (IT): stripped_yucca_palm's top texture
+  
+### UPDATED
+- **Woodworks** (FG): Multiple Blocks' tags - [#965](https://github.com/MehVahdJukaar/WoodGood/issues/965) , #963, #
+- **MOre Chest Variants** (FG): Fixed the chests' incorrect texture in inventory - [#966](https://github.com/MehVahdJukaar/WoodGood/issues/966)
+- **Handcrafted** (COMMON): Updated for **Moonlight Lib**'s v2.14.9+ 
+- **Regions Unexplored** (COMMON): The outdated codes to generate shrub's texture due to multi-thread code from **Moonlight lib**
+- **MOVED TO COMMON**:
+  - **More Chest Variants** (LieOnLion) - This also mean FABRIC version is supported 
+  - **More Crafting Tables** (LieOnLion) 
+- **Chipped** (COMMON): 
+  - [#968](https://github.com/MehVahdJukaar/WoodGood/issues/968) - is fixed by **Moonlight Lib v2.14.11**
+  - Fixed the stripped_log's texture with "Palette size can't be 0" in the latest.log for some Wood Mods (ex: **Productive Trees**)
+- **Re:Deco** (FG): Fixed the loot_table of chairs, benches, stools not dropping cushions - [#969](https://github.com/MehVahdJukaar/WoodGood/issues/969)
+- **Corail Pillar** (FG): Corrected blocks' incorrect recipe and removed an code that manually added recipes for 2 blocks
+- **Every Compat**: Fixed an concurrency issue (multi-thread stuff) with `addOtherCompatMod()` method - @MehVahdJukaar
+
+---
+
+## v2.8.8
 
 ### UPDATED: 
 - **LANG**: us_en - Corrected the name for full storage drawer - [#949](https://github.com/MehVahdJukaar/WoodGood/issues/949)
