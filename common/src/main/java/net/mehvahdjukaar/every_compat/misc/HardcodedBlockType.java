@@ -43,6 +43,9 @@ public class HardcodedBlockType {
 
 
         /// ========== INCLUDE ========== \\\
+        // Enderscape's murublight_shelf prevent Another-Furniture's shelf from being generated
+        if (isWoodFrom("another_furniture", "", "", "enderscape:murublight", "")) return false;
+
         // Makes it so the Guita's Branches block still registers if another mod adds a branch block/item
         if (isWoodFrom("branches", "", "", "", "branch")) return false;
 
