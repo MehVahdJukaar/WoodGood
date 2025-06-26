@@ -13,6 +13,15 @@
   </div>
 </div>
 
+### UPDATED: 
+- **MOVED TO COMMON**:
+  - **Variant Vanilla Blocks**
+- **Re:Deco** (FG): Fixed the loot_table of pedestal, display_case, sword_mount not dropping fabric - [#969](https://github.com/MehVahdJukaar/WoodGood/issues/969)
+
+---
+
+## v2.8.9
+
 ### ADDED:
 - **TEXTURE** (TEX): Applying the chest's texture for AP's twisted from **Quark** with **Architect's Palette (AP)** to **Woodworks** with **Architect's Palette**
 - **Terrestria** (IT): stripped_yucca_palm's top texture
@@ -28,7 +37,7 @@
 - **Chipped** (COMMON): 
   - [#968](https://github.com/MehVahdJukaar/WoodGood/issues/968) - is fixed by **Moonlight Lib v2.14.11**
   - Fixed the stripped_log's texture with "Palette size can't be 0" in the latest.log for some Wood Mods (ex: **Productive Trees**)
-- **Re:Deco** (FG): Fixed the loot_table of chairs, benches, stools not dropping cushions - [#969](https://github.com/MehVahdJukaar/WoodGood/issues/969)
+- **Re:Deco** (FG): Fixed the loot_table of chairs, benches, stools not dropping fabric - [#969](https://github.com/MehVahdJukaar/WoodGood/issues/969)
 - **Corail Pillar** (FG): Corrected blocks' incorrect recipe and removed an code that manually added recipes for 2 blocks
 - **Every Compat**: Fixed an concurrency issue (multi-thread stuff) with `addOtherCompatMod()` method - @MehVahdJukaar
 
