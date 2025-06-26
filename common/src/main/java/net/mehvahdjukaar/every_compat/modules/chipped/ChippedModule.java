@@ -405,7 +405,7 @@ public class ChippedModule extends SimpleModule {
                         getModBlock("enclosed_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
-                .addTexture(modRes("block/oak_planks/ctm/common_textures/0"))
+                //TEXTURES: cratedPlanks' modRes("block/oak_planks/ctm/common_textures/0")
                 .addTexture(modRes("block/oak_planks/ctm/enclosed_oak_planks_ctm/1"))
                 .addTexture(modRes("block/oak_planks/ctm/enclosed_oak_planks_ctm/2"))
                 .addTexture(modRes("block/oak_planks/ctm/enclosed_oak_planks_ctm/3"))
@@ -2182,6 +2182,7 @@ public class ChippedModule extends SimpleModule {
         }
         else { // paletteColor must have 2 colors
             PaletteColor paletteColor = p.get(0);
+            paletteColor.getDarkened();
             p.add(paletteColor);
         }
     }
