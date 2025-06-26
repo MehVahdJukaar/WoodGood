@@ -45,7 +45,7 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
                 .setTabKey(tab)
-                .addRecipe(modRes("stonecutting/pillar_oak_planks"))
+                .addRecipe(modRes("stonecutting/small_pillar_oak_log"))
                 .build();
         this.addEntry(SMALL_LOG_PILLAR);
 
@@ -68,48 +68,10 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
                 .setTabKey(tab)
-//                .addRecipe(modRes("stonecutting/"))
+                .addRecipe(modRes("stonecutting/pillar_oak_planks"))
                 .build();
         this.addEntry(SMALL_PLANK_PILLAR);
 
-    }
-
-    @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
-
-        LOG_PILLAR.blocks.forEach((wood, item) -> {
-            // LOG
-            stonecuttingRecipe(handler, wood.log, item, 2);
-            stonecuttingRecipe(handler, wood.log, SMALL_LOG_PILLAR.blocks.get(wood), 4);
-
-            // PLANKS
-            stonecuttingRecipe(handler, wood.planks, PLANK_PILLAR.blocks.get(wood), 2);
-            stonecuttingRecipe(handler, wood.planks, SMALL_PLANK_PILLAR.blocks.get(wood), 4);
-
-        });
-    }
-
-    public void stonecuttingRecipe(ServerDynamicResourcesHandler handler, Block input, Block output, int count) {
-        String recipeJSON = """
-            {   
-                "type":"minecraft:stonecutting",
-                "ingredient":{
-                    "item":"[INPUT]"
-                },
-                "result":"[OUTPUT]",
-                "count": amount
-            }
-        """;
-
-        String newJson = recipeJSON
-                .replace("[INPUT]", Utils.getID(input).toString())
-                .replace("[OUTPUT]", Utils.getID(output).toString())
-                .replace("amount", String.valueOf(count));
-
-        ResourceLocation resLoc = Utils.getID(output); // provide everycomp:cpr/namespace/BlockID
-
-        handler.getPack().addBytes(resLoc, newJson.getBytes(), ResType.RECIPES);
     }
 
 }
