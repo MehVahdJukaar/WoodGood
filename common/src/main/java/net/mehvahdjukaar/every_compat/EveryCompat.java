@@ -74,7 +74,7 @@ public abstract class EveryCompat {
         addOtherCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
     }
 
-    public static  void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
+    public static void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, supportedModId);
         addOtherCompatMod(compatModId, List.of(fromModId), list);
