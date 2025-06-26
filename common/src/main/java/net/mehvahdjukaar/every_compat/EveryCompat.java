@@ -89,7 +89,7 @@ public abstract class EveryCompat {
         addOtherCompatMod(compatModId, fromModId, List.of(supportedModId));
     }
 
-    public static void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
+    public static synchronized void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
         COMPAT_MODS.add(new CompatMod(compatModId, fromModId, supportedModId));
         DEPENDENCIES.add(compatModId);
         DEPENDENCIES.addAll(fromModId);
