@@ -123,6 +123,7 @@ public class ReDecoModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .copyParentDrop() //REASON: included the cushion
                 .build();
         this.addEntry(chairs);
 
@@ -135,6 +136,7 @@ public class ReDecoModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .copyParentDrop() //REASON: included the cushion
                 .build();
         this.addEntry(stools);
 
@@ -147,6 +149,7 @@ public class ReDecoModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .copyParentDrop() //REASON: included the cushion
                 .build();
         this.addEntry(benches);
 
