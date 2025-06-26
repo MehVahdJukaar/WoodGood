@@ -1,16 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored;
 
-import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -21,7 +16,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -32,9 +26,7 @@ import net.regions_unexplored.block.RuBlocks;
 import net.regions_unexplored.world.level.block.plant.branch.BranchBlock;
 import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -52,14 +44,14 @@ public class RegionsUnexploredModule extends SimpleModule {
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
             getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
             w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()), "branch")
-        )
-            .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-            .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
-            .addTag(modRes("branches"), Registries.BLOCK)
-            .addTag(modRes("branches"), Registries.ITEM)
-            .setTabKey(tab)
-            .addRecipe(modRes("oak_branch_from_oak_log"))
-            .build();
+                )
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
+                .addTag(modRes("branches"), Registries.BLOCK)
+                .addTag(modRes("branches"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("oak_branch_from_oak_log"))
+                .build();
         this.addEntry(branchs);
 
         shrubs = SimpleEntrySet.builder(LeavesType.class, "shrub",
@@ -78,7 +70,6 @@ public class RegionsUnexploredModule extends SimpleModule {
                 .addTag(modRes("shrubs"), Registries.BLOCK)
                 .addTag(modRes("shrub_can_survive_on"), Registries.BLOCK)
                 .addTag(modRes("shrubs"), Registries.ITEM)
-                .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
                 .setTabKey(tab)
                 .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .addRecipe(modRes("dark_oak_shrub"))
@@ -94,7 +85,7 @@ public class RegionsUnexploredModule extends SimpleModule {
     }
 
     @Override
-    // Tags
+    //TAGS
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
@@ -112,7 +103,7 @@ public class RegionsUnexploredModule extends SimpleModule {
     }
 
     @Override
-    // Textures & Models
+    //TEXTURES
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 
@@ -158,121 +149,54 @@ public class RegionsUnexploredModule extends SimpleModule {
                 EveryCompat.LOGGER.error("Failed to get Branch Item Texture for ", e);
             }
 
-            // Generating shrub textures ===========================================================================================
+// Generating shrub textures ===========================================================================================
             try (
-                    // middle is where the log color is located below the leave via dark_oak_shrub_top
-                    TextureImage shrubMiddle = TextureImage.open(manager,
-                            EveryCompat.res("block/regions_unexplored/dark_oak_shrub_middle"));
-                    TextureImage shrubBottom = TextureImage.open(manager, modRes("block/dark_oak_shrub_bottom"))
+                    // middle is the bark part of shrub_top's
+                    TextureImage shrubTop = TextureImage.open(manager, modRes("block/dark_oak_shrub_top"));
+                    TextureImage shrubBottom = TextureImage.open(manager, modRes("block/dark_oak_shrub_bottom"));
+                    TextureImage shrubTopMask = TextureImage.open(manager, EveryCompat.res("block/ru/mask_shrub_top"));
+                    TextureImage shrubMiddleMask = TextureImage.open(manager, EveryCompat.res("block/ru/mask_shrub_middle"))
             ) {
 
                 shrubs.blocks.forEach((leavesType, block) -> {
-                    // Modifying BLOCK MODEL
-                    String shrubPath = shortenedId() + "/" + leavesType.getAppendableId() + "_shrub";
+                    String shrubPath = leavesType.createPathWith(shortenedId(), "shrub");
 
-                    String crossModel = """
-                            {
-                                "parent": "minecraft:block/cross",
-                                "render_type": "cutout",
-                                "textures": {
-                                    "particle": "[shrub_top]",
-                                    "cross_tint": "[shrub_top]",
-                                    "cross": "[shrub_middle]"
-                                },
-                                "elements": [
-                                    {   "from": [ 0.8, 0, 8 ],
-                                        "to": [ 15.2, 16, 8 ],
-                                        "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
-                                        "shade": false,
-                                        "faces": {
-                                            "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" },
-                                            "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" }
-                                        }
-                                    },
-                                    {   "from": [ 8, 0, 0.8 ],
-                                        "to": [ 8, 16, 15.2 ],
-                                        "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
-                                        "shade": false,
-                                        "faces": {
-                                            "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" },
-                                            "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" }
-                                        }
-                                    },
-                                    {   "from": [ 0.8, 0, 8 ],
-                                        "to": [ 15.2, 16, 8 ],
-                                        "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
-                                        "shade": false,
-                                        "faces": {
-                                            "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross_tint", "tintindex": 0 },
-                                            "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross_tint", "tintindex": 0 }
-                                        }
-                                    },
-                                    {   "from": [ 8, 0, 0.8 ],
-                                        "to": [ 8, 16, 15.2 ],
-                                        "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
-                                        "shade": false,
-                                        "faces": {
-                                            "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross_tint", "tintindex": 0 },
-                                            "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross_tint", "tintindex": 0 }
-                                        }
-                                    }
-                                ]
-                            }
-                            """;
-
-
-                    String blockID = "everycomp:block/" + shrubPath;
-
-                    String newModel = crossModel.replace("[shrub_middle]", blockID + "_middle")
-                            .replace("[shrub_top]", blockID + "_top");
-
-                    sink.addBytes(EveryCompat.res(shrubPath), newModel.getBytes(), ResType.BLOCK_MODELS);
-
-                    // Modifying ITEM MODEL ================================================================================
-                    var itemPath = ResType.ITEM_MODELS.getPath(EveryCompat.res(shrubPath));
-
-                    try (InputStream modelItemStream = manager.getResource(itemPath)
-                            .orElseThrow(FileNotFoundException::new).open()) {
-
-                        JsonObject modelItem = RPUtils.deserializeJson(modelItemStream);
-
-                        modelItem.getAsJsonObject("textures")
-                                .addProperty("layer0", blockID + "_top");
-                        modelItem.getAsJsonObject("textures")
-                                .addProperty("layer1", blockID + "_middle");
-
-                        sink.addJson(EveryCompat.res(shrubPath), modelItem, ResType.ITEM_MODELS);
-
-                    } catch (IOException e) {
-                        EveryCompat.LOGGER.error("Failed to open the item model file via {} : {}", itemPath, e);
-                    }
-
-                    // Generating textures for shrubs ======================================================================
+                    // Generating textures for shrubs
                     try (TextureImage logTexture = TextureImage.open(manager,
                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.getWoodType().log,
-                                    SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                                    SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                         TextureImage leavesTexture = TextureImage.open(manager,
+                                 RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves,
+                                         SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
                     ) {
                         Respriter respriterBottom = Respriter.of(shrubBottom);
-
-                        Respriter respriterMiddle = Respriter.of(shrubMiddle);
+                        Respriter respriterTop = Respriter.masked(shrubTop, shrubMiddleMask);
 
                         List<Palette> list_logSide = Palette.fromAnimatedImage(logTexture);
+                        List<Palette> list_leaves = Palette.fromAnimatedImage(leavesTexture);
 
-                        // Recoloring the log middle & bottom
-                        TextureImage recoloredMiddle = respriterMiddle.recolor(list_logSide);
-                        TextureImage recoloredBottom = respriterBottom.recolor(list_logSide);
+                        // Recoloring the shrub's Bottom
+                        TextureImage finishedShrubBottom = respriterBottom.recolor(list_logSide);
+
+                        // Recoloring the shrub's Top (the leaves part)
+                        TextureImage recoloredShrubTop = respriterTop.recolor(list_leaves);
+
+                        // Recoloring the shrub's Middle (the bark part)
+                        Respriter respriterMiddle = Respriter.masked(recoloredShrubTop, shrubTopMask);
+
+                        TextureImage finishedShrub = respriterMiddle.recolor(list_logSide);
 
                         // Adding to the resource
                         String resLoc = "block/" + shrubPath;
-                        sink.addAndCloseTexture(EveryCompat.res(resLoc + "_middle"), recoloredMiddle);
-                        sink.addAndCloseTexture(EveryCompat.res(resLoc + "_bottom"), recoloredBottom);
+                        sink.addAndCloseTexture(EveryCompat.res(resLoc + "_bottom"), finishedShrubBottom);
+                        sink.addAndCloseTexture(EveryCompat.res(resLoc + "_top"), finishedShrub);
 
                     } catch (IOException e) {
-                        EveryCompat.LOGGER.error("Failed to get texture for {} : {}", block.toString(), e);
+                        EveryCompat.LOGGER.error("Failed to get texture for {} : {}", block.toString(), e.getMessage());
                     }
                 });
             } catch (IOException e) {
-                EveryCompat.LOGGER.error("Failed to open textures for: ", e);
+                EveryCompat.LOGGER.error("Failed to open textures for: {}", e.getMessage());
             }
 
         });
