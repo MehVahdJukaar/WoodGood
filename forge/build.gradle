@@ -197,6 +197,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:5318681")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097")
+//    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995")
 
             //- OTHER MAVENS
@@ -226,7 +227,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
     modCompileOnly("curse.maven:macaws-stairs-1119394:6155181")
 
-        // OTHERS
+        // GENERAL
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:beautify-decorate-633252:4781709")
@@ -257,7 +258,6 @@ dependencies {
     modCompileOnly("curse.maven:tropicraft-254794:4811116") // Registrate
     modCompileOnly("curse.maven:valhelsia-structures-347488:5195707") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
     modCompileOnly("curse.maven:quark-243121:6312787") // Zeta - IMPORTANT: modRuntimeOnly mustn't be set blc it causes issue in production
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:woodworks-543610:5228779") // Blueprint

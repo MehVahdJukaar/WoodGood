@@ -41,7 +41,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantCraftingTablesModule;
-import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
@@ -115,7 +114,6 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("tropicraft", () -> TropicraftModule::new);
         addIfLoaded("twilightforest", () -> TwilightForestModule::new);
         addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
         addIfLoaded("woodster", () -> WoodsterModule::new);
         addIfLoaded("woodworks", () -> WoodworksModule::new);

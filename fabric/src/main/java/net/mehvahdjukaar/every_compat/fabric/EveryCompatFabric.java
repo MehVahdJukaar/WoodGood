@@ -21,7 +21,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
 
@@ -71,7 +70,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         addIfLoaded("redbits", () -> RedBitsModule::new);
         addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
         addIfLoaded("shutter", () -> LauchsShuttersModule::new);
-        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addIfLoaded("wilderwild", () -> WilderWildModule::new);
         addIfLoaded("woodenhoppers", () -> WoodenHoppersModule::new);
 

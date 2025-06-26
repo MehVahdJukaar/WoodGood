@@ -197,6 +197,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5319819") //RLM: exp4j
 //    modRuntimeOnly("curse.maven:twigs-496913:4603805")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189603")
+//    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68")
 
         //- OTHER MAVENS
@@ -221,7 +222,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-furniture-359540:4726281")
     modCompileOnly("curse.maven:macaws-stairs-1119394:6155218")
 
-        // OTHERS
+        // GENERAL
     modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:beautify-refabricated-809311:5405529")
     modCompileOnly("curse.maven:bewitchment-394915:5205373")
@@ -237,7 +238,6 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:regions-unexplored-659110:5558172") // Forge-Config-Api-Port
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143")
     modCompileOnly("maven.modrinth:wilder-wild:3.0.7-mc1.20.1") // FrozenLib
 

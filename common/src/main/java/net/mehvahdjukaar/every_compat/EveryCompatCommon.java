@@ -25,6 +25,7 @@ import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
@@ -113,6 +114,7 @@ public class EveryCompatCommon {
         addIfLoaded("table_top_craft", () -> TableTopCraftModule::new);
         addIfLoaded("twigs", () -> TwigsModule::new);
         addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
+        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addIfLoaded("villagersplus", () -> VillagersPlusModule::new);
 
     }
