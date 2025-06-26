@@ -9,11 +9,37 @@
       <li>(NF): NEOFORGE</li>
       <li>(IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
       <li>(COMPAT): Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod</li>
+      <li>(INCLUDED): The block is not generated because a Wood Mod already have the same block as the supported mod will be generated</li>
+      <li>(EXCLUDED): The block is generated BUT it shouldn't be generated for a reason</li>
     </ul>
   </div>
 </div>
 
 ---
+
+### ADDED:
+- **Another-Furniture** (INCLUDED): murublight_shelf with **Enderscape** - [#970](https://github.com/MehVahdJukaar/WoodGood/issues/970)
+
+### UPDATED: 
+- **LANG**: us_en - Corrected the name for full storage drawer
+- **Macaw's Stairs** (COMMON): Fixed the balcony's duplicated dropping
+- **Handcrafted** (COMMON): Updated the outdated code to account for the updated code in **Moonlight Lib** since v2.19.2
+- **More Variant Chests (LieOnLion)**: Ported the updated code from 1.20.1
+- **MOVED TO COMMON**:
+  - **More Variant Chests** (LieOnLion)
+  - **More Crafting Tables** (LieOnLion)
+- **Variant Vanilla Blocks** (COMMON): 
+  - Fixed the chests' incorrect texture as an item in inventory
+  - Corrected chests' mask texture
+- **Chipped** (COMMON): 
+  - [#968](https://github.com/MehVahdJukaar/WoodGood/issues/968) - is fixed by **Moonlight Lib v2.19.4**
+  - Fixed the stripped_log's texture with "Palette size can't be 0" in the latest.log for some Wood Mods (ex: **Productive Trees**)
+- **Corail Pillar** (FG): Corrected blocks' incorrect recipe and removed an code that manually added recipes for 2 blocks
+- **Every Compat**: Fixed an concurrency issue (multi-thread stuff) with `addOtherCompatMod()` method - @MehVahdJukaar
+
+---
+
+## v2.10.8
 
 ### UPDATED: 
 - **Woodster** (NF): 
