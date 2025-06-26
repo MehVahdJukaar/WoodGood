@@ -100,7 +100,7 @@ side="BOTH"
 [[dependencies.everycomp]] #optional
 modId="vmp"
 mandatory=false
-versionRange="[9.-IT-IS-INCOMPATIBLE,]" #mandatory
+versionRange="[9.9-MARKED_AS_INCOMPATIBLE-AND-REMOVE_IT,]" #mandatory
 ordering="NONE"
 side="BOTH"
 
@@ -108,6 +108,6 @@ side="BOTH"
 [[dependencies.everycomp]] #optional
 modId="vminus"
 mandatory=false
-versionRange="[9.-IT-IS-INCOMPATIBLE,]" #mandatory
+versionRange="[9.9-MARKED_AS_INCOMPATIBLE-AND-REMOVE_IT,]" #mandatory
 ordering="NONE"
 side="BOTH"
