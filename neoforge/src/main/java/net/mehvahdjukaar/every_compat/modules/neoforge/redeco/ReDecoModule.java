@@ -189,6 +189,7 @@ public class ReDecoModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .copyParentDrop() //REASON: included the cushion
                 .build();
         this.addEntry(display_cases);
 
@@ -201,6 +202,7 @@ public class ReDecoModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .copyParentDrop() //REASON: included the cushion
                 .build();
         this.addEntry(sword_mounts);
 
@@ -213,6 +215,7 @@ public class ReDecoModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .copyParentDrop() //REASON: included the cushion
                 .build();
         this.addEntry(pedestals);
 
