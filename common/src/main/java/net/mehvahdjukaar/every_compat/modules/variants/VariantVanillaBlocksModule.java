@@ -67,9 +67,9 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         return set.build();
     }
 
-    public VariantVanillaBlocksModule(String modID) {
-        super(modID, "vvb");
-        ResourceLocation tab = modRes(Initialise.MOD_ID);
+    public VariantVanillaBlocksModule(String modId) {
+        super(modId, "vvb");
+        ResourceLocation tab = modRes(modId);
 
         //Barrel
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
@@ -153,6 +153,14 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                         getModBlock("acacia_chest"), () -> WoodTypeRegistry.getValue("acacia"),
                         w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks))
                 )
+                .addTile(VariantChestBlockEntity::new)
+                .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
+                                s.replace(
+                                        "\"variantvanillablocks:chest/acacia_chest\"",
+                                        "\""+woodType.createFullIdWith(EveryCompat.MOD_ID, "chest", shortenedId(), "", "chest") +"\""
+                                )
+                        )
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("chests"), Registries.BLOCK)
@@ -162,7 +170,6 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(ResourceLocation.parse("c:chests_wooden"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("c:chests"), Registries.ITEM)
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
-                .addTile(VariantChestBlockEntity::new)
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -209,10 +216,13 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("crafting_tables"), Registries.BLOCK)
                 .addTag(modRes("crafting_tables"), Registries.ITEM)
-                //TEXTURES: oak_craftng_table - BaseTexture
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
-                .addTexture(EveryCompat.res("block/spruce_crafting_table_top"))
+                //TEXTURE: texture is oak_craftng_table's texture
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_top_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTabKey(tab)
@@ -334,17 +344,19 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
 
-        //POI & ACQUIREABLE_JOB //!! Dont use below until the problem is fixed
-//        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-//        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        // POI & ACQUIREABLE_JOB //!! Dont use below until the problem is fixed
+        /*
+        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
+        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        */
     }
 
-    // Registry --------------------------------------------------------------------------------------------------------
+    // REGISTRY --------------------------------------------------------------------------------------------------------
 
     @Override
     @Environment(EnvType.CLIENT)
