@@ -9,8 +9,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -24,16 +26,19 @@ public class VariantCraftingTablesModule extends SimpleModule {
 
     public VariantCraftingTablesModule(String modId) {
         super(modId, "vct");
-        var tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"),
                         () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
                         w -> new VCTCraftingTableBlock(Utils.copyPropertySafe(w.planks).strength(2.5F).sound(SoundType.WOOD)))
-                //TEXTURES: oak_craftng_table - BaseTexture
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
-                .addTexture(EveryCompat.res("block/spruce_crafting_table_top"))
+                //TEXTURE: texture is oak_craftng_table's texture
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"),
+                        EveryCompat.res("block/vct/spruce_crafting_table_top_m"))
                 //TAG: #forge:workbench removed
                 .addTag(ResourceLocation.parse("charm:crafting_table"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
