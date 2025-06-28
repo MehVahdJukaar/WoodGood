@@ -15,7 +15,13 @@
   </div>
 </div>
 
+### UPDATED: 
+- **Every Compat** (INCLUDED): minecraft:pale_oak from **Perfect Parity: The Garden Awakens Edition** blc it's a vanilla WoodType
+- **VariantVanillaBlocks** (COMMON): Ported the updated mask texture from 1.20.1 for crafting_table
+
 ---
+
+## v2.10.9
 
 ### ADDED:
 - **Another-Furniture** (INCLUDED): murublight_shelf with **Enderscape** - [#970](https://github.com/MehVahdJukaar/WoodGood/issues/970)
