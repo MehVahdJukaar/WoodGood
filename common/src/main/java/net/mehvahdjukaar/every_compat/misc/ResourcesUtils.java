@@ -119,10 +119,16 @@ public class ResourcesUtils {
     private static List<StaticResource> gatherNonVanillaModels(ResourceManager manager, Set<String> modelsLoc) {
         List<StaticResource> models = new ArrayList<>();
 
+        // List of vanilla wood types to filter out
+        final Set<String> VANILLA_WOODS = Set.of(
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "crimson", "warped"
+        );
         for (var m : modelsLoc) {
-            //remove the ones from mc namespace
             ResourceLocation modelRes = ResourceLocation.parse(m);
-            if (!modelRes.getNamespace().equals("minecraft")) {
+            String path = modelRes.getPath();
+            boolean isVanillaWood = modelRes.getNamespace().equals("minecraft") &&
+                VANILLA_WOODS.stream().anyMatch(wood -> path.contains(wood));
+            if (!isVanillaWood) {
                 StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(m));
                 if (model != null) models.add(model);
             }
