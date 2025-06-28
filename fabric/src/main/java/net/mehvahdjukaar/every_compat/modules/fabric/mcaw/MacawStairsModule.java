@@ -44,7 +44,7 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("terrace_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
+                //REASON: take a look at their textures, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
@@ -61,7 +61,7 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("skyline_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
+                //REASON: take a look at their textures, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
@@ -78,7 +78,7 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("compact_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
+                //REASON: take a look at their textures, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
@@ -95,7 +95,7 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("bulk_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
+                //REASON: take a look at their textures, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
@@ -112,7 +112,7 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("loft_stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
+                //REASON: take a look at their textures, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
@@ -130,7 +130,7 @@ public class MacawStairsModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop()
-                //REASON: take a look at their //TEXTURES, you'll see why.
+                //REASON: take a look at their textures, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
@@ -148,7 +148,7 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("railings"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
+                //REASON: take a look at their textures, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
@@ -165,7 +165,7 @@ public class MacawStairsModule extends SimpleModule {
                 .addTag(modRes("platforms"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
+                //REASON: take a look at their textures, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
                 .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
                 .build();
