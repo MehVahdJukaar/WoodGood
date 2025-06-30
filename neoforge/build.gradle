@@ -118,11 +118,12 @@ dependencies {
     }
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("curse.maven:emi-580555:5872513") // v1.1.18
-    modRuntimeOnly("curse.maven:jade-324717:5884231") // v15.8.3
-    modRuntimeOnly("curse.maven:worldedit-225608:5830452")
-    modRuntimeOnly("curse.maven:configured-457570:5873783")
-//    modRuntimeOnly("curse.maven:jei-238222:5846880")
+    modRuntimeOnly("curse.maven:emi-580555:6420931") // v1.1.22
+    modRuntimeOnly("curse.maven:jei-238222:6614392") // v19.21.2.313
+    modRuntimeOnly("curse.maven:jade-324717:6667790") // v15.10.1
+    modRuntimeOnly("curse.maven:configured-457570:5873783") // v2.6.0
+    modRuntimeOnly("curse.maven:crafttweaker-239197:6434161") // v21.0.27
+//    modRuntimeOnly("curse.maven:worldedit-225608:5830452")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
     //@ IMPORTANT: RLM - "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/forge/run/mods/....
