@@ -102,19 +102,22 @@ dependencies {
     implementation 'org.jetbrains:annotations:22.0.0'
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
+    //- Repository LOCAL
     String path = System.getenv('REPOS21_1')
+    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
+    print "isMyPc: $usesMavenLocalML\n"
 
     //- Repository LOCAL
-    if (enable_moonlight_test.toBoolean() || usesMavenLocalML) {
+    if (enable_moonlight_test.toBoolean()) {
         if (usesMavenLocalML) {
-            //- ~/neoforge/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_testVersion}") // LOCAL
+            //- ~/fabric/mods LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}") // LOCAL
         } else {
-            modImplementation(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
+            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-neoforge") // v2.18.12
+        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-neoforge") // v2.19.4
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -214,6 +217,7 @@ dependencies {
     modCompileOnly("curse.maven:absent-by-design-305840:4616702") //!! 1.20.1
     modCompileOnly("curse.maven:architects-palette-433862:5036133") //!! 1.20.1
     modCompileOnly("curse.maven:beautify-decorate-633252:5810850")
+    modCompileOnly("curse.maven:bibliocraft-legacy-1122260:6533545")
     modCompileOnly("curse.maven:boatload-337396:5292325") //!! 1.20.1
     modCompileOnly("curse.maven:buildersaddition-389697:5544431")
     modCompileOnly("curse.maven:corail-pillar-266228:5669131") //TODO: Move the module to COMMON

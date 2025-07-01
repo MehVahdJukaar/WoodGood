@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate.BeautifyDecorateModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.building_but_better.BuildingButBetterModule;
@@ -79,6 +80,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
         addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
         addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
+        addIfLoaded("bibliocraft", () -> BibliocraftLegacyModule::new);
         addIfLoaded("boatload", () -> BoatLoadModule::new);
         addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
         addIfLoaded("bbb", () -> BuildingButBetterModule::new);
@@ -104,7 +106,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("tropicraft", () -> TropicraftModule::new);
         addIfLoaded("twilightforest", () -> TwilightForestModule::new);
         addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-//        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
+//        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new); //!! NOT-AVAILABLE
         addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
         addIfLoaded("woodster", () -> WoodsterModule::new);
         addIfLoaded("woodworks", () -> WoodworksModule::new);

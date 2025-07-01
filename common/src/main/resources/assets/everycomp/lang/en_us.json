@@ -1018,5 +1018,17 @@
   "block_type.more_beautiful_torches.planks_redstone_torch": "%s Planks Redstone Torch",
   "block_type.more_beautiful_torches.stripped_log_torch": "Stripped %s Log Torch",
   "block_type.more_beautiful_torches.stripped_log_soul_torch": "Stripped %s Log Soul Torch",
-  "block_type.more_beautiful_torches.stripped_log_redstone_torch": "Stripped %s Log Redstone Torch"
+  "block_type.more_beautiful_torches.stripped_log_redstone_torch": "Stripped %s Log Redstone Torch",
+
+  "block_type.bibliocraft.bookcase": "%s Bookcase",
+  "block_type.bibliocraft.fancy_armor_stand": "%s Fancy Armor Stand",
+  "block_type.bibliocraft.fancy_clock": "%s Fancy Clock",
+  "block_type.bibliocraft.fancy_crafter": "%s Fancy Crafter",
+  "block_type.bibliocraft.fancy_sign": "%s Fancy Sign",
+  "block_type.bibliocraft.grandfather_clock": "%s Grandfather Clock",
+  "block_type.bibliocraft.label": "%s Label",
+  "block_type.bibliocraft.potion_shelf": "%s Potion Shelf",
+  "block_type.bibliocraft.shelf": "%s Shelf",
+  "block_type.bibliocraft.table": "%s Table",
+  "block_type.bibliocraft.tool_rack": "%s Tool Rack"
 }

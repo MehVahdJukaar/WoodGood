@@ -20,8 +20,8 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
 
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
@@ -42,19 +42,22 @@ dependencies {
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
+    //- Repository LOCAL
     String path = System.getenv('REPOS21_1')
+    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
+    print "isMyPc: $usesMavenLocalML\n"
 
     //- Repository LOCAL
-    if (enable_moonlight_test.toBoolean() || usesMavenLocalML) {
+    if (enable_moonlight_test.toBoolean()) {
         if (usesMavenLocalML) {
             //- ~/fabric/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_testVersion}") // LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}") // LOCAL
         } else {
             modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-fabric") // v2.18.12
+        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-fabric") // v2.19.4
     }
 
 //!! TOOLS ========================================================================================================== \\
