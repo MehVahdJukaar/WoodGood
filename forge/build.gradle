@@ -157,7 +157,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // v81 | TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:monolib-968432:6123976") // v2.0.0 | More-Beautiful-Torches
-    modRuntimeOnly("curse.maven:brewin-and-chewin-637808:6237884") // Smidgeon-O'-Bliss
+//    modRuntimeOnly("curse.maven:brewin-and-chewin-637808:6237884") // Smidgeon-O'-Bliss
 
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
@@ -185,7 +185,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:5651249")
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:5089406")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399")
-    modRuntimeOnly("curse.maven:farmersdelight-398521:6597298") // Smidgeon-O'-Bliss
+//    modRuntimeOnly("curse.maven:farmersdelight-398521:6597298") // Smidgeon-O'-Bliss
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
@@ -253,6 +253,7 @@ dependencies {
     modCompileOnly("curse.maven:productivebees-377897:5566102") //v12.6.0 | WIP
     modCompileOnly("curse.maven:redeco-897377:5603009")
     modCompileOnly("curse.maven:regions-unexplored-659110:5558225")
+    modCompileOnly("curse.maven:smidgeon-o-bliss-remastered-1288021:6710528") // Farmer's-Delight, Brewing'-And-Chewin' - NOTE: Test in production (PrismLauncher or others), idk why it don't work in DEV
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
     modCompileOnly("curse.maven:timber-frames-606011:5372390")

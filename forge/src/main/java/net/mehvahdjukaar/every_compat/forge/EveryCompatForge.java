@@ -36,6 +36,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModu
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
+import net.mehvahdjukaar.every_compat.modules.forge.smidgeon_o_bliss.SmidgeonOBlissModule;
 import net.mehvahdjukaar.every_compat.modules.forge.timber_frames.TimberFramesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
@@ -110,6 +111,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("redeco", () -> ReDecoModule::new);
         addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
         addIfLoaded("shutter", () -> LauchsShuttersModule::new);
+        addIfLoaded("sob", () -> SmidgeonOBlissModule::new);
         addIfLoaded("timber_frames", () -> TimberFramesModule::new);
         addIfLoaded("tropicraft", () -> TropicraftModule::new);
         addIfLoaded("twilightforest", () -> TwilightForestModule::new);

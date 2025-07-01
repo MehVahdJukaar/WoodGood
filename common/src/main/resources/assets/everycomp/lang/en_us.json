@@ -1033,5 +1033,7 @@
   "block_type.blocksplus.mosaic_slab": "%s Mosaic Slab",
   "block_type.blocksplus.cracked_mosaic": "Cracked %s Mosaic",
   "block_type.blocksplus.mossy_mosaic": "Mossy %s Mosaic",
-  "block_type.blocksplus.mosaic_pressure_plate": "%s Mosaic Pressure Plate"
+  "block_type.blocksplus.mosaic_pressure_plate": "%s Mosaic Pressure Plate",
+
+  "block_type.sob.counter": "%s Counter"
 }
