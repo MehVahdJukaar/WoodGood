@@ -19,6 +19,9 @@
 - **Every Compat** (INCLUDED): minecraft:pale_oak from **Perfect Parity: The Garden Awakens Edition** blc it's a vanilla WoodType
 - **VariantVanillaBlocks** (COMMON): Ported the updated mask texture from 1.20.1 for crafting_table
 
+### NEW SUPPORTED MOD:
+- **Bilbiocraft Legacy** (NF) - Let me know if there are more Compat Mods - @xelbayria
+
 ---
 
 ## v2.10.9
