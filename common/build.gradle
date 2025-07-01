@@ -54,7 +54,7 @@ dependencies {
     modCompileOnly("curse.maven:dawn-of-time-312359:5651253")
     modCompileOnly("curse.maven:decorative-blocks-362528:5089408")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550")
-    modCompileOnly("curse.maven:farmersdelight-398521:4679319")
+    modCompileOnly("curse.maven:farmersdelight-398521:6597298")
     modCompileOnly("curse.maven:friends-and-foes-551364:4639311")
     modCompileOnly("curse.maven:furnish-547069:4821511")
     modCompileOnly("curse.maven:handcrafted-538214:5118730")
