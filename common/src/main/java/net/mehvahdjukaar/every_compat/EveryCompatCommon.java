@@ -86,7 +86,7 @@ public class EveryCompatCommon {
 
         // Abnormals Delight
         addOtherCompatMod("abnormals_delight",
-                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caves_and_chasms"),
+                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caverns_and_chasms"),
                 "farmersdelight");
 
     //!! =========================================== Add Modules ==================================================== \\
