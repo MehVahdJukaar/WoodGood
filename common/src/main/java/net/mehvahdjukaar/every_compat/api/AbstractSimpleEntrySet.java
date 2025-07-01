@@ -392,7 +392,15 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                         if (info != null) {
                             if (Objects.nonNull(info.customTexturePath())) {
                                 oldPath = info.customTexturePath();
-                                newId = blockId.getNamespace() +":"+ BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.get().getTypeName());
+                                if (oldPath.contains("SHORTENEDID")) { //REASON: Take a look at SmidgeonOBlissModule for the details
+                                    // SHORTENEDID-[old]-[new]
+                                    String oldShortenedId = oldPath.split("-")[1];
+                                    String newShortenedId = oldPath.split("-")[2];
+                                    newId = newPath.replace(oldShortenedId, newShortenedId);
+                                }
+                                else {
+                                    newId = blockId.getNamespace() +":"+ BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.get().getTypeName());
+                                }
                             }
                             else if (info.keepNamespace()) newId = oldTextureId.withPath(newPath).toString();
                             else
