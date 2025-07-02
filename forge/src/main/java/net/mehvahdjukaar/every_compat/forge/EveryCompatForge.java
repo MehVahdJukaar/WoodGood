@@ -31,6 +31,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.more.MoreCraftingTablesForFo
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish.MrCrayfishFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.forge.nosiphus.NosiphusFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
@@ -94,7 +95,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("boatload", () -> BoatLoadModule::new);
         addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
         addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
-        addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
+//        addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
         addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
         addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
@@ -106,6 +107,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
         addIfLoaded("mighty_mail", () -> MightyMailModule::new);
         addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+        addIfLoaded("nfm", () -> NosiphusFurnitureModule::new);
         addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
         addIfLoaded("pokecube_legends", () -> PokecubeLegendsModule::new);
         addIfLoaded("premium_wood", () -> PremiumWoodModule::new);

@@ -1044,5 +1044,10 @@
   "block_type.storagedelight.bookshelf_with_door": "%s Bookshelf With Door",
   "block_type.storagedelight.glass_cabinet": "Glass %s Cabinet",
   "block_type.storagedelight.cabinet_with_glass_doors": "%s Cabinet With Glass Doors",
-  "block_type.storagedelight.single_door_cabinet": "%s Single Door Cabinet"
+  "block_type.storagedelight.single_door_cabinet": "%s Single Door Cabinet",
+
+  "block_type.nfm.chopping_board": "%s Chopping Board",
+  "block_type.nfm.door_bell": "%s Door Bell",
+  "block_type.nfm.stripped_door_bell": "Stripped %s Door Bell",
+  "block_type.nfm.water_tank": "%s Water Tank"
 }
