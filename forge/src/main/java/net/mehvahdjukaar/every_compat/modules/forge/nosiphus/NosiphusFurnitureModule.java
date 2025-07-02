@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.util.Objects;
 
-//SUPPORT: v
+//SUPPORT: v2025.02.07+
 public class NosiphusFurnitureModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chopping_board;
