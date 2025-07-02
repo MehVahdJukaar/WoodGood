@@ -254,6 +254,7 @@ dependencies {
     modCompileOnly("curse.maven:redeco-897377:5603009")
     modCompileOnly("curse.maven:regions-unexplored-659110:5558225")
     modCompileOnly("curse.maven:smidgeon-o-bliss-remastered-1288021:6710528") // Farmer's-Delight, Brewing'-And-Chewin' - NOTE: Test in production (PrismLauncher or others), idk why it don't work in DEV
+    modCompileOnly("curse.maven:storage-delight-forge-979761:6696771")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
     modCompileOnly("curse.maven:timber-frames-606011:5372390")

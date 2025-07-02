@@ -230,18 +230,19 @@ dependencies {
     modCompileOnly("curse.maven:clutter-826060:5828924") //RML: Geckolib
     modCompileOnly("curse.maven:create-fabric-624165:5982726") // Do not use for RunTime
     modCompileOnly("curse.maven:dramatic-doors-380617:6438745")
-    modCompileOnly("curse.maven:exlines-awnings-526698:4668406")
     modCompileOnly("curse.maven:excessive-building-845097:6051029") // Forge-Config-Api-Port
+    modCompileOnly("curse.maven:exlines-awnings-526698:4668406")
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:4939709") // legacy
     modCompileOnly("curse.maven:infinity-buttons-661902:5409967") // Owo-Lib
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643")
-    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271")
     modCompileOnly("curse.maven:regions-unexplored-659110:5558172") // Forge-Config-Api-Port
+    modCompileOnly("curse.maven:storage-delight-fabric-978786:6696778")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143")
-    modCompileOnly("maven.modrinth:wilder-wild:3.0.7-mc1.20.1") // FrozenLib
 
         // OTHER MAVENS
+    modCompileOnly("maven.modrinth:wilder-wild:3.0.7-mc1.20.1") // FrozenLib
 //    modCompileOnly("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}:slim") { transitive = false }  // Registrate, Flywheel, Ponder //!! maven is outdated & not available
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
