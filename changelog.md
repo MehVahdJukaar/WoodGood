@@ -1,18 +1,23 @@
 <div style="text-align: center; border: 1px solid yellow; padding: 10px;">
-  <div style="text-align: center; margin-bottom: 10px;">
-    <h3>LEGEND</h3>
-  </div>
-  <div style="text-align: left;">
-    <ul style="list-style-type: disc; padding-left: 20px;">
-      <li>(COMMON) = FORGE & FABRIC</li>
-      <li>(FB): FABRIC</li>
-      <li>(NF): NEOFORGE</li>
-      <li>(IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
-      <li>(COMPAT): Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod</li>
-      <li>(INCLUDED): The block is not generated because a Wood Mod already have the same block as the supported mod will be generated</li>
-      <li>(EXCLUDED): The block is generated BUT it shouldn't be generated for a reason</li>
-    </ul>
-  </div>
+
+<div style="text-align: center; margin-bottom: 10px;">
+
+### LEGEND
+
+</div>
+
+<div style="text-align: left;">
+
+*   (COMMON) = FORGE & FABRIC
+*   (FB): FABRIC
+*   (NF): NEOFORGE
+*   (IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
+*   (COMPAT): Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod
+*   (INCLUDED): The block is not generated because a Wood Mod already have the same block as the supported mod will be generated
+*   (EXCLUDED): The block is generated BUT it shouldn't be generated for a reason
+
+</div>
+
 </div>
 
 ### UPDATED: 
