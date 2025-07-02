@@ -134,6 +134,7 @@ subprojects {
                     optional.project("absent-by-design")
                     optional.project("another-furniture")
                     optional.project("architects-palette")
+                    optional.project("bibliocraft-legacy")
                     optional.project("boatload")
                     optional.project("branches")
                     optional.project("buildersaddition")
@@ -206,6 +207,7 @@ subprojects {
             project {
                 id = project_id
                 changelog = changelogText
+                changelogType = 'markdown'
                 releaseType = release_type
                 for (var ver : versions) {
                     addGameVersion ver
@@ -274,6 +276,7 @@ subprojects {
                         optionalDependency("another-furniture")
                         optionalDependency("architects-palette")
                         optionalDependency("backpacked")
+                        optionalDependency("bibliocraft-legacy")
                         optionalDependency("boatload")
                         optionalDependency("branches")
                         optionalDependency("buildersaddition")
