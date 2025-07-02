@@ -185,6 +185,7 @@ subprojects {
                         optionalDependency("quark")
                         optionalDependency("redeco")
                         optionalDependency("regions-unexplored")
+                        optionalDependency("smidgeon-o-bliss-remastered")
                         optionalDependency("storage-drawers")
                         optionalDependency("timber-frames")
                         optionalDependency("the-graveyard-forge")
