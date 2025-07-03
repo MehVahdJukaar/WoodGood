@@ -42,6 +42,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.storage_delight.StorageDelig
 import net.mehvahdjukaar.every_compat.modules.forge.timber_frames.TimberFramesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.forge.ultimate_car.UltimateCarModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
@@ -95,7 +96,8 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("boatload", () -> BoatLoadModule::new);
         addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
         addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
-//        addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
+        addIfLoaded("car", () -> UltimateCarModule::new);
+        addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
         addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
         addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);

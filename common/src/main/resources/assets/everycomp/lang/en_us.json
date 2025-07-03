@@ -1049,5 +1049,11 @@
   "block_type.nfm.chopping_board": "%s Chopping Board",
   "block_type.nfm.door_bell": "%s Door Bell",
   "block_type.nfm.stripped_door_bell": "Stripped %s Door Bell",
-  "block_type.nfm.water_tank": "%s Water Tank"
+  "block_type.nfm.water_tank": "%s Water Tank",
+
+  "car_variant.%s": "%s",
+  "item_type.car.license_plate_holder": "%s License Plate Holder",
+  "item_type.car.bumper": "%s Bumper",
+  "item_type.car.body": "%s Body",
+  "item_type.car.big_body": "Big %s Body"
 }
