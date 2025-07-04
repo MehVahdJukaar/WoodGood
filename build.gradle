@@ -1,6 +1,6 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.9-SNAPSHOT" apply false
+    id "dev.architectury.loom" version "1.10-SNAPSHOT" apply false
     id "com.matthewprenger.cursegradle" version "1.4.0"
     id "com.modrinth.minotaur" version "2.+"
     id "com.github.johnrengelman.shadow" version "7.1.2" apply false
@@ -22,13 +22,13 @@ subprojects {
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        minecraft "com.mojang:minecraft:${minecraft_version}"
         // The following line declares the mojmap mappings, you may use other mappings as well
         mappings loom.layered() {
             it.officialMojangMappings {
                 setNameSyntheticMembers(false)
             }
-            it.parchment("org.parchmentmc.data:parchment-${rootProject.parchment_version}")
+            it.parchment("org.parchmentmc.data:parchment-${parchment_version}")
         }
     }
 
