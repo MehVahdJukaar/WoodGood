@@ -198,9 +198,9 @@ dependencies {
 //    modRuntimeOnly("curse.maven:twigs-496913:4603805")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189603")
 //    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8
-//    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68")
 
         //- OTHER MAVENS
+//    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68")
 
         //- ~/fabric/mods LOCAL
 //    modRuntimeOnly("com.arcanc.bc:beautifulcampfires-fabric-1.20.1-1.0.0")
