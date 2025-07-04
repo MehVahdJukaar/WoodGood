@@ -158,6 +158,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // v81 | TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:monolib-968432:6123976") // v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:brewin-and-chewin-637808:6237884") // Smidgeon-O'-Bliss
+//    modRuntimeOnly("curse.maven:kotlin-for-forge-351264:5402061") // Adorn
 
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
@@ -185,7 +186,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:5651249")
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:5089406")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399")
-//    modRuntimeOnly("curse.maven:farmersdelight-398521:6597298") // Smidgeon-O'-Bliss
+//    modRuntimeOnly("curse.maven:farmersdelight-398521:6597298") // Smidgeon-O'-Bliss, Youkais-Homecoming
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
@@ -268,6 +269,7 @@ dependencies {
     modCompileOnly("curse.maven:woodworks-543610:5228779") // Blueprint
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:5713529")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
+    modCompileOnly("curse.maven:youkais-homecoming-957437:6724147") // Farmer's-Delight - Use Production instead of modImplementation
 
             // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:1.20.1-1.1.1") // MidnightLib

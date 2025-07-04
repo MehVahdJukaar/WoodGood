@@ -22,6 +22,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsM
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.excessive_building.ExcessiveBuildingModule;
 import net.mehvahdjukaar.every_compat.modules.forge.functional_storage.FunctionalStorageModule;
+import net.mehvahdjukaar.every_compat.modules.forge.gensokyo_delight.YoukaisHomecomingModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
@@ -127,6 +128,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("woodworks", () -> WoodworksModule::new);
         addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addIfLoaded("xercamod", () -> XercaModule::new);
+        addIfLoaded("youkaishomecoming", () -> YoukaisHomecomingModule::new);
 
         if (PlatHelper.isModLoaded("mcwdoors")) {
             addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);

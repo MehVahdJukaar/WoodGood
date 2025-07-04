@@ -1055,5 +1055,9 @@
   "item_type.car.license_plate_holder": "%s License Plate Holder",
   "item_type.car.bumper": "%s Bumper",
   "item_type.car.body": "%s Body",
-  "item_type.car.big_body": "Big %s Body"
+  "item_type.car.big_body": "Big %s Body",
+
+  "block_type.youkaishomecoming.handrail": "%s Handrail",
+  "block_type.youkaishomecoming.dining_table": "%s Dining Table",
+  "block_type.youkaishomecoming.dining_chair": "%s Dining Chair"
 }
