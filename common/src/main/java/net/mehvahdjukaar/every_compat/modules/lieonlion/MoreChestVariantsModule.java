@@ -47,7 +47,7 @@ public class MoreChestVariantsModule extends SimpleModule {
         String namespace = (PlatHelper.getPlatform().isForge()) ? "forge" : "c";
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
-                        getModBlock("OAK_CHEST"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatChestBlock(this::getChestTile,
                                 Utils.copyPropertySafe(Blocks.CHEST).mapColor(MapColor.WOOD))
                 )
@@ -74,7 +74,7 @@ public class MoreChestVariantsModule extends SimpleModule {
         this.addEntry(chests);
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
-                        getModBlock("OAK_TRAPPED_CHEST"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatTrappedChestBlock(this::getTrappedTile,
                                 Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
                 )
