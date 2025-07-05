@@ -1,17 +1,42 @@
 <div style="text-align: center; border: 1px solid yellow; padding: 10px;">
-  <div style="text-align: center; margin-bottom: 10px;">
-    <h3>LEGEND</h3>
-  </div>
-  <div style="text-align: left;">
-    <ul style="list-style-type: disc; padding-left: 20px;">
-      <li>(COMMON): FORGE & FABRIC</li>
-      <li>(FB): FABRIC</li>
-      <li>(FG): FORGE</li>
-      <li>(IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
-      <li>(TEX): New hand-made texture for specific block or item</li>
-    </ul>
-  </div>
+
+<div style="text-align: center; margin-bottom: 10px;">
+
+### LEGEND
+
 </div>
+
+<div style="text-align: left;">
+
+* **(COMMON)**: FORGE & FABRIC
+* **(FB)**: FABRIC
+* **(FG)**: FORGE
+* **(IT)**: Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
+* **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod
+* **(INCLUDED)**: The block is not generated because a Wood Mod already have the same block as the supported mod will be generated
+* **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason
+
+</div>
+
+</div>
+
+### UPDATED: 
+- **Every Compat** (COMPAT): 
+  - **Abnormal's Delight** - Fixed a typo in modId for **Caverns & Chasms**
+  - **Ascended Quark** (COMPAT): **Quark** with **The Aether** & **Deep Aether**
+- **Woodworks** (FG): Corrected `#blueprint:wooden_chiseled_bookshelf` to `#blueprint:wooden_chiseled_bookshelves` - [#977](https://github.com/MehVahdJukaar/WoodGood/issues/977)
+- **More Chest Variant** (COMMON): Corrected OAK_CHEST & OAK_TRAPPED_CHEST to lower cases & fixed the crash blc of it
+
+### NEW SUPPORTED MOD:
+- **Smidgeon O' Bliss** (FG)
+- **Storage Delight** (COMMON)
+- **Nosiphus Furniture Mod** (FG)
+- **Ultimate Car Mod** (FG)
+- **Gensokyo Delight - Youkai's Homecoming** (FG)
+
+---
+
+## v2.8.10
 
 ### UPDATED: 
 - **MOVED TO COMMON**:
