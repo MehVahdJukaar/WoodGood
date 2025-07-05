@@ -62,6 +62,8 @@ public class EveryCompatCommon {
         addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
                 "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
 
+        addOtherCompatMod("ascended_quark", List.of("aether", "deep_aether"), "quark");
+
         // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
         addOtherCompatMod("macawbridgesbyg", "biomeswevegone", "mcwbridges");
