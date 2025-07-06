@@ -33,7 +33,7 @@ public class HardcodedBlockType {
         if (woodType.isVanilla()) return true;
 
         // Nature's-Spirit's joshua texture is a 8x8, it's currently excluded in Valhelaia-Structure for now - the texture generation could be improved
-        if (isWoodFrom("valhelsia_structures", "", "natures_spirit:joshua", "", "")) return true;
+        if (isWoodFrom("valhelsia_structures", "", "", "natures_spirit:joshua", "")) return true;
 
         // Garden-Of-The-dead's whistle, Snifferent's globar, Nethers-Exoticism's jabuticaba already has branches, Regions-Unexplored's branches is not needed
         if (isWoodFrom("regions_unexplored", "", "gardens_of_the_dead|snifferent|nethers_exoticism", "", "(whistlecane|globar|jabuticaba)_branch")) return true;
