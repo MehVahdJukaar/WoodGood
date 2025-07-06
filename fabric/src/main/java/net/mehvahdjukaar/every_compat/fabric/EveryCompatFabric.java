@@ -75,10 +75,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         addIfLoaded("wilderwild", () -> WilderWildModule::new);
         addIfLoaded("woodenhoppers", () -> WoodenHoppersModule::new);
 
-        if (PlatHelper.isModLoaded("mcwdoors")) {
-            addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
-        }
-
+        if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("twilightforest", () -> TwilightForestModule::new); //!! NOT AVAILABLE

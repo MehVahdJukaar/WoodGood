@@ -100,6 +100,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("car", () -> UltimateCarModule::new);
         addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
         addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
+        addIfLoaded("create", () -> CreateModule::new);
         addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
         addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
@@ -130,11 +131,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("xercamod", () -> XercaModule::new);
         addIfLoaded("youkaishomecoming", () -> YoukaisHomecomingModule::new);
 
-        if (PlatHelper.isModLoaded("mcwdoors")) {
-            addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
-        }
-
-        addIfLoaded("create", () -> CreateModule::new); //TEMP: DISABLED due to version difference
+        if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
 
         // ========================================= Macaw's ======================================================== \\
         addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
