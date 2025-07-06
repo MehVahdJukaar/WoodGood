@@ -274,6 +274,11 @@ allprojects {
         maven { // Chipped
             url = "https://maven.teamresourceful.com/repository/maven-public/"
         }
+
+        maven { // YetAnotherConfigLib (YACL)
+            name = "Xander Maven"
+            url = "https://maven.isxander.dev/releases"
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {
