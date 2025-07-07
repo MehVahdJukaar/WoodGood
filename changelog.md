@@ -21,6 +21,17 @@
 </div>
 
 ### UPDATED: 
+- **EveryCompat** (COMMON): 
+  - Excluded some blocks from Supported Mods due to FramedBlocks having a similar blocks - "torch"
+  - Corrected the parameter in the wrong place to correct parameter - Case: **valhelsia_structures** + **Nature's Spirit**:joshua
+    - In other words, The blocks from **Valhelsia Structures** will be included with joshua from **Nature's Spirit**
+- **Dawn Of Time** (COMMON): Split into FABRIC & FORGE folder to fix the issue with Minecraft not launching properly
+
+---
+
+## v2.8.12
+
+### UPDATED: 
 - **Every Compat** (COMPAT): 
   - **Abnormal's Delight** - Fixed a typo in modId for **Caverns & Chasms**
   - **Ascended Quark** (COMPAT): **Quark** with **The Aether** & **Deep Aether**
