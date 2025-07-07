@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdd
 import net.mehvahdjukaar.every_compat.modules.forge.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.corail_pillar.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
+import net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
@@ -101,6 +102,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
         addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
         addIfLoaded("create", () -> CreateModule::new);
+        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
         addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);

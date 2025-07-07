@@ -146,7 +146,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | REI, Infinity-Buttons
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish, Minecraft-Comes-Alive-Reborn
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Handcrafted, Cozy
-//    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5668859") // Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
@@ -161,6 +160,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:kotlin-for-forge-351264:5402061") // Adorn
 
             //- OTHER MAVENS
+//    modRuntimeOnly("maven.modrinth:fusion-connected-textures:1.2.7b-forge-mc${minecraft_version}") // Dawn-Of-Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
 //    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
@@ -183,7 +183,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4034009") //WARNING: v2.1.2-1.19.2 -> 1.20.1: Cannot remap access widener from namespace 'srg'. Expected: 'intermediary'
 //    modRuntimeOnly("curse.maven:backpacked-352835:5401965")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679")
-//    modRuntimeOnly("curse.maven:dawn-of-time-312359:5651249")
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:5089406")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399")
 //    modRuntimeOnly("curse.maven:farmersdelight-398521:6597298") // Smidgeon-O'-Bliss, Youkais-Homecoming
@@ -236,6 +235,7 @@ dependencies {
     modCompileOnly("curse.maven:boatload-337396:5292325") // Blueprint
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:corail-pillar-266228:5073954")
+    modCompileOnly("curse.maven:dawn-of-time-312359:6729167") // Fusion, YetAnotherConfigLib - NOTE: Test in production (PrismLauncher or others)
     modCompileOnly("curse.maven:decoration-delight-687475:5563942")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:dramatic-doors-380617:6438745")
@@ -287,6 +287,9 @@ dependencies {
 //     modRuntimeOnly("curse.maven:malum-484064:5718038") // MAGIC MOD & use BBModel
 
 //!! ============================================== FOR TESTING ===================================================== \\
+
+//    modRuntimeOnly("curse.maven:framedblocks-441647:6685443")
+//    forgeRuntimeLibrary("com.github.ben-manes.caffeine:caffeine:3.2.1")
 
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
