@@ -48,6 +48,7 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         w -> new BookcaseBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .requiresChildren("slab") //REASON: recipes
+                .addTile(getModTile("bookcase"))
                 //TEXTURES: planks
                 .addTexture(modRes("block/oak_bookcase"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -63,6 +64,7 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         w -> new FancyArmorStandBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .requiresChildren("slab") //REASON: recipes
+                .addTile("fancy_armor_stand")
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_armor_stands"), Registries.BLOCK)
@@ -79,8 +81,8 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         w -> new FancyClockBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .requiresChildren("slab") //REASON: recipes
-                //TEXTURES: planks
                 .addTile(getModTile("clock"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_clocks"), Registries.BLOCK)
                 .addTag(modRes("fancy_clocks"), Registries.ITEM)
@@ -93,6 +95,7 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         getModBlock("oak_fancy_crafter"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new FancyCrafterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
+                .addTile(getModTile("fancy_crafter"))
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_crafters"), Registries.BLOCK)
@@ -136,8 +139,8 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         w -> new LabelBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .requiresChildren("slab") //REASON: recipes
-                //TEXTURES: planks
                 .addTile(getModTile("label"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("labels"), Registries.BLOCK)
                 .addTag(modRes("labels"), Registries.ITEM)
@@ -151,8 +154,8 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         w -> new PotionShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .requiresChildren("slab") //REASON: recipes
-                //TEXTURES: planks
                 .addTile(getModTile("potion_shelf"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("potion_shelves"), Registries.BLOCK)
                 .addTag(modRes("potion_shelves"), Registries.ITEM)
@@ -166,8 +169,8 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .requiresChildren("slab") //REASON: recipes
-                //TEXTURES: planks
                 .addTile(getModTile("shelf"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shelves"), Registries.BLOCK)
                 .addTag(modRes("shelves"), Registries.ITEM)
@@ -180,8 +183,8 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
-                //TEXTURES: planks
                 .addTile(getModTile("table"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.ITEM)
@@ -194,8 +197,8 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         getModBlock("oak_tool_rack"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ToolRackBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
-                //TEXTURES: planks
                 .addTile(getModTile("tool_rack"))
+                //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tool_racks"), Registries.BLOCK)
                 .addTag(modRes("tool_racks"), Registries.ITEM)
