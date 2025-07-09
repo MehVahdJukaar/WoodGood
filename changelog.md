@@ -21,11 +21,29 @@
 </div>
 
 ### UPDATED: 
+- **Bibliocraft Legacy** (NF): Added the missing BlockEntityType to 3 blocks to fix the crash - [#987](https://github.com/MehVahdJukaar/WoodGood/issues/987)
+
+---
+
+## v2.10.11
+
+### UPDATED: 
 - **Every Compat** (INCLUDED): minecraft:pale_oak from **Perfect Parity: The Garden Awakens Edition** blc it's a vanilla WoodType
 - **VariantVanillaBlocks** (COMMON): Ported the updated mask texture from 1.20.1 for crafting_table
 
 ### NEW SUPPORTED MOD:
 - **Bilbiocraft Legacy** (NF) - Let me know if there are more Compat Mods - @xelbayria
+
+---
+
+## v2.10.10
+### UPDATED: 
+- **Re: Deco** (NF): Fixed 3 more blocks' incorrect droppings 
+- **Variant Crafting Tables** (NF): Improved the mask texture for crafting_table
+- **Variant Vanilla Blocks** (COMMON): Ported the updated mask texture from 1.20.1 for crafting_table
+
+### ADDED:
+- **Perfect Parity: The Garden Awakens Edition** (INCLUDED): pale_oak with any supported mods
 
 ---
 
@@ -50,6 +68,7 @@
   - Fixed the stripped_log's texture with "Palette size can't be 0" in the latest.log for some Wood Mods (ex: **Productive Trees**)
 - **Corail Pillar** (FG): Corrected blocks' incorrect recipe and removed an code that manually added recipes for 2 blocks
 - **Every Compat**: Fixed an concurrency issue (multi-thread stuff) with `addOtherCompatMod()` method - @MehVahdJukaar
+- **Re: Deco** (NF): Fixed 3 blocks' incorrect droppings
 
 ---
 
