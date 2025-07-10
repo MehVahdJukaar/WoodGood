@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -1445,6 +1446,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1465,6 +1468,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK) //common tags
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1485,6 +1490,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1505,6 +1512,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1525,6 +1534,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1545,6 +1556,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1565,6 +1578,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1585,6 +1600,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1601,6 +1618,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1621,6 +1640,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1641,6 +1662,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.BLOCK)
                 .addTag(modRes("glass"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1659,6 +1682,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1676,6 +1701,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1693,6 +1720,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1710,6 +1739,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1727,6 +1758,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(  ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1744,6 +1777,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(  ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1761,6 +1796,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1778,6 +1815,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1795,6 +1834,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1812,6 +1853,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();
@@ -1829,6 +1872,8 @@ public class ChippedModule extends SimpleModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .setTabKey(tab)
                 .build();

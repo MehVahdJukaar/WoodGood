@@ -267,6 +267,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     protected BlockTypeResTransformer<T> makeBlockStateTransformer(SimpleModule module, ResourceManager manager) {
         String baseBlockName = baseType.get().getTypeName();
         return BlockTypeResTransformer.<T>create(module.modId, manager)
+                .replaceWithTextureFromChild("minecraft:block/" + baseBlockName + "_planks", "planks")
                 .replaceBlockType(baseBlockName)
                 .IDReplaceType(baseBlockName);
     }
@@ -302,7 +303,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
     }
 
-//!! SUBCLASS
+    //!! SUBCLASS
     public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T, B>, T, B, Item> {
         protected final Supplier<@Nullable B> baseBlock;
         protected LootTableMode lootMode = LootTableMode.DROP_SELF;
@@ -335,7 +336,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {
             this.tileHolder = new ExistingTileHolder<>(
-                    () -> BuiltInRegistries.BLOCK_ENTITY_TYPE.get(ResourceLocation.parse(idTile))
+                    () -> BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(ResourceLocation.parse(idTile))
+                            .orElseThrow(() -> new NoSuchElementException("Tile entity with ID" + idTile + " not found! ID must be wrong!"))
             );
             return this;
         }
@@ -400,7 +402,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        public Builder<T, B> defaultItemTexture() {
+            public Builder<T, B> defaultItemTexture() {
             this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("item/")).build());
             return this;
         }

@@ -147,4 +147,40 @@ public class TagUtility {
         }
     }
 
+    /**
+     * Get the id tag from the mods
+     *
+     * @return Pair of ResourceLocation, Boolean
+     **/
+    public static Pair<ResourceLocation, Boolean> getATagId(String idTag, String idAlt, ResourceManager manager) {
+        // ResourceLocation
+        ResourceLocation RLocId = new ResourceLocation(idTag); // forge:suffix/EXTRA_TYPE or c:TYPE_ingot
+        ResourceLocation RLocIdAlt = new ResourceLocation(idAlt); // forge:suffix/EXTRATYPE or c:TYPEingot
+
+        if (doTagExistFor(RLocId, manager))
+            return Pair.of(RLocId, true);
+        else if (doTagExistFor(RLocIdAlt, manager))
+            return Pair.of(RLocIdAlt, true);
+
+        return Pair.of(null, false);
+    }
+
+    /// Checking if a tag exist for a block or an item
+    private static boolean doTagExistFor(ResourceLocation resLoc, ResourceManager manager) {
+        boolean blockTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("blocks/"))).isPresent();
+        boolean itemTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
+        return blockTag || itemTag;
+    }
+
+    // Common tags
+
+    private static ResourceLocation commonTag(String suffix) {
+        return PlatHelper.getPlatform().isFabric() ?
+                new ResourceLocation("c", suffix) :
+                new ResourceLocation("forge", suffix);
+    }
+
+    public static final ResourceLocation GLASS_TAG = commonTag("glass");
+    public static final ResourceLocation GLASS_PANE_TAG = commonTag("glass_panes");
+
 }
