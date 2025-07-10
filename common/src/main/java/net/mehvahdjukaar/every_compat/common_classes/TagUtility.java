@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
+import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -154,8 +155,8 @@ public class TagUtility {
      **/
     public static Pair<ResourceLocation, Boolean> getATagId(String idTag, String idAlt, ResourceManager manager) {
         // ResourceLocation
-        ResourceLocation RLocId = new ResourceLocation(idTag); // forge:suffix/EXTRA_TYPE or c:TYPE_ingot
-        ResourceLocation RLocIdAlt = new ResourceLocation(idAlt); // forge:suffix/EXTRATYPE or c:TYPEingot
+        ResourceLocation RLocId = ResourceLocation.parse(idTag); // forge:suffix/EXTRA_TYPE or c:TYPE_ingot
+        ResourceLocation RLocIdAlt = ResourceLocation.parse(idAlt); // forge:suffix/EXTRATYPE or c:TYPEingot
 
         if (doTagExistFor(RLocId, manager))
             return Pair.of(RLocId, true);
