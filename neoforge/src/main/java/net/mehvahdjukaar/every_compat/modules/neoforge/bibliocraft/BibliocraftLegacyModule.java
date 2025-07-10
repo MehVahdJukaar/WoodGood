@@ -50,7 +50,6 @@ public class BibliocraftLegacyModule extends SimpleModule {
                 .requiresChildren("slab") //REASON: recipes
                 .addTile(getModTile("bookcase"))
                 //TEXTURES: planks
-                .addTexture(modRes("block/oak_bookcase"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bookcases"), Registries.BLOCK)
                 .addTag(modRes("bookcases"), Registries.ITEM)
@@ -64,7 +63,7 @@ public class BibliocraftLegacyModule extends SimpleModule {
                         w -> new FancyArmorStandBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .requiresChildren("slab") //REASON: recipes
-                .addTile("fancy_armor_stand")
+                .addTile(getModTile("fancy_armor_stand"))
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_armor_stands"), Registries.BLOCK)
