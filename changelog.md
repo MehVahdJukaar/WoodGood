@@ -21,6 +21,13 @@
 </div>
 
 ### UPDATED: 
+- **Bibliocraft Legacy** (NF): Corrected the ResourceLocation of BlockEntityType for fancy_armor_stand
+
+---
+
+## v2.10.12
+
+### UPDATED: 
 - **Bibliocraft Legacy** (NF): Added the missing BlockEntityType to 3 blocks to fix the crash - [#987](https://github.com/MehVahdJukaar/WoodGood/issues/987)
 
 ---
