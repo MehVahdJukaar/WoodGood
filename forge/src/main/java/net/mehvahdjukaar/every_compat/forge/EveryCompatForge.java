@@ -17,11 +17,13 @@ import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdd
 import net.mehvahdjukaar.every_compat.modules.forge.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.corail_pillar.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
+import net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.excessive_building.ExcessiveBuildingModule;
 import net.mehvahdjukaar.every_compat.modules.forge.functional_storage.FunctionalStorageModule;
+import net.mehvahdjukaar.every_compat.modules.forge.gensokyo_delight.YoukaisHomecomingModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
@@ -29,19 +31,22 @@ import net.mehvahdjukaar.every_compat.modules.forge.lightmans_currency.Lightmans
 import net.mehvahdjukaar.every_compat.modules.forge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.forge.more.MoreCraftingTablesForForgeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry.MosaicCarpentryModule;
-import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MightyMailModule;
-import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish_furniture.MrCrayfishFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish.MightyMailModule;
+import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish.MrCrayfishFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.forge.nosiphus.NosiphusFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
+import net.mehvahdjukaar.every_compat.modules.forge.smidgeon_o_bliss.SmidgeonOBlissModule;
+import net.mehvahdjukaar.every_compat.modules.forge.storage_delight.StorageDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.timber_frames.TimberFramesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.forge.ultimate_car.UltimateCarModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantCraftingTablesModule;
-import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
@@ -93,8 +98,11 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("boatload", () -> BoatLoadModule::new);
         addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
         addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
+        addIfLoaded("car", () -> UltimateCarModule::new);
         addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
         addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
+        addIfLoaded("create", () -> CreateModule::new);
+        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
         addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
@@ -105,28 +113,27 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
         addIfLoaded("mighty_mail", () -> MightyMailModule::new);
         addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+        addIfLoaded("nfm", () -> NosiphusFurnitureModule::new);
         addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
         addIfLoaded("pokecube_legends", () -> PokecubeLegendsModule::new);
         addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
         addIfLoaded("redeco", () -> ReDecoModule::new);
         addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
         addIfLoaded("shutter", () -> LauchsShuttersModule::new);
+        addIfLoaded("sob", () -> SmidgeonOBlissModule::new);
+        addIfLoaded("storagedelight", () -> StorageDelightModule::new);
         addIfLoaded("timber_frames", () -> TimberFramesModule::new);
         addIfLoaded("tropicraft", () -> TropicraftModule::new);
         addIfLoaded("twilightforest", () -> TwilightForestModule::new);
         addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
         addIfLoaded("woodster", () -> WoodsterModule::new);
         addIfLoaded("woodworks", () -> WoodworksModule::new);
         addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addIfLoaded("xercamod", () -> XercaModule::new);
+        addIfLoaded("youkaishomecoming", () -> YoukaisHomecomingModule::new);
 
-        if (PlatHelper.isModLoaded("mcwdoors")) {
-            addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
-        }
-
-        addIfLoaded("create", () -> CreateModule::new); //TEMP: DISABLED due to version difference
+        if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
 
         // ========================================= Macaw's ======================================================== \\
         addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);

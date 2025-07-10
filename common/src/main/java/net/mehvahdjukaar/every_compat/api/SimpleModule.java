@@ -208,10 +208,10 @@ public class SimpleModule extends CompatModule {
 
         // ugly hardcoded stuff
         if (blockType instanceof WoodType wt) {
-            Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(blockName, wt, modId, shortenedId());
+            Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(blockName, wt, modId);
             if (hardcoded != null) return hardcoded;
         } else if (blockType instanceof LeavesType lt) {
-            Boolean hardcoded = HardcodedBlockType.isLeavesBlockAlreadyRegistered(blockName, lt, modId, shortenedId());
+            Boolean hardcoded = HardcodedBlockType.isLeavesBlockAlreadyRegistered(blockName, lt, modId);
             if (hardcoded != null) return hardcoded;
         }
 

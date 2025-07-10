@@ -1,6 +1,5 @@
-package net.mehvahdjukaar.every_compat.modules.dawn_of_time;
+package net.mehvahdjukaar.every_compat.modules.fabric.dawn_of_time;
 
-import java.util.function.ToIntFunction;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -20,18 +19,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.dawnoftimebuilder.block.japanese.SpruceLowTableBlock;
 import org.dawnoftimebuilder.block.roman.BirchCouchBlock;
 import org.dawnoftimebuilder.block.roman.BirchFootstoolBlock;
-import org.dawnoftimebuilder.block.templates.BeamBlock;
-import org.dawnoftimebuilder.block.templates.ChairBlock;
-import org.dawnoftimebuilder.block.templates.EdgeBlock;
-import org.dawnoftimebuilder.block.templates.LatticeBlock;
-import org.dawnoftimebuilder.block.templates.PergolaBlock;
-import org.dawnoftimebuilder.block.templates.PlateBlock;
-import org.dawnoftimebuilder.block.templates.SupportBeamBlock;
-import org.dawnoftimebuilder.block.templates.SupportSlabBlock;
+import org.dawnoftimebuilder.block.templates.*;
 import org.dawnoftimebuilder.util.VoxelShapes;
 
+import java.util.function.ToIntFunction;
 
-//SUPPORT v1.5.7+
+
+//SUPPORT v1.5.14+
+//REASON: The difference between FABRIC & FORGE is the library path: org.dawnoftimebuilder.block.templates.* OR org.dawnoftime.dawnoftime.block.templates.*
 public class DawnOfTimeModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BEAM;
@@ -50,7 +45,7 @@ public class DawnOfTimeModule extends SimpleModule {
 
     public DawnOfTimeModule(String modId) {
         super(modId, "dot");
-        var tab = modRes("dot_tab");
+        ResourceLocation tab = modRes("dot_tab");
 
         PLATE = SimpleEntrySet.builder(WoodType.class, "planks_plate",
                         getModBlock("oak_planks_plate"), () -> WoodTypeRegistry.OAK_TYPE,

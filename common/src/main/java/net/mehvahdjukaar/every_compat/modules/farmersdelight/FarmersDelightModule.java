@@ -26,8 +26,7 @@ import java.io.InputStream;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-// SUPPORT: v1.2.4+
-// SUPPORT: FABRIC-v2.0.5+
+// SUPPORT: FABRIC-v2.4.0+ | FORGE-v1.2.8+
 public class FarmersDelightModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> cabinets;

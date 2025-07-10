@@ -1033,5 +1033,31 @@
   "block_type.blocksplus.mosaic_slab": "%s Mosaic Slab",
   "block_type.blocksplus.cracked_mosaic": "Cracked %s Mosaic",
   "block_type.blocksplus.mossy_mosaic": "Mossy %s Mosaic",
-  "block_type.blocksplus.mosaic_pressure_plate": "%s Mosaic Pressure Plate"
+  "block_type.blocksplus.mosaic_pressure_plate": "%s Mosaic Pressure Plate",
+
+  "block_type.sob.counter": "%s Counter",
+
+  "block_type.storagedelight.drawer": "%s Drawer",
+  "block_type.storagedelight.drawer_with_door": "%s Drawer With Door",
+  "block_type.storagedelight.drawer_with_books": "%s Drawer With Books",
+  "block_type.storagedelight.small_drawers": "Small %s Drawers",
+  "block_type.storagedelight.bookshelf_with_door": "%s Bookshelf With Door",
+  "block_type.storagedelight.glass_cabinet": "Glass %s Cabinet",
+  "block_type.storagedelight.cabinet_with_glass_doors": "%s Cabinet With Glass Doors",
+  "block_type.storagedelight.single_door_cabinet": "%s Single Door Cabinet",
+
+  "block_type.nfm.chopping_board": "%s Chopping Board",
+  "block_type.nfm.door_bell": "%s Door Bell",
+  "block_type.nfm.stripped_door_bell": "Stripped %s Door Bell",
+  "block_type.nfm.water_tank": "%s Water Tank",
+
+  "car_variant.%s": "%s",
+  "item_type.car.license_plate_holder": "%s License Plate Holder",
+  "item_type.car.bumper": "%s Bumper",
+  "item_type.car.body": "%s Body",
+  "item_type.car.big_body": "Big %s Body",
+
+  "block_type.youkaishomecoming.handrail": "%s Handrail",
+  "block_type.youkaishomecoming.dining_table": "%s Dining Table",
+  "block_type.youkaishomecoming.dining_chair": "%s Dining Chair"
 }

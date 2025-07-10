@@ -47,7 +47,7 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
                 .setTabKey(tab)
-                .addRecipe(modRes("stonecutting/pillar_oak_planks"))
+                .addRecipe(modRes("stonecutting/small_pillar_oak_log"))
                 .build();
         this.addEntry(SMALL_LOG_PILLAR);
 
@@ -59,6 +59,7 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
                 .setTabKey(tab)
+                .addRecipe(modRes("stonecutting/pillar_oak_planks"))
                 .build();
         this.addEntry(PLANK_PILLAR);
 
@@ -70,51 +71,10 @@ public class CorailPillarModule extends SimpleModule {
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
                 .setTabKey(tab)
-//                .addRecipe(modRes("stonecutting/"))
+                .addRecipe(modRes("stonecutting/small_pillar_oak_planks"))
                 .build();
         this.addEntry(SMALL_PLANK_PILLAR);
 
-    }
-
-    // RECIPES
-    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
-        super.addDynamicServerResources(executor);
-
-        executor.accept((manager, sink) -> {
-            LOG_PILLAR.blocks.forEach((wood, item) -> {
-                // LOG
-                stonecuttingRecipe(sink, wood.log, item, 2);
-                stonecuttingRecipe(sink, wood.log, SMALL_LOG_PILLAR.blocks.get(wood), 4);
-
-                // PLANKS
-                stonecuttingRecipe(sink, wood.planks, PLANK_PILLAR.blocks.get(wood), 2);
-                stonecuttingRecipe(sink, wood.planks, SMALL_PLANK_PILLAR.blocks.get(wood), 4);
-
-            });
-
-        });
-    }
-
-    public void stonecuttingRecipe(ResourceSink sink, Block input, Block output, int count) {
-        String recipeJSON = """
-            {   
-                "type":"minecraft:stonecutting",
-                "ingredient":{
-                    "item":"[INPUT]"
-                },
-                "result":"[OUTPUT]",
-                "count": amount
-            }
-        """;
-
-        String newJson = recipeJSON
-                .replace("[INPUT]", Utils.getID(input).toString())
-                .replace("[OUTPUT]", Utils.getID(output).toString())
-                .replace("amount", String.valueOf(count));
-
-        ResourceLocation resLoc = Utils.getID(output); // provide everycomp:cpr/namespace/BlockID
-
-        sink.addBytes(resLoc, newJson.getBytes(), ResType.RECIPES);
     }
 
 }

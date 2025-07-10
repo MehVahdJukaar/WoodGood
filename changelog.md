@@ -1,15 +1,85 @@
 <div style="text-align: center; border: 1px solid yellow; padding: 10px;">
-  <div style="text-align: center; margin-bottom: 10px;">
-    <h3>LEGEND</h3>
-  </div>
-  <div style="text-align: left;">
-    <ul style="list-style-type: disc; padding-left: 20px;">
-      <li>(COMMON): FORGE & FABRIC</li>
-      <li>(IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture</li>
-      <li>(TEX): New hand-made texture for specific block or item</li>
-    </ul>
-  </div>
+
+<div style="text-align: center; margin-bottom: 10px;">
+
+### LEGEND
+
 </div>
+
+<div style="text-align: left;">
+
+* **(COMMON)**: FORGE & FABRIC
+* **(FB)**: FABRIC
+* **(FG)**: FORGE
+* **(IT)**: Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
+* **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod
+* **(INCLUDED)**: The block is not generated because a Wood Mod already have the same block as the supported mod will be generated
+* **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason
+
+</div>
+
+</div>
+
+### UPDATED: 
+- **EveryCompat** (COMMON): 
+  - Excluded some blocks from Supported Mods due to FramedBlocks having a similar blocks - "torch"
+  - Corrected the parameter in the wrong place to correct parameter - Case: **valhelsia_structures** + **Nature's Spirit**:joshua
+    - In other words, The blocks from **Valhelsia Structures** will be included with joshua from **Nature's Spirit**
+- **Dawn Of Time** (COMMON): Split into FABRIC & FORGE folder to fix the issue with Minecraft not launching properly
+
+---
+
+## v2.8.12
+
+### UPDATED: 
+- **Every Compat** (COMPAT): 
+  - **Abnormal's Delight** - Fixed a typo in modId for **Caverns & Chasms**
+  - **Ascended Quark** (COMPAT): **Quark** with **The Aether** & **Deep Aether**
+- **Woodworks** (FG): Corrected `#blueprint:wooden_chiseled_bookshelf` to `#blueprint:wooden_chiseled_bookshelves` - [#977](https://github.com/MehVahdJukaar/WoodGood/issues/977)
+- **More Chest Variant** (COMMON): Corrected OAK_CHEST & OAK_TRAPPED_CHEST to lower cases & fixed the crash blc of it
+
+### NEW SUPPORTED MOD:
+- **Smidgeon O' Bliss** (FG)
+- **Storage Delight** (COMMON)
+- **Nosiphus Furniture Mod** (FG)
+- **Ultimate Car Mod** (FG)
+- **Gensokyo Delight - Youkai's Homecoming** (FG)
+
+---
+
+## v2.8.10
+
+### UPDATED: 
+- **MOVED TO COMMON**:
+  - **Variant Vanilla Blocks**
+- **Re:Deco** (FG): Fixed the loot_table of pedestal, display_case, sword_mount not dropping fabric - [#969](https://github.com/MehVahdJukaar/WoodGood/issues/969)
+
+---
+
+## v2.8.9
+
+### ADDED:
+- **TEXTURE** (TEX): Applying the chest's texture for AP's twisted from **Quark** with **Architect's Palette (AP)** to **Woodworks** with **Architect's Palette**
+- **Terrestria** (IT): stripped_yucca_palm's top texture
+  
+### UPDATED
+- **Woodworks** (FG): Multiple Blocks' tags - [#965](https://github.com/MehVahdJukaar/WoodGood/issues/965) , #963, #
+- **MOre Chest Variants** (FG): Fixed the chests' incorrect texture in inventory - [#966](https://github.com/MehVahdJukaar/WoodGood/issues/966)
+- **Handcrafted** (COMMON): Updated for **Moonlight Lib**'s v2.14.9+ 
+- **Regions Unexplored** (COMMON): The outdated codes to generate shrub's texture due to multi-thread code from **Moonlight lib**
+- **MOVED TO COMMON**:
+  - **More Chest Variants** (LieOnLion) - This also mean FABRIC version is supported 
+  - **More Crafting Tables** (LieOnLion) 
+- **Chipped** (COMMON): 
+  - [#968](https://github.com/MehVahdJukaar/WoodGood/issues/968) - is fixed by **Moonlight Lib v2.14.11**
+  - Fixed the stripped_log's texture with "Palette size can't be 0" in the latest.log for some Wood Mods (ex: **Productive Trees**)
+- **Re:Deco** (FG): Fixed the loot_table of chairs, benches, stools not dropping fabric - [#969](https://github.com/MehVahdJukaar/WoodGood/issues/969)
+- **Corail Pillar** (FG): Corrected blocks' incorrect recipe and removed an code that manually added recipes for 2 blocks
+- **Every Compat**: Fixed an concurrency issue (multi-thread stuff) with `addOtherCompatMod()` method - @MehVahdJukaar
+
+---
+
+## v2.8.8
 
 ### UPDATED: 
 - **LANG**: us_en - Corrected the name for full storage drawer - [#949](https://github.com/MehVahdJukaar/WoodGood/issues/949)

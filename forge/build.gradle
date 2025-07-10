@@ -130,11 +130,11 @@ dependencies {
     }
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("curse.maven:jade-324717:5672013")
-    modRuntimeOnly("curse.maven:emi-580555:5704396")
-    modRuntimeOnly("curse.maven:configured-457570:5180902")
-    modRuntimeOnly("curse.maven:crafttweaker-239197:6082752")
-//    modRuntimeOnly("curse.maven:jei-238222:5718385")
+    modRuntimeOnly("curse.maven:jade-324717:6106101") // v11.12.3
+    modRuntimeOnly("curse.maven:emi-580555:6420945") // v1.1.22
+    modRuntimeOnly("curse.maven:configured-457570:5180902") // v2.2.3
+    modRuntimeOnly("curse.maven:crafttweaker-239197:6256146") // v14.0.57
+    modRuntimeOnly("curse.maven:jei-238222:6600311") // v15.20.0.112
 //    modRuntimeOnly("curse.maven:worldedit-225608:4586218")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
@@ -144,9 +144,8 @@ dependencies {
 //    modRuntimeOnly("curse.maven:athena-841890:5176879") //
 //    modRuntimeOnly("curse.maven:aeroblender-879879:4789008") // Aether
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | REI, Infinity-Buttons
-//    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish
+//    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish, Minecraft-Comes-Alive-Reborn
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Handcrafted, Cozy
-//    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129294") // Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5668859") // Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
@@ -157,8 +156,11 @@ dependencies {
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // v81 | TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:monolib-968432:6123976") // v2.0.0 | More-Beautiful-Torches
+//    modRuntimeOnly("curse.maven:brewin-and-chewin-637808:6237884") // Smidgeon-O'-Bliss
+//    modRuntimeOnly("curse.maven:kotlin-for-forge-351264:5402061") // Adorn
 
             //- OTHER MAVENS
+//    modRuntimeOnly("maven.modrinth:fusion-connected-textures:1.2.7b-forge-mc${minecraft_version}") // Dawn-Of-Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
 //    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
@@ -181,10 +183,9 @@ dependencies {
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4034009") //WARNING: v2.1.2-1.19.2 -> 1.20.1: Cannot remap access widener from namespace 'srg'. Expected: 'intermediary'
 //    modRuntimeOnly("curse.maven:backpacked-352835:5401965")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679")
-//    modRuntimeOnly("curse.maven:dawn-of-time-312359:5651249")
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:5089406")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399")
-//    modRuntimeOnly("curse.maven:farmersdelight-398521:4679319")
+//    modRuntimeOnly("curse.maven:farmersdelight-398521:6597298") // Smidgeon-O'-Bliss, Youkais-Homecoming
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
@@ -197,6 +198,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:5318681")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097")
+//    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995")
 
             //- OTHER MAVENS
@@ -226,13 +228,14 @@ dependencies {
     modCompileOnly("curse.maven:macaws-windows-363569:4961142")
     modCompileOnly("curse.maven:macaws-stairs-1119394:6155181")
 
-        // OTHERS
+        // GENERAL
     modCompileOnly("curse.maven:absent-by-design-305840:4616702")
     modCompileOnly("curse.maven:architects-palette-433862:5036133")
     modCompileOnly("curse.maven:beautify-decorate-633252:4781709")
     modCompileOnly("curse.maven:boatload-337396:5292325") // Blueprint
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
     modCompileOnly("curse.maven:corail-pillar-266228:5073954")
+    modCompileOnly("curse.maven:dawn-of-time-312359:6729167") // Fusion, YetAnotherConfigLib - NOTE: Test in production (PrismLauncher or others)
     modCompileOnly("curse.maven:decoration-delight-687475:5563942")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
     modCompileOnly("curse.maven:dramatic-doors-380617:6438745")
@@ -245,24 +248,28 @@ dependencies {
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
+    modCompileOnly("curse.maven:nosiphus-furniture-mod-593876:6169762") // MrCrayFish's-Furniture-Mod-(LEGACY)
     modCompileOnly("curse.maven:oreberries-replanted-454062:5138729")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4816899")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:5566102") //v12.6.0 | WIP
+    modCompileOnly("curse.maven:quark-243121:6312787") // Zeta - IMPORTANT: modRuntimeOnly mustn't be set blc it causes issue in production
     modCompileOnly("curse.maven:redeco-897377:5603009")
     modCompileOnly("curse.maven:regions-unexplored-659110:5558225")
+    modCompileOnly("curse.maven:smidgeon-o-bliss-remastered-1288021:6710528") // Farmer's-Delight, Brewing'-And-Chewin' - NOTE: Test in production (PrismLauncher or others), idk why it don't work in DEV
+    modCompileOnly("curse.maven:storage-delight-forge-979761:6696771")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
     modCompileOnly("curse.maven:timber-frames-606011:5372390")
     modCompileOnly("curse.maven:tropicraft-254794:4811116") // Registrate
+    modCompileOnly("curse.maven:ultimate-car-mod-267458:5982592")
     modCompileOnly("curse.maven:valhelsia-structures-347488:5195707") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
-    modCompileOnly("curse.maven:quark-243121:6312787") // Zeta - IMPORTANT: modRuntimeOnly mustn't be set blc it causes issue in production
     modCompileOnly("curse.maven:woodster-869951:4670471")
     modCompileOnly("curse.maven:woodworks-543610:5228779") // Blueprint
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:5713529")
     modCompileOnly("curse.maven:xercamod-341575:4667995")
+    modCompileOnly("curse.maven:youkais-homecoming-957437:6724147") // Farmer's-Delight - Use Production instead of modImplementation
 
             // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:1.20.1-1.1.1") // MidnightLib
@@ -281,10 +288,13 @@ dependencies {
 
 //!! ============================================== FOR TESTING ===================================================== \\
 
+//    modRuntimeOnly("curse.maven:framedblocks-441647:6685443")
+//    forgeRuntimeLibrary("com.github.ben-manes.caffeine:caffeine:3.2.1")
+
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
     modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6364065") // Terrablender, Glitchcore
-//    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore
+//    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore, ProductiveLib
 //    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel
 //    modRuntimeOnly("curse.maven:rats-323596:5904296")
 //    modRuntimeOnly("curse.maven:mo-shiz-mod-62536:5587177")

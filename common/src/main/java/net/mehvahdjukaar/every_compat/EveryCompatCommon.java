@@ -5,7 +5,6 @@ import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurniture
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
-import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
@@ -25,6 +24,7 @@ import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
@@ -61,6 +61,8 @@ public class EveryCompatCommon {
         addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
                 "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
 
+        addOtherCompatMod("ascended_quark", List.of("aether", "deep_aether"), "quark");
+
         // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
         addOtherCompatMod("macawbridgesbyg", "biomeswevegone", "mcwbridges");
@@ -85,7 +87,7 @@ public class EveryCompatCommon {
 
         // Abnormals Delight
         addOtherCompatMod("abnormals_delight",
-                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caves_and_chasms"),
+                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caverns_and_chasms"),
                 "farmersdelight");
 
     //!! =========================================== Add Modules ==================================================== \\
@@ -95,7 +97,6 @@ public class EveryCompatCommon {
         addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
         addIfLoaded("campchair", () -> CampChairModule::new);
         addIfLoaded("chipped", () -> ChippedModule::new);
-        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule::new);
         addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);
         addIfLoaded("friendsandfoes", () -> FriendsAndFoesModule::new);
@@ -113,6 +114,7 @@ public class EveryCompatCommon {
         addIfLoaded("table_top_craft", () -> TableTopCraftModule::new);
         addIfLoaded("twigs", () -> TwigsModule::new);
         addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
+        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
         addIfLoaded("villagersplus", () -> VillagersPlusModule::new);
 
     }

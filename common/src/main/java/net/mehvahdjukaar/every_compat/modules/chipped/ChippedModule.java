@@ -1055,8 +1055,8 @@ public class ChippedModule extends SimpleModule {
                         getModBlock("tile_windowed_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()) {}
                         )
-                .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_bottom"), EveryCompat.res("block/ch/doors/tile_windowed_oak_door_bottom_m"))
-                .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_top"), EveryCompat.res("block/ch/doors/tile_windowed_oak_door_top_m"))
+                .addTextureM(modRes("block/oak_door/tile_windowed_oak_door_bottom"), EveryCompat.res("block/ch/doors/tile_windowed_oak_door_bottom_m"))
+                .addTextureM(modRes("block/oak_door/tile_windowed_oak_door_top"), EveryCompat.res("block/ch/doors/tile_windowed_oak_door_top_m"))
                 .addTextureM(modRes("item/oak_door/tile_windowed_oak_door"), EveryCompat.res("item/ch/doors/tile_windowed_oak_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)

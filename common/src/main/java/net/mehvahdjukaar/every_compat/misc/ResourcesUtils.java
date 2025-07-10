@@ -35,6 +35,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.Map.entry;
+
 @SuppressWarnings("unused")
 public class ResourcesUtils {
 
@@ -381,11 +383,28 @@ public class ResourcesUtils {
      * if item (key) matched the following below, then instead of "minecraft:air", the value will be used
      * NOTE:
      * Quark's bookshelf and it's loot_table where it has "minecraft:booK" will be replaced with
-     * "minecraft:air". A similar case with "minecraft:shulker_box" also happened, too.
+     * "minecraft:air". A similar case with "minecraft:shulker_box"
     **/
-    private static final Map<String, String> mapOfItem = Map.of(
-            "shulker_box", "\"minecraft:shulker_box\"",
-            "book", "\"minecraft:book\""
+    private static final Map<String, String> mapOfItem = Map.ofEntries(
+            entry("shulker_box", "\"minecraft:shulker_box\""),
+            entry("book", "\"minecraft:book\""),
+
+            // Re: Deco
+            entry("white_upholstery", "\"redeco:white_upholstery\""),
+            entry("light_gray_upholstery", "\"redeco:light_gray_upholstery\""),
+            entry("gray_upholstery", "\"redeco:gray_upholstery\""),
+            entry("black_upholstery", "\"redeco:black_upholstery\""),
+            entry("lime_upholstery", "\"redeco:lime_upholstery\""),
+            entry("green_upholstery", "\"redeco:green_upholstery\""),
+            entry("cyan_upholstery", "\"redeco:cyan_upholstery\""),
+            entry("blue_upholstery", "\"redeco:blue_upholstery\""),
+            entry("light_blue_upholstery", "\"redeco:light_blue_upholstery\""),
+            entry("purple_upholstery", "\"redeco:purple_upholstery\""),
+            entry("magenta_upholstery", "\"redeco:magenta_upholstery\""),
+            entry("pink_upholstery", "\"redeco:pink_upholstery\""),
+            entry("orange_upholstery", "\"redeco:orange_upholstery\""),
+            entry("yellow_upholstery", "\"redeco:yellow_upholstery\""),
+            entry("brown_upholstery", "\"redeco:brown_upholstery\"")
     );
 
 }

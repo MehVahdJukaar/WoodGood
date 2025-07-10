@@ -52,15 +52,14 @@ public class BuildersAdditionModule extends SimpleModule {
 
     public BuildersAdditionModule(String modId) {
         super(modId, "bca");
-        var tab = CreativeModeTabRegistry.MAIN_TAB.getId();
+        ResourceLocation tab = CreativeModeTabRegistry.MAIN_TAB.getId();
 
 
         verticalSlab = SimpleEntrySet.builder(WoodType.class, "vertical_slab",
                         Index.OAK_VERTICAL_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
-                        (w) -> {
-                            if (PlatHelper.isModLoaded("v_slab_compat")) return null;
-                            return new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks);
-                        })
+                        w -> new VerticalSlab(shortenedId() + "/" + w.getAppendableId(), w.planks)
+                )
+                .addCondition(w -> !PlatHelper.isModLoaded("v_slab_compat"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("vertical_slab/oak_vertical_slab"))
 //              Recipe added by a manual code below
