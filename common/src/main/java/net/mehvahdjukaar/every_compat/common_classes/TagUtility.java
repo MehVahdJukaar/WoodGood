@@ -175,9 +175,7 @@ public class TagUtility {
     // Common tags
 
     private static ResourceLocation commonTag(String suffix) {
-        return PlatHelper.getPlatform().isFabric() ?
-                new ResourceLocation("c", suffix) :
-                new ResourceLocation("forge", suffix);
+        return ResourceLocation.fromNamespaceAndPath("c", suffix);
     }
 
     public static final ResourceLocation GLASS_TAG = commonTag("glass");
