@@ -248,7 +248,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Override
-    public void generateModels(SimpleModule module,  ResourceManager manager,ResourceSink handler) {
+    public void generateModels(SimpleModule module, ResourceManager manager, ResourceSink handler) {
         ResourcesUtils.generateStandardBlockModels(manager, handler, blocks, baseType.get(),
                 makeModelTransformer(module, manager), makeBlockStateTransformer(module, manager), this.modelConfiguration
         );
@@ -270,7 +270,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     protected BlockTypeResTransformer<T> makeBlockStateTransformer(SimpleModule module, ResourceManager manager) {
         String baseBlockName = baseType.get().getTypeName();
         return BlockTypeResTransformer.<T>create(module.modId, manager)
-                .replaceWithTextureFromChild("minecraft:block/"+baseBlockName+"_planks", "planks")
+                .replaceWithTextureFromChild("minecraft:block/" + baseBlockName + "_planks", "planks")
                 .replaceBlockType(baseBlockName)
                 .IDReplaceType(baseBlockName);
     }
@@ -306,7 +306,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
     }
 
-//!! SUBCLASS
+    //!! SUBCLASS
     public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T, B>, T, B, Item> {
         protected final Supplier<@Nullable B> baseBlock;
         protected LootTableMode lootMode = LootTableMode.DROP_SELF;
@@ -343,7 +343,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {
             this.tileHolder = new ExistingTileHolder<>(
-                    () -> BuiltInRegistries.BLOCK_ENTITY_TYPE.get(new ResourceLocation(idTile))
+                    () -> BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(new ResourceLocation(idTile))
+                            .orElseThrow(() -> new NoSuchElementException("Tile entity with ID" + idTile + " not found! ID must be wrong!"))
             );
             return this;
         }
@@ -404,40 +405,41 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
 
-    /// Add models/block files so it can be generated - Only MINECRAFT's
-    public Builder<T, B> generateBlockModels(ResourceLocation... blockModels) {
-        if (this.modelConfig == ModelConfiguration.EMPTY) {
-            this.modelConfig = ModelConfiguration.createNew();
+        /// Add models/block files so it can be generated - Only MINECRAFT's
+        public Builder<T, B> generateBlockModels(ResourceLocation... blockModels) {
+            if (this.modelConfig == ModelConfiguration.EMPTY) {
+                this.modelConfig = ModelConfiguration.createNew();
+            }
+            this.modelConfig.addBlockModel(blockModels);
+            return this;
         }
-        this.modelConfig.addBlockModel(blockModels);
-        return this;
-    }
-    /// Add models/block files to a List so it can be generated BUT Minecraft is excluded
-    public Builder<T, B> generateBlockModels(boolean includeInGeneration, ResourceLocation... blockModels) {
-        if (this.modelConfig == ModelConfiguration.EMPTY) {
-            this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
-        }
-        this.modelConfig.addBlockModel(blockModels);
-        return this;
-    }
 
-    /// Add models/item files so it can be generated - Only MINECRAFT's
-    public Builder<T, B> generateItemModels(ResourceLocation... itemModels) {
-        if (this.modelConfig == ModelConfiguration.EMPTY) {
-            this.modelConfig = ModelConfiguration.createNew();
+        /// Add models/block files to a List so it can be generated BUT Minecraft is excluded
+        public Builder<T, B> generateBlockModels(boolean includeInGeneration, ResourceLocation... blockModels) {
+            if (this.modelConfig == ModelConfiguration.EMPTY) {
+                this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
+            }
+            this.modelConfig.addBlockModel(blockModels);
+            return this;
         }
-        this.modelConfig.addItemModel(itemModels);
-        return this;
-    }
 
-    /// Add models/item files to a List so it can be generated BUT Minecraft is excluded
-    public Builder<T, B> generateItemModels(boolean includeInGeneration, ResourceLocation... itemModels) {
-        if (this.modelConfig == ModelConfiguration.EMPTY) {
-            this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
+        /// Add models/item files so it can be generated - Only MINECRAFT's
+        public Builder<T, B> generateItemModels(ResourceLocation... itemModels) {
+            if (this.modelConfig == ModelConfiguration.EMPTY) {
+                this.modelConfig = ModelConfiguration.createNew();
+            }
+            this.modelConfig.addItemModel(itemModels);
+            return this;
         }
-        this.modelConfig.addItemModel(itemModels);
-        return this;
-    }
+
+        /// Add models/item files to a List so it can be generated BUT Minecraft is excluded
+        public Builder<T, B> generateItemModels(boolean includeInGeneration, ResourceLocation... itemModels) {
+            if (this.modelConfig == ModelConfiguration.EMPTY) {
+                this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
+            }
+            this.modelConfig.addItemModel(itemModels);
+            return this;
+        }
 
 
         /// Is there a way to get baseBlock?

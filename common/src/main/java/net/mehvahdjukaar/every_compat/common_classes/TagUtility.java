@@ -182,5 +182,16 @@ public class TagUtility {
         boolean itemTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
         return blockTag || itemTag;
     }
+    
+    // Common tags
+
+    private static ResourceLocation commonTag(String suffix) {
+        return PlatHelper.getPlatform().isFabric() ?
+                new ResourceLocation("c", suffix) :
+                new ResourceLocation("forge", suffix);
+    }
+
+    public static final ResourceLocation GLASS_TAG = commonTag("glass");
+    public static final ResourceLocation GLASS_PANE_TAG = commonTag("glass_panes");
 
 }
