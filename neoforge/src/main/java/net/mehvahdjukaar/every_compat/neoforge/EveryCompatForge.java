@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate.BeautifyDecorateModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.building_but_better.BuildingButBetterModule;
@@ -23,8 +24,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.Functi
 import net.mehvahdjukaar.every_compat.modules.neoforge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lauchs.LauchsShuttersModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.lieonlion.MoreChestVariantsModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.lieonlion.MoreCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.more.MoreCraftingTablesForForgeModule;
@@ -40,7 +39,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.tropicraft.TropicraftModu
 import net.mehvahdjukaar.every_compat.modules.neoforge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingTablesModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
@@ -82,6 +80,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
         addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
         addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
+        addIfLoaded("bibliocraft", () -> BibliocraftLegacyModule::new);
         addIfLoaded("boatload", () -> BoatLoadModule::new);
         addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
         addIfLoaded("bbb", () -> BuildingButBetterModule::new);
@@ -93,7 +92,6 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("functionalstorage", () -> FunctionalStorageModule::new);
         addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
         addIfLoaded("justaraftmod", () -> JustARaftModule::new);
-        addIfLoaded("lolmcv", () -> MoreChestVariantsModule::new);
         addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
         addIfLoaded("mighty_mail", () -> MightyMailModule::new);
         addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
@@ -108,13 +106,12 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("tropicraft", () -> TropicraftModule::new);
         addIfLoaded("twilightforest", () -> TwilightForestModule::new);
         addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
+//        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new); //!! NOT-AVAILABLE
         addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
         addIfLoaded("woodster", () -> WoodsterModule::new);
         addIfLoaded("woodworks", () -> WoodworksModule::new);
         addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
         addIfLoaded("xercamod", () -> XercaModule::new);
-        addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
 
         if (PlatHelper.isModLoaded("mcwdoors")) {
             addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);

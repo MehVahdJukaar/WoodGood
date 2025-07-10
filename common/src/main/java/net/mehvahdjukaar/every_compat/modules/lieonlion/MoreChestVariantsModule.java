@@ -1,6 +1,7 @@
-package net.mehvahdjukaar.every_compat.modules.neoforge.lieonlion;
+package net.mehvahdjukaar.every_compat.modules.lieonlion;
 
-import com.google.gson.JsonObject;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -10,16 +11,16 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -27,43 +28,43 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.common.Tags;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
-//SUPPORT: v1.5.4+
+//SUPPORT: FABRIC-v1.5.8+ | NEOFORGE-v1.5.9+
 public class MoreChestVariantsModule extends SimpleModule {
-
     public final SimpleEntrySet<WoodType, Block> chests;
     public final SimpleEntrySet<WoodType, Block> trappedChests;
 
     public MoreChestVariantsModule(String modID) {
-        super(modID, "lolmcv");
+        super(modID, "mcv");
+        ResourceKey<CreativeModeTab> functionalTab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
+        ResourceKey<CreativeModeTab> redstoneTab = CreativeModeTabs.REDSTONE_BLOCKS;
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new CompatChestBlock(this::getChestTile,
                                 Utils.copyPropertySafe(Blocks.CHEST).mapColor(MapColor.WOOD))
                 )
+                //REASON: ensure Chest's texture in inventory is corrected
+                .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
+                        s.replace("\"lolmcv:entity/chest/oak\"",
+                                "\""+woodType.createFullIdWith(EveryCompat.MOD_ID, "entity/chest", shortenedId(), "", "chest")+"\"" )
+                ))
                 .addTile(MoreChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/normal"), Registries.BLOCK)
-                .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
-                .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("c:chests"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("c:chests/wooden"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quad:cats_on_blocks/sit"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
-                .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
-                .addTag(Tags.Items.CHESTS, Registries.ITEM)
+                .addTag(ResourceLocation.parse("c:chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("c:chests/wooden"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/normal"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.ITEM)
-                .setTabKey(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+                .setTabKey(functionalTab)
                 .defaultRecipe()
                 .build();
         this.addEntry(chests);
@@ -73,19 +74,24 @@ public class MoreChestVariantsModule extends SimpleModule {
                         w -> new CompatTrappedChestBlock(this::getTrappedTile,
                                 Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
                 )
+                //REASON: ensure Chest's texture in inventory is corrected
+                .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
+                        s.replace("\"lolmcv:entity/chest/trapped/oak\"",
+                                "\""+woodType.createFullIdWith(EveryCompat.MOD_ID, "entity/chest", shortenedId(), "", "trapped_chest")+"\"" )
+                ))
                 .addTile(MoreTrappedBlockEntity::new)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/trapped"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
-                .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
-                .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("c:chests"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("c:chests/wooden"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/trapped"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.ITEM)
-                .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
-                .addTag(Tags.Items.CHESTS, Registries.ITEM)
-                .setTabKey(CreativeModeTabs.REDSTONE_BLOCKS)
+                .addTag(ResourceLocation.parse("c:chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("c:chests/wooden"), Registries.ITEM)
+                .setTabKey(redstoneTab)
                 .defaultRecipe()
                 .build();
         this.addEntry(trappedChests);
@@ -116,16 +122,15 @@ public class MoreChestVariantsModule extends SimpleModule {
 
     // Registry --------------------------------------------------------------------------------------------------------
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
         CompatChestBlockRenderer.register(event, trappedChests.getTile(CompatChestBlockEntity.class), shortenedId());
     }
 
-    @Deprecated(forRemoval = true)
-    @Override
     // Textures
+    @Override
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
         super.addDynamicClientResources(handler, manager);
 
@@ -151,35 +156,8 @@ public class MoreChestVariantsModule extends SimpleModule {
                     EveryCompat.res("entity/mcv_chest_right_o"),
                     EveryCompat.res("entity/mcv_trapped_right_o"), 0
             );
-
-
-            // MODEL BLOCK
-            String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
-            String trapped_path = shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
-
-            customModel(path, handler, manager);
-            customModel(trapped_path, handler, manager);
         });
+
     }
 
-    public void customModel(String path, ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        JsonObject modelFile;
-        ResourceLocation modelRLoc = EveryCompat.res("models/block/" + path + ".json");
-
-        if (manager.getResource(modelRLoc).isPresent()) {
-            try (InputStream modelStream = manager.getResource(modelRLoc).get().open()) {
-                modelFile = RPUtils.deserializeJson(modelStream);
-
-                String textureID = EveryCompat.MOD_ID + ":entity/chest/" + path;
-
-                // Editing
-                modelFile.getAsJsonObject("textures").addProperty("wood_type", textureID);
-
-                // Add to Resource
-                handler.dynamicPack.addJson(EveryCompat.res(path), modelFile, ResType.BLOCK_MODELS);
-            } catch (IOException e) {
-                handler.getLogger().error("MoreChestVariantsModule: failed to open the model file: {} - {}", modelRLoc, e);
-            }
-        }
-    }
 }

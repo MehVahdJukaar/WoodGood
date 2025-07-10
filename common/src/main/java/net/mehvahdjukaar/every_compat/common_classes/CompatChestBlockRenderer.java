@@ -45,17 +45,16 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
     public CompatChestBlockRenderer(BlockEntityRendererProvider.Context context, String shortenedId) {
         super(context);
         for (WoodType w : WoodTypeRegistry.getTypes()) {
-            if (w.isVanilla()) continue;
+            if (!w.getId().toString().equals("minecraft:pale_oak") && w.isVanilla()) continue; // minecraft:pale_oak is from Perfect Parity: The Garden Awakens Edition
             String path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_chest";
             String trapped_path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_trapped_chest";
-            if (!w.isVanilla()) {
-                single.put(w, new Material(CHEST_SHEET, EveryCompat.res(path)));
-                left.put(w, new Material(CHEST_SHEET, EveryCompat.res(path + "_left")));
-                right.put(w, new Material(CHEST_SHEET, EveryCompat.res(path + "_right")));
-                trapped.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path)));
-                trapped_left.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path + "_left")));
-                trapped_right.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path + "_right")));
-            }
+
+            single.put(w, new Material(CHEST_SHEET, EveryCompat.res(path)));
+            left.put(w, new Material(CHEST_SHEET, EveryCompat.res(path + "_left")));
+            right.put(w, new Material(CHEST_SHEET, EveryCompat.res(path + "_right")));
+            trapped.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path)));
+            trapped_left.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path + "_left")));
+            trapped_right.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path + "_right")));
         }
     }
 
@@ -103,7 +102,7 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
             float f1 = neighborcombineresult.apply(ChestBlock.opennessCombiner(blockEntity)).get(partialTick);
             f1 = 1.0F - f1;
             f1 = 1.0F - f1 * f1 * f1;
-            int i = neighborcombineresult.<Int2IntFunction>apply(new BrightnessCombiner<>()).applyAsInt(packedLight);
+            int i = neighborcombineresult.apply(new BrightnessCombiner<>()).applyAsInt(packedLight);
             Material material = this.getMaterial(blockEntity, chesttype);
             VertexConsumer vertexconsumer = material.buffer(buffer, RenderType::entityCutout);
             if (flag1x) {

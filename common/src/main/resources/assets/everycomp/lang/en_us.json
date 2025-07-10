@@ -1,7 +1,7 @@
 {
   "itemGroup.everycomp": "Every Compat",
   "itemGroup.everycomp.everycomp": "Every Compat",
-  "tooltip.everycomp.mod": "Mod: %s",
+  "tooltip.everycomp.mod": "Supported Mod: %s",
   "tooltip.everycomp.wood_type": "Wood Type: %s",
   "tooltip.everycomp.leaf_type": "Leaves Type: %s",
   "container.everycomp.chest.name": "%s Chest",
@@ -674,9 +674,9 @@
   "block_type.projectbrazier.vertical_lattice": "%s Vertical Lattice",
   "block_type.projectbrazier.zipline_anchor": "%s Zipline Anchor",
 
-  "block_type.storagedrawers.full_drawers_1": "%s Storage Drawers 1x1",
-  "block_type.storagedrawers.full_drawers_2": "%s Storage Drawers 1x2",
-  "block_type.storagedrawers.full_drawers_4": "%s Storage Drawers 2x2",
+  "block_type.storagedrawers.full_drawers_1": "%s Drawers 1x1",
+  "block_type.storagedrawers.full_drawers_2": "%s Drawers 1x2",
+  "block_type.storagedrawers.full_drawers_4": "%s Drawers 2x2",
   "block_type.storagedrawers.half_drawers_1": "%s Half Drawers 1x1",
   "block_type.storagedrawers.half_drawers_2": "%s Half Drawers 1x2",
   "block_type.storagedrawers.half_drawers_4": "%s Half Drawers 2x2",
@@ -1018,5 +1018,17 @@
   "block_type.more_beautiful_torches.planks_redstone_torch": "%s Planks Redstone Torch",
   "block_type.more_beautiful_torches.stripped_log_torch": "Stripped %s Log Torch",
   "block_type.more_beautiful_torches.stripped_log_soul_torch": "Stripped %s Log Soul Torch",
-  "block_type.more_beautiful_torches.stripped_log_redstone_torch": "Stripped %s Log Redstone Torch"
+  "block_type.more_beautiful_torches.stripped_log_redstone_torch": "Stripped %s Log Redstone Torch",
+
+  "block_type.bibliocraft.bookcase": "%s Bookcase",
+  "block_type.bibliocraft.fancy_armor_stand": "%s Fancy Armor Stand",
+  "block_type.bibliocraft.fancy_clock": "%s Fancy Clock",
+  "block_type.bibliocraft.fancy_crafter": "%s Fancy Crafter",
+  "block_type.bibliocraft.fancy_sign": "%s Fancy Sign",
+  "block_type.bibliocraft.grandfather_clock": "%s Grandfather Clock",
+  "block_type.bibliocraft.label": "%s Label",
+  "block_type.bibliocraft.potion_shelf": "%s Potion Shelf",
+  "block_type.bibliocraft.shelf": "%s Shelf",
+  "block_type.bibliocraft.table": "%s Table",
+  "block_type.bibliocraft.tool_rack": "%s Tool Rack"
 }

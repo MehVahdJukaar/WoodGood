@@ -4,16 +4,18 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
+import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChiseledBookShelfBlock;
 import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 //SUPPORT: v2.0.1+
 public class WoodsterModule extends SimpleModule {
@@ -25,8 +27,11 @@ public class WoodsterModule extends SimpleModule {
         ResourceLocation tab = modRes(modId);
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        getModBlock("dark_oak_chiseled_bookshelf"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("dark_oak")),
-                        w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
+                        getModBlock("dark_oak_chiseled_bookshelf"), () -> WoodTypeRegistry.getValue(VanillaWoods.DARK_OAK),
+                        w -> new ChiseledBookShelfBlock(BlockBehaviour.Properties.of()
+                                .strength(1.5F)
+                                .sound(SoundType.CHISELED_BOOKSHELF)
+                        )
                 )
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
                 .addTexture(TextureInfo.of(modRes("block/everycomp_dark_oak_chiseled_bookshelf_6"), "block/dark_oak_chiseled_bookshelf_6")
@@ -42,8 +47,11 @@ public class WoodsterModule extends SimpleModule {
         this.addEntry(chiseled_books);
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        getModBlock("spruce_ladder"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("spruce")),
-                        w -> new LadderBlock(Utils.copyPropertySafe(getModBlock("spruce_ladder").get()))
+                        getModBlock("spruce_ladder"), () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
+                        w -> new LadderBlock(BlockBehaviour.Properties.of()
+                                .strength(0.4F)
+                                .sound(SoundType.LADDER)
+                        )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)

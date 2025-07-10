@@ -102,27 +102,31 @@ dependencies {
     implementation 'org.jetbrains:annotations:22.0.0'
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
+    //- Repository LOCAL
     String path = System.getenv('REPOS21_1')
+    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
+    print "isMyPc: $usesMavenLocalML\n"
 
     //- Repository LOCAL
-    if (enable_moonlight_test.toBoolean() || usesMavenLocalML) {
+    if (enable_moonlight_test.toBoolean()) {
         if (usesMavenLocalML) {
-            //- ~/neoforge/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_testVersion}") // LOCAL
+            //- ~/fabric/mods LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}") // LOCAL
         } else {
-            modImplementation(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
+            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-neoforge") // v2.18.12
+        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-neoforge") // v2.19.4
     }
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("curse.maven:emi-580555:5872513") // v1.1.18
-    modRuntimeOnly("curse.maven:jade-324717:5884231") // v15.8.3
-    modRuntimeOnly("curse.maven:worldedit-225608:5830452")
-    modRuntimeOnly("curse.maven:configured-457570:5873783")
-//    modRuntimeOnly("curse.maven:jei-238222:5846880")
+    modRuntimeOnly("curse.maven:emi-580555:6420931") // v1.1.22
+    modRuntimeOnly("curse.maven:jei-238222:6614392") // v19.21.2.313
+    modRuntimeOnly("curse.maven:jade-324717:6667790") // v15.10.1
+    modRuntimeOnly("curse.maven:configured-457570:5873783") // v2.6.0
+    modRuntimeOnly("curse.maven:crafttweaker-239197:6434161") // v21.0.27
+//    modRuntimeOnly("curse.maven:worldedit-225608:5830452")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
     //@ IMPORTANT: RLM - "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/forge/run/mods/....
@@ -146,6 +150,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:citadel-331936:5143956") // Alex's Cave //!! 1.20.1
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies //!! 1.20.1
 //    modRuntimeOnly("curse.maven:monolib-968432:6123990") //v2.0.0 | More-Beautiful-Torches
+//    modRuntimeOnly("curse.maven:quad-932715:5900860") // v1.2.9 | More-Chest-Variants, More-Crafting-Table
 
         // OTHER MAVENs
 //    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Resourceful-Lib
@@ -154,7 +159,6 @@ dependencies {
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     modCompileOnly("curse.maven:framework-549225:5911998") // v0.9.4 | Refurbished-Furniture, +Mighty-Mail, Backpacked
-    modCompileOnly("curse.maven:quad-932715:5692947") // v1.2.8 | More Chest Variants, More Crafting Table
     modCompileOnly("curse.maven:titanium-287342:5726400") // Functional-Storage
     modCompileOnly("curse.maven:zeta-968868:5078215") // v1.0-13 | Quark - @DNU
     modCompileOnly("curse.maven:blueprint-382216:6449863") // v8.0.3 | The-Outer-End, Woodworks, Boatload
@@ -178,10 +182,13 @@ dependencies {
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617252") // Resourceful-Lib
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:6302230")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
+//    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5862569") // Quad - LieOnLion
+//    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272849") // Framework
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:5890187")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //@ 1.20.1-NOT_AVAILABLE
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995") //!! 1.20.1
 
         //- OTHER MAVENS
@@ -210,21 +217,19 @@ dependencies {
     modCompileOnly("curse.maven:absent-by-design-305840:4616702") //!! 1.20.1
     modCompileOnly("curse.maven:architects-palette-433862:5036133") //!! 1.20.1
     modCompileOnly("curse.maven:beautify-decorate-633252:5810850")
+    modCompileOnly("curse.maven:bibliocraft-legacy-1122260:6533545")
     modCompileOnly("curse.maven:boatload-337396:5292325") //!! 1.20.1
     modCompileOnly("curse.maven:buildersaddition-389697:5544431")
     modCompileOnly("curse.maven:corail-pillar-266228:5669131") //TODO: Move the module to COMMON
     modCompileOnly("curse.maven:decoration-delight-687475:5563942") //!! 1.20.1
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257") //!! 1.20.1
     modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
-    modCompileOnly("curse.maven:redeco-897377:5603009") //!! 1.20.1
     modCompileOnly("curse.maven:functional-storage-556861:5853986")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983") //!! 1.20.1
     modCompileOnly("curse.maven:just-a-raft-mod-274350:5777240")
     modCompileOnly("curse.maven:lightmans-currency-472521:6524192")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:5569350")
-    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5334619") //CHESTS //!! 1.20.1
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473305") //CRAFTING_TABLES
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212") //CRAFTING_TABLES for FORGE //!! 1.20.1
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673") //!! 1.20.1
     modCompileOnly("curse.maven:oreberries-replanted-454062:5817304")
@@ -232,14 +237,14 @@ dependencies {
     modCompileOnly("curse.maven:premium-wood-353515:3905203") //!! 1.20.1
     modCompileOnly("curse.maven:productivebees-377897:5304827") //v12.5.1 | WIP //!! 1.20.1
     modCompileOnly("curse.maven:quark-243121:5093415") //@DNU //!! 1.20.1
+    modCompileOnly("curse.maven:redeco-897377:5603009") //!! 1.20.1
     modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
-    modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847") //!! 1.20.1
     modCompileOnly("curse.maven:the-twilight-forest-227639:5759335")
+    modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:5658664")
     modCompileOnly("curse.maven:valhelsia-structures-347488:6360484") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //!! 1.20.1
     modCompileOnly("curse.maven:woodster-869951:6425772")
     modCompileOnly("curse.maven:woodworks-543610:6449924") // Blueprint
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:5752681")

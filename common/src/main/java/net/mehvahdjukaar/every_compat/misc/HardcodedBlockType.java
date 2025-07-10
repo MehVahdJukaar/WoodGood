@@ -24,8 +24,11 @@ public class HardcodedBlockType {
         shortenedIdenfity = shortenedId;
 
             /// ========== INCLUDE VANILLA TYPE ========== \\\
-        // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
+        // Dawn-Of-Time's fancy-fence only has BIRCH but no other vanilla variants
         if (isWoodFrom("dawnoftimebuilder", "", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
+
+        // PALE from Perfect Parity: The Garden Awakens Edition is being skipped because it's a vanilla
+        if (isWoodFrom("", "", "", "minecraft:pale", "")) return false;
 
 
         /// ========== EXCLUDE ========== \\\
@@ -43,6 +46,9 @@ public class HardcodedBlockType {
 
 
         /// ========== INCLUDE ========== \\\
+        // Enderscape's murublight_shelf prevent Another-Furniture's shelf from being generated
+        if (isWoodFrom("another_furniture", "", "", "enderscape:murublight", "")) return false;
+
         // Makes it so the Guita's Branches block still registers if another mod adds a branch block/item
         if (isWoodFrom("branches", "", "", "", "branch")) return false;
 
