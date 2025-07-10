@@ -21,6 +21,8 @@
 </div>
 
 ### UPDATED: 
+- **EveryCompat** (COMMON): Corrected version to v2.10.13
+- **Chipped** (COMMON): Added tags, #c:glass & #c:glass_panes to glasses & glass_panes blocks
 - **Bibliocraft Legacy** (NF): Corrected the ResourceLocation of BlockEntityType for fancy_armor_stand
 
 ---
