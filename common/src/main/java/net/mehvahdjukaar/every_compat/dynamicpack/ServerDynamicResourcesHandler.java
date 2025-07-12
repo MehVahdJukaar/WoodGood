@@ -46,7 +46,10 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicServerResources(tasks::add));
 
-        int batchSize = Math.max(10, tasks.size() / (Runtime.getRuntime().availableProcessors()));
+        int minBatches = Runtime.getRuntime().availableProcessors();
+        int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
+        int batchSize =  Math.max(minBatches, maxBatches);
+
         //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
         EveryCompat.LOGGER.info("Dynamic server resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
         for (int i = 0; i < tasks.size(); i += batchSize) {
