@@ -18,12 +18,18 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-// Used to identify textures "types" only based off their name.
-// feed into "findFirstBlockTextureLocation()"
+// ┌───────────────────────────────────────────────────────────────┐
+// │  Used to identify textures "types" only based off their name. │
+// │  feed into "findFirstBlockTextureLocation()"                  │
+// └───────────────────────────────────────────────────────────────┘
 public class SpriteHelper {
+
+    public static Set<SpriteExtra> spriteExtraSet = new HashSet<>();
 
     public static final @NotNull Predicate<String> LOOKS_LIKE_TOP_LOG_TEXTURE = (s) -> {
         s = (new ResourceLocation(s)).getPath();
@@ -40,6 +46,13 @@ public class SpriteHelper {
     };
 
     public static void addHardcodedSprites() {
+
+        if (!spriteExtraSet.isEmpty()) {
+            for (SpriteExtra currentSprite : spriteExtraSet) {
+                addOptional(currentSprite.blockId(), currentSprite.textureKey(), currentSprite.resLocTexture());
+            }
+        }
+
         // Minecraft
         TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log", EveryCompat.res("block/cactus_side"));
         TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log_top", EveryCompat.res("block/cactus_top"));
@@ -47,7 +60,6 @@ public class SpriteHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS"stripped_cactus_log_top", res("block/stripped_cactus_top"));
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
-
         // Luminous Nether
         addOptional("luminous_nether:withered_log", "_side", "luminous_nether:block/ashenlogside");
         addOptional("luminous_nether:withered_log", "_top", "luminous_nether:block/ashenlogtop");
@@ -444,7 +456,9 @@ public class SpriteHelper {
                 .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
     }
 
-
+    // ┌──────────────────────────────────────────────────────────┐
+    // │                      OTHER HELPERS                       │
+    // └──────────────────────────────────────────────────────────┘
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakLeaves(BlockTypeResTransformer<T> t) {
         return t.replaceWithTextureFromChild("minecraft:block/oak_leaves", "leaves", s -> {
             return !s.contains("_snow") && !s.contains("snow_") && !s.contains("snowy_");
