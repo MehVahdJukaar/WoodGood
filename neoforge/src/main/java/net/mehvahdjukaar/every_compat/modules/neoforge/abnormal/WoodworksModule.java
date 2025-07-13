@@ -50,7 +50,7 @@ import java.util.Objects;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 
-//SUPPORT: v4.0.0+
+//SUPPORT: v4.0.1+
 public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> chiseled_bookshelves;
