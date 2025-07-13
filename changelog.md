@@ -20,6 +20,13 @@
 
 </div>
 
+### UPDATED:
+- **Woodworks** (NF): Fixed the crash due to BlockEntityType for beehives - [#991](https://github.com/MehVahdJukaar/WoodGood/issues/991)
+
+---
+
+## v2.10.13
+
 ### UPDATED: 
 - **EveryCompat** (COMMON): Corrected version to v2.10.13
 - **Chipped** (COMMON): Added tags, #c:glass & #c:glass_panes to glasses & glass_panes blocks
