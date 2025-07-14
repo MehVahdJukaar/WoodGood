@@ -944,5 +944,31 @@
   "block_type.blocksplus.mosaic_slab": "%s马赛克台阶",
   "block_type.blocksplus.cracked_mosaic": "裂纹%s马赛克",
   "block_type.blocksplus.mossy_mosaic": "覆苔%s马赛克",
-  "block_type.blocksplus.mosaic_pressure_plate": "%s马赛克压力板"
+  "block_type.blocksplus.mosaic_pressure_plate": "%s马赛克压力板",
+  
+  "block_type.sob.counter": "%s柜台",
+
+  "block_type.storagedelight.drawer": "%s抽屉",
+  "block_type.storagedelight.drawer_with_door": "%s抽屉柜",
+  "block_type.storagedelight.drawer_with_books": "%s书橱",
+  "block_type.storagedelight.small_drawers": "%s小抽屉",
+  "block_type.storagedelight.bookshelf_with_door": "带门的%s书架",
+  "block_type.storagedelight.glass_cabinet": "%s单门玻璃橱柜",
+  "block_type.storagedelight.cabinet_with_glass_doors": "%s玻璃橱柜",
+  "block_type.storagedelight.single_door_cabinet": "%s单门橱柜",
+
+  "block_type.nfm.chopping_board": "%s菜板",
+  "block_type.nfm.door_bell": "%s门铃",
+  "block_type.nfm.stripped_door_bell": "去皮%s门铃",
+  "block_type.nfm.water_tank": "%s水箱",
+
+  "car_variant.%s": "%s",
+  "item_type.car.license_plate_holder": "%s车牌架",
+  "item_type.car.bumper": "%s保险杠",
+  "item_type.car.body": "%s车身",
+  "item_type.car.big_body": "大%s车身",
+
+  "block_type.youkaishomecoming.handrail": "%s扶手",
+  "block_type.youkaishomecoming.dining_table": "%s餐桌",
+  "block_type.youkaishomecoming.dining_chair": "%s餐椅"
 }
