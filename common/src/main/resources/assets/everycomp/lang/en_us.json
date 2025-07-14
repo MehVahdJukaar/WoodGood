@@ -1059,5 +1059,17 @@
 
   "block_type.youkaishomecoming.handrail": "%s Handrail",
   "block_type.youkaishomecoming.dining_table": "%s Dining Table",
-  "block_type.youkaishomecoming.dining_chair": "%s Dining Chair"
+  "block_type.youkaishomecoming.dining_chair": "%s Dining Chair",
+
+  "block_type.unusual_furniture.carved": "Carved %s",
+  "block_type.unusual_furniture.table": "%s Table",
+  "block_type.unusual_furniture.coffee_table": "%s Coffee Table",
+  "block_type.unusual_furniture.stool": "%s Stool",
+  "block_type.unusual_furniture.chair": "%s Chair",
+  "block_type.unusual_furniture.celling_lamp": "%s Celling Lamp",
+  "block_type.unusual_furniture.drawer": "%s Drawer",
+  "block_type.unusual_furniture.bench": "%s Bench",
+  "block_type.unusual_furniture.open_riser_stairs": "%s Open Riser Stairs",
+  "block_type.unusual_furniture.railing": "%s Railing",
+  "block_type.unusual_furniture.beam": "%s Beam"
 }
