@@ -45,6 +45,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.timber_frames.TimberFramesMo
 import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.forge.ultimate_car.UltimateCarModule;
+import net.mehvahdjukaar.every_compat.modules.forge.unusual_furniture.UnusualFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
@@ -125,6 +126,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("timber_frames", () -> TimberFramesModule::new);
         addIfLoaded("tropicraft", () -> TropicraftModule::new);
         addIfLoaded("twilightforest", () -> TwilightForestModule::new);
+        addIfLoaded("unusual_furniture", () -> UnusualFurnitureModule::new);
         addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
         addIfLoaded("woodster", () -> WoodsterModule::new);
