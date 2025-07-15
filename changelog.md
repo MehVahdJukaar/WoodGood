@@ -10,7 +10,7 @@
 
 * **(COMMON)**: FORGE & FABRIC
 * **(FB)**: FABRIC
-* **(FG)**: FORGE
+* **(F)**: FORGE
 * **(IT)**: Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
 * **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod
 * **(INCLUDED)**: The block is not generated because a Wood Mod already have the same block as the supported mod will be generated
@@ -19,6 +19,21 @@
 </div>
 
 </div>
+
+### UPDATED:
+- **EveryCompat** (COMMON): Updated SpriteHelper so it can be used by StoneZone & GemRealms to correct the incorrect texture related to (IT)
+- **TAGS** (COMMON): Added tags to glasses & glass_panes with either #forge:glass & #forge:glass_panes but if it's fabric, then c:glass_block & c:glass_panes
+  - **Chipped**
+  - **Create**
+- **LANG**: zh_cn - @libu2333
+
+### NEW SUPPORTED MOD:
+- **Unusual Furniture** (F)
+- **Blockus** (FB) - Can be used with Sinytra Connector for FORGE
+
+---
+
+## v2.8.12
 
 ### UPDATED: 
 - **EveryCompat** (COMMON): 
@@ -29,7 +44,7 @@
 
 ---
 
-## v2.8.12
+## v2.8.11
 
 ### UPDATED: 
 - **Every Compat** (COMPAT): 
