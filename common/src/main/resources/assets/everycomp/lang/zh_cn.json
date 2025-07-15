@@ -970,5 +970,17 @@
 
   "block_type.youkaishomecoming.handrail": "%s扶手",
   "block_type.youkaishomecoming.dining_table": "%s餐桌",
-  "block_type.youkaishomecoming.dining_chair": "%s餐椅"
+  "block_type.youkaishomecoming.dining_chair": "%s餐椅",
+
+  "block_type.unusual_furniture.carved": "雕刻%s",
+  "block_type.unusual_furniture.table": "%s桌子",
+  "block_type.unusual_furniture.coffee_table": "%s咖啡桌",
+  "block_type.unusual_furniture.stool": "%s凳子",
+  "block_type.unusual_furniture.chair": "%s椅子",
+  "block_type.unusual_furniture.celling_lamp": "%s吊灯", 
+  "block_type.unusual_furniture.drawer": "%s抽屉",
+  "block_type.unusual_furniture.bench": "%s长凳",
+  "block_type.unusual_furniture.open_riser_stairs": "%s镂空踏步楼梯",
+  "block_type.unusual_furniture.railing": "%s扶栏",
+  "block_type.unusual_furniture.beam": "%s横梁"
 }
