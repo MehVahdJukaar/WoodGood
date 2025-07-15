@@ -130,17 +130,19 @@ dependencies {
     }
 
 //!! TOOLS ========================================================================================================== \\
+    modRuntimeOnly("dev.emi:emi-forge:${emi_version}+${minecraft_version}")
+    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
     modRuntimeOnly("curse.maven:jade-324717:6106101") // v11.12.3
-    modRuntimeOnly("curse.maven:emi-580555:6420945") // v1.1.22
     modRuntimeOnly("curse.maven:configured-457570:5180902") // v2.2.3
-    modRuntimeOnly("curse.maven:crafttweaker-239197:6256146") // v14.0.57
     modRuntimeOnly("curse.maven:jei-238222:6600311") // v15.20.0.112
 //    modRuntimeOnly("curse.maven:worldedit-225608:4586218")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
-    modRuntimeOnly("curse.maven:terrablender-563928:5378180") // v3.0.1.7 | BOP, Regions-Unexplored
-    modRuntimeOnly("curse.maven:glitchcore-955399:5787839") // v0.0.1.1 | BOP
+//    modRuntimeOnly("curse.maven:terrablender-563928:5378180") // v3.0.1.7 | BOP, Regions-Unexplored
+//    modRuntimeOnly("curse.maven:glitchcore-955399:5787839") // v0.0.1.1 | BOP
+    modRuntimeOnly("com.github.glitchfiend:TerraBlender-forge:${minecraft_version}-${terrablender_version}") // Biomes-O'-Plenty, Regions-Unexplored
+    modRuntimeOnly("com.github.glitchfiend:GlitchCore-forge:${minecraft_version}-${glitchcore_version}") // Biomes-O'-Plenty
 //    modRuntimeOnly("curse.maven:athena-841890:5176879") //
 //    modRuntimeOnly("curse.maven:aeroblender-879879:4789008") // Aether
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | REI, Infinity-Buttons
