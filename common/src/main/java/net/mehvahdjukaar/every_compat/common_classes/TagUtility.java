@@ -186,16 +186,19 @@ public class TagUtility {
     // Common tags
 
     @SuppressWarnings("SameParameterValue")
+    /// @return c:tagPath for FABRIC or forge:tagPath for FORGE
     private static ResourceLocation commonTag(String tagPath) {
         return PlatHelper.getPlatform().isFabric() ?
                 new ResourceLocation("c", tagPath) :
                 new ResourceLocation("forge", tagPath);
     }
 
+    /// @return c:tagPath
     public static ResourceLocation fabricTag(String tagPath) {
         return new ResourceLocation("c", tagPath);
     }
 
+    /// @return forge:tagPath
     public static ResourceLocation forgeTag(String tagPath) {
         return new ResourceLocation("forge", tagPath);
     }
