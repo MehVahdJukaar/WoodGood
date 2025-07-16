@@ -970,5 +970,34 @@
 
   "block_type.youkaishomecoming.handrail": "%s扶手",
   "block_type.youkaishomecoming.dining_table": "%s餐桌",
-  "block_type.youkaishomecoming.dining_chair": "%s餐椅"
+  "block_type.youkaishomecoming.dining_chair": "%s餐椅",
+
+  "block_type.unusual_furniture.carved": "雕刻%s",
+  "block_type.unusual_furniture.table": "%s桌子",
+  "block_type.unusual_furniture.coffee_table": "%s咖啡桌",
+  "block_type.unusual_furniture.stool": "%s凳子",
+  "block_type.unusual_furniture.chair": "%s椅子",
+  "block_type.unusual_furniture.celling_lamp": "%s吊灯", 
+  "block_type.unusual_furniture.drawer": "%s抽屉",
+  "block_type.unusual_furniture.bench": "%s长凳",
+  "block_type.unusual_furniture.open_riser_stairs": "%s镂空踏步楼梯",
+  "block_type.unusual_furniture.railing": "%s扶栏",
+  "block_type.unusual_furniture.beam": "%s横梁",
+  
+  "block_type.blockus.herringbone_planks": "人字形纹%s板",
+  "block_type.blockus.mossy_planks": "青苔%s板",
+  "block_type.blockus.mossy_slab": "青苔%s台阶",
+  "block_type.blockus.mossy_stairs": "青苔%s楼梯",
+  "block_type.blockus.grate": "%s格栅",
+  "block_type.blockus.lattice": "%s格栅栏",
+  "block_type.blockus.mosaic": "%s马赛克",
+  "block_type.blockus.mosaic_slab": "%s马赛克台阶",
+  "block_type.blockus.mosaic_stairs": "%s马赛克楼梯",
+  "block_type.blockus.small_logs": "小型%s原木",
+  "block_type.blockus.timber_frame": "%s木质框架",
+  "block_type.blockus.diagonal_timber_frame": "%s对角木质框架",
+  "block_type.blockus.cross_timber_frame": "%s十字木质框架",
+  "block_type.blockus.stripped_post": "去皮%s柱",
+  "block_type.blockus.post": "%s柱",
+  "block_type.blockus.small_hedge": "小型%s树篱"
 }
