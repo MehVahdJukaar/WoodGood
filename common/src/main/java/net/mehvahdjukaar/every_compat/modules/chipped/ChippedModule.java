@@ -2440,7 +2440,7 @@ public class ChippedModule extends SimpleModule {
     public void createLogTexture(ResourceLocation textureResLoc, ResourceLocation innerMaskResLoc, ResourceLocation outerMaskResLoc,
                                  String textureFilename, String folderName, String suffix,
                                  SimpleEntrySet<WoodType, Block> mainBlock, String innerType, String outerType,
-                                 ResourceSink handler, ResourceManager manager) {
+                                 ResourceSink sink, ResourceManager manager) {
         try (
              TextureImage mainTexture = TextureImage.open(manager, textureResLoc);
              TextureImage innerMask = TextureImage.open(manager, innerMaskResLoc);
@@ -2467,7 +2467,7 @@ public class ChippedModule extends SimpleModule {
                     if (!suffix.isEmpty()) suffixed = "_"+suffix;
                     String newPath = "block/"+ shortenedId()+"/"+woodType.getAppendableId() +"_"+folderName+"/"+ textureFilename.replace("oak", woodType.getTypeName()) + suffixed;
 
-                    handler.addAndCloseTexture( EveryCompat.res(newPath), finiahedTexture);
+                    sink.addTextureIfNotPresent(manager, newPath, () -> finiahedTexture);
                 }
                 catch (IOException e) {
                     EveryCompat.LOGGER.error("Failed to generate planked_log texture for {} : {}", woodType.getId(), String.valueOf(e));

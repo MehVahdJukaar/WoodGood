@@ -1071,5 +1071,22 @@
   "block_type.unusual_furniture.bench": "%s Bench",
   "block_type.unusual_furniture.open_riser_stairs": "%s Open Riser Stairs",
   "block_type.unusual_furniture.railing": "%s Railing",
-  "block_type.unusual_furniture.beam": "%s Beam"
+  "block_type.unusual_furniture.beam": "%s Beam",
+
+  "block_type.blockus.herringbone_planks": "Herringbone %s Planks",
+  "block_type.blockus.mossy_planks": "Mossy %s Planks",
+  "block_type.blockus.mossy_slab": "Mossy %s Slab",
+  "block_type.blockus.mossy_stairs": "Mossy %s Stairs",
+  "block_type.blockus.grate": "%s Grate",
+  "block_type.blockus.lattice": "%s Lattice",
+  "block_type.blockus.mosaic": "%s Mosaic",
+  "block_type.blockus.mosaic_slab": "%s Mosaic Slab",
+  "block_type.blockus.mosaic_stairs": "%s Mosaic Stairs",
+  "block_type.blockus.small_logs": "%s Small Logs",
+  "block_type.blockus.timber_frame": "%s Timber Frame",
+  "block_type.blockus.diagonal_timber_frame": "%s Diagonal Timber Frame",
+  "block_type.blockus.cross_timber_frame": "%s Cross Timber Frame",
+  "block_type.blockus.stripped_post": "Stripped %s Post",
+  "block_type.blockus.post": "%s Post",
+  "block_type.blockus.small_hedge": "%s Small Hedge"
 }

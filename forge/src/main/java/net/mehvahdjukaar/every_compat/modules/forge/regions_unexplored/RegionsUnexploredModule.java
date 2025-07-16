@@ -118,8 +118,8 @@ public class RegionsUnexploredModule extends SimpleModule {
                     try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage logTop_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
-                        ResourceLocation resLocITEM = EveryCompat.res("item/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch");
-                        ResourceLocation resLocBLOCK = EveryCompat.res("block/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch");
+                        String resLocITEM = "item/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
+                        String resLocBLOCK = "block/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
 
                         Respriter respriterSIDE = Respriter.of(branch_side); // ITEM
                         Respriter respriterTOP = Respriter.of(branch_top); // ITEM
@@ -137,9 +137,11 @@ public class RegionsUnexploredModule extends SimpleModule {
                         TextureImage recoloredBLOCK = respriterBlock.recolor(list_logSide);
 
                         // Block Texture
-                        sink.addAndCloseTexture(resLocBLOCK, recoloredBLOCK);
+                        sink.addTextureIfNotPresent(manager, resLocBLOCK, () -> recoloredBLOCK);
+                        recoloredBLOCK.close();
                         // Item Texture
-                        sink.addAndCloseTexture(resLocITEM, recoloredITEM);
+                        sink.addTextureIfNotPresent(manager, resLocITEM, () -> recoloredITEM);
+                        recoloredITEM.close();
 
                     } catch (IOException e) {
                         EveryCompat.LOGGER.error("Failed to get Log Texture for {} : {}", block, e);
@@ -188,8 +190,10 @@ public class RegionsUnexploredModule extends SimpleModule {
 
                         // Adding to the resource
                         String resLoc = "block/" + shrubPath;
-                        sink.addAndCloseTexture(EveryCompat.res(resLoc + "_bottom"), finishedShrubBottom);
-                        sink.addAndCloseTexture(EveryCompat.res(resLoc + "_top"), finishedShrub);
+                        sink.addTextureIfNotPresent(manager,resLoc + "_bottom", () -> finishedShrubBottom);
+                        finishedShrubBottom.close();
+                        sink.addTextureIfNotPresent(manager,resLoc + "_top", () -> finishedShrub);
+                        finishedShrub.close();
 
                     } catch (IOException e) {
                         EveryCompat.LOGGER.error("Failed to get texture for {} : {}", block.toString(), e.getMessage());

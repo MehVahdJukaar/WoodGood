@@ -112,7 +112,7 @@ public class CompatChestTexture {
         }
     }
 
-    private static void createChestTextures(ResourceSink handler,
+    private static void createChestTextures(ResourceSink sink,
                                             Respriter respriter, Respriter respriterO,
                                             McMetaFile baseMeta, List<Palette> basePalette,
                                             List<Palette> overlayPalette, ResourceLocation normalRLoc,
@@ -126,11 +126,11 @@ public class CompatChestTexture {
         if (trappedOverlay != null) {
             TextureImage trapped = recoloredBase.makeCopy();
             trapped.applyOverlay(trappedOverlay.makeCopy());
-            handler.addAndCloseTexture(trappedRLoc, trapped);
+            sink.addAndCloseTexture(trappedRLoc, trapped);
         }
 
         if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
-            handler.addAndCloseTexture(normalRLoc, recoloredBase);
+            sink.addAndCloseTexture(normalRLoc, recoloredBase);
     }
 
 }

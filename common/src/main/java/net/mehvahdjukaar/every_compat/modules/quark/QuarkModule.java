@@ -474,7 +474,7 @@ public class QuarkModule extends SimpleModule {
         }
     }
 
-    private void createChestTextures(ResourceSink handler, TextureImage trappedOverlay,
+    private void createChestTextures(ResourceSink sink, TextureImage trappedOverlay,
                                      Respriter respriterLeft, Respriter respriterLeftO,
                                      McMetaFile baseMeta, List<Palette> basePalette,
                                      List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes,
@@ -486,10 +486,10 @@ public class QuarkModule extends SimpleModule {
         TextureImage trapped = recoloredBase.makeCopy();
 
         if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
-            handler.addAndCloseTexture(res, recoloredBase);
+            sink.addAndCloseTexture(res, recoloredBase);
 
         trapped.applyOverlay(trappedOverlay.makeCopy());
-        handler.addAndCloseTexture(trappedRes, trapped);
+        sink.addAndCloseTexture(trappedRes, trapped);
     }
 
     @Override
