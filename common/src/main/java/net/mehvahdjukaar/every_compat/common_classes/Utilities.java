@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.common_classes;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 @SuppressWarnings("unused")
 public class Utilities {
@@ -62,5 +64,18 @@ public class Utilities {
         if (Objects.nonNull(blocks.get(blockType))) return blocks.get(blockType).defaultBlockState();
         else return ((Block) blockType.mainChild()).defaultBlockState();
     }
+
+    //for mods that might add in vanilla namespace
+    public boolean isWoodVanilla(WoodType woodType){
+        var id = woodType.getId();
+        if (id.getNamespace().equals("minecraft")) {
+            return VANILLA_WOODS.contains(id.getPath());
+        }
+        return false;
+    }
+
+    private static final Set<String> VANILLA_WOODS = Set.of(
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped"
+    );
 
 }

@@ -178,7 +178,7 @@ public abstract class CompatModule {
 
     // Ec tab
     public ResourceKey<CreativeModeTab> getDedicatedTab() {
-        return (ResourceKey<CreativeModeTab>) ECRegistry.MOD_TAB.getKey();
+        return ECRegistry.MOD_TAB.getKey();
     }
 
     public abstract Collection<Class<? extends BlockType>> getAffectedTypes();
