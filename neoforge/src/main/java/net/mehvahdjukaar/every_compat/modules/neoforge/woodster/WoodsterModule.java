@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.woodster;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
@@ -53,12 +54,14 @@ public class WoodsterModule extends SimpleModule {
                                 .sound(SoundType.LADDER)
                         )
                 )
+                .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .addTag(BlockTags.create(ResourceLocation.fromNamespaceAndPath("quill", "ladders")), Registries.BLOCK)
-                .addTexture(EveryCompat.res("block/spruce_ladder"))
+                .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("quill:ladders"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(ladders);
     }
