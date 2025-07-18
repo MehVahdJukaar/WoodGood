@@ -10,6 +10,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -519,7 +521,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 
         executor.accept((manager, sink) -> {
             for (WoodType woodType : WoodTypeRegistry.getTypes()) {
-                if (woodType.isVanilla()) continue;
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
                 for (var entry : this.getEntries()) {
                     String newRecipe = recipe;

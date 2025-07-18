@@ -6,6 +6,7 @@ import earth.terrarium.chipped.common.registry.ModBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -2363,7 +2364,7 @@ public class ChippedModule extends SimpleModule {
         JsonArray jsonArray = new JsonArray();
 
         for (var woodType : WoodTypeRegistry.getTypes()) {
-            if (woodType.isVanilla()) continue;
+            if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
             boolean isTagCreated = false;
             String suffixedFile = (identifier.equals("stripped_log"))

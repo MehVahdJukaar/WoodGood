@@ -874,7 +874,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         executor.accept((manager, sink) -> {
             for (var w : WoodTypeRegistry.getTypes()) {
-                if (!w.isVanilla()) {
+                if (!HardcodecWoodType.isKnownVanillaWood(w)) {
                     addChiselRecipe(sink, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
                     addChiselRecipe(sink, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7);
                     addChiselRecipe(sink, w, "slab", SLAB_1, SLAB_2, SLAB_3, SLAB_4, SLAB_5, SLAB_6, SLAB_7);
