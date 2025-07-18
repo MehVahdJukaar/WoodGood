@@ -5,6 +5,8 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+
 // ugly mess. Too coupled with WoodTypes|LeavesTypes and too many hardcoded exceptions
 public class HardcodedBlockType {
 
@@ -26,10 +28,9 @@ public class HardcodedBlockType {
         // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
         if (isWoodFrom("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
 
-
         /// ========== EXCLUDE ========== \\\
-        // Exclude all of Vanilla Types
-        if (woodType.isVanilla()) return true;
+        // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
+        if (isKnownVanillaWood(woodType)) return true;
 
         // Supported Mods that have supportedBlockId should be excluded due to FramedBlocks
         if (isWoodFrom("", "", "", "torch") && PlatHelper.isModLoaded("framedblocks")) return true;
@@ -186,5 +187,18 @@ public class HardcodedBlockType {
         return true;
     }
 
+
+    //for mods that might add in vanilla namespace
+    public static boolean isKnownVanillaWood(WoodType woodType){
+        var id = woodType.getId();
+        if (id.getNamespace().equals("minecraft")) {
+            return VANILLA_WOODS.contains(id.getPath());
+        }
+        return false;
+    }
+
+    private static final Set<String> VANILLA_WOODS = Set.of(
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped"
+    );
 
 }
