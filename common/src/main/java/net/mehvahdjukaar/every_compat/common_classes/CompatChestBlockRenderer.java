@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -45,7 +46,7 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
     public CompatChestBlockRenderer(BlockEntityRendererProvider.Context context, String shortenedId) {
         super(context);
         for (WoodType w : WoodTypeRegistry.getTypes()) {
-            if (!w.getId().toString().equals("minecraft:pale_oak") && w.isVanilla()) continue; // minecraft:pale_oak is from Perfect Parity: The Garden Awakens Edition
+            if (HardcodedBlockType.isKnownVanillaWood(w)) continue; // minecraft:pale_oak is from Perfect Parity: The Garden Awakens Edition
             String path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_chest";
             String trapped_path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_trapped_chest";
 

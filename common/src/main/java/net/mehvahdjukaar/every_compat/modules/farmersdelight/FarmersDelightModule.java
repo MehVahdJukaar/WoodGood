@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -79,7 +80,7 @@ public class FarmersDelightModule extends SimpleModule {
 
         // Creating cutting_board recipes
         for (var woodType : WoodTypeRegistry.getTypes()) {
-            if (woodType.isVanilla() || blacklistedWoodType.contains(woodType.getId().toString())) continue;
+            if (HardcodedBlockType.isKnownVanillaWood(woodType) || blacklistedWoodType.contains(woodType.getId().toString())) continue;
 
             createCuttingRecipe("door", woodType.getBlockOfThis("door"), woodType.planks,
                     woodType, handler, manager);

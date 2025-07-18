@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -2340,7 +2341,7 @@ public class ChippedModule extends SimpleModule {
         JsonArray ingredients = new JsonArray();
 
         for (var woodType : WoodTypeRegistry.getTypes()) {
-            if (woodType.isVanilla()) continue;
+            if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
             boolean isTagCreated = false;
             String suffixedFile = (identifier.equals("stripped_log"))

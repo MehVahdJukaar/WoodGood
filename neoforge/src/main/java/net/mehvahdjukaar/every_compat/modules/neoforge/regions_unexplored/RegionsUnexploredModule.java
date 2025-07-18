@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -124,7 +125,7 @@ public class RegionsUnexploredModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
 
         for (WoodType woodType : WoodTypeRegistry.getTypes()) {
-            if (woodType.isVanilla() || woodType.getNamespace().equals("regions_unexplored")) continue;
+            if (HardcodedBlockType.isKnownVanillaWood(woodType) || woodType.getNamespace().equals("regions_unexplored")) continue;
 
             //Tagging the planks as ingredient to get painted_planks
             createAndAddCustomTags(ResourceLocation.parse("planks"), handler, woodType.planks);

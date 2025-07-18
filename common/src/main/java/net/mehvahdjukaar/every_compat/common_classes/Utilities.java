@@ -65,17 +65,4 @@ public class Utilities {
         else return ((Block) blockType.mainChild()).defaultBlockState();
     }
 
-    //for mods that might add in vanilla namespace
-    public boolean isWoodVanilla(WoodType woodType){
-        var id = woodType.getId();
-        if (id.getNamespace().equals("minecraft")) {
-            return VANILLA_WOODS.contains(id.getPath());
-        }
-        return false;
-    }
-
-    private static final Set<String> VANILLA_WOODS = Set.of(
-            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped"
-    );
-
 }

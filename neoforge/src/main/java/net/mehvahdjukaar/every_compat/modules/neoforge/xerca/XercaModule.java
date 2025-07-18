@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -277,7 +278,7 @@ public class XercaModule extends SimpleModule {
         for (WoodType woodType : WoodTypeRegistry.getTypes()) {
             ResourceLocation modelLocation = modRes("models/block/carved_wood/carved_dark_oak.json"); // get model JSON
 
-            if (woodType.isVanilla()) continue;
+            if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
 
             try (InputStream modelStream = manager.getResource(modelLocation).orElseThrow().open()) {

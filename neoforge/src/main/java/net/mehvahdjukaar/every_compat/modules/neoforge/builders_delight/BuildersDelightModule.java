@@ -869,7 +869,7 @@ public class BuildersDelightModule extends SimpleModule {
         super.addDynamicServerResources(handler, manager);
         var pack = handler.getPack();
         /*for (var w : WoodTypeRegistry.getTypes()) {
-            if (!w.isVanilla()) {
+            if (!HardcodecWoodType.isKnownVanillaWood(w)) {
                 addChiselRecipe(pack, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7 );
                 addChiselRecipe(pack, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7 );
                 addChiselRecipe(pack, w, "slab", SLAB_1, SLAB_2, SLAB_3, SLAB_4, SLAB_5, SLAB_6, SLAB_7 );

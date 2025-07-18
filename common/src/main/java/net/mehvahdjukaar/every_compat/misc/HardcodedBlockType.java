@@ -4,6 +4,8 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+
 // ugly mess. Too coupled with WoodTypes|LeavesTypes and too many hardcoded exceptions
 public class HardcodedBlockType {
 
@@ -27,13 +29,10 @@ public class HardcodedBlockType {
         // Dawn-Of-Time's fancy-fence only has BIRCH but no other vanilla variants
         if (isWoodFrom("dawnoftimebuilder", "", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
 
-        // PALE from Perfect Parity: The Garden Awakens Edition is being skipped because it's a vanilla
-        if (isWoodFrom("", "", "", "minecraft:pale", "")) return false;
-
 
         /// ========== EXCLUDE ========== \\\
-        // Exclude all of Vanilla Types
-        if (woodType.isVanilla()) return true;
+        // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
+        if (isKnownVanillaWood(woodType)) return true;
 
         // Nature's-Spirit's joshua texture is a 8x8, it's currently excluded in Valhelaia-Structure for now - the texture generation could be improved
         if (isWoodFrom("valhelsia_structures", "", "natures_spirit:joshua", "", "")) return true;
@@ -175,5 +174,18 @@ public class HardcodedBlockType {
         return true;
     }
 
+
+    //for mods that might add in vanilla namespace
+    public static boolean isKnownVanillaWood(WoodType woodType){
+        var id = woodType.getId();
+        if (id.getNamespace().equals("minecraft")) {
+            return VANILLA_WOODS.contains(id.getPath());
+        }
+        return false;
+    }
+
+    private static final Set<String> VANILLA_WOODS = Set.of(
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped"
+    );
 
 }
