@@ -136,7 +136,7 @@ public abstract class EveryCompat {
     public static void init() {
         ECConfigs.init();
         ECNetworking.init();
-        ECRegistry.init();
+//        ECRegistry.init(); // Not need for Library Section
 
         ServerDynamicResourcesHandler.INSTANCE.register();
         RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
