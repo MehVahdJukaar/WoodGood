@@ -40,7 +40,7 @@ subprojects {
 
     if (env.MODRINTH_TOKEN) {
         modrinth {
-            projectId = "every-compat"
+            projectId = modrinth_id
             uploadFile = tasks.remapJar
             additionalFiles.add(tasks.remapSourcesJar)
             gameVersions = [minecraft_version]
@@ -52,10 +52,15 @@ subprojects {
                 dependencies {
                     required.project "fabric-api"
                     required.project "moonlight"
+                    optional.project "gems-realm"
+                    optional.project "stone-zone"
                 }
+            //!! FORGE
             } else {
                 dependencies {
                     required.project "moonlight"
+                    optional.project "gems-realm"
+                    optional.project "stone-zone"
                 }
             }
         }
@@ -65,7 +70,7 @@ subprojects {
         curseforge {
             apiKey = env.CURSEFORGE_TOKEN
             project {
-                id = project_id
+                id = curseforge_id
                 changelog = changelogText
                 changelogType = 'markdown'
                 releaseType = 'release'
@@ -82,125 +87,14 @@ subprojects {
                     relations {
                         requiredDependency "fabric-api"
                         requiredDependency "selene"
-                        optionalDependency("another-furniture")
-                        optionalDependency("architects-palette-fabric")
-                        optionalDependency("backpacked")
-                        optionalDependency("branches")
-                        optionalDependency("building-but-better")
-                        optionalDependency("camp-chair")
-                        optionalDependency("carpentry-chisels")
-                        optionalDependency("chipped")
-                        optionalDependency("clutter")
-                        optionalDependency("create-fabric")
-                        optionalDependency("decorative-blocks")
-                        optionalDependency("dramatic-doors")
-                        optionalDependency("exlines-awnings")
-                        optionalDependency("exlines-bark-carpets")
-                        optionalDependency("excessive-building")
-                        optionalDependency("farmers-delight-fabric")
-                        optionalDependency("farmers-delight-refabricated")
-                        optionalDependency("friends-and-foes")
-                        optionalDependency("furnish")
-                        optionalDependency("handcrafted")
-                        optionalDependency("hearth-and-home")
-                        optionalDependency("infinitybuttons")
-                        optionalDependency("lightmans-currency-fabric")
-                        optionalDependency("macaws-bridges")
-                        optionalDependency("macaws-doors")
-                        optionalDependency("macaws-fences-and-walls")
-                        optionalDependency("macaws-furniture")
-                        optionalDependency("macaws-lights-and-lamps")
-                        optionalDependency("macaws-paths-and-pavings")
-                        optionalDependency("macaws-roofs")
-                        optionalDependency("macaws-trapdoors")
-                        optionalDependency("macaws-windows")
-                        optionalDependency("mighty-mail-fabric")
-                        optionalDependency("missing-wilds")
-                        optionalDependency("more-beautiful-torches")
-                        optionalDependency("more-crafting-tables-lieonlion")
-                        optionalDependency("quark")
-                        optionalDependency("regions-unexplored")
-//                        optionalDependency("the-twilight-forest") // NOT AVAILABLE
-                        optionalDependency("table-top-craft-fabric")
-                        optionalDependency("twigs")
-                        optionalDependency("valhelsia-furniture")
-                        optionalDependency("variant-vanilla-blocks")
-                        optionalDependency("villagersplus-fabric")
-                        optionalDependency("wooden-hoppers")
+                        optionalDependency "stone-zone"
+                        optionalDependency "gems-realm"
                     }
+                //!! FORGE
                 } else {
                     relations {
                         incompatible("vminus")
                         requiredDependency("selene")
-                        optionalDependency("sawmill")
-                        optionalDependency("absent-by-design")
-                        optionalDependency("another-furniture")
-                        optionalDependency("architects-palette")
-                        optionalDependency("backpacked")
-                        optionalDependency("boatload")
-                        optionalDependency("branches")
-                        optionalDependency("buildersaddition")
-                        optionalDependency("building-but-better")
-                        optionalDependency("camp-chair")
-                        optionalDependency("carpentry-chisels")
-                        optionalDependency("chipped")
-                        optionalDependency("corail-pillar")
-                        optionalDependency("create")
-                        optionalDependency("dawn-of-time")
-                        optionalDependency("decorative-blocks")
-                        optionalDependency("decoration-delight")
-                        optionalDependency("domum-ornamentum")
-                        optionalDependency("dramatic-doors")
-                        optionalDependency("exlines-bark-carpets")
-                        optionalDependency("excessive-building")
-                        optionalDependency("farmers-delight")
-                        optionalDependency("friends-and-foes-forge")
-                        optionalDependency("functional-storage")
-                        optionalDependency("furnish")
-                        optionalDependency("handcrafted")
-                        optionalDependency("hearth-and-home")
-                        optionalDependency("infinitybuttons")
-                        optionalDependency("just-a-raft-mod")
-                        optionalDependency("lightmans-currency")
-                        optionalDependency("macaws-bridges")
-                        optionalDependency("macaws-doors")
-                        optionalDependency("macaws-fences-and-walls")
-                        optionalDependency("macaws-furniture")
-                        optionalDependency("macaws-lights-and-lamps")
-                        optionalDependency("macaws-paths-and-pavings")
-                        optionalDependency("macaws-roofs")
-                        optionalDependency("macaws-trapdoors")
-                        optionalDependency("macaws-windows")
-                        optionalDependency("mighty-mail")
-                        optionalDependency("missing-wilds-forge")
-                        optionalDependency("more-beautiful-torches")
-                        optionalDependency("more-chest-variants-lieonlion")
-                        optionalDependency("more-crafting-tables-for-forge")
-                        optionalDependency("more-crafting-tables-lieonlion")
-                        optionalDependency("mosaic-carpentry")
-                        optionalDependency("mrcrayfish-furniture-mod")
-                        optionalDependency("pokecube-aoi")
-                        optionalDependency("premium-wood")
-//                        optionalDependency("productivebees")
-                        optionalDependency("quark")
-                        optionalDependency("redeco")
-                        optionalDependency("regions-unexplored")
-                        optionalDependency("smidgeon-o-bliss-remastered")
-                        optionalDependency("storage-drawers")
-                        optionalDependency("timber-frames")
-                        optionalDependency("the-graveyard-forge")
-                        optionalDependency("the-twilight-forest")
-                        optionalDependency("table-top-craft")
-                        optionalDependency("tropicraft")
-                        optionalDependency("twigs")
-                        optionalDependency("valhelsia-furniture")
-                        optionalDependency("variant-crafting-tables")
-                        optionalDependency("variant-vanilla-blocks")
-                        optionalDependency("villagersplus-forge")
-                        optionalDependency("woodster")
-                        optionalDependency("woodworks")
-                        optionalDependency("workshop-for-handsome-adventurer")
-                        optionalDependency("xercamod")
                     }
                 }
             }
