@@ -23,7 +23,7 @@ if your mod is already supported heavily consider reaching out to incorporate so
 ### DEVELOPMENT: 
 
 Two Things are required:
-- **Every Compat (Wood Good)** Or **Every Compat (Library Section)**
+- **Every Compat (Wood Good)**
 - **Moonlight Lib** used to be known as **Selene**
 
 To know how to support your mod with Every Compat, Please look at the below:
