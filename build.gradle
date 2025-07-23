@@ -230,7 +230,7 @@ allprojects {
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
         // See https://docs.gradle.org/current/userguide/declaring_repositories.html
         // for more information about repositories.
-        maven { url "https://maven.parchmentmc.org" }
+        maven { url = "https://maven.parchmentmc.org" }
 
         maven {
             url = "https://www.cursemaven.com"
@@ -242,7 +242,7 @@ allprojects {
 
         maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
 
-        maven { url "https://maven.shedaniel.me/" } // Cloth Config
+        maven { url = "https://maven.shedaniel.me/" } // Cloth Config
 
         // Required for Create
         maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
@@ -255,25 +255,23 @@ allprojects {
             url = "https://maven.jamieswhiteshirt.com/libs-release"
             content { includeGroup("com.jamieswhiteshirt") }
         }
-        maven { // CC: Tweaked
-            url "https://squiddev.cc/maven"
-        }
-        maven { // Unknown
-            name = 'Ladysnake Mods'
-            url = 'https://maven.ladysnake.org/releases'
-        }
-        maven { // JEI
-            name = "Jared's maven"
-            url = "https://maven.blamejared.com/"
-        }
-        maven { // Botania & FALLBACK for JEI
-            name = "ModMaven"
-            url = "https://modmaven.dev"
-        }
+        maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
 
-        maven { // Chipped
-            url = "https://maven.teamresourceful.com/repository/maven-public/"
-        }
+        maven { url = 'https://maven.ladysnake.org/releases' } // Unknown
+
+        maven { url = "https://maven.shedaniel.me" } // unknown
+
+        maven { url = "https://maven.blamejared.com/" } // JEI
+
+        maven { url = "https://modmaven.dev" } // Botania & FALLBACK for JEI
+
+        maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
+
+        maven { url = 'https://maven.minecraftforge.net/' } // Terrablender
+
+        maven { url = "https://maven.terraformersmc.com/" } // EMI
+
+        maven { url = "https://maven.terraformersmc.com/releases" }
     }
 
     tasks.withType(JavaCompile).configureEach {

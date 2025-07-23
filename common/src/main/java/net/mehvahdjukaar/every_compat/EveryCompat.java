@@ -50,8 +50,9 @@ public abstract class EveryCompat {
     private static final Set<Class<? extends BlockType>> AFFECTED_TYPES = new HashSet<>();
     private static final UnsafeModuleDisabler MODULE_DISABLER = new UnsafeModuleDisabler();
 
-    public static ResourceLocation res(String name) {
-        return new ResourceLocation(MOD_ID, name);
+    /// @return everycomp:path
+    public static ResourceLocation res(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 
     public static void forAllModules(Consumer<CompatModule> action) {

@@ -185,13 +185,28 @@ public class TagUtility {
     
     // Common tags
 
-    private static ResourceLocation commonTag(String suffix) {
+    @SuppressWarnings("SameParameterValue")
+    /// @return c:tagPath for FABRIC or forge:tagPath for FORGE
+    private static ResourceLocation commonTag(String tagPath) {
         return PlatHelper.getPlatform().isFabric() ?
-                new ResourceLocation("c", suffix) :
-                new ResourceLocation("forge", suffix);
+                new ResourceLocation("c", tagPath) :
+                new ResourceLocation("forge", tagPath);
     }
 
-    public static final ResourceLocation GLASS_TAG = commonTag("glass");
+    /// @return c:tagPath
+    public static ResourceLocation fabricTag(String tagPath) {
+        return new ResourceLocation("c", tagPath);
+    }
+
+    /// @return forge:tagPath
+    public static ResourceLocation forgeTag(String tagPath) {
+        return new ResourceLocation("forge", tagPath);
+    }
+
+    public static final ResourceLocation SILICA_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("silica_glass") : forgeTag("silica");
+    public static final ResourceLocation GLASS_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("glass_blocks") : forgeTag("glass");
     public static final ResourceLocation GLASS_PANE_TAG = commonTag("glass_panes");
+    public static final ResourceLocation GLASS_COLORLESS_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("colorless_glass") : forgeTag("glass/colorless");
+    public static final ResourceLocation GLASS_PANE_COLORLESS_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("colorless_glass_panes") : forgeTag("glass_panes/colorless");
 
 }

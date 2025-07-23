@@ -10,6 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
+import static net.mehvahdjukaar.every_compat.configs.ECConfigs.TAB_ITEM_SEARCH_ENABLED;
+
 public class ECRegistry {
 
     public static void init(){
@@ -18,12 +20,13 @@ public class ECRegistry {
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(EveryCompat.res("all_woods"), AllWoodItem::new);
 
+
     @Nullable
     public static final RegSupplier<CreativeModeTab> MOD_TAB = ECConfigs.TAB_ENABLED.get() ?
                     RegHelper.registerCreativeModeTab(EveryCompat.res(EveryCompat.MOD_ID),
-                            true,
+                            TAB_ITEM_SEARCH_ENABLED.get(), // searchBar
                             builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
-                                    .backgroundSuffix("item_search.png")
+                                    .backgroundSuffix((TAB_ITEM_SEARCH_ENABLED.get()) ? "item_search.png" : "items.png")
                                     .title(Component.translatable("itemGroup.everycomp.everycomp"))
                                     .build())
                     : null;

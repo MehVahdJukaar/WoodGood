@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
@@ -15,8 +14,8 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
     private final WoodType woodType;
     private final boolean trapped;
 
-    public CompatChestBlockEntity(BlockEntityType<?> arg, BlockPos pos, BlockState state) {
-        super(arg, pos, state);
+    public CompatChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
+        super(blockEntityType, pos, state);
         var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
         this.woodType = w == null ? WoodTypeRegistry.OAK_TYPE : w;
         this.trapped = state.getBlock() instanceof CompatTrappedChestBlock;

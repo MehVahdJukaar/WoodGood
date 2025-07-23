@@ -342,10 +342,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {
-            this.tileHolder = new ExistingTileHolder<>(
-                    () -> BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(new ResourceLocation(idTile))
-                            .orElseThrow(() -> new NoSuchElementException("Tile entity with ID" + idTile + " not found! ID must be wrong!"))
-            );
+            BlockEntityType<?> entityType = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(new ResourceLocation(idTile))
+                    .orElseThrow(() -> new NoSuchElementException("BlockEntityType's ID: " + idTile + " not found! ID must be wrong!"));
+
+            this.tileHolder = new ExistingTileHolder<>(() -> entityType);
             return this;
         }
 

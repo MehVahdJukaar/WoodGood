@@ -153,7 +153,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
         executor.accept(this::makeCampfireTextures);
     }
 
-    private void makeCampfireTextures(ResourceManager manager, ResourceSink handler) {
+    private void makeCampfireTextures(ResourceManager manager, ResourceSink sink) {
         String campfirePath = "block/acacia_campfire_log";
         ResourceLocation campfireImage = modRes(campfirePath);
         ResourceLocation targetLogMask = EveryCompat.res("block/bc/campfire_log_m"); // Focus on the log part
@@ -172,7 +172,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                         TextureImage logTexture = TextureImage.open(manager,
                                 RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
-                    ResourceLocation newResLoc = EveryCompat.res(BlockTypeResTransformer.replaceTypeNoNamespace(campfirePath, wood, id, "acacia"));
+                    String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(campfirePath, wood, id, "acacia");
 
                     // Recoloring the log part
                     Respriter respriterLog = Respriter.masked(textureImage, targetLogImage);
@@ -185,7 +185,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                     TextureImage finishedImage = respriterPlank.recolorWithAnimationOf(plankTexture);
 
                     // Adding to the resource
-                    handler.addAndCloseTexture(newResLoc, finishedImage);
+                    sink.addTextureIfNotPresent(manager, newPath, () -> finishedImage);
 
                 } catch (IOException e) {
                     EveryCompat.LOGGER.error("Failed to open log/plank texture file: ", e);

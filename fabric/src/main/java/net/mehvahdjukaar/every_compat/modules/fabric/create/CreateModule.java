@@ -10,11 +10,11 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -30,30 +30,38 @@ public class CreateModule extends SimpleModule {
         var tab = modRes("palettes");
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
-                        getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW
+                        getModBlock("oak_window"), () -> WoodTypeRegistry.OAK_TYPE,
                         this::makeWindow
                 )
-                .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
-                .setTabKey(tab)
-                .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
                 .createPaletteFromPlanks(p -> p.remove(p.getDarkest()))
                 .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/c/palettes/oak_window_m"))
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/c/palettes/oak_window_connected_m"))
+                .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
+                .addTag(TagUtility.SILICA_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_COLORLESS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.SILICA_TAG, Registries.ITEM)
+                .addTag(TagUtility.GLASS_TAG, Registries.ITEM)
+                .addTag(TagUtility.GLASS_COLORLESS_TAG, Registries.ITEM)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .setRenderType(RenderLayer.TRANSLUCENT)
                 .build();
         this.addEntry(windows);
 
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
-                        getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE, //AllPaletteBlocks.OAK_WINDOW_PANE
+                        getModBlock("oak_window_pane"), () -> WoodTypeRegistry.OAK_TYPE,
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE))
                 )
                 .requiresFromMap(windows.blocks) //REASON: textures
-                .addTag(new ResourceLocation("c:glass_panes"), Registries.BLOCK)
-                .addTag(new ResourceLocation("c:glass_panes"), Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_COLORLESS_TAG, Registries.BLOCK)
+                .addTag(TagUtility.GLASS_PANE_TAG, Registries.ITEM)
+                .addTag(TagUtility.GLASS_PANE_COLORLESS_TAG, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                .copyParentDrop() //REASON: ensure blocks' dropping when Diagonal Fences is installed
                 .build();
         this.addEntry(windowPanes);
 
