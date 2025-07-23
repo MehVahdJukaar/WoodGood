@@ -322,7 +322,6 @@ public class WoodworksModule extends SimpleModule {
         });
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public void createRecipeIfNotNull(String recipeName, boolean usingLog, String output,
                                       ResourceSink sink, ResourceManager manager, WoodType wood) {
         Item input = (usingLog) ? wood.log.asItem() : wood.planks.asItem();
@@ -334,21 +333,20 @@ public class WoodworksModule extends SimpleModule {
         }
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public void sawmillRecipe(String recipeName, Item input, Item output,
                               ResourceSink sink, ResourceManager manager, WoodType wood) {
 
         ResourceLocation recipeLocation = modRes("recipes/" + recipeName + ".json"); // get Recipe JSON
-        JsonObject recipe = null;
 
         try (InputStream recipeStream = manager.getResource(recipeLocation).get().open()) {
-            recipe = RPUtils.deserializeJson(recipeStream);
+            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
             // VARIABLES
-            JsonObject getRecipe = recipe.getAsJsonArray("recipes")
+            //TODO: this isnt fool proof.not all recipes are of thos type, A better way wouldbe desrrialize the recipe property and then do stuff there
+            JsonObject foundRecipe = recipe.getAsJsonArray("recipes")
                     .get(0).getAsJsonObject().getAsJsonObject("recipe");
 
-            JsonObject getIngredient = getRecipe.getAsJsonObject("ingredient");
+            JsonObject getIngredient = foundRecipe.getAsJsonObject("ingredient");
 
             // Editing the JSON recipe
             if (getIngredient.has("tag")) {
@@ -357,18 +355,19 @@ public class WoodworksModule extends SimpleModule {
             } else { // getIngredient.has("item")
                 getIngredient.addProperty("item", Utils.getID(input).toString());
             }
-            getRecipe.addProperty("result", Utils.getID(output).toString());
+            foundRecipe.addProperty("result", Utils.getID(output).toString());
 
-        } catch (IOException e) {
-            EveryCompat.LOGGER.error("Woodworks Module/sawmill_recipe() - failed to open the recipe: {0}", e);
+            // filenameBuilder: <woodType>_<blockType>_from_<woodType>_<logs|planks>_sawing
+            String[] nameSplit = recipeName.split("_(?!gate|plate)");
+            String filenameBuilder = "_" + nameSplit[1] + "_from_" + wood.getTypeName() + "_" + nameSplit[4] + "_sawing";
+
+            sink.addJson(EveryCompat.res(this.shortenedId() + "/" + wood.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
+
+        } catch (Exception e) {
+            EveryCompat.LOGGER.error("Error while creating recipes for woodwork sawmill: ", e);
         }
 
-        // filenameBuilder: <woodType>_<blockType>_from_<woodType>_<logs|planks>_sawing
-        String[] nameSplit = recipeName.split("_(?!gate|plate)");
-        String filenameBuilder = "_" + nameSplit[1] + "_from_" + wood.getTypeName() + "_" + nameSplit[4] + "_sawing";
-
-        sink.addJson(EveryCompat.res(this.shortenedId() + "/" + wood.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
-    }
+   }
 
 
 
