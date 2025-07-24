@@ -5,7 +5,6 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -22,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 ///      ┌──────────────────────────────────────────────────────────┐
 ///      │       WoodGoodModule using Twigs Mod as An Example       │
 ///      └──────────────────────────────────────────────────────────┘
