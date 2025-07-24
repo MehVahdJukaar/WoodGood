@@ -40,7 +40,7 @@ subprojects {
 
     if (env.MODRINTH_TOKEN) {
         modrinth {
-            projectId = "every-compat"
+            projectId = "${modrinth_id}"
             uploadFile = tasks.remapJar
             additionalFiles.add(tasks.remapSourcesJar)
             gameVersions = [minecraft_version]
@@ -65,7 +65,7 @@ subprojects {
         curseforge {
             apiKey = env.CURSEFORGE_TOKEN
             project {
-                id = project_id
+                id = curseforge_id
                 changelog = changelogText
                 changelogType = 'markdown'
                 releaseType = 'release'
