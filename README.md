@@ -26,7 +26,7 @@ Two Things are required:
 - **Every Compat (Wood Good)**
 - **Moonlight Lib** used to be known as **Selene**
 
-To know how to support your mod with Every Compat, Please look at the below:
+How to support your mod with Every Compat, Please look at the below:
 
 `common/src/main/java/net/mehvahdjukaar/every_compat/api/EveryCompatAPI.java` 
 
