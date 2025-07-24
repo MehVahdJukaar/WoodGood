@@ -28,11 +28,20 @@ Two Things are required:
 
 To know how to support your mod with Every Compat, Please look at the below:
 
-`common/src/main/java/net/mehvahdjukaar/every_compat/api/EveryCompatAPI.java`
+`common/src/main/java/net/mehvahdjukaar/every_compat/api/EveryCompatAPI.java` 
 
-If you want one more example of how is this applied, then you can check below:
-1. [GuitaWoodworks-Init](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/GuitaWoodworks.java#L57)
-2. [GuitaWoodworks-EveryCompatModule](https://github.com/macuguita/woodworks/blob/1.21.1/common/src/main/java/com/macuguita/woodworks/GuitaWoodworks.java#L105)
-3. [ModCompat](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/compat/ModCompat.java)
+it has 3 usages:
+1) Using `EveryCompatAPI.registerModule(new WoodGoodModule(mod_Id))` to add the module to EveryCompat to support your mod
+2) Using `EveryCompatAPI.addOtherCompatMod(String, List<String>, List<String>)` to add a compat Mod that your mod is already supported with Wood Mods
+3) Add an undetected WoodType or LeavesType from your mod, an example is provided in `EveryCompatAPI`
+
+Take a look at how the module is supporting blocks or items from a mod (detail level is general): 
+
+`common/src/main/java/net/mehvahdjukaar/every_compat/api/example/WoodGoodModule.java`
+
+If you want a **high detail level** example of how is this applied, then you can check below:
+1. [GuitaWoodworks-Init](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/GuitaWoodworks.java#L57) - Initization
+2. [GuitaWoodworks-EveryCompatModule](https://github.com/macuguita/woodworks/blob/1.21.1/common/src/main/java/com/macuguita/woodworks/GuitaWoodworks.java#L105) - Checking if EveryCompat is installed 
+3. [ModCompat](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/compat/ModCompat.java) - Using `EveryCompatAPI.registerModule(...)`
 4. [WoodGoodModule](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/compat/WoodGood.java)
 
