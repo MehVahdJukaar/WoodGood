@@ -11,5 +11,5 @@ include("common")
 include("fabric")
 include("forge")
 
-rootProject.name = "everycompat-multi"
+rootProject.name = "library-section"
 
