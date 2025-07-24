@@ -1,6 +1,6 @@
 package net.mehvahdjukaar.every_compat.api.example;
 
-import com.ninni.twigs.block.TableBlock;
+//import com.ninni.twigs.block.TableBlock;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -43,7 +43,7 @@ public class WoodGoodModule extends SimpleModule {
 
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
                     getModBlock("oak_table"), ()-> WoodTypeRegistry.OAK_TYPE,
-                    woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
+                    woodType -> new Block(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     /// Similar setup as sampleBlock
                     .build();
@@ -51,7 +51,7 @@ public class WoodGoodModule extends SimpleModule {
 
             sampleBlock = SimpleEntrySet.builder(WoodType.class,"table",
                             getModBlock("oak_table"), ()-> WoodTypeRegistry.OAK_TYPE,
-                            woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
+                            woodType -> new Block(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     ///OPTIONAL: Check if a WoodType or LeavesType has the children required, then block will be generated
                     .requiresChildren("slab", "other_childkey") //REASON: can be for recipes or textures
