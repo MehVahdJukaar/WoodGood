@@ -40,7 +40,7 @@ subprojects {
 
     if (env.MODRINTH_TOKEN) {
         modrinth {
-            projectId = modrinth_id
+            projectId = "${modrinth_id}"
             uploadFile = tasks.remapJar
             additionalFiles.add(tasks.remapSourcesJar)
             gameVersions = [minecraft_version]
