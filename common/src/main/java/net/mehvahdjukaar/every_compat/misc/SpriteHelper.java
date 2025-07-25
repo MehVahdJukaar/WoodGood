@@ -60,6 +60,11 @@ public class SpriteHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS"stripped_cactus_log_top", res("block/stripped_cactus_top"));
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
+
+        // Natural Decor mod
+        addOptional("naturaldecormod:saguaro_log", "_side", "naturaldecormod:block/aguaroogew");
+        addOptional("naturaldecormod:saguaro_log", "_top", "naturaldecormod:block/aguaroogewop");
+
         // Luminous Nether
         addOptional("luminous_nether:withered_log", "_side", "luminous_nether:block/ashenlogside");
         addOptional("luminous_nether:withered_log", "_top", "luminous_nether:block/ashenlogtop");
