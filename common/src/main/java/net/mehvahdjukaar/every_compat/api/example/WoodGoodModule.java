@@ -19,6 +19,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
@@ -133,4 +134,12 @@ public class WoodGoodModule extends SimpleModule {
                 /// A good example is QuarkModule's hedge where its recipe is using tag as ingredient
             });
         }
+
+///      ┌──────────────────────────────────────────────────────────┐
+///      │   If the mod has built-in codes that support Wood Mods   │
+///      └──────────────────────────────────────────────────────────┘
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of("biomesoplenty", "so_on...");
     }
+}
