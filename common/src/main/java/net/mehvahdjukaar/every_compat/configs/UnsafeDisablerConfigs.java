@@ -30,7 +30,7 @@ public class UnsafeDisablerConfigs {
                         Don't use this if you don't know what you are doing
                             REASON:
                         This file is a conditional registration. This is harmless in Singleplayer World,
-                        but harmful in SERVER because you won't able to join
+                        but harmful in SERVER because you won't able to join.
 
                         ══════════════════════════ Detail ═══════════════════════════
                         This file allow you to exclude WoodTypes, LeavesType, EntrySet, or a Module
@@ -38,7 +38,9 @@ public class UnsafeDisablerConfigs {
                         2) Leave a value empty to disable that rule.
 
                         Module - is a Supported Mod, just a modId is sufficient.
-                        EntrySet - is a FurnitureType or DecorativeType that Wood Good is supporting via the mod. it is either block or item.
+                        EntrySet - is a FurnitureType or DecorativeType that Wood-Good is supporting via the mod. it is either block or item.
+
+                        NOTE: blacklisting a Module will be applied to Wood-Good, Stone-Zone, Gems-Realm
                     """;
             builder.comment(comment);
 
@@ -91,7 +93,7 @@ public class UnsafeDisablerConfigs {
                             \n
                             ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
                             ┃                        ATTENTION                         ┃
-                            ┃  You are using conditional registration.                 ┃
+                            ┃  You are using conditional registration via Wood-Good.   ┃
                             ┃  Proceed at your own risk and do not complain if you     ┃
                             ┃  CANNOT connect to servers                               ┃
                             ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
