@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,46 +20,26 @@ public class EveryCompatAPI {
         EveryCompat.addModule(module);
     }
 
-
     public static Collection<CompatModule> getModule(String modId) {
         return EveryCompat.getModulesOfMod(modId);
     }
 
+    /// If you mod has compat mods that support it with Biomes O' Plenty or other Wood Mods below can make an exception
+    /// so EC won't generate blocks from your mod with Biomes O' Plenty
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId){
         EveryCompat.addOtherCompatMod(compatModId, fromModId, supportedModId);
     }
 
-
-    //for each entry that you register you will need to add "block_type.everycomp.your_type" translation string to your lang file
-
-    //example using simple module class
-    /*
-
-        SimpleModule mod = new SimpleModule("twigs", "tw");
-        SimpleEntrySet<?, ?> e = SimpleEntrySet.builder(WoodType.class,"table", TwigsBlocks.OAK_TABLE, ()->WoodTypeRegistry.OAK_TYPE,
-                        w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
-                .addTag(new ResourceLocation("twigs:tables"), Registries.BLOCK)
-                .useLootFromBase()
-                .setTab(()->Twigs.ITEM_GROUP)
-                .addTexture(new ResourceLocation("twigs:block/oak_table"))
-                .addTexture(new ResourceLocation("twigs:block/oak_table_top"))
-                .addTexture(new ResourceLocation("twigs:block/oak_table_bottom"))
-                .build();
-        mod.addEntry(e);
-
-        WoodGoodAPI.registerModule(mod)
-
-     */
-
-
-    //register a custom non-detected wood type
-
-    /*
+///      ┌──────────────────────────────────────────────────────────┐
+///      │         register a custom non-detected wood type         │
+///      └──────────────────────────────────────────────────────────┘
+/*
     public static void init() {
         BlockSetAPI.addBlockTypeFinder(WoodType.class, WoodType.Finder
             .simple("my_mod", "cherry", "cherry_plank", "cherry_stem"));
+
     }
-    */
+*/
 
 
 }

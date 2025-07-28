@@ -39,6 +39,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -338,11 +339,11 @@ public class WoodworksModule extends SimpleModule {
 
         ResourceLocation recipeLocation = modRes("recipes/" + recipeName + ".json"); // get Recipe JSON
 
-        try (InputStream recipeStream = manager.getResource(recipeLocation).get().open()) {
+        try (InputStream recipeStream = manager.getResource(recipeLocation)
+                .orElseThrow(() -> new FileNotFoundException("File Not Found: " + recipeLocation)).open()) {
             JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
             // VARIABLES
-            //TODO: this isnt fool proof.not all recipes are of thos type, A better way wouldbe desrrialize the recipe property and then do stuff there
             JsonObject foundRecipe = recipe.getAsJsonArray("recipes")
                     .get(0).getAsJsonObject().getAsJsonObject("recipe");
 
@@ -367,7 +368,7 @@ public class WoodworksModule extends SimpleModule {
             EveryCompat.LOGGER.error("Error while creating recipes for woodwork sawmill: ", e);
         }
 
-   }
+    }
 
 
 
