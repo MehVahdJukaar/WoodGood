@@ -32,7 +32,7 @@ public class HardcodedBlockType {
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-        // Exclude one EntrySet from a module
+        // Exclude one WoodType from a Wood Mod
         if (woodTypeList.get().stream().anyMatch(woodidentify::matches)) return true;
 
         // Exclude one EntrySet from a module
@@ -106,7 +106,7 @@ public class HardcodedBlockType {
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-        // Exclude one EntrySet from a module
+        // Exclude one LeavesType from a Wood mod
         if (leavesTypeList.get().stream().anyMatch(leavesidentify::matches)) return true;
 
         // Exclude one EntrySet from a module
