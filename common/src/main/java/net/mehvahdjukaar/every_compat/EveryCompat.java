@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
+import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -32,6 +33,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.modulesList;
+
 public abstract class EveryCompat {
 
     public static final String MOD_ID = "everycomp";
@@ -48,7 +51,6 @@ public abstract class EveryCompat {
     private static final Map<Class<? extends BlockType>, Set<String>> TYPES_TO_CHILD_KEYS = new Object2ObjectOpenHashMap<>();
     private static final Map<Object, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
     private static final Set<Class<? extends BlockType>> AFFECTED_TYPES = new HashSet<>();
-    private static final UnsafeModuleDisabler MODULE_DISABLER = new UnsafeModuleDisabler();
 
     /// @return everycomp:path
     public static ResourceLocation res(String path) {
@@ -99,7 +101,7 @@ public abstract class EveryCompat {
     }
 
     public static synchronized void addModule(CompatModule module) {
-        if (MODULE_DISABLER.isModuleOn(module.getModId())) { //maybe turn into supplier
+        if (!modulesList.get().contains(module.getModId())) {
             ACTIVE_MODULES.put(module.getModId(), module);
             DEPENDENCIES.add(module.getModId());
             DEPENDENCIES.addAll(module.getAlreadySupportedMods());
@@ -135,6 +137,7 @@ public abstract class EveryCompat {
 
     public static void init() {
         ECConfigs.init();
+        UnsafeDisablerConfigs.init();
         ECNetworking.init();
 //        ECRegistry.init(); // Not need for Library Section
 
@@ -146,7 +149,6 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicRegistration((r, c) -> registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
         BlockSetAPI.addDynamicRegistration((r, c) -> registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
 
-        MODULE_DISABLER.save();
     }
 
     public static void setup() {
@@ -180,6 +182,7 @@ public abstract class EveryCompat {
             Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(CompatModule::bloatAmount));
             if (compatbloated.isPresent()) {
                 CompatModule bloated = compatbloated.get();
+                EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
                 //no freaking clue why this was returned as null once
                 EveryCompat.LOGGER.error("Every Compat registered children make up more than one third of your registered children, taking up memory and load time.");
                 EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} children)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());

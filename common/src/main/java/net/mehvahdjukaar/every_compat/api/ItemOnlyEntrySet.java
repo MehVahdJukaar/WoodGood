@@ -87,7 +87,9 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         for (T blockType : Objects.requireNonNull(typeRegistry).getValues()) {
             String name = getItemName(blockType);
             String fullName = module.shortenedId() + "/" + blockType.getNamespace() + "/" + name;
-            if (module.isEntryAlreadyRegistered(name, blockType, BuiltInRegistries.ITEM)) continue;
+            String entrySetId = module.getModId() +":"+ this.typeName;
+
+            if (module.isEntryAlreadyRegistered(entrySetId, name, blockType, BuiltInRegistries.ITEM)) continue;
 
             if (condition.test(blockType)) {
                 I item = itemFactory.apply(blockType);
