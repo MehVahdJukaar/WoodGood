@@ -160,6 +160,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:monolib-968432:6123976") // v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:brewin-and-chewin-637808:6237884") // Smidgeon-O'-Bliss
 //    modRuntimeOnly("curse.maven:kotlin-for-forge-351264:5402061") // Adorn
+//    modRuntimeOnly("curse.maven:ctm-267602:5983309") // Chipped
 
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:fusion-connected-textures:1.2.7b-forge-mc${minecraft_version}") // Dawn-Of-Time, Timber-Frame, Rechiseled
@@ -206,7 +207,7 @@ dependencies {
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK")
 //    modRuntimeOnly("fuzs.diagonalblocks:diagonalblocks-forge:8.0.6")
-//    modRuntimeOnly("earth.terrarium.chipped:chipped-forge-${minecraft_version}:3.0.7") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: Bytecodecs
+//    modRuntimeOnly("earth.terrarium.chipped:chipped-forge-${minecraft_version}:3.0.7") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: Bytecodecs, ConnectedTexturesMod (CTM)
 
             //- ~/forge/mods LOCAL
 //    modRuntimeOnly("com.arcanc.bc:beautifulcampfires-forge-1.20.1-1.0.1")
@@ -312,10 +313,10 @@ dependencies {
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5812948") // Blueprint
 //    modRuntimeOnly("curse.maven:caverns-and-chasms-438005:6040957") // Blueprint
 //    modRuntimeOnly("curse.maven:atmospheric-362393:6393127") // Blueprint
-//    modRuntimeOnly("curse.maven:soulful-nether-1146098:6376431") //
-//    modRuntimeOnly("curse.maven:elysium-api-1158628:6376984") //
+//    modRuntimeOnly("curse.maven:soulful-nether-1146098:6376431") // Elysium-API
+//    modRuntimeOnly("curse.maven:elysium-api-1158628:6376984") // Soulful-Nether
 
-//    modRuntimeOnly("curse.maven:terrafirmacraft-302973:4862659") // patchouli
+//    modRuntimeOnly("curse.maven:terrafirmacraft-302973:6739107") // patchouli
 
     //!! OTHERS
 //    modRuntimeOnly("maven.modrinth:stone-zone:1.20-2.7.14") //REQUIRE: Stone Mods
