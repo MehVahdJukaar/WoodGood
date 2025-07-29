@@ -78,18 +78,20 @@
 
   "wood_type.quark.ancient": "Ashen",
   "wood_type.quark.blossom": "Trumpet",
+  "leaves_type.quark.ancient": "Ashen",
+  "leaves_type.quark.blue_blossom": "Frosty Trumpet",
+  "leaves_type.quark.lavender_blossom":"Serene Trumpet",
+  "leaves_type.quark.orange_blossom": "Warm Trumpet",
+  "leaves_type.quark.pink_blossom": "Sweet Trumpet",
+  "leaves_type.quark.yellow_blossom": "Sunny Trumpet",
+  "leaves_type.quark.red_blossom":"Fiery Trumpet",
 
   "wood_type.unusualprehistory.dryo": "Dryophyllum",
   "wood_type.unusualprehistory.foxxi": "Foxii",
 
-  "leaves_type.quark.blue": "Frosty",
-  "leaves_type.quark.lavender":"Serene",
-  "leaves_type.quark.orange": "Warm",
-  "leaves_type.quark.pink": "Sweet",
-  "leaves_type.quark.yellow": "Sunny",
-  "leaves_type.quark.red":"Fiery",
   "leaves_type.twilightforest.dark": "Darkwood",
   "leaves_type.ulterlands.souldrained": "Petrified",
+
 
   "block_type.twigs.table": "%s Table",
 
