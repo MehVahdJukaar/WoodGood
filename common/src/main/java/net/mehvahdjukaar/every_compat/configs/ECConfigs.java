@@ -75,7 +75,5 @@ public class ECConfigs {
         SPEC.loadFromFile(); //manually load early
     }
 
-    public static void init() {
-
-    }
+    public static void init() {}
 }

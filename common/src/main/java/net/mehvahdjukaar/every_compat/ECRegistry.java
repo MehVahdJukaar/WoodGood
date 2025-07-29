@@ -12,9 +12,7 @@ import java.util.function.Supplier;
 
 public class ECRegistry {
 
-    public static void init(){
-
-    }
+    public static void init() {}
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(EveryCompat.res("all_woods"), AllWoodItem::new);
 
