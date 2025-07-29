@@ -14,9 +14,7 @@ import static net.mehvahdjukaar.every_compat.configs.ECConfigs.TAB_ITEM_SEARCH_E
 
 public class ECRegistry {
 
-    public static void init(){
-
-    }
+    public static void init() {}
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(EveryCompat.res("all_woods"), AllWoodItem::new);
 
