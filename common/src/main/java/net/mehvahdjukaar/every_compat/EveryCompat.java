@@ -162,12 +162,13 @@ public abstract class EveryCompat {
         float p = (myChildrenSize / (float) newSize) * 100f;
         if (myChildrenSize == 0) {
             String log = """
-            ###########################################################################################################
-            #                                                                                                         #
-            # ATTENTION: EVERY COMPAT REGISTERED 0 CHILDREN! No Wood mods (Biomes O' Plenty or others) are installed. #
-            #                           You dont need EveryCompat and should remove it.                               #
-            #                                                                                                         #
-            ###########################################################################################################
+                \n
+                ###########################################################################################################
+                #                                                                                                         #
+                # ATTENTION: EVERY COMPAT REGISTERED 0 CHILDREN! No Wood mods (Biomes O' Plenty or others) are installed. #
+                #                           You dont need EveryCompat and should remove it.                               #
+                #                                                                                                         #
+                ###########################################################################################################
             """;
             EveryCompat.LOGGER.error("\n{}", log);
             return;
@@ -188,12 +189,13 @@ public abstract class EveryCompat {
                 EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} children)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
             } else {
                 String log = """
-                #######################################################
-                #                                                     #
-                #     ATTENTION: No supported mods are installed.     #
-                #   You dont need EveryCompat and should remove it.   #
-                #                                                     #
-                #######################################################
+                    \n
+                    #######################################################
+                    #                                                     #
+                    #     ATTENTION: No supported mods are installed.     #
+                    #   You dont need EveryCompat and should remove it.   #
+                    #                                                     #
+                    #######################################################
                 """;
                 EveryCompat.LOGGER.error("\n{}", log);
             }
