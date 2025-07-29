@@ -1,3 +1,11 @@
+## v2.8.14
+
+### UPDATED: 
+- **Every Compat** (COMMON):
+    - Improved the _everycomp-hazardous_ config
+    - Improved code check for Vanilla Wood - @MehVahdJukaar
+
+---
 
 ## v2.8.13
 
