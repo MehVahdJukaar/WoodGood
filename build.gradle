@@ -79,7 +79,7 @@ subprojects {
 
                 mainArtifact(tasks.remapJar) {
                     if (modLoader == "fabric") {
-                        displayName = mod_id +"-"+ mod_version + "-fabric"
+                        displayName = mod_id +"LS-"+ mod_version + "-fabric"
                     }
                 }
 
