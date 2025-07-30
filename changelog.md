@@ -21,6 +21,13 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (COMMON): Fixed the SERVER crash related to `everycomp-hazardous.properties` config - [#1006](https://github.com/MehVahdJukaar/WoodGood/issues/1006)
+
+---
+
+## v2.8.14
+
+### UPDATED: 
 - **Every Compat** (COMMON): 
   - Improved the _everycomp-hazardous_ config
   - Improved code check for Vanilla Wood - @MehVahdJukaar
