@@ -37,7 +37,8 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         this.initialize();
 
         if (PlatHelper.getPhysicalSide().isClient()) {
-            ItemTooltipCallback.EVENT.register(EveryCompatClient::onItemTooltip);
+            EveryCompatFabricClient.init();
+
         }
     }
 

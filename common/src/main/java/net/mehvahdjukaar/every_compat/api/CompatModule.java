@@ -34,7 +34,7 @@ import java.util.function.Supplier;
 public abstract class CompatModule {
 
     protected final String modId;
-    protected final String modName;
+    protected final String modName; //redable name
 
     //EC or addon namespace
     private final String myNamespace;

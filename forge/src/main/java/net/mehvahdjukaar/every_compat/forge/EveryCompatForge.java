@@ -84,6 +84,10 @@ public class EveryCompatForge extends EveryCompatCommon {
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
         MinecraftForge.EVENT_BUS.register(this);
+
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            EveryCompatFogeClient.init();
+        }
     }
 
     @Override
@@ -158,7 +162,7 @@ public class EveryCompatForge extends EveryCompatCommon {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void itemTooltipEvent(ItemTooltipEvent event) {
-        EveryCompatClient.onItemTooltip(event.getItemStack(),event.getFlags(), event.getToolTip());
+        EveryCompatClient.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());
     }
 
     @SubscribeEvent
@@ -180,7 +184,7 @@ public class EveryCompatForge extends EveryCompatCommon {
 
     @SubscribeEvent
     public void onPlayerNegotiation(PlayerNegotiationEvent playerNegotiationEvent) {
-        if(ECConfigs.CHECK_PACKET.get()) {
+        if (ECConfigs.CHECK_PACKET.get()) {
             ((ChannelHandlerImpl) ECNetworking.CHANNEL).channel.sendTo(new ECNetworking.S2CModVersionCheckMessage(),
                     playerNegotiationEvent.getConnection(),
                     NetworkDirection.LOGIN_TO_CLIENT
