@@ -52,13 +52,28 @@ public abstract class EveryCompat {
     private static final Map<Object, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
     private static final Set<Class<? extends BlockType>> AFFECTED_TYPES = new HashSet<>();
 
+    static boolean canShowErrorScreen = PlatHelper.getPhysicalSide().isClient();
+    private static final Set<CompatModule> ERRORED = new HashSet<>();
+
     /// @return everycomp:path
     public static ResourceLocation res(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 
     public static void forAllModules(Consumer<CompatModule> action) {
-        ACTIVE_MODULES.values().forEach(action);
+        for (var m : ACTIVE_MODULES.values()) {
+            try {
+                action.accept(m);
+            } catch (Throwable e) {
+                EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", m.getModName(), e);
+                if (!canShowErrorScreen) {
+                    //if before first screen we can display an error screen
+                    ERRORED.add(m);
+                } else {
+                    throw e;
+                }
+            }
+        }
     }
 
     public static CompatModule getModuleOfItem(Item item) {
@@ -203,6 +218,7 @@ public abstract class EveryCompat {
 
 
         forAllModules(CompatModule::onModSetup);
+        canShowErrorScreen = true;
 
     }
 
@@ -269,5 +285,11 @@ public abstract class EveryCompat {
         } else {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
+    }
+
+
+    public static List<String> getModulesThatErrored() {
+        return ERRORED.stream().map(CompatModule::getModName)
+                .toList();
     }
 }

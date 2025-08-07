@@ -4,12 +4,16 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.ErrorMessageScreen;
+import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -33,6 +37,15 @@ public class EveryCompatClient {
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
         ClientDynamicResourcesHandler.getInstance().register();
+    }
+
+    @EventCalled
+    public static void onFirstScreen(Screen screen) {
+        var errors = EveryCompat.getModulesThatErrored();
+        if (!errors.isEmpty()) {
+            Minecraft.getInstance().setScreen(ErrorMessageScreen.create(screen, errors));
+        }
+        EveryCompat.canShowErrorScreen = false;
     }
 
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
@@ -85,7 +98,7 @@ public class EveryCompatClient {
     }
 
     public static <B extends Block> void registerRenderType(B b, BlockType bt, Object type) {
-        if(bt.id.equals(ResourceLocation.tryParse("rats:pirat"))){
+        if (bt.id.equals(ResourceLocation.tryParse("rats:pirat"))) {
             type = RenderLayer.TRANSLUCENT;
         }
         if (type == null) return;
