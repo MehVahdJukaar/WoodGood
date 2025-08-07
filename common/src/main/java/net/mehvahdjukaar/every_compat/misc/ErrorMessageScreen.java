@@ -42,12 +42,6 @@ public class ErrorMessageScreen extends Screen {
         }).bounds(this.width / 2 + 5, this.height * 5 / 6, 150, 20).build());
         this.exitButton.active = false;
 
-        this.disaleButton = this.addRenderableWidget(Button.builder(
-                Component.translatable("gui.supplementaries.welcome_screen.turn_off"), (pressed) -> {
-                    throw new RuntimeException();
-                }).bounds((this.width - 150) / 2, this.height * 5 / 6, 150, 20).build());
-        this.disaleButton.active = false;
-
         this.message = MultiLineLabel.create(this.font, text, this.width - 50);
     }
 
@@ -74,7 +68,7 @@ public class ErrorMessageScreen extends Screen {
 
     @Override
     public void onClose() {
-        Minecraft.getInstance().setScreen(this.lastScreen);
+        throw new RuntimeException("Every Compat encountered an error loading a module. Look at error below.");
     }
 
     // static stuff
