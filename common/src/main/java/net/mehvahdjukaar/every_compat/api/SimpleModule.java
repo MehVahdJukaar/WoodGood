@@ -194,9 +194,8 @@ public class SimpleModule extends CompatModule {
     }
 
     //TODO: improve
-    public boolean isEntryAlreadyRegistered(String blockId, BlockType blockType, Registry<?> registry) {
-//        //!! NOTE: blockType is either: WoodType, LeavesType, or StoneTYpe
-//        if (blockType.isVanilla()) return true; // is moved to HardcodedBlockType
+    public boolean isEntryAlreadyRegistered(String entrySetId, String blockId, BlockType blockType, Registry<?> registry) {
+        ///NOTE: blockType is either: WoodType, LeavesType, StoneTYpe, or Other Types
 
         // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
         String blockName = blockId.substring(blockId.lastIndexOf("/") + 1);
@@ -207,11 +206,12 @@ public class SimpleModule extends CompatModule {
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
 
         // ugly hardcoded stuff
-        if (blockType instanceof WoodType wt) {
-            Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(blockName, wt, modId);
+        if (blockType instanceof WoodType woodType) {
+            Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(entrySetId, blockName, woodType, modId);
             if (hardcoded != null) return hardcoded;
-        } else if (blockType instanceof LeavesType lt) {
-            Boolean hardcoded = HardcodedBlockType.isLeavesBlockAlreadyRegistered(blockName, lt, modId);
+        }
+        else if (blockType instanceof LeavesType leavesType) {
+            Boolean hardcoded = HardcodedBlockType.isLeavesBlockAlreadyRegistered(entrySetId, blockName, leavesType, modId);
             if (hardcoded != null) return hardcoded;
         }
 

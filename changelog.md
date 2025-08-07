@@ -20,6 +20,31 @@
 
 </div>
 
+### UPDATED: 
+- **Every Compat** (COMMON): Fixed the SERVER crash related to `everycomp-hazardous.properties` config - [#1006](https://github.com/MehVahdJukaar/WoodGood/issues/1006)
+
+---
+
+## v2.8.14
+
+### UPDATED: 
+- **Every Compat** (COMMON): 
+  - Improved the _everycomp-hazardous_ config
+  - Improved code check for Vanilla Wood - @MehVahdJukaar
+- **XercaMod** (FORGE): Ported the finished recipe system from 1.21.1 - [#1002](https://github.com/MehVahdJukaar/WoodGood/issues/1002)
+- **Macaw's Holiday** (IT): Added snowy_oak_leaves & snowy_spruce_leaves - [#980](https://github.com/MehVahdJukaar/WoodGood/issues/980)
+
+### LANG 
+- **EN_US**: Corrected LeavesType from **Quark** - [#1005](https://github.com/MehVahdJukaar/WoodGood/issues/1005)
+
+### OTHERS
+<span style="color: YELLOW;">FOR MODPACK DEVS:</span> The file, `everycomp-hazardous.properties` have been changed to `everycomp-hazardous.toml` with improved configs
+<br>If you've used it to disable a module, then you can use the mod-ID of the disabled module and place it under "module" via the new file. 
+
+---
+
+## v2.8.13
+
 ### UPDATED:
 - **EveryCompat** (COMMON): Updated SpriteHelper so it can be used by StoneZone & GemRealms to correct the incorrect texture related to (IT)
 - **TAGS** (COMMON): Added tags to glasses & glass_panes with either #forge:glass & #forge:glass_panes but if it's fabric, then c:glass_block & c:glass_panes

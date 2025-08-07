@@ -45,3 +45,7 @@ If you want a **high detail level** example of how is this applied, then you can
 3. [ModCompat](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/compat/ModCompat.java) - Using `EveryCompatAPI.registerModule(...)`
 4. [WoodGoodModule](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/compat/WoodGood.java)
 
+### NOTIFICATION
+
+If you added an module in your mod, then you can go to Every Compat's github to create a new issue using "Built-In Module Notification" 
+to let DEV know. This way Your mod will be added to the table listing supported mods via Curseforge or Modrinth.

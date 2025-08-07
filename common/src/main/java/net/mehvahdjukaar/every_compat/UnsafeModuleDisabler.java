@@ -16,6 +16,7 @@ public class UnsafeModuleDisabler {
 
     private boolean isSafe = true;
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public UnsafeModuleDisabler() {
         this.properties = new Properties();
         Path configPath = PlatHelper.getGamePath().resolve("config");
@@ -44,7 +45,7 @@ public class UnsafeModuleDisabler {
         try (FileOutputStream output = new FileOutputStream(propertiesFile)) {
             properties.store(output, "Hard disable entire modules. Use at your own risk and don't ask for support if you use this. Write modid = false to disable modules");
         } catch (IOException e) {
-            e.printStackTrace();
+            EveryCompat.LOGGER.error("Failed to save everycomp-hazardous.properties: ", e);
         }
     }
 
@@ -58,12 +59,11 @@ public class UnsafeModuleDisabler {
                 var ret = Boolean.parseBoolean(properties.getProperty(modId, "true"));
                 if (!ret && isSafe) {
                     isSafe = false;
-                    EveryCompat.LOGGER.warn("!!! You are using conditional modules registration. Proceed at your own risk and dont complain if you cant connect to servers !!!");
+                    EveryCompat.LOGGER.warn("!!! You are using conditional modules registration. Proceed at your own risk and dont complain if you CANNOT connect to servers !!!");
                 }
                 return ret;
             }
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
         return true;
     }
 

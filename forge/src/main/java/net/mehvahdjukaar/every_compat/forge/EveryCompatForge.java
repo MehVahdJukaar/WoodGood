@@ -162,6 +162,12 @@ public class EveryCompatForge extends EveryCompatCommon {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void itemTooltipEvent(ItemTooltipEvent event) {
+        //TODO: what the heck is this? if WE are adding that line we shold not remove it immediately like this! Fix
+        // Remove the [Debug] strings from ItemToolTip
+        event.getToolTip().removeIf(line ->
+            line.getString().matches(".*\\[Debug\\] Item Tags:.*") || line.getString().matches(".*\\[Debug\\] Block Tags:.*")
+        );
+
         EveryCompatClient.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());
     }
 

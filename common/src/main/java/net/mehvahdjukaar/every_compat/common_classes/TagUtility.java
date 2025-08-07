@@ -206,7 +206,5 @@ public class TagUtility {
     public static final ResourceLocation SILICA_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("silica_glass") : forgeTag("silica");
     public static final ResourceLocation GLASS_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("glass_blocks") : forgeTag("glass");
     public static final ResourceLocation GLASS_PANE_TAG = commonTag("glass_panes");
-    public static final ResourceLocation GLASS_COLORLESS_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("colorless_glass") : forgeTag("glass/colorless");
-    public static final ResourceLocation GLASS_PANE_COLORLESS_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("colorless_glass_panes") : forgeTag("glass_panes/colorless");
 
 }
