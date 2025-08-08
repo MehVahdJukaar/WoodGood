@@ -30,10 +30,10 @@ public class TagUtility {
         String resLocMOD = blockType.getNamespace() + ":" + blockType.getTypeName();
 
         // ResourceLocation
-        ResourceLocation RLocLogs = new ResourceLocation(resLocMOD +"_"+ suffixTag); // modId:TYPE_suffix
-        ResourceLocation RLocStems = new ResourceLocation(resLocMOD +"_"+ suffixAlt);
-        ResourceLocation RLocFolders = new ResourceLocation(blockType.getNamespace() +":"+ suffixTag +"/"+ blockType.getTypeName()); // modId:suffix/TYPE
-        ResourceLocation RLocEC = EveryCompat.res(blockType.getAppendableId() +"_"+ suffixTag); // everycomp:modId/TYPE_suffix
+        ResourceLocation RLocLogs = new ResourceLocation(resLocMOD + "_" + suffixTag); // modId:TYPE_suffix
+        ResourceLocation RLocStems = new ResourceLocation(resLocMOD + "_" + suffixAlt);
+        ResourceLocation RLocFolders = new ResourceLocation(blockType.getNamespace() + ":" + suffixTag + "/" + blockType.getTypeName()); // modId:suffix/TYPE
+        ResourceLocation RLocEC = EveryCompat.res(blockType.getAppendableId() + "_" + suffixTag); // everycomp:modId/TYPE_suffix
 
         if (doTagExistFor(RLocLogs, manager))
             return RLocLogs;
@@ -182,15 +182,17 @@ public class TagUtility {
         boolean itemTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
         return blockTag || itemTag;
     }
-    
+
     // Common tags
 
     @SuppressWarnings("SameParameterValue")
     /// @return c:tagPath for FABRIC or forge:tagPath for FORGE
-    private static ResourceLocation commonTag(String tagPath) {
-        return PlatHelper.getPlatform().isFabric() ?
-                new ResourceLocation("c", tagPath) :
-                new ResourceLocation("forge", tagPath);
+    private static ResourceLocation platformTag(String tagPath) {
+        return platformTag(tagPath, tagPath);
+    }
+
+    public static ResourceLocation platformTag(String fabric, String forge) {
+        return PlatHelper.getPlatform().isFabric() ? fabricTag(fabric) : forgeTag(forge);
     }
 
     /// @return c:tagPath
@@ -203,8 +205,10 @@ public class TagUtility {
         return new ResourceLocation("forge", tagPath);
     }
 
-    public static final ResourceLocation SILICA_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("silica_glass") : forgeTag("silica");
-    public static final ResourceLocation GLASS_TAG = PlatHelper.getPlatform().isFabric() ? fabricTag("glass_blocks") : forgeTag("glass");
-    public static final ResourceLocation GLASS_PANE_TAG = commonTag("glass_panes");
+
+
+    public static final ResourceLocation SILICA_TAG = platformTag("silica_glass", "silica");
+    public static final ResourceLocation GLASS_TAG = platformTag("glass_blocks", "glass");
+    public static final ResourceLocation GLASS_PANE_TAG = platformTag("glass_panes");
 
 }
