@@ -134,17 +134,16 @@ public class QuarkModule extends SimpleModule {
         posts = QuarkSimpleEntrySet.builder(WoodType.class, "post",
                         WoodenPostsModule.class,
                         getModBlock("oak_post"),
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK_TYPE,
                         w -> {
                             Block fence = w.getBlockOfThis("fence");
                             return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/",
                                     Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
                         })
-                .requiresChildren("fence", "wood") //REASON: recipes
+                .requiresChildren(VanillaWoodChildKeys.FENCE, VanillaWoodChildKeys.WOOD) //REASON: recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("posts"), Registries.BLOCK)
-                .addTag(modRes("posts"), Registries.ITEM)
+                .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/oak_post"))
