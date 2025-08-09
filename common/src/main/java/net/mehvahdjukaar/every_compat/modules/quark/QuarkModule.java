@@ -26,6 +26,9 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -91,17 +94,17 @@ public class QuarkModule extends SimpleModule {
         verticalSlabs = QuarkSimpleEntrySet.builder(WoodType.class, "vertical_slab",
                         VerticalSlabsModule.class,
                         getModBlock("oak_vertical_slab"),
-                        () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new VerticalSlabBlock(() -> w.getBlockOfThis(VanillaWoodChildren.SLAB),
-                                Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis(VanillaWoodChildren.SLAB)))
+                        () -> VanillaWoodTypes.OAK,
+                        w -> new VerticalSlabBlock(() -> w.getBlockOfThis(VanillaWoodChildKeys.SLAB),
+                                Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis(VanillaWoodChildKeys.SLAB)))
                                         .sound(w.getSound())
                         )
                 )
                 .requiresChildren("slab")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_vertical_slabs"), Registries.BLOCK, Registries.ITEM)
-                .addTag(modRes("vertical_slabs"), Registries.BLOCK,  Registries.ITEM) //TODO: are we sure 2 tags exist?
-                .addTag(modRes("vertical_slab"), Registries.BLOCK,  Registries.ITEM)
+                .addTag(modRes("vertical_slabs"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("vertical_slab"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab"))
@@ -114,7 +117,7 @@ public class QuarkModule extends SimpleModule {
         bookshelves = QuarkSimpleEntrySet.builder(WoodType.class, "bookshelf",
                         VariantBookshelvesModule.class,
                         getModBlock("acacia_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        () -> VanillaWoodTypes.ACACIA,
                         w -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, w.canBurn(), w.getSound()))
                 .setTabKey(tab)
@@ -132,7 +135,7 @@ public class QuarkModule extends SimpleModule {
         posts = QuarkSimpleEntrySet.builder(WoodType.class, "post",
                         WoodenPostsModule.class,
                         getModBlock("oak_post"),
-                        () -> VanillaWoodTypes.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> {
                             Block fence = w.getBlockOfThis("fence");
                             return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/",
@@ -152,7 +155,7 @@ public class QuarkModule extends SimpleModule {
         strippedPosts = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         WoodenPostsModule.class,
                         getModBlock("stripped_oak_post"),
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> {
                             if (w.getNamespace().equals("malum") || w.getNamespace().equals("twigs")) return null;
                             Block fence = w.getBlockOfThis("fence");
@@ -174,7 +177,7 @@ public class QuarkModule extends SimpleModule {
         verticalPlanks = QuarkSimpleEntrySet.builder(WoodType.class, "planks", "vertical",
                         VerticalPlanksModule.class,
                         getModBlock("vertical_oak_planks"),
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> {
                             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
                             return new ZetaBlock(name, null,
@@ -199,7 +202,7 @@ public class QuarkModule extends SimpleModule {
         ladders = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
                         VariantLaddersModule.class,
                         getModBlock("spruce_ladder"),
-                        () -> VanillaWoodTypes.WOOD_,
+                        () -> VanillaWoodTypes.SPRUCE,
                         w -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
                 .setTabKey(tab)
@@ -216,7 +219,7 @@ public class QuarkModule extends SimpleModule {
         hollowLogs = QuarkSimpleEntrySet.builder(WoodType.class, "log", "hollow",
                         HollowLogsModule.class,
                         getModBlock("hollow_oak_log"),
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> new HollowLogBlock(shortenedId() + "/" + w.getAppendableId(),
                                 w.log, null, w.canBurn()))
                 .requiresChildren("stripped_log") // Texture
@@ -231,7 +234,7 @@ public class QuarkModule extends SimpleModule {
         chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
                         VariantChestsModule.class,
                         getModBlock("oak_chest", VariantChestBlock.class),
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> new CompatChestBlock(w,
                                 shortenedId() + "/" + w.getAppendableId(),
                                 Utils.copyPropertySafe(Blocks.CHEST)))
@@ -249,7 +252,7 @@ public class QuarkModule extends SimpleModule {
         trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         VariantChestsModule.class,
                         getModBlock("oak_trapped_chest", VariantTrappedChestBlock.class),
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> {
                             boolean isNamespaceLoaded = w.getNamespace().equals("twilightforest")
                                     || w.getNamespace().equals("blue_skies");
@@ -272,10 +275,10 @@ public class QuarkModule extends SimpleModule {
         hedges = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
                         HedgesModule.class,
                         getModBlock("oak_hedge"),
-                        () -> LeavesTypeRegistry.OAK_TYPE,
+                        () -> VanillaLeavesTypes.OAK,
                         leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
                 )
-                .addCondition(l -> l.getWoodType() != null) // Reason: RECIPES
+                .addCondition(l -> l.getAssociatedWoodType() != null) // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -293,7 +296,7 @@ public class QuarkModule extends SimpleModule {
         leafCarpets = QuarkSimpleEntrySet.builder(LeavesType.class, "leaf_carpet",
                         LeafCarpetModule.class,
                         getModBlock("oak_leaf_carpet"),
-                        () -> LeavesTypeRegistry.OAK_TYPE,
+                        () -> VanillaLeavesTypes.OAK,
                         leavesType -> {
                             String name = shortenedId() + "/" + leavesType.getVariantId("%s_leaf_carpet");
                             return new LeafCarpetBlock(name, leavesType.leaves, null);
