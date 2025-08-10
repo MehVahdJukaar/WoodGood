@@ -8,6 +8,7 @@ import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class ErrorMessageScreen extends Screen {
     }
 
     @Override
-    public Component getNarrationMessage() {
+    public @NotNull Component getNarrationMessage() {
         return CommonComponents.joinForNarration(super.getNarrationMessage(), text);
     }
 
