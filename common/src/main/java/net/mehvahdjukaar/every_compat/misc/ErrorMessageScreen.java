@@ -70,13 +70,11 @@ public class ErrorMessageScreen extends Screen {
     }
 
     // static stuff
-    private static final Component TEXT = Component.translatable("gui.everycomp.error_screen.message");
-
     private static final Component TITLE = Component.translatable("gui.everycomp.error_screen.title")
             .withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
 
     public static ErrorMessageScreen create(Screen screen, List<String> mods) {
-        return new ErrorMessageScreen(screen, 40, TITLE, TEXT);
+        return new ErrorMessageScreen(screen, 40, TITLE,Component.translatable("gui.everycomp.error_screen.message", String.join(", ", mods)) );
     }
 
 }
