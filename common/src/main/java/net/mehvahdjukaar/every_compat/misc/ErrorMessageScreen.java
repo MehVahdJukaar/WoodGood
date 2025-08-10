@@ -37,9 +37,9 @@ public class ErrorMessageScreen extends Screen {
     @Override
     protected void init() {
         super.init();
-        this.exitButton = this.addRenderableWidget(Button.builder(CommonComponents.GUI_PROCEED, (pressed) -> {
-            Minecraft.getInstance().setScreen(this.lastScreen);
-        }).bounds(this.width / 2 + 5, this.height * 5 / 6, 150, 20).build());
+        this.exitButton = this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (pressed) -> {
+            onClose();
+        }).bounds((this.width - 150) / 2, this.height * 5 / 6, 150, 20).build());
         this.exitButton.active = false;
 
         this.message = MultiLineLabel.create(this.font, text, this.width - 50);
@@ -75,7 +75,9 @@ public class ErrorMessageScreen extends Screen {
             .withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
 
     public static ErrorMessageScreen create(Screen screen, List<String> mods) {
-        return new ErrorMessageScreen(screen, 40, TITLE,Component.translatable("gui.everycomp.error_screen.message", String.join(", ", mods)) );
+        return new ErrorMessageScreen(screen, 40, TITLE,
+                Component.translatable("gui.everycomp.error_screen.message",
+                        Component.literal(String.join(", ", mods)).withStyle(ChatFormatting.GOLD)));
     }
 
 }
