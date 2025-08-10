@@ -27,6 +27,9 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -101,7 +104,7 @@ public class QuarkModule extends SimpleModule {
                 .requiresChildren("slab")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_vertical_slabs"), Registries.BLOCK, Registries.ITEM)
-                .addTag(modRes("vertical_slabs"), Registries.BLOCK, Registries.ITEM) //TODO: are we sure 2 tags exist?
+                .addTag(modRes("vertical_slabs"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("vertical_slab"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
@@ -199,7 +202,7 @@ public class QuarkModule extends SimpleModule {
         ladders = QuarkSimpleEntrySet.builder(WoodType.class, "ladder",
                         VariantLaddersModule.class,
                         getModBlock("spruce_ladder"),
-                        () -> VanillaWoodTypes.OAK,
+                        () -> VanillaWoodTypes.SPRUCE,
                         w -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, BlockBehaviour.Properties.copy(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
                 .setTabKey(tab)

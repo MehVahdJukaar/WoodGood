@@ -1,8 +1,6 @@
 package net.mehvahdjukaar.every_compat.fabric;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 
 import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
@@ -10,7 +8,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModu
 import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.excessive_building.ExcessiveBuildingModule;
@@ -64,7 +61,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         addIfLoaded("bewitchment", () -> BewitchmentModule::new);
         addIfLoaded("clutter", () -> ClutterModule::new);
         addIfLoaded("create", () -> CreateModule::new);
-        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
         addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
         addIfLoaded("exlineawnings", () -> AwningModule::new);
