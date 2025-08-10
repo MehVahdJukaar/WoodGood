@@ -52,7 +52,7 @@ dependencies {
     modCompileOnly("curse.maven:blockus-312289:6256096")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
-    modCompileOnly("curse.maven:dawn-of-time-312359:6643151")
+    modCompileOnly("curse.maven:dawn-of-time-312359:6863594")
     modCompileOnly("curse.maven:decorative-blocks-362528:5089408")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550")
     modCompileOnly("curse.maven:farmersdelight-398521:6597298")
