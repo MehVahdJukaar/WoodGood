@@ -52,11 +52,6 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     }
 
     @Override
-    public boolean dependsOnLoadedPacks() {
-        return ECConfigs.SPEC == null || ECConfigs.DEPEND_ON_PACKS.get();
-    }
-
-    @Override
     public void addDynamicTranslations(AfterLanguageLoadEvent lang) {
         EveryCompat.forAllModules(m -> {
             m.addTranslations(this, lang);
@@ -65,15 +60,22 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
+        if (!firstInit) {
+            SpriteHelper.addHardcodedSprites();
+            firstInit = true;
+        }
+        if (!ECConfigs.GENERATE_DYNAMIC_CLIENT.get())return;
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
+
+
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
 
         int minBatches = Runtime.getRuntime().availableProcessors();
         int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
         int batchSize =  Math.max(minBatches, maxBatches);
-
-//        EveryCompat.LOGGER.info("Dynamic resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
-//        EveryCompat.LOGGER.info("Dynamic resources generation threads: {} ", tasks.size() / batchSize);
 
         //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
         EveryCompat.LOGGER.info("Dynamic resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
@@ -87,29 +89,11 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
             });
         }
 
-    }
-
-//    private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
-//
-//    @Override
-//    protected @NotNull ExecutorService getExecutors() {
-//        return EXECUTOR_SERVICE;
-//    }
-
-    @Override
-    public void regenerateDynamicAssets(ResourceManager manager) {
-        if (!firstInit) {
-            SpriteHelper.addHardcodedSprites();
-            firstInit = true;
-        }
-        if (!ECConfigs.GENERATE_DYNAMIC_CLIENT.get())return;
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
-        super.regenerateDynamicAssets(manager);
 
         EveryCompat.LOGGER.info("Dynamic client assets generation took: {}", stopwatch.stop().toString());
         this.paletteCache.clear();
     }
+
 
     //needs to be thread safe
     private final Map<BlockType, Palette> paletteCache = new ConcurrentHashMap<>();

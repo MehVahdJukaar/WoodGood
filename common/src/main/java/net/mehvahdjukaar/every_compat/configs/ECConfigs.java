@@ -16,7 +16,6 @@ public class ECConfigs {
 
     public static final Supplier<Boolean> TAB_ENABLED;
     public static final Supplier<Boolean> TAB_ITEM_SEARCH_ENABLED;
-    public static final Supplier<Boolean> DEPEND_ON_PACKS;
     public static final Supplier<Boolean> CHECK_PACKET;
     public static final Supplier<Boolean> DEBUG_RESOURCES;
     public static final Supplier<Boolean> DEBUG_PACKET;
@@ -54,8 +53,6 @@ public class ECConfigs {
         //        .define("remap_other_mods", false);
         // REMAP_OWN = builder.comment("Clears out and remaps all blocks registered by this mod belonging to uninstalled wood types to air or oak wood")
         //         .define("remap_self", true);
-        DEPEND_ON_PACKS = builder.comment("Makes dynamic assets that are generated depend on loaded resource packs. Turn off to make them just use vanilla assets")
-                .define("assets_depend_on_loaded_packs", true);
         DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
                 .define("save_debug_resources", false);
         CHECK_PACKET = builder.comment("Sends a packet to verify all dependencies mod versions are the same on connect. DIsable if it causes issues")
