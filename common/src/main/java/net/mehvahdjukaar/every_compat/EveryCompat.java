@@ -64,9 +64,10 @@ public abstract class EveryCompat {
         for (var m : ACTIVE_MODULES.values()) {
             try {
                 action.accept(m);
+                throw new RuntimeException("skibidi bop bop bop");
             } catch (Throwable e) {
                 EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", m.getModName(), e);
-                if (!canShowErrorScreen) {
+                if (canShowErrorScreen) {
                     //if before first screen we can display an error screen
                     ERRORED.add(m);
                 } else {

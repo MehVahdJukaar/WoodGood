@@ -7,7 +7,6 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
@@ -37,21 +36,22 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
     }
 
     @Override
-    public boolean dependsOnLoadedPacks() {
-        return ECConfigs.SPEC == null || ECConfigs.DEPEND_ON_PACKS.get();
-    }
-
-    @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
+        if (!ECConfigs.GENERATE_DYNAMIC_SERVER.get()) return;
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
+
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicServerResources(tasks::add));
 
         int minBatches = Runtime.getRuntime().availableProcessors();
         int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
-        int batchSize =  Math.max(minBatches, maxBatches);
+        int batchSize = Math.max(minBatches, maxBatches);
 
         //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
         EveryCompat.LOGGER.info("Dynamic server resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
+
         for (int i = 0; i < tasks.size(); i += batchSize) {
             int end = Math.min(i + batchSize, tasks.size());
             var subList = tasks.subList(i, end);
@@ -61,20 +61,10 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
                 }
             });
         }
-    }
-
-
-    @Override
-    public void regenerateDynamicAssets(ResourceManager manager) {
-        if (!ECConfigs.GENERATE_DYNAMIC_SERVER.get())return;
-
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
-        super.regenerateDynamicAssets(manager);
 
         EveryCompat.LOGGER.info("Dynamic server assets generation took: {}", stopwatch.stop().toString());
-    }
 
+    }
 
     /// Will be added to DynamicPack if the mod is loaded - it's for tags stuff
     public void addModToDynamicPack(String modId) {
