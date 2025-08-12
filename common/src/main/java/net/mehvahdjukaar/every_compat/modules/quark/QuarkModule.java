@@ -498,26 +498,8 @@ public class QuarkModule extends SimpleModule {
                 LeavesType leavesType = entry.getKey();
                 Block block = entry.getValue();
 
-                if (block != null) { // will generate if block is not null
-                    // general
-                    if (!leavesType.getNamespace().equals("fruitfulfun"))
-                        generalHedgeRecipe(leavesType, block, handler, manager);
-
-                    // Fruitful Fun
-                    if (leavesType.getNamespace().equals("fruitfulfun")) {
-                        switch (leavesType.getTypeName()) {
-                            case "apple" -> specialHedgeRecipe("minecraft:oak", leavesType, block, handler, manager);
-
-                            case "grapefruit", "lemon", "tangerine", "lime", "citron", "pomelo", "orange" ->
-                                    specialHedgeRecipe("fruitfulfun:citrus", leavesType, block, handler, manager);
-
-                            case "pomegranate" ->
-                                    specialHedgeRecipe("minecraft:jungle", leavesType, block, handler, manager);
-                            case "redlove" ->
-                                    specialHedgeRecipe("fruitfulfun:redlove", leavesType, block, handler, manager);
-                        }
-                    }
-                }
+                // will generate if block is not null
+                if (block != null) generalHedgeRecipe(leavesType, block, handler, manager);
             }
         });
     }
@@ -560,58 +542,4 @@ public class QuarkModule extends SimpleModule {
             EveryCompat.LOGGER.warn("[RECIPE] Quark's hedge for {} has no Associated WoodType", leavesType.getId().toString());
     }
 
-    public void specialHedgeRecipe(String reslocWood, LeavesType leavesType,
-                                   Block block, ResourceSink handler,
-                                   ResourceManager manager) {
-
-        ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
-        try (InputStream recipeStream = manager.getResource(recipeLoc)
-                .orElseThrow(() -> new FileNotFoundException("Failed to open recipe @ " + recipeLoc)).open()) {
-
-            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
-            JsonObject underKey = recipe.getAsJsonObject("key");
-            JsonObject underResult = recipe.getAsJsonObject("result");
-            WoodType woodType = leavesType.getAssociatedWoodType();
-
-            if (Objects.nonNull(woodType)) {
-                // Editing JSON
-                // Leaves
-                underKey.getAsJsonObject("L")
-                        .addProperty("item", Utils.getID(leavesType.leaves).toString());
-                // WoodTypes
-                underKey.getAsJsonObject("W").addProperty("tag",
-                        whichSpecialTags("logs", woodType, reslocWood, handler, manager).toString());
-                // Hedges
-                underResult.addProperty("item", Utils.getID(block).toString());
-
-                // Adding the finished recipe to ResourceLocation
-                ResourceLocation newLoc = EveryCompat.res(shortenedId() + "/" + leavesType.getAppendableId() + "_hedge");
-                handler.addJson(newLoc, recipe, ResType.RECIPES);
-            }
-            else
-                EveryCompat.LOGGER.warn("[SPECIAL-RECIPE] Quark's hedge for {} has no Associated WoodType", leavesType.getId().toString());
-
-        } catch (IOException e) {
-            EveryCompat.LOGGER.error("Failed to open the recipe file: {} : {}", recipeLoc, e);
-        }
-    }
-
-    public static ResourceLocation whichSpecialTags(String suffixTag, WoodType woodType, String wood, ResourceSink handler, ResourceManager manager) {
-        // If a namespace:<type>_logs already exist, then it will be used as an ingredient in the recipe, otherwise will
-        // generate a tag for logs/stems that don't have the tags.
-
-        // ResourceLocation of log/planks tags
-        ResourceLocation RLocLogsTag = new ResourceLocation(wood + "_" + suffixTag);
-        // ~ of generated tags
-        ResourceLocation RLocECTag = EveryCompat.res(woodType.getAppendableId() + "_" + suffixTag);
-
-        if (manager.getResource(ResType.TAGS.getPath(RLocLogsTag.withPrefix("blocks/"))).isPresent())
-            return RLocLogsTag;
-        else if (manager.getResource(ResType.TAGS.getPath(RLocECTag.withPrefix("blocks/"))).isPresent())
-            return RLocECTag;
-        else // if RLocECTags is empty, then it will be generated
-            createAndAddDefaultTags(RLocECTag, handler, woodType);
-
-        return RLocECTag;
-    }
 }
