@@ -70,9 +70,19 @@ public class SpriteHelper {
         addOptional("luminous_nether:withered_log", "_top", "luminous_nether:block/ashenlogtop");
         addOptional("luminous_nether:stripped_withered_log", "_side", "luminous_nether:block/strippedwitheredlogside");
         addOptional("luminous_nether:stripped_withered_log", "_top", "luminous_nether:block/strippedwitheredlogtop");
-
             // Planks
         addOptional("luminous_nether:withered_planks", "_top", "luminous_nether:block/ashplanks");
+
+            // golden_stem aka "mushroom"
+                // log
+        addOptional("luminous_nether:goldenstem", "_side", "luminous_nether:block/stembase");
+        addOptional("luminous_nether:goldenstem", "_top", "luminous_nether:block/mushroominside");
+                // stripped_log
+        addOptional("luminous_nether:shredded_stem", "_side", "luminous_nether:block/mushroomblockside");
+        addOptional("luminous_nether:shredded_stem", "_top", "luminous_nether:block/mushroomstemtop");
+                // wood
+        addOptional("luminous_nether:shredded_stem", "_side", "luminous_nether:block/goldenmushroomside");
+        addOptional("luminous_nether:shredded_stem", "_top", "luminous_nether:block/goldenmushroomtop");
 
         // Mofu's Better End
         addOptional("mofus_better_end_:weepingstar_log", "_side", "mofus_better_end_:block/weepingstarlogside");
