@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.MultiLineLabel;
@@ -47,6 +46,7 @@ public class ErrorMessageScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+        this.renderDirtBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTicks);
         graphics.drawCenteredString(this.font, this.title, this.width / 2, 30, 16777215);
         this.message.renderCentered(graphics, this.width / 2, 55);
