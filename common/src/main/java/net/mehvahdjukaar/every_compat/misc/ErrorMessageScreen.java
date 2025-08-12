@@ -18,7 +18,6 @@ public class ErrorMessageScreen extends Screen {
     private MultiLineLabel message;
 
     private Button exitButton;
-    private Button disaleButton;
 
     public ErrorMessageScreen(Screen screen, int ticksUntilEnable,
                               Component title, Component text) {
@@ -57,7 +56,6 @@ public class ErrorMessageScreen extends Screen {
         super.tick();
         if (--this.ticksUntilEnable <= 0) {
             this.exitButton.active = true;
-            this.disaleButton.active = true;
         }
     }
 
