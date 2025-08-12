@@ -47,7 +47,7 @@ side="BOTH"
 [[dependencies.everycomp]]
 modId="moonlight"
 mandatory=true
-versionRange="[1.20-2.14.12,]"
+versionRange="[1.20-2.15.7,]"
 ordering="NONE"
 side="BOTH"
 
