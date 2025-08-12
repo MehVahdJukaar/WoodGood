@@ -1,4 +1,11 @@
 ### UPDATED: 
+- **EveryCompat** (COMMON): Simplified many codes and tags to make it more readable, Improved other codes.
+
+---
+
+## v2.8.15
+
+### UPDATED: 
 - **Every Compat** (COMMON): Fixed the SERVER crash related to `everycomp-hazardous.toml` config - [#1006](https://github.com/MehVahdJukaar/WoodGood/issues/1006)
 
 ---
