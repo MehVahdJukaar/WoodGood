@@ -5,7 +5,7 @@
   "tooltip.everycomp.wood_type": "Wood Type: %s",
   "tooltip.everycomp.leaf_type": "Leaves Type: %s",
   "gui.everycomp.error_screen.title": "Every Compat encountered an Error",
-  "gui.everycomp.error_screen.message": "The Every Compat Modules from the following mods [%s] had errors while loading.\nThis usually means that the respective mods might have recently updated with breaking changes, requiring a future Every Compat update, or that one of the two mods is outdated.\nThe game cant proceed but you can try to downgrade one of the two or wait for an update.",
+  "gui.everycomp.error_screen.message": "The Every Compat Modules from the following mods [%s] had errors while loading.\nThis usually means that the respective mods might have recently updated with breaking changes, requiring a future Every Compat update, or that one of the two mods is outdated.\nThe game can't proceed but you can try to downgrade one of the two or wait for an update.",
 
   "container.everycomp.chest.name": "%s Chest",
 
