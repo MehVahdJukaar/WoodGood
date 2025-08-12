@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
@@ -47,7 +46,7 @@ public class UnsafeDisablerConfigs {
         String WoodTypeExample = """
                     EXAMPLE: blacklist = [
                         "forestry:.*fireproof.*",\t\tCOMMENT: .* is an RegEx, it exclude all of WoodType containing "fireproof" from Forestry
-                        "biomesoplenty:.*",\t\t\t\tCOMMENT: .* is an RegEx, it exclude all of WoodType from Wood Mod for any Module
+                        "biomesoplenty:.*",\t\t\tCOMMENT: .* is an RegEx, it exclude all of WoodType from Wood Mod for any Module
                         "biomesoplenty:redwood"\t\tCOMMENT: exclude redwood from Wood Mod for any module
                     ]
                 """;
@@ -62,9 +61,9 @@ public class UnsafeDisablerConfigs {
         String entrysetExample = """
                     This is only applied to Wood-Good.
                     EXAMPLE: blacklist = [
-                        "chipped:checkered_trapdoor",\tCOMMENT: chipped:checkered_oak_trapdoor without "oak"
-                        "variantvanillablocks:chest",\tCOMMENT: variantvanillablocks:oak_chest without "oak"
-                        "chipped:.*"\t\t\t\t\tCOMMENT: .* is an regex which will exclude all of EntrySets from one Module - Wood-Good ONLY
+                        "chipped:checkered_trapdoor",\t\tCOMMENT: chipped:checkered_oak_trapdoor without "oak"
+                        "variantvanillablocks:chest",\t\tCOMMENT: variantvanillablocks:oak_chest without "oak"
+                        "chipped:.*"\t\t\t\t\t\tCOMMENT: .* is an regex which will exclude all of EntrySets from one Module - Wood-Good ONLY
                     ]
                 """;
         entrySetList = builder.comment("Exclude EntrySet from the module for All of WoodType or LeavesType\n"+entrysetExample).define("blacklist", List.of());
