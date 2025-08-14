@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
@@ -39,24 +40,20 @@ public class PaletteStrategies {
 
     public static final PaletteStrategy MAIN_CHILD = registerCached(PaletteStrategies::makePaletteFromMainChild);
 
-    public static final PaletteStrategy FROM_WOOD_PLANKS = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
+    public static final PaletteStrategy WOOD_PLANKS = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
             t, manager, VanillaWoodChildKeys.PLANKS, null, null));
 
+    public static final PaletteStrategy WOOD_SIGN_LIKE = registerCached((t, manager) -> {
+        try (TextureImage plankTexture = TextureImage.open(manager,
+                RPUtils.findFirstBlockTextureLocation(manager, t.getBlockOfThis(VanillaWoodChildKeys.PLANKS)))) {
 
-    private static class Cached implements PaletteStrategy {
-        private final Map<BlockType, PaletteStrategy.PaletteAndAnimation> cache = new HashMap<>();
-        private final PaletteStrategy factory;
-
-        private Cached(PaletteStrategy factory) {
-            this.factory = factory;
+            //that method likely sholdn't be in ML...
+            List<Palette> targetPalette = SpriteUtils.extrapolateSignBlockPalette(plankTexture);
+            return PaletteStrategy.PaletteAndAnimation.of(targetPalette, plankTexture.getMcMeta());
+        } catch (Exception e) {
+            return null;
         }
-
-        @Override
-        public PaletteAndAnimation getPaletteAndAnimation(BlockType t, ResourceManager manager) {
-            return cache.computeIfAbsent(t, blockType -> factory.getPaletteAndAnimation(t, manager));
-        }
-    }
-
+    });
 
     //other bad code...
     public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType w, ResourceManager manager) {
@@ -120,6 +117,26 @@ public class PaletteStrategies {
         }
         throw new RuntimeException("No child with key \"" + childKey + "\" found for" + blockType.getId());
     }
+
+    private static class Cached implements PaletteStrategy {
+        private final Map<BlockType, PaletteStrategy.PaletteAndAnimation> cache = new HashMap<>();
+        private final PaletteStrategy factory;
+
+        private Cached(PaletteStrategy factory) {
+            this.factory = factory;
+        }
+
+        @Override
+        public PaletteAndAnimation getPaletteAndAnimation(BlockType t, ResourceManager manager) throws Exception {
+            var existing = cache.get(t);
+            if (existing == null) {
+                existing = factory.getPaletteAndAnimation(t, manager);
+                cache.put(t, existing);
+            }
+            return existing;
+        }
+    }
+
 
 
 }

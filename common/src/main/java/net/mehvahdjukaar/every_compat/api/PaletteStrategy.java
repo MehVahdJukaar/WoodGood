@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface PaletteStrategy {
 
-    PaletteAndAnimation getPaletteAndAnimation(BlockType t, ResourceManager manager);
+    PaletteAndAnimation getPaletteAndAnimation(BlockType t, ResourceManager manager) throws Exception;
 
     record PaletteAndAnimation(List<Palette> palette, @Nullable McMetaFile animation) {
         public static PaletteAndAnimation of(List<Palette> palette, @Nullable McMetaFile animation) {
