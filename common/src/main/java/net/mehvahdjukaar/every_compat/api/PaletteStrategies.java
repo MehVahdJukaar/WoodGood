@@ -44,7 +44,7 @@ public class PaletteStrategies {
     public static final PaletteStrategy WOOD_PLANKS = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
             t, manager, VanillaWoodChildKeys.PLANKS, null, null));
 
-    public static final PaletteStrategy WOOD_LOG = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
+    public static final PaletteStrategy WOOD_LOG_SIDE = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
             t, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,  null));
 
     //TODO: make this not side (top)? i guess. or always use the one below. otherwise these might be equal or just incorrect sinde side inst specified
