@@ -71,6 +71,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                           @Nullable Object renderType,
+                          @Deprecated(forRemoval = true)
+                          @Nullable
                           BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                           boolean mergedPalette, boolean copyTint,
@@ -250,11 +252,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Override
-    public void generateModels(SimpleModule module, ResourceManager manager, ResourceSink handler) {
-        ResourcesUtils.generateStandardBlockModels(manager, handler, blocks, baseType.get(),
+    public void generateModels(SimpleModule module, ResourceManager manager, ResourceSink sink) {
+        ResourcesUtils.generateStandardBlockModels(manager, sink, blocks, baseType.get(),
                 makeModelTransformer(module, manager), makeBlockStateTransformer(module, manager), this.modelConfiguration
         );
-        ResourcesUtils.generateStandardItemModels(manager, handler, items, baseType.get(),
+        ResourcesUtils.generateStandardItemModels(manager, sink, items, baseType.get(),
                 makeModelTransformer(module, manager), this.modelConfiguration
         );
     }
@@ -334,12 +336,18 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 throw new IllegalStateException("Tab for module " + name + " was null!");
             }
             var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
-                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition,
+                    itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
                     this.modelConfig
             );
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
-            e.textures.addAll(textures);
+            for(var t : this.textures){
+                if(this.palette != null) {
+                    e.textures.add(t.cloneWithPalette( this.palette));
+                }else{
+                    e.textures.add(t);
+                }
+            }
             return e;
         }
 
@@ -403,6 +411,16 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         public Builder<T, B> defaultRecipe() {
             this.recipes.add(() -> Utils.getID(this.baseBlock.get()));
+            return this;
+        }
+
+        public Builder<T, B> defaultBlockTexture() {
+            this.textures.add(TextureInfo.<T>of(Utils.getID(this.baseBlock.get()).withPrefix("block/")).build());
+            return this;
+        }
+
+        public Builder<T, B> defaultItemTexture() {
+            this.textures.add(TextureInfo.<T>of(Utils.getID(this.baseBlock.get()).withPrefix("item/")).build());
             return this;
         }
 

@@ -47,6 +47,7 @@ public interface EntrySet<T extends BlockType> {
 
     void generateTextures(SimpleModule module, ResourceManager manager, ResourceSink sink);
 
+
     default void setupExistingTiles() {
     }
 
