@@ -41,24 +41,24 @@ public class PaletteStrategies {
 
     public static final PaletteStrategy MAIN_CHILD = registerCached(PaletteStrategies::makePaletteFromMainChild);
 
-    public static final PaletteStrategy WOOD_PLANKS = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
-            t, manager, VanillaWoodChildKeys.PLANKS, null, null));
+    public static final PaletteStrategy WOOD_PLANKS = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null, null));
 
-    public static final PaletteStrategy WOOD_LOG_SIDE = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
-            t, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,  null));
+    public static final PaletteStrategy WOOD_LOG_SIDE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,  null));
 
     //TODO: make this not side (top)? i guess. or always use the one below. otherwise these might be equal or just incorrect sinde side inst specified
     //so yeah delete, use below
-    public static final PaletteStrategy WOOD_STRIPPED_LOG = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
-            t, manager, VanillaWoodChildKeys.STRIPPED_LOG, null, null));
+    public static final PaletteStrategy WOOD_STRIPPED_LOG = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.STRIPPED_LOG, null, null));
 
     public static final PaletteStrategy WOOD_STRIPPED_LOG_SIDE = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
             t, manager, VanillaWoodChildKeys.STRIPPED_LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
 
 
-    public static final PaletteStrategy WOOD_SIGN_LIKE = registerCached((t, manager) -> {
+    public static final PaletteStrategy WOOD_SIGN_LIKE = registerCached((blockType, manager) -> {
         try (TextureImage plankTexture = TextureImage.open(manager,
-                RPUtils.findFirstBlockTextureLocation(manager, t.getBlockOfThis(VanillaWoodChildKeys.PLANKS)))) {
+                RPUtils.findFirstBlockTextureLocation(manager, blockType.getBlockOfThis(VanillaWoodChildKeys.PLANKS)))) {
 
             //that method likely sholdn't be in ML...
             List<Palette> targetPalette = SpriteUtils.extrapolateSignBlockPalette(plankTexture);
@@ -68,8 +68,8 @@ public class PaletteStrategies {
         }
     });
 
-    public static final PaletteStrategy WOOD_PLANKS_REMOVE_DARKEST = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
-            t, manager, VanillaWoodChildKeys.PLANKS, null,
+    public static final PaletteStrategy WOOD_PLANKS_REMOVE_DARKEST = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null,
             (p) -> p.remove(p.getDarkest())));
 
 
