@@ -72,12 +72,8 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
         this.addEntry(shrubs);
     }
 
-    // new ShrubBlock(Utils.copyPropertySafe(l.leaves).pushReaction(PushReaction.DESTROY)
-    //                            .ignitedByLava().noCollission().instabreak().sound(SoundType.AZALEA)
-    //                           .offsetType(BlockBehaviour.OffsetType.XZ))
     public abstract Block newShrubBlock(LeavesType leavesType);
 
-    //BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()), "branch"
     public abstract Block newBranchBlock(WoodType w);
 
     @Override

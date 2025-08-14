@@ -124,7 +124,7 @@ public class MacawFencesModule extends SimpleModule {
         this.addEntry(highleyGates);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
-                        BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_HEDGE, () -> VanillaLeavesType.OAK,
                         l -> new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
                                 .mapColor(l.leaves.defaultMapColor()))
                 )

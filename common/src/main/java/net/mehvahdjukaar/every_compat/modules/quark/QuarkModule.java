@@ -22,6 +22,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
@@ -466,16 +467,18 @@ public class QuarkModule extends SimpleModule {
                                      List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes,
                                      WoodType wood) {
 
-        TextureImage recoloredBase = respriterLeft.recolorWithAnimation(basePalette, baseMeta);
-        TextureImage recoloredOverlay = respriterLeftO.recolorWithAnimation(overlayPalette, baseMeta);
-        recoloredBase.applyOverlay(recoloredOverlay);
-        TextureImage trapped = recoloredBase.makeCopy();
+        try (TextureImage recoloredBase = respriterLeft.recolorWithAnimation(basePalette, baseMeta);
+             TextureImage recoloredOverlay = respriterLeftO.recolorWithAnimation(overlayPalette, baseMeta)) {
+            TextureOps.applyOverlay(recoloredBase, recoloredOverlay);
+            try (TextureImage trapped = recoloredBase.makeCopy()) {
 
-        if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
-            sink.addAndCloseTexture(res, recoloredBase);
+                if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
+                    sink.addTexture(res, recoloredBase);
 
-        trapped.applyOverlay(trappedOverlay.makeCopy());
-        sink.addAndCloseTexture(trappedRes, trapped);
+                TextureOps.applyOverlay(trapped, trappedOverlay);
+                sink.addTexture(trappedRes, trapped);
+            }
+        }
     }
 
     @Override
@@ -536,8 +539,7 @@ public class QuarkModule extends SimpleModule {
             } catch (IOException e) {
                 EveryCompat.LOGGER.error("Failed to open the recipe file @ {} : {}", recipeLoc, e);
             }
-        }
-        else
+        } else
             EveryCompat.LOGGER.warn("[RECIPE] Quark's hedge for {} has no Associated WoodType", leavesType.getId().toString());
     }
 

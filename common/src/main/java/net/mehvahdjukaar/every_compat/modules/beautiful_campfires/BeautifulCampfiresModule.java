@@ -2,6 +2,8 @@ package net.mehvahdjukaar.every_compat.modules.beautiful_campfires;
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
@@ -12,6 +14,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
@@ -71,9 +74,10 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 //TEXTURE: using acacia_soul_campfire above
-                .createPaletteFromChild("log")
-                .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
-                .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"))
+                .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"),
+                        PaletteStrategies.WOOD_LOG)
+                .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"),
+                        PaletteStrategies.WOOD_LOG)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
                 .addTag(BlockTags.PIGLIN_REPELLENTS, Registries.BLOCK)
@@ -96,7 +100,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
     }
 
     private static @NotNull ToIntFunction<BlockState> litBlockEmission(int pLightValue) {
-        return (state) -> (Boolean)state.getValue(BlockStateProperties.LIT) ? pLightValue : 0;
+        return (state) -> (Boolean) state.getValue(BlockStateProperties.LIT) ? pLightValue : 0;
     }
 
     @Override
@@ -131,13 +135,12 @@ public class BeautifulCampfiresModule extends SimpleModule {
 
             // Adding to resources
             handler.addJson(
-                    EveryCompat.res(shortenedId() +"/"+ woodType.getAppendableId() +"_"+ recipeName),
+                    EveryCompat.res(shortenedId() + "/" + woodType.getAppendableId() + "_" + recipeName),
                     recipe,
                     ResType.RECIPES
             );
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             EveryCompat.LOGGER.error("Failed to generate the {} recipe for {} : {}", recipeName, woodType.getId(), e);
         }
 
@@ -160,6 +163,8 @@ public class BeautifulCampfiresModule extends SimpleModule {
              TextureImage targetLogImage = TextureImage.open(manager, targetLogMask);
              TextureImage targetPlankImage = TextureImage.open(manager, targetPlankMask)
         ) {
+            Respriter respriterLog = Respriter.masked(textureImage, targetLogImage);
+
             campfires.blocks.forEach((wood, block) -> {
                 ResourceLocation id = Utils.getID(block);
 
@@ -171,18 +176,14 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 ) {
                     String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(campfirePath, wood, id, "acacia");
 
-                    // Recoloring the log part
-                    Respriter respriterLog = Respriter.masked(textureImage, targetLogImage);
-
-                    TextureImage recoloredLog = respriterLog.recolorWithAnimationOf(logTexture);
-
-                    // Recoloring the plank part
-                    Respriter respriterPlank = Respriter.masked(recoloredLog, targetPlankImage);
-
-                    TextureImage finishedImage = respriterPlank.recolorWithAnimationOf(plankTexture);
-
                     // Adding to the resource
-                    sink.addTextureIfNotPresent(manager, newPath, () -> finishedImage);
+                    sink.addTextureIfNotPresent(manager, newPath, () -> {
+                        // Recoloring the plank part
+                        try (TextureImage recoloredLog = respriterLog.recolorWithAnimationOf(logTexture)) {
+                            Respriter respriterPlank = Respriter.masked(recoloredLog, targetPlankImage);
+                            return respriterPlank.recolorWithAnimationOf(plankTexture);
+                        }
+                    });
 
                 } catch (IOException e) {
                     EveryCompat.LOGGER.error("Failed to open log/plank texture file: ", e);

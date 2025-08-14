@@ -18,6 +18,7 @@ import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureCollager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -343,7 +344,7 @@ public class FurnishModule extends SimpleModule {
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 
-        executor.accept((manager, handler) -> {
+        executor.accept((manager, sink) -> {
             logBenches.blocks.forEach((w, block) -> {
                 var id = Utils.getID(block);
 
@@ -354,12 +355,12 @@ public class FurnishModule extends SimpleModule {
 
                     var newTexture = topTexture.makeCopy();
 
-                    handler.addTextureIfNotPresent(manager, newId, () -> newTexture);
+                    sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
 
                     var newTop = topTexture.makeCopy();
                     createTopTexture(topTexture, newTop);
 
-                    handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                    sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate Log Bench block texture for for {} : {}", block, e);
@@ -375,14 +376,14 @@ public class FurnishModule extends SimpleModule {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/jungle_coffin_sides", w, id, "jungle");
 
-                    var newTexture = topTexture.makeCopy();
+                    sink.addTextureIfNotPresent(manager, newId + "_top", () -> {
+                        TextureImage newTop = topTexture.makeCopy();
+                        createTopTexture(topTexture, newTop);
+                        return newTop;
+                    });
 
-                    handler.addTextureIfNotPresent(manager, newId, () -> newTexture);
-
-                    var newTop = topTexture.makeCopy();
-                    createTopTexture(topTexture, newTop);
-
-                    handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                    //odd. reusing an existing texture
+                    sink.addTextureIfNotPresent(manager, newId, () -> topTexture);
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate coffin block texture for for {} : {}", block, e);
@@ -393,25 +394,18 @@ public class FurnishModule extends SimpleModule {
         });
     }
 
+
     private void createTopTexture(TextureImage original, TextureImage newImage) {
-        original.forEachFramePixel((i, x, y) -> {
-            int localX = x - original.getFrameStartX(i);
-            int localY = y - original.getFrameStartY(i);
-            if (localX >= 5 && localX <= 10 && localY >= 5 && localY <= 10) {
-                newImage.getImage().setPixelRGBA(x - 3, y - 3, original.getImage().getPixelRGBA(x, y));
-            } else if (localX >= 10 && localY > 0 && localY <= 7) {
-                newImage.getImage().setPixelRGBA(x - 6, y, original.getImage().getPixelRGBA(x, y));
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            } else if (localY >= 10 && localX > 0 && localX <= 7) {
-                newImage.getImage().setPixelRGBA(x, y - 6, original.getImage().getPixelRGBA(x, y));
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            } else if (localX >= 10 && localY >= 10) {
-                newImage.getImage().setPixelRGBA(x - 6, y - 6, original.getImage().getPixelRGBA(x, y));
-            } else if (localX >= 10 || localY >= 10) {
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            }
-        });
+        TextureCollager collager = TextureCollager.builder(16, 16, 16, 16)
+                .copyFrom(5, 5, 6, 6).to(2, 2)
+                .copyFrom(14, 1, 2, 7).to(8, 1)
+                .copyFrom(1, 14, 7, 2).to(1, 8)
+                .copyFrom(14, 14, 2, 2).to(8, 8)
+                .build();
+
+        collager.apply(original, newImage);
     }
+
 
     //!! RECIPES
     public static class FurnishFinishedRecipe implements FinishedRecipe {

@@ -98,7 +98,7 @@ public class BuildersAdditionModule extends SimpleModule {
         this.addEntry(chairs);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "", "hedge",
-                        Index.HEDGE_OAK, () -> LeavesTypeRegistry.OAK_TYPE,
+                        Index.HEDGE_OAK, () -> VanillaLeavesType.OAK,
                         w -> {
                             var l = w.getBlockOfThis("leaves");
                             if (l == null) return null;
@@ -107,7 +107,7 @@ public class BuildersAdditionModule extends SimpleModule {
                 .requiresChildren("leaves") // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
-                .addModelTransform(m -> m.replaceLeavesTextures(LeavesTypeRegistry.OAK_TYPE))
+                .addModelTransform(m -> m.replaceLeavesTextures(VanillaLeavesType.OAK))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.LEAVES, Registries.BLOCK)
                 .addTag(ItemTags.LEAVES, Registries.ITEM)

@@ -7,6 +7,7 @@ import com.brand.blockus.blocks.base.SmallHedgeBlock;
 import com.brand.blockus.utils.BlockFactory;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -19,6 +20,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -197,8 +199,7 @@ public class BlockusModule extends SimpleModule {
                         getModBlock("acacia_small_logs"), () -> VanillaWoodTypes.ACACIA,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .createPaletteFromChild("log", CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-                .addTexture(modRes("block/acacia_small_logs"))
+                .addTexture(modRes("block/acacia_small_logs"), PaletteStrategies.WOOD_LOG)
                 //TEXTURE: manually generated texture below (acacia_small_logs_top.png)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)
@@ -288,7 +289,7 @@ public class BlockusModule extends SimpleModule {
         this.addEntry(post);
 
         small_hedge = SimpleEntrySet.builder(LeavesType.class, "small_hedge",
-                        getModBlock("oak_small_hedge"), () -> LeavesTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_small_hedge"), () -> VanillaLeavesTypes.OAK,
                         leavesType -> new SmallHedgeBlock(Utils.copyPropertySafe(leavesType.leaves)
                                 .isSuffocating(BlockFactory::never)
                                 .isViewBlocking(BlockFactory::never)
@@ -339,11 +340,9 @@ public class BlockusModule extends SimpleModule {
 
                         String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(texturePath, woodType, blockId, "acacia");
 
-                        // Recoloring the texture
-                        TextureImage finishedTexture = generateLogTopTexture(baseLogTopTexture, logSideTexture, insideMask, planksTexture, edgeMask);
-
                         // Adding to the resource
-                        sink.addTextureIfNotPresent(manager, newPath, () -> finishedTexture);
+                        sink.addTextureIfNotPresent(manager, newPath, () -> 
+                                generateLogTopTexture(baseLogTopTexture, logSideTexture, insideMask, planksTexture, edgeMask));
 
                     } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to generate texture for {} : {}", block, e);
@@ -361,13 +360,13 @@ public class BlockusModule extends SimpleModule {
 
         Respriter targetEdge = Respriter.masked(baseTexture, insideMask);
 
-        TextureImage recoloredEdge = targetEdge.recolorWithAnimationOf(logSideTexture);
+        try(TextureImage recoloredEdge = targetEdge.recolorWithAnimationOf(logSideTexture)) {
 
-        Respriter targetInside = Respriter.masked(recoloredEdge, edgeMask);
+            Respriter targetInside = Respriter.masked(recoloredEdge, edgeMask);
 
-        // Finished Texture
-        return targetInside.recolorWithAnimationOf(planksTexture);
-
+            // Finished Texture
+            return targetInside.recolorWithAnimationOf(planksTexture);
+        }
     }
 
     @Override

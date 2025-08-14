@@ -2363,7 +2363,7 @@ public class ChippedModule extends SimpleModule {
     private void addCarpenterRecipe(ResourceSink pack, String identifier) {
         JsonArray jsonArray = new JsonArray();
 
-        for (var woodType : WoodTypeRegistry.getTypes()) {
+        for (var woodType : WoodTypeRegistry.INSTANCE) {
             if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
             boolean isTagCreated = false;
@@ -2447,6 +2447,9 @@ public class ChippedModule extends SimpleModule {
              TextureImage innerMask = TextureImage.open(manager, innerMaskResLoc);
              TextureImage outerMask = TextureImage.open(manager, outerMaskResLoc)
         ) {
+            // Recoloring the texture - TOP
+            Respriter innerResprite = Respriter.masked(mainTexture, innerMask);
+
             mainBlock.blocks.forEach((woodType, block) -> {
                 try (
                      TextureImage innerColoring = TextureImage.open(manager,
@@ -2454,21 +2457,18 @@ public class ChippedModule extends SimpleModule {
                      TextureImage outerColoring = TextureImage.open(manager,
                              RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(outerType), CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
-                    // Recoloring the texture - TOP
-                    Respriter innerResprite = Respriter.masked(mainTexture, innerMask);
-
-                    TextureImage recoloredInner = innerResprite.recolorWithAnimationOf(innerColoring);
-
-                    Respriter outerResprite = Respriter.masked(recoloredInner, outerMask);
-
-                    TextureImage finiahedTexture = outerResprite.recolorWithAnimationOf(outerColoring);
 
                     // Adding to the resource
                     String suffixed = "";
                     if (!suffix.isEmpty()) suffixed = "_"+suffix;
                     String newPath = "block/"+ shortenedId()+"/"+woodType.getAppendableId() +"_"+folderName+"/"+ textureFilename.replace("oak", woodType.getTypeName()) + suffixed;
 
-                    sink.addTextureIfNotPresent(manager, newPath, () -> finiahedTexture);
+                    sink.addTextureIfNotPresent(manager, newPath, () -> {
+                        try(TextureImage recoloredInner = innerResprite.recolorWithAnimationOf(innerColoring)) {
+                            Respriter outerResprite = Respriter.masked(recoloredInner, outerMask);
+                            return outerResprite.recolorWithAnimationOf(outerColoring);
+                        }
+                    });
                 }
                 catch (IOException e) {
                     EveryCompat.LOGGER.error("Failed to generate planked_log texture for {} : {}", woodType.getId(), String.valueOf(e));

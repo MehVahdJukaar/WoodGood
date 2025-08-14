@@ -485,7 +485,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
         this.addEntry(strippedUpgradedGates);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
-                        ModBlocks.HEDGE_OAK, () -> LeavesTypeRegistry.OAK_TYPE,
+                        ModBlocks.HEDGE_OAK, () -> VanillaLeavesType.OAK,
                         w -> {
                             var l = w.getBlockOfThis("leaves");
                             if (l == null) return null;

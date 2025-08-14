@@ -210,7 +210,7 @@ public class WoodworksModule extends SimpleModule {
 
 
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
-                        WoodworksBlocks.OAK_LEAF_PILE, () -> LeavesTypeRegistry.OAK_TYPE,
+                        WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesType.OAK,
                         leavesType -> {
                             if (leavesType.getWoodType() == null) return null;
                             return new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
