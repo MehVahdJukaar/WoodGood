@@ -5,8 +5,10 @@ import lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes;
 import lilypuree.decorative_blocks.core.DBBlocks;
 import lilypuree.decorative_blocks.items.SeatItem;
 import lilypuree.decorative_blocks.items.SupportItem;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -58,9 +60,10 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTag(modRes("beams_that_burn"), Registries.ITEM)
                 .defaultRecipe()
                 .setTabKey(tab)
-                .setPalette(this::makeDBPalette)
-                .addTexture(modRes("block/oak_beam_end"))
-                .addTexture(modRes("block/oak_beam_side"))
+                .addTexture(TextureInfo.of(modRes("block/oak_beam_end"))
+                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                .addTexture(TextureInfo.of(modRes("block/oak_beam_side"))
+                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
                 .build();
         this.addEntry(beams);
 
@@ -78,9 +81,10 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTag(modRes("palisades_that_burn"), Registries.ITEM)
                 .defaultRecipe()
                 .setTabKey(tab)
-                .setPalette(this::makeDBPalette)
-                .addTexture(modRes("block/oak_palisade_end"))
-                .addTexture(modRes("block/oak_palisade_side"))
+                .addTexture(TextureInfo.of(modRes("block/oak_palisade_end"))
+                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                .addTexture(TextureInfo.of(modRes("block/oak_palisade_side"))
+                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
                 .build();
         this.addEntry(palisades);
 
@@ -97,9 +101,10 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new SupportItem(b, p))
                 .defaultRecipe()
                 .setTabKey(tab)
-                .setPalette(this::makeDBPalette)
-                .addTexture(modRes("block/oak_support_end"))
-                .addTexture(modRes("block/oak_support_side"))
+                .addTexture(TextureInfo.of(modRes("block/oak_support_end"))
+                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                .addTexture(TextureInfo.of(modRes("block/oak_support_side"))
+                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
                 .build();
         this.addEntry(supports);
 
@@ -116,23 +121,13 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new SeatItem(b, p))
                 .setTabKey(tab)
-                .setPalette(this::makeDBPalette)
-                .addTexture(modRes("block/oak_seat"))
+                .addTexture(TextureInfo.of(modRes("block/oak_seat"))
+                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
                 .build();
         this.addEntry(seats);
 
     }
 
-    public Pair<List<Palette>, McMetaFile> makeDBPalette(WoodType woodType, ResourceManager manager) {
-        try (TextureImage plankTexture = TextureImage.open(manager,
-                RPUtils.findFirstBlockTextureLocation(manager, woodType.planks))) {
-
-            List<Palette> targetPalette = SpriteUtils.extrapolateSignBlockPalette(plankTexture);
-            return Pair.of(targetPalette, plankTexture.getMcMeta());
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     @Override
     public <T extends BlockType> void registerBlocks(Class<T> typeClass,
