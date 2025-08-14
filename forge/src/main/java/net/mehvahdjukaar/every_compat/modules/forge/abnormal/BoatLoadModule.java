@@ -6,10 +6,14 @@ import com.teamabnormals.boatload.core.api.BoatloadBoatType;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 
@@ -24,7 +28,7 @@ public class BoatLoadModule extends SimpleModule {
 
     public BoatLoadModule(String modId) {
         super(modId, "abnbl");
-        var tab = CreativeModeTabs.TOOLS_AND_UTILITIES;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.TOOLS_AND_UTILITIES;
 
         largeBoats = ItemOnlyEntrySet.builder(WoodType.class, "boat", "large",
                         getModItem("large_oak_boat"),
@@ -32,7 +36,7 @@ public class BoatLoadModule extends SimpleModule {
                         w -> new LargeBoatItem(getBoatType(w))
                 )
                 .setTabKey(tab)
-                .requiresChildren("boat") //REASON: recipes
+                .requiresChildren(VanillaWoodChildKeys.BOAT) //REASON: recipes
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("large_boats"), Registries.ITEM)
                 .addRecipe(modRes("large_oak_boat"))
@@ -48,7 +52,7 @@ public class BoatLoadModule extends SimpleModule {
                         w -> new FurnaceBoatItem(getBoatType(w))
                 )
                 .setTabKey(tab)
-                .requiresChildren("boat") //REASON: recipes
+                .requiresChildren(VanillaWoodChildKeys.BOAT) //REASON: recipes
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("furnace_boats"), Registries.ITEM)
                 .addRecipe(modRes("oak_furnace_boat"))
