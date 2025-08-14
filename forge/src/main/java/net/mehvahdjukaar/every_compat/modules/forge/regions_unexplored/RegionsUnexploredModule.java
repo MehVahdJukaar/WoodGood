@@ -9,6 +9,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -43,8 +44,8 @@ public class RegionsUnexploredModule extends SimpleModule {
         ResourceLocation tab = modRes("ru_main");
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
-            getModBlock("oak_branch"), () -> VanillaWoodTypes.OAK,
-            w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()), "branch")
+                        getModBlock("oak_branch"), () -> VanillaWoodTypes.OAK,
+                        w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()), "branch")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
@@ -114,6 +115,9 @@ public class RegionsUnexploredModule extends SimpleModule {
                  TextureImage branch_top = TextureImage.open(manager, EveryCompat.res("item/oak_branch_top"));
                  TextureImage branch_block = TextureImage.open(manager, modRes("block/oak_branch"))
             ) {
+                Respriter respriterSIDE = Respriter.of(branch_side); // ITEM
+                Respriter respriterTOP = Respriter.of(branch_top); // ITEM
+                Respriter respriterBlock = Respriter.of(branch_block); // BLOCK
 
                 branchs.blocks.forEach((wood, block) -> {
                     try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
@@ -122,27 +126,19 @@ public class RegionsUnexploredModule extends SimpleModule {
                         String resLocITEM = "item/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
                         String resLocBLOCK = "block/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
 
-                        Respriter respriterSIDE = Respriter.of(branch_side); // ITEM
-                        Respriter respriterTOP = Respriter.of(branch_top); // ITEM
-                        Respriter respriterBlock = Respriter.of(branch_block); // BLOCK
-
                         List<Palette> list_logSide = Palette.fromAnimatedImage(logSide_texture);
                         List<Palette> list_logTop = Palette.fromAnimatedImage(logTop_texture);
 
-                        // Recoloring ITEM textures
-                        TextureImage recoloredITEM = respriterSIDE.recolor(list_logSide);
-                        TextureImage recoloredTOP = respriterTOP.recolor(list_logTop);
-                        recoloredITEM.applyOverlay(recoloredTOP);
-
-                        // Recoloring BLOCK texture
-                        TextureImage recoloredBLOCK = respriterBlock.recolor(list_logSide);
-
                         // Block Texture
-                        sink.addTextureIfNotPresent(manager, resLocBLOCK, () -> recoloredBLOCK);
-                        recoloredBLOCK.close();
+                        sink.addTextureIfNotPresent(manager, resLocBLOCK, () -> respriterBlock.recolor(list_logSide));
                         // Item Texture
-                        sink.addTextureIfNotPresent(manager, resLocITEM, () -> recoloredITEM);
-                        recoloredITEM.close();
+                        sink.addTextureIfNotPresent(manager, resLocITEM, () -> {
+                            TextureImage recoloredITEM = respriterSIDE.recolor(list_logSide);
+                            try (TextureImage recoloredTOP = respriterTOP.recolor(list_logTop)) {
+                                TextureOps.applyOverlay(recoloredITEM, recoloredTOP);
+                            }
+                            return recoloredITEM;
+                        });
 
                     } catch (IOException e) {
                         EveryCompat.LOGGER.error("Failed to get Log Texture for {} : {}", block, e);
@@ -161,40 +157,40 @@ public class RegionsUnexploredModule extends SimpleModule {
                     TextureImage shrubMiddleMask = TextureImage.open(manager, EveryCompat.res("block/ru/mask_shrub_middle"))
             ) {
 
+                Respriter respriterBottom = Respriter.of(shrubBottom);
+
                 shrubs.blocks.forEach((leavesType, block) -> {
                     String shrubPath = leavesType.createPathWith(shortenedId(), "shrub");
 
                     // Generating textures for shrubs
                     try (TextureImage logTexture = TextureImage.open(manager,
-                            RPUtils.findFirstBlockTextureLocation(manager, leavesType.getWoodType().log,
+                            RPUtils.findFirstBlockTextureLocation(manager, leavesType.getAssociatedWoodType().log,
                                     CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage leavesTexture = TextureImage.open(manager,
                                  RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves,
                                          CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                     ) {
-                        Respriter respriterBottom = Respriter.of(shrubBottom);
                         Respriter respriterTop = Respriter.masked(shrubTop, shrubMiddleMask);
 
-                        List<Palette> list_logSide = Palette.fromAnimatedImage(logTexture);
-                        List<Palette> list_leaves = Palette.fromAnimatedImage(leavesTexture);
-
-                        // Recoloring the shrub's Bottom
-                        TextureImage finishedShrubBottom = respriterBottom.recolor(list_logSide);
-
-                        // Recoloring the shrub's Top (the leaves part)
-                        TextureImage recoloredShrubTop = respriterTop.recolor(list_leaves);
-
-                        // Recoloring the shrub's Middle (the bark part)
-                        Respriter respriterMiddle = Respriter.masked(recoloredShrubTop, shrubTopMask);
-
-                        TextureImage finishedShrub = respriterMiddle.recolor(list_logSide);
+                        List<Palette> logSidePalette = Palette.fromAnimatedImage(logTexture);
+                        List<Palette> leavesPalette = Palette.fromAnimatedImage(leavesTexture);
 
                         // Adding to the resource
                         String resLoc = "block/" + shrubPath;
-                        sink.addTextureIfNotPresent(manager,resLoc + "_bottom", () -> finishedShrubBottom);
-                        finishedShrubBottom.close();
-                        sink.addTextureIfNotPresent(manager,resLoc + "_top", () -> finishedShrub);
-                        finishedShrub.close();
+                        sink.addTextureIfNotPresent(manager, resLoc + "_bottom", () -> {
+                            // Recoloring the shrub's Bottom
+                            return respriterBottom.recolor(logSidePalette);
+                        });
+
+                        sink.addTextureIfNotPresent(manager, resLoc + "_top", () -> {
+                            // Recoloring the shrub's Top (the leaves part)
+                            try (TextureImage recoloredShrubTop = respriterTop.recolor(leavesPalette)) {
+                                // Recoloring the shrub's Middle (the bark part)
+                                Respriter respriterMiddle = Respriter.masked(recoloredShrubTop, shrubTopMask);
+                                return respriterMiddle.recolor(logSidePalette);
+                            }
+                        });
+
 
                     } catch (IOException e) {
                         EveryCompat.LOGGER.error("Failed to get texture for {} : {}", block.toString(), e.getMessage());

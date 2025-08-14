@@ -16,6 +16,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureCollager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -203,9 +204,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
                     } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to generate Post texture for for {} : {}", block, e);
-
                     }
-
                 });
 
                 //!! stripped_oak_posts
@@ -219,18 +218,17 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
                         String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak");
 
-                        var newTexture = logTexture.makeCopy();
+                        try (TextureImage newTexture = logTexture.makeCopy();
+                             TextureImage newTop = topTexture.makeCopy()) {
+                            sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
 
-                        sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
+                            createTopTexture(topTexture, newTop);
 
-                        var newTop = topTexture.makeCopy();
-                        createTopTexture(topTexture, newTop);
-
-                        sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                            sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                        }
 
                     } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to generate Stripped-Post texture for {} : {}", block, e);
-
                     }
                 });
             } catch (Exception ex) {
@@ -280,11 +278,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                                TextureImage BPTopInnerMask, TextureImage BPTopOuterMask,
                                ResourceLocation getLogSide, ResourceLocation getLogTop,
                                ResourceSink sink, ResourceManager manager, Block block
-                               ) {
+    ) {
         try (TextureImage logSide_texture = TextureImage.open(manager,
-                 RPUtils.findFirstBlockTextureLocation(manager, getLogBlock, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                RPUtils.findFirstBlockTextureLocation(manager, getLogBlock, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
              TextureImage logTop_texture = TextureImage.open(manager,
-                 RPUtils.findFirstBlockTextureLocation(manager, getLogBlock, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
+                     RPUtils.findFirstBlockTextureLocation(manager, getLogBlock, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
              TextureImage TextureSide = TextureImage.open(manager, getLogSide);
              TextureImage TextureTop = TextureImage.open(manager, getLogTop)
         ) {
@@ -298,8 +296,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                     NativeImage standardSize = new NativeImage(16, 16, false);
                     standardSize.copyFrom(logSide_texture.getImage());
                     sideImage = TextureImage.of(standardSize);
-                }
-                else {
+                } else {
                     sideImage = logSide_texture;
                 }
 
@@ -308,11 +305,11 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 Respriter respriterSide = Respriter.of(TextureSide);
 
                 // Recoloring
-                TextureImage recoloredSIDE = respriterSide.recolorWithAnimation(targetSide, metaSide);
 
                 // Adding to the Resource
-                sink.addTextureIfNotPresent(manager, newPath, () -> recoloredSIDE);
-                recoloredSIDE.close();
+                sink.addTextureIfNotPresent(manager, newPath, () ->
+                    respriterSide.recolorWithAnimation(targetSide, metaSide)
+                );
             }
 
 // Top texture =================================================================================================
@@ -324,8 +321,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                     NativeImage standardSize = new NativeImage(16, 16, false);
                     standardSize.copyFrom(logTop_texture.getImage());
                     topImage = TextureImage.of(standardSize);
-                }
-                else {
+                } else {
                     topImage = logTop_texture;
                 }
 
@@ -356,24 +352,14 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     }
 
     private void createTopTexture(TextureImage original, TextureImage newImage) {
-        original.forEachFramePixel((i, x, y) -> {
-            //TODO: use ImageTransformer here instead
-            int localX = x - original.getFrameStartX(i);
-            int localY = y - original.getFrameStartX(i);
-            if (localX >= 5 && localX <= 10 && localY >= 5 && localY <= 10) {
-                newImage.getImage().setPixelRGBA(x - 3, y - 3, original.getImage().getPixelRGBA(x, y));
-            } else if (localX >= 14 && localY > 0 && localY <= 7) {
-                newImage.getImage().setPixelRGBA(x - 6, y, original.getImage().getPixelRGBA(x, y));
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            } else if (localY >= 14 && localX > 0 && localX <= 7) {
-                newImage.getImage().setPixelRGBA(x, y - 6, original.getImage().getPixelRGBA(x, y));
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            } else if (localX >= 14 && localY >= 14) {
-                newImage.getImage().setPixelRGBA(x - 6, y - 6, original.getImage().getPixelRGBA(x, y));
-            } else if (localX >= 10 || localY >= 10) {
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            }
-        });
+        TextureCollager collager = TextureCollager.builder(16, 16, 16, 16)
+                .copyFrom(5, 5, 6, 6).to(2, 2)
+                .copyFrom(14, 1, 2, 7).to(8, 1)
+                .copyFrom(1, 14, 7, 2).to(1, 8)
+                .copyFrom(14, 14, 2, 2).to(8, 8)
+                .build();
+
+        collager.apply(original, newImage);
     }
 
     public class StrippablePostBlock extends PostBlock {
