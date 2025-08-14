@@ -1,4 +1,11 @@
 ### UPDATED: 
+- **EveryCompat** (COMMON): Restored backward compat with addon mods due to a sneaky signature change in last update
+
+---
+
+## v2.8.16
+
+### UPDATED: 
 - **EveryCompat** (COMMON): Simplified many codes and tags to make it more readable, Improved other codes.
 
 ---
