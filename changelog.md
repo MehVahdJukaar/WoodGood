@@ -21,6 +21,16 @@
 </div>
 
 ### UPDATED: 
+- **EveryCompat** (COMMON): Simplified many codes and tags to make it more readable, Improved other codes.
+- **Create** (COMMON): Removed unneeded Tags: `#forge:glass/silica` & `#forge:glass/colorless` or similar for glass and glass_pane - [#1007](https://github.com/MehVahdJukaar/WoodGood/issues/1007)
+- **Dawn Of Time** (FB): now supporting v1.5.16, BUT no longer will support older version - [#1019](https://github.com/MehVahdJukaar/WoodGood/issues/1019)
+- **Luminous Nether** (IT): Added goldenstem & its stripped_log, wood - [#1017](https://github.com/MehVahdJukaar/WoodGood/issues/1017)
+
+---
+
+## vv2.8.15
+
+### UPDATED: 
 - **Every Compat** (COMMON): Fixed the SERVER crash related to `everycomp-hazardous.properties` config - [#1006](https://github.com/MehVahdJukaar/WoodGood/issues/1006)
 
 ---

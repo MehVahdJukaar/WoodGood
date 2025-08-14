@@ -171,7 +171,7 @@ dependencies {
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN FORGE
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
-    modCompileOnly("curse.maven:blueprint-382216:5292242") // v7.10 | The-Outer-End, Woodworks, Boatload, Sully Mod
+    modCompileOnly("curse.maven:blueprint-382216:5292242") // v7.10 | The-Outer-End, +Woodworks, Boatload, Sully Mod
     modCompileOnly("curse.maven:valhelsia-core-416935:5189548") // v1.1.2 | Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5911986") // v0.7.12 | Refurbished Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
@@ -221,8 +221,8 @@ dependencies {
     modCompileOnly("blocks_plus:blocks+1.20.1-1.7")
 
         // MACAW's
-    modImplementation("curse.maven:macaws-bridges-351725:5240518")
-    modImplementation("curse.maven:macaws-doors-378646:4649910")
+    modCompileOnly("curse.maven:macaws-bridges-351725:5240518")
+    modCompileOnly("curse.maven:macaws-doors-378646:4649910")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:6363155")
     modCompileOnly("curse.maven:macaws-furniture-359540:4726300")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450327")
@@ -313,6 +313,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5812948") // Blueprint
 //    modRuntimeOnly("curse.maven:caverns-and-chasms-438005:6040957") // Blueprint
 //    modRuntimeOnly("curse.maven:atmospheric-362393:6393127") // Blueprint
+//    modRuntimeOnly("curse.maven:environmental-388992:6060255") // Blueprint
 //    modRuntimeOnly("curse.maven:soulful-nether-1146098:6376431") // Elysium-API
 //    modRuntimeOnly("curse.maven:elysium-api-1158628:6376984") // Soulful-Nether
 
