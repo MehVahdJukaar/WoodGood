@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -31,7 +32,7 @@ public class TropicraftModule extends SimpleModule {
         super(modId, "tc");
 
         boardwalks = SimpleEntrySet.builder(WoodType.class, "boardwalk",
-                        getModBlock("mangrove_boardwalk"), () -> WoodTypeRegistry.getValue(new ResourceLocation("mangrove")),
+                        getModBlock("mangrove_boardwalk"), () -> VanillaWoodTypes.MANGROVE,
                         w -> new BoardwalkBlock(BlockBehaviour.Properties.of().noOcclusion())
                 )
                 //TEXTURE: planks
