@@ -43,6 +43,10 @@ public class PaletteStrategies {
     public static final PaletteStrategy WOOD_PLANKS = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
             t, manager, VanillaWoodChildKeys.PLANKS, null, null));
 
+    public static final PaletteStrategy WOOD_STRIPPED_LOG = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
+            t, manager, VanillaWoodChildKeys.STRIPPED_LOG, null, null));
+
+
     public static final PaletteStrategy WOOD_SIGN_LIKE = registerCached((t, manager) -> {
         try (TextureImage plankTexture = TextureImage.open(manager,
                 RPUtils.findFirstBlockTextureLocation(manager, t.getBlockOfThis(VanillaWoodChildKeys.PLANKS)))) {

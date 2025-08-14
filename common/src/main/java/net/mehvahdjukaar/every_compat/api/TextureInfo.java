@@ -87,6 +87,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
             return this;
         }
 
+        // Masks with colors of the block type default block main texture
         public Builder autoMask() {
             this.autoMask = true;
             return this;

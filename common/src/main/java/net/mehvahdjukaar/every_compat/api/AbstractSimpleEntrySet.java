@@ -433,9 +433,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return addTexture(TextureInfo.of(resourceLocation));
         }
 
+        public BL addTexture(ResourceLocation resourceLocation, PaletteStrategy palette) {
+            return addTexture(TextureInfo.of(resourceLocation)
+                    .palette(palette));
+        }
+
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
-            return addTexture(TextureInfo.<T>of(textureLocation)
+            return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation));
+        }
+
+        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, PaletteStrategy palette) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(maskLocation)
+                    .palette(palette));
         }
 
         /// Custom Texture Path is for placing the texture in the correct ResourceLocation
@@ -445,7 +456,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         // adds a texture with automatic masking. Experimental
         public BL addTextureAutoM(ResourceLocation textureLocation) {
-            return addTexture(TextureInfo.<T>of(textureLocation)
+            return addTexture(TextureInfo.of(textureLocation)
                     .autoMask());
         }
 
