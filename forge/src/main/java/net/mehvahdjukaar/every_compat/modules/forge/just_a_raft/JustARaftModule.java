@@ -6,6 +6,7 @@ import com.mrbysco.justaraftmod.init.RaftRegistry;
 import com.mrbysco.justaraftmod.items.RaftItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -43,8 +44,8 @@ public class JustARaftModule extends SimpleModule {
                             return new RaftItem(newRaft, new Item.Properties());
                         }
                 )
-                .createPaletteFromChild("log", CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-                .addTextureM(modRes("entity/raft/oak_raft"), EveryCompat.res("entity/raft/oak_raft_m"))
+                .addTextureM(modRes("entity/raft/oak_raft"), EveryCompat.res("entity/raft/oak_raft_m"),
+                        PaletteStrategies.WOOD_LOG_SIDE)
                 .addTag(modRes("rafts"), Registries.ITEM)
                 .setTabKey(RaftRegistry.RAFT_TAB.getId())
                 .build();

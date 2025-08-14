@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.beautiful_campfires;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
-import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
@@ -75,9 +74,9 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 //TEXTURE: using acacia_soul_campfire above
                 .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"),
-                        PaletteStrategies.WOOD_LOG)
+                        PaletteStrategies.WOOD_LOG_SIDE)
                 .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"),
-                        PaletteStrategies.WOOD_LOG)
+                        PaletteStrategies.WOOD_LOG_SIDE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
                 .addTag(BlockTags.PIGLIN_REPELLENTS, Registries.BLOCK)

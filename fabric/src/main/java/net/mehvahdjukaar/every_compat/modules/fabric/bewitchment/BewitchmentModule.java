@@ -8,9 +8,7 @@ import moriyashiine.bewitchment.common.registry.BWObjects;
 import moriyashiine.bewitchment.common.registry.BWTags;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -61,8 +59,7 @@ public class BewitchmentModule extends SimpleModule {
                         w -> new Item(new Item.Properties())
                 )
                 .requiresChildren("stripped_log") // Recipes
-                .createPaletteFromChild("log", CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-                .addTexture(modRes("item/oak_bark"))
+                .addTexture(modRes("item/oak_bark"), PaletteStrategies.WOOD_LOG_SIDE)
                 .addTag(BWTags.BARKS, Registries.ITEM)
                 .setTabKey(tab)
                 .build();

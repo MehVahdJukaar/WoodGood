@@ -19,7 +19,6 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -199,7 +198,7 @@ public class BlockusModule extends SimpleModule {
                         getModBlock("acacia_small_logs"), () -> VanillaWoodTypes.ACACIA,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addTexture(modRes("block/acacia_small_logs"), PaletteStrategies.WOOD_LOG)
+                .addTexture(modRes("block/acacia_small_logs"), PaletteStrategies.WOOD_LOG_SIDE)
                 //TEXTURE: manually generated texture below (acacia_small_logs_top.png)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)

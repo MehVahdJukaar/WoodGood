@@ -7,6 +7,7 @@ import com.fizzware.dramaticdoors.forge.blocks.TallStableDoorBlock;
 import com.mcwdoors.kikoz.MacawsDoors;
 import com.mcwdoors.kikoz.init.BlockInit;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -157,8 +158,9 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         w -> new TallDoorBlock(BlockInit.OAK_BARK_GLASS_DOOR.get(), w.toVanillaOrOak().setType())
                 )
 //                .requiresChildren("mcwdoors:bark_glass_door") //REASON: recipes
-                .createPaletteFromChild("log", CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-                .addTextureM(modRes("item/macaw/tall_oak_bark_glass_door"), EveryCompat.res("item/ddm/tall_oak_bark_glass_door_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_bark_glass_door"),
+                        EveryCompat.res("item/ddm/tall_oak_bark_glass_door_m"),
+                        PaletteStrategies.WOOD_LOG_SIDE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
