@@ -293,7 +293,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected boolean copyTint = false;
 
         @Deprecated(forRemoval = true)
-        protected TextureInfo.PaletteProvider<T> palette = null;
+        protected BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> palette = null;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType) {
             this.baseType = baseType;
@@ -458,12 +458,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         //by default, they all use planks palette
         @Deprecated(forRemoval = true)
         public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteProvider) {
-            this.palette =new TextureInfo.PaletteProvider<T>() {
-                @Override
-                public TextureInfo.PaletteAndAnimation apply(T t, ResourceManager manager) {
-                    var old = paletteProvider.apply(t, manager);
-                    return new TextureInfo.PaletteAndAnimation(old.getFirst(), old.getSecond());
-                }
+            this.palette = (t, m) -> {
+                var old = paletteProvider.apply(t, m);
+                return PaletteStrategy.PaletteAndAnimation.of(old.getFirst(), old.getSecond());
             };
             return (BL) this;
         }
@@ -500,7 +497,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, Predicate<String> whichSide) {
             return this.setPalette((blockType, m) -> {
-                var p = TextureInfo.makePaletteFromChild(paletteTransform, childKey, whichSide, blockType, m);
+                var p = PaletteStrategies.makePaletteFromChild(blockType, m, childKey, whichSide, paletteTransform);
                 return Pair.of(p.palette(), p.animation());
             });
         }
