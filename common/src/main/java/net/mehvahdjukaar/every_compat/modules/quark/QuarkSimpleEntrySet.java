@@ -116,12 +116,18 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
         public QuarkSimpleEntrySet<T, B> build() {
             var e = new QuarkSimpleEntrySet<>(type, name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, tabMode, lootMode,
-                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition,
+                    itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
                     modelConfig
             );
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
-            e.textures.addAll(textures);
+            for(var t : this.textures){
+                if(this.palette != null) {
+                    e.textures.add(t.cloneWithPalette( this.palette));
+                }else{
+                    e.textures.add(t);
+                }
+            }
             return e;
         }
     }

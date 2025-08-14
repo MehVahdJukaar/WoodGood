@@ -1,6 +1,6 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import static net.mehvahdjukaar.every_compat.misc.SpriteHelper.spriteExtraSet;
+import static net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper.spriteExtraSet;
 
 // ┌──────────────────────────────────────────────────────────┐
 // │ Used by addons like StoneZone or GemsRealms, so their    │

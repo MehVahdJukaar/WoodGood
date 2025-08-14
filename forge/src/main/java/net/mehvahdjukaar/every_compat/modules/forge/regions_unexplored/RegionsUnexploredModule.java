@@ -3,7 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -116,7 +116,7 @@ public class RegionsUnexploredModule extends SimpleModule {
             ) {
 
                 branchs.blocks.forEach((wood, block) -> {
-                    try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                    try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage logTop_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
                         String resLocITEM = "item/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
@@ -167,10 +167,10 @@ public class RegionsUnexploredModule extends SimpleModule {
                     // Generating textures for shrubs
                     try (TextureImage logTexture = TextureImage.open(manager,
                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.getWoodType().log,
-                                    SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                                    CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage leavesTexture = TextureImage.open(manager,
                                  RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves,
-                                         SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
+                                         CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                     ) {
                         Respriter respriterBottom = Respriter.of(shrubBottom);
                         Respriter respriterTop = Respriter.masked(shrubTop, shrubMiddleMask);

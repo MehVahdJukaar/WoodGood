@@ -6,7 +6,7 @@ import io.github.uhq_games.regions_unexplored.world.level.block.plant.tall.Shrub
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -18,7 +18,6 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -139,7 +138,7 @@ public class RegionsUnexploredModule extends SimpleModule {
             ) {
 
                 branchs.blocks.forEach((wood, block) -> {
-                    try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                    try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage logTop_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
                         String resLocITEM = "item/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
@@ -190,10 +189,10 @@ public class RegionsUnexploredModule extends SimpleModule {
                     // Generating textures for shrubs
                     try (TextureImage logTexture = TextureImage.open(manager,
                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.getWoodType().log,
-                                    SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                                    CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage leavesTexture = TextureImage.open(manager,
                                  RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves,
-                                         SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
+                                         CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                     ) {
                         Respriter respriterBottom = Respriter.of(shrubBottom);
                         Respriter respriterTop = Respriter.masked(shrubTop, shrubMiddleMask);

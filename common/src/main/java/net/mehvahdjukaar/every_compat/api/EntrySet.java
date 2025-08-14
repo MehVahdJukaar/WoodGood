@@ -5,6 +5,7 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
@@ -46,6 +47,7 @@ public interface EntrySet<T extends BlockType> {
     void generateModels(SimpleModule module, ResourceManager manager, ResourceSink sink);
 
     void generateTextures(SimpleModule module, ResourceManager manager, ResourceSink sink);
+
 
     default void setupExistingTiles() {
     }

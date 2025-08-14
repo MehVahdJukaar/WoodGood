@@ -7,13 +7,12 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -50,7 +49,7 @@ public class WilderWildModule extends SimpleModule {
                 //REASON: using the vanilla textures instead of generated textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild(
                         "wilderwild:block/hollowed_oak_log", "log",
-                        SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
+                        CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
                 ))
 //-                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
 //-                .addTexture(modRes("block/hollowed_oak_log"))
@@ -85,7 +84,7 @@ public class WilderWildModule extends SimpleModule {
                 //REASON: using the vanilla textures instead of generated textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild(
                         "wilderwild:block/stripped_hollowed_oak_log", "stripped_log",
-                        SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
+                        CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
                 ))
 //-                .createPaletteFromChild("stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
 //-                .addTexture(modRes("block/stripped_hollowed_oak_log"))

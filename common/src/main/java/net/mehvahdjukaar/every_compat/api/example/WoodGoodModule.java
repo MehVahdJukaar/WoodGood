@@ -5,7 +5,7 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -63,7 +63,7 @@ public class WoodGoodModule extends SimpleModule {
                     .addTile(getModTile("id_of_EntityType"))
 
                     ///OPTIONAL: Adding block's textures to be generated
-                    .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE) // Without this, the default texture is planks' texture. but this is using log's SIDE texture
+                    .createPaletteFromChild("log", CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE) // Without this, the default texture is planks' texture. but this is using log's SIDE texture
                     .addTexture(modRes("block/oak_table"))
                     .addTexture(new ResourceLocation("twigs:block/oak_table_bottom"))
                     .addTextureM(modRes("block/oak_table_top"), modRes("block/mask/oak_table_top_m")) // If the texture has parts that shouldn't be recolored, the mask (black color) can be used to exclude them

@@ -7,7 +7,7 @@ import com.lion.villagersplus.init.VPItemGroups;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.world.level.block.Block;
@@ -26,7 +26,7 @@ public class VillagersPlusModule extends SimpleModule {
                         w -> new HorticulturistTableBlock(BlockBehaviour.Properties.of().strength(0.5F).noOcclusion().ignitedByLava())
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
-                .createPaletteFromChild("stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .createPaletteFromChild("stripped_log", CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .addTextureM(modRes("block/oak_horticulturist_workstation"),
                         EveryCompat.res("block/vp/oak_horticulturist_workstation_m"))
                 .addTile(VPBlockEntities.HORTICULTURIST_TABLE_BLOCK_ENTITY)

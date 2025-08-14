@@ -14,7 +14,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -100,6 +100,9 @@ public class ResourcesUtils {
                                 EveryCompat.LOGGER.error("Failed to add {}'s models/block file: {}", Utils.getID(block), e.getMessage());
                             }
                         }
+                    } else {
+                        //dummy blockstate so we don't generate models for this
+                        sink.addJson(blockId, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
 //                    else {
 //                        //dummy blockstate so we don't generate models for this
@@ -228,13 +231,13 @@ public class ResourcesUtils {
 
         // Modifying the model files' content
         if (baseType instanceof LeavesType leavesType) {
-            SpriteHelper.replaceLeavesTextures(transformer, leavesType);
+            CompatSpritesHelper.replaceLeavesTextures(transformer, leavesType);
             var woodT = leavesType.getWoodType();
             if (woodT != null) {
-                SpriteHelper.replaceWoodTextures(transformer, woodT);
+                CompatSpritesHelper.replaceWoodTextures(transformer, woodT);
             }
         } else if (baseType instanceof WoodType woodType) {
-            SpriteHelper.replaceWoodTextures(transformer, woodType);
+            CompatSpritesHelper.replaceWoodTextures(transformer, woodType);
         }
 
         transformer.replaceGenericType(oldTypeName, "block");
@@ -244,7 +247,7 @@ public class ResourcesUtils {
 
 
     //creates and add new jsons based off the ones at the given resources with the provided modifiers
-    public static <B extends Block, T extends BlockType> void addBlockResources(ResourceManager manager, ResourceSink pack,
+    public static <B extends Block, T extends BlockType> void addBlockResources(ResourceManager manager, ResourceSink sink,
                                                                                 Map<T, B> blocks,
                                                                                 BlockTypeResTransformer<T> modifier, ResourceLocation... jsonsLocations) {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).toList();
@@ -259,7 +262,7 @@ public class ResourcesUtils {
                         Preconditions.checkArgument(newRes.location != res.location,
                                 "ids cant be the same: " + newRes.location);
 
-                        pack.addResource(newRes);
+                        sink.addResource(newRes);
                     } catch (Exception e) {
                         if (res != null) {
                             EveryCompat.LOGGER.error("Failed to generate json resource from {}", res.location);
@@ -277,7 +280,7 @@ public class ResourcesUtils {
      */
     public static void addLeavesRecipes(String modId, ResourceManager manager, ResourceSink pack,
                                         Map<LeavesType, Item> blocks, String oakRecipe) {
-        addBlocksRecipes(modId, manager, pack, blocks, oakRecipe, LeavesTypeRegistry.OAK_TYPE);
+        addBlocksRecipes(modId, manager, pack, blocks, oakRecipe, VanillaLeavesTypes.OAK);
     }
 
     /**

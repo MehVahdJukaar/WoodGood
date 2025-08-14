@@ -6,7 +6,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -2452,7 +2452,7 @@ public class ChippedModule extends SimpleModule {
                      TextureImage innerColoring = TextureImage.open(manager,
                              RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(innerType)));
                      TextureImage outerColoring = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(outerType), SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                             RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(outerType), CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
                     // Recoloring the texture - TOP
                     Respriter innerResprite = Respriter.masked(mainTexture, innerMask);

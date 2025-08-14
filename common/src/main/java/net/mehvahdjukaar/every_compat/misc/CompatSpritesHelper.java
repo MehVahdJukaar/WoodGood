@@ -27,7 +27,7 @@ import java.util.function.Supplier;
 // │  Used to identify textures "types" only based off their name. │
 // │  feed into "findFirstBlockTextureLocation()"                  │
 // └───────────────────────────────────────────────────────────────┘
-public class SpriteHelper {
+public class CompatSpritesHelper {
 
     public static Set<SpriteExtra> spriteExtraSet = new HashSet<>();
 
@@ -696,7 +696,7 @@ public class SpriteHelper {
                 try (TextureImage vineOverlay = TextureImage.open(manager,
                         new ResourceLocation("aoa3:block/stranglewood_log_vine"));
                      TextureImage logTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, strangewood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
+                             RPUtils.findFirstBlockTextureLocation(manager, strangewood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
 
                     Respriter respriter = Respriter.of(image);
                     var temp = respriter.recolorWithAnimationOf(logTexture);

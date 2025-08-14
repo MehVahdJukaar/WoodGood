@@ -28,6 +28,12 @@
 
 ---
 
+## vv2.9.0
+
+- Palette generation is now cached and a lot faster
+
+---
+
 ## vv2.8.17
 
 - Restored backward compat with addon mods due to a sneaky signature change in last update
