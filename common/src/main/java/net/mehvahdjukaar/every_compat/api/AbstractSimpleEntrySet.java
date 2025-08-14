@@ -69,7 +69,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected final TabAddMode tabMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
-    protected final Set<TextureInfo<T>> textures = new HashSet<>();
+    protected final Set<TextureInfo> textures = new HashSet<>();
     @Nullable
     protected final Consumer<BlockTypeResTransformer<T>> extraModelTransform;
 
@@ -285,7 +285,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected TabAddMode tabMode = TabAddMode.AFTER_SAME_TYPE;
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
-        protected final Set<TextureInfo<T>> textures = new HashSet<>();
+        protected final Set<TextureInfo> textures = new HashSet<>();
         protected boolean useMergedPalette;
         @Nullable
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
@@ -416,9 +416,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        public BL addTexture(TextureInfo.Builder<T> textureLoc) {
+        public BL addTexture(TextureInfo.Builder textureLoc) {
             if (PlatHelper.getPhysicalSide().isClient()) {
-                TextureInfo<T> info = textureLoc.build();
+                TextureInfo info = textureLoc.build();
                 this.textures.add(info);
                 if (info.keepNamespace()) {
                     //hack so we assure namespace has been added since it could be NOT Ec one
