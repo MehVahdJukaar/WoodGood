@@ -14,7 +14,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;

@@ -1,23 +1,5 @@
 package net.mehvahdjukaar.every_compat.forge;
 
-import com.google.common.collect.Maps;
-import com.google.gson.*;
-import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.util.profiling.ProfilerFiller;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
 /*
 public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
 
