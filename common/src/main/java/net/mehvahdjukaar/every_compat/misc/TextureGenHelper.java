@@ -33,7 +33,7 @@ public class TextureGenHelper {
     //TODO: this is unmanageable. needs to be split in smaller manageable bits and commented better
     public static <T extends BlockType> void generateDefault(ResourceSink sink, ResourceManager manager,
                                                              String modId,
-                                                             Set<TextureInfo<T>> textureInfos, T baseType,
+                                                             Set<TextureInfo> textureInfos, T baseType,
                                                              boolean mergePalette,
                                                              Map<T, ?> entries) throws Exception {
 
@@ -51,10 +51,10 @@ public class TextureGenHelper {
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
             Palette globalPalette = Palette.empty();
 
-            Multimap<ResourceLocation, TextureInfo<T>> infoPerTextures = ArrayListMultimap.create();
+            Multimap<ResourceLocation, TextureInfo> infoPerTextures = ArrayListMultimap.create();
 
             /// Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
-            for (TextureInfo<T> textureInfo : textureInfos) {
+            for (TextureInfo textureInfo : textureInfos) {
                 ResourceLocation textureId = textureInfo.texture();
 
                 try {
