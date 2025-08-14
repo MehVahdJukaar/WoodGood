@@ -7,8 +7,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -43,7 +43,7 @@ public class WoodGoodModule extends SimpleModule {
             ResourceLocation yourModTab = modRes("twig");
 
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
-                    getModBlock("oak_table"), ()-> WoodTypeRegistry.OAK_TYPE,
+                    getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
                     woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     /// Similar setup as sampleBlock
@@ -51,7 +51,7 @@ public class WoodGoodModule extends SimpleModule {
             this.addEntry(sampleBlock_2);
 
             sampleBlock = SimpleEntrySet.builder(WoodType.class,"table",
-                            getModBlock("oak_table"), ()-> WoodTypeRegistry.OAK_TYPE,
+                            getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
                             woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     ///OPTIONAL: Check if a WoodType or LeavesType has the children required, then block will be generated
@@ -93,7 +93,7 @@ public class WoodGoodModule extends SimpleModule {
             this.addEntry(sampleBlock);
 
             sampleItem = ItemOnlyEntrySet.builder(WoodType.class,"table",
-                            getModItem("oak_table"), ()-> WoodTypeRegistry.OAK_TYPE,
+                            getModItem("oak_table"), ()-> VanillaWoodTypes.OAK,
                             w -> new Item(new Item.Properties())
                     )
                     .addTexture(modRes("item/itemTexture"))

@@ -11,6 +11,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -42,7 +43,7 @@ public class RegionsUnexploredModule extends SimpleModule {
         ResourceLocation tab = modRes("ru_main");
 
         branchs = SimpleEntrySet.builder(WoodType.class, "branch",
-            getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
+            getModBlock("oak_branch"), () -> VanillaWoodTypes.OAK,
             w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()), "branch")
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

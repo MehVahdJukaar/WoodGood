@@ -6,6 +6,8 @@ import io.github.suel_ki.beautify.common.block.Trellis;
 import io.github.suel_ki.beautify.core.init.BlockInit;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -28,7 +30,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
         var tab = modRes("group");
 
         tellis = SimpleEntrySet.builder(WoodType.class, "trellis",
-                        () -> BlockInit.OAK_TRELLIS, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_TRELLIS, () -> VanillaWoodTypes.OAK,
                         w -> new Trellis(BlockBehaviour.Properties.of()
                                 .mapColor(MapColor.WOOD)
                                 .strength(0.3F, 0.3F)
@@ -48,7 +50,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
         this.addEntry(tellis);
 
         blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
-                        () -> BlockInit.OAK_BLINDS, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_BLINDS, () -> VanillaWoodTypes.OAK,
                         w -> new Blinds(Utils.copyPropertySafe(w.planks)
                                 .noOcclusion().strength(0.4F, 0.4F)
                                 .sound(SoundType.WOOD)
@@ -63,7 +65,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
         this.addEntry(blinds);
 
         picture_frames = SimpleEntrySet.builder(WoodType.class, "picture_frame",
-                        () -> BlockInit.OAK_PICTURE_FRAME, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_PICTURE_FRAME, () -> VanillaWoodTypes.OAK,
                         w -> new PictureFrame(Utils.copyPropertySafe(w.planks)
                                 .noOcclusion().strength(0.1F, 0.1F)
                                 .sound(SoundType.WOOD).noOcclusion()

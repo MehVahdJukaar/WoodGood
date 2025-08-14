@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.unusual_furniture;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
@@ -30,7 +31,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         ResourceLocation tab = modRes(modId);
 
         carved = SimpleEntrySet.builder(WoodType.class, "", "carved",
-                        getModBlock("carved_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("carved_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new CarvedOakBlock()
                 )
                 .requiresChildren( "slab") //REASON: recipes
@@ -43,7 +44,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(carved);
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
-                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new OakTableBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -59,7 +60,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(table);
 
         coffee_table = SimpleEntrySet.builder(WoodType.class, "coffee_table",
-                        getModBlock("oak_coffee_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_coffee_table"), () -> VanillaWoodTypes.OAK,
                         w -> new OakCoffeeTableBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -75,7 +76,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(coffee_table);
 
         stool = SimpleEntrySet.builder(WoodType.class, "stool",
-                        getModBlock("oak_stool"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_stool"), () -> VanillaWoodTypes.OAK,
                         w -> new OakStoolBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -90,7 +91,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(stool);
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
-                        getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
                         w -> new OakChairBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -105,7 +106,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(chair);
 
         ceiling_lamp = SimpleEntrySet.builder(WoodType.class, "celling_lamp",
-                        getModBlock("oak_celling_lamp"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_celling_lamp"), () -> VanillaWoodTypes.OAK,
                         w -> new OakCellingLampBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -119,7 +120,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(ceiling_lamp);
 
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
-                        getModBlock("jungle_drawer"), () -> WoodTypeRegistry.getValue("jungle"),
+                        getModBlock("jungle_drawer"), () -> VanillaWoodTypes.JUNGLE,
                         w -> new JungleDrawerBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -132,7 +133,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(drawer);
 
         bench = SimpleEntrySet.builder(WoodType.class, "bench",
-                        getModBlock("oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
                         w -> new OakBenchBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -146,7 +147,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(bench);
 
         open_riser_stairs = SimpleEntrySet.builder(WoodType.class, "open_riser_stairs",
-                        getModBlock("oak_open_riser_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_open_riser_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new OakOpenRiserStairsBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -160,7 +161,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(open_riser_stairs);
 
         railing = SimpleEntrySet.builder(WoodType.class, "railing",
-                        getModBlock("oak_railing"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_railing"), () -> VanillaWoodTypes.OAK,
                         w -> new OakRailingBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
@@ -174,7 +175,7 @@ public class UnusualFurnitureModule extends SimpleModule {
         this.addEntry(railing);
 
         beam = SimpleEntrySet.builder(WoodType.class, "beam",
-                        getModBlock("oak_beam"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_beam"), () -> VanillaWoodTypes.OAK,
                         w -> new OakBeamBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures

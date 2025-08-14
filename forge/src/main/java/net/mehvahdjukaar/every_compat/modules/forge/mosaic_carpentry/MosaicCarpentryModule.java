@@ -3,12 +3,10 @@ package net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry;
 import caittastic.mosaiccarpentry.MosaicCarpentry;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -29,7 +27,7 @@ public class MosaicCarpentryModule extends SimpleModule {
 
 
         mosaics = SimpleEntrySet.builder(WoodType.class, "mosaic",
-                        getModBlock("spruce_mosaic"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_mosaic"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
@@ -42,7 +40,7 @@ public class MosaicCarpentryModule extends SimpleModule {
         this.addEntry(mosaics);
 
         mosaicStairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
-                        getModBlock("spruce_mosaic_stairs"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_mosaic_stairs"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new StairBlock(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
@@ -55,7 +53,7 @@ public class MosaicCarpentryModule extends SimpleModule {
         this.addEntry(mosaicStairs);
 
         mosaicSlabs = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
-                        getModBlock("spruce_mosaic_slab"), () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        getModBlock("spruce_mosaic_slab"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)

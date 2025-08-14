@@ -12,8 +12,8 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -47,7 +47,7 @@ public class MoreChestVariantsModule extends SimpleModule {
         String namespace = (PlatHelper.getPlatform().isForge()) ? "forge" : "c";
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
-                        getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chest"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatChestBlock(this::getChestTile,
                                 Utils.copyPropertySafe(Blocks.CHEST).mapColor(MapColor.WOOD))
                 )
@@ -74,7 +74,7 @@ public class MoreChestVariantsModule extends SimpleModule {
         this.addEntry(chests);
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
-                        getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_trapped_chest"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatTrappedChestBlock(this::getTrappedTile,
                                 Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
                 )

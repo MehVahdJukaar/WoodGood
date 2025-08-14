@@ -7,8 +7,8 @@ import decor.delight.init.DecorationDelightModBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -28,7 +28,7 @@ public class DecorationDelightModule extends SimpleModule {
         ResourceLocation tab = modRes("decoration_delight_tab");
 
         COUNTER = SimpleEntrySet.builder(WoodType.class, "counter",
-                DecorationDelightModBlocks.OAK_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
+                DecorationDelightModBlocks.OAK_COUNTER, () -> VanillaWoodTypes.OAK,
                 w -> new OakCounterBlock()
         )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -46,7 +46,7 @@ public class DecorationDelightModule extends SimpleModule {
         this.addEntry(COUNTER);
 
         COUNTER_CORNER = SimpleEntrySet.builder(WoodType.class, "counter_corner",
-                DecorationDelightModBlocks.OAK_COUNTER_CORNER, () -> WoodTypeRegistry.OAK_TYPE,
+                DecorationDelightModBlocks.OAK_COUNTER_CORNER, () -> VanillaWoodTypes.OAK,
                 w -> new OakCounterCornerBlock()
         )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -63,7 +63,7 @@ public class DecorationDelightModule extends SimpleModule {
         this.addEntry(COUNTER_CORNER);
 
         COUNTER_BEND = SimpleEntrySet.builder(WoodType.class, "counter_bend",
-                DecorationDelightModBlocks.OAK_COUNTER_BEND, () -> WoodTypeRegistry.OAK_TYPE,
+                DecorationDelightModBlocks.OAK_COUNTER_BEND, () -> VanillaWoodTypes.OAK,
                 w -> new OakCounterBendBlock()
         )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -79,7 +79,7 @@ public class DecorationDelightModule extends SimpleModule {
         this.addEntry(COUNTER_BEND);
 
         COUNTER_TOP = SimpleEntrySet.builder(WoodType.class, "countertop",
-                DecorationDelightModBlocks.OAK_COUNTERTOP, () -> WoodTypeRegistry.OAK_TYPE,
+                DecorationDelightModBlocks.OAK_COUNTERTOP, () -> VanillaWoodTypes.OAK,
                 w -> new OakCountertopBlock()
         )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -93,7 +93,7 @@ public class DecorationDelightModule extends SimpleModule {
         this.addEntry(COUNTER_TOP);
 
         STOOL = SimpleEntrySet.builder(WoodType.class, "stool",
-                DecorationDelightModBlocks.OAK_STOOL, () -> WoodTypeRegistry.OAK_TYPE,
+                DecorationDelightModBlocks.OAK_STOOL, () -> VanillaWoodTypes.OAK,
                 w -> new OakStoolBlock()
                 )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -111,7 +111,7 @@ public class DecorationDelightModule extends SimpleModule {
         this.addEntry(STOOL);
 
         MOSAIC = SimpleEntrySet.builder(WoodType.class, "mosaic",
-                DecorationDelightModBlocks.OAK_MOSAIC, () -> WoodTypeRegistry.OAK_TYPE,
+                DecorationDelightModBlocks.OAK_MOSAIC, () -> VanillaWoodTypes.OAK,
                 w -> new OakMosaicBlock()
                 )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)

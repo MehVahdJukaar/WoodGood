@@ -5,8 +5,8 @@ import com.nosiphus.furniture.block.DoorBellBlock;
 import com.nosiphus.furniture.block.WaterTankBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -29,7 +29,7 @@ public class NosiphusFurnitureModule extends SimpleModule {
         ResourceLocation tab = modRes("creative_tab");
 
         chopping_board = SimpleEntrySet.builder(WoodType.class, "chopping_board",
-                        getModBlock("oak_chopping_board"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chopping_board"), () -> VanillaWoodTypes.OAK,
                         w -> new ChoppingBoardBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("slab") //REASON: recipes
@@ -42,7 +42,7 @@ public class NosiphusFurnitureModule extends SimpleModule {
         this.addEntry(chopping_board);
 
         door_bell = SimpleEntrySet.builder(WoodType.class, "door_bell",
-                        getModBlock("oak_door_bell"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_door_bell"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBellBlock(Utils.copyPropertySafe(w.log).noOcclusion())
                 )
                 //TEXTURES: log
@@ -53,7 +53,7 @@ public class NosiphusFurnitureModule extends SimpleModule {
         this.addEntry(door_bell);
 
         stripped_door_bell = SimpleEntrySet.builder(WoodType.class, "door_bell", "stripped",
-                        getModBlock("stripped_oak_door_bell"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("stripped_oak_door_bell"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBellBlock(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("stripped_log"))).noOcclusion())
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
@@ -65,7 +65,7 @@ public class NosiphusFurnitureModule extends SimpleModule {
         this.addEntry(stripped_door_bell);
 
         water_tank = SimpleEntrySet.builder(WoodType.class, "water_tank",
-                        getModBlock("oak_water_tank"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_water_tank"), () -> VanillaWoodTypes.OAK,
                         w -> new WaterTankBlock(Utils.copyPropertySafe(Blocks.CAULDRON).noOcclusion())
                 )
                 .addTile(getModTile("water_tank"))

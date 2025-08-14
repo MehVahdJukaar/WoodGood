@@ -8,8 +8,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -22,7 +22,7 @@ public class VillagersPlusModule extends SimpleModule {
         super(modId, "vp");
 
         tub = SimpleEntrySet.builder(WoodType.class, "horticulturist_table",
-                        VPBlocks.OAK_HORTICULTURIST_TABLE_BLOCK, () -> WoodTypeRegistry.OAK_TYPE,
+                        VPBlocks.OAK_HORTICULTURIST_TABLE_BLOCK, () -> VanillaWoodTypes.OAK,
                         w -> new HorticulturistTableBlock(BlockBehaviour.Properties.of().strength(0.5F).noOcclusion().ignitedByLava())
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures

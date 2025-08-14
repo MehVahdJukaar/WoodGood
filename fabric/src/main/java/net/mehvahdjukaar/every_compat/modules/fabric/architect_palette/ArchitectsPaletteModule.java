@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -27,7 +28,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
         super(modId, "ap");
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
-                        getModBlock("oak_railing"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_railing"), () -> VanillaWoodTypes.OAK,
                         w -> new RailingBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
@@ -36,7 +37,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
         this.addEntry(railings);
 
         boardSlabs = SimpleEntrySet.builder(WoodType.class, "board_slab",
-                        getModBlock("oak_board_slab"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_board_slab"), () -> VanillaWoodTypes.OAK,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
@@ -72,7 +73,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
 
 
         boardWalls = SimpleEntrySet.builder(WoodType.class, "board_wall",
-                        getModBlock("oak_board_wall"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_board_wall"), () -> VanillaWoodTypes.OAK,
                         w -> new WallBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -83,7 +84,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
         this.addEntry(boardWalls);
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
-                        getModBlock("oak_boards"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_boards"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
@@ -92,7 +93,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
         this.addEntry(boards);
 
         boardStairs = SimpleEntrySet.builder(WoodType.class, "board_stairs",
-                        getModBlock("oak_board_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_board_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new ModStairBlock(() -> boards.blocks.get(w), Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)

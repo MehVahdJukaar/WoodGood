@@ -21,6 +21,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -84,7 +85,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: ITEM
         FURNITURE_KIT = ItemOnlyEntrySet.builder(WoodType.class, "furniture_kit",
-                        getModItem("oak_furniture_kit"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModItem("oak_furniture_kit"), () -> VanillaWoodTypes.OAK,
                         w -> new CustomBdFurnitureKit(new Item.Properties().stacksTo(64),"furniture_kit")
                 )
                 .setTabKey(tabMater)
@@ -96,7 +97,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: CHAIR
         CHAIR_1 = SimpleEntrySet.builder(WoodType.class, "chair_1",
-                        BdDecoration.OAK_CHAIR_1, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdDecoration.OAK_CHAIR_1, () -> VanillaWoodTypes.OAK,
                         w -> new BlockChair(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -111,7 +112,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(CHAIR_1);
 
         CHAIR_2 = SimpleEntrySet.builder(WoodType.class, "chair_2",
-                        BdDecoration.OAK_CHAIR_2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdDecoration.OAK_CHAIR_2, () -> VanillaWoodTypes.OAK,
                         w -> new BlockStool(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -129,7 +130,7 @@ public class BuildersDelightModule extends SimpleModule {
         //TYPE: TABLE
         TABLE_1 = SimpleEntrySet.builder(WoodType.class, "table_1",
                         BdDecoration.OAK_TABLE_1,
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> new BlockSmallTable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -143,7 +144,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(TABLE_1);
 
         TABLE_2 = SimpleEntrySet.builder(WoodType.class, "table_2",
-                        BdDecoration.OAK_TABLE_2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdDecoration.OAK_TABLE_2, () -> VanillaWoodTypes.OAK,
                         w -> new BlockSmallTable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -159,7 +160,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: PLANKS
         PLANKS_1 = SimpleEntrySet.builder(WoodType.class, "planks_1",
-                        BdBlocks.OAK_PLANKS_1, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_PLANKS_1, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -173,7 +174,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(PLANKS_1);
 
         PLANKS_2 = SimpleEntrySet.builder(WoodType.class, "planks_2",
-                        BdBlocks.OAK_PLANKS_2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_PLANKS_2, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -187,7 +188,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(PLANKS_2);
 
         PLANKS_3 = SimpleEntrySet.builder(WoodType.class, "planks_3",
-                        BdBlocks.OAK_PLANKS_3, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_PLANKS_3, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -201,7 +202,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(PLANKS_3);
 
         PLANKS_4 = SimpleEntrySet.builder(WoodType.class, "planks_4",
-                        BdBlocks.OAK_PLANKS_4, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_PLANKS_4, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -215,7 +216,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(PLANKS_4);
 
         PLANKS_5 = SimpleEntrySet.builder(WoodType.class, "planks_5",
-                        BdBlocks.OAK_PLANKS_5, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_PLANKS_5, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -229,7 +230,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(PLANKS_5);
 
         PLANKS_6 = SimpleEntrySet.builder(WoodType.class, "planks_6",
-                        BdBlocks.OAK_PLANKS_6, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_PLANKS_6, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -243,7 +244,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(PLANKS_6);
 
         PLANKS_7 = SimpleEntrySet.builder(WoodType.class, "planks_7",
-                        BdBlocks.OAK_PLANKS_7, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_PLANKS_7, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -259,7 +260,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: STAIRS
         STAIRS_1 = SimpleEntrySet.builder(WoodType.class, "stairs_1",
-                        BdBlocks.OAK_STAIRS_1, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_STAIRS_1, () -> VanillaWoodTypes.OAK,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -273,7 +274,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(STAIRS_1);
 
         STAIRS_2 = SimpleEntrySet.builder(WoodType.class, "stairs_2",
-                        BdBlocks.OAK_STAIRS_2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_STAIRS_2, () -> VanillaWoodTypes.OAK,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -287,7 +288,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(STAIRS_2);
 
         STAIRS_3 = SimpleEntrySet.builder(WoodType.class, "stairs_3",
-                        BdBlocks.OAK_STAIRS_3, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_STAIRS_3, () -> VanillaWoodTypes.OAK,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -301,7 +302,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(STAIRS_3);
 
         STAIRS_4 = SimpleEntrySet.builder(WoodType.class, "stairs_4",
-                        BdBlocks.OAK_STAIRS_4, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_STAIRS_4, () -> VanillaWoodTypes.OAK,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -315,7 +316,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(STAIRS_4);
 
         STAIRS_5 = SimpleEntrySet.builder(WoodType.class, "stairs_5",
-                        BdBlocks.OAK_STAIRS_5, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_STAIRS_5, () -> VanillaWoodTypes.OAK,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -329,7 +330,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(STAIRS_5);
 
         STAIRS_6 = SimpleEntrySet.builder(WoodType.class, "stairs_6",
-                        BdBlocks.OAK_STAIRS_6, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_STAIRS_6, () -> VanillaWoodTypes.OAK,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -343,7 +344,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(STAIRS_6);
 
         STAIRS_7 = SimpleEntrySet.builder(WoodType.class, "stairs_7",
-                        BdBlocks.OAK_STAIRS_7, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_STAIRS_7, () -> VanillaWoodTypes.OAK,
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -359,7 +360,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: SLAB
         SLAB_1 = SimpleEntrySet.builder(WoodType.class, "slab_1",
-                        BdBlocks.OAK_SLAB_1, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_SLAB_1, () -> VanillaWoodTypes.OAK,
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -373,7 +374,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(SLAB_1);
 
         SLAB_2 = SimpleEntrySet.builder(WoodType.class, "slab_2",
-                        BdBlocks.OAK_SLAB_2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_SLAB_2, () -> VanillaWoodTypes.OAK,
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -387,7 +388,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(SLAB_2);
 
         SLAB_3 = SimpleEntrySet.builder(WoodType.class, "slab_3",
-                        BdBlocks.OAK_SLAB_3, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_SLAB_3, () -> VanillaWoodTypes.OAK,
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -401,7 +402,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(SLAB_3);
 
         SLAB_4 = SimpleEntrySet.builder(WoodType.class, "slab_4",
-                        BdBlocks.OAK_SLAB_4, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_SLAB_4, () -> VanillaWoodTypes.OAK,
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -415,7 +416,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(SLAB_4);
 
         SLAB_5 = SimpleEntrySet.builder(WoodType.class, "slab_5",
-                        BdBlocks.OAK_SLAB_5, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_SLAB_5, () -> VanillaWoodTypes.OAK,
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -429,7 +430,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(SLAB_5);
 
         SLAB_6 = SimpleEntrySet.builder(WoodType.class, "slab_6",
-                        BdBlocks.OAK_SLAB_6, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_SLAB_6, () -> VanillaWoodTypes.OAK,
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -443,7 +444,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(SLAB_6);
 
         SLAB_7 = SimpleEntrySet.builder(WoodType.class, "slab_7",
-                        BdBlocks.OAK_SLAB_7, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_SLAB_7, () -> VanillaWoodTypes.OAK,
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -459,7 +460,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: FRAME
         FRAME_1 = SimpleEntrySet.builder(WoodType.class, "frame_1",
-                        BdBlocks.OAK_FRAME_1, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_FRAME_1, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_1"))
@@ -473,7 +474,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(FRAME_1);
 
         FRAME_2 = SimpleEntrySet.builder(WoodType.class, "frame_2",
-                        BdBlocks.OAK_FRAME_2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_FRAME_2, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_2"))
@@ -488,7 +489,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(FRAME_2);
 
         FRAME_3 = SimpleEntrySet.builder(WoodType.class, "frame_3",
-                        BdBlocks.OAK_FRAME_3, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_FRAME_3, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_3"))
@@ -503,7 +504,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(FRAME_3);
 
         FRAME_4 = SimpleEntrySet.builder(WoodType.class, "frame_4",
-                        BdBlocks.OAK_FRAME_4, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_FRAME_4, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_4"))
@@ -518,7 +519,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(FRAME_4);
 
         FRAME_5 = SimpleEntrySet.builder(WoodType.class, "frame_5",
-                        BdBlocks.OAK_FRAME_5, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_FRAME_5, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_5"))
@@ -533,7 +534,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(FRAME_5);
 
         FRAME_6 = SimpleEntrySet.builder(WoodType.class, "frame_6",
-                        BdBlocks.OAK_FRAME_6, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_FRAME_6, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_6"))
@@ -548,7 +549,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(FRAME_6);
 
         FRAME_7 = SimpleEntrySet.builder(WoodType.class, "frame_7",
-                        BdBlocks.OAK_FRAME_7, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_FRAME_7, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_7"))
@@ -563,7 +564,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(FRAME_7);
 
         FRAME_8 = SimpleEntrySet.builder(WoodType.class, "frame_8",
-                        BdBlocks.OAK_FRAME_8, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_FRAME_8, () -> VanillaWoodTypes.OAK,
                         w -> new BlockFlammable(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_8"))
@@ -580,7 +581,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: GLASS
         GLASS_1 = SimpleEntrySet.builder(WoodType.class, "glass_1",
-                        BdBlocks.OAK_GLASS_1, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_1, () -> VanillaWoodTypes.OAK,
                         w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_1"))
@@ -594,7 +595,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_1);
 
         GLASS_2 = SimpleEntrySet.builder(WoodType.class, "glass_2",
-                        BdBlocks.OAK_GLASS_2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_2, () -> VanillaWoodTypes.OAK,
                         w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_2"))
@@ -609,7 +610,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_2);
 
         GLASS_3 = SimpleEntrySet.builder(WoodType.class, "glass_3",
-                        BdBlocks.OAK_GLASS_3, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_3, () -> VanillaWoodTypes.OAK,
                         w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_3"))
@@ -624,7 +625,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_3);
 
         GLASS_4 = SimpleEntrySet.builder(WoodType.class, "glass_4",
-                        BdBlocks.OAK_GLASS_4, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_4, () -> VanillaWoodTypes.OAK,
                         w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_4"))
@@ -638,7 +639,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_4);
 
         GLASS_5 = SimpleEntrySet.builder(WoodType.class, "glass_5",
-                        BdBlocks.OAK_GLASS_5, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_5, () -> VanillaWoodTypes.OAK,
                         w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_5"))
@@ -653,7 +654,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_5);
 
         GLASS_6 = SimpleEntrySet.builder(WoodType.class, "glass_6",
-                        BdBlocks.OAK_GLASS_6, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_6, () -> VanillaWoodTypes.OAK,
                         w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_6"))
@@ -668,7 +669,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_6);
 
         GLASS_7 = SimpleEntrySet.builder(WoodType.class, "glass_7",
-                        BdBlocks.OAK_GLASS_7, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_7, () -> VanillaWoodTypes.OAK,
                         w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_7"))
@@ -683,7 +684,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_7);
 
         GLASS_8 = SimpleEntrySet.builder(WoodType.class, "glass_8",
-                        BdBlocks.OAK_GLASS_8, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_8, () -> VanillaWoodTypes.OAK,
                         w -> new BlockGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_8"))
@@ -699,7 +700,7 @@ public class BuildersDelightModule extends SimpleModule {
 
         //TYPE: GLASS_PANE
         GLASS_PANE_1 = SimpleEntrySet.builder(WoodType.class, "glass_pane_1",
-                        BdBlocks.OAK_GLASS_PANE_1, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_PANE_1, () -> VanillaWoodTypes.OAK,
                         w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_1"))
@@ -712,7 +713,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_PANE_1);
 
         GLASS_PANE_2 = SimpleEntrySet.builder(WoodType.class, "glass_pane_2",
-                        BdBlocks.OAK_GLASS_PANE_2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_PANE_2, () -> VanillaWoodTypes.OAK,
                         w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_2"))
@@ -725,7 +726,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_PANE_2);
 
         GLASS_PANE_3 = SimpleEntrySet.builder(WoodType.class, "glass_pane_3",
-                        BdBlocks.OAK_GLASS_PANE_3, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_PANE_3, () -> VanillaWoodTypes.OAK,
                         w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_3"))
@@ -738,7 +739,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_PANE_3);
 
         GLASS_PANE_4 = SimpleEntrySet.builder(WoodType.class, "glass_pane_4",
-                        BdBlocks.OAK_GLASS_PANE_4, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_PANE_4, () -> VanillaWoodTypes.OAK,
                         w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_4"))
@@ -751,7 +752,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_PANE_4);
 
         GLASS_PANE_5 = SimpleEntrySet.builder(WoodType.class, "glass_pane_5",
-                        BdBlocks.OAK_GLASS_PANE_5, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_PANE_5, () -> VanillaWoodTypes.OAK,
                         w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_5"))
@@ -764,7 +765,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_PANE_5);
 
         GLASS_PANE_6 = SimpleEntrySet.builder(WoodType.class, "glass_pane_6",
-                        BdBlocks.OAK_GLASS_PANE_6, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_PANE_6, () -> VanillaWoodTypes.OAK,
                         w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_6"))
@@ -777,7 +778,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_PANE_6);
 
         GLASS_PANE_7 = SimpleEntrySet.builder(WoodType.class, "glass_pane_7",
-                        BdBlocks.OAK_GLASS_PANE_7, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_PANE_7, () -> VanillaWoodTypes.OAK,
                         w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_7"))
@@ -790,7 +791,7 @@ public class BuildersDelightModule extends SimpleModule {
         this.addEntry(GLASS_PANE_7);
 
         GLASS_PANE_8 = SimpleEntrySet.builder(WoodType.class, "glass_pane_8",
-                        BdBlocks.OAK_GLASS_PANE_8, () -> WoodTypeRegistry.OAK_TYPE,
+                        BdBlocks.OAK_GLASS_PANE_8, () -> VanillaWoodTypes.OAK,
                         w -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_8"))

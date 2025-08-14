@@ -6,8 +6,8 @@ import net.kikoz.mcwroofs.objects.roofs.*;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -40,7 +40,7 @@ public class MacawRoofsModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = MacawsRoofs.ROOFGROUP;
 
         ATTIC_ROOFS = SimpleEntrySet.builder(WoodType.class, "attic_roof",
-                        () -> BlockInit.OAK_ATTIC_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_ATTIC_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new RoofGlass(Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -52,7 +52,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(ATTIC_ROOFS);
 
         LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "lower_roof",
-                        () -> BlockInit.OAK_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_LOWER_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -64,7 +64,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(LOWER_ROOFS);
 
         ROOFS = SimpleEntrySet.builder(WoodType.class, "roof",
-                        () -> BlockInit.OAK_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -76,7 +76,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(ROOFS);
 
         STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "steep_roof",
-                        () -> BlockInit.OAK_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_STEEP_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new SteepRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -88,7 +88,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(STEEP_ROOFS);
 
         TOP_ROOFS = SimpleEntrySet.builder(WoodType.class, "top_roof",
-                        () -> BlockInit.OAK_TOP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_TOP_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new RoofTopNew(Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -100,7 +100,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(TOP_ROOFS);
 
         UPPER_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "upper_lower_roof",
-                        () -> BlockInit.OAK_UPPER_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_UPPER_LOWER_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new Lower(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -112,7 +112,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(UPPER_LOWER_ROOFS);
 
         UPPER_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "upper_steep_roof",
-                        () -> BlockInit.OAK_UPPER_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_UPPER_STEEP_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new Steep(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -124,7 +124,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(UPPER_STEEP_ROOFS);
 
         PLANKS_ATTIC_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_attic_roof",
-                        () -> BlockInit.OAK_PLANKS_ATTIC_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_PLANKS_ATTIC_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new RoofGlass(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -136,7 +136,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(PLANKS_ATTIC_ROOFS);
 
         PLANKS_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_lower_roof",
-                        () -> BlockInit.OAK_PLANKS_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_PLANKS_LOWER_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -148,7 +148,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(PLANKS_LOWER_ROOFS);
 
         PLANKS_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_roof",
-                        () -> BlockInit.OAK_PLANKS_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_PLANKS_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new BaseRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -160,7 +160,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(PLANKS_ROOFS);
 
         PLANKS_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_steep_roof",
-                        () -> BlockInit.OAK_PLANKS_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_PLANKS_STEEP_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new SteepRoof(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -172,7 +172,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(PLANKS_STEEP_ROOFS);
 
         PLANKS_TOP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_top_roof",
-                        () -> BlockInit.OAK_PLANKS_TOP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_PLANKS_TOP_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new RoofTopNew(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -184,7 +184,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(PLANKS_TOP_ROOFS);
 
         PLANKS_UPPER_LOWER_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_upper_lower_roof",
-                        () -> BlockInit.OAK_PLANKS_UPPER_LOWER_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_PLANKS_UPPER_LOWER_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new Lower(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -196,7 +196,7 @@ public class MacawRoofsModule extends SimpleModule {
         this.addEntry(PLANKS_UPPER_LOWER_ROOFS);
 
         PLANKS_UPPER_STEEP_ROOFS = SimpleEntrySet.builder(WoodType.class, "planks_upper_steep_roof",
-                        () -> BlockInit.OAK_PLANKS_UPPER_STEEP_ROOF, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_PLANKS_UPPER_STEEP_ROOF, () -> VanillaWoodTypes.OAK,
                         w -> new Steep(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks

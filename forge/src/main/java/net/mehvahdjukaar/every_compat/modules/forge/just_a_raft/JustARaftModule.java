@@ -11,8 +11,8 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +34,7 @@ public class JustARaftModule extends SimpleModule {
         super(modId, "jar");
 
         rafts = ItemOnlyEntrySet.builder(WoodType.class, "raft",
-                        getModItem("oak_raft"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModItem("oak_raft"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             RaftType newRaft = getRaft(w);
 

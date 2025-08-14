@@ -7,8 +7,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.violetmoon.quark.content.building.block.VariantTrappedChestBlock;
-import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
-import org.violetmoon.quark.content.building.module.VariantChestsModule;
 
 public class CompatTrappedChestBlock extends VariantTrappedChestBlock {
 

@@ -53,7 +53,7 @@ public class BlocksPlusModule extends SimpleModule {
         var tab = modRes("creative_tab");
 
         cracked_planks = SimpleEntrySet.builder(WoodType.class, "planks", "cracked",
-                        getModBlock("cracked_acacia_planks"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("cracked_acacia_planks"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPCrackedMossyPlanks(Utils.copyPropertySafe(w.planks))
                 )
                 .addTexture(modRes("block/cracked_acacia_planks"))
@@ -64,7 +64,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(cracked_planks);
 
         mossy_planks = SimpleEntrySet.builder(WoodType.class, "planks", "mossy",
-                        getModBlock("mossy_acacia_planks"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("mossy_acacia_planks"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPCrackedMossyPlanks(Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(modRes("block/mossy_acacia_planks"), EveryCompat.res("block/bp/mossy_acacia_planks_m"))
@@ -75,7 +75,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(mossy_planks);
 
         crafting_table = SimpleEntrySet.builder(WoodType.class, "crafting_table",
-                        getModBlock("acacia_crafting_table"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_crafting_table"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPCraftingTable(Utils.copyPropertySafe(Blocks.CRAFTING_TABLE).mapColor(w.getColor()))
                 )
                 .addTextureM(modRes("block/acacia_crafting_table_side"), EveryCompat.res("block/vanilla_crafting_table_side_m"))
@@ -88,7 +88,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(crafting_table);
 
         chest = SimpleEntrySet.builder(WoodType.class, "chest",
-                        getModBlock("acacia_chest"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_chest"), () -> VanillaWoodTypes.ACACIA,
                         w -> new CompatChestBlock(this::getChestTile, Utils.copyPropertySafe(Blocks.CHEST).mapColor(w.getColor()))
                 )
                 //TEXTURES: planks
@@ -102,7 +102,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(chest);
 
         trapped_chest = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
-                        getModBlock("acacia_trapped_chest"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_trapped_chest"), () -> VanillaWoodTypes.ACACIA,
                         w -> new CompatTrappedChestBlock(this::getTrappedTile, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(w.getColor()))
                 )
                 //TEXTURES: planks
@@ -116,7 +116,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(trapped_chest);
 
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        getModBlock("acacia_bookshelf"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_bookshelf"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPPlankBookshelf(Utils.copyPropertySafe(Blocks.BOOKSHELF).mapColor(w.getColor()))
                 )
                 .addTextureM(modRes("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
@@ -129,7 +129,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(bookshelf);
 
         wooden_crate = SimpleEntrySet.builder(WoodType.class, "wooden_crate",
-                        getModBlock("acacia_wooden_crate"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_wooden_crate"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPPlanks(Utils.copyPropertySafe(w.planks))
                 )
                 .addTexture(modRes("block/acacia_wooden_crate"))
@@ -140,7 +140,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(wooden_crate);
 
         ladder = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        getModBlock("acacia_ladder"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_ladder"), () -> VanillaWoodTypes.ACACIA,
                         w -> new LadderBlock(Utils.copyPropertySafe(Blocks.LADDER).mapColor(w.getColor()))
                 )
                 .addTexture(modRes("block/acacia_ladder"))
@@ -154,7 +154,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(ladder);
 
         mosaic = SimpleEntrySet.builder(WoodType.class, "mosaic",
-                        getModBlock("acacia_mosaic"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_mosaic"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPPlanks(Utils.copyPropertySafe(w.planks))
                 )
                 .addTexture(modRes("block/acacia_mosaic"))
@@ -165,7 +165,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(mosaic);
 
         mosaic_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
-                        getModBlock("acacia_mosaic_stairs"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_mosaic_stairs"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPPlankStairs(mosaic.blocks.get(w).defaultBlockState(),
                                 Utils.copyPropertySafe(getBlockSafe(w, "stairs")).mapColor(w.getColor()))
                 )
@@ -179,7 +179,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(mosaic_stairs);
 
         mosaic_slab = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
-                        getModBlock("acacia_mosaic_slab"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_mosaic_slab"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPPlankSlab(Utils.copyPropertySafe(getBlockSafe(w, "slab")).mapColor(w.getColor()))
                 )
                 .requiresChildren("slab")
@@ -192,7 +192,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(mosaic_slab);
 
         mosaic_pressure_plate = SimpleEntrySet.builder(WoodType.class, "mosaic_pressure_plate",
-                        getModBlock("acacia_mosaic_pressure_plate"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_mosaic_pressure_plate"), () -> VanillaWoodTypes.ACACIA,
                         w -> new PressurePlateBlock(
                                 PressurePlateBlock.Sensitivity.EVERYTHING,
                                 Utils.copyPropertySafe(getBlockSafe(w, "pressure_plate")).mapColor(w.getColor()),
@@ -208,7 +208,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(mosaic_pressure_plate);
 
         cracked_mosaic = SimpleEntrySet.builder(WoodType.class, "mosaic", "cracked",
-                        getModBlock("cracked_acacia_mosaic"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("cracked_acacia_mosaic"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPCrackedMossyPlanks(Utils.copyPropertySafe(w.planks))
                 )
                 .addTexture(modRes("block/cracked_acacia_mosaic"))
@@ -219,7 +219,7 @@ public class BlocksPlusModule extends SimpleModule {
         this.addEntry(cracked_mosaic);
 
         mossy_mosaic = SimpleEntrySet.builder(WoodType.class, "mosaic", "mossy",
-                        getModBlock("mossy_acacia_mosaic"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("mossy_acacia_mosaic"), () -> VanillaWoodTypes.ACACIA,
                         w -> new BPCrackedMossyPlanks(Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(modRes("block/mossy_acacia_mosaic"), EveryCompat.res("block/bp/mossy_acacia_mosaic_m"))

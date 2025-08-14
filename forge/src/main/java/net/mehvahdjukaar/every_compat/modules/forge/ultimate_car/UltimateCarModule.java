@@ -11,8 +11,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
@@ -51,7 +51,7 @@ public class UltimateCarModule extends SimpleModule {
         ResourceLocation tab = modRes("car_parts");
 
         license_plate_holder = ItemOnlyEntrySet.builder(WoodType.class, "license_plate_holder",
-                        getModItem("oak_license_plate_holder"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModItem("oak_license_plate_holder"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             ResourceLocation planksResLoc = (mapPlanks.containsKey(w.getId().toString()))
                                     ? mapPlanks.get(w.getId().toString()).withPrefix("textures/")
@@ -74,7 +74,7 @@ public class UltimateCarModule extends SimpleModule {
         this.addEntry(license_plate_holder);
 
         bumper = ItemOnlyEntrySet.builder(WoodType.class, "bumper",
-                        getModItem("oak_bumper"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModItem("oak_bumper"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             ResourceLocation planksResLoc = (mapPlanks.containsKey(w.getId().toString()))
                                     ? mapPlanks.get(w.getId().toString()).withPrefix("textures/")
@@ -97,7 +97,7 @@ public class UltimateCarModule extends SimpleModule {
         this.addEntry(bumper);
 
         body = ItemOnlyEntrySet.builder(WoodType.class, "body",
-                        getModItem("oak_body"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModItem("oak_body"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             ResourceLocation planksResLoc = new ResourceLocation(
                                             w.createFullIdWith(
@@ -119,7 +119,7 @@ public class UltimateCarModule extends SimpleModule {
         this.addEntry(body);
 
         big_body = ItemOnlyEntrySet.builder(WoodType.class, "body", "big",
-                        getModItem("big_oak_body"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModItem("big_oak_body"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             ResourceLocation planksResLoc =  new ResourceLocation(
                                             w.createFullIdWith(

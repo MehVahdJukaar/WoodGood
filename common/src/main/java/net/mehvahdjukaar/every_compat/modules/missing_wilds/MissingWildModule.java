@@ -5,6 +5,7 @@ import me.ultrusmods.missingwilds.register.MissingWildsBlocks;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -21,7 +22,7 @@ public class MissingWildModule extends SimpleModule {
         super(modId, "msw");
 
         fallenLogs = SimpleEntrySet.builder(WoodType.class, "log", "fallen",
-                        MissingWildsBlocks.FALLEN_ACACIA_LOG, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        MissingWildsBlocks.FALLEN_ACACIA_LOG, () -> VanillaWoodTypes.ACACIA,
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(modRes("fallen_logs"), Registries.BLOCK)
                 .addTag(modRes("fallen_logs"), Registries.ITEM)

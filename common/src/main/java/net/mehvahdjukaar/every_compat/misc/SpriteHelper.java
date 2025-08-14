@@ -524,8 +524,8 @@ public class SpriteHelper {
     }
 
     private static  <T extends BlockType> @Nullable ItemLike wfl(T t, String s) {
-        if (t instanceof LeavesType l && l.getWoodType() != null) {
-            var c = l.getWoodType().getChild(s);
+        if (t instanceof LeavesType l && l.getAssociatedWoodType() != null) {
+            var c = l.getAssociatedWoodType().getChild(s);
             return c instanceof ItemLike il ? il : null;
         }
         return null;
@@ -565,7 +565,7 @@ public class SpriteHelper {
     //for ecologics
     private static void maybeFlowerAzalea(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
         if (woodType.getId().toString().equals("ecologics:flowering_azalea")) {
-            WoodType azalea = WoodTypeRegistry.getValue(new ResourceLocation("ecologics:azalea"));
+            WoodType azalea = WoodTypeRegistry.INSTANCE.get(new ResourceLocation("ecologics:azalea"));
             if (azalea != null && !(image.imageWidth() > 32) && !(image.imageHeight() > 32)) {
                 try (TextureImage mask = TextureImage.open(manager,
                         EveryCompat.res("block/ecologics_overlay"));
@@ -588,7 +588,7 @@ public class SpriteHelper {
     //for Regions-Unexplored's brimwood
     private static void maybeBrimwood(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
         if (woodType.getId().toString().equals("regions_unexplored:brimwood")) {
-            WoodType brimwood = WoodTypeRegistry.getValue(new ResourceLocation("regions_unexplored:brimwood"));
+            WoodType brimwood = WoodTypeRegistry.INSTANCE.get(new ResourceLocation("regions_unexplored:brimwood"));
             if (brimwood != null) {
                 try (TextureImage lavaOverlay = TextureImage.open(manager,
                         EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"));
@@ -691,7 +691,7 @@ public class SpriteHelper {
     //for Advent-Of-Ascension's stranglewood
     private static void maybeStrangewood(TextureImage image, ResourceManager manager, WoodType woodType) {
         if (woodType.getId().toString().equals("aoa3:strangewood")) {
-            WoodType strangewood = WoodTypeRegistry.getValue(new ResourceLocation("aoa3:strangewood"));
+            WoodType strangewood = WoodTypeRegistry.INSTANCE.get(new ResourceLocation("aoa3:strangewood"));
             if (strangewood != null) {
                 try (TextureImage vineOverlay = TextureImage.open(manager,
                         new ResourceLocation("aoa3:block/stranglewood_log_vine"));

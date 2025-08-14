@@ -6,6 +6,7 @@ import net.larsmans.infinitybuttons.block.custom.button.WoodenButton;
 import net.larsmans.infinitybuttons.block.custom.secretbutton.PlankSecretButton;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
@@ -26,7 +27,7 @@ public class InfinityButtonsModule extends SimpleModule {
         ResourceLocation tab = modRes(modId);
 
         largeButtons = SimpleEntrySet.builder(WoodType.class, "large_button",
-                        () -> InfinityButtonsBlocks.OAK_LARGE_BUTTON, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> InfinityButtonsBlocks.OAK_LARGE_BUTTON, () -> VanillaWoodTypes.OAK,
                         woodType -> new WoodenButton(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON)
                                 .strength(0.5f).collidable(false).nonOpaque().sounds(SoundType.WOOD)
                                 .pistonBehavior(PushReaction.DESTROY),
@@ -40,7 +41,7 @@ public class InfinityButtonsModule extends SimpleModule {
         this.addEntry(largeButtons);
 
         plankSecretButtons = SimpleEntrySet.builder(WoodType.class, "plank_secret_button",
-                        () -> InfinityButtonsBlocks.OAK_PLANK_SECRET_BUTTON, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> InfinityButtonsBlocks.OAK_PLANK_SECRET_BUTTON, () -> VanillaWoodTypes.OAK,
                         woodType -> new PlankSecretButton(FabricBlockSettings.copyOf(woodType.planks)
                                 .strength(2.0f, 3.0f).burnable()
                                 .nonOpaque().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY),

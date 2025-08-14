@@ -4,8 +4,8 @@ import com.lothrazar.absentbydesign.block.BlockAbsentFence;
 import com.lothrazar.absentbydesign.block.BlockAbsentWall;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +26,7 @@ public class AbsentByDesignModule extends SimpleModule {
         ResourceLocation tab = modRes("tab");
 
         fence_log = SimpleEntrySet.builder(WoodType.class, "", "fence_log",
-                        getModBlock("fence_log_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("fence_log_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new BlockAbsentFence(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
                 //TEXTURE: using the oak_log
@@ -39,7 +39,7 @@ public class AbsentByDesignModule extends SimpleModule {
         this.addEntry(fence_log);
 
         wall_log = SimpleEntrySet.builder(WoodType.class, "log", "wall",
-                        getModBlock("wall_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("wall_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
                 .requiresChildren("wood") //REASON: recipes
@@ -55,7 +55,7 @@ public class AbsentByDesignModule extends SimpleModule {
         this.addEntry(wall_log);
 
         wall_stripped_log = SimpleEntrySet.builder(WoodType.class, "log", "wall_stripped",
-                        getModBlock("wall_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("wall_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.log).ignitedByLava())
                 )
                 .requiresChildren("stripped_wood") //REASON: recipes
@@ -71,7 +71,7 @@ public class AbsentByDesignModule extends SimpleModule {
         this.addEntry(wall_stripped_log);
 
         wall_planks = SimpleEntrySet.builder(WoodType.class, "planks", "wall",
-                        getModBlock("wall_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("wall_oak_planks"), () -> VanillaWoodTypes.OAK,
                         w -> new BlockAbsentWall(Utils.copyPropertySafe(w.planks).ignitedByLava())
                 )
                 //TEXTURE: planks

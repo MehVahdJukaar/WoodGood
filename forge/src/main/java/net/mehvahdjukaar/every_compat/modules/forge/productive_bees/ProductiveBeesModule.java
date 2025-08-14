@@ -7,7 +7,7 @@ package net.mehvahdjukaar.every_compat.modules.forge.productive_bees;
 //import net.mehvahdjukaar.every_compat.EveryCompat;
 //import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 //import net.mehvahdjukaar.every_compat.api.SimpleModule;
-//import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+//import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 //import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 //import net.mehvahdjukaar.moonlight.api.util.Utils;
 //import net.minecraft.core.Registry;
@@ -27,7 +27,7 @@ public class ProductiveBeesModule extends SimpleModule {
         CreativeModeTab tab = ModItemGroups.PRODUCTIVE_BEES;
 
         advancedBeehives = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
-                        ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> VanillaWoodTypes.SPRUCE,
                         w -> new AdvancedBeehive(Utils.copyPropertySafe(w.planks)))
                 // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))
@@ -63,7 +63,7 @@ public class ProductiveBeesModule extends SimpleModule {
         this.addEntry(advancedBeehives);
 
         expansionBoxes = SimpleEntrySet.builder(WoodType.class, "", "expansion_box",
-                        ModBlocks.EXPANSION_BOX_SPRUCE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        ModBlocks.EXPANSION_BOX_SPRUCE, () -> VanillaWoodTypes.SPRUCE,
                         w -> new ExpansionBox(Utils.copyPropertySafe(w.planks)))
                 // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))

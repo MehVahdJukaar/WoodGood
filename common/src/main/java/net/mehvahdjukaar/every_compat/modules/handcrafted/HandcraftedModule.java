@@ -11,9 +11,9 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.io.FileNotFoundException;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 //SUPPORT: v3.0.6+
@@ -52,7 +51,7 @@ public class HandcraftedModule extends SimpleModule {
         ResourceLocation tab = modRes("main");
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
-                        ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_CHAIR, () -> VanillaWoodTypes.OAK,
                         w -> new ChairBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -67,7 +66,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(chair);
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
-                        ModBlocks.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_TABLE, () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -83,7 +82,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(table);
 
         bench = SimpleEntrySet.builder(WoodType.class, "bench",
-                        ModBlocks.OAK_BENCH, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_BENCH, () -> VanillaWoodTypes.OAK,
                         w -> new BenchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -100,7 +99,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(bench);
 
         couch = SimpleEntrySet.builder(WoodType.class, "couch",
-                        ModBlocks.OAK_COUCH, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_COUCH, () -> VanillaWoodTypes.OAK,
                         w -> new CouchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -115,7 +114,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(couch);
 
         fancy_bed = SimpleEntrySet.builder(WoodType.class, "fancy_bed",
-                        ModBlocks.OAK_FANCY_BED, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_FANCY_BED, () -> VanillaWoodTypes.OAK,
                         w -> new FancyBedBlock(Utils.copyPropertySafe(Blocks.WHITE_BED))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -134,7 +133,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(fancy_bed);
 
         dining_bench = SimpleEntrySet.builder(WoodType.class, "dining_bench",
-                        ModBlocks.OAK_DINING_BENCH, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_DINING_BENCH, () -> VanillaWoodTypes.OAK,
                         w -> new DiningBenchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -149,7 +148,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(dining_bench);
 
         nightstand = SimpleEntrySet.builder(WoodType.class, "nightstand",
-                        ModBlocks.OAK_NIGHTSTAND, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_NIGHTSTAND, () -> VanillaWoodTypes.OAK,
                         w -> new NightstandBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(getModTile("container"))
@@ -166,7 +165,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(nightstand);
 
         desk = SimpleEntrySet.builder(WoodType.class, "desk",
-                        ModBlocks.OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_DESK, () -> VanillaWoodTypes.OAK,
                         w -> new DeskBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(getModTile("container"))
@@ -183,7 +182,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(desk);
 
         side_table = SimpleEntrySet.builder(WoodType.class, "side_table",
-                        ModBlocks.OAK_SIDE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_SIDE_TABLE, () -> VanillaWoodTypes.OAK,
                         w -> new SideTableBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(getModTile("container"))
@@ -199,7 +198,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(side_table);
 
         counter = SimpleEntrySet.builder(WoodType.class, "counter",
-                        ModBlocks.ACACIA_COUNTER, () -> WoodTypeRegistry.getValue("acacia"),
+                        ModBlocks.ACACIA_COUNTER, () -> VanillaWoodTypes.ACACIA,
                         w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(getModTile("container"))
@@ -217,7 +216,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(counter);
 
         cupboard = SimpleEntrySet.builder(WoodType.class, "cupboard",
-                        ModBlocks.OAK_CUPBOARD, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_CUPBOARD, () -> VanillaWoodTypes.OAK,
                         w -> new CupboardBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(getModTile("container"))
@@ -236,7 +235,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(cupboard);
 
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
-                        ModBlocks.OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_DRAWER, () -> VanillaWoodTypes.OAK,
                         w -> new DrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(getModTile("container"))
@@ -268,7 +267,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(drawer);
 
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
-                        ModBlocks.OAK_SHELF, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_SHELF, () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(getModTile("container"))
@@ -291,7 +290,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(shelf);
 
         pillarTrim = SimpleEntrySet.builder(WoodType.class, "pillar_trim",
-                        ModBlocks.OAK_PILLAR_TRIM, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_PILLAR_TRIM, () -> VanillaWoodTypes.OAK,
                         w -> new PillarTrimBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), true)
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -313,7 +312,7 @@ public class HandcraftedModule extends SimpleModule {
         this.addEntry(pillarTrim);
 
         cornerTrim = SimpleEntrySet.builder(WoodType.class, "corner_trim",
-                        ModBlocks.OAK_CORNER_TRIM, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_CORNER_TRIM, () -> VanillaWoodTypes.OAK,
                         w -> new CornerTrimBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), true)
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
-
 import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
@@ -22,7 +21,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsU
 import net.mehvahdjukaar.every_compat.modules.fabric.storage_delight.StorageDelightModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
-
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;

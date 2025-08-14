@@ -6,11 +6,10 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -43,7 +42,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
 
 
         BARK_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bark_trapdoor",
-                        BlockInit.OAK_BARK_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BARK_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 //TEXTURES: log
@@ -60,7 +59,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(BARK_TRAPDOORS);
 
         BARN_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barn_trapdoor",
-                        BlockInit.OAK_BARN_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BARN_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -77,7 +76,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(BARN_TRAPDOORS);
 
         BARRED_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barred_trapdoor",
-                        BlockInit.OAK_BARRED_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BARRED_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -94,7 +93,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(BARRED_TRAPDOORS);
 
         BEACH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "beach_trapdoor",
-                        BlockInit.OAK_BEACH_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BEACH_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -111,7 +110,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(BEACH_TRAPDOORS);
 
         CLASSIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "classic_trapdoor",
-                        BlockInit.SPRUCE_CLASSIC_TRAPDOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        BlockInit.SPRUCE_CLASSIC_TRAPDOOR, () -> VanillaWoodTypes.SPRUCE,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -128,7 +127,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(CLASSIC_TRAPDOORS);
 
         COTTAGE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "cottage_trapdoor",
-                        BlockInit.OAK_COTTAGE_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_COTTAGE_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -145,7 +144,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(COTTAGE_TRAPDOORS);
 
         FOUR_PANEL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "four_panel_trapdoor",
-                        BlockInit.OAK_FOUR_PANEL_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_FOUR_PANEL_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -162,7 +161,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(FOUR_PANEL_TRAPDOORS);
 
         GLASS_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "glass_trapdoor",
-                        BlockInit.OAK_GLASS_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_GLASS_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -180,7 +179,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(GLASS_TRAPDOORS);
 
         MESH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bamboo_trapdoor",
-                        BlockInit.OAK_BAMBOO_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BAMBOO_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -198,7 +197,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(MESH_TRAPDOORS);
 
         MYSTIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "mystic_trapdoor",
-                        BlockInit.OAK_MYSTIC_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_MYSTIC_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -215,7 +214,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(MYSTIC_TRAPDOORS);
 
         PAPER_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "paper_trapdoor",
-                        BlockInit.OAK_PAPER_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PAPER_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -233,7 +232,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(PAPER_TRAPDOORS);
 
         RANCH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "ranch_trapdoor",
-                        BlockInit.OAK_RANCH_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_RANCH_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -251,7 +250,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(RANCH_TRAPDOORS);
 
         SWAMP_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "swamp_trapdoor",
-                        BlockInit.OAK_SWAMP_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_SWAMP_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -269,7 +268,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(SWAMP_TRAPDOORS);
 
         TROPICAL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "tropical_trapdoor",
-                        BlockInit.OAK_TROPICAL_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_TROPICAL_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -286,7 +285,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(TROPICAL_TRAPDOORS);
 
         WAFFLE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "blossom_trapdoor",
-                        BlockInit.OAK_BLOSSOM_TRAPDOOR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BLOSSOM_TRAPDOOR, () -> VanillaWoodTypes.OAK,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTexture(modRes("block/blossom/oak_blossom_trapdoor"))
@@ -303,7 +302,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
         this.addEntry(WAFFLE_TRAPDOORS);
 
         BARREL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barrel_trapdoor",
-                        BlockInit.SPRUCE_BARREL_TRAPDOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        BlockInit.SPRUCE_BARREL_TRAPDOOR, () -> VanillaWoodTypes.SPRUCE,
                         w -> new TrapDoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion(), w.toVanillaOrOak().setType()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

@@ -7,8 +7,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
@@ -43,7 +43,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         var tab = modRes("main");
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
-                        getModBlock("oak_table", TableBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table", TableBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -57,7 +57,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(tables);
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
-                        getModBlock("oak_chair", ChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chair", ChairBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new CompatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), false)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -70,7 +70,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(chairs);
 
         hay_chairs = SimpleEntrySet.builder(WoodType.class, "chair", "hay",
-                        getModBlock("hay_oak_chair", ChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("hay_oak_chair", ChairBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new CompatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), true)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -84,7 +84,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(hay_chairs);
 
         stools = SimpleEntrySet.builder(WoodType.class, "stool",
-                        getModBlock("oak_stool", StoolBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_stool", StoolBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new StoolBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -97,7 +97,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(stools);
 
         desks = SimpleEntrySet.builder(WoodType.class, "desk",
-                        getModBlock("oak_desk", DeskBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_desk", DeskBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new DeskBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(modRes("block/desk/oak/front"),
@@ -116,7 +116,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(desks);
 
         desk_drawers = SimpleEntrySet.builder(WoodType.class, "desk_drawer",
-                        getModBlock("oak_desk_drawer", DeskDrawerBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_desk_drawer", DeskDrawerBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new DeskDrawerBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(ModBlockEntities.DESK_DRAWER)

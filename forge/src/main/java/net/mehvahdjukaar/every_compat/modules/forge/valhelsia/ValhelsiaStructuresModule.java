@@ -17,8 +17,8 @@ import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.Direction;
@@ -58,7 +58,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         ResourceLocation tab = modRes("main");
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
-                        getModBlock("stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("stripped_oak_post"), () -> VanillaWoodTypes.OAK,
                         woodType -> new PostBlock(postProperties(woodType))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -72,7 +72,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         this.addEntry(strippedPosts);
 
         posts = SimpleEntrySet.builder(WoodType.class, "post",
-                        getModBlock("oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_post"), () -> VanillaWoodTypes.OAK,
                         woodType -> new StrippablePostBlock(woodType, postProperties(woodType))
                 )
                 //TEXTURES: manual generation (BELOW)
@@ -85,7 +85,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         this.addEntry(posts);
 
         cutStrippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut_stripped",
-                        getModBlock("cut_stripped_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("cut_stripped_oak_post"), () -> VanillaWoodTypes.OAK,
                         woodType -> new CutPostBlock(cutPostProperties(woodType))
                 )
                 .requiresFromMap(strippedPosts.blocks) //REASON: recipes
@@ -102,7 +102,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         this.addEntry(cutStrippedPosts);
 
         cutPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut",
-                        getModBlock("cut_oak_post"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("cut_oak_post"), () -> VanillaWoodTypes.OAK,
                         woodType -> new StrippableCutPostBlock(woodType, cutPostProperties(woodType))
                 )
                 .requiresFromMap(posts.blocks) //REASON: recipes
@@ -117,7 +117,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         this.addEntry(cutPosts);
 
         bundledStrippedPosts = SimpleEntrySet.builder(WoodType.class, "posts", "bundled_stripped",
-                        getModBlock("bundled_stripped_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("bundled_stripped_oak_posts"), () -> VanillaWoodTypes.OAK,
                         woodType -> new RotatedPillarBlock(bundledPostProperties(woodType))
                 )
                 .requiresFromMap(strippedPosts.blocks) //REASON: recipes
@@ -130,7 +130,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         this.addEntry(bundledStrippedPosts);
 
         bundledPosts = SimpleEntrySet.builder(WoodType.class, "posts", "bundled",
-                        getModBlock("bundled_oak_posts"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("bundled_oak_posts"), () -> VanillaWoodTypes.OAK,
                         woodType -> new StrippableRotatedPillarBlock(() -> bundledStrippedPosts.blocks.get(woodType), bundledPostProperties(woodType))
                 )
                 .requiresFromMap(posts.blocks) //REASON: recipes

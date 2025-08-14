@@ -8,8 +8,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +33,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                 modRes(modId) : modRes("tab");
 
         flowerBoxes = SimpleEntrySet.builder(WoodType.class, "flower_box",
-                       getModBlock("oak_flower_box"), () -> WoodTypeRegistry.OAK_TYPE,
+                       getModBlock("oak_flower_box"), () -> VanillaWoodTypes.OAK,
                         w -> new FlowerBoxBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("flower_boxes"), Registries.BLOCK)
                 .addTag(modRes("flower_boxes"), Registries.ITEM)
@@ -48,7 +48,7 @@ public class AnotherFurnitureModule extends SimpleModule {
         this.addEntry(flowerBoxes);
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
-                       getModBlock("oak_shutter"), () -> WoodTypeRegistry.OAK_TYPE,
+                       getModBlock("oak_shutter"), () -> VanillaWoodTypes.OAK,
                         w -> new ShutterBlock(1, Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(modRes("shutters"), Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.ITEM)
@@ -104,7 +104,7 @@ public class AnotherFurnitureModule extends SimpleModule {
         this.addEntry(shutters);
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
-                       getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                       getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("tables"), Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.ITEM)
@@ -122,7 +122,7 @@ public class AnotherFurnitureModule extends SimpleModule {
         this.addEntry(tables);
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
-                       getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
+                       getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
                         w -> new ChairBlock(1, Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("chairs"), Registries.BLOCK)
                 .addTag(modRes("chairs"), Registries.ITEM)
@@ -147,7 +147,7 @@ public class AnotherFurnitureModule extends SimpleModule {
         this.addEntry(chairs);
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
-                       getModBlock("oak_shelf"), () -> WoodTypeRegistry.OAK_TYPE,
+                       getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("shelves"), Registries.BLOCK)
                 .addTag(modRes("shelves"), Registries.ITEM)
@@ -163,7 +163,7 @@ public class AnotherFurnitureModule extends SimpleModule {
         this.addEntry(shelves);
 
         drawers = SimpleEntrySet.builder(WoodType.class, "drawer",
-                       getModBlock("oak_drawer"), () -> WoodTypeRegistry.OAK_TYPE,
+                       getModBlock("oak_drawer"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("drawers"), Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.ITEM)
@@ -179,7 +179,7 @@ public class AnotherFurnitureModule extends SimpleModule {
         this.addEntry(drawers);
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
-                       getModBlock("oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
+                       getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
                         w -> new BenchBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("benches"), Registries.BLOCK)
                 .addTag(modRes("benches"), Registries.ITEM)

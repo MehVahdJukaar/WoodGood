@@ -2,12 +2,11 @@ package net.mehvahdjukaar.every_compat.modules.stylish_stiles;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.weaverfever.stylishstiles.block.custom.Stile;
@@ -23,7 +22,7 @@ public class StylishStilesModule extends SimpleModule {
 
         //noinspection DataFlowIssue
         STILE = SimpleEntrySet.builder(WoodType.class, "stile",
-                        getModBlock("oak_stile"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_stile"), () -> VanillaWoodTypes.OAK,
                         w -> registerIfFence(w, () -> new Stile(Utils.copyPropertySafe(w.getBlockOfThis("fence"))))
         )
                 .addModelTransform(m -> m.addModifier((s, id, w) -> {

@@ -28,6 +28,14 @@
 
 ---
 
+## vv2.8.17
+
+- Restored backward compat with addon mods due to a sneaky signature change in last update
+
+---
+
+---
+
 ## vv2.8.15
 
 ### UPDATED: 

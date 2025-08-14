@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -46,7 +47,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
 
 //!! OAK
         vertical_stairs = SimpleEntrySet.builder(WoodType.class, "vertical_stairs",
-                        getModBlock("oak_vertical_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_vertical_stairs"), () -> VanillaWoodTypes.OAK,
                         woodType -> new FlammableVerticalStairBlock(Utils.copyPropertySafe(woodType.planks), 20, 5 )
                 )
                 //TEXTURES: planks
@@ -59,7 +60,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(vertical_stairs);
 
         mosaics = SimpleEntrySet.builder(WoodType.class, "mosaic",
-                        getModBlock("oak_mosaic"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic"), () -> VanillaWoodTypes.OAK,
                         woodType -> new FlammableBlock(Utils.copyPropertySafe(woodType.planks), 20, 5)
                 )
                 .requiresChildren("slab") //REASON: recipes
@@ -71,7 +72,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(mosaics);
 
         mosaic_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
-                        getModBlock("oak_mosaic_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic_stairs"), () -> VanillaWoodTypes.OAK,
                         woodType -> new FlammableStairBlock(mosaics.blocks.get(woodType).defaultBlockState(),
                                 Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD), 20, 5)
                 )
@@ -86,7 +87,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(mosaic_stairs);
 
         mosaic_slabs = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
-                        getModBlock("oak_mosaic_slab"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic_slab"), () -> VanillaWoodTypes.OAK,
                         woodType -> new FlammableSlabBlock(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD), 20, 5)
                 )
                 .requiresFromMap(mosaics.blocks) //REASON: recipes
@@ -100,7 +101,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(mosaic_slabs);
 
         mosaic_vertical_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_vertical_stairs",
-                        getModBlock("oak_mosaic_vertical_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic_vertical_stairs"), () -> VanillaWoodTypes.OAK,
                         woodType -> new FlammableVerticalStairBlock(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD), 20, 5)
                 )
                 .requiresFromMap(mosaics.blocks) //REASON: recipes
@@ -114,7 +115,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(mosaic_vertical_stairs);
 
         chiseled_planks = SimpleEntrySet.builder(WoodType.class, "", "chiseled",
-                        getModBlock("chiseled_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("chiseled_oak"), () -> VanillaWoodTypes.OAK,
                         woodType -> new Block(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
                 )
                 .requiresChildren("slab") //REASON: recipes
@@ -127,7 +128,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(chiseled_planks);
 
         hollow_logs = SimpleEntrySet.builder(WoodType.class, "log","hollow",
-                        getModBlock("hollow_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("hollow_oak_log"), () -> VanillaWoodTypes.OAK,
                         woodType -> new FlammableHollowRotatedPillarBlock(Utils.copyPropertySafe(woodType.log)
                                 .sound(woodType.getSound())
                                 .ignitedByLava(),
@@ -143,7 +144,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(hollow_logs);
 
         hollow_stripped_logs = SimpleEntrySet.builder(WoodType.class, "log","hollow_stripped",
-                        getModBlock("hollow_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("hollow_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
                         woodType -> new FlammableHollowRotatedPillarBlock(Utils.copyPropertySafe(woodType.log)
                                 .sound(woodType.getSound())
                                 .ignitedByLava(),
@@ -160,7 +161,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
 
 //!! SPRUCE
         crafting_tables = SimpleEntrySet.builder(WoodType.class, "crafting_table",
-                        getModBlock("spruce_crafting_table"), () -> WoodTypeRegistry.getValue("spruce"),
+                        getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
                         woodType -> new EBCraftingTableBlock(BlockBehaviour.Properties.of()
                                 .mapColor(woodType.getColor())
                                 .instrument(NoteBlockInstrument.BASS)
@@ -180,7 +181,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(crafting_tables);
 
         decorative_shelves = SimpleEntrySet.builder(WoodType.class, "decorative_shelf",
-                        getModBlock("spruce_decorative_shelf"), () -> WoodTypeRegistry.getValue("spruce"),
+                        getModBlock("spruce_decorative_shelf"), () -> VanillaWoodTypes.SPRUCE,
                         woodType -> new DecorativeShelfBlock(Utils.copyPropertySafe(Blocks.BOOKSHELF).sound(SoundType.WOOD), 30, 20)
                 )
                 .addTexture(modRes("block/spruce_empty_shelf"))
@@ -198,7 +199,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(decorative_shelves);
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        getModBlock("spruce_bookshelf"), () -> WoodTypeRegistry.getValue("spruce"),
+                        getModBlock("spruce_bookshelf"), () -> VanillaWoodTypes.SPRUCE,
                         woodType -> new FlammableBlock(Utils.copyPropertySafe(Blocks.BOOKSHELF).sound(SoundType.WOOD), 30, 20)
                 )
                 //TEXTURES: planks
@@ -212,7 +213,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
 
 //!! CRIMSON
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        getModBlock("crimson_ladder"), () -> WoodTypeRegistry.getValue("crimson"),
+                        getModBlock("crimson_ladder"), () -> VanillaWoodTypes.CRIMSON,
                         woodType -> new LadderBlock(Utils.copyPropertySafe(Blocks.LADDER).sound(woodType.getSound()))
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

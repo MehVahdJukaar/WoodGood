@@ -5,8 +5,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -32,7 +32,7 @@ public class StorageDelightModule extends SimpleModule {
         ResourceLocation tab = (PlatHelper.getPlatform().isFabric()) ? modRes("title") : modRes(modId);
 
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
-                        getModBlock("oak_drawer"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_drawer"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .requiresChildren("slab", "trapdoor") //REASON: recipes
@@ -48,7 +48,7 @@ public class StorageDelightModule extends SimpleModule {
         this.addEntry(drawer);
 
         drawer_with_door = SimpleEntrySet.builder(WoodType.class, "drawer_with_door",
-                        getModBlock("oak_drawer_with_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_drawer_with_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerDoorBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .requiresChildren("slab", "trapdoor") //REASON: recipes
@@ -63,7 +63,7 @@ public class StorageDelightModule extends SimpleModule {
         this.addEntry(drawer_with_door);
 
         drawer_with_books = SimpleEntrySet.builder(WoodType.class, "drawer_with_books",
-                        getModBlock("oak_drawer_with_books"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_drawer_with_books"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerBooksBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .requiresChildren("slab", "trapdoor") //REASON: recipes
@@ -78,7 +78,7 @@ public class StorageDelightModule extends SimpleModule {
         this.addEntry(drawer_with_books);
 
         small_drawers = SimpleEntrySet.builder(WoodType.class, "drawers", "small",
-                        getModBlock("small_oak_drawers"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("small_oak_drawers"), () -> VanillaWoodTypes.OAK,
                         w -> new SmallDrawersBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .requiresChildren("slab", "trapdoor") //REASON: recipes
@@ -93,7 +93,7 @@ public class StorageDelightModule extends SimpleModule {
         this.addEntry(small_drawers);
 
         bookshelf_with_door = SimpleEntrySet.builder(WoodType.class, "bookshelf_with_door",
-                        getModBlock("oak_bookshelf_with_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bookshelf_with_door"), () -> VanillaWoodTypes.OAK,
                         w -> new BookshelfDoorBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .requiresChildren("slab", "trapdoor") //REASON: recipes
@@ -108,7 +108,7 @@ public class StorageDelightModule extends SimpleModule {
         this.addEntry(bookshelf_with_door);
 
         glass_cabinet = SimpleEntrySet.builder(WoodType.class, "cabinet", "glass",
-                        getModBlock("glass_oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("glass_oak_cabinet"), () -> VanillaWoodTypes.OAK,
                         w -> new GlassCabinetBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .requiresChildren("slab", "trapdoor") //REASON: recipes
@@ -123,7 +123,7 @@ public class StorageDelightModule extends SimpleModule {
         this.addEntry(glass_cabinet);
 
         cabinet_with_glass_doors = SimpleEntrySet.builder(WoodType.class, "cabinet_with_glass_doors",
-                        getModBlock("oak_cabinet_with_glass_doors"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cabinet_with_glass_doors"), () -> VanillaWoodTypes.OAK,
                         w -> new CabinetVariantBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .requiresChildren("slab", "trapdoor") //REASON: recipes
@@ -138,7 +138,7 @@ public class StorageDelightModule extends SimpleModule {
         this.addEntry(cabinet_with_glass_doors);
 
         single_door_cabinet = SimpleEntrySet.builder(WoodType.class, "single_door_cabinet",
-                        getModBlock("oak_single_door_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_single_door_cabinet"), () -> VanillaWoodTypes.OAK,
                         w -> new CabinetVariantBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .requiresChildren("slab", "trapdoor") //REASON: recipes

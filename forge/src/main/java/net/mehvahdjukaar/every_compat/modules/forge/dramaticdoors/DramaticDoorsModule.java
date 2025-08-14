@@ -1,14 +1,14 @@
 package net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors;
 
+import com.fizzware.dramaticdoors.forge.DDRegistry;
 import com.fizzware.dramaticdoors.forge.blocks.ShortDoorBlock;
 import com.fizzware.dramaticdoors.forge.blocks.TallDoorBlock;
-import com.fizzware.dramaticdoors.forge.DDRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -32,7 +32,7 @@ public class DramaticDoorsModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = DDRegistry.MAIN_TAB;
 
         tallDoors = SimpleEntrySet.builder(WoodType.class, "door", "tall",
-                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("tall_oak_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(copyDoorSafe(w), w.toVanillaOrOak().setType())
                 )
                 .requiresChildren("door") //REASON: recipes
@@ -51,7 +51,7 @@ public class DramaticDoorsModule extends SimpleModule {
         this.addEntry(tallDoors);
 
         shortDoors = SimpleEntrySet.builder(WoodType.class, "door", "short",
-                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("short_oak_door"), () -> VanillaWoodTypes.OAK,
                         w -> new ShortDoorBlock(copyDoorSafe(w), w.toVanillaOrOak().setType())
                 )
                 .requiresChildren("door") //REASON: recipes

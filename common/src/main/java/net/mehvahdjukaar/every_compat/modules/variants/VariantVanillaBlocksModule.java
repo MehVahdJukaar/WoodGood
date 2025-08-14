@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.variants;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.JsonObject;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -13,9 +12,8 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -29,8 +27,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -73,7 +69,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         //Barrel
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
-                        getModBlock("oak_barrel"),() -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_barrel"),() -> VanillaWoodTypes.OAK,
                         w -> new BarrelBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -97,7 +93,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(barrel);
 
         beehive = SimpleEntrySet.builder(WoodType.class, "beehive",
-                        getModBlock("spruce_beehive"), () -> WoodTypeRegistry.getValue("spruce"),
+                        getModBlock("spruce_beehive"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -117,7 +113,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(beehive);
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        getModBlock("acacia_bookshelf"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_bookshelf"), () -> VanillaWoodTypes.ACACIA,
                         w -> new Block(Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -133,7 +129,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(bookshelves);
 
         cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
-                        getModBlock("oak_cartography_table"),() -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cartography_table"),() -> VanillaWoodTypes.OAK,
                         w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)) {
                         }
                 )
@@ -150,7 +146,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(cartography);
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
-                        getModBlock("acacia_chest"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_chest"), () -> VanillaWoodTypes.ACACIA,
                         w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(VariantChestBlockEntity::new)
@@ -176,7 +172,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(chests);
 
         chiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        getModBlock("acacia_chiseled_bookshelf"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_chiseled_bookshelf"), () -> VanillaWoodTypes.ACACIA,
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -194,7 +190,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(chiseledBookshelves);
 
         composters = SimpleEntrySet.builder(WoodType.class, "composter",
-                        getModBlock("oak_composter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_composter"), () -> VanillaWoodTypes.OAK,
                         w -> new ComposterBlock(Utils.copyPropertySafe(Blocks.COMPOSTER))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -209,7 +205,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(composters);
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
-                        getModBlock("spruce_crafting_table"), () -> WoodTypeRegistry.getValue("spruce"),
+                        getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks)) {
                         }
                 )
@@ -230,7 +226,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(craftingTable);
 
         fletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
-                        getModBlock("oak_fletching_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_fletching_table"), () -> VanillaWoodTypes.OAK,
                         w -> new FletchingTableBlock(Utils.copyPropertySafe(Blocks.FLETCHING_TABLE)) {
                         }
                 )
@@ -249,7 +245,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(fletchingTable);
 
         grindstones = SimpleEntrySet.builder(WoodType.class, "grindstone",
-                        getModBlock("oak_grindstone"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_grindstone"), () -> VanillaWoodTypes.OAK,
                         w -> new GrindstoneBlock(Utils.copyPropertySafe(Blocks.GRINDSTONE)) {
                         }
                 )
@@ -263,7 +259,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(grindstones);
 
         lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
-                        getModBlock("acacia_lectern"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_lectern"), () -> VanillaWoodTypes.ACACIA,
                         w -> new LecternBlock(Utils.copyPropertySafe(Blocks.LECTERN)) {
                         }
                 )
@@ -283,7 +279,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(lectern);
 
         smithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
-                        getModBlock("oak_smithing_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_smithing_table"), () -> VanillaWoodTypes.OAK,
                         w -> new SmithingTableBlock(Utils.copyPropertySafe(Blocks.SMITHING_TABLE)) {
                         }
                 )
@@ -302,7 +298,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         this.addEntry(smithingTable);
 
         smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
-                        getModBlock("acacia_smoker"), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_smoker"), () -> VanillaWoodTypes.ACACIA,
                         w -> new SmokerBlock(Utils.copyPropertySafe(Blocks.SMOKER)) {
                         }
                 )

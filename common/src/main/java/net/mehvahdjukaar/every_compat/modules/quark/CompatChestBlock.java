@@ -2,16 +2,11 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.content.building.block.VariantChestBlock;
-import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
 
 public class CompatChestBlock extends VariantChestBlock {
 

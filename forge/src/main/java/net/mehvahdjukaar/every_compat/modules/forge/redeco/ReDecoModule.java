@@ -16,8 +16,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -63,7 +63,7 @@ public class ReDecoModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = ModCreativeModeTab.REDECO_TAB.getKey();
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
-                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(copyProperties(w, 1.0F))
                 )
                 .addTexture(modRes("block/table/oak_table"))
@@ -74,7 +74,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(tables);
 
         side_tables = SimpleEntrySet.builder(WoodType.class, "side_table",
-                        getModBlock("oak_side_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_side_table"), () -> VanillaWoodTypes.OAK,
                         w -> new SideTableBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.SIDE_TABLE_BLOCK_ENTITY)
@@ -87,7 +87,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(side_tables);
 
         drawers = SimpleEntrySet.builder(WoodType.class, "drawers",
-                        getModBlock("oak_drawers"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_drawers"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawersBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.DRAWERS_BLOCK_ENTITY)
@@ -100,7 +100,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(drawers);
 
         coffee_tables = SimpleEntrySet.builder(WoodType.class, "coffee_table",
-                        getModBlock("oak_coffee_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_coffee_table"), () -> VanillaWoodTypes.OAK,
                         w -> new CoffeeTableBlock(copyProperties(w, 1.0F))
                 )
                 //TEXTURE: using the tables' oak_table -above
@@ -111,7 +111,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(coffee_tables);
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
-                        getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
                         w -> new ChairBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.CHAIR_BLOCK_ENTITY)
@@ -131,7 +131,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(chairs);
 
         stools = SimpleEntrySet.builder(WoodType.class, "stool",
-                        getModBlock("oak_stool"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_stool"), () -> VanillaWoodTypes.OAK,
                         w -> new StoolBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.STOOL_BLOCK_ENTITY)
@@ -144,7 +144,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(stools);
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
-                        getModBlock("oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
                         w -> new BenchBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.BENCH_BLOCK_ENTITY)
@@ -157,7 +157,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(benches);
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
-                        getModBlock("oak_shelf"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.SHELF_BLOCK_ENTITY)
@@ -170,7 +170,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(shelves);
 
         crates = SimpleEntrySet.builder(WoodType.class, "crate",
-                        getModBlock("oak_crate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_crate"), () -> VanillaWoodTypes.OAK,
                         w -> new CrateBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.CRATE_BLOCK_ENTITY)
@@ -183,7 +183,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(crates);
 
         display_cases = SimpleEntrySet.builder(WoodType.class, "display_case",
-                        getModBlock("oak_display_case"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_display_case"), () -> VanillaWoodTypes.OAK,
                         w -> new DisplayCaseBlock(copyProperties(w, 1.0F).noOcclusion())
                 )
                 .addTile(ModBlockEntities.DISPLAY_CASE_BLOCK_ENTITY)
@@ -197,7 +197,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(display_cases);
 
         sword_mounts = SimpleEntrySet.builder(WoodType.class, "sword_mount",
-                        getModBlock("oak_sword_mount"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_sword_mount"), () -> VanillaWoodTypes.OAK,
                         w -> new SwordMountBlock(copyProperties(w, 1.0F).noOcclusion())
                 )
                 .addTile(ModBlockEntities.SWORD_MOUNT_BLOCK_ENTITY)
@@ -210,7 +210,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(sword_mounts);
 
         pedestals = SimpleEntrySet.builder(WoodType.class, "pedestal",
-                        getModBlock("oak_pedestal"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_pedestal"), () -> VanillaWoodTypes.OAK,
                         w -> new PedestalBlock(copyProperties(w, 1.0F).noOcclusion())
                 )
                 .addTile(ModBlockEntities.PEDESTAL_BLOCK_ENTITY)
@@ -223,7 +223,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(pedestals);
 
         plank_fences = SimpleEntrySet.builder(WoodType.class, "plank_fence",
-                        getModBlock("oak_plank_fence"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_plank_fence"), () -> VanillaWoodTypes.OAK,
                         w -> new PlankFenceBlock(copyProperties(w, 1.0F))
                 )
                 .addTexture(modRes("block/plankfence/oak_plank_fence"))
@@ -235,7 +235,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(plank_fences);
 
         plank_gates = SimpleEntrySet.builder(WoodType.class, "plank_gate",
-                        getModBlock("oak_plank_gate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_plank_gate"), () -> VanillaWoodTypes.OAK,
                         w -> new PlankGateBlock(copyProperties(w, 1.0F),
                                 SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN)
                 )
@@ -247,7 +247,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(plank_gates);
 
         lattices = SimpleEntrySet.builder(WoodType.class, "lattice",
-                        getModBlock("oak_lattice"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_lattice"), () -> VanillaWoodTypes.OAK,
                         w -> new LatticeBlock(Utils.copyPropertySafe(Blocks.LADDER)
                                 .strength(1.0F).noOcclusion().sound(SoundType.WOOD))
                 )
@@ -262,7 +262,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(lattices);
 
         counters = SimpleEntrySet.builder(WoodType.class, "counter",
-                        getModBlock("oak_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_counter"), () -> VanillaWoodTypes.OAK,
                         w -> new CounterBlock(copyProperties(w, 1.0F))
                 )
                 .addTextureM(modRes("block/counters/oak_counters"), EveryCompat.res("block/rd/oak_counters_m"))
@@ -274,7 +274,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(counters);
 
         drawer_counters = SimpleEntrySet.builder(WoodType.class, "drawer_counter",
-                        getModBlock("oak_drawer_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_drawer_counter"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerCounterBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.DRAWERS_BLOCK_ENTITY)
@@ -288,7 +288,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(drawer_counters);
 
         cabinet_counters = SimpleEntrySet.builder(WoodType.class, "cabinet_counter",
-                        getModBlock("oak_cabinet_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cabinet_counter"), () -> VanillaWoodTypes.OAK,
                         w -> new CabinetCounterBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.CABINET_BLOCK_ENTITY)
@@ -302,7 +302,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(cabinet_counters);
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
-                        getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,
                         w -> new CabinetBlock(copyProperties(w, 1.0F))
                 )
                 .addTile(ModBlockEntities.CABINET_BLOCK_ENTITY)
@@ -315,7 +315,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(cabinets);
 
         polished_planks = SimpleEntrySet.builder(WoodType.class, "planks", "polished",
-                        getModBlock("polished_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("polished_oak_planks"), () -> VanillaWoodTypes.OAK,
                         w -> new PolishedPlankBlock(copyProperties(w, 1.0F))
                 )
                 .addTexture(modRes("block/polishedplanks/polished_oak_planks"))
@@ -328,7 +328,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(polished_planks);
 
         polished_stairs = SimpleEntrySet.builder(WoodType.class, "stairs", "polished",
-                        getModBlock("polished_oak_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("polished_oak_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new PolishedPlankStairs(() -> copyState(w), stairsProperties(w))
                 )
                 //TEXTURE: Using polished_planks' polished_oak_planks -above
@@ -343,7 +343,7 @@ public class ReDecoModule extends SimpleModule {
         this.addEntry(polished_stairs);
 
         polished_slabs = SimpleEntrySet.builder(WoodType.class, "slab", "polished",
-                        getModBlock("polished_oak_slab"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("polished_oak_slab"), () -> VanillaWoodTypes.OAK,
                         w -> new PolishedPlankSlab(copyProperties(w, 1.0F))
                 )
                 //TEXTURE: Using polished_planks' polished_oak_planks -above

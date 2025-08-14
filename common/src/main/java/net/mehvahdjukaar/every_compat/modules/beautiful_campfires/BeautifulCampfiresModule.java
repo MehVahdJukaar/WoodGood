@@ -4,8 +4,6 @@ import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -55,7 +53,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         campfires = SimpleEntrySet.builder(WoodType.class, "campfire",
-                        getModBlock("acacia_campfire", CampfireBlock.class), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_campfire", CampfireBlock.class), () -> VanillaWoodTypes.ACACIA,
                         w -> new CampfireBlock(true, 1, copyProperties(15))
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
@@ -69,7 +67,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
         this.addEntry(campfires);
 
         soul_campfires = SimpleEntrySet.builder(WoodType.class, "soul_campfire",
-                        getModBlock("acacia_soul_campfire", CampfireBlock.class), () -> WoodTypeRegistry.getValue("acacia"),
+                        getModBlock("acacia_soul_campfire", CampfireBlock.class), () -> VanillaWoodTypes.ACACIA,
                         w -> new CampfireBlock(true, 2, copyProperties(10))
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)

@@ -6,8 +6,8 @@ import com.teamabnormals.boatload.core.api.BoatloadBoatType;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -28,7 +28,7 @@ public class BoatLoadModule extends SimpleModule {
 
         largeBoats = ItemOnlyEntrySet.builder(WoodType.class, "boat", "large",
                         getModItem("large_oak_boat"),
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> new LargeBoatItem(getBoatType(w))
                 )
                 .setTabKey(tab)
@@ -44,7 +44,7 @@ public class BoatLoadModule extends SimpleModule {
 
         furnaceBoats = ItemOnlyEntrySet.builder(WoodType.class, "furnace_boat",
                         getModItem("oak_furnace_boat"),
-                        () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> VanillaWoodTypes.OAK,
                         w -> new FurnaceBoatItem(getBoatType(w))
                 )
                 .setTabKey(tab)

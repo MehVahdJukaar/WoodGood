@@ -13,8 +13,8 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -42,7 +42,7 @@ public class DecorativeBlocksModule extends SimpleModule {
         ResourceLocation tab = modRes("general");
 
         beams = SimpleEntrySet.builder(WoodType.class, "beam",
-                        getModBlock("oak_beam"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_beam"), () -> VanillaWoodTypes.OAK,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.BEAM)
                 )
                 .requiresChildren("stripped_log") //REASON: recipes
@@ -66,7 +66,7 @@ public class DecorativeBlocksModule extends SimpleModule {
 
 
         palisades = SimpleEntrySet.builder(WoodType.class, "palisade",
-                        getModBlock("oak_palisade"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_palisade"), () -> VanillaWoodTypes.OAK,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.PALISADE)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -86,7 +86,7 @@ public class DecorativeBlocksModule extends SimpleModule {
 
 
         supports = SimpleEntrySet.builder(WoodType.class, "support",
-                        getModBlock("oak_support"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_support"), () -> VanillaWoodTypes.OAK,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.SUPPORT)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -105,7 +105,7 @@ public class DecorativeBlocksModule extends SimpleModule {
 
 
         seats = SimpleEntrySet.builder(WoodType.class, "seat",
-                        getModBlock("oak_seat"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_seat"), () -> VanillaWoodTypes.OAK,
                         w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.SEAT)
                 )
                 .requiresChildren("fence", "slab") //REASON: recipes

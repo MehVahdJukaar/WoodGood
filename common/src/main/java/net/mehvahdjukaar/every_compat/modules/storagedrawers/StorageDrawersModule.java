@@ -9,8 +9,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +38,7 @@ public class StorageDrawersModule extends SimpleModule {
         ResourceLocation tab = modRes(ModConstants.MOD_ID);
 
         FULL_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "full_drawers_1",
-                        getModBlock("oak_full_drawers_1", BlockStandardDrawers.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_full_drawers_1", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(1, false, Utils.copyPropertySafe(getModBlock("oak_full_drawers_1").get()))
                 )
                 .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
@@ -59,7 +59,7 @@ public class StorageDrawersModule extends SimpleModule {
         this.addEntry(FULL_DRAWERS_1);
 
         FULL_DRAWERS_2 = SimpleEntrySet.builder(WoodType.class, "full_drawers_2",
-                        getModBlock("oak_full_drawers_2", BlockStandardDrawers.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_full_drawers_2", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(2, false, Utils.copyPropertySafe(getModBlock("oak_full_drawers_2").get()))
                 )
                 .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
@@ -77,7 +77,7 @@ public class StorageDrawersModule extends SimpleModule {
         this.addEntry(FULL_DRAWERS_2);
 
         FULL_DRAWERS_4 = SimpleEntrySet.builder(WoodType.class, "full_drawers_4",
-                        getModBlock("oak_full_drawers_4", BlockStandardDrawers.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_full_drawers_4", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(4, false, Utils.copyPropertySafe(getModBlock("oak_full_drawers_4").get()))
                 )
                 .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
@@ -96,7 +96,7 @@ public class StorageDrawersModule extends SimpleModule {
         this.addEntry(FULL_DRAWERS_4);
 
         HALF_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "half_drawers_1",
-                        getModBlock("oak_half_drawers_1", BlockStandardDrawers.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_half_drawers_1", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(1, true, Utils.copyPropertySafe(getModBlock("oak_half_drawers_1").get()))
                 )
                 .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
@@ -115,7 +115,7 @@ public class StorageDrawersModule extends SimpleModule {
         this.addEntry(HALF_DRAWERS_1);
 
         HALF_DRAWERS_2 = SimpleEntrySet.builder(WoodType.class, "half_drawers_2",
-                        getModBlock("oak_half_drawers_2", BlockStandardDrawers.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_half_drawers_2", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(2, true, Utils.copyPropertySafe(getModBlock("oak_half_drawers_2").get()))
                 )
                 .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
@@ -131,7 +131,7 @@ public class StorageDrawersModule extends SimpleModule {
         this.addEntry(HALF_DRAWERS_2);
 
         HALF_DRAWERS_4 = SimpleEntrySet.builder(WoodType.class, "half_drawers_4",
-                        getModBlock("oak_half_drawers_4", BlockStandardDrawers.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_half_drawers_4", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(4, true, Utils.copyPropertySafe(getModBlock("oak_half_drawers_4").get()))
                 )
                 .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
@@ -147,7 +147,7 @@ public class StorageDrawersModule extends SimpleModule {
         this.addEntry(HALF_DRAWERS_4);
 
         TRIMS = SimpleEntrySet.builder(WoodType.class, "trim",
-                        getModBlock("oak_trim", BlockTrim.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_trim", BlockTrim.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockTrim(Utils.copyPropertySafe(getModBlock("oak_trim").get()))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

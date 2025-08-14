@@ -28,9 +28,11 @@ public class PremiumWoodModule extends SimpleModule {
         super(modId, "pw");
         var tab = CreativeModeTabs.BUILDING_BLOCKS;
 
+        var tiger = WoodTypeRegistry.INSTANCE.makeFutureHolder(new ResourceLocation("premium_wood:tiger"));
+
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("tiger_crafting_table"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("premium_wood:tiger")),
+                        tiger,
                         w -> new PremiumWorkbenchBlock())
                 .addTextureM(EveryCompat.res("block/tiger/tiger_crafting_table_front"), EveryCompat.res("block/pw/tiger_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/tiger/tiger_crafting_table_side"), EveryCompat.res("block/pw/tiger_crafting_table_side_m"))
@@ -45,7 +47,7 @@ public class PremiumWoodModule extends SimpleModule {
 
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("tiger_bookshelf"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("premium_wood:tiger")),
+                        tiger,
                         w -> new PremiumBookshelfBlock())
                 .addTextureM(modRes("block/tiger/tiger_bookshelf"), EveryCompat.res("block/pw/tiger_bookshelf_m"))
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
@@ -58,7 +60,7 @@ public class PremiumWoodModule extends SimpleModule {
 
         framedGlass = SimpleEntrySet.builder(WoodType.class, "framed_glass",
                         getModBlock("tiger_framed_glass"),
-                        () -> WoodTypeRegistry.getValue(new ResourceLocation("premium_wood:tiger")),
+                        tiger,
                         w -> new GlassBlock(Utils.copyPropertySafe(Blocks.GLASS)))
                 .addTextureM(modRes("block/tiger/tiger_framed_glass"), EveryCompat.res("block/pw/tiger_framed_glass_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)

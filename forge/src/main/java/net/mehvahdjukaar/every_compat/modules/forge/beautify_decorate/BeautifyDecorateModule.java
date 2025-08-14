@@ -7,12 +7,11 @@ import com.github.Pandarix.beautify.core.init.BlockInit;
 import com.github.Pandarix.beautify.core.init.ItemGroupInit;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
 //SUPPORT: v2.0.2+
@@ -27,7 +26,7 @@ public class BeautifyDecorateModule extends SimpleModule {
         var tab = ItemGroupInit.BEAUTIFY_TAB.getId();
 
         tellis = SimpleEntrySet.builder(WoodType.class, "trellis",
-                        BlockInit.OAK_TRELLIS, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_TRELLIS, () -> VanillaWoodTypes.OAK,
                         w -> new OakTrellis(Utils.copyPropertySafe(w.planks)
                                 .strength(0.3F, 0.3F)
                                 .sound(SoundType.BAMBOO).noOcclusion()
@@ -41,7 +40,7 @@ public class BeautifyDecorateModule extends SimpleModule {
         this.addEntry(tellis);
 
         blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
-                        BlockInit.OAK_BLINDS, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BLINDS, () -> VanillaWoodTypes.OAK,
                         w -> new OakBlinds(Utils.copyPropertySafe(w.planks)
                                 .noOcclusion().strength(0.4F, 0.4F)
                                 .sound(SoundType.WOOD)
@@ -55,7 +54,7 @@ public class BeautifyDecorateModule extends SimpleModule {
         this.addEntry(blinds);
 
         picture_frames = SimpleEntrySet.builder(WoodType.class, "picture_frame",
-                        BlockInit.OAK_PICTURE_FRAME, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PICTURE_FRAME, () -> VanillaWoodTypes.OAK,
                         w -> new OakPictureFrame(Utils.copyPropertySafe(w.planks)
                                 .noOcclusion().strength(0.1F, 0.1F)
                                 .sound(SoundType.WOOD).noOcclusion()

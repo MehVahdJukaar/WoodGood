@@ -5,8 +5,8 @@ import com.mrbysco.oreberriesreplanted.block.VatBlock;
 import com.mrbysco.oreberriesreplanted.registry.OreBerryRegistry;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -24,7 +24,7 @@ public class OreberriesReplantedModule extends SimpleModule {
         ResourceLocation tab = modRes("tab");
 
         vats = SimpleEntrySet.builder(WoodType.class, "vat",
-                        OreBerryRegistry.OAK_VAT, () -> WoodTypeRegistry.OAK_TYPE,
+                        OreBerryRegistry.OAK_VAT, () -> VanillaWoodTypes.OAK,
                         w -> new VatBlock(BlockBehaviour.Properties.of()
                                 .mapColor(w.planks.defaultMapColor())
                                 .sound(SoundType.SWEET_BERRY_BUSH)

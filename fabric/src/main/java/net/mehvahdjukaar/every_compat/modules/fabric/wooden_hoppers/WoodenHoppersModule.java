@@ -6,6 +6,7 @@ import io.github.haykam821.woodenhoppers.tag.WoodenHoppersBlockTags;
 import io.github.haykam821.woodenhoppers.tag.WoodenHoppersItemTags;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -24,7 +25,7 @@ public class WoodenHoppersModule extends SimpleModule {
         super(modId, "wh");
 
         hoppers = SimpleEntrySet.builder(WoodType.class, "hopper",
-                        getModBlock("oak_hopper"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_hopper"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenHopperBlock(Utils.copyPropertySafe(w.planks).strength(2))
                 )
                 .addTile(() -> Main.WOODEN_HOPPER_BLOCK_ENTITY_TYPE)

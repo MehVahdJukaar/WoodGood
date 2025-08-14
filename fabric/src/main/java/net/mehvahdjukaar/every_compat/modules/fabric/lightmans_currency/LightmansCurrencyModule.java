@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
@@ -30,7 +31,7 @@ public class LightmansCurrencyModule extends SimpleModule {
         var tab = modRes("trading");
 
         shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
-                        getModBlock("shelf_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("shelf_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(FabricBlockSettings.create().nonOpaque()
                                 .strength(2.0F, Float.POSITIVE_INFINITY)
                                 .sound(SoundType.WOOD)
@@ -52,7 +53,7 @@ public class LightmansCurrencyModule extends SimpleModule {
         this.addEntry(shelves);
 
         card_displays = SimpleEntrySet.builder(WoodType.class, "", "card_display",
-                        getModBlock("card_display_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("card_display_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new CardDisplayBlock(FabricBlockSettings.create().nonOpaque()
                                 .strength(2.0F, Float.POSITIVE_INFINITY)
                                 .sound(SoundType.WOOD)

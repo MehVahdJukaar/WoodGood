@@ -7,8 +7,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -45,7 +45,7 @@ public class TimberFramesModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         frame_alpha = SimpleEntrySet.builder(WoodType.class, "timber_frame_alpha",
-                        getModBlock("oak_timber_frame_alpha"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_timber_frame_alpha"), () -> VanillaWoodTypes.OAK,
                         w -> new OakTimberFrameAlphaBlock()
                 )
                 .addTextureM(modRes("block/oak_timber_frame"),
@@ -77,7 +77,7 @@ public class TimberFramesModule extends SimpleModule {
         this.addEntry(frame_alpha);
 
         frame_beta = SimpleEntrySet.builder(WoodType.class, "timber_frame_beta",
-                        getModBlock("oak_timber_frame_beta"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_timber_frame_beta"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatTimberFrameBetaBlock(frame_alpha.blocks.get(w))
                 )
                 // TEXTURES: Using the same texture above

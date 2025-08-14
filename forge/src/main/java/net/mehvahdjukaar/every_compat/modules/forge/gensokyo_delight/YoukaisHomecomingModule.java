@@ -6,8 +6,8 @@ import dev.xkmc.youkaishomecoming.content.block.variants.MultiFenceBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -31,7 +31,7 @@ public class YoukaisHomecomingModule extends SimpleModule {
         ResourceLocation tab = modRes("youkais_homecoming");
 
         handrail = SimpleEntrySet.builder(WoodType.class, "handrail",
-                        getModBlock("oak_handrail"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_handrail"), () -> VanillaWoodTypes.OAK,
                         w -> new MultiFenceBlock(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("fence"))).noOcclusion())
                 )
                 .requiresChildren("fence") //REASON: properties
@@ -44,7 +44,7 @@ public class YoukaisHomecomingModule extends SimpleModule {
         this.addEntry(handrail);
 
         dining_table = SimpleEntrySet.builder(WoodType.class, "dining_table",
-                        getModBlock("oak_dining_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_dining_table"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodTableBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_wood", "slab") //REASON: recipes
@@ -56,7 +56,7 @@ public class YoukaisHomecomingModule extends SimpleModule {
         this.addEntry(dining_table);
 
         dining_chair = SimpleEntrySet.builder(WoodType.class, "dining_chair",
-                        getModBlock("oak_dining_chair"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_dining_chair"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodChairBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(modRes("block/wooden/oak_dining_chair"), EveryCompat.res("block/ykh/oak_dining_chair_m"))

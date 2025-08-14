@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -41,7 +42,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
 
 //!! OAK
         vertical_stairs = SimpleEntrySet.builder(WoodType.class, "vertical_stairs",
-                        getModBlock("oak_vertical_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_vertical_stairs"), () -> VanillaWoodTypes.OAK,
                         woodType -> new VerticalStairsBlock(Utils.copyPropertySafe(woodType.planks))
                 )
                 //TEXTURES: planks
@@ -54,7 +55,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(vertical_stairs);
 
         mosaics = SimpleEntrySet.builder(WoodType.class, "mosaic",
-                        getModBlock("oak_mosaic"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic"), () -> VanillaWoodTypes.OAK,
                         woodType -> new Block(Utils.copyPropertySafe(woodType.planks))
                 )
                 .requiresChildren("slab") //REASON: recipes
@@ -66,7 +67,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(mosaics);
 
         mosaic_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
-                        getModBlock("oak_mosaic_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic_stairs"), () -> VanillaWoodTypes.OAK,
                         woodType -> new StairBlock(mosaics.blocks.get(woodType).defaultBlockState(),
                                 Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
                 )
@@ -80,7 +81,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(mosaic_stairs);
 
         mosaic_slabs = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
-                        getModBlock("oak_mosaic_slab"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic_slab"), () -> VanillaWoodTypes.OAK,
                         woodType -> new SlabBlock(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
                 )
                 .requiresFromMap(mosaics.blocks) //REASON: recipes
@@ -93,7 +94,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(mosaic_slabs);
 
         mosaic_vertical_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_vertical_stairs",
-                        getModBlock("oak_mosaic_vertical_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic_vertical_stairs"), () -> VanillaWoodTypes.OAK,
                         woodType -> new VerticalStairsBlock(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
                 )
                 .requiresFromMap(mosaics.blocks) //REASON: recipes
@@ -106,7 +107,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(mosaic_vertical_stairs);
 
         chiseled_planks = SimpleEntrySet.builder(WoodType.class, "planks", "chiseled",
-                        getModBlock("chiseled_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("chiseled_oak_planks"), () -> VanillaWoodTypes.OAK,
                         woodType -> new Block(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
                 )
                 .requiresChildren("slab") //REASON: recipes
@@ -120,7 +121,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
 
 //!! SPRUCE
         crafting_tables = SimpleEntrySet.builder(WoodType.class, "crafting_table",
-                        getModBlock("spruce_crafting_table"), () -> WoodTypeRegistry.getValue("spruce"),
+                        getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
                         woodType -> new EBCraftingTableBlock(Utils.copyPropertySafe(woodType.planks)
                                 .sound(SoundType.WOOD)
                         )
@@ -136,7 +137,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(crafting_tables);
 
         decorative_shelves = SimpleEntrySet.builder(WoodType.class, "decorative_shelf",
-                        getModBlock("oak_decorative_shelf"), () -> WoodTypeRegistry.getValue("oak"),
+                        getModBlock("oak_decorative_shelf"), () -> VanillaWoodTypes.OAK,
                         woodType -> new DecorativeShelfBlock(Utils.copyPropertySafe(Blocks.BOOKSHELF).sound(SoundType.WOOD))
                 )
                 .requiresFromMap(mosaics.blocks) //REASON: textures, recipes
@@ -154,7 +155,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
         this.addEntry(decorative_shelves);
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        getModBlock("spruce_bookshelf"), () -> WoodTypeRegistry.getValue("spruce"),
+                        getModBlock("spruce_bookshelf"), () -> VanillaWoodTypes.SPRUCE,
                         woodType -> new EBBookshelfBlock(Utils.copyPropertySafe(Blocks.BOOKSHELF).sound(SoundType.WOOD))
                 )
                 //TEXTURES: planks
@@ -168,7 +169,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
 
 //!! CRIMSON
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        getModBlock("crimson_ladder"), () -> WoodTypeRegistry.getValue("crimson"),
+                        getModBlock("crimson_ladder"), () -> VanillaWoodTypes.CRIMSON,
                         woodType -> new EBLadderBlock(Utils.copyPropertySafe(Blocks.LADDER).sound(woodType.getSound()))
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

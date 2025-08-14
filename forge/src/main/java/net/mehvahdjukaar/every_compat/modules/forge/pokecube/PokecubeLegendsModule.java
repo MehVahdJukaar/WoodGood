@@ -2,16 +2,14 @@ package net.mehvahdjukaar.every_compat.modules.forge.pokecube;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.List;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -24,7 +22,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
@@ -40,6 +37,9 @@ import pokecube.legends.init.BlockInit;
 import pokecube.legends.init.LegendsCreativeTabs;
 import pokecube.legends.recipes.LegendsDistorticRecipeSerializer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PokecubeLegendsModule extends SimpleModule {
 
@@ -53,7 +53,7 @@ public class PokecubeLegendsModule extends SimpleModule {
         TemplateRecipeManager.registerTemplate(modRes("legends_recipe"), MirrorRecipeTemplate::new);
 
         distorticPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
-                        BlockInit.DISTORTIC_OAK_PLANKS, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.DISTORTIC_OAK_PLANKS, () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_planks"))
                 .addTag(modRes("legends_planks"), Registries.BLOCK)
@@ -68,7 +68,7 @@ public class PokecubeLegendsModule extends SimpleModule {
         this.addEntry(distorticPlanks);
 
         distorticStairs = SimpleEntrySet.builder(WoodType.class, "stairs", "distortic",
-                        BlockInit.DISTORTIC_OAK_STAIRS, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.DISTORTIC_OAK_STAIRS, () -> VanillaWoodTypes.OAK,
                         w -> new ItemGenerator.GenericStairs(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_stairs"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -81,7 +81,7 @@ public class PokecubeLegendsModule extends SimpleModule {
         this.addEntry(distorticStairs);
 
         DISTORTICSLABS = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
-                        BlockInit.DISTORTIC_OAK_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.DISTORTIC_OAK_SLAB, () -> VanillaWoodTypes.OAK,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_slab"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

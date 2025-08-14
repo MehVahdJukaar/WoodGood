@@ -7,8 +7,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
@@ -24,7 +24,7 @@ public class MightyMailModule extends SimpleModule {
         super(modId, "mm");
 
         mailboxes = SimpleEntrySet.builder(WoodType.class, "mail_box",
-                        getModBlock("oak_mail_box"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mail_box"), () -> VanillaWoodTypes.OAK,
                         w -> new MailboxBlock(Utils.copyPropertySafe(w.planks)
                                 .strength(3.5F).sound(SoundType.WOOD).ignitedByLava()))
                 .setTab(ModCreativeTabs.MAIN::get)

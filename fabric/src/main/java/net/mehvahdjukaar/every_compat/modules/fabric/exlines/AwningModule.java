@@ -5,8 +5,8 @@ import com.exline.exlineawnings.block.AwningBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,7 +23,7 @@ public class AwningModule extends SimpleModule {
         super(modId, "ea");
 
         awnings = SimpleEntrySet.builder(WoodType.class, "awning",
-                        getModBlock("oak_awning", AwningBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_awning", AwningBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new AwningBlock(w.getBlockOfThis("stairs").defaultBlockState(),
                                 FabricBlockSettings.create()
                                         .mapColor(MapColor.SNOW)
@@ -40,7 +40,7 @@ public class AwningModule extends SimpleModule {
         this.addEntry(awnings);
 
         awnings_log = SimpleEntrySet.builder(WoodType.class, "log_awning",
-                        getModBlock("oak_log_awning", AwningBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_log_awning", AwningBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new AwningBlock(w.getBlockOfThis("stairs").defaultBlockState(),
                                 FabricBlockSettings.create()
                                         .mapColor(MapColor.SNOW)

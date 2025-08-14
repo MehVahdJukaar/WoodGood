@@ -5,8 +5,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +23,7 @@ public class SmidgeonOBlissModule extends SimpleModule {
         ResourceLocation tab = modRes(modId);
 
         counter = SimpleEntrySet.builder(WoodType.class, "counter",
-                        getModBlock("oak_counter"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_counter"), () -> VanillaWoodTypes.OAK,
                         woodType -> new CounterBlock(Utils.copyPropertySafe(woodType.planks))
                 )
                 //TEXTURES: oak_cabinet_top from Farmer's Delight

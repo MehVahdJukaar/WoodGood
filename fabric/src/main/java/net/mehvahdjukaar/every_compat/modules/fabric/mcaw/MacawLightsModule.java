@@ -8,8 +8,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -36,7 +36,7 @@ public class MacawLightsModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = MacawsLights.LIGHTSGROUP;
 
         SOUL_TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class, "tiki_torch", "soul",
-                        () -> BlockInit.SOUL_OAK_TIKI_TORCH, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.SOUL_OAK_TIKI_TORCH, () -> VanillaWoodTypes.OAK,
                         w -> new TikiTorch(BlockBehaviour.Properties.of()
                                 .lightLevel(blockOffLightValue(10))
                                 .strength(1.5F, 2.5F)
@@ -56,7 +56,7 @@ public class MacawLightsModule extends SimpleModule {
         this.addEntry(SOUL_TIKI_TORCHES);
 
         TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class, "tiki_torch",
-                        () -> BlockInit.OAK_TIKI_TORCH, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_TIKI_TORCH, () -> VanillaWoodTypes.OAK,
                         w -> new TikiTorch(BlockBehaviour.Properties.of()
                                 .lightLevel(blockOffLightValue(15))
                                 .strength(1.5F, 2.5F)
@@ -76,7 +76,7 @@ public class MacawLightsModule extends SimpleModule {
         this.addEntry(TIKI_TORCHES);
 
         ceiling_fan_lights = SimpleEntrySet.builder(WoodType.class, "ceiling_fan_light",
-                        () -> BlockInit.OAK_CEILING_FAN_LIGHT, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_CEILING_FAN_LIGHT, () -> VanillaWoodTypes.OAK,
                         w -> new LightBaseShort(BlockBehaviour.Properties.of()
                                 .lightLevel(blockOffLightValue(15))
                                 .mapColor(MapColor.WOOD)

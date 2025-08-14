@@ -7,8 +7,8 @@ import com.mcwstairs.kikoz.objects.stair_types.*;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -34,7 +34,7 @@ public class MacawStairsModule extends SimpleModule {
         ResourceLocation tab = modRes(modId);
 
         terrace_stairs = SimpleEntrySet.builder(WoodType.class, "terrace_stairs",
-                        getModBlock("oak_terrace_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_terrace_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new TerraceStairs(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
@@ -51,7 +51,7 @@ public class MacawStairsModule extends SimpleModule {
         this.addEntry(terrace_stairs);
 
         skyline_stairs = SimpleEntrySet.builder(WoodType.class, "skyline_stairs",
-                        getModBlock("oak_skyline_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_skyline_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new SkylineStairs(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
@@ -68,7 +68,7 @@ public class MacawStairsModule extends SimpleModule {
         this.addEntry(skyline_stairs);
 
         compact_stairs = SimpleEntrySet.builder(WoodType.class, "compact_stairs",
-                        getModBlock("oak_compact_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_compact_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new CompactStairs(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
@@ -85,7 +85,7 @@ public class MacawStairsModule extends SimpleModule {
         this.addEntry(compact_stairs);
 
         bulk_stairs = SimpleEntrySet.builder(WoodType.class, "bulk_stairs",
-                        getModBlock("oak_bulk_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bulk_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new BulkStairs(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
@@ -102,7 +102,7 @@ public class MacawStairsModule extends SimpleModule {
         this.addEntry(bulk_stairs);
 
         loft_stairs = SimpleEntrySet.builder(WoodType.class, "loft_stairs",
-                        getModBlock("oak_loft_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_loft_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new LoftStairs(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures, recipes
@@ -119,7 +119,7 @@ public class MacawStairsModule extends SimpleModule {
         this.addEntry(loft_stairs);
 
         balconies = SimpleEntrySet.builder(WoodType.class, "balcony",
-                        getModBlock("oak_balcony"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_balcony"), () -> VanillaWoodTypes.OAK,
                         w -> new BalconyRailing(copyProperties())
                 )
                 .requiresChildren("fence", "stripped_log") //REASON: textures, recipes
@@ -137,7 +137,7 @@ public class MacawStairsModule extends SimpleModule {
         this.addEntry(balconies);
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
-                        getModBlock("oak_railing"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_railing"), () -> VanillaWoodTypes.OAK,
                         w -> new StairRailing(copyProperties())
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -155,7 +155,7 @@ public class MacawStairsModule extends SimpleModule {
         this.addEntry(railings);
 
         platforms = SimpleEntrySet.builder(WoodType.class, "platform",
-                        getModBlock("oak_platform"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_platform"), () -> VanillaWoodTypes.OAK,
                         w -> new StairPlatform(copyProperties())
                 )
                 .requiresChildren("slab", "stripped_log") //REASON: textures, recipes

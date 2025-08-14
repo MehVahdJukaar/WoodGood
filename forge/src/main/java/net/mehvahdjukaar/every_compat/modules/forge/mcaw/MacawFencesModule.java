@@ -9,8 +9,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +38,7 @@ public class MacawFencesModule extends SimpleModule {
         ResourceLocation tab = modRes("fenceitemgroup");
 
         picketFences = SimpleEntrySet.builder(WoodType.class, "picket_fence",
-                        BlockInit.OAK_PICKET_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PICKET_FENCE, () -> VanillaWoodTypes.OAK,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: log, planks
@@ -52,7 +52,7 @@ public class MacawFencesModule extends SimpleModule {
         this.addEntry(picketFences);
 
         stockadeFences = SimpleEntrySet.builder(WoodType.class, "stockade_fence",
-                        BlockInit.OAK_STOCKADE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_STOCKADE_FENCE, () -> VanillaWoodTypes.OAK,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: log, planks
@@ -66,7 +66,7 @@ public class MacawFencesModule extends SimpleModule {
         this.addEntry(stockadeFences);
 
         horseFences = SimpleEntrySet.builder(WoodType.class, "horse_fence",
-                        BlockInit.OAK_HORSE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_HORSE_FENCE, () -> VanillaWoodTypes.OAK,
                         w -> new FenceBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -81,7 +81,7 @@ public class MacawFencesModule extends SimpleModule {
         this.addEntry(horseFences);
 
         wiredFences = SimpleEntrySet.builder(WoodType.class, "wired_fence",
-                        BlockInit.OAK_WIRED_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_WIRED_FENCE, () -> VanillaWoodTypes.OAK,
                         w -> new WiredFence(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: log
@@ -96,7 +96,7 @@ public class MacawFencesModule extends SimpleModule {
         this.addEntry(wiredFences);
 
         pyramidGates = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
-                        BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PYRAMID_GATE, () -> VanillaWoodTypes.OAK,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks), w.toVanillaOrOak())
                 )
                 //TEXTURES: log, planks
@@ -110,7 +110,7 @@ public class MacawFencesModule extends SimpleModule {
         this.addEntry(pyramidGates);
 
         highleyGates = SimpleEntrySet.builder(WoodType.class, "highley_gate",
-                        BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_HIGHLEY_GATE, () -> VanillaWoodTypes.OAK,
                         w -> new FenceGateBlock(Utils.copyPropertySafe(w.planks),w.toVanillaOrOak())
                 )
                 //TEXTURES: log

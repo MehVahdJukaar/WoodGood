@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
@@ -30,7 +31,7 @@ public class WoodsterModule extends SimpleModule {
         var tab = modRes(modId);
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        WoodsterBlocks.DARK_OAK_CHISELED_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
+                        WoodsterBlocks.DARK_OAK_CHISELED_BOOKSHELF, () -> VanillaWoodTypes.DARK_OAK,
                         w -> new ChiseledBookShelfBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.CHISELED_BOOKSHELF))
                 )
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
@@ -46,7 +47,7 @@ public class WoodsterModule extends SimpleModule {
         this.addEntry(chiseled_books);
 
         books = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        WoodsterBlocks.ACACIA_BOOKSHELF, () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
+                        WoodsterBlocks.ACACIA_BOOKSHELF, () -> VanillaWoodTypes.ACACIA,
                         w -> new BookshelfBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.WOOD))
                 )
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
@@ -58,7 +59,7 @@ public class WoodsterModule extends SimpleModule {
         this.addEntry(books);
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        WoodsterBlocks.SPRUCE_LADDER, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
+                        WoodsterBlocks.SPRUCE_LADDER, () -> VanillaWoodTypes.SPRUCE,
                         w -> new LadderBlock(BlockBehaviour.Properties.of().strength(0.4F).sound(SoundType.LADDER).noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

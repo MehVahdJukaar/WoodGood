@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -41,7 +42,7 @@ public class WilderWildModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         hollow_logs = SimpleEntrySet.builder(WoodType.class, "log", "hollowed",
-                        getModBlock("hollowed_oak_log", HollowedLogBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("hollowed_oak_log", HollowedLogBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("hollowed_oak_log").get()))
                 )
                 .requiresChildren("stripped_log", "wood") //REASON: textures, recipes
@@ -76,7 +77,7 @@ public class WilderWildModule extends SimpleModule {
         this.addEntry(hollow_logs);
 
         stripped_hollow_logs = SimpleEntrySet.builder(WoodType.class, "log", "stripped_hollowed",
-                        getModBlock("stripped_hollowed_oak_log", HollowedLogBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("stripped_hollowed_oak_log", HollowedLogBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("stripped_hollowed_oak_log").get()))
                 )
                 .requiresChildren("stripped_log", "stripped_wood") //REASON: textures, recipes
