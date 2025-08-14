@@ -597,11 +597,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        public BL addTag(ResourceLocation tag, ResourceKey<?> registries) {
+            return this.addTag(tag, new ResourceKey[]{registries});
+        }
+
         public BL addTag(ResourceLocation location, ResourceKey<?> ...registries) {
             var s = this.tags.computeIfAbsent(location, b -> new HashSet<>());
             s.addAll(List.of(registries));
             return (BL) this;
         }
+
+        public BL addTag(TagKey<?> tag, ResourceKey<?> registries) {
+            return this.addTag(tag, new ResourceKey[]{registries});
+        }
+
 
         public BL addTag(TagKey<?> tag, ResourceKey<?> ...registries) {
             addTag(tag.location(), registries);
