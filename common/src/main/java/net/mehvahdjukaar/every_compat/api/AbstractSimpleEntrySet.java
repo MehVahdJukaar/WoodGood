@@ -17,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -479,7 +480,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         //only works for oak type. Will fail if its used on leaves
         @Deprecated(forRemoval = true)
         public BL createPaletteFromPlanks(Consumer<Palette> paletteTransform) {
-            return createPaletteFromChild(paletteTransform, "planks");
+            return createPaletteFromChild(paletteTransform, VanillaWoodChildKeys.PLANKS);
         }
 
         @Deprecated(forRemoval = true)
