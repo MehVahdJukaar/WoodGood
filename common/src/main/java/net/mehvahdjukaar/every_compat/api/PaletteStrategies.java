@@ -68,6 +68,11 @@ public class PaletteStrategies {
         }
     });
 
+    public static final PaletteStrategy WOOD_PLANKS_REMOVE_DARKEST = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
+            t, manager, VanillaWoodChildKeys.PLANKS, null,
+            (p) -> p.remove(p.getDarkest())));
+
+
     //other bad code...
     public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType w, ResourceManager manager) {
         ItemLike mainChild = w.mainChild();
