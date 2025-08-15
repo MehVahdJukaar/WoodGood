@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -124,7 +125,7 @@ public class MacawFencesModule extends SimpleModule {
         this.addEntry(highleyGates);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
-                        BlockInit.OAK_HEDGE, () -> VanillaLeavesType.OAK,
+                        BlockInit.OAK_HEDGE, () -> VanillaLeavesTypes.OAK,
                         l -> new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
                                 .mapColor(l.leaves.defaultMapColor()))
                 )

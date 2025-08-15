@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -98,7 +99,7 @@ public class BuildersAdditionModule extends SimpleModule {
         this.addEntry(chairs);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "", "hedge",
-                        Index.HEDGE_OAK, () -> VanillaLeavesType.OAK,
+                        Index.HEDGE_OAK, () -> VanillaLeavesTypes.OAK,
                         w -> {
                             var l = w.getBlockOfThis("leaves");
                             if (l == null) return null;
@@ -107,7 +108,7 @@ public class BuildersAdditionModule extends SimpleModule {
                 .requiresChildren("leaves") // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
-                .addModelTransform(m -> m.replaceLeavesTextures(VanillaLeavesType.OAK))
+                .addModelTransform(m -> m.replaceLeavesTextures(VanillaLeavesTypes.OAK))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.LEAVES, Registries.BLOCK)
                 .addTag(ItemTags.LEAVES, Registries.ITEM)

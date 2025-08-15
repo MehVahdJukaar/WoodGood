@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -485,7 +486,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
         this.addEntry(strippedUpgradedGates);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
-                        ModBlocks.HEDGE_OAK, () -> VanillaLeavesType.OAK,
+                        ModBlocks.HEDGE_OAK, () -> VanillaLeavesTypes.OAK,
                         w -> {
                             var l = w.getBlockOfThis("leaves");
                             if (l == null) return null;

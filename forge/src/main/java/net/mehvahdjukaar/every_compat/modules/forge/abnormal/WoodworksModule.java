@@ -17,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -210,7 +211,7 @@ public class WoodworksModule extends SimpleModule {
 
 
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
-                        WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesType.OAK,
+                        WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesTypes.OAK,
                         leavesType -> {
                             if (leavesType.getWoodType() == null) return null;
                             return new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)

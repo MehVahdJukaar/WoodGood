@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -59,7 +60,6 @@ public class PaletteStrategies {
     public static final PaletteStrategy WOOD_SIGN_LIKE = registerCached((blockType, manager) -> {
         try (TextureImage plankTexture = TextureImage.open(manager,
                 RPUtils.findFirstBlockTextureLocation(manager, blockType.getBlockOfThis(VanillaWoodChildKeys.PLANKS)))) {
-
             //that method likely sholdn't be in ML...
             List<Palette> targetPalette = SpriteUtils.extrapolateSignBlockPalette(plankTexture);
             return PaletteStrategy.PaletteAndAnimation.of(targetPalette, plankTexture.getMcMeta());
