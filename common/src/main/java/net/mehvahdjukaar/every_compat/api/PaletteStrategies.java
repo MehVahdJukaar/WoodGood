@@ -74,11 +74,11 @@ public class PaletteStrategies {
 
 
     //other bad code...
-    public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType w, ResourceManager manager) {
-        ItemLike mainChild = w.mainChild();
+    public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType blockType, ResourceManager manager) {
+        ItemLike mainChild = blockType.mainChild();
         Block mainWoodTypeBlock = null;
-        if (mainChild instanceof Block bb) mainWoodTypeBlock = bb;
-        else if (mainChild instanceof BlockItem bii) mainWoodTypeBlock = bii.getBlock();
+        if (mainChild instanceof Block block) mainWoodTypeBlock = block;
+        else if (mainChild instanceof BlockItem blockItem) mainWoodTypeBlock = blockItem.getBlock();
         if (mainWoodTypeBlock == null) {
             throw new UnsupportedOperationException("You need to provide a palette supplier for non block main child");
         }
