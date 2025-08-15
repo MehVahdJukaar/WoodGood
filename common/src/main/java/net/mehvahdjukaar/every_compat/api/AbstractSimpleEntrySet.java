@@ -43,7 +43,6 @@ import java.util.regex.Pattern;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.addTagToAllBlocks;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
-@SuppressWarnings({"unused", "removal"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
     public static int totalChildren = 0;
@@ -294,7 +293,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected boolean copyTint = false;
 
         @Deprecated(forRemoval = true)
-        protected BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> palette = null;
+        protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile >> palette = null;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType) {
             this.baseType = baseType;
@@ -470,10 +469,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         //by default, they all use planks palette
         @Deprecated(forRemoval = true)
         public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteProvider) {
-            this.palette = (t, m) -> {
-                var old = paletteProvider.apply(t, m);
-                return PaletteStrategy.PaletteAndAnimation.of(old.getFirst(), old.getSecond());
-            };
+            this.palette = paletteProvider;
             return (BL) this;
         }
 
