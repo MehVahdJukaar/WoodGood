@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
-import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
@@ -125,8 +124,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
             for(var t : this.textures){
                 if(this.palette != null) {
                     e.textures.add(t.cloneWithPalette((t1, manager) -> {
-                        var p =   this.palette.apply((T) t1, manager);
-                        return PaletteStrategy.PaletteAndAnimation.of(p.getFirst(), p.getSecond());
+                        return   this.palette.apply((T) t1, manager);
                     }));
                 }else{
                     e.textures.add(t);
