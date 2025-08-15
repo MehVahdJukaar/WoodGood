@@ -349,18 +349,18 @@ public class FurnishModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
+                     TextureImage newTexture = topTexture.makeCopy()) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/oak_log_bench_top", w, id, "oak");
 
-                    var newTexture = topTexture.makeCopy();
-
                     sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
 
-                    var newTop = topTexture.makeCopy();
-                    createTopTexture(topTexture, newTop);
-
-                    sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                    sink.addTextureIfNotPresent(manager, newId + "_top", () -> {
+                        TextureImage newTop = topTexture.makeCopy();
+                        CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
+                        return newTop;
+                    });
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate Log Bench block texture for for {} : {}", block, e);
@@ -378,7 +378,7 @@ public class FurnishModule extends SimpleModule {
 
                     sink.addTextureIfNotPresent(manager, newId + "_top", () -> {
                         TextureImage newTop = topTexture.makeCopy();
-                        createTopTexture(topTexture, newTop);
+                        CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
                         return newTop;
                     });
 
@@ -393,19 +393,6 @@ public class FurnishModule extends SimpleModule {
             });
         });
     }
-
-
-    private void createTopTexture(TextureImage original, TextureImage newImage) {
-        TextureCollager collager = TextureCollager.builder(16, 16, 16, 16)
-                .copyFrom(5, 5, 6, 6).to(2, 2)
-                .copyFrom(14, 1, 2, 7).to(8, 1)
-                .copyFrom(1, 14, 7, 2).to(1, 8)
-                .copyFrom(14, 14, 2, 2).to(8, 8)
-                .build();
-
-        collager.apply(original, newImage);
-    }
-
 
     //!! RECIPES
     public static class FurnishFinishedRecipe implements FinishedRecipe {

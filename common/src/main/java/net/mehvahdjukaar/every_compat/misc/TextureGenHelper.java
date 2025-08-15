@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.Block;
 
 import java.io.InputStream;
 import java.util.*;
-import java.util.function.Supplier;
 
 //Sprite Helper is too big
 public class TextureGenHelper {
@@ -152,10 +151,9 @@ public class TextureGenHelper {
                         if (info.customTexturePath() != null) {
                             oldPath = info.customTexturePath();
                             newId = EveryCompat.MOD_ID + ":" + BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
-                        } else if (info.keepNamespace()){
+                        } else if (info.keepNamespace()) {
                             newId = oldTextureId.withPath(newPath).toString();
-                        }
-                        else {
+                        } else {
                             newId = new ResourceLocation(blockId.getNamespace(), newPath).toString();
                         }
                         if (newId.isEmpty()) {
@@ -165,29 +163,13 @@ public class TextureGenHelper {
 
                         isOnAtlas = info.onAtlas();
 
-                        /// TEMP: do not remove this until the mcmeta problem is fixed.
-                        //TODO: what problem??
-                        if (info.copyMCMETA()) {
-                            ResourceLocation mcmetaLoc = ResType.MCMETA.getPath(oldTextureId);
-                            Optional<Resource> getMCMETA = manager.getResource(mcmetaLoc);
-
-                            if (getMCMETA.isPresent()) {
-                                InputStream mcmetaStream = getMCMETA.get().open();
-                                JsonObject mcmetaFile = RPUtils.deserializeJson(mcmetaStream);
-
-                                // Adding to the resources next to new textures
-                                sink.addJson(ResourceLocation.tryParse(newId), mcmetaFile, ResType.MCMETA);
-                                mcmetaStream.close();
-                            } else
-                                EveryCompat.LOGGER.error("The MCMETA file may no longer existing, check @ {}", mcmetaLoc);
-                        }
-
-                        Respriter respriter = re.getValue();
-
-                        Supplier<TextureImage> textureSupplier = () -> respriter.recolorWithAnimation(targetPalette, targetAnimation);
-                        textureSupplier = postProcessSpecialTexture(blockType, newId, manager, textureSupplier);
-
-                        sink.addTextureIfNotPresent(manager, newId, textureSupplier, isOnAtlas);
+                        String finalNewId = newId;
+                        sink.addTextureIfNotPresent(manager, newId, () -> {
+                            Respriter respriter = re.getValue();
+                            TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
+                            postProcessSpecialTexture(blockType, finalNewId, manager, img);
+                            return img;
+                        }, isOnAtlas);
                     }
                 }
             }
@@ -198,15 +180,12 @@ public class TextureGenHelper {
     }
 
     //post process some textures.
-    private static <T extends BlockType> Supplier<TextureImage> postProcessSpecialTexture(T blockType, String newId, ResourceManager manager,
-                                                                                          Supplier<TextureImage> textureSupplier) {
+    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, String newId, ResourceManager manager,
+                                                                                TextureImage texture) {
         if (blockType.getClass() == WoodType.class) {
-            var changed = CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, textureSupplier);
-            if (changed != null) {
-                return changed;
-            }
+            CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture);
         }
-        return textureSupplier;
+        return texture;
     }
 
 

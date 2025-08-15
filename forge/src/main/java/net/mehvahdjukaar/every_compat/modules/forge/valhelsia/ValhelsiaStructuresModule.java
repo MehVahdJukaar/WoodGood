@@ -16,7 +16,6 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureCollager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -198,7 +197,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
 
                         var newTop = topTexture.makeCopy();
-                        createTopTexture(topTexture, newTop);
+                        CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
 
                         sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
 
@@ -222,7 +221,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                              TextureImage newTop = topTexture.makeCopy()) {
                             sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
 
-                            createTopTexture(topTexture, newTop);
+                            CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
 
                             sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
                         }
@@ -308,7 +307,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
 
                 // Adding to the Resource
                 sink.addTextureIfNotPresent(manager, newPath, () ->
-                    respriterSide.recolorWithAnimation(targetSide, metaSide)
+                        respriterSide.recolorWithAnimation(targetSide, metaSide)
                 );
             }
 
@@ -351,16 +350,6 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         }
     }
 
-    private void createTopTexture(TextureImage original, TextureImage newImage) {
-        TextureCollager collager = TextureCollager.builder(16, 16, 16, 16)
-                .copyFrom(5, 5, 6, 6).to(2, 2)
-                .copyFrom(14, 1, 2, 7).to(8, 1)
-                .copyFrom(1, 14, 7, 2).to(1, 8)
-                .copyFrom(14, 14, 2, 2).to(8, 8)
-                .build();
-
-        collager.apply(original, newImage);
-    }
 
     public class StrippablePostBlock extends PostBlock {
         public final WoodType woodType;
