@@ -41,24 +41,24 @@ public class PaletteStrategies {
 
     public static final PaletteStrategy MAIN_CHILD = registerCached(PaletteStrategies::makePaletteFromMainChild);
 
-    public static final PaletteStrategy WOOD_PLANKS = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
-            t, manager, VanillaWoodChildKeys.PLANKS, null, null));
+    public static final PaletteStrategy WOOD_PLANKS = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null, null));
 
-    public static final PaletteStrategy WOOD_LOG_SIDE = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
-            t, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,  null));
+    public static final PaletteStrategy WOOD_LOG_SIDE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,  null));
 
     //TODO: make this not side (top)? i guess. or always use the one below. otherwise these might be equal or just incorrect sinde side inst specified
     //so yeah delete, use below
-    public static final PaletteStrategy WOOD_STRIPPED_LOG = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
-            t, manager, VanillaWoodChildKeys.STRIPPED_LOG, null, null));
+    public static final PaletteStrategy WOOD_STRIPPED_LOG = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.STRIPPED_LOG, null, null));
 
     public static final PaletteStrategy WOOD_STRIPPED_LOG_SIDE = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
             t, manager, VanillaWoodChildKeys.STRIPPED_LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
 
 
-    public static final PaletteStrategy WOOD_SIGN_LIKE = registerCached((t, manager) -> {
+    public static final PaletteStrategy WOOD_SIGN_LIKE = registerCached((blockType, manager) -> {
         try (TextureImage plankTexture = TextureImage.open(manager,
-                RPUtils.findFirstBlockTextureLocation(manager, t.getBlockOfThis(VanillaWoodChildKeys.PLANKS)))) {
+                RPUtils.findFirstBlockTextureLocation(manager, blockType.getBlockOfThis(VanillaWoodChildKeys.PLANKS)))) {
 
             //that method likely sholdn't be in ML...
             List<Palette> targetPalette = SpriteUtils.extrapolateSignBlockPalette(plankTexture);
@@ -68,17 +68,17 @@ public class PaletteStrategies {
         }
     });
 
-    public static final PaletteStrategy WOOD_PLANKS_REMOVE_DARKEST = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
-            t, manager, VanillaWoodChildKeys.PLANKS, null,
+    public static final PaletteStrategy WOOD_PLANKS_REMOVE_DARKEST = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null,
             (p) -> p.remove(p.getDarkest())));
 
 
     //other bad code...
-    public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType w, ResourceManager manager) {
-        ItemLike mainChild = w.mainChild();
+    public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType blockType, ResourceManager manager) {
+        ItemLike mainChild = blockType.mainChild();
         Block mainWoodTypeBlock = null;
-        if (mainChild instanceof Block bb) mainWoodTypeBlock = bb;
-        else if (mainChild instanceof BlockItem bii) mainWoodTypeBlock = bii.getBlock();
+        if (mainChild instanceof Block block) mainWoodTypeBlock = block;
+        else if (mainChild instanceof BlockItem blockItem) mainWoodTypeBlock = blockItem.getBlock();
         if (mainWoodTypeBlock == null) {
             throw new UnsupportedOperationException("You need to provide a palette supplier for non block main child");
         }
@@ -100,8 +100,9 @@ public class PaletteStrategies {
                                                                                                  @Nullable Predicate<String> whichSide,
                                                                                                  @Nullable Consumer<Palette> paletteTransform) {
         var child = blockType.getChild(childKey);
+        /// BLOCK
         if (child instanceof Block b) {
-            if (whichSide != null) {
+            if (whichSide != null) { /// PaletteSupplier: childkey with whichSide - example: log_side or log_top
                 try (TextureImage blockTexture = TextureImage.open(m,
                         RPUtils.findFirstBlockTextureLocation(m, b, whichSide))) {
 
@@ -111,7 +112,7 @@ public class PaletteStrategies {
                 } catch (Exception e) {
                     throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
                 }
-            } else { // whichSide should be defaulted to use all_texture (like planks)  -Xelbayria's assumption
+            } else { /// default PaletteSupplier: planks
                 try (TextureImage plankTexture = TextureImage.open(m,
                         RPUtils.findFirstBlockTextureLocation(m, b))) {
 
@@ -122,7 +123,9 @@ public class PaletteStrategies {
                     throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
                 }
             }
+        /// ITEM
         } else if (child instanceof Item i) {
+            /// Default PaletteSupplier: planks
             try (TextureImage plankTexture = TextureImage.open(m,
                     RPUtils.findFirstItemTextureLocation(m, i))) {
 
