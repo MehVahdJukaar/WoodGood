@@ -344,7 +344,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             for(var t : this.textures){
                 if(this.palette != null) {
                     e.textures.add(t.cloneWithPalette((t1, manager) -> {
-                      return   this.palette.apply((T) t1, manager);
+                      var p =   this.palette.apply((T) t1, manager);
+                      return PaletteStrategy.PaletteAndAnimation.of(p.getFirst(), p.getSecond());
                     }));
                 }else{
                     e.textures.add(t);
