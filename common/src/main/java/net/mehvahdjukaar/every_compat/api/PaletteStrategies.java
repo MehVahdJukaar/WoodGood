@@ -100,8 +100,9 @@ public class PaletteStrategies {
                                                                                                  @Nullable Predicate<String> whichSide,
                                                                                                  @Nullable Consumer<Palette> paletteTransform) {
         var child = blockType.getChild(childKey);
+        /// BLOCK
         if (child instanceof Block b) {
-            if (whichSide != null) {
+            if (whichSide != null) { /// PaletteSupplier: childkey with whichSide - example: log_side or log_top
                 try (TextureImage blockTexture = TextureImage.open(m,
                         RPUtils.findFirstBlockTextureLocation(m, b, whichSide))) {
 
@@ -111,7 +112,7 @@ public class PaletteStrategies {
                 } catch (Exception e) {
                     throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
                 }
-            } else { // whichSide should be defaulted to use all_texture (like planks)  -Xelbayria's assumption
+            } else { /// default PaletteSupplier: planks
                 try (TextureImage plankTexture = TextureImage.open(m,
                         RPUtils.findFirstBlockTextureLocation(m, b))) {
 
@@ -122,7 +123,9 @@ public class PaletteStrategies {
                     throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
                 }
             }
+        /// ITEM
         } else if (child instanceof Item i) {
+            /// Default PaletteSupplier: planks
             try (TextureImage plankTexture = TextureImage.open(m,
                     RPUtils.findFirstItemTextureLocation(m, i))) {
 
