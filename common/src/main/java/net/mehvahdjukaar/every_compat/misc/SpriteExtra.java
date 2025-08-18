@@ -8,6 +8,7 @@ import static net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper.spriteExtr
 // │ "findFirstBlockTextureLocation()"                        │
 // │ See EveryCompat's SpriteHelper for details               │
 // └──────────────────────────────────────────────────────────┘
+//this should be in API package if it is to be used extenrally.
 public record SpriteExtra(String blockId, String textureKey, String resLocTexture) {
 
     @SuppressWarnings("unused") // Being used by StoneZone & GemRealms
