@@ -59,7 +59,6 @@ public class PaletteStrategies {
     public static final PaletteStrategy WOOD_SIGN_LIKE = registerCached((blockType, manager) -> {
         try (TextureImage plankTexture = TextureImage.open(manager,
                 RPUtils.findFirstBlockTextureLocation(manager, blockType.getBlockOfThis(VanillaWoodChildKeys.PLANKS)))) {
-
             //that method likely sholdn't be in ML...
             List<Palette> targetPalette = SpriteUtils.extrapolateSignBlockPalette(plankTexture);
             return PaletteStrategy.PaletteAndAnimation.of(targetPalette, plankTexture.getMcMeta());
