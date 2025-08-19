@@ -43,6 +43,7 @@ import java.util.regex.Pattern;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.addTagToAllBlocks;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
+@SuppressWarnings({"unused"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
     public static int totalChildren = 0;
@@ -83,7 +84,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                                      Supplier<ResourceKey<CreativeModeTab>> tab,
                                      TabAddMode tabMode,
                                      @Deprecated(forRemoval = true)
-                                     BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteSupplier,
+                                     BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                      boolean mergePalette, boolean copyTint,
                                      Predicate<T> condition) {
@@ -293,7 +294,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected boolean copyTint = false;
 
         @Deprecated(forRemoval = true)
-        protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile >> palette = null;
+        protected BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> palette = null;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType) {
             this.baseType = baseType;
@@ -468,41 +469,51 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         //by default, they all use planks palette
         @Deprecated(forRemoval = true)
+        /// @deprecated new method haven't been implemented yet
         public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteProvider) {
-            this.palette = paletteProvider;
+            this.palette = (t, m) -> {
+                var old = paletteProvider.apply(t, m);
+                return PaletteStrategy.PaletteAndAnimation.of(old.getFirst(), old.getSecond());
+            };
             return (BL) this;
         }
 
         //only works for oak type. Will fail if its used on leaves
         @Deprecated(forRemoval = true)
+        /// @deprecated new method haven't been implemented yet
         public BL createPaletteFromPlanks(Consumer<Palette> paletteTransform) {
             return createPaletteFromChild(paletteTransform, VanillaWoodChildKeys.PLANKS);
         }
 
         @Deprecated(forRemoval = true)
+        /// @deprecated new method haven't been implemented yet
         public BL createPaletteFromPlanks() {
             return createPaletteFromPlanks(p -> {
             });
         }
 
         @Deprecated(forRemoval = true)
+        /// @deprecated new method haven't been implemented yet
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
             return createPaletteFromChild(paletteTransform, childKey, null);
         }
 
         @Deprecated(forRemoval = true)
+        /// @deprecated new method haven't been implemented yet
         public BL createPaletteFromChild(String childKey, Predicate<String> whichSide) {
             return createPaletteFromChild(p -> {
             }, childKey, whichSide);
         }
 
         @Deprecated(forRemoval = true)
+        /// @deprecated new method haven't been implemented yet
         public BL createPaletteFromChild(String childKey) {
             return createPaletteFromChild(p -> {
             }, childKey, null);
         }
 
         @Deprecated(forRemoval = true)
+        /// @deprecated new method haven't been implemented yet
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, Predicate<String> whichSide) {
             return this.setPalette((blockType, m) -> {
                 var p = PaletteStrategies.makePaletteFromChild(blockType, m, childKey, whichSide, paletteTransform);

@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
-import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -10,9 +9,7 @@ import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
@@ -25,7 +22,6 @@ import org.violetmoon.quark.base.Quark;
 import org.violetmoon.zeta.module.IDisableable;
 import org.violetmoon.zeta.module.ZetaModule;
 
-import java.util.List;
 import java.util.function.*;
 
 @SuppressWarnings("DataFlowIssue")
@@ -45,7 +41,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                                @Nullable Object renderType,
-                               @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteSupplier,
+                               @Nullable BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                boolean mergedPalette,
                                boolean copyTint,
@@ -125,8 +121,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
             for(var t : this.textures){
                 if(this.palette != null) {
                     e.textures.add(t.cloneWithPalette((t1, manager) -> {
-                        var p =   this.palette.apply((T) t1, manager);
-                        return PaletteStrategy.PaletteAndAnimation.of(p.getFirst(), p.getSecond());
+                        return   this.palette.apply((T) t1, manager);
                     }));
                 }else{
                     e.textures.add(t);

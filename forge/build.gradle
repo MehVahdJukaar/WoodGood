@@ -93,12 +93,6 @@ publishing {
     }
 }
 
-
-//repositories{
-//    // Built mods
-//    mavenCentral()
-//}
-
 dependencies {
     forge "net.minecraftforge:forge:${forge_version}"
 
@@ -146,16 +140,18 @@ dependencies {
 //    modRuntimeOnly("curse.maven:athena-841890:5176879") //
 //    modRuntimeOnly("curse.maven:aeroblender-879879:4789008") // Aether
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | REI, Infinity-Buttons
-//    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish, Minecraft-Comes-Alive-Reborn
-//    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Handcrafted, Cozy
+//    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish, Minecraft-Comes-Alive-Reborn, Garden-Of-The-Dead
+//    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Handcrafted, Cozy, Ad-Astra
+//    modRuntimeOnly("curse.maven:resourceful-config-714059:6231176")  // v2.1.3 | Ad-Astra
+//    modRuntimeOnly("curse.maven:botarium-704113:5486070")  // v2.3.4 | Ad-Astra
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
-    modImplementation("curse.maven:supermartijn642s-core-lib-454372:5668859") // Rechiseled
-    modImplementation("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
-    modImplementation("curse.maven:rechiseled-558998:5286306") // Rechiseled
+//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5668859") // Rechiseled
+//    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
+//    modRuntimeOnly("curse.maven:rechiseled-558998:5286306") // Rechiseled @ ISN'T SUPPORTED YET
 //    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum, Aether
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum
 //    modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
-//    modRuntimeOnly("curse.maven:citadel-331936:5633260") // Alex's Cave, Rats
+//    modRuntimeOnly("curse.maven:citadel-331936:6702068") // v2.6.2 | Alex's Cave, Rats
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // v81 | TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:monolib-968432:6123976") // v2.0.0 | More-Beautiful-Torches
@@ -164,9 +160,10 @@ dependencies {
 //    modRuntimeOnly("curse.maven:ctm-267602:5983309") // Chipped
 
             //- OTHER MAVENS
-    modImplementation("maven.modrinth:fusion-connected-textures:1.2.7b-forge-mc${minecraft_version}") // Dawn-Of-Time, Timber-Frame, Rechiseled
+//    modRuntimeOnly("maven.modrinth:fusion-connected-textures:1.2.7b-forge-mc${minecraft_version}") // Dawn-Of-Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
-//    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped
+//    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Ad-Astra
+//    forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3") // Ad-Astra
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}") // Create
 
@@ -299,9 +296,10 @@ dependencies {
 
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6364065") // Terrablender, Glitchcore
+//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6364065") // Terrablender, Glitchcore
 //    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore, ProductiveLib
-//    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel
+//    modRuntimeOnly("curse.maven:alexs-caves-924854:5848216") // Citadel
+//    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784269") // Architectury-API
 //    modRuntimeOnly("curse.maven:rats-323596:5904296")
 //    modRuntimeOnly("curse.maven:mo-shiz-mod-62536:5587177")
 //    modRuntimeOnly("curse.maven:aether-255308:5889509") // Curios
@@ -315,6 +313,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:caverns-and-chasms-438005:6040957") // Blueprint
 //    modRuntimeOnly("curse.maven:atmospheric-362393:6393127") // Blueprint
 //    modRuntimeOnly("curse.maven:environmental-388992:6060255") // Blueprint
+//    modRuntimeOnly("curse.maven:ad-astra-635042:6262032") // Botarium, Resourceful-Config, Resourceful-Lib, Bytecodecs
 //    modRuntimeOnly("curse.maven:soulful-nether-1146098:6376431") // Elysium-API
 //    modRuntimeOnly("curse.maven:elysium-api-1158628:6376984") // Soulful-Nether
 

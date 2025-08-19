@@ -97,7 +97,7 @@ public class QuarkModule extends SimpleModule {
                                         .sound(w.getSound())
                         )
                 )
-                .requiresChildren("slab")
+                .requiresChildren(VanillaWoodChildKeys.SLAB)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_vertical_slabs"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("vertical_slabs"), Registries.BLOCK, Registries.ITEM)
@@ -186,7 +186,6 @@ public class QuarkModule extends SimpleModule {
                             );
                         }
                 )
-                .excludeBlockTypes("gardens_of_the_dead", "whistlecane")
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
