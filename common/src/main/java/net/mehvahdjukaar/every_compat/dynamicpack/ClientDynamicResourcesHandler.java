@@ -60,9 +60,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
         PaletteStrategies.clearCache();
 
-        Stopwatch stopwatch = Stopwatch.createStarted();
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
-
 
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
@@ -72,7 +70,7 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         int batchSize = Math.max(minBatches, maxBatches);
 
         //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
-        EveryCompat.LOGGER.info("Starting dynamic resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
+        EveryCompat.LOGGER.info("Starting dynamic resources generation tasks: {} in batches of {}", tasks.size(), batchSize);
         for (int i = 0; i < tasks.size(); i += batchSize) {
             int end = Math.min(i + batchSize, tasks.size());
             var subList = tasks.subList(i, end);
