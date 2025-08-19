@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -15,6 +16,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -121,11 +123,18 @@ public class SimpleModule extends CompatModule {
                 e.generateLootTables(this, manager, sink);
                 e.generateRecipes(this, manager, sink);
                 e.generateTags(this, manager, sink);
+
+                addDynamicServerResources(ServerDynamicResourcesHandler.INSTANCE, manager);
             } catch (Exception ex) {
                 EveryCompat.LOGGER.error("Failed to generate server resources for entry set {} from module {}:", e, this, ex);
                 if (PlatHelper.isDev()) throw ex;
             }
         }));
+    }
+
+
+    @Deprecated(forRemoval = true)
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager){
     }
 
     @Override
@@ -141,12 +150,21 @@ public class SimpleModule extends CompatModule {
                 try {
                     entry.generateTextures(this, manager, sink);
                     entry.generateModels(this, manager, sink);
+
+                    addDynamicClientResources(ClientDynamicResourcesHandler.getInstance(), manager);
                 } catch (Exception ex) {
                     EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", entry, this, ex);
                     if (PlatHelper.isDev()) throw ex;
                 }
             });
         }
+
+        executor.accept((manager, sink) -> {
+        });
+    }
+
+    @Deprecated(forRemoval = true)
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
     }
 
 
