@@ -32,6 +32,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.modulesList;
 
@@ -167,6 +168,14 @@ public abstract class EveryCompat {
     }
 
     public static void setup() {
+        String activeModulesString = ACTIVE_MODULES.keySet().stream()
+                .map(key -> {
+                    int count = ACTIVE_MODULES.get(key).size();
+                    return count > 1 ? key + "(" + count + ")" : key;
+                })
+                .collect(Collectors.joining(", ", "[", "]"));
+        EveryCompat.LOGGER.info("Every Compat has loaded {} modules: {}", ACTIVE_MODULES.size(), activeModulesString);
+
         if (PlatHelper.isModLoaded("chipped")) {
             EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
         }
