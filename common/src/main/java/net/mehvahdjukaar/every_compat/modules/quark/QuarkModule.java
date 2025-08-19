@@ -186,7 +186,6 @@ public class QuarkModule extends SimpleModule {
                             );
                         }
                 )
-                .excludeBlockTypes("gardens_of_the_dead", "whistlecane")
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
