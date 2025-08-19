@@ -50,8 +50,7 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
         int batchSize = Math.max(minBatches, maxBatches);
 
         //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
-        EveryCompat.LOGGER.info("Dynamic server resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
-
+        EveryCompat.LOGGER.info("Every Compat is starting dynamic server resources generation tasks: {} in batches of: {}", tasks.size(), batchSize);
         for (int i = 0; i < tasks.size(); i += batchSize) {
             int end = Math.min(i + batchSize, tasks.size());
             var subList = tasks.subList(i, end);
@@ -61,9 +60,6 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
                 }
             });
         }
-
-        EveryCompat.LOGGER.info("Dynamic server assets generation took: {}", stopwatch.stop().toString());
-
     }
 
     /// Will be added to DynamicPack if the mod is loaded - it's for tags stuff
