@@ -68,7 +68,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                           @Nullable Object renderType,
-                          @Deprecated(forRemoval = true)
                           @Nullable
                           BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
