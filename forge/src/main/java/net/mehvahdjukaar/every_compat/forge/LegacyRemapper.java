@@ -6,7 +6,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.MissingMappingsEvent;
+import net.minecraftforge.registries.RegisterEvent;
 
 import java.util.Map;
 
@@ -36,6 +39,18 @@ public class LegacyRemapper {
             if (newMap != null) {
                 reg.getOptional(new ResourceLocation(newMap))
                         .ifPresent(mapping::remap);
+            }
+        }
+    }
+
+    //event above is cooked... this is the real mvp
+    @SubscribeEvent
+    public static void registerEvent(RegisterEvent event) {
+        if (event.getRegistryKey().equals(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey())) {
+            if (event.getForgeRegistry() instanceof ForgeRegistry<?> fr) {
+                OLD_TO_NEW_NAMES.forEach((oldKey, newKey) -> {
+                    fr.addAlias(oldKey, new ResourceLocation(newKey));
+                });
             }
         }
     }
