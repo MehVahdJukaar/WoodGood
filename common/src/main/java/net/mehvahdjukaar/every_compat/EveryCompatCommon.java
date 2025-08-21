@@ -60,11 +60,14 @@ public class EveryCompatCommon {
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", "storagedrawers");
         addOtherCompatMod("lolmcvbop", "biomesoplenty", "lolmcv");
         addOtherCompatMod("lolmcvbmo", "biomemakeover", "lolmcv");
-        addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
         addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
                 "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
 
         addOtherCompatMod("ascended_quark", List.of("aether", "deep_aether"), "quark");
+
+        // Farmer's Delight
+        addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
+        addOtherCompatMod("undergardendelight", "undergarden", "farmersdelight");
 
         // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
