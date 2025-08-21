@@ -63,6 +63,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
@@ -77,7 +78,7 @@ import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
 @Mod(EveryCompat.MOD_ID)
 public class EveryCompatForge extends EveryCompatCommon {
 
-    public EveryCompatForge(IEventBus bus) {
+    public EveryCompatForge() {
         this.initialize();
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
@@ -87,7 +88,8 @@ public class EveryCompatForge extends EveryCompatCommon {
             EveryCompatForgeClient.init();
         }
 
-        LegacyRemapper.init(bus);
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        LegacyRemapper.init(modBus);
     }
 
     @Override
