@@ -124,17 +124,20 @@ public class SimpleModule extends CompatModule {
                 e.generateRecipes(this, manager, sink);
                 e.generateTags(this, manager, sink);
 
-                addDynamicServerResources(ServerDynamicResourcesHandler.INSTANCE, manager);
             } catch (Exception ex) {
                 EveryCompat.LOGGER.error("Failed to generate server resources for entry set {} from module {}:", e, this, ex);
                 if (PlatHelper.isDev()) throw ex;
             }
         }));
+        executor.accept((manager, sink) -> {
+            addDynamicServerResources(ServerDynamicResourcesHandler.INSTANCE, manager);
+        });
+
     }
 
 
     @Deprecated(forRemoval = true)
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager){
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
     }
 
     @Override
@@ -144,14 +147,12 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-
         for (var entry : getEntries()) {
             executor.accept((manager, sink) -> {
                 try {
                     entry.generateTextures(this, manager, sink);
                     entry.generateModels(this, manager, sink);
 
-                    addDynamicClientResources(ClientDynamicResourcesHandler.getInstance(), manager);
                 } catch (Exception ex) {
                     EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", entry, this, ex);
                     if (PlatHelper.isDev()) throw ex;
@@ -160,6 +161,7 @@ public class SimpleModule extends CompatModule {
         }
 
         executor.accept((manager, sink) -> {
+            addDynamicClientResources(ClientDynamicResourcesHandler.getInstance(), manager);
         });
     }
 
@@ -227,8 +229,7 @@ public class SimpleModule extends CompatModule {
         if (blockType instanceof WoodType woodType) {
             Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(entrySetId, blockName, woodType, modId);
             if (hardcoded != null) return hardcoded;
-        }
-        else if (blockType instanceof LeavesType leavesType) {
+        } else if (blockType instanceof LeavesType leavesType) {
             Boolean hardcoded = HardcodedBlockType.isLeavesBlockAlreadyRegistered(entrySetId, blockName, leavesType, modId);
             if (hardcoded != null) return hardcoded;
         }
