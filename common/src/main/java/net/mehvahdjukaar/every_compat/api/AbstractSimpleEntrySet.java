@@ -83,7 +83,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                                      Supplier<T> baseType,
                                      Supplier<ResourceKey<CreativeModeTab>> tab,
                                      TabAddMode tabMode,
-                                     @Deprecated(forRemoval = true)
                                      BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                      boolean mergePalette, boolean copyTint,
@@ -468,8 +467,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
 
         //by default, they all use planks palette
-        @Deprecated(forRemoval = true)
         /// @deprecated new method haven't been implemented yet
+        @Deprecated(forRemoval = true)
         public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteProvider) {
             this.palette = (t, m) -> {
                 var old = paletteProvider.apply(t, m);
@@ -479,41 +478,41 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         //only works for oak type. Will fail if its used on leaves
-        @Deprecated(forRemoval = true)
         /// @deprecated new method haven't been implemented yet
+        @Deprecated(forRemoval = true)
         public BL createPaletteFromPlanks(Consumer<Palette> paletteTransform) {
             return createPaletteFromChild(paletteTransform, VanillaWoodChildKeys.PLANKS);
         }
 
-        @Deprecated(forRemoval = true)
         /// @deprecated new method haven't been implemented yet
+        @Deprecated(forRemoval = true)
         public BL createPaletteFromPlanks() {
             return createPaletteFromPlanks(p -> {
             });
         }
 
-        @Deprecated(forRemoval = true)
         /// @deprecated new method haven't been implemented yet
+        @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
             return createPaletteFromChild(paletteTransform, childKey, null);
         }
 
-        @Deprecated(forRemoval = true)
         /// @deprecated new method haven't been implemented yet
+        @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(String childKey, Predicate<String> whichSide) {
             return createPaletteFromChild(p -> {
             }, childKey, whichSide);
         }
 
-        @Deprecated(forRemoval = true)
         /// @deprecated new method haven't been implemented yet
+        @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(String childKey) {
             return createPaletteFromChild(p -> {
             }, childKey, null);
         }
 
-        @Deprecated(forRemoval = true)
         /// @deprecated new method haven't been implemented yet
+        @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, Predicate<String> whichSide) {
             return this.setPalette((blockType, m) -> {
                 var p = PaletteStrategies.makePaletteFromChild(blockType, m, childKey, whichSide, paletteTransform);
