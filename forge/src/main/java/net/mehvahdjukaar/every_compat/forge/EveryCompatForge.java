@@ -60,6 +60,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerNegotiationEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkDirection;
@@ -76,7 +77,7 @@ import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
 @Mod(EveryCompat.MOD_ID)
 public class EveryCompatForge extends EveryCompatCommon {
 
-    public EveryCompatForge() {
+    public EveryCompatForge(IEventBus bus) {
         this.initialize();
 
         CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
@@ -86,7 +87,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             EveryCompatForgeClient.init();
         }
 
-        MinecraftForge.EVENT_BUS.register(LegacyRemapper.class);
+        LegacyRemapper.init(bus);
     }
 
     @Override
@@ -163,7 +164,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         //TODO: what the heck is this? if WE are adding that line we shold not remove it immediately like this! Fix
         // Remove the [Debug] strings from ItemToolTip
         event.getToolTip().removeIf(line ->
-            line.getString().matches(".*\\[Debug\\] Item Tags:.*") || line.getString().matches(".*\\[Debug\\] Block Tags:.*")
+                line.getString().matches(".*\\[Debug\\] Item Tags:.*") || line.getString().matches(".*\\[Debug\\] Block Tags:.*")
         );
 
         EveryCompatClient.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());

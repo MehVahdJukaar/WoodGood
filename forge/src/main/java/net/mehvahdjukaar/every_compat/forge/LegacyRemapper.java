@@ -5,6 +5,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
@@ -14,6 +16,11 @@ import net.minecraftforge.registries.RegisterEvent;
 import java.util.Map;
 
 public class LegacyRemapper {
+
+    public static void init(IEventBus modBus){
+        modBus.addListener(LegacyRemapper::registerEvent);
+        MinecraftForge.EVENT_BUS.addListener(LegacyRemapper::remapBlocks);
+    }
 
     // Important. wherever a block name or most likely block entity changes (like gets removed in favour of a mod one), add the old names here to prevent backward compat with saves that have them
     private static final Map<ResourceLocation, String> OLD_TO_NEW_NAMES = Map.of(
@@ -26,7 +33,6 @@ public class LegacyRemapper {
     );
 
     //this can be slow. doesn't matter since it only happens once on boot
-    @SubscribeEvent
     public static void remapBlocks(MissingMappingsEvent event) {
         remapInRegistry(event, BuiltInRegistries.BLOCK_ENTITY_TYPE);
         remapInRegistry(event, BuiltInRegistries.BLOCK);
@@ -44,7 +50,6 @@ public class LegacyRemapper {
     }
 
     //event above is cooked... this is the real mvp
-    @SubscribeEvent
     public static void registerEvent(RegisterEvent event) {
         if (event.getRegistryKey().equals(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey())) {
             if (event.getForgeRegistry() instanceof ForgeRegistry<?> fr) {
