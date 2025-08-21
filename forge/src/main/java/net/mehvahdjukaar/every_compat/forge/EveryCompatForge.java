@@ -85,6 +85,8 @@ public class EveryCompatForge extends EveryCompatCommon {
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatForgeClient.init();
         }
+
+        MinecraftForge.EVENT_BUS.register(LegacyRemapper.class);
     }
 
     @Override

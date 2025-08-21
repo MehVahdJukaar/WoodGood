@@ -1,32 +1,47 @@
 package net.mehvahdjukaar.every_compat.forge;
 
-/*
-public class EntriesRemapper {
+
+import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.registries.MissingMappingsEvent;
+
+import java.util.Map;
+
+public class LegacyRemapper {
+
+    // Important. wherever a block name or most likely block entity changes (like gets removed in favour of a mod one), add the old names here to prevent backward compat with saves that have them
+    private static final Map<ResourceLocation, String> OLD_TO_NEW_NAMES = Map.of(
+            new ResourceLocation("everycomp:sd_full_drawers_1"), "storagedrawers:standard_drawers_1",
+            new ResourceLocation("everycomp:sd_full_drawers_2"), "storagedrawers:standard_drawers_2",
+            new ResourceLocation("everycomp:sd_full_drawers_4"), "storagedrawers:standard_drawers_4",
+            new ResourceLocation("everycomp:sd_half_drawers_1"), "storagedrawers:standard_drawers_1",
+            new ResourceLocation("everycomp:sd_half_drawers_2"), "storagedrawers:standard_drawers_2",
+            new ResourceLocation("everycomp:sd_half_drawers_4"), "storagedrawers:standard_drawers_4"
+    );
 
     //this can be slow. doesn't matter since it only happens once on boot
     @SubscribeEvent
-    public static void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
-        remapEntries(event, ForgeRegistries.BLOCKS);
-        if (EarlyConfigs.REMAP_OWN.get()) {
-            for (var mapping : event.getMappings(EveryCompat.MOD_ID)) {
-                mapping.ignore();
-                //mapping.remap(Blocks.OAK_PLANKS);
+    public static void remapBlocks(MissingMappingsEvent event) {
+        remapInRegistry(event, BuiltInRegistries.BLOCK_ENTITY_TYPE);
+        remapInRegistry(event, BuiltInRegistries.BLOCK);
+        remapInRegistry(event, BuiltInRegistries.ITEM);
+    }
+
+    private static <T> void remapInRegistry(MissingMappingsEvent event, Registry<T> reg) {
+        for (var mapping : event.getMappings(reg.key(), EveryCompat.MOD_ID)) {
+            String newMap = OLD_TO_NEW_NAMES.get(mapping.getKey());
+            if (newMap != null) {
+                reg.getOptional(new ResourceLocation(newMap))
+                        .ifPresent(mapping::remap);
             }
         }
     }
 
-    //this can be slow. doesn't matter since it only happens once on boot
-    @SubscribeEvent
-    public static void remapItems(RegistryEvent.MissingMappings<Item> event) {
-        remapEntries(event, ForgeRegistries.ITEMS);
-        if (EarlyConfigs.REMAP_OWN.get()) {
-            for (var mapping : event.getMappings(EveryCompat.MOD_ID)) {
-                mapping.ignore();
-                //  mapping.remap(Items.AIR);
-            }
-        }
-    }
 
+           /*
     private static <T extends IForgeRegistryEntry<T>> void remapEntries(RegistryEvent.MissingMappings<T> event, IForgeRegistry<T> blockReg) {
         if (!EarlyConfigs.REMAP_COMPAT.get()) return;
         for (var compatMod : EveryCompat.COMPAT_MODS) {
@@ -62,7 +77,7 @@ public class EntriesRemapper {
             }
         }
     }
-            /*
+
     private static <T extends IForgeRegistryEntry<T>> void clearRemoved(RegistryEvent.MissingMappings<T> event, IForgeRegistry<T> blockReg) {
 
         for (var mapping : event.getMappings(MOD_ID)) {
@@ -97,7 +112,6 @@ public class EntriesRemapper {
             }
 
         }
-    }
+    }*/
 
 }
-*/
