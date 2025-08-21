@@ -25,5 +25,7 @@
 ## v2.9.0
 
 ### UPDATED:
-- **EveryCompat** (COMMON): Palette generation is now cached and a lot faster
-
+- **EveryCompat** (COMMON): 
+  - Palette generation is now cached and a lot faster
+  - Improved API
+- **Quark** (INCLUDED): vertical_planks with **Garden Of The Dead**'s whistlecane - [#1021](https://github.com/MehVahdJukaar/WoodGood/issues/1021)
