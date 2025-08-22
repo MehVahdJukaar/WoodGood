@@ -33,8 +33,8 @@ public class SmidgeonOBlissModule extends SimpleModule {
                         )
                 ))
                 .addTexture(modRes("block/oak_counter"))
-                //REASON: SHORTENEDID-[old]-[new] - Using the texture via FarmersDelightModule BUT it's meant to generate the texture in case FarmersDelightModule's CABINET is not generated
-                .addTexture(TextureInfo.of(new ResourceLocation("farmersdelight:block/oak_cabinet_top"), "SHORTENEDID-"+shortenedId()+"-fd"))
+                //REASON: Using the texture via FarmersDelightModule BUT it's meant to generate the texture in case FarmersDelightModule's CABINET is not generated
+                .addTexture(TextureInfo.of(new ResourceLocation("farmersdelight:block/oak_cabinet_top")).replacePath(shortenedId(), "fd"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("crafting/oak_counter"))
