@@ -2,13 +2,11 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -18,12 +16,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
-import java.io.InputStream;
 import java.util.*;
 
 //Sprite Helper is too big
@@ -148,14 +144,20 @@ public class TextureGenHelper {
                             throw new RuntimeException("This should not happen. A palette of size 0 was found");
                         }
 
+                        /// Creating a new Id for the texture
                         if (info.customTexturePath() != null) {
                             oldPath = info.customTexturePath();
-                            newId = EveryCompat.MOD_ID + ":" + BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
+                            newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
+
+                            if (!info.replacePath().getFirst().isEmpty()) newId = newId.replace(info.replacePath().getFirst(), info.replacePath().getSecond());
+
+                            newId = EveryCompat.MOD_ID + ":" + newId;
                         } else if (info.keepNamespace()) {
                             newId = oldTextureId.withPath(newPath).toString();
                         } else {
                             newId = new ResourceLocation(blockId.getNamespace(), newPath).toString();
                         }
+
                         if (newId.isEmpty()) {
                             EveryCompat.LOGGER.error("The path of new texture is empty for: {}", info.texture());
                             continue;
