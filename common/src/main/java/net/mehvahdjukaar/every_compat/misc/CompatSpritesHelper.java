@@ -177,10 +177,6 @@ public class CompatSpritesHelper {
         // Leaves
         addOptional("culturaldelights:fruiting_avocado_leaves", "_leaves", "culturaldelights:block/fruiting_avocado_leaves_0");
 
-        // Meadow
-        // Leaves
-        addOptional("meadow:pine_leaves", "_leaves", "meadow:block/pine_leaves_1");
-
         // Autumnity
         // Leaves
         addOptional("autumnity:red_maple_leaves", "_leaves", "autumnity:block/maple_leaves");
