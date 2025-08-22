@@ -144,14 +144,20 @@ public class TextureGenHelper {
                             throw new RuntimeException("This should not happen. A palette of size 0 was found");
                         }
 
+                        /// Creating a new Id for the texture
                         if (info.customTexturePath() != null) {
                             oldPath = info.customTexturePath();
-                            newId = EveryCompat.MOD_ID + ":" + BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
+                            newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
+
+                            if (!info.replacePath().getFirst().isEmpty()) newId = newId.replace(info.replacePath().getFirst(), info.replacePath().getSecond());
+
+                            newId = EveryCompat.MOD_ID + ":" + newId;
                         } else if (info.keepNamespace()) {
                             newId = oldTextureId.withPath(newPath).toString();
                         } else {
                             newId = new ResourceLocation(blockId.getNamespace(), newPath).toString();
                         }
+
                         if (newId.isEmpty()) {
                             EveryCompat.LOGGER.error("The path of new texture is empty for: {}", info.texture());
                             continue;
