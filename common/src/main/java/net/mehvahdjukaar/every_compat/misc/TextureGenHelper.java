@@ -14,6 +14,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -59,7 +60,7 @@ public class TextureGenHelper {
                     infoPerTextures.put(textureId, textureInfo);
 
                     if (textureInfo.copyTexture()) {
-                        respriters.put(textureId, Respriter.ofPalette(main, List.of(Palette.empty())));
+                        respriters.put(textureId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(0))))));
                     } else {
                         imagesToClose.add(main);
 
@@ -113,10 +114,10 @@ public class TextureGenHelper {
 
 
                 /// Creating new Path to add the new textures via the resources
-                for (var re : respriters.entrySet()) {
+                for (var respriterSet : respriters.entrySet()) {
 
 
-                    ResourceLocation oldTextureId = re.getKey();
+                    ResourceLocation oldTextureId = respriterSet.getKey();
                     String oldPath = oldTextureId.getPath();
 
                     //TODO: ugly, change
@@ -167,7 +168,7 @@ public class TextureGenHelper {
 
                         String finalNewId = newId;
                         sink.addTextureIfNotPresent(manager, newId, () -> {
-                            Respriter respriter = re.getValue();
+                            Respriter respriter = respriterSet.getValue();
                             TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
                             postProcessSpecialTexture(blockType, finalNewId, manager, img);
                             return img;
@@ -182,6 +183,7 @@ public class TextureGenHelper {
     }
 
     //post process some textures.
+    @SuppressWarnings("UnusedReturnValue")
     private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, String newId, ResourceManager manager,
                                                                                 TextureImage texture) {
         if (blockType.getClass() == WoodType.class) {
