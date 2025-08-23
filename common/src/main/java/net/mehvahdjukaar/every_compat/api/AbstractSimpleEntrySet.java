@@ -269,7 +269,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     mergePalette, this.getDefaultEntries());
         } catch (Exception e) {
             EveryCompat.LOGGER.error("Could not generate any block texture for entry set {}: {}",
-                    module == null ? "dummy" : module.modRes(this.getName()), e.getMessage());
+                    module == null ? "dummy" : module.modRes(this.getName()), e);
         }
     }
 
