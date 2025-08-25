@@ -149,13 +149,13 @@ public class TextureGenHelper {
                         if (info.customTexturePath() != null) {
                             oldPath = info.customTexturePath();
                             newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
-
-                            if (!info.replacePath().getFirst().isEmpty()) newId = newId.replace(info.replacePath().getFirst(), info.replacePath().getSecond());
-
-                            newId = EveryCompat.MOD_ID + ":" + newId;
+                            newId = blockId.getNamespace() + ":" + newId;
+                        } else if (Objects.nonNull(info.replacePath()))  {
+                            newId = newPath.replace(info.replacePath().getFirst(), info.replacePath().getSecond());
+                            newId = blockId.getNamespace() + ":" + newId;
                         } else if (info.keepNamespace()) {
                             newId = oldTextureId.withPath(newPath).toString();
-                        } else {
+                        } else { /// DEFAULT
                             newId = new ResourceLocation(blockId.getNamespace(), newPath).toString();
                         }
 
