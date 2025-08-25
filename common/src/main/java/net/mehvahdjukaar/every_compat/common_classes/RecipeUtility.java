@@ -71,10 +71,24 @@ public class RecipeUtility {
         if (object instanceof JsonObject jsonObject) {
             for (String key : jsonObject.keySet()) {
                 switch (key) {
-                    case "ingredients", "ingredient", "results" ->
+                    case "ingredients", "ingredient", "results" -> {
+                        if (jsonObject.get(key).isJsonArray())
                             parseAndModifyRecipe(jsonObject.getAsJsonArray(key), oldIngredient, newIngredien, newResult);
+                        else
+                            parseAndModifyRecipe(jsonObject.getAsJsonObject(key), oldIngredient, newIngredien, newResult);
+                    }
                     // modifying
                     case "result" -> jsonObject.addProperty("result", newResult);
+                    case "tag" -> {
+                        if (jsonObject.get("tag").getAsString().equals(oldIngredient))
+                            jsonObject.addProperty("tag", newIngredien);
+                    }
+                    case "item" -> {
+                        if (jsonObject.get("item").getAsString().equals(oldIngredient))
+                            jsonObject.addProperty("item", newIngredien);
+                        else
+                            jsonObject.addProperty("item", newResult);
+                    }
                 }
             }
         }
