@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
@@ -39,7 +38,7 @@ public class PaletteStrategies {
         return c;
     }
 
-
+// ──────────────────────────────── Below Can Be Used In addTexture() or addTextureM() -────────────────────────────────
     public static final PaletteStrategy MAIN_CHILD = registerCached(PaletteStrategies::makePaletteFromMainChild);
 
     public static final PaletteStrategy WOOD_PLANKS = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
@@ -72,6 +71,7 @@ public class PaletteStrategies {
             blockType, manager, VanillaWoodChildKeys.PLANKS, null,
             (p) -> p.remove(p.getDarkest())));
 
+// ──────────────────────────────────────── End ────────────────────────────────────────
 
     //other bad code...
     public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType blockType, ResourceManager manager) {

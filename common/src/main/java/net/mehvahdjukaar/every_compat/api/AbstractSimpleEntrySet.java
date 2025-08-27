@@ -467,7 +467,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
 
         //by default, they all use planks palette
-        /// @deprecated new method haven't been implemented yet
+        /// @deprecated Use {@link PaletteStrategies} to create a new strategies instead of setPalette()
         @Deprecated(forRemoval = true)
         public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteProvider) {
             this.palette = (t, m) -> {
@@ -478,40 +478,44 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         //only works for oak type. Will fail if its used on leaves
-        /// @deprecated new method haven't been implemented yet
+        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
         @Deprecated(forRemoval = true)
         public BL createPaletteFromPlanks(Consumer<Palette> paletteTransform) {
             return createPaletteFromChild(paletteTransform, VanillaWoodChildKeys.PLANKS);
         }
 
-        /// @deprecated new method haven't been implemented yet
+        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
         @Deprecated(forRemoval = true)
         public BL createPaletteFromPlanks() {
             return createPaletteFromPlanks(p -> {
             });
         }
 
-        /// @deprecated new method haven't been implemented yet
+        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
         @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
             return createPaletteFromChild(paletteTransform, childKey, null);
         }
 
-        /// @deprecated new method haven't been implemented yet
+        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
         @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(String childKey, Predicate<String> whichSide) {
             return createPaletteFromChild(p -> {
             }, childKey, whichSide);
         }
 
-        /// @deprecated new method haven't been implemented yet
+        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
         @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(String childKey) {
             return createPaletteFromChild(p -> {
             }, childKey, null);
         }
 
-        /// @deprecated new method haven't been implemented yet
+        /**
+         * @deprecated USE .addTexture() or .addTextureM(), the last parameter is PaletteStrategies<br>
+         * Take a look at {@link PaletteStrategies} & Look for the FIELD which can be used as an argument for the last
+         * parameter
+        **/
         @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, Predicate<String> whichSide) {
             return this.setPalette((blockType, m) -> {
