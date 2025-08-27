@@ -20,7 +20,15 @@
 
 </div>
 
-### UPDATED:
+### UPDATED: 
+- **Every Compat** (C): 
+  - Corrected the logic for texture not being generated with **Gems Realm** & **Macaw's Bridges** - [#31](https://github.com/Xelbayria/GemsRealm/issues/31)
+  - Improved Recipe Generation for **Gems Realm** to correct the recipes with wrong ingredients
+- **Boatload (Abnormal)** (F): Added custom textures to improve the items' texture - @qwerty97475 (from Discord)
+
+---
+
+## v2.9.1
 
 ### ADDED: 
 - **Farmer's Delight** (COMPAT): **Undergarden's Delight** - [#1023](https://github.com/MehVahdJukaar/WoodGood/issues/1023)
