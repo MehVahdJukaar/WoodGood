@@ -58,10 +58,14 @@ public class EveryCompatCommon {
         addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", "storagedrawers");
         addOtherCompatMod("lolmcvbop", "biomesoplenty", "lolmcv");
         addOtherCompatMod("lolmcvbmo", "biomemakeover", "lolmcv");
-        addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
-        addOtherCompatMod("twilightdelight", "twilightforest", "farmersdelight");
         addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
                 "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
+
+        addOtherCompatMod("ascended_quark", List.of("aether", "deep_aether"), "quark");
+
+        // Farmer's Delight
+        addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
+        addOtherCompatMod("undergardendelight", "undergarden", "farmersdelight");
 
         // Macaw's Addon
         addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
@@ -87,36 +91,37 @@ public class EveryCompatCommon {
 
         // Abnormals Delight
         addOtherCompatMod("abnormals_delight",
-                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caves_and_chasms"),
+                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caverns_and_chasms"),
                 "farmersdelight");
 
     //!! =========================================== Add Modules ==================================================== \\
         addIfLoaded("another_furniture", () -> AnotherFurnitureModule::new);
-        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("backpacked", () -> BackpackedModule::new);
         addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
         addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
+//        addIfLoaded("blockus", () -> BlockusModule::new);
         addIfLoaded("campchair", () -> CampChairModule::new);
         addIfLoaded("chipped", () -> ChippedModule::new);
+        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule::new);
+        addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);
         addIfLoaded("friendsandfoes", () -> FriendsAndFoesModule::new);
         addIfLoaded("furnish", () -> FurnishModule::new);
+        addIfLoaded("handcrafted", () -> HandcraftedModule::new);
         addIfLoaded("hearth_and_home", () -> HearthAndHomeModule::new);
-        addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches::new);
-        addIfLoaded("quark", () -> QuarkModule::new);
-        addIfLoaded("twigs", () -> TwigsModule::new);
         addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
         addIfLoaded("lolmcv", () -> MoreChestVariantsModule::new);
+        addIfLoaded("missingwilds", () -> MissingWildModule::new);
+        addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches::new);
+        addIfLoaded("quark", () -> QuarkModule::new);
         addIfLoaded("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
-        addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);
-        addIfLoaded("handcrafted", () -> HandcraftedModule::new);
-        addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
-        addIfLoaded("villagersplus", () -> VillagersPlusModule::new);
-        addIfLoaded("table_top_craft", () -> TableTopCraftModule::new);
         addIfLoaded("storagedrawers", () -> StorageDrawersModule::new);
         addIfLoaded("stylishstiles", () -> StylishStilesModule::new);
-        addIfLoaded("missingwilds", () -> MissingWildModule::new);
+        addIfLoaded("table_top_craft", () -> TableTopCraftModule::new);
+        addIfLoaded("twigs", () -> TwigsModule::new);
+        addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
         addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
+        addIfLoaded("villagersplus", () -> VillagersPlusModule::new);
 
 //!! =================================================== OTHERS ===================================================== \\
         forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
