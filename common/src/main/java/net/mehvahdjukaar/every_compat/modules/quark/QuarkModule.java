@@ -273,7 +273,7 @@ public class QuarkModule extends SimpleModule {
                         () -> VanillaLeavesTypes.OAK,
                         leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
                 )
-                .addCondition(l -> l.getAssociatedWoodType() != null || l.getBlockOfThis(VanillaWoodChildKeys.LOG) != null) // Reason: RECIPES
+                .requiresChildren(VanillaWoodChildKeys.LOG) // Reason: RECIPES
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -509,37 +509,33 @@ public class QuarkModule extends SimpleModule {
     public void generalHedgeRecipe(LeavesType leavesType, Block block, ResourceSink handler, ResourceManager manager) {
 
         ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
-        WoodType woodType = leavesType.getAssociatedWoodType();
 
-        if (Objects.nonNull(woodType)) {
-            try (InputStream recipeStream = manager.getResource(recipeLoc)
-                    .orElseThrow(() -> new FileNotFoundException("Failed to open recipe @ " + recipeLoc)).open()) {
+        try (InputStream recipeStream = manager.getResource(recipeLoc)
+                .orElseThrow(() -> new FileNotFoundException("Failed to open recipe @ " + recipeLoc)).open()) {
 
-                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
-                JsonObject underKey = recipe.getAsJsonObject("key");
-                JsonObject underResult = recipe.getAsJsonObject("result");
+            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+            JsonObject underKey = recipe.getAsJsonObject("key");
+            JsonObject underResult = recipe.getAsJsonObject("result");
 
-                // Editing JSON
-                // Leaves
-                underKey.getAsJsonObject("L")
-                        .addProperty("item", Utils.getID(leavesType.leaves).toString());
-                // WoodTypes
-                underKey.getAsJsonObject("W").addProperty("tag",
-                        getATagOrCreateANew("logs", "caps", woodType, handler, manager).toString());
-                // Hedges
-                underResult.addProperty("item", Utils.getID(block).toString());
+            // Editing JSON
+            // Leaves
+            underKey.getAsJsonObject("L")
+                    .addProperty("item", Utils.getID(leavesType.leaves).toString());
+            // WoodTypes
+            underKey.getAsJsonObject("W").addProperty("tag",
+                    getATagOrCreateANew("logs", "caps", woodType, handler, manager).toString());
+            // Hedges
+            underResult.addProperty("item", Utils.getID(block).toString());
 
 
-                // Adding the finished recipe to ResourceLocation
-                String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
-                handler.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
-                        ResType.RECIPES);
+            // Adding the finished recipe to ResourceLocation
+            String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
+            handler.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
+                    ResType.RECIPES);
 
-            } catch (IOException e) {
-                EveryCompat.LOGGER.error("Failed to open the recipe file @ {} : {}", recipeLoc, e);
-            }
-        } else
-            EveryCompat.LOGGER.warn("[RECIPE] Quark's hedge for {} has no Associated WoodType", leavesType.getId().toString());
+        } catch (IOException e) {
+            EveryCompat.LOGGER.error("Failed to open the recipe file @ {} : {}", recipeLoc, e);
+        }
     }
 
 }

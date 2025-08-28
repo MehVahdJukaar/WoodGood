@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.modulesList;
 
 public abstract class EveryCompat {
-
+//TODO: figure out pack overlays to remove unneded textures when mods arent loaded
     public static final String MOD_ID = "everycomp";
     public static final Logger LOGGER = LogManager.getLogger("Every Compat");
 
