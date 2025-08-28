@@ -38,14 +38,14 @@ public class PaletteStrategies {
         return c;
     }
 
-// ──────────────────────────────── Below Can Be Used In addTexture() or addTextureM() -────────────────────────────────
+    // ──────────────────────────────── Below Can Be Used In addTexture() or addTextureM() -────────────────────────────────
     public static final PaletteStrategy MAIN_CHILD = registerCached(PaletteStrategies::makePaletteFromMainChild);
 
     public static final PaletteStrategy WOOD_PLANKS = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, VanillaWoodChildKeys.PLANKS, null, null));
 
     public static final PaletteStrategy WOOD_LOG_SIDE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
-            blockType, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,  null));
+            blockType, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
 
     //TODO: make this not side (top)? i guess. or always use the one below. otherwise these might be equal or just incorrect sinde side inst specified
     //so yeah delete, use below
@@ -67,14 +67,45 @@ public class PaletteStrategies {
         }
     });
 
-    public static final PaletteStrategy WOOD_PLANKS_REMOVE_DARKEST = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+    public static final PaletteStrategy WOOD_PLANKS_REMOVE_DARKEST = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
             blockType, manager, VanillaWoodChildKeys.PLANKS, null,
             (p) -> p.remove(p.getDarkest())));
+
+    public static final PaletteStrategy WOOD_ITEM = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromMainChild(blockType, manager,
+            SpriteUtils::extrapolateSignBlockPalette));
+
+    public static final PaletteStrategy WOOD_PLANKS_LOW_CONTRAST = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null,
+            (p) -> {
+                //luminance step is the distance between 2 colors. Essentially contrast
+                float averageStep = p.getAverageLuminanceStep();
+                //lower step = lower contrast. Tweak as needed
+                p.matchLuminanceStep(averageStep * 0.9f);
+                //TODO: tweak that magic number as needed. below was old approach
+                /*
+                p.remove(p.getLightest());
+                p.increaseInner();
+                p.remove(p.getDarkest());
+                p.increaseInner();
+                p.remove(p.getLightest());
+                p.increaseInner();
+                p.remove(p.getDarkest());
+                */
+            }));
+
 
 // ──────────────────────────────────────── End ────────────────────────────────────────
 
     //other bad code...
+
     public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType blockType, ResourceManager manager) {
+        return makePaletteFromMainChild(blockType, manager, null);
+    }
+
+    public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType blockType, ResourceManager manager,
+                                                                               @Nullable Consumer<Palette> paletteTransform) {
         ItemLike mainChild = blockType.mainChild();
         Block mainWoodTypeBlock = null;
         if (mainChild instanceof Block block) mainWoodTypeBlock = block;
@@ -87,6 +118,7 @@ public class PaletteStrategies {
                 RPUtils.findFirstBlockTextureLocation(manager, mainWoodTypeBlock))) {
             var targetPalette = Palette.fromAnimatedImage(plankTexture);
             var animation = plankTexture.getMcMeta();
+            if (paletteTransform != null) targetPalette.forEach(paletteTransform);
             return PaletteStrategy.PaletteAndAnimation.of(targetPalette, animation);
         } catch (Exception e) {
             throw new RuntimeException("Failed to get main block type texture", e);
@@ -123,7 +155,7 @@ public class PaletteStrategies {
                     throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
                 }
             }
-        /// ITEM
+            /// ITEM
         } else if (child instanceof Item i) {
             /// Default PaletteSupplier: planks
             try (TextureImage plankTexture = TextureImage.open(m,
