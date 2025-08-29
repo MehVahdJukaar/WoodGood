@@ -19,6 +19,69 @@ configurations {
     developmentFabric.extendsFrom common
 }
 
+processResources {
+    filesMatching("fabric.mod.json") {
+        expand rootProject.ext.replaceProperties + [project: project]
+    }
+}
+
+
+shadowJar {
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+    archiveClassifier = "dev-shadow"
+
+    zip64 true
+}
+
+remapJar {
+    injectAccessWidener = true
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+    archiveClassifier = "fabric"
+}
+
+remapSourcesJar {
+    archiveClassifier = "fabric-sources"
+}
+
+jar {
+    archiveClassifier = "dev"
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+
+    archiveClassifier = "fabric-sources"
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+
+publishing {
+    publications {
+        mavenFabric(MavenPublication) {
+            artifactId = rootProject.mod_id + "-" + project.name
+            from components.java
+        }
+    }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    repositories {
+        // Add repositories to publish to here.
+        maven {
+            url = "https://www.cursemaven.com"
+            allowInsecureProtocol = true
+        }
+    }
+}
+
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
@@ -107,6 +170,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162192")
 //    modRuntimeOnly("curse.maven:backpacked-352835:5852971") //!! BETA
+//    modRuntimeOnly("curse.maven:blockus-312289:6761560")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579676") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:chipped-456956:5813118")
 //    modRuntimeOnly("curse.maven:corail-pillar-266228:5613351")
@@ -181,68 +245,4 @@ dependencies {
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
 //    modRuntimeOnly("curse.maven:terrestria-323974:5799166")
 
-}
-
-
-processResources {
-    filesMatching("fabric.mod.json") {
-        expand rootProject.ext.replaceProperties + [project: project]
-    }
-}
-
-
-shadowJar {
-    exclude "architectury.common.json"
-
-    configurations = [project.configurations.shadowCommon]
-    archiveClassifier = "dev-shadow"
-
-    zip64 true
-}
-
-remapJar {
-    injectAccessWidener = true
-    input.set shadowJar.archiveFile
-    dependsOn shadowJar
-    archiveClassifier = "fabric"
-}
-
-remapSourcesJar {
-    archiveClassifier = "fabric-sources"
-}
-
-jar {
-    archiveClassifier = "dev"
-}
-
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
-
-    archiveClassifier = "fabric-sources"
-}
-
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
-    }
-}
-
-publishing {
-    publications {
-        mavenFabric(MavenPublication) {
-            artifactId = rootProject.mod_id + "-" + project.name
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
-        maven {
-            url = "https://www.cursemaven.com"
-            allowInsecureProtocol = true
-        }
-    }
 }

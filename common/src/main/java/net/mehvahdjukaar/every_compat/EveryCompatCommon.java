@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
+import net.mehvahdjukaar.every_compat.modules.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
@@ -99,7 +100,7 @@ public class EveryCompatCommon {
         addIfLoaded("backpacked", () -> BackpackedModule::new);
         addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
         addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
-//        addIfLoaded("blockus", () -> BlockusModule::new);
+        addIfLoaded("blockus", () -> BlockusModule::new);
         addIfLoaded("campchair", () -> CampChairModule::new);
         addIfLoaded("chipped", () -> ChippedModule::new);
         addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);

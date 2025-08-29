@@ -62,6 +62,7 @@ dependencies {
     modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
     modCompileOnly("curse.maven:backpacked-352835:5852971") //!! BETA
     modCompileOnly("curse.maven:beautiful-campfires-1085950:6162192")
+    modCompileOnly("curse.maven:blockus-312289:6761560")
     modCompileOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
     modCompileOnly("curse.maven:chipped-456956:5813118")
     modCompileOnly("curse.maven:create-624165:5168511") //!! 1.20.1
