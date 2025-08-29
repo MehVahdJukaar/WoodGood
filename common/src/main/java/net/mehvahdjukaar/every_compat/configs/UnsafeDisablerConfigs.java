@@ -1,0 +1,102 @@
+package net.mehvahdjukaar.every_compat.configs;
+
+import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
+
+import java.util.List;
+import java.util.function.Supplier;
+
+public class UnsafeDisablerConfigs {
+
+    public static Supplier<List<String>> woodTypeList;
+    public static Supplier<List<String>> leavesTypeList;
+    public static Supplier<List<String>> entrySetList;
+    public static Supplier<List<String>> modulesList;
+
+    public static ModConfigHolder CONFIG_SPEC;
+
+    public static void init() {}
+
+    static {
+
+        ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("hazardous"), ConfigType.COMMON);
+
+        String comment = """
+                    ═════════════════════════ Attention ═════════════════════════
+                    Don't use this if you don't know what you are doing
+                        REASON:
+                    This file is a conditional registration. This is harmless in Singleplayer World,
+                    but harmful in SERVER because you won't able to join.
+    
+                    ══════════════════════════ Detail ═══════════════════════════
+                    This file allow you to exclude WoodTypes, LeavesType, EntrySet, or a Module
+                    1) You can find their names for WoodTypes, LeavesType, or EntrySet in `everycomp-entries.toml`
+                    2) Leave a value empty to disable that rule.
+    
+                    Module - is a Supported Mod, just a modId is sufficient.
+                    EntrySet - is a FurnitureType or DecorativeType that Wood-Good is supporting via the mod. it is either block or item.
+    
+                    NOTE: blacklisting a Module will be applied to Wood-Good, Stone-Zone, Gems-Realm
+                """;
+        builder.comment(comment);
+
+        builder.push("woodtype");
+        String WoodTypeExample = """
+                    EXAMPLE: blacklist = [
+                        "forestry:.*fireproof.*",\t\tCOMMENT: .* is an RegEx, it exclude all of WoodType containing "fireproof" from Forestry
+                        "biomesoplenty:.*",\t\t\tCOMMENT: .* is an RegEx, it exclude all of WoodType from Wood Mod for any Module
+                        "biomesoplenty:redwood"\t\tCOMMENT: exclude redwood from Wood Mod for any module
+                    ]
+                """;
+        woodTypeList = builder.comment("Exclude WoodType from all of Modules\n"+WoodTypeExample).define("blacklist", List.of());
+        builder.pop();
+
+        builder.push("leavestype");
+        leavesTypeList = builder.comment("Exclude LeavesType from all of Modules\n\tThe example is same as WoodType's").define("blacklist", List.of());
+        builder.pop();
+
+        builder.push("entryset");
+        String entrysetExample = """
+                    This is only applied to Wood-Good.
+                    EXAMPLE: blacklist = [
+                        "chipped:checkered_trapdoor",\t\tCOMMENT: chipped:checkered_oak_trapdoor without "oak"
+                        "variantvanillablocks:chest",\t\tCOMMENT: variantvanillablocks:oak_chest without "oak"
+                        "chipped:.*"\t\t\t\t\t\tCOMMENT: .* is an regex which will exclude all of EntrySets from one Module - Wood-Good ONLY
+                    ]
+                """;
+        entrySetList = builder.comment("Exclude EntrySet from the module for All of WoodType or LeavesType\n"+entrysetExample).define("blacklist", List.of());
+        builder.pop();
+
+        builder.push("module");
+        String moduleExample = """
+                    EXAMPLE: blacklist = [
+                        "chipped",
+                        "variantvanillablocks"
+                    ]
+                """;
+        modulesList = builder.comment("Exclude Module From Wood-Good, Stone-Zone & Gems-Realm\n"+moduleExample).define("blacklist", List.of());
+        builder.pop();
+
+        CONFIG_SPEC = builder.build();
+
+        CONFIG_SPEC.forceLoad();
+
+        // Warning Message
+        if (!woodTypeList.get().isEmpty() || !leavesTypeList.get().isEmpty() || !entrySetList.get().isEmpty() || !modulesList.get().isEmpty()) {
+            EveryCompat.LOGGER.warn("""
+                            \n
+                            ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+                            ┃                        ATTENTION                         ┃
+                            ┃  You are using conditional registration via Wood-Good.   ┃
+                            ┃  Proceed at your own risk and do not complain if you     ┃
+                            ┃  CANNOT connect to servers                               ┃
+                            ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                    """
+            );
+        }
+
+    }
+
+}

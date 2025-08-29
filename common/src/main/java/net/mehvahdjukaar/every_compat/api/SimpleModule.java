@@ -9,6 +9,7 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class SimpleModule extends CompatModule {
 
@@ -70,9 +72,6 @@ public class SimpleModule extends CompatModule {
     }
 
     public EntrySet<?> getEntry(String name) {
-//        var e = entries.get(name);
-//        if (e == null)
-//            throw new UnsupportedOperationException(String.format("This module does not have entries of type %s", name));
         return entries.get(name);
     }
 
@@ -118,33 +117,58 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> {
-            e.generateLootTables(this, handler.dynamicPack, manager);
-            e.generateRecipes(this, handler.dynamicPack, manager);
-            e.generateTags(this, handler.dynamicPack, manager);
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        getEntries().forEach(e -> executor.accept((manager, sink) -> {
+            try {
+                e.generateLootTables(this, manager, sink);
+                e.generateRecipes(this, manager, sink);
+                e.generateTags(this, manager, sink);
+
+            } catch (Exception ex) {
+                EveryCompat.LOGGER.error("Failed to generate server resources for entry set {} from module {}:", e, this, ex);
+                if (PlatHelper.isDev()) throw ex;
+            }
+        }));
+        executor.accept((manager, sink) -> {
+            addDynamicServerResources(ServerDynamicResourcesHandler.INSTANCE, manager);
         });
+
+    }
+
+
+    @Deprecated(forRemoval = true)
+    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
     }
 
     @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        getEntries().forEach(e -> {
-            try {
-                e.generateModels(this, handler, manager);
-            } catch (Exception ex) {
-                EveryCompat.LOGGER.error("Failed to generate models for entry set {}:", e, ex);
-                if (PlatHelper.isDev()) throw ex;
-            }
-        });
-        getEntries().forEach(e -> {
-            try {
-                e.generateTextures(this, handler, manager);
-            } catch (Exception ex) {
-                EveryCompat.LOGGER.error("Failed to generate textures for entry set {}:", e, ex);
-                if (PlatHelper.isDev()) throw ex;
-            }
+    public String toString() {
+        return "[module: " + modId + "]";
+    }
+
+    @Override
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        for (var entry : getEntries()) {
+            executor.accept((manager, sink) -> {
+                try {
+                    entry.generateTextures(this, manager, sink);
+                    entry.generateModels(this, manager, sink);
+
+                } catch (Exception ex) {
+                    EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", entry, this, ex);
+                    if (PlatHelper.isDev()) throw ex;
+                }
+            });
+        }
+
+        executor.accept((manager, sink) -> {
+            addDynamicClientResources(ClientDynamicResourcesHandler.getInstance(), manager);
         });
     }
+
+    @Deprecated(forRemoval = true)
+    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
+    }
+
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
@@ -190,9 +214,8 @@ public class SimpleModule extends CompatModule {
     }
 
     //TODO: improve
-    public boolean isEntryAlreadyRegistered(String blockId, BlockType blockType, Registry<?> registry) {
-//        //!! NOTE: blockType is either: WoodType, LeavesType, or StoneTYpe
-//        if (blockType.isVanilla()) return true; // is moved to HardcodedBlockType
+    public boolean isEntryAlreadyRegistered(String entrySetId, String blockId, BlockType blockType, Registry<?> registry) {
+        ///NOTE: blockType is either: WoodType, LeavesType, StoneTYpe, or Other Types
 
         // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
         String blockName = blockId.substring(blockId.lastIndexOf("/") + 1);
@@ -203,11 +226,11 @@ public class SimpleModule extends CompatModule {
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
 
         // ugly hardcoded stuff
-        if (blockType instanceof WoodType wt) {
-            Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(blockName, wt, modId, shortenedId());
+        if (blockType instanceof WoodType woodType) {
+            Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(entrySetId, blockName, woodType, modId);
             if (hardcoded != null) return hardcoded;
-        } else if (blockType instanceof LeavesType lt) {
-            Boolean hardcoded = HardcodedBlockType.isLeavesBlockAlreadyRegistered(blockName, lt, modId, shortenedId());
+        } else if (blockType instanceof LeavesType leavesType) {
+            Boolean hardcoded = HardcodedBlockType.isLeavesBlockAlreadyRegistered(entrySetId, blockName, leavesType, modId);
             if (hardcoded != null) return hardcoded;
         }
 
@@ -228,7 +251,8 @@ public class SimpleModule extends CompatModule {
             }
         }
 
-        if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(woodTypeFrom, blockName))) return true; //REASON: prevent duplicated blocks for now & above is WIP for now
+        if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(woodTypeFrom, blockName)))
+            return true; //REASON: prevent duplicated blocks for now & above is WIP for now
 
         for (var c : EveryCompat.getCompatMods()) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs

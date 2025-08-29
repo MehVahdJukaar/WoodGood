@@ -1,20 +1,16 @@
 package net.mehvahdjukaar.every_compat.api;
 
-import com.mojang.datafixers.util.Pair;
+import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -35,6 +31,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     protected final Supplier<@Nullable I> baseItem;
     protected final Function<T, @Nullable I> itemFactory;
+    protected ModelConfiguration modelConfig;
 
     public ItemOnlyEntrySet(Class<T> type,
                             String name, @Nullable String prefix,
@@ -43,13 +40,16 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                             Supplier<T> baseType,
                             @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
                             TabAddMode tabMode,
-                            @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteSupplier,
+                            @Nullable BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
                             @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                             boolean mergedPalette, boolean copyTint,
-                            Predicate<T> condition) {
+                            Predicate<T> condition,
+                            ModelConfiguration modelConfig
+    ) {
         super(type, name, prefix, baseType, tab, tabMode, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         this.itemFactory = itemFactory;
         this.baseItem = baseItem;
+        this.modelConfig = modelConfig;
     }
 
     public I getBaseItem() {
@@ -58,7 +58,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     @Override
     public void addTranslations(SimpleModule module, AfterLanguageLoadEvent lang) {
-        items.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "item_type." + module.getModId() + "." + typeName, w, v));
+        items.forEach((blockType, item) -> LangBuilder.addDynamicEntry(lang, "item_type." + module.getModId() + "." + typeName, blockType, item));
     }
 
     @Override
@@ -81,19 +81,25 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     @Override
     public void registerItems(SimpleModule module, Registrator<Item> registry) {
         BlockTypeRegistry<T> typeRegistry = BlockSetAPI.getTypeRegistry(this.type);
-        for (T w : Objects.requireNonNull(typeRegistry).getValues()) {
-            String name = getItemName(w);
-            String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            if (module.isEntryAlreadyRegistered(name, w, BuiltInRegistries.ITEM)) continue;
+        for (T blockType : Objects.requireNonNull(typeRegistry).getValues()) {
+            String name = getItemName(blockType);
+            String fullName = module.shortenedId() + "/" + blockType.getNamespace() + "/" + name;
+            String entrySetId = module.getModId() +":"+ this.typeName;
 
-            if (condition.test(w)) {
-                I item = itemFactory.apply(w);
+            if (module.isEntryAlreadyRegistered(entrySetId, name, blockType, BuiltInRegistries.ITEM)) continue;
+
+            if (condition.test(blockType)) {
+                I item = itemFactory.apply(blockType);
                 //for blocks that fail
                 if (item != null) {
-                    this.items.put(w, item);
+                    this.items.put(blockType, item);
+
+                    String childKey = getChildKey(module);
+                    if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", "");
 
                     registry.register(module.makeMyRes(fullName), item);
-                    w.addChild(getChildKey(module), item);
+                    blockType.addChild(childKey, item);
+                    totalChildren++;
                 }
             }
         }
@@ -108,6 +114,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             throw new UnsupportedOperationException("Base Item cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = getChildKey(module);
+        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", "");
         baseType.get().addChild(childKey, base);
 
         //attempts adding all other children
@@ -143,14 +150,14 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     }
 
     @Override
-    public void generateLootTables(SimpleModule module, DynamicDataPack pack, ResourceManager manager) {
+    public void generateLootTables(SimpleModule module, ResourceManager manager, ResourceSink sink) {
 
     }
 
     @Override
-    public void generateModels(SimpleModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
+    public void generateModels(SimpleModule module, ResourceManager manager, ResourceSink handler) {
         ResourcesUtils.generateStandardItemModels(manager, handler, items, baseType.get(),
-                makeModelTransformer(module, manager));
+                makeModelTransformer(module, manager), modelConfig);
     }
 
     // items models
@@ -186,6 +193,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     public static class Builder<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet.Builder<Builder<T, I>, T, Block, I> {
         protected final Supplier<@Nullable I> baseItem;
         protected final Function<T, I> itemFactory;
+        protected ModelConfiguration modelConfig = ModelConfiguration.EMPTY;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<I> baseItem, Function<T, I> itemFactory) {
             super(type, name, prefix, baseType);
@@ -195,7 +203,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
         public ItemOnlyEntrySet<T, I> build() {
             var e = new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab, tabMode,
-                    palette, extraModelTransform, useMergedPalette, copyTint, condition);
+                    palette, extraModelTransform, useMergedPalette, copyTint, condition, modelConfig);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
@@ -203,8 +211,29 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         }
 
         public ItemOnlyEntrySet.Builder<T, I> defaultRecipe() {
-            this.recipes.add(() -> Utils.getID(this.baseItem.get()));
+            this.recipes.add(() -> Utils.getID(Objects.requireNonNull(this.baseItem.get())));
             return this;
         }
+
+
+        /// Add models/block files so it can be generated - Only MINECRAFT's
+        public Builder<T, I> generateBlockModels(ResourceLocation... blockModels) {
+            if (this.modelConfig == ModelConfiguration.EMPTY) {
+                this.modelConfig = ModelConfiguration.createNew();
+            }
+            this.modelConfig.addBlockModel(blockModels);
+//            GemsRealmModule.putInModelsToModify(blockModels);
+            return this;
+        }
+
+        /// Add models/item files so it can be generated - Only MINECRAFT's
+        public Builder<T, I> generateItemModels(ResourceLocation... itemModels) {
+            if (this.modelConfig == ModelConfiguration.EMPTY) {
+                this.modelConfig = ModelConfiguration.createNew();
+            }
+            this.modelConfig.addItemModel(itemModels);
+            return this;
+        }
+
     }
 }

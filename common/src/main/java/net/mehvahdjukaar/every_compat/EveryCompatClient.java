@@ -4,12 +4,16 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.ErrorMessageScreen;
+import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -19,7 +23,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -34,6 +37,15 @@ public class EveryCompatClient {
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
         ClientDynamicResourcesHandler.getInstance().register();
+    }
+
+    @EventCalled
+    public static void onFirstScreen(Screen screen) {
+        var errors = EveryCompat.getModulesThatErrored();
+        if (!errors.isEmpty()) {
+            Minecraft.getInstance().setScreen(ErrorMessageScreen.create(screen, errors));
+        }
+        EveryCompat.canShowErrorScreen = false;
     }
 
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
@@ -52,23 +64,23 @@ public class EveryCompatClient {
         EveryCompat.forAllModules(CompatModule::onClientSetup);
     }
 
-    public static void onItemTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, List<Component> components) {
-        boolean mod = ECConfigs.MOD_TOOPTIP.get();
-        boolean block = ECConfigs.BLOCK_TYPE_TOOLTIP.get();
+    public static void onItemTooltip(ItemStack stack, TooltipFlag tooltipFlag, List<Component> components) {
+        boolean modTooltip = ECConfigs.MOD_TOOPTIP.get();
+        boolean blockTooltip = ECConfigs.BLOCK_TYPE_TOOLTIP.get();
 
-        if (mod || block && (tooltipFlag.isAdvanced() || !ECConfigs.TOOLTIPS_ADVANCED.get())) {
+        if (modTooltip || blockTooltip && (tooltipFlag.isAdvanced() || !ECConfigs.TOOLTIPS_ADVANCED.get())) {
             Item item = stack.getItem();
-            var m = EveryCompat.getModuleOfItem(item);
-            if (m != null) {
-                if (mod)
-                    components.add(Component.translatable("tooltip.everycomp.mod", m.getModName()).withStyle(ChatFormatting.BLUE));
-                if (block) {
-                    BlockType w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
-                    if (w == null) w = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);
-                    if (w != null) {
-                        components.add(Component.translatable("tooltip.everycomp.wood_type", w.toString()).withStyle(ChatFormatting.BLUE));
+            var compatModule = EveryCompat.getModuleOfItem(item);
+            if (compatModule != null) {
+                if (blockTooltip) {
+                    BlockType woodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
+                    if (woodType == null) woodType = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);
+                    if (woodType != null) {
+                        components.add(Component.translatable("tooltip.everycomp.wood_type", woodType.toString()).withStyle(ChatFormatting.DARK_GREEN));
                     }
                 }
+                if (modTooltip)
+                    components.add(Component.translatable("tooltip.everycomp.mod", compatModule.getModName()).withStyle(ChatFormatting.BLUE));
             }
         }
         if (PlatHelper.isDev()) {
@@ -85,11 +97,10 @@ public class EveryCompatClient {
         }
     }
 
-    public static <B extends Block> void registerRenderType(B b, BlockType bt, @Nullable Object type) {
-        if(bt.id.equals(ResourceLocation.parse("rats:pirat"))){
+    public static <B extends Block> void registerRenderType(B b, BlockType bt, Object type) {
+        if (bt.id.equals(ResourceLocation.tryParse("rats:pirat"))) {
             type = RenderLayer.TRANSLUCENT;
         }
-
         if (type == null) return;
         if (type instanceof RenderLayer rl) {
             switch (rl) {
