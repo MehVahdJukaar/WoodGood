@@ -83,7 +83,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         }
 
         //a bit of abuse of type here, should be PaletteStrategy but i want to enforce them being cached
-        public Builder palette(PaletteStrategy paletteProvider) {
+        public Builder setPalette(PaletteStrategy paletteProvider) {
             this.palette = paletteProvider;
             return this;
         }
