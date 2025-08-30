@@ -103,6 +103,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
     }
 
     @Override
+    // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
@@ -146,6 +147,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
     }
 
     @Override
+    // TEXTURES
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 
