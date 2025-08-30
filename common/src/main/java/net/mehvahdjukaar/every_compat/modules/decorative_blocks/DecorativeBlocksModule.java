@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.decorative_blocks;
 
-import com.mojang.datafixers.util.Pair;
 import lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes;
 import lilypuree.decorative_blocks.core.DBBlocks;
 import lilypuree.decorative_blocks.items.SeatItem;
@@ -10,24 +9,17 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 //SUPPORT: v4.1.3+
@@ -61,9 +53,9 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .defaultRecipe()
                 .setTabKey(tab)
                 .addTexture(TextureInfo.of(modRes("block/oak_beam_end"))
-                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                        .palette(PaletteStrategies.SIGN_LIKE))
                 .addTexture(TextureInfo.of(modRes("block/oak_beam_side"))
-                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                        .palette(PaletteStrategies.SIGN_LIKE))
                 .build();
         this.addEntry(beams);
 
@@ -82,9 +74,9 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .defaultRecipe()
                 .setTabKey(tab)
                 .addTexture(TextureInfo.of(modRes("block/oak_palisade_end"))
-                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                        .palette(PaletteStrategies.SIGN_LIKE))
                 .addTexture(TextureInfo.of(modRes("block/oak_palisade_side"))
-                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                        .palette(PaletteStrategies.SIGN_LIKE))
                 .build();
         this.addEntry(palisades);
 
@@ -102,9 +94,9 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .defaultRecipe()
                 .setTabKey(tab)
                 .addTexture(TextureInfo.of(modRes("block/oak_support_end"))
-                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                        .palette(PaletteStrategies.SIGN_LIKE))
                 .addTexture(TextureInfo.of(modRes("block/oak_support_side"))
-                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                        .palette(PaletteStrategies.SIGN_LIKE))
                 .build();
         this.addEntry(supports);
 
@@ -122,7 +114,7 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new SeatItem(b, p))
                 .setTabKey(tab)
                 .addTexture(TextureInfo.of(modRes("block/oak_seat"))
-                        .palette(PaletteStrategies.WOOD_SIGN_LIKE))
+                        .palette(PaletteStrategies.SIGN_LIKE))
                 .build();
         this.addEntry(seats);
 

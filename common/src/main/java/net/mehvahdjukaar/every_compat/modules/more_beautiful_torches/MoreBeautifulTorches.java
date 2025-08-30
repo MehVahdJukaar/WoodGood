@@ -1,7 +1,10 @@
 package net.mehvahdjukaar.every_compat.modules.more_beautiful_torches;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -201,7 +204,7 @@ public class MoreBeautifulTorches extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .addTextureM(modRes("block/stripped_oak_log_torch"),
-                        EveryCompat.res("block/common_torch_m"), PaletteStrategies.WOOD_STRIPPED_LOG)
+                        EveryCompat.res("block/common_torch_m"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
                 .addTag(new ResourceLocation("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .noTab()
                 .noItem()
@@ -229,7 +232,7 @@ public class MoreBeautifulTorches extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .addTextureM(modRes("block/stripped_oak_log_soul_torch"),
-                        EveryCompat.res("block/common_torch_m"), PaletteStrategies.WOOD_STRIPPED_LOG)
+                        EveryCompat.res("block/common_torch_m"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
                 .addTag(new ResourceLocation("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .noTab()
                 .noItem()
@@ -257,9 +260,9 @@ public class MoreBeautifulTorches extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .addTextureM(modRes("block/stripped_oak_log_redstone_torch"),
-                        EveryCompat.res("block/common_redstone_torch_m") , PaletteStrategies.WOOD_STRIPPED_LOG)
+                        EveryCompat.res("block/common_redstone_torch_m") , PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
                 .addTextureM(modRes("block/stripped_oak_log_redstone_torch_off"),
-                        EveryCompat.res("block/common_torch_m"),  PaletteStrategies.WOOD_STRIPPED_LOG)
+                        EveryCompat.res("block/common_torch_m"),  PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
                 .noTab()
                 .noItem()
                 .setRenderType(RenderLayer.CUTOUT)

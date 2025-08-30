@@ -59,8 +59,8 @@ public class WoodGoodModule extends SimpleModule {
                     .addTile(getModTile("id_of_EntityType"))
 
                     ///OPTIONAL: Adding block's textures to be generated
-                    .addTexture(modRes("block/oak_table"), PaletteStrategies.WOOD_LOG_SIDE)
-                    .addTexture(new ResourceLocation("twigs:block/oak_table_bottom"), PaletteStrategies.WOOD_LOG_SIDE)
+                    .addTexture(modRes("block/oak_table"), PaletteStrategies.LOG_SIDE_STANDARD)
+                    .addTexture(new ResourceLocation("twigs:block/oak_table_bottom"), PaletteStrategies.LOG_SIDE_STANDARD)
                     .addTextureM(modRes("block/oak_table_top"), modRes("block/mask/oak_table_top_m")) // If the texture has parts that shouldn't be recolored, the mask (black color) can be used to exclude them
 
                     ///OPTIONAL: Adding tags to the block
