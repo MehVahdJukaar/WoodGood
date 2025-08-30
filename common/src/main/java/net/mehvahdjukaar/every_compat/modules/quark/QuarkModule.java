@@ -523,7 +523,7 @@ public class QuarkModule extends SimpleModule {
                     .addProperty("item", Utils.getID(leavesType.leaves).toString());
             // WoodTypes
             underKey.getAsJsonObject("W").addProperty("tag",
-                    getATagOrCreateANew("logs", "caps", woodType, handler, manager).toString());
+                    getATagOrCreateANew("logs", "caps", Objects.requireNonNull(leavesType.getAssociatedWoodType()), handler, manager).toString());
             // Hedges
             underResult.addProperty("item", Utils.getID(block).toString());
 
