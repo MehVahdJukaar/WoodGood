@@ -12,7 +12,6 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
-import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -160,7 +159,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 //                .requiresChildren("mcwdoors:bark_glass_door") //REASON: recipes
                 .addTextureM(modRes("item/macaw/tall_oak_bark_glass_door"),
                         EveryCompat.res("item/ddm/tall_oak_bark_glass_door_m"),
-                        PaletteStrategies.WOOD_LOG_SIDE)
+                        PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)

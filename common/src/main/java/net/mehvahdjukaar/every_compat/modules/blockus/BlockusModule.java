@@ -198,7 +198,7 @@ public class BlockusModule extends SimpleModule {
                         getModBlock("acacia_small_logs"), () -> VanillaWoodTypes.ACACIA,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addTexture(modRes("block/acacia_small_logs"), PaletteStrategies.WOOD_LOG_SIDE)
+                .addTexture(modRes("block/acacia_small_logs"), PaletteStrategies.LOG_SIDE_STANDARD)
                 //TEXTURE: manually generated texture below (acacia_small_logs_top.png)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)

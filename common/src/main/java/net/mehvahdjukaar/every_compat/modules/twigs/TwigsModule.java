@@ -27,9 +27,9 @@ public class TwigsModule extends SimpleModule {
                 .setTabKey(modRes("twig"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .addTexture(modRes("block/oak_table"), PaletteStrategies.WOOD_PLANKS_REMOVE_DARKEST)
-                .addTexture(modRes("block/oak_table_top"), PaletteStrategies.WOOD_PLANKS_REMOVE_DARKEST)
-                .addTexture(modRes("block/oak_table_bottom"), PaletteStrategies.WOOD_PLANKS_REMOVE_DARKEST)
+                .addTexture(modRes("block/oak_table"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
+                .addTexture(modRes("block/oak_table_top"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
+                .addTexture(modRes("block/oak_table_bottom"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
                 .build();
 
         this.addEntry(tables);

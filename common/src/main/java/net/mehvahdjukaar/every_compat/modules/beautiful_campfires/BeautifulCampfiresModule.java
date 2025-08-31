@@ -74,9 +74,9 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 //TEXTURE: using acacia_soul_campfire above
                 .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"),
-                        PaletteStrategies.WOOD_LOG_SIDE)
+                        PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"),
-                        PaletteStrategies.WOOD_LOG_SIDE)
+                        PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
                 .addTag(BlockTags.PIGLIN_REPELLENTS, Registries.BLOCK)
@@ -103,6 +103,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
     }
 
     @Override
+    // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
@@ -146,6 +147,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
     }
 
     @Override
+    // TEXTURES
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 

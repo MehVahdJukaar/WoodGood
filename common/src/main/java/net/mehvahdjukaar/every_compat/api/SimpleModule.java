@@ -135,7 +135,7 @@ public class SimpleModule extends CompatModule {
 
     }
 
-
+    /// @deprecated -> USE {@link SimpleModule#addDynamicServerResources(Consumer)}
     @Deprecated(forRemoval = true)
     public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
     }
@@ -165,6 +165,7 @@ public class SimpleModule extends CompatModule {
         });
     }
 
+    /// @deprecated -> USE {@link SimpleModule#addDynamicClientResources(Consumer)}
     @Deprecated(forRemoval = true)
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
     }

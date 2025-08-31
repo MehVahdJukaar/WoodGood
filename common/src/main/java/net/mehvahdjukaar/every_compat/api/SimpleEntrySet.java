@@ -348,9 +348,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             e.tags.putAll(this.tags);
             for (var t : this.textures) {
                 if (this.palette != null) {
-                    e.textures.add(t.cloneWithPalette((t1, manager) -> {
-                        return this.palette.apply((T) t1, manager);
-                    }));
+                    e.textures.add(t.cloneWithPalette((blockType, manager) ->
+                         this.palette.apply((T) blockType, manager)));
                 } else {
                     e.textures.add(t);
                 }
@@ -417,17 +416,17 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public Builder<T, B> defaultRecipe() {
-            this.recipes.add(() -> Utils.getID(this.baseBlock.get()));
+            this.recipes.add(() -> Utils.getID(Objects.requireNonNull(this.baseBlock.get())));
             return this;
         }
 
         public Builder<T, B> defaultBlockTexture() {
-            this.textures.add(TextureInfo.<T>of(Utils.getID(this.baseBlock.get()).withPrefix("block/")).build());
+            this.textures.add(TextureInfo.<T>of(Utils.getID(Objects.requireNonNull(this.baseBlock.get())).withPrefix("block/")).build());
             return this;
         }
 
         public Builder<T, B> defaultItemTexture() {
-            this.textures.add(TextureInfo.<T>of(Utils.getID(this.baseBlock.get()).withPrefix("item/")).build());
+            this.textures.add(TextureInfo.<T>of(Utils.getID(Objects.requireNonNull(this.baseBlock.get())).withPrefix("item/")).build());
             return this;
         }
 
@@ -467,20 +466,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             this.modelConfig.addItemModel(itemModels);
             return this;
         }
-
-
-        /// Is there a way to get baseBlock?
-//        public Builder<T, B> defaultBlockTexture() {
-//            var test = this.baseBlock;
-//            this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("block/")).build());
-//            return this;
-//        }
-
-//        public Builder<T, B> defaultItemTexture() {
-//            this.textures.add(TextureInfo.of(Utils.getID(this.baseBlock.get()).withPrefix("item/")).build());
-//            return this;
-//        }
-
     }
 
 

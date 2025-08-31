@@ -232,7 +232,7 @@ public class ResourcesUtils {
         // Modifying the model files' content
         if (baseType instanceof LeavesType leavesType) {
             CompatSpritesHelper.replaceLeavesTextures(transformer, leavesType);
-            var woodT = leavesType.getWoodType();
+            var woodT = leavesType.getAssociatedWoodType();
             if (woodT != null) {
                 CompatSpritesHelper.replaceWoodTextures(transformer, woodT);
             }
