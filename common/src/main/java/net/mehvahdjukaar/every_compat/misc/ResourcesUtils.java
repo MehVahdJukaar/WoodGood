@@ -57,7 +57,7 @@ public class ResourcesUtils {
         Block baseBlock = BlockType.changeBlockType(first.getValue(), first.getKey(), baseType);
 
         if (baseBlock == null) {
-            EveryCompat.LOGGER.error("Skipped generating some block assets because oakBlock is null for {}", Utils.getID(first.getValue()));
+            EveryCompat.LOGGER.error("Skipped generating some block assets because baseBlock is null for {}", Utils.getID(first.getValue()));
             return;
         }
 
@@ -97,12 +97,9 @@ public class ResourcesUtils {
                                 //Adding to the resources
                                 sink.addResourceIfNotPresent(manager, newModel);
                             } catch (Exception e) {
-                                EveryCompat.LOGGER.error("Failed to add {}'s models/block file: {}", Utils.getID(block), e.getMessage());
+                                EveryCompat.LOGGER.error("Failed to add {}'s models/block file: {}", Utils.getID(block), e);
                             }
                         }
-                    } else {
-                        //dummy blockstate so we don't generate models for this
-                        sink.addJson(blockId, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
 //                    else {
 //                        //dummy blockstate so we don't generate models for this
@@ -110,7 +107,7 @@ public class ResourcesUtils {
 //                    }
 
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to add {}'s blockstate file: {}", block, e.getMessage());
+                    EveryCompat.LOGGER.error("Failed to add {}'s blockstate file: {}", block, e);
                 }
             });
         } catch (Exception e) {
