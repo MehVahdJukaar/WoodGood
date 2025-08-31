@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GlassBlock;
 
-
 public class PremiumWoodModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;
@@ -27,13 +26,12 @@ public class PremiumWoodModule extends SimpleModule {
     public PremiumWoodModule(String modId) {
         super(modId, "pw");
         var tab = CreativeModeTabs.BUILDING_BLOCKS;
-
         var tiger = WoodTypeRegistry.INSTANCE.makeFutureHolder(new ResourceLocation("premium_wood:tiger"));
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
-                        getModBlock("tiger_crafting_table"),
-                        tiger,
-                        w -> new PremiumWorkbenchBlock())
+                        getModBlock("tiger_crafting_table"), tiger,
+                        w -> new PremiumWorkbenchBlock()
+                )
                 .addTextureM(EveryCompat.res("block/tiger/tiger_crafting_table_front"), EveryCompat.res("block/pw/tiger_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/tiger/tiger_crafting_table_side"), EveryCompat.res("block/pw/tiger_crafting_table_side_m"))
                 .addTexture(EveryCompat.res("block/tiger/tiger_crafting_table_top"))
@@ -46,9 +44,9 @@ public class PremiumWoodModule extends SimpleModule {
         this.addEntry(craftingTable);
 
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
-                        getModBlock("tiger_bookshelf"),
-                        tiger,
-                        w -> new PremiumBookshelfBlock())
+                        getModBlock("tiger_bookshelf"), tiger,
+                        w -> new PremiumBookshelfBlock()
+                )
                 .addTextureM(modRes("block/tiger/tiger_bookshelf"), EveryCompat.res("block/pw/tiger_bookshelf_m"))
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -59,9 +57,9 @@ public class PremiumWoodModule extends SimpleModule {
         this.addEntry(bookshelf);
 
         framedGlass = SimpleEntrySet.builder(WoodType.class, "framed_glass",
-                        getModBlock("tiger_framed_glass"),
-                        tiger,
-                        w -> new GlassBlock(Utils.copyPropertySafe(Blocks.GLASS)))
+                        getModBlock("tiger_framed_glass"), tiger,
+                        w -> new GlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                )
                 .addTextureM(modRes("block/tiger/tiger_framed_glass"), EveryCompat.res("block/pw/tiger_framed_glass_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("framed_glass"), Registries.BLOCK)

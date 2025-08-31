@@ -9,7 +9,6 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +20,10 @@ import net.tropicraft.core.common.block.BoardwalkBlock;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.function.Consumer;
+
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 //SUPPORT: v9.6.3+
 public class TropicraftModule extends SimpleModule {
@@ -35,6 +37,7 @@ public class TropicraftModule extends SimpleModule {
                         getModBlock("mangrove_boardwalk"), () -> VanillaWoodTypes.MANGROVE,
                         w -> new BoardwalkBlock(BlockBehaviour.Properties.of().noOcclusion())
                 )
+                .requiresChildren(SLAB) //REASON: recipes
                 //TEXTURE: planks
                 //REASON: tropicraft has its own planks texture for mangrove, Below is use mod's planks texture
                 .addModelTransform(m -> m.replaceWithTextureFromChild("tropicraft:block/mangrove_planks",
@@ -50,7 +53,6 @@ public class TropicraftModule extends SimpleModule {
     // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         ResourceLocation recipePath = modRes("mangrove_boardwalk");
-
         executor.accept((manager, sink) -> {
             boardwalks.blocks.forEach((wood, block) -> {
 
@@ -62,7 +64,7 @@ public class TropicraftModule extends SimpleModule {
                     JsonObject underKey = recipe.getAsJsonObject("key").getAsJsonObject("X");
 
                     // Editing the JSON
-                    underKey.addProperty("item", Utils.getID(wood.getBlockOfThis("slab")).toString());
+                    underKey.addProperty("item", Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(SLAB))).toString());
                     recipe.getAsJsonObject("result").addProperty("item", Utils.getID(block).toString());
 
                     // Adding to the resource

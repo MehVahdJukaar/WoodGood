@@ -11,6 +11,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -24,6 +25,8 @@ import twilightforest.enums.HollowLogVariants;
 import twilightforest.init.TFBlocks;
 import twilightforest.item.HollowLogItem;
 
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
+
 //SUPPORT: v4.3.1750+
 public class TwilightForestModule extends SimpleModule {
 
@@ -34,9 +37,8 @@ public class TwilightForestModule extends SimpleModule {
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
-        var tab = modRes("blocks");
+        ResourceLocation tab = modRes("blocks");
 
-        //TODO: check face culling
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> VanillaWoodTypes.OAK,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
@@ -48,18 +50,16 @@ public class TwilightForestModule extends SimpleModule {
                 .build();
         this.addEntry(banisters);
 
-
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, () -> VanillaWoodTypes.BIRCH,
                         w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
                 )
-                .requiresChildren("stripped_log") //REASON: Textures
+                .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(hollowLogsHorizontal);
-
 
         hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, () -> VanillaWoodTypes.BIRCH,
@@ -67,7 +67,7 @@ public class TwilightForestModule extends SimpleModule {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return new HollowLogVertical(Utils.copyPropertySafe(w.log), RegistryObject.create(id, ForgeRegistries.BLOCKS));
                         })
-                .requiresChildren("stripped_log") //REASON: Textures
+                .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .noItem()
                 .setTabKey(tab)
@@ -80,7 +80,7 @@ public class TwilightForestModule extends SimpleModule {
                         w -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
                                 RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS))
                 )
-                .requiresChildren("stripped_log") //REASON: Textures
+                .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

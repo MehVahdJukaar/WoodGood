@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
+
 //SUPPORT: v1.15.2+
 public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
     private static final ResourceLocation TAG_PACKINGTAPE_BLACKLIST = new ResourceLocation("packingtape","te_blacklist");
@@ -46,11 +48,11 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new BookShelf.Dual("double")
                 )
+                .addTile(Registration.BOOK_SHELF_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .addRecipe(modRes("book_shelf_double_spruce"))
                 .setTabKey(tab)
-                .addTile(Registration.BOOK_SHELF_BE)
+                .addRecipe(modRes("book_shelf_double_spruce"))
                 .addCustomItem((wood, block, prop) -> new BlockItemEx( block, prop))
                 .build();
         this.addEntry(double_bookshelves);
@@ -60,12 +62,12 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new BookShelf.Dual("open_double")
                 )
+                .addTile(Registration.BOOK_SHELF_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .addRecipe(modRes("book_shelf_open_double_spruce"))
                 .setTabKey(tab)
+                .addRecipe(modRes("book_shelf_open_double_spruce"))
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.BOOK_SHELF_BE)
                 .build();
         this.addEntry(open_double_bookshelves);
 
@@ -74,12 +76,12 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new BookShelf.TopSimple("minimal")
                 )
+                .addTile(Registration.BOOK_SHELF_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .defaultRecipe()
                 .setTabKey(tab)
+                .defaultRecipe()
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.BOOK_SHELF_BE)
                 .build();
         this.addEntry(min_bookshelves);
 
@@ -88,13 +90,13 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new BookShelf.TopSimple("open_minimal")
                 )
+                .addTile(Registration.BOOK_SHELF_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
+                .setTabKey(tab)
                 .addRecipe(modRes("book_shelf_open_minimal_spruce"))
                 .addRecipe(modRes("book_shelf_open_minimal_from_double_spruce"))
-                .setTabKey(tab)
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.BOOK_SHELF_BE)
                 .build();
         this.addEntry(open_min_bookshelves);
 
@@ -103,12 +105,12 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new BookShelf.TopWithLanterns("with_lanterns")
                 )
+                .addTile(Registration.BOOK_SHELF_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .defaultRecipe()
                 .setTabKey(tab)
+                .defaultRecipe()
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.BOOK_SHELF_BE)
                 .build();
         this.addEntry(lantern_bookshelves);
 
@@ -117,15 +119,15 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         (w) -> new SimpleTable()
                 )
+                .requiresChildren(STRIPPED_LOG)
+                .addTile(Registration.SIMPLE_TABLE_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .requiresChildren("stripped_log")
                 .addTag(new ResourceLocation("forge","workbench"), Registries.BLOCK)
                 .addTag(new ResourceLocation("forge","workbench"), Registries.ITEM)
+                .setTabKey(tab)
                 .addRecipe(modRes("simple_table_normal_spruce"))
                 .addRecipe(modRes("simple_table_replacement_spruce"))
-                .setTabKey(tab)
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.SIMPLE_TABLE_BE)
                 .build();
         this.addEntry(simple_tables);
 
@@ -134,13 +136,13 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new DualToolRack(6, "framed")
                 )
+                .addTile(Registration.TOOL_RACK_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .defaultRecipe()
                 .setTabKey(tab)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.TOOL_RACK_BE)
+                .defaultRecipe()
                 .copyParentDrop()
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .build();
         this.addEntry(framed_toolracks);
 
@@ -149,13 +151,13 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new DualToolRack(6, "pframed")
                 )
+                .addTile(Registration.TOOL_RACK_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .defaultRecipe()
                 .setTabKey(tab)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.TOOL_RACK_BE)
+                .defaultRecipe()
                 .copyParentDrop()
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .build();
         this.addEntry(pframed_toolracks);
 
@@ -164,13 +166,13 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new DualToolRack(6, "double")
                 )
+                .addTile(Registration.TOOL_RACK_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .defaultRecipe()
                 .setTabKey(tab)
-                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.TOOL_RACK_BE)
+                .defaultRecipe()
                 .copyParentDrop()
+                .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .build();
         this.addEntry(double_toolracks);
 
@@ -179,13 +181,13 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new ToolRack(2, "single")
                 )
+                .addTile(Registration.TOOL_RACK_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .addRecipe(modRes("tool_rack_single_from_multi_spruce"))
                 .setTabKey(tab)
+                .addRecipe(modRes("tool_rack_single_from_multi_spruce"))
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.TOOL_RACK_BE)
                 .build();
         this.addEntry(single_toolracks);
 
@@ -194,12 +196,12 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new PotionShelf()
                 )
+                .addTile(Registration.POTION_SHELF_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .defaultRecipe()
                 .setTabKey(tab)
+                .defaultRecipe()
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
-                .addTile(Registration.POTION_SHELF_BE)
                 .build();
         this.addEntry(potionshelves1);
 
@@ -208,9 +210,9 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new AdvancedTableTopSecondary()
                 )
+                .requiresChildren(STRIPPED_LOG)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .noItem().noTab()
-                .requiresChildren("stripped_log")
                 .build();
         this.addEntry(dual_table_parts_tr);
 
@@ -219,9 +221,9 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new AdvancedTableTopSecondary()
                 )
+                .requiresChildren(STRIPPED_LOG)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .noItem().noTab()
-                .requiresChildren("stripped_log")
                 .build();
         this.addEntry(dual_table_parts_tl);
 
@@ -230,9 +232,9 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new AdvancedTableBottomSecondary()
                 )
+                .requiresChildren(STRIPPED_LOG)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .noItem().noTab()
-                .requiresChildren("stripped_log")
                 .build();
         this.addEntry(dual_table_parts_br);
 
@@ -241,9 +243,9 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new AdvancedTableBottomPrimary()
                 )
+                .requiresChildren(STRIPPED_LOG)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .requiresChildren("stripped_log")
                 .noItem().noTab()
                 .addTile(Registration.DUAL_TABLE_BE)
                 .build();
@@ -283,21 +285,15 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(WorkshopForHandsomeAdventurerModule::sendIMC);
     }
 
-
-    @Override
-    public List<String> getAlreadySupportedMods() {
-        return List.of("biomesoplenty");
-    }
-
     public static void sendIMC(final InterModEnqueueEvent event) {
         ArrayList<String> blacklist = new ArrayList<>();
-        for (WoodType w : WoodTypeRegistry.getTypes()) {
+        for (WoodType w : WoodTypeRegistry.INSTANCE) {
             if (!w.getNamespace().equals("minecraft")) {
                 // we need to tell carry on not to break our multiblock structures
                 blacklist.add(MessageFormat.format("{0}:wfha/{1}/tool_rack_double_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                 blacklist.add(MessageFormat.format("{0}:wfha/{1}/tool_rack_framed_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                 blacklist.add(MessageFormat.format("{0}:wfha/{1}/tool_rack_pframed_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
-                if (w.getBlockOfThis("stripped_log") != null) {
+                if (w.getBlockOfThis(STRIPPED_LOG) != null) {
                     blacklist.add(MessageFormat.format("{0}:wfha/{1}/dual_table_bottom_left_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                     blacklist.add(MessageFormat.format("{0}:wfha/{1}/dual_table_bottom_right_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                     blacklist.add(MessageFormat.format("{0}:wfha/{1}/dual_table_top_left_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
@@ -313,4 +309,8 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
         }
     }
 
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of("biomesoplenty");
+    }
 }
