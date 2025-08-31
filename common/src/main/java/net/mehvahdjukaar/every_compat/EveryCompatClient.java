@@ -64,7 +64,7 @@ public class EveryCompatClient {
         EveryCompat.forAllModules(CompatModule::onClientSetup);
     }
 
-    public static void onItemTooltip(ItemStack stack, TooltipFlag tooltipFlag, List<Component> components) {
+    public static void onItemTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, List<Component> components) {
         boolean modTooltip = ECConfigs.MOD_TOOPTIP.get();
         boolean blockTooltip = ECConfigs.BLOCK_TYPE_TOOLTIP.get();
 

@@ -4,7 +4,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
-
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
@@ -42,7 +41,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingT
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
-
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.neoforged.bus.api.EventPriority;
@@ -70,6 +68,10 @@ public class EveryCompatForge extends EveryCompatCommon {
         this.initialize();
 
         NeoForge.EVENT_BUS.register(this);
+
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            EveryCompatForgeClient.init();
+        }
     }
 
     @Override

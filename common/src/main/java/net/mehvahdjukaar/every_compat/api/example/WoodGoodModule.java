@@ -60,13 +60,13 @@ public class WoodGoodModule extends SimpleModule {
 
                     ///OPTIONAL: Adding block's textures to be generated
                     .addTexture(modRes("block/oak_table"), PaletteStrategies.LOG_SIDE_STANDARD)
-                    .addTexture(new ResourceLocation("twigs:block/oak_table_bottom"), PaletteStrategies.LOG_SIDE_STANDARD)
+                    .addTexture(ResourceLocation.parse("twigs:block/oak_table_bottom"), PaletteStrategies.LOG_SIDE_STANDARD)
                     .addTextureM(modRes("block/oak_table_top"), modRes("block/mask/oak_table_top_m")) // If the texture has parts that shouldn't be recolored, the mask (black color) can be used to exclude them
 
                     ///OPTIONAL: Adding tags to the block
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                    .addTag(new ResourceLocation("twigs:tables"), Registries.BLOCK)
-                    .addTag(new ResourceLocation("twigs:tables"), Registries.ITEM)
+                    .addTag(ResourceLocation.parse("twigs:tables"), Registries.BLOCK)
+                    .addTag(ResourceLocation.parse("twigs:tables"), Registries.ITEM)
 
                     ///OPTIONAL: If your block is glasses, then please take a look at below & Looking for // Common Tags which is at the bottom of the class
             // https://github.com/MehVahdJukaar/WoodGood/blob/1.20/common/src/main/java/net/mehvahdjukaar/every_compat/common_classes/TagUtility.java#L186
@@ -92,7 +92,7 @@ public class WoodGoodModule extends SimpleModule {
                             w -> new Item(new Item.Properties())
                     )
                     .addTexture(modRes("item/itemTexture"))
-                    .addTag(new ResourceLocation("twigs:tables"), Registries.ITEM)
+                    .addTag(ResourceLocation.parse("twigs:tables"), Registries.ITEM)
                     .setTabKey(tab)
                     .defaultRecipe()
                     .addRecipe(modRes("path/to/recipeFile"))

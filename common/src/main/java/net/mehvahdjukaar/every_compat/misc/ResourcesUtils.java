@@ -5,13 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
-import net.mehvahdjukaar.moonlight.api.platform.ForgeHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
@@ -19,13 +17,14 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -104,11 +103,6 @@ public class ResourcesUtils {
                         //dummy blockstate so we don't generate models for this
                         sink.addJson(blockId, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
-//                    else {
-//                        //dummy blockstate so we don't generate models for this
-//                        sink.addJson(blockId, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
-//                    }
-
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to add {}'s blockstate file: {}", block, e.getMessage());
                 }
@@ -232,7 +226,7 @@ public class ResourcesUtils {
         // Modifying the model files' content
         if (baseType instanceof LeavesType leavesType) {
             CompatSpritesHelper.replaceLeavesTextures(transformer, leavesType);
-            var woodT = leavesType.getWoodType();
+            var woodT = leavesType.getAssociatedWoodType();
             if (woodT != null) {
                 CompatSpritesHelper.replaceWoodTextures(transformer, woodT);
             }
@@ -296,40 +290,27 @@ public class ResourcesUtils {
      */
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, ResourceSink pack,
                                                                               Map<T, B> blocks, String oakRecipe, T fromType) {
-        addBlocksRecipes(manager, pack, blocks, new ResourceLocation(modId, oakRecipe), fromType, 0);
+        addBlocksRecipes(manager, pack, blocks, ResourceLocation.fromNamespaceAndPath(modId, oakRecipe), fromType, 0);
     }
 
-    @SuppressWarnings("removal")
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, ResourceSink pack,
                                                                               Map<T, B> items, ResourceLocation oakRecipe, T fromType,
                                                                               int index) {
-        IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
-                ResType.RECIPES.getPath(oakRecipe));
-
+        Recipe<?> template = RPUtils.readRecipe(manager, oakRecipe);
         items.forEach((w, i) -> {
 
-            //check for disabled ones. //
             if (ModEntriesConfigs.isEntryEnabled(w, i)) {
-                // Will actually crash if its null since vanilla recipe builder expects a non-null one
                 try {
-                    String blockId = RecipeBuilder.getDefaultRecipeId(i).toString();
-                    FinishedRecipe newR;
-
-                    String oakRecipePath = oakRecipe.getPath();
-                    String modifiedRecipe = oakRecipePath.substring(oakRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), w.getTypeName());
-                    String target = blockId.substring(blockId.lastIndexOf("/") + 1);
-                    // Replaced the >text< with modifiedRecipe: everycomp:q/biomesoplenty/ >fir_vertical_slab<
-                    String newId = blockId.replace(target, modifiedRecipe);
-
-                    if (!blockId.equals(newId)) {
-                        newR = template.createSimilar(fromType, w, w.mainChild().asItem(), newId);
+                    //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
+                    ResourceLocation id = RecipeBuilder.getDefaultRecipeId(i);
+                    RecipeHolder<?> newR;
+                    if (index != 0) {
+                        id = id.withSuffix("_" + index);
                     }
-                    else {
-                        newR = template.createSimilar(fromType, w, w.mainChild().asItem());
-                    }
-                    if (newR == null) return;
+                    newR = RPUtils.makeSimilarRecipe(template, fromType, w, id);
 
-                    newR = ForgeHelper.addRecipeConditions(newR, template.getConditions()); //not even needed
+                    //not even needed
+                    //newR = ForgeHelper.copyRecipeConditions(template, newR.value());
 
                     // Adding to the resources
                     pack.addRecipe(newR);
@@ -371,6 +352,7 @@ public class ResourcesUtils {
     protected static final String RES_CHARS = "[a-z,A-Z,\\-,_./]*";
     protected static final Pattern RES_PATTERN = Pattern.compile("\"(" + RES_CHARS + ":" + RES_CHARS + ")\"");
 
+    @SuppressWarnings("DataFlowIssue")
     public static String convertItemIDinText(String text, BlockType fromType, BlockType toType) {
         Matcher matcher = RES_PATTERN.matcher(text);
         return matcher.replaceAll(m -> {

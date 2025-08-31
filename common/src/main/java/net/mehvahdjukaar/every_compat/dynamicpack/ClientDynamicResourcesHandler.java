@@ -1,14 +1,14 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;

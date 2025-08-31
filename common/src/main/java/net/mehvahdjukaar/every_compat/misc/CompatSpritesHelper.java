@@ -34,16 +34,16 @@ public class CompatSpritesHelper {
     public static Set<SpriteExtra> spriteExtraSet = new HashSet<>();
 
     public static final @NotNull Predicate<String> LOOKS_LIKE_TOP_LOG_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = (ResourceLocation.parse(s)).getPath();
         if (s.contains("_overlay")) return false;
         return s.contains("_top") || s.contains("_end") || s.contains("_up");
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_SIDE_LOG_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = (ResourceLocation.parse(s)).getPath();
         return (!LOOKS_LIKE_TOP_LOG_TEXTURE.test(s) && !(s.contains("_overlay") && !(s.contains("_leaves"))));
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_LEAF_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = (ResourceLocation.parse(s)).getPath();
         return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow");
     };
 
@@ -468,9 +468,9 @@ public class CompatSpritesHelper {
 
     }
 
-    private static void addOptional(String blockId, String textureId, String texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(blockId))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
+    private static void addOptional(String blockId, String textureId, String textureLocation) {
+        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(textureLocation)));
     }
 
     // ┌──────────────────────────────────────────────────────────┐
@@ -532,11 +532,11 @@ public class CompatSpritesHelper {
 
     //ugly hardcoded wood post-processing
     private static final Supplier<WoodType> FLOWERING_AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            new ResourceLocation("ecologics", "flowering_azalea"));
+            ResourceLocation.fromNamespaceAndPath("ecologics", "flowering_azalea"));
     private static final Supplier<WoodType> BRIMWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            new ResourceLocation("regions_unexplored", "brimwood"));
+            ResourceLocation.fromNamespaceAndPath("regions_unexplored", "brimwood"));
     private static final Supplier<WoodType> STRANGEWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            new ResourceLocation("aoa", "strangewood"));
+            ResourceLocation.fromNamespaceAndPath("aoa", "strangewood"));
 
     public static void maybePostProcessWoodTexture(WoodType wood, String newId, ResourceManager manager, TextureImage textureSupplier) {
         // Ecologics
@@ -672,7 +672,7 @@ public class CompatSpritesHelper {
     //for Advent-Of-Ascension's stranglewood
     private static void strangewoodPattern(TextureImage image, ResourceManager manager, WoodType woodType) {
         try (TextureImage vineOverlay = TextureImage.open(manager,
-                new ResourceLocation("aoa3:block/stranglewood_log_vine"));
+                ResourceLocation.parse("aoa3:block/stranglewood_log_vine"));
              TextureImage logTexture = TextureImage.open(manager,
                      RPUtils.findFirstBlockTextureLocation(manager, STRANGEWOOD.get().log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
 
