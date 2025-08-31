@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -46,7 +47,7 @@ public class MacawDoorsModule extends SimpleModule {
 
     public MacawDoorsModule(String modId) {
         super(modId, "mcd");
-        var tab = modRes(MacawsDoors.MOD_ID);
+        ResourceLocation tab = modRes(MacawsDoors.MOD_ID);
 
         WaffleDoors = SimpleEntrySet.builder(WoodType.class, "waffle_door",
                         BlockInit.OAK_WAFFLE_DOOR, () -> VanillaWoodTypes.OAK,
