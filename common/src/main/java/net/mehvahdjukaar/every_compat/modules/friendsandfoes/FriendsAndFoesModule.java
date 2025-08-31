@@ -3,10 +3,9 @@ package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
@@ -26,9 +25,9 @@ public class FriendsAndFoesModule extends SimpleModule {
         super(modId, "faf");
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
-                        getModBlock("spruce_beehive"),
-                        () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
-                        w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE)))
+                        getModBlock("spruce_beehive"), () -> VanillaWoodTypes.SPRUCE,
+                        w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE))
+                )
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))

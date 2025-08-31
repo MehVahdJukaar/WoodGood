@@ -5,9 +5,8 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
-import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -28,7 +27,7 @@ public class WoodsterModule extends SimpleModule {
         ResourceLocation tab = modRes(modId);
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
-                        getModBlock("dark_oak_chiseled_bookshelf"), () -> WoodTypeRegistry.getValue(VanillaWoods.DARK_OAK),
+                        getModBlock("dark_oak_chiseled_bookshelf"), () -> VanillaWoodTypes.DARK_OAK,
                         w -> new ChiseledBookShelfBlock(BlockBehaviour.Properties.of()
                                 .strength(1.5F)
                                 .sound(SoundType.CHISELED_BOOKSHELF)
@@ -48,7 +47,7 @@ public class WoodsterModule extends SimpleModule {
         this.addEntry(chiseled_books);
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        getModBlock("spruce_ladder"), () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
+                        getModBlock("spruce_ladder"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new LadderBlock(BlockBehaviour.Properties.of()
                                 .strength(0.4F)
                                 .sound(SoundType.LADDER)

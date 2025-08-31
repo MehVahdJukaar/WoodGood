@@ -4,22 +4,20 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import twilightforest.block.BanisterBlock;
-import twilightforest.block.HollowLogClimbable;
 import twilightforest.block.HollowLogHorizontal;
-import twilightforest.block.HollowLogVertical;
-import twilightforest.init.TFBlocks;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.function.Supplier;
+
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: //!! NOT AVAILABLE
 public class TwilightForestModule extends SimpleModule {
@@ -33,9 +31,8 @@ public class TwilightForestModule extends SimpleModule {
         super(modId, "tf");
         ResourceLocation tab = modRes("blocks");
 
-        //TODO: check face culling
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
-                        getModBlock("oak_banister"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_banister"), () -> VanillaWoodTypes.OAK,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTag(modRes("banisters"), Registries.BLOCK)
@@ -47,11 +44,10 @@ public class TwilightForestModule extends SimpleModule {
         this.addEntry(banisters);
 
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
-                        getModBlock("hollow_acacia_log_horizontal", HollowLogHorizontal.class),
-                        () -> WoodTypeRegistry.getValue(VanillaWoods.ACACIA),
+                        getModBlock("hollow_acacia_log_horizontal", HollowLogHorizontal.class), () -> VanillaWoodTypes.ACACIA,
                         w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
                 )
-                .requiresChildren("stripped_log") //REASON: Textures
+                .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)

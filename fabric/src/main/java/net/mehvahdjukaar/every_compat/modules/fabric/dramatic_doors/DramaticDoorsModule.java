@@ -8,7 +8,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
@@ -31,15 +31,14 @@ public class DramaticDoorsModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = DDCreativeTabs.MAIN_TAB;
 
         tallDoors = SimpleEntrySet.builder(WoodType.class, "door", "tall",
-                        getModBlock("tall_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("tall_oak_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(w.toVanillaOrOak().setType(), getDoorSafe(w))
                 )
                 .addTextureM(modRes("block/tall_oak_door_bottom"), EveryCompat.res("block/dd/tall_oak_door_bottom_m"))
                 .addTextureM(modRes("block/tall_oak_door_middle"), EveryCompat.res("block/dd/tall_oak_door_middle_m"))
                 .addTextureM(modRes("block/tall_oak_door_top"), EveryCompat.res("block/dd/tall_oak_door_top_m"))
                 .addTextureM(modRes("item/tall_oak_door"), EveryCompat.res("item/dd/tall_oak_door_m"))
-                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
-                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
@@ -49,13 +48,12 @@ public class DramaticDoorsModule extends SimpleModule {
         this.addEntry(tallDoors);
 
         shortDoors = SimpleEntrySet.builder(WoodType.class, "door", "short",
-                        getModBlock("short_oak_door"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("short_oak_door"), () -> VanillaWoodTypes.OAK,
                         w -> new ShortDoorBlock(w.toVanillaOrOak().setType(), getDoorSafe(w))
                 )
                 .addTextureM(modRes("block/short_oak_door"), EveryCompat.res("block/dd/short_oak_door_m"))
                 .addTextureM(modRes("item/short_oak_door"), EveryCompat.res("item/dd/short_oak_door_m"))
-                .addTag(modRes("short_wooden_doors"), Registries.BLOCK)
-                .addTag(modRes("short_wooden_doors"), Registries.ITEM)
+                .addTag(modRes("short_wooden_doors"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)

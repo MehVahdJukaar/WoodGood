@@ -1,12 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
 import com.ninni.twigs.block.TableBlock;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.api.TabAddMode;
+import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
@@ -21,7 +18,7 @@ public class TwigsModule extends SimpleModule {
         super(modId, "tw");
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
-                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
                 .addTag(modRes("tables"), Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.ITEM)
@@ -30,12 +27,10 @@ public class TwigsModule extends SimpleModule {
                 .setTabKey(modRes("twig"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .createPaletteFromPlanks((p) -> p.remove(p.getDarkest()))
-                .addTexture(modRes("block/oak_table"))
-                .addTexture(modRes("block/oak_table_top"))
-                .addTexture(modRes("block/oak_table_bottom"))
+                .addTexture(modRes("block/oak_table"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
+                .addTexture(modRes("block/oak_table_top"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
+                .addTexture(modRes("block/oak_table_bottom"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
                 .build();
-
         this.addEntry(tables);
     }
 

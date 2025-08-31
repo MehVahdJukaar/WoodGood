@@ -10,19 +10,20 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.client.util.RenderUtil;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.BlockTypeSwapIngredient;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -40,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 //SUPPORT: v1.0.12+
 public class RefurbishedFurnitureModule extends SimpleModule {
@@ -72,7 +74,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         ResourceLocation tab = modRes("creative_tab");
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
-                        getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
                         w -> new ChairBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of().strength(2.0F))))
                 .addRecipe(modRes("constructing/oak_chair"))
                 .setTabKey(tab)
@@ -83,7 +85,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(chairs);
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
-                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
                                 .strength(2.0F))))
                 .addRecipe(modRes("constructing/oak_table"))
@@ -97,7 +99,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(tables);
 
         darkFans = SimpleEntrySet.builder(WoodType.class, "dark_ceiling_fan",
-                        getModBlock("oak_dark_ceiling_fan"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_dark_ceiling_fan"), () -> VanillaWoodTypes.OAK,
                         w -> new CeilingFanBlock(w.toVanillaOrOak(),
                                 MetalType.DARK,
                                 BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
@@ -116,7 +118,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(darkFans);
 
         lightFans = SimpleEntrySet.builder(WoodType.class, "light_ceiling_fan",
-                        getModBlock("oak_light_ceiling_fan"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_light_ceiling_fan"), () -> VanillaWoodTypes.OAK,
                         w -> new CeilingFanBlock(w.toVanillaOrOak(),
                                 MetalType.DARK,
                                 BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
@@ -135,7 +137,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 
 
         crates = SimpleEntrySet.builder(WoodType.class, "crate",
-                        getModBlock("oak_crate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_crate"), () -> VanillaWoodTypes.OAK,
                         w -> new CrateBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
                                 .forceSolidOn().strength(2.5F))))
                 .addRecipe(modRes("constructing/oak_crate"))
@@ -149,7 +151,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(crates);
 
         mailboxes = SimpleEntrySet.builder(WoodType.class, "mail_box",
-                        getModBlock("oak_mail_box"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mail_box"), () -> VanillaWoodTypes.OAK,
                         w -> new MailboxBlock(w.toVanillaOrOak(), addWoodPropNoFire(w, BlockBehaviour.Properties.of()
                                 .strength(2.5F))))
                 .addRecipe(modRes("constructing/oak_mail_box"))
@@ -166,7 +168,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(mailboxes);
 
         toilets = SimpleEntrySet.builder(WoodType.class, "toilet",
-                        getModBlock("oak_toilet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_toilet"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenToiletBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
                                 .strength(3.5f).sound(SoundType.STONE)))
                 .addRecipe(modRes("constructing/oak_toilet"))
@@ -182,7 +184,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(toilets);
 
         jars = SimpleEntrySet.builder(WoodType.class, "storage_jar",
-                        getModBlock("oak_storage_jar"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_storage_jar"), () -> VanillaWoodTypes.OAK,
                         w -> new StorageJarBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
                                 .mapColor(w.planks.defaultMapColor())
                                 .instrument(NoteBlockInstrument.HAT).strength(1.0F).sound(SoundType.GLASS)))
@@ -199,7 +201,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(jars);
 
         kitchen_cabinetry = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinetry",
-                        getModBlock("oak_kitchen_cabinetry"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_kitchen_cabinetry"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenKitchenCabinetryBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.0f))
                 )
@@ -215,7 +217,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(kitchen_cabinetry);
 
         kitchen_drawer = SimpleEntrySet.builder(WoodType.class, "kitchen_drawer",
-                        getModBlock("oak_kitchen_drawer"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_kitchen_drawer"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenKitchenDrawerBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
                 )
@@ -232,7 +234,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(kitchen_drawer);
 
         kitchen_sink = SimpleEntrySet.builder(WoodType.class, "kitchen_sink",
-                        getModBlock("oak_kitchen_sink"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_kitchen_sink"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenKitchenSinkBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
                 )
@@ -249,7 +251,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(kitchen_sink);
 
         kitchen_storage_cabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_storage_cabinet",
-                        getModBlock("oak_kitchen_storage_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_kitchen_storage_cabinet"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenKitchenStorageCabinetBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
                 )
@@ -266,7 +268,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(kitchen_storage_cabinet);
 
         storage_cabinet = SimpleEntrySet.builder(WoodType.class, "storage_cabinet",
-                        getModBlock("oak_storage_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_storage_cabinet"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenStorageCabinetBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
                 )
@@ -284,7 +286,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(storage_cabinet);
 
         basin = SimpleEntrySet.builder(WoodType.class, "basin",
-                        getModBlock("oak_basin"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_basin"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenBasinBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
                                 .mapColor(w.planks.defaultMapColor())
                                 .strength(3.5f).sound(SoundType.STONE)
@@ -302,7 +304,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(basin);
 
         bath = SimpleEntrySet.builder(WoodType.class, "bath",
-                        getModBlock("oak_bath"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bath"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenBathBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
                                 .mapColor(w.planks.defaultMapColor())
                                 .strength(3.5f).sound(SoundType.STONE)
@@ -320,7 +322,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(bath);
 
         lattice_fence = SimpleEntrySet.builder(WoodType.class, "lattice_fence",
-                        getModBlock("oak_lattice_fence"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_lattice_fence"), () -> VanillaWoodTypes.OAK,
                         w -> new LatticeFenceBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
                                 .strength(2.0f).forceSolidOn())
                         )
@@ -339,7 +341,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(lattice_fence);
 
         lattice_fence_gate = SimpleEntrySet.builder(WoodType.class, "lattice_fence_gate",
-                        getModBlock("oak_lattice_fence_gate"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_lattice_fence_gate"), () -> VanillaWoodTypes.OAK,
                         w -> new LatticeFenceGateBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
                                 .strength(2.0f)
                         )
@@ -358,7 +360,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(lattice_fence_gate);
 
         desk = SimpleEntrySet.builder(WoodType.class, "desk",
-                        getModBlock("oak_desk"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_desk"), () -> VanillaWoodTypes.OAK,
                         w -> new DeskBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
                                 .strength(2.0f).forceSolidOn()
                         )
@@ -374,7 +376,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(desk);
 
         cutting_board = SimpleEntrySet.builder(WoodType.class, "cutting_board",
-                        getModBlock("oak_cutting_board"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cutting_board"), () -> VanillaWoodTypes.OAK,
                         w -> new CuttingBoardBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
                                 .strength(1.5f)
                         )
@@ -389,7 +391,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(cutting_board);
 
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
-                        getModBlock("oak_drawer"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_drawer"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
                                 .strength(2.5f).forceSolidOn()
                         )
@@ -406,13 +408,13 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         this.addEntry(drawer);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
-                        getModBlock("oak_hedge"), () -> LeavesTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_hedge"), () -> VanillaLeavesTypes.OAK,
                         l -> new HedgeBlock(LeafType.OAK, BlockBehaviour.Properties.of().strength(0.5f)
                                 .sound(SoundType.AZALEA_LEAVES))
                 )
                 .requiresChildren("leaves") // Textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
-                        "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
+                        "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addRecipe(modRes("constructing/oak_hedge"))
                 .setTabKey(tab)
                 .addTile(ModBlockEntities.DRAWER::get)
@@ -424,25 +426,28 @@ public class RefurbishedFurnitureModule extends SimpleModule {
     }
 
     @Override
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
+    // MODELS
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
 
-        // code copied from ResourceUtils.addStandardResources
-        StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
-                modRes("extra/oak_dark_ceiling_fan_blade")
-        ));
-        addFanModels(handler, manager, darkBlade, darkFans);
-        StaticResource lightBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
-                modRes("extra/oak_light_ceiling_fan_blade")
-        ));
-        addFanModels(handler, manager, lightBlade, lightFans);
+        executor.accept((manager, sink) -> {
 
+            // code copied from ResourceUtils.addStandardResources
+            StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                    modRes("extra/oak_dark_ceiling_fan_blade")
+            ));
+            addFanModels(sink, manager, darkBlade, darkFans);
+            StaticResource lightBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                    modRes("extra/oak_light_ceiling_fan_blade")
+            ));
+            addFanModels(sink, manager, lightBlade, lightFans);
+        });
     }
 
-    private void addFanModels(ClientDynamicResourcesHandler handler, ResourceManager manager, StaticResource darkBlade, SimpleEntrySet<WoodType, Block> darkFans) {
+    private void addFanModels(ResourceSink sink, ResourceManager manager, StaticResource darkBlade, SimpleEntrySet<WoodType, Block> darkFans) {
         darkFans.blocks.forEach((w, b) -> {
             try {
-                handler.addSimilarJsonResource(manager, darkBlade, s ->
+                sink.addSimilarJsonResource(manager, darkBlade, s ->
                         s.replace("oak", w.getAppendableId())
                                 .replace("texture\": \"refurbished_furniture:block", "texture\": \"everycomp:block/rfm"));
 

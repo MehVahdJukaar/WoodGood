@@ -9,6 +9,9 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -26,9 +29,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 
-// SUPPORT: v1.2.6+
-// SUPPORT: FABRIC-v2.2.7+
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
+
+// SUPPORT: FABRIC-v2.2.7+ | NEOFORGE-v1.2.6+
 public class FarmersDelightModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> cabinets;
@@ -37,12 +42,11 @@ public class FarmersDelightModule extends SimpleModule {
         super(modId, "fd");
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
-                        getModBlock("oak_cabinet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,
                         w -> new CabinetBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .requiresChildren("trapdoor", "slab") //REASON: recipes
-                .addTag(modRes("cabinets"), Registries.BLOCK)
-                .addTag(modRes("cabinets"), Registries.ITEM)
+                .requiresChildren(TRAPDOOR, SLAB) //REASON: recipes
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinets/wooden"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
@@ -72,34 +76,33 @@ public class FarmersDelightModule extends SimpleModule {
     }
 
     @Override
-    // Recipes
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
+    // RECIPES
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        Set<String> blacklistedWoodType = Set.of("extradelight:cinnamon");
+        executor.accept((manager, sink) -> {
+            // Creating cutting_board recipes
+            cabinets.items.forEach(((woodType, item) -> {
 
-        // Creating cutting_board recipes
-        for (var woodType : WoodTypeRegistry.getTypes()) {
-            if (HardcodedBlockType.isKnownVanillaWood(woodType) || blacklistedWoodType.contains(woodType.getId().toString())) continue;
+                createCuttingRecipe("door", woodType.getBlockOfThis("door"), woodType.planks,
+                        woodType, sink, manager);
+                createCuttingRecipe("hanging_sign", woodType.getBlockOfThis("hanging_sign"), woodType.planks,
+                        woodType, sink, manager);
+                createCuttingRecipe("sign", woodType.getBlockOfThis("sign"), woodType.planks,
+                        woodType, sink, manager);
+                createCuttingRecipe("trapdoor", woodType.getBlockOfThis("trapdoor"), woodType.planks,
+                        woodType, sink, manager);
+                createCuttingRecipe("log", woodType.log, woodType.getBlockOfThis("stripped_log"),
+                        woodType, sink, manager);
+                createCuttingRecipe("wood", woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"),
+                        woodType, sink, manager);
 
-            createCuttingRecipe("door", woodType.getBlockOfThis("door"), woodType.planks,
-                    woodType, handler, manager);
-            createCuttingRecipe("hanging_sign", woodType.getBlockOfThis("hanging_sign"), woodType.planks,
-                    woodType, handler, manager);
-            createCuttingRecipe("sign", woodType.getBlockOfThis("sign"), woodType.planks,
-                    woodType, handler, manager);
-            createCuttingRecipe("trapdoor", woodType.getBlockOfThis("trapdoor"), woodType.planks,
-                    woodType, handler, manager);
-            createCuttingRecipe("log", woodType.log, woodType.getBlockOfThis("stripped_log"),
-                    woodType, handler, manager);
-            createCuttingRecipe("wood", woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"),
-                    woodType, handler, manager);
-
-        }
+            }));
+        });
     }
 
     public void createCuttingRecipe(String recipeType, Block input, Block output,
-                                    WoodType woodType, ServerDynamicResourcesHandler handler, ResourceManager manager) {
+                                    WoodType woodType, ResourceSink sink, ResourceManager manager) {
 
         if (Objects.nonNull(input) && Objects.nonNull(output)) {
             ResourceLocation recipeLocation = ResType.RECIPES.getPath(modRes("cutting/oak_"+recipeType));
@@ -118,9 +121,9 @@ public class FarmersDelightModule extends SimpleModule {
                 // Adding to ResourceLocation
                 String path = this.shortenedId() + "/cutting/" + woodType.getAppendableId() +"_"+ recipeType;
 
-                handler.dynamicPack.addJson(EveryCompat.res(path), recipe, ResType.RECIPES);
+                sink.addJson(EveryCompat.res(path), recipe, ResType.RECIPES);
             } catch (IOException e) {
-                handler.getLogger().error("Failed to generate the cutting recipe for {} - {}", Utils.getID(output), e);
+                EveryCompat.LOGGER.error("Failed to generate the cutting recipe for {} - {}", Utils.getID(output), e);
             }
         }
     }

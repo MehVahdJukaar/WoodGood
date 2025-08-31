@@ -6,11 +6,11 @@ import com.mcwfences.kikoz.objects.WiredFence;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -19,26 +19,27 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 
 //SUPPORT v1.1.1+
 public class MacawFencesModule extends SimpleModule {
 
+    public final SimpleEntrySet<WoodType, Block> highleyGates,
+            horseFences,
+            picketFences,
+            pyramidGates,
+            stockadeFences,
+            wiredFences;
     public final SimpleEntrySet<LeavesType, Block> hedges;
-    public final SimpleEntrySet<WoodType, Block> highleyGates;
-    public final SimpleEntrySet<WoodType, Block> horseFences;
-    public final SimpleEntrySet<WoodType, Block> picketFences;
-    public final SimpleEntrySet<WoodType, Block> pyramidGates;
-    public final SimpleEntrySet<WoodType, Block> stockadeFences;
-    public final SimpleEntrySet<WoodType, Block> wiredFences;
 
     public MacawFencesModule(String modId) {
         super(modId, "mcf");
         ResourceLocation tab = modRes("fenceitemgroup");
 
         picketFences = SimpleEntrySet.builder(WoodType.class, "picket_fence",
-                        BlockInit.OAK_PICKET_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceBlock(Utils.copyPropertySafe(w.planks))
+                        BlockInit.OAK_PICKET_FENCE, () -> VanillaWoodTypes.OAK,
+                        w -> new FenceBlock(copyStandardProperties(w))
                 )
                 //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -47,12 +48,15 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(picketFences);
 
         stockadeFences = SimpleEntrySet.builder(WoodType.class, "stockade_fence",
-                        BlockInit.OAK_STOCKADE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceBlock(Utils.copyPropertySafe(w.planks))
+                        BlockInit.OAK_STOCKADE_FENCE, () -> VanillaWoodTypes.OAK,
+                        w -> new FenceBlock(copyStandardProperties(w))
                 )
                 //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -61,12 +65,15 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(stockadeFences);
 
         horseFences = SimpleEntrySet.builder(WoodType.class, "horse_fence",
-                        BlockInit.OAK_HORSE_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceBlock(Utils.copyPropertySafe(w.planks))
+                        BlockInit.OAK_HORSE_FENCE, () -> VanillaWoodTypes.OAK,
+                        w -> new FenceBlock(copyStandardProperties(w))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 //TEXTURES: log, stripped_log (inventory), planks (inventory)
@@ -76,27 +83,33 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(horseFences);
 
         wiredFences = SimpleEntrySet.builder(WoodType.class, "wired_fence",
-                        BlockInit.OAK_WIRED_FENCE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new WiredFence(Utils.copyPropertySafe(w.planks))
+                        BlockInit.OAK_WIRED_FENCE, () -> VanillaWoodTypes.OAK,
+                        w -> new WiredFence(copyStandardProperties(w))
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(ItemTags.FENCES, Registries.ITEM)
-                .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
+                .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(wiredFences);
 
         pyramidGates = SimpleEntrySet.builder(WoodType.class, "pyramid_gate",
-                        BlockInit.OAK_PYRAMID_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
+                        BlockInit.OAK_PYRAMID_GATE, () -> VanillaWoodTypes.OAK,
+                        w -> new FenceGateBlock(w.toVanillaOrOak(), copyStandardProperties(w))
                 )
                 //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -105,12 +118,15 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(pyramidGates);
 
         highleyGates = SimpleEntrySet.builder(WoodType.class, "highley_gate",
-                        BlockInit.OAK_HIGHLEY_GATE, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new FenceGateBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
+                        BlockInit.OAK_HIGHLEY_GATE, () -> VanillaWoodTypes.OAK,
+                        w -> new FenceGateBlock(w.toVanillaOrOak(), copyStandardProperties(w))
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -119,31 +135,37 @@ public class MacawFencesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
+                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
+                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
                 .build();
         this.addEntry(highleyGates);
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
-                        BlockInit.OAK_HEDGE, () -> LeavesTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_HEDGE, () -> VanillaLeavesTypes.OAK,
                         l -> new FenceHitbox(Utils.copyPropertySafe(l.leaves).lightLevel((s) -> 0)
+                                .strength(0.2F, 0.3F).noOcclusion()
                                 .mapColor(l.leaves.defaultMapColor()))
                 )
                 //TEXTURES: leaves
-//                .addCondition(l -> !l.getId().toString().equals("regions_unexplored:apple_oak")) // there should be a way to fix the color of the leave being grey
+                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_leaves",
+                        "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
                 .setTabKey(tab)
-                .copyParentTint()
-                .defaultRecipe()
-                .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_leaves",
-                        "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
+                .copyParentTint()
                 //REASON: Below have no leave texture
                 .excludeBlockTypes("regions_unexplored", "flowering")
                 .build();
         this.addEntry(hedges);
     }
 
+    private BlockBehaviour.Properties copyStandardProperties(WoodType woodType) {
+        return Utils.copyPropertySafe(woodType.planks).strength(1.4F, 2.0F).noOcclusion();
+    }
 }

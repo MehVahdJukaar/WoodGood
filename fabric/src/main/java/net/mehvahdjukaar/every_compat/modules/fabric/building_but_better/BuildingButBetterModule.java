@@ -8,9 +8,9 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -23,6 +23,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.material.PushReaction;
+
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 // IMPORTANT:
 // FABRIC version of this module is already included in the mod. It's currently OUTDATED
@@ -47,26 +50,25 @@ public class BuildingButBetterModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         layers = SimpleEntrySet.builder(WoodType.class, "layer",
-                        getModBlock("oak_layer"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_layer"), () -> VanillaWoodTypes.OAK,
                         w -> new LayerBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("slab") //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
-                .addTag(modRes("wooden_layers"), Registries.BLOCK)
+                .addTag(modRes("wooden_layers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BBBBlockTags.LAYERS, Registries.BLOCK)
                 .addTag(BBBItemTags.LAYERS, Registries.ITEM)
-                .addTag(modRes("wooden_layers"), Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .copyParentDrop()
-                .addModelTransform(SpriteHelper::replaceOakPlanks)
+                .addModelTransform(CompatSpritesHelper::replaceOakPlanks)
                 .build();
         this.addEntry(layers);
 
         trims = SimpleEntrySet.builder(WoodType.class, "trim",
-                        getModBlock("oak_trim"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_trim"), () -> VanillaWoodTypes.OAK,
                         w -> new FacingConnectingBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTexture(modRes("block/trim/oak_bottom"))
@@ -83,7 +85,7 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(trims);
 
         beams = SimpleEntrySet.builder(WoodType.class, "beam",
-                        getModBlock("oak_beam"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_beam"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: recipes
@@ -99,7 +101,7 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(beams);
 
         beamStairs = SimpleEntrySet.builder(WoodType.class, "beam_stairs",
-                        getModBlock("oak_beam_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_beam_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new StairBlock(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks))
                 )
                 .addCondition(w -> (beams.blocks.get(w) != null)) //REASON: recipes
@@ -116,7 +118,7 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(beamStairs);
 
         beamSlabs = SimpleEntrySet.builder(WoodType.class, "beam_slab",
-                        getModBlock("oak_beam_slab"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_beam_slab"), () -> VanillaWoodTypes.OAK,
                         w -> new FacingSlabBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addCondition(w -> (beams.blocks.get(w) != null)) //REASON: recipes
@@ -133,15 +135,14 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(beamSlabs);
 
         supports = SimpleEntrySet.builder(WoodType.class, "support",
-                        getModBlock("oak_support"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_support"), () -> VanillaWoodTypes.OAK,
                         w -> new SupportBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTexture(modRes("block/beam/oak"))
                 .addTexture(modRes("block/beam/oak_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
-                .addTag(modRes("supports"), Registries.BLOCK)
-                .addTag(modRes("supports"), Registries.ITEM)
+                .addTag(modRes("supports"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
@@ -149,7 +150,7 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(supports);
 
         frames = SimpleEntrySet.builder(WoodType.class, "frame",
-                        getModBlock("oak_frame"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_frame"), () -> VanillaWoodTypes.OAK,
                         w -> new FrameBlock(Utils.copyPropertySafe(w.planks).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY))
                 )
                 .requiresChildren("slab") //REASON: recipes
@@ -158,8 +159,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.fromNamespaceAndPath("create", "movable_empty_collider"), Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
-                .addTag(modRes("frames"), Registries.BLOCK)
-                .addTag(modRes("frames"), Registries.ITEM)
+                .addTag(modRes("frames"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
@@ -167,14 +167,13 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(frames);
 
         pallets = SimpleEntrySet.builder(WoodType.class, "pallet",
-                        getModBlock("oak_pallet"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_pallet"), () -> VanillaWoodTypes.OAK,
                         w -> new PalletBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTexture(modRes("block/pallet/oak_pallet"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
-                .addTag(modRes("pallets"), Registries.BLOCK)
-                .addTag(modRes("pallets"), Registries.ITEM)
+                .addTag(modRes("pallets"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
@@ -182,10 +181,10 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(pallets);
 
         lanterns = SimpleEntrySet.builder(WoodType.class, "lantern",
-                        getModBlock("oak_lantern"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_lantern"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenLanternBlock(Utils.copyPropertySafe(w.planks).lightLevel((blockStatex) -> 15))
                 )
-                .requiresChildren("slab") //REASON: recipes
+                .requiresChildren(SLAB) //REASON: recipes
                 .addTexture(modRes("block/lantern/oak"))
 //                .addTextureM(modRes("block/lantern/oak"), EveryCompat.res("block/bbb/oak_lantern_m")) //REASON: the texture is 18x16, mask_texture had to be removed
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -199,7 +198,7 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(lanterns);
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        getModBlock("oak_ladder"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_ladder"), () -> VanillaWoodTypes.OAK,
                         w -> new BBBLadderBlock(1, Utils.copyPropertySafe(Blocks.LADDER))
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -214,11 +213,10 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTextureM(modRes("block/ladder/spruce/oak"), EveryCompat.res("block/bbb/spruce-oak_ladder_m"))
                 .addTexture(modRes("block/ladder/warped/oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("ladders"), Registries.BLOCK)
+                .addTag(modRes("ladders"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
-                .addTag(modRes("ladders"), Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
@@ -226,10 +224,10 @@ public class BuildingButBetterModule extends SimpleModule {
         this.addEntry(ladders);
 
         walls = SimpleEntrySet.builder(WoodType.class, "wall",
-                        getModBlock("oak_wall"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_wall"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenWallBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .requiresChildren("stripped_log") //REASON: recipes
+                .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))
                 .addTexture(modRes("block/beam/oak_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)

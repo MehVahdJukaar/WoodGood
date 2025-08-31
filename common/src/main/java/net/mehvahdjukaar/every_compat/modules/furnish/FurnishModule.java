@@ -9,25 +9,25 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
-import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.PushReaction;
+
+import java.util.function.Consumer;
 
 // SUPPORT: v24+
 public class FurnishModule extends SimpleModule {
@@ -55,7 +55,7 @@ public class FurnishModule extends SimpleModule {
         ResourceLocation tab = modRes(Furnish.MODID);
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
-                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new Table(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -67,7 +67,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(table);
 
         squareTable = SimpleEntrySet.builder(WoodType.class, "square_table",
-                        getModBlock("oak_square_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_square_table"), () -> VanillaWoodTypes.OAK,
                         w -> new SimpleFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -79,7 +79,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(squareTable);
 
         pedestalTable = SimpleEntrySet.builder(WoodType.class, "pedestal_table",
-                        getModBlock("oak_pedestal_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_pedestal_table"), () -> VanillaWoodTypes.OAK,
                         w -> new SimpleFurniture(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -91,7 +91,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(pedestalTable);
 
         bedsideTable = SimpleEntrySet.builder(WoodType.class, "bedside_table",
-                        getModBlock("oak_bedside_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bedside_table"), () -> VanillaWoodTypes.OAK,
                         w -> new InventoryFurniture(Utils.copyPropertySafe(w.log), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound)
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -104,7 +104,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(bedsideTable);
 
         kitchenCabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinet",
-                        FurnishBlocks.Oak_Kitchen_Cabinet, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Kitchen_Cabinet, () -> VanillaWoodTypes.OAK,
                         w -> new InventoryFurniture(Utils.copyPropertySafe(w.planks), FurnishRegistries.Drawers_Open_Sound, FurnishRegistries.Drawers_Close_Sound)
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -117,7 +117,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(kitchenCabinet);
 
         cabinet = SimpleEntrySet.builder(WoodType.class, "cabinet",
-                        FurnishBlocks.Birch_Cabinet, () -> WoodTypeRegistry.getValue( ResourceLocation.withDefaultNamespace("birch")),
+                        FurnishBlocks.Birch_Cabinet, () -> VanillaWoodTypes.BIRCH,
                         w -> new Cabinet(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound)
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -132,7 +132,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(cabinet);
 
         wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
-                        FurnishBlocks.Birch_Wardrobe, () -> WoodTypeRegistry.getValue(ResourceLocation.withDefaultNamespace("birch")),
+                        FurnishBlocks.Birch_Wardrobe, () -> VanillaWoodTypes.BIRCH,
                         w -> new Wardrobe(Utils.copyPropertySafe(w.log), FurnishRegistries.Cabinet_Open_Sound, FurnishRegistries.Cabinet_Close_Sound)
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -149,7 +149,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(wardrobe);
 
         stool = SimpleEntrySet.builder(WoodType.class, "stool",
-                        FurnishBlocks.Oak_Stool, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Stool, () -> VanillaWoodTypes.OAK,
                         w -> new Chair(Utils.copyPropertySafe(w.log), Chair.BASE_SHAPES)
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -161,7 +161,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(stool);
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
-                        FurnishBlocks.Oak_Chair, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Chair, () -> VanillaWoodTypes.OAK,
                         w -> new Chair(Utils.copyPropertySafe(w.log),
                                 VoxelShapeHelper.getMergedShapes(Chair.BASE_SHAPES, Chair.CHAIR_SEAT))
                 )
@@ -174,7 +174,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(chair);
 
         shutter = SimpleEntrySet.builder(WoodType.class, "shutter",
-                        FurnishBlocks.Oak_Shutter, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Shutter, () -> VanillaWoodTypes.OAK,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("trapdoor") //REASON: recipes
@@ -187,7 +187,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(shutter);
 
         crate = SimpleEntrySet.builder(WoodType.class, "crate",
-                        FurnishBlocks.Oak_Crate, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Crate, () -> VanillaWoodTypes.OAK,
                         w -> new Crate(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -208,7 +208,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(crate);
 
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
-                        FurnishBlocks.Oak_Shelf, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Shelf, () -> VanillaWoodTypes.OAK,
                         w -> new Shelf(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -221,7 +221,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(shelf);
 
         bench = SimpleEntrySet.builder(WoodType.class, "bench",
-                        FurnishBlocks.Oak_Bench, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Bench, () -> VanillaWoodTypes.OAK,
                         w -> new Bench(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -233,7 +233,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(bench);
 
         logBenches = SimpleEntrySet.builder(WoodType.class, "log_bench",
-                        FurnishBlocks.Oak_Log_Bench, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Log_Bench, () -> VanillaWoodTypes.OAK,
                         w -> new LogBench(Utils.copyPropertySafe(w.log))
                 )
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
@@ -246,7 +246,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(logBenches);
 
         ladder = SimpleEntrySet.builder(WoodType.class, "ladder",
-                        FurnishBlocks.Oak_Ladder, () -> WoodTypeRegistry.OAK_TYPE,
+                        FurnishBlocks.Oak_Ladder, () -> VanillaWoodTypes.OAK,
                         w -> new Ladder(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -259,7 +259,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(ladder);
 
         coffin = SimpleEntrySet.builder(WoodType.class, "coffin",
-                        FurnishBlocks.Jungle_Coffin, () -> WoodTypeRegistry.getValue(VanillaWoods.JUNGLE),
+                        FurnishBlocks.Jungle_Coffin, () -> VanillaWoodTypes.JUNGLE,
                         w -> new Coffin(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
@@ -271,7 +271,7 @@ public class FurnishModule extends SimpleModule {
         this.addEntry(coffin);
 
         bookshelfChest = SimpleEntrySet.builder(WoodType.class, "bookshelf_chest",
-                        FurnishBlocks.Dark_Oak_Bookshelf_Chest, () -> WoodTypeRegistry.getValue(VanillaWoods.DARK_OAK),
+                        FurnishBlocks.Dark_Oak_Bookshelf_Chest, () -> VanillaWoodTypes.DARK_OAK,
                         w -> new BookshelfChest(Utils.copyPropertySafe(w.planks).pushReaction(PushReaction.BLOCK))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -295,52 +295,56 @@ public class FurnishModule extends SimpleModule {
     }
 
     @Override
-    // Tags
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
+    // TAGS
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        for (var w : WoodTypeRegistry.getTypes()) {
-            boolean hasSomething = false;
-            SimpleTagBuilder itemTag = SimpleTagBuilder.of(modRes(w.getTypeName() + "_" + "furniture"));
+        executor.accept((manager, handler) -> {
 
-            for (var entry : this.getEntries()) {
-                Item b = ((SimpleEntrySet<?, ?>) entry).items.get(w);
-                if (b != null) {
-                    hasSomething = true;
-                    itemTag.addEntry(b);
+            for (var w : WoodTypeRegistry.INSTANCE) {
+                boolean hasSomething = false;
+                SimpleTagBuilder itemTag = SimpleTagBuilder.of(modRes(w.getTypeName() + "_" + "furniture"));
+
+                for (var entry : this.getEntries()) {
+                    Item b = ((SimpleEntrySet<?, ?>) entry).items.get(w);
+                    if (b != null) {
+                        hasSomething = true;
+                        itemTag.addEntry(b);
+                    }
+                }
+                if (hasSomething) {
+                    handler.addTag(itemTag, Registries.ITEM);
+                    handler.addTag(itemTag, Registries.BLOCK);
                 }
             }
-            if (hasSomething) {
-                handler.dynamicPack.addTag(itemTag, Registries.ITEM);
-                handler.dynamicPack.addTag(itemTag, Registries.BLOCK);
-            }
-        }
+        });
     }
 
     @Override
-    // Textures
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
-        try {
+    // TEXTURES
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+
+        executor.accept((manager, sink) -> {
             logBenches.blocks.forEach((w, block) -> {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
+                     TextureImage newTexture = topTexture.makeCopy()) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/oak_log_bench_top", w, id, "oak");
 
-                    var newTexture = topTexture.makeCopy();
+                    sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
 
-                    handler.addTextureIfNotPresent(manager, newId, () -> newTexture);
-
-                    var newTop = topTexture.makeCopy();
-                    createTopTexture(topTexture, newTop);
-
-                    handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                    sink.addTextureIfNotPresent(manager, newId + "_top", () -> {
+                        TextureImage newTop = topTexture.makeCopy();
+                        CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
+                        return newTop;
+                    });
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate Log Bench block texture for for {} : {}", block, e);
+                    EveryCompat.LOGGER.error("Failed to generate Log Bench block texture for for {} : {}", block, e);
 
                 }
 
@@ -349,48 +353,25 @@ public class FurnishModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage topTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/jungle_coffin_sides", w, id, "jungle");
 
-                    var newTexture = topTexture.makeCopy();
+                    sink.addTextureIfNotPresent(manager, newId + "_top", () -> {
+                        TextureImage newTop = topTexture.makeCopy();
+                        CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
+                        return newTop;
+                    });
 
-                    handler.addTextureIfNotPresent(manager, newId, () -> newTexture);
-
-                    var newTop = topTexture.makeCopy();
-                    createTopTexture(topTexture, newTop);
-
-                    handler.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                    //odd. reusing an existing texture
+                    sink.addTextureIfNotPresent(manager, newId, () -> topTexture);
 
                 } catch (Exception e) {
-                    handler.getLogger().error("Failed to generate coffin block texture for for {} : {}", block, e);
+                    EveryCompat.LOGGER.error("Failed to generate coffin block texture for for {} : {}", block, e);
 
                 }
 
             });
-        } catch (Exception ex) {
-            handler.getLogger().error("Could not generate any block textures: ", ex);
-        }
-    }
-
-    private void createTopTexture(TextureImage original, TextureImage newImage) {
-        original.forEachFramePixel((i, x, y) -> {
-            int localX = x - original.getFrameStartX(i);
-            int localY = y - original.getFrameStartY(i);
-            if (localX >= 5 && localX <= 10 && localY >= 5 && localY <= 10) {
-                newImage.getImage().setPixelRGBA(x - 3, y - 3, original.getImage().getPixelRGBA(x, y));
-            } else if (localX >= 10 && localY > 0 && localY <= 7) {
-                newImage.getImage().setPixelRGBA(x - 6, y, original.getImage().getPixelRGBA(x, y));
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            } else if (localY >= 10 && localX > 0 && localX <= 7) {
-                newImage.getImage().setPixelRGBA(x, y - 6, original.getImage().getPixelRGBA(x, y));
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            } else if (localX >= 10 && localY >= 10) {
-                newImage.getImage().setPixelRGBA(x - 6, y - 6, original.getImage().getPixelRGBA(x, y));
-            } else if (localX >= 10 || localY >= 10) {
-                newImage.getImage().setPixelRGBA(x, y, 0);
-            }
         });
     }
-
 }

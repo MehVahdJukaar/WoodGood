@@ -4,13 +4,14 @@ import com.duart.mctb.blocks.CraftingBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
@@ -24,12 +25,12 @@ public class MoreCraftingTablesForForgeModule extends SimpleModule {
 
     public MoreCraftingTablesForForgeModule(String modId) {
         super(modId, "mctb");
-        var tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
-                        getModBlock("spruce_crafting_table"),
-                        () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
-                        w -> new CraftingBlock(Utils.copyPropertySafe(w.planks)))
+                        getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
+                        w -> new CraftingBlock(Utils.copyPropertySafe(w.planks))
+                )
                 //TEXTURES: oak_craftng_table - BaseTexture
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/mctb/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/mctb/spruce_crafting_table_side_m"))
@@ -41,7 +42,6 @@ public class MoreCraftingTablesForForgeModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(craftingTable);
     }
 

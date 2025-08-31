@@ -1,18 +1,20 @@
 package net.mehvahdjukaar.every_compat.modules.valhelsia_furniture;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -24,6 +26,7 @@ import net.valhelsia.valhelsia_furniture.core.registry.ModBlockEntities;
 import net.valhelsia.valhelsia_furniture.core.registry.ModTags;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 //SUPPORT: v1.1.3+
 public class ValhelsiaFurnitureModule extends SimpleModule {
@@ -37,15 +40,15 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
 
     public ValhelsiaFurnitureModule(String modId) {
         super(modId, "vf");
-        var tab = modRes("main");
+        ResourceLocation tab = modRes("main");
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
-                        getModBlock("oak_table", TableBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table", TableBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/table/oak/oak_table"))
-                // the oak_table_connected texutre is in desk_drawers' EntrySet
+                .addTexture(modRes("block/table/oak/oak_table_connected"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.TABLES, Registries.BLOCK)
                 .defaultRecipe()
@@ -54,8 +57,8 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(tables);
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
-                        getModBlock("oak_chair", ChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new compatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), false)
+                        getModBlock("oak_chair", ChairBlock.class), () -> VanillaWoodTypes.OAK,
+                        w -> new CompatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), false)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/chair/oak/oak_chair"))
@@ -67,8 +70,8 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(chairs);
 
         hay_chairs = SimpleEntrySet.builder(WoodType.class, "chair", "hay",
-                        getModBlock("hay_oak_chair", ChairBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new compatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), true)
+                        getModBlock("hay_oak_chair", ChairBlock.class), () -> VanillaWoodTypes.OAK,
+                        w -> new CompatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), true)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/chair/oak/hay_oak_chair"),
@@ -81,7 +84,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(hay_chairs);
 
         stools = SimpleEntrySet.builder(WoodType.class, "stool",
-                        getModBlock("oak_stool", StoolBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_stool", StoolBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new StoolBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -94,7 +97,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(stools);
 
         desks = SimpleEntrySet.builder(WoodType.class, "desk",
-                        getModBlock("oak_desk", DeskBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_desk", DeskBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new DeskBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(modRes("block/desk/oak/front"),
@@ -113,7 +116,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
         this.addEntry(desks);
 
         desk_drawers = SimpleEntrySet.builder(WoodType.class, "desk_drawer",
-                        getModBlock("oak_desk_drawer", DeskDrawerBlock.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_desk_drawer", DeskDrawerBlock.class), () -> VanillaWoodTypes.OAK,
                         w -> new DeskDrawerBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(ModBlockEntities.DESK_DRAWER)
@@ -121,49 +124,43 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
                 .addTag(ModTags.Items.DESKS, Registries.ITEM)
-                .defaultRecipe()
-                /*
-                * Below is a bit special. has to be separated from the Table's EntrySet above. It has 5 color palettes
-                * while the other texture for table is 7 color palettes. Below will only remove one darkest from
-                * Planks' 7 color palettes to ensure the texture is not darkened
-                */
-                .createPaletteFromPlanks(p -> p.remove(p.getDarkest()))
-                .addTexture(modRes("block/table/oak/oak_table_connected"))
                 .setTabKey(tab)
+                .defaultRecipe()
                 .build();
         this.addEntry(desk_drawers);
 
     }
 
-    // Tags
     private TagKey<Block> modTag(String name) {
         return TagKey.create(Registries.BLOCK, EveryCompat.res(name));
     }
 
     @Override
-    // Tags
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
+    // TAGS
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        createTagFor("desks", desks, desk_drawers, handler);
-        createTagFor("chairs", chairs, hay_chairs, handler);
-        for (var w : tables.blocks.keySet()) {
-            boolean isTagFull = false;
-            SimpleTagBuilder tag = SimpleTagBuilder.of(EveryCompat.res(w.getAppendableId() + "_tables"));
+        executor.accept((manager, sink)-> {
+            createTagFor("desks", desks, desk_drawers, sink);
+            createTagFor("chairs", chairs, hay_chairs, sink);
+            for (var w : tables.blocks.keySet()) {
+                boolean isTagFull = false;
+                SimpleTagBuilder tag = SimpleTagBuilder.of(EveryCompat.res(w.getAppendableId() + "_tables"));
 
-             Block block = tables.blocks.get(w);
+                Block block = tables.blocks.get(w);
                 if (block != null) {
                     isTagFull = true;
                     tag.addEntry(block);
                 }
-            if (isTagFull) {
-                handler.dynamicPack.addTag(tag, Registries.ITEM);
-                handler.dynamicPack.addTag(tag, Registries.BLOCK);
+                if (isTagFull) {
+                    sink.addTag(tag, Registries.ITEM);
+                    sink.addTag(tag, Registries.BLOCK);
+                }
             }
-        }
+        });
     }
 
-    public void createTagFor(String blockType, SimpleEntrySet<?,?> firstBlock, SimpleEntrySet<?,?> secondBlock, ServerDynamicResourcesHandler handler) {
+    public void createTagFor(String blockType, SimpleEntrySet<?,?> firstBlock, SimpleEntrySet<?,?> secondBlock, ResourceSink handler) {
         for (var w : firstBlock.blocks.keySet()) {
             boolean isTagFull = false;
             SimpleTagBuilder tag = SimpleTagBuilder.of(EveryCompat.res(w.getAppendableId() + "_" + blockType));
@@ -179,18 +176,18 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 tag.addEntry(secondB);
             }
             if (isTagFull) {
-                handler.dynamicPack.addTag(tag, Registries.ITEM);
-                handler.dynamicPack.addTag(tag, Registries.BLOCK);
+                handler.addTag(tag, Registries.ITEM);
+                handler.addTag(tag, Registries.BLOCK);
             }
         }
     }
 
-    // Had to create this because of appendHoverText, "Hay Seat" is showing up on both chairs & hay_chairs
-    // chairs shouldn't have "Hay Seat"
-    public static class compatChairBlock extends ChairBlock {
+    //REASON: Had to create this because of appendHoverText, "Hay Seat" is showing up on both chairs & hay_chairs
+    // Chairs shouldn't have "Hay Seat"
+    public static class CompatChairBlock extends ChairBlock {
         private final boolean isHayCHair;
 
-        public compatChairBlock(net.minecraft.world.level.block.state.properties.WoodType woodType, Properties properties, boolean isHayCHair) {
+        public CompatChairBlock(net.minecraft.world.level.block.state.properties.WoodType woodType, Properties properties, boolean isHayCHair) {
             super(woodType, properties);
             this.isHayCHair = isHayCHair;
         }

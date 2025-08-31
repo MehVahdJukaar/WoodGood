@@ -11,10 +11,11 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
@@ -33,10 +34,10 @@ public class FunctionalStorageModule extends SimpleModule {
 
     public FunctionalStorageModule(String modId) {
         super(modId, "fs");
-        var tab = modRes("main");
+        ResourceLocation tab = modRes("main");
 
         drawer_1 = SimpleEntrySet.builder(WoodType.class, "1",
-                        getModBlock("oak_1"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_1"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_1, Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(getModTile("oak_1"))
@@ -53,7 +54,7 @@ public class FunctionalStorageModule extends SimpleModule {
         this.addEntry(drawer_1);
 
         drawer_2 = SimpleEntrySet.builder(WoodType.class, "2",
-                        getModBlock("oak_2"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_2"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_2, Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(getModTile("oak_2"))
@@ -69,7 +70,7 @@ public class FunctionalStorageModule extends SimpleModule {
         this.addEntry(drawer_2);
 
         drawer_4 = SimpleEntrySet.builder(WoodType.class, "4",
-                        getModBlock("oak_4"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_4"), () -> VanillaWoodTypes.OAK,
                         w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_4, Utils.copyPropertySafe(w.planks))
                 )
                 .addTile(getModTile("oak_4"))

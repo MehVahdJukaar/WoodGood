@@ -8,7 +8,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -65,7 +65,7 @@ public class ClutterModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = ModItemGroups.CLUTTER_BLOCKS;
 
         wall_bookshelves = SimpleEntrySet.builder(WoodType.class, "wall_bookshelf",
-                        getModBlock("oak_wall_bookshelf"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_wall_bookshelf"), () -> VanillaWoodTypes.OAK,
                         w -> new WallBookshelfBlock(Utils.copyPropertySafe(w.planks)
                                 .lightLevel(createLightLevelFromLitBlockState())
                         )
@@ -83,7 +83,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(wall_bookshelves);
 
         window_sills = SimpleEntrySet.builder(WoodType.class, "window_sill",
-                        getModBlock("oak_window_sill"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_window_sill"), () -> VanillaWoodTypes.OAK,
                         w -> new WindowSillBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
@@ -97,7 +97,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(window_sills);
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
-                        getModBlock("oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatTableBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: log, planks
@@ -114,7 +114,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(tables);
 
         stripped_tables = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
-                        getModBlock("stripped_oak_table"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("stripped_oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatTableBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
@@ -132,7 +132,7 @@ public class ClutterModule extends SimpleModule {
 
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
-                        getModBlock("oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatChairBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: log, planks
@@ -149,7 +149,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(chairs);
 
         stripped_chairs = SimpleEntrySet.builder(WoodType.class, "chair", "stripped",
-                        getModBlock("stripped_oak_chair"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("stripped_oak_chair"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatChairBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
@@ -167,7 +167,7 @@ public class ClutterModule extends SimpleModule {
 
 
         cupboards = SimpleEntrySet.builder(WoodType.class, "cupboard",
-                        getModBlock("oak_cupboard"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_cupboard"), () -> VanillaWoodTypes.OAK,
                         w -> new CupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.CUPBOARD)
@@ -183,7 +183,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(cupboards);
 
         wall_cupboards = SimpleEntrySet.builder(WoodType.class, "wall_cupboard",
-                        getModBlock("oak_wall_cupboard"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_wall_cupboard"), () -> VanillaWoodTypes.OAK,
                         w -> new WallCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.WALL_CUPBOARD)
@@ -197,7 +197,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(wall_cupboards);
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
-                        getModBlock("oak_shelf"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.SHELF)
@@ -213,7 +213,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(shelves);
 
         trellises = SimpleEntrySet.builder(WoodType.class, "trellis",
-                        getModBlock("oak_trellis"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_trellis"), () -> VanillaWoodTypes.OAK,
                         w -> new TrellisBlock(Utils.copyPropertySafe(w.planks)
                                 .lightLevel(createLightLevelFromLitBlockState()))
                 )
@@ -230,7 +230,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(trellises);
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
-                        getModBlock("oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatBenchBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: log, planks
@@ -247,7 +247,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(benches);
 
         stripped_benches = SimpleEntrySet.builder(WoodType.class, "bench", "stripped",
-                        getModBlock("stripped_oak_bench"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("stripped_oak_bench"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatBenchBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
@@ -264,7 +264,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(stripped_benches);
 
         mosaic_planks = SimpleEntrySet.builder(WoodType.class, "mosaic",
-                        getModBlock("oak_mosaic"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
                 .addTexture(modRes("block/oak_mosaic"))
@@ -277,7 +277,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(mosaic_planks);
 
         mosaic_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
-                        getModBlock("oak_mosaic_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new StairBlock(copyStairs(w),
                                 Utils.copyPropertySafe(w.planks))
                 )
@@ -294,7 +294,7 @@ public class ClutterModule extends SimpleModule {
         this.addEntry(mosaic_stairs);
 
         mosaic_slabs = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
-                        getModBlock("oak_mosaic_slab"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_mosaic_slab"), () -> VanillaWoodTypes.OAK,
                         w -> new SlabBlock(copySlabs(w))
                 )
                 .requiresFromMap(mosaic_planks.blocks) //REASON: textures

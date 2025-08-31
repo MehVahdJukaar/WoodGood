@@ -4,9 +4,8 @@ import kittehmod.vct.blocks.VCTCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -29,8 +28,7 @@ public class VariantCraftingTablesModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
-                        getModBlock("spruce_crafting_table"),
-                        () -> WoodTypeRegistry.getValue(VanillaWoods.SPRUCE),
+                        getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new VCTCraftingTableBlock(Utils.copyPropertySafe(w.planks).strength(2.5F).sound(SoundType.WOOD)))
                 //TEXTURE: texture is oak_craftng_table's texture
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
@@ -45,7 +43,6 @@ public class VariantCraftingTablesModule extends SimpleModule {
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
-
         this.addEntry(craftingTable);
     }
 

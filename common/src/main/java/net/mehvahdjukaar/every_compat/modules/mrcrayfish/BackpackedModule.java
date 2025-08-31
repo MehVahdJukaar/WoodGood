@@ -6,8 +6,8 @@ import com.mrcrayfish.backpacked.core.ModBlocks;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
@@ -22,7 +22,7 @@ public class BackpackedModule extends SimpleModule {
         super(modId, "bp");
 
         shelves = SimpleEntrySet.builder(WoodType.class, "backpack_shelf",
-                        ModBlocks.OAK_BACKPACK_SHELF::get, () -> WoodTypeRegistry.OAK_TYPE,
+                        ModBlocks.OAK_BACKPACK_SHELF::get, () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)))
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

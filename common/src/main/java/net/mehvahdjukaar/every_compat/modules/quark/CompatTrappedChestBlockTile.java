@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.violetmoon.quark.content.building.block.be.VariantTrappedChestBlockEntity;
 
 public class CompatTrappedChestBlockTile extends VariantTrappedChestBlockEntity {
@@ -13,7 +14,7 @@ public class CompatTrappedChestBlockTile extends VariantTrappedChestBlockEntity 
     }
 
     @Override
-    public BlockEntityType<?> getType() {
+    public @NotNull BlockEntityType<?> getType() {
         return QuarkModule.TRAPPED_CHEST_TILE;
     }
 }

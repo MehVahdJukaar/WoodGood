@@ -4,9 +4,8 @@ import me.ultrusmods.missingwilds.block.FallenLogBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -20,10 +19,9 @@ public class MissingWildModule extends SimpleModule {
         super(modId, "msw");
 
         fallenLogs = SimpleEntrySet.builder(WoodType.class, "log", "fallen",
-                        getModBlock("fallen_acacia_log"), () -> WoodTypeRegistry.getValue(VanillaWoods.ACACIA),
+                        getModBlock("fallen_acacia_log"), () -> VanillaWoodTypes.ACACIA,
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
-                .addTag(modRes("fallen_logs"), Registries.BLOCK)
-                .addTag(modRes("fallen_logs"), Registries.ITEM)
+                .addTag(modRes("fallen_logs"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(modRes("items"))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

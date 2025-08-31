@@ -6,8 +6,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.registries.Registries;
@@ -25,7 +25,7 @@ import twilightforest.enums.HollowLogVariants;
 import twilightforest.init.TFBlocks;
 import twilightforest.item.HollowLogItem;
 
-import java.util.function.Supplier;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v4.6.2790+
 public class TwilightForestModule extends SimpleModule {
@@ -37,10 +37,10 @@ public class TwilightForestModule extends SimpleModule {
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
-        var tab = modRes("blocks");
+        ResourceLocation tab = modRes("blocks");
 
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
-                        TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
+                        TFBlocks.OAK_BANISTER, () -> VanillaWoodTypes.OAK,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 //TEXTURES: planks
@@ -52,12 +52,11 @@ public class TwilightForestModule extends SimpleModule {
                 .build();
         this.addEntry(banisters);
 
-
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, getBirch(),
+                        TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, () -> VanillaWoodTypes.BIRCH,
                         w -> new HorizontalHollowLogBlock(Utils.copyPropertySafe(w.log))
                 )
-                .requiresChildren("stripped_log") //REASON: Textures
+                .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
@@ -65,14 +64,13 @@ public class TwilightForestModule extends SimpleModule {
                 .build();
         this.addEntry(hollowLogsHorizontal);
 
-
         hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, getBirch(),
+                        TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, () -> VanillaWoodTypes.BIRCH,
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return new VerticalHollowLogBlock(Utils.copyPropertySafe(w.log), DeferredHolder.create(Registries.BLOCK, id));
                         })
-                .requiresChildren("stripped_log") //REASON: Textures
+                .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .noItem()
@@ -82,12 +80,12 @@ public class TwilightForestModule extends SimpleModule {
         this.addEntry(hollowLogsVertical);
 
         hollowLogsClimbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, getBirch(),
+                        TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, () -> VanillaWoodTypes.BIRCH,
                         w -> new ClimbableHollowLogBlock(
                                 DeferredHolder.create(Registries.BLOCK, Utils.getID(hollowLogsVertical.blocks.get(w))),
                                 Utils.copyPropertySafe(w.log))
                 )
-                .requiresChildren("stripped_log") //REASON: Textures
+                .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
@@ -95,11 +93,6 @@ public class TwilightForestModule extends SimpleModule {
                 .build();
         this.addEntry(hollowLogsClimbable);
 
-    }
-
-    @NotNull
-    private static Supplier<WoodType> getBirch() {
-        return () -> WoodTypeRegistry.getValue(ResourceLocation.parse("birch"));
     }
 
     @Override

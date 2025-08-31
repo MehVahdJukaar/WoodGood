@@ -4,18 +4,20 @@ import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,12 +25,14 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import net.rasanovum.timberframes.block.OakTimberFrameAlphaBlock;
 import net.rasanovum.timberframes.block.OakTimberFrameBetaBlock;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 //SUPPORT: v2.0+
 public class TimberFramesModule extends SimpleModule {
@@ -41,7 +45,7 @@ public class TimberFramesModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         frame_alpha = SimpleEntrySet.builder(WoodType.class, "timber_frame_alpha",
-                        getModBlock("oak_timber_frame_alpha"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_timber_frame_alpha"), () -> VanillaWoodTypes.OAK,
                         w -> new OakTimberFrameAlphaBlock()
                 )
                 .addTextureM(modRes("block/oak_timber_frame"),
@@ -64,22 +68,21 @@ public class TimberFramesModule extends SimpleModule {
                         EveryCompat.res("block/tf/oak_timber_frame_y_m"))
                 .addTextureM(modRes("block/oak_timber_frame_nega"),
                         EveryCompat.res("block/tf/oak_timber_frame_x_m"))
-                .addTag(modRes("timber_frame"), Registries.BLOCK)
+                .addTag(modRes("timber_frame"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("timber_frame"), Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_timber_frame"))
                 .build();
         this.addEntry(frame_alpha);
 
         frame_beta = SimpleEntrySet.builder(WoodType.class, "timber_frame_beta",
-                        getModBlock("oak_timber_frame_beta"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_timber_frame_beta"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatTimberFrameBetaBlock(frame_alpha.blocks.get(w))
                 )
+                .requiresFromMap(frame_alpha.blocks) //REASON: Loot_table
                 //TEXTURES: Using the same texture above
-                .addTag(modRes("timber_frame"), Registries.BLOCK)
+                .addTag(modRes("timber_frame"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("timber_frame"), Registries.ITEM)
                 .noTab()
                 .build();
         this.addEntry(frame_beta);
@@ -105,41 +108,43 @@ public class TimberFramesModule extends SimpleModule {
         }
 
         @Override
-        public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+        public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
             return Collections.singletonList(new ItemStack(alpha));
         }
 
     }
 
     @Override
-    // MCMETA ---
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
+    // MCMETA
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+        executor.accept((manager, sink) -> {
+            frame_alpha.blocks.forEach((wood, block) -> {
 
-        frame_alpha.blocks.forEach((wood, block) -> {
+                String[] types = {
+                        "cross", "filler", "blank", "diagonal_left", "diagonal_right"
+                };
 
-            String[] types = {
-                    "cross", "filler", "blank", "diagonal_left", "diagonal_right"
-            };
+                for (String type : types) {
+                    String path = "_timber_frame_" + type;
+                    ResourceLocation resLoc = modRes("oak" + path);
 
-            for (String type : types) {
-                String path = "_timber_frame_" + type;
+                    try (InputStream mcmetaStream = manager.getResource(ResType.BLOCK_MCMETA.getPath(resLoc))
+                            .orElseThrow(() -> new FileNotFoundException("failed to open the recipe file @" +
+                                    resLoc)).open()
+                    ) {
+                        JsonObject mcmeta = RPUtils.deserializeJson(mcmetaStream);
 
-                try (InputStream mcmetaStream = manager.getResource(ResType.BLOCK_MCMETA.getPath(modRes("oak" + path)))
-                        .orElseThrow(() -> new FileNotFoundException("failed to open the recipe file @" +
-                                modRes("oak" + path))).open()
-                ) {
-                    JsonObject mcmeta = RPUtils.deserializeJson(mcmetaStream);
+                        // Copying MCMETA file to the resources
+                        String newPath = shortenedId() + "/" + wood.getAppendableId() + path;
 
-                    // Copying MCMETA file to the resources
-                    String newPath = shortenedId() +"/"+ wood.getAppendableId() + path;
-
-                    handler.dynamicPack.addJson(EveryCompat.res(newPath), mcmeta, ResType.BLOCK_MCMETA);
+                        sink.addJson(EveryCompat.res(newPath), mcmeta, ResType.BLOCK_MCMETA);
+                    } catch (IOException e) {
+                        EveryCompat.LOGGER.error("Failed to get {}'s MCMETA : {}", resLoc.toString(), e);
+                    }
                 }
-                catch (IOException e) {
-                    handler.getLogger().error("Failed to get oak_{}'s MCMETA : {}", path, e);
-                }
-            }
+            });
+
         });
     }
 }

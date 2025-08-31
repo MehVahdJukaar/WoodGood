@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency;
 
 import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.ItemTraderBlockEntityRenderer;
-import io.github.lightman314.lightmanscurrency.common.ModCreativeGroups;
 import io.github.lightman314.lightmanscurrency.common.blockentity.trader.ItemTraderBlockEntity;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.CardDisplayBlock;
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.ShelfBlock;
@@ -11,8 +10,8 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -27,10 +26,10 @@ public class LightmansCurrencyModule extends SimpleModule {
 
     public LightmansCurrencyModule(String modId) {
         super(modId, "lc");
-        var tab = modRes("trading");
+        ResourceLocation tab = modRes("trading");
 
         shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
-                        getModBlock("shelf_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("shelf_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(FabricBlockSettings.create()
                                 .nonOpaque()
                                 .strength(2.0F, Float.POSITIVE_INFINITY)
@@ -53,7 +52,7 @@ public class LightmansCurrencyModule extends SimpleModule {
         this.addEntry(shelves);
 
         card_displays = SimpleEntrySet.builder(WoodType.class, "", "card_display",
-                        getModBlock("card_display_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("card_display_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new CardDisplayBlock(FabricBlockSettings.create()
                                 .nonOpaque()
                                 .strength(2.0F, Float.POSITIVE_INFINITY)

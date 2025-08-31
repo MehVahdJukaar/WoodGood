@@ -2,14 +2,10 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.corail_pillar;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import ovh.corail.corail_pillar.block.BlockPillar;
@@ -26,7 +22,7 @@ public class CorailPillarModule extends SimpleModule {
         ResourceLocation tab = ModTabs.TAB_ID;
 
         LOG_PILLAR = SimpleEntrySet.builder(WoodType.class, "log", "pillar",
-                getModBlock("pillar_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                getModBlock("pillar_oak_log"), () -> VanillaWoodTypes.OAK,
                 w -> new BlockPillar(w.getTypeName() + "_log", w.log, false)
         )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -38,7 +34,7 @@ public class CorailPillarModule extends SimpleModule {
         this.addEntry(LOG_PILLAR);
 
         SMALL_LOG_PILLAR = SimpleEntrySet.builder(WoodType.class, "log", "small_pillar",
-                getModBlock("small_pillar_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
+                getModBlock("small_pillar_oak_log"), () -> VanillaWoodTypes.OAK,
                 w -> new BlockPillar(w.getTypeName() + "_log", w.log, true)
         )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -50,7 +46,7 @@ public class CorailPillarModule extends SimpleModule {
         this.addEntry(SMALL_LOG_PILLAR);
 
         PLANK_PILLAR = SimpleEntrySet.builder(WoodType.class, "planks", "pillar",
-                getModBlock("pillar_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                getModBlock("pillar_oak_planks"), () -> VanillaWoodTypes.OAK,
                 w -> new BlockPillar(w.getTypeName() + "_planks", w.planks, false)
         )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -61,7 +57,7 @@ public class CorailPillarModule extends SimpleModule {
         this.addEntry(PLANK_PILLAR);
 
         SMALL_PLANK_PILLAR = SimpleEntrySet.builder(WoodType.class, "planks", "small_pillar",
-                getModBlock("small_pillar_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
+                getModBlock("small_pillar_oak_planks"), () -> VanillaWoodTypes.OAK,
                 w -> new BlockPillar(w.getTypeName() + "_planks", w.planks, true)
         )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

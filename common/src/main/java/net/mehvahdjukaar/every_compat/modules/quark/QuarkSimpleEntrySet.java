@@ -2,18 +2,14 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
-import com.mojang.datafixers.util.Pair;
-import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
+import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
@@ -26,9 +22,9 @@ import org.violetmoon.quark.base.Quark;
 import org.violetmoon.zeta.module.IDisableable;
 import org.violetmoon.zeta.module.ZetaModule;
 
-import java.util.List;
 import java.util.function.*;
 
+@SuppressWarnings("DataFlowIssue")
 public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEntrySet<T, B> {
 
     private final Supplier<ZetaModule> zetaModule;
@@ -45,22 +41,24 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                                @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
                                @Nullable Object renderType,
-                               @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteSupplier,
+                               @Nullable BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
                                @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                boolean mergedPalette,
                                boolean copyTint,
-                               Predicate<T> condition) {
+                               Predicate<T> condition,
+                               ModelConfiguration modelConfig
+    ) {
         super(type, name, prefix, blockSupplier, baseBlock, baseType, tab, tabMode, tableMode, itemFactory,
-                tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
+                tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, copyTint, condition, modelConfig);
         var m = Preconditions.checkNotNull(module);
         this.zetaModule = Suppliers.memoize(() -> Quark.ZETA.modules.get(m));
     }
 
     @Override
-    public void generateRecipes(SimpleModule module, DynamicDataPack pack, ResourceManager manager) {
+    public void generateRecipes(SimpleModule module, ResourceManager manager, ResourceSink pack) {
         ZetaModule mod = zetaModule.get();
         if (mod == null || mod.enabled) {
-            super.generateRecipes(module, pack, manager);
+            super.generateRecipes(module, manager, pack);
         }
     }
 
@@ -115,10 +113,19 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
         public QuarkSimpleEntrySet<T, B> build() {
             var e = new QuarkSimpleEntrySet<>(type, name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, tabMode, lootMode,
-                    itemFactory, tileHolder, renderType, palette, extraModelTransform, useMergedPalette, copyTint, condition);
+                    itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
+                    modelConfig
+            );
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
-            e.textures.addAll(textures);
+            for(var t : this.textures){
+                if(this.palette != null) {
+                    e.textures.add(t.cloneWithPalette((blockType, manager) ->
+                            this.palette.apply((T) blockType, manager)));
+                }else{
+                    e.textures.add(t);
+                }
+            }
             return e;
         }
     }

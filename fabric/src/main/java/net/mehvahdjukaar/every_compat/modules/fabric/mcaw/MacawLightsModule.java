@@ -8,8 +8,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -24,59 +24,62 @@ import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.ToIntFunction;
 
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.FENCE;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
+
 //SUPPORT: v1.1.0+
 public class MacawLightsModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> SOUL_TIKI_TORCHES;
-    public final SimpleEntrySet<WoodType, Block> TIKI_TORCHES;
+    public final SimpleEntrySet<WoodType, Block> soul_tiki_torches;
+    public final SimpleEntrySet<WoodType, Block> tiki_torches;
     public final SimpleEntrySet<WoodType, Block> ceiling_fan_lights;
 
     public MacawLightsModule(String modId) {
         super(modId, "mcl");
         ResourceKey<CreativeModeTab> tab = MacawsLights.LIGHTSGROUP;
 
-        SOUL_TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class, "tiki_torch", "soul",
-                        () -> BlockInit.SOUL_OAK_TIKI_TORCH, () -> WoodTypeRegistry.OAK_TYPE,
+        soul_tiki_torches = SimpleEntrySet.builder(WoodType.class, "tiki_torch", "soul",
+                        () -> BlockInit.SOUL_OAK_TIKI_TORCH, () -> VanillaWoodTypes.OAK,
                         w -> new TikiTorch(BlockBehaviour.Properties.of()
                                 .lightLevel(blockOffLightValue(10))
                                 .strength(1.5F, 2.5F)
-                                .sound(SoundType.WOOD)
                                 .mapColor(MapColor.WOOD)
+                                .sound(SoundType.WOOD)
                                 .noOcclusion(),
                                 ParticleTypes.SOUL_FIRE_FLAME
                         )
                 )
-                .requiresChildren("fence") //REASON: recipes
+                .requiresChildren(FENCE) //REASON: recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
-        this.addEntry(SOUL_TIKI_TORCHES);
+        this.addEntry(soul_tiki_torches);
 
-        TIKI_TORCHES = SimpleEntrySet.builder(WoodType.class, "tiki_torch",
-                        () -> BlockInit.OAK_TIKI_TORCH, () -> WoodTypeRegistry.OAK_TYPE,
+        tiki_torches = SimpleEntrySet.builder(WoodType.class, "tiki_torch",
+                        () -> BlockInit.OAK_TIKI_TORCH, () -> VanillaWoodTypes.OAK,
                         w -> new TikiTorch(BlockBehaviour.Properties.of()
                                 .lightLevel(blockOffLightValue(15))
                                 .strength(1.5F, 2.5F)
-                                .sound(SoundType.WOOD)
                                 .mapColor(MapColor.WOOD)
+                                .sound(SoundType.WOOD)
                                 .noOcclusion(),
                                 ParticleTypes.FLAME
                         )
                 )
-                .requiresChildren("fence") //REASON: recipes
+                .requiresChildren(FENCE) //REASON: recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
+                .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
-        this.addEntry(TIKI_TORCHES);
+        this.addEntry(tiki_torches);
 
         ceiling_fan_lights = SimpleEntrySet.builder(WoodType.class, "ceiling_fan_light",
-                        () -> BlockInit.OAK_CEILING_FAN_LIGHT, () -> WoodTypeRegistry.OAK_TYPE,
+                        () -> BlockInit.OAK_CEILING_FAN_LIGHT, () -> VanillaWoodTypes.OAK,
                         w -> new LightBaseShort(BlockBehaviour.Properties.of()
                                 .lightLevel(blockOffLightValue(15))
                                 .mapColor(MapColor.WOOD)
@@ -85,7 +88,7 @@ public class MacawLightsModule extends SimpleModule {
                                 .noOcclusion()
                         )
                 )
-                .requiresChildren("slab") //REASON: recipes
+                .requiresChildren(SLAB) //REASON: recipes
                 .addTextureM(modRes("block/oak_ceiling_fan"), EveryCompat.res("block/mcw/lights/ceiling_fan_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)

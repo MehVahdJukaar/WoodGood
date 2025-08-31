@@ -7,12 +7,15 @@ import com.github.Pandarix.beautify.common.block.Trellis;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 //SUPPORT: v2.0.2+
 public class BeautifyDecorateModule extends SimpleModule {
@@ -23,10 +26,10 @@ public class BeautifyDecorateModule extends SimpleModule {
 
     public BeautifyDecorateModule(String modId) {
         super(modId, "bd");
-        var tab = modRes(Beautify.MODID);
+        ResourceLocation tab = modRes(Beautify.MODID);
 
         tellis = SimpleEntrySet.builder(WoodType.class, "trellis",
-                        getModBlock("oak_trellis"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_trellis"), () -> VanillaWoodTypes.OAK,
                         w -> new Trellis(Utils.copyPropertySafe(w.planks)
                                 .strength(0.3F, 0.3F)
                                 .sound(SoundType.BAMBOO).noOcclusion()
@@ -41,13 +44,13 @@ public class BeautifyDecorateModule extends SimpleModule {
         this.addEntry(tellis);
 
         blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
-                        getModBlock("oak_blinds"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_blinds"), () -> VanillaWoodTypes.OAK,
                         w -> new Blinds(Utils.copyPropertySafe(w.planks)
                                 .noOcclusion().strength(0.4F, 0.4F)
                                 .sound(SoundType.WOOD)
                         )
                 )
-                .requiresChildren("slab") //REASON: recipes
+                .requiresChildren(SLAB) //REASON: recipes
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -56,13 +59,13 @@ public class BeautifyDecorateModule extends SimpleModule {
         this.addEntry(blinds);
 
         picture_frames = SimpleEntrySet.builder(WoodType.class, "picture_frame",
-                        getModBlock("oak_picture_frame"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_picture_frame"), () -> VanillaWoodTypes.OAK,
                         w -> new PictureFrame(Utils.copyPropertySafe(w.planks)
                                 .noOcclusion().strength(0.1F, 0.1F)
                                 .sound(SoundType.WOOD).noOcclusion()
                         )
                 )
-                .requiresChildren("slab") //REASON: recipes
+                .requiresChildren(SLAB) //REASON: recipes
                 .addTexture(modRes("block/oak_frame_texture"))
                 .setTabKey(tab)
                 .defaultRecipe()

@@ -4,19 +4,19 @@ import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -27,8 +27,9 @@ import xerca.xercamod.common.block.BlockCarvedLog;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.function.Consumer;
 
-
+//SUPPORT: NOT-AVAILABLE
 public class XercaModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> carved1;
@@ -45,7 +46,7 @@ public class XercaModule extends SimpleModule {
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         carved1 = SimpleEntrySet.builder(WoodType.class, "1", "carved",
-                        getModBlock("carved_warped_1"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("warped")),
+                        getModBlock("carved_warped_1"), () -> VanillaWoodTypes.WARPED,
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -59,7 +60,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved1);
 
         carved2 = SimpleEntrySet.builder(WoodType.class, "2", "carved",
-                        getModBlock("carved_warped_2"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("warped")),
+                        getModBlock("carved_warped_2"), () -> VanillaWoodTypes.WARPED,
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -73,7 +74,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved2);
 
         carved3 = SimpleEntrySet.builder(WoodType.class, "3", "carved",
-                        getModBlock("carved_warped_3"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("warped")),
+                        getModBlock("carved_warped_3"), () -> VanillaWoodTypes.WARPED,
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -87,7 +88,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved3);
 
         carved4 = SimpleEntrySet.builder(WoodType.class, "4", "carved",
-                        getModBlock("carved_warped_4"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("warped")),
+                        getModBlock("carved_warped_4"), () -> VanillaWoodTypes.WARPED,
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -101,7 +102,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved4);
 
         carved5 = SimpleEntrySet.builder(WoodType.class, "5", "carved",
-                        getModBlock("carved_warped_5"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("warped")),
+                        getModBlock("carved_warped_5"), () -> VanillaWoodTypes.WARPED,
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -116,7 +117,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved5);
 
         carved6 = SimpleEntrySet.builder(WoodType.class, "6", "carved",
-                        getModBlock("carved_warped_6"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("warped")),
+                        getModBlock("carved_warped_6"), () -> VanillaWoodTypes.WARPED,
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -134,7 +135,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved6);
 
         carved7 = SimpleEntrySet.builder(WoodType.class, "7", "carved",
-                        getModBlock("carved_warped_7"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("warped")),
+                        getModBlock("carved_warped_7"), () -> VanillaWoodTypes.WARPED,
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -149,7 +150,7 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved7);
 
         carved8 = SimpleEntrySet.builder(WoodType.class, "8", "carved",
-                        getModBlock("carved_warped_8"), () -> WoodTypeRegistry.getValue(ResourceLocation.parse("warped")),
+                        getModBlock("carved_warped_8"), () -> VanillaWoodTypes.WARPED,
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
@@ -194,44 +195,48 @@ public class XercaModule extends SimpleModule {
     }
 
     @Override
-    // Recipes
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicServerResources(handler, manager);
+    // RECIPES
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-        carved1.items.forEach((wood, item) -> {
-            if (Objects.nonNull(wood.getBlockOfThis("stripped_log")))
-                recipeCreator(handler, wood.log.asItem(),
-                        Objects.requireNonNull(wood.getBlockOfThis("stripped_log")).asItem(), 1, wood);
+        executor.accept((manager, sink) -> {
 
-            recipeCreator(handler, wood.log.asItem(), item,1, wood);
-            createRecipeIfNotNull("stripped_log", item, 1, wood, handler);
+            carved1.items.forEach((wood, item) -> {
+                Block strippedLog = wood.getBlockOfThis("stripped_log");
 
-            recipeCreator(handler, wood.log.asItem(), carved2.items.get(wood), 2, wood);
-            createRecipeIfNotNull("stripped_log", carved2.items.get(wood), 2, wood, handler);
+                if (Objects.nonNull(strippedLog))
+                    recipeCreator(wood.log.asItem(), Objects.requireNonNull(strippedLog).asItem(), 1, wood, sink);
 
-            recipeCreator(handler, wood.log.asItem(), carved3.items.get(wood), 3, wood);
-            createRecipeIfNotNull("stripped_log", carved3.items.get(wood), 3, wood, handler);
+                recipeCreator(wood.log.asItem(), item,1, wood, sink);
+                createRecipeIfNotNull("stripped_log", item, 1, wood, sink);
 
-            recipeCreator(handler, wood.log.asItem(), carved4.items.get(wood), 4, wood);
-            createRecipeIfNotNull("stripped_log", carved4.items.get(wood), 4, wood, handler);
+                recipeCreator(wood.log.asItem(), carved2.items.get(wood), 2, wood, sink);
+                createRecipeIfNotNull("stripped_log", carved2.items.get(wood), 2, wood, sink);
 
-            recipeCreator(handler, wood.log.asItem(), carved5.items.get(wood), 5, wood);
-            createRecipeIfNotNull("stripped_log", carved5.items.get(wood), 5, wood, handler);
+                recipeCreator(wood.log.asItem(), carved3.items.get(wood), 3, wood, sink);
+                createRecipeIfNotNull("stripped_log", carved3.items.get(wood), 3, wood, sink);
 
-            recipeCreator(handler, wood.log.asItem(), carved6.items.get(wood), 6, wood);
-            createRecipeIfNotNull("stripped_log", carved6.items.get(wood), 6, wood, handler);
+                recipeCreator(wood.log.asItem(), carved4.items.get(wood), 4, wood, sink);
+                createRecipeIfNotNull("stripped_log", carved4.items.get(wood), 4, wood, sink);
 
-            recipeCreator(handler, wood.log.asItem(), carved7.items.get(wood), 7, wood);
-            createRecipeIfNotNull("stripped_log", carved7.items.get(wood), 7, wood, handler);
+                recipeCreator(wood.log.asItem(), carved5.items.get(wood), 5, wood, sink);
+                createRecipeIfNotNull("stripped_log", carved5.items.get(wood), 5, wood, sink);
 
-            recipeCreator(handler, wood.log.asItem(), carved8.items.get(wood), 8, wood);
-            createRecipeIfNotNull("stripped_log", carved8.items.get(wood), 8, wood, handler);
+                recipeCreator(wood.log.asItem(), carved6.items.get(wood), 6, wood, sink);
+                createRecipeIfNotNull("stripped_log", carved6.items.get(wood), 6, wood, sink);
+
+                recipeCreator(wood.log.asItem(), carved7.items.get(wood), 7, wood, sink);
+                createRecipeIfNotNull("stripped_log", carved7.items.get(wood), 7, wood, sink);
+
+                recipeCreator(wood.log.asItem(), carved8.items.get(wood), 8, wood, sink);
+                createRecipeIfNotNull("stripped_log", carved8.items.get(wood), 8, wood, sink);
+
+            });
 
         });
-
     }
 
-    public void recipeCreator(ServerDynamicResourcesHandler handler, Item input, Item output, int num, WoodType wood) {
+    public void recipeCreator(Item input, Item output, int num, WoodType wood, ResourceSink sink) {
         // pathBuilder: carving/x/namespace/
         String pathBuilder = this.shortenedId() + "/" + wood.getNamespace() + "/";
         String recipeName = wood.getTypeName() + "_log_from_" + wood.getTypeName() + "_log_carving";
@@ -260,51 +265,52 @@ public class XercaModule extends SimpleModule {
         json.addProperty("count", 1);
 
         // Adding to the resources
-        handler.dynamicPack.addJson(EveryCompat.res("carving/" + pathBuilder + recipeName), json, ResType.RECIPES);
+        sink.addJson(EveryCompat.res(pathBuilder + recipeName), json, ResType.RECIPES);
     }
 
     // Null check for stripped_log
-    public void createRecipeIfNotNull(String input, Item output, int num, WoodType wood, ServerDynamicResourcesHandler handler) {
+    public void createRecipeIfNotNull(String input, Item output, int num, WoodType wood, ResourceSink sink) {
         if (Objects.nonNull(wood.getItemOfThis(input))) {
-            recipeCreator(handler, wood.getItemOfThis(input), output, num, wood);
+            recipeCreator(wood.getItemOfThis(input), output, num, wood, sink);
         }
     }
 
     @Override
-    // Model files
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-        super.addDynamicClientResources(handler, manager);
+    // MODELS
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+        executor.accept((manager, sink) -> {
+            for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
+                ResourceLocation modelLocation = modRes("models/block/carved_wood/carved_dark_oak.json"); // get model JSON
 
-        for (WoodType woodType : WoodTypeRegistry.getTypes()) {
-            ResourceLocation modelLocation = modRes("models/block/carved_wood/carved_dark_oak.json"); // get model JSON
-
-            if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
 
-            try (InputStream modelStream = manager.getResource(modelLocation).orElseThrow().open()) {
-                JsonObject model = RPUtils.deserializeJson(modelStream);
+                try (InputStream modelStream = manager.getResource(modelLocation).orElseThrow().open()) {
+                    JsonObject model = RPUtils.deserializeJson(modelStream);
 
-                // VARIABLES
-                String filenameBuilder = "carved_" + woodType.getTypeName();
-                JsonObject underTextures = model.getAsJsonObject("textures");
-                String log_topPath;
-                if (Objects.equals(woodType.getNamespace(), "tfc")) {
-                    log_topPath = ":block/wood/log_top/" + woodType.getTypeName();
+                    // VARIABLES
+                    String filenameBuilder = "carved_" + woodType.getTypeName();
+                    JsonObject underTextures = model.getAsJsonObject("textures");
+                    String log_topPath;
+                    if (Objects.equals(woodType.getNamespace(), "tfc")) {
+                        log_topPath = ":block/wood/log_top/" + woodType.getTypeName();
+                    }
+                    else {
+                        log_topPath = ":block/" + woodType.getTypeName() + "_log_top";
+                    }
+
+                    // Editing
+                    underTextures.addProperty("up",  woodType.getNamespace() + log_topPath);
+                    underTextures.addProperty("down",  woodType.getNamespace() + log_topPath);
+                    underTextures.addProperty("particle",  woodType.getNamespace() + log_topPath);
+
+                    sink.addJson(EveryCompat.res("block/carved_wood/" + filenameBuilder), model, ResType.MODELS);
+                } catch (IOException e) {
+                    EveryCompat.LOGGER.error("Failed to get MODEL file @ {} : {}",modelLocation, e);
                 }
-                else {
-                    log_topPath = ":block/" + woodType.getTypeName() + "_log_top";
-                }
-
-                // Editing
-                underTextures.addProperty("up",  woodType.getNamespace() + log_topPath);
-                underTextures.addProperty("down",  woodType.getNamespace() + log_topPath);
-                underTextures.addProperty("particle",  woodType.getNamespace() + log_topPath);
-
-                handler.dynamicPack.addJson(EveryCompat.res("block/carved_wood/" + filenameBuilder), model, ResType.MODELS);
-            } catch (IOException e) {
-                EveryCompat.LOGGER.error("Failed to get MODEL file @ {} : {}",modelLocation, e);
             }
-        }
+        });
     }
 
 }

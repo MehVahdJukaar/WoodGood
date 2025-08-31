@@ -5,11 +5,13 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
@@ -26,20 +28,21 @@ public class ArchitectsPaletteModule extends SimpleModule {
 
     public ArchitectsPaletteModule(String modId) {
         super(modId, "ap");
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
-                        getModBlock("oak_railing"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_railing"), () -> VanillaWoodTypes.OAK,
                         w -> new RailingBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
-                .setTabKey( CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
         this.addEntry(railings);
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
-                        getModBlock("oak_boards"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_boards"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
                 .createPaletteFromPlanks(p -> {
@@ -66,13 +69,13 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTexture(modRes("block/oak_boards"))
                 .addTexture(modRes("block/oak_boards_odd"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
-                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
         this.addEntry(boards);
 
         boardSlabs = SimpleEntrySet.builder(WoodType.class, "board_slab",
-                        getModBlock("oak_board_slab"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_board_slab"), () -> VanillaWoodTypes.OAK,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresFromMap(boards.blocks) //REASONS: textures, recipes
@@ -80,14 +83,14 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop()
-                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
         this.addEntry(boardSlabs);
 
         boardStairs = SimpleEntrySet.builder(WoodType.class, "board_stairs",
-                        getModBlock("oak_board_stairs"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_board_stairs"), () -> VanillaWoodTypes.OAK,
                         w -> new ModStairBlock(() -> boards.blocks.get(w), Utils.copyPropertySafe(w.planks))
                 )
                 .requiresFromMap(boards.blocks) //REASONS: textures, recipes
@@ -95,14 +98,13 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
-                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
-                .addCondition(boards.blocks::containsKey)
                 .build();
         this.addEntry(boardStairs);
 
         boardWalls = SimpleEntrySet.builder(WoodType.class, "board_wall",
-                        getModBlock("oak_board_wall"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_board_wall"), () -> VanillaWoodTypes.OAK,
                         w -> new WallBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresFromMap(boards.blocks) //REASONS: textures, recipes
@@ -110,8 +112,8 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
-                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
                 .build();
         this.addEntry(boardWalls);
 

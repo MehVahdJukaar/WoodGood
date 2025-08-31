@@ -4,13 +4,12 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.stehschnitzel.shutter.block.Shutter;
-import net.stehschnitzel.shutter.init.ShutterItemGroup;
 
 //SUPPORT: v2.0.2+
 public class LauchsShuttersModule extends SimpleModule {
@@ -21,7 +20,7 @@ public class LauchsShuttersModule extends SimpleModule {
         super(modId, "ls");
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
-                        getModBlock("oak_shutter", Shutter.class), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("oak_shutter", Shutter.class), () -> VanillaWoodTypes.OAK,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTextureM(modRes("block/oak_shutter_lower"), EveryCompat.res("block/ls/oak_shutter_lower_m"))
@@ -34,7 +33,7 @@ public class LauchsShuttersModule extends SimpleModule {
                 .addTexture(modRes("block/oak_shutter_middle_big"))
                 .addTexture(modRes("item/oak_shutter"))
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTab(() -> ShutterItemGroup.SHUTTER_GROUP)
+                .setTabKey(modRes(modId))
                 .defaultRecipe()
                 .build();
 

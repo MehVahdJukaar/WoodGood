@@ -5,8 +5,8 @@ import com.mcwbridges.kikoz.objects.*;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -16,19 +16,19 @@ import net.minecraft.world.level.block.Block;
 // SUPPORT: v3.0.0+
 public class MacawBridgesModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> bridgePiers;
-    public final SimpleEntrySet<WoodType, Block> bridgeMiddles;
-    public final SimpleEntrySet<WoodType, Block> ropeBridges;
-    public final SimpleEntrySet<WoodType, Block> railBridges;
-    public final SimpleEntrySet<WoodType, Block> bridgeStairs;
-    public final SimpleEntrySet<WoodType, Block> ropeStairs;
+    public final SimpleEntrySet<WoodType, Block> bridgePiers,
+            bridgeMiddles,
+            ropeBridges,
+            railBridges,
+            bridgeStairs,
+            ropeStairs;
 
     public MacawBridgesModule(String modId) {
         super(modId, "mcb");
         ResourceLocation tab = modRes(modId);
 
         bridgePiers = SimpleEntrySet.builder(WoodType.class, "bridge_pier",
-                        BlockInit.OAK_BRIDGE_PIER, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BRIDGE_PIER, () -> VanillaWoodTypes.OAK,
                         w -> new Bridge_Support(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("fence") //REASON: recieps
@@ -41,7 +41,7 @@ public class MacawBridgesModule extends SimpleModule {
         this.addEntry(bridgePiers);
 
         ropeBridges = SimpleEntrySet.builder(WoodType.class, "bridge", "rope",
-                        BlockInit.ROPE_OAK_BRIDGE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.ROPE_OAK_BRIDGE, () -> VanillaWoodTypes.OAK,
                         w -> new Bridge_Block_Rope(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("slab") //REASON: recieps
@@ -55,7 +55,7 @@ public class MacawBridgesModule extends SimpleModule {
         this.addEntry(ropeBridges);
 
         bridgeMiddles = SimpleEntrySet.builder(WoodType.class, "log_bridge_middle",
-                        BlockInit.OAK_LOG_BRIDGE_MIDDLE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_LOG_BRIDGE_MIDDLE, () -> VanillaWoodTypes.OAK,
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("slab", "fence") //REASON: recieps
@@ -70,7 +70,7 @@ public class MacawBridgesModule extends SimpleModule {
 
 
         railBridges = SimpleEntrySet.builder(WoodType.class, "rail_bridge",
-                        BlockInit.OAK_RAIL_BRIDGE, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_RAIL_BRIDGE, () -> VanillaWoodTypes.OAK,
                         w -> new Rail_Bridge(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .requiresChildren("slab", "fence") //REASON: recieps
@@ -85,7 +85,7 @@ public class MacawBridgesModule extends SimpleModule {
 
 
         bridgeStairs = SimpleEntrySet.builder(WoodType.class, "log_bridge_stair",
-                        BlockInit.OAK_LOG_BRIDGE_STAIR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_LOG_BRIDGE_STAIR, () -> VanillaWoodTypes.OAK,
                         w -> new Bridge_Stairs(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresFromMap(bridgeMiddles.blocks) //REASON: recipes
@@ -99,7 +99,7 @@ public class MacawBridgesModule extends SimpleModule {
         this.addEntry(bridgeStairs);
 
         ropeStairs = SimpleEntrySet.builder(WoodType.class, "rope_bridge_stair",
-                        BlockInit.OAK_ROPE_BRIDGE_STAIR, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_ROPE_BRIDGE_STAIR, () -> VanillaWoodTypes.OAK,
                         w -> new Bridge_Stairs(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresFromMap(ropeBridges.blocks) //REASON: recipes

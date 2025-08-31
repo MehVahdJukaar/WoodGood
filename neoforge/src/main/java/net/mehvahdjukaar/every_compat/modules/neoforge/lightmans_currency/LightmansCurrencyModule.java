@@ -6,8 +6,8 @@ import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.ShelfB
 import io.github.lightman314.lightmanscurrency.common.blocks.traderblocks.reference.AuctionStandBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +30,7 @@ public class LightmansCurrencyModule extends SimpleModule {
         ResourceLocation tab = modRes("extra");
 
         auction_stands = SimpleEntrySet.builder(WoodType.class, "", "auction_stand",
-                        getModBlock("auction_stand_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("auction_stand_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new AuctionStandBlock(Utils.copyPropertySafe(w.planks)
                                 .mapColor(w.getColor()).strength(2.0F)
                         )
@@ -48,7 +48,7 @@ public class LightmansCurrencyModule extends SimpleModule {
         this.addEntry(auction_stands);
 
         shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
-                        getModBlock("shelf_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("shelf_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)
                                 .mapColor(w.getColor()).strength(2.0F, Float.POSITIVE_INFINITY),
                                 1
@@ -73,7 +73,7 @@ public class LightmansCurrencyModule extends SimpleModule {
         this.addEntry(shelves);
 
         shelves_2x2 = SimpleEntrySet.builder(WoodType.class, "","shelf_2x2",
-                        getModBlock("shelf_2x2_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("shelf_2x2_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)
                                 .mapColor(w.getColor()).strength(2.0F, Float.POSITIVE_INFINITY),
                                 4
@@ -98,7 +98,7 @@ public class LightmansCurrencyModule extends SimpleModule {
         this.addEntry(shelves_2x2);
 
         bookshelf_traders = SimpleEntrySet.builder(WoodType.class, "", "bookshelf_trader",
-                        getModBlock("bookshelf_trader_oak"), () -> WoodTypeRegistry.OAK_TYPE,
+                        getModBlock("bookshelf_trader_oak"), () -> VanillaWoodTypes.OAK,
                         w -> new BookTraderBlock(Utils.copyPropertySafe(w.planks)
                                 .mapColor(w.getColor()).strength(3.0F, Float.POSITIVE_INFINITY)
                                 .sound(SoundType.WOOD)

@@ -1,7 +1,6 @@
 
 package net.mehvahdjukaar.every_compat.modules.neoforge.graveyard;
 
-import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -9,8 +8,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 public class GraveyardModule extends SimpleModule {
 
@@ -32,14 +32,14 @@ public class GraveyardModule extends SimpleModule {
         super(modId, "gy");
 
         COFFINS = SimpleEntrySet.builder(WoodType.class, "coffin",
-                        getModBlock("oak_coffin"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatCoffinfBlock(Utils.copyPropertySafe(Blocks.OAK_PLANKS).noOcclusion(), w))
-                .addTag(modRes("coffins"), Registries.BLOCK)
-                .addTag(modRes("coffins"), Registries.ITEM)
-                .defaultRecipe()
-                .setTab(() -> TheGraveyard.GROUP)
+                        getModBlock("oak_coffin"), () -> VanillaWoodTypes.OAK,
+                        w -> new CompatCoffinfBlock(Utils.copyPropertySafe(Blocks.OAK_PLANKS).noOcclusion(), w)
+                )
                 .addTile(CompatCoffinBlockTile::new)
                 .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("model/oak_coffin_m"))
+                .addTag(modRes("coffins"), Registries.BLOCK, Registries.ITEM)
+                .setTabKey(modRes("graveyard_group"))
+                .defaultRecipe()
                 .build();
         this.addEntry(COFFINS);
 
@@ -68,7 +68,7 @@ public class GraveyardModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntityType<?> getType() {
+        public @NotNull BlockEntityType<?> getType() {
             return COFFINS.getTile();
         }
 
@@ -89,7 +89,7 @@ public class GraveyardModule extends SimpleModule {
             return woodType;
         }
 
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
             return new CompatCoffinBlockTile(pos, state);
         }
     }

@@ -4,8 +4,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
@@ -23,9 +23,9 @@ public class LauchsShuttersModule extends SimpleModule {
         super(modId, "ls");
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
-                        getModBlock("oak_shutter"), () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new Shutter(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                        getModBlock("oak_shutter"), () -> VanillaWoodTypes.OAK,
+                        w -> new Shutter(Utils.copyPropertySafe(w.planks))
+                )
                 .addTextureM(modRes("block/oak_shutter_lower"), EveryCompat.res("block/ls/oak_shutter_lower_m"))
                 .addTextureM(modRes("block/oak_shutter_normal"), EveryCompat.res("block/ls/oak_shutter_normal_m"))
                 .addTextureM(modRes("block/oak_shutter_upper"), EveryCompat.res("block/ls/oak_shutter_upper_m"))
@@ -35,8 +35,9 @@ public class LauchsShuttersModule extends SimpleModule {
                 .addTexture(modRes("block/oak_shutter_middle"))
                 .addTexture(modRes("block/oak_shutter_middle_big"))
                 .addTexture(modRes("item/oak_shutter"))
-                .setRenderType(RenderLayer.CUTOUT)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(modRes("shutter_tab"))
+                .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
         this.addEntry(shutters);

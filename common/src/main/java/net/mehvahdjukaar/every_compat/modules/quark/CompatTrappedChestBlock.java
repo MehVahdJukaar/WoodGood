@@ -22,7 +22,7 @@ public class CompatTrappedChestBlock extends VariantTrappedChestBlock {
     }
 
     @Override
-    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+    public @NotNull BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new CompatTrappedChestBlockTile(pos, state);
     }
 

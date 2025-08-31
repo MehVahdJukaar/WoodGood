@@ -5,10 +5,9 @@ import com.starfish_studios.hearth_and_home.block.LatticeBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.VanillaWoods;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -26,14 +25,13 @@ public class HearthAndHomeModule extends SimpleModule {
 
     public HearthAndHomeModule(String modId) {
         super(modId, "hnhome");
-        var tab = (PlatHelper.getPlatform().isForge()) ? modRes(HearthAndHome.MOD_ID) : modRes("tab");
+        ResourceLocation tab = (PlatHelper.getPlatform().isForge()) ? modRes(HearthAndHome.MOD_ID) : modRes("tab");
 
         sanded_wood = SimpleEntrySet.builder(WoodType.class, "sanded_wood",
-                        getModBlock("oak_sanded_wood"), () -> WoodTypeRegistry.getValue(VanillaWoods.OAK),
+                        getModBlock("oak_sanded_wood"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("sanded_wood"), Registries.BLOCK)
-                .addTag(modRes("sanded_wood"), Registries.ITEM)
+                .addTag(modRes("sanded_wood"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/sanded_wood/oak"))
                 .defaultRecipe()
                 .setTabKey(tab)
@@ -41,11 +39,10 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(sanded_wood);
 
         parquet = SimpleEntrySet.builder(WoodType.class, "parquet",
-                        getModBlock("oak_parquet"), () -> WoodTypeRegistry.getValue(VanillaWoods.OAK),
+                        getModBlock("oak_parquet"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("parquet"), Registries.BLOCK)
-                .addTag(modRes("parquet"), Registries.ITEM)
+                .addTag(modRes("parquet"), Registries.BLOCK,  Registries.ITEM)
                 .addTexture(modRes("block/parquet/oak"))
                 .defaultRecipe()
                 .setTabKey(tab)
@@ -53,11 +50,10 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(parquet);
 
         trim = SimpleEntrySet.builder(WoodType.class, "trim",
-                        getModBlock("oak_trim"), () -> WoodTypeRegistry.getValue(VanillaWoods.OAK),
+                        getModBlock("oak_trim"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("trims"), Registries.BLOCK)
-                .addTag(modRes("trims"), Registries.ITEM)
+                .addTag(modRes("trims"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/trim/oak"))
                 .defaultRecipe()
                 .addRecipe(modRes("oak_trim_from_oak_vertical_trim"))
@@ -66,11 +62,10 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(trim);
 
         vertical_trim = SimpleEntrySet.builder(WoodType.class, "vertical_trim",
-                        getModBlock("oak_vertical_trim"), () -> WoodTypeRegistry.getValue(VanillaWoods.OAK),
+                        getModBlock("oak_vertical_trim"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("trims"), Registries.BLOCK)
-                .addTag(modRes("trims"), Registries.ITEM)
+                .addTag(modRes("trims"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/trim/oak"))
                 .defaultRecipe()
                 .setTabKey(tab)
@@ -78,11 +73,10 @@ public class HearthAndHomeModule extends SimpleModule {
         this.addEntry(vertical_trim);
 
         lattice = SimpleEntrySet.builder(WoodType.class, "lattice",
-                        getModBlock("oak_lattice"), () -> WoodTypeRegistry.getValue(VanillaWoods.OAK),
+                        getModBlock("oak_lattice"), () -> VanillaWoodTypes.OAK,
                         w -> new LatticeBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("lattices"), Registries.BLOCK)
-                .addTag(modRes("lattices"), Registries.ITEM)
+                .addTag(modRes("lattices"), Registries.BLOCK, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/lattice/oak"))
                 .addTexture(modRes("block/lattice/oak_bar"))

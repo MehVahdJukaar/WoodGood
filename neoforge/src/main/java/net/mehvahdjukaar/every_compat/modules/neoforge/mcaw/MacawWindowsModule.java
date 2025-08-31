@@ -6,8 +6,8 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -40,7 +40,7 @@ public class MacawWindowsModule extends SimpleModule {
         ResourceLocation tab = modRes(modId);
 
         window = SimpleEntrySet.builder(WoodType.class, "window",
-                        BlockInit.OAK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new ConnectedWindow(Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -48,13 +48,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(window);
 
         window2 = SimpleEntrySet.builder(WoodType.class, "window2",
-                        BlockInit.OAK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_WINDOW2, () -> VanillaWoodTypes.OAK,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -62,13 +62,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_two"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(window2);
 
         fourWindow = SimpleEntrySet.builder(WoodType.class, "four_window",
-                        BlockInit.OAK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_FOUR_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -76,13 +76,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_four"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(fourWindow);
 
         strippedLogWindow = SimpleEntrySet.builder(WoodType.class, "log_window", "stripped",
-                        BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new ConnectedWindow(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -91,13 +91,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedLogWindow);
 
         strippedLogWindow2 = SimpleEntrySet.builder(WoodType.class, "log_window2", "stripped",
-                        BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> VanillaWoodTypes.OAK,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -106,13 +106,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_two"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedLogWindow2);
 
         strippedLogFourWindow = SimpleEntrySet.builder(WoodType.class, "log_four_window", "stripped",
-                        BlockInit.STRIPPED_OAK_LOG_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.STRIPPED_OAK_LOG_FOUR_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -121,13 +121,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_four"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedLogFourWindow);
 
         plankWindow = SimpleEntrySet.builder(WoodType.class, "plank_window",
-                        BlockInit.OAK_PLANK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PLANK_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new ConnectedWindow(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -135,13 +135,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(plankWindow);
 
         plankWindow2 = SimpleEntrySet.builder(WoodType.class, "plank_window2",
-                        BlockInit.OAK_PLANK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PLANK_WINDOW2, () -> VanillaWoodTypes.OAK,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -149,13 +149,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_two"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(plankWindow2);
 
         plankFourWindow = SimpleEntrySet.builder(WoodType.class, "plank_four_window",
-                        BlockInit.OAK_PLANK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PLANK_FOUR_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -163,13 +163,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_four"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(plankFourWindow);
 
         paneWindow = SimpleEntrySet.builder(WoodType.class, "pane_window",
-                        BlockInit.OAK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PANE_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new Window(Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
@@ -177,13 +177,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(paneWindow);
 
         strippedPaneWindow = SimpleEntrySet.builder(WoodType.class, "pane_window", "stripped",
-                        BlockInit.STRIPPED_OAK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.STRIPPED_OAK_PANE_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new Window(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -192,13 +192,13 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedPaneWindow);
 
         plankPaneWindow = SimpleEntrySet.builder(WoodType.class, "plank_pane_window",
-                        BlockInit.OAK_PLANK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PLANK_PANE_WINDOW, () -> VanillaWoodTypes.OAK,
                         w -> new Window(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -206,26 +206,26 @@ public class MacawWindowsModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(plankPaneWindow);
 
         logParapet = SimpleEntrySet.builder(WoodType.class, "log_parapet",
-                        BlockInit.OAK_LOG_PARAPET, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_LOG_PARAPET, () -> VanillaWoodTypes.OAK,
                         w -> new Parapet(Utils.copyPropertySafe(w.log))
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("parapets"), Registries.BLOCK)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(logParapet);
 
         plankParapet = SimpleEntrySet.builder(WoodType.class, "plank_parapet",
-                        BlockInit.OAK_PLANK_PARAPET, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_PLANK_PARAPET, () -> VanillaWoodTypes.OAK,
                         w -> new Parapet(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
@@ -237,7 +237,7 @@ public class MacawWindowsModule extends SimpleModule {
         this.addEntry(plankParapet);
 
         blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
-                        BlockInit.OAK_BLINDS, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_BLINDS, () -> VanillaWoodTypes.OAK,
                         w -> new Blinds(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren("stripped_log") //REASON: textures
@@ -250,7 +250,7 @@ public class MacawWindowsModule extends SimpleModule {
         this.addEntry(blinds);
 
         shutter = SimpleEntrySet.builder(WoodType.class, "shutter",
-                        BlockInit.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_SHUTTER, () -> VanillaWoodTypes.OAK,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks))
                 )
                 .createPaletteFromPlanks(this::shutterPalette)
@@ -264,7 +264,7 @@ public class MacawWindowsModule extends SimpleModule {
         this.addEntry(shutter);
 
         louveredShutter = SimpleEntrySet.builder(WoodType.class, "louvered_shutter",
-                        BlockInit.OAK_LOUVERED_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
+                        BlockInit.OAK_LOUVERED_SHUTTER, () -> VanillaWoodTypes.OAK,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks))
                 )
                 .addTexture(modRes("block/oak_louvered_shutter"))
