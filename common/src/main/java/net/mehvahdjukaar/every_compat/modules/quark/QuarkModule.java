@@ -273,7 +273,7 @@ public class QuarkModule extends SimpleModule {
                         () -> VanillaLeavesTypes.OAK,
                         leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
                 )
-                .requiresChildren(VanillaWoodChildKeys.LOG) // Reason: RECIPES
+                .requiresChildren(VanillaWoodChildKeys.LOG) // Reason: RECIPES. Yes leaves have log too.
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

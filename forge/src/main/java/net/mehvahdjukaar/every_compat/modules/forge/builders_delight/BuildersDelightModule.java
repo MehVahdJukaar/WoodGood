@@ -869,7 +869,7 @@ public class BuildersDelightModule extends SimpleModule {
         super.addDynamicServerResources(executor);
 
         executor.accept((manager, sink) -> {
-            for (var w : WoodTypeRegistry.getTypes()) {
+            for (var w : WoodTypeRegistry.INSTANCE) {
                 if (!HardcodedBlockType.isKnownVanillaWood(w)) {
                     addChiselRecipe(sink, w, "planks", PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
                     addChiselRecipe(sink, w, "stairs", STAIRS_1, STAIRS_2, STAIRS_3, STAIRS_4, STAIRS_5, STAIRS_6, STAIRS_7);

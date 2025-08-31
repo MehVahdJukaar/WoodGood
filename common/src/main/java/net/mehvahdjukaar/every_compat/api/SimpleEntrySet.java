@@ -116,7 +116,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         for (T w : types) {
             String name = getBlockName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            String entrySetId = module.getModId() +":"+ this.typeName;
+            String entrySetId = module.getModId() + ":" + this.typeName;
 
             if (module.isEntryAlreadyRegistered(entrySetId, name, w, BuiltInRegistries.BLOCK)) continue;
 
@@ -126,7 +126,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 if (block != null) {
                     this.blocks.put(w, block);
 
-                    registry.register(module.makeMyRes(fullName), block);
+
+                    ResourceLocation resourceLocation = module.makeMyRes(fullName);
+                    if (resourceLocation.toString().equals("minecraft:air")) {
+                        throw new UnsupportedOperationException("Attempted to register a Block of wood type " + w + " from module " + this + " has an invalid item name. How?");
+                    }
+                    registry.register(resourceLocation, block);
                     w.addChild(childKey, block);
 
                     if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
@@ -200,7 +205,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             //for ones that don't have item
             if (i != null) {
                 this.items.put(w, i);
-                registry.register(Utils.getID(value), i);
+                ResourceLocation id = Utils.getID(value);
+                if (id.toString().equals("minecraft:air")) {
+                    throw new UnsupportedOperationException("Block of wood type " + w + " from module " + this + " has an invalid item name. How?");
+                }
+                registry.register(id, i);
             }
         });
     }
@@ -337,12 +346,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             );
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
-            for(var t : this.textures){
-                if(this.palette != null) {
+            for (var t : this.textures) {
+                if (this.palette != null) {
                     e.textures.add(t.cloneWithPalette((t1, manager) -> {
-                      return   this.palette.apply((T) t1, manager);
+                        return this.palette.apply((T) t1, manager);
                     }));
-                }else{
+                } else {
                     e.textures.add(t);
                 }
             }
