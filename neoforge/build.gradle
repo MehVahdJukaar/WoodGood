@@ -110,10 +110,10 @@ dependencies {
     //- Repository LOCAL
     if (enable_moonlight_test.toBoolean()) {
         if (usesMavenLocalML) {
-            //- ~/fabric/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}") // LOCAL
+            //- ../neoforge/mods LOCAL
+            modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_testVersion}-neoforge")
         } else {
-            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
+            modImplementation(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
         }
     } else {
         //+ MAVEN
