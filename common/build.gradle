@@ -30,7 +30,7 @@ dependencies {
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-fabric") // v2.19.4
+        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-fabric") // v2.22.6
     }
 //!! ============================================= DEPENDENCIES ========================================================
     //+ REQUIRED - The modules access libaries from below

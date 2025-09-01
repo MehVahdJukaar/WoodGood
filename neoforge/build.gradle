@@ -117,7 +117,7 @@ dependencies {
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-neoforge") // v2.19.4
+        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-neoforge") // v2.22.6
     }
 
 //!! TOOLS ========================================================================================================== \\
