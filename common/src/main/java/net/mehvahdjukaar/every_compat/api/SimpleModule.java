@@ -154,15 +154,15 @@ public class SimpleModule extends CompatModule {
                     entry.generateModels(this, manager, sink);
 
                 } catch (Exception ex) {
-                    EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", entry, this, ex);
+                    EveryCompat.LOGGER.error("Failed to generate client resources for EntrySet: {} from module {}:", entry, this, ex);
                     if (PlatHelper.isDev()) throw ex;
                 }
             });
         }
 
-        executor.accept((manager, sink) -> {
-            addDynamicClientResources(ClientDynamicResourcesHandler.getInstance(), manager);
-        });
+        executor.accept((manager, sink) ->
+                addDynamicClientResources(ClientDynamicResourcesHandler.getInstance(), manager)
+        );
     }
 
     /// @deprecated -> USE {@link SimpleModule#addDynamicClientResources(Consumer)}
