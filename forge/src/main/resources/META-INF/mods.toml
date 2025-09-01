@@ -100,7 +100,7 @@ side="BOTH"
 [[dependencies.everycomp]] #optional
 modId="vmp"
 mandatory=false
-versionRange="[9.9-MARKED_AS_INCOMPATIBLE-AND-REMOVE_IT,]" #mandatory
+versionRange="[9-;  This mod is incompatible with Every-Compat  ;,]" #mandatory
 ordering="NONE"
 side="BOTH"
 
@@ -108,6 +108,6 @@ side="BOTH"
 [[dependencies.everycomp]] #optional
 modId="vminus"
 mandatory=false
-versionRange="[9.9-MARKED_AS_INCOMPATIBLE-AND-REMOVE_IT,]" #mandatory
+versionRange="[9-;  This mod is incompatible with Every-Compat & Go to VMinus#34 via GitHub for DETAILS  ;,]" #mandatory
 ordering="NONE"
 side="BOTH"
