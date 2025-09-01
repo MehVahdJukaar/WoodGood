@@ -41,7 +41,9 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
     protected void addModules() {
         super.addModules();
 
-//!! =============================================== Macaw's ======================================================== \\
+//!!================================================ Add Modules ==================================================== \\
+
+        // ========================================= MACAW's ======================================================== \\
         addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
         addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
         addIfLoaded("mcwfences", () -> MacawFencesModule::new);
@@ -53,7 +55,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
         addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
 
-//!!================================================ Add Modules ==================================================== \\
+        // ========================================= GENERAL ======================================================== \\
         addIfLoaded("bbb", () -> BuildingButBetterModule::new);
         addIfLoaded("beautify", () -> BeautifyRefabricatedModule::new);
         addIfLoaded("bewitchment", () -> BewitchmentModule::new);

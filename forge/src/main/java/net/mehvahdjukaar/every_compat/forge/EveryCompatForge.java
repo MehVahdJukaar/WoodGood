@@ -97,6 +97,20 @@ public class EveryCompatForge extends EveryCompatCommon {
         super.addModules();
 
 //!! =============================================== Add Modules ==================================================== \\
+
+        // ========================================= MACAW's ======================================================== \\
+        addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
+        addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
+        addIfLoaded("mcwfences", () -> MacawFencesModule::new);
+        addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
+        addIfLoaded("mcwlights", () -> MacawLightsModule::new);
+        addIfLoaded("mcwpaths", () -> MacawPathsModule::new);
+        addIfLoaded("mcwroofs", () -> MacawRoofsModule::new);
+        addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
+        addIfLoaded("mcwwindows", () -> MacawWindowsModule::new);
+        addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
+
+        // ========================================= GENERAL ======================================================== \\
         addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
         addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
         addIfLoaded("bbb", () -> BuildingButBetterModule::new);
@@ -141,18 +155,6 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("youkaishomecoming", () -> YoukaisHomecomingModule::new);
 
         if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
-
-        // ========================================= Macaw's ======================================================== \\
-        addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
-        addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
-        addIfLoaded("mcwfences", () -> MacawFencesModule::new);
-        addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
-        addIfLoaded("mcwlights", () -> MacawLightsModule::new);
-        addIfLoaded("mcwpaths", () -> MacawPathsModule::new);
-        addIfLoaded("mcwroofs", () -> MacawRoofsModule::new);
-        addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
-        addIfLoaded("mcwwindows", () -> MacawWindowsModule::new);
-        addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addIfLoaded("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
