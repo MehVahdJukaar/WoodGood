@@ -514,7 +514,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         /**
-         * @deprecated USE .addTexture() or .addTextureM(), the last parameter is PaletteStrategies<br>
+         * @deprecated USE .addTexture(ResourceLocation, PaletteStrategy) or .addTextureM(ResourceLocation, ResourceLocation, PaletteStrategy),
+         * the last parameter is PaletteStrategy<br>
          * Take a look at {@link PaletteStrategies} & Look for the FIELD which can be used as an argument for the last
          * parameter
         **/
