@@ -1,16 +1,32 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
+import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
 
 import java.util.function.Supplier;
 
 //loaded after registry
 public class ECConfigs {
+
+    public enum GenMode{
+        NEVER,
+        CACHED,
+        CACHED_ZIPPED,
+        ALWAYS;
+
+        public PackGenerationStrategy pickStrategy(){
+            return   switch (this){
+                case NEVER -> PackGenerationStrategy.NO_OP;
+                case CACHED -> PackGenerationStrategy.CACHED;
+                case CACHED_ZIPPED -> PackGenerationStrategy.CACHED_ZIPPED;
+                case ALWAYS -> PackGenerationStrategy.REGEN_ON_EVERY_RELOAD;
+            };
+        }
+    }
 
     public static ModConfigHolder SPEC;
     public static ModConfigHolder CLIENT_SPEC;
@@ -23,10 +39,8 @@ public class ECConfigs {
     public static final Supplier<Boolean> BLOCK_TYPE_TOOLTIP;
     public static final Supplier<Boolean> MOD_TOOPTIP;
     public static final Supplier<Boolean> TOOLTIPS_ADVANCED;
-    public static final Supplier<Boolean> GENERATE_DYNAMIC_SERVER;
-    public static final Supplier<Boolean> GENERATE_DYNAMIC_CLIENT;
-    public static final Supplier<Boolean> CACHE_SERVER;
-    public static final Supplier<Boolean> CACHE_CLIENT;
+    public static final Supplier<GenMode> SERVER_GENERATION_MODE;
+    public static final Supplier<GenMode> CLIENT_GENERATION_MODE;
 
 
     static {
@@ -35,26 +49,21 @@ public class ECConfigs {
             ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.CLIENT);
 
             builder.push("general");
-            GENERATE_DYNAMIC_CLIENT = builder.comment("Enables the generation of dynamic assets. This is required for the mod to work properly. Turn off if you chose to add all the generated assets via datapack manually. This can speedup boot times for modpacks. Note that the generated assets will depend on loaded datapacks")
-                    .define("generate_dynamic_assets", true);
-            CACHE_CLIENT = builder.comment("Caches the generated client resources to speed up load times. Cache regenerate once any mod version or pack version change")
-                    .define("cache_dynamic_assets", true);
+            CLIENT_GENERATION_MODE = builder.comment("How assets are generated. If cached the cache will regenerate once any mod or pack changes")
+                    .define("dynamic_assets_generation_mode", GenMode.CACHED_ZIPPED);
             builder.pop();
 
             CLIENT_SPEC = builder.build();
             CLIENT_SPEC.forceLoad(); //manually load early
         } else {
-            GENERATE_DYNAMIC_CLIENT = () -> false;
-            CACHE_CLIENT = () -> true;
+            CLIENT_GENERATION_MODE = () -> GenMode.ALWAYS;
         }
 
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.COMMON);
 
         builder.push("general");
-        CACHE_SERVER = builder.comment("Caches the generated server resources to speed up load times. Cache regenerates once any mod version or datapack version change")
-                .define("cache_dynamic_assets", true);
-        GENERATE_DYNAMIC_SERVER = builder.comment("Enables the generation of dynamic assets. This is required for the mod to work properly. Turn off if you chose to add all the generated assets via datapack manually. This can speedup boot times for modpacks. Note that the generated assets will depend on loaded datapacks")
-                .define("generate_dynamic_assets", true);
+        SERVER_GENERATION_MODE = builder.comment("How assets are generated. If cached the cache will regenerate once any mod or pack changes")
+                .define("dynamic_assets_generation_mode", GenMode.CACHED_ZIPPED);
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .define("creative_tab", true);
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")

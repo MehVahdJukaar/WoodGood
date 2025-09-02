@@ -32,8 +32,7 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
 
     public ClientDynamicResourcesHandler() {
         super(EveryCompat.res("dynamic_resources"),
-                ECConfigs.CACHE_CLIENT.get() ? PackGenerationStrategy.CACHED :
-                        PackGenerationStrategy.REGEN_ON_EVERY_RELOAD);
+                ECConfigs.CLIENT_GENERATION_MODE.get().pickStrategy());
     }
 
     @Override
@@ -55,7 +54,6 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
             CompatSpritesHelper.addHardcodedSprites();
             firstInit = true;
         }
-        if (!ECConfigs.GENERATE_DYNAMIC_CLIENT.get()) return;
         super.reload(manager, reporter);
     }
 

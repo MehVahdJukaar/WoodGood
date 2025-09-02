@@ -27,8 +27,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
 
     public ServerDynamicResourcesHandler() {
         super(EveryCompat.res("dynamic_resources"),
-                ECConfigs.CACHE_SERVER.get() ? PackGenerationStrategy.CACHED :
-                        PackGenerationStrategy.REGEN_ON_EVERY_RELOAD);
+                ECConfigs.SERVER_GENERATION_MODE.get().pickStrategy());
     }
 
     //needs to be ready when constructor is called
@@ -41,13 +40,6 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
         if (PlatHelper.isModLoaded("lolmcv")) namespaces.add("lieonstudio");
 
         return namespaces;
-    }
-
-
-    @Override
-    public void reload(ResourceManager manager, IProgressTracker reporter) {
-        if (!ECConfigs.GENERATE_DYNAMIC_SERVER.get()) return;
-        super.reload(manager, reporter);
     }
 
     @Override
