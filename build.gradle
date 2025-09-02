@@ -90,7 +90,7 @@ subprojects {
                     optional.project("clutter")
 //                    optional.project("corail-pillar")
                     optional.project("create-fabric")
-                    optional.project("dawn-of-time-builder-edition")
+                    optional.project("dawn-of-time")
                     optional.project("decorative-blocks")
                     optional.project("dramatic-doors")
                     optional.project("exlines-awnings")
