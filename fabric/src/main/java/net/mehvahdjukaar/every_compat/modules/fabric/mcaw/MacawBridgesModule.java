@@ -15,6 +15,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.FENCE;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
+
 // SUPPORT: v3.0.0+
 public class MacawBridgesModule extends SimpleModule {
 
@@ -31,8 +34,9 @@ public class MacawBridgesModule extends SimpleModule {
 
         bridgePiers = SimpleEntrySet.builder(WoodType.class, "bridge_pier",
                         () -> BlockInit.OAK_BRIDGE_PIER, () -> VanillaWoodTypes.OAK,
-                        w -> new Bridge_Support(Utils.copyPropertySafe(w.planks)))
-                .requiresChildren("fence") //REASON: recieps
+                        w -> new Bridge_Support(Utils.copyPropertySafe(w.planks))
+                )
+                .requiresChildren(FENCE) //REASON: recipes
                 //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_piers"), Registries.BLOCK)
@@ -45,7 +49,7 @@ public class MacawBridgesModule extends SimpleModule {
                         () -> BlockInit.ROPE_OAK_BRIDGE, () -> VanillaWoodTypes.OAK,
                         w -> new Bridge_Block_Rope(Utils.copyPropertySafe(w.planks))
                 )
-                .requiresChildren("slab") //REASON: recieps
+                .requiresChildren(SLAB) //REASON: recipes
                 //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rope_bridges"), Registries.BLOCK)
@@ -59,7 +63,7 @@ public class MacawBridgesModule extends SimpleModule {
                         () -> BlockInit.OAK_LOG_BRIDGE_MIDDLE, () -> VanillaWoodTypes.OAK,
                         w -> new Log_Bridge(Utils.copyPropertySafe(w.planks))
                 )
-                .requiresChildren("slab", "fence") //REASON: recieps
+                .requiresChildren(SLAB, FENCE) //REASON: recipes
                 //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("log_bridges"), Registries.BLOCK)
@@ -74,7 +78,7 @@ public class MacawBridgesModule extends SimpleModule {
                         () -> BlockInit.OAK_RAIL_BRIDGE, () -> VanillaWoodTypes.OAK,
                         w -> new Rail_Bridge(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
-                .requiresChildren("slab", "fence") //REASON: recieps
+                .requiresChildren(SLAB, FENCE) //REASON: recipes
                 //TEXTURES: log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("rail_bridges"), Registries.BLOCK)
