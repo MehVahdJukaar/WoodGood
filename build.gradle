@@ -143,7 +143,6 @@ subprojects {
                     optional.project("chipped")
 //                    optional.project("corail-pillar")
                     optional.project("create")
-                    optional.project("dawn-of-time-builder-edition")
                     optional.project("decorative-blocks")
 //                    optional.project("decoration-delight")
 //                    optional.project("domum-ornamentum")
