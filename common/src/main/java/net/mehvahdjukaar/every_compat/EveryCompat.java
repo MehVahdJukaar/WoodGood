@@ -122,11 +122,12 @@ public abstract class EveryCompat {
             DEPENDENCIES.add(module.getModId());
             DEPENDENCIES.addAll(module.getAlreadySupportedMods());
 
-            ServerDynamicResourcesHandler.INSTANCE.getPackResources()
-                    .addNamespaces(module.getServerResourcesNamespaces());
+            ServerDynamicResourcesHandler.getInstance()
+                    .addSupportedNamespaces(module.getServerResourcesNamespaces());
+
             if (PlatHelper.getPhysicalSide().isClient()) {
-                ClientDynamicResourcesHandler.getInstance().getPackResources()
-                        .addNamespaces(module.getClientResourcesNamespaces());
+                ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
+                        module.getClientResourcesNamespaces());
             }
 
             for (var t : module.getAffectedTypes()) {

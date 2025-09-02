@@ -114,7 +114,8 @@ dependencies {
     if (enable_moonlight_test.toBoolean()) {
         if (usesMavenLocalML) {
             //- ../fabric/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_testVersion}-fabric")
+            //For the love of god do NOT change this line
+            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}")
         } else {
             modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
         }

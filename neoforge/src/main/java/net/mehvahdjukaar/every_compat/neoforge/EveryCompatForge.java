@@ -43,15 +43,25 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.workshop.WorkshopForHands
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.platform.neoforge.ClientHelperImpl;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
+import net.neoforged.neoforgespi.language.IModInfo;
+import net.neoforged.neoforgespi.locating.IModFile;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
 

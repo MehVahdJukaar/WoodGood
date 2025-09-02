@@ -129,15 +129,6 @@ public class SimpleModule extends CompatModule {
                 if (PlatHelper.isDev()) throw ex;
             }
         }));
-        executor.accept((manager, sink) -> {
-            addDynamicServerResources(ServerDynamicResourcesHandler.INSTANCE, manager);
-        });
-
-    }
-
-
-    @Deprecated(forRemoval = true)
-    public void addDynamicServerResources(ServerDynamicResourcesHandler handler, ResourceManager manager) {
     }
 
     @Override
@@ -159,16 +150,7 @@ public class SimpleModule extends CompatModule {
                 }
             });
         }
-
-        executor.accept((manager, sink) -> {
-            addDynamicClientResources(ClientDynamicResourcesHandler.getInstance(), manager);
-        });
     }
-
-    @Deprecated(forRemoval = true)
-    public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
-    }
-
 
     @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {

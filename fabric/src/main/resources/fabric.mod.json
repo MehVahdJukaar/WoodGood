@@ -12,7 +12,7 @@
     "sources": "${mod_github}"
   },
   "license": "${mod_license}",
-  "icon": "logo.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -28,7 +28,7 @@
   "depends": {
     "fabric": ">=0.92.0+1.20.1",
     "minecraft": ">=${minecraft_min_version} <${minecraft_max_version}",
-    "moonlight": ">=1.21-2.19.4"
+    "moonlight": ">=1.21-2.23.0"
   },
   "recommends": {
     "sawmill": "*"

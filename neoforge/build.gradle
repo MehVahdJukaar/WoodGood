@@ -111,7 +111,8 @@ dependencies {
     if (enable_moonlight_test.toBoolean()) {
         if (usesMavenLocalML) {
             //- ../neoforge/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_testVersion}-neoforge")
+            //For the love of god do NOT change this line
+            modImplementation("net.mehvahdjukaar:moonlight-neoforge:${project.moonlight_testVersion}")
         } else {
             modImplementation(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${moonlight_testVersion}-neoforge.jar"))
         }
@@ -205,7 +206,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-bridges-351725:5465228")
     modCompileOnly("curse.maven:macaws-doors-378646:5439155")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442175")
-    modCompileOnly("curse.maven:macaws-furniture-359540:5589819")
+    modImplementation("curse.maven:macaws-furniture-359540:5589819")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5473578")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5430735")
     modCompileOnly("curse.maven:macaws-roofs-352039:5554896")
