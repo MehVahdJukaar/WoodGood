@@ -34,7 +34,6 @@ public class ECConfigs {
     public static final Supplier<Boolean> TAB_ENABLED;
     public static final Supplier<Boolean> TAB_ITEM_SEARCH_ENABLED;
     public static final Supplier<Boolean> CHECK_PACKET;
-    public static final Supplier<Boolean> DEBUG_RESOURCES;
     public static final Supplier<Boolean> DEBUG_PACKET;
     public static final Supplier<Boolean> BLOCK_TYPE_TOOLTIP;
     public static final Supplier<Boolean> MOD_TOOPTIP;
@@ -72,8 +71,6 @@ public class ECConfigs {
         //        .define("remap_other_mods", false);
         // REMAP_OWN = builder.comment("Clears out and remaps all blocks registered by this mod belonging to uninstalled wood types to air or oak wood")
         //         .define("remap_self", true);
-        DEBUG_RESOURCES = builder.comment("Creates a debug folder inside your instance directory where all the dynamically generated resources will be saved")
-                .define("save_debug_resources", false);
         CHECK_PACKET = builder.comment("Sends a packet to verify all dependencies mod versions are the same on connect. DIsable if it causes issues")
                 .define("mod_version_check_packet", true);
         DEBUG_PACKET = builder.comment("Don't touch unless you are told to").define("debug_packet", false);
