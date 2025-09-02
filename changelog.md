@@ -20,6 +20,12 @@
 
 </div>
 
+## v2.11.0
+
+### ADDED:
+- Mod dynamic resources are now cached. Cache will regenerate once installed mod versions change, datapack changes or texture packs change
+- Requires newest **Moonlight Lib v2.23.0** or above
+
 ### UPDATED:
 - **Woodworks** (NF): Fixed the crash due to BlockEntityType for beehives - [#991](https://github.com/MehVahdJukaar/WoodGood/issues/991)
 

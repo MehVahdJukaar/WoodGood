@@ -7,13 +7,11 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicServerResourceProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider {
@@ -28,7 +26,9 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
     }
 
     public ServerDynamicResourcesHandler() {
-        super(EveryCompat.res("dynamic_resources"), PackGenerationStrategy.CACHED);
+        super(EveryCompat.res("dynamic_resources"),
+                ECConfigs.CACHE_SERVER.get() ? PackGenerationStrategy.CACHED :
+                        PackGenerationStrategy.REGEN_ON_EVERY_RELOAD);
     }
 
     //needs to be ready when constructor is called

@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 public class ECConfigs {
 
     public static ModConfigHolder SPEC;
-    public static ModConfigHolder CLIENT_SPED;
+    public static ModConfigHolder CLIENT_SPEC;
 
     public static final Supplier<Boolean> TAB_ENABLED;
     public static final Supplier<Boolean> TAB_ITEM_SEARCH_ENABLED;
@@ -24,25 +24,32 @@ public class ECConfigs {
     public static final Supplier<Boolean> TOOLTIPS_ADVANCED;
     public static final Supplier<Boolean> GENERATE_DYNAMIC_SERVER;
     public static final Supplier<Boolean> GENERATE_DYNAMIC_CLIENT;
+    public static final Supplier<Boolean> CACHE_SERVER;
+    public static final Supplier<Boolean> CACHE_CLIENT;
 
 
     static {
 
-        if(PlatHelper.getPhysicalSide().isClient()) {
+        if (PlatHelper.getPhysicalSide().isClient()) {
             ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.CLIENT);
             builder.push("general");
             GENERATE_DYNAMIC_CLIENT = builder.comment("Enables the generation of dynamic assets. This is required for the mod to work properly. Turn off if you chose to add all the generated assets via datapack manually. This can speedup boot times for modpacks. Note that the generated assets will depend on loaded datapacks")
                     .define("generate_dynamic_assets", true);
             builder.pop();
-            CLIENT_SPED = builder.build();
-            CLIENT_SPED.forceLoad(); //manually load early
+            CACHE_CLIENT = builder.comment("Caches the generated client resources to speed up load times. Cache regenerate once any mod version or pack version change")
+                    .define("cache_dynamic_assets", true);
+            CLIENT_SPEC = builder.build();
+            CLIENT_SPEC.forceLoad(); //manually load early
         } else {
             GENERATE_DYNAMIC_CLIENT = () -> false;
+            CACHE_CLIENT = () -> true;
         }
 
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.COMMON);
 
         builder.push("general");
+        CACHE_SERVER = builder.comment("Caches the generated server resources to speed up load times. Cache regenerates once any mod version or datapack version change")
+                .define("cache_dynamic_assets", true);
         GENERATE_DYNAMIC_SERVER = builder.comment("Enables the generation of dynamic assets. This is required for the mod to work properly. Turn off if you chose to add all the generated assets via datapack manually. This can speedup boot times for modpacks. Note that the generated assets will depend on loaded datapacks")
                 .define("generate_dynamic_assets", true);
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
@@ -75,5 +82,6 @@ public class ECConfigs {
         SPEC.forceLoad();
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

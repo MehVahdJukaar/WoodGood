@@ -31,7 +31,9 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
     private boolean firstInit = false;
 
     public ClientDynamicResourcesHandler() {
-        super(EveryCompat.res("dynamic_resources"), PackGenerationStrategy.CACHED);
+        super(EveryCompat.res("dynamic_resources"),
+                ECConfigs.CACHE_CLIENT.get() ? PackGenerationStrategy.CACHED :
+                        PackGenerationStrategy.REGEN_ON_EVERY_RELOAD);
     }
 
     @Override
