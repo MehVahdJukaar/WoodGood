@@ -205,7 +205,7 @@ subprojects {
         curseforge {
             apiKey = env.CURSEFORGE_TOKEN
             project {
-                id = project_id
+                id = curseforge_id
                 changelog = changelogText
                 changelogType = 'markdown'
                 releaseType = release_type
