@@ -33,6 +33,23 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     protected final Function<T, @Nullable I> itemFactory;
     protected ModelConfiguration modelConfig;
 
+    @Deprecated(forRemoval = true)
+    public ItemOnlyEntrySet(Class<T> type,
+                            String name, @Nullable String prefix,
+                            Function<T, I> itemFactory,
+                            Supplier<@Nullable I> baseItem,
+                            Supplier<T> baseType,
+                            @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
+                            TabAddMode tabMode,
+                            @Nullable BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
+                            @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                            boolean mergedPalette, boolean copyTint,
+                            Predicate<T> condition
+    ) {
+        this(type, name, prefix, itemFactory, baseItem, baseType, tab, tabMode, paletteSupplier, extraTransform,
+                mergedPalette, copyTint, condition, ModelConfiguration.EMPTY);
+    }
+
     public ItemOnlyEntrySet(Class<T> type,
                             String name, @Nullable String prefix,
                             Function<T, I> itemFactory,

@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
@@ -32,12 +33,14 @@ public class ECConfigs {
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.CLIENT);
+
             builder.push("general");
             GENERATE_DYNAMIC_CLIENT = builder.comment("Enables the generation of dynamic assets. This is required for the mod to work properly. Turn off if you chose to add all the generated assets via datapack manually. This can speedup boot times for modpacks. Note that the generated assets will depend on loaded datapacks")
                     .define("generate_dynamic_assets", true);
-            builder.pop();
             CACHE_CLIENT = builder.comment("Caches the generated client resources to speed up load times. Cache regenerate once any mod version or pack version change")
                     .define("cache_dynamic_assets", true);
+            builder.pop();
+
             CLIENT_SPEC = builder.build();
             CLIENT_SPEC.forceLoad(); //manually load early
         } else {

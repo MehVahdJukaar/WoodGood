@@ -6,9 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+//what is this??
 /// Add models/block & models/item that need to be generated - Used by Gems-Realm
+//name isnt great. ExtraModels would have been better
 public record ModelConfiguration(Set<ResourceLocation> blockModel, Set<ResourceLocation> itemModel,
-                                 boolean includeInGeneration) {
+                             //whats this boolean for? why not just not add models instead if they should not generated. if it does other stuff name shoul be better
+                             @Deprecated(forRemoval = true)    boolean includeInGeneration) {
 
     public static final ModelConfiguration EMPTY = new ModelConfiguration(Set.of(), Set.of(), false);
 

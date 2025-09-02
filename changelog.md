@@ -20,7 +20,11 @@
 
 </div>
 
-## v2.11.0
+## v2.11.1
+- Fixed an issue with config
+- Added back a constructor that was recently modified hopefully restoring backward compat
+
+## v2.11.1
 
 ### ADDED:
 - Mod dynamic resources are now cached. Cache will regenerate once installed mod versions change, datapack changes or texture packs change

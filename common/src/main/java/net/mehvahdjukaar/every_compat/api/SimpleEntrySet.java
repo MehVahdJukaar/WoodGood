@@ -57,6 +57,26 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     protected ModelConfiguration modelConfiguration;
 
 
+    @Deprecated(forRemoval = true)
+    public SimpleEntrySet(Class<T> type,
+                          String name, String prefix,
+                          Function<T, B> blockSupplier,
+                          Supplier<@Nullable B> baseBlock,
+                          Supplier<T> baseType,
+                          @NotNull Supplier<ResourceKey<CreativeModeTab>> tab,
+                          TabAddMode tabMode,
+                          LootTableMode lootMode,
+                          @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
+                          @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
+                          @Nullable Object renderType,
+                          BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
+                          @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                          boolean mergedPalette, boolean copyTint,
+                          Predicate<T> condition){
+        this(type, name, prefix, blockSupplier, baseBlock, baseType, tab, tabMode, lootMode, itemFactory, tileFactory, renderType,
+                paletteSupplier, extraTransform, mergedPalette,copyTint, condition, ModelConfiguration.EMPTY);
+    }
+
     public SimpleEntrySet(Class<T> type,
                           String name, @Nullable String prefix,
                           Function<T, B> blockSupplier,
