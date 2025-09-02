@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.misc.ErrorMessageScreen;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -36,7 +37,7 @@ public class EveryCompatClient {
         ClientHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
-        ClientDynamicResourcesHandler.getInstance().register();
+        RegHelper.registerDynamicResourceProvider(ClientDynamicResourcesHandler.getInstance());
     }
 
     @EventCalled

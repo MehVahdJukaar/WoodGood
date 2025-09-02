@@ -66,7 +66,7 @@ public abstract class EveryCompat {
             try {
                 action.accept(m);
             } catch (Throwable e) {
-                EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", m.getModName(), e);
+                EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", Objects.requireNonNull(m).getModName(), e);
                 if (canShowErrorScreen) {
                     //if before first screen we can display an error screen
                     ERRORED.add(m);
@@ -122,10 +122,10 @@ public abstract class EveryCompat {
             DEPENDENCIES.add(module.getModId());
             DEPENDENCIES.addAll(module.getAlreadySupportedMods());
 
-            ServerDynamicResourcesHandler.INSTANCE.getPack()
+            ServerDynamicResourcesHandler.INSTANCE.getPackResources()
                     .addNamespaces(module.getServerResourcesNamespaces());
             if (PlatHelper.getPhysicalSide().isClient()) {
-                ClientDynamicResourcesHandler.getInstance().getPack()
+                ClientDynamicResourcesHandler.getInstance().getPackResources()
                         .addNamespaces(module.getClientResourcesNamespaces());
             }
 
@@ -157,7 +157,7 @@ public abstract class EveryCompat {
         ECNetworking.init();
         ECRegistry.init();
 
-        ServerDynamicResourcesHandler.INSTANCE.register();
+        RegHelper.registerDynamicResourceProvider(ServerDynamicResourcesHandler.getInstance());
         RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
         PlatHelper.addCommonSetup(EveryCompat::setup);
 
@@ -203,7 +203,7 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
         }
         if (p > 33) {
-            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(CompatModule::bloatAmount));
+            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
             if (compatbloated.isPresent()) {
                 CompatModule bloated = compatbloated.get();
                 EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));

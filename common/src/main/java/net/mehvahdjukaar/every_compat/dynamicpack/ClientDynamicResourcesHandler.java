@@ -5,18 +5,17 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicClientResourceProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
 
-public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
+public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider {
 
     private static ClientDynamicResourcesHandler INSTANCE;
 
@@ -30,23 +29,20 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
     private boolean firstInit = false;
 
     public ClientDynamicResourcesHandler() {
-        super(new DynamicTexturePack(EveryCompat.res("generated_pack")));
-        //since we place chests textures in its namespace to use its renderer
-        if (PlatHelper.isModLoaded("quark")) getPack().addNamespaces("quark");
-
-        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
-    }
-
-    @Override
-    public Logger getLogger() {
-        return EveryCompat.LOGGER;
+        super(EveryCompat.res("dynamic_resources"), PackGenerationStrategy.CACHED);
     }
 
     @Override
     public void addDynamicTranslations(AfterLanguageLoadEvent lang) {
-        EveryCompat.forAllModules(m -> {
-            m.addTranslations(this, lang);
-        });
+        EveryCompat.forAllModules(m -> m.addTranslations(this, lang));
+    }
+
+    @Override
+    protected Collection<String> gatherSupportedNamespaces() {
+        return List.of(
+                "minecraft",
+                "quark" //REASON: since we place chests textures in its namespace to use its renderer
+        );
     }
 
     @Override
@@ -58,8 +54,6 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
         if (!ECConfigs.GENERATE_DYNAMIC_CLIENT.get()) return;
 
         PaletteStrategies.clearCache();
-
-        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
 
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));

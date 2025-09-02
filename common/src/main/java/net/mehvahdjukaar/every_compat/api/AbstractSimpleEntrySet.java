@@ -424,8 +424,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 this.textures.add(info);
                 if (info.keepNamespace()) {
                     //hack so we assure namespace has been added since it could be NOT Ec one
-                    ClientDynamicResourcesHandler.getInstance().dynamicPack
-                            .addNamespaces(info.texture().getNamespace());
+                    ClientDynamicResourcesHandler.getInstance().getPackResources().addNamespaces(info.texture().getNamespace());
                 }
             }
             return (BL) this;

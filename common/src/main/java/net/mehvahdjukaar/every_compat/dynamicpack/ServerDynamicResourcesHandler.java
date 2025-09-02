@@ -1,46 +1,53 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
-import com.google.common.base.Stopwatch;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicServerResourceProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.server.packs.repository.PackRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
-public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
+public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider {
 
-    public static final ServerDynamicResourcesHandler INSTANCE = new ServerDynamicResourcesHandler();
+    private Collection<String> dynamicDataList;
+    public static ServerDynamicResourcesHandler INSTANCE;
+
+    public static ServerDynamicResourcesHandler getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServerDynamicResourcesHandler();
+        }
+        return INSTANCE;
+    }
 
     public ServerDynamicResourcesHandler() {
-        super(new DynamicDataPack(EveryCompat.res("generated_pack")));
-
-        /// Ensure the tags to be loaded first time into the world, not second time
-        getPack().addNamespaces("minecraft");
-        getPack().addNamespaces("forge");
-        getPack().addNamespaces(EveryCompat.MOD_ID);
-
-        if (PlatHelper.isModLoaded("lolmcv")) {
-            getPack().addNamespaces("lieonstudio");
-        }
+        super(EveryCompat.res("dynamic_resources"), PackGenerationStrategy.CACHED);
     }
 
     @Override
-    public Logger getLogger() {
-        return EveryCompat.LOGGER;
+    protected Collection<String> gatherSupportedNamespaces() {
+        dynamicDataList = new ArrayList<>();
+        dynamicDataList.add("minecraft");
+        dynamicDataList.add(EveryCompat.MOD_ID);
+        /// Ensure the tags to be loaded first time into the world, not second time
+        addIfLoaded("lolmcv", "lieonstudio");
+
+        return dynamicDataList;
+    }
+
+    public void addIfLoaded(String modId, String namespace) {
+        if (PlatHelper.isModLoaded(modId)) dynamicDataList.add(namespace);
     }
 
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         if (!ECConfigs.GENERATE_DYNAMIC_SERVER.get()) return;
-
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
 
         List<ResourceGenTask> tasks = new ArrayList<>();
         EveryCompat.forAllModules(m -> m.addDynamicServerResources(tasks::add));
@@ -62,11 +69,9 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
         }
     }
 
-    /// Will be added to DynamicPack if the mod is loaded - it's for tags stuff
-    public void addModToDynamicPack(String modId) {
-        if (PlatHelper.isModLoaded(modId)) {
-            getPack().addNamespaces(modId);
-        }
+    @Override
+    protected PackRepository getPackRepository() {
+        return Objects.nonNull(PlatHelper.getCurrentServer()) ? PlatHelper.getCurrentServer().getPackRepository() : null;
     }
 
 }
