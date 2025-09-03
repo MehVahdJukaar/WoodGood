@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.moonlight.api.misc.IProgressTracker;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicServerResourceProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.GlobalCachedStrategy;
 import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.minecraft.server.packs.resources.ResourceManager;

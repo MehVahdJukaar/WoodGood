@@ -26,20 +26,18 @@ import java.util.function.Consumer;
 
 public class SimpleModule extends CompatModule {
 
-    private final String shortId;
     private final Map<String, EntrySet<?>> entries = new LinkedHashMap<>();
     private final Set<Class<? extends BlockType>> affectedTypes = new HashSet<>();
 
     protected int bloat = 0;
 
+    @Deprecated(forRemoval = true)
     public SimpleModule(String modId, String shortId) {
-        super(modId);
-        this.shortId = shortId;
+        super(modId, shortId, EveryCompat.MOD_ID);
     }
 
     public SimpleModule(String modId, String shortId, String myNamespace) {
-        super(modId, myNamespace);
-        this.shortId = shortId;
+        super(modId, shortId, myNamespace);
     }
 
     public ResourceLocation makeMyRes(String name) {
@@ -73,11 +71,6 @@ public class SimpleModule extends CompatModule {
 
     public EntrySet<?> getEntry(String name) {
         return entries.get(name);
-    }
-
-    @Override
-    public String shortenedId() {
-        return shortId;
     }
 
     @Override
@@ -129,11 +122,6 @@ public class SimpleModule extends CompatModule {
                 if (PlatHelper.isDev()) throw ex;
             }
         }));
-    }
-
-    @Override
-    public String toString() {
-        return "[module: " + modId + "]";
     }
 
     @Override

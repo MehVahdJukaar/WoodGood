@@ -4,14 +4,12 @@ import com.google.common.base.Suppliers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECRegistry;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Registry;
@@ -35,18 +33,21 @@ public abstract class CompatModule {
 
     protected final String modId;
     protected final String modName; //redable name
+    protected final String shortId;
 
     //EC or addon namespace
     private final String myNamespace;
 
+    @Deprecated(forRemoval = true)
     protected CompatModule(String modId, String myNamespace) {
+        this(modId, modId, myNamespace);
+    }
+
+    protected CompatModule(String modId, String shortId, String myNamespace) {
         this.modId = modId;
         this.modName = PlatHelper.getModName(modId);
         this.myNamespace = myNamespace;
-    }
-
-    protected CompatModule(String modId) {
-        this(modId, EveryCompat.MOD_ID);
+        this.shortId = shortId;
     }
 
     public String getModId() {
@@ -62,11 +63,13 @@ public abstract class CompatModule {
         return modName;
     }
 
-    public abstract String shortenedId();
+    public String shortenedId() {
+        return shortId;
+    }
 
     @Override
     public String toString() {
-        return "WoodGood: " + LangBuilder.getReadableName(modId) + " Module";
+        return "module[ " + getModName() + " @ " + getMyNamespace() + " ]";
     }
 
     public ResourceLocation modRes(String string) {

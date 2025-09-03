@@ -14,6 +14,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -139,8 +140,23 @@ public abstract class EveryCompat {
 
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
-            CompatModule module = moduleFactory.get().apply(modId);
-            addModule(module);
+            try {
+                CompatModule module = moduleFactory.get().apply(modId);
+                addModule(module);
+            }catch (Exception e){
+                ERRORED.add(new CompatModule(modId, modId, "unknown") {
+
+                    @Override
+                    public int bloatAmount() {
+                        return 0;
+                    }
+
+                    @Override
+                    public Collection<Class<? extends BlockType>> getAffectedTypes() {
+                        return List.of();
+                    }
+                });
+            }
         }
     }
 
