@@ -14,6 +14,7 @@ public class ECConfigs {
 
     public enum GenMode{
         NEVER,
+        RUN_ONCE,
         CACHED,
         CACHED_ZIPPED,
         ALWAYS;
@@ -21,6 +22,7 @@ public class ECConfigs {
         public PackGenerationStrategy pickStrategy(){
             return   switch (this){
                 case NEVER -> PackGenerationStrategy.NO_OP;
+                case RUN_ONCE -> PackGenerationStrategy.runOnce();
                 case CACHED -> PackGenerationStrategy.CACHED;
                 case CACHED_ZIPPED -> PackGenerationStrategy.CACHED_ZIPPED;
                 case ALWAYS -> PackGenerationStrategy.REGEN_ON_EVERY_RELOAD;
@@ -48,7 +50,13 @@ public class ECConfigs {
             ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.CLIENT);
 
             builder.push("general");
-            CLIENT_GENERATION_MODE = builder.comment("How assets are generated. If cached the cache will regenerate once any mod or pack changes")
+            CLIENT_GENERATION_MODE = builder.comment("""
+                            \nHow dynamic assets are generated. If cached the cache will regenerate once any mod or pack changes
+                            - NEVER: This mod will never attempt to generate the cache folder. The assets will be put in memory
+                            - RUN_ONCE: Will generate once in memory every time you launched. This mean it is only one time, that's it.
+                            - CACHED: create a CACHE folder via .minecraft/dynamic-resource-pack-cache
+                            - CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-resource-pack-cache
+                            - ALWAYS: regenerate on every time you launched Minecraft. Reload (F3 + T) is included, too""")
                     .define("dynamic_assets_generation_mode", GenMode.CACHED_ZIPPED);
             builder.pop();
 
@@ -61,8 +69,14 @@ public class ECConfigs {
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.COMMON);
 
         builder.push("general");
-        SERVER_GENERATION_MODE = builder.comment("How assets are generated. If cached the cache will regenerate once any mod or pack changes")
-                .define("dynamic_assets_generation_mode", GenMode.CACHED_ZIPPED);
+        SERVER_GENERATION_MODE = builder.comment("""
+                        \nHow dynamic assets are generated. If cached the cache will regenerate once any mod or pack changes
+                        - NEVER: This mod will never attempt to generate the cache folder. The assets will be put in memory
+                        - RUN_ONCE: Will generate once in memory every time you launched. This mean it is only one time, that's it.
+                        - CACHED: create a CACHE folder via .minecraft/dynamic-data-pack-cache
+                        - CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-data-pack-cache
+                        - ALWAYS: regenerate on every time you load the world. /reload is included, too""")
+                .define("server_assets_generation_mode", GenMode.CACHED_ZIPPED);
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .define("creative_tab", true);
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")
