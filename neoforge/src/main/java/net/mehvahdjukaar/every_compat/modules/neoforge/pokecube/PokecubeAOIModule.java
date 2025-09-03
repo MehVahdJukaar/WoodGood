@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.SlabBlock;
 import pokecube.core.init.ItemGenerator;
 import pokecube.legends.init.BlockInit;
 
-//SUPPORT: 4.0.2+ (ALPHA)
+//SUPPORT: 4.0.8+
 public class PokecubeAOIModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> distorticPlanks;
