@@ -2,7 +2,9 @@ package net.mehvahdjukaar.every_compat.mixins;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.mehvahdjukaar.every_compat.ECPlatStuff;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,9 +32,10 @@ public abstract class LootTablesHackMixin {
     public void everyComp$addFastDrops(BlockState state, LootParams.Builder params, CallbackInfoReturnable<List<ItemStack>> cir,
                                        @Local LootTable lootTable, @Local LootParams lootParams,
                                        @Local ResourceKey<LootTable> resId) {
-        if (lootTable == LootTable.EMPTY) {
+        if (lootTable == LootTable.EMPTY && EveryCompat.isMyIdOrAddon(Utils.getID(state.getBlock()).getNamespace())) {
             if (SimpleEntrySet.isSimpleDrop(state.getBlock())) {
-                cir.setReturnValue(ECPlatStuff.modifyLoot(resId.location(), List.of(this.asItem().getDefaultInstance()), lootParams));
+                cir.setReturnValue(ECPlatStuff.modifyLoot(resId.location(), List.of(this.asItem().getDefaultInstance()),
+                        lootParams));
             }
         }
     }
