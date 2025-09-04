@@ -38,7 +38,7 @@ side = "CLIENT"
 modId = "moonlight"
 type = "required"
 referralUrl = "https://www.curseforge.com/minecraft/mc-mods/selene"
-versionRange = "[1.21-2.23.0,]"
+versionRange = "[1.21-2.23.2,]"
 ordering = "NONE"
 side = "BOTH"
 

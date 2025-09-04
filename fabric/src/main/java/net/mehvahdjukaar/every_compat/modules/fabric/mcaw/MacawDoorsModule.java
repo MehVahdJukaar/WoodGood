@@ -1,13 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
-import net.kikoz.mcwdoors.init.BlockInit;
 import net.kikoz.mcwdoors.objects.JapaneseDoors;
 import net.kikoz.mcwdoors.objects.StableDoor;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -18,6 +14,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SoundType;
+
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
 
 //SUPPORT: v1.1.1+
 public class MacawDoorsModule extends SimpleModule {
@@ -45,11 +44,11 @@ public class MacawDoorsModule extends SimpleModule {
             WesternDoors;
 
     public MacawDoorsModule(String modId) {
-        super(modId, "mcd");
+        super(modId, "mcd", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("inv");
 
         WaffleDoors = SimpleEntrySet.builder(WoodType.class, "waffle_door",
-                        () -> BlockInit.OAK_WAFFLE_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_waffle_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -68,7 +67,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(WaffleDoors);
 
         BarkGlassDoors = SimpleEntrySet.builder(WoodType.class, "bark_glass_door",
-                        () -> BlockInit.OAK_BARK_GLASS_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_bark_glass_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -85,7 +84,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(BarkGlassDoors);
 
         BarnDoors = SimpleEntrySet.builder(WoodType.class, "barn_door",
-                        () -> BlockInit.OAK_BARN_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_barn_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -104,7 +103,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(BarnDoors);
 
         BarnGlassDoors = SimpleEntrySet.builder(WoodType.class, "barn_glass_door",
-                        () -> BlockInit.OAK_BARN_GLASS_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_barn_glass_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -123,7 +122,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(BarnGlassDoors);
 
         BeachDoors = SimpleEntrySet.builder(WoodType.class, "beach_door",
-                        () -> BlockInit.OAK_BEACH_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_beach_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -142,7 +141,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(BeachDoors);
 
         ClassicDoors = SimpleEntrySet.builder(WoodType.class, "classic_door",
-                        () -> BlockInit.SPRUCE_CLASSIC_DOOR, () -> VanillaWoodTypes.SPRUCE,
+                        getModBlock("spruce_classic_door"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -161,7 +160,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(ClassicDoors);
 
         CottageDoors = SimpleEntrySet.builder(WoodType.class, "cottage_door",
-                        () -> BlockInit.OAK_COTTAGE_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_cottage_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -180,7 +179,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(CottageDoors);
 
         FourPanelDoors = SimpleEntrySet.builder(WoodType.class, "four_panel_door",
-                        () -> BlockInit.OAK_FOUR_PANEL_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_four_panel_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -199,7 +198,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(FourPanelDoors);
 
         GlassDoors = SimpleEntrySet.builder(WoodType.class, "glass_door",
-                        () -> BlockInit.OAK_GLASS_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_glass_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -218,7 +217,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(GlassDoors);
 
         MeshDoors = SimpleEntrySet.builder(WoodType.class, "bamboo_door",
-                        () -> BlockInit.OAK_BAMBOO_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_bamboo_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -227,17 +226,22 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTag(ItemTags.DOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setTabKey(tab)
-                .addTextureM(modRes("block/oak_bamboo_door_lower"), EveryCompat.res("block/mcw/doors/oak_bamboo_door_lower_m"))
-                .addTextureM(modRes("block/oak_bamboo_door_upper"), EveryCompat.res("block/mcw/doors/oak_bamboo_door_upper_m"))
-                .addTextureM(modRes("item/oak_bamboo_door"), EveryCompat.res("item/mcw/doors/oak_bamboo_door_m"))
-                .createPaletteFromPlanks(this::darkerPalette)
+                .addTextureM(modRes("block/oak_bamboo_door_lower"),
+                        EveryCompat.res("block/mcw/doors/oak_bamboo_door_lower_m"),
+                        darkerPalette)
+                .addTextureM(modRes("block/oak_bamboo_door_upper"),
+                        EveryCompat.res("block/mcw/doors/oak_bamboo_door_upper_m"),
+                        darkerPalette)
+                .addTextureM(modRes("item/oak_bamboo_door"),
+                        EveryCompat.res("item/mcw/doors/oak_bamboo_door_m"),
+                        darkerPalette)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
         this.addEntry(MeshDoors);
 
         ModernDoors = SimpleEntrySet.builder(WoodType.class, "modern_door",
-                        () -> BlockInit.OAK_MODERN_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_modern_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -256,7 +260,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(ModernDoors);
 
         MysticDoors = SimpleEntrySet.builder(WoodType.class, "mystic_door",
-                        () -> BlockInit.OAK_MYSTIC_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_mystic_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -275,7 +279,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(MysticDoors);
 
         NetherDoors = SimpleEntrySet.builder(WoodType.class, "nether_door",
-                        () -> BlockInit.OAK_NETHER_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_nether_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -294,7 +298,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(NetherDoors);
 
         PaperDoors = SimpleEntrySet.builder(WoodType.class, "paper_door",
-                        () -> BlockInit.OAK_PAPER_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_paper_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -313,7 +317,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(PaperDoors);
 
         ShojiDoors = SimpleEntrySet.builder(WoodType.class, "japanese_door",
-                        () -> BlockInit.OAK_JAPANESE_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_japanese_door"), () -> VanillaWoodTypes.OAK,
                         w -> new JapaneseDoors(Utils.copyPropertySafe(w.planks).noOcclusion().sound(SoundType.SCAFFOLDING),
                                 w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -332,7 +336,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(ShojiDoors);
 
         ShojiWholeDoors = SimpleEntrySet.builder(WoodType.class, "japanese2_door",
-                        () -> BlockInit.OAK_JAPANESE2_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_japanese2_door"), () -> VanillaWoodTypes.OAK,
                         w -> new JapaneseDoors(Utils.copyPropertySafe(w.planks).noOcclusion().sound(SoundType.SCAFFOLDING),
                                 w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -351,7 +355,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(ShojiWholeDoors);
 
         StableDoors = SimpleEntrySet.builder(WoodType.class, "stable_door",
-                        () -> BlockInit.OAK_STABLE_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_stable_door"), () -> VanillaWoodTypes.OAK,
                         w -> new StableDoor(Utils.copyPropertySafe(w.planks).noOcclusion(),
                                 w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -371,7 +375,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(StableDoors);
 
         StableHeadDoors = SimpleEntrySet.builder(WoodType.class, "stable_head_door",
-                        () -> BlockInit.OAK_STABLE_HEAD_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_stable_head_door"), () -> VanillaWoodTypes.OAK,
                         w -> new StableDoor(Utils.copyPropertySafe(w.planks).noOcclusion(),
                                 w.toVanillaOrOak().setType()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -391,7 +395,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(StableHeadDoors);
 
         SwampDoors = SimpleEntrySet.builder(WoodType.class, "swamp_door",
-                        () -> BlockInit.OAK_SWAMP_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_swamp_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -403,15 +407,20 @@ public class MacawDoorsModule extends SimpleModule {
                 .copyParentDrop()
                 .addRecipe(modRes("oak_swamp_door"))
                 .setRenderType(RenderLayer.CUTOUT)
-                .createPaletteFromPlanks(this::darkerPalette)
-                .addTextureM(EveryCompat.res("block/oak_swamp_door_lower"), EveryCompat.res("block/mcw/doors/oak_swamp_door_lower_m"))
-                .addTextureM(EveryCompat.res("block/oak_swamp_door_upper"), EveryCompat.res("block/mcw/doors/oak_swamp_door_upper_m"))
-                .addTextureM(modRes("item/oak_swamp_door"), EveryCompat.res("item/mcw/doors/oak_swamp_door_m"))
+                .addTextureM(modRes("block/oak_swamp_door_lower"),
+                        EveryCompat.res("block/mcw/doors/oak_swamp_door_lower_m"),
+                        darkerPalette)
+                .addTextureM(modRes("block/oak_swamp_door_upper"),
+                        EveryCompat.res("block/mcw/doors/oak_swamp_door_upper_m"),
+                        darkerPalette)
+                .addTextureM(modRes("item/oak_swamp_door"),
+                        EveryCompat.res("item/mcw/doors/oak_swamp_door_m"),
+                        darkerPalette)
                 .build();
         this.addEntry(SwampDoors);
 
         TropicalDoors = SimpleEntrySet.builder(WoodType.class, "tropical_door",
-                        () -> BlockInit.OAK_TROPICAL_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_tropical_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -430,7 +439,7 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(TropicalDoors);
 
         WesternDoors = SimpleEntrySet.builder(WoodType.class, "western_door",
-                        () -> BlockInit.OAK_WESTERN_DOOR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_western_door"), () -> VanillaWoodTypes.OAK,
                         w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -449,10 +458,12 @@ public class MacawDoorsModule extends SimpleModule {
         this.addEntry(WesternDoors);
     }
 
-    private void darkerPalette(Palette p) {
-        p.add(p.increaseInner());
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
-    }
+    public static final PaletteStrategy darkerPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, PLANKS, null, p -> {
+                p.add(p.increaseInner());
+                p.remove(p.getDarkest());
+                p.remove(p.getLightest());
+            })
+    );
 
 }

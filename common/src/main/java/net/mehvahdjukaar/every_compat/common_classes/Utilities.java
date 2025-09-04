@@ -24,39 +24,34 @@ public class Utilities {
             return Objects.nonNull(entrySet.blocks.get(blockType));
     }
 
-    public static BlockBehaviour.Properties copyChildrenPropertySafe(String childType, BlockType blockType) {
-        Block block = blockType.getBlockOfThis(childType);
+    public static Block getChildrenBlockSafe(String childkey, BlockType blockType) {
+        Block block = blockType.getBlockOfThis(childkey);
         Block blockAlt = null;
-        if (childType.contains("_")) {
-            String[] split = childType.split("_");
+        if (childkey.contains("_")) {
+            String[] split = childkey.split("_");
             blockAlt = blockType.getBlockOfThis(split[split.length - 1]);
         }
 
-        if (Objects.nonNull(block)) return Utils.copyPropertySafe(block);
-        else if (Objects.nonNull(blockAlt)) return Utils.copyPropertySafe(blockAlt);
-        else return Utils.copyPropertySafe((Block) blockType.mainChild());
+        if (Objects.nonNull(block)) return block;
+        else if (Objects.nonNull(blockAlt)) return blockAlt;
+        else return (Block) blockType.mainChild();
+    }
+
+    public static BlockBehaviour.Properties copyChildrenPropertySafe(String childKey, BlockType blockType) {
+        return Utils.copyPropertySafe(getChildrenBlockSafe(childKey, blockType));
     }
 
     /**
-     * @param types stairs, slab, or other blockTypes can be used
-     * @param blockType WoodType, LeavesType, or StoneType
+     * @param childkey stairs, slab, or other childkeys can be used
+     * @param blockType WoodType, LeavesType, or other BlockTypes
      */
-    public static BlockState copyBlockStateSafe(String types, BlockType blockType) {
-        Block block = blockType.getBlockOfThis(types);
-        Block blockAlt = null;
-        if (types.contains("_")) {
-            String[] split = types.split("_");
-            blockAlt = blockType.getBlockOfThis(split[1]);
-        }
-
-        if (Objects.nonNull(block)) return block.defaultBlockState();
-        else if (Objects.nonNull(blockAlt)) return blockAlt.defaultBlockState();
-        else return ((Block) blockType.mainChild()).defaultBlockState();
+    public static BlockState copyBlockStateSafe(String childkey, BlockType blockType) {
+        return getChildrenBlockSafe(childkey, blockType).defaultBlockState();
     }
 
     /**
      * @param blocks SimpleEntrySet.blocks
-     * @param blockType WoodType, LeavesType, or StoneType
+     * @param blockType WoodType, LeavesType, or other BlockTypes
      */
     public static BlockState copyBlockStateSafe(Map<?, Block> blocks, BlockType blockType) {
         if (Objects.nonNull(blocks.get(blockType))) return blocks.get(blockType).defaultBlockState();

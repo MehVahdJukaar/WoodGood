@@ -32,9 +32,10 @@ public abstract class LootTablesHackMixin {
     public void everyComp$addFastDrops(BlockState state, LootParams.Builder params, CallbackInfoReturnable<List<ItemStack>> cir,
                                        @Local LootTable lootTable, @Local LootParams lootParams,
                                        @Local ResourceKey<LootTable> resId) {
-        if (lootTable == LootTable.EMPTY && Utils.getID(state.getBlock()).getNamespace().equals(EveryCompat.MOD_ID)) {
+        if (lootTable == LootTable.EMPTY && EveryCompat.isMyIdOrAddon(Utils.getID(state.getBlock()).getNamespace())) {
             if (SimpleEntrySet.isSimpleDrop(state.getBlock())) {
-                cir.setReturnValue(ECPlatStuff.modifyLoot(resId.location(), List.of(this.asItem().getDefaultInstance()), lootParams));
+                cir.setReturnValue(ECPlatStuff.modifyLoot(resId.location(), List.of(this.asItem().getDefaultInstance()),
+                        lootParams));
             }
         }
     }

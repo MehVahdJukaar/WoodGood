@@ -14,7 +14,6 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -143,7 +142,7 @@ public abstract class EveryCompat {
             try {
                 CompatModule module = moduleFactory.get().apply(modId);
                 addModule(module);
-            }catch (Exception e){
+            } catch (Exception e){
                 ERRORED.add(new CompatModule(modId, modId, "unknown") {
 
                     @Override
@@ -158,6 +157,13 @@ public abstract class EveryCompat {
                 });
             }
         }
+    }
+
+    @SafeVarargs
+    public static void addMultipleIfLoaded(String modId, Supplier<Function<String, CompatModule>>... moduleFactories) {
+            for (var moduleFactory : moduleFactories) {
+                addIfLoaded(modId, moduleFactory);
+            }
     }
 
     public static Collection<CompatMod> getCompatMods() {

@@ -1,7 +1,6 @@
-package net.mehvahdjukaar.every_compat.api.example;
+package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
