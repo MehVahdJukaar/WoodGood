@@ -24,13 +24,13 @@ import pokecube.legends.recipes.LegendsDistorticRecipeImpl;
 import java.lang.reflect.Field;
 
 //SUPPORT: 4.0.8+
-public class PokecubeAOIModule extends SimpleModule {
+public class PokecubeAIOModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> distortic_planks;
     public final SimpleEntrySet<WoodType, Block> distortic_stairs;
     public final SimpleEntrySet<WoodType, Block> distortic_slab;
 
-    public PokecubeAOIModule(String modId) {
+    public PokecubeAIOModule(String modId) {
         super(modId, "pcl", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("building_blocks_tab");
 

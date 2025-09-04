@@ -29,7 +29,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.more.MoreCraftingTablesFo
 import net.mehvahdjukaar.every_compat.modules.neoforge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeAOIModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeAIOModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.RegionsUnexploredModule;
@@ -43,25 +43,15 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.workshop.WorkshopForHands
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.platform.neoforge.ClientHelperImpl;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
-import net.neoforged.neoforgespi.language.IModInfo;
-import net.neoforged.neoforgespi.locating.IModFile;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
-import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
 
@@ -123,7 +113,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
         addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
         addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
-        addIfLoaded("pokecube_legends", () -> PokecubeAOIModule::new);
+        addIfLoaded("pokecube_legends", () -> PokecubeAIOModule::new);
         addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
         addIfLoaded("redeco", () -> ReDecoModule::new);
         addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
