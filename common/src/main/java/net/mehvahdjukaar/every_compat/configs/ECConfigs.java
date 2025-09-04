@@ -53,10 +53,10 @@ public class ECConfigs {
             CLIENT_GENERATION_MODE = builder.comment("""
                             \nHow dynamic assets are generated. If cached the cache will regenerate once any mod or pack changes
                             - NEVER: This mod will never attempt to generate the cache folder. The assets will be put in memory
-                            - RUN_ONCE: Will generate once in memory every time you launched. This mean it is only one time, that's it.
+                            - RUN_ONCE: Will generate once & the assets will be stored in memory every time you launched.
                             - CACHED: create a CACHE folder via .minecraft/dynamic-resource-pack-cache
                             - CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-resource-pack-cache
-                            - ALWAYS: regenerate on every time you launched Minecraft. Reload (F3 + T) is included, too""")
+                            - ALWAYS: Will always generate the assets & will be stored in memory. There will be no cache folder""")
                     .define("dynamic_assets_generation_mode", GenMode.CACHED_ZIPPED);
             builder.pop();
 
@@ -72,10 +72,10 @@ public class ECConfigs {
         SERVER_GENERATION_MODE = builder.comment("""
                         \nHow dynamic assets are generated. If cached the cache will regenerate once any mod or pack changes
                         - NEVER: This mod will never attempt to generate the cache folder. The assets will be put in memory
-                        - RUN_ONCE: Will generate once in memory every time you launched. This mean it is only one time, that's it.
+                        - RUN_ONCE: Will generate once & the assets will be stored in memory every time you launched.
                         - CACHED: create a CACHE folder via .minecraft/dynamic-data-pack-cache
                         - CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-data-pack-cache
-                        - ALWAYS: regenerate on every time you load the world. /reload is included, too""")
+                        - ALWAYS: Will always generate the assets & will be stored in memory. There will be no cache folder""")
                 .define("server_assets_generation_mode", GenMode.CACHED_ZIPPED);
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .define("creative_tab", true);
