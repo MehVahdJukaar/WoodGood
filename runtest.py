@@ -1,0 +1,65 @@
+import subprocess
+import re
+from datetime import datetime
+from pathlib import Path
+
+# === HARD-CODED CONFIGURATION ===
+NUM_RUNS = 5
+LOG_FILE_PATH = "load_times.txt"
+
+# Path to your project root that contains gradlew.bat
+PROJECT_DIR = r"C:\Users\Matteo\IdeaProjects\WoodGood"
+
+# On Windows use gradlew.bat
+COMMAND = ["gradlew.bat", ":neoforge:runClient"]
+# If you prefer absolute path:
+# COMMAND = [str(Path(PROJECT_DIR, "gradlew.bat")), ":neoforge:runClient"]
+# =================================
+
+PATTERN = re.compile(r"GAME LOADED IN:\s*([\d.]+)\s*s", re.IGNORECASE)
+
+def run_once(cmd, cwd: Path):
+    process = subprocess.run(
+        cmd,
+        cwd=cwd,                       # run in project root
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True
+    )
+
+    output = process.stdout or ""
+    last_match = None
+    for line in output.splitlines():
+        m = PATTERN.search(line)
+        if m:
+            last_match = m.group(1)  # numeric part
+
+    return process.returncode, output, last_match
+
+def append_separator(log_path: Path, cmd_display: str, times: int):
+    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    sep = "=" * 72
+    with log_path.open("a", encoding="utf-8") as f:
+        f.write(f"{sep}\n[{ts}] New run: times={times} cmd={cmd_display}\n{sep}\n")
+
+def append_entry(log_path: Path, idx: int, load_time: str | None, exit_code: int):
+    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    status = "OK" if (exit_code == 0 and load_time is not None) else f"ERR({exit_code})"
+    value = load_time if load_time is not None else "N/A"
+    with log_path.open("a", encoding="utf-8") as f:
+        f.write(f"[{ts}] #{idx:03d} GAME LOADED IN: {value} s  [{status}]\n")
+
+def main():
+    log_path = Path(PROJECT_DIR) / LOG_FILE_PATH
+    cwd = Path(PROJECT_DIR)
+    cmd_display = " ".join(COMMAND)
+
+    append_separator(log_path, cmd_display, NUM_RUNS)
+
+    for i in range(1, NUM_RUNS + 1):
+        print(f">>> Run #{i}")
+        exit_code, output, load_time = run_once(COMMAND, cwd)
+        append_entry(log_path, i, load_time, exit_code)
+
+if __name__ == "__main__":
+    main()

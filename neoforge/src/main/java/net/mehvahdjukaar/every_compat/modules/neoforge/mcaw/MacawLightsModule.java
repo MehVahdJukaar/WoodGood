@@ -87,7 +87,8 @@ public class MacawLightsModule extends SimpleModule {
                         )
                 )
                 .requiresChildren(SLAB) //REASON: recipes
-                .addTextureM(modRes("block/oak_ceiling_fan"), EveryCompat.res("block/mcw/lights/ceiling_fan_m"))
+                .addTextureM(modRes("block/oak_ceiling_fan"),
+                        EveryCompat.res("block/mcw/lights/ceiling_fan_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()

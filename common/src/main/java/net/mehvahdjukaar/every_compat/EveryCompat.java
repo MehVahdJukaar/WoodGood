@@ -220,9 +220,9 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
         }
         if (p > 33) {
-            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
-            if (compatbloated.isPresent()) {
-                CompatModule bloated = compatbloated.get();
+            Optional<CompatModule> compatBloatAmount = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
+            if (compatBloatAmount.isPresent()) {
+                CompatModule bloated = compatBloatAmount.get();
                 EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
                 //no freaking clue why this was returned as null once
                 EveryCompat.LOGGER.error("Every Compat registered children make up more than one third of your registered children, taking up memory and load time.");

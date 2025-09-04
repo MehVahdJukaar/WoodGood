@@ -4,6 +4,7 @@
   "package": "net.mehvahdjukaar.every_compat.mixins",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "MinecraftMixin"
   ],
   "mixins": [
     "LootTablesHackMixin"
