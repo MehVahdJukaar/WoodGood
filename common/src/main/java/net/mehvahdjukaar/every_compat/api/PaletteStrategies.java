@@ -32,7 +32,7 @@ public class PaletteStrategies {
         cachedStrategies.forEach(c -> c.cache.clear());
     }
 
-    public static PaletteStrategy registerCached(PaletteStrategy factory) {
+    public synchronized static PaletteStrategy registerCached(PaletteStrategy factory) {
         Cached c = new Cached(factory);
         cachedStrategies.add(c);
         return c;
