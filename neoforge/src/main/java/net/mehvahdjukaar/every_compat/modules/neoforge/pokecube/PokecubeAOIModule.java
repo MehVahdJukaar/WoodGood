@@ -1,32 +1,40 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.pokecube;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.resources.RecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import pokecube.core.init.ItemGenerator;
 import pokecube.legends.init.BlockInit;
+import pokecube.legends.recipes.LegendsDistorticRecipeImpl;
+
+import java.lang.reflect.Field;
 
 //SUPPORT: 4.0.8+
 public class PokecubeAOIModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> distorticPlanks;
-    public final SimpleEntrySet<WoodType, Block> distorticStairs;
-    public final SimpleEntrySet<WoodType, Block> DISTORTICSLABS;
+    public final SimpleEntrySet<WoodType, Block> distortic_planks;
+    public final SimpleEntrySet<WoodType, Block> distortic_stairs;
+    public final SimpleEntrySet<WoodType, Block> distortic_slab;
 
     public PokecubeAOIModule(String modId) {
-        super(modId, "pcl");
+        super(modId, "pcl", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("building_blocks_tab");
-//        TemplateRecipeManager.registerTemplate(modRes("legends_recipe"), MirrorRecipeTemplate::new);
 
-        distorticPlanks = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
+        distortic_planks = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
                         BlockInit.DISTORTIC_OAK_PLANKS, () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
@@ -39,148 +47,79 @@ public class PokecubeAOIModule extends SimpleModule {
                 .setTabKey(tab)
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_planks"))
                 .build();
-        this.addEntry(distorticPlanks);
+        this.addEntry(distortic_planks);
 
-        distorticStairs = SimpleEntrySet.builder(WoodType.class, "stairs", "distortic",
+        distortic_stairs = SimpleEntrySet.builder(WoodType.class, "stairs", "distortic",
                         BlockInit.DISTORTIC_OAK_STAIRS, () -> VanillaWoodTypes.OAK,
                         w -> new ItemGenerator.GenericStairs(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks))
                 )
-                .addTexture(modRes("block/distortic_oak_planks"))
+                .requiresFromMap(distortic_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_STAIRS, Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_stairs"))
                 .build();
-        this.addEntry(distorticStairs);
+        this.addEntry(distortic_stairs);
 
-        DISTORTICSLABS = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
+        distortic_slab = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
                         BlockInit.DISTORTIC_OAK_SLAB, () -> VanillaWoodTypes.OAK,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addTexture(modRes("block/distortic_oak_planks"))
+                .requiresFromMap(distortic_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_SLABS, Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_slab"))
                 .build();
-        this.addEntry(DISTORTICSLABS);
+        this.addEntry(distortic_slab);
     }
 
-    /*public static class MirrorFinishedRecipe implements FinishedRecipe {
+    @Override
+    public void onModSetup() {
+        super.onModSetup();
 
-        private final Ingredient ingredient;
-        private final ItemStack result;
-        private final Block block;
-        private final ResourceLocation id;
-        public final ResourceKey<Level> dimId;
-        private final Advancement.Builder advancement;
-        protected final ResourceLocation advancementId;
-//        public final String group;
+        RecipeTemplate.register(LegendsDistorticRecipeImpl.class, (old, from, to) -> {
 
+            LegendsDistorticRecipeImpl modifiedRecipe = null;
+            ItemStack originalResult = old.getResultItem(RegistryAccess.EMPTY);
+            ItemStack newResult = RecipeTemplate.convertItemStack(originalResult, from, to);
+            ResourceLocation dimId = old.dimId.location();
 
-        public MirrorFinishedRecipe(ResourceLocation id, Ingredient ingredient, ItemStack result, Block block, Advancement.Builder advancement, ResourceLocation advancementId, ResourceLocation dimId) {
-            this.id = id;
-            this.ingredient = ingredient;
-            this.result = result;
-            this.block = block;
-            this.dimId = ResourceKey.create(Registries.DIMENSION, dimId);
-            this.advancement = advancement;
-            this.advancementId = advancementId;
-//            this.group = group;
-        }
+            try {
+                Ingredient inputObj = Ingredient.of(Items.OAK_PLANKS);
+                ResourceLocation dummyblock = modRes("distortic_mirror");
 
+                LegendsDistorticRecipeImpl instance = new LegendsDistorticRecipeImpl(inputObj, newResult, dummyblock, dimId);
 
-        public void serializeRecipeData(JsonObject json) {
-//            if (!this.group.isEmpty()) {
-//                json.addProperty("group", this.group);
-//            }
-            json.addProperty("id", this.id.toString());
+                Field inputField = LegendsDistorticRecipeImpl.class.getDeclaredField("input");
+                inputField.setAccessible(true);
+                Ingredient input = (Ingredient) inputField.get(instance);
 
-            json.add("ingredient", ingredient.toJson());
+                ItemStack newIngredient = RecipeTemplate.convertItemStack(input.getItems()[0], from, to);
+                Ingredient newInput = Ingredient.of(newIngredient);
 
-            json.addProperty("result", Utils.getID(result.getItem()).toString());
-            json.addProperty("count", result.getCount());
-        }
+                Field blockField = LegendsDistorticRecipeImpl.class.getDeclaredField("block");
+                blockField.setAccessible(true);
+                ResourceLocation blockId = Utils.getID((Block) blockField.get(instance));
 
-        @Override
-        public @NotNull ResourceLocation getId() {
-            return id;
-        }
+                modifiedRecipe = new LegendsDistorticRecipeImpl(newInput, newResult, blockId,
+                        dimId);
 
-        @Override
-        public @NotNull RecipeSerializer<?> getType() {
-            return LegendsDistorticRecipeSerializer.SERIALIZER_DISTORTIC;
-        }
-
-        @Nullable
-        @Override
-        public JsonObject serializeAdvancement() {
-            return advancement.serializeToJson();
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return advancementId;
-        }
-    }
-
-    public class MirrorRecipeTemplate implements IRecipeTemplate<MirrorFinishedRecipe> {
-
-        private final List<Object> conditions = new ArrayList<>();
-
-        public final Block block;
-        public final Ingredient input;
-        public final ItemStack result;
-        public final JsonElement inputElement;
-        public final ResourceLocation blockId;
-        public final ResourceLocation dimID;
-        public final String group;
-
-        public MirrorRecipeTemplate(JsonObject json) {
-            var g = json.get("group");
-            this.group = g == null ? "" : g.getAsString();
-
-            this.inputElement = GsonHelper.isArrayNode(json, "input") ? GsonHelper.getAsJsonArray(json, "input") : GsonHelper.getAsJsonObject(json, "input");
-            this.result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
-            this.blockId = ResourceLocation.parse(GsonHelper.getAsString(json, "blockId"));
-            this.dimID = ResourceLocation.parse(GsonHelper.getAsString(json, "dimId"));
-            this.block = ForgeRegistries.BLOCKS.getValue(blockId);
-            this.input = Ingredient.fromJson((JsonElement)inputElement);
-        }
-
-        @Override
-        public <T extends BlockType> MirrorFinishedRecipe createSimilar(
-                T originalMat, T destinationMat, Item unlockItem, String id) {
-            ItemLike newRes = BlockType.changeItemType(this.result.getItem(), originalMat, destinationMat);
-            if (newRes == null) {
-                throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
-                        this.result, originalMat, destinationMat));
+            } catch (NoSuchFieldException e) {
+                EveryCompat.LOGGER.error("Failed to get Field: ", e);
+            } catch (IllegalAccessException e) {
+                EveryCompat.LOGGER.error("Failed to access the recipe class: ", e);
             }
-            ItemStack newResult = new ItemStack(newRes);
-            if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
-            if (id == null) id = Utils.getID(newRes.asItem()).toString();
 
-            Ingredient newIng = ResourcesUtils.convertIngredient(this.input, originalMat, destinationMat);
+            if (newResult == null || modifiedRecipe == null) {
+                throw new UnsupportedOperationException("Failed to convert recipe result");
+            } else {
+                return modifiedRecipe;
+            }
 
-            Advancement.Builder advancement = Advancement.Builder.advancement();
+        });
+    }
 
-            advancement.addCriterion("has_planks", InventoryChangeTrigger.TriggerInstance.hasItems(unlockItem));
-            var res = ResourceLocation.parse(id);
-            return new MirrorFinishedRecipe(res, newIng, newResult, block, advancement,
-                    modRes("recipes/" + "pokecube_legends/" + "distortic_planks" + "/" + res.getPath()), dimID);
-        }
-
-        @Override
-        public void addCondition(Object condition) {
-            this.conditions.add(condition);
-        }
-
-        @Override
-        public List<Object> getConditions() {
-            return conditions;
-        }
-    }*/
 }
