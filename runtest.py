@@ -6,7 +6,7 @@ from pathlib import Path
 # === HARD-CODED CONFIGURATION ===
 NUM_RUNS = 5
 LOG_FILE_PATH = "load_times.txt"
-PROJECT_DIR = r"C:\Users\Matteo\IdeaProjects\WoodGood"
+PROJECT_DIR = "./"
 COMMAND = ["gradlew.bat", ":neoforge:runClient"]
 # =================================
 
