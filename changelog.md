@@ -8,7 +8,7 @@
 
 <div style="text-align: left;">
 
-*   (COMMON) = FORGE & FABRIC
+*   (C) = FORGE & FABRIC
 *   (FB): FABRIC
 *   (NF): NEOFORGE
 *   (IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
@@ -19,6 +19,14 @@
 </div>
 
 </div>
+
+### UPDATED: 
+- **EveryCompat** (C): Fixed the blocks from **StoneZone** not being dropped - [#143](https://github.com/MehVahdJukaar/StoneZone/issues/143)
+- **Regions Unexplored** (C): Forgot to add the mask textures from 1.20.1 - [#1042](https://github.com/MehVahdJukaar/WoodGood/issues/1042)
+- **Boatload (Abnormal)** (F): Added custom textures to improve the items' texture - @qwerty97475 (from Discord)
+- **Storage Drawers** (C): Added the missing tag, `#storagedrawers:trim` to trim blocks - [#1029](https://github.com/MehVahdJukaar/WoodGood/issues/1029)
+
+---
 
 ## v2.11.1
 
