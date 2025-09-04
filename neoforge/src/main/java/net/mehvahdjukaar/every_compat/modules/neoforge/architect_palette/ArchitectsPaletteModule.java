@@ -1,6 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.architect_palette;
 
 import architectspalette.content.blocks.RailingBlock;
+import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
@@ -17,6 +20,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.WallBlock;
 
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
+
 //SUPPORT v1.3.6+
 public class ArchitectsPaletteModule extends SimpleModule {
 
@@ -27,7 +33,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> boardWalls;
 
     public ArchitectsPaletteModule(String modId) {
-        super(modId, "ap");
+        super(modId, "ap", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
@@ -45,29 +51,8 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         getModBlock("oak_boards"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
-                .createPaletteFromPlanks(p -> {
-
-                    while (p.size() > 7) {
-                        p.remove(p.getDarkest());
-                    }
-
-                    var col = p.getColorAtSlope(0.5f);
-                    int ind = p.indexOf(col);
-                    var lab = col.lab();
-                    PaletteColor newC = new PaletteColor(lab.withLuminance(lab.luminance() * 1.03f));
-                    float dl = p.get(ind + 1).luminance() - newC.luminance();
-                    p.set(ind, newC);
-                    PaletteColor before = p.get(ind - 1);
-                    //lighten the other main plank mask if its too dark
-                    if (newC.luminance() - before.luminance() > dl * 1.5) {
-                        PaletteColor newBefore = new PaletteColor(before.lab().withLuminance(
-                                (before.luminance() * 0.6f + (newC.luminance() + dl) * 0.4f)));
-                        p.set(ind - 1, newBefore);
-                    }
-
-                })
-                .addTexture(modRes("block/oak_boards"))
-                .addTexture(modRes("block/oak_boards_odd"))
+                .addTexture(modRes("block/oak_boards"), customPalette)
+                .addTexture(modRes("block/oak_boards_odd"), customPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -118,5 +103,29 @@ public class ArchitectsPaletteModule extends SimpleModule {
         this.addEntry(boardWalls);
 
     }
+
+    public static final PaletteStrategy customPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, PLANKS, null, p -> {
+
+                while (p.size() > 7) {
+                    p.remove(p.getDarkest());
+                }
+
+                var col = p.getColorAtSlope(0.5f);
+                int ind = p.indexOf(col);
+                var lab = col.lab();
+                PaletteColor newC = new PaletteColor(lab.withLuminance(lab.luminance() * 1.03f));
+                float dl = p.get(ind + 1).luminance() - newC.luminance();
+                p.set(ind, newC);
+                PaletteColor before = p.get(ind - 1);
+                //lighten the other main plank mask if its too dark
+                if (newC.luminance() - before.luminance() > dl * 1.5) {
+                    PaletteColor newBefore = new PaletteColor(before.lab().withLuminance(
+                            (before.luminance() * 0.6f + (newC.luminance() + dl) * 0.4f)));
+                    p.set(ind - 1, newBefore);
+                }
+
+            })
+    );
 
 }

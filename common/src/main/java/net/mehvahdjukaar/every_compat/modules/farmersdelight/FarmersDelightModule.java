@@ -2,18 +2,13 @@ package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.api.TabAddMode;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -28,9 +23,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 // SUPPORT: FABRIC-v2.2.7+ | NEOFORGE-v1.2.6+
@@ -39,41 +34,46 @@ public class FarmersDelightModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> cabinets;
 
     public FarmersDelightModule(String modId) {
-        super(modId, "fd");
+        super(modId, "fd", EveryCompat.MOD_ID);
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,
                         w -> new CabinetBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .requiresChildren(TRAPDOOR, SLAB) //REASON: recipes
+                .addTile(getModTile("cabinet"))
+                .addTextureM(modRes("block/oak_cabinet_front"),
+                        EveryCompat.res("block/fd/oak_cabinet_front_m"),
+                        customPalette)
+                .addTexture(modRes("block/oak_cabinet_side"), customPalette)
+                .addTexture(modRes("block/oak_cabinet_top"), customPalette)
+                .addTexture(modRes("block/oak_cabinet_front_open"), customPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinets/wooden"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .defaultRecipe()
-                .addTile(getModTile("cabinet"))
                 .setTabKey(modRes( "farmersdelight"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
-                .createPaletteFromPlanks(p -> {
-                    p.reduceDown();
-                    if (p.size() < 9) {
-                        while (p.size() <= 9) {
-                            p.increaseInner();
-                        }
-                    }
-                    else {
-                        while (p.size() >= 9) {
-                            p.reduce();
-                        }
-                    }
-                })
-                .addTextureM(modRes("block/oak_cabinet_front"), EveryCompat.res("block/fd/oak_cabinet_front_m"))
-                .addTexture(modRes("block/oak_cabinet_side"))
-                .addTexture(modRes("block/oak_cabinet_top"))
-                .addTexture(modRes("block/oak_cabinet_front_open"))
+                .defaultRecipe()
                 .addCustomItem((w, block, p) -> new FuelBlockItem(block, ModItems.basicItem(), 300))
                 .build();
         this.addEntry(cabinets);
     }
+
+    public static final PaletteStrategy customPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, PLANKS, null, p -> {
+                p.reduceDown();
+                if (p.size() < 9) {
+                    while (p.size() <= 9) {
+                        p.increaseInner();
+                    }
+                }
+                else {
+                    while (p.size() >= 9) {
+                        p.reduce();
+                    }
+                }
+            })
+    );
 
     @Override
     // RECIPES
