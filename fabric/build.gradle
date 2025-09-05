@@ -125,7 +125,7 @@ dependencies {
     }
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("curse.maven:emi-580555:5872512") // v1.1.18
+    modRuntimeOnly("curse.maven:emi-580555:6420930") // v1.1.22
     modRuntimeOnly("curse.maven:jade-324717:5884237") // v15.8.3
 //    modRuntimeOnly("curse.maven:worldedit-225608:5830452") // required loom 1.7.410
 
@@ -169,6 +169,7 @@ dependencies {
 //!! =================================================== IMPORTS ==================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162192")
 //    modRuntimeOnly("curse.maven:backpacked-352835:5852971") //!! BETA
 //    modRuntimeOnly("curse.maven:blockus-312289:6761560")
@@ -215,7 +216,6 @@ dependencies {
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802484")
 
         //+ GENERAL
-    modCompileOnly("curse.maven:architects-palette-fabric-487364:3845046") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:beautify-refabricated-809311:5405529") //!! 1.20.1
     modCompileOnly("curse.maven:bewitchment-394915:5205373") //!! 1.20.1
     modCompileOnly("curse.maven:building-but-better-989479:5362379") //!! 1.20.1
@@ -232,7 +232,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:6273884") // Forge-Config-Api-Port
+    modCompileOnly("curse.maven:regions-unexplored-659110:6273884") // Forge-Config-API-Port
 
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1") // Frozen-Lib
