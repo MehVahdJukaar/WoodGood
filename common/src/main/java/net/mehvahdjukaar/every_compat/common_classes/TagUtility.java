@@ -191,8 +191,8 @@ public class TagUtility {
         return platformTag(tagPath, tagPath);
     }
 
-    public static ResourceLocation platformTag(String fabric, String forge) {
-        return PlatHelper.getPlatform().isFabric() ? fabricTag(fabric) : neoforgeTag(forge);
+    public static ResourceLocation platformTag(String fabric, String neoforge) {
+        return PlatHelper.getPlatform().isFabric() ? fabricTag(fabric) : neoforgeTag(neoforge);
     }
 
     /// @return c:tagPath
