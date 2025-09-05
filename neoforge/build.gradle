@@ -162,7 +162,7 @@ dependencies {
     modCompileOnly("curse.maven:titanium-287342:5726400") // Functional-Storage
     modCompileOnly("curse.maven:zeta-968868:5078215") // v1.0-13 | Quark - @DNU
     modCompileOnly("curse.maven:blueprint-382216:6505319") // v8.0.5 | The-Outer-End, Woodworks, Boatload
-    modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // v1.1.5 | Valhelsia Structure, Valhelsia Furniture
+    modImplementation("curse.maven:valhelsia-core-416935:6296775") // v1.1.5 | Valhelsia Structure, Valhelsia Furniture
 
         //+ OTHER MAVENs
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}") // Create, The-Twilight-Forest, Tropicraft
@@ -243,7 +243,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:5759335")
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:5658664")
-    modCompileOnly("curse.maven:valhelsia-structures-347488:6360484") // Valhelsia-Core
+    modCompileOnly("curse.maven:valhelsia-structures-347488:6814480") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
     modCompileOnly("curse.maven:woodster-869951:6425772")
     modCompileOnly("curse.maven:woodworks-543610:6499291") // Blueprint
