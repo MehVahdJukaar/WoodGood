@@ -31,7 +31,7 @@ public class RecipeUtility {
 
                 // Editing the recipe
                 recipe.getAsJsonObject("ingredient").addProperty("tag", tagResLoc.toString());
-                recipe.addProperty("result", Utils.getID(output).toString());
+                recipe.getAsJsonObject("result").addProperty("id", Utils.getID(output).toString());
 
                 // Adding to the resources
                 sink.addJson(newRecipeLoc, recipe, ResType.RECIPES);
