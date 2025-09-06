@@ -323,13 +323,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return new Builder<>(type, name, prefix, baseType, baseBlock, blockSupplier);
     }
 
-    @Environment(EnvType.CLIENT)
-    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> renderer) {
-        if (tileHolder != null) {
-            tileHolder.registerRenderer(event, renderer);
-        }
-    }
-
     //!! SUBCLASS
     public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T, B>, T, B, Item> {
         protected final Supplier<@Nullable B> baseBlock;
