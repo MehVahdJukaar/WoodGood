@@ -1,29 +1,53 @@
 package net.mehvahdjukaar.every_compat.configs;
 
+import com.google.common.base.Stopwatch;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
+import net.mehvahdjukaar.moonlight.api.resources.pack.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackLocationInfo;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.IoSupplier;
+import org.jetbrains.annotations.Nullable;
 
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.function.Supplier;
 
 //loaded after registry
 public class ECConfigs {
 
-    public enum GenMode{
+    public enum GenMode {
         NEVER,
         CACHED,
         CACHED_ZIPPED,
         ALWAYS;
 
-        public PackGenerationStrategy pickStrategy(){
-            return   switch (this){
+        public PackGenerationStrategy pickStrategy() {
+            return switch (this) {
                 case NEVER -> PackGenerationStrategy.NO_OP;
                 case CACHED -> PackGenerationStrategy.CACHED;
-                case CACHED_ZIPPED -> PackGenerationStrategy.CACHED_ZIPPED;
-                case ALWAYS -> PackGenerationStrategy.REGEN_ON_EVERY_RELOAD;
+                case CACHED_ZIPPED -> new GlobalCachedStrategy(){
+                    @Override
+                    public IEditablePackResources createPackResources(PackLocationInfo info, PackType type) {
+                        return new Cached(info, type, this.getPath(type).resolve(info.id().replace(":", "-")));
+                    }
+                };
+                case ALWAYS -> new PackGenerationStrategy() {
+                    @Override
+                    public boolean needsRegeneration(PackType packType) {
+                        return true;
+                    }
+
+                    @Override
+                    public IEditablePackResources createPackResources(PackLocationInfo packLocationInfo, PackType packType) {
+                        return new InMem(packLocationInfo, packType);
+                    }
+                };
             };
         }
     }
@@ -92,5 +116,117 @@ public class ECConfigs {
     }
 
     public static void init() {
+    }
+
+    public static final ConcurrentTimer watch = new ConcurrentTimer();
+
+    private static final class Cached extends CacheZipPackResources {
+        public Cached(PackLocationInfo location, PackType type, Path path) {
+            super(location, type, path);
+        }
+
+        @Override
+        public IoSupplier<InputStream> getResource(PackType type, ResourceLocation id) {
+            try (var t = watch.time()) { // time is added even if an exception occurs
+                return super.getResource(type, id);
+            }
+        }
+
+        @Override
+        public void listResources(PackType packType, String namespace, String id, ResourceOutput output) {
+            try (var t = watch.time()) {
+                super.listResources(packType, namespace, id, output);
+            }
+        }
+
+        @Override
+        public @Nullable IoSupplier<InputStream> getRootResource(String... strings) {
+            try (var t = watch.time()) {
+                return super.getRootResource(strings);
+            }
+        }
+    }
+
+    private static final class InMem extends InMemoryPackResources {
+
+        protected InMem(PackLocationInfo info, PackType type) {
+            super(info, type);
+        }
+
+        protected InMem(PackLocationInfo info, PackType type, boolean hidden) {
+            super(info, type, hidden);
+        }
+
+        @Override
+        public IoSupplier<InputStream> getResource(PackType type, ResourceLocation id) {
+            try (var t = watch.time()) { // time is added even if an exception occurs
+                return super.getResource(type, id);
+            }
+        }
+
+        @Override
+        public void listResources(PackType packType, String namespace, String id, ResourceOutput output) {
+            try (var t = watch.time()) {
+                super.listResources(packType, namespace, id, output);
+            }
+        }
+
+        @Override
+        public @Nullable IoSupplier<InputStream> getRootResource(String... strings) {
+            try (var t = watch.time()) {
+                return super.getRootResource(strings);
+            }
+        }
+    }
+
+
+    public static final class ConcurrentTimer {
+        private final LongAdder nanos = new LongAdder();
+
+        /**
+         * Start a scoped timing; call close() (prefer try-with-resources).
+         */
+        public Timing time() {
+            return new Timing(this);
+        }
+
+        public long elapsedNanos() {
+            return nanos.sum();
+        }
+
+        public double elapsedMillis() {
+            return nanos.sum() / 1_000_000.0;
+        }
+
+        private void add(long deltaNanos) {
+            nanos.add(deltaNanos);
+        }
+
+        public double elapsedSeconds() {
+            return nanos.sum() / 1_000_000_000.0;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Elapsed: %.3f ms (%.6f s)", elapsedMillis(), elapsedSeconds());
+        }
+
+        public static final class Timing implements AutoCloseable {
+            private final ConcurrentTimer owner;
+            private final long start = System.nanoTime();
+            private boolean closed;
+
+            private Timing(ConcurrentTimer owner) {
+                this.owner = owner;
+            }
+
+            @Override
+            public void close() {
+                if (!closed) {
+                    owner.add(System.nanoTime() - start);
+                    closed = true;
+                }
+            }
+        }
     }
 }

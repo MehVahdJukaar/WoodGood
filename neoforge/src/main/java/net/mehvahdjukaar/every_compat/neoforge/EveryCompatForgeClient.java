@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.neoforge;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.config.ConfigTracker;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
