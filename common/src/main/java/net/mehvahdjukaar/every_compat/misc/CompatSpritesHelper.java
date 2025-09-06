@@ -63,6 +63,10 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // Frightful Winter
+            // Leaves
+        addOptional("frightful_winter:snowy_pine_leaves", "_leaves", "frightful_winter:block/snowy_pine_leaves");
+
         // Macaw's Holiday
         addOptional("mcwholidays:snowy_oak_leaves", "_leaves", "mcwholidays:block/snowy_oak_leaves");
         addOptional("mcwholidays:snowy_spruce_leaves", "_leaves", "mcwholidays:block/snowy_spruce_leaves");
