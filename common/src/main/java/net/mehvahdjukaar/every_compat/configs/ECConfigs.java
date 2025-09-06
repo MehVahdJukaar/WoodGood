@@ -57,7 +57,7 @@ public class ECConfigs {
                             - CACHED: create a CACHE folder via .minecraft/dynamic-resource-pack-cache
                             - CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-resource-pack-cache
                             - ALWAYS: Will always generate the assets & will be stored in memory. There will be no cache folder""")
-                    .define("dynamic_assets_generation_mode", GenMode.CACHED_ZIPPED);
+                    .define("dynamic_assets_generation_mode", GenMode.ALWAYS);
             builder.pop();
 
             CLIENT_SPEC = builder.build();
@@ -76,7 +76,7 @@ public class ECConfigs {
                         - CACHED: create a CACHE folder via .minecraft/dynamic-data-pack-cache
                         - CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-data-pack-cache
                         - ALWAYS: Will always generate the assets & will be stored in memory. There will be no cache folder""")
-                .define("server_assets_generation_mode", GenMode.CACHED_ZIPPED);
+                .define("server_assets_generation_mode", GenMode.ALWAYS);
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .define("creative_tab", true);
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")
