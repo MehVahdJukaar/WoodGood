@@ -855,7 +855,7 @@ public class ChippedMainModule extends SimpleModule {
             }
         }
         JsonObject jo = new JsonObject();
-        jo.addProperty("type", "chipped:" + "carpenters_table");
+        jo.addProperty("type", "chipped:" + "workbench");
         jo.add("tags", jsonArray);
         pack.addJson(EveryCompat.res(shortenedId() + "/" + "carpenters_table" + "_" + identifier), jo, ResType.RECIPES);
 
