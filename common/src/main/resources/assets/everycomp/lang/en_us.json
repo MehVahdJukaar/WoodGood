@@ -426,6 +426,7 @@
   "block_type.mcwdoors.tropical_door": "%s Tropical Door",
   "block_type.mcwdoors.western_door": "%s Western Door",
   "block_type.mcwdoors.waffle_door": "%s Waffle Door",
+  "block_type.mcwdoors.whispering_door": "%s Whispering Door",
 
 
   "block_type.mcwfences.picket_fence": "%s Picket Fence",
@@ -528,6 +529,7 @@
   "block_type.mcwtrpdoors.swamp_trapdoor": "%s Swamp Trapdoor",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s Tropical Trapdoor",
   "block_type.mcwtrpdoors.barrel_trapdoor": "%s Barrel Trapdoor",
+  "block_type.mcwtrpdoors.whispering_trapdoor": "%s Whispering Trapdoor",
 
   "block_type.mcwwindows.window": "Resizeable %s Window",
   "block_type.mcwwindows.window2": "Rectangle %s Window",
