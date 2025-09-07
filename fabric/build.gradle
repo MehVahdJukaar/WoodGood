@@ -205,12 +205,12 @@ dependencies {
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5465222")
-    modCompileOnly("curse.maven:macaws-doors-378646:5439190")
+    modCompileOnly("curse.maven:macaws-doors-378646:6146461")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442197")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5473592")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5430737")
     modCompileOnly("curse.maven:macaws-roofs-352039:5554934")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:5431124")
+    modCompileOnly("curse.maven:macaws-trapdoors-400933:5977723")
     modCompileOnly("curse.maven:macaws-windows-363569:5592083")
     modCompileOnly("curse.maven:macaws-furniture-359540:5589849")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802484")
