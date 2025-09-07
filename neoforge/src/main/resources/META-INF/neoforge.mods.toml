@@ -57,3 +57,19 @@ referralUrl = "https://www.curseforge.com/minecraft/mc-mods/woodster"
 versionRange = "[2.0.1,]"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "mcwdoors"
+type = "optional"
+referralUrl = "https://www.curseforge.com/minecraft/mc-mods/macaws-doors"
+versionRange = "[1.1.2,]"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "mcwtrpdoors"
+type = "optional"
+referralUrl = "https://www.curseforge.com/minecraft/mc-mods/macaws-trapdoors"
+versionRange = "[1.1.4,]"
+ordering = "AFTER"
+side = "BOTH"
