@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TransparentBlock;
 
-//SUPPORT: v
-public class ChippedGlassModule extends ChippedMainModule {
+//SUPPORT: v4.0.2+
+public class ChippedGlassModule extends ChippedAbstractModule {
 
     public final SimpleEntrySet<WoodType, Block> circleGlass,
             barredGlass,
@@ -45,6 +45,7 @@ public class ChippedGlassModule extends ChippedMainModule {
 
     public ChippedGlassModule(String modId) {
         super(modId);
+        //        super(modId, shortenedId, EveryCompat.MOD_ID);
         ResourceLocation tab = modRes(tabPath);
 
         circleGlass = SimpleEntrySet.builder(WoodType.class, "glass", "circle",

@@ -1,9 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.storagedrawers;
 
-import com.jaquadro.minecraft.storagedrawers.ModConstants;
 import com.jaquadro.minecraft.storagedrawers.block.BlockCompDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
-import com.jaquadro.minecraft.storagedrawers.client.model.DrawerModelGeometry;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
@@ -134,8 +132,6 @@ public class ModDrawersGeometry {
         Resource iresource;
         Reader reader = null;
         try {
-//            iresource = Minecraft.getInstance().getResourceManager().getResourceOrThrow(location);
-//            reader = new InputStreamReader(iresource.open(), StandardCharsets.UTF_8);
             iresource =  manager.getResourceOrThrow(location);
             reader = new InputStreamReader(iresource.open(), StandardCharsets.UTF_8);
             return BlockModel.fromStream(reader);

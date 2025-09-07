@@ -16,8 +16,11 @@ import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import org.jetbrains.annotations.NotNull;
 
-//SUPPORT: v
-public class ChippedDoorModule extends ChippedMainModule {
+import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkPalette;
+import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkerPalette;
+
+//SUPPORT: v4.0.2+
+public class ChippedDoorModule extends ChippedAbstractModule {
 
     public final SimpleEntrySet<WoodType, Block> barredDoor,
             beachDoor,

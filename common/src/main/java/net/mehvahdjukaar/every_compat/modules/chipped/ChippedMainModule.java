@@ -1,45 +1,26 @@
 package net.mehvahdjukaar.every_compat.modules.chipped;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.*;
-import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
-import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BarrelBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.TorchBlock;
+import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
@@ -48,7 +29,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLAN
 // Mcmeta files are not copied from the base block
 
 //SUPPORT: v4.0.2+
-public class ChippedMainModule extends SimpleModule {
+public class ChippedMainModule extends ChippedAbstractModule {
 
     public final SimpleEntrySet<WoodType, Block> barrel,
             crate,
@@ -95,10 +76,8 @@ public class ChippedMainModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> torch;
     public final SimpleEntrySet<WoodType, Block> wallTorch;
 
-    public static String tabPath = "main";
-
     public ChippedMainModule(String modId) {
-        super(modId, "ch", EveryCompat.MOD_ID);
+        super(modId);
         ResourceLocation tab = modRes(tabPath);
 
         mosaicPlanks = SimpleEntrySet.builder(WoodType.class, "planks_mosaic",
@@ -765,141 +744,102 @@ public class ChippedMainModule extends SimpleModule {
             })
     );
 
-    @Override
-    // RECIPES, LOOT_TABLES
-    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
-        super.addDynamicServerResources(executor);
-
-        executor.accept((manager, handler)-> {
-            // use this. also set the entry to no drop so we don't have 2.
-            // why do we need this instead of copy parent drop? macaw has doors too and they work
-            // chipped adds their loot not via loot table. this is why we need this. no other mod should need this stuff
-            // this shouldnt be needed.... why isnt copy parent loot working?
-            List<EntrySet<?>> doors = this.getEntries().stream().filter(
-                    e -> e.getName().contains("door") && !e.getName().contains("trapdoor")).toList();
-            for (var e : doors) {
-                if (e instanceof SimpleEntrySet<?, ?> se) {
-                    for (var d : se.blocks.values()) {
-                        handler.addLootTable(d, createDoorLoot(d));
-                    }
-                }
-            }
-
-            addCarpenterRecipe(handler, "planks");
-            addCarpenterRecipe(handler, "door");
-            addCarpenterRecipe(handler, "trapdoor");
-            addCarpenterRecipe(handler, "log");
-            addCarpenterRecipe(handler, "stripped_log");
-        });
-    }
-
-    public static LootTable.Builder createDoorLoot(Block block) {
-        return LootTable.lootTable().withPool(
-                LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .add(LootItem.lootTableItem(block)
-                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                        .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)))));
-    }
-
-
-    @SuppressWarnings("SameParameterValue")
-    private void addCarpenterRecipe(ResourceSink pack, String identifier) {
-        JsonArray jsonArray = new JsonArray();
-
-        for (var woodType : WoodTypeRegistry.INSTANCE) {
-            if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
-
-            boolean isTagCreated = false;
-            String suffixedFile = (identifier.equals("stripped_log"))
-                    ? woodType.getAppendableIdWith("stripped", "log")
-                    : woodType.getAppendableIdWith(identifier);
-
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
-                    shortenedId() + "/" + suffixedFile));
-
-            for (var entry : this.getEntries()) {
-                String name = entry.getName();
-
-                boolean isStrippedLog = identifier.equals("stripped_log") && name.contains("stripped");
-
-                if (name.matches(".*(_" + identifier + "|" + identifier + "_).*") || isStrippedLog) {
-                    if (identifier.equals("door") && name.matches(".*(_trapdoor|trapdoor_).*")) continue;
-                    if (identifier.equals("log") && name.matches(".*(_stripped_log|stripped_).*")) continue;
-                    if (identifier.equals("stripped_log") && !name.contains("stripped")) continue;
-                    Item item = ((SimpleEntrySet<?, ?>) entry).items.get(woodType);
-                    if (item != null) {
-                        isTagCreated = true;
-                        tagBuilder.addEntry(item);
-                    }
-                }
-            }
-
-
-            // Checking for Child of wood type exist
-            if (woodType.getChild(identifier) != null) {
-                switch (identifier) { // Adds normal or modded blockType
-                    case "planks" -> tagBuilder.addEntry(woodType.planks);
-                    case "door" -> tagBuilder.addEntry(woodType.getChild("door"));
-                    case "trapdoor" -> tagBuilder.addEntry(woodType.getChild("trapdoor"));
-                    case "log" -> tagBuilder.addEntry(woodType.log);
-                    case "stripped_log" -> tagBuilder.addEntry(woodType.getChild("stripped_log"));
-                }
-            }
-
-            if (isTagCreated) {
-                pack.addTag(tagBuilder, Registries.ITEM);
-                pack.addTag(tagBuilder, Registries.BLOCK);
-                jsonArray.add(tagBuilder.getId().toString());
-            }
-        }
-        JsonObject jo = new JsonObject();
-        jo.addProperty("type", "chipped:" + "workbench");
-        jo.add("tags", jsonArray);
-        pack.addJson(EveryCompat.res(shortenedId() + "/" + "carpenters_table" + "_" + identifier), jo, ResType.RECIPES);
-
-    }
-
-    public void createLogTexture(ResourceLocation textureResLoc, ResourceLocation innerMaskResLoc, ResourceLocation outerMaskResLoc,
-                                 String textureFilename, String folderName, String suffix,
-                                 SimpleEntrySet<WoodType, Block> mainBlock, String innerType, String outerType,
-                                 ResourceSink sink, ResourceManager manager) {
-        try (
-             TextureImage mainTexture = TextureImage.open(manager, textureResLoc);
-             TextureImage innerMask = TextureImage.open(manager, innerMaskResLoc);
-             TextureImage outerMask = TextureImage.open(manager, outerMaskResLoc)
-        ) {
-            // Recoloring the texture - TOP
-            Respriter innerResprite = Respriter.masked(mainTexture, innerMask);
-
-            mainBlock.blocks.forEach((woodType, block) -> {
-                try (
-                     TextureImage innerColoring = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(innerType)));
-                     TextureImage outerColoring = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(outerType), CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
-                ) {
-
-                    // Adding to the resource
-                    String suffixed = "";
-                    if (!suffix.isEmpty()) suffixed = "_"+suffix;
-                    String newPath = "block/"+ shortenedId()+"/"+woodType.getAppendableId() +"_"+folderName+"/"+ textureFilename.replace("oak", woodType.getTypeName()) + suffixed;
-
-                    sink.addTextureIfNotPresent(manager, newPath, () -> {
-                        try(TextureImage recoloredInner = innerResprite.recolorWithAnimationOf(innerColoring)) {
-                            Respriter outerResprite = Respriter.masked(recoloredInner, outerMask);
-                            return outerResprite.recolorWithAnimationOf(outerColoring);
-                        }
-                    });
-                }
-                catch (IOException e) {
-                    EveryCompat.LOGGER.error("Failed to generate planked_log texture for {} : {}", woodType.getId(), String.valueOf(e));
-                }
-            });
-        } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed to get textures for planked_logs: {}", String.valueOf(e));
-        }
-
-    }
+//    @Override
+//    // RECIPES, LOOT_TABLES
+//    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+//        super.addDynamicServerResources(executor);
+//
+//        executor.accept((manager, handler)-> {
+//            // use this. also set the entry to no drop so we don't have 2.
+//            // why do we need this instead of copy parent drop? macaw has doors too and they work
+//            // chipped adds their loot not via loot table. this is why we need this. no other mod should need this stuff
+//            // this shouldnt be needed.... why isnt copy parent loot working?
+//            List<EntrySet<?>> doors = this.getEntries().stream().filter(
+//                    e -> e.getName().contains("door") && !e.getName().contains("trapdoor")).toList();
+//            for (var e : doors) {
+//                if (e instanceof SimpleEntrySet<?, ?> se) {
+//                    for (var d : se.blocks.values()) {
+//                        handler.addLootTable(d, createDoorLoot(d));
+//                    }
+//                }
+//            }
+//
+//            addCarpenterRecipe(handler, "planks");
+//            addCarpenterRecipe(handler, "door");
+//            addCarpenterRecipe(handler, "trapdoor");
+//            addCarpenterRecipe(handler, "log");
+//            addCarpenterRecipe(handler, "stripped_log");
+//        });
+//    }
+//
+//    public static LootTable.Builder createDoorLoot(Block block) {
+//        return LootTable.lootTable().withPool(
+//                LootPool.lootPool()
+//                        .setRolls(ConstantValue.exactly(1.0F))
+//                        .add(LootItem.lootTableItem(block)
+//                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+//                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+//                                                .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)))));
+//    }
+//
+//
+//    @SuppressWarnings("SameParameterValue")
+//    private void addCarpenterRecipe(ResourceSink pack, String identifier) {
+//        JsonArray ingredients = new JsonArray();
+//
+//        for (var woodType : WoodTypeRegistry.INSTANCE) {
+//            if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
+//
+//            boolean isTagCreated = false;
+//            String suffixedFile = (identifier.equals("stripped_log"))
+//                    ? woodType.getAppendableIdWith("stripped", "log")
+//                    : woodType.getAppendableIdWith(identifier);
+//
+//            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(EveryCompat.res(
+//                    shortenedId() + "/" + suffixedFile));
+//
+//            for (var entry : this.getEntries()) {
+//                String name = entry.getName();
+//
+//                boolean isStrippedLog = identifier.equals("stripped_log") && name.contains("stripped");
+//
+//                if (name.matches(".*(_" + identifier + "|" + identifier + "_).*") || isStrippedLog) {
+//                    if (identifier.equals("door") && name.matches(".*(_trapdoor|trapdoor_).*")) continue;
+//                    if (identifier.equals("log") && name.matches(".*(_stripped_log|stripped_).*")) continue;
+//                    if (identifier.equals("stripped_log") && !name.contains("stripped")) continue;
+//                    Item item = ((SimpleEntrySet<?, ?>) entry).items.get(woodType);
+//                    if (item != null) {
+//                        tagBuilder.addEntry(item);
+//                        isTagCreated = true;
+//                    }
+//                }
+//            }
+//
+//
+//            // Checking for Child of wood type exist
+//            if (woodType.getChild(identifier) != null) {
+//                switch (identifier) { // Adds normal or modded blockType
+//                    case "planks" -> tagBuilder.addEntry(woodType.planks);
+//                    case "door" -> tagBuilder.addEntry(woodType.getChild("door"));
+//                    case "trapdoor" -> tagBuilder.addEntry(woodType.getChild("trapdoor"));
+//                    case "log" -> tagBuilder.addEntry(woodType.log);
+//                    case "stripped_log" -> tagBuilder.addEntry(woodType.getChild("stripped_log"));
+//                }
+//            }
+//
+//            JsonObject tagObject = new JsonObject();
+//            if (isTagCreated) {
+//                pack.addTag(tagBuilder, Registries.ITEM);
+//                pack.addTag(tagBuilder, Registries.BLOCK);
+//                tagObject.addProperty("tag", tagBuilder.getId().toString());
+//                ingredients.add(tagObject);
+//            }
+//
+//        }
+//        JsonObject recipeJO = new JsonObject();
+//        recipeJO.addProperty("type", "chipped:" + "workbench");
+//        recipeJO.add("ingredients", ingredients);
+//        if (!ingredients.isEmpty()) pack.addJson(EveryCompat.res(shortenedId() + "/" + "carpenters_table" + "_" + identifier), recipeJO, ResType.RECIPES);
+//
+//    }
 }
