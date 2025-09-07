@@ -230,7 +230,7 @@ dependencies {
     modCompileOnly("curse.maven:lightmans-currency-472521:6524192")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:5569350")
-    modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212") //CRAFTING_TABLES for FORGE //!! 1.20.1
+    modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673") //!! 1.20.1
     modCompileOnly("curse.maven:oreberries-replanted-454062:5817304")
     modCompileOnly("curse.maven:pokecube-aoi-285121:6920497")
