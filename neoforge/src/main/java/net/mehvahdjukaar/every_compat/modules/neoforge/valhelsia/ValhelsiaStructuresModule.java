@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
+import com.stal111.valhelsia_structures.common.recipe.ToolCraftingRecipe;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -10,6 +11,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.RecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -20,12 +22,15 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.Direction;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -42,7 +47,7 @@ import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-//SUPPORT: v1.1.1+
+//SUPPORT: v1.1.2+
 public class ValhelsiaStructuresModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> strippedPosts;
@@ -53,7 +58,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> bundledPosts;
 
     public ValhelsiaStructuresModule(String modId) {
-        super(modId, "vs");
+        super(modId, "vs", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("main");
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
@@ -61,8 +66,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         woodType -> new PostBlock(postProperties(woodType))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
-                .addTag(modRes("stripped_posts"), Registries.BLOCK)
-                .addTag(modRes("stripped_posts"), Registries.ITEM)
+                .addTag(modRes("stripped_posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -74,8 +78,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 )
                 //TEXTURES: manual-texture-generation
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("posts"), Registries.BLOCK)
-                .addTag(modRes("posts"), Registries.ITEM)
+                .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -86,8 +89,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         woodType -> new CutPostBlock(cutPostProperties(woodType))
                         )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
-                .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
-                .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
+                .addTag(modRes("cut_stripped_posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop()
@@ -98,8 +100,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         cutPosts = SimpleEntrySet.builder(WoodType.class, "post", "cut",
                         getModBlock("cut_oak_post"), () -> VanillaWoodTypes.OAK,
                         woodType -> new StrippableCutPostBlock(woodType, cutPostProperties(woodType)))
-                .addTag(modRes("cut_posts"), Registries.BLOCK)
-                .addTag(modRes("cut_posts"), Registries.ITEM)
+                .addTag(modRes("cut_posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop()
@@ -130,8 +131,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     public static BlockBehaviour.Properties postProperties(WoodType woodType) {
         return woodType.copyProperties()
                 .mapColor(
-                        Objects.nonNull(woodType.getBlockOfThis("stripped_log"))
-                                ? Objects.requireNonNull(woodType.getBlockOfThis("stripped_log")).defaultMapColor()
+                        Objects.nonNull(woodType.getBlockOfThis(STRIPPED_LOG))
+                                ? Objects.requireNonNull(woodType.getBlockOfThis(STRIPPED_LOG)).defaultMapColor()
                                 : woodType.log.defaultMapColor())
                 .strength(2.0F).noOcclusion();
     }
@@ -139,8 +140,8 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     public static BlockBehaviour.Properties cutPostProperties(WoodType woodType) {
         return woodType.copyProperties()
                 .mapColor(
-                        (state) -> state.getValue(DirectionalBlock.FACING).getAxis().isVertical() && Objects.nonNull(woodType.getBlockOfThis("stripped_log"))
-                                ? Objects.requireNonNull(woodType.getBlockOfThis("stripped_log")).defaultMapColor()
+                        (state) -> state.getValue(DirectionalBlock.FACING).getAxis().isVertical() && Objects.nonNull(woodType.getBlockOfThis(STRIPPED_LOG))
+                                ? Objects.requireNonNull(woodType.getBlockOfThis(STRIPPED_LOG)).defaultMapColor()
                                 : woodType.log.defaultMapColor())
                 .strength(2.0F).noOcclusion();
     }
@@ -152,6 +153,23 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                                 ? MapColor.WOOD
                                 : MapColor.PODZOL
                 ).strength(2.0F).noOcclusion();
+    }
+
+    @Override
+    public void onModSetup() {
+        super.onModSetup();
+
+        RecipeTemplate.register(ToolCraftingRecipe.class, (original, from, to) -> {
+            ItemStack modifiedIngredient = RecipeTemplate.convertItemStack(original.ingredient().getItems()[0], from, to);
+            Ingredient newInput = Ingredient.of(modifiedIngredient);
+            ItemStack originalResult = original.getResultItem(RegistryAccess.EMPTY);
+            ItemStack newResult = RecipeTemplate.convertItemStack(originalResult, from, to);
+            if (newResult == null) {
+                throw new UnsupportedOperationException("Failed to convert recipe result");
+            } else {
+                return new ToolCraftingRecipe(original.category(), newInput, original.tool(), newResult);
+            }
+        });
     }
 
     @Override

@@ -170,6 +170,7 @@ dependencies {
 //!! =================================================== IMPORTS ==================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4034009") //WARNING: version 2.1.2-1.19.2
+//    modRuntimeOnly("curse.maven:architects-palette-433862:6861008") //@ BETA
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162194")
 //    modRuntimeOnly("curse.maven:backpacked-352835:5852973") //!! BETA
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
@@ -185,7 +186,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5862569") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272849") // Framework
-//    modRuntimeOnly("curse.maven:storage-drawers-223852:5890187")
+//    modRuntimeOnly("curse.maven:storage-drawers-223852:6967730")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //@ 1.20.1-NOT_AVAILABLE
@@ -203,19 +204,18 @@ dependencies {
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5465228")
-    modImplementation("curse.maven:macaws-doors-378646:5439155")
+    modCompileOnly("curse.maven:macaws-doors-378646:6146345")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442175")
     modCompileOnly("curse.maven:macaws-furniture-359540:5589819")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5473578")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5430735")
     modCompileOnly("curse.maven:macaws-roofs-352039:5554896")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:5431123")
+    modCompileOnly("curse.maven:macaws-trapdoors-400933:5977602")
     modCompileOnly("curse.maven:macaws-windows-363569:5592081")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802422")
 
         //+ GENERAL
     modCompileOnly("curse.maven:absent-by-design-305840:4616702") //!! 1.20.1
-    modCompileOnly("curse.maven:architects-palette-433862:5036133") //!! 1.20.1
     modCompileOnly("curse.maven:beautify-decorate-633252:5810850")
     modCompileOnly("curse.maven:bibliocraft-legacy-1122260:6533545")
     modCompileOnly("curse.maven:boatload-337396:5292325") //!! 1.20.1
@@ -230,7 +230,7 @@ dependencies {
     modCompileOnly("curse.maven:lightmans-currency-472521:6524192")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:5569350")
-    modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212") //CRAFTING_TABLES for FORGE //!! 1.20.1
+    modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673") //!! 1.20.1
     modCompileOnly("curse.maven:oreberries-replanted-454062:5817304")
     modCompileOnly("curse.maven:pokecube-aoi-285121:6920497")
@@ -243,7 +243,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:5759335")
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:5658664")
-    modCompileOnly("curse.maven:valhelsia-structures-347488:6360484") // Valhelsia-Core
+    modCompileOnly("curse.maven:valhelsia-structures-347488:6814480") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
     modCompileOnly("curse.maven:woodster-869951:6425772")
     modCompileOnly("curse.maven:woodworks-543610:6499291") // Blueprint

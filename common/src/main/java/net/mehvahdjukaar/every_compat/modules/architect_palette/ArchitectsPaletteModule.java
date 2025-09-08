@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.neoforge.architect_palette;
+package net.mehvahdjukaar.every_compat.modules.architect_palette;
 
 import architectspalette.content.blocks.RailingBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -12,10 +12,9 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.WallBlock;
@@ -23,7 +22,7 @@ import net.minecraft.world.level.block.WallBlock;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
 
-//SUPPORT v1.3.6+
+//SUPPORT: v1.4.0-Beta.5+
 public class ArchitectsPaletteModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> railings;
@@ -34,7 +33,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
 
     public ArchitectsPaletteModule(String modId) {
         super(modId, "ap", EveryCompat.MOD_ID);
-        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
+        ResourceLocation tab = modRes("architects_palette");
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
                         getModBlock("oak_railing"), () -> VanillaWoodTypes.OAK,
@@ -67,7 +66,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 //TEXTURES: boards
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
-                .addTag(BlockTags.SLABS, Registries.ITEM)
+                .addTag(ItemTags.SLABS, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentDrop()
@@ -82,7 +81,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 //TEXTURES: boards
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
-                .addTag(BlockTags.STAIRS, Registries.ITEM)
+                .addTag(ItemTags.STAIRS, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -96,7 +95,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 //TEXTURES: boards
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
-                .addTag(BlockTags.WALLS, Registries.ITEM)
+                .addTag(ItemTags.WALLS, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();

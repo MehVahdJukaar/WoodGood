@@ -4,18 +4,25 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -23,7 +30,7 @@ import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCache
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v
-public class ChippedLogModule extends ChippedMainModule {
+public class ChippedLogModule extends ChippedAbstractModule {
 
     public final SimpleEntrySet<WoodType, Block> BundledLog,
             CenterCutLog,
@@ -420,6 +427,48 @@ public class ChippedLogModule extends ChippedMainModule {
                     PlankedLogFilename, "log", "top", PlankedLog, "planks", "log",
                     handler, manager);
         });
+    }
+
+    public void createLogTexture(ResourceLocation textureResLoc, ResourceLocation innerMaskResLoc, ResourceLocation outerMaskResLoc,
+                                 String textureFilename, String folderName, String suffix,
+                                 SimpleEntrySet<WoodType, Block> mainBlock, String innerType, String outerType,
+                                 ResourceSink sink, ResourceManager manager) {
+        try (
+                TextureImage mainTexture = TextureImage.open(manager, textureResLoc);
+                TextureImage innerMask = TextureImage.open(manager, innerMaskResLoc);
+                TextureImage outerMask = TextureImage.open(manager, outerMaskResLoc)
+        ) {
+            // Recoloring the texture - TOP
+            Respriter innerResprite = Respriter.masked(mainTexture, innerMask);
+
+            mainBlock.blocks.forEach((woodType, block) -> {
+                try (
+                        TextureImage innerColoring = TextureImage.open(manager,
+                                RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(innerType)));
+                        TextureImage outerColoring = TextureImage.open(manager,
+                                RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(outerType), CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                ) {
+
+                    // Adding to the resource
+                    String suffixed = "";
+                    if (!suffix.isEmpty()) suffixed = "_"+suffix;
+                    String newPath = "block/"+ shortenedId()+"/"+woodType.getAppendableId() +"_"+folderName+"/"+ textureFilename.replace("oak", woodType.getTypeName()) + suffixed;
+
+                    sink.addTextureIfNotPresent(manager, newPath, () -> {
+                        try(TextureImage recoloredInner = innerResprite.recolorWithAnimationOf(innerColoring)) {
+                            Respriter outerResprite = Respriter.masked(recoloredInner, outerMask);
+                            return outerResprite.recolorWithAnimationOf(outerColoring);
+                        }
+                    });
+                }
+                catch (IOException e) {
+                    EveryCompat.LOGGER.error("Failed to generate planked_log texture for {} : {}", woodType.getId(), String.valueOf(e));
+                }
+            });
+        } catch (Exception e) {
+            EveryCompat.LOGGER.error("Failed to get textures for planked_logs: {}", String.valueOf(e));
+        }
+
     }
 
 }

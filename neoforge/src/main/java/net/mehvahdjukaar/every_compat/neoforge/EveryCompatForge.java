@@ -7,7 +7,6 @@ import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate.BeautifyDecorateModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
@@ -94,7 +93,6 @@ public class EveryCompatForge extends EveryCompatCommon {
 
         // ========================================= GENERAL ======================================================== \\
         addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
-        addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
         addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
         addIfLoaded("bibliocraft", () -> BibliocraftLegacyModule::new);
         addIfLoaded("boatload", () -> BoatLoadModule::new);

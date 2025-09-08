@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
 import net.mehvahdjukaar.every_compat.modules.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
@@ -99,6 +100,7 @@ public class EveryCompatCommon {
                 "farmersdelight");
 
     //!! =========================================== Add Modules ==================================================== \\
+        addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
         addIfLoaded("another_furniture", () -> AnotherFurnitureModule::new);
         addIfLoaded("backpacked", () -> BackpackedModule::new);
         addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's

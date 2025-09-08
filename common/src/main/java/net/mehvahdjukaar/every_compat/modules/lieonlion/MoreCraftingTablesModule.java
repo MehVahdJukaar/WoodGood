@@ -10,6 +10,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +21,7 @@ public class MoreCraftingTablesModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> craftingTable;
 
     public MoreCraftingTablesModule(String modId) {
-        super(modId, "lolmct");
+        super(modId, "lolmct", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
@@ -30,6 +31,7 @@ public class MoreCraftingTablesModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/lolmct/spruce_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TagUtility.fabricTag("workbench"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:crafting_tables"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)

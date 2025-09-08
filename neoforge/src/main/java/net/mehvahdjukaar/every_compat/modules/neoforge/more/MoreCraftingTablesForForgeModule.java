@@ -17,14 +17,14 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
-// SUPPORT: v5.1.2+
-// NOTE: More Crafting Table for Forge! is developed by Duart And is FORGE only
+// SUPPORT: v7.0.2+
+// NOTE: More Crafting Table for Forge! is developed by 852Duart/DaveDuart And is FORGE only
 public class MoreCraftingTablesForForgeModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;
 
     public MoreCraftingTablesForForgeModule(String modId) {
-        super(modId, "mctb");
+        super(modId, "mctb", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
@@ -36,9 +36,11 @@ public class MoreCraftingTablesForForgeModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/mctb/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/mctb/spruce_crafting_table_top_m"))
                 //TAG: forge:workbenches removed
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("forge:workbench"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("forge:workbenches"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("charm:crafting_table"), Registries.ITEM)
                 .addTag(modRes("revertable_workbench"), Registries.ITEM)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .build();
@@ -48,9 +50,12 @@ public class MoreCraftingTablesForForgeModule extends SimpleModule {
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of(
-                "biomesoplenty", "quark", "ad_astra",
-                "naturesaura", "undergarden", "twilightforest",
-                "regions_unexplored"
+                "ad_astra", "ars_nouveau", "atmospheric",
+                "biomesoplenty", "blue_skies", "botania",
+                "environmental", "forbidden_arcanus", "naturesaura",
+                "outer_end", "quark", "regions_unexplored",
+                "tconstruct", "traverse", "twilightforest",
+                "undergarden"
         );
 
     }

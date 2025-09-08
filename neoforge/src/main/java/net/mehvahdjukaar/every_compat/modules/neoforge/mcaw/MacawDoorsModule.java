@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.SoundType;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
 
-//SUPPORT: v1.1.1+
+//SUPPORT: v1.1.2+
 public class MacawDoorsModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> WaffleDoors,
@@ -42,7 +42,8 @@ public class MacawDoorsModule extends SimpleModule {
             StableHeadDoors,
             SwampDoors,
             TropicalDoors,
-            WesternDoors;
+            WesternDoors,
+            WhisperingDoors;
 
     public MacawDoorsModule(String modId) {
         super(modId, "mcd", EveryCompat.MOD_ID);
@@ -457,6 +458,25 @@ public class MacawDoorsModule extends SimpleModule {
                 .addTextureM(modRes("item/oak_western_door"), EveryCompat.res("item/mcw/doors/oak_western_door_m"))
                 .build();
         this.addEntry(WesternDoors);
+
+        WhisperingDoors = SimpleEntrySet.builder(WoodType.class, "whispering_door",
+                        getModBlock("oak_whispering_door"), () -> VanillaWoodTypes.OAK,
+                        w -> new DoorBlock(w.toVanillaOrOak().setType(), Utils.copyPropertySafe(w.log).noOcclusion()){}
+                )
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
+                .addTag(BlockTags.DOORS, Registries.BLOCK)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
+                .addTag(ItemTags.DOORS, Registries.ITEM)
+                .setTabKey(tab)
+                .copyParentDrop()
+                .defaultRecipe()
+                .setRenderType(RenderLayer.CUTOUT)
+                .addTextureM(modRes("block/oak_whispering_door_lower"), EveryCompat.res("block/mcw/doors/oak_whispering_door_lower_m"))
+                .addTextureM(modRes("block/oak_whispering_door_upper"), EveryCompat.res("block/mcw/doors/oak_whispering_door_upper_m"))
+                .addTextureM(modRes("item/oak_whispering_door"), EveryCompat.res("item/mcw/doors/oak_whispering_door_m"))
+                .build();
+        this.addEntry(WhisperingDoors);
     }
 
     public static final PaletteStrategy darkerPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(

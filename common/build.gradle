@@ -60,6 +60,7 @@ dependencies {
 
         //+ GENERAL
     modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
+    modCompileOnly("curse.maven:architects-palette-433862:6861002") //!! BETA
     modCompileOnly("curse.maven:backpacked-352835:5852971") //!! BETA
     modCompileOnly("curse.maven:beautiful-campfires-1085950:6162192")
     modCompileOnly("curse.maven:blockus-312289:6761560")
@@ -83,7 +84,7 @@ dependencies {
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304")
     modCompileOnly("curse.maven:quark-243121:5093415") //!! 1.20.1
     modCompileOnly("curse.maven:refurbished-furniture-897116:6272856") // Framework
-    modCompileOnly("curse.maven:storage-drawers-223852:5840297")
+    modCompileOnly("curse.maven:storage-drawers-223852:6967726")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
     modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603") //!! 1.20.1

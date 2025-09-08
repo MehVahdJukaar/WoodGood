@@ -78,7 +78,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("twilightforest", () -> TwilightForestModule::new); //!! NOT AVAILABLE
-//        addModule("architects_palette", () -> ArchitectsPaletteModule::new); //!! NOT AVAILABLE
 
     }
 }
