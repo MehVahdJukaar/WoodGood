@@ -70,12 +70,12 @@ public class ECConfigs {
 
         builder.push("general");
         SERVER_GENERATION_MODE = builder.comment("""
-                        \nHow dynamic assets are generated. If cached the cache will regenerate once any mod or pack changes
-                        - NEVER: This mod will never attempt to generate the cache folder. The assets will be put in memory
-                        - RUN_ONCE: Will generate once & the assets will be stored in memory every time you launched.
-                        - CACHED: create a CACHE folder via .minecraft/dynamic-data-pack-cache
-                        - CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-data-pack-cache
-                        - ALWAYS: Will always generate the assets & will be stored in memory. There will be no cache folder""")
+                        \nHow dynamic assets are generated.
+                        - NEVER: No asset will be generated. Use this if you have an external pack that adds assets for the block, otherwise you'll get missing assets everywhere
+                        - RUN_ONCE: Assets will be generated once every session. Subsequent reloads of resource/data pack will not regenerate them even if assets might have changed as a consequence
+                        - CACHED: Generate the assets on first boot and saves them to a cache folder in .minecraft/dynamic-data-pack-cache. If mods or packs change it will regenerate the cache. If not, subsequent reload won't generate anything and just read the cached ones as a normal pack.
+                        - CACHED_ZIPPED: Generate the assets on first boot and saves them to a cache zip file in .minecraft/dynamic-data-pack-cache. If mods or packs change it will regenerate the cache. If not, subsequent reload won't generate anything and just read the cached ones as a normal pack.
+                        - ALWAYS: Will always generate the assets & will be stored in memory. No cache is used. Unintuitively, this is often the fastest method as any disk access will be slow. Try and see what works best for you.""")
                 .define("server_assets_generation_mode", GenMode.CACHED_ZIPPED);
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .define("creative_tab", true);
