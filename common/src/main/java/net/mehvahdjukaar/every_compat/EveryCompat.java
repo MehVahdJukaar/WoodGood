@@ -188,7 +188,7 @@ public abstract class EveryCompat {
             String log = """
                     \n###########################################################################################################
                     #                                                                                                         #
-                    # ATTENTION: EVERY COMPAT REGISTERED 0 CHILDREN! No Wood mods (Biomes O' Plenty or others) are installed. #
+                    # ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed. #
                     #                           You dont need EveryCompat and should remove it.                               #
                     #                                                                                                         #
                     ###########################################################################################################
@@ -198,18 +198,18 @@ public abstract class EveryCompat {
         }
 
         if (p > 25) {
-            EveryCompat.LOGGER.warn("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
+            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
         } else {
-            EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
+            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
         }
         if (p > 33) {
             Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(CompatModule::bloatAmount));
             if (compatbloated.isPresent()) {
                 CompatModule bloated = compatbloated.get();
-                EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
+                EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
                 //no freaking clue why this was returned as null once
-                EveryCompat.LOGGER.error("Every Compat registered children make up more than one third of your registered children, taking up memory and load time.");
-                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} children)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
+                EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
+                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
             } else {
                 String log = """
                         \n#######################################################
