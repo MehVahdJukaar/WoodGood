@@ -20,24 +20,31 @@ import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
 ///      ┌──────────────────────────────────────────────────────────┐
-///      │       WoodGoodModule using Twigs Mod as An Example       │
+///      │   WoodGoodModule example module. Use as a template       │
 ///      └──────────────────────────────────────────────────────────┘
-public class WoodGoodModule extends SimpleModule {
+public final class WoodGoodModuleExample extends SimpleModule {
 
         /// For Blocks
-        public final SimpleEntrySet<WoodType, Block> sampleBlock, sampleBlock_2;
+        private final SimpleEntrySet<WoodType, Block> sampleBlock, sampleBlock_2;
 
         /// For Items
-        public final ItemOnlyEntrySet<WoodType, Item> sampleItem;
+        private final ItemOnlyEntrySet<WoodType, Item> sampleItem;
 
-        public WoodGoodModule(String modId) {
+        WoodGoodModuleExample() {
             // an example of shortened ID for TerraFirmaCraft is "tfc", so one for Twigs is "tw"
-            super(modId, "tw");
+            // note the "modId" is the mod that is being supported, myNamespace is the mod namespace under which the blocks will be registered
+            // usually for addons both will match.
+            // You can change myNamespace to EveryCompat.MOD_ID if you want the blocks to be registered under Every Compat's namespace
+            super("awesome_blocs_mod", "abm", "awesome_blocs_mod");
 
             //  your mod's tab or minecraft's tab can be used for setTabKey() - it can use either ResourceKey or ResourceLocation
             ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
-            ResourceLocation yourModTab = modRes("twig");
+            //location of your tab with helper method
+            ResourceLocation yourModTab = modRes("mod_tab");
 
+            // Here we create 2 simple entry sets. You are free to not use these or make your own entry set implementation
+            // Discover all the methods that these simple builders have by pressing "." and invoke what you need
+            // after creating the entry set, don't forget to add it to the module via this.addEntry(entrySet);
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
                     getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
                     woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
@@ -65,8 +72,7 @@ public class WoodGoodModule extends SimpleModule {
 
                     ///OPTIONAL: Adding tags to the block
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                    .addTag(ResourceLocation.parse("twigs:tables"), Registries.BLOCK)
-                    .addTag(ResourceLocation.parse("twigs:tables"), Registries.ITEM)
+                    .addTag(modRes("tables"), Registries.BLOCK, Registries.ITEM)
 
                     ///OPTIONAL: If your block is glasses, then please take a look at below & Looking for // Common Tags which is at the bottom of the class
             // https://github.com/MehVahdJukaar/WoodGood/blob/1.20/common/src/main/java/net/mehvahdjukaar/every_compat/common_classes/TagUtility.java#L186
@@ -92,7 +98,7 @@ public class WoodGoodModule extends SimpleModule {
                             w -> new Item(new Item.Properties())
                     )
                     .addTexture(modRes("item/itemTexture"))
-                    .addTag(ResourceLocation.parse("twigs:tables"), Registries.ITEM)
+                    .addTag(modRes("tables"), Registries.ITEM)
                     .setTabKey(tab)
                     .defaultRecipe()
                     .addRecipe(modRes("path/to/recipeFile"))
@@ -131,7 +137,7 @@ public class WoodGoodModule extends SimpleModule {
         }
 
 ///      ┌──────────────────────────────────────────────────────────┐
-///      │   If the mod has built-in codes that support Wood Mods   │
+///      │   If the mod has built-in codes that already support Wood Mods   │
 ///      └──────────────────────────────────────────────────────────┘
     @Override
     public List<String> getAlreadySupportedMods() {
