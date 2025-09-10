@@ -1,9 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.every_compat.api.example.WoodGoodAddonExample;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
  * Use this class register new wood type blocks and module to Every Compat
  * To register wood types that aren't detected reference net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
  * <p>
- * Take a look at {@link net.mehvahdjukaar.every_compat.api.example.WoodGoodDetectionExample} and {@link net.mehvahdjukaar.every_compat.api.example.WoodGoodModuleExample} for examples
+ * Take a look at {@link WoodGoodAddonExample} and {@link net.mehvahdjukaar.every_compat.api.example.WoodGoodModuleExample} for examples
  */
 public class EveryCompatAPI {
 

@@ -30,9 +30,12 @@ public final class WoodGoodModuleExample extends SimpleModule {
         /// For Items
         private final ItemOnlyEntrySet<WoodType, Item> sampleItem;
 
-        private WoodGoodModuleExample(String modId) {
+        WoodGoodModuleExample() {
             // an example of shortened ID for TerraFirmaCraft is "tfc", so one for Twigs is "tw"
-            super(modId, "abm", "awesome_blocs_mod");
+            // note the "modId" is the mod that is being supported, myNamespace is the mod namespace under which the blocks will be registered
+            // usually for addons both will match.
+            // You can change myNamespace to EveryCompat.MOD_ID if you want the blocks to be registered under Every Compat's namespace
+            super("awesome_blocs_mod", "abm", "awesome_blocs_mod");
 
             //  your mod's tab or minecraft's tab can be used for setTabKey() - it can use either ResourceKey or ResourceLocation
             ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;

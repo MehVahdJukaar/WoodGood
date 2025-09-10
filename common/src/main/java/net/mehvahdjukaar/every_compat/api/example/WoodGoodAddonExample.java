@@ -1,12 +1,13 @@
 package net.mehvahdjukaar.every_compat.api.example;
 
+import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 
-public final class WoodGoodDetectionExample {
+public final class WoodGoodAddonExample {
 
-    private WoodGoodDetectionExample() {
+    private WoodGoodAddonExample() {
     }
     ///      ┌──────────────────────────────────────────────────────────┐
     ///      │         register a custom non-detected wood type         │
@@ -14,12 +15,15 @@ public final class WoodGoodDetectionExample {
     /// Call this method from your mod's init method
     private static void onModInit() {
 
-        // ───────────────────────────────── WOODTYPE ──────────────────────────────────
+        // Register out module
+        EveryCompatAPI.registerModule(new WoodGoodModuleExample());
 
-        WoodTypeRegistry.INSTANCE.addSimpleFinder("mod_id", "cherry");
+        // ───────────────────────────────── WOODTYPE ──────────────────────────────────
 
         /// If you have multiple WoodTypes to add, then you can do the following:
         WoodTypeRegistry woodReg = WoodTypeRegistry.INSTANCE;
+
+        woodReg.addSimpleFinder("mod_id", "cherry");
 
         /// Simple Finder - it will use the ID by default for log: mod_id:cherry_log and planks: mod_id:cherry_planks
         woodReg.addSimpleFinder("mod_id", "cherry");
@@ -37,7 +41,7 @@ public final class WoodGoodDetectionExample {
         LeavesTypeRegistry leafReg = LeavesTypeRegistry.INSTANCE;
 
         /// Simple Finder
-        LeavesTypeRegistry.INSTANCE.addSimpleFinder("mod_id:red_cherry");
+        leafReg.addSimpleFinder("mod_id:red_cherry");
         leafReg.addSimpleFinder("mod_id","white_cherry");
 
         /// Advanced Finder - Adding undetected children:
