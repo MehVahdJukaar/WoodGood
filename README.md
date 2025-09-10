@@ -28,9 +28,11 @@ To import EveryCompat in your dev environment you can add the following gradle l
 `modCompileOnly(every-compat/628539/[ec_version])`
 
 Where `ec_version` is the version number you can see in CurseForge after clicking on a particular file version. For example `6974680` is for 1.21.1-2.11.3-fabric
+You can also click on "Curse Maven Snippet" in the files section of a particular file to get this same import line this way. Remember to use `modCompileOnly`
 
 
-How to support your mod with Every Compat, Please look at the below:
+
+Once you have done that, to interact with EveryCompat, all will happen through the Every Compat API class.
 
 `common/src/main/java/net/mehvahdjukaar/every_compat/api/EveryCompatAPI.java` 
 
