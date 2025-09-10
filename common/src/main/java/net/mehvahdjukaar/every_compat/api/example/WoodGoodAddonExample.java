@@ -10,7 +10,7 @@ public final class WoodGoodAddonExample {
     private WoodGoodAddonExample() {
     }
     ///      ┌──────────────────────────────────────────────────────────┐
-    ///      │         register a custom non-detected wood type         │
+    ///      │   register a custom module and non-detected wood type    │
     ///      └──────────────────────────────────────────────────────────┘
     /// Call this method from your mod's init method
     private static void onModInit() {
@@ -18,6 +18,8 @@ public final class WoodGoodAddonExample {
         // Register out module
         EveryCompatAPI.registerModule(new WoodGoodModuleExample());
 
+
+        // Only add if you need to add non-detected WoodTypes or LeavesTypes
         // ───────────────────────────────── WOODTYPE ──────────────────────────────────
 
         /// If you have multiple WoodTypes to add, then you can do the following:

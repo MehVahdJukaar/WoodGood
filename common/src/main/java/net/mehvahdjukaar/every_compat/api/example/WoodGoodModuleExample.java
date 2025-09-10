@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
 ///      ┌──────────────────────────────────────────────────────────┐
-///      │         WoodGoodModule example. Dont instantiate         │
+///      │   WoodGoodModule example module. Use as a template       │
 ///      └──────────────────────────────────────────────────────────┘
 public final class WoodGoodModuleExample extends SimpleModule {
 
@@ -42,6 +42,9 @@ public final class WoodGoodModuleExample extends SimpleModule {
             //location of your tab with helper method
             ResourceLocation yourModTab = modRes("mod_tab");
 
+            // Here we create 2 simple entry sets. You are free to not use these or make your own entry set implementation
+            // Discover all the methods that these simple builders have by pressing "." and invoke what you need
+            // after creating the entry set, don't forget to add it to the module via this.addEntry(entrySet);
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
                     getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
                     woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
