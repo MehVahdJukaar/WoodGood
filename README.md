@@ -22,9 +22,13 @@ if your mod is already supported heavily consider reaching out to incorporate so
 
 ### DEVELOPMENT: 
 
-Two Things are required:
-- **Every Compat (Wood Good)**
-- **Moonlight Lib** used to be known as **Selene**
+
+To import EveryCompat in your dev environment you can add the following gradle line
+
+`modCompileOnly(every-compat/628539/[ec_version])`
+
+Where `ec_version` is the version number you can see in CurseForge after clicking on a particular file version. For example `6974680` is for 1.21.1-2.11.3-fabric
+
 
 How to support your mod with Every Compat, Please look at the below:
 
