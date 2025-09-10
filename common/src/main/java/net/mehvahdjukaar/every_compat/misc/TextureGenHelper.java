@@ -170,7 +170,7 @@ public class TextureGenHelper {
                         sink.addTextureIfNotPresent(manager, newId, () -> {
                             Respriter respriter = respriterSet.getValue();
                             TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
-                            postProcessSpecialTexture(blockType, finalNewId, manager, img);
+                            postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
                             return img;
                         }, isOnAtlas);
                     }
@@ -185,9 +185,9 @@ public class TextureGenHelper {
     //post process some textures.
     @SuppressWarnings("UnusedReturnValue")
     private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, String newId, ResourceManager manager,
-                                                                                TextureImage texture) {
+                                                                                TextureImage texture, TextureInfo textureInfo) {
         if (blockType.getClass() == WoodType.class) {
-            CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture);
+            CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture, textureInfo);
         }
         return texture;
     }
