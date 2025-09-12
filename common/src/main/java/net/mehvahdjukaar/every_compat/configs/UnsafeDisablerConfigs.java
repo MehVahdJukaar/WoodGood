@@ -14,6 +14,7 @@ public class UnsafeDisablerConfigs {
     public static Supplier<List<String>> leavesTypeList;
     public static Supplier<List<String>> entrySetList;
     public static Supplier<List<String>> modulesList;
+    public static final Supplier<Boolean> INCLUDE_ALL_WOOD_MODULES;
 
     public static ModConfigHolder CONFIG_SPEC;
 
@@ -77,6 +78,11 @@ public class UnsafeDisablerConfigs {
                     ]
                 """;
         modulesList = builder.comment("Exclude Module From Wood-Good, Stone-Zone & Gems-Realm\n"+moduleExample).define("blacklist", List.of());
+        builder.pop();
+
+        builder.push("other");
+        INCLUDE_ALL_WOOD_MODULES = builder.comment("Disable all of Supported Mods on EveryCompat's side. This feature is same as Library-Section which do not have any Wood Modules.\nWARNING: If the config between CLIENT & SERVER are not the same, then you won't able to join a server")
+                .define("include_all_wood_modules", true);
         builder.pop();
 
         CONFIG_SPEC = builder.build();
