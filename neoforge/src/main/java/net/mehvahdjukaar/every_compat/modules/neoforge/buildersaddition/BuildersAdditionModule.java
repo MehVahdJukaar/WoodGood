@@ -17,6 +17,7 @@ import github.mrh0.buildersaddition2.blocks.stool.StoolBlock;
 import github.mrh0.buildersaddition2.blocks.stripped_fence.StrippedFenceBlock;
 import github.mrh0.buildersaddition2.blocks.support_beam.SupportBeamBlock;
 import github.mrh0.buildersaddition2.blocks.table.TableBlock;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -35,36 +36,35 @@ import net.minecraft.world.level.block.Block;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LEAVES;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-//TODO: Test this module
 //SUPPORT: v2.1.0+
 public class BuildersAdditionModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> panels,
-            arcades,
-            bedsideTables,
-            benches,
-            bookshelves,
-            cabinets,
+            tables,
+            stools,
             chairs,
             counters,
             countersAndesite,
-            countersBlackstone,
-            countersDeepslate,
             countersDiorite,
             countersGranite,
+            countersBlackstone,
+            countersDeepslate,
             countersBasal,
-            cupboards,
+            bookshelves,
             shelves,
-            stools,
+            cabinets,
+            cupboards,
+            benches,
             supportBeams,
-            tables,
+            bedsideTables,
+            arcades,
             shopSigns,
             posts,
             stripped_fences;
     public final SimpleEntrySet<LeavesType, Block> hedges;
 
     public BuildersAdditionModule(String modId) {
-        super(modId, "bca");
+        super(modId, "bca", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("builders_addition_group");
 
 
