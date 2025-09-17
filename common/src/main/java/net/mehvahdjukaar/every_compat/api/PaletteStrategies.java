@@ -45,7 +45,7 @@ public class PaletteStrategies {
             blockType, manager, VanillaWoodChildKeys.PLANKS, null, null));
 
     public static final PaletteStrategy LOG_SIDE_STANDARD = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
-            blockType, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
+            blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
 
     //TODO: make this not side (top)? i guess. or always use the one below. otherwise these might be equal or just incorrect sinde side inst specified
     //so yeah delete, use below
@@ -118,15 +118,15 @@ public class PaletteStrategies {
     public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType blockType, ResourceManager manager,
                                                                                @Nullable Consumer<Palette> paletteTransform) {
         ItemLike mainChild = blockType.mainChild();
-        Block mainWoodTypeBlock = null;
-        if (mainChild instanceof Block block) mainWoodTypeBlock = block;
-        else if (mainChild instanceof BlockItem blockItem) mainWoodTypeBlock = blockItem.getBlock();
-        if (mainWoodTypeBlock == null) {
+        Block mainBlockTypeBlock = null;
+        if (mainChild instanceof Block block) mainBlockTypeBlock = block;
+        else if (mainChild instanceof BlockItem blockItem) mainBlockTypeBlock = blockItem.getBlock();
+        if (mainBlockTypeBlock == null) {
             throw new UnsupportedOperationException("You need to provide a palette supplier for non block main child");
         }
 
         try (TextureImage plankTexture = TextureImage.open(manager,
-                RPUtils.findFirstBlockTextureLocation(manager, mainWoodTypeBlock))) {
+                RPUtils.findFirstBlockTextureLocation(manager, mainBlockTypeBlock))) {
             var targetPalette = Palette.fromAnimatedImage(plankTexture);
             var animation = plankTexture.getMcMeta();
             if (paletteTransform != null) targetPalette.forEach(paletteTransform);
