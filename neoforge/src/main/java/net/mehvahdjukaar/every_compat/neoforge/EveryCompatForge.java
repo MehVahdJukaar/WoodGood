@@ -53,6 +53,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
 import java.lang.ref.WeakReference;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 /**
  * Author: MehVahdJukaar
@@ -79,59 +80,62 @@ public class EveryCompatForge extends EveryCompatCommon {
 
 //!! =============================================== Add Modules ==================================================== \\
 
-        // ========================================= MACAW's ======================================================== \\
-        addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
-        addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
-        addIfLoaded("mcwfences", () -> MacawFencesModule::new);
-        addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
-        addIfLoaded("mcwlights", () -> MacawLightsModule::new);
-        addIfLoaded("mcwpaths", () -> MacawPathsModule::new);
-        addIfLoaded("mcwroofs", () -> MacawRoofsModule::new);
-        addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
-        addIfLoaded("mcwwindows", () -> MacawWindowsModule::new);
-        addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
+        if (INCLUDE_ALL_WOOD_MODULES.get()) {
 
-        // ========================================= GENERAL ======================================================== \\
-        addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
-        addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
-        addIfLoaded("bibliocraft", () -> BibliocraftLegacyModule::new);
-        addIfLoaded("boatload", () -> BoatLoadModule::new);
-        addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
-        addIfLoaded("bbb", () -> BuildingButBetterModule::new);
-        addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
-        addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
-        addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
-        addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
-        addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
-        addIfLoaded("functionalstorage", () -> FunctionalStorageModule::new);
-        addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
-        addIfLoaded("justaraftmod", () -> JustARaftModule::new);
-        addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
-        addIfLoaded("mighty_mail", () -> MightyMailModule::new);
-        addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
-        addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
-        addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
-        addIfLoaded("pokecube_legends", () -> PokecubeAIOModule::new);
-        addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
-        addIfLoaded("redeco", () -> ReDecoModule::new);
-        addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
-        addIfLoaded("shutter", () -> LauchsShuttersModule::new);
-        addIfLoaded("timber_frames", () -> TimberFramesModule::new);
-        addIfLoaded("tropicraft", () -> TropicraftModule::new);
-        addIfLoaded("twilightforest", () -> TwilightForestModule::new);
-        addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
+            // ========================================= MACAW's ======================================================== \\
+            addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
+            addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
+            addIfLoaded("mcwfences", () -> MacawFencesModule::new);
+            addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
+            addIfLoaded("mcwlights", () -> MacawLightsModule::new);
+            addIfLoaded("mcwpaths", () -> MacawPathsModule::new);
+            addIfLoaded("mcwroofs", () -> MacawRoofsModule::new);
+            addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
+            addIfLoaded("mcwwindows", () -> MacawWindowsModule::new);
+            addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
+
+            // ========================================= GENERAL ======================================================== \\
+            addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
+            addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
+            addIfLoaded("bibliocraft", () -> BibliocraftLegacyModule::new);
+            addIfLoaded("boatload", () -> BoatLoadModule::new);
+            addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
+            addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
+            addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
+            addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
+            addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
+            addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
+            addIfLoaded("functionalstorage", () -> FunctionalStorageModule::new);
+            addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
+            addIfLoaded("justaraftmod", () -> JustARaftModule::new);
+            addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
+            addIfLoaded("mighty_mail", () -> MightyMailModule::new);
+            addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+            addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
+            addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
+            addIfLoaded("pokecube_legends", () -> PokecubeAIOModule::new);
+            addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
+            addIfLoaded("redeco", () -> ReDecoModule::new);
+            addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
+            addIfLoaded("shutter", () -> LauchsShuttersModule::new);
+            addIfLoaded("timber_frames", () -> TimberFramesModule::new);
+            addIfLoaded("tropicraft", () -> TropicraftModule::new);
+            addIfLoaded("twilightforest", () -> TwilightForestModule::new);
+            addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
 //        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new); //!! NOT-AVAILABLE
-        addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
-        addIfLoaded("woodster", () -> WoodsterModule::new);
-        addIfLoaded("woodworks", () -> WoodworksModule::new);
-        addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
-        addIfLoaded("xercamod", () -> XercaModule::new);
+            addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
+            addIfLoaded("woodster", () -> WoodsterModule::new);
+            addIfLoaded("woodworks", () -> WoodworksModule::new);
+            addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+            addIfLoaded("xercamod", () -> XercaModule::new);
 
-        if (PlatHelper.isModLoaded("mcwdoors")) {
-            addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+            if (PlatHelper.isModLoaded("mcwdoors")) {
+                addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+            }
+
+            addIfLoaded("create", () -> CreateModule::new); //TEMP: DISABLED due to version difference
         }
-
-        addIfLoaded("create", () -> CreateModule::new); //TEMP: DISABLED due to version difference
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addIfLoaded("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work

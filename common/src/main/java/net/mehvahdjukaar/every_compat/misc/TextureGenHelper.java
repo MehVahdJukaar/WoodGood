@@ -127,7 +127,7 @@ public class TextureGenHelper {
                             // Default
                             : BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
 
-                    ResourceLocation newId = null;
+                    ResourceLocation newId;
 
                     /// Adding the textures to the resource
                     for (var info : infoPerTextures.get(oldTextureId)) {
@@ -167,7 +167,7 @@ public class TextureGenHelper {
                         sink.addTextureIfNotPresent(manager, newId, () -> {
                             Respriter respriter = respriterSet.getValue();
                             TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
-                            postProcessSpecialTexture(blockType, finalNewId, manager, img);
+                            postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
                             return img;
                         });
                     }
@@ -182,9 +182,9 @@ public class TextureGenHelper {
     //post process some textures.
     @SuppressWarnings("UnusedReturnValue")
     private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, ResourceLocation newId, ResourceManager manager,
-                                                                                TextureImage texture) {
+                                                                                TextureImage texture, TextureInfo textureInfo) {
         if (blockType.getClass() == WoodType.class) {
-            CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture);
+            CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture, textureInfo);
         }
         return texture;
     }
