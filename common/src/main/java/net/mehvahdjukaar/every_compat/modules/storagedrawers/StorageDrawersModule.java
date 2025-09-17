@@ -5,10 +5,12 @@ import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockStandardDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
 import com.jaquadro.minecraft.storagedrawers.item.ItemDrawers;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -21,6 +23,8 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
+
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 
 //SUPPORT: v12.10.5+ (FABRIC) | v12.9.13+ (FORGE)
 public class StorageDrawersModule extends SimpleModule {
@@ -41,20 +45,17 @@ public class StorageDrawersModule extends SimpleModule {
                         getModBlock("oak_full_drawers_1", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(1, false, Utils.copyPropertySafe(getModBlock("oak_full_drawers_1").get()))
                 )
-                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
+                .addTile(getModTile("standard_drawers_1"))
+                .addTexture(modRes("block/drawers_oak_front_1"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_side"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_sort"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_trim"), drawersPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.BLOCK)
-                .addTag(modRes("full_drawers"), Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.ITEM)
-                .addTag(modRes("full_drawers"), Registries.ITEM)
+                .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .addTile(getModTile("standard_drawers_1"))
-                .createPaletteFromPlanks(this::drawersPalette)
-                .addTexture(modRes("block/drawers_oak_front_1"))
-                .addTexture(modRes("block/drawers_oak_side"))
-                .addTexture(modRes("block/drawers_oak_sort"))
-                .addTexture(modRes("block/drawers_oak_trim"))
+                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
                 .build();
         this.addEntry(FULL_DRAWERS_1);
 
@@ -62,17 +63,14 @@ public class StorageDrawersModule extends SimpleModule {
                         getModBlock("oak_full_drawers_2", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(2, false, Utils.copyPropertySafe(getModBlock("oak_full_drawers_2").get()))
                 )
-                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
+                .addTile(getModTile("standard_drawers_2"))
+                .addTexture(modRes("block/drawers_oak_front_2"), drawersPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.BLOCK)
-                .addTag(modRes("full_drawers"), Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.ITEM)
-                .addTag(modRes("full_drawers"), Registries.ITEM)
+                .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .addTile(getModTile("standard_drawers_2"))
-                .createPaletteFromPlanks(this::drawersPalette)
-                .addTexture(modRes("block/drawers_oak_front_2"))
+                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
                 .build();
         this.addEntry(FULL_DRAWERS_2);
 
@@ -80,17 +78,14 @@ public class StorageDrawersModule extends SimpleModule {
                         getModBlock("oak_full_drawers_4", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(4, false, Utils.copyPropertySafe(getModBlock("oak_full_drawers_4").get()))
                 )
-                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
+                .addTile(getModTile("standard_drawers_4"))
+                .addTexture(modRes("block/drawers_oak_front_4"), drawersPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.BLOCK)
-                .addTag(modRes("full_drawers"), Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.ITEM)
-                .addTag(modRes("full_drawers"), Registries.ITEM)
+                .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .addTile(getModTile("standard_drawers_4"))
-                .createPaletteFromPlanks(this::drawersPalette)
-                .addTexture(modRes("block/drawers_oak_front_4"))
+                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
                 .build();
 
         this.addEntry(FULL_DRAWERS_4);
@@ -99,18 +94,15 @@ public class StorageDrawersModule extends SimpleModule {
                         getModBlock("oak_half_drawers_1", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(1, true, Utils.copyPropertySafe(getModBlock("oak_half_drawers_1").get()))
                 )
-                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
+                .addTile(getModTile("standard_drawers_1"))
+                .addTexture(modRes("block/drawers_oak_side_h"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_side_v"), drawersPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.BLOCK)
-                .addTag(modRes("half_drawers"), Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.ITEM)
-                .addTag(modRes("half_drawers"), Registries.ITEM)
+                .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("half_drawers"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .addTile(getModTile("standard_drawers_1"))
-                .createPaletteFromPlanks(this::drawersPalette)
-                .addTexture(modRes("block/drawers_oak_side_h"))
-                .addTexture(modRes("block/drawers_oak_side_v"))
+                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
                 .build();
         this.addEntry(HALF_DRAWERS_1);
 
@@ -118,15 +110,13 @@ public class StorageDrawersModule extends SimpleModule {
                         getModBlock("oak_half_drawers_2", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(2, true, Utils.copyPropertySafe(getModBlock("oak_half_drawers_2").get()))
                 )
-                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
+                .addTile(getModTile("standard_drawers_2"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.BLOCK)
-                .addTag(modRes("half_drawers"), Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.ITEM)
-                .addTag(modRes("half_drawers"), Registries.ITEM)
+                .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("half_drawers"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .addTile(getModTile("standard_drawers_2"))
+                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
                 .build();
         this.addEntry(HALF_DRAWERS_2);
 
@@ -134,15 +124,13 @@ public class StorageDrawersModule extends SimpleModule {
                         getModBlock("oak_half_drawers_4", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockStandardDrawers(4, true, Utils.copyPropertySafe(getModBlock("oak_half_drawers_4").get()))
                 )
-                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
+                .addTile(getModTile("standard_drawers_4"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.BLOCK)
-                .addTag(modRes("half_drawers"), Registries.BLOCK)
-                .addTag(modRes("drawers"), Registries.ITEM)
-                .addTag(modRes("half_drawers"), Registries.ITEM)
+                .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("half_drawers"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .addTile(getModTile("standard_drawers_4"))
+                .addCustomItem((woodType, block, properties) -> new ItemDrawers(block, properties))
                 .build();
         this.addEntry(HALF_DRAWERS_4);
 
@@ -150,29 +138,34 @@ public class StorageDrawersModule extends SimpleModule {
                         getModBlock("oak_trim", BlockTrim.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockTrim(Utils.copyPropertySafe(getModBlock("oak_trim").get()))
                 )
+                .addTexture(modRes("block/drawers_oak_trim"), trimPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("trim"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .createPaletteFromPlanks(this::trimPalette)
-                .addTexture(modRes("block/drawers_oak_trim"))
                 .build();
         this.addEntry(TRIMS);
     }
 
+    private static final PaletteStrategy drawersPalette = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
+                    (p) -> {
+                        p.remove(p.getLightest());
+                        p.increaseInner();
+                        p.increaseInner();
+                        p.increaseInner();
+                        p.increaseUp();
+                    }
+            ));
 
-    private void drawersPalette(Palette p) {
-        p.remove(p.getLightest());
-        p.increaseInner();
-        p.increaseInner();
-        p.increaseInner();
-        p.increaseUp();
-    }
-
-    private void trimPalette(Palette p) {
-        p.remove(p.getLightest());
-        p.increaseInner();
-        p.increaseUp();
-    }
+    private static final PaletteStrategy trimPalette = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
+                    (p) -> {
+                        p.remove(p.getLightest());
+                        p.increaseInner();
+                        p.increaseUp();
+                    }
+            ));
 
 
     @Override
