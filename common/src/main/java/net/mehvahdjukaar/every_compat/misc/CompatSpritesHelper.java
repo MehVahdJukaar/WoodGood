@@ -66,7 +66,7 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
         // Frightful Winter
-            // Leaves
+        // Leaves
         addOptional("frightful_winter:snowy_pine_leaves", "_leaves", "frightful_winter:block/snowy_pine_leaves");
 
         // Macaw's Holiday
@@ -593,12 +593,8 @@ public class CompatSpritesHelper {
 
     //for Regions-Unexplored's brimwood
     private static void brimwoodGlow(TextureImage image, ResourceManager manager, ResourceLocation textureId, TextureInfo textureInfo) {
-        try (TextureImage lavaOverlay = TextureImage.open(manager,
-                EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"));
-             TextureImage plankTexture = TextureImage.open(manager,
-                     EveryCompat.res("block/regions_unexplored/brimwood_planks"))
-
-        ) {
+        try (TextureImage plankTexture = TextureImage.open(manager,
+                EveryCompat.res("block/regions_unexplored/brimwood_planks"))) {
             String toString = textureId.toString();
             Respriter respriter;
             if (Objects.nonNull(textureInfo.mask()))
@@ -613,7 +609,10 @@ public class CompatSpritesHelper {
                         || toString.contains("lectern_side") || toString.contains("lectern_top")
                         || toString.contains("bookshelf_side") || toString.contains("bookshelf_top")
                 ) {
-                    TextureOps.applyOverlayOnExisting(image, temp, lavaOverlay);
+                    try (TextureImage lavaOverlay = TextureImage.open(manager,
+                            EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"))) {
+                        TextureOps.applyOverlayOnExisting(image, temp, lavaOverlay);
+                    }
                 } else {
                     TextureOps.applyOverlayOnExisting(image, temp);
                 }
