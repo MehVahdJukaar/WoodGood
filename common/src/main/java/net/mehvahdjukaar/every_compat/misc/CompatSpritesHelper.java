@@ -543,6 +543,8 @@ public class CompatSpritesHelper {
     //ugly hardcoded wood post-processing
     private static final Supplier<WoodType> FLOWERING_AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
             ResourceLocation.fromNamespaceAndPath("ecologics", "flowering_azalea"));
+    private static final Supplier<WoodType> AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
+            ResourceLocation.fromNamespaceAndPath("ecologics", "azalea"));
     private static final Supplier<WoodType> BRIMWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
             ResourceLocation.fromNamespaceAndPath("regions_unexplored", "brimwood"));
     private static final Supplier<WoodType> STRANGEWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
@@ -551,7 +553,7 @@ public class CompatSpritesHelper {
     public static void maybePostProcessWoodTexture(WoodType wood, String newId, ResourceManager manager, TextureImage textureSupplier, TextureInfo textureInfo) {
         // Ecologics
         if (wood == FLOWERING_AZALEA.get()) {
-            flowerAzalea(textureSupplier, manager, newId, wood);
+            flowerAzalea(textureSupplier, manager, newId, textureInfo);
         }
         // Regions Unexplored
         else if (wood == BRIMWOOD.get()) {
@@ -564,20 +566,27 @@ public class CompatSpritesHelper {
     }
 
     //for ecologics
-    private static void flowerAzalea(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
+    private static void flowerAzalea(TextureImage image, ResourceManager manager, String textureId, TextureInfo textureInfo) {
         if (!(image.imageWidth() > 32) && !(image.imageHeight() > 32)) {
-            try (TextureImage mask = TextureImage.open(manager,
+            try (TextureImage flowerOverLay = TextureImage.open(manager,
                     EveryCompat.res("block/ecologics_overlay"));
                  TextureImage plankTexture = TextureImage.open(manager,
-                         RPUtils.findFirstBlockTextureLocation(manager, FLOWERING_AZALEA.get().planks))) {
+                         RPUtils.findFirstBlockTextureLocation(manager, AZALEA.get().planks));
+            ) {
 
-                Respriter respriter = Respriter.of(image);
+                Respriter respriter;
+                if (Objects.nonNull(textureInfo.mask()))
+                    respriter = Respriter.masked(image, TextureImage.open(manager, textureInfo.mask()));
+                else
+                    respriter = Respriter.of(image);
+
                 try (TextureImage temp = respriter.recolorWithAnimationOf(plankTexture)) {
-                    TextureOps.applyOverlayOnExisting(image, temp, mask);
+                    if (!textureInfo.texture().toString().matches("boatload:item/(oak_furnace|large_oak)_boat"))
+                        TextureOps.applyOverlayOnExisting(image, temp, flowerOverLay);
                 }
 
             } catch (Exception e) {
-                EveryCompat.LOGGER.warn("Failed to apply {} overlay to {}: {}", woodType, textureId, String.valueOf(e));
+                EveryCompat.LOGGER.warn("Failed to apply the flowering overlay to {}: {}", textureId, e);
             }
         }
     }
