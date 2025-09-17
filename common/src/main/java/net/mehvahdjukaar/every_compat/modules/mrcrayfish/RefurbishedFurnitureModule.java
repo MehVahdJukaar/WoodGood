@@ -70,7 +70,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 
 
     public RefurbishedFurnitureModule(String modId) {
-        super(modId, "rfm");
+        super(modId, "rfm", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("creative_tab");
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
@@ -365,13 +365,13 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(2.0f).forceSolidOn()
                         )
                 )
-                .addRecipe(modRes("constructing/oak_desk"))
-                .setTabKey(tab)
                 .addTexture(modRes("block/oak_desk"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tuckable"), Registries.BLOCK)
                 .addTag(modRes("general"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_desk"))
                 .build();
         this.addEntry(desk);
 
@@ -396,14 +396,14 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(2.5f).forceSolidOn()
                         )
                 )
-                .addRecipe(modRes("constructing/oak_drawer"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.DRAWER::get)
                 .addTexture(modRes("block/oak_drawer"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTag(modRes("general"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_drawer"))
                 .build();
         this.addEntry(drawer);
 
