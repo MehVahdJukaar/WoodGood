@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -537,130 +539,74 @@ public class CompatSpritesHelper {
     //ugly hardcoded wood post-processing
     private static final Supplier<WoodType> FLOWERING_AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
             new ResourceLocation("ecologics", "flowering_azalea"));
+    private static final Supplier<WoodType> AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
+            new ResourceLocation("ecologics", "azalea"));
     private static final Supplier<WoodType> BRIMWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
             new ResourceLocation("regions_unexplored", "brimwood"));
     private static final Supplier<WoodType> STRANGEWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
             new ResourceLocation("aoa", "strangewood"));
 
-    public static void maybePostProcessWoodTexture(WoodType wood, String newId, ResourceManager manager, TextureImage textureSupplier) {
+    public static void maybePostProcessWoodTexture(WoodType wood, String newId, ResourceManager manager, TextureImage textureSupplier, TextureInfo textureInfo) {
         // Ecologics
         if (wood == FLOWERING_AZALEA.get()) {
-            flowerAzalea(textureSupplier, manager, newId, wood);
+            flowerAzalea(textureSupplier, manager, newId, textureInfo);
         }
         // Regions Unexplored
         else if (wood == BRIMWOOD.get()) {
-            brimwoodGlow(textureSupplier, manager, newId, wood);
+            brimwoodGlow(textureSupplier, manager, newId, textureInfo);
         }
         // Advent of Ascension
         else if (wood == STRANGEWOOD.get()) {
-            strangewoodPattern(textureSupplier, manager, wood);
+            strangewoodPattern(textureSupplier, manager);
         }
     }
-    //for ecologics
 
-    private static void flowerAzalea(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
+    //for ecologics
+    private static void flowerAzalea(TextureImage image, ResourceManager manager, String textureId, TextureInfo textureInfo) {
         if (!(image.imageWidth() > 32) && !(image.imageHeight() > 32)) {
-            try (TextureImage mask = TextureImage.open(manager,
+            try (TextureImage flowerOverLay = TextureImage.open(manager,
                     EveryCompat.res("block/ecologics_overlay"));
                  TextureImage plankTexture = TextureImage.open(manager,
-                         RPUtils.findFirstBlockTextureLocation(manager, FLOWERING_AZALEA.get().planks))) {
+                         RPUtils.findFirstBlockTextureLocation(manager, AZALEA.get().planks));
+            ) {
 
-                Respriter respriter = Respriter.of(image);
+                Respriter respriter;
+                if (Objects.nonNull(textureInfo.mask()))
+                    respriter = Respriter.masked(image, TextureImage.open(manager, textureInfo.mask()));
+                else
+                    respriter = Respriter.of(image);
+
                 try (TextureImage temp = respriter.recolorWithAnimationOf(plankTexture)) {
-                    TextureOps.applyOverlayOnExisting(image, temp, mask);
+                    if (!textureInfo.texture().toString().matches("boatload:item/(oak_furnace|large_oak)_boat"))
+                        TextureOps.applyOverlayOnExisting(image, temp, flowerOverLay);
                 }
 
             } catch (Exception e) {
-                EveryCompat.LOGGER.warn("Failed to apply {} overlay to {}: {}", woodType, textureId, String.valueOf(e));
+                EveryCompat.LOGGER.warn("Failed to apply the flowering overlay to {}: {}", textureId, e);
             }
         }
     }
-    //for Regions-Unexplored's brimwood
 
-    private static void brimwoodGlow(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
+    //for Regions-Unexplored's brimwood
+    private static void brimwoodGlow(TextureImage image, ResourceManager manager, String textureId, TextureInfo textureInfo) {
         try (TextureImage lavaOverlay = TextureImage.open(manager,
                 EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"));
              TextureImage plankTexture = TextureImage.open(manager,
                      EveryCompat.res("block/regions_unexplored/brimwood_planks"))
 
         ) {
-            String type = textureId.substring(textureId.lastIndexOf("brimwood_") + 9);
-
-            Respriter respriter = switch (type) {
-                case "barrel_side" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_barrel_side_m")
-                ));
-                case "barrel_top" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_barrel_top_m")
-                ));
-                case "beehive_front_honey" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_beehive_front_honey_m")
-                ));
-                case "beehive_side" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_beehive_side_m")
-                ));
-                case "bookshelf" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_bookshelf_m")
-                ));
-                case "cartography_table_side1" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_side1_m")
-                ));
-                case "cartography_table_side2" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_side2_m")
-                ));
-                case "cartography_table_top" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_cartography_table_top_m")
-                ));
-                case "chiseled_bookshelf_occupied" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_chiseled_bookshelf_occupied_m")
-                ));
-                case "crafting_table_front" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_crafting_table_front_m")
-                ));
-                case "crafting_table_side" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_crafting_table_side_m")
-                ));
-                case "fletching_table_front" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_front_m")
-                ));
-                case "fletching_table_side" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_side_m")
-                ));
-                case "fletching_table_top" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_fletching_table_top_m")
-                ));
-                case "lectern_base" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_lectern_base_m")
-                ));
-                case "lectern_front" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_lectern_front_m")
-                ));
-                case "smithing_table_bottom" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_bottom_m")
-                ));
-                case "smithing_table_front" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_front_m")
-                ));
-                case "smithing_table_side" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_smithing_table_side_m")
-                ));
-                case "smoker_bottom" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_smoker_bottom_m")
-                ));
-                case "smoker_front" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_smoker_front_m")
-                ));
-                case "smoker_side" -> Respriter.masked(image, TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_smoker_side_m")
-                ));
-                default -> Respriter.of(image);
-            };
+            Respriter respriter;
+            if (Objects.nonNull(textureInfo.mask()))
+                respriter = Respriter.masked(image, TextureImage.open(manager, textureInfo.mask()));
+            else
+                respriter = Respriter.of(image);
 
             try (TextureImage temp = respriter.recolorWithAnimationOf(plankTexture)) {
-                if (textureId.contains("stairs") || textureId.contains("planks") || textureId.contains("slab") ||
-                        textureId.contains("beehive") || textureId.contains("composter_bottom") || textureId.contains("composter_side")
-                        || textureId.contains("lectern_side") || textureId.contains("lectern_top") || textureId.contains("bookshelf_side")
-                        || textureId.contains("bookshelf_top")
+                if (textureId.contains("stairs") || textureId.contains("planks")
+                        || textureId.contains("slab") || textureId.contains("beehive")
+                        || textureId.contains("composter_bottom") || textureId.contains("composter_side")
+                        || textureId.contains("lectern_side") || textureId.contains("lectern_top")
+                        || textureId.contains("bookshelf_side") || textureId.contains("bookshelf_top")
                 ) {
                     TextureOps.applyOverlayOnExisting(image, temp, lavaOverlay);
                 } else {
@@ -674,7 +620,7 @@ public class CompatSpritesHelper {
     }
 
     //for Advent-Of-Ascension's stranglewood
-    private static void strangewoodPattern(TextureImage image, ResourceManager manager, WoodType woodType) {
+    private static void strangewoodPattern(TextureImage image, ResourceManager manager) {
         try (TextureImage vineOverlay = TextureImage.open(manager,
                 new ResourceLocation("aoa3:block/stranglewood_log_vine"));
              TextureImage logTexture = TextureImage.open(manager,
