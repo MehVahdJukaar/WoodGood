@@ -18,14 +18,14 @@ import net.minecraft.world.item.Item;
 import java.util.HashMap;
 import java.util.Map;
 
-//SUPPORT: v5.0.1+
+//SUPPORT: v6.0.1+
 public class BoatLoadModule extends SimpleModule {
     public final ItemOnlyEntrySet<WoodType, Item> largeBoats;
     public final ItemOnlyEntrySet<WoodType, Item> furnaceBoats;
     public final Map<WoodType, BoatloadBoatType> boatTypes = new HashMap<>();
 
     public BoatLoadModule(String modId) {
-        super(modId, "abnbl");
+        super(modId, "abnbl", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.TOOLS_AND_UTILITIES;
 
         largeBoats = ItemOnlyEntrySet.builder(WoodType.class, "boat", "large",
