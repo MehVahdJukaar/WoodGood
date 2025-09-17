@@ -54,15 +54,15 @@ public class SimpleModule extends CompatModule {
         return bloat;
     }
 
-    public <T extends BlockType, S extends EntrySet<T>> S addEntry(S entryHolder) {
-        var old = this.entries.put(entryHolder.getName(), entryHolder);
+    public <T extends BlockType, S extends EntrySet<T>> S addEntry(S entrySet) {
+        var old = this.entries.put(entrySet.getName(), entrySet);
         if (old != null) {
-            throw new UnsupportedOperationException(String.format("This module already has an entry set with name %s", entryHolder.getName()));
+            throw new UnsupportedOperationException(String.format("This module already has an entry set with name %s", entrySet.getName()));
         }
-        this.affectedTypes.add(entryHolder.getTypeClass());
+        this.affectedTypes.add(entrySet.getTypeClass());
         //ugly
-        EveryCompat.trackChildType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
-        return entryHolder;
+        EveryCompat.trackChildType(entrySet.getTypeClass(), entrySet.getChildKey(this));
+        return entrySet;
     }
 
     public Collection<EntrySet<?>> getEntries() {

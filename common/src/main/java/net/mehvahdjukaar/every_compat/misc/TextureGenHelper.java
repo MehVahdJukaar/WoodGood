@@ -127,8 +127,7 @@ public class TextureGenHelper {
                             // Default
                             : BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
 
-                    String newId;
-                    boolean isOnAtlas;
+                    ResourceLocation newId = null;
 
                     /// Adding the textures to the resource
                     for (var info : infoPerTextures.get(oldTextureId)) {
@@ -148,31 +147,29 @@ public class TextureGenHelper {
                         /// Creating a new Id for the texture
                         if (info.customTexturePath() != null) {
                             oldPath = info.customTexturePath();
-                            newId = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
-                            newId = blockId.getNamespace() + ":" + newId;
-                        } else if (Objects.nonNull(info.replacePath()))  {
-                            newId = newPath.replace(info.replacePath().getFirst(), info.replacePath().getSecond());
-                            newId = blockId.getNamespace() + ":" + newId;
+                            String transformedPath = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
+                            newId = blockId.withPath(transformedPath);
+                        } else if (Objects.nonNull(info.replacePath())) {
+                            String transformedPath = newPath.replace(info.replacePath().getFirst(), info.replacePath().getSecond());
+                            newId = blockId.withPath(transformedPath);
                         } else if (info.keepNamespace()) {
-                            newId = oldTextureId.withPath(newPath).toString();
+                            newId = oldTextureId.withPath(newPath);
                         } else { /// DEFAULT
-                            newId = ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), newPath).toString();
+                            newId = ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), newPath);
                         }
 
-                        if (newId.isEmpty()) {
+                        if (newId.getPath().isEmpty()) {
                             EveryCompat.LOGGER.error("The path of new texture is empty for: {}", info.texture());
                             continue;
                         }
 
-                        isOnAtlas = info.onAtlas();
-
-                        String finalNewId = newId;
+                        ResourceLocation finalNewId = newId;
                         sink.addTextureIfNotPresent(manager, newId, () -> {
                             Respriter respriter = respriterSet.getValue();
                             TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
                             postProcessSpecialTexture(blockType, finalNewId, manager, img);
                             return img;
-                        }, isOnAtlas);
+                        });
                     }
                 }
             }
@@ -184,7 +181,7 @@ public class TextureGenHelper {
 
     //post process some textures.
     @SuppressWarnings("UnusedReturnValue")
-    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, String newId, ResourceManager manager,
+    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, ResourceLocation newId, ResourceManager manager,
                                                                                 TextureImage texture) {
         if (blockType.getClass() == WoodType.class) {
             CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture);

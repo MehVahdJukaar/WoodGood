@@ -1,23 +1,20 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
-import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-import java.util.function.Supplier;
-
-public class AllWoodItem extends Item implements ICustomItemRendererProvider {
+public class AllWoodItem extends Item {
 
     public AllWoodItem() {
         super(new Properties());
     }
 
-    @Environment(EnvType.CLIENT)
     @Override
-    public Supplier<ItemStackRenderer> getRendererFactory() {
-        return WoodTypeCycleItemRenderer::new;
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        stack.setCount(0);
     }
 }

@@ -542,7 +542,8 @@ public class CompatSpritesHelper {
     private static final Supplier<WoodType> STRANGEWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
             ResourceLocation.fromNamespaceAndPath("aoa", "strangewood"));
 
-    public static void maybePostProcessWoodTexture(WoodType wood, String newId, ResourceManager manager, TextureImage textureSupplier) {
+    public static void maybePostProcessWoodTexture(WoodType wood, ResourceLocation newId, ResourceManager manager, TextureImage textureSupplier) {
+
         // Ecologics
         if (wood == FLOWERING_AZALEA.get()) {
             flowerAzalea(textureSupplier, manager, newId, wood);
@@ -558,7 +559,7 @@ public class CompatSpritesHelper {
     }
     //for ecologics
 
-    private static void flowerAzalea(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
+    private static void flowerAzalea(TextureImage image, ResourceManager manager, ResourceLocation textureId, WoodType woodType) {
         if (!(image.imageWidth() > 32) && !(image.imageHeight() > 32)) {
             try (TextureImage mask = TextureImage.open(manager,
                     EveryCompat.res("block/ecologics_overlay"));
@@ -577,14 +578,16 @@ public class CompatSpritesHelper {
     }
     //for Regions-Unexplored's brimwood
 
-    private static void brimwoodGlow(TextureImage image, ResourceManager manager, String textureId, WoodType woodType) {
+    private static void brimwoodGlow(TextureImage image, ResourceManager manager, ResourceLocation textureId, WoodType woodType) {
         try (TextureImage lavaOverlay = TextureImage.open(manager,
                 EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"));
              TextureImage plankTexture = TextureImage.open(manager,
                      EveryCompat.res("block/regions_unexplored/brimwood_planks"))
 
         ) {
-            String type = textureId.substring(textureId.lastIndexOf("brimwood_") + 9);
+            String toString = textureId.toString();
+            //bad
+            String type = toString.substring(toString.lastIndexOf("brimwood_") + 9);
 
             Respriter respriter = switch (type) {
                 case "barrel_side" -> Respriter.masked(image, TextureImage.open(manager,
@@ -657,10 +660,10 @@ public class CompatSpritesHelper {
             };
 
             try (TextureImage temp = respriter.recolorWithAnimationOf(plankTexture)) {
-                if (textureId.contains("stairs") || textureId.contains("planks") || textureId.contains("slab") ||
-                        textureId.contains("beehive") || textureId.contains("composter_bottom") || textureId.contains("composter_side")
-                        || textureId.contains("lectern_side") || textureId.contains("lectern_top") || textureId.contains("bookshelf_side")
-                        || textureId.contains("bookshelf_top")
+                if (toString.contains("stairs") || toString.contains("planks") || toString.contains("slab") ||
+                        toString.contains("beehive") || toString.contains("composter_bottom") || toString.contains("composter_side")
+                        || toString.contains("lectern_side") || toString.contains("lectern_top") || toString.contains("bookshelf_side")
+                        || toString.contains("bookshelf_top")
                 ) {
                     TextureOps.applyOverlayOnExisting(image, temp, lavaOverlay);
                 } else {

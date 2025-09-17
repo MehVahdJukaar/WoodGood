@@ -4,7 +4,9 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.every_compat.misc.ErrorMessageScreen;
+import net.mehvahdjukaar.every_compat.misc.WoodTypeCycleItemRenderer;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -38,6 +40,9 @@ public class EveryCompatClient {
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
         RegHelper.registerDynamicResourceProvider(ClientDynamicResourcesHandler.getInstance());
+        ClientHelper.addItemRenderersRegistration(event -> {
+            event.register(ECRegistry.ALL_WOODS.get(), new WoodTypeCycleItemRenderer());
+        });
     }
 
     @EventCalled
