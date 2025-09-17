@@ -482,6 +482,7 @@ public class CompatSpritesHelper {
     // ┌──────────────────────────────────────────────────────────┐
     // │                      OTHER HELPERS                       │
     // └──────────────────────────────────────────────────────────┘
+    @SuppressWarnings("unused")
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakLeaves(BlockTypeResTransformer<T> t) {
         return t.replaceWithTextureFromChild("minecraft:block/oak_leaves", "leaves",
                 s -> !s.contains("_snow") && !s.contains("snow_") && !s.contains("snowy_"));
@@ -490,6 +491,7 @@ public class CompatSpritesHelper {
     /**
      * Replaces the oak planks texture with the plank texture of the 'planks' child of this block type. Meant for wood types
      */
+    @SuppressWarnings("unused")
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakPlanks(BlockTypeResTransformer<T> t) {
         return t.replaceWithTextureFromChild("minecraft:block/oak_planks", "planks");
     }
@@ -497,16 +499,19 @@ public class CompatSpritesHelper {
     /**
      * Replaces the oak log textures with the log texture of the 'log' child of this block type. Meant for wood types
      */
+    @SuppressWarnings("unused")
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakBark(BlockTypeResTransformer<T> t) {
         return t.replaceWithTextureFromChild("minecraft:block/oak_log", "log", LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .replaceWithTextureFromChild("minecraft:block/oak_log_top", "log", LOOKS_LIKE_TOP_LOG_TEXTURE);
     }
 
+    @SuppressWarnings("unused")
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakStripped(BlockTypeResTransformer<T> t) {
         return t.replaceWithTextureFromChild("minecraft:block/stripped_oak_log", "stripped_log", LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .replaceWithTextureFromChild("minecraft:block/stripped_oak_log_top", "stripped_log", LOOKS_LIKE_TOP_LOG_TEXTURE);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceWoodTextures(BlockTypeResTransformer<T> t, WoodType woodType) {
         String n = woodType.getTypeName();
         return t.replaceWithTextureFromChild("minecraft:block/" + n + "_planks", "planks")
@@ -517,6 +522,7 @@ public class CompatSpritesHelper {
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceLeavesTextures(BlockTypeResTransformer<T> t, LeavesType woodType) {
         String n = woodType.getTypeName();
         return t.replaceWithTextureFromChild("minecraft:block/" + n + "_leaves", "leaves", LOOKS_LIKE_LEAF_TEXTURE)
@@ -546,7 +552,7 @@ public class CompatSpritesHelper {
     private static final Supplier<WoodType> STRANGEWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
             new ResourceLocation("aoa", "strangewood"));
 
-    public static void maybePostProcessWoodTexture(WoodType wood, String newId, ResourceManager manager, TextureImage textureSupplier, TextureInfo textureInfo) {
+    public static void maybePostProcessWoodTexture(WoodType wood, ResourceLocation newId, ResourceManager manager, TextureImage textureSupplier, TextureInfo textureInfo) {
         // Ecologics
         if (wood == FLOWERING_AZALEA.get()) {
             flowerAzalea(textureSupplier, manager, newId, textureInfo);
@@ -562,12 +568,12 @@ public class CompatSpritesHelper {
     }
 
     //for ecologics
-    private static void flowerAzalea(TextureImage image, ResourceManager manager, String textureId, TextureInfo textureInfo) {
+    private static void flowerAzalea(TextureImage image, ResourceManager manager, ResourceLocation textureId, TextureInfo textureInfo) {
         if (!(image.imageWidth() > 32) && !(image.imageHeight() > 32)) {
             try (TextureImage flowerOverLay = TextureImage.open(manager,
                     EveryCompat.res("block/ecologics_overlay"));
                  TextureImage plankTexture = TextureImage.open(manager,
-                         RPUtils.findFirstBlockTextureLocation(manager, AZALEA.get().planks));
+                         RPUtils.findFirstBlockTextureLocation(manager, AZALEA.get().planks))
             ) {
 
                 Respriter respriter;
@@ -588,13 +594,10 @@ public class CompatSpritesHelper {
     }
 
     //for Regions-Unexplored's brimwood
-    private static void brimwoodGlow(TextureImage image, ResourceManager manager, String textureId, TextureInfo textureInfo) {
-        try (TextureImage lavaOverlay = TextureImage.open(manager,
-                EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"));
-             TextureImage plankTexture = TextureImage.open(manager,
-                     EveryCompat.res("block/regions_unexplored/brimwood_planks"))
-
-        ) {
+    private static void brimwoodGlow(TextureImage image, ResourceManager manager, ResourceLocation textureId, TextureInfo textureInfo) {
+        try (TextureImage plankTexture = TextureImage.open(manager,
+                EveryCompat.res("block/regions_unexplored/brimwood_planks"))) {
+            String toString = textureId.toString();
             Respriter respriter;
             if (Objects.nonNull(textureInfo.mask()))
                 respriter = Respriter.masked(image, TextureImage.open(manager, textureInfo.mask()));
@@ -602,13 +605,16 @@ public class CompatSpritesHelper {
                 respriter = Respriter.of(image);
 
             try (TextureImage temp = respriter.recolorWithAnimationOf(plankTexture)) {
-                if (textureId.contains("stairs") || textureId.contains("planks")
-                        || textureId.contains("slab") || textureId.contains("beehive")
-                        || textureId.contains("composter_bottom") || textureId.contains("composter_side")
-                        || textureId.contains("lectern_side") || textureId.contains("lectern_top")
-                        || textureId.contains("bookshelf_side") || textureId.contains("bookshelf_top")
+                if (toString.contains("stairs") || toString.contains("planks")
+                        || toString.contains("slab") || toString.contains("beehive")
+                        || toString.contains("composter_bottom") || toString.contains("composter_side")
+                        || toString.contains("lectern_side") || toString.contains("lectern_top")
+                        || toString.contains("bookshelf_side") || toString.contains("bookshelf_top")
                 ) {
-                    TextureOps.applyOverlayOnExisting(image, temp, lavaOverlay);
+                    try (TextureImage lavaOverlay = TextureImage.open(manager,
+                            EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"))) {
+                        TextureOps.applyOverlayOnExisting(image, temp, lavaOverlay);
+                    }
                 } else {
                     TextureOps.applyOverlayOnExisting(image, temp);
                 }
