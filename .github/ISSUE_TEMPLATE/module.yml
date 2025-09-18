@@ -17,6 +17,8 @@ body:
           required: true
         - label: "The mod MUST contain variant WoodType: OAK or other vanilla WoodTypes for ITEM or BLOCK"
           required: true
+        - label: "Consider requesting EC compatibility to the target mod. Adding direct EC support on their side is the preferreed way as to minimize maintenance and future proof the module. this can be done following the mod readme"
+          requires: true
 
   - type: input
     id: curseforge-normal
