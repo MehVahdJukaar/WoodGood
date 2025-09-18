@@ -174,11 +174,11 @@ dependencies {
 //    modRuntimeOnly("curse.maven:building-but-better-989479:5362379") // has a built-in module
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579676")
 //    modRuntimeOnly("curse.maven:chipped-456956:4634858") // v3.0.1 | Athena, Resourceful-Lib, Forge-Config-Api-Port
-//    modCompileOnly("curse.maven:dawn-of-time-312359:6863594") // Fusion, YetAnotherConfigLib
+//    modRuntimeOnly("curse.maven:dawn-of-time-312359:6863594") // Fusion, YetAnotherConfigLib
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:5089408")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4062547")
 //    modRuntimeOnly("curse.maven:farmers-delight-refabricated-993166:6626608")
-//    modRuntimeOnly("curse.maven:friends-and-foes-551364:4968876")
+//    modRuntimeOnly("curse.maven:friends-and-foes-551364:6354623")
 //    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118730")
 //    modRuntimeOnly("curse.maven:furnish-547069:4821516")

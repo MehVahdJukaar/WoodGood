@@ -190,7 +190,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:farmersdelight-398521:6597298") // Smidgeon-O'-Bliss, Youkais-Homecoming
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5118729") // Resourceful-Lib
-//    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:4712044")
+//    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:6354624")
 //    modRuntimeOnly("curse.maven:missing-wilds-forge-634277:5053677")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5263631") // Monolib
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5476605") // Quad - LieOnLion
