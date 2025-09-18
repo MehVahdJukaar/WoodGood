@@ -143,6 +143,13 @@ public abstract class EveryCompat {
         }
     }
 
+    @SafeVarargs
+    public static void addMultipleIfLoaded(String modId, Supplier<Function<String, CompatModule>>... moduleFactories) {
+            for (var moduleFactory : moduleFactories) {
+                addIfLoaded(modId, moduleFactory);
+            }
+    }
+
     public static Collection<CompatMod> getCompatMods() {
         return COMPAT_MODS;
     }
