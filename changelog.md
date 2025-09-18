@@ -21,6 +21,21 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C):
+  - Improved the logging in case of crash for some unique cases
+  - Improved the error message with VMinus - it's still marked as incompatible - Please look at [VMinus#34](https://github.com/lixxir/VMinus/issues/34) for details
+  - Added a new feature in `everycomp-hazardous.toml` to disable all of Wood Modules (same as what Library-Section can do)
+  - Multiple Undocumented Changes
+- **Create** (C): Fixed a typo in "wallnut" to "walnut" for custom textures with **Ecologic** - @22858
+- **Refurbished Furniture (MrCrayFish)** (C): Added the missing tooltips to ceiling_fan
+- **Builder's Crafts & Additions** (F): Fixed the crash with **Excessive Building** - [#1048](https://github.com/MehVahdJukaar/WoodGood/issues/1048)
+- **Storage Drawers** (C): Added the missing tag, `#storagedrawers:trim` to trim blocks - [#1029](https://github.com/MehVahdJukaar/WoodGood/issues/1029)
+
+---
+
+## v2.9.2
+
+### UPDATED: 
 - **Every Compat** (C): 
   - Corrected the logic for texture not being generated with **Gems Realm** & **Macaw's Bridges** - [#31](https://github.com/Xelbayria/GemsRealm/issues/31)
   - Improved Recipe Generation for **Gems Realm** to correct the recipes with wrong ingredients
