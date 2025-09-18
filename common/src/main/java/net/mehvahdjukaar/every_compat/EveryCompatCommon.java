@@ -5,7 +5,10 @@ import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurniture
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
 import net.mehvahdjukaar.every_compat.modules.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
-import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
+import net.mehvahdjukaar.every_compat.modules.chipped.ChippedDoorModule;
+import net.mehvahdjukaar.every_compat.modules.chipped.ChippedGlassModule;
+import net.mehvahdjukaar.every_compat.modules.chipped.ChippedLogModule;
+import net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
@@ -32,8 +35,7 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 import java.util.List;
 
-import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
-import static net.mehvahdjukaar.every_compat.EveryCompat.addOtherCompatMod;
+import static net.mehvahdjukaar.every_compat.EveryCompat.*;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 public class EveryCompatCommon {
@@ -106,7 +108,7 @@ public class EveryCompatCommon {
             addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
             addIfLoaded("blockus", () -> BlockusModule::new);
             addIfLoaded("campchair", () -> CampChairModule::new);
-            addIfLoaded("chipped", () -> ChippedModule::new);
+            addMultipleIfLoaded("chipped", () -> ChippedMainModule::new, () -> ChippedLogModule::new, () -> ChippedDoorModule::new, () -> ChippedGlassModule::new);
             addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
             addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule::new);
             addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);
