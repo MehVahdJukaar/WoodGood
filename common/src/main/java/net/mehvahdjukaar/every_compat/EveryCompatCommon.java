@@ -34,6 +34,7 @@ import java.util.List;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
 import static net.mehvahdjukaar.every_compat.EveryCompat.addOtherCompatMod;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 public class EveryCompatCommon {
 
@@ -51,79 +52,82 @@ public class EveryCompatCommon {
 
     protected void addModules() {
 
+        if (INCLUDE_ALL_WOOD_MODULES.get()) {
+
 //!! =============================================== Add Other Compat Mods ========================================== \\
-        addOtherCompatMod("compatoplenty", "biomesoplenty",
-                "twigs", "farmersdelight", "quark", "woodworks", "boatload");
-        addOtherCompatMod("compat_makeover", "biomemakeover",
-                "habitat", "farmersdelight", "quark", "decorative_blocks");
-        addOtherCompatMod("decorative_compat", "biomesoplenty", "decorative_blocks");
-        addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", "storagedrawers");
-        addOtherCompatMod("lolmcvbop", "biomesoplenty", "lolmcv");
-        addOtherCompatMod("lolmcvbmo", "biomemakeover", "lolmcv");
-        addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
-                "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
+            addOtherCompatMod("compatoplenty", "biomesoplenty",
+                    "twigs", "farmersdelight", "quark", "woodworks", "boatload");
+            addOtherCompatMod("compat_makeover", "biomemakeover",
+                    "habitat", "farmersdelight", "quark", "decorative_blocks");
+            addOtherCompatMod("decorative_compat", "biomesoplenty", "decorative_blocks");
+            addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", "storagedrawers");
+            addOtherCompatMod("lolmcvbop", "biomesoplenty", "lolmcv");
+            addOtherCompatMod("lolmcvbmo", "biomemakeover", "lolmcv");
+            addOtherCompatMod("arts_and_crafts_compat", "arts_and_crafts",
+                    "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
 
-        addOtherCompatMod("ascended_quark", List.of("aether", "deep_aether"), "quark");
+            addOtherCompatMod("ascended_quark", List.of("aether", "deep_aether"), "quark");
 
-        // Farmer's Delight
-        addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
-        addOtherCompatMod("undergardendelight", "undergarden", "farmersdelight");
+            // Farmer's Delight
+            addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
+            addOtherCompatMod("undergardendelight", "undergarden", "farmersdelight");
 
-        // Macaw's Addon
-        addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
-        addOtherCompatMod("macawbridgesbyg", "biomeswevegone", "mcwbridges");
-        addOtherCompatMod("mcwfencesbop", "biomesoplenty", "mcwfences");
-        addOtherCompatMod("mcwfencesbyg", "biomeswevegone", "mcwfences");
-        addOtherCompatMod("macawsroofsbop", "biomesoplenty", "mcwroofs");
-        addOtherCompatMod("macawsroofsbyg", "biomeswevegone", "mcwroofs");
-        addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"),
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-        addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty",
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-        addOtherCompatMod("mcwmoddinglegacy", List.of("blue_skies", "premium_wood"),
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-        addOtherCompatMod("mcwabnormals", List.of("buzzier_bees", "environmental", "upgrade_aquatic", "autumnity", "endergetic", "atmospheric", "caverns_and_chasms"),
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-        addOtherCompatMod("mcwterraformersmc", List.of("terrestria", "traverse", "cinderscape"),
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-        addOtherCompatMod("mcwaurora", "enhanced_mushrooms",
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-        addOtherCompatMod("mcwquark", "quark",
-                "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+            // Macaw's Addon
+            addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
+            addOtherCompatMod("macawbridgesbyg", "biomeswevegone", "mcwbridges");
+            addOtherCompatMod("mcwfencesbop", "biomesoplenty", "mcwfences");
+            addOtherCompatMod("mcwfencesbyg", "biomeswevegone", "mcwfences");
+            addOtherCompatMod("macawsroofsbop", "biomesoplenty", "mcwroofs");
+            addOtherCompatMod("macawsroofsbyg", "biomeswevegone", "mcwroofs");
+            addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"),
+                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+            addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty",
+                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+            addOtherCompatMod("mcwmoddinglegacy", List.of("blue_skies", "premium_wood"),
+                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+            addOtherCompatMod("mcwabnormals", List.of("buzzier_bees", "environmental", "upgrade_aquatic", "autumnity", "endergetic", "atmospheric", "caverns_and_chasms"),
+                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+            addOtherCompatMod("mcwterraformersmc", List.of("terrestria", "traverse", "cinderscape"),
+                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+            addOtherCompatMod("mcwaurora", "enhanced_mushrooms",
+                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+            addOtherCompatMod("mcwquark", "quark",
+                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
 
-        // Abnormals Delight
-        addOtherCompatMod("abnormals_delight",
-                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caverns_and_chasms"),
-                "farmersdelight");
+            // Abnormals Delight
+            addOtherCompatMod("abnormals_delight",
+                    List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caverns_and_chasms"),
+                    "farmersdelight");
 
-    //!! =========================================== Add Modules ==================================================== \\
-        addIfLoaded("another_furniture", () -> AnotherFurnitureModule::new);
-        addIfLoaded("backpacked", () -> BackpackedModule::new);
-        addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
-        addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
-        addIfLoaded("blockus", () -> BlockusModule::new);
-        addIfLoaded("campchair", () -> CampChairModule::new);
-        addIfLoaded("chipped", () -> ChippedModule::new);
-        addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
-        addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule::new);
-        addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);
-        addIfLoaded("friendsandfoes", () -> FriendsAndFoesModule::new);
-        addIfLoaded("furnish", () -> FurnishModule::new);
-        addIfLoaded("handcrafted", () -> HandcraftedModule::new);
-        addIfLoaded("hearth_and_home", () -> HearthAndHomeModule::new);
-        addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
-        addIfLoaded("lolmcv", () -> MoreChestVariantsModule::new);
-        addIfLoaded("missingwilds", () -> MissingWildModule::new);
-        addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches::new);
-        addIfLoaded("quark", () -> QuarkModule::new);
-        addIfLoaded("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
-        addIfLoaded("storagedrawers", () -> StorageDrawersModule::new);
-        addIfLoaded("stylishstiles", () -> StylishStilesModule::new);
-        addIfLoaded("table_top_craft", () -> TableTopCraftModule::new);
-        addIfLoaded("twigs", () -> TwigsModule::new);
-        addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
-        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
-        addIfLoaded("villagersplus", () -> VillagersPlusModule::new);
+            //!! =========================================== Add Modules ==================================================== \\
+            addIfLoaded("another_furniture", () -> AnotherFurnitureModule::new);
+            addIfLoaded("backpacked", () -> BackpackedModule::new);
+            addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
+            addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
+            addIfLoaded("blockus", () -> BlockusModule::new);
+            addIfLoaded("campchair", () -> CampChairModule::new);
+            addIfLoaded("chipped", () -> ChippedModule::new);
+            addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
+            addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule::new);
+            addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);
+            addIfLoaded("friendsandfoes", () -> FriendsAndFoesModule::new);
+            addIfLoaded("furnish", () -> FurnishModule::new);
+            addIfLoaded("handcrafted", () -> HandcraftedModule::new);
+            addIfLoaded("hearth_and_home", () -> HearthAndHomeModule::new);
+            addIfLoaded("lolmct", () -> MoreCraftingTablesModule::new);
+            addIfLoaded("lolmcv", () -> MoreChestVariantsModule::new);
+            addIfLoaded("missingwilds", () -> MissingWildModule::new);
+            addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches::new);
+            addIfLoaded("quark", () -> QuarkModule::new);
+            addIfLoaded("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
+            addIfLoaded("storagedrawers", () -> StorageDrawersModule::new);
+            addIfLoaded("stylishstiles", () -> StylishStilesModule::new);
+            addIfLoaded("table_top_craft", () -> TableTopCraftModule::new);
+            addIfLoaded("twigs", () -> TwigsModule::new);
+            addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
+            addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new);
+            addIfLoaded("villagersplus", () -> VillagersPlusModule::new);
 
+        }
     }
 }

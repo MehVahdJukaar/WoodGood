@@ -71,6 +71,7 @@ import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
 import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 /**
  * Author: MehVahdJukaar
@@ -98,63 +99,67 @@ public class EveryCompatForge extends EveryCompatCommon {
 
 //!! =============================================== Add Modules ==================================================== \\
 
-        // ========================================= MACAW's ======================================================== \\
-        addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
-        addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
-        addIfLoaded("mcwfences", () -> MacawFencesModule::new);
-        addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
-        addIfLoaded("mcwlights", () -> MacawLightsModule::new);
-        addIfLoaded("mcwpaths", () -> MacawPathsModule::new);
-        addIfLoaded("mcwroofs", () -> MacawRoofsModule::new);
-        addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
-        addIfLoaded("mcwwindows", () -> MacawWindowsModule::new);
-        addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
+        if (INCLUDE_ALL_WOOD_MODULES.get()) {
 
-        // ========================================= GENERAL ======================================================== \\
-        addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
-        addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
-        addIfLoaded("bbb", () -> BuildingButBetterModule::new);
-        addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
-        addIfLoaded("blocksplus", () -> BlocksPlusModule::new);
-        addIfLoaded("boatload", () -> BoatLoadModule::new);
-        addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
-        addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
-        addIfLoaded("car", () -> UltimateCarModule::new);
-        addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
-        addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
-        addIfLoaded("create", () -> CreateModule::new);
-        addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
-        addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
-        addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
-        addIfLoaded("functionalstorage", () -> FunctionalStorageModule::new);
-        addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
-        addIfLoaded("justaraftmod", () -> JustARaftModule::new);
-        addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
-        addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
-        addIfLoaded("mighty_mail", () -> MightyMailModule::new);
-        addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
-        addIfLoaded("nfm", () -> NosiphusFurnitureModule::new);
-        addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
-        addIfLoaded("pokecube_legends", () -> PokecubeLegendsModule::new);
-        addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
-        addIfLoaded("redeco", () -> ReDecoModule::new);
-        addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
-        addIfLoaded("shutter", () -> LauchsShuttersModule::new);
-        addIfLoaded("sob", () -> SmidgeonOBlissModule::new);
-        addIfLoaded("storagedelight", () -> StorageDelightModule::new);
-        addIfLoaded("timber_frames", () -> TimberFramesModule::new);
-        addIfLoaded("tropicraft", () -> TropicraftModule::new);
-        addIfLoaded("twilightforest", () -> TwilightForestModule::new);
-        addIfLoaded("unusual_furniture", () -> UnusualFurnitureModule::new);
-        addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
-        addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
-        addIfLoaded("woodster", () -> WoodsterModule::new);
-        addIfLoaded("woodworks", () -> WoodworksModule::new);
-        addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
-        addIfLoaded("xercamod", () -> XercaModule::new);
-        addIfLoaded("youkaishomecoming", () -> YoukaisHomecomingModule::new);
+            // ========================================= MACAW's ======================================================== \\
+            addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
+            addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
+            addIfLoaded("mcwfences", () -> MacawFencesModule::new);
+            addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
+            addIfLoaded("mcwlights", () -> MacawLightsModule::new);
+            addIfLoaded("mcwpaths", () -> MacawPathsModule::new);
+            addIfLoaded("mcwroofs", () -> MacawRoofsModule::new);
+            addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
+            addIfLoaded("mcwwindows", () -> MacawWindowsModule::new);
+            addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
 
-        if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+            // ========================================= GENERAL ======================================================== \\
+            addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
+            addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
+            addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
+            addIfLoaded("blocksplus", () -> BlocksPlusModule::new);
+            addIfLoaded("boatload", () -> BoatLoadModule::new);
+            addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
+            addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
+            addIfLoaded("car", () -> UltimateCarModule::new);
+            addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
+            addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
+            addIfLoaded("create", () -> CreateModule::new);
+            addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
+            addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
+            addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
+            addIfLoaded("functionalstorage", () -> FunctionalStorageModule::new);
+            addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
+            addIfLoaded("justaraftmod", () -> JustARaftModule::new);
+            addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
+            addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
+            addIfLoaded("mighty_mail", () -> MightyMailModule::new);
+            addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+            addIfLoaded("nfm", () -> NosiphusFurnitureModule::new);
+            addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
+            addIfLoaded("pokecube_legends", () -> PokecubeLegendsModule::new);
+            addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
+            addIfLoaded("redeco", () -> ReDecoModule::new);
+            addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
+            addIfLoaded("shutter", () -> LauchsShuttersModule::new);
+            addIfLoaded("sob", () -> SmidgeonOBlissModule::new);
+            addIfLoaded("storagedelight", () -> StorageDelightModule::new);
+            addIfLoaded("timber_frames", () -> TimberFramesModule::new);
+            addIfLoaded("tropicraft", () -> TropicraftModule::new);
+            addIfLoaded("twilightforest", () -> TwilightForestModule::new);
+            addIfLoaded("unusual_furniture", () -> UnusualFurnitureModule::new);
+            addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
+            addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
+            addIfLoaded("woodster", () -> WoodsterModule::new);
+            addIfLoaded("woodworks", () -> WoodworksModule::new);
+            addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+            addIfLoaded("xercamod", () -> XercaModule::new);
+            addIfLoaded("youkaishomecoming", () -> YoukaisHomecomingModule::new);
+
+            if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+
+        }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addIfLoaded("graveyard", () -> GraveyardModule::new); // Disabled until custom block models work
