@@ -1,15 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
 import com.google.gson.JsonObject;
-import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECPlatformStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.api.TabAddMode;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -23,7 +19,6 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
@@ -64,7 +59,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //SUPPORT: v4.0-435+
 public class QuarkModule extends SimpleModule {
@@ -97,7 +94,7 @@ public class QuarkModule extends SimpleModule {
                                         .sound(w.getSound())
                         )
                 )
-                .requiresChildren(VanillaWoodChildKeys.SLAB)
+                .requiresChildren(SLAB)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_vertical_slabs"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("vertical_slabs"), Registries.BLOCK, Registries.ITEM)
@@ -116,15 +113,17 @@ public class QuarkModule extends SimpleModule {
                         getModBlock("acacia_bookshelf"),
                         () -> VanillaWoodTypes.ACACIA,
                         w -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(),
-                                null, w.canBurn(), w.getSound()))
+                                null, w.canBurn(), w.getSound())
+                )
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(new ResourceLocation("forge:bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .addRecipe(modRes("building/crafting/acacia_bookshelf"))
-                .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
-                .setPalette(this::bookshelfPalette)
+                .addTextureM(EveryCompat.res("block/acacia_bookshelf"),
+                        EveryCompat.res("block/acacia_bookshelf_m"),
+                        bookshelfPalette)
                 .build();
         this.addEntry(bookshelves);
 
@@ -137,7 +136,7 @@ public class QuarkModule extends SimpleModule {
                             return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/",
                                     Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
                         })
-                .requiresChildren(VanillaWoodChildKeys.FENCE, VanillaWoodChildKeys.WOOD) //REASON: recipes
+                .requiresChildren(FENCE, WOOD) //REASON: recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
@@ -159,7 +158,7 @@ public class QuarkModule extends SimpleModule {
                             return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/stripped_",
                                     Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
                         })
-                .requiresChildren("fence", "stripped_log", "stripped_wood") //REASON: textures, recipes
+                .requiresChildren(FENCE, STRIPPED_LOG, STRIPPED_WOOD) //REASON: textures, recipes
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
@@ -216,8 +215,9 @@ public class QuarkModule extends SimpleModule {
                         getModBlock("hollow_oak_log"),
                         () -> VanillaWoodTypes.OAK,
                         w -> new HollowLogBlock(shortenedId() + "/" + w.getAppendableId(),
-                                w.log, null, w.canBurn()))
-                .requiresChildren("stripped_log") // Texture
+                                w.log, null, w.canBurn())
+                )
+                .requiresChildren(STRIPPED_LOG) // Texture
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -273,7 +273,7 @@ public class QuarkModule extends SimpleModule {
                         () -> VanillaLeavesTypes.OAK,
                         leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
                 )
-                .requiresChildren(VanillaWoodChildKeys.LOG) // Reason: RECIPES. Yes leaves have log too.
+                .requiresChildren(LOG) // Reason: RECIPES. Yes leaves have log too.
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -296,7 +296,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + leavesType.getVariantId("%s_leaf_carpet");
                             return new LeafCarpetBlock(name, leavesType.leaves, null);
                         })
-                .requiresChildren("leaves") // Reason: RECIPES
+                //RECIPES: leaves
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -353,24 +353,17 @@ public class QuarkModule extends SimpleModule {
         event.register(TRAPPED_CHEST_TILE, context -> new VariantChestRenderer(context, true));
     }
 
-    private Pair<List<Palette>, McMetaFile> bookshelfPalette(BlockType w, ResourceManager m) {
-        try (TextureImage plankTexture = TextureImage.open(m,
-                RPUtils.findFirstBlockTextureLocation(m, ((WoodType) w).planks))) {
-
-            List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-            targetPalette.forEach(p -> {
-                var l0 = p.getDarkest();
-                p.increaseDown();
-                p.increaseDown();
-                p.increaseDown();
-                p.increaseDown();
-                p.remove(l0);
-            });
-            return Pair.of(targetPalette, plankTexture.getMcMeta());
-        } catch (Exception e) {
-            throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
-        }
-    }
+    public static final PaletteStrategy bookshelfPalette = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
+                    blockType, manager, PLANKS, null,
+                    (p) -> {
+                        var l0 = p.getDarkest();
+                        p.increaseDown();
+                        p.increaseDown();
+                        p.increaseDown();
+                        p.increaseDown();
+                        p.remove(l0);
+                    }));
 
     @Override
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
@@ -481,11 +474,9 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
+    // RECIPES, TAGS
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
-        // Recipes & Tags
         super.addDynamicServerResources(executor);
-
-        //extra tasks
         executor.accept((manager, handler) -> {
             if (PlatHelper.isModLoaded("botanypots")) {
                 hedges.items.forEach((leaves, item) -> {
@@ -500,13 +491,13 @@ public class QuarkModule extends SimpleModule {
                 Block block = entry.getValue();
 
                 // will generate if block is not null
-                if (block != null) generalHedgeRecipe(leavesType, block, handler, manager);
+                if (block != null) createHedgeRecipe(leavesType, block, handler, manager);
             }
         });
     }
 
     // Correcting logs used to craft hedges
-    public void generalHedgeRecipe(LeavesType leavesType, Block block, ResourceSink handler, ResourceManager manager) {
+    public void createHedgeRecipe(LeavesType leavesType, Block block, ResourceSink handler, ResourceManager manager) {
 
         ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
 
