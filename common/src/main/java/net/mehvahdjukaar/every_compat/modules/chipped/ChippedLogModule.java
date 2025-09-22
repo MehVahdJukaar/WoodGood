@@ -471,4 +471,14 @@ public class ChippedLogModule extends ChippedAbstractModule {
 
     }
 
+    @Override
+    // RECIPES
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
+
+        executor.accept((manager, sink) -> {
+            addCarpenterRecipe(sink, "log");
+            addCarpenterRecipe(sink, "stripped_log");
+        });
+    }
 }

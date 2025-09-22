@@ -1,11 +1,14 @@
 package net.mehvahdjukaar.every_compat.modules.chipped;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.EntrySet;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -13,7 +16,16 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkPalette;
 import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkerPalette;
@@ -428,10 +440,10 @@ public class ChippedDoorModule extends ChippedAbstractModule {
                         getModBlock("tile_windowed_oak_door"), () -> VanillaWoodTypes.OAK,
                         this::makeDoor
                 )
-                .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_bottom"),
+                .addTextureM(modRes("block/oak_door/tile_windowed_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/tile_windowed_oak_door_bottom_m"),
                         darkPalette)
-                .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_top"),
+                .addTextureM(modRes("block/oak_door/tile_windowed_oak_door_top"),
                         EveryCompat.res("block/ch/doors/tile_windowed_oak_door_top_m"),
                         darkPalette)
                 .addTextureM(modRes("item/oak_door/tile_windowed_oak_door"),
@@ -803,5 +815,40 @@ public class ChippedDoorModule extends ChippedAbstractModule {
 
     private @NotNull DoorBlock makeDoor(WoodType w) {
         return new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion(), w.toVanillaOrOak().setType());
+    }
+
+    @Override
+    // RECIPES, LOOT_TABLES
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
+
+        executor.accept((manager, sink)-> {
+            // use this. also set the entry to no drop so we don't have 2.
+            // why do we need this instead of copy parent drop? macaw has doors too and they work
+            // chipped adds their loot not via loot table. this is why we need this. no other mod should need this stuff
+            // this shouldnt be needed.... why isnt copy parent loot working?
+            List<EntrySet<?>> doors = this.getEntries().stream().filter(
+                    e -> e.getName().contains("door") && !e.getName().contains("trapdoor")).toList();
+            for (var e : doors) {
+                if (e instanceof SimpleEntrySet<?, ?> se) {
+                    for (var d : se.blocks.values()) {
+                        sink.addLootTable(d, createDoorLoot(d));
+                    }
+                }
+            }
+
+            addCarpenterRecipe(sink, "door");
+            addCarpenterRecipe(sink, "trapdoor");
+        });
+    }
+
+    public static LootTable.Builder createDoorLoot(Block block) {
+        return LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(block)
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)))));
     }
 }

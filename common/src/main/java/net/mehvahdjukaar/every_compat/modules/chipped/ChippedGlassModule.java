@@ -492,6 +492,10 @@ public class ChippedGlassModule extends ChippedAbstractModule {
                 .build();
         this.addEntry(squareGlassPane);
 
-
     }
+
+//    @Override
+//    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+//        super.addDynamicServerResources(executor);
+//    }
 }
