@@ -142,7 +142,7 @@ public abstract class EveryCompat {
             try {
                 CompatModule module = moduleFactory.get().apply(modId);
                 addModule(module);
-            } catch (Exception e){
+            } catch (Throwable e){
                 ERRORED.add(new CompatModule(modId, modId, "unknown") {
 
                     @Override
