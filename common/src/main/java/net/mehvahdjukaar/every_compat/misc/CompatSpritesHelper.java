@@ -499,11 +499,13 @@ public class CompatSpritesHelper {
     /**
      * Replaces the oak log textures with the log texture of the 'log' child of this block type. Meant for wood types
      */
+    @SuppressWarnings("unused")
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakBark(BlockTypeResTransformer<T> t) {
         return t.replaceWithTextureFromChild("minecraft:block/oak_log", "log", LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .replaceWithTextureFromChild("minecraft:block/oak_log_top", "log", LOOKS_LIKE_TOP_LOG_TEXTURE);
     }
 
+    @SuppressWarnings("unused")
     public static <T extends BlockType> BlockTypeResTransformer<T> replaceOakStripped(BlockTypeResTransformer<T> t) {
         return t.replaceWithTextureFromChild("minecraft:block/stripped_oak_log", "stripped_log", LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .replaceWithTextureFromChild("minecraft:block/stripped_oak_log_top", "stripped_log", LOOKS_LIKE_TOP_LOG_TEXTURE);
@@ -571,7 +573,7 @@ public class CompatSpritesHelper {
             try (TextureImage flowerOverLay = TextureImage.open(manager,
                     EveryCompat.res("block/ecologics_overlay"));
                  TextureImage plankTexture = TextureImage.open(manager,
-                         RPUtils.findFirstBlockTextureLocation(manager, AZALEA.get().planks));
+                         RPUtils.findFirstBlockTextureLocation(manager, AZALEA.get().planks))
             ) {
 
                 Respriter respriter;

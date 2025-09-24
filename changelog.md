@@ -20,6 +20,18 @@
 
 </div>
 
+### UPDATED: 
+- **Every Compat** (C): 
+  - Improved the comments in configs, `everycomp-common.toml` and `everycomp-client.toml`
+  - Added a new feature in `everycomp-hazardous.toml` to disable all of Wood Modules (same as what Library-Section can do)
+  - Multiple Undocumented Changes
+- **Refurbished Furniture (MrCrayFish)** (C): Fixed the incorrectly generated textures for **Region Unexplored**'s brimwood
+- **Create** (C): Fixed a typo in "wallnut" to "walnut" for custom textures with **Ecologic**
+
+---
+
+## v2.11.3
+
 ### UPDATED:
 - **Architect's Palette** (C): Updated for 1.21.1 - [#1040](https://github.com/MehVahdJukaar/WoodGood/issues/1040)
 - **Valhelsia Structure** (NF): Fixed the missing recipes for all blocks except bundled_stripped_posts and bundled_posts
