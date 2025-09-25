@@ -132,7 +132,7 @@ public class PaletteStrategies {
             if (paletteTransform != null) targetPalette.forEach(paletteTransform);
             return PaletteStrategy.PaletteAndAnimation.of(targetPalette, animation);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to get main block type texture", e);
+            throw new RuntimeException("Failed to get mainChild texture for "+ blockType.getId() +" - "+ e);
         }
     }
 
