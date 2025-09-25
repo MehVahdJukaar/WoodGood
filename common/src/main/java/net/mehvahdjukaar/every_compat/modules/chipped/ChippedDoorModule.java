@@ -440,10 +440,10 @@ public class ChippedDoorModule extends ChippedAbstractModule {
                         getModBlock("tile_windowed_oak_door"), () -> VanillaWoodTypes.OAK,
                         this::makeDoor
                 )
-                .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_bottom"),
+                .addTextureM(modRes("block/oak_door/tile_windowed_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/tile_windowed_oak_door_bottom_m"),
                         darkPalette)
-                .addTextureM(EveryCompat.res("block/oak_door/tile_windowed_oak_door_top"),
+                .addTextureM(modRes("block/oak_door/tile_windowed_oak_door_top"),
                         EveryCompat.res("block/ch/doors/tile_windowed_oak_door_top_m"),
                         darkPalette)
                 .addTextureM(modRes("item/oak_door/tile_windowed_oak_door"),
