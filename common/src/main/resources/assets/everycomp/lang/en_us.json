@@ -1107,5 +1107,8 @@
   "block_type.bibliocraft.potion_shelf": "%s Potion Shelf",
   "block_type.bibliocraft.shelf": "%s Shelf",
   "block_type.bibliocraft.table": "%s Table",
-  "block_type.bibliocraft.tool_rack": "%s Tool Rack"
+  "block_type.bibliocraft.tool_rack": "%s Tool Rack",
+
+  "block_type.nomansland.trimmed_planks": "Trimmed %s Planks",
+  "block_type.nomansland.bookshelf": "%s Bookshelf"
 }

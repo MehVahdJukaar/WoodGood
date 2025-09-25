@@ -232,6 +232,7 @@ dependencies {
     modCompileOnly("curse.maven:missing-wilds-622590:5569350")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673") //!! 1.20.1
+    modCompileOnly("curse.maven:no-mans-land-538493:6937950")
     modCompileOnly("curse.maven:oreberries-replanted-454062:5817304")
     modCompileOnly("curse.maven:pokecube-aoi-285121:6920497")
     modCompileOnly("curse.maven:premium-wood-353515:3905203") //!! 1.20.1

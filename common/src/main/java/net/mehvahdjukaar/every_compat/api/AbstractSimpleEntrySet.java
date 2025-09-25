@@ -455,6 +455,12 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return addTexture(TextureInfo.of(textureLocation, customTexturePath));
         }
 
+        // edge case for when a custom path (for the correct ResourceLocation) is required with a mask simultaneously
+        public BL addTextureCM(ResourceLocation textureLocation, ResourceLocation maskLocation, String customTexturePath) {
+            return addTexture(TextureInfo.of(textureLocation, customTexturePath)
+                    .mask(maskLocation));
+        }
+
         // adds a texture with automatic masking. Experimental
         public BL addTextureAutoM(ResourceLocation textureLocation) {
             return addTexture(TextureInfo.of(textureLocation)

@@ -27,6 +27,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.more.MoreCraftingTablesForForgeModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish.MightyMailModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.nomansland.NoMansLandModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeAIOModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
@@ -112,6 +113,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
             addIfLoaded("mighty_mail", () -> MightyMailModule::new);
             addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
+            addIfLoaded("nomansland", () -> NoMansLandModule::new);
             addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
             addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
             addIfLoaded("pokecube_legends", () -> PokecubeAIOModule::new);
