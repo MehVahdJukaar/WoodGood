@@ -69,24 +69,24 @@ public class PaletteStrategies {
 
     public static final PaletteStrategy PLANKS_REMOVE_DARKEST = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
-            blockType, manager, VanillaWoodChildKeys.PLANKS, null,
-            (p) -> {
-                if (p.size() > 2) p.remove(p.getDarkest());
-            }));
+                    blockType, manager, VanillaWoodChildKeys.PLANKS, null,
+                    p -> {
+                        if (p.size() > 2) p.remove(p.getDarkest());
+                    }));
 
     public static final PaletteStrategy PLANKS_REMOVE_2_DARKEST = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
-            blockType, manager, VanillaWoodChildKeys.PLANKS, null,
-            (p) -> {
-                if (p.size() > 3) {
-                    p.remove(p.getDarkest());
-                    p.remove(p.getDarkest());
-                }
-            }));
+                    blockType, manager, VanillaWoodChildKeys.PLANKS, null,
+                    p -> {
+                        if (p.size() > 3) {
+                            p.remove(p.getDarkest());
+                            p.remove(p.getDarkest());
+                        }
+                    }));
 
     public static final PaletteStrategy PLANKS_LOW_CONTRAST = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, VanillaWoodChildKeys.PLANKS, null,
-            (p) -> {
+            p -> {
                 //luminance step is the distance between 2 colors. Essentially contrast
                 float averageStep = p.getAverageLuminanceStep();
                 //lower step = lower contrast. Tweak as needed
@@ -132,7 +132,7 @@ public class PaletteStrategies {
             if (paletteTransform != null) targetPalette.forEach(paletteTransform);
             return PaletteStrategy.PaletteAndAnimation.of(targetPalette, animation);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to get main block type texture", e);
+            throw new RuntimeException("Failed to get mainChild texture for "+ blockType.getId() +" - "+ e);
         }
     }
 
