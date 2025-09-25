@@ -50,6 +50,7 @@ public class PaletteStrategies {
     /// Has about 12 to 20 paletteColors depending on WoodType
     public static final PaletteStrategy STRIPPED_LOG_TOP_STANDARD = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, VanillaWoodChildKeys.STRIPPED_LOG, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE, null));
+
     /// Has 20 or more paletteColors depending on WoodType
     public static final PaletteStrategy STRIPPED_LOG_SIDE_STANDARD = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
             t, manager, VanillaWoodChildKeys.STRIPPED_LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
