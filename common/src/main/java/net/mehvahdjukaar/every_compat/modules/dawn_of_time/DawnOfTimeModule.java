@@ -14,18 +14,18 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import org.dawnoftimebuilder.block.japanese.SpruceLowTableBlock;
-import org.dawnoftimebuilder.block.roman.BirchCouchBlock;
-import org.dawnoftimebuilder.block.roman.BirchFootstoolBlock;
-import org.dawnoftimebuilder.block.templates.*;
-import org.dawnoftimebuilder.util.VoxelShapes;
+import org.dawnoftime.dawnoftime.block.japanese.SpruceLowTableBlock;
+import org.dawnoftime.dawnoftime.block.roman.BirchCouchBlock;
+import org.dawnoftime.dawnoftime.block.roman.BirchFootstoolBlock;
+import org.dawnoftime.dawnoftime.block.templates.*;
+import org.dawnoftime.dawnoftime.util.VoxelShapes;
 
 import java.util.function.ToIntFunction;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 
 
-//SUPPORT v1.5.7+
+//SUPPORT v1.6.3+
 public class DawnOfTimeModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BEAM;
@@ -43,7 +43,7 @@ public class DawnOfTimeModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> WALL;
 
     public DawnOfTimeModule(String modId) {
-        super(modId, "dot");
+        super(modId, "dot", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("dot_tab");
 
         PLATE = SimpleEntrySet.builder(WoodType.class, "planks_plate",
