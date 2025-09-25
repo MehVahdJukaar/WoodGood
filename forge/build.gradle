@@ -120,7 +120,7 @@ dependencies {
         }
     } else {
         //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-forge") // v2.14.1
+        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-forge") // v2.16.13
     }
 
 //!! TOOLS ========================================================================================================== \\
