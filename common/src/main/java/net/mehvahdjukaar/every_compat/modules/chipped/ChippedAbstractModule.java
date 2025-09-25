@@ -75,7 +75,7 @@ public class ChippedAbstractModule extends SimpleModule {
 
 
     @SuppressWarnings("SameParameterValue")
-    private void addCarpenterRecipe(ResourceSink pack, String identifier) {
+    protected void addCarpenterRecipe(ResourceSink pack, String identifier) {
         JsonArray ingredients = new JsonArray();
 
         for (var woodType : WoodTypeRegistry.INSTANCE) {
