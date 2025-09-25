@@ -67,6 +67,16 @@ public class PaletteStrategies {
         }
     });
 
+    public static final PaletteStrategy LOG_SIDE_REMOVE_2_DARKEST = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
+                    blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,
+                    p -> {
+                        if (p.size() > 3) {
+                            p.reduceDown();
+                            p.reduceDown();
+                        }
+                    }));
+
     public static final PaletteStrategy PLANKS_REMOVE_DARKEST = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
                     blockType, manager, VanillaWoodChildKeys.PLANKS, null,
