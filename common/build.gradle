@@ -65,7 +65,7 @@ dependencies {
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969") // Quad - LieOnLion
     modCompileOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
     modCompileOnly("curse.maven:quark-243121:5093415")
-    modCompileOnly("curse.maven:storage-drawers-223852:5981394")
+    modCompileOnly("curse.maven:storage-drawers-223852:6994478")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819")
     modCompileOnly("curse.maven:twigs-496913:4605097")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5150741") //v1.3.8

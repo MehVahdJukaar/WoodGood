@@ -187,7 +187,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:5053651")
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
 //    modRuntimeOnly("curse.maven:villagersplus-fabric-809542:4996993")
-//    modRuntimeOnly("curse.maven:storage-drawers-223852:5981394")
+//    modRuntimeOnly("curse.maven:storage-drawers-223852:6994478")
 //    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5319819") //RLM: exp4j
 //    modRuntimeOnly("curse.maven:twigs-496913:4603805")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189603")
