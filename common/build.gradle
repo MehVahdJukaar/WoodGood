@@ -41,7 +41,9 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
     modCompileOnly("curse.maven:zeta-968868:5078215") // v1.0-13 | Quark
 
-    //+ ~/common/mods LOCAL
+        //+ OTHER MAVENS
+
+        //+ ~/common/mods LOCAL
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
 //!! ================================================== IMPORTS ===================================================== \\
@@ -52,6 +54,7 @@ dependencies {
     modCompileOnly("curse.maven:blockus-312289:6256096")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
+    modCompileOnly("curse.maven:create-fabric-624165:5982726")
     modCompileOnly("curse.maven:dawn-of-time-312359:6863594")
     modCompileOnly("curse.maven:decorative-blocks-362528:5089408")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550")
