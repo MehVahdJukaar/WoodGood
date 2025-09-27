@@ -6,7 +6,7 @@
 
 </div>
 
-<div style="text-align: left;">
+<div style="text-align: baseTexture;">
 
 * **(C)**: FORGE & FABRIC
 * **(FB)**: FABRIC
@@ -19,6 +19,22 @@
 </div>
 
 </div>
+
+### UPDATED: 
+- **Every Compat** (C): 
+  - Corrected a mistake for texture to be used (before it was using planks' texture for LOG, not log's texture)
+  - Improved the error loggings for some rare cases
+- **Chipped** (C): 
+  - one missed outdated method
+  - Fixed the missing recipes
+  - Fixed missing textures for `tile_windowed_>TYPE<_door`
+  - Added mask textures for the remaining logs and stripped_logs. & also improved the textures
+- **Storage Drawers** (C): Updated to support `v12.14.3` & Fixed the drawer's tooltip showing `8 stacks per drawer`, it's corrected to 32 like vanilla drawers
+- **Create** (C): Updated to have one common class for better maintenance for both FABRIC & FORGE 
+
+---
+
+## v2.9.3
 
 ### UPDATED: 
 - **Every Compat** (C):
