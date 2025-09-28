@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.variants;
 
-import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -10,30 +9,32 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
+import net.mehvahdjukaar.every_compat.mixins.PoiTypesAccessor;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Set;
+import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
-
-//SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILBLE
+//SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
 public class VariantVanillaBlocksModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> barrel;
@@ -49,25 +50,13 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> lectern;
     public final SimpleEntrySet<WoodType, Block> smithingTable;
     public final SimpleEntrySet<WoodType, Block> smoker;
-    //LOOM?
-
-    // Point-Of-Interest for Beehives -  //!! - remove when the addBlocksToPOI() is fixed & enabled below
-    protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
-    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
-            () -> new PoiType(getBeehives(), 1, 1));
-    private Set<BlockState> getBeehives() {
-        var set = new ImmutableSet.Builder<BlockState>();
-        beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
-        return set.build();
-    }
 
     public VariantVanillaBlocksModule(String modId) {
         super(modId, "vvb");
         ResourceLocation tab = modRes(modId);
 
-        //Barrel
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
-                        getModBlock("oak_barrel"),() -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_barrel"), () -> VanillaWoodTypes.OAK,
                         w -> new BarrelBlock(Utils.copyPropertySafe(Blocks.BARREL))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -76,12 +65,11 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(ResourceLocation.parse("c:barrels"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("c:barrels_wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/oak_barrel_bottom"))
-                .addTextureM(modRes("block/oak_barrel_side"),
-                        EveryCompat.res("block/vanilla_barrel_side_m"))
-                .addTextureM(modRes("block/oak_barrel_top"),
-                        EveryCompat.res("block/vanilla_barrel_top_m"))
+                .addTextureM(modRes("block/oak_barrel_side"), EveryCompat.res("block/vanilla_barrel_side_m"))
+                .addTextureM(modRes("block/oak_barrel_top"), EveryCompat.res("block/vanilla_barrel_top_m"))
                 .addTexture(modRes("block/oak_barrel_top_open"))
                 .addTile(() -> BlockEntityType.BARREL)
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -96,11 +84,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(modRes("beehives"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/spruce_beehive_end"))
                 .addTexture(modRes("block/spruce_beehive_front"))
-                .addTextureM(modRes("block/spruce_beehive_front_honey"),
-                        EveryCompat.res("block/spruce_beehive_front_honey_m"))
-                .addTextureM(modRes("block/spruce_beehive_side"),
-                        EveryCompat.res("block/spruce_beehive_side_m"))
+                .addTextureM(modRes("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
+                .addTextureM(modRes("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
                 .addTile(() -> BlockEntityType.BEEHIVE)
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -115,15 +102,15 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(modRes("bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .addTextureM(modRes("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
         this.addEntry(bookshelves);
 
         cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
-                        getModBlock("oak_cartography_table"),() -> VanillaWoodTypes.OAK,
-                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)) {
-                        }
+                        getModBlock("oak_cartography_table"), () -> VanillaWoodTypes.OAK,
+                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.BLOCK, Registries.ITEM)
@@ -131,6 +118,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_cartography_table_side2"), EveryCompat.res("block/vanilla_cartography_table_side2_m"))
                 .addTexture(modRes("block/oak_cartography_table_side3"))
                 .addTextureM(modRes("block/oak_cartography_table_top"), EveryCompat.res("block/vanilla_cartography_table_top_m"))
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -144,7 +132,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
                                 s.replace(
                                         "\"variantvanillablocks:chest/acacia_chest\"",
-                                        "\""+woodType.createFullIdWith(EveryCompat.MOD_ID, "chest", shortenedId(), "", "chest") +"\""
+                                        "\"" + woodType.createFullIdWith(EveryCompat.MOD_ID, "chest", shortenedId(), "", "chest") + "\""
                                 )
                         )
                 )
@@ -166,11 +154,11 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_empty"))
-                .addTextureM(modRes("block/acacia_chiseled_bookshelf_occupied"),
-                        EveryCompat.res("block/vanilla_chiseled_bookshelf_occupied_m"))
+                .addTextureM(modRes("block/acacia_chiseled_bookshelf_occupied"), EveryCompat.res("block/vanilla_chiseled_bookshelf_occupied_m"))
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_top"))
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -185,6 +173,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTexture(modRes("block/oak_composter_bottom"))
                 .addTexture(modRes("block/oak_composter_side"))
                 .addTexture(modRes("block/oak_composter_top"))
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -197,14 +186,12 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("crafting_tables"), Registries.BLOCK, Registries.ITEM)
-                //TEXTURE: texture is oak_craftng_table's texture
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
-                        EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"),
-                        EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
-                .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"),
-                        EveryCompat.res("block/vct/spruce_crafting_table_top_m"))
+                //TEXTURE: texture is oak_crafting_table's texture
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/vct/spruce_crafting_table_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/vct/spruce_crafting_table_side_m"))
+                .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/vct/spruce_crafting_table_top_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -217,12 +204,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("fletching_tables"), Registries.BLOCK, Registries.ITEM)
-                .addTextureM(modRes("block/oak_fletching_table_front"),
-                        EveryCompat.res("block/vanilla_fletching_table_front_m"))
-                .addTextureM(modRes("block/oak_fletching_table_side"),
-                        EveryCompat.res("block/vanilla_fletching_table_side_m"))
-                .addTextureM(modRes("block/oak_fletching_table_top"),
-                        EveryCompat.res("block/vanilla_fletching_table_top_m"))
+                .addTextureM(modRes("block/oak_fletching_table_front"), EveryCompat.res("block/vanilla_fletching_table_front_m"))
+                .addTextureM(modRes("block/oak_fletching_table_side"), EveryCompat.res("block/vanilla_fletching_table_side_m"))
+                .addTextureM(modRes("block/oak_fletching_table_top"), EveryCompat.res("block/vanilla_fletching_table_top_m"))
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -236,6 +221,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("grindstones"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/oak_grindstone_pivot"))
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -249,13 +235,12 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("lecterns"), Registries.BLOCK)
                 .addTag(modRes("lecterns"), Registries.ITEM)
-                .addTextureM(modRes("block/acacia_lectern_base"),
-                        EveryCompat.res("block/vanilla_lectern_base_m"))
-                .addTextureM(modRes("block/acacia_lectern_front"),
-                        EveryCompat.res("block/vanilla_lectern_front_m"))
+                .addTextureM(modRes("block/acacia_lectern_base"), EveryCompat.res("block/vanilla_lectern_base_m"))
+                .addTextureM(modRes("block/acacia_lectern_front"), EveryCompat.res("block/vanilla_lectern_front_m"))
                 .addTexture(modRes("block/acacia_lectern_sides"))
                 .addTexture(modRes("block/acacia_lectern_top"))
                 .addTile(() -> BlockEntityType.LECTERN)
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -268,12 +253,10 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("smithing_tables"), Registries.BLOCK, Registries.ITEM)
-                .addTextureM(modRes("block/oak_smithing_table_bottom"),
-                        EveryCompat.res("block/vanilla_smithing_table_bottom_m"))
-                .addTextureM(modRes("block/oak_smithing_table_front"),
-                        EveryCompat.res("block/vanilla_smithing_table_front_m"))
-                .addTextureM(modRes("block/oak_smithing_table_side"),
-                        EveryCompat.res("block/vanilla_smithing_table_side_m"))
+                .addTextureM(modRes("block/oak_smithing_table_bottom"), EveryCompat.res("block/vanilla_smithing_table_bottom_m"))
+                .addTextureM(modRes("block/oak_smithing_table_front"), EveryCompat.res("block/vanilla_smithing_table_front_m"))
+                .addTextureM(modRes("block/oak_smithing_table_side"), EveryCompat.res("block/vanilla_smithing_table_side_m"))
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -286,17 +269,13 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("smokers"), Registries.BLOCK, Registries.ITEM)
-                .addTextureM(modRes("block/acacia_smoker_front"),
-                        EveryCompat.res("block/vanilla_smoker_front_m"))
-                .addTextureM(modRes("block/acacia_smoker_front_on"),
-                        EveryCompat.res("block/vanilla_smoker_front_on_m"))
-                .addTextureM(modRes("block/acacia_smoker_side"),
-                        EveryCompat.res("block/vanilla_smoker_side_m"))
-                .addTextureM(modRes("block/acacia_smoker_top"),
-                        EveryCompat.res("block/vanilla_smoker_x_m"))
-                .addTextureM(modRes("block/acacia_smoker_bottom"),
-                        EveryCompat.res("block/vanilla_smoker_x_m"))
+                .addTextureM(modRes("block/acacia_smoker_front"), EveryCompat.res("block/vanilla_smoker_front_m"))
+                .addTextureM(modRes("block/acacia_smoker_front_on"), EveryCompat.res("block/vanilla_smoker_front_on_m"))
+                .addTextureM(modRes("block/acacia_smoker_side"), EveryCompat.res("block/vanilla_smoker_side_m"))
+                .addTextureM(modRes("block/acacia_smoker_top"), EveryCompat.res("block/vanilla_smoker_x_m"))
+                .addTextureM(modRes("block/acacia_smoker_bottom"), EveryCompat.res("block/vanilla_smoker_x_m"))
                 .addTile(() -> BlockEntityType.SMOKER)
+                .copyParentDrop()
                 .defaultRecipe()
                 .setTabKey(tab)
                 .build();
@@ -304,7 +283,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
     }
 
-    //kind of hacky. dont like but we cant reference chests itself while constructing its own object
+    //kind of hacky. don't like but we cant reference chests itself while constructing its own object
     // GetTiles
     private BlockEntityType<? extends ChestBlockEntity> getTile() {
         return chests.getTile(CompatChestBlockEntity.class);
@@ -317,21 +296,30 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         }
     }
 
-    @SuppressWarnings("CommentedOutCode")
     @Override
     public void onModSetup() {
         super.onModSetup();
 
-        // POI & ACQUIREABLE_JOB //!! Dont use below until the problem is fixed
-        /*
-        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
-        */
+        Map<BlockState, Holder<PoiType>> poiStatesToType = PoiTypesAccessor.getTypeByState();
+
+        registerStates(barrel.blocks.values(), PoiTypes.FISHERMAN, poiStatesToType);
+        registerStates(beehive.blocks.values(), PoiTypes.BEEHIVE, poiStatesToType);
+        registerStates(cartography.blocks.values(), PoiTypes.CARTOGRAPHER, poiStatesToType);
+        registerStates(composters.blocks.values(), PoiTypes.FARMER, poiStatesToType);
+        registerStates(fletchingTable.blocks.values(), PoiTypes.FLETCHER, poiStatesToType);
+        registerStates(grindstones.blocks.values(), PoiTypes.WEAPONSMITH, poiStatesToType);
+        registerStates(lectern.blocks.values(), PoiTypes.LIBRARIAN, poiStatesToType);
+        registerStates(smithingTable.blocks.values(), PoiTypes.TOOLSMITH, poiStatesToType);
+        registerStates(smoker.blocks.values(), PoiTypes.BUTCHER, poiStatesToType);
+    }
+
+    private static void registerStates(Iterable<Block> blocks, ResourceKey<PoiType> poiType, Map<BlockState, Holder<PoiType>> poiStatesToType) {
+        Holder<PoiType> entry = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poiType);
+        for (Block block : blocks) {
+            for (BlockState state : block.getStateDefinition().getPossibleStates()) {
+                poiStatesToType.putIfAbsent(state, entry);
+            }
+        }
     }
 
     // REGISTRY --------------------------------------------------------------------------------------------------------
@@ -383,5 +371,5 @@ public class VariantVanillaBlocksModule extends SimpleModule {
 
         });
     }
-
+    
 }
