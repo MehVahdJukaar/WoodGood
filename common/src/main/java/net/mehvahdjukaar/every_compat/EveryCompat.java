@@ -137,7 +137,7 @@ public abstract class EveryCompat {
         }
     }
 
-    public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
+    public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>>  moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
             try {
                 CompatModule module = moduleFactory.get().apply(modId);
