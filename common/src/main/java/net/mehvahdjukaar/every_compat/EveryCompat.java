@@ -6,6 +6,7 @@ import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
@@ -27,7 +28,10 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -36,6 +40,7 @@ import java.util.stream.Collectors;
 
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.modulesList;
 
+@ApiStatus.Internal
 public abstract class EveryCompat {
 //TODO: figure out pack overlays to remove unneded textures when mods arent loaded
     public static final String MOD_ID = "everycomp";
@@ -137,6 +142,7 @@ public abstract class EveryCompat {
         }
     }
 
+    @Deprecated(forRemoval = true)
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>>  moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
             try {
@@ -159,12 +165,43 @@ public abstract class EveryCompat {
         }
     }
 
-    @SafeVarargs
-    public static void addMultipleIfLoaded(String modId, Supplier<Function<String, CompatModule>>... moduleFactories) {
-            for (var moduleFactory : moduleFactories) {
-                addIfLoaded(modId, moduleFactory);
-            }
+    public static void maybeAddModule(
+            String modId,
+            Supplier<Class<? extends CompatModule>> moduleClassSupplier
+    ) {
+        if (!PlatHelper.isModLoaded(modId)) return;
+
+        try {
+            Class<? extends CompatModule> klazz = moduleClassSupplier.get();
+
+            CompatModule module = instantiateModuleClass(modId, klazz);
+
+            addModule(module);
+        } catch (Throwable t) {
+            ERRORED.add(new CompatModule(modId, modId, "unknown") {
+                @Override public int bloatAmount() { return 0; }
+                @Override public Collection<Class<? extends BlockType>> getAffectedTypes() { return List.of(); }
+            });
+        }
     }
+
+    private static @NotNull CompatModule instantiateModuleClass(String modId, Class<? extends CompatModule> klazz)
+            throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        CompatModule module;
+        try {
+            // Prefer (String modId) ctor if present
+            var ctor = klazz.getDeclaredConstructor(String.class);
+            ctor.setAccessible(true);
+            module = ctor.newInstance(modId);
+        } catch (NoSuchMethodException e) {
+            // Fallback to no-arg ctor
+            var noArg = klazz.getDeclaredConstructor();
+            noArg.setAccessible(true);
+            module = noArg.newInstance();
+        }
+        return module;
+    }
+
 
     public static Collection<CompatMod> getCompatMods() {
         return COMPAT_MODS;
