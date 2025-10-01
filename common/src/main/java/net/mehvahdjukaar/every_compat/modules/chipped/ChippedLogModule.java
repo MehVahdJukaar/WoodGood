@@ -5,28 +5,26 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import java.io.IOException;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.every_compat.common_classes.TextureUtility.Quartet;
+import static net.mehvahdjukaar.every_compat.common_classes.TextureUtility.generateLogTexture;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v
@@ -69,8 +67,7 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("bundled_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTexture(modRes("block/oak_log/bundled_oak_log"))
-                .addTexture(modRes("block/oak_log/bundled_oak_log_top"))
+                //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -80,8 +77,7 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("center_cut_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTexture(modRes("block/oak_log/center_cut_oak_log"))
-                .addTexture(modRes("block/oak_log/center_cut_oak_log_top"))
+                //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -91,8 +87,7 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("damaged_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTexture(modRes("block/oak_log/damaged_oak_log"))
-                .addTexture(modRes("block/oak_log/damaged_oak_log_top"))
+                //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -102,8 +97,7 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("edge_cut_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTexture(modRes("block/oak_log/edge_cut_oak_log"))
-                .addTexture(modRes("block/oak_log/edge_cut_oak_log_top"))
+                //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -113,8 +107,7 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("firewood_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTexture(modRes("block/oak_log/firewood_oak_log"))
-                .addTexture(modRes("block/oak_log/firewood_oak_log_top"))
+                .addTexture(modRes("block/oak_log/firewood_oak_log"), LOG_SIDE_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -125,9 +118,9 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
                 .addTextureM(modRes("block/oak_log/flowering_oak_log"),
-                        EveryCompat.res("block/ch/logs/flowering_oak_log_m"))
+                        EveryCompat.res("block/ch/oak_logs/flowering_oak_log_m"), PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTextureM(modRes("block/oak_log/flowering_oak_log_top"),
-                        EveryCompat.res("block/ch/logs/flowering_oak_log_top_m"))
+                        EveryCompat.res("block/common_log_top_outer_m"), PaletteStrategies.PLANKS_STANDARD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -137,8 +130,7 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("mixed_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTexture(modRes("block/oak_log/mixed_oak_log"))
-                .addTexture(modRes("block/oak_log/mixed_oak_log_top"))
+                .addTexture(modRes("block/oak_log/mixed_oak_log"), PaletteStrategies.LOG_SIDE_REMOVE_2_DARKEST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -149,8 +141,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
                 .addTextureM(modRes("block/oak_log/nailed_oak_log"),
-                        EveryCompat.res("block/ch/logs/nailed_oak_log_m"))
-                .addTexture(modRes("block/oak_log/nailed_oak_log_top"))
+                        EveryCompat.res("block/ch/oak_logs/nailed_oak_log_m"), NAILED_PALETTE)
+                //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -161,9 +153,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
                 .addTextureM(modRes("block/oak_log/overgrown_oak_log"),
-                        EveryCompat.res("block/ch/logs/overgrown_oak_log_m"))
-                .addTextureM(modRes("block/oak_log/overgrown_oak_log_top"),
-                        EveryCompat.res("block/ch/logs/overgrown_oak_log_top_m"))
+                        EveryCompat.res("block/ch/oak_logs/overgrown_oak_log_m"), PaletteStrategies.LOG_SIDE_STANDARD)
+                //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -184,8 +175,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
                 .addTextureM(modRes("block/oak_log/reinforced_oak_log"),
-                        EveryCompat.res("block/ch/logs/reinforced_oak_log_m"))
-                .addTexture(modRes("block/oak_log/reinforced_oak_log_top"))
+                        EveryCompat.res("block/ch/oak_logs/reinforced_oak_log_m"), PaletteStrategies.LOG_SIDE_STANDARD)
+                //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -198,8 +189,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -210,8 +201,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -222,8 +213,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -234,8 +225,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -246,8 +237,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -258,8 +249,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -270,8 +261,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -282,8 +273,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -294,8 +285,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -306,8 +297,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -318,8 +309,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -330,8 +321,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -342,8 +333,10 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/reinforced_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/reinforced_stripped_oak_log_top"), lightPalette)
+                .addTextureM(modRes("block/stripped_oak_log/reinforced_stripped_oak_log"),
+                        EveryCompat.res("block/ch/stripped_oak_logs/reinforced_stripped_oak_log_m"),
+                        STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/reinforced_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -354,8 +347,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -366,8 +359,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -378,8 +371,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log"), lightPalette)
-                .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log_top"), lightPalette)
+                .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
+                .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -387,8 +380,41 @@ public class ChippedLogModule extends ChippedAbstractModule {
 
     }
 
-    public static final PaletteStrategy lightPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
-            blockType, manager, STRIPPED_LOG, null, p -> {
+    public static final PaletteStrategy DAMAGED_PALETTE = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
+                    blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,
+                    p -> {
+                        if (p.size() > 3) {
+                            p.reduceDown();
+                        }
+                        if (p.size() < 4) p.increaseUp();
+                    }));
+
+    public static final PaletteStrategy NAILED_PALETTE = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
+                    blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,
+                    p -> {
+                        if (p.size() > 2) p.reduceUp();
+                        if (p.size() < 5) {
+                            p.increaseUp();
+                            p.increaseUp();
+                            p.increaseUp();
+                        }
+                    }));
+
+    public static final PaletteStrategy LOG_SIDE_LIGHT_PALETTE = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
+                    blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,
+                    p -> {
+                        if (p.size() > 3) {
+                            p.reduceDown();
+                            p.reduceDown();
+                        }
+                        if (p.size() < 4) p.increaseInner();
+                    }));
+
+    public static final PaletteStrategy STRIPPED_LOG_LIGHT_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, STRIPPED_LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, p -> {
                 int leftover = p.size() - 1;
 
                 if (leftover > 2) {
@@ -411,64 +437,81 @@ public class ChippedLogModule extends ChippedAbstractModule {
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 
-        executor.accept((manager, handler) -> {
-            String PlankedLogFilename = "planked_oak_log";
-            ResourceLocation innerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_inner_m")).withPrefix("block/ch/");
-            ResourceLocation outerSideM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_outer_m")).withPrefix("block/ch/");
-            ResourceLocation innerTopM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_top_inner_m")).withPrefix("block/ch/");
-            ResourceLocation outerTopM_ResLoc = EveryCompat.res(PlankedLogFilename.concat("_top_outer_m")).withPrefix("block/ch/");
+        String cLogTopM = "block/common_log_top_outer_m";
+        String cLogTopPlanksM = "block/common_log_top_inner_m";
 
-            //REASON: The generated textures are not correct, so below is the best way to get the correct generated texture
-            createLogTexture(modRes(PlankedLogFilename).withPrefix("block/oak_log/"), innerSideM_ResLoc, outerSideM_ResLoc,
-                    PlankedLogFilename, "log", "", PlankedLog, "planks", "log",
-                    handler, manager);
+        String xCutLogM = "block/ch/oak_logs/x_cut_log_m";
+        String xCutLogPlanksM = "block/ch/oak_logs/x_cut_log_planks_m";
 
-            createLogTexture(modRes(PlankedLogFilename + "_top").withPrefix("block/oak_log/"), innerTopM_ResLoc, outerTopM_ResLoc,
-                    PlankedLogFilename, "log", "top", PlankedLog, "planks", "log",
-                    handler, manager);
+        String xLogTopM = "block/ch/oak_logs/x_log_top_m";
+        String xLogTopPlanksM = "block/ch/oak_logs/x_log_top_planks_m";
+
+        //REASON: The generated textures are not correct, so below is the best way to get the correct generated texture
+        executor.accept((manager, sink) -> {
+
+            Set<Quartet<String, String, String, PaletteStrategy>> textures = Set.of(
+                    Quartet.of("planked_oak_log", "block/ch/oak_logs/planked_oak_log_m",
+                            "block/ch/oak_logs/planked_oak_log_planks_m",
+                            LOG_SIDE_LIGHT_PALETTE),
+                    Quartet.of("planked_oak_log_top", cLogTopM, cLogTopPlanksM,
+                            LOG_SIDE_LIGHT_PALETTE),
+
+                    Quartet.of("nailed_oak_log_top", cLogTopM, cLogTopPlanksM, NAILED_PALETTE),
+
+                    Quartet.of("overgrown_oak_log_top", cLogTopM,
+                            "block/ch/oak_logs/overgrown_oak_log_top_planks_m",
+                            LOG_SIDE_LIGHT_PALETTE),
+
+                    Quartet.of("reinforced_oak_log_top", cLogTopM, cLogTopPlanksM,
+                            LOG_SIDE_LIGHT_PALETTE),
+
+                    Quartet.of("bundled_oak_log", "block/ch/oak_logs/bundled_log_m",
+                            "block/ch/oak_logs/bundled_log_planks_m",
+                            PaletteStrategies.LOG_SIDE_STANDARD),
+                    Quartet.of("bundled_oak_log_top", xLogTopM, xLogTopPlanksM,
+                            PaletteStrategies.LOG_SIDE_STANDARD),
+
+                    Quartet.of("center_cut_oak_log", xCutLogPlanksM, xCutLogM,
+                            LOG_SIDE_LIGHT_PALETTE),
+                    Quartet.of("center_cut_oak_log_top", cLogTopM, cLogTopPlanksM,
+                            LOG_SIDE_LIGHT_PALETTE),
+
+                    Quartet.of("damaged_oak_log", "block/ch/oak_logs/damaged_oak_log_m",
+                            "block/ch/oak_logs/damaged_oak_log_planks_m", DAMAGED_PALETTE),
+                    Quartet.of("damaged_oak_log_top", cLogTopM, cLogTopPlanksM, DAMAGED_PALETTE),
+
+                    Quartet.of("edge_cut_oak_log", xCutLogM, xCutLogPlanksM,
+                            LOG_SIDE_LIGHT_PALETTE),
+                    Quartet.of("edge_cut_oak_log_top", cLogTopM, cLogTopPlanksM,
+                            LOG_SIDE_LIGHT_PALETTE),
+
+                    Quartet.of("firewood_oak_log_top", xLogTopM, xLogTopPlanksM,
+                            LOG_SIDE_LIGHT_PALETTE),
+
+                    Quartet.of("mixed_oak_log_top", xLogTopM, xLogTopPlanksM,
+                            PaletteStrategies.LOG_SIDE_REMOVE_2_DARKEST)
+            );
+
+            textures.forEach(currentTextures ->
+                    generateLogTexture(
+                            modRes(currentTextures.baseTexture()).withPrefix("block/oak_log/"),
+                            EveryCompat.res(currentTextures.logMask()), EveryCompat.res(currentTextures.planksMask()),
+                            shortenedId(), "oak", currentTextures.paletteStrategy(),
+                            sink, manager
+                    )
+            );
+
         });
     }
 
-    public void createLogTexture(ResourceLocation textureResLoc, ResourceLocation innerMaskResLoc, ResourceLocation outerMaskResLoc,
-                                 String textureFilename, String folderName, String suffix,
-                                 SimpleEntrySet<WoodType, Block> mainBlock, String innerType, String outerType,
-                                 ResourceSink sink, ResourceManager manager) {
-        try (
-                TextureImage mainTexture = TextureImage.open(manager, textureResLoc);
-                TextureImage innerMask = TextureImage.open(manager, innerMaskResLoc);
-                TextureImage outerMask = TextureImage.open(manager, outerMaskResLoc)
-        ) {
-            // Recoloring the texture - TOP
-            Respriter innerResprite = Respriter.masked(mainTexture, innerMask);
+    @Override
+    // RECIPES
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
 
-            mainBlock.blocks.forEach((woodType, block) -> {
-                try (
-                        TextureImage innerColoring = TextureImage.open(manager,
-                                RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(innerType)));
-                        TextureImage outerColoring = TextureImage.open(manager,
-                                RPUtils.findFirstBlockTextureLocation(manager, woodType.getBlockOfThis(outerType), CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
-                ) {
-
-                    // Adding to the resource
-                    String suffixed = "";
-                    if (!suffix.isEmpty()) suffixed = "_"+suffix;
-                    String newPath = "block/"+ shortenedId()+"/"+woodType.getAppendableId() +"_"+folderName+"/"+ textureFilename.replace("oak", woodType.getTypeName()) + suffixed;
-
-                    sink.addTextureIfNotPresent(manager, newPath, () -> {
-                        try(TextureImage recoloredInner = innerResprite.recolorWithAnimationOf(innerColoring)) {
-                            Respriter outerResprite = Respriter.masked(recoloredInner, outerMask);
-                            return outerResprite.recolorWithAnimationOf(outerColoring);
-                        }
-                    });
-                }
-                catch (IOException e) {
-                    EveryCompat.LOGGER.error("Failed to generate planked_log texture for {} : {}", woodType.getId(), String.valueOf(e));
-                }
-            });
-        } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed to get textures for planked_logs: {}", String.valueOf(e));
-        }
-
+        executor.accept((manager, sink) -> {
+            addCarpenterRecipe(sink, "log");
+            addCarpenterRecipe(sink, "stripped_log");
+        });
     }
-
 }

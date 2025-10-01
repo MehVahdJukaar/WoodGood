@@ -455,11 +455,21 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return addTexture(TextureInfo.of(textureLocation, customTexturePath));
         }
 
-        // adds a texture with automatic masking. Experimental
-        public BL addTextureAutoM(ResourceLocation textureLocation) {
-            return addTexture(TextureInfo.of(textureLocation)
-                    .autoMask());
+        public BL addTextureC(ResourceLocation textureLocation, PaletteStrategy palette, String customTexturePath) {
+            return addTexture(TextureInfo.of(textureLocation, customTexturePath).setPalette(palette));
         }
+
+        public BL addTextureMC(ResourceLocation textureLocation, ResourceLocation maskLocation, PaletteStrategy palette, String customTexturePath) {
+            return addTexture(TextureInfo.of(textureLocation, customTexturePath)
+                    .mask(maskLocation)
+                    .setPalette(palette));
+        }
+
+        // adds a texture with automatic masking. Experimental
+//        public BL addTextureAutoM(ResourceLocation textureLocation) {
+//            return addTexture(TextureInfo.of(textureLocation)
+//                    .autoMask());
+//        }
 
         public BL useMergedPalette() {
             this.useMergedPalette = true;

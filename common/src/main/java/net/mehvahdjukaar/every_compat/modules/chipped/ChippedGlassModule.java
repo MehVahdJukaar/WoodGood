@@ -492,6 +492,5 @@ public class ChippedGlassModule extends ChippedAbstractModule {
                 .build();
         this.addEntry(squareGlassPane);
 
-
     }
 }
