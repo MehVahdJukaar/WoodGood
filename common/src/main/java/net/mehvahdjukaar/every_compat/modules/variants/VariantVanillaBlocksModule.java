@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
 import net.mehvahdjukaar.every_compat.mixins.PoiTypesAccessor;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -297,31 +298,40 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
     @Override
-    public void onModSetup() {
-        super.onModSetup();
-
-        Map<BlockState, Holder<PoiType>> poiStatesToType = PoiTypesAccessor.getTypeByState();
-
-        registerStates(barrel.blocks.values(), PoiTypes.FISHERMAN, poiStatesToType);
-        registerStates(beehive.blocks.values(), PoiTypes.BEEHIVE, poiStatesToType);
-        registerStates(cartography.blocks.values(), PoiTypes.CARTOGRAPHER, poiStatesToType);
-        registerStates(composters.blocks.values(), PoiTypes.FARMER, poiStatesToType);
-        registerStates(fletchingTable.blocks.values(), PoiTypes.FLETCHER, poiStatesToType);
-        registerStates(grindstones.blocks.values(), PoiTypes.WEAPONSMITH, poiStatesToType);
-        registerStates(lectern.blocks.values(), PoiTypes.LIBRARIAN, poiStatesToType);
-        registerStates(smithingTable.blocks.values(), PoiTypes.TOOLSMITH, poiStatesToType);
-        registerStates(smoker.blocks.values(), PoiTypes.BUTCHER, poiStatesToType);
+    public void onModInit() {
+        super.onModInit();
+        RegHelper.addExtraPOIStatesRegistration(this::addExtraPoiStates);
     }
 
-    private static void registerStates(Iterable<Block> blocks, ResourceKey<PoiType> poiType, Map<BlockState, Holder<PoiType>> poiStatesToType) {
-        Holder<PoiType> entry = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poiType);
-        for (Block block : blocks) {
-            for (BlockState state : block.getStateDefinition().getPossibleStates()) {
-                poiStatesToType.putIfAbsent(state, entry);
-            }
-        }
+    private void addExtraPoiStates(RegHelper.ExtraPOIStatesEvent event) {
+        barrel.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.FISHERMAN, b)
+        );
+        beehive.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.BEEHIVE, b)
+        );
+        cartography.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.CARTOGRAPHER, b)
+        );
+        composters.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.FARMER, b)
+        );
+        fletchingTable.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.FLETCHER, b)
+        );
+        grindstones.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.WEAPONSMITH, b)
+        );
+        lectern.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.LIBRARIAN, b)
+        );
+        smithingTable.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.TOOLSMITH, b)
+        );
+        smoker.blocks.values().forEach(b ->
+                event.addBlockToPoi(PoiTypes.BUTCHER, b)
+        );
     }
-
     // REGISTRY --------------------------------------------------------------------------------------------------------
 
     @Override
