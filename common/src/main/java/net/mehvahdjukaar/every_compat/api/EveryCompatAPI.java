@@ -5,6 +5,9 @@ import net.mehvahdjukaar.every_compat.api.example.WoodGoodAddonExample;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Supplier;
+
+import static net.mehvahdjukaar.every_compat.EveryCompat.maybeAddModule;
 
 /**
  * Use this class register new wood type blocks and module to Every Compat
@@ -35,5 +38,15 @@ public class EveryCompatAPI {
         EveryCompat.addOtherCompatMod(compatModId, fromModId, supportedModId);
     }
 
+    public static void addIfLoaded(String modId, Supplier<Class<? extends CompatModule>> moduleClassSupplier) {
+        maybeAddModule(modId, moduleClassSupplier);
+    }
+
+    @SafeVarargs
+    public static void addMultipleIfLoaded(String modId, Supplier<Class<? extends CompatModule>>... moduleClasses) {
+        for (Supplier<Class<? extends CompatModule>> moduleClassSupplier : moduleClasses) {
+            maybeAddModule(modId, moduleClassSupplier);
+        }
+    }
 
 }
