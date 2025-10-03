@@ -100,7 +100,6 @@ public class FunctionalStorageModule extends SimpleModule {
                 .addTag(modRes("drawer_2x2"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .addRecipe(modRes("spruce_1"))
                 .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
                 .build();
         this.addEntry(drawer_4);
