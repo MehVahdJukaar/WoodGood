@@ -4,84 +4,103 @@ import com.buuz135.functionalstorage.FunctionalStorage;
 import com.buuz135.functionalstorage.block.DrawerBlock;
 import com.buuz135.functionalstorage.block.tile.DrawerTile;
 import com.buuz135.functionalstorage.client.DrawerRenderer;
+import com.buuz135.functionalstorage.client.item.DrawerISTER;
+import com.buuz135.functionalstorage.inventory.item.DrawerStackItemHandler;
 import com.buuz135.functionalstorage.util.IWoodType;
 import com.hrznstudio.titanium.module.BlockWithTile;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
+import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
-//SUPPORT: v1.3.4+
+//SUPPORT: v1.5.4+
 public class FunctionalStorageModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> drawer_1;
-    public final SimpleEntrySet<WoodType, Block> drawer_2;
-    public final SimpleEntrySet<WoodType, Block> drawer_4;
+    public final SimpleEntrySet<WoodType, DrawerBlock> drawer_1;
+    public final SimpleEntrySet<WoodType, DrawerBlock> drawer_2;
+    public final SimpleEntrySet<WoodType, DrawerBlock> drawer_4;
 
     public FunctionalStorageModule(String modId) {
-        super(modId, "fs");
+        super(modId, "fs", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("main");
 
         drawer_1 = SimpleEntrySet.builder(WoodType.class, "1",
-                        getModBlock("oak_1"), () -> VanillaWoodTypes.OAK,
+                        getModBlock("spruce_1", DrawerBlock.class), () -> VanillaWoodTypes.SPRUCE,
                         w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_1, Utils.copyPropertySafe(w.planks))
                 )
-                .addTile(getModTile("oak_1"))
-                .addTexture(modRes("block/oak_front_1"))
-                .addTextureM(modRes("block/oak_side"), EveryCompat.res("block/fs/oak_side_m"))
-                .addTexture(TextureInfo.of(modRes("block/oak_front_1"))
+                .addTile(getModTile("spruce_1"))
+                .addTexture(modRes("block/spruce_front_1"))
+                .addTextureM(modRes("block/spruce_side"), EveryCompat.res("block/fs/spruce_side_m"))
+                .addTexture(TextureInfo.of(modRes("block/spruce_front_1"))
                         .forEntityOrGui()
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(TagUtility.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
+                .addTag(modRes("drawer_1x1"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
                 .build();
         this.addEntry(drawer_1);
 
         drawer_2 = SimpleEntrySet.builder(WoodType.class, "2",
-                        getModBlock("oak_2"), () -> VanillaWoodTypes.OAK,
+                        getModBlock("spruce_2", DrawerBlock.class), () -> VanillaWoodTypes.SPRUCE,
                         w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_2, Utils.copyPropertySafe(w.planks))
                 )
-                .addTile(getModTile("oak_2"))
-                .addTexture(modRes("block/oak_front_2"))
-                .addTexture(TextureInfo.of(modRes("block/oak_front_2"))
+                .addTile(getModTile("spruce_2"))
+                .addTexture(modRes("block/spruce_front_2"))
+                .addTexture(TextureInfo.of(modRes("block/spruce_front_2"))
                         .forEntityOrGui()
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(TagUtility.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
+                .addTag(modRes("drawer_1x2"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
                 .build();
         this.addEntry(drawer_2);
 
         drawer_4 = SimpleEntrySet.builder(WoodType.class, "4",
-                        getModBlock("oak_4"), () -> VanillaWoodTypes.OAK,
+                        getModBlock("spruce_4", DrawerBlock.class), () -> VanillaWoodTypes.SPRUCE,
                         w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_4, Utils.copyPropertySafe(w.planks))
                 )
-                .addTile(getModTile("oak_4"))
-                .addTexture(modRes("block/oak_front_4"))
-                .addTexture(TextureInfo.of(modRes("block/oak_front_4"))
+                .addTile(getModTile("spruce_4"))
+                .addTexture(modRes("block/spruce_front_4"))
+                .addTexture(TextureInfo.of(modRes("block/spruce_front_4"))
                         .forEntityOrGui()
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(TagUtility.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
+                .addTag(modRes("drawer_2x2"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
+                .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
                 .build();
         this.addEntry(drawer_4);
 
@@ -100,11 +119,11 @@ public class FunctionalStorageModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
         var     x_1 = FunctionalStorage.DRAWER_TYPES.get(FunctionalStorage.DrawerType.X_1);
-        var tileRO_1 = DeferredHolder.create(Registries.BLOCK_ENTITY_TYPE, modRes("oak_1"));
+        var tileRO_1 = DeferredHolder.create(Registries.BLOCK_ENTITY_TYPE, modRes("spruce_1"));
         var x_2 = FunctionalStorage.DRAWER_TYPES.get(FunctionalStorage.DrawerType.X_2);
-        var tileRO_2 = DeferredHolder.create(Registries.BLOCK_ENTITY_TYPE, modRes("oak_2"));
+        var tileRO_2 = DeferredHolder.create(Registries.BLOCK_ENTITY_TYPE, modRes("spruce_2"));
         var x_4 = FunctionalStorage.DRAWER_TYPES.get(FunctionalStorage.DrawerType.X_4);
-        var tileRO_4 = DeferredHolder.create(Registries.BLOCK_ENTITY_TYPE, modRes("oak_4"));
+        var tileRO_4 = DeferredHolder.create(Registries.BLOCK_ENTITY_TYPE, modRes("spruce_4"));
 
 
         for (var block : drawer_1.blocks.values()) {
@@ -146,6 +165,36 @@ public class FunctionalStorageModule extends SimpleModule {
         public String getName() {
             return "fs/" + woodType.getAppendableId();
         }
+    }
+
+    public static class CompatDrawerItem extends DrawerBlock.DrawerItem {
+
+        private final DrawerBlock drawerBlock;
+
+        public CompatDrawerItem(DrawerBlock drawerBlock, Properties properties) {
+            super(drawerBlock, properties, FunctionalStorage.TAB);
+            this.drawerBlock = drawerBlock;
+        }
+
+        @Nullable
+        public IItemHandler initCapabilities(ItemStack stack) {
+            return new DrawerStackItemHandler(stack, this.drawerBlock.getType());
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                @Override
+                public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    return switch (drawerBlock.getType()){
+                        case X_2 -> DrawerISTER.SLOT_2;
+                        case X_4 -> DrawerISTER.SLOT_4;
+                        default -> DrawerISTER.SLOT_1;
+                    };
+                }
+            });
+        }
+
     }
 
 }

@@ -6,7 +6,6 @@ import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
@@ -143,6 +142,7 @@ public abstract class EveryCompat {
     }
 
     @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompat#maybeAddModule(String, Supplier)}
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>>  moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
             try {
@@ -182,6 +182,13 @@ public abstract class EveryCompat {
                 @Override public int bloatAmount() { return 0; }
                 @Override public Collection<Class<? extends BlockType>> getAffectedTypes() { return List.of(); }
             });
+        }
+    }
+
+    @SafeVarargs
+    public static void maybeAddMultipleModule(String modId, Supplier<Class<? extends CompatModule>>... moduleClasses) {
+        for (Supplier<Class<? extends CompatModule>> moduleClassSupplier : moduleClasses) {
+            maybeAddModule(modId, moduleClassSupplier);
         }
     }
 

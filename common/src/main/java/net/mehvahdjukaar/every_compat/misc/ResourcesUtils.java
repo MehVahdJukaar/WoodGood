@@ -41,7 +41,7 @@ public class ResourcesUtils {
 
 
     @SuppressWarnings("PointlessBooleanExpression")
-    public static <B extends Block, T extends BlockType> void generateStandardBlockModels(
+    public static <B extends Block, T extends BlockType> void generateStandardBlockFiles(
             ResourceManager manager, ResourceSink sink,
             Map<T, B> blocks, T baseType,
             BlockTypeResTransformer<T> modelTransformer,

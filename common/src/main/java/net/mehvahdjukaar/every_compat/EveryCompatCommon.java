@@ -110,10 +110,7 @@ public class EveryCompatCommon {
             maybeAddModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
             maybeAddModule("blockus", () -> BlockusModule.class);
             maybeAddModule("campchair", () -> CampChairModule.class);
-            maybeAddModule("chipped", () -> ChippedMainModule.class);
-            maybeAddModule("chipped", () -> ChippedLogModule.class);
-            maybeAddModule("chipped",  () -> ChippedDoorModule.class);
-            maybeAddModule("chipped", () -> ChippedGlassModule.class);
+            maybeAddMultipleModule("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class);
             maybeAddModule("dawnoftimebuilder", () -> DawnOfTimeModule.class);
             maybeAddModule("decorative_blocks", () -> DecorativeBlocksModule.class);
             maybeAddModule("farmersdelight", () -> FarmersDelightModule.class);

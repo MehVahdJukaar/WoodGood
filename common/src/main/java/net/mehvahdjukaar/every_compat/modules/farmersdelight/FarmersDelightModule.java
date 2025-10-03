@@ -2,11 +2,11 @@ package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
-import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -84,23 +84,24 @@ public class FarmersDelightModule extends SimpleModule {
 
         executor.accept((manager, sink) -> {
             // Creating cutting_board recipes
-            //why is it iterating over the cabinets??
-            cabinets.items.forEach(((woodType, item) -> {
+            for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
+
                 //adding compat cutting board recipes for vanilla modded stuff i guess
-                createCuttingRecipe("door", woodType.getBlockOfThis("door"),
+                createCuttingRecipe(DOOR, woodType.getBlockOfThis("door"),
                         woodType, sink, manager);
-                createCuttingRecipe("hanging_sign", woodType.getBlockOfThis("hanging_sign"),
+                createCuttingRecipe(HANGING_SIGN, woodType.getBlockOfThis("hanging_sign"),
                         woodType, sink, manager);
-                createCuttingRecipe("sign", woodType.getBlockOfThis("sign"),
+                createCuttingRecipe(SIGN, woodType.getBlockOfThis("sign"),
                         woodType, sink, manager);
-                createCuttingRecipe("trapdoor", woodType.getBlockOfThis("trapdoor"),
+                createCuttingRecipe(TRAPDOOR, woodType.getBlockOfThis("trapdoor"),
                         woodType, sink, manager);
-                createCuttingRecipe("log", woodType.getBlockOfThis("stripped_log"),
+                createCuttingRecipe(LOG, woodType.getBlockOfThis("stripped_log"),
                         woodType, sink, manager);
-                createCuttingRecipe("wood", woodType.getBlockOfThis("wood"),
+                createCuttingRecipe(WOOD, woodType.getBlockOfThis("wood"),
                         woodType, sink, manager);
 
-            }));
+            }
         });
     }
 
