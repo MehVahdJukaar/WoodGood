@@ -20,6 +20,13 @@
 
 </div>
 
+### UPDATED: 
+- **Every Compat** (C): Updated a few API for **Stone Zone**
+
+---
+
+## v2.11.5
+
 ### UPDATED:
 - **Friends & Foes** (C): Updated to use the new method from Moonlight for beehives' Point-Of-Interest
 - **Variant Vanilla Blocks** (FB): Updated to use the new method from Moonlight for blocks' Point-Of-Interest  
