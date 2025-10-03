@@ -9,30 +9,25 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
-import net.mehvahdjukaar.every_compat.mixins.PoiTypesAccessor;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Map;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
+import static net.mehvahdjukaar.every_compat.common_classes.poiUtility.simpleAddBlocksToPOI;
 
 //SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
 public class VariantVanillaBlocksModule extends SimpleModule {
@@ -52,7 +47,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> smoker;
 
     public VariantVanillaBlocksModule(String modId) {
-        super(modId, "vvb");
+        super(modId, "vvb", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes(modId);
 
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
@@ -297,33 +292,20 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     }
 
     @Override
-    public void onModSetup() {
-        super.onModSetup();
-
-        Map<BlockState, Holder<PoiType>> poiStatesToType = PoiTypesAccessor.getTypeByState();
-
-        registerStates(barrel.blocks.values(), PoiTypes.FISHERMAN, poiStatesToType);
-        registerStates(beehive.blocks.values(), PoiTypes.BEEHIVE, poiStatesToType);
-        registerStates(cartography.blocks.values(), PoiTypes.CARTOGRAPHER, poiStatesToType);
-        registerStates(composters.blocks.values(), PoiTypes.FARMER, poiStatesToType);
-        registerStates(fletchingTable.blocks.values(), PoiTypes.FLETCHER, poiStatesToType);
-        registerStates(grindstones.blocks.values(), PoiTypes.WEAPONSMITH, poiStatesToType);
-        registerStates(lectern.blocks.values(), PoiTypes.LIBRARIAN, poiStatesToType);
-        registerStates(smithingTable.blocks.values(), PoiTypes.TOOLSMITH, poiStatesToType);
-        registerStates(smoker.blocks.values(), PoiTypes.BUTCHER, poiStatesToType);
-    }
-
-    private static void registerStates(Iterable<Block> blocks, ResourceKey<PoiType> poiType, Map<BlockState, Holder<PoiType>> poiStatesToType) {
-        Holder<PoiType> entry = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poiType);
-        for (Block block : blocks) {
-            for (BlockState state : block.getStateDefinition().getPossibleStates()) {
-                poiStatesToType.putIfAbsent(state, entry);
-            }
-        }
+    public void onModInit() {
+        super.onModInit();
+        simpleAddBlocksToPOI(beehive, PoiTypes.BEEHIVE);
+        simpleAddBlocksToPOI(barrel, PoiTypes.FISHERMAN);
+        simpleAddBlocksToPOI(cartography, PoiTypes.CARTOGRAPHER);
+        simpleAddBlocksToPOI(composters, PoiTypes.FARMER);
+        simpleAddBlocksToPOI(fletchingTable, PoiTypes.FLETCHER);
+        simpleAddBlocksToPOI(grindstones, PoiTypes.WEAPONSMITH);
+        simpleAddBlocksToPOI(lectern, PoiTypes.LIBRARIAN);
+        simpleAddBlocksToPOI(smithingTable, PoiTypes.TOOLSMITH);
+        simpleAddBlocksToPOI(smoker, PoiTypes.BUTCHER);
     }
 
     // REGISTRY --------------------------------------------------------------------------------------------------------
-
     @Override
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
