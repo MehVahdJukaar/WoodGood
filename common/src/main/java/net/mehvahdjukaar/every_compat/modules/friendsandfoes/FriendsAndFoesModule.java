@@ -44,8 +44,13 @@ public class FriendsAndFoesModule extends SimpleModule {
     }
 
     @Override
-    public void onModSetup() {
-        super.onModSetup();
-        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehives.blocks.values());
+    public void onModInit() {
+        super.onModInit();
+        RegHelper.addExtraPOIStatesRegistration(event ->
+                beehives.blocks.values().forEach(b ->
+                        event.addBlockToPoi(PoiTypes.BEEHIVE, b)
+                ));
+
     }
+
 }
