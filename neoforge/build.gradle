@@ -143,7 +143,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5713682") // v1.1.17i | Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:YeePowOJ") // v1.6.3 | Building-But-Better
-//    modRuntimeOnly("curse.maven:patchouli-306770:6842247") // v92 | TFC, Timber-Frames
+    modRuntimeOnly("curse.maven:patchouli-306770:6842247") // v92 | TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design //!! 1.20.1
 //    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum //!! 1.20.1
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum //!! 1.20.1
@@ -159,7 +159,7 @@ dependencies {
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     modCompileOnly("curse.maven:framework-549225:5911998") // v0.9.4 | Refurbished-Furniture, +Mighty-Mail, Backpacked
-    modCompileOnly("curse.maven:titanium-287342:5726400") // Functional-Storage
+    modCompileOnly("curse.maven:titanium-287342:6875285") // v4.0.40 | Functional-Storage
     modCompileOnly("curse.maven:zeta-968868:5078215") // v1.0-13 | Quark - @DNU
     modCompileOnly("curse.maven:blueprint-382216:6965808") // v8.0.6 | The-Outer-End, Woodworks, Boatload
     modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // v1.1.5 | Valhelsia Structure, Valhelsia Furniture
@@ -224,7 +224,7 @@ dependencies {
     modCompileOnly("curse.maven:decoration-delight-687475:5563942") //!! 1.20.1
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257") //!! 1.20.1
     modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
-    modCompileOnly("curse.maven:functional-storage-556861:5853986")
+    modCompileOnly("curse.maven:functional-storage-556861:6930104")
     modCompileOnly("curse.maven:infinity-buttons-661902:4716983") //!! 1.20.1
     modCompileOnly("curse.maven:just-a-raft-mod-274350:5777240")
     modCompileOnly("curse.maven:lightmans-currency-472521:6524192")
@@ -279,7 +279,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:deeperdarker-659011:6463247")
 //    modRuntimeOnly("curse.maven:frightful-winter-1241289:6447798")
 
-//    modRuntimeOnly("curse.maven:terrafirmacraft-302973:4862659") // patchouli //!! 1.20.1
+    modImplementation("curse.maven:terrafirmacraft-302973:7024199") // patchouli
 
 }
 
