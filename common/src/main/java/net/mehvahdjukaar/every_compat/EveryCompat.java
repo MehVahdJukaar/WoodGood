@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
@@ -33,7 +34,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.ENABLED_MODULES_LIST;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.MODULES_BLACKLIST;
 
 @ApiStatus.Internal
 //Keep this class safe to be loaded at any time
@@ -81,12 +82,14 @@ public abstract class EveryCompat {
     public static void setup() {
         //hoping this isnt too late
         for (var module : ACTIVE_MODULES.values()) {
-            ServerDynamicResourcesHandler.getInstance()
-                    .addSupportedNamespaces(module.getServerResourcesNamespaces());
+            if (module != null) {
+                ServerDynamicResourcesHandler.getInstance()
+                        .addSupportedNamespaces(module.getServerResourcesNamespaces());
 
-            if (PlatHelper.getPhysicalSide().isClient()) {
-                ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
-                        module.getClientResourcesNamespaces());
+                if (PlatHelper.getPhysicalSide().isClient()) {
+                    ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
+                            module.getClientResourcesNamespaces());
+                }
             }
         }
 
@@ -104,17 +107,17 @@ public abstract class EveryCompat {
         //log registered stuff size
         int newSize = BuiltInRegistries.BLOCK.size();
         //cal
-        int myChildrenSize = ACTIVE_MODULES.values().stream().mapToInt(CompatModule::bloatAmount).sum();
+        int myChildrenSize = ACTIVE_MODULES.values().stream().filter(Objects::nonNull).mapToInt(CompatModule::bloatAmount).sum();
 
         float p = (myChildrenSize / (float) newSize) * 100f;
         if (myChildrenSize == 0) {
             String log = """
-                    \n###########################################################################################################
-                    #                                                                                                         #
-                    # ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed. #
-                    #                           You dont need EveryCompat and should remove it.                               #
-                    #                                                                                                         #
-                    ###########################################################################################################
+                    \n##########################################################################################################
+                    #                                                                                                        #
+                    #  ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed.  #
+                    #                            You dont need EveryCompat and should remove it.                             #
+                    #                                                                                                        #
+                    ##########################################################################################################
                     """;
             EveryCompat.LOGGER.error("\n{}", log);
             return;
@@ -210,18 +213,11 @@ public abstract class EveryCompat {
     }
 
     public static synchronized void addModule(CompatModule module) {
-        if (!ENABLED_MODULES_LIST.get().contains(module.getModId())) {
+        if (!MODULES_BLACKLIST.get().contains(module.getModId())) {
             ACTIVE_MODULES.put(module.getModId(), module);
             DEPENDENCIES.add(module.getModId());
             DEPENDENCIES.addAll(module.getAlreadySupportedMods());
             ADDON_IDS.add(module.getMyNamespace());
-        }
-    }
-
-    @Deprecated(forRemoval = true)
-    public static void addMultipleOptional(String chipped, Supplier<Class<? extends CompatModule>>... object) {
-        for (var klazz : object) {
-            addOptionalModule(chipped, klazz);
         }
     }
 
@@ -246,6 +242,13 @@ public abstract class EveryCompat {
                     return List.of();
                 }
             });
+        }
+    }
+
+    @SafeVarargs
+    public static void addMultipleOptional(String modId, Supplier<Class<? extends CompatModule>>... klazzes) {
+        for (var klazz : klazzes) {
+            addOptionalModule(modId, klazz);
         }
     }
 
@@ -312,30 +315,27 @@ public abstract class EveryCompat {
     }
 
 
-    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String)}
     public static void addOtherCompatMod(String compatModId, String fromModId, String supportedModId) {
         addCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
     }
 
-    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String...)}
     public static void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, supportedModId);
         addCompatMod(compatModId, List.of(fromModId), list);
     }
 
-    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String...)}
+    public static void addOtherCompatMod(String compatModId, List<String> fromModId, String supportedModId) {
+        addCompatMod(compatModId, fromModId, List.of(supportedModId));
+    }
+
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, String... supportedModId) {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, supportedModId);
         addCompatMod(compatModId, fromModId, list);
     }
 
-    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String)}
-    public static void addOtherCompatMod(String compatModId, List<String> fromModId, String supportedModId) {
-        addCompatMod(compatModId, fromModId, List.of(supportedModId));
-    }
-
+// ─────────────────────────────────────── Deprecated & Marked-for-removal ───────────────────────────────────────
 
     @Deprecated(forRemoval = true)
     /// @deprecated USE {@link EveryCompatAPI#addIfLoaded(String, Supplier)}
@@ -360,5 +360,4 @@ public abstract class EveryCompat {
             }
         }
     }
-
 }
