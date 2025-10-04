@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECRegistry;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -11,6 +12,7 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -48,6 +50,40 @@ public abstract class CompatModule {
         this.modName = PlatHelper.getModName(modId);
         this.myNamespace = myNamespace;
         this.shortId = shortId;
+
+        //yeah, bad api but doesn't matter if we use wood or other types
+        //called here so we get right bus since module construction is delegated
+        BlockSetAPI.addDynamicRegistration(myNamespace, (r) -> {
+            EveryCompat.executeOrFail(() -> {
+                for (var t : this.getAffectedTypes()) {
+                    this.registerBlocks(t, r);
+                }
+            }, this);
+
+        }, BuiltInRegistries.BLOCK);
+
+        BlockSetAPI.addDynamicRegistration(myNamespace, (r) -> {
+            EveryCompat.executeOrFail(() -> {
+                this.registerItems((resourceLocation, item) -> {
+                    EveryCompat.addItemToModuleMapping(item, this);
+                    r.register(resourceLocation, item);
+                });
+            }, this);
+        }, BuiltInRegistries.ITEM);
+
+        BlockSetAPI.addDynamicRegistration(myNamespace, r -> {
+            EveryCompat.executeOrFail(() -> {
+                this.registerTiles(r);
+            }, this);
+        }, BuiltInRegistries.BLOCK_ENTITY_TYPE);
+
+        BlockSetAPI.addDynamicRegistration(myNamespace, r -> {
+            EveryCompat.executeOrFail(() -> {
+                this.registerEntities(r);
+            }, this);
+        }, BuiltInRegistries.ENTITY_TYPE);
+
+
     }
 
     public String getModId() {
@@ -90,6 +126,11 @@ public abstract class CompatModule {
     }
 
     public void onClientSetup() {
+    }
+
+    private <T extends BlockType> void registerBlocks(Class<T> type,
+                                                      Registrator<Block> registry) {
+        this.registerBlocks(type, registry, BlockSetAPI.getBlockSet(type).getValues());
     }
 
     public <T extends BlockType> void registerBlocks(Class<T> typeClass,

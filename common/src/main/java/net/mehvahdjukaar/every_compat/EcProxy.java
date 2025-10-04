@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 //mega hack. I hate this. Only here to prevent classload shenanigans when loading EC classes from another mod
 //needs to safely load without referencing anything
 @ApiStatus.Internal
-public class EcTempPluginStorage {
+public class EcProxy {
 
     public static List<CompatModule> COMPAT_MODULES = new ArrayList<>();
     public static List<Pair<String, Supplier<Class<? extends CompatModule>>>> OPT_MODULES = new ArrayList<>();

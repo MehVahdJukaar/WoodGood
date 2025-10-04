@@ -6,26 +6,21 @@ import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
@@ -80,6 +75,25 @@ public abstract class EveryCompat {
                 }
             }
         }
+    }
+
+    public static void executeOrFail(Runnable r, CompatModule module){
+        try {
+            r.run();
+        } catch (Throwable e) {
+            EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", Objects.requireNonNull(module).getModName(), e);
+            if (canShowErrorScreen) {
+                //if before first screen we can display an error screen
+                ERRORED.add(module);
+            } else {
+                throw e;
+            }
+        }
+    }
+
+
+    public static void addItemToModuleMapping(Item item, CompatModule module) {
+        ITEMS_TO_MODULES.put(item, module);
     }
 
     public static CompatModule getModuleOfItem(Item item) {
@@ -148,9 +162,7 @@ public abstract class EveryCompat {
                         module.getClientResourcesNamespaces());
             }
 
-            for (var t : module.getAffectedTypes()) {
-                addDynamicRegistrationFor(t);
-            }
+            AFFECTED_TYPES.addAll(module.getAffectedTypes());
             ADDON_IDS.add(module.getMyNamespace());
         }
     }
@@ -242,11 +254,11 @@ public abstract class EveryCompat {
         RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
         PlatHelper.addCommonSetup(EveryCompat::setup);
 
-        BlockSetAPI.addDynamicRegistration((r, c) -> registerItems(r), WoodType.class, BuiltInRegistries.ITEM);
-        BlockSetAPI.addDynamicRegistration((r, c) -> registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
-        BlockSetAPI.addDynamicRegistration((r, c) -> registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
+        BlockSetAPI.addDynamicRegistration(MOD_ID, (r) -> {
+            ModEntriesConfigs.initEarlyButNotSuperEarly(); // assure configs are loaded since they depend on wood stuff being init
+        }, BuiltInRegistries.BLOCK);
 
-        EcTempPluginStorage.setEcLoaded();
+        EcProxy.setEcLoaded();
     }
 
     public static void setup() {
@@ -309,37 +321,6 @@ public abstract class EveryCompat {
         forAllModules(CompatModule::onModSetup);
         canShowErrorScreen = true;
 
-    }
-
-    private static int prevRegSize = 0;
-
-    public static <T extends BlockType> void addDynamicRegistrationFor(Class<T> t) {
-        if (AFFECTED_TYPES.add(t)) {
-            BlockSetAPI.addDynamicBlockRegistration((r, c) -> {
-                if (prevRegSize == 0) prevRegSize = BuiltInRegistries.BLOCK.size();
-                LOGGER.info("Registering Compat {} Blocks", t.getSimpleName());
-                forAllModules(m -> m.registerBlocks(t, r, c));
-            }, t);
-
-            BlockSetAPI.addDynamicItemRegistration((r, c) -> {
-                ModEntriesConfigs.initEarlyButNotSuperEarly(); // assure configs are loaded since they depend on wood stuff being init
-            }, t);
-        }
-    }
-
-    protected static void registerItems(Registrator<Item> event) {
-        forAllModules(m -> m.registerItems((id, o) -> {
-            event.register(id, o);
-            EveryCompat.ITEMS_TO_MODULES.put(o, m);
-        }));
-    }
-
-    protected static void registerTiles(Registrator<BlockEntityType<?>> event) {
-        forAllModules(m -> m.registerTiles(event));
-    }
-
-    protected static void registerEntities(Registrator<EntityType<?>> event) {
-        forAllModules(m -> m.registerEntities(event));
     }
 
     public static boolean isMyIdOrAddon(String namespace) {
