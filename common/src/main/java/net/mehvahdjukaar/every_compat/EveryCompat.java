@@ -94,27 +94,35 @@ public abstract class EveryCompat {
         return TYPES_TO_CHILD_KEYS.getOrDefault(type, Set.of());
     }
 
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String)}
     public static void addOtherCompatMod(String compatModId, String fromModId, String supportedModId) {
-        addOtherCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
+        addCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
     }
 
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String...)}
     public static void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, supportedModId);
-        addOtherCompatMod(compatModId, List.of(fromModId), list);
+        addCompatMod(compatModId, List.of(fromModId), list);
     }
 
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String...)}
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, String... supportedModId) {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, supportedModId);
-        addOtherCompatMod(compatModId, fromModId, list);
+        addCompatMod(compatModId, fromModId, list);
     }
 
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String)}
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, String supportedModId) {
-        addOtherCompatMod(compatModId, fromModId, List.of(supportedModId));
+        addCompatMod(compatModId, fromModId, List.of(supportedModId));
     }
 
-    public static synchronized void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
+    public static synchronized void addCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
         COMPAT_MODS.add(new CompatMod(compatModId, fromModId, supportedModId));
         DEPENDENCIES.add(compatModId);
         DEPENDENCIES.addAll(fromModId);
