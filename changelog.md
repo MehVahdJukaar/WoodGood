@@ -21,6 +21,16 @@
 </div>
 
 ### UPDATED: 
+- **Quark** (NF): Updated deprecated method to use new method, just texture stuff
+- **Woodworks** (NF): Added, the missing tag, #minecraft:enchantment_power_provider to `bookshelf`
+- **EveryCompat** (C): Updated EveryCompatAPI to fix some issues with mod's built-in modules not generating ITEM (experimental)
+  - Related to: **Marioverse**
+
+---
+
+## v2.11.6
+
+### UPDATED: 
 - **Every Compat** (C): Updated a few API for **Stone Zone**
 
 ---
