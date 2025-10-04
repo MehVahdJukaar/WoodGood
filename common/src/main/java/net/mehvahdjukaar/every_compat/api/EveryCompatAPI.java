@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.api;
 
-import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.example.WoodGoodAddonExample;
 import net.mehvahdjukaar.every_compat.misc.OtherCompatMod;

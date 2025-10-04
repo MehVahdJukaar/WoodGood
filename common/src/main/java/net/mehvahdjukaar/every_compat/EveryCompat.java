@@ -4,7 +4,6 @@ package net.mehvahdjukaar.every_compat;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
@@ -37,6 +36,7 @@ import java.util.stream.Collectors;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.ENABLED_MODULES_LIST;
 
 @ApiStatus.Internal
+//Keep this class safe to be loaded at any time
 public abstract class EveryCompat {
     //TODO: figure out pack overlays to remove unneded textures when mods arent loaded
     public static final String MOD_ID = "everycomp";
@@ -44,17 +44,17 @@ public abstract class EveryCompat {
 
     private static final Multimap<String, CompatModule> ACTIVE_MODULES = MultimapBuilder
             .linkedHashKeys().arrayListValues().build();
-    static final List<OtherCompatMod> COMPAT_MODS = new ArrayList<>();
+    private static final List<OtherCompatMod> COMPAT_MODS = new ArrayList<>();
 
     //these are the names of the block types we add wooden variants for
     private static final Map<Class<? extends BlockType>, Set<String>> TYPES_TO_CHILD_KEYS = new Object2ObjectOpenHashMap<>();
     private static final Map<Object, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
 
     // all mod that EC directly or indirectly depends on
-    static final Set<String> DEPENDENCIES = new HashSet<>();
-    static final Set<String> ADDON_IDS = new HashSet<>();
+    private static final Set<String> DEPENDENCIES = new HashSet<>();
+    private static final Set<String> ADDON_IDS = new HashSet<>();
 
-    static final Set<CompatModule> ERRORED = new HashSet<>();
+    private static final Set<CompatModule> ERRORED = new HashSet<>();
 
     static boolean canShowErrorScreen = PlatHelper.getPhysicalSide().isClient();
 
