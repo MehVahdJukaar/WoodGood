@@ -282,7 +282,7 @@ public abstract class EveryCompat {
             String log = """
                     \n###########################################################################################################
                     #                                                                                                         #
-                    # ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed. #
+                    # ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed.    #
                     #                           You dont need EveryCompat and should remove it.                               #
                     #                                                                                                         #
                     ###########################################################################################################
