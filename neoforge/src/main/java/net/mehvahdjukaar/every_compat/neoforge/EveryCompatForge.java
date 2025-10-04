@@ -52,7 +52,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
 
 import java.lang.ref.WeakReference;
 
-import static net.mehvahdjukaar.every_compat.api.EveryCompatAPI.addIfLoaded;
+import static net.mehvahdjukaar.every_compat.EveryCompat.addOptionalModule;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 /**
@@ -83,63 +83,63 @@ public class EveryCompatForge extends EveryCompatCommon {
         if (INCLUDE_ALL_WOOD_MODULES.get()) {
 
             // ========================================= MACAW's ======================================================== \\
-            addIfLoaded("mcwbridges", () -> MacawBridgesModule.class);
-            addIfLoaded("mcwdoors", () -> MacawDoorsModule.class);
-            addIfLoaded("mcwfences", () -> MacawFencesModule.class);
-            addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule.class);
-            addIfLoaded("mcwlights", () -> MacawLightsModule.class);
-            addIfLoaded("mcwpaths", () -> MacawPathsModule.class);
-            addIfLoaded("mcwroofs", () -> MacawRoofsModule.class);
-            addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule.class);
-            addIfLoaded("mcwwindows", () -> MacawWindowsModule.class);
-            addIfLoaded("mcwstairs", () -> MacawStairsModule.class);
+            addOptionalModule("mcwbridges", () -> MacawBridgesModule.class);
+            addOptionalModule("mcwdoors", () -> MacawDoorsModule.class);
+            addOptionalModule("mcwfences", () -> MacawFencesModule.class);
+            addOptionalModule("mcwfurnitures", () -> MacawFurnitureModule.class);
+            addOptionalModule("mcwlights", () -> MacawLightsModule.class);
+            addOptionalModule("mcwpaths", () -> MacawPathsModule.class);
+            addOptionalModule("mcwroofs", () -> MacawRoofsModule.class);
+            addOptionalModule("mcwtrpdoors", () -> MacawTrapdoorsModule.class);
+            addOptionalModule("mcwwindows", () -> MacawWindowsModule.class);
+            addOptionalModule("mcwstairs", () -> MacawStairsModule.class);
 
             // ========================================= GENERAL ======================================================== \\
-            addIfLoaded("absentbydesign", () -> AbsentByDesignModule.class);
-            addIfLoaded("beautify", () -> BeautifyDecorateModule.class);
-            addIfLoaded("bibliocraft", () -> BibliocraftLegacyModule.class);
-            addIfLoaded("boatload", () -> BoatLoadModule.class);
-            addIfLoaded("buildersaddition", () -> BuildersAdditionModule.class);
-            addIfLoaded("bbb", () -> BuildingButBetterModule.class);
-            addIfLoaded("buildersdelight", () -> BuildersDelightModule.class);
-            addIfLoaded("corail_pillar", () -> CorailPillarModule.class);
-            addIfLoaded("decoration_delight", () -> DecorationDelightModule.class);
-            addIfLoaded("dramaticdoors", () -> DramaticDoorsModule.class);
-            addIfLoaded("excessive_building", () -> ExcessiveBuildingModule.class);
-            addIfLoaded("functionalstorage", () -> FunctionalStorageModule.class);
-            addIfLoaded("infinitybuttons", () -> InfinityButtonsModule.class);
-            addIfLoaded("justaraftmod", () -> JustARaftModule.class);
-            addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule.class);
-            addIfLoaded("mighty_mail", () -> MightyMailModule.class);
-            addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule.class);
-            addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule.class);
-            addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule.class);
-            addIfLoaded("pokecube_legends", () -> PokecubeAIOModule.class);
-            addIfLoaded("premium_wood", () -> PremiumWoodModule.class);
-            addIfLoaded("redeco", () -> ReDecoModule.class);
-            addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule.class);
-            addIfLoaded("shutter", () -> LauchsShuttersModule.class);
-            addIfLoaded("timber_frames", () -> TimberFramesModule.class);
-            addIfLoaded("tropicraft", () -> TropicraftModule.class);
-            addIfLoaded("twilightforest", () -> TwilightForestModule.class);
-            addIfLoaded("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
-//        addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule::new); .class-AVAILABLE
-            addIfLoaded("vct", () -> VariantCraftingTablesModule.class);
-            addIfLoaded("woodster", () -> WoodsterModule.class);
-            addIfLoaded("woodworks", () -> WoodworksModule.class);
-            addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class);
-            addIfLoaded("xercamod", () -> XercaModule.class);
+            addOptionalModule("absentbydesign", () -> AbsentByDesignModule.class);
+            addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
+            addOptionalModule("bibliocraft", () -> BibliocraftLegacyModule.class);
+            addOptionalModule("boatload", () -> BoatLoadModule.class);
+            addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
+            addOptionalModule("bbb", () -> BuildingButBetterModule.class);
+            addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
+            addOptionalModule("corail_pillar", () -> CorailPillarModule.class);
+            addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
+            addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
+            addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);
+            addOptionalModule("functionalstorage", () -> FunctionalStorageModule.class);
+            addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
+            addOptionalModule("justaraftmod", () -> JustARaftModule.class);
+            addOptionalModule("mctb", () -> MoreCraftingTablesForForgeModule.class);
+            addOptionalModule("mighty_mail", () -> MightyMailModule.class);
+            addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
+            addOptionalModule("oreberriesreplanted", () -> OreberriesReplantedModule.class);
+            addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
+            addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
+            addOptionalModule("premium_wood", () -> PremiumWoodModule.class);
+            addOptionalModule("redeco", () -> ReDecoModule.class);
+            addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
+            addOptionalModule("shutter", () -> LauchsShuttersModule.class);
+            addOptionalModule("timber_frames", () -> TimberFramesModule.class);
+            addOptionalModule("tropicraft", () -> TropicraftModule.class);
+            addOptionalModule("twilightforest", () -> TwilightForestModule.class);
+            addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
+//        addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new); .class-AVAILABLE
+            addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
+            addOptionalModule("woodster", () -> WoodsterModule.class);
+            addOptionalModule("woodworks", () -> WoodworksModule.class);
+            addOptionalModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class);
+            addOptionalModule("xercamod", () -> XercaModule.class);
 
             if (PlatHelper.isModLoaded("mcwdoors")) {
-                addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule.class);
+                addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
             }
 
-            addIfLoaded("create", () -> CreateModule.class); //TEMP: DISABLED due to version difference
+            addOptionalModule("create", () -> CreateModule.class); //TEMP: DISABLED due to version difference
         }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
-//        addIfLoaded("graveyard", () -> GraveyardModule::new); .class until custom block models work
-//        addIfLoaded("productivebees", () -> ProductiveBeesModule::new); .class: class for both beehive have major changes
+//        addOptionalModule("graveyard", () -> GraveyardModule::new); .class until custom block models work
+//        addOptionalModule("productivebees", () -> ProductiveBeesModule::new); .class: class for both beehive have major changes
 
     }
 

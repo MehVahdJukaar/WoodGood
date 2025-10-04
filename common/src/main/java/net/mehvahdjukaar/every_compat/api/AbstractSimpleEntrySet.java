@@ -47,8 +47,6 @@ import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.addTagToA
 //@SuppressWarnings({"unused"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
-    public static int totalChildren = 0;
-
     protected static final ResourceLocation NO_TAB_MARKER = ResourceLocation.withDefaultNamespace("none");
 
     public final Map<T, B> blocks = new HashMap<>();

@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.OtherCompatMod;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
@@ -33,7 +34,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.modulesList;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.ENABLED_MODULES_LIST;
 
 @ApiStatus.Internal
 public abstract class EveryCompat {
@@ -43,22 +44,110 @@ public abstract class EveryCompat {
 
     private static final Multimap<String, CompatModule> ACTIVE_MODULES = MultimapBuilder
             .linkedHashKeys().arrayListValues().build();
-    private static final List<OtherCompatMod> COMPAT_MODS = new ArrayList<>();
-    // all mod that EC directly or indirectly depends on
-    private static final Set<String> DEPENDENCIES = new HashSet<>();
-    private static final Set<String> ADDON_IDS = new HashSet<>();
+    static final List<OtherCompatMod> COMPAT_MODS = new ArrayList<>();
 
     //these are the names of the block types we add wooden variants for
     private static final Map<Class<? extends BlockType>, Set<String>> TYPES_TO_CHILD_KEYS = new Object2ObjectOpenHashMap<>();
     private static final Map<Object, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
-    private static final Set<Class<? extends BlockType>> AFFECTED_TYPES = new HashSet<>();
+
+    // all mod that EC directly or indirectly depends on
+    static final Set<String> DEPENDENCIES = new HashSet<>();
+    static final Set<String> ADDON_IDS = new HashSet<>();
+
+    static final Set<CompatModule> ERRORED = new HashSet<>();
 
     static boolean canShowErrorScreen = PlatHelper.getPhysicalSide().isClient();
-    private static final Set<CompatModule> ERRORED = new HashSet<>();
 
     /// @return everycomp:path
     public static ResourceLocation res(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    public static void init() {
+        ECConfigs.init();
+        UnsafeDisablerConfigs.init();
+        ECNetworking.init();
+        ECRegistry.init();
+
+        RegHelper.registerDynamicResourceProvider(ServerDynamicResourcesHandler.getInstance());
+        RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
+        PlatHelper.addCommonSetup(EveryCompat::setup);
+
+        BlockSetAPI.addDynamicRegistration(MOD_ID, (r) -> {
+            ModEntriesConfigs.initEarlyButNotSuperEarly(); // assure configs are loaded since they depend on wood stuff being init
+        }, BuiltInRegistries.BLOCK);
+    }
+
+    public static void setup() {
+        //hoping this isnt too late
+        for (var module : ACTIVE_MODULES.values()) {
+            ServerDynamicResourcesHandler.getInstance()
+                    .addSupportedNamespaces(module.getServerResourcesNamespaces());
+
+            if (PlatHelper.getPhysicalSide().isClient()) {
+                ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
+                        module.getClientResourcesNamespaces());
+            }
+        }
+
+        String activeModulesString = ACTIVE_MODULES.keySet().stream()
+                .map(key -> {
+                    int count = ACTIVE_MODULES.get(key).size();
+                    return count > 1 ? key + "(" + count + ")" : key;
+                })
+                .collect(Collectors.joining(", ", "[", "]"));
+        EveryCompat.LOGGER.info("Every Compat has loaded {} modules: {}", ACTIVE_MODULES.size(), activeModulesString);
+
+        if (PlatHelper.isModLoaded("chipped")) {
+            EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
+        }
+        //log registered stuff size
+        int newSize = BuiltInRegistries.BLOCK.size();
+        //cal
+        int myChildrenSize = ACTIVE_MODULES.values().stream().mapToInt(CompatModule::bloatAmount).sum();
+
+        float p = (myChildrenSize / (float) newSize) * 100f;
+        if (myChildrenSize == 0) {
+            String log = """
+                    \n###########################################################################################################
+                    #                                                                                                         #
+                    # ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed. #
+                    #                           You dont need EveryCompat and should remove it.                               #
+                    #                                                                                                         #
+                    ###########################################################################################################
+                    """;
+            EveryCompat.LOGGER.error("\n{}", log);
+            return;
+        }
+
+        if (p > 25) {
+            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
+        } else {
+            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
+        }
+        if (p > 33) {
+            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
+            if (compatbloated.isPresent()) {
+                CompatModule bloated = compatbloated.get();
+                EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
+                //no freaking clue why this was returned as null once
+                EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
+                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
+            } else {
+                String log = """
+                        \n#######################################################
+                        #                                                     #
+                        #     ATTENTION: No supported mods are installed.     #
+                        #   You dont need EveryCompat and should remove it.   #
+                        #                                                     #
+                        #######################################################
+                        """;
+                EveryCompat.LOGGER.error("\n{}", log);
+            }
+        }
+
+        forAllModules(CompatModule::onModSetup);
+        canShowErrorScreen = true;
     }
 
     public static void forAllModules(Consumer<CompatModule> action) {
@@ -77,7 +166,7 @@ public abstract class EveryCompat {
         }
     }
 
-    public static void executeOrFail(Runnable r, CompatModule module){
+    public static void executeOrFail(Runnable r, CompatModule module) {
         try {
             r.run();
         } catch (Throwable e) {
@@ -90,7 +179,6 @@ public abstract class EveryCompat {
             }
         }
     }
-
 
     public static void addItemToModuleMapping(Item item, CompatModule module) {
         ITEMS_TO_MODULES.put(item, module);
@@ -108,33 +196,6 @@ public abstract class EveryCompat {
         return TYPES_TO_CHILD_KEYS.getOrDefault(type, Set.of());
     }
 
-    @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String)}
-    public static void addOtherCompatMod(String compatModId, String fromModId, String supportedModId) {
-        addCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
-    }
-
-    @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String...)}
-    public static void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
-        List<String> list = new ArrayList<>();
-        Collections.addAll(list, supportedModId);
-        addCompatMod(compatModId, List.of(fromModId), list);
-    }
-
-    @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String...)}
-    public static void addOtherCompatMod(String compatModId, List<String> fromModId, String... supportedModId) {
-        List<String> list = new ArrayList<>();
-        Collections.addAll(list, supportedModId);
-        addCompatMod(compatModId, fromModId, list);
-    }
-
-    @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String)}
-    public static void addOtherCompatMod(String compatModId, List<String> fromModId, String supportedModId) {
-        addCompatMod(compatModId, fromModId, List.of(supportedModId));
-    }
 
     public static void addCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
         OtherCompatMod oc = new OtherCompatMod(compatModId, fromModId, supportedModId);
@@ -143,62 +204,32 @@ public abstract class EveryCompat {
 
     public static synchronized void addOtherCompatMod(OtherCompatMod oc) {
         COMPAT_MODS.add(oc);
-        DEPENDENCIES.add(oc.modId);
-        DEPENDENCIES.addAll(oc.woodsFrom);
-        DEPENDENCIES.addAll(oc.blocksFrom);
+        DEPENDENCIES.add(oc.modId());
+        DEPENDENCIES.addAll(oc.woodsFrom());
+        DEPENDENCIES.addAll(oc.blocksFrom());
     }
 
     public static synchronized void addModule(CompatModule module) {
-        if (!modulesList.get().contains(module.getModId())) {
+        if (!ENABLED_MODULES_LIST.get().contains(module.getModId())) {
             ACTIVE_MODULES.put(module.getModId(), module);
             DEPENDENCIES.add(module.getModId());
             DEPENDENCIES.addAll(module.getAlreadySupportedMods());
-
-            ServerDynamicResourcesHandler.getInstance()
-                    .addSupportedNamespaces(module.getServerResourcesNamespaces());
-
-            if (PlatHelper.getPhysicalSide().isClient()) {
-                ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
-                        module.getClientResourcesNamespaces());
-            }
-
-            AFFECTED_TYPES.addAll(module.getAffectedTypes());
             ADDON_IDS.add(module.getMyNamespace());
         }
     }
 
     @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link EveryCompatAPI#addIfLoaded(String, Supplier)}
-    public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatHelper.isModLoaded(modId)) {
-            try {
-                CompatModule module = moduleFactory.get().apply(modId);
-                addModule(module);
-            } catch (Throwable e) {
-                ERRORED.add(new CompatModule(modId, modId, "unknown") {
-
-                    @Override
-                    public int bloatAmount() {
-                        return 0;
-                    }
-
-                    @Override
-                    public Collection<Class<? extends BlockType>> getAffectedTypes() {
-                        return List.of();
-                    }
-                });
-            }
+    public static void addMultipleOptional(String chipped, Supplier<Class<? extends CompatModule>>... object) {
+        for (var klazz : object) {
+            addOptionalModule(chipped, klazz);
         }
     }
 
-    public static void maybeAddModule(
-            String modId,
-            Supplier<Class<? extends CompatModule>> moduleClassSupplier
-    ) {
+    public synchronized static void addOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
         if (!PlatHelper.isModLoaded(modId)) return;
 
         try {
-            Class<? extends CompatModule> klazz = moduleClassSupplier.get();
+            Class<? extends CompatModule> klazz = moduleClass.get();
 
             CompatModule module = instantiateModuleClass(modId, klazz);
 
@@ -244,95 +275,12 @@ public abstract class EveryCompat {
         return DEPENDENCIES;
     }
 
-    public static void init() {
-        ECConfigs.init();
-        UnsafeDisablerConfigs.init();
-        ECNetworking.init();
-        ECRegistry.init();
-
-        RegHelper.registerDynamicResourceProvider(ServerDynamicResourcesHandler.getInstance());
-        RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
-        PlatHelper.addCommonSetup(EveryCompat::setup);
-
-        BlockSetAPI.addDynamicRegistration(MOD_ID, (r) -> {
-            ModEntriesConfigs.initEarlyButNotSuperEarly(); // assure configs are loaded since they depend on wood stuff being init
-        }, BuiltInRegistries.BLOCK);
-
-        EcProxy.setEcLoaded();
-    }
-
-    public static void setup() {
-        String activeModulesString = ACTIVE_MODULES.keySet().stream()
-                .map(key -> {
-                    int count = ACTIVE_MODULES.get(key).size();
-                    return count > 1 ? key + "(" + count + ")" : key;
-                })
-                .collect(Collectors.joining(", ", "[", "]"));
-        EveryCompat.LOGGER.info("Every Compat has loaded {} modules: {}", ACTIVE_MODULES.size(), activeModulesString);
-
-        if (PlatHelper.isModLoaded("chipped")) {
-            EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
-        }
-        //log registered stuff size
-        int newSize = BuiltInRegistries.BLOCK.size();
-        int myChildrenSize = AbstractSimpleEntrySet.totalChildren; // This include ITEMS and BLOCKS
-
-        float p = (myChildrenSize / (float) newSize) * 100f;
-        if (myChildrenSize == 0) {
-            String log = """
-                    \n###########################################################################################################
-                    #                                                                                                         #
-                    # ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed. #
-                    #                           You dont need EveryCompat and should remove it.                               #
-                    #                                                                                                         #
-                    ###########################################################################################################
-                    """;
-            EveryCompat.LOGGER.error("\n{}", log);
-            return;
-        }
-
-        if (p > 25) {
-            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
-        } else {
-            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
-        }
-        if (p > 33) {
-            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
-            if (compatbloated.isPresent()) {
-                CompatModule bloated = compatbloated.get();
-                EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
-                //no freaking clue why this was returned as null once
-                EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
-                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
-            } else {
-                String log = """
-                        \n#######################################################
-                        #                                                     #
-                        #     ATTENTION: No supported mods are installed.     #
-                        #   You dont need EveryCompat and should remove it.   #
-                        #                                                     #
-                        #######################################################
-                        """;
-                EveryCompat.LOGGER.error("\n{}", log);
-            }
-        }
-
-
-        forAllModules(CompatModule::onModSetup);
-        canShowErrorScreen = true;
-
-    }
-
     public static boolean isMyIdOrAddon(String namespace) {
         return ADDON_IDS.contains(namespace);
     }
 
     public static Collection<CompatModule> getModulesOfMod(String modId) {
         return ACTIVE_MODULES.get(modId);
-    }
-
-
-    public record OtherCompatMod(String modId, List<String> woodsFrom, List<String> blocksFrom) {
     }
 
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
@@ -362,4 +310,55 @@ public abstract class EveryCompat {
         return ERRORED.stream().map(CompatModule::getModName)
                 .toList();
     }
+
+
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String)}
+    public static void addOtherCompatMod(String compatModId, String fromModId, String supportedModId) {
+        addCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
+    }
+
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String...)}
+    public static void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list, supportedModId);
+        addCompatMod(compatModId, List.of(fromModId), list);
+    }
+
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String...)}
+    public static void addOtherCompatMod(String compatModId, List<String> fromModId, String... supportedModId) {
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list, supportedModId);
+        addCompatMod(compatModId, fromModId, list);
+    }
+
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String)}
+    public static void addOtherCompatMod(String compatModId, List<String> fromModId, String supportedModId) {
+        addCompatMod(compatModId, fromModId, List.of(supportedModId));
+    }
+
+
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addIfLoaded(String, Supplier)}
+    public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
+        if (PlatHelper.isModLoaded(modId)) {
+            try {
+                CompatModule module = moduleFactory.get().apply(modId);
+                addModule(module);
+            } catch (Throwable e) {
+                ERRORED.add(new CompatModule(modId, modId, "unknown") {
+
+                    @Override
+                    public int bloatAmount() {
+                        return 0;
+                    }
+
+                    @Override
+                    public Collection<Class<? extends BlockType>> getAffectedTypes() {
+                        return List.of();
+                    }
+                });
+            }
+        }
+    }
+
 }
