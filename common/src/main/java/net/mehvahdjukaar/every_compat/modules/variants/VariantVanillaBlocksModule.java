@@ -9,31 +9,25 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
-import net.mehvahdjukaar.every_compat.mixins.PoiTypesAccessor;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Map;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
+import static net.mehvahdjukaar.every_compat.common_classes.poiUtility.simpleAddBlocksToPOI;
 
 //SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
 public class VariantVanillaBlocksModule extends SimpleModule {
@@ -53,7 +47,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> smoker;
 
     public VariantVanillaBlocksModule(String modId) {
-        super(modId, "vvb");
+        super(modId, "vvb", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes(modId);
 
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
@@ -300,40 +294,18 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     @Override
     public void onModInit() {
         super.onModInit();
-        RegHelper.addExtraPOIStatesRegistration(this::addExtraPoiStates);
+        simpleAddBlocksToPOI(beehive, PoiTypes.BEEHIVE);
+        simpleAddBlocksToPOI(barrel, PoiTypes.FISHERMAN);
+        simpleAddBlocksToPOI(cartography, PoiTypes.CARTOGRAPHER);
+        simpleAddBlocksToPOI(composters, PoiTypes.FARMER);
+        simpleAddBlocksToPOI(fletchingTable, PoiTypes.FLETCHER);
+        simpleAddBlocksToPOI(grindstones, PoiTypes.WEAPONSMITH);
+        simpleAddBlocksToPOI(lectern, PoiTypes.LIBRARIAN);
+        simpleAddBlocksToPOI(smithingTable, PoiTypes.TOOLSMITH);
+        simpleAddBlocksToPOI(smoker, PoiTypes.BUTCHER);
     }
 
-    private void addExtraPoiStates(RegHelper.ExtraPOIStatesEvent event) {
-        barrel.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.FISHERMAN, b)
-        );
-        beehive.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.BEEHIVE, b)
-        );
-        cartography.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.CARTOGRAPHER, b)
-        );
-        composters.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.FARMER, b)
-        );
-        fletchingTable.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.FLETCHER, b)
-        );
-        grindstones.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.WEAPONSMITH, b)
-        );
-        lectern.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.LIBRARIAN, b)
-        );
-        smithingTable.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.TOOLSMITH, b)
-        );
-        smoker.blocks.values().forEach(b ->
-                event.addBlockToPoi(PoiTypes.BUTCHER, b)
-        );
-    }
     // REGISTRY --------------------------------------------------------------------------------------------------------
-
     @Override
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {

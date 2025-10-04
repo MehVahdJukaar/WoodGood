@@ -36,7 +36,10 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 import java.util.List;
 
-import static net.mehvahdjukaar.every_compat.EveryCompat.*;
+import static net.mehvahdjukaar.every_compat.EveryCompat.addOtherCompatMod;
+import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
+import static net.mehvahdjukaar.every_compat.api.EveryCompatAPI.addIfLoaded;
+import static net.mehvahdjukaar.every_compat.api.EveryCompatAPI.addMultipleIfLoaded;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 public class EveryCompatCommon {
@@ -103,34 +106,34 @@ public class EveryCompatCommon {
                     "farmersdelight");
 
     //!! =========================================== Add Modules ==================================================== \\
-            maybeAddModule("architects_palette", () -> ArchitectsPaletteModule.class);
-            maybeAddModule("another_furniture", () -> AnotherFurnitureModule.class);
-            maybeAddModule("backpacked", () -> BackpackedModule.class);
-            maybeAddModule("barkcarpets", () -> BarkCarpetsModule.class); // Exline's
-            maybeAddModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
-            maybeAddModule("blockus", () -> BlockusModule.class);
-            maybeAddModule("campchair", () -> CampChairModule.class);
-            maybeAddMultipleModule("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class);
-            maybeAddModule("dawnoftimebuilder", () -> DawnOfTimeModule.class);
-            maybeAddModule("decorative_blocks", () -> DecorativeBlocksModule.class);
-            maybeAddModule("farmersdelight", () -> FarmersDelightModule.class);
-            maybeAddModule("friendsandfoes", () -> FriendsAndFoesModule.class);
-            maybeAddModule("furnish", () -> FurnishModule.class);
-            maybeAddModule("handcrafted", () -> HandcraftedModule.class);
-            maybeAddModule("hearth_and_home", () -> HearthAndHomeModule.class);
-            maybeAddModule("lolmct", () -> MoreCraftingTablesModule.class);
-            maybeAddModule("lolmcv", () -> MoreChestVariantsModule.class);
-            maybeAddModule("missingwilds", () -> MissingWildModule.class);
-            maybeAddModule("more_beautiful_torches", () -> MoreBeautifulTorches.class);
-            maybeAddModule("quark", () -> QuarkModule.class);
-            maybeAddModule("refurbished_furniture", () -> RefurbishedFurnitureModule.class);
-            maybeAddModule("storagedrawers", () -> StorageDrawersModule.class);
-            maybeAddModule("stylishstiles", () -> StylishStilesModule.class);
-            maybeAddModule("table_top_craft", () -> TableTopCraftModule.class);
-            maybeAddModule("twigs", () -> TwigsModule.class);
-            maybeAddModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
-            maybeAddModule("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
-            maybeAddModule("villagersplus", () -> VillagersPlusModule.class);
+            addIfLoaded("architects_palette", () -> ArchitectsPaletteModule.class);
+            addIfLoaded("another_furniture", () -> AnotherFurnitureModule.class);
+            addIfLoaded("backpacked", () -> BackpackedModule.class);
+            addIfLoaded("barkcarpets", () -> BarkCarpetsModule.class); // Exline's
+            addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule.class);
+            addIfLoaded("blockus", () -> BlockusModule.class);
+            addIfLoaded("campchair", () -> CampChairModule.class);
+            addMultipleIfLoaded("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class);
+            addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule.class);
+            addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule.class);
+            addIfLoaded("farmersdelight", () -> FarmersDelightModule.class);
+            addIfLoaded("friendsandfoes", () -> FriendsAndFoesModule.class);
+            addIfLoaded("furnish", () -> FurnishModule.class);
+            addIfLoaded("handcrafted", () -> HandcraftedModule.class);
+            addIfLoaded("hearth_and_home", () -> HearthAndHomeModule.class);
+            addIfLoaded("lolmct", () -> MoreCraftingTablesModule.class);
+            addIfLoaded("lolmcv", () -> MoreChestVariantsModule.class);
+            addIfLoaded("missingwilds", () -> MissingWildModule.class);
+            addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches.class);
+            addIfLoaded("quark", () -> QuarkModule.class);
+            addIfLoaded("refurbished_furniture", () -> RefurbishedFurnitureModule.class);
+            addIfLoaded("storagedrawers", () -> StorageDrawersModule.class);
+            addIfLoaded("stylishstiles", () -> StylishStilesModule.class);
+            addIfLoaded("table_top_craft", () -> TableTopCraftModule.class);
+            addIfLoaded("twigs", () -> TwigsModule.class);
+            addIfLoaded("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
+            addIfLoaded("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
+            addIfLoaded("villagersplus", () -> VillagersPlusModule.class);
 
 //!! =================================================== OTHERS ===================================================== \\
             forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));

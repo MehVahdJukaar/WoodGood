@@ -6,6 +6,7 @@ import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
@@ -93,27 +94,35 @@ public abstract class EveryCompat {
         return TYPES_TO_CHILD_KEYS.getOrDefault(type, Set.of());
     }
 
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String)}
     public static void addOtherCompatMod(String compatModId, String fromModId, String supportedModId) {
-        addOtherCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
+        addCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
     }
 
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, String, String...)}
     public static void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, supportedModId);
-        addOtherCompatMod(compatModId, List.of(fromModId), list);
+        addCompatMod(compatModId, List.of(fromModId), list);
     }
 
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String...)}
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, String... supportedModId) {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, supportedModId);
-        addOtherCompatMod(compatModId, fromModId, list);
+        addCompatMod(compatModId, fromModId, list);
     }
 
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link EveryCompatAPI#addOtherCompatMod(String, List<String>, String)}
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, String supportedModId) {
-        addOtherCompatMod(compatModId, fromModId, List.of(supportedModId));
+        addCompatMod(compatModId, fromModId, List.of(supportedModId));
     }
 
-    public static void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
+    public static void addCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
         OtherCompatMod oc = new OtherCompatMod(compatModId, fromModId, supportedModId);
         addOtherCompatMod(oc);
     }
@@ -147,7 +156,7 @@ public abstract class EveryCompat {
     }
 
     @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link EveryCompat#maybeAddModule(String, Supplier)}
+    /// @deprecated USE {@link EveryCompatAPI#addIfLoaded(String, Supplier)}
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
             try {
@@ -194,15 +203,6 @@ public abstract class EveryCompat {
                     return List.of();
                 }
             });
-        }
-    }
-
-    //eeeh idk is this needed?
-    @Deprecated(forRemoval = true)
-    @SafeVarargs
-    public static void maybeAddMultipleModule(String modId, Supplier<Class<? extends CompatModule>>... moduleClasses) {
-        for (Supplier<Class<? extends CompatModule>> moduleClassSupplier : moduleClasses) {
-            maybeAddModule(modId, moduleClassSupplier);
         }
     }
 

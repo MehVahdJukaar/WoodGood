@@ -21,6 +21,31 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C): Updated a few API for **Stone Zone**
+
+---
+
+## v2.11.5
+
+### UPDATED:
+- **Friends & Foes** (C): Updated to use the new method from Moonlight for beehives' Point-Of-Interest
+- **Variant Vanilla Blocks** (FB): Updated to use the new method from Moonlight for blocks' Point-Of-Interest  
+- **Functional Storage** (NF): Fixed the missing item for all Drawers - [#1057](https://github.com/MehVahdJukaar/WoodGood/issues/1057) 
+- **Farmer's Delight** (C): Fixed the cutting recipe - [#1066](https://github.com/MehVahdJukaar/WoodGood/issues/1066) - @MehVahdJukaar
+- **Variant Vanilla Blocks** (C): Fixed its blocks not counting as Job Sites - [#900](https://github.com/MehVahdJukaar/WoodGood/issues/900)
+- **EveryCompat** (C): Improved the error loggings for some rare cases
+- **Dawn Of Time** (C): now support v1.6.3+ (no longer supporting the older version) - [#1060](https://github.com/MehVahdJukaar/WoodGood/issues/1060)
+- **Chipped** (C):
+    - one missed outdated method
+    - Fixed the missing recipes
+    - Fixed missing textures for `tile_windowed_>TYPE<_door`
+    - Added mask textures for the remaining logs and stripped_logs. & also improved the textures
+
+---
+
+## v2.11.4
+
+### UPDATED: 
 - **Every Compat** (C): 
   - Improved the comments in configs, `everycomp-common.toml` and `everycomp-client.toml`
   - Added a new feature in `everycomp-hazardous.toml` to disable all of Wood Modules (same as what Library-Section can do)

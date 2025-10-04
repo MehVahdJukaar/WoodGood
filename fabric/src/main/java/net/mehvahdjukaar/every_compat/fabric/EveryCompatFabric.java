@@ -22,7 +22,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModul
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
-import static net.mehvahdjukaar.every_compat.EveryCompat.maybeAddModule;
+import static net.mehvahdjukaar.every_compat.api.EveryCompatAPI.addIfLoaded;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 public class EveryCompatFabric extends EveryCompatCommon implements ModInitializer {
@@ -45,39 +45,39 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
         if (INCLUDE_ALL_WOOD_MODULES.get()) {
 
             // =============================================== MACAW's ================================================== \\
-            maybeAddModule("mcwbridges", () -> MacawBridgesModule.class);
-            maybeAddModule("mcwdoors", () -> MacawDoorsModule.class);
-            maybeAddModule("mcwfences", () -> MacawFencesModule.class);
-            maybeAddModule("mcwlights", () -> MacawLightsModule.class);
-            maybeAddModule("mcwpaths", () -> MacawPathsModule.class);
-            maybeAddModule("mcwroofs", () -> MacawRoofsModule.class);
-            maybeAddModule("mcwtrpdoors", () -> MacawTrapdoorsModule.class);
-            maybeAddModule("mcwwindows", () -> MacawWindowsModule.class);
-            maybeAddModule("mcwfurnitures", () -> MacawFurnitureModule.class);
-            maybeAddModule("mcwstairs", () -> MacawStairsModule.class);
+            addIfLoaded("mcwbridges", () -> MacawBridgesModule.class);
+            addIfLoaded("mcwdoors", () -> MacawDoorsModule.class);
+            addIfLoaded("mcwfences", () -> MacawFencesModule.class);
+            addIfLoaded("mcwlights", () -> MacawLightsModule.class);
+            addIfLoaded("mcwpaths", () -> MacawPathsModule.class);
+            addIfLoaded("mcwroofs", () -> MacawRoofsModule.class);
+            addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule.class);
+            addIfLoaded("mcwwindows", () -> MacawWindowsModule.class);
+            addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule.class);
+            addIfLoaded("mcwstairs", () -> MacawStairsModule.class);
 
             // =============================================== GENERAL ================================================== \\
-            maybeAddModule("bbb", () -> BuildingButBetterModule.class);
-            maybeAddModule("beautify", () -> BeautifyRefabricatedModule.class);
-            maybeAddModule("bewitchment", () -> BewitchmentModule.class);
-            maybeAddModule("clutter", () -> ClutterModule.class);
-            maybeAddModule("dramaticdoors", () -> DramaticDoorsModule.class);
-            maybeAddModule("excessive_building", () -> ExcessiveBuildingModule.class);
-            maybeAddModule("exlineawnings", () -> AwningModule.class);
-            maybeAddModule("infinitybuttons", () -> InfinityButtonsModule.class);
-            maybeAddModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //!! Not maintained since 1.20.1
-            maybeAddModule("mighty_mail", () -> MightyMailModule.class);
-            maybeAddModule("redbits", () -> RedBitsModule.class);
-            maybeAddModule("regions_unexplored", () -> RegionsUnexploredModule.class);
-            maybeAddModule("shutter", () -> LauchsShuttersModule.class);
-            maybeAddModule("wilderwild", () -> WilderWildModule.class);
-            maybeAddModule("woodenhoppers", () -> WoodenHoppersModule.class);
+            addIfLoaded("bbb", () -> BuildingButBetterModule.class);
+            addIfLoaded("beautify", () -> BeautifyRefabricatedModule.class);
+            addIfLoaded("bewitchment", () -> BewitchmentModule.class);
+            addIfLoaded("clutter", () -> ClutterModule.class);
+            addIfLoaded("dramaticdoors", () -> DramaticDoorsModule.class);
+            addIfLoaded("excessive_building", () -> ExcessiveBuildingModule.class);
+            addIfLoaded("exlineawnings", () -> AwningModule.class);
+            addIfLoaded("infinitybuttons", () -> InfinityButtonsModule.class);
+            addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule.class); //!! Not maintained since 1.20.1
+            addIfLoaded("mighty_mail", () -> MightyMailModule.class);
+            addIfLoaded("redbits", () -> RedBitsModule.class);
+            addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule.class);
+            addIfLoaded("shutter", () -> LauchsShuttersModule.class);
+            addIfLoaded("wilderwild", () -> WilderWildModule.class);
+            addIfLoaded("woodenhoppers", () -> WoodenHoppersModule.class);
 
             if (PlatHelper.isModLoaded("mcwdoors")) {
-                maybeAddModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
+                addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule.class);
             }
 
-            maybeAddModule("create", () -> CreateModule.class); // ONLY TEMP until FABRIC v6.0.0 is out
+            addIfLoaded("create", () -> CreateModule.class); // ONLY TEMP until FABRIC v6.0.0 is out
         }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
