@@ -16,7 +16,7 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -64,7 +64,7 @@ public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<LeavesType, Block> leafPiles;
 
     public WoodworksModule(String modId) {
-        super(modId, "abnww");
+        super(modId, "abnww", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
@@ -76,6 +76,7 @@ public class WoodworksModule extends SimpleModule {
                         )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
@@ -197,7 +198,7 @@ public class WoodworksModule extends SimpleModule {
 
 
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
-                        WoodworksBlocks.OAK_LEAF_PILE, () -> LeavesTypeRegistry.OAK_TYPE,
+                        WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesTypes.OAK,
                         leavesType -> new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
                                 .strength(0.2F)
                                 .ignitedByLava()
@@ -313,7 +314,6 @@ public class WoodworksModule extends SimpleModule {
         }
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public void sawmillRecipe(String recipeName, Item input, Item output,
                               ResourceSink sink, ResourceManager manager, WoodType wood) {
 

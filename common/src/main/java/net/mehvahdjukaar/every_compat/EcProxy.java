@@ -28,6 +28,11 @@ public class EcProxy {
         if (EC_LOADED) flush();
     }
 
+    @SafeVarargs
+    public synchronized static void addMultipleOptional(String modId, Supplier<Class<? extends CompatModule>>... moduleClasses) {
+        for (Supplier<Class<? extends CompatModule>> moduleClass : moduleClasses) addOptional(modId, moduleClass);
+    }
+
     public synchronized static void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
         COMPAT_MODS.add(new EveryCompat.OtherCompatMod(compatModId, fromModId, supportedModId));
         if (EC_LOADED) flush();

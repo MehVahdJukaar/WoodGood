@@ -42,24 +42,23 @@ public class EveryCompatAPI {
     }
 
 
-    //TODO: delete these 2 they arent needed. less stuff here the better
-    /// Add your module to EveryCompat. The module will be loaded if the mod is installed
-    @Deprecated(forRemoval = true)
+    /// USE {@link EcTempPluginStorage#addOptional(String, Supplier)}
+    @Deprecated(forRemoval = true, since = "v2.11.8")
     public static void addIfLoaded(String modId, Supplier<Class<? extends CompatModule>> moduleClassSupplier) {
         maybeAddModule(modId, moduleClassSupplier);
     }
 
     //delete
-    @Deprecated(forRemoval = true)
+    @Deprecated(forRemoval = true, since = "v2.11.8")
     @SafeVarargs
-    /// Same as addIfLoaded but Multiple Module can be StoneModule, MudModule, WoodModule or others for the one same mod
+    /// USE {@link EcTempPluginStorage#addMultipleOptional(String, Supplier[])}
     public static void addMultipleIfLoaded(String modId, Supplier<Class<? extends CompatModule>>... moduleClasses) {
         for (Supplier<Class<? extends CompatModule>> moduleClassSupplier : moduleClasses) {
             maybeAddModule(modId, moduleClassSupplier);
         }
     }
 
-    /// If you mod has compat mods that support it with Biomes O' Plenty or other Wood Mods below can make an exception
+    /// If your mod has compat mods that support it with Biomes O' Plenty or other Wood Mods below can make an exception
     /// so EC won't generate blocks from your mod with Biomes O' Plenty
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
         EcProxy.addOtherCompatMod(compatModId, fromModId, supportedModId);
