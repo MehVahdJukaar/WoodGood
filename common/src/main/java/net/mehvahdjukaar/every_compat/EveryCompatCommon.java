@@ -36,8 +36,8 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 import java.util.List;
 
-import static net.mehvahdjukaar.every_compat.EcTempPluginStorage.addMultipleOptional;
-import static net.mehvahdjukaar.every_compat.EcTempPluginStorage.addOptional;
+import static net.mehvahdjukaar.every_compat.EcProxy.addMultipleOptional;
+import static net.mehvahdjukaar.every_compat.EcProxy.addOptional;
 import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
 import static net.mehvahdjukaar.every_compat.api.EveryCompatAPI.addOtherCompatMod;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
