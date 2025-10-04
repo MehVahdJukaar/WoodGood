@@ -1,15 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
 import com.google.gson.JsonObject;
-import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECPlatformStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.api.TabAddMode;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -23,7 +19,6 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
@@ -64,6 +59,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
@@ -86,7 +82,7 @@ public class QuarkModule extends SimpleModule {
     public static BlockEntityType<ChestBlockEntity> TRAPPED_CHEST_TILE;
 
     public QuarkModule(String modId) {
-        super(modId, "q");
+        super(modId, "q", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         verticalSlabs = QuarkSimpleEntrySet.builder(WoodType.class, "vertical_slab",
@@ -117,15 +113,15 @@ public class QuarkModule extends SimpleModule {
                         getModBlock("acacia_bookshelf"),
                         () -> VanillaWoodTypes.ACACIA,
                         w -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(),
-                                null, w.canBurn(), w.getSound()))
-                .setTabKey(tab)
-                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .copyParentDrop()
+                                null, w.canBurn(), w.getSound())
+                )
+                .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"), bookshelfPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
+                .setTabKey(tab)
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/acacia_bookshelf"))
-                .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
-                .setPalette(this::bookshelfPalette)
+                .copyParentDrop()
                 .build();
         this.addEntry(bookshelves);
 
@@ -354,24 +350,19 @@ public class QuarkModule extends SimpleModule {
         event.register(TRAPPED_CHEST_TILE, context -> new VariantChestRenderer(context, true));
     }
 
-    private Pair<List<Palette>, McMetaFile> bookshelfPalette(BlockType w, ResourceManager m) {
-        try (TextureImage plankTexture = TextureImage.open(m,
-                RPUtils.findFirstBlockTextureLocation(m, ((WoodType) w).planks))) {
-
-            List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-            targetPalette.forEach(p -> {
-                var l0 = p.getDarkest();
-                p.increaseDown();
-                p.increaseDown();
-                p.increaseDown();
-                p.increaseDown();
-                p.remove(l0);
-            });
-            return Pair.of(targetPalette, plankTexture.getMcMeta());
-        } catch (Exception e) {
-            throw new RuntimeException(String.format("Failed to generate palette for %s : %s", w, e));
-        }
-    }
+    public static final PaletteStrategy bookshelfPalette = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
+                    blockType, manager, PLANKS,null,
+                    p -> {
+                        var l0 = p.getDarkest();
+                        p.increaseDown();
+                        p.increaseDown();
+                        p.increaseDown();
+                        p.increaseDown();
+                        p.remove(l0);
+                    }
+            )
+    );
 
     @Override
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
