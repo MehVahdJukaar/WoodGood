@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.mehvahdjukaar.every_compat.EcTempPluginStorage;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.example.WoodGoodAddonExample;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.maybeAddModule;
+import java.util.function.Supplier;
 
 /**
  * Use this class register new wood type blocks and module to Every Compat
@@ -27,18 +29,29 @@ public class EveryCompatAPI {
      * Take a look at {@link net.mehvahdjukaar.every_compat.api.example.WoodGoodModuleExample} for an example module
      */
     public static synchronized void registerModule(CompatModule module) {
-        EveryCompat.addModule(module);
+        EcTempPluginStorage.add(module);
     }
 
+    public static synchronized void registerOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
+        EcTempPluginStorage.addOptional(modId, moduleClass);
+    }
+
+    //no need for this
+    @Deprecated(forRemoval = true)
     public static Collection<CompatModule> getModule(String modId) {
         return EveryCompat.getModulesOfMod(modId);
     }
 
+
+    //TODO: delete these 2 they arent needed. less stuff here the better
     /// Add your module to EveryCompat. The module will be loaded if the mod is installed
+    @Deprecated(forRemoval = true)
     public static void addIfLoaded(String modId, Supplier<Class<? extends CompatModule>> moduleClassSupplier) {
         maybeAddModule(modId, moduleClassSupplier);
     }
 
+    //delete
+    @Deprecated(forRemoval = true)
     @SafeVarargs
     /// Same as addIfLoaded but Multiple Module can be StoneModule, MudModule, WoodModule or others for the one same mod
     public static void addMultipleIfLoaded(String modId, Supplier<Class<? extends CompatModule>>... moduleClasses) {
@@ -50,7 +63,7 @@ public class EveryCompatAPI {
     /// If you mod has compat mods that support it with Biomes O' Plenty or other Wood Mods below can make an exception
     /// so EC won't generate blocks from your mod with Biomes O' Plenty
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
-        EveryCompat.addCompatMod(compatModId, fromModId, supportedModId);
+        EcTempPluginStorage.addCompatMod(compatModId, fromModId, supportedModId);
     }
 
     public static void addOtherCompatMod(String compatModId, String fromModId, String supportedModId) {

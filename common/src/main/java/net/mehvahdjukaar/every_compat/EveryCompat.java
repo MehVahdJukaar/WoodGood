@@ -42,13 +42,13 @@ import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.modul
 
 @ApiStatus.Internal
 public abstract class EveryCompat {
-//TODO: figure out pack overlays to remove unneded textures when mods arent loaded
+    //TODO: figure out pack overlays to remove unneded textures when mods arent loaded
     public static final String MOD_ID = "everycomp";
     public static final Logger LOGGER = LogManager.getLogger("Every Compat");
 
     private static final Multimap<String, CompatModule> ACTIVE_MODULES = MultimapBuilder
             .linkedHashKeys().arrayListValues().build();
-    private static final List<CompatMod> COMPAT_MODS = new ArrayList<>();
+    private static final List<OtherCompatMod> COMPAT_MODS = new ArrayList<>();
     // all mod that EC directly or indirectly depends on
     private static final Set<String> DEPENDENCIES = new HashSet<>();
     private static final Set<String> ADDON_IDS = new HashSet<>();
@@ -122,11 +122,16 @@ public abstract class EveryCompat {
         addCompatMod(compatModId, fromModId, List.of(supportedModId));
     }
 
-    public static synchronized void addCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
-        COMPAT_MODS.add(new CompatMod(compatModId, fromModId, supportedModId));
-        DEPENDENCIES.add(compatModId);
-        DEPENDENCIES.addAll(fromModId);
-        DEPENDENCIES.addAll(supportedModId);
+    public static void addCompatMod(String compatModId, List<String> fromModId, List<String> supportedModId) {
+        OtherCompatMod oc = new OtherCompatMod(compatModId, fromModId, supportedModId);
+        addOtherCompatMod(oc);
+    }
+
+    public static synchronized void addOtherCompatMod(OtherCompatMod oc) {
+        COMPAT_MODS.add(oc);
+        DEPENDENCIES.add(oc.modId);
+        DEPENDENCIES.addAll(oc.woodsFrom);
+        DEPENDENCIES.addAll(oc.blocksFrom);
     }
 
     public static synchronized void addModule(CompatModule module) {
@@ -152,12 +157,12 @@ public abstract class EveryCompat {
 
     @Deprecated(forRemoval = true)
     /// @deprecated USE {@link EveryCompatAPI#addIfLoaded(String, Supplier)}
-    public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>>  moduleFactory) {
+    public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
             try {
                 CompatModule module = moduleFactory.get().apply(modId);
                 addModule(module);
-            } catch (Throwable e){
+            } catch (Throwable e) {
                 ERRORED.add(new CompatModule(modId, modId, "unknown") {
 
                     @Override
@@ -188,8 +193,15 @@ public abstract class EveryCompat {
             addModule(module);
         } catch (Throwable t) {
             ERRORED.add(new CompatModule(modId, modId, "unknown") {
-                @Override public int bloatAmount() { return 0; }
-                @Override public Collection<Class<? extends BlockType>> getAffectedTypes() { return List.of(); }
+                @Override
+                public int bloatAmount() {
+                    return 0;
+                }
+
+                @Override
+                public Collection<Class<? extends BlockType>> getAffectedTypes() {
+                    return List.of();
+                }
             });
         }
     }
@@ -212,7 +224,7 @@ public abstract class EveryCompat {
     }
 
 
-    public static Collection<CompatMod> getCompatMods() {
+    public static Collection<OtherCompatMod> getCompatMods() {
         return COMPAT_MODS;
     }
 
@@ -234,6 +246,7 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicRegistration((r, c) -> registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
         BlockSetAPI.addDynamicRegistration((r, c) -> registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
 
+        EcTempPluginStorage.setEcLoaded();
     }
 
     public static void setup() {
@@ -338,7 +351,7 @@ public abstract class EveryCompat {
     }
 
 
-    public record CompatMod(String modId, List<String> woodsFrom, List<String> blocksFrom) {
+    public record OtherCompatMod(String modId, List<String> woodsFrom, List<String> blocksFrom) {
     }
 
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
