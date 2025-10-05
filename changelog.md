@@ -20,11 +20,12 @@
 
 </div>
 
-### UPDATED: 
+### UPDATED:
 - **Quark** (NF): Updated deprecated method to use new method, just texture stuff
 - **Woodworks** (NF): Added, the missing tag, #minecraft:enchantment_power_provider to `bookshelf`
 - **EveryCompat** (C): Updated EveryCompatAPI to fix some issues with mod's built-in modules not generating ITEM (experimental)
   - Related to: **Marioverse**
+  - Updated again to improved some codes related to above
 
 ---
 
