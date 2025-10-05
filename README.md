@@ -60,7 +60,8 @@ If you want a **high detail level** example of how is this applied, then you can
 #### Making a Module
 
 Modules are plugins that you can register to EC. They contain many extension point but the simplest way to use them is via EntrySet. Particularly the base implementation SimpleEntrySet.
-To add suppoet for a wooden furniture block simply call this.addEntry(entrySet) where entry set is a SimpleEntrySet made by its own descriptive builder SimoleEntrySet.builder(). EC will then use that information to target the base block you specified, clone it for each missing wood type and add all its needed assets and things. Thats ut really its simoler thar you might expect. for more extension points chrck out all the entry sets builder or for more advanced stuff use the overrides in the module or subclass entryset if needed.
+To add suppoet for a wooden furniture block simply call this.addEntry(entrySet) where entry set is a SimpleEntrySet made by its own descriptive builder SimoleEntrySet.builder(). EC will then use that information to target the base block you specified, clone it for each missing wood type and add all its needed assets and things. That's it, really it's simoler than you might expect. 
+For more extension points chrck out all the entry sets builder or for more advanced stuff use the overrides in the module or subclass entryset if needed.
 EC has plenty of examples in its own modules implemetation for other mods so check those out too if in doubt.
 
 ### NOTIFICATION
