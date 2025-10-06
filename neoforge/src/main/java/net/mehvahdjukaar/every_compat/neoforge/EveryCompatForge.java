@@ -149,6 +149,13 @@ public class EveryCompatForge extends EveryCompatCommon {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void itemTooltipEvent(ItemTooltipEvent event) {
+        // Remove the [Debug] strings from ItemToolTip
+        if (PlatHelper.isDev()) {
+            event.getToolTip().removeIf(line ->
+                    line.getString().matches(".*\\[Debug\\] Item Tags:.*") || line.getString().matches(".*\\[Debug\\] Block Tags:.*")
+            );
+        }
+
         EveryCompatClient.onItemTooltip(event.getItemStack(), event.getContext(), event.getFlags(), event.getToolTip());
     }
 /*
