@@ -237,26 +237,30 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                          EveryCompat.res("block/vs/bundledposts_top_outer_m"));
 
                  TextureImage logInnerMask = TextureImage.open(manager,
-                         EveryCompat.res("block/vs/log_top_inner_m"));
+                         EveryCompat.res("block/common_log_top_inner_m"));
                  TextureImage logOuterMask = TextureImage.open(manager,
-                         EveryCompat.res("block/vs/log_top_outer_m"))
+                         EveryCompat.res("block/common_log_top_outer_m"))
             ) {
 
                 bundledPosts.blocks.forEach((w, block) -> {
-                    String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_"
-                            + w.getTypeName() + "_posts";
+//                    String resLoc = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_"
+//                            + w.getTypeName() + "_posts";
+                    ResourceLocation resLoc = ResourceLocation.parse(w.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(),
+                            "bundled_posts/bundled_", "posts"));
 
-                    createTexture(newPath, w.log, logInnerMask, logOuterMask, BPTopInnerMask, BPTopOuterMask,
+                    createTexture(resLoc, w.log, logInnerMask, logOuterMask, BPTopInnerMask, BPTopOuterMask,
                             modRes("block/bundled_posts/bundled_oak_posts"),
                             modRes("block/bundled_posts/bundled_oak_posts_top"),
                             sink, manager, block);
                 });
 
                 bundledStrippedPosts.blocks.forEach((w, block) -> {
-                    String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_stripped_"
-                            + w.getTypeName() + "_posts";
+//                    String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_stripped_"
+//                            + w.getTypeName() + "_posts";
+                    ResourceLocation resLoc = ResourceLocation.parse(w.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(),
+                            "bundled_posts/bundled_stripped_", "posts"));
 
-                    createTexture(newPath, w.getBlockOfThis("stripped_log"), logInnerMask, logOuterMask,
+                    createTexture(resLoc, w.getBlockOfThis("stripped_log"), logInnerMask, logOuterMask,
                             BPTopInnerMask, BPTopOuterMask,
                             modRes("block/bundled_posts/bundled_stripped_oak_posts"),
                             modRes("block/bundled_posts/bundled_stripped_oak_posts_top"),
@@ -269,7 +273,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         });
     }
 
-    private void createTexture(String newPath, Block getLogBlock, TextureImage logInnerMask, TextureImage logOuterMask,
+    private void createTexture(ResourceLocation resLoc, Block getLogBlock, TextureImage logInnerMask, TextureImage logOuterMask,
                                TextureImage BPTopInnerMask, TextureImage BPTopOuterMask,
                                ResourceLocation getLogSide, ResourceLocation getLogTop,
                                ResourceSink sink, ResourceManager manager, Block block
@@ -301,7 +305,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 Respriter respriterSide = Respriter.of(TextureSide);
 
                 // Adding to the Resource
-                sink.addTextureIfNotPresent(manager, newPath, () ->
+                sink.addTextureIfNotPresent(manager, resLoc, () ->
                         respriterSide.recolorWithAnimation(targetSide, metaSide)
                 );
             }
@@ -334,7 +338,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 while (targetTopOuter.getFirst().size() < 3) targetTopOuter.getFirst().increaseInner();
 
                 // Adding to the Resource
-                sink.addTextureIfNotPresent(manager, newPath + "_top", () ->
+                sink.addTextureIfNotPresent(manager, resLoc + "_top", () ->
                         outerTopResp.recolorWithAnimation(targetTopOuter, metaTop)
                 );
             }
