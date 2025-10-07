@@ -21,6 +21,14 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C): Fixed a rare bug where `everycomp-hazardous.toml` blacklist 2 modules in ENTRY_SET_BLACKLIST leads to a crash
+  - **Variant Vanilla Blocks** & **Friends & Foes**
+
+---
+
+## v2.9.4
+
+### UPDATED: 
 - **Every Compat** (C): 
   - Corrected a mistake for texture to be used (before it was using planks' texture for LOG, not log's texture)
   - Improved the error loggings for some rare cases
