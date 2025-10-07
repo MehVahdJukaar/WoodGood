@@ -34,7 +34,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.modulesList;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.ENTRY_SETS_BLACKLIST;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.MODULES_BLACKLIST;
 
 public abstract class EveryCompat {
 //TODO: figure out pack overlays to remove unneded textures when mods arent loaded
@@ -117,27 +118,25 @@ public abstract class EveryCompat {
     }
 
     public static synchronized void addModule(CompatModule module) {
-        if (!modulesList.get().contains(module.getModId())) {
-            ACTIVE_MODULES.put(module.getModId(), module);
-            DEPENDENCIES.add(module.getModId());
-            DEPENDENCIES.addAll(module.getAlreadySupportedMods());
+        ACTIVE_MODULES.put(module.getModId(), module);
+        DEPENDENCIES.add(module.getModId());
+        DEPENDENCIES.addAll(module.getAlreadySupportedMods());
 
-            ServerDynamicResourcesHandler.INSTANCE.getPack()
-                    .addNamespaces(module.getServerResourcesNamespaces());
-            if (PlatHelper.getPhysicalSide().isClient()) {
-                ClientDynamicResourcesHandler.getInstance().getPack()
-                        .addNamespaces(module.getClientResourcesNamespaces());
-            }
-
-            for (var t : module.getAffectedTypes()) {
-                addDynamicRegistrationFor(t);
-            }
-            ADDON_IDS.add(module.getMyNamespace());
+        ServerDynamicResourcesHandler.INSTANCE.getPack()
+                .addNamespaces(module.getServerResourcesNamespaces());
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            ClientDynamicResourcesHandler.getInstance().getPack()
+                    .addNamespaces(module.getClientResourcesNamespaces());
         }
+
+        for (var t : module.getAffectedTypes()) {
+            addDynamicRegistrationFor(t);
+        }
+        ADDON_IDS.add(module.getMyNamespace());
     }
 
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatHelper.isModLoaded(modId)) {
+        if (PlatHelper.isModLoaded(modId) && !MODULES_BLACKLIST.get().contains(modId) && !ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*")) {
             CompatModule module = moduleFactory.get().apply(modId);
             addModule(module);
         }
@@ -193,12 +192,12 @@ public abstract class EveryCompat {
         float p = (myChildrenSize / (float) newSize) * 100f;
         if (myChildrenSize == 0) {
             String log = """
-                    \n###########################################################################################################
-                    #                                                                                                         #
-                    # ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed. #
-                    #                           You dont need EveryCompat and should remove it.                               #
-                    #                                                                                                         #
-                    ###########################################################################################################
+                    \n##########################################################################################################
+                    #                                                                                                        #
+                    #  ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed.  #
+                    #                            You dont need EveryCompat and should remove it.                             #
+                    #                                                                                                        #
+                    ##########################################################################################################
                     """;
             EveryCompat.LOGGER.error("\n{}", log);
             return;
@@ -210,7 +209,7 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
         }
         if (p > 33) {
-            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(CompatModule::bloatAmount));
+            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
             if (compatbloated.isPresent()) {
                 CompatModule bloated = compatbloated.get();
                 EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
