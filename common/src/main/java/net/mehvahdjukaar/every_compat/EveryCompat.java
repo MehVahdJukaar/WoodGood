@@ -34,6 +34,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.ENTRY_SETS_BLACKLIST;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.MODULES_BLACKLIST;
 
 @ApiStatus.Internal
@@ -213,35 +214,35 @@ public abstract class EveryCompat {
     }
 
     public static synchronized void addModule(CompatModule module) {
-        if (!MODULES_BLACKLIST.get().contains(module.getModId())) {
-            ACTIVE_MODULES.put(module.getModId(), module);
-            DEPENDENCIES.add(module.getModId());
-            DEPENDENCIES.addAll(module.getAlreadySupportedMods());
-            ADDON_IDS.add(module.getMyNamespace());
-        }
+        ACTIVE_MODULES.put(module.getModId(), module);
+        DEPENDENCIES.add(module.getModId());
+        DEPENDENCIES.addAll(module.getAlreadySupportedMods());
+        ADDON_IDS.add(module.getMyNamespace());
     }
 
     public synchronized static void addOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
-        if (!PlatHelper.isModLoaded(modId)) return;
+        if (PlatHelper.isModLoaded(modId)
+                && !MODULES_BLACKLIST.get().contains(modId)
+                && !ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*")) {
+            try {
+                Class<? extends CompatModule> klazz = moduleClass.get();
 
-        try {
-            Class<? extends CompatModule> klazz = moduleClass.get();
+                CompatModule module = instantiateModuleClass(modId, klazz);
 
-            CompatModule module = instantiateModuleClass(modId, klazz);
+                addModule(module);
+            } catch (Throwable t) {
+                ERRORED.add(new CompatModule(modId, modId, "unknown") {
+                    @Override
+                    public int bloatAmount() {
+                        return 0;
+                    }
 
-            addModule(module);
-        } catch (Throwable t) {
-            ERRORED.add(new CompatModule(modId, modId, "unknown") {
-                @Override
-                public int bloatAmount() {
-                    return 0;
-                }
-
-                @Override
-                public Collection<Class<? extends BlockType>> getAffectedTypes() {
-                    return List.of();
-                }
-            });
+                    @Override
+                    public Collection<Class<? extends BlockType>> getAffectedTypes() {
+                        return List.of();
+                    }
+                });
+            }
         }
     }
 
