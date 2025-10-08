@@ -50,6 +50,9 @@ Take a look at how the module is supporting blocks or items from a mod (detail l
 
 `common/src/main/java/net/mehvahdjukaar/every_compat/api/example/WoodGoodModule.java`
 
+To register a custom module and non-detected wood type in your mod:
+`common/src/main/java/net/mehvahdjukaar/every_compat/api/example/WoodGoodAddon.java`
+
 If you want a **high detail level** example of how is this applied, then you can check below:
 1. [GuitaWoodworks-Init](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/GuitaWoodworks.java#L57) - Initization
 2. [GuitaWoodworks-EveryCompatModule](https://github.com/macuguita/woodworks/blob/1.21.1/common/src/main/java/com/macuguita/woodworks/GuitaWoodworks.java#L105) - Checking if EveryCompat is installed 

@@ -14,7 +14,7 @@ import java.util.function.Supplier;
  * Use this class register new wood type blocks and module to Every Compat
  * To register wood types that aren't detected reference net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
  * <p>
- * Take a look at {@link WoodGoodAddonExample} and {@link net.mehvahdjukaar.every_compat.api.example.WoodGoodModuleExample} for examples
+ * Take a look at {@link WoodGoodAddonExample} for examples
  */
 public class EveryCompatAPI {
 
@@ -23,7 +23,7 @@ public class EveryCompatAPI {
      *
      * @param module your module instance. Can be a custom implementation
      *               <p>
-     *               Take a look at {@link net.mehvahdjukaar.every_compat.api.example.WoodGoodModuleExample} for an example module
+     *               Take a look at {@link WoodGoodAddonExample} for an example module
      */
     public static synchronized void registerModule(CompatModule module) {
         EveryCompat.addModule(module);
