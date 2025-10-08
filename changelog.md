@@ -21,6 +21,20 @@
 </div>
 
 ### UPDATED:
+- **Every Compat** (C): Fixed a rare bug where `everycomp-hazardous.toml` blacklist 2 modules in ENTRY_SET_BLACKLIST leads to a crash (Ported from 1.20.1)
+    - **Variant Vanilla Blocks** & **Friends & Foes**
+- **Farmer's Delight** (C): Fixed the missing recipe - [#1073](https://github.com/MehVahdJukaar/WoodGood/issues/1073)
+- **Ecologics** (TEXTURES): Excluded **Chipped**'s item door from being overlayed with flowering_azalea
+
+### ADDED:
+- **TEXTURES** (C): Added the missing mask textures for **Chipped**'s log and stripped_log
+  - **Valhelsia Structures** (NF): Updated the mask textures to use the new mask textures
+
+---
+
+## v2.11.7
+s
+### UPDATED:
 - **Quark** (NF): Updated deprecated method to use new method, just texture stuff
 - **Woodworks** (NF): Added, the missing tag, #minecraft:enchantment_power_provider to `bookshelf`
 - **EveryCompat** (C): Updated EveryCompatAPI to fix some issues with mod's built-in modules not generating ITEM (experimental)
