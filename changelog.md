@@ -20,6 +20,14 @@
 
 </div>
 
+### UPDATED: 
+- **Every Compat** (C): Fixed all Supported mods' missing model files in **Stone Zone** - [#158](https://github.com/MehVahdJukaar/StoneZone/issues/158)
+- **LANG** (en_us): Corrected the LANG for sniffed_out's vessel to use "stem" instead of "log" with hollow from **Quark** or **The Twilight Forest**
+
+---
+
+## v2.11.8
+
 ### UPDATED:
 - **Every Compat** (C): Fixed a rare bug where `everycomp-hazardous.toml` blacklist 2 modules in ENTRY_SET_BLACKLIST leads to a crash (Ported from 1.20.1)
     - **Variant Vanilla Blocks** & **Friends & Foes**
@@ -33,7 +41,7 @@
 ---
 
 ## v2.11.7
-s
+
 ### UPDATED:
 - **Quark** (NF): Updated deprecated method to use new method, just texture stuff
 - **Woodworks** (NF): Added, the missing tag, #minecraft:enchantment_power_provider to `bookshelf`
