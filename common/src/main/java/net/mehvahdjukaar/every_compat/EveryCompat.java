@@ -79,16 +79,6 @@ public abstract class EveryCompat {
     }
 
     public static void setup() {
-        //hoping this isnt too late
-        for (var module : ACTIVE_MODULES.values()) {
-            ServerDynamicResourcesHandler.getInstance()
-                    .addSupportedNamespaces(module.getServerResourcesNamespaces());
-
-            if (PlatHelper.getPhysicalSide().isClient()) {
-                ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
-                        module.getClientResourcesNamespaces());
-            }
-        }
 
         String activeModulesString = ACTIVE_MODULES.keySet().stream()
                 .map(key -> {
@@ -215,6 +205,16 @@ public abstract class EveryCompat {
             DEPENDENCIES.add(module.getModId());
             DEPENDENCIES.addAll(module.getAlreadySupportedMods());
             ADDON_IDS.add(module.getMyNamespace());
+
+            //this will initialize the config. should be fine if loaded from another mod i hope
+            ServerDynamicResourcesHandler.getInstance()
+                    .addSupportedNamespaces(module.getServerResourcesNamespaces());
+
+            if (PlatHelper.getPhysicalSide().isClient()) {
+                ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
+                        module.getClientResourcesNamespaces());
+            }
+
         }
     }
 

@@ -1,11 +1,14 @@
 package net.mehvahdjukaar.every_compat.neoforge;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
+import net.mehvahdjukaar.moonlight.api.platform.configs.neoforge.ConfigBuilderImpl;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.List;
