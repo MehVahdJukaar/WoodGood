@@ -116,7 +116,6 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
                     registry.register(module.makeMyRes(fullName), item);
                     blockType.addChild(childKey, item);
-                    totalChildren++;
                 }
             }
         }

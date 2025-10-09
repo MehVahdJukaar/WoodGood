@@ -22,11 +22,22 @@ if your mod is already supported heavily consider reaching out to incorporate so
 
 ### DEVELOPMENT: 
 
-Two Things are required:
-- **Every Compat (Wood Good)**
-- **Moonlight Lib** used to be known as **Selene**
 
-How to support your mod with Every Compat, Please look at the below:
+To import EveryCompat in your dev environment you can add the following gradle line
+
+If you are using Loom:
+`modCompileOnly("every-compat-628539:[ec_version]")`
+
+If you are using ForgeGradle:
+`compileOnly fg.deobf("every-compat-628539:[ec_version]")`
+
+Where `ec_version` is the version number you can see in CurseForge after clicking on a particular file version. For example `6974680` is for 1.21.1-2.11.3-fabric
+You can also click on "Curse Maven Snippet" in the files section of a particular file to get this same import line this way. Remember to use `modCompileOnly`
+
+example:  `modCompileOnly("every-compat-628539:6974680")`
+
+
+Once you have done that, to interact with EveryCompat, all will happen through the Every Compat API class.
 
 `common/src/main/java/net/mehvahdjukaar/every_compat/api/EveryCompatAPI.java` 
 
@@ -39,11 +50,23 @@ Take a look at how the module is supporting blocks or items from a mod (detail l
 
 `common/src/main/java/net/mehvahdjukaar/every_compat/api/example/WoodGoodModule.java`
 
+To register a custom module and non-detected wood type in your mod:
+`common/src/main/java/net/mehvahdjukaar/every_compat/api/example/WoodGoodAddon.java`
+
 If you want a **high detail level** example of how is this applied, then you can check below:
 1. [GuitaWoodworks-Init](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/GuitaWoodworks.java#L57) - Initization
 2. [GuitaWoodworks-EveryCompatModule](https://github.com/macuguita/woodworks/blob/1.21.1/common/src/main/java/com/macuguita/woodworks/GuitaWoodworks.java#L105) - Checking if EveryCompat is installed 
 3. [ModCompat](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/compat/ModCompat.java) - Using `EveryCompatAPI.registerModule(...)`
 4. [WoodGoodModule](https://github.com/macuguita/woodworks/blob/1.20.1/common/src/main/java/com/macuguita/woodworks/compat/WoodGood.java)
+
+
+#### Making a Module
+
+Modules are plugins that you can register to EC. They contain many extension points, but the simplest way to use them is via EntrySet. Particularly the base implementation SimpleEntrySet.
+To add support for a wooden furniture block, simply call `this.addEntry(entrySet)` where entrySet is a `SimpleEntrySet` made by its own descriptive builder `SimpleEntrySet.builder()`. Use the builder to provide details like textures, recipes, and tags, even if your mod already declares those things elsewhere. EC will then use that information to target the base block you specified, clone it for each missing wood type and add all its needed assets and things. That's it, really it's simpler than you might expect. 
+
+For more extension points, check out all the EntrySet builder methods. Or for more advanced stuff, use the overrides in the module, or subclass entryset if needed.
+EC has plenty of examples in its own modules implemetation for other mods, so check those out too if in doubt.
 
 ### NOTIFICATION
 

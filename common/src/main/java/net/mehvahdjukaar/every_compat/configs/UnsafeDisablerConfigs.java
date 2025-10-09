@@ -10,10 +10,10 @@ import java.util.function.Supplier;
 
 public class UnsafeDisablerConfigs {
 
-    public static final Supplier<List<String>> ENABLED_WOOD_TYPES_LIST;
-    public static final Supplier<List<String>> ENABLED_LEAVES_TYPES_LIST;
-    public static final Supplier<List<String>> ENABLED_ENTRY_SETS_LIST;
-    public static final Supplier<List<String>> ENABLED_MODULES_LIST;
+    public static final Supplier<List<String>> WOOD_TYPES_BLACKLIST;
+    public static final Supplier<List<String>> LEAVES_TYPES_BLACKLIST;
+    public static final Supplier<List<String>> ENTRY_SETS_BLACKLIST;
+    public static final Supplier<List<String>> MODULES_BLACKLIST;
     public static final Supplier<Boolean> INCLUDE_ALL_WOOD_MODULES;
 
     public static ModConfigHolder CONFIG_SPEC;
@@ -52,11 +52,11 @@ public class UnsafeDisablerConfigs {
                         "biomesoplenty:redwood"\t\tCOMMENT: exclude redwood from Wood Mod for any module
                     ]
                 """;
-        ENABLED_WOOD_TYPES_LIST = builder.comment("Exclude WoodType from all of Modules\n"+WoodTypeExample).define("blacklist", List.of());
+        WOOD_TYPES_BLACKLIST = builder.comment("Exclude WoodType from all of Modules\n"+WoodTypeExample).define("blacklist", List.of());
         builder.pop();
 
         builder.push("leavestype");
-        ENABLED_LEAVES_TYPES_LIST = builder.comment("Exclude LeavesType from all of Modules\n\tThe example is same as WoodType's").define("blacklist", List.of());
+        LEAVES_TYPES_BLACKLIST = builder.comment("Exclude LeavesType from all of Modules\n\tThe example is same as WoodType's").define("blacklist", List.of());
         builder.pop();
 
         builder.push("entryset");
@@ -68,7 +68,7 @@ public class UnsafeDisablerConfigs {
                         "chipped:.*"\t\t\t\t\t\tCOMMENT: .* is an regex which will exclude all of EntrySets from one Module - Wood-Good ONLY
                     ]
                 """;
-        ENABLED_ENTRY_SETS_LIST = builder.comment("Exclude EntrySet from the module for All of WoodType or LeavesType\n"+entrysetExample).define("blacklist", List.of());
+        ENTRY_SETS_BLACKLIST = builder.comment("Exclude EntrySet from the module for All of WoodType or LeavesType\n"+entrysetExample).define("blacklist", List.of());
         builder.pop();
 
         builder.push("module");
@@ -78,7 +78,7 @@ public class UnsafeDisablerConfigs {
                         "variantvanillablocks"
                     ]
                 """;
-        ENABLED_MODULES_LIST = builder.comment("Exclude Module From Wood-Good, Stone-Zone & Gems-Realm\n"+moduleExample).define("blacklist", List.of());
+        MODULES_BLACKLIST = builder.comment("Exclude Module From Wood-Good, Stone-Zone & Gems-Realm\n"+moduleExample).define("blacklist", List.of());
         builder.pop();
 
         builder.push("other");
@@ -91,7 +91,7 @@ public class UnsafeDisablerConfigs {
         CONFIG_SPEC.forceLoad();
 
         // Warning Message
-        if (!ENABLED_WOOD_TYPES_LIST.get().isEmpty() || !ENABLED_LEAVES_TYPES_LIST.get().isEmpty() || !ENABLED_ENTRY_SETS_LIST.get().isEmpty() || !ENABLED_MODULES_LIST.get().isEmpty()) {
+        if (!WOOD_TYPES_BLACKLIST.get().isEmpty() || !LEAVES_TYPES_BLACKLIST.get().isEmpty() || !ENTRY_SETS_BLACKLIST.get().isEmpty() || !MODULES_BLACKLIST.get().isEmpty()) {
             EveryCompat.LOGGER.warn("""
                             \n
                             ===========================================================

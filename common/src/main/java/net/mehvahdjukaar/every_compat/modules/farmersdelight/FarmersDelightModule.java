@@ -18,6 +18,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Block;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
@@ -26,6 +27,7 @@ import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.item.FuelBlockItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
@@ -88,17 +90,17 @@ public class FarmersDelightModule extends SimpleModule {
                 if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
                 //adding compat cutting board recipes for vanilla modded stuff i guess
-                createCuttingRecipe(DOOR, woodType.getBlockOfThis("door"),
+                createCuttingRecipe(DOOR, woodType.getBlockOfThis(DOOR),
                         woodType, sink, manager);
-                createCuttingRecipe(HANGING_SIGN, woodType.getBlockOfThis("hanging_sign"),
+                createCuttingRecipe(HANGING_SIGN, woodType.getBlockOfThis(HANGING_SIGN),
                         woodType, sink, manager);
-                createCuttingRecipe(SIGN, woodType.getBlockOfThis("sign"),
+                createCuttingRecipe(SIGN, woodType.getBlockOfThis(SIGN),
                         woodType, sink, manager);
-                createCuttingRecipe(TRAPDOOR, woodType.getBlockOfThis("trapdoor"),
+                createCuttingRecipe(TRAPDOOR, woodType.getBlockOfThis(TRAPDOOR),
                         woodType, sink, manager);
-                createCuttingRecipe(LOG, woodType.getBlockOfThis("stripped_log"),
+                createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG),
                         woodType, sink, manager);
-                createCuttingRecipe(WOOD, woodType.getBlockOfThis("wood"),
+                createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD),
                         woodType, sink, manager);
 
             }
@@ -108,9 +110,11 @@ public class FarmersDelightModule extends SimpleModule {
     public void createCuttingRecipe(String recipeType, Block input,
                                     WoodType targetType, ResourceSink sink, ResourceManager manager) {
 
-        if (input == null) return;
+        if (Objects.isNull(input)) return;
 
-        var recipe = RPUtils.readRecipe(manager, "cutting/oak_" + recipeType);
+        String recipeLocation = modRes("cutting/oak_" + recipeType).toString();
+        Recipe<?> recipe = RPUtils.readRecipe(manager, recipeLocation);
+
         if (recipe instanceof CuttingBoardRecipe cr) {
 
             String path = this.shortenedId() + "/cutting/" + targetType.getAppendableId() + "_" + recipeType;

@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
-///      ┌──────────────────────────────────────────────────────────┐
-///      │   WoodGoodModule example module. Use as a template       │
-///      └──────────────────────────────────────────────────────────┘
+///      ┌──────────────────────────────────────────────────────┐
+///      │   WoodGoodModule example module. Use as a template   │
+///      └──────────────────────────────────────────────────────┘
 public final class WoodGoodModuleExample extends SimpleModule {
 
         /// For Blocks
@@ -64,6 +64,7 @@ public final class WoodGoodModuleExample extends SimpleModule {
 
                     ///OPTIONAL: Add the block to EntityBlockType
                     .addTile(getModTile("id_of_EntityType"))
+                    //.addTile(() -> BlockEntityType.CAMPFIRE) //OPTIONAL: you can use BlockEntity as a reference
 
                     ///OPTIONAL: Adding block's textures to be generated
                     .addTexture(modRes("block/oak_table"), PaletteStrategies.LOG_SIDE_STANDARD)
@@ -86,6 +87,9 @@ public final class WoodGoodModuleExample extends SimpleModule {
                     .addRecipe(modRes("path/to/recipeFile")) // Do not use "recipes/"
 
                     ///OPTIONAL: Special cases
+                    // Without the .copyParentDrop(), blocks will self-drop with their own loot_table by default.
+                    // But some blocks like Bookshelf won't drop anything, the .copyParentDrop() can be used to ensure
+                    // books are dropped just like vanilla bookshelf's loot_table
                     .copyParentDrop() // copy the loot_table of the baseBlock (oak_table)
                     .copyParentTint() // Applying tinted color to Leaves - Good example is hedge from Quark OR Macaw's Fences & Walls
                     .setRenderType(RenderLayer.CUTOUT) //USAGE: CUTOUT, CUTOUT_MIPPED, SOLID, TRANSLUCENT

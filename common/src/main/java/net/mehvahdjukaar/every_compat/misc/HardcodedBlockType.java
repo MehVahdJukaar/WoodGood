@@ -33,10 +33,10 @@ public class HardcodedBlockType {
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude one WoodType from a Wood Mod
-        if (ENABLED_WOOD_TYPES_LIST.get().stream().anyMatch(woodidentify::matches)) return true;
+        if (WOOD_TYPES_BLACKLIST.get().stream().anyMatch(woodidentify::matches)) return true;
 
         // Exclude one EntrySet from a module
-        if (ENABLED_ENTRY_SETS_LIST.get().stream().anyMatch(entrySetId::matches)) return true;
+        if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
 
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
         if (isKnownVanillaWood(woodType)) return true;
@@ -107,10 +107,10 @@ public class HardcodedBlockType {
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude one LeavesType from a Wood mod
-        if (ENABLED_LEAVES_TYPES_LIST.get().stream().anyMatch(leavesidentify::matches)) return true;
+        if (LEAVES_TYPES_BLACKLIST.get().stream().anyMatch(leavesidentify::matches)) return true;
 
         // Exclude one EntrySet from a module
-        if (ENABLED_ENTRY_SETS_LIST.get().stream().anyMatch(entrySetId::matches)) return true;
+        if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
 
         // Exclude all of Vanilla Types
         if (leavesType.isVanilla()) return true;
