@@ -152,7 +152,6 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
                     TextureImage shrubMiddleMask = TextureImage.open(manager, EveryCompat.res("block/ru/mask_shrub_middle"))
             ) {
 
-                Respriter respriterBottom = Respriter.of(shrubBottom);
 
                 shrubs.blocks.forEach((leavesType, block) -> {
                     String shrubPath = leavesType.createPathWith(shortenedId(), "shrub");
@@ -166,6 +165,7 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
                                          CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                     ) {
                         Respriter respriterTop = Respriter.masked(shrubTop, shrubMiddleMask);
+                        Respriter respriterBottom = Respriter.of(shrubBottom);
 
                         List<Palette> logSidePalette = Palette.fromAnimatedImage(logTexture);
                         List<Palette> leavesPalette = Palette.fromAnimatedImage(leavesTexture);

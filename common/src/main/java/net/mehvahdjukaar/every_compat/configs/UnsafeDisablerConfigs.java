@@ -10,15 +10,17 @@ import java.util.function.Supplier;
 
 public class UnsafeDisablerConfigs {
 
-    public static Supplier<List<String>> woodTypeList;
-    public static Supplier<List<String>> leavesTypeList;
-    public static Supplier<List<String>> entrySetList;
-    public static Supplier<List<String>> modulesList;
+    public static final Supplier<List<String>> WOOD_TYPES_BLACKLIST;
+    public static final Supplier<List<String>> LEAVES_TYPES_BLACKLIST;
+    public static final Supplier<List<String>> ENTRY_SETS_BLACKLIST;
+    public static final Supplier<List<String>> MODULES_BLACKLIST;
+    public static final Supplier<Boolean> INCLUDE_ALL_WOOD_MODULES;
 
     public static ConfigSpec CONFIG_SPEC;
 
     public static void init() {}
 
+    //loads by whoever calls it first
     static {
 
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("hazardous"), ConfigType.COMMON);
@@ -50,11 +52,11 @@ public class UnsafeDisablerConfigs {
                         "biomesoplenty:redwood"\t\tCOMMENT: exclude redwood from Wood Mod for any module
                     ]
                 """;
-        woodTypeList = builder.comment("Exclude WoodType from all of Modules\n"+WoodTypeExample).define("blacklist", List.of());
+        WOOD_TYPES_BLACKLIST = builder.comment("Exclude WoodType from all of Modules\n"+WoodTypeExample).define("blacklist", List.of());
         builder.pop();
 
         builder.push("leavestype");
-        leavesTypeList = builder.comment("Exclude LeavesType from all of Modules\n\tThe example is same as WoodType's").define("blacklist", List.of());
+        LEAVES_TYPES_BLACKLIST = builder.comment("Exclude LeavesType from all of Modules\n\tThe example is same as WoodType's").define("blacklist", List.of());
         builder.pop();
 
         builder.push("entryset");
@@ -66,7 +68,7 @@ public class UnsafeDisablerConfigs {
                         "chipped:.*"\t\t\t\t\t\tCOMMENT: .* is an regex which will exclude all of EntrySets from one Module - Wood-Good ONLY
                     ]
                 """;
-        entrySetList = builder.comment("Exclude EntrySet from the module for All of WoodType or LeavesType\n"+entrysetExample).define("blacklist", List.of());
+        ENTRY_SETS_BLACKLIST = builder.comment("Exclude EntrySet from the module for All of WoodType or LeavesType\n"+entrysetExample).define("blacklist", List.of());
         builder.pop();
 
         builder.push("module");
@@ -76,7 +78,12 @@ public class UnsafeDisablerConfigs {
                         "variantvanillablocks"
                     ]
                 """;
-        modulesList = builder.comment("Exclude Module From Wood-Good, Stone-Zone & Gems-Realm\n"+moduleExample).define("blacklist", List.of());
+        MODULES_BLACKLIST = builder.comment("Exclude Module From Wood-Good, Stone-Zone & Gems-Realm\n"+moduleExample).define("blacklist", List.of());
+        builder.pop();
+
+        builder.push("other");
+        INCLUDE_ALL_WOOD_MODULES = builder.comment("Disable all of Supported Mods on EveryCompat's side. This feature is same as Library-Section which do not have any Wood Modules.\nWARNING: If the config between CLIENT & SERVER are not the same, then you won't able to join a server")
+                .define("include_all_wood_modules", true);
         builder.pop();
 
         builder.setSynced();
@@ -86,15 +93,17 @@ public class UnsafeDisablerConfigs {
         CONFIG_SPEC.loadFromFile();
 
         // Warning Message
-        if (!woodTypeList.get().isEmpty() || !leavesTypeList.get().isEmpty() || !entrySetList.get().isEmpty() || !modulesList.get().isEmpty()) {
+        if (!WOOD_TYPES_BLACKLIST.get().isEmpty() || !LEAVES_TYPES_BLACKLIST.get().isEmpty() || !ENTRY_SETS_BLACKLIST.get().isEmpty() || !MODULES_BLACKLIST.get().isEmpty()) {
             EveryCompat.LOGGER.warn("""
                             \n
-                            ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-                            ┃                        ATTENTION                         ┃
-                            ┃  You are using conditional registration via Wood-Good.   ┃
-                            ┃  Proceed at your own risk and do not complain if you     ┃
-                            ┃  CANNOT connect to servers                               ┃
-                            ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                            ===========================================================
+                            |                                                         |
+                            |                        ATTENTION                        |
+                            |  You are using conditional registration via Wood-Good.  |
+                            |  Proceed at your own risk and do not complain if you    |
+                            |  CANNOT connect to servers                              |
+                            |                                                         |
+                            ===========================================================
                     """
             );
         }

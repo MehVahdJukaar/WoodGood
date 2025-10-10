@@ -6,7 +6,7 @@
 
 </div>
 
-<div style="text-align: left;">
+<div style="text-align: baseTexture;">
 
 * **(C)**: FORGE & FABRIC
 * **(FB)**: FABRIC
@@ -19,6 +19,45 @@
 </div>
 
 </div>
+
+### UPDATED: 
+- **Every Compat** (C): Fixed a rare bug where `everycomp-hazardous.toml` blacklist 2 modules in ENTRY_SET_BLACKLIST leads to a crash
+  - **Variant Vanilla Blocks** & **Friends & Foes**
+
+---
+
+## v2.9.4
+
+### UPDATED: 
+- **Every Compat** (C): 
+  - Corrected a mistake for texture to be used (before it was using planks' texture for LOG, not log's texture)
+  - Improved the error loggings for some rare cases
+- **Chipped** (C): 
+  - one missed outdated method
+  - Fixed the missing recipes
+  - Fixed missing textures for `tile_windowed_>TYPE<_door`
+  - Added mask textures for the remaining logs and stripped_logs. & also improved the textures
+- **Storage Drawers** (C): Updated to support `v12.14.3` & Fixed the drawer's tooltip showing `8 stacks per drawer`, it's corrected to 32 like vanilla drawers
+- **Create** (C): Updated to have one common class for better maintenance for both FABRIC & FORGE 
+
+---
+
+## v2.9.3
+
+### UPDATED: 
+- **Every Compat** (C):
+  - Improved the logging in case of crash for some unique cases
+  - Improved the error message with VMinus - it's still marked as incompatible - Please look at [VMinus#34](https://github.com/lixxir/VMinus/issues/34) for details
+  - Added a new feature in `everycomp-hazardous.toml` to disable all of Wood Modules (same as what Library-Section can do)
+  - Multiple Undocumented Changes
+- **Create** (C): Fixed a typo in "wallnut" to "walnut" for custom textures with **Ecologic** - @22858
+- **Refurbished Furniture (MrCrayFish)** (C): Added the missing tooltips to ceiling_fan
+- **Builder's Crafts & Additions** (F): Fixed the crash with **Excessive Building** - [#1048](https://github.com/MehVahdJukaar/WoodGood/issues/1048)
+- **Storage Drawers** (C): Added the missing tag, `#storagedrawers:trim` to trim blocks - [#1029](https://github.com/MehVahdJukaar/WoodGood/issues/1029)
+
+---
+
+## v2.9.2
 
 ### UPDATED: 
 - **Every Compat** (C): 

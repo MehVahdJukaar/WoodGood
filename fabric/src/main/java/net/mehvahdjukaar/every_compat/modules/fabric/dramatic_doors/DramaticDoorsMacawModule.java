@@ -14,7 +14,6 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -60,11 +59,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_barn_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_BARN_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:barn_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_barn_door_lower"), EveryCompat.res("block/ddm/tall_oak_barn_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_barn_door_middle"), EveryCompat.res("block/ddm/tall_oak_barn_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_barn_door_upper"), EveryCompat.res("block/ddm/tall_oak_barn_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_barn_door"), EveryCompat.res("item/ddm/tall_oak_barn_door_m"))
+                .requiresChildren("mcwdoors:barn_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_barn_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_barn_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_barn_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_barn_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_barn_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_barn_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_barn_door"),
+                        EveryCompat.res("item/ddm/tall_oak_barn_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -84,11 +87,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_barn_glass_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_BARN_GLASS_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:glass_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_barn_door_lower"), EveryCompat.res("block/ddm/tall_oak_barn_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_barn_glass_door_middle"), EveryCompat.res("block/ddm/tall_oak_barn_glass_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_barn_glass_door_upper"), EveryCompat.res("block/ddm/tall_oak_barn_glass_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_barn_glass_door"), EveryCompat.res("item/ddm/tall_oak_barn_glass_door_m"))
+                .requiresChildren("mcwdoors:barn_glass_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_barn_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_barn_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_barn_glass_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_barn_glass_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_barn_glass_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_barn_glass_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_barn_glass_door"),
+                        EveryCompat.res("item/ddm/tall_oak_barn_glass_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -108,11 +115,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_stable_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallStableDoorBlock(BlockInit.OAK_STABLE_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:stable_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_stable_door_lower"), EveryCompat.res("block/ddm/tall_oak_stable_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_stable_door_middle"), EveryCompat.res("block/ddm/tall_oak_stable_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_stable_door_upper"), EveryCompat.res("block/ddm/tall_oak_stable_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_stable_door"), EveryCompat.res("item/ddm/tall_oak_stable_door_m"))
+                .requiresChildren("mcwdoors:stable_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_stable_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_stable_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_stable_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_stable_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_stable_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_stable_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_stable_door"),
+                        EveryCompat.res("item/ddm/tall_oak_stable_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -132,11 +143,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_stable_head_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallStableDoorBlock(BlockInit.OAK_STABLE_HEAD_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:stable_head_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_stable_door_lower"), EveryCompat.res("block/ddm/tall_oak_stable_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_stable_head_door_middle"), EveryCompat.res("block/ddm/tall_oak_stable_head_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_stable_door_upper"), EveryCompat.res("block/ddm/tall_oak_stable_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_stable_head_door"), EveryCompat.res("item/ddm/tall_oak_stable_head_door_m"))
+                .requiresChildren("mcwdoors:stable_head_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_stable_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_stable_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_stable_head_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_stable_head_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_stable_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_stable_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_stable_head_door"),
+                        EveryCompat.res("item/ddm/tall_oak_stable_head_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -156,7 +171,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_bark_glass_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_BARK_GLASS_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:bark_glass_door") //REASON: recipes
+                .requiresChildren("mcwdoors:bark_glass_door") //REASON: Recipes
                 .addTextureM(modRes("item/macaw/tall_oak_bark_glass_door"),
                         EveryCompat.res("item/ddm/tall_oak_bark_glass_door_m"),
                         PaletteStrategies.LOG_SIDE_STANDARD)
@@ -179,11 +194,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_glass_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_GLASS_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:glass_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_glass_door_lower"), EveryCompat.res("block/ddm/tall_oak_glass_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_glass_door_middle"), EveryCompat.res("block/ddm/tall_oak_glass_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_glass_door_upper"), EveryCompat.res("block/ddm/tall_oak_glass_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_glass_door"), EveryCompat.res("item/ddm/tall_oak_glass_door_m"))
+                .requiresChildren("mcwdoors:glass_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_glass_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_glass_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_glass_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_glass_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_glass_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_glass_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_glass_door"),
+                        EveryCompat.res("item/ddm/tall_oak_glass_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -203,11 +222,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_modern_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_MODERN_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:modern_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_modern_door_lower"), EveryCompat.res("block/ddm/tall_oak_modern_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_modern_door_middle"), EveryCompat.res("block/ddm/tall_oak_modern_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_modern_door_upper"), EveryCompat.res("block/ddm/tall_oak_modern_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_modern_door"), EveryCompat.res("item/ddm/tall_oak_modern_door_m"))
+                .requiresChildren("mcwdoors:modern_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_modern_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_modern_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_modern_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_modern_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_modern_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_modern_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_modern_door"),
+                        EveryCompat.res("item/ddm/tall_oak_modern_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -227,11 +250,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_japanese_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallSlidingDoorBlock(BlockInit.OAK_JAPANESE_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:japanese_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_japanese_door_lower"), EveryCompat.res("block/ddm/tall_oak_japanese_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_japanese_door_middle"), EveryCompat.res("block/ddm/tall_oak_japanese_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_japanese_door_upper"), EveryCompat.res("block/ddm/tall_oak_japanese_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_japanese_door"), EveryCompat.res("item/ddm/tall_oak_japanese_door_m"))
+                .requiresChildren("mcwdoors:japanese_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_japanese_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_japanese_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_japanese_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_japanese_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_japanese_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_japanese_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_japanese_door"),
+                        EveryCompat.res("item/ddm/tall_oak_japanese_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -251,11 +278,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_japanese2_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallSlidingDoorBlock(BlockInit.OAK_JAPANESE2_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:japanese2_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_japanese2_door_lower"), EveryCompat.res("block/ddm/tall_oak_japanese2_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_japanese2_door_middle"), EveryCompat.res("block/ddm/tall_oak_japanese2_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_japanese2_door_upper"), EveryCompat.res("block/ddm/tall_oak_japanese2_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_japanese2_door"), EveryCompat.res("item/ddm/tall_oak_japanese2_door_m"))
+                .requiresChildren("mcwdoors:japanese2_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_japanese2_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_japanese2_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_japanese2_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_japanese2_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_japanese2_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_japanese2_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_japanese2_door"),
+                        EveryCompat.res("item/ddm/tall_oak_japanese2_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -275,11 +306,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_spruce_classic_door"), () -> VanillaWoodTypes.SPRUCE,
                         w -> new TallDoorBlock(BlockInit.SPRUCE_CLASSIC_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:classic_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_lower"), EveryCompat.res("block/ddm/tall_oak_classic_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_middle"), EveryCompat.res("block/ddm/tall_oak_classic_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_upper"), EveryCompat.res("block/ddm/tall_oak_classic_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_spruce_classic_door"), EveryCompat.res("item/ddm/tall_oak_classic_door_m"))
+                .requiresChildren("mcwdoors:classic_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_classic_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_classic_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_spruce_classic_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_classic_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_spruce_classic_door"),
+                        EveryCompat.res("item/ddm/tall_oak_classic_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -299,11 +334,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_cottage_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_COTTAGE_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:cottage_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_lower"), EveryCompat.res("block/ddm/tall_oak_cottage_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_middle"), EveryCompat.res("block/ddm/tall_oak_cottage_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_upper"), EveryCompat.res("block/ddm/tall_oak_cottage_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_cottage_door"), EveryCompat.res("item/ddm/tall_oak_cottage_door_m"))
+                .requiresChildren("mcwdoors:cottage_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_cottage_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_cottage_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_cottage_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_cottage_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_cottage_door"),
+                        EveryCompat.res("item/ddm/tall_oak_cottage_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -323,11 +362,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_paper_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_PAPER_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:paper_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_paper_door_lower"), EveryCompat.res("block/ddm/tall_oak_paper_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_paper_door_middle"), EveryCompat.res("block/ddm/tall_oak_paper_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_paper_door_upper"), EveryCompat.res("block/ddm/tall_oak_paper_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_paper_door"), EveryCompat.res("item/ddm/tall_oak_paper_door_m"))
+                .requiresChildren("mcwdoors:paper_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_paper_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_paper_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_paper_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_paper_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_paper_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_paper_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_paper_door"),
+                        EveryCompat.res("item/ddm/tall_oak_paper_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -347,11 +390,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_beach_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_BEACH_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:beach_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_beach_door_lower"), EveryCompat.res("block/ddm/tall_oak_beach_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_beach_door_middle"), EveryCompat.res("block/ddm/tall_oak_beach_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_beach_door_upper"), EveryCompat.res("block/ddm/tall_oak_beach_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_beach_door"), EveryCompat.res("item/ddm/tall_oak_beach_door_m"))
+                .requiresChildren("mcwdoors:beach_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_beach_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_beach_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_beach_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_beach_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_beach_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_beach_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_beach_door"),
+                        EveryCompat.res("item/ddm/tall_oak_beach_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -371,11 +418,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_tropical_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_TROPICAL_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:tropical_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_tropical_door_lower"), EveryCompat.res("block/ddm/tall_oak_tropical_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_tropical_door_middle"), EveryCompat.res("block/ddm/tall_oak_tropical_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_tropical_door_upper"), EveryCompat.res("block/ddm/tall_oak_tropical_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_tropical_door"), EveryCompat.res("item/ddm/tall_oak_tropical_door_m"))
+                .requiresChildren("mcwdoors:tropical_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_tropical_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_tropical_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_tropical_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_tropical_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_tropical_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_tropical_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_tropical_door"),
+                        EveryCompat.res("item/ddm/tall_oak_tropical_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -395,11 +446,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_four_panel_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_FOUR_PANEL_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:four_panel_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_lower"), EveryCompat.res("block/ddm/tall_oak_four_panel_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_middle"), EveryCompat.res("block/ddm/tall_oak_four_panel_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_upper"), EveryCompat.res("block/ddm/tall_oak_four_panel_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_four_panel_door"), EveryCompat.res("item/ddm/tall_oak_four_panel_door_m"))
+                .requiresChildren("mcwdoors:four_panel_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_four_panel_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_four_panel_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_four_panel_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_four_panel_door"),
+                        EveryCompat.res("item/ddm/tall_oak_four_panel_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -419,11 +474,19 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_swamp_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_SWAMP_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:swamp_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_swamp_door_lower"), EveryCompat.res("block/ddm/tall_oak_swamp_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_swamp_door_middle"), EveryCompat.res("block/ddm/tall_oak_swamp_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_swamp_door_upper"), EveryCompat.res("block/ddm/tall_oak_swamp_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_swamp_door"), EveryCompat.res("item/ddm/tall_oak_swamp_door_m"))
+                .requiresChildren("mcwdoors:swamp_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_swamp_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_swamp_door_lower_m"),
+                        PaletteStrategies.PLANKS_REMOVE_2_DARKEST)
+                .addTextureM(modRes("block/macaw/tall_oak_swamp_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_swamp_door_middle_m"),
+                        PaletteStrategies.PLANKS_REMOVE_2_DARKEST)
+                .addTextureM(modRes("block/macaw/tall_oak_swamp_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_swamp_door_upper_m"),
+                        PaletteStrategies.PLANKS_REMOVE_2_DARKEST)
+                .addTextureM(modRes("item/macaw/tall_oak_swamp_door"),
+                        EveryCompat.res("item/ddm/tall_oak_swamp_door_m"),
+                        PaletteStrategies.PLANKS_REMOVE_2_DARKEST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -433,7 +496,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTag(modRes("tall_doors"), Registries.ITEM)
                 .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
                 .addTag(modRes("categories/tall_macaw_doors"), Registries.ITEM)
-                .createPaletteFromPlanks(this::swampDoorPalette)
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTabKey(tab)
                 .copyParentDrop()
@@ -444,11 +506,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_nether_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_NETHER_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:nether_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_nether_door_lower"), EveryCompat.res("block/ddm/tall_oak_nether_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_nether_door_middle"), EveryCompat.res("block/ddm/tall_oak_nether_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_nether_door_upper"), EveryCompat.res("block/ddm/tall_oak_nether_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_nether_door"), EveryCompat.res("item/ddm/tall_oak_nether_door_m"))
+                .requiresChildren("mcwdoors:nether_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_nether_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_nether_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_nether_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_nether_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_nether_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_nether_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_nether_door"),
+                        EveryCompat.res("item/ddm/tall_oak_nether_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -468,11 +534,15 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         getModBlock("tall_macaw_oak_mystic_door"), () -> VanillaWoodTypes.OAK,
                         w -> new TallDoorBlock(BlockInit.OAK_MYSTIC_DOOR, w.toVanillaOrOak().setType())
                 )
-//                .requiresChildren("mcwdoors:mystic_door") //REASON: recipes
-                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_lower"), EveryCompat.res("block/ddm/tall_oak_mystic_door_lower_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_middle"), EveryCompat.res("block/ddm/tall_oak_mystic_door_middle_m"))
-                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_upper"), EveryCompat.res("block/ddm/tall_oak_mystic_door_upper_m"))
-                .addTextureM(modRes("item/macaw/tall_oak_mystic_door"), EveryCompat.res("item/ddm/tall_oak_mystic_door_m"))
+                .requiresChildren("mcwdoors:mystic_door") //REASON: Recipes
+                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_lower"),
+                        EveryCompat.res("block/ddm/tall_oak_mystic_door_lower_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_middle"),
+                        EveryCompat.res("block/ddm/tall_oak_mystic_door_middle_m"))
+                .addTextureM(modRes("block/macaw/tall_oak_mystic_door_upper"),
+                        EveryCompat.res("block/ddm/tall_oak_mystic_door_upper_m"))
+                .addTextureM(modRes("item/macaw/tall_oak_mystic_door"),
+                        EveryCompat.res("item/ddm/tall_oak_mystic_door_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
                 .addTag(modRes("tall_doors"), Registries.BLOCK)
@@ -487,11 +557,6 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .copyParentDrop()
                 .build();
         this.addEntry(tallMysticDoors);
-    }
-
-    private void swampDoorPalette(Palette p) {
-        p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
     }
 
     @Override

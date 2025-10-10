@@ -32,7 +32,7 @@ public class PaletteStrategies {
         cachedStrategies.forEach(c -> c.cache.clear());
     }
 
-    public static PaletteStrategy registerCached(PaletteStrategy factory) {
+    public synchronized static PaletteStrategy registerCached(PaletteStrategy factory) {
         Cached c = new Cached(factory);
         cachedStrategies.add(c);
         return c;
@@ -45,13 +45,13 @@ public class PaletteStrategies {
             blockType, manager, VanillaWoodChildKeys.PLANKS, null, null));
 
     public static final PaletteStrategy LOG_SIDE_STANDARD = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
-            blockType, manager, VanillaWoodChildKeys.PLANKS, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
+            blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
 
-    //TODO: make this not side (top)? i guess. or always use the one below. otherwise these might be equal or just incorrect sinde side inst specified
-    //so yeah delete, use below
+    /// Has about 12 to 20 paletteColors depending on WoodType
     public static final PaletteStrategy STRIPPED_LOG_TOP_STANDARD = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, VanillaWoodChildKeys.STRIPPED_LOG, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE, null));
 
+    /// Has 20 or more paletteColors depending on WoodType
     public static final PaletteStrategy STRIPPED_LOG_SIDE_STANDARD = registerCached((t, manager) -> PaletteStrategies.makePaletteFromChild(
             t, manager, VanillaWoodChildKeys.STRIPPED_LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE, null));
 
@@ -67,41 +67,52 @@ public class PaletteStrategies {
         }
     });
 
+    public static final PaletteStrategy LOG_SIDE_REMOVE_2_DARKEST = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
+                    blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,
+                    p -> {
+                        if (p.size() > 3) {
+                            p.reduceDown();
+                            p.reduceDown();
+                        }
+                    }));
+
     public static final PaletteStrategy PLANKS_REMOVE_DARKEST = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
                     blockType, manager, VanillaWoodChildKeys.PLANKS, null,
-                    (p) -> {
-                        if (p.size() > 2) p.remove(p.getDarkest());
+                    p -> {
+                        if (p.size() > 2) p.reduceDown();
                     }));
 
     public static final PaletteStrategy PLANKS_REMOVE_2_DARKEST = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
                     blockType, manager, VanillaWoodChildKeys.PLANKS, null,
-                    (p) -> {
+                    p -> {
                         if (p.size() > 3) {
-                            p.remove(p.getDarkest());
-                            p.remove(p.getDarkest());
+                            p.reduceDown();
+                            p.reduceDown();
                         }
                     }));
 
-    public static final PaletteStrategy PLANKS_LOW_CONTRAST = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
-            blockType, manager, VanillaWoodChildKeys.PLANKS, null,
-            (p) -> {
-                //luminance step is the distance between 2 colors. Essentially contrast
-                float averageStep = p.getAverageLuminanceStep();
-                //lower step = lower contrast. Tweak as needed
-                p.matchLuminanceStep(averageStep * 0.9f);
-                //TODO: tweak that magic number as needed. below was old approach
-                /*
-                p.remove(p.getLightest());
-                p.increaseInner();
-                p.remove(p.getDarkest());
-                p.increaseInner();
-                p.remove(p.getLightest());
-                p.increaseInner();
-                p.remove(p.getDarkest());
-                */
-            }));
+    public static final PaletteStrategy PLANKS_LOW_CONTRAST = registerCached((blockType, manager) ->
+            PaletteStrategies.makePaletteFromChild(
+                    blockType, manager, VanillaWoodChildKeys.PLANKS, null,
+                    p -> {
+                        //luminance step is the distance between 2 colors. Essentially contrast
+                        float averageStep = p.getAverageLuminanceStep();
+                        //lower step = lower contrast. Tweak as needed
+                        p.matchLuminanceStep(averageStep * 0.9f);
+                        //TODO: tweak that magic number as needed. below was old approach
+                        /*
+                        p.remove(p.getLightest());
+                        p.increaseInner();
+                        p.remove(p.getDarkest());
+                        p.increaseInner();
+                        p.remove(p.getLightest());
+                        p.increaseInner();
+                        p.remove(p.getDarkest());
+                        */
+                    }));
 
     public static final PaletteStrategy WOOD_ITEM = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromMainChild(blockType, manager,
@@ -118,21 +129,21 @@ public class PaletteStrategies {
     public static PaletteStrategy.PaletteAndAnimation makePaletteFromMainChild(BlockType blockType, ResourceManager manager,
                                                                                @Nullable Consumer<Palette> paletteTransform) {
         ItemLike mainChild = blockType.mainChild();
-        Block mainWoodTypeBlock = null;
-        if (mainChild instanceof Block block) mainWoodTypeBlock = block;
-        else if (mainChild instanceof BlockItem blockItem) mainWoodTypeBlock = blockItem.getBlock();
-        if (mainWoodTypeBlock == null) {
+        Block mainBlockTypeBlock = null;
+        if (mainChild instanceof Block block) mainBlockTypeBlock = block;
+        else if (mainChild instanceof BlockItem blockItem) mainBlockTypeBlock = blockItem.getBlock();
+        if (mainBlockTypeBlock == null) {
             throw new UnsupportedOperationException("You need to provide a palette supplier for non block main child");
         }
 
         try (TextureImage plankTexture = TextureImage.open(manager,
-                RPUtils.findFirstBlockTextureLocation(manager, mainWoodTypeBlock))) {
+                RPUtils.findFirstBlockTextureLocation(manager, mainBlockTypeBlock))) {
             var targetPalette = Palette.fromAnimatedImage(plankTexture);
             var animation = plankTexture.getMcMeta();
             if (paletteTransform != null) targetPalette.forEach(paletteTransform);
             return PaletteStrategy.PaletteAndAnimation.of(targetPalette, animation);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to get main block type texture", e);
+            throw new RuntimeException("Failed to get mainChild texture for "+ blockType.getId() +" - "+ e);
         }
     }
 

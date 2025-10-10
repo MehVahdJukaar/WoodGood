@@ -241,9 +241,9 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                          EveryCompat.res("block/vs/bundledposts_top_outer_m"));
 
                  TextureImage logInnerMask = TextureImage.open(manager,
-                         EveryCompat.res("block/vs/log_top_inner_m"));
+                         EveryCompat.res("block/common_log_top_inner_m"));
                  TextureImage logOuterMask = TextureImage.open(manager,
-                         EveryCompat.res("block/vs/log_top_outer_m"))
+                         EveryCompat.res("block/common_log_top_outer_m"))
             ) {
 
                 bundledPosts.blocks.forEach((w, block) -> {

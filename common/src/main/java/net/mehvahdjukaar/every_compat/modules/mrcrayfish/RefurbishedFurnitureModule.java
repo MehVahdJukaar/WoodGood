@@ -8,12 +8,13 @@ import com.mrcrayfish.furniture.refurbished.core.ModBlockEntities;
 import com.mrcrayfish.furniture.refurbished.crafting.StackedIngredient;
 import com.mrcrayfish.furniture.refurbished.crafting.WorkbenchContructingRecipe;
 import com.mrcrayfish.furniture.refurbished.item.MailboxItem;
+import com.mrcrayfish.furniture.refurbished.item.PoweredItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
@@ -115,17 +116,19 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         w -> new CeilingFanBlock(w.toVanillaOrOak(),
                                 MetalType.DARK,
                                 BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
-                                        .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light)))
-                .defaultRecipe()
-                .addRecipe(modRes("constructing/oak_dark_ceiling_fan"))
+                                        .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light))
+                )
+                .addTextureM(modRes("block/oak_dark_ceiling_fan"),
+                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .addTile(ModBlockEntities.CEILING_FAN::get)
-                .setTabKey(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("electronics"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
-                .addTextureM(modRes("block/oak_dark_ceiling_fan"),
-                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
+                .setTabKey(tab)
                 .setRenderType(RenderLayer.TRANSLUCENT)
+                .addRecipe(modRes("constructing/oak_dark_ceiling_fan"))
+                .defaultRecipe()
+                .addCustomItem((w, block, properties) -> new PoweredItem(block, properties))
                 .build();
         this.addEntry(darkFans);
 
@@ -134,16 +137,18 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         w -> new CeilingFanBlock(w.toVanillaOrOak(),
                                 MetalType.DARK,
                                 BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
-                                        .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light)))
-                .addRecipe(modRes("constructing/oak_light_ceiling_fan"))
+                                        .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light))
+                )
                 .addTile(ModBlockEntities.CEILING_FAN::get)
-                .setTabKey(tab)
+                .addTextureM(modRes("block/oak_light_ceiling_fan"),
+                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("electronics"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
-                .addTextureM(modRes("block/oak_light_ceiling_fan"),
-                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
+                .setTabKey(tab)
                 .setRenderType(RenderLayer.TRANSLUCENT)
+                .addRecipe(modRes("constructing/oak_light_ceiling_fan"))
+                .addCustomItem((w, block, properties) -> new PoweredItem(block, properties))
                 .build();
         this.addEntry(lightFans);
 

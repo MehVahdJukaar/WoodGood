@@ -24,6 +24,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHopper
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 public class EveryCompatFabric extends EveryCompatCommon implements ModInitializer {
 
@@ -41,38 +42,44 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
     protected void addModules() {
         super.addModules();
 
-//!! =============================================== Macaw's ======================================================== \\
-        addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
-        addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
-        addIfLoaded("mcwfences", () -> MacawFencesModule::new);
-        addIfLoaded("mcwlights", () -> MacawLightsModule::new);
-        addIfLoaded("mcwpaths", () -> MacawPathsModule::new);
-        addIfLoaded("mcwroofs", () -> MacawRoofsModule::new);
-        addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
-        addIfLoaded("mcwwindows", () -> MacawWindowsModule::new);
-        addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
-        addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
-
 //!!================================================ Add Modules ==================================================== \\
-        addIfLoaded("bbb", () -> BuildingButBetterModule::new);
-        addIfLoaded("beautify", () -> BeautifyRefabricatedModule::new);
-        addIfLoaded("bewitchment", () -> BewitchmentModule::new);
-        addIfLoaded("clutter", () -> ClutterModule::new);
-        addIfLoaded("create", () -> CreateModule::new);
-        addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
-        addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
-        addIfLoaded("exlineawnings", () -> AwningModule::new);
-        addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
-        addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
-        addIfLoaded("mighty_mail", () -> MightyMailModule::new);
-        addIfLoaded("redbits", () -> RedBitsModule::new);
-        addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
-        addIfLoaded("storagedelight", () -> StorageDelightModule::new);
-        addIfLoaded("shutter", () -> LauchsShuttersModule::new);
-        addIfLoaded("wilderwild", () -> WilderWildModule::new);
-        addIfLoaded("woodenhoppers", () -> WoodenHoppersModule::new);
 
-        if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+        if (INCLUDE_ALL_WOOD_MODULES.get()) {
+
+            // ========================================= MACAW's ======================================================== \\
+            addIfLoaded("mcwbridges", () -> MacawBridgesModule::new);
+            addIfLoaded("mcwdoors", () -> MacawDoorsModule::new);
+            addIfLoaded("mcwfences", () -> MacawFencesModule::new);
+            addIfLoaded("mcwlights", () -> MacawLightsModule::new);
+            addIfLoaded("mcwpaths", () -> MacawPathsModule::new);
+            addIfLoaded("mcwroofs", () -> MacawRoofsModule::new);
+            addIfLoaded("mcwtrpdoors", () -> MacawTrapdoorsModule::new);
+            addIfLoaded("mcwwindows", () -> MacawWindowsModule::new);
+            addIfLoaded("mcwfurnitures", () -> MacawFurnitureModule::new);
+            addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
+
+            // ========================================= GENERAL ======================================================== \\
+            addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            addIfLoaded("beautify", () -> BeautifyRefabricatedModule::new);
+            addIfLoaded("bewitchment", () -> BewitchmentModule::new);
+            addIfLoaded("clutter", () -> ClutterModule::new);
+            addIfLoaded("create", () -> CreateModule::new);
+            addIfLoaded("dramaticdoors", () -> DramaticDoorsModule::new);
+            addIfLoaded("excessive_building", () -> ExcessiveBuildingModule::new);
+            addIfLoaded("exlineawnings", () -> AwningModule::new);
+            addIfLoaded("infinitybuttons", () -> InfinityButtonsModule::new);
+            addIfLoaded("lightmanscurrency", () -> LightmansCurrencyModule::new);
+            addIfLoaded("mighty_mail", () -> MightyMailModule::new);
+            addIfLoaded("redbits", () -> RedBitsModule::new);
+            addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
+            addIfLoaded("storagedelight", () -> StorageDelightModule::new);
+            addIfLoaded("shutter", () -> LauchsShuttersModule::new);
+            addIfLoaded("wilderwild", () -> WilderWildModule::new);
+            addIfLoaded("woodenhoppers", () -> WoodenHoppersModule::new);
+
+            if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
+
+        }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("twilightforest", () -> TwilightForestModule::new); //!! NOT AVAILABLE

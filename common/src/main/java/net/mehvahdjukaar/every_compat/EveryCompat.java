@@ -34,7 +34,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.modulesList;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.ENTRY_SETS_BLACKLIST;
+import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.MODULES_BLACKLIST;
 
 public abstract class EveryCompat {
 //TODO: figure out pack overlays to remove unneded textures when mods arent loaded
@@ -117,30 +118,35 @@ public abstract class EveryCompat {
     }
 
     public static synchronized void addModule(CompatModule module) {
-        if (!modulesList.get().contains(module.getModId())) {
-            ACTIVE_MODULES.put(module.getModId(), module);
-            DEPENDENCIES.add(module.getModId());
-            DEPENDENCIES.addAll(module.getAlreadySupportedMods());
+        ACTIVE_MODULES.put(module.getModId(), module);
+        DEPENDENCIES.add(module.getModId());
+        DEPENDENCIES.addAll(module.getAlreadySupportedMods());
 
-            ServerDynamicResourcesHandler.INSTANCE.getPack()
-                    .addNamespaces(module.getServerResourcesNamespaces());
-            if (PlatHelper.getPhysicalSide().isClient()) {
-                ClientDynamicResourcesHandler.getInstance().getPack()
-                        .addNamespaces(module.getClientResourcesNamespaces());
-            }
-
-            for (var t : module.getAffectedTypes()) {
-                addDynamicRegistrationFor(t);
-            }
-            ADDON_IDS.add(module.getMyNamespace());
+        ServerDynamicResourcesHandler.INSTANCE.getPack()
+                .addNamespaces(module.getServerResourcesNamespaces());
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            ClientDynamicResourcesHandler.getInstance().getPack()
+                    .addNamespaces(module.getClientResourcesNamespaces());
         }
+
+        for (var t : module.getAffectedTypes()) {
+            addDynamicRegistrationFor(t);
+        }
+        ADDON_IDS.add(module.getMyNamespace());
     }
 
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatHelper.isModLoaded(modId)) {
+        if (PlatHelper.isModLoaded(modId) && !MODULES_BLACKLIST.get().contains(modId) && !ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*")) {
             CompatModule module = moduleFactory.get().apply(modId);
             addModule(module);
         }
+    }
+
+    @SafeVarargs
+    public static void addMultipleIfLoaded(String modId, Supplier<Function<String, CompatModule>>... moduleFactories) {
+            for (var moduleFactory : moduleFactories) {
+                addIfLoaded(modId, moduleFactory);
+            }
     }
 
     public static Collection<CompatMod> getCompatMods() {
@@ -186,30 +192,30 @@ public abstract class EveryCompat {
         float p = (myChildrenSize / (float) newSize) * 100f;
         if (myChildrenSize == 0) {
             String log = """
-                    \n###########################################################################################################
-                    #                                                                                                         #
-                    # ATTENTION: EVERY COMPAT REGISTERED 0 CHILDREN! No Wood mods (Biomes O' Plenty or others) are installed. #
-                    #                           You dont need EveryCompat and should remove it.                               #
-                    #                                                                                                         #
-                    ###########################################################################################################
+                    \n##########################################################################################################
+                    #                                                                                                        #
+                    #  ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed.  #
+                    #                            You dont need EveryCompat and should remove it.                             #
+                    #                                                                                                        #
+                    ##########################################################################################################
                     """;
             EveryCompat.LOGGER.error("\n{}", log);
             return;
         }
 
         if (p > 25) {
-            EveryCompat.LOGGER.warn("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
+            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
         } else {
-            EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
+            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
         }
         if (p > 33) {
-            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(CompatModule::bloatAmount));
+            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
             if (compatbloated.isPresent()) {
                 CompatModule bloated = compatbloated.get();
-                EveryCompat.LOGGER.info("Registered {} compat children making up {}% of total children registered", myChildrenSize, String.format("%.2f", p));
+                EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
                 //no freaking clue why this was returned as null once
-                EveryCompat.LOGGER.error("Every Compat registered children make up more than one third of your registered children, taking up memory and load time.");
-                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} children)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
+                EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
+                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
             } else {
                 String log = """
                         \n#######################################################

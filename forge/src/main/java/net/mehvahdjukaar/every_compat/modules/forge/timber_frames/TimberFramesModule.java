@@ -68,9 +68,8 @@ public class TimberFramesModule extends SimpleModule {
                         EveryCompat.res("block/tf/oak_timber_frame_y_m"))
                 .addTextureM(modRes("block/oak_timber_frame_nega"),
                         EveryCompat.res("block/tf/oak_timber_frame_x_m"))
-                .addTag(modRes("timber_frame"), Registries.BLOCK)
+                .addTag(modRes("timber_frame"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("timber_frame"), Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_timber_frame"))
                 .build();
@@ -81,9 +80,8 @@ public class TimberFramesModule extends SimpleModule {
                         w -> new CompatTimberFrameBetaBlock(frame_alpha.blocks.get(w))
                 )
                 // TEXTURES: Using the same texture above
-                .addTag(modRes("timber_frame"), Registries.BLOCK)
+                .addTag(modRes("timber_frame"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("timber_frame"), Registries.ITEM)
                 .noTab()
                 .build();
         this.addEntry(frame_beta);
@@ -116,10 +114,9 @@ public class TimberFramesModule extends SimpleModule {
     }
 
     @Override
-    // MCMETA ---
+    // MCMETA
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
-
         executor.accept((manager, sink) -> {
             frame_alpha.blocks.forEach((wood, block) -> {
 
@@ -142,7 +139,7 @@ public class TimberFramesModule extends SimpleModule {
 
                         sink.addJson(EveryCompat.res(newPath), mcmeta, ResType.BLOCK_MCMETA);
                     } catch (IOException e) {
-                        EveryCompat.LOGGER.error("Failed to get oak_{}'s MCMETA : {}", resLoc.toString(), e);
+                        EveryCompat.LOGGER.error("Failed to get {}'s MCMETA : {}", resLoc.toString(), e);
                     }
                 }
             });

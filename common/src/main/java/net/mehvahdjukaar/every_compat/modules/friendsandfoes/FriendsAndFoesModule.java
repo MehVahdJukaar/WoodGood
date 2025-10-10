@@ -22,14 +22,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Set;
 import java.util.function.Supplier;
 
+//SUPPORT: V3.0.9+
 public class FriendsAndFoesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> beehives;
 
-    // Point-Of-Interest for Beehives - //!! - remove when the addBlocksToPOI() is fixed & enabled below
+    // Point-Of-Interest for Beehives
     protected final ResourceLocation poiId = EveryCompat.res("faf_beehive");
+
     public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
             () -> new PoiType(getBeehives(), 1, 1));
+
     private Set<BlockState> getBeehives() {
         var set = new ImmutableSet.Builder<BlockState>();
         beehives.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
@@ -40,17 +43,20 @@ public class FriendsAndFoesModule extends SimpleModule {
         super(modId, "faf");
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
-                        getModBlock("spruce_beehive"),
-                        () -> VanillaWoodTypes.SPRUCE,
-                        w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE)))
-                .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
-                .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
-                .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
+                        getModBlock("spruce_beehive"), () -> VanillaWoodTypes.SPRUCE,
+                        w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE))
+                )
+                .addTile(() -> BlockEntityType.BEEHIVE)
+                .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"),
+                        EveryCompat.res("block/spruce_beehive_front_honey_m"))
+                .addTextureM(EveryCompat.res("block/spruce_beehive_front"),
+                        EveryCompat.res("block/spruce_beehive_front_m"))
+                .addTextureM(EveryCompat.res("block/spruce_beehive_side"),
+                        EveryCompat.res("block/spruce_beehive_side_m"))
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
-                .addTile(() -> BlockEntityType.BEEHIVE)
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -58,10 +64,4 @@ public class FriendsAndFoesModule extends SimpleModule {
 
     }
 
-    @Override
-    public void onModSetup() {
-        super.onModSetup();
-        //!! Dont use below until the problem is fixed
-//        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehives.blocks.values());
-    }
 }
