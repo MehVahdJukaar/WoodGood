@@ -56,7 +56,11 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
             var subList = tasks.subList(i, end);
             executor.accept((resourceManager, resourceSink) -> {
                 for (ResourceGenTask task : subList) {
-                    task.accept(resourceManager, resourceSink);
+                    try {
+                        task.accept(resourceManager, resourceSink);
+                    } catch (Throwable e) {
+                        EveryCompat.LOGGER.error("Error while generating dynamic resource for task {}", task, e);
+                    }
                 }
             });
         }

@@ -84,7 +84,11 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
             var subList = tasks.subList(i, end);
             executor.accept((resourceManager, resourceSink) -> {
                 for (ResourceGenTask subtask : subList) {
-                    subtask.accept(resourceManager, resourceSink);
+                    try {
+                        subtask.accept(resourceManager, resourceSink);
+                    } catch (Throwable e) {
+                        EveryCompat.LOGGER.error("Error while generating dynamic resource for task {}", subtask, e);
+                    }
                 }
             });
         }

@@ -530,8 +530,8 @@ public class QuarkModule extends SimpleModule {
             handler.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
                     ResType.RECIPES);
 
-        } catch (IOException e) {
-            EveryCompat.LOGGER.error("Failed to open the recipe file @ {} : {}", recipeLoc, e);
+        } catch (Exception e) {
+            EveryCompat.LOGGER.error("Failed generate a hedge recipe file @ {} : {}", recipeLoc, e);
         }
     }
 
