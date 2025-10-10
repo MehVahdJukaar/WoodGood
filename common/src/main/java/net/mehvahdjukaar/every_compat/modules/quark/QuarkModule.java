@@ -39,6 +39,8 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -505,11 +507,15 @@ public class QuarkModule extends SimpleModule {
         });
     }
 
+    //why is there a need to correct in the first place?? this sounds like a bandaid fix. the reason why they arent made right the first time should be found instead
     // Correcting logs used to craft hedges
     public void generalHedgeRecipe(LeavesType leavesType, Block block, ResourceSink handler, ResourceManager manager) {
 
         ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
 
+        //TODO: replace with hardcoded recipe
+
+        //this is very brittle. one shouldnt blindly rely on assumed json structure like this. make it more robust or just add a custom shaped recipe manually without passing through json
         try (InputStream recipeStream = manager.getResource(recipeLoc)
                 .orElseThrow(() -> new FileNotFoundException("Failed to open recipe @ " + recipeLoc)).open()) {
 
