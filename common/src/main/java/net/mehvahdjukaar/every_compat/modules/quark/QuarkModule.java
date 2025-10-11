@@ -34,8 +34,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -53,7 +51,6 @@ import org.violetmoon.zeta.block.ZetaBlock;
 import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -282,9 +279,10 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("hedges"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .copyParentTint()
+                .addRecipe(modRes("building/crafting/oak_hedge"))
                 //RECIPES: Manually created below blc the recipe has a tag as an ingredient
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .copyParentTint()
                 .build();
         this.addEntry(hedges);
 
@@ -375,7 +373,7 @@ public class QuarkModule extends SimpleModule {
         executor.accept((this::generateChestTextures));
     }
 
-    private void generateChestTextures(ResourceManager manager, ResourceSink handler) {
+    private void generateChestTextures(ResourceManager manager, ResourceSink sink) {
         try (TextureImage normal = TextureImage.open(manager, modRes("quark_variant_chests/oak/normal"));
              TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
              TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
@@ -422,26 +420,26 @@ public class QuarkModule extends SimpleModule {
 
                     {
                         ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/normal");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                        if (!sink.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap");
 
-                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
+                            createChestTextures(sink, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
                         }
                     }
                     {
                         ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/left");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                        if (!sink.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_left");
 
-                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
+                            createChestTextures(sink, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
                         }
                     }
                     {
                         ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/right");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                        if (!sink.alreadyHasTextureAtLocation(manager, res)) {
                             ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_right");
 
-                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
+                            createChestTextures(sink, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
                         }
                     }
 
@@ -479,11 +477,11 @@ public class QuarkModule extends SimpleModule {
     // RECIPES, TAGS
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
-        executor.accept((manager, handler) -> {
+        executor.accept((manager, sink) -> {
             if (PlatHelper.isModLoaded("botanypots")) {
                 hedges.items.forEach((leaves, item) -> {
                     var leavesItem = leaves.leaves.asItem();
-                    BotanyPotsHelper.cropQuarkHedgeRecipe(this, item, leavesItem, handler, manager, leaves);
+                    BotanyPotsHelper.cropQuarkHedgeRecipe(this, item, leavesItem, sink, manager, leaves);
                 });
             }
 
@@ -493,14 +491,14 @@ public class QuarkModule extends SimpleModule {
                 Block block = entry.getValue();
 
                 // will generate if block is not null
-                if (block != null) createHedgeRecipe(leavesType, block, handler, manager);
+                if (block != null) createHedgeRecipe(leavesType, block, sink, manager);
             }
         });
     }
 
     //why is there a need to correct in the first place?? this sounds like a bandaid fix. the reason why they arent made right the first time should be found instead
     // Correcting logs used to craft hedges
-    public void createHedgeRecipe(LeavesType leavesType, Block block, ResourceSink handler, ResourceManager manager) {
+    public void createHedgeRecipe(LeavesType leavesType, Block block, ResourceSink sink, ResourceManager manager) {
 
         ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
 
@@ -520,14 +518,14 @@ public class QuarkModule extends SimpleModule {
                     .addProperty("item", Utils.getID(leavesType.leaves).toString());
             // WoodTypes
             underKey.getAsJsonObject("W").addProperty("tag",
-                    getATagOrCreateANew("logs", "caps", Objects.requireNonNull(leavesType.getAssociatedWoodType()), handler, manager).toString());
+                    getATagOrCreateANew("logs", "caps", Objects.requireNonNull(leavesType.getAssociatedWoodType()), sink, manager).toString());
             // Hedges
             underResult.addProperty("item", Utils.getID(block).toString());
 
 
             // Adding the finished recipe to ResourceLocation
             String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
-            handler.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
+            sink.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
                     ResType.RECIPES);
 
         } catch (Exception e) {
