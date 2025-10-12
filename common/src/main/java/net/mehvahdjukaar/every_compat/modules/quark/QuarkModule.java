@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
-import com.google.gson.JsonObject;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECPlatformStuff;
@@ -50,11 +49,8 @@ import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
 import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -486,51 +482,52 @@ public class QuarkModule extends SimpleModule {
             }
 
             // hedge's recipe & logs' tags
-            for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-                LeavesType leavesType = entry.getKey();
-                Block block = entry.getValue();
-
-                // will generate if block is not null
+            hedges.blocks.forEach((leavesType, block) -> {
                 if (block != null) createHedgeRecipe(leavesType, block, sink, manager);
-            }
+            });
         });
     }
 
-    //why is there a need to correct in the first place?? this sounds like a bandaid fix. the reason why they arent made right the first time should be found instead
-    // Correcting logs used to craft hedges
-    public void createHedgeRecipe(LeavesType leavesType, Block block, ResourceSink sink, ResourceManager manager) {
+    // Hedge's recipe has a tag as an ingredient
+    public void createHedgeRecipe(LeavesType leavesType, Block hedge, ResourceSink sink, ResourceManager manager) {
 
-        ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
+        String recipe = """
+                {
+                    "type": "minecraft:crafting_shaped",
+                    "pattern": [
+                        "L",
+                        "W"
+                    ],
+                    "key": {
+                        "L": {
+                            "item": "[LEAVES]"
+                        },
+                        "W": {
+                            "tag": "[TAG]"
+                        }
+                    },
+                    "result": {
+                        "item": "[HEDGE]",
+                        "count": 2
+                    },
+                    "conditions": [
+                        {
+                            "type": "quark:flag",
+                            "flag": "hedges"
+                        }
+                    ]
+                }\s
+                """;
 
-        //TODO: replace with hardcoded recipe
+        String newTag = getATagOrCreateANew("log", "cap", Objects.requireNonNull(leavesType.getAssociatedWoodType()), sink, manager).toString();
 
-        //this is very brittle. one shouldnt blindly rely on assumed json structure like this. make it more robust or just add a custom shaped recipe manually without passing through json
-        try (InputStream recipeStream = manager.getResource(recipeLoc)
-                .orElseThrow(() -> new FileNotFoundException("Failed to open recipe @ " + recipeLoc)).open()) {
+        String newRecipe = recipe.replace("[LEAVES]", Utils.getID(leavesType.leaves).toString())
+                .replace("[TAG]", newTag)
+                .replace("[HEDGE]", Utils.getID(hedge).toString());
 
-            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
-            JsonObject underKey = recipe.getAsJsonObject("key");
-            JsonObject underResult = recipe.getAsJsonObject("result");
-
-            // Editing JSON
-            // Leaves
-            underKey.getAsJsonObject("L")
-                    .addProperty("item", Utils.getID(leavesType.leaves).toString());
-            // WoodTypes
-            underKey.getAsJsonObject("W").addProperty("tag",
-                    getATagOrCreateANew("logs", "caps", Objects.requireNonNull(leavesType.getAssociatedWoodType()), sink, manager).toString());
-            // Hedges
-            underResult.addProperty("item", Utils.getID(block).toString());
-
-
-            // Adding the finished recipe to ResourceLocation
-            String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
-            sink.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
-                    ResType.RECIPES);
-
-        } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed generate a hedge recipe file @ {} : {}", recipeLoc, e);
-        }
+        // Adding the finished recipe to ResourceLocation
+        sink.addBytes(EveryCompat.res(leavesType.createPathWith(shortenedId(), "hedge")), newRecipe.getBytes(),
+                ResType.RECIPES);
     }
 
 }
