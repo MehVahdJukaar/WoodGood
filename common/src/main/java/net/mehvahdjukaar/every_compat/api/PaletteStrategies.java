@@ -71,27 +71,28 @@ public class PaletteStrategies {
             PaletteStrategies.makePaletteFromChild(
                     blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,
                     p -> {
-                        if (p.size() > 3) {
-                            p.reduceDown();
-                            p.reduceDown();
-                        }
+                        p.increaseUp();
+                        p.increaseUp();
+                        p.reduceDown();
+                        p.reduceDown();
                     }));
 
     public static final PaletteStrategy PLANKS_REMOVE_DARKEST = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
                     blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     p -> {
-                        if (p.size() > 2) p.reduceDown();
+                        p.increaseUp();
+                        p.reduceDown();
                     }));
 
     public static final PaletteStrategy PLANKS_REMOVE_2_DARKEST = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
                     blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     p -> {
-                        if (p.size() > 3) {
-                            p.reduceDown();
-                            p.reduceDown();
-                        }
+                        p.increaseUp();
+                        p.increaseUp();
+                        p.reduceDown();
+                        p.reduceDown();
                     }));
 
     public static final PaletteStrategy PLANKS_LOW_CONTRAST = registerCached((blockType, manager) ->
@@ -119,6 +120,17 @@ public class PaletteStrategies {
                     SpriteUtils::extrapolateSignBlockPalette));
 
 // ──────────────────────────────────────── End ────────────────────────────────────────
+
+    public static PaletteStrategy removeDarkestBy(int number, String childKey, Predicate<String> whichSide) {
+        return registerCached((blockType, manager) ->
+                PaletteStrategies.makePaletteFromChild(blockType, manager, childKey, whichSide,
+                        p -> {
+                            for (int idx = 0; idx < number; idx++) {
+                                p.reduceDown();
+                                p.increaseUp();
+                            }
+                        }));
+    }
 
     //other bad code...
 
@@ -190,7 +202,7 @@ public class PaletteStrategies {
                 throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
             }
         }
-        throw new RuntimeException("No child with key \"" + childKey + "\" found for" + blockType.getId());
+        throw new RuntimeException("No child with key \"" + childKey + "\" found for: " + blockType.getId());
     }
 
     private static class Cached implements PaletteStrategy {
