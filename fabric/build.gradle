@@ -104,7 +104,7 @@ dependencies {
     //- Repository LOCAL
     String path = System.getenv('REPOS20_1')
     boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
-    print "isMyPc: $usesMavenLocalML"
+    print "isMyPc (FABRIC): $usesMavenLocalML\n"
 
         //- Repository LOCAL
     if (enable_moonlight_test.toBoolean()) {

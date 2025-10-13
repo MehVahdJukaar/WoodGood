@@ -108,7 +108,7 @@ dependencies {
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
     String path = System.getenv('REPOS20_1')
     boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
-    print "isMyPc: $usesMavenLocalML"
+    print "isMyPc (FORGE): $usesMavenLocalML\n"
 
         //- Repository LOCAL
     if (enable_moonlight_test.toBoolean()) {
@@ -151,7 +151,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum, Aether
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum
 //    modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
-//    modRuntimeOnly("curse.maven:citadel-331936:6702068") // v2.6.2 | Alex's Cave, Rats
+    modRuntimeOnly("curse.maven:citadel-331936:6702068") // v2.6.2 | Alex's Cave, Rats
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // v81 | TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:monolib-968432:6123976") // v2.0.0 | More-Beautiful-Torches
@@ -298,7 +298,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
 //    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6364065") // Terrablender, Glitchcore
 //    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore, ProductiveLib
-//    modRuntimeOnly("curse.maven:alexs-caves-924854:5848216") // Citadel
+    modRuntimeOnly("curse.maven:alexs-caves-924854:5848216") // Citadel
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784269") // Architectury-API
 //    modRuntimeOnly("curse.maven:rats-323596:5904296")
 //    modRuntimeOnly("curse.maven:mo-shiz-mod-62536:5587177")
@@ -306,6 +306,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:ancient-aether-886751:6013933") // Aether
 //    modRuntimeOnly("curse.maven:pfw-aesthetic-gems-906404:6023817")
 //    modRuntimeOnly("curse.maven:deeperdarker-659011:5906086")
+//    modRuntimeOnly("curse.maven:gregtechceu-modern-890405:6862094")
 //    modRuntimeOnly("curse.maven:sullys-mod-386534:6005769") // Blueprint
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:5296565") // Blueprint
 //    modRuntimeOnly("curse.maven:autumnity-365045:5292346") // Blueprint
