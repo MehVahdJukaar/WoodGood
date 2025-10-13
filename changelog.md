@@ -21,6 +21,15 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C): Improved the generation where a recipe generation failed can cause other recipes that do not get a chance to be generated and get skipped 
+- **Quark** (F): Fixed crash with Hedge's recipe in the SERVER
+- **Chipped** (C): Improved textures & Corrected a few incorrect textures for logs
+
+---
+
+## v2.9.5
+
+### UPDATED: 
 - **Every Compat** (C): Fixed a rare bug where `everycomp-hazardous.toml` blacklist 2 modules in ENTRY_SET_BLACKLIST leads to a crash
   - **Variant Vanilla Blocks** & **Friends & Foes**
 
