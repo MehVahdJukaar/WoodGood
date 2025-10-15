@@ -21,6 +21,13 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C): Fixed the incorrect logic in texture generation that caused crash with **Chipped** with any Wood Mods - [#1077](https://github.com/MehVahdJukaar/WoodGood/issues/1077)
+
+---
+
+## v2.9.6
+
+### UPDATED: 
 - **Every Compat** (C): Improved the generation where a recipe generation failed can cause other recipes that do not get a chance to be generated and get skipped 
 - **Quark** (F): Fixed crash with Hedge's recipe in the SERVER
 - **Chipped** (C): Improved textures & Corrected a few incorrect textures for logs
