@@ -28,7 +28,7 @@ import static net.mehvahdjukaar.every_compat.common_classes.TextureUtility.*;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LOG;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-//SUPPORT: v4.0.2+
+//See ChippedAbstractModule's SUPPORTED VERSION
 public class ChippedLogModule extends ChippedAbstractModule {
 
     public final SimpleEntrySet<WoodType, Block> BundledLog,

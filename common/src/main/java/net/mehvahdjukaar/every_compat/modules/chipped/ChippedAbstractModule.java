@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 
+//SUPPORT: v3.0.7+
 public class ChippedAbstractModule extends SimpleModule {
 
     public static String tabPath = "main";

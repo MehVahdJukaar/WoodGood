@@ -30,7 +30,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkPalette;
 import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkerPalette;
 
-//SUPPORT: v4.0.2+
+//See ChippedAbstractModule's SUPPORTED VERSION
 public class ChippedDoorModule extends ChippedAbstractModule {
 
     public final SimpleEntrySet<WoodType, Block> barredDoor,
