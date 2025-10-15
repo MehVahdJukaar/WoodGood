@@ -148,9 +148,9 @@ dependencies {
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5668859") // Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
 //    modRuntimeOnly("curse.maven:rechiseled-558998:5286306") // Rechiseled @ ISN'T SUPPORTED YET
-//    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum, Aether
+//    modRuntimeOnly("curse.maven:curios-309927:6418456") // v5.14.1 | Malum, Aether, Ars-Nouveau
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum
-//    modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
+//    modRuntimeOnly("curse.maven:geckolib-388172:7025129") // v4.8.2 | Ars-Nouveau
     modRuntimeOnly("curse.maven:citadel-331936:6702068") // v2.6.2 | Alex's Cave, Rats
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // v81 | TFC, Timber-Frames
