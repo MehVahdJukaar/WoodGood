@@ -583,7 +583,8 @@ public class CompatSpritesHelper {
                     respriter = Respriter.of(image);
 
                 try (TextureImage temp = respriter.recolorWithAnimationOf(plankTexture)) {
-                    if (!textureInfo.texture().toString().matches("boatload:item/(oak_furnace|large_oak)_boat"))
+                    if (!textureInfo.texture().toString().matches("boatload:item/(oak_furnace|large_oak)_boat")
+                    && !textureInfo.texture().toString().matches("chipped:(item/oak_door|block/torch)/\\w+"))
                         TextureOps.applyOverlayOnExisting(image, temp, flowerOverLay);
                 }
 
