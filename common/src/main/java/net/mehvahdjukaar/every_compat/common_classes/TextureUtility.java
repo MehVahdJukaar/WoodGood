@@ -183,31 +183,4 @@ public class TextureUtility {
         }
     }
 
-    public record Quartet<
-            L extends String,
-            ML extends String,
-            MR extends String,
-            R extends PaletteStrategy>(L baseTexture, ML logMask, MR planksMask, R logPaletteStrategy) {
-
-        public static <A extends String, B extends String, C extends String, D extends PaletteStrategy>
-        Quartet<A, B, C, D> of(A baseTexture, B logMask, C planksMask, D paletteStrategy) {
-            return new Quartet<>(baseTexture, logMask, planksMask, paletteStrategy);
-        }
-
-        public L baseTexture() {
-            return this.baseTexture;
-        }
-
-        public ML logMask() {
-            return this.logMask;
-        }
-
-        public MR planksMask() {
-            return this.planksMask;
-        }
-
-        public R logPaletteStrategy() {
-            return this.logPaletteStrategy;
-        }
-    }
 }

@@ -142,9 +142,6 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("nailed_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addModelTransform(m ->
-                        m.replaceWithTextureFromChild("chipped:block/oak_log/nailed_oak_log_top", LOG,
-                        CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -177,9 +174,6 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("reinforced_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addModelTransform(m ->
-                        m.replaceWithTextureFromChild("chipped:block/oak_log/reinforced_oak_log_top", LOG,
-                                CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -441,54 +435,54 @@ public class ChippedLogModule extends ChippedAbstractModule {
         //REASON: The generated textures are not correct, so below is the best way to get the correct generated texture
         executor.accept((manager, sink) -> {
 
-            Set<Quartet<String, String, String, PaletteStrategy>> textures = Set.of(
+            Set<TextureGroup> textures = Set.of(
                     // planked_oak_log
-                    Quartet.of("planked_oak_log", xxLogM, xxLogPlanksM, LOG_SIDE_LIGHT_PALETTE),
-                    Quartet.of("planked_oak_log_top", cLogTopM, cLogTopPlanksM, LOG_SIDE_LIGHT_PALETTE),
+                    TextureGroup.of("planked_oak_log", xxLogM, xxLogPlanksM, LOG_SIDE_LIGHT_PALETTE),
+                    TextureGroup.of("planked_oak_log_top", cLogTopM, cLogTopPlanksM, LOG_SIDE_LIGHT_PALETTE),
 
                     // nailed_oak_log
-                    Quartet.of("nailed_oak_log", "block/ch/oak_logs/nailed_oak_log_m",
+                    TextureGroup.of("nailed_oak_log", "block/ch/oak_logs/nailed_oak_log_m",
                             "", null),
 
                     // overgrown_oak_log_top
-                    Quartet.of("overgrown_oak_log_top", cLogTopM,
+                    TextureGroup.of("overgrown_oak_log_top", cLogTopM,
                             "block/ch/oak_logs/overgrown_oak_log_top_planks_m",
                             LOG_SIDE_LIGHT_PALETTE),
 
                     // reinforced_oak_log
-                    Quartet.of("reinforced_oak_log", "block/ch/oak_logs/reinforced_oak_log_m",
+                    TextureGroup.of("reinforced_oak_log", "block/ch/oak_logs/reinforced_oak_log_m",
                             "", null),
 
                     // bundled_oak_log
-                    Quartet.of("bundled_oak_log", "block/ch/oak_logs/bundled_log_m",
+                    TextureGroup.of("bundled_oak_log", "block/ch/oak_logs/bundled_log_m",
                             "block/ch/oak_logs/bundled_log_planks_m",
                             LOG_SIDE_REMOVE_2_DARKEST),
-                    Quartet.of("bundled_oak_log_top", xLogTopM, xLogTopPlanksM,
+                    TextureGroup.of("bundled_oak_log_top", xLogTopM, xLogTopPlanksM,
                             PaletteStrategies.removeDarkestBy(2, LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)),
 
                     // center_cut_oak_log
-                    Quartet.of("center_cut_oak_log", xxLogPlanksM, xxLogM,
+                    TextureGroup.of("center_cut_oak_log", xxLogPlanksM, xxLogM,
                             LOG_SIDE_LIGHT_PALETTE),
-                    Quartet.of("center_cut_oak_log_top", "block/ch/oak_logs/center_cut_log_top_m",
+                    TextureGroup.of("center_cut_oak_log_top", "block/ch/oak_logs/center_cut_log_top_m",
                             "block/ch/oak_logs/center_cut_log_top_planks_m",
                             LOG_SIDE_LIGHT_PALETTE),
 
                     // damaged_oak_log
-                    Quartet.of("damaged_oak_log", "block/ch/oak_logs/damaged_oak_log_m",
+                    TextureGroup.of("damaged_oak_log", "block/ch/oak_logs/damaged_oak_log_m",
                             "block/ch/oak_logs/damaged_oak_log_planks_m", DAMAGED_PALETTE),
 
                     // edge_cut_oak_log
-                    Quartet.of("edge_cut_oak_log", xxLogM, xxLogPlanksM,
+                    TextureGroup.of("edge_cut_oak_log", xxLogM, xxLogPlanksM,
                             LOG_SIDE_LIGHT_PALETTE),
-                    Quartet.of("edge_cut_oak_log_top", "block/ch/oak_logs/edge_cut_log_top_m",
+                    TextureGroup.of("edge_cut_oak_log_top", "block/ch/oak_logs/edge_cut_log_top_m",
                             "block/ch/oak_logs/edge_cut_log_top_planks_m",
                             LOG_SIDE_LIGHT_PALETTE),
 
                     // firewood_oak_log_top
-                    Quartet.of("firewood_oak_log_top", xLogTopM, xLogTopPlanksM, LOG_SIDE_LIGHT_PALETTE),
+                    TextureGroup.of("firewood_oak_log_top", xLogTopM, xLogTopPlanksM, LOG_SIDE_LIGHT_PALETTE),
 
                     // mixed_oak_log_top
-                    Quartet.of("mixed_oak_log_top", xLogTopM, xLogTopPlanksM, LOG_SIDE_REMOVE_2_DARKEST)
+                    TextureGroup.of("mixed_oak_log_top", xLogTopM, xLogTopPlanksM, LOG_SIDE_REMOVE_2_DARKEST)
             );
 
             textures.forEach(currentTextures -> {
@@ -529,5 +523,13 @@ public class ChippedLogModule extends ChippedAbstractModule {
             addCarpenterRecipe(sink, "log");
             addCarpenterRecipe(sink, "stripped_log");
         });
+    }
+
+
+
+    private record TextureGroup(String baseTexture, String logMask, String planksMask, PaletteStrategy logPaletteStrategy) {
+        public static TextureGroup of(String baseTexture, String logMask, String planksMask, PaletteStrategy logPaletteStrategy) {
+            return new TextureGroup(baseTexture, logMask, planksMask, logPaletteStrategy);
+        }
     }
 }
