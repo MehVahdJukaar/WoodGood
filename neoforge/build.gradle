@@ -105,7 +105,7 @@ dependencies {
     //- Repository LOCAL
     String path = System.getenv('REPOS21_1')
     boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
-    print "isMyPc: $usesMavenLocalML\n"
+    print "isMyPc (NEOFORGE): $usesMavenLocalML"
 
     //- Repository LOCAL
     if (enable_moonlight_test.toBoolean()) {
@@ -177,7 +177,7 @@ dependencies {
 //    modCompileOnly("curse.maven:dawn-of-time-312359:7029195") // Fusion-Connected-Texture
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:3941638") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:farmersdelight-398521:5962800")
+//    modRuntimeOnly("curse.maven:farmersdelight-398521:6917256")
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:6354619")
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511") //!! 1.20.1 -> 1.21.1 Cannot remap access widener from namespace 'mojang'. Expected: 'intermediary'
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617252") // Resourceful-Lib
@@ -279,7 +279,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:deeperdarker-659011:6463247")
 //    modRuntimeOnly("curse.maven:frightful-winter-1241289:6447798")
 
-    modImplementation("curse.maven:terrafirmacraft-302973:7024199") // patchouli
+//    modImplementation("curse.maven:terrafirmacraft-302973:7024199") // patchouli
 
 }
 
