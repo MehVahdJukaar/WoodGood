@@ -129,7 +129,7 @@ public class QuarkModule extends SimpleModule {
                         w -> {
                             Block fence = w.getBlockOfThis("fence");
                             return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/",
-                                    Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
+                                    Objects.requireNonNull(fence.defaultBlockState().getSoundType()));
                         })
                 .requiresChildren(FENCE, WOOD) //REASON: recipes
                 //TEXTURES: log
@@ -151,7 +151,7 @@ public class QuarkModule extends SimpleModule {
                             Block fence = w.getBlockOfThis("fence");
                             // required stripped_log texture & fence as an ingredients
                             return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/stripped_",
-                                    Objects.requireNonNull(fence).getSoundType(fence.defaultBlockState()));
+                                    Objects.requireNonNull(fence.defaultBlockState().getSoundType()));
                         })
                 .requiresChildren(FENCE, STRIPPED_LOG, STRIPPED_WOOD) //REASON: textures, recipes
                 //TEXTURES: stripped_log
@@ -268,7 +268,8 @@ public class QuarkModule extends SimpleModule {
                         () -> VanillaLeavesTypes.OAK,
                         leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
                 )
-                .requiresChildren(LOG) // Reason: RECIPES. Yes leaves have log too.
+                .addCondition(l->l.getAssociatedWoodType() != null)
+                //.requiresChildren(LOG) // Reason: RECIPES. Yes leaves have log too.
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -520,7 +521,7 @@ public class QuarkModule extends SimpleModule {
                 """;
 
         WoodType woodType = leavesType.getAssociatedWoodType();
-        if (Objects.nonNull(woodType)) {
+        if (Objects.nonNull(woodType)) { //why is this here? we already checked all leaves have an associated wood in hedge construction
             String newTag = getATagOrCreateANew("log", "cap", woodType, sink, manager).toString();
 
             String newRecipe = recipe.replace("[LEAVES]", Utils.getID(leavesType.leaves).toString())
@@ -532,7 +533,7 @@ public class QuarkModule extends SimpleModule {
                     ResType.RECIPES);
         }
         else
-            EveryCompat.LOGGER.warn("Hedge's LeavesType do not have associated WoodType for: {}", leavesType.getId().toString());
+            EveryCompat.LOGGER.error("Hedge's LeavesType do not have associated WoodType for: {}. HOW??", leavesType.getId().toString());
     }
 
 }
