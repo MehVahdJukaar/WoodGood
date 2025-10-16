@@ -21,6 +21,13 @@
 </div>
 
 ### UPDATED: 
+- **Quark** (F): Fixed the recipe not being generated due to LeavesType's missing Associated WoodType and that halt the rest of other recipes generation - Related to [#1078](https://github.com/MehVahdJukaar/WoodGood/issues/1078)
+
+---
+
+## v2.9.7
+
+### UPDATED: 
 - **Every Compat** (C): Fixed the incorrect logic in texture generation that caused crash with **Chipped** with any Wood Mods - [#1077](https://github.com/MehVahdJukaar/WoodGood/issues/1077)
 
 ---
