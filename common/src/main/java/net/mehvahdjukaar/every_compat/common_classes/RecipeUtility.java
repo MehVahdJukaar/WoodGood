@@ -26,7 +26,7 @@ public class RecipeUtility {
                                                  ResourceLocation newRecipeLoc, ResourceSink sink, ResourceManager manager) {
         if (Objects.nonNull(output)) {
             try (InputStream recipeStream = manager.getResource(recipeLoc)
-                    .orElseThrow(() -> new FileNotFoundException("File Not Found: " + recipeLoc)).open()) {
+                    .orElseThrow(() -> new FileNotFoundException(" @ " + recipeLoc)).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
                 // Editing the recipe
@@ -50,7 +50,7 @@ public class RecipeUtility {
                                            ResourceSink sink, ResourceManager manager) {
         if (Objects.nonNull(newResult)) {
             try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipeLoc))
-                    .orElseThrow(() -> new FileNotFoundException("File Not Found: " + recipeLoc)).open()) {
+                    .orElseThrow(() -> new FileNotFoundException(" @ " + recipeLoc)).open()) {
                 JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
                 // Editing the recipe
