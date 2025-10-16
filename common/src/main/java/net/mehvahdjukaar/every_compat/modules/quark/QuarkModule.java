@@ -519,15 +519,20 @@ public class QuarkModule extends SimpleModule {
                 }\s
                 """;
 
-        String newTag = getATagOrCreateANew("log", "cap", Objects.requireNonNull(leavesType.getAssociatedWoodType()), sink, manager).toString();
+        WoodType woodType = leavesType.getAssociatedWoodType();
+        if (Objects.nonNull(woodType)) {
+            String newTag = getATagOrCreateANew("log", "cap", woodType, sink, manager).toString();
 
-        String newRecipe = recipe.replace("[LEAVES]", Utils.getID(leavesType.leaves).toString())
-                .replace("[TAG]", newTag)
-                .replace("[HEDGE]", Utils.getID(hedge).toString());
+            String newRecipe = recipe.replace("[LEAVES]", Utils.getID(leavesType.leaves).toString())
+                    .replace("[TAG]", newTag)
+                    .replace("[HEDGE]", Utils.getID(hedge).toString());
 
-        // Adding the finished recipe to ResourceLocation
-        sink.addBytes(EveryCompat.res(leavesType.createPathWith(shortenedId(), "hedge")), newRecipe.getBytes(),
-                ResType.RECIPES);
+            // Adding the finished recipe to ResourceLocation
+            sink.addBytes(EveryCompat.res(leavesType.createPathWith(shortenedId(), "hedge")), newRecipe.getBytes(),
+                    ResType.RECIPES);
+        }
+        else
+            EveryCompat.LOGGER.warn("Hedge's LeavesType do not have associated WoodType for: {}", leavesType.getId().toString());
     }
 
 }
