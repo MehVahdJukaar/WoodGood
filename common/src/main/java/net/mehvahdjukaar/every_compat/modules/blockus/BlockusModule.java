@@ -11,8 +11,8 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -34,8 +34,8 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.res;
-import static net.mehvahdjukaar.every_compat.common_classes.Utilities.copyChildrenPropertySafe;
-import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
+import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.copyChildrenPropertySafe;
+import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.doChildrenExistFor;
 
 //SUPPORT: v
 public class BlockusModule extends SimpleModule {
@@ -68,9 +68,9 @@ public class BlockusModule extends SimpleModule {
                 .addTexture(modRes("block/herringbone_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
-                .addTag(TagUtility.fabricTag("planks_that_burn"), Registries.BLOCK)
+                .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .addTag(TagUtility.fabricTag("planks_that_burn"), Registries.ITEM)
+                .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.ITEM)
                 .addTag(modRes("herringbone_planks_that_burn"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -83,9 +83,9 @@ public class BlockusModule extends SimpleModule {
                 )
                 .addTextureM(modRes("block/mossy_oak_planks"), res("block/bus/mossy_oak_planks_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(TagUtility.fabricTag("planks_that_burn"), Registries.BLOCK)
+                .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.BLOCK)
                 .addTag(modRes("all_mossy_planks"), Registries.BLOCK)
-                .addTag(TagUtility.fabricTag("planks_that_burn"), Registries.ITEM)
+                .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("mossy_oak_planks_from_moss_block"))
                 .addRecipe(modRes("mossy_oak_planks_from_vine"))
@@ -155,9 +155,9 @@ public class BlockusModule extends SimpleModule {
                 )
                 .addTexture(modRes("block/oak_mosaic"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(TagUtility.fabricTag("planks_that_burn"), Registries.BLOCK)
+                .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.BLOCK)
                 .addTag(modRes("all_wooden_mosaics"), Registries.BLOCK)
-                .addTag(TagUtility.fabricTag("planks_that_burn"), Registries.ITEM)
+                .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.ITEM)
                 .addTag(modRes("wooden_mosaic_that_burn"), Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()

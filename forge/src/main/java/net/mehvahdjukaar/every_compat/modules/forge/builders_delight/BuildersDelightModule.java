@@ -47,7 +47,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
+import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
 //SUPPORT: v1.3+
 public class BuildersDelightModule extends SimpleModule {

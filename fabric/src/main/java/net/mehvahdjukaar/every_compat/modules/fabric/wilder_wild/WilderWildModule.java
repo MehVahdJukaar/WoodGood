@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
-import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
+import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.doChildrenExistFor;
+import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
 //SUPPORT: v3.0.7+
 public class WilderWildModule extends SimpleModule {

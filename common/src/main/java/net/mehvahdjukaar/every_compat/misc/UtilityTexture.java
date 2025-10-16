@@ -1,9 +1,8 @@
-package net.mehvahdjukaar.every_compat.common_classes;
+package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
-import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -20,7 +19,7 @@ import java.util.List;
 
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 
-public class TextureUtility {
+public class UtilityTexture {
 
     /**
      * modify the original Path of Texture's ResourceLocation by replacing oldTypeName with new WoodType's name

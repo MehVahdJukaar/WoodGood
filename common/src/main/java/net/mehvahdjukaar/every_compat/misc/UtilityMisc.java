@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.common_classes;
+package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class Utilities {
+public class UtilityMisc {
 
     public static boolean doChildrenExistFor(BlockType blockType, String... blockTypes) {
         for (String type : blockTypes) {

@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.common_classes;
+package net.mehvahdjukaar.every_compat.misc;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class RecipeUtility {
+public class UtilityRecipe {
 
     /**
      * Create Stonecutting Recipe that use tag as an ingredient

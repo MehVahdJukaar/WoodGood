@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.common_classes;
+package net.mehvahdjukaar.every_compat.misc;
 
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class TagUtility {
+public class UtilityTag {
 
     /**
      * Get the namespace:WoodType_logs tag from the wood mods or create a new tag if not available
