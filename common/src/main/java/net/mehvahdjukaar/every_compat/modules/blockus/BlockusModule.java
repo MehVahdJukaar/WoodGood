@@ -10,7 +10,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.common_classes.TagUtility;
+import net.mehvahdjukaar.every_compat.misc.TagUtility;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -33,8 +33,8 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.res;
-import static net.mehvahdjukaar.every_compat.common_classes.Utilities.copyChildrenPropertySafe;
-import static net.mehvahdjukaar.every_compat.common_classes.Utilities.doChildrenExistFor;
+import static net.mehvahdjukaar.every_compat.misc.MiscUtils.copyChildrenPropertySafe;
+import static net.mehvahdjukaar.every_compat.misc.MiscUtils.doChildrenExistFor;
 
 //SUPPORT: v2.9.10+ (FABRIC)
 public class BlockusModule extends SimpleModule {

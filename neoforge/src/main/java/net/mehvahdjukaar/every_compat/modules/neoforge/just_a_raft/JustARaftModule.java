@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
+import static net.mehvahdjukaar.every_compat.misc.TagUtility.getATagOrCreateANew;
 
 //SUPPORT: v7.0.3+
 public class JustARaftModule extends SimpleModule {

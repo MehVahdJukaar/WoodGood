@@ -1,8 +1,12 @@
-package net.mehvahdjukaar.every_compat.common_classes;
+package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -11,7 +15,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class Utilities {
+public class MiscUtils {
 
     public static boolean doChildrenExistFor(BlockType blockType, String... blockTypes) {
         for (String type : blockTypes) {
@@ -58,4 +62,11 @@ public class Utilities {
         else return ((Block) blockType.mainChild()).defaultBlockState();
     }
 
+    //TODO: remove and use ML addBlocks in the event
+    /// Must be called in onModInit(), not onModSetup()
+    public static void simpleAddBlocksToPOI(SimpleEntrySet<WoodType, Block> entrySet, ResourceKey<PoiType> poiType) {
+        RegHelper.addExtraPOIStatesRegistration(event ->
+                entrySet.blocks.values().forEach(block -> event.addBlockToPoi(poiType, block))
+        );
+    }
 }

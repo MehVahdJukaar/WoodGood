@@ -1,9 +1,8 @@
-package net.mehvahdjukaar.every_compat.common_classes;
+package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
-import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -34,6 +33,8 @@ public class TextureUtility {
         return EveryCompat.res(prefix + infix + baseTexturePath.substring(prefix.length()).replace(oldTypeName, blockType.getTypeName()));
     }
 
+    //Should these 2 be here? not sure what they do but they seem highly specialized code for a specific mod. shouldnt they be in that mod's code?
+    //also there is already a TextureGenHelper class with similar use methods
     /**
      * The Log's texture has 2 parts: planks & log_side. This method focus on recolor 1 of 2 parts using the correct
      * palettes and then use the other palettes to recolor the other part.
