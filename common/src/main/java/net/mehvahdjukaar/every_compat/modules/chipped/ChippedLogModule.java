@@ -141,8 +141,6 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("nailed_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTextureM(modRes("block/oak_log/nailed_oak_log"),
-                        EveryCompat.res("block/ch/oak_logs/nailed_oak_log_m"), NAILED_PALETTE)
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -175,8 +173,6 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("reinforced_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTextureM(modRes("block/oak_log/reinforced_oak_log"),
-                        EveryCompat.res("block/ch/oak_logs/reinforced_oak_log_m"), PaletteStrategies.LOG_SIDE_STANDARD)
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -391,18 +387,6 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         if (p.size() < 4) p.increaseUp();
                     }));
 
-    public static final PaletteStrategy NAILED_PALETTE = registerCached((blockType, manager) ->
-            PaletteStrategies.makePaletteFromChild(
-                    blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,
-                    p -> {
-                        if (p.size() > 2) p.reduceUp();
-                        if (p.size() < 5) {
-                            p.increaseUp();
-                            p.increaseUp();
-                            p.increaseUp();
-                        }
-                    }));
-
     public static final PaletteStrategy LOG_SIDE_LIGHT_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
                     blockType, manager, VanillaWoodChildKeys.LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE,
@@ -448,7 +432,6 @@ public class ChippedLogModule extends ChippedAbstractModule {
         String xLogTopPlanksM = "block/ch/oak_logs/x_log_top_planks_m";
 
         //REASON: The generated textures are not correct, so below is the best way to get the correct generated texture
-        //isn't this another bandaid "solution" ? if they arent correct 1: why are they left to be generataed wasting resources and most importantly 2: why are they incorrect in the first place? actual issue should be found and resolved
         executor.accept((manager, sink) -> {
 
             Set<TextureGroup> textures = Set.of(
