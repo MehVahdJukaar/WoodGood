@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
-import com.google.gson.JsonObject;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECPlatformStuff;
@@ -50,9 +49,6 @@ import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
 import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -496,36 +492,51 @@ public class QuarkModule extends SimpleModule {
         });
     }
 
-    // Correcting logs used to craft hedges
-    public void generalHedgeRecipe(LeavesType leavesType, Block block, ResourceSink handler, ResourceManager manager) {
+    // Hedge's recipe has a tag as an ingredient
+    public void createHedgeRecipe(LeavesType leavesType, Block hedge, ResourceSink sink, ResourceManager manager) {
 
-        ResourceLocation recipeLoc = modRes("recipes/building/crafting/oak_hedge.json");
+        String recipe = """
+                {
+                    "type": "minecraft:crafting_shaped",
+                    "pattern": [
+                        "L",
+                        "W"
+                    ],
+                    "key": {
+                        "L": {
+                            "item": "[LEAVES]"
+                        },
+                        "W": {
+                            "tag": "[TAG]"
+                        }
+                    },
+                    "result": {
+                        "item": "[HEDGE]",
+                        "count": 2
+                    },
+                    "conditions": [
+                        {
+                            "type": "quark:flag",
+                            "flag": "hedges"
+                        }
+                    ]
+                }\s
+                """;
 
-        try (InputStream recipeStream = manager.getResource(recipeLoc)
-                .orElseThrow(() -> new FileNotFoundException("Failed to open recipe @ " + recipeLoc)).open()) {
+        WoodType woodType = leavesType.getAssociatedWoodType();
+        if (Objects.nonNull(woodType)) { //why is this here? we already checked all leaves have an associated wood in hedge construction
+            String newTag = getATagOrCreateANew("log", "cap", woodType, sink, manager).toString();
 
-            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
-            JsonObject underKey = recipe.getAsJsonObject("key");
-            JsonObject underResult = recipe.getAsJsonObject("result");
-
-            // Editing JSON
-            // Leaves
-            underKey.getAsJsonObject("L")
-                    .addProperty("item", Utils.getID(leavesType.leaves).toString());
-            // WoodTypes
-            underKey.getAsJsonObject("W").addProperty("tag",
-                    getATagOrCreateANew("logs", "caps", Objects.requireNonNull(leavesType.getAssociatedWoodType()), handler, manager).toString());
-            // Hedges
-            underResult.addProperty("item", Utils.getID(block).toString());
+            String newRecipe = recipe.replace("[LEAVES]", Utils.getID(leavesType.leaves).toString())
+                    .replace("[TAG]", newTag)
+                    .replace("[HEDGE]", Utils.getID(hedge).toString());
 
             // Adding the finished recipe to ResourceLocation
-            String path = this.shortenedId() + "/" + leavesType.getNamespace() + "/";
-            handler.addJson(EveryCompat.res(path + leavesType.getTypeName() + "_hedge"), recipe,
+            sink.addBytes(EveryCompat.res(leavesType.createPathWith(shortenedId(), "hedge")), newRecipe.getBytes(),
                     ResType.RECIPES);
-
-        } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed to open the recipe file @ {} : {}", recipeLoc, e);
         }
+        else
+            EveryCompat.LOGGER.error("Hedge's LeavesType do not have associated WoodType for: {}. HOW??", leavesType.getId().toString());
     }
 
 }
