@@ -59,14 +59,13 @@ public abstract class CompatModule {
                     this.registerBlocks(t, r);
                 }
             }, this);
-
         }, BuiltInRegistries.BLOCK);
 
         BlockSetAPI.addDynamicRegistration(myNamespace, (r) -> {
             EveryCompat.executeOrFail(() -> {
                 this.registerItems((resourceLocation, item) -> {
-                    EveryCompat.addItemToModuleMapping(item, this);
                     r.register(resourceLocation, item);
+                    EveryCompat.addItemToModuleMapping(item, this);
                 });
             }, this);
         }, BuiltInRegistries.ITEM);

@@ -202,18 +202,20 @@ public abstract class EveryCompat {
     }
 
     public static synchronized void addModule(CompatModule module) {
-        ACTIVE_MODULES.put(module.getModId(), module);
-        DEPENDENCIES.add(module.getModId());
-        DEPENDENCIES.addAll(module.getAlreadySupportedMods());
-        ADDON_IDS.add(module.getMyNamespace());
+        if (!MODULES_BLACKLIST.get().contains(module.getModId())) {
+            ACTIVE_MODULES.put(module.getModId(), module);
+            DEPENDENCIES.add(module.getModId());
+            DEPENDENCIES.addAll(module.getAlreadySupportedMods());
+            ADDON_IDS.add(module.getMyNamespace());
 
-        //this will initialize the config. should be fine if loaded from another mod i hope
-        ServerDynamicResourcesHandler.getInstance()
-                .addSupportedNamespaces(module.getServerResourcesNamespaces());
+            //this will initialize the config. should be fine if loaded from another mod i hope
+            ServerDynamicResourcesHandler.getInstance()
+                    .addSupportedNamespaces(module.getServerResourcesNamespaces());
 
-        if (PlatHelper.getPhysicalSide().isClient()) {
-            ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
-                    module.getClientResourcesNamespaces());
+            if (PlatHelper.getPhysicalSide().isClient()) {
+                ClientDynamicResourcesHandler.getInstance().addSupportedNamespaces(
+                        module.getClientResourcesNamespaces());
+            }
         }
     }
 
