@@ -33,7 +33,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-// SUPPORT: FABRIC-v2.2.7+ | NEOFORGE-v1.2.6+
+// SUPPORT: FABRIC-v3.2.0+ | NEOFORGE-v1.2.9+
 public class FarmersDelightModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> cabinets;
@@ -115,11 +115,11 @@ public class FarmersDelightModule extends SimpleModule {
         String recipeLocation = modRes("cutting/oak_" + recipeType).toString();
         Recipe<?> recipe = RPUtils.readRecipe(manager, recipeLocation);
 
-        if (recipe instanceof CuttingBoardRecipe cr) {
+        if (recipe instanceof CuttingBoardRecipe crRecipe) {
 
             String path = this.shortenedId() + "/cutting/" + targetType.getAppendableId() + "_" + recipeType;
 
-            NonNullList<ChanceResult> oldResult = cr.getRollableResults();
+            NonNullList<ChanceResult> oldResult = crRecipe.getRollableResults();
             NonNullList<ChanceResult> newResult = NonNullList.withSize(oldResult.size(), ChanceResult.EMPTY);
             for (int i = 0; i < oldResult.size(); i++) {
                 ChanceResult r = oldResult.get(i);
@@ -134,8 +134,8 @@ public class FarmersDelightModule extends SimpleModule {
                 }
                 newResult.set(i, r);
             }
-            CuttingBoardRecipe newRec = new CuttingBoardRecipe(cr.getGroup(),
-                    Ingredient.of(input), cr.getTool(), newResult, cr.getSoundEvent());
+            CuttingBoardRecipe newRec = new CuttingBoardRecipe(modRes("cutting").toString(),
+                    Ingredient.of(input), crRecipe.getTool(), newResult, crRecipe.getSoundEvent());
 
             ResourceLocation recipePath = EveryCompat.res(path);
             sink.addRecipe(new RecipeHolder<>(recipePath, newRec));
