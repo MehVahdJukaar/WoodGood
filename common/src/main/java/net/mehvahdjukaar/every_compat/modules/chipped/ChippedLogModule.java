@@ -22,9 +22,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.LOG_SIDE_REMOVE_2_DARKEST;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
-import static net.mehvahdjukaar.every_compat.common_classes.TextureUtility.Quartet;
-import static net.mehvahdjukaar.every_compat.common_classes.TextureUtility.generateLogTexture;
+import static net.mehvahdjukaar.every_compat.common_classes.TextureUtility.*;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LOG;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v
@@ -130,7 +131,7 @@ public class ChippedLogModule extends ChippedAbstractModule {
                         getModBlock("mixed_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
                 )
-                .addTexture(modRes("block/oak_log/mixed_oak_log"), PaletteStrategies.LOG_SIDE_REMOVE_2_DARKEST)
+                .addTexture(modRes("block/oak_log/mixed_oak_log"), LOG_SIDE_REMOVE_2_DARKEST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
@@ -440,8 +441,8 @@ public class ChippedLogModule extends ChippedAbstractModule {
         String cLogTopM = "block/common_log_top_outer_m";
         String cLogTopPlanksM = "block/common_log_top_inner_m";
 
-        String xCutLogM = "block/ch/oak_logs/x_cut_log_m";
-        String xCutLogPlanksM = "block/ch/oak_logs/x_cut_log_planks_m";
+        String xxLogM = "block/ch/oak_logs/x_x_log_m";
+        String xxLogPlanksM = "block/ch/oak_logs/x_x_log_planks_m";
 
         String xLogTopM = "block/ch/oak_logs/x_log_top_m";
         String xLogTopPlanksM = "block/ch/oak_logs/x_log_top_planks_m";
@@ -450,56 +451,80 @@ public class ChippedLogModule extends ChippedAbstractModule {
         executor.accept((manager, sink) -> {
 
             Set<Quartet<String, String, String, PaletteStrategy>> textures = Set.of(
-                    Quartet.of("planked_oak_log", "block/ch/oak_logs/planked_oak_log_m",
-                            "block/ch/oak_logs/planked_oak_log_planks_m",
-                            LOG_SIDE_LIGHT_PALETTE),
-                    Quartet.of("planked_oak_log_top", cLogTopM, cLogTopPlanksM,
-                            LOG_SIDE_LIGHT_PALETTE),
+                    // planked_oak_log
+                    Quartet.of("planked_oak_log", xxLogM, xxLogPlanksM, LOG_SIDE_LIGHT_PALETTE),
+                    Quartet.of("planked_oak_log_top", cLogTopM, cLogTopPlanksM, LOG_SIDE_LIGHT_PALETTE),
 
-                    Quartet.of("nailed_oak_log_top", cLogTopM, cLogTopPlanksM, NAILED_PALETTE),
+                    // nailed_oak_log
+                    Quartet.of("nailed_oak_log", "block/ch/oak_logs/nailed_oak_log_m",
+                            "", null),
 
+                    // overgrown_oak_log_top
                     Quartet.of("overgrown_oak_log_top", cLogTopM,
                             "block/ch/oak_logs/overgrown_oak_log_top_planks_m",
                             LOG_SIDE_LIGHT_PALETTE),
 
-                    Quartet.of("reinforced_oak_log_top", cLogTopM, cLogTopPlanksM,
-                            LOG_SIDE_LIGHT_PALETTE),
+                    // reinforced_oak_log
+                    Quartet.of("reinforced_oak_log", "block/ch/oak_logs/reinforced_oak_log_m",
+                            "", null),
 
+                    // bundled_oak_log
                     Quartet.of("bundled_oak_log", "block/ch/oak_logs/bundled_log_m",
                             "block/ch/oak_logs/bundled_log_planks_m",
-                            PaletteStrategies.LOG_SIDE_STANDARD),
+                            LOG_SIDE_REMOVE_2_DARKEST),
                     Quartet.of("bundled_oak_log_top", xLogTopM, xLogTopPlanksM,
-                            PaletteStrategies.LOG_SIDE_STANDARD),
+                            PaletteStrategies.removeDarkestBy(2, LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)),
 
-                    Quartet.of("center_cut_oak_log", xCutLogPlanksM, xCutLogM,
+                    // center_cut_oak_log
+                    Quartet.of("center_cut_oak_log", xxLogPlanksM, xxLogM,
                             LOG_SIDE_LIGHT_PALETTE),
-                    Quartet.of("center_cut_oak_log_top", cLogTopM, cLogTopPlanksM,
+                    Quartet.of("center_cut_oak_log_top", "block/ch/oak_logs/center_cut_log_top_m",
+                            "block/ch/oak_logs/center_cut_log_top_planks_m",
                             LOG_SIDE_LIGHT_PALETTE),
 
+                    // damaged_oak_log
                     Quartet.of("damaged_oak_log", "block/ch/oak_logs/damaged_oak_log_m",
                             "block/ch/oak_logs/damaged_oak_log_planks_m", DAMAGED_PALETTE),
-                    Quartet.of("damaged_oak_log_top", cLogTopM, cLogTopPlanksM, DAMAGED_PALETTE),
 
-                    Quartet.of("edge_cut_oak_log", xCutLogM, xCutLogPlanksM,
+                    // edge_cut_oak_log
+                    Quartet.of("edge_cut_oak_log", xxLogM, xxLogPlanksM,
                             LOG_SIDE_LIGHT_PALETTE),
-                    Quartet.of("edge_cut_oak_log_top", cLogTopM, cLogTopPlanksM,
-                            LOG_SIDE_LIGHT_PALETTE),
-
-                    Quartet.of("firewood_oak_log_top", xLogTopM, xLogTopPlanksM,
+                    Quartet.of("edge_cut_oak_log_top", "block/ch/oak_logs/edge_cut_log_top_m",
+                            "block/ch/oak_logs/edge_cut_log_top_planks_m",
                             LOG_SIDE_LIGHT_PALETTE),
 
-                    Quartet.of("mixed_oak_log_top", xLogTopM, xLogTopPlanksM,
-                            PaletteStrategies.LOG_SIDE_REMOVE_2_DARKEST)
+                    // firewood_oak_log_top
+                    Quartet.of("firewood_oak_log_top", xLogTopM, xLogTopPlanksM, LOG_SIDE_LIGHT_PALETTE),
+
+                    // mixed_oak_log_top
+                    Quartet.of("mixed_oak_log_top", xLogTopM, xLogTopPlanksM, LOG_SIDE_REMOVE_2_DARKEST)
             );
 
-            textures.forEach(currentTextures ->
+            textures.forEach(currentTextures -> {
+                if (currentTextures.logPaletteStrategy() == null)
+                    applyLogAndGenerateTexture(
+                            modRes(currentTextures.baseTexture()).withPrefix("block/oak_log/"),
+                            EveryCompat.res(currentTextures.logMask()),
+                            shortenedId(), "oak", sink, manager
+                    );
+                //REGEX: excluded edge_cut_oak_log_top & center_cut_oak_log_top
+                else if (currentTextures.baseTexture().matches("^(?!\\w+cut_)\\w+_top$")
+                        || currentTextures.baseTexture().contains("bundled_")
+                )
                     generateLogTexture(
                             modRes(currentTextures.baseTexture()).withPrefix("block/oak_log/"),
                             EveryCompat.res(currentTextures.logMask()), EveryCompat.res(currentTextures.planksMask()),
-                            shortenedId(), "oak", currentTextures.paletteStrategy(),
+                            shortenedId(), "oak", currentTextures.logPaletteStrategy(),
                             sink, manager
-                    )
-            );
+                    );
+                else
+                    applyLogAndswapPlanksTexture(
+                            modRes(currentTextures.baseTexture()).withPrefix("block/oak_log/"),
+                            EveryCompat.res(currentTextures.logMask()), EveryCompat.res(currentTextures.planksMask()),
+                            shortenedId(), "oak",
+                            sink, manager
+                    );
+            });
 
         });
     }
