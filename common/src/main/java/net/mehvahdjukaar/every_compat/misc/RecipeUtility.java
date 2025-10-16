@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.common_classes;
+package net.mehvahdjukaar.every_compat.misc;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

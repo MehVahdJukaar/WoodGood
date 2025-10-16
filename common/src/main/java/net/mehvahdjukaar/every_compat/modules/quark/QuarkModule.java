@@ -56,7 +56,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.getATagOrCreateANew;
+import static net.mehvahdjukaar.every_compat.misc.TagUtility.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //SUPPORT: v4.0-435+
@@ -264,7 +264,7 @@ public class QuarkModule extends SimpleModule {
         hedges = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
                         HedgesModule.class,
                         getModBlock("oak_hedge"),
-                        () -> LeavesTypeRegistry.OAK_TYPE,
+                        () -> VanillaLeavesTypes.OAK,
                         leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
                 )
                 .requiresChildren(LOG) // Reason: RECIPES
@@ -493,7 +493,7 @@ public class QuarkModule extends SimpleModule {
     }
 
     // Hedge's recipe has a tag as an ingredient
-    public void createHedgeRecipe(LeavesType leavesType, Block hedge, ResourceSink sink, ResourceManager manager) {
+    public void generalHedgeRecipe(LeavesType leavesType, Block hedge, ResourceSink sink, ResourceManager manager) {
 
         String recipe = """
                 {

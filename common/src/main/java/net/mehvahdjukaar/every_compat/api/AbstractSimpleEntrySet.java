@@ -41,7 +41,7 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.addTagToAllBlocks;
+import static net.mehvahdjukaar.every_compat.misc.TagUtility.addTagToAllBlocks;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
 //@SuppressWarnings({"unused"})

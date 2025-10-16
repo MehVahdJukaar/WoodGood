@@ -2,52 +2,21 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.tynoxs.buildersdelight.content.block.custom.BlockChair;
-import com.tynoxs.buildersdelight.content.block.custom.BlockGlassBlock;
-import com.tynoxs.buildersdelight.content.block.custom.BlockSmallTable;
-import com.tynoxs.buildersdelight.content.block.custom.BlockStool;
-import com.tynoxs.buildersdelight.content.block.wood.BlockFlammable;
-import com.tynoxs.buildersdelight.content.block.wood.SlabFlammable;
-import com.tynoxs.buildersdelight.content.block.wood.StairFlammable;
-import com.tynoxs.buildersdelight.content.init.BdBlocks;
-import com.tynoxs.buildersdelight.content.init.BdDecoration;
-import com.tynoxs.buildersdelight.content.init.BdTabs;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
-import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.IronBarsBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.neoforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.createAndAddCustomTags;
+import static net.mehvahdjukaar.every_compat.misc.TagUtility.createAndAddCustomTags;
 
 //SUPPORT: v1.3+
 public class BuildersDelightModule extends SimpleModule {

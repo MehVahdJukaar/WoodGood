@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.common_classes;
+package net.mehvahdjukaar.every_compat.misc;
 
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
