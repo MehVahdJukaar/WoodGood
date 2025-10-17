@@ -20,6 +20,23 @@
 
 </div>
 
+### UPDATED:
+- **Farmer's Delight** (C): Fixed the cutting recipe not being generated - [#1038](https://github.com/MehVahdJukaar/WoodGood/issues/1038)
+- **Quark** (C): Ported the HedgeRecipe Update from 1.20.1 and it's no longer brittle code.
+- **Chipped** (C): Improved textures & Corrected a few incorrect textures for logs
+
+### DEV:
+- **Every Compat** (C): 
+  - Utility Classes have been moved to net.mehvahdjukaar.every_compat.misc
+  - `TextureUtility` are renamed to `UtilityTexture` 
+  - `TagUtility` are renamed to `UtilityTag` 
+  - `RecipeUtility` are renamed to `UtilityRecipe` 
+  - `Utility` are renamed to `UtilityMisc`
+
+---
+
+## v2.11.9
+
 ### UPDATED: 
 - **Every Compat** (C): Fixed all Supported mods' missing model files in **Stone Zone** - [#158](https://github.com/MehVahdJukaar/StoneZone/issues/158)
 - **LANG** (en_us): Corrected the LANG for sniffed_out's vessel to use "stem" instead of "log" with hollow from **Quark** or **The Twilight Forest**
