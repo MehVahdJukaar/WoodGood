@@ -24,7 +24,7 @@ import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.LOG_SIDE_REMOVE_2_DARKEST;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
-import static net.mehvahdjukaar.every_compat.misc.TextureUtility.*;
+import static net.mehvahdjukaar.every_compat.misc.UtilityTexture.*;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LOG;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 

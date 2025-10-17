@@ -19,7 +19,7 @@ import java.util.List;
 
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 
-public class TextureUtility {
+public class UtilityTexture {
 
     /**
      * modify the original Path of Texture's ResourceLocation by replacing oldTypeName with new WoodType's name

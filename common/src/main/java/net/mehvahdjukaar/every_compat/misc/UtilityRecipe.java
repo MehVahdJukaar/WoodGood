@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class RecipeUtility {
+public class UtilityRecipe {
 
     /**
      * Create Stonecutting Recipe that use tag as an ingredient

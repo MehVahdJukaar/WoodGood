@@ -12,7 +12,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
-import net.mehvahdjukaar.every_compat.misc.TagUtility;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -57,7 +57,7 @@ public class FunctionalStorageModule extends SimpleModule {
                         .forEntityOrGui()
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(TagUtility.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
+                .addTag(UtilityTag.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
                 .addTag(modRes("drawer_1x1"), Registries.ITEM)
                 .setTabKey(tab)
@@ -76,7 +76,7 @@ public class FunctionalStorageModule extends SimpleModule {
                         .forEntityOrGui()
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(TagUtility.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
+                .addTag(UtilityTag.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
                 .addTag(modRes("drawer_1x2"), Registries.ITEM)
                 .setTabKey(tab)
@@ -95,7 +95,7 @@ public class FunctionalStorageModule extends SimpleModule {
                         .forEntityOrGui()
                         .keepNamespace())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(TagUtility.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
+                .addTag(UtilityTag.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
                 .addTag(modRes("drawer_2x2"), Registries.ITEM)
                 .setTabKey(tab)

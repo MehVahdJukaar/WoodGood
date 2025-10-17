@@ -3,7 +3,8 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
@@ -11,12 +12,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
 
 import java.io.IOException;
 import java.io.InputStream;
-
-import static net.mehvahdjukaar.every_compat.misc.TagUtility.createAndAddCustomTags;
 
 //SUPPORT: v1.3+
 public class BuildersDelightModule extends SimpleModule {

@@ -40,7 +40,7 @@ import java.io.InputStream;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
-import static net.mehvahdjukaar.every_compat.misc.TagUtility.getATagOrCreateANew;
+import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 
 //SUPPORT: v1.0.0+
 //NOTE: The Project ID is 1085950

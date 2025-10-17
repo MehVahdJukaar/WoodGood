@@ -4,7 +4,7 @@ import io.github.lieonlion.lolmct.block.MoreCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.TagUtility;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
@@ -32,7 +32,7 @@ public class MoreCraftingTablesModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(TagUtility.fabricTag("workbench"), Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.fabricTag("workbench"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:crafting_tables"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
                 .setTabKey(tab)
