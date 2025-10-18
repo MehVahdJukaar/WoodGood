@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class MiscUtils {
+public class UtilityMisc {
 
     public static boolean doChildrenExistFor(BlockType blockType, String... blockTypes) {
         for (String type : blockTypes) {

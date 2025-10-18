@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-import static net.mehvahdjukaar.every_compat.misc.MiscUtils.simpleAddBlocksToPOI;
+import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.simpleAddBlocksToPOI;
 
 //SUPPORT: v3.0.9+
 public class FriendsAndFoesModule extends SimpleModule {

@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.misc.TagUtility.createAndAddCustomTags;
+import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
 public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> branches;

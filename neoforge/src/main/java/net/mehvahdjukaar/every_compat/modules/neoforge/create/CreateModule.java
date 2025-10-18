@@ -7,7 +7,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.TagUtility;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -28,7 +28,7 @@ public class CreateModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> windowPanes;
 
     public CreateModule(String modId) {
-        super(modId, "c");
+        super(modId, "c", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
@@ -38,10 +38,10 @@ public class CreateModule extends SimpleModule {
                 .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/c/palettes/oak_window_m"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/c/palettes/oak_window_connected_m"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
-                .addTag(TagUtility.GLASS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(windows);
 
@@ -50,10 +50,10 @@ public class CreateModule extends SimpleModule {
                         s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE))
                 )
                 .requiresFromMap(windows.blocks) //REASON: textures
-                .addTag(TagUtility.GLASS_PANE_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentDrop() //REASON: ensure blocks' dropping when Diagonal Fences is installed
                 .build();
         this.addEntry(windowPanes);

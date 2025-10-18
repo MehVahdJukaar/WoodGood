@@ -7,6 +7,26 @@
   "gui.everycomp.error_screen.title": "Every Compat encountered an Error",
   "gui.everycomp.error_screen.message": "The Every Compat Modules from the following mods [%s] had errors while loading.\nThis usually means that the respective mods might have recently updated with breaking changes, requiring a future Every Compat update, or that one of the two mods is outdated.\nThe game can't proceed but you can try to downgrade one of the two or wait for an update.",
 
+  "everycomp.configuration.general": "General",
+  "everycomp.configuration.server_assets_generation_mode": "Assets Generation Mode",
+  "everycomp.configuration.dynamic_assets_generation_mode": "Assets Generation Mode",
+  "everycomp.configuration.creative_tab": "Creative Tab",
+  "everycomp.configuration.tab_item_search": "Tab Item Search",
+  "everycomp.configuration.mod_version_check_packet": "Mod Version Check Packet",
+  "everycomp.configuration.debug_packet": "Debug Packet",
+  "everycomp.configuration.tooltips": "Tooltips",
+  "everycomp.configuration.mod_origin_enabled": "Mod Origin Enabled",
+  "everycomp.configuration.block_type_enabled": "Block Type Enabled",
+  "everycomp.configuration.show_on_advanced_tooltips": "Show On Advanced Tooltips",
+  "everycomp.configuration.types": "Types",
+  "everycomp.configuration.entries": "Entries",
+  "everycomp.configuration.blacklist": "Blacklist",
+  "everycomp.configuration.entryset": "Entryset",
+  "everycomp.configuration.module": "Module",
+  "everycomp.configuration.other": "Other",
+  "everycomp.configuration.include_all_wood_modules": "Include All Wood Modules",
+
+
   "container.everycomp.chest.name": "%s Chest",
 
 
