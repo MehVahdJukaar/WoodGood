@@ -49,7 +49,7 @@ public class UtilityTexture {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (isKnownVanillaWood(woodType)) continue;
 
-                String newPath = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
+                ResourceLocation newPath = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
 
                 // Adding to the resource
                 sink.addTextureIfNotPresent(manager, newPath, () -> {
