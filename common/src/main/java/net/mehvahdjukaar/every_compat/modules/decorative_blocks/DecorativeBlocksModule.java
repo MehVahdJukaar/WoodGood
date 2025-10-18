@@ -1,9 +1,12 @@
 package net.mehvahdjukaar.every_compat.modules.decorative_blocks;
 
-import lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes;
-import lilypuree.decorative_blocks.core.DBBlocks;
+import lilypuree.decorative_blocks.blocks.BeamBlock;
+import lilypuree.decorative_blocks.blocks.PalisadeBlock;
+import lilypuree.decorative_blocks.blocks.SeatBlock;
+import lilypuree.decorative_blocks.blocks.SupportBlock;
 import lilypuree.decorative_blocks.items.SeatItem;
 import lilypuree.decorative_blocks.items.SupportItem;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -17,29 +20,35 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-//SUPPORT: v4.1.3+
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
+
+//NAME: Decorative Blocks Reborn
+//SUPPORT: v6.0.1+
 public class DecorativeBlocksModule extends SimpleModule {
 
-    public final Map<WoodType, DBWoodType> wtConversion = new HashMap<>();
+    public final Map<WoodType, net.minecraft.world.level.block.state.properties.WoodType> wtConversion = new HashMap<>();
     public final SimpleEntrySet<WoodType, Block> beams;
     public final SimpleEntrySet<WoodType, Block> palisades;
     public final SimpleEntrySet<WoodType, Block> supports;
     public final SimpleEntrySet<WoodType, Block> seats;
 
     public DecorativeBlocksModule(String modId) {
-        super(modId, "db");
+        super(modId, "db", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("general");
 
         beams = SimpleEntrySet.builder(WoodType.class, "beam",
                         getModBlock("oak_beam"), () -> VanillaWoodTypes.OAK,
-                        w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.BEAM)
+                        w -> new BeamBlock(wtConversion.get(w),
+                                copyStandardProperties(w, 1.2F, 0)
+                        )
                 )
-                .requiresChildren("stripped_log") //REASON: recipes
+                .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
                 .addTag(BlockTags.LOGS, Registries.BLOCK)
@@ -62,7 +71,9 @@ public class DecorativeBlocksModule extends SimpleModule {
 
         palisades = SimpleEntrySet.builder(WoodType.class, "palisade",
                         getModBlock("oak_palisade"), () -> VanillaWoodTypes.OAK,
-                        w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.PALISADE)
+                        w -> new PalisadeBlock(wtConversion.get(w),
+                                copyStandardProperties(w, 2.0F, 4.0F)
+                        )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
@@ -83,7 +94,9 @@ public class DecorativeBlocksModule extends SimpleModule {
 
         supports = SimpleEntrySet.builder(WoodType.class, "support",
                         getModBlock("oak_support"), () -> VanillaWoodTypes.OAK,
-                        w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.SUPPORT)
+                        w -> new SupportBlock(wtConversion.get(w),
+                                copyStandardProperties(w, 1.2F, 0)
+                        )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("supports"), Registries.BLOCK)
@@ -103,28 +116,41 @@ public class DecorativeBlocksModule extends SimpleModule {
 
         seats = SimpleEntrySet.builder(WoodType.class, "seat",
                         getModBlock("oak_seat"), () -> VanillaWoodTypes.OAK,
-                        w -> DBBlocks.createDecorativeBlock(wtConversion.get(w), WoodDecorativeBlockTypes.SEAT)
+                        w -> new SeatBlock(wtConversion.get(w),
+                                copyStandardProperties(w, 1.2F, 0)
+                        )
                 )
-                .requiresChildren("fence", "slab") //REASON: recipes
+                .requiresChildren(FENCE, SLAB) //REASON: recipes
+                .addTexture(TextureInfo.of(modRes("block/oak_seat")).setPalette(PaletteStrategies.SIGN_LIKE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("seats_that_burn"), Registries.BLOCK)
                 .addTag(modRes("seats"), Registries.BLOCK)
                 .addTag(modRes("seats"), Registries.ITEM)
                 .defaultRecipe()
-                .addCustomItem((w, b, p) -> new SeatItem(b, p))
                 .setTabKey(tab)
-                .addTexture(TextureInfo.of(modRes("block/oak_seat"))
-                        .setPalette(PaletteStrategies.SIGN_LIKE))
+                .addCustomItem((w, b, p) -> new SeatItem(b, p))
                 .build();
         this.addEntry(seats);
 
+    }
+
+    public BlockBehaviour.Properties copyStandardProperties(WoodType woodType, float destroyTimeOrStrength, float explosiveResistence) {
+        if (explosiveResistence != 0)
+            return BlockBehaviour.Properties.of().mapColor(woodType.getColor()).sound(woodType.getSound())
+                    .strength(destroyTimeOrStrength, explosiveResistence)
+                    .ignitedByLava();
+        else
+            return BlockBehaviour.Properties.of().mapColor(woodType.getColor()).sound(woodType.getSound())
+                    .strength(destroyTimeOrStrength)
+                    .ignitedByLava();
     }
 
     @Override
     public <T extends BlockType> void registerBlocks(Class<T> typeClass,
                                                      Registrator<Block> registry, Collection<T> types) {
         if (typeClass == WoodType.class) {
-            types.forEach(w -> wtConversion.put((WoodType) w, new DBWoodType((WoodType) w)));
+            types.forEach(w -> wtConversion.put((WoodType) w,
+                    new net.minecraft.world.level.block.state.properties.WoodType(w.getTypeName(), ((WoodType) w).toVanillaOrOak().setType())));
         }
         super.registerBlocks(typeClass, registry, types);
     }
