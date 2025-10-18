@@ -16,7 +16,7 @@ public class ECConfigSelectScreen extends CustomConfigSelectScreen {
     public ECConfigSelectScreen(Screen parent) {
         super(EveryCompat.MOD_ID, ECRegistry.ALL_WOODS.get().getDefaultInstance(),
                 "§7Every Compat Configured", parent,
-                ECConfigScreen::new, ECConfigs.SPEC, ECConfigs.SPEC, ModEntriesConfigs.SPEC);
+                ConfiguredScreen::new, ECConfigs.SPEC, ECConfigs.SPEC, ModEntriesConfigs.SPEC);
     }
 
 

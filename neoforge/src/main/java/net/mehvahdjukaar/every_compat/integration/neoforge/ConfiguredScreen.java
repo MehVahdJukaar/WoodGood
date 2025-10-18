@@ -16,7 +16,7 @@ import java.util.Map;
 //fancy config screen, extending configured's CustomConfigScreen
 
 //credits to MrCrayfish's Configured Mod
-public class ECConfigScreen extends CustomConfigScreen {
+public class ConfiguredScreen extends CustomConfigScreen {
 
     private static final Map<String, ItemStack> CUSTOM_ICONS = new HashMap<>();
 
@@ -32,13 +32,13 @@ public class ECConfigScreen extends CustomConfigScreen {
         CUSTOM_ICONS.put(s, i.asItem().getDefaultInstance());
     }
 
-    public ECConfigScreen(CustomConfigSelectScreen parent, IModConfig config) {
+    public ConfiguredScreen(CustomConfigSelectScreen parent, IModConfig config) {
         super(parent, config);
         this.icons.putAll(CUSTOM_ICONS);
     }
 
-    public ECConfigScreen(String modId, ItemStack mainIcon, Component title,
-                          Screen parent, IModConfig config) {
+    public ConfiguredScreen(String modId, ItemStack mainIcon, Component title,
+                            Screen parent, IModConfig config) {
         super(modId, mainIcon, title, parent, config);
         this.icons.putAll(CUSTOM_ICONS);
     }
@@ -49,7 +49,7 @@ public class ECConfigScreen extends CustomConfigScreen {
 
     @Override
     public Factory getSubScreenFactory() {
-        return ECConfigScreen::new;
+        return ConfiguredScreen::new;
     }
 
 }
