@@ -13,6 +13,8 @@ import net.minecraft.world.level.ItemLike;
 import java.util.HashMap;
 import java.util.Map;
 
+//fancy config screen, extending configured's CustomConfigScreen
+
 //credits to MrCrayfish's Configured Mod
 public class ECConfigScreen extends CustomConfigScreen {
 
@@ -20,9 +22,15 @@ public class ECConfigScreen extends CustomConfigScreen {
 
     static {
         //TODO: here is a list of config category (what gets done with a .push, to icons)
-        addIcon("blocks", Items.OXIDIZED_COPPER);
+        addIcon("general", Items.BOOKSHELF);
+        addIcon("tooltips", Items.NAME_TAG);
+        addIcon("types", Items.OAK_PLANKS);
+        addIcon("entries", Items.OAK_FENCE);
     }
 
+    private static void addIcon(String s, ItemLike i) {
+        CUSTOM_ICONS.put(s, i.asItem().getDefaultInstance());
+    }
 
     public ECConfigScreen(CustomConfigSelectScreen parent, IModConfig config) {
         super(parent, config);
@@ -33,10 +41,6 @@ public class ECConfigScreen extends CustomConfigScreen {
                           Screen parent, IModConfig config) {
         super(modId, mainIcon, title, parent, config);
         this.icons.putAll(CUSTOM_ICONS);
-    }
-
-    private static void addIcon(String s, ItemLike i) {
-        CUSTOM_ICONS.put(s, i.asItem().getDefaultInstance());
     }
 
     @Override
