@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modmenu;
+package net.mehvahdjukaar.every_compat.integration.fabric;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
@@ -13,8 +13,6 @@ public class ModMenuCompat implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return p -> new FabricConfigListScreen(EveryCompat.MOD_ID, Items.OAK_PLANKS.getDefaultInstance(),
-                Component.literal("§6Every Compat Configs"), ResourceLocation.parse("textures/block/oak_planks.png"),
-                p, ECConfigs.SPEC);
+        return ModConfigSelectScreen::new;
     }
 }

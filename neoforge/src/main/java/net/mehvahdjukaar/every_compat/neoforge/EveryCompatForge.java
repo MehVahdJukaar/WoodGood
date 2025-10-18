@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
+import net.mehvahdjukaar.every_compat.integration.neoforge.ECConfigSelectScreen;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
@@ -47,7 +48,6 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.IModBusEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
@@ -73,6 +73,10 @@ public class EveryCompatForge extends EveryCompatCommon {
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatForgeClient.init();
+
+            if(PlatHelper.isModLoaded("configured")){
+                ECConfigSelectScreen.registerConfigScreen(EveryCompat.MOD_ID, ECConfigSelectScreen::new);
+            }
         }
     }
 

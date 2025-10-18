@@ -12,15 +12,15 @@ import java.util.function.Supplier;
 //loaded after registry
 public class ECConfigs {
 
-    public enum GenMode{
+    public enum GenMode {
         NEVER,
         RUN_ONCE,
         CACHED,
         CACHED_ZIPPED,
         ALWAYS;
 
-        public PackGenerationStrategy pickStrategy(){
-            return   switch (this){
+        public PackGenerationStrategy pickStrategy() {
+            return switch (this) {
                 case NEVER -> PackGenerationStrategy.NO_OP;
                 case RUN_ONCE -> PackGenerationStrategy.runOnce();
                 case CACHED -> PackGenerationStrategy.CACHED;
@@ -76,10 +76,13 @@ public class ECConfigs {
                         - CACHED: Generate the assets on first boot and saves them to a cache folder in .minecraft/dynamic-data-pack-cache. If mods or packs change it will regenerate the cache. If not, subsequent reload won't generate anything and just read the cached ones as a normal pack.
                         - CACHED_ZIPPED: Generate the assets on first boot and saves them to a cache zip file in .minecraft/dynamic-data-pack-cache. If mods or packs change it will regenerate the cache. If not, subsequent reload won't generate anything and just read the cached ones as a normal pack.
                         - ALWAYS: Will always generate the assets & will be stored in memory. No cache is used. Unintuitively, this is often the fastest method as any disk access will be slow. \nTry and see what works best for you.""")
+                .worldReload()
                 .define("server_assets_generation_mode", GenMode.ALWAYS);
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
+                .gameRestart()
                 .define("creative_tab", true);
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")
+                .gameRestart()
                 .define("tab_item_search", true);
         // REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
         //        .define("remap_other_mods", false);

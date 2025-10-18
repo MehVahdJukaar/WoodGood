@@ -35,6 +35,53 @@ public class TextureUtility {
 
     //Should these 2 be here? not sure what they do but they seem highly specialized code for a specific mod. shouldnt they be in that mod's code?
     //also there is already a TextureGenHelper class with similar use methods
+
+    public static void applyLogAndswapPlanksTexture(ResourceLocation baseTextureLoc,
+                                                    ResourceLocation logMaskLoc, ResourceLocation planksMaskLoc,
+                                                    String shortenedId, String oldTypeName,
+                                                    ResourceSink sink, ResourceManager manager) {
+        try (
+                TextureImage mainTexture = TextureImage.open(manager, baseTextureLoc);
+                TextureImage logMask = TextureImage.open(manager, logMaskLoc);
+                TextureImage planksMask = TextureImage.open(manager, planksMaskLoc)
+        ) {
+
+            for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
+                if (isKnownVanillaWood(woodType)) continue;
+
+                String newPath = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
+
+                // Adding to the resource
+                sink.addTextureIfNotPresent(manager, newPath, () -> {
+                    // Recoloring the baseTexture
+                    try (
+                            TextureImage logTexture = TextureImage.open(manager,
+                                    RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                    ) {
+                        var planksPalette = PaletteStrategies.PLANKS_REMOVE_DARKEST.getPaletteAndAnimation(woodType, manager);
+
+                        TextureImage croppedTexture = logTexture.makeCopyWithMetadata(logTexture.getMcMeta());
+                        TextureOps.applyMask(croppedTexture, planksMask);
+
+                        TextureOps.applyOverlay(mainTexture, croppedTexture);
+
+                        /// Targetting planks
+                        Respriter planksResprite = Respriter.masked(mainTexture, logMask);
+
+                        return planksResprite.recolorWithAnimation(planksPalette.palette(), planksPalette.animation());
+
+                    } catch (Exception e) {
+                        EveryCompat.LOGGER.error("Failed to apply overlays & generate texture: {} for {} - {}",
+                                baseTextureLoc, woodType.getId(), e);
+                    }
+                    return mainTexture;
+                });
+            }
+        } catch (Exception e) {
+            EveryCompat.LOGGER.error("Failed to generate texture with logOverlay: ", e);
+        }
+    }
+
     /**
      * The Log's texture has 2 parts: planks & log_side. This method focus on recolor 1 of 2 parts using the correct
      * palettes and then use the other palettes to recolor the other part.
@@ -87,7 +134,7 @@ public class TextureUtility {
     }
 
     /// Apply log's texture over the baseTexture's log parts & swap out the planks' part
-    public static void applyLogAndswapPlanksTexture(ResourceLocation baseTextureLoc,
+    public static void applyLogAndSwapPlanksTexture(ResourceLocation baseTextureLoc,
                                                     ResourceLocation logMaskLoc, ResourceLocation planksMaskLoc,
                                                     String shortenedId, String oldTypeName,
                                                     ResourceSink sink, ResourceManager manager) {
