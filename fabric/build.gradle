@@ -129,6 +129,9 @@ dependencies {
     modRuntimeOnly("curse.maven:jade-324717:5884237") // v15.8.3
 //    modRuntimeOnly("curse.maven:worldedit-225608:5830452") // required loom 1.7.410
 
+    //+ REQUIRED
+    modImplementation("curse.maven:configured-457570:7122913") // v2.6.2
+
 //!! ================================================ DEPENDENCIES ================================================== \\
     //@ IMPORTANT: RLM - "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
     //@ IMPORTANT: DNU - "DO NOT USE" the modRunTimeOnly because it can cause issues in production
