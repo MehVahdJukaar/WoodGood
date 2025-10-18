@@ -28,7 +28,7 @@ public class CreateModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> windowPanes;
 
     public CreateModule(String modId) {
-        super(modId, "c");
+        super(modId, "c", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
@@ -41,7 +41,7 @@ public class CreateModule extends SimpleModule {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(windows);
 
@@ -53,7 +53,7 @@ public class CreateModule extends SimpleModule {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
-                .setRenderType(RenderLayer.TRANSLUCENT)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentDrop() //REASON: ensure blocks' dropping when Diagonal Fences is installed
                 .build();
         this.addEntry(windowPanes);
