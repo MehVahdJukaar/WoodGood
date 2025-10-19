@@ -34,6 +34,7 @@ dependencies {
     }
 //!! ============================================= DEPENDENCIES ========================================================
     //+ REQUIRED - The modules access libaries from below
+//    modCompileOnly("curse.maven:configured-457570:7122913") // v2.6.2 - NOT ADDED YET
     modCompileOnly("curse.maven:framework-549225:5911983") // v0.9.4 | +Refurbished-Furniture, Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:resourceful-lib-570073:5659872") // v2.1.29
     modCompileOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14
