@@ -20,6 +20,18 @@
 
 </div>
 
+### UPDATED: 
+- **Every Compat** (C): Updated to support Configured - [#1082](https://github.com/MehVahdJukaar/WoodGood/issues/1082) 
+- **Decorative Blocks** (C): Updated to support **Decorative Blocks Reborn v6.0.1+** - [#1080](https://github.com/MehVahdJukaar/WoodGood/issues/1080)
+- **Create** (NF): Changed the renderType of windows & window_panes to CUTOUT_MIPPED
+
+### ADDED:
+- **LANG** (en_us): missing LANG for configuration - [#1082](https://github.com/MehVahdJukaar/WoodGood/issues/1082)
+
+---
+
+## vv.11.10
+
 ### UPDATED:
 - **Farmer's Delight** (C): Fixed the cutting recipe not being generated - [#1038](https://github.com/MehVahdJukaar/WoodGood/issues/1038)
 - **Quark** (C): Ported the HedgeRecipe Update from 1.20.1 and it's no longer brittle code.
