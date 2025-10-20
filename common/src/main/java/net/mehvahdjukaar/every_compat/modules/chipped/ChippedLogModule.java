@@ -22,8 +22,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.LOG_SIDE_REMOVE_2_DARKEST;
-import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.*;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTexture.*;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LOG;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
@@ -443,6 +442,9 @@ public class ChippedLogModule extends ChippedAbstractModule {
                     // nailed_oak_log
                     TextureGroup.of("nailed_oak_log", "block/ch/oak_logs/nailed_oak_log_m",
                             "", null),
+                    TextureGroup.of("nailed_oak_log_top", "block/ch/oak_logs/edge_cut_log_top_m",
+                            "block/ch/oak_logs/center_cut_log_top_m",
+                            LOG_SIDE_STANDARD),
 
                     // overgrown_oak_log_top
                     TextureGroup.of("overgrown_oak_log_top", cLogTopM,
@@ -452,6 +454,9 @@ public class ChippedLogModule extends ChippedAbstractModule {
                     // reinforced_oak_log
                     TextureGroup.of("reinforced_oak_log", "block/ch/oak_logs/reinforced_oak_log_m",
                             "", null),
+                    TextureGroup.of("reinforced_oak_log_top", "block/ch/oak_logs/edge_cut_log_top_m",
+                            "block/ch/oak_logs/center_cut_log_top_m",
+                            LOG_SIDE_STANDARD),
 
                     // bundled_oak_log
                     TextureGroup.of("bundled_oak_log", "block/ch/oak_logs/bundled_log_m",
