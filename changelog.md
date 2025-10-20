@@ -21,6 +21,13 @@
 </div>
 
 ### UPDATED: 
+- **Chipped** (C): Added the missing textures for damaged_oak_log, nailed_oak_log, reinforced_oak_log (all top texture) - [#1083](https://github.com/MehVahdJukaar/WoodGood/issues/1083)
+
+---
+
+## v2.11.11
+
+### UPDATED: 
 - **Every Compat** (C): Updated to support Configured - [#1082](https://github.com/MehVahdJukaar/WoodGood/issues/1082) 
 - **Decorative Blocks** (C): Updated to support **Decorative Blocks Reborn v6.0.1+** - [#1080](https://github.com/MehVahdJukaar/WoodGood/issues/1080)
 - **Create** (NF): Changed the renderType of windows & window_panes to CUTOUT_MIPPED
@@ -30,7 +37,7 @@
 
 ---
 
-## vv.11.10
+## v2.11.10
 
 ### UPDATED:
 - **Farmer's Delight** (C): Fixed the cutting recipe not being generated - [#1038](https://github.com/MehVahdJukaar/WoodGood/issues/1038)
