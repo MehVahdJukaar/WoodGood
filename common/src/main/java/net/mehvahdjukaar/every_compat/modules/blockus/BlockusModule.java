@@ -121,7 +121,13 @@ public class BlockusModule extends SimpleModule {
 
         grate = SimpleEntrySet.builder(WoodType.class, "grate",
                         getModBlock("oak_grate"), () -> VanillaWoodTypes.OAK,
-                        w -> new WaterloggedTransparentBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new WaterloggedTransparentBlock(Utils.copyPropertySafe(w.planks)
+                                .noOcclusion()
+                                .isValidSpawn(Blocks::never)
+                                .isRedstoneConductor(Blocks::never)
+                                .isSuffocating(Blocks::never)
+                                .isViewBlocking(Blocks::never)
+                        )
                 )
                 .addTexture(modRes("block/oak_grate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
