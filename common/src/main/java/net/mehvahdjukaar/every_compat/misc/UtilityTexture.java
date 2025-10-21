@@ -14,9 +14,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 
 public class UtilityTexture {
@@ -100,34 +97,30 @@ public class UtilityTexture {
 
                 ResourceLocation newPath = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
 
-                // Adding to the resource
-                sink.addTextureIfNotPresent(manager, newPath, () -> {
-                    // Recoloring the baseTexture
-                    try (
-                            TextureImage logTexture = TextureImage.open(manager,
-                                    RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
-                    ) {
-                        var planksPalette = PaletteStrategies.PLANKS_REMOVE_DARKEST.getPaletteAndAnimation(woodType, manager);
+                // Recoloring the baseTexture
+                try (
+                        TextureImage logTexture = TextureImage.open(manager,
+                                RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                ) {
+                    var planksPalette = PaletteStrategies.PLANKS_REMOVE_DARKEST.getPaletteAndAnimation(woodType, manager);
 
-                        TextureImage croppedTexture = logTexture.makeCopyWithMetadata(logTexture.getMcMeta());
-                        TextureOps.applyMask(croppedTexture, planksMask);
+                    TextureOps.applyMask(logTexture, planksMask);
+                    TextureOps.applyOverlay(mainTexture, logTexture);
 
-                        TextureOps.applyOverlay(mainTexture, croppedTexture);
-
+                    // Adding to the resource
+                    sink.addTextureIfNotPresent(manager, newPath, () -> {
                         /// Targetting planks
                         Respriter planksResprite = Respriter.masked(mainTexture, logMask);
-
                         return planksResprite.recolorWithAnimation(planksPalette.palette(), planksPalette.animation());
+                    });
 
-                    } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to apply overlays & generate texture: {} for {} - {}",
-                                baseTextureLoc, woodType.getId(), e);
-                    }
-                    return mainTexture;
-                });
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("Failed to apply overlays & generate texture: {} for {} - {}",
+                            baseTextureLoc, woodType.getId(), e);
+                }
             }
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed to generate texture with logOverlay: ", e);
+            EveryCompat.LOGGER.error("Failed to generate texture with logOverlay & planks' palettes: ", e);
         }
     }
 
@@ -140,9 +133,6 @@ public class UtilityTexture {
                 TextureImage baseTexture = TextureImage.open(manager, baseTextureLoc);
                 TextureImage mask = TextureImage.open(manager, maskLoc)
         ) {
-
-            List<TextureImage> imagesToClose = new ArrayList<>();
-
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (isKnownVanillaWood(woodType)) continue;
 
@@ -152,27 +142,20 @@ public class UtilityTexture {
                         TextureImage logTexture = TextureImage.open(manager,
                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
-                    TextureImage mainTexture = baseTexture.makeCopy();
-                    TextureImage logOverlay = logTexture.makeCopy();
-                    TextureOps.applyMask(logOverlay, mask); // remove parts from texture for overlaying
+                    TextureOps.applyMask(logTexture, mask); // remove parts from texture for overlaying
 
-                    TextureOps.applyOverlay(mainTexture, logOverlay);
+                    TextureOps.applyOverlay(baseTexture, logTexture);
 
                     // Adding to the resource
-                    sink.addTextureIfNotPresent(manager, newResLoc, () -> mainTexture);
-
-                    imagesToClose.add(mainTexture);
-                    imagesToClose.add(logOverlay);
+                    sink.addTextureIfNotPresent(manager, newResLoc, () -> baseTexture);
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to apply overlays to texture: {} for {} - {}",
                             baseTextureLoc, woodType.getId(), e);
-                } finally {
-                    imagesToClose.forEach(TextureImage::close);
                 }
             }
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed to generate texture: ", e);
+            EveryCompat.LOGGER.error("Failed to generate texture with logOverlay: ", e);
         }
     }
 
