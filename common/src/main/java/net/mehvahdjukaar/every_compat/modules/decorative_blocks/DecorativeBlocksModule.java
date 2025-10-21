@@ -10,7 +10,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -61,10 +60,8 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTag(modRes("beams_that_burn"), Registries.ITEM)
                 .defaultRecipe()
                 .setTabKey(tab)
-                .addTexture(TextureInfo.of(modRes("block/oak_beam_end"))
-                        .setPalette(PaletteStrategies.SIGN_LIKE))
-                .addTexture(TextureInfo.of(modRes("block/oak_beam_side"))
-                        .setPalette(PaletteStrategies.SIGN_LIKE))
+                .addTexture(modRes("block/oak_beam_end"), PaletteStrategies.SIGN_LIKE)
+                .addTexture(modRes("block/oak_beam_side"), PaletteStrategies.SIGN_LIKE)
                 .build();
         this.addEntry(beams);
 
@@ -84,10 +81,8 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addTag(modRes("palisades_that_burn"), Registries.ITEM)
                 .defaultRecipe()
                 .setTabKey(tab)
-                .addTexture(TextureInfo.of(modRes("block/oak_palisade_end"))
-                        .setPalette(PaletteStrategies.SIGN_LIKE))
-                .addTexture(TextureInfo.of(modRes("block/oak_palisade_side"))
-                        .setPalette(PaletteStrategies.SIGN_LIKE))
+                .addTexture(modRes("block/oak_palisade_end"), PaletteStrategies.SIGN_LIKE)
+                .addTexture(modRes("block/oak_palisade_side"), PaletteStrategies.SIGN_LIKE)
                 .build();
         this.addEntry(palisades);
 
@@ -106,10 +101,8 @@ public class DecorativeBlocksModule extends SimpleModule {
                 .addCustomItem((w, b, p) -> new SupportItem(b, p))
                 .defaultRecipe()
                 .setTabKey(tab)
-                .addTexture(TextureInfo.of(modRes("block/oak_support_end"))
-                        .setPalette(PaletteStrategies.SIGN_LIKE))
-                .addTexture(TextureInfo.of(modRes("block/oak_support_side"))
-                        .setPalette(PaletteStrategies.SIGN_LIKE))
+                .addTexture(modRes("block/oak_support_end"), PaletteStrategies.SIGN_LIKE)
+                .addTexture(modRes("block/oak_support_side"), PaletteStrategies.SIGN_LIKE)
                 .build();
         this.addEntry(supports);
 
@@ -121,7 +114,7 @@ public class DecorativeBlocksModule extends SimpleModule {
                         )
                 )
                 .requiresChildren(FENCE, SLAB) //REASON: recipes
-                .addTexture(TextureInfo.of(modRes("block/oak_seat")).setPalette(PaletteStrategies.SIGN_LIKE))
+                .addTexture(modRes("block/oak_seat"), PaletteStrategies.SIGN_LIKE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("seats_that_burn"), Registries.BLOCK)
                 .addTag(modRes("seats"), Registries.BLOCK)
