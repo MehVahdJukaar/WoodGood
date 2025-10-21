@@ -21,6 +21,16 @@
 </div>
 
 ### UPDATED: 
+- **Blockus** (FB): Updated to support **v2.9.11+** - [#1085](https://github.com/MehVahdJukaar/WoodGood/issues/1085), [#1086](https://github.com/MehVahdJukaar/WoodGood/issues/1086)
+  - NOTE: the **_older version_** than **_v2.9.11_** will be no longer supported. 
+    - REASON: the ResourceLocation for some blocks' textures has changed
+- **Chipped** (C): Fixed the crash due to texture generation - [#1089](https://github.com/MehVahdJukaar/WoodGood/issues/1089), [#1088](https://github.com/MehVahdJukaar/WoodGood/issues/1088)
+
+---
+
+## v2.11.12
+
+### UPDATED: 
 - **Chipped** (C): Added the missing textures for damaged_oak_log, nailed_oak_log, reinforced_oak_log (all top texture) - [#1083](https://github.com/MehVahdJukaar/WoodGood/issues/1083)
 
 ---
