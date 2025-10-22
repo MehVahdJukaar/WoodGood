@@ -242,6 +242,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         addTagToAllBlocks(blocks, "fright", "soulfulnether", BlockTags.SOUL_FIRE_BASE_BLOCKS,
                 true, false, sink, regEx);
 
+        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored", BlockTags.STRIDER_WARM_BLOCKS, true, false, sink);
+        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored", "minecraft:non_flammable_wood", false, true, sink);
+
     }
 
     public Map<T, ?> getDefaultEntries() {
