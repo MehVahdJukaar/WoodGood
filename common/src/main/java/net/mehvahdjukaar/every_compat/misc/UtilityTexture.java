@@ -42,7 +42,7 @@ public class UtilityTexture {
                                           PaletteStrategy logPaletteStrategy,
                                           ResourceSink sink, ResourceManager manager) {
         try (
-                TextureImage mainTexture = TextureImage.open(manager, baseTextureLoc);
+                TextureImage baseTexture = TextureImage.open(manager, baseTextureLoc);
                 TextureImage logMask = TextureImage.open(manager, logMaskLoc);
                 TextureImage planksMask = TextureImage.open(manager, planksMaskLoc)
         ) {
@@ -60,7 +60,7 @@ public class UtilityTexture {
                         var planksPalette = PaletteStrategies.PLANKS_STANDARD.getPaletteAndAnimation(woodType, manager);
 
                         /// Targetting planks
-                        Respriter planksResprite = Respriter.masked(mainTexture, logMask);
+                        Respriter planksResprite = Respriter.masked(baseTexture, logMask);
 
                         TextureImage recoloredInner = planksResprite.recolorWithAnimation(planksPalette.palette(), planksPalette.animation());
 
@@ -73,7 +73,7 @@ public class UtilityTexture {
                         EveryCompat.LOGGER.error("Failed to generate log texture: {} for {} - {}",
                                 baseTextureLoc, woodType.getId(), e);
                     }
-                    return mainTexture;
+                    return baseTexture;
                 });
             }
         } catch (Exception e) {
@@ -87,7 +87,7 @@ public class UtilityTexture {
                                                     String shortenedId, String oldTypeName,
                                                     ResourceSink sink, ResourceManager manager) {
         try (
-                TextureImage mainTexture = TextureImage.open(manager, baseTextureLoc);
+                TextureImage baseTexture = TextureImage.open(manager, baseTextureLoc);
                 TextureImage logMask = TextureImage.open(manager, logMaskLoc);
                 TextureImage planksMask = TextureImage.open(manager, planksMaskLoc)
         ) {
@@ -105,12 +105,12 @@ public class UtilityTexture {
                     var planksPalette = PaletteStrategies.PLANKS_REMOVE_DARKEST.getPaletteAndAnimation(woodType, manager);
 
                     TextureOps.applyMask(logTexture, planksMask);
-                    TextureOps.applyOverlay(mainTexture, logTexture);
+                    TextureOps.applyOverlay(baseTexture, logTexture);
 
                     // Adding to the resource
                     sink.addTextureIfNotPresent(manager, newPath, () -> {
                         /// Targetting planks
-                        Respriter planksResprite = Respriter.masked(mainTexture, logMask);
+                        Respriter planksResprite = Respriter.masked(baseTexture, logMask);
                         return planksResprite.recolorWithAnimation(planksPalette.palette(), planksPalette.animation());
                     });
 
@@ -143,16 +143,16 @@ public class UtilityTexture {
                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
                     TextureImage mainTexture = baseTexture.makeCopy();
-                    TextureImage croppedTexture = logTexture.makeCopy();
-                    TextureOps.applyMask(croppedTexture, mask); // remove parts from texture for overlaying
+                    TextureImage logOverlay = logTexture.makeCopy();
+                    TextureOps.applyMask(logOverlay, mask); // remove parts from texture for overlaying
 
-                    TextureOps.applyOverlay(mainTexture, croppedTexture);
+                    TextureOps.applyOverlay(mainTexture, logOverlay);
 
                     // Adding to the resource
                     sink.addTextureIfNotPresent(manager, newResLoc, () -> mainTexture);
 
                     mainTexture.close();
-                    croppedTexture.close();
+                    logOverlay.close();
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to apply overlays to texture: {} for {} - {}",
