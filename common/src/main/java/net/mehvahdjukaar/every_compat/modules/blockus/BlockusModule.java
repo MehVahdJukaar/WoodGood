@@ -299,8 +299,7 @@ public class BlockusModule extends SimpleModule {
                 )
                 //TEXTURES: leaves
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
-                .addTag(modRes("small_hedges"), Registries.BLOCK)
-                .addTag(modRes("small_hedges"), Registries.ITEM)
+                .addTag(modRes("hedges"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentTint()
