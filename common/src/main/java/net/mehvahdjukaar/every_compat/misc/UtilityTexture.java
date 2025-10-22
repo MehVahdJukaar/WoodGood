@@ -142,12 +142,17 @@ public class UtilityTexture {
                         TextureImage logTexture = TextureImage.open(manager,
                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
-                    TextureOps.applyMask(logTexture, mask); // remove parts from texture for overlaying
+                    TextureImage mainTexture = baseTexture.makeCopy();
+                    TextureImage croppedTexture = logTexture.makeCopy();
+                    TextureOps.applyMask(croppedTexture, mask); // remove parts from texture for overlaying
 
-                    TextureOps.applyOverlay(baseTexture, logTexture);
+                    TextureOps.applyOverlay(mainTexture, croppedTexture);
 
                     // Adding to the resource
-                    sink.addTextureIfNotPresent(manager, newResLoc, () -> baseTexture);
+                    sink.addTextureIfNotPresent(manager, newResLoc, () -> mainTexture);
+
+                    mainTexture.close();
+                    croppedTexture.close();
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to apply overlays to texture: {} for {} - {}",
