@@ -20,11 +20,13 @@ public class HardcodedBlockType {
     public static String supportedBlockName;
 
     @Nullable
-    public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String ModId) {
+    public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String supportedModId) {
         woodTypeFromMod = woodType.getNamespace();
         woodidentify = woodType.getId().toString();
-        supportedMod = ModId;
+        supportedMod = supportedModId;
         supportedBlockName = blockName;
+
+        String blockId = supportedModId +"/"+ woodTypeFromMod +"/"+ blockName;
 
         /// ─────────────────────────── Include Vanilla Type ────────────────────────────
         // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
@@ -34,6 +36,9 @@ public class HardcodedBlockType {
 
         // Exclude one WoodType from a Wood Mod
         if (WOOD_TYPES_BLACKLIST.get().stream().anyMatch(woodidentify::matches)) return true;
+
+        // Exclude a specific WoodType Block
+        if (BLOCKS_BLACKLIST.get().stream().anyMatch(blockId::matches)) return true;
 
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
@@ -104,10 +109,15 @@ public class HardcodedBlockType {
         supportedMod = supportedModId;
         supportedBlockName = blockName;
 
+        String blockId = supportedModId + ":" + blockName;
+
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude one LeavesType from a Wood mod
         if (LEAVES_TYPES_BLACKLIST.get().stream().anyMatch(leavesidentify::matches)) return true;
+
+        // Exclude a specific LeavesType Block
+        if (BLOCKS_BLACKLIST.get().stream().anyMatch(blockName::matches)) return true;
 
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
