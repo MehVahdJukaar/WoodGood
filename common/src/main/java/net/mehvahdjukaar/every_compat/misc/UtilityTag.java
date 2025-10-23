@@ -12,7 +12,6 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -110,33 +109,12 @@ public class UtilityTag {
         return isTagCreated;
     }
 
-    /// See {@link UtilityTag#addTagToAllBlocks(Map, String, String, TagKey, boolean, boolean, ResourceSink, String)}'s javadoc
+    /// See {@link UtilityTag#addTagToAllBlocks(Map, String, String, String, boolean, boolean, ResourceSink, String)}'s javadoc
     public static <T extends BlockType, B extends Block>
-        void addTagToAllBlocks(Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId, String tag, boolean includeBlock,
-                               boolean includeItem, ResourceSink sink
-    ) {
-        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, fromModId,
-                TagKey.create(Registries.BLOCK, new ResourceLocation(tag)),
-                includeBlock, includeItem, sink);
-    }
-
-    /// See {@link UtilityTag#addTagToAllBlocks(Map, String, String, TagKey, boolean, boolean, ResourceSink, String)}'s javadoc
-    public static <T extends BlockType, B extends Block>
-        void addTagToAllBlocks(Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId, String tag, boolean includeBlock,
-                               boolean includeItem, ResourceSink sink, String regexBlockId
-    ) {
-        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, fromModId,
-                TagKey.create(Registries.BLOCK, new ResourceLocation(tag)),
-                includeBlock, includeItem, sink, regexBlockId);
-    }
-
-    /// See {@link UtilityTag#addTagToAllBlocks(Map, String, String, TagKey, boolean, boolean, ResourceSink, String)}'s javadoc
-    public static <T extends BlockType, B extends Block>
-        void addTagToAllBlocks(Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId, TagKey<Block> tag,
+        void addTagToAllBlocks(Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId, String tagResLoc,
                                boolean includeBlock, boolean includeItem, ResourceSink sink
     ) {
-        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, fromModId,
-                tag, includeBlock, includeItem, sink, null);
+        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, fromModId, tagResLoc, includeBlock, includeItem, sink, null);
     }
 
     /**
@@ -147,12 +125,15 @@ public class UtilityTag {
      */
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
             Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId,
-            TagKey<Block> tag, boolean includeBlock, boolean includeItem, ResourceSink pack,
+            String tagResLoc, boolean includeBlock, boolean includeItem, ResourceSink pack,
             @Nullable String regexBlockId
     ) {
         if (PlatHelper.isModLoaded(fromModId) || fromModId.isEmpty()) {
+
+            if (!tagResLoc.contains(":")) tagResLoc = fromModId + ":" + tagResLoc;
+
             boolean isTagCreated = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(tagResLoc));
             for (Map.Entry<T, B> entry : blocks.entrySet()) {
                 T blockType = entry.getKey();
                 B block = entry.getValue();

@@ -236,16 +236,24 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         // Adding tag to a specific WoodType of all generated blocks
-        addTagToAllBlocks(blocks, "petrified", "sullysmod", BlockTags.MINEABLE_WITH_PICKAXE,
-                true, false, sink);
+        /// Sully's Mod
+        addTagToAllBlocks(blocks, "petrified", "sullysmod",
+                BlockTags.MINEABLE_WITH_PICKAXE.location().toString(), true, false, sink);
 
+        /// Soulful Nether
         String regEx = "\\w+_(log|planks|beehive|boards|sanded_wood|beam|parquet|trim|bookshelf|window|drawer|table|bookshelf|shelf|table|support|cabinet|board_stairs|board_slab|boards)";
-        addTagToAllBlocks(blocks, "fright", "soulfulnether", BlockTags.SOUL_FIRE_BASE_BLOCKS,
-                true, false, sink, regEx);
+        addTagToAllBlocks(blocks, "fright", "soulfulnether",
+                BlockTags.SOUL_FIRE_BASE_BLOCKS.location().toString(), true, false, sink, regEx);
 
-        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored", BlockTags.STRIDER_WARM_BLOCKS, true, false, sink);
-        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored", "minecraft:non_flammable_wood", false, true, sink);
+        /// Regions Unexplored
+        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)",
+                "regions_unexplored", BlockTags.STRIDER_WARM_BLOCKS.location().toString(),
+                true, false, sink);
+        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)",
+                "regions_unexplored", "minecraft:non_flammable_wood",
+                false, true, sink);
 
+        /// Botania
         if (PlatHelper.isModLoaded("botania")) {
             String glassRegEx = "\\w+_(?:window|glass)";
             String glassPaneRegEx = "\\w+_(?:window|glass)_pane";
