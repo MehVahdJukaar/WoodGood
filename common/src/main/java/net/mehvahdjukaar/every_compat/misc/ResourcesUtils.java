@@ -298,10 +298,10 @@ public class ResourcesUtils {
 
     @SuppressWarnings("removal")
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, ResourceSink pack,
-                                                                              Map<T, B> items, ResourceLocation oakRecipe, T fromType,
+                                                                              Map<T, B> items, ResourceLocation baseRecipe, T fromType,
                                                                               int index) {
         IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
-                ResType.RECIPES.getPath(oakRecipe));
+                ResType.RECIPES.getPath(baseRecipe));
 
         items.forEach((w, i) -> {
 
@@ -312,13 +312,14 @@ public class ResourcesUtils {
                     String blockId = RecipeBuilder.getDefaultRecipeId(i).toString();
                     FinishedRecipe newR;
 
-                    String oakRecipePath = oakRecipe.getPath();
-                    String modifiedRecipe = oakRecipePath.substring(oakRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), w.getTypeName());
+                    String baseRecipePath = baseRecipe.getPath();
+                    String modifiedRecipePath = baseRecipePath.substring(baseRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), w.getTypeName());
                     String target = blockId.substring(blockId.lastIndexOf("/") + 1);
                     // Replaced the >text< with modifiedRecipe: everycomp:q/biomesoplenty/ >fir_vertical_slab<
-                    String newId = blockId.replace(target, modifiedRecipe);
+                    String newId = blockId.replace(target, modifiedRecipePath);
 
-                    if (!blockId.equals(newId)) {
+                    // matches() ensure the last word, [a-z]_[a-z] is not one word, CASE: lightman's currency
+                    if (!blockId.equals(newId) && newId.matches("\\w+:\\w+/\\w+/[a-z]_[a-z]")) {
                         newR = template.createSimilar(fromType, w, w.mainChild().asItem(), newId);
                     }
                     else {
@@ -331,7 +332,7 @@ public class ResourcesUtils {
                     // Adding to the resources
                     pack.addRecipe(newR);
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to generate recipe @ {} for {}: {}", oakRecipe, i, e.getMessage());
+                    EveryCompat.LOGGER.error("Failed to generate recipe @ {} for {}: {}", baseRecipe, i, e.getMessage());
                 }
             }
         });
