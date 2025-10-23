@@ -22,7 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-//SUPPORT: v2.2.5.2+
+//SUPPORT: v2.2.6.4+
 public class LightmansCurrencyModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> auction_stands;
@@ -123,6 +123,7 @@ public class LightmansCurrencyModule extends SimpleModule {
                 .addTag(LCTags.Items.TRADER_SPECIALTY_BOOKSHELF, Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("traders/bookshelf/oak"))
+                .copyParentDrop()
                 .build();
         this.addEntry(bookshelf_traders);
 
