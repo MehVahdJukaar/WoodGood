@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
 import net.mehvahdjukaar.every_compat.modules.blockus.BlockusModule;
+import net.mehvahdjukaar.every_compat.modules.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedDoorModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedGlassModule;
@@ -105,6 +106,7 @@ public class EveryCompatCommon {
             addIfLoaded("another_furniture", () -> AnotherFurnitureModule::new);
             addIfLoaded("backpacked", () -> BackpackedModule::new);
             addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
+            if (PlatHelper.getModVersion("bbb").contains("2.0pre3")) addIfLoaded("bbb", () -> BuildingButBetterModule::new);
             addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
             addIfLoaded("blockus", () -> BlockusModule::new);
             addIfLoaded("campchair", () -> CampChairModule::new);

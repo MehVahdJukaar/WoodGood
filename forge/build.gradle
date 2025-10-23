@@ -140,7 +140,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:athena-841890:5176879") //
 //    modRuntimeOnly("curse.maven:aeroblender-879879:4789008") // Aether
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | REI, Infinity-Buttons
-//    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish, Minecraft-Comes-Alive-Reborn, Garden-Of-The-Dead
+//    modRuntimeOnly("curse.maven:architectury-api-419699:5137938") // v9.2.14 | REI, Furnish, Minecraft-Comes-Alive-Reborn, Garden-Of-The-Dead, Building-But-Better
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659871")  // v2.1.29 | Handcrafted, Cozy, Ad-Astra
 //    modRuntimeOnly("curse.maven:resourceful-config-714059:6231176")  // v2.1.3 | Ad-Astra
 //    modRuntimeOnly("curse.maven:botarium-704113:5486070")  // v2.3.4 | Ad-Astra
@@ -274,7 +274,8 @@ dependencies {
     modCompileOnly("curse.maven:youkais-homecoming-957437:6724147") // Farmer's-Delight - Use Production instead of modImplementation
 
             // OTHER MAVENS
-    modCompileOnly("maven.modrinth:building-but-better:1.20.1-1.1.1") // MidnightLib
+//    modRuntimeOnly("maven.modrinth:building-but-better:1.20.1-1.1.1") // MidnightLib
+    modCompileOnly("curse.maven:building-but-better-989479:6803575") // MidnightLib, Architectury-API
     modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false } // Registrate, Flywheel, Ponder
 
     //- ======================================= DISABLED FOR A REASON =============================================== \\

@@ -14,8 +14,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -45,7 +47,7 @@ public class BuildingButBetterModule extends SimpleModule {
 
     public BuildingButBetterModule(String modId) {
         super(modId, "bbb");
-        var tab = CreativeModeTabs.BUILDING_BLOCKS;
+        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         layers = SimpleEntrySet.builder(WoodType.class, "layer",
                         getModBlock("oak_layer"), () -> VanillaWoodTypes.OAK,
@@ -141,8 +143,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTexture(modRes("block/beam/oak_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
-                .addTag(modRes("supports"), Registries.BLOCK)
-                .addTag(modRes("supports"), Registries.ITEM)
+                .addTag(modRes("supports"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
@@ -170,8 +171,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(new ResourceLocation("create", "movable_empty_collider"), Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
-                .addTag(modRes("frames"), Registries.BLOCK)
-                .addTag(modRes("frames"), Registries.ITEM)
+                .addTag(modRes("frames"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
@@ -185,8 +185,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTexture(modRes("block/pallet/oak_pallet"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
-                .addTag(modRes("pallets"), Registries.BLOCK)
-                .addTag(modRes("pallets"), Registries.ITEM)
+                .addTag(modRes("pallets"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
