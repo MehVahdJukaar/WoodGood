@@ -244,7 +244,7 @@ dependencies {
     modCompileOnly("curse.maven:functional-storage-556861:5373105") // Titanium
     modCompileOnly("curse.maven:infinity-buttons-661902:5330420") // Cloth-Config
     modCompileOnly("curse.maven:just-a-raft-mod-274350:5777239")
-    modCompileOnly("curse.maven:lightmans-currency-472521:6524190")
+    modCompileOnly("curse.maven:lightmans-currency-472521:6994457")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
