@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.every_compat.misc.TextureGenHelper;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -241,6 +242,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         String regEx = "\\w+_(log|planks|beehive|boards|sanded_wood|beam|parquet|trim|bookshelf|window|drawer|table|bookshelf|shelf|table|support|cabinet|board_stairs|board_slab|boards)";
         addTagToAllBlocks(blocks, "fright", "soulfulnether", BlockTags.SOUL_FIRE_BASE_BLOCKS,
                 true, false, sink, regEx);
+
+        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored", BlockTags.STRIDER_WARM_BLOCKS, true, false, sink);
+        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored", "minecraft:non_flammable_wood", false, true, sink);
+
+        if (PlatHelper.isModLoaded("botania")) {
+            String glassRegEx = "\\w+_(?:window|glass)";
+            String glassPaneRegEx = "\\w+_(?:window|glass)_pane";
+            addTagToAllBlocks(blocks, ".*", "", UtilityTag.GLASS_TAG.toString(),
+                    true, true, sink, glassRegEx);
+            addTagToAllBlocks(blocks, ".*", "", UtilityTag.GLASS_PANE_TAG.toString(),
+                    true, true, sink, glassPaneRegEx);
+        }
 
     }
 

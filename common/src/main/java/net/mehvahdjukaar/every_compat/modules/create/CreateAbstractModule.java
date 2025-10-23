@@ -6,7 +6,6 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
@@ -35,10 +34,8 @@ public abstract class CreateAbstractModule extends SimpleModule {
                         EveryCompat.res("block/c/palettes/oak_window_connected_m"),
                         PaletteStrategies.PLANKS_REMOVE_DARKEST)
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
-                .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
-                .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.TRANSLUCENT) //Original: CUTOUT_MIPPED - REASON: only TRANSLUCENT works with colored_glass
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
         this.addEntry(windows);
@@ -48,10 +45,8 @@ public abstract class CreateAbstractModule extends SimpleModule {
                         this::makeConnectedGlassPane
                 )
                 .requiresFromMap(windows.blocks) //REASON: textures
-                .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
-                .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setTabKey(tab)
-                .setRenderType(RenderLayer.TRANSLUCENT) //Original: CUTOUT_MIPPED - REASON: only TRANSLUCENT works with colored_glass
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks' dropping when Diagonal Fences is installed
                 .build();
