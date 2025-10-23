@@ -153,7 +153,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:geckolib-388172:7025129") // v4.8.2 | Ars-Nouveau
     modRuntimeOnly("curse.maven:citadel-331936:6702068") // v2.6.2 | Alex's Cave, Rats
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
-//    modRuntimeOnly("curse.maven:patchouli-306770:4636277") // v81 | TFC, Timber-Frames
+//    modRuntimeOnly("curse.maven:patchouli-306770:6164575") // v84.1 | TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:monolib-968432:6123976") // v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:brewin-and-chewin-637808:6237884") // Smidgeon-O'-Bliss
 //    modRuntimeOnly("curse.maven:kotlin-for-forge-351264:5402061") // Adorn
