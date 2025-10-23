@@ -12,7 +12,6 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -110,38 +109,31 @@ public class UtilityTag {
         return isTagCreated;
     }
 
-    /// See {@link UtilityTag#addTagToAllBlocks(Map, String, String, TagKey, boolean, boolean, ResourceSink, String)}'s javadoc
-    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
-            Map<T, B> blocks, String nameBlockTypeOrRegEx, String modId, String tag,
-            boolean includeBlock, boolean includeItem, ResourceSink pack
+    /// See {@link UtilityTag#addTagToAllBlocks(Map, String, String, String, boolean, boolean, ResourceSink, String)}'s javadoc
+    public static <T extends BlockType, B extends Block>
+        void addTagToAllBlocks(Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId, String tagResLoc,
+                               boolean includeBlock, boolean includeItem, ResourceSink sink
     ) {
-        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, modId,
-                TagKey.create(Registries.BLOCK, ResourceLocation.parse(tag)),
-                includeBlock, includeItem, pack);
-    }
-
-    /// See {@link UtilityTag#addTagToAllBlocks(Map, String, String, TagKey, boolean, boolean, ResourceSink, String)}'s javadoc
-    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
-            Map<T, B> blocks, String nameBlockTypeOrRegEx, String modId, TagKey<Block> tag,
-            boolean includeBlock, boolean includeItem, ResourceSink pack
-    ) {
-        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, modId,
-                tag, includeBlock, includeItem, pack, null);
+        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, fromModId, tagResLoc, includeBlock, includeItem, sink, null);
     }
 
     /**
      * The tag will be added if the mod is loaded
      * @param nameBlockTypeOrRegEx name of BlockType without the modId, RegEx can be used, too
-     * @param modId The mod that BlockType is from
+     * @param fromModId The mod that BlockType is from Or "" for any mods
+     * @param regexBlockId RegEx to match EveryCompat's blocks' Id without the modId
      */
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
-            Map<T, B> blocks, String nameBlockTypeOrRegEx, String modId,
-            TagKey<Block> tag, boolean includeBlock, boolean includeItem, ResourceSink pack,
+            Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId,
+            String tagResLoc, boolean includeBlock, boolean includeItem, ResourceSink pack,
             @Nullable String regexBlockId
     ) {
-        if (PlatHelper.isModLoaded(modId)) {
+        if (PlatHelper.isModLoaded(fromModId) || fromModId.isEmpty()) {
+
+            if (!tagResLoc.contains(":")) tagResLoc = fromModId + ":" + tagResLoc;
+
             boolean isTagCreated = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(tag);
+            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(ResourceLocation.parse(tagResLoc));
             for (Map.Entry<T, B> entry : blocks.entrySet()) {
                 T blockType = entry.getKey();
                 B block = entry.getValue();
@@ -149,8 +141,8 @@ public class UtilityTag {
                 String blockPath = Utils.getID(block).getPath();
                 String blockId = blockPath.substring(blockPath.lastIndexOf("/") + 1);
 
-                if (blockType.getId().toString().matches(modId +":"+ nameBlockTypeOrRegEx) &&
-                        (regexBlockId == null || blockId.matches(regexBlockId))) {
+                if ((blockType.getId().toString().matches(fromModId +":"+ nameBlockTypeOrRegEx) || fromModId.isEmpty())
+                        && (regexBlockId == null || blockId.matches(regexBlockId))) {
                     tagBuilder.addEntry(block);
                     isTagCreated = true;
                 }
