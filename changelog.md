@@ -10,6 +10,13 @@
   </div>
 </div>
 
+### UPDATED: 
+- **Every Compat** (C): Updated `isEntryAlreadyRegistered` so it can be overridden by other mods that has the module built-in for **Every Compat**
+
+---
+
+## v2.5.35
+
 ### ADDED: 
 -**Every Compat**: Re-enabled **The Fwilight Forest** for FABRIC
 
