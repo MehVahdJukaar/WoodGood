@@ -59,7 +59,10 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addIfLoaded("mcwstairs", () -> MacawStairsModule::new);
 
             // ========================================= GENERAL ======================================================== \\
-            if (PlatHelper.getModVersion("bbb").contains("1.0.2")) addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            if (PlatHelper.isModLoaded("bbb")) {
+                if (PlatHelper.getModVersion("bbb").contains("1.0.2"))
+                    addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            }
             addIfLoaded("beautify", () -> BeautifyRefabricatedModule::new);
             addIfLoaded("bewitchment", () -> BewitchmentModule::new);
             addIfLoaded("clutter", () -> ClutterModule::new);

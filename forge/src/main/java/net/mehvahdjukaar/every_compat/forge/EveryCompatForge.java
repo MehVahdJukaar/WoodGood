@@ -116,8 +116,10 @@ public class EveryCompatForge extends EveryCompatCommon {
             // ========================================= GENERAL ======================================================== \\
             addIfLoaded("absentbydesign", () -> AbsentByDesignModule::new);
             addIfLoaded("architects_palette", () -> ArchitectsPaletteModule::new);
-            if (PlatHelper.getModVersion("bbb").contains("1.0.1") || PlatHelper.getModVersion("bbb").contains("1.1.1"))
-                addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            if (PlatHelper.isModLoaded("bbb")) {
+                if (PlatHelper.getModVersion("bbb").contains("1.0.1") || PlatHelper.getModVersion("bbb").contains("1.1.1"))
+                    addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            }
             addIfLoaded("beautify", () -> BeautifyDecorateModule::new);
             addIfLoaded("blocksplus", () -> BlocksPlusModule::new);
             addIfLoaded("boatload", () -> BoatLoadModule::new);

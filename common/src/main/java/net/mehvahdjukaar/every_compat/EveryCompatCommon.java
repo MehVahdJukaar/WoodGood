@@ -106,7 +106,10 @@ public class EveryCompatCommon {
             addIfLoaded("another_furniture", () -> AnotherFurnitureModule::new);
             addIfLoaded("backpacked", () -> BackpackedModule::new);
             addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
-            if (PlatHelper.getModVersion("bbb").contains("2.0pre3")) addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            if (PlatHelper.isModLoaded("bbb")) {
+                if (PlatHelper.getModVersion("bbb").contains("2.0pre3"))
+                    addIfLoaded("bbb", () -> BuildingButBetterModule::new);
+            }
             addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);
             addIfLoaded("blockus", () -> BlockusModule::new);
             addIfLoaded("campchair", () -> CampChairModule::new);
