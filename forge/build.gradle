@@ -264,7 +264,7 @@ dependencies {
     modCompileOnly("curse.maven:timber-frames-606011:5372390")
     modCompileOnly("curse.maven:tropicraft-254794:4811116") // Registrate
     modCompileOnly("curse.maven:ultimate-car-mod-267458:5982592")
-    modCompileOnly("curse.maven:unusual-furniture-1278034:6604940")
+    modCompileOnly("curse.maven:unusual-furniture-1278034:6895574")
     modCompileOnly("curse.maven:valhelsia-structures-347488:5195707") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921")
     modCompileOnly("curse.maven:woodster-869951:4670471")

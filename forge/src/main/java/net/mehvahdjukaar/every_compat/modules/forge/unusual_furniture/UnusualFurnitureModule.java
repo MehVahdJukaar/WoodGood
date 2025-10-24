@@ -4,14 +4,16 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.toopa.unusualfurniture.block.*;
 
-//SUPPORT: v1.0+
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
+
+//SUPPORT: v1.1.1+
 public class UnusualFurnitureModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> carved;
@@ -48,7 +50,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                         w -> new OakTableBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
-                .requiresChildren("stripped_log", "slab") //REASON: recipes
+                .requiresChildren(STRIPPED_LOG, SLAB) //REASON: recipes
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/oak_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -64,7 +66,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                         w -> new OakCoffeeTableBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
-                .requiresChildren("stripped_log", "slab") //REASON: recipes
+                .requiresChildren(STRIPPED_LOG, SLAB) //REASON: recipes
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/oak_coffee_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -80,7 +82,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                         w -> new OakStoolBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
-                .requiresChildren("slab") //REASON: recipes
+                .requiresChildren(SLAB) //REASON: recipes
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/oak_stool"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -95,9 +97,9 @@ public class UnusualFurnitureModule extends SimpleModule {
                         w -> new OakChairBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
-                .requiresChildren("slab") //REASON: recipes
-                //TEXTURES: carved_oak
-                .addTexture(modRes("block/oak_chair"))
+                .requiresFromMap(stool.blocks) //REASON: textures
+                .requiresChildren(SLAB) //REASON: recipes
+                //TEXTURES: carved_oak, stool
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool"), Registries.BLOCK)
                 .setTabKey(tab)
@@ -124,7 +126,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                         w -> new JungleDrawerBlock()
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
-                .requiresChildren("slab") //REASON: recipes
+                .requiresChildren(SLAB) //REASON: recipes
                 //TEXTURES: carved_oak_top
                 .addTexture(modRes("block/jungle_drawer"))
                 .setTabKey(tab)
