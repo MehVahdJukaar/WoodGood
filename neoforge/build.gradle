@@ -246,6 +246,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:5759335")
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:5658664")
+    modCompileOnly("curse.maven:unusual-furniture-1278034:6786565")
     modCompileOnly("curse.maven:valhelsia-structures-347488:6814480") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
     modCompileOnly("curse.maven:woodster-869951:6425772")
