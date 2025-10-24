@@ -93,8 +93,8 @@ public abstract class CompatModule {
 
     }
 
-    public final boolean isEntryAlreadyRegistered(String blockId, BlockType blockType, Registry<?> registry) {
-        //!! NOTE: blockType is either: WoodType, LeavesType, or StoneTYpe
+    public boolean isEntryAlreadyRegistered(String blockId, BlockType blockType, Registry<?> registry) {
+        /// NOTE: blockType is either: WoodType, LeavesType
         if (blockType.isVanilla()) return true; // Exclude all of Vanilla Types
 
         // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
