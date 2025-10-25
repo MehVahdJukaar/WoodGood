@@ -169,7 +169,7 @@ public class TextureGenHelper {
                             TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
                             postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
                             return img;
-                        });
+                        }, info.onAtlas());
                     }
                 }
             }
