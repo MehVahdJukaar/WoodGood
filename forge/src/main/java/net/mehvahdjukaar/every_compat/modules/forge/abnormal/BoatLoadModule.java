@@ -8,7 +8,6 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
-import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
