@@ -20,6 +20,33 @@
 
 </div>
 
+### UPDATED:
+- **Boatload** (F): Fixed the missing textures for large_boat & furnace_boat
+- **Building But Better** (C): Updated to support **2.0pre3** - [#1075](https://github.com/MehVahdJukaar/WoodGood/issues/1075)
+  - NOTE: older than 2.0pre1 to 2.0pre2 won't be supported
+  - NOTE: FORGE - You can still use v1.0.1 or v1.1.1 & FABRIC - still use v1.0.2
+  - but it will be removed in the future when v2.0 is officially out of "Release Candidate"
+- **Quark** (C): Improved hedge's condition to check if LeavesType has associated WoodType, then it will be generated
+- **Builder's Delight** (F): Finished the unfinished recipes
+- **Lightman's Currency** (F): Fixed the missing recipes for 3 of 4 blocks & Fixed bookshelf_traders' drops - [#1084](https://github.com/MehVahdJukaar/WoodGood/issues/1084)
+- **Create** & **Chipped** (C): glasses/windows with The tags, `#forge:glass` or `#c:glass` have been removed and will be only added if **Botania** is installed - [#1076](https://github.com/MehVahdJukaar/WoodGood/issues/1076)
+  - glass_pane/window_panes also have `#forge:glass_pane` or `#c:glass_pane` removed for the same reason
+
+### ADDED:
+- **Farmer's Delight** (COMPAT): **Windswept's Delight**
+
+### DEV:
+- **Every Compat** (C):
+    - Utility Classes have been moved to net.mehvahdjukaar.every_compat.misc
+    - `TextureUtility` are renamed to `UtilityTexture`
+    - `TagUtility` are renamed to `UtilityTag`
+    - `RecipeUtility` are renamed to `UtilityRecipe`
+    - `Utility` are renamed to `UtilityMisc`
+
+---
+
+## vv2.9.8
+
 ### UPDATED: 
 - **Quark** (F): Fixed the recipe not being generated due to LeavesType's missing Associated WoodType and that halt the rest of other recipes generation - Related to [#1078](https://github.com/MehVahdJukaar/WoodGood/issues/1078)
 
