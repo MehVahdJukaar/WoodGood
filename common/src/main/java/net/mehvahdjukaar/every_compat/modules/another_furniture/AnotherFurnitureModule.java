@@ -105,6 +105,7 @@ public class AnotherFurnitureModule extends SimpleModule {
                        getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(modRes("tables"), Registries.BLOCK)
+                .addTag(modRes("table_connectable"), Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.ITEM)
                 .copyParentDrop()
                 .defaultRecipe()
