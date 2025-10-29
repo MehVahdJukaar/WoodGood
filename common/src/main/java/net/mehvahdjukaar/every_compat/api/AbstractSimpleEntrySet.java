@@ -346,13 +346,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        // Exclude Leaves | Wood | Stone - exclusive with addCondition
+        // Exclude Leaves | Wood | Stone | Other BlockTypes - exclusive with addCondition
         public BL excludeBlockTypes(String regEx) {
             this.addCondition(blockType -> !blockType.getId().toString().matches(regEx));
             return (BL) this;
         }
 
-        // Exclude Leaves | Wood | Stone - exclusive with addCondition
+        // Exclude Leaves | Wood | Stone | Other BlockTypes - exclusive with addCondition
         public BL excludeBlockTypes(String modId, String... typeIds) {
             StringBuilder regexBuilder = new StringBuilder();
 
