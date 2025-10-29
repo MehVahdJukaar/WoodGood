@@ -102,8 +102,8 @@ public class PaletteStrategies {
                         //luminance step is the distance between 2 colors. Essentially contrast
                         float averageStep = p.getAverageLuminanceStep();
                         //lower step = lower contrast. Tweak as needed
-                        p.matchLuminanceStep(averageStep * 0.9f);
-                        //TODO: tweak that magic number as needed. below was old approach
+                        p.matchLuminanceStep(averageStep * 0.8f);
+                        // abov is similar to below & it was the old approach
                         /*
                         p.remove(p.getLightest());
                         p.increaseInner();
