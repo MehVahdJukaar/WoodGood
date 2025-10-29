@@ -20,6 +20,27 @@
 
 </div>
 
+### UPDATED:
+- **Farmer's Delight** (COMPAT): If one or more of **Farmer's Cutting** mods is installed, then the cutting_board recipe generation will be skipped 
+- **Every Compat** (C): New feature in `everycomp-hazardous.toml` where you can blacklist a specific WoodType block or leavesType block
+- **Chipped** (C): Fixed the missing textures for nailed_log & reinforced_log - [#1094](https://github.com/MehVahdJukaar/WoodGood/issues/1094)
+- **Blockus** (FB): 
+  - Added the missing properties to _grate_ - [#1090](https://github.com/MehVahdJukaar/WoodGood/issues/1090)
+  - Updated hedges' LANG in EN_US - [#1093](https://github.com/MehVahdJukaar/WoodGood/issues/1093)
+  - hedges' tag, `#blockus:small_hedges` is now `#blockus:hedges` - [#1093](https://github.com/MehVahdJukaar/WoodGood/issues/1093)
+
+### ADDED:
+- **Unusual Furniture** (NF): Supporting v1.1.1+ 
+- **Every Compat** (C): Added tag, `#minecraft:non_flammable_wood` & `#minecraft:strider_warm_blocks` to all blocks for 4 WoodTypes - [#1091](https://github.com/MehVahdJukaar/WoodGood/issues/1091)
+  - regions_unexplored:brimwood
+  - regions_unexplored:cobalt
+  - regions_unexplored:dead
+  - regions_unexplored:yellow_bioshroom
+
+---
+
+## v2.11.13
+
 ### UPDATED: 
 - **Blockus** (FB): Updated to support **v2.9.11+** - [#1085](https://github.com/MehVahdJukaar/WoodGood/issues/1085), [#1086](https://github.com/MehVahdJukaar/WoodGood/issues/1086)
   - NOTE: the **_older version_** than **_v2.9.11_** will be no longer supported. 
