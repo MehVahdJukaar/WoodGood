@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
@@ -27,9 +28,11 @@ import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.item.FuelBlockItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static java.util.Map.entry;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
@@ -89,20 +92,29 @@ public class FarmersDelightModule extends SimpleModule {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
-                //adding compat cutting board recipes for vanilla modded stuff i guess
-                createCuttingRecipe(DOOR, woodType.getBlockOfThis(DOOR),
-                        woodType, sink, manager);
-                createCuttingRecipe(HANGING_SIGN, woodType.getBlockOfThis(HANGING_SIGN),
-                        woodType, sink, manager);
-                createCuttingRecipe(SIGN, woodType.getBlockOfThis(SIGN),
-                        woodType, sink, manager);
-                createCuttingRecipe(TRAPDOOR, woodType.getBlockOfThis(TRAPDOOR),
-                        woodType, sink, manager);
-                createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG),
-                        woodType, sink, manager);
-                createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD),
-                        woodType, sink, manager);
+                // Skip if one of Farmer's-Cutting mods is installed
+                String namespaceRegex = COMPAT_RECIPE_MODS.getOrDefault(woodType.getNamespace(), "none");
+                boolean isRecipeModNotInstalled = !PlatHelper.getInstalledMods().contains(namespaceRegex);
+                boolean isCollectionModNotInstalled = PlatHelper.getInstalledMods().contains("mr_farmers_cuttingcollection")
+                        && !COMPAT_RECIPE_MODS.containsKey(woodType.getNamespace());
 
+                if (isRecipeModNotInstalled && isCollectionModNotInstalled) {
+
+                    //adding compat cutting board recipes for vanilla modded stuff i guess
+                    createCuttingRecipe(DOOR, woodType.getBlockOfThis(DOOR),
+                            woodType, sink, manager);
+                    createCuttingRecipe(HANGING_SIGN, woodType.getBlockOfThis(HANGING_SIGN),
+                            woodType, sink, manager);
+                    createCuttingRecipe(SIGN, woodType.getBlockOfThis(SIGN),
+                            woodType, sink, manager);
+                    createCuttingRecipe(TRAPDOOR, woodType.getBlockOfThis(TRAPDOOR),
+                            woodType, sink, manager);
+                    createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG),
+                            woodType, sink, manager);
+                    createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD),
+                            woodType, sink, manager);
+
+                }
             }
         });
     }
@@ -141,4 +153,23 @@ public class FarmersDelightModule extends SimpleModule {
             sink.addRecipe(new RecipeHolder<>(recipePath, newRec));
         }
     }
+
+    // a recipe mod, not full Compat-Mod providing cutting-board recipes for other Wood-Mods
+    // farmers-cutting-collection.*.jar
+    private final Map<String, String> COMPAT_RECIPE_MODS = Map.ofEntries(
+        entry("aether", "fcaether"),
+        entry("betterend", "fcbe"),
+        entry("betternether", "fcbn"),
+        entry("biomesoplenty", "fcbop"),
+        entry("biomeswevegone", "fcbwg"),
+        entry("blue_skies", "fcbs"),
+        entry("cinderscapes", "fccs"),
+        entry("eternal_starlight", "fces"),
+        entry("natures_spirit", "fcns"),
+        entry("nethers_exoticism", "fcne"),
+        entry("promenade", "fcpromenade"),
+        entry("regions_unexplored", "fcru"),
+        entry("terrestria", "fcterrestria"),
+        entry("twilightforest", "fctf")
+    );
 }
