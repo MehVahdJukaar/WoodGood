@@ -53,11 +53,13 @@ public class BuildingButBetterModule extends SimpleModule {
                 //TEXTURES: beam/oak, planks
                 .addTexture(modRes("block/balustrade/oak_sides"))
                 .addTexture(modRes("block/balustrade/oak_top"))
+                .addTexture(modRes("block/beam/oak"), PaletteStrategies.PLANKS_LOW_CONTRAST)
+                .addTexture(modRes("block/beam/oak_top"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("balustrades"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
-//                .defaultRecipe()
+//                .defaultRecipe() // NOT AVAILABLE YET
                 .addCustomItem((woodType, block, properties) -> new DescriptionBlockItem(block, properties))
                 .build();
         this.addEntry(balustrade);
@@ -67,8 +69,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis(STRIPPED_LOG))))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
-                .addTexture(modRes("block/beam/oak"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
-                .addTexture(modRes("block/beam/oak_top"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
+                //TEXTURES: beam/oak, beam/oak_top (@balustrade)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
@@ -266,6 +267,7 @@ public class BuildingButBetterModule extends SimpleModule {
                         getModBlock("oak_wall"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenWallBlock(Utils.copyPropertySafe(w.planks))
                 )
+                .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: beam/oak, beam/oak_top
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
