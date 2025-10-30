@@ -2,9 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.api.TabAddMode;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -30,6 +28,8 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import static java.util.Map.entry;
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 // SUPPORT: FABRIC-v2.4.0+ | FORGE-v1.2.8+
 public class FarmersDelightModule extends SimpleModule {
@@ -43,35 +43,40 @@ public class FarmersDelightModule extends SimpleModule {
                         getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,
                         w -> new CabinetBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .requiresChildren("trapdoor", "slab") //REASON: recipes
+                .requiresChildren(TRAPDOOR, SLAB) //REASON: recipes
+                .addTile(getModTile("cabinet"))
+                .addTextureM(modRes("block/oak_cabinet_front"),
+                        EveryCompat.res("block/fd/oak_cabinet_front_m"),
+                        customPalette)
+                .addTexture(modRes("block/oak_cabinet_side"), customPalette)
+                .addTexture(modRes("block/oak_cabinet_top"), customPalette)
+                .addTexture(modRes("block/oak_cabinet_front_open"), customPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinets/wooden"), Registries.ITEM)
-                .defaultRecipe()
-                .addTile(getModTile("cabinet"))
                 .setTabKey(modRes("farmersdelight"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
-                .createPaletteFromPlanks(p -> {
-                    p.reduceDown();
-                    if (p.size() < 9) {
-                        while (p.size() <= 9) {
-                            p.increaseInner();
-                        }
-                    }
-                    else {
-                        while (p.size() >= 9) {
-                            p.reduce();
-                        }
-                    }
-                })
-                .addTextureM(modRes("block/oak_cabinet_front"), EveryCompat.res("block/fd/oak_cabinet_front_m"))
-                .addTexture(modRes("block/oak_cabinet_side"))
-                .addTexture(modRes("block/oak_cabinet_top"))
-                .addTexture(modRes("block/oak_cabinet_front_open"))
+                .defaultRecipe()
                 .build();
         this.addEntry(cabinets);
     }
 
+    public static final PaletteStrategy customPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, PLANKS, null, p -> {
+                p.reduceDown();
+                if (p.size() < 9) {
+                    while (p.size() <= 9) {
+                        p.increaseInner();
+                    }
+                } else {
+                    while (p.size() >= 9) {
+                        p.reduce();
+                    }
+                }
+            })
+    );
+
     @Override
+    // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
