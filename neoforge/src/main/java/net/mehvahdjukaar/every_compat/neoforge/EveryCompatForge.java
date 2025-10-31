@@ -36,6 +36,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.Region
 import net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames.TimberFramesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.UnusualFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
@@ -43,7 +44,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.workshop.WorkshopForHands
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.neoforged.bus.EventBus;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -128,6 +128,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("timber_frames", () -> TimberFramesModule.class);
             addOptionalModule("tropicraft", () -> TropicraftModule.class);
             addOptionalModule("twilightforest", () -> TwilightForestModule.class);
+            addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
             addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
 //        addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new); .class-AVAILABLE
             addOptionalModule("vct", () -> VariantCraftingTablesModule.class);

@@ -12,13 +12,13 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public class ModConfigSelectScreen extends FabricConfigListScreen {
+public class ECConfigSelectScreen extends FabricConfigListScreen {
 
     private static final ResourceLocation BACKGROUND = ResourceLocation.parse("textures/block/oak_planks.png");
 
-    public ModConfigSelectScreen(Screen parent) {
+    public ECConfigSelectScreen(Screen parent) {
         super(EveryCompat.MOD_ID, ECRegistry.ALL_WOODS.get().getDefaultInstance(),
-                Component.literal("§7Supplementaries Configs"), BACKGROUND,
+                Component.literal("§7Every Compat Configs"), BACKGROUND,
                 parent, ECConfigs.SPEC, ECConfigs.CLIENT_SPEC, ModEntriesConfigs.SPEC);
     }
 

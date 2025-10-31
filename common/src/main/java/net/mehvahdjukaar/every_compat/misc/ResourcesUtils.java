@@ -281,22 +281,22 @@ public class ResourcesUtils {
      * Adds recipes based off an oak planks based one
      */
     public static <B extends Item> void addWoodRecipes(String modId, ResourceManager manager, ResourceSink pack,
-                                                       Map<WoodType, B> blocks, String oakRecipe) {
-        addBlocksRecipes(modId, manager, pack, blocks, oakRecipe, VanillaWoodTypes.OAK);
+                                                       Map<WoodType, B> blocks, String baseRecipe) {
+        addBlocksRecipes(modId, manager, pack, blocks, baseRecipe, VanillaWoodTypes.OAK);
     }
 
     /**
      * Adds recipes based off a given one
      */
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, ResourceSink pack,
-                                                                              Map<T, B> blocks, String oakRecipe, T fromType) {
-        addBlocksRecipes(manager, pack, blocks, ResourceLocation.fromNamespaceAndPath(modId, oakRecipe), fromType, 0);
+                                                                              Map<T, B> blocks, String baseRecipe, T fromType) {
+        addBlocksRecipes(manager, pack, blocks, ResourceLocation.fromNamespaceAndPath(modId, baseRecipe), fromType, 0);
     }
 
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, ResourceSink pack,
-                                                                              Map<T, B> items, ResourceLocation oakRecipe, T fromType,
+                                                                              Map<T, B> items, ResourceLocation baseRecipe, T fromType,
                                                                               int index) {
-        Recipe<?> template = RPUtils.readRecipe(manager, oakRecipe);
+        Recipe<?> template = RPUtils.readRecipe(manager, baseRecipe);
         items.forEach((w, i) -> {
 
             if (ModEntriesConfigs.isEntryEnabled(w, i)) {
@@ -315,7 +315,7 @@ public class ResourcesUtils {
                     // Adding to the resources
                     pack.addRecipe(newR);
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to generate recipe @ {} for {}: {}", oakRecipe, i, e.getMessage());
+                    EveryCompat.LOGGER.error("Failed to generate recipe @ {} for {}: {}", baseRecipe, i, e.getMessage());
                 }
             }
         });

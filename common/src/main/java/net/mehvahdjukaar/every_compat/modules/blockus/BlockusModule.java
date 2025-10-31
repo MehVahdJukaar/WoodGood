@@ -36,7 +36,7 @@ import static net.mehvahdjukaar.every_compat.EveryCompat.res;
 import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.copyChildrenPropertySafe;
 import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.doChildrenExistFor;
 
-//SUPPORT: v2.9.10+ (FABRIC)
+//SUPPORT: v2.9.11+ (FABRIC)
 public class BlockusModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> herringbone_planks;
@@ -57,7 +57,7 @@ public class BlockusModule extends SimpleModule {
     public final SimpleEntrySet<LeavesType, Block> small_hedge;
 
     public BlockusModule(String modId) {
-        super(modId, "bus");
+        super(modId, "bus", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("blockus_building_blocks");
 
         herringbone_planks = SimpleEntrySet.builder(WoodType.class, "planks", "herringbone",
@@ -121,7 +121,13 @@ public class BlockusModule extends SimpleModule {
 
         grate = SimpleEntrySet.builder(WoodType.class, "grate",
                         getModBlock("oak_grate"), () -> VanillaWoodTypes.OAK,
-                        w -> new WaterloggedTransparentBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new WaterloggedTransparentBlock(Utils.copyPropertySafe(w.planks)
+                                .noOcclusion()
+                                .isValidSpawn(Blocks::never)
+                                .isRedstoneConductor(Blocks::never)
+                                .isSuffocating(Blocks::never)
+                                .isViewBlocking(Blocks::never)
+                        )
                 )
                 .addTexture(modRes("block/oak_grate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -190,11 +196,11 @@ public class BlockusModule extends SimpleModule {
                 .build();
         this.addEntry(mosaic_stairs);
 
-        small_logs = SimpleEntrySet.builder(WoodType.class, "small_logs",
-                        getModBlock("acacia_small_logs"), () -> VanillaWoodTypes.ACACIA,
+        small_logs = SimpleEntrySet.builder(WoodType.class, "logs", "small",
+                        getModBlock("small_acacia_logs"), () -> VanillaWoodTypes.ACACIA,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addTexture(modRes("block/acacia_small_logs"), PaletteStrategies.LOG_SIDE_STANDARD)
+                .addTexture(modRes("block/small_acacia_logs"), PaletteStrategies.LOG_SIDE_STANDARD)
                 //TEXTURE: manually generated texture below (acacia_small_logs_top.png)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)
@@ -283,8 +289,8 @@ public class BlockusModule extends SimpleModule {
                 .build();
         this.addEntry(post);
 
-        small_hedge = SimpleEntrySet.builder(LeavesType.class, "small_hedge",
-                        getModBlock("oak_small_hedge"), () -> VanillaLeavesTypes.OAK,
+        small_hedge = SimpleEntrySet.builder(LeavesType.class, "hedge",
+                        getModBlock("oak_hedge"), () -> VanillaLeavesTypes.OAK,
                         leavesType -> new SmallHedgeBlock(Utils.copyPropertySafe(leavesType.leaves)
                                 .isSuffocating(BlockFactory::never)
                                 .isViewBlocking(BlockFactory::never)
@@ -293,8 +299,7 @@ public class BlockusModule extends SimpleModule {
                 )
                 //TEXTURES: leaves
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
-                .addTag(modRes("small_hedges"), Registries.BLOCK)
-                .addTag(modRes("small_hedges"), Registries.ITEM)
+                .addTag(modRes("hedges"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentTint()
@@ -317,7 +322,7 @@ public class BlockusModule extends SimpleModule {
         super.addDynamicClientResources(executor);
 
         executor.accept((manager, sink) -> {
-            String texturePath = "block/acacia_small_logs_top";
+            String texturePath = "block/small_acacia_logs_top";
             ResourceLocation logTopResLoc = modRes(texturePath);
 
             try (TextureImage edgeMask = TextureImage.open(manager, res("block/bus/small_logs_top_edge_m"));
@@ -336,7 +341,7 @@ public class BlockusModule extends SimpleModule {
                         String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(texturePath, woodType, blockId, "acacia");
 
                         // Adding to the resource
-                        sink.addTextureIfNotPresent(manager, newPath, () -> 
+                        sink.addTextureIfNotPresent(manager, res(newPath), () ->
                                 generateLogTopTexture(baseLogTopTexture, logSideTexture, insideMask, planksTexture, edgeMask));
 
                     } catch (Exception e) {

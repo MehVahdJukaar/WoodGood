@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TransparentBlock;
 
-//SUPPORT: v4.0.2+
+//See ChippedAbstractModule's SUPPORTED VERSION
 public class ChippedGlassModule extends ChippedAbstractModule {
 
     public final SimpleEntrySet<WoodType, Block> circleGlass,

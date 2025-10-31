@@ -21,6 +21,56 @@
 </div>
 
 ### UPDATED:
+- **Farmer's Delight** (COMPAT): If one or more of **Farmer's Cutting** mods is installed, then the cutting_board recipe generation will be skipped 
+- **Every Compat** (C): New feature in `everycomp-hazardous.toml` where you can blacklist a specific WoodType block or leavesType block
+- **Chipped** (C): Fixed the missing textures for nailed_log & reinforced_log - [#1094](https://github.com/MehVahdJukaar/WoodGood/issues/1094)
+- **Blockus** (FB): 
+  - Added the missing properties to _grate_ - [#1090](https://github.com/MehVahdJukaar/WoodGood/issues/1090)
+  - Updated hedges' LANG in EN_US - [#1093](https://github.com/MehVahdJukaar/WoodGood/issues/1093)
+  - hedges' tag, `#blockus:small_hedges` is now `#blockus:hedges` - [#1093](https://github.com/MehVahdJukaar/WoodGood/issues/1093)
+
+### ADDED:
+- **Unusual Furniture** (NF): Supporting v1.1.1+ 
+- **Every Compat** (C): Added tag, `#minecraft:non_flammable_wood` & `#minecraft:strider_warm_blocks` to all blocks for 4 WoodTypes - [#1091](https://github.com/MehVahdJukaar/WoodGood/issues/1091)
+  - regions_unexplored:brimwood
+  - regions_unexplored:cobalt
+  - regions_unexplored:dead
+  - regions_unexplored:yellow_bioshroom
+
+---
+
+## v2.11.13
+
+### UPDATED: 
+- **Blockus** (FB): Updated to support **v2.9.11+** - [#1085](https://github.com/MehVahdJukaar/WoodGood/issues/1085), [#1086](https://github.com/MehVahdJukaar/WoodGood/issues/1086)
+  - NOTE: the **_older version_** than **_v2.9.11_** will be no longer supported. 
+    - REASON: the ResourceLocation for some blocks' textures has changed
+- **Chipped** (C): Fixed the crash due to texture generation - [#1089](https://github.com/MehVahdJukaar/WoodGood/issues/1089), [#1088](https://github.com/MehVahdJukaar/WoodGood/issues/1088)
+
+---
+
+## v2.11.12
+
+### UPDATED: 
+- **Chipped** (C): Added the missing textures for damaged_oak_log, nailed_oak_log, reinforced_oak_log (all top texture) - [#1083](https://github.com/MehVahdJukaar/WoodGood/issues/1083)
+
+---
+
+## v2.11.11
+
+### UPDATED: 
+- **Every Compat** (C): Updated to support Configured - [#1082](https://github.com/MehVahdJukaar/WoodGood/issues/1082) 
+- **Decorative Blocks** (C): Updated to support **Decorative Blocks Reborn v6.0.1+** - [#1080](https://github.com/MehVahdJukaar/WoodGood/issues/1080)
+- **Create** (NF): Changed the renderType of windows & window_panes to CUTOUT_MIPPED
+
+### ADDED:
+- **LANG** (en_us): missing LANG for configuration - [#1082](https://github.com/MehVahdJukaar/WoodGood/issues/1082)
+
+---
+
+## v2.11.10
+
+### UPDATED:
 - **Farmer's Delight** (C): Fixed the cutting recipe not being generated - [#1038](https://github.com/MehVahdJukaar/WoodGood/issues/1038)
 - **Quark** (C): Ported the HedgeRecipe Update from 1.20.1 and it's no longer brittle code.
 - **Chipped** (C): Improved textures & Corrected a few incorrect textures for logs

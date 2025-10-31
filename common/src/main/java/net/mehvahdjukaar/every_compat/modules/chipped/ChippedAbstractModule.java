@@ -27,12 +27,13 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import java.util.List;
 import java.util.function.Consumer;
 
+//SUPPORT: v4.0.2+
 public class ChippedAbstractModule extends SimpleModule {
 
     public static String tabPath = "main";
 
     public ChippedAbstractModule(String modId) {
-        super(modId, "ch");
+        super(modId, "ch", EveryCompat.MOD_ID);
     }
 
     @Override
