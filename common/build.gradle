@@ -6,6 +6,29 @@ loom {
     accessWidenerPath = file("src/main/resources/${mod_id}.accesswidener")
 }
 
+
+
+publishing {
+    publications {
+        mavenCommon(MavenPublication) {
+            artifactId = rootProject.mod_id
+            from components.java
+        }
+    }
+
+    repositories {
+        // Add repositories to publish to here.
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.compilerArgs.add("-Acrafttweaker.processor.document.output_directory=${new File(rootProject.buildDir, "docsOut")}")
+    it.options.compilerArgs.add("-Acrafttweaker.processor.document.multi_source=true")
+
+    it.options.compilerArgs << "-Xmaxerrs" << "4000"
+
+}
+
 dependencies {
 
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
@@ -13,25 +36,8 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
-    //common. Fabric version that works on both
-//!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
-    //- Repository LOCAL
-    String path = System.getenv('REPOS21_1')
-    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
-    print "isMyPc (COMMON): $usesMavenLocalML"
+    modApi("net.mehvahdjukaar:moonlight:${moonlight_version}")
 
-    //- Repository LOCAL
-    if (enable_moonlight_test.toBoolean()) {
-        if (usesMavenLocalML) {
-            //- ~/fabric/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}") // LOCAL
-        } else {
-            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
-        }
-    } else {
-        //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-fabric") // v2.22.6
-    }
 //!! ============================================= DEPENDENCIES ========================================================
     //+ REQUIRED - The modules access libaries from below
     modCompileOnly("curse.maven:framework-549225:5911983") // v0.9.4 | +Refurbished-Furniture, Mighty-Mail, Backpacked
@@ -42,11 +48,11 @@ dependencies {
 
 //!! ================================================ IMPORTS ==========================================================
     //+ REQUIRED - The modules access libaries from below
-        // ~/common/mods LOCAL
+    // ~/common/mods LOCAL
     modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1") //FABRIC
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
-        // MACAW's
+    // MACAW's
 //    modCompileOnly("curse.maven:macaws-bridges-351725:5465222")
 //    modCompileOnly("curse.maven:macaws-doors-378646:5439190")
 //    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442197")
@@ -58,7 +64,7 @@ dependencies {
 //    modCompileOnly("curse.maven:macaws-furniture-359540:5589849")
 //    modCompileOnly("curse.maven:macaws-stairs-1119394:5802484")
 
-        //+ GENERAL
+    //+ GENERAL
     modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
     modCompileOnly("curse.maven:architects-palette-433862:6861002") //!! BETA
     modCompileOnly("curse.maven:backpacked-352835:5852971") //!! BETA
@@ -93,29 +99,8 @@ dependencies {
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //FABRIC //!! 1.20.1
 
-        //!! OTHER MAVENS
+    //!! OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
     modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1") //FABRIC
-
-}
-
-publishing {
-    publications {
-        mavenCommon(MavenPublication) {
-            artifactId = rootProject.mod_id
-            from components.java
-        }
-    }
-
-    repositories {
-        // Add repositories to publish to here.
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.compilerArgs.add("-Acrafttweaker.processor.document.output_directory=${new File(rootProject.buildDir, "docsOut")}")
-    it.options.compilerArgs.add("-Acrafttweaker.processor.document.multi_source=true")
-
-    it.options.compilerArgs << "-Xmaxerrs" << "4000"
 
 }

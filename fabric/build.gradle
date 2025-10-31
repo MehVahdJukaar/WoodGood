@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 architectury {
@@ -25,25 +25,21 @@ processResources {
     }
 }
 
-
 shadowJar {
     exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
     archiveClassifier = "dev-shadow"
-
-    zip64 true
 }
 
 remapJar {
+    exclude '**/example/**'
+
     injectAccessWidener = true
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    archiveClassifier = "fabric"
-}
-
-remapSourcesJar {
-    archiveClassifier = "fabric-sources"
+    archiveClassifier = null
+    archiveClassifier = 'fabric'
 }
 
 jar {
@@ -55,6 +51,10 @@ sourcesJar {
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
 
+    archiveClassifier = "fabric-sources"
+}
+
+remapSourcesJar{
     archiveClassifier = "fabric-sources"
 }
 
@@ -71,17 +71,7 @@ publishing {
             from components.java
         }
     }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
-        maven {
-            url = "https://www.cursemaven.com"
-            allowInsecureProtocol = true
-        }
-    }
 }
-
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
@@ -89,6 +79,9 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    modApi("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
+
 
 
     modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
@@ -101,28 +94,7 @@ dependencies {
     }
 
 //!! SUPPLEMENTARIES ------------------------------------------------------------------------------------------------ \\
-
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
-
-//!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
-    //- Repository LOCAL
-    String path = System.getenv('REPOS21_1')
-    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
-    print "isMyPc (FABRIC): $usesMavenLocalML"
-
-    //- Repository LOCAL
-    if (enable_moonlight_test.toBoolean()) {
-        if (usesMavenLocalML) {
-            //- ../fabric/mods LOCAL
-            //For the love of god do NOT change this line
-            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}")
-        } else {
-            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
-        }
-    } else {
-        //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-fabric") // v2.22.6
-    }
 
 //!! TOOLS ========================================================================================================== \\
     modRuntimeOnly("curse.maven:emi-580555:6420930") // v1.1.22
