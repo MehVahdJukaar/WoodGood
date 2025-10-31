@@ -96,7 +96,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("buildersdelight", () -> BuildersDelightModule::new);
         addModule("cfm", () -> MrCrayfishFurnitureModule::new);
         addModule("corail_pillar", () -> CorailPillarModule::new);
-        addModule("create", () -> CreateModule::new);
+//        addModule("create", () -> CreateModule::new);
         addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("decoration_delight", () -> DecorationDelightModule::new);
         if (PlatformHelper.isModLoaded("mcwdoors")) {

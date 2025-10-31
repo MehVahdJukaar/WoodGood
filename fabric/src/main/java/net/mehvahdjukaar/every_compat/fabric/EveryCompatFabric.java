@@ -56,7 +56,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("beautify", () -> BeautifyRefabricatedModule::new);
         addModule("bewitchment", () -> BewitchmentModule::new);
         addModule("clutter", () -> ClutterModule::new);
-        addModule("create", () -> CreateModule::new);
+//        addModule("create", () -> CreateModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         if (PlatformHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
