@@ -133,7 +133,7 @@ dependencies {
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     modCompileOnly("curse.maven:framework-549225:6531439") // v0.9.6 | Refurbished-Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:titanium-287342:6875285") // v4.0.40 | Functional-Storage
-    modCompileOnly("curse.maven:zeta-968868:5078215") // v1.0-13 | Quark - @DNU
+    modCompileOnly("org.violetmoon.zeta:Zeta:1.1-33.147") // v1.0-13 | Quark - @DNU
     modCompileOnly("curse.maven:blueprint-382216:6965808") // v8.0.6 | The-Outer-End, Woodworks, Boatload
     modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // v1.1.5 | Valhelsia Structure, Valhelsia Furniture
 
@@ -210,7 +210,7 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:6920497")
     modCompileOnly("curse.maven:premium-wood-353515:3905203") //!! 1.20.1
     modCompileOnly("curse.maven:productivebees-377897:5304827") //v12.5.1 | WIP //!! 1.20.1
-    modCompileOnly("curse.maven:quark-243121:5093415") //@DNU //!! 1.20.1
+    modCompileOnly("org.violetmoon.quark:Quark:4.1-467.3568") //@DNU //!! 1.20.1
     modCompileOnly("curse.maven:redeco-897377:5603009") //!! 1.20.1
     modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847") //!! 1.20.1

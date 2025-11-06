@@ -1,16 +1,25 @@
 package net.mehvahdjukaar.every_compat.modules.quark;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECPlatformStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
@@ -23,7 +32,6 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -41,22 +49,30 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import org.violetmoon.quark.base.QuarkClient;
-import org.violetmoon.quark.content.building.block.*;
+import org.violetmoon.quark.content.building.block.HedgeBlock;
+import org.violetmoon.quark.content.building.block.HollowLogBlock;
+import org.violetmoon.quark.content.building.block.LeafCarpetBlock;
+import org.violetmoon.quark.content.building.block.VariantBookshelfBlock;
+import org.violetmoon.quark.content.building.block.VariantLadderBlock;
+import org.violetmoon.quark.content.building.block.VerticalSlabBlock;
+import org.violetmoon.quark.content.building.block.WoodPostBlock;
 import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
-import org.violetmoon.quark.content.building.module.*;
+import org.violetmoon.quark.content.building.module.HedgesModule;
+import org.violetmoon.quark.content.building.module.HollowLogsModule;
+import org.violetmoon.quark.content.building.module.LeafCarpetModule;
+import org.violetmoon.quark.content.building.module.VariantBookshelvesModule;
+import org.violetmoon.quark.content.building.module.VariantLaddersModule;
+import org.violetmoon.quark.content.building.module.VerticalPlanksModule;
+import org.violetmoon.quark.content.building.module.VerticalSlabsModule;
+import org.violetmoon.quark.content.building.module.WoodenPostsModule;
 import org.violetmoon.zeta.block.ZetaBlock;
-import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
-import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.FENCE;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.WOOD;
 
 //SUPPORT: v4.0-435+
 public class QuarkModule extends SimpleModule {
@@ -68,8 +84,8 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> verticalPlanks;
     public final SimpleEntrySet<WoodType, Block> ladders;
     public final SimpleEntrySet<WoodType, Block> hollowLogs;
-    public final SimpleEntrySet<WoodType, VariantChestBlock> chests;
-    public final SimpleEntrySet<WoodType, VariantTrappedChestBlock> trappedChests;
+//    public final SimpleEntrySet<WoodType, VariantChestBlock> chests;
+//    public final SimpleEntrySet<WoodType, VariantTrappedChestBlock> trappedChests;
     public final SimpleEntrySet<LeavesType, Block> hedges;
     public final SimpleEntrySet<LeavesType, Block> leafCarpets;
 
@@ -115,7 +131,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(ResourceLocation.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/crafting/acacia_bookshelf"))
+                .addRecipe(modRes("building/crafting/bookshelves/acacia_bookshelf"))
                 .copyParentDrop()
                 .build();
         this.addEntry(bookshelves);
@@ -135,7 +151,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/crafting/oak_post"))
+                .addRecipe(modRes("building/crafting/posts/oak_post"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(posts);
@@ -157,7 +173,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/crafting/stripped_oak_post"))
+                .addRecipe(modRes("building/crafting/posts/stripped_oak_post"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(strippedPosts);
@@ -199,7 +215,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
-                .addRecipe(modRes("building/crafting/spruce_ladder"))
+                .addRecipe(modRes("building/crafting/ladders/spruce_ladder"))
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .build();
         this.addEntry(ladders);
@@ -219,45 +235,45 @@ public class QuarkModule extends SimpleModule {
                 .build();
         this.addEntry(hollowLogs);
 
-        chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
-                        VariantChestsModule.class,
-                        getModBlock("oak_chest", VariantChestBlock.class),
-                        () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChestBlock(w,
-                                shortenedId() + "/" + w.getAppendableId(),
-                                Utils.copyPropertySafe(Blocks.CHEST)))
-                .setTabKey(tab)
-                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addTag(ResourceLocation.parse("c:chests/wooden"), Registries.BLOCK, Registries.ITEM)
-                .addTag(modRes("revertable_chests"), Registries.BLOCK, Registries.ITEM)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTile(CompatChestBlockTile::new)
-                .excludeBlockTypes("twilightforest", "dark")
-                .addRecipe(modRes("building/crafting/chests/oak_chest"))
-                .build();
-        this.addEntry(chests);
+//        chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
+//                        VariantChestsModule.class,
+//                        getModBlock("oak_chest", VariantChestBlock.class),
+//                        () -> VanillaWoodTypes.OAK,
+//                        w -> new CompatChestBlock(w,
+//                                shortenedId() + "/" + w.getAppendableId(),
+//                                Utils.copyPropertySafe(Blocks.CHEST)))
+//                .setTabKey(tab)
+//                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
+//                .addTag(ResourceLocation.parse("c:chests/wooden"), Registries.BLOCK, Registries.ITEM)
+//                .addTag(modRes("revertable_chests"), Registries.BLOCK, Registries.ITEM)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+//                .addTile(CompatChestBlockTile::new)
+//                .excludeBlockTypes("twilightforest", "dark")
+//                .addRecipe(modRes("building/crafting/chests/oak_chest"))
+//                .build();
+//        this.addEntry(chests);
 
-        trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
-                        VariantChestsModule.class,
-                        getModBlock("oak_trapped_chest", VariantTrappedChestBlock.class),
-                        () -> VanillaWoodTypes.OAK,
-                        w -> {
-                            boolean isNamespaceLoaded = w.getNamespace().equals("twilightforest")
-                                    || w.getNamespace().equals("blue_skies");
-                            if (!chests.blocks.containsKey(w) && !isNamespaceLoaded) return null;
-                            String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatTrappedChestBlock(w, name, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
-                        })
-                .setTabKey(tab)
-                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addTag(ResourceLocation.parse("forge:chests/trapped"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("forge:chests/wooden"), Registries.BLOCK, Registries.ITEM)
-                .addTag(modRes("revertable_trapped_chests"), Registries.ITEM)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTile(CompatTrappedChestBlockTile::new)
-                .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
-                .build();
-        this.addEntry(trappedChests);
+//        trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
+//                        VariantChestsModule.class,
+//                        getModBlock("trapped_oak_chest", VariantTrappedChestBlock.class),
+//                        () -> VanillaWoodTypes.OAK,
+//                        w -> {
+//                            boolean isNamespaceLoaded = w.getNamespace().equals("twilightforest")
+//                                    || w.getNamespace().equals("blue_skies");
+//                            if (!chests.blocks.containsKey(w) && !isNamespaceLoaded) return null;
+//                            String name = shortenedId() + "/" + w.getAppendableId();
+//                            return new CompatTrappedChestBlock(w, name, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
+//                        })
+//                .setTabKey(tab)
+//                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
+//                .addTag(ResourceLocation.parse("forge:chests/trapped"), Registries.BLOCK, Registries.ITEM)
+//                .addTag(ResourceLocation.parse("forge:chests/wooden"), Registries.BLOCK, Registries.ITEM)
+//                .addTag(modRes("revertable_trapped_chests"), Registries.ITEM)
+//                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+//                .addTile(CompatTrappedChestBlockTile::new)
+//                .addRecipe(modRes("building/crafting/chests/trapped_oak_chest"))
+//                .build();
+//        this.addEntry(trappedChests);
 
         //doing it this way because for some reason its nuking whatever block item I throw in here
         hedges = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
@@ -296,7 +312,7 @@ public class QuarkModule extends SimpleModule {
                 .addTag(ResourceLocation.parse("mynethersdelight:resurgent_soil_plant"), Registries.BLOCK)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/crafting/oak_leaf_carpet"))
+                .addRecipe(modRes("building/crafting/leafcarpet/oak_leaf_carpet"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentTint()
                 .build();
@@ -316,8 +332,8 @@ public class QuarkModule extends SimpleModule {
     @Override
     public void registerTiles(Registrator<BlockEntityType<?>> registry) {
         super.registerTiles(registry);
-        CHEST_TILE = chests.getTile(ChestBlockEntity.class);
-        TRAPPED_CHEST_TILE = trappedChests.getTile(ChestBlockEntity.class);
+//        CHEST_TILE = chests.getTile(ChestBlockEntity.class);
+//        TRAPPED_CHEST_TILE = trappedChests.getTile(ChestBlockEntity.class);
     }
 
     @Override
@@ -330,10 +346,10 @@ public class QuarkModule extends SimpleModule {
     @Environment(EnvType.CLIENT)
     public static class QuarkClientModule {
         private static void initClient(QuarkModule module) {
-            for (var b : module.chests.blocks.values())
-                QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(CHEST_TILE, b.defaultBlockState()));
-            for (var b : module.trappedChests.blocks.values())
-                QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(TRAPPED_CHEST_TILE, b.defaultBlockState()));
+//            for (var b : module.chests.blocks.values())
+//                QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(CHEST_TILE, b.defaultBlockState()));
+//            for (var b : module.trappedChests.blocks.values())
+//                QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(TRAPPED_CHEST_TILE, b.defaultBlockState()));
         }
     }
 
@@ -341,8 +357,8 @@ public class QuarkModule extends SimpleModule {
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(CHEST_TILE, context -> new VariantChestRenderer(context, false));
-        event.register(TRAPPED_CHEST_TILE, context -> new VariantChestRenderer(context, true));
+//        event.register(CHEST_TILE, context -> new VariantChestRenderer(context, false));
+//        event.register(TRAPPED_CHEST_TILE, context -> new VariantChestRenderer(context, true));
     }
 
     public static final PaletteStrategy bookshelfPalette = registerCached((blockType, manager) ->
@@ -390,58 +406,58 @@ public class QuarkModule extends SimpleModule {
             Respriter respriterLeftO = Respriter.of(left_o);
             Respriter respriterRightO = Respriter.of(right_o);
 
-            trappedChests.blocks.forEach((wood, block) -> {
-
-                CompatTrappedChestBlock b = (CompatTrappedChestBlock) block;
-
-                try (TextureImage plankTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
-
-                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-                    var meta = plankTexture.getMcMeta();
-
-                    List<Palette> overlayPalette = new ArrayList<>();
-                    for (var p : targetPalette) {
-                        var d1 = p.getDarkest();
-                        p.remove(d1);
-                        var d2 = p.getDarkest();
-                        p.remove(d2);
-                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
-                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
-                        var pal = Palette.ofColors(List.of(n1, n2));
-                        overlayPalette.add(pal);
-                    }
-
-                    {
-                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/normal");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap");
-
-                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
-                    {
-                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/left");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_left");
-
-                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
-                    {
-                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/right");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_right");
-
-                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
-
-
-                } catch (Exception ex) {
-                    EveryCompat.LOGGER.error("Failed to generate Chest block texture for for {} : {}", b, ex);
-                }
-            });
+//            trappedChests.blocks.forEach((wood, block) -> {
+//
+//                CompatTrappedChestBlock b = (CompatTrappedChestBlock) block;
+//
+//                try (TextureImage plankTexture = TextureImage.open(manager,
+//                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
+//
+//                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
+//                    var meta = plankTexture.getMcMeta();
+//
+//                    List<Palette> overlayPalette = new ArrayList<>();
+//                    for (var p : targetPalette) {
+//                        var d1 = p.getDarkest();
+//                        p.remove(d1);
+//                        var d2 = p.getDarkest();
+//                        p.remove(d2);
+//                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
+//                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
+//                        var pal = Palette.ofColors(List.of(n1, n2));
+//                        overlayPalette.add(pal);
+//                    }
+//
+//                    {
+//                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/normal");
+//                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+//                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap");
+//
+//                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
+//                        }
+//                    }
+//                    {
+//                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/left");
+//                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+//                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_left");
+//
+//                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
+//                        }
+//                    }
+//                    {
+//                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/right");
+//                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+//                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_right");
+//
+//                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
+//                        }
+//                    }
+//
+//
+//                } catch (Exception ex) {
+//                    EveryCompat.LOGGER.error("Failed to generate Chest block texture for for {} : {}", b, ex);
+//                }
+//            });
         } catch (Exception ex) {
             EveryCompat.LOGGER.error("Could not generate any Chest block texture : ", ex);
         }
@@ -496,6 +512,12 @@ public class QuarkModule extends SimpleModule {
 
         String recipe = """
                 {
+                    "neoforge:conditions": [
+					    {
+					        "type": "zeta:flag",
+					        "flag": "hedges"
+					    }
+				    ],
                     "type": "minecraft:crafting_shaped",
                     "pattern": [
                         "L",
@@ -510,15 +532,9 @@ public class QuarkModule extends SimpleModule {
                         }
                     },
                     "result": {
-                        "item": "[HEDGE]",
+                        "id": "[HEDGE]",
                         "count": 2
-                    },
-                    "conditions": [
-                        {
-                            "type": "quark:flag",
-                            "flag": "hedges"
-                        }
-                    ]
+                    }
                 }\s
                 """;
 
