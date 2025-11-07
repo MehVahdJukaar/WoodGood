@@ -2,15 +2,15 @@ plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT" apply false
     id "dev.architectury.loom" version "1.11-SNAPSHOT" apply false
     id "io.github.juuxel.loom-quiltflower" version "1.7.1" apply false
-    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
     id "com.matthewprenger.cursegradle" version "1.+"
     id "com.modrinth.minotaur" version "2.+"
+    id "com.possible-triangle.publishing" version "1.2.67" apply false
 }
 
 allprojects {
     apply plugin: "java"
     apply plugin: "architectury-plugin"
-    apply plugin: "maven-publish"
+    apply plugin: "com.possible-triangle.publishing"
 
     group = mod_group_id
     version = mod_version
@@ -92,6 +92,24 @@ subprojects {
             it.parchment("org.parchmentmc.data:parchment-${rootProject.parchment_version}")
         }
 
+    }
+
+    publishing {
+        repositories {
+            mavenLocal()
+
+            def nexusToken = providers.environmentVariable("NEXUS_TOKEN")
+            def nexusUser = providers.environmentVariable("NEXUS_USER")
+            if (nexusToken && nexusUser) {
+                maven {
+                    url = uri("https://registry.somethingcatchy.net/repository/maven-releases/")
+                    credentials {
+                        username = nexusUser.get()
+                        password = nexusToken.get()
+                    }
+                }
+            }
+        }
     }
 
     var env = System.getenv()
