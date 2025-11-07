@@ -98,14 +98,14 @@ subprojects {
         repositories {
             mavenLocal()
 
-            def nexusToken = providers.environmentVariable("NEXUS_TOKEN")
-            def nexusUser = providers.environmentVariable("NEXUS_USER")
+            def nexusToken = providers.environmentVariable("NEXUS_TOKEN").get()
+            def nexusUser = providers.environmentVariable("NEXUS_USER").get()
             if (nexusToken && nexusUser) {
                 maven {
                     url = uri("https://registry.somethingcatchy.net/repository/maven-releases/")
                     credentials {
-                        username = nexusUser.get()
-                        password = nexusToken.get()
+                        username = nexusUser
+                        password = nexusToken
                     }
                 }
             }
