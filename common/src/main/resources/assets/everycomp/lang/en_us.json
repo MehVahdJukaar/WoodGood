@@ -1104,6 +1104,7 @@
   "block_type.unusual_furniture.open_riser_stairs": "%s Open Riser Stairs",
   "block_type.unusual_furniture.railing": "%s Railing",
   "block_type.unusual_furniture.beam": "%s Beam",
+  "block_type.unusual_furniture.shelf": "%s Shelf",
 
   "block_type.blockus.herringbone_planks": "Herringbone %s Planks",
   "block_type.blockus.mossy_planks": "Mossy %s Planks",
