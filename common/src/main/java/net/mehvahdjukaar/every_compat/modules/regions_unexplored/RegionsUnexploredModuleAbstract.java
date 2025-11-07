@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -16,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -34,7 +36,7 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
     public final SimpleEntrySet<LeavesType, Block> shrubs;
 
     public RegionsUnexploredModuleAbstract(String modId) {
-        super(modId, "ru");
+        super(modId, "ru", EveryCompat.MOD_ID);
         ResourceLocation tab = (PlatHelper.getPlatform().isFabric()) ? modRes("main") : modRes("ru_main");
 
         branches = SimpleEntrySet.builder(WoodType.class, "branch",
@@ -47,6 +49,7 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
                 .addTag(modRes("branches"), Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_branch_from_oak_log"))
+                //RECIPE-GENERATED: stick_from_oak_branch
                 .build();
         this.addEntry(branches);
 
@@ -87,6 +90,23 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
+        String recipe = """
+                {
+                    "type": "minecraft:crafting_shapeless",
+                    "category": "misc",
+                    "group": "stick",
+                    "ingredients": [
+                        {
+                            "item": "[BRANCH]"
+                        }
+                    ],
+                    "result": {
+                    "count": 4,
+                    "id": "minecraft:stick"
+                    }
+                }
+                """;
+
         executor.accept((manager, sink) -> {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (woodType.isVanilla() || woodType.getNamespace().equals("regions_unexplored")) continue;
@@ -94,6 +114,14 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
                 //Tagging the planks as ingredient to get painted_planks
                 createAndAddCustomTags(ResourceLocation.withDefaultNamespace("planks"), sink, woodType.planks);
                 createAndAddCustomTags(ResourceLocation.parse("forge:planks"), sink, woodType.planks);
+
+                branches.blocks.forEach((wt, block) -> {
+                    String newRecipe = recipe.replace("[BRANCH]", Utils.getID(block).toString());
+
+                    sink.addBytes(EveryCompat.res(wt.createPathWith(shortenedId(), "stick_from", "branch")),
+                            newRecipe.getBytes(), ResType.RECIPES);
+
+                });
             }
 
         });
@@ -195,5 +223,9 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
             }
 
         });
+    }
+
+    public void createRecipe(WoodType woodType) {
+
     }
 }

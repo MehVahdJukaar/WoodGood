@@ -52,7 +52,7 @@ import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.g
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LOG;
 
-//SUPPORT: v4.0.1+
+//SUPPORT: v4.0.2+
 public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> chiseled_bookshelves;
@@ -317,7 +317,7 @@ public class WoodworksModule extends SimpleModule {
     public void sawmillRecipe(String recipeName, Item input, Item output,
                               ResourceSink sink, ResourceManager manager, WoodType wood) {
 
-        ResourceLocation recipeLocation = modRes("recipes/" + recipeName + ".json"); // get Recipe JSON
+        ResourceLocation recipeLocation = modRes("recipe/" + recipeName + ".json"); // get Recipe JSON
 
         try (InputStream recipeStream = manager.getResource(recipeLocation)
                 .orElseThrow(() -> new FileNotFoundException("File Not Found: " + recipeLocation)).open()) {
