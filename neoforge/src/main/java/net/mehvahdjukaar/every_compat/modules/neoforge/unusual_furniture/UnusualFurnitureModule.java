@@ -37,6 +37,7 @@ public class UnusualFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> open_riser_stairs;
     public final SimpleEntrySet<WoodType, Block> railing;
     public final SimpleEntrySet<WoodType, Block> beam;
+    public final SimpleEntrySet<WoodType, Block> shelf;
 
     public static final Map<Block, ResourceLocation> BLOCK_TO_TEXTURE_MAP = new HashMap<>();
     public final String shortenedId;
@@ -212,6 +213,20 @@ public class UnusualFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("oak_beam_craft"))
                 .build();
         this.addEntry(beam);
+
+        shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
+                        getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
+                        w -> new OakShelfBlock()
+                )
+                .requiresFromMap(carved.blocks) //REASON: textures
+                .requiresFromMap(coffee_table.blocks) //REASON: textures
+                .requiresChildren(SLAB) //REASON: recipes
+                //TEXTURES: oak_coffee_table, carved_oak_top
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .addRecipe(modRes("oak_sheft_craft"))
+                .build();
+        this.addEntry(shelf);
 
     }
 
