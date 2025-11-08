@@ -89,7 +89,9 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    modApi("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}")
+    modApi("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}"){
+        transitive = false
+    }
 
 //!! TOOLS ========================================================================================================== \\
     modRuntimeOnly("curse.maven:emi-580555:6420931") // v1.1.22

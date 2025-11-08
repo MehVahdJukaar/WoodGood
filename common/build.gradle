@@ -36,7 +36,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
 
-    modApi("net.mehvahdjukaar:moonlight:${moonlight_version}")
+    modApi("net.mehvahdjukaar:moonlight:${moonlight_version}"){
+        transitive = false
+    }
 
 //!! ============================================= DEPENDENCIES ========================================================
     //+ REQUIRED - The modules access libaries from below
