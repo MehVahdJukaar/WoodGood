@@ -73,7 +73,6 @@ public class UnusualFurnitureModule extends SimpleModule {
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/oak_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.NEEDS_STONE_TOOL, Registries.BLOCK)
                 .addTag(modRes("large_table"), Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_table_recipe"))
@@ -90,7 +89,6 @@ public class UnusualFurnitureModule extends SimpleModule {
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/oak_coffee_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.NEEDS_STONE_TOOL, Registries.BLOCK)
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_coffee_table_craft"))
@@ -107,6 +105,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/oak_stool"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_stool_craft"))
                 .build();
@@ -122,6 +121,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                 //TEXTURES: carved_oak, stool
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_chair_craft"))
                 .build();
@@ -167,6 +167,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/bench_oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bench"), Registries.BLOCK)
+                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_bench_craft"))
                 .build();
@@ -180,6 +181,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                 .requiresFromMap(coffee_table.blocks) //REASON: textures
                 .requiresChildren(STAIRS) //REASON: recipes
                 //TEXTURES: carved_oak, oak_coffe_table
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stairs"), Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_open_riser_stairs_craft"))
@@ -195,6 +197,7 @@ public class UnusualFurnitureModule extends SimpleModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: carved_oak, oak_coffe_table
                 .addTexture(modRes("block/oak_railing"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("railing"), Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_railing_recipe"))
@@ -218,10 +221,9 @@ public class UnusualFurnitureModule extends SimpleModule {
                         getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
                         w -> new OakShelfBlock()
                 )
-                .requiresFromMap(carved.blocks) //REASON: textures
                 .requiresFromMap(coffee_table.blocks) //REASON: textures
                 .requiresChildren(SLAB) //REASON: recipes
-                //TEXTURES: oak_coffee_table, carved_oak_top
+                //TEXTURES: planks, oak_coffee_table
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_sheft_craft"))
