@@ -42,7 +42,7 @@ import java.util.function.ToIntFunction;
 
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 
-//SUPPORT: v1.0.0+
+//SUPPORT: v1.0.2+
 //NOTE: The Project ID is 1085950
 public class BeautifulCampfiresModule extends SimpleModule {
 
@@ -50,7 +50,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, CampfireBlock> soul_campfires;
 
     public BeautifulCampfiresModule(String modId) {
-        super(modId, "bc");
+        super(modId, "bc", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         campfires = SimpleEntrySet.builder(WoodType.class, "campfire",
@@ -73,8 +73,12 @@ public class BeautifulCampfiresModule extends SimpleModule {
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 //TEXTURES: acacia_soul_campfire above
-                .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"), PaletteStrategies.LOG_SIDE_STANDARD)
-                .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"), PaletteStrategies.LOG_SIDE_STANDARD)
+                .addTextureM(modRes("block/acacia_campfire_log_lit"),
+                        EveryCompat.res("block/bc/campfire_log_lit_m"),
+                        PaletteStrategies.LOG_SIDE_STANDARD)
+                .addTextureM(modRes("block/acacia_soul_campfire_log_lit"),
+                        EveryCompat.res("block/bc/campfire_log_lit_m"),
+                        PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
                 .addTag(BlockTags.PIGLIN_REPELLENTS, Registries.BLOCK)
@@ -178,7 +182,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                     String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(campfirePath, wood, id, "acacia");
 
                     // Adding to the resource
-                    sink.addTextureIfNotPresent(manager, newPath, () -> {
+                    sink.addTextureIfNotPresent(manager, EveryCompat.res(newPath), () -> {
                         // Recoloring the plank part
                         try (TextureImage recoloredLog = respriterLog.recolorWithAnimationOf(logTexture)) {
                             Respriter respriterPlank = Respriter.masked(recoloredLog, targetPlankImage);
