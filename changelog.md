@@ -20,6 +20,21 @@
 
 </div>
 
+### UPDATED: 
+- **Unusual Furniture** (NF): 
+  - Fixed Railing & Drawer's missing textures - [#1107](https://github.com/MehVahdJukaar/WoodGood/issues/1107)
+  - Fixed the crash when placing table, coffee_table, and also other 3 blocks - [#1108](https://github.com/MehVahdJukaar/WoodGood/issues/1108)
+- **Woodworks** (NF): Fixed missing saw recipes - [#1102](https://github.com/MehVahdJukaar/WoodGood/issues/1102)
+- **Every Compat** (EXCLUDED): **Regions Unexplored**'s _ALPHA_ is blacklisted because it replaced **Minecraft**'s _OAK_
+- **Regions Unexplored** (C): Added a missing recipe for _branch_, crafting 4 sticks from branch - [#1106](https://github.com/MehVahdJukaar/WoodGood/issues/1106)
+
+### ADDED:
+- **Unusual Furniture** (NF): Supporting new block: shelf - @astrough
+
+---
+
+## v2.11.14
+
 ### UPDATED:
 - **Farmer's Delight** (COMPAT): If one or more of **Farmer's Cutting** mods is installed, then the cutting_board recipe generation will be skipped 
 - **Every Compat** (C): New feature in `everycomp-hazardous.toml` where you can blacklist a specific WoodType block or leavesType block
