@@ -5,7 +5,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
-public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation mask,
+public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation mask, @Nullable ResourceLocation overlay,
                           boolean keepNamespace, boolean copyTexture, String customTexturePath,
                           Pair<String, String> replacePath,
                           boolean autoMask,
@@ -20,6 +20,10 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         return new Builder(res).mask(mask);
     }
 
+    public static Builder of(ResourceLocation res, ResourceLocation mask, ResourceLocation overlay) {
+        return new Builder(res).mask(mask).overlay(overlay);
+    }
+
     public static <T extends BlockType> Builder of(ResourceLocation res, String customTexturePath) {
         return new Builder(res).customTexture(customTexturePath);
     }
@@ -27,13 +31,14 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
     //remove once you remove the rest of palette madness
     @Deprecated(forRemoval = true)
     public TextureInfo cloneWithPalette(PaletteStrategy newPalette) {
-        return new TextureInfo(this.texture, this.mask, this.keepNamespace, this.copyTexture, this.customTexturePath,
+        return new TextureInfo(this.texture, this.mask, this.overlay, this.keepNamespace, this.copyTexture, this.customTexturePath,
                 replacePath, this.autoMask, this.onAtlas, newPalette);
     }
 
     public static class Builder {
         private final ResourceLocation texture;
         private ResourceLocation mask;
+        private ResourceLocation overlay;
         private boolean keepNamespace = false;
         private boolean copyTexture = false;
         private boolean autoMask = false;
@@ -49,6 +54,11 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
 
         public Builder mask(ResourceLocation mask) {
             this.mask = mask;
+            return this;
+        }
+
+        public Builder overlay(ResourceLocation overlay) {
+            this.overlay = overlay;
             return this;
         }
 
@@ -92,7 +102,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
 
 
         public TextureInfo build() {
-            return new TextureInfo(texture, mask, keepNamespace,
+            return new TextureInfo(texture, mask, overlay, keepNamespace,
                     copyTexture, customTexturePath, replacePath, autoMask, onAtlas, palette);
         }
     }
