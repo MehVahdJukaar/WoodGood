@@ -21,6 +21,13 @@
 </div>
 
 ### UPDATED: 
+- **Unusual Furniture** (NF): Forgot to mark one method to be `OnlyIn(Dist.CLIENT)` - FIXED issue with SERVER not working properly
+
+---
+
+## v2.11.15
+
+### UPDATED: 
 - **Unusual Furniture** (NF): 
   - Fixed Railing & Drawer's missing textures - [#1107](https://github.com/MehVahdJukaar/WoodGood/issues/1107)
   - Fixed the crash when placing table, coffee_table, and also other 3 blocks - [#1108](https://github.com/MehVahdJukaar/WoodGood/issues/1108)
@@ -29,7 +36,7 @@
 - **Regions Unexplored** (C): Added a missing recipe for _branch_, crafting 4 sticks from branch - [#1106](https://github.com/MehVahdJukaar/WoodGood/issues/1106)
 
 ### ADDED:
-- **Unusual Furniture** (NF): Supporting new block: shelf - @astrough
+- **Unusual Furniture** (NF): Supporting new block: shelf - @axtrough
 
 ---
 
