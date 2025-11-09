@@ -452,9 +452,22 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     .mask(maskLocation));
         }
 
+        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, ResourceLocation overlayLocation) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(maskLocation)
+                    .overlay(overlayLocation));
+        }
+
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, PaletteStrategy palette) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation)
+                    .setPalette(palette));
+        }
+
+        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, ResourceLocation overlayLocation, PaletteStrategy palette) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(maskLocation)
+                    .overlay(overlayLocation)
                     .setPalette(palette));
         }
 

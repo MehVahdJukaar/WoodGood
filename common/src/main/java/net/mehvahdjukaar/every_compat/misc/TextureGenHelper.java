@@ -11,6 +11,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -167,6 +168,7 @@ public class TextureGenHelper {
                         sink.addTextureIfNotPresent(manager, newId, () -> {
                             Respriter respriter = respriterSet.getValue();
                             TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
+                            if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), manager);
                             postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
                             return img;
                         });
@@ -189,5 +191,12 @@ public class TextureGenHelper {
         return texture;
     }
 
+    private static void getAndApplyOverlay(TextureImage image, ResourceLocation overlayLocation, ResourceManager manager) {
+        try (TextureImage overlayTexture = TextureImage.open(manager, overlayLocation)) {
+            TextureOps.applyOverlay(image, overlayTexture);
+        } catch (Exception e) {
+            EveryCompat.LOGGER.error("Failed to get an overlay texture: ", e);
+        }
+    }
 
 }
