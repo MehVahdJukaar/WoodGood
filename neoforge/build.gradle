@@ -113,7 +113,7 @@ dependencies {
     modRuntimeOnly("curse.maven:athena-841890:5629395") // v4.0.1 | Chipped
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | Required by: REI, Furnish
 //    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | Required by: REI
-    modRuntimeOnly("curse.maven:resourceful-lib-570073:5793500")  // v3.0.11 | Chipped, Handcrafted, Cozy
+//    modRuntimeOnly("curse.maven:resourceful-lib-570073:5793500")  // v3.0.11 | Chipped, Handcrafted, Cozy
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5679902") // v1.1.1a | Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5713682") // v1.1.17i | Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
@@ -128,7 +128,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:quad-932715:5900860") // v1.2.9 | More-Chest-Variants, More-Crafting-Table
 
         // OTHER MAVENs
-    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Resourceful-Lib
+//    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Resourceful-Lib
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}") // Create
 
@@ -170,7 +170,7 @@ dependencies {
 
         //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK") //!! 1.20.1
-    modRuntimeOnly("earth.terrarium.chipped:chipped-neoforge-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
+//    modRuntimeOnly("earth.terrarium.chipped:chipped-neoforge-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
         // ~/forge/mods LOCAL
@@ -180,12 +180,12 @@ dependencies {
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5465228")
-    modImplementation("curse.maven:macaws-doors-378646:6146345")
+    modCompileOnly("curse.maven:macaws-doors-378646:6146345")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442175")
     modCompileOnly("curse.maven:macaws-furniture-359540:5589819")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5473578")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5430735")
-    modImplementation("curse.maven:macaws-roofs-352039:5554896")
+    modCompileOnly("curse.maven:macaws-roofs-352039:5554896")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:5977602")
     modCompileOnly("curse.maven:macaws-windows-363569:5592081")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802422")
