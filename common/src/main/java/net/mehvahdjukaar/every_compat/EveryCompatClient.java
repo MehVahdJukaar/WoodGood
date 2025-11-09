@@ -89,18 +89,7 @@ public class EveryCompatClient {
                     components.add(Component.translatable("tooltip.everycomp.mod", compatModule.getModName()).withStyle(ChatFormatting.BLUE));
             }
         }
-        if (PlatHelper.isDev()) {
-            Block blocked = Block.byItem(stack.getItem());
-            // BLOCK TAGS
-            if (blocked != Blocks.AIR) {
-                components.add(Component.literal("BlockTag:").withStyle(ChatFormatting.GREEN));
-                blocked.defaultBlockState().getTags().forEach((k) -> components.add(Component.literal("-" + k.location()).withStyle(Style.EMPTY.withColor(0xc8ffc8))));
-            }
-
-            // ITEM TAGS
-            components.add(Component.literal("ItemTag:").withStyle(ChatFormatting.LIGHT_PURPLE));
-            stack.getTags().forEach((k) -> components.add(Component.literal("-" + k.location()).withStyle(Style.EMPTY.withColor(0xffc8ff))));
-        }
+        //tags stuff moved to ML, under the config
     }
 
     public static <B extends Block> void registerRenderType(B b, BlockType bt, Object type) {

@@ -52,6 +52,23 @@ allprojects {
         maven { url = "https://maven.firstdarkdev.xyz/snapshots" } // FirstDarkDev (snapshots)
         maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // NeoForge config API port
 
+
+        maven { url = "https://mvn.devos.one/snapshots/" }
+        maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
+        maven { url = "https://maven.shedaniel.me/" } // Cloth Config
+        maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
+        maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
+        maven { url = "https://maven.jamieswhiteshirt.com/libs-release";
+            content { includeGroup("com.jamieswhiteshirt") } } // Reach Entity Attributes
+        maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
+        maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" } // JEI
+        maven { name = "ModMaven"; url = "https://modmaven.dev" } // Botania & FALLBACK for JEI
+        maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
+        maven { url = "https://maven.firstdarkdev.xyz/snapshots" }
+        maven { name = "TerraformersMC"; url = "https://maven.terraformersmc.com/" }
+        maven { url = "https://raw.githubusercontent.com/moddingplayground/maven/main/" }
+
+
         maven { // Reach Entity Attributes
             url = "https://maven.jamieswhiteshirt.com/libs-release"
             content { includeGroup("com.jamieswhiteshirt") }
