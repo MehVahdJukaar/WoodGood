@@ -16,6 +16,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.toopa.unusualfurniture.block.*;
 
 import java.util.HashMap;
@@ -358,6 +360,7 @@ public class UnusualFurnitureModule extends SimpleModule {
 // ─────────────────────────────────── Register ────────────────────────────────────
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
 
