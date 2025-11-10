@@ -116,13 +116,15 @@ dependencies {
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5793501") //v3.0.11 | Chipped, Handcrafted, Cozy
 //    modRuntimeOnly("curse.maven:monolib-968432:6123972") //v2.0.0 | More-Beautiful-Torches
+//    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
 
         //- OTHER LIBRARIES
 //    modRuntimeOnly("org.reflections:reflections:0.10.2") // Refurbished-Furniture
 //    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
 
+        //- OTHER MAVENS
+
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
-    modCompileOnly("curse.maven:athena-841890:5176880") // Chipped
     modCompileOnly("curse.maven:framework-549225:5911983") // v0.9.4 | Refurbished-Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5903633") // v1.2.9 | More-Chest-Variants, More-Crafting-Tables
     modCompileOnly("curse.maven:valhelsia-core-416935:6296784") // v1.1.5 | Valhelsia-Furniture
@@ -148,7 +150,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:backpacked-352835:5852971") //!! BETA
 //    modRuntimeOnly("curse.maven:blockus-312289:7060780")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579676") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:chipped-456956:5813118")
 //    modRuntimeOnly("curse.maven:corail-pillar-266228:5613351")
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029308")
 //    modRuntimeOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
@@ -171,6 +172,7 @@ dependencies {
 
         //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
+    modRuntimeOnly("earth.terrarium.chipped:chipped-fabric-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib -NOTE: no need to enable these dependencies mods, it's already included
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
         // ~/forge/mods LOCAL
@@ -180,7 +182,7 @@ dependencies {
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5465222")
     modCompileOnly("curse.maven:macaws-doors-378646:6146461")
-    modImplementation("curse.maven:macaws-fences-and-walls-453925:5442197")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442197")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5473592")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5430737")
     modCompileOnly("curse.maven:macaws-roofs-352039:5554934")
