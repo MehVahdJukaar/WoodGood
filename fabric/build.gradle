@@ -172,7 +172,7 @@ dependencies {
 
         //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
-    modRuntimeOnly("earth.terrarium.chipped:chipped-fabric-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib -NOTE: no need to enable these dependencies mods, it's already included
+//    modRuntimeOnly("earth.terrarium.chipped:chipped-fabric-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib -NOTE: no need to enable these dependencies mods, it's already included
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
         // ~/forge/mods LOCAL
