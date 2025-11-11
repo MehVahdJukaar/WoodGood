@@ -46,6 +46,9 @@ public class HardcodedBlockType {
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
         if (isKnownVanillaWood(woodType)) return true;
 
+        // The WoodType from Cobblemon's Legendary Monuments has a 32x32 texture
+        if (isWoodFrom("", "", "legendarymonuments:distortion", "")) return true;
+
         // Supported Mods that have supportedBlockId should be excluded due to FramedBlocks
         if (isWoodFrom("", "", "", "torch") && PlatHelper.isModLoaded("framedblocks")) return true;
 
