@@ -486,6 +486,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     .setPalette(palette));
         }
 
+        /// Copy the texture as it is to EC's Resources
+        public BL copyTexture(ResourceLocation textureLocation) {
+            return addTexture(TextureInfo.of(textureLocation).copyTexture());
+        }
+
         // adds a texture with automatic masking. Experimental
 //        public BL addTextureAutoM(ResourceLocation textureLocation) {
 //            return addTexture(TextureInfo.of(textureLocation)
