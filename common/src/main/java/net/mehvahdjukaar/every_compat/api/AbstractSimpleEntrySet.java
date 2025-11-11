@@ -456,7 +456,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         public BL addTexture(ResourceLocation resourceLocation, PaletteStrategy palette) {
             return addTexture(TextureInfo.of(resourceLocation)
-                    .palette(palette));
+                    .setPalette(palette));
         }
 
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
@@ -464,10 +464,23 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     .mask(maskLocation));
         }
 
+        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, ResourceLocation overlayLocation) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(maskLocation)
+                    .overlay(overlayLocation));
+        }
+
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, PaletteStrategy palette) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation)
-                    .palette(palette));
+                    .setPalette(palette));
+        }
+
+        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, ResourceLocation overlayLocation, PaletteStrategy palette) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(maskLocation)
+                    .overlay(overlayLocation)
+                    .setPalette(palette));
         }
 
         /// Custom Texture Path is for placing the texture in the correct ResourceLocation
@@ -475,11 +488,26 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return addTexture(TextureInfo.of(textureLocation, customTexturePath));
         }
 
-        // adds a texture with automatic masking. Experimental
-        public BL addTextureAutoM(ResourceLocation textureLocation) {
-            return addTexture(TextureInfo.of(textureLocation)
-                    .autoMask());
+        public BL addTextureC(ResourceLocation textureLocation, PaletteStrategy palette, String customTexturePath) {
+            return addTexture(TextureInfo.of(textureLocation, customTexturePath).setPalette(palette));
         }
+
+        public BL addTextureMC(ResourceLocation textureLocation, ResourceLocation maskLocation, PaletteStrategy palette, String customTexturePath) {
+            return addTexture(TextureInfo.of(textureLocation, customTexturePath)
+                    .mask(maskLocation)
+                    .setPalette(palette));
+        }
+
+        /// Copy the texture as it is to EC's Resources
+        public BL copyTexture(ResourceLocation textureLocation) {
+            return addTexture(TextureInfo.of(textureLocation).copyTexture());
+        }
+
+        // adds a texture with automatic masking. Experimental
+//        public BL addTextureAutoM(ResourceLocation textureLocation) {
+//            return addTexture(TextureInfo.of(textureLocation)
+//                    .autoMask());
+//        }
 
         public BL useMergedPalette() {
             this.useMergedPalette = true;
