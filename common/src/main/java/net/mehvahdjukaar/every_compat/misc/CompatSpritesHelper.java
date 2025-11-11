@@ -57,7 +57,7 @@ public class CompatSpritesHelper {
             }
         }
 
-        // Minecraft
+        // -------------------- Minecraft
         TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log", EveryCompat.res("block/cactus_side"));
         TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log_top", EveryCompat.res("block/cactus_top"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS"stripped_cactus_log", res("block/stripped_cactus_side"));
@@ -65,27 +65,27 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
-        // Frightful Winter
+        // -------------------- Frightful Winter
         // Leaves
         addOptional("frightful_winter:snowy_pine_leaves", "_leaves", "frightful_winter:block/snowy_pine_leaves");
 
-        // Macaw's Holiday
+        // -------------------- Macaw's Holiday
         addOptional("mcwholidays:snowy_oak_leaves", "_leaves", "mcwholidays:block/snowy_oak_leaves");
         addOptional("mcwholidays:snowy_spruce_leaves", "_leaves", "mcwholidays:block/snowy_spruce_leaves");
 
-        // Natural Decor mod
+        // -------------------- Natural Decor mod
         addOptional("naturaldecormod:saguaro_log", "_side", "naturaldecormod:block/aguaroogew");
         addOptional("naturaldecormod:saguaro_log", "_top", "naturaldecormod:block/aguaroogewop");
 
-        // Luminous Nether
+        // -------------------- Luminous Nether
         addOptional("luminous_nether:withered_log", "_side", "luminous_nether:block/ashenlogside");
         addOptional("luminous_nether:withered_log", "_top", "luminous_nether:block/ashenlogtop");
         addOptional("luminous_nether:stripped_withered_log", "_side", "luminous_nether:block/strippedwitheredlogside");
         addOptional("luminous_nether:stripped_withered_log", "_top", "luminous_nether:block/strippedwitheredlogtop");
-        // Planks
+        // -------------------- Planks
         addOptional("luminous_nether:withered_planks", "_top", "luminous_nether:block/ashplanks");
 
-        // golden_stem aka "mushroom"
+        // -------------------- golden_stem aka "mushroom"
         // log
         addOptional("luminous_nether:goldenstem", "_side", "luminous_nether:block/stembase");
         addOptional("luminous_nether:goldenstem", "_top", "luminous_nether:block/mushroominside");
@@ -96,7 +96,7 @@ public class CompatSpritesHelper {
         addOptional("luminous_nether:shredded_stem", "_side", "luminous_nether:block/goldenmushroomside");
         addOptional("luminous_nether:shredded_stem", "_top", "luminous_nether:block/goldenmushroomtop");
 
-        // Mofu's Better End
+        // -------------------- Mofu's Better End
         addOptional("mofus_better_end_:weepingstar_log", "_side", "mofus_better_end_:block/weepingstarlogside");
         addOptional("mofus_better_end_:weepingstar_log", "_top", "mofus_better_end_:block/weepingstarlogup");
         addOptional("mofus_better_end_:weepingstar_stripped_log", "_side", "mofus_better_end_:block/weepingstarrefinedplanks");
@@ -115,11 +115,11 @@ public class CompatSpritesHelper {
         addOptional("mofus_better_end_:weepingstar_leaf", "_leavse", "mofus_better_end_:block/weepingstarleafs2");
         addOptional("mofus_better_end_:frost_root_leaves", "_leavse", "mofus_better_end_:block/frostrootleaves");
 
-        // Botanic Pledge
+        // -------------------- Botanic Pledge
         addOptional("botanicpledge:yggdrasil_log", "_side", "botanicpledge:block/yggdrasil_log");
         addOptional("botanicpledge:stripped_yggdrasil_log", "_side", "botanicpledge:block/stripped_yggdrasil_log");
 
-        // Abyssal Decor
+        // -------------------- Abyssal Decor
         addOptional("abyssal_decor:white_wood_log", "_side", "abyssal_decor:block/whitewoodstrippedlog");
         addOptional("abyssal_decor:white_wood_log", "_top", "abyssal_decor:block/whitewoodstrippedlogtop");
         addOptional("abyssal_decor:white_wood_wood", "_side", "abyssal_decor:block/whitewoodstrippedlog");
@@ -135,19 +135,19 @@ public class CompatSpritesHelper {
         addOptional("abyssal_decor:blackwood_wood", "_side", "abyssal_decor:block/moldylogside");
         addOptional("abyssal_decor:blackwood_wood", "_top", "abyssal_decor:block/moldylogside");
 
-        // Deeper And Darker
+        // -------------------- Deeper And Darker
         addOptional("deeperdarker:blooming_stem", "_top", "deeperdarker:block/blooming_stem");
         addOptional("deeperdarker:stripped_blooming_stem", "_top", "deeperdarker:block/stripped_blooming_stem");
 
-        // Piglin Ruins
+        // -------------------- Piglin Ruins
         addOptional("piglin_ruins:ominous_stalk_block", "_side", "piglin_ruins:block/ominous_stalk_block_side");
         addOptional("piglin_ruins:ominous_stalk_block", "_top", "piglin_ruins:block/ominous_stalk_block_top");
 
-        // Astral Dimension
+        // -------------------- Astral Dimension
         addOptional("astral_dimension:sick_log", "_side", "astral_dimension:block/sick_log");
         addOptional("astral_dimension:sick_log", "_top", "astral_dimension:block/sick_log");
 
-        // Promenade
+        // -------------------- Promenade
         addOptional("promenade:sakura_log", "_side", "promenade:block/sakura/log/side");
         addOptional("promenade:sakura_log", "_top", "promenade:block/sakura/log/top");
         addOptional("promenade:stripped_sakura_log", "_side", "promenade:block/sakura/stripped_log/side");
@@ -173,40 +173,40 @@ public class CompatSpritesHelper {
         addOptional("promenade:palm_planks", "all", "promenade:block/palm/planks");
         addOptional("promenade:maple_planks", "all", "promenade:block/maple/planks");
 
-        // Simple Mango
+        // -------------------- Simple Mango
         addOptional("simplemango:mango_log", "_top", "simplemango:block/mango_log_horizontal");
 
-        // Rainbow Oaks Renewed
+        // -------------------- Rainbow Oaks Renewed
         addOptional("rainbowoaks:rainbow_leaves", "_leaves", "minecraft:block/oak_leaves");
 
-        // Cultural Delights
+        // -------------------- Cultural Delights
         // Leaves
         addOptional("culturaldelights:fruiting_avocado_leaves", "_leaves", "culturaldelights:block/fruiting_avocado_leaves_0");
 
-        // Autumnity
+        // -------------------- Autumnity
         // Leaves
         addOptional("autumnity:red_maple_leaves", "_leaves", "autumnity:block/maple_leaves");
         addOptional("autumnity:orange_maple_leaves", "_leaves", "autumnity:block/maple_leaves");
         addOptional("autumnity:yellow_maple_leaves", "_leaves", "autumnity:block/maple_leaves");
 
-        // Blue Skies
+        // -------------------- Blue Skies
         // Leaves
         addOptional("blue_skies:comet_leaves", "_leaves", "blue_skies:block/leaves/comet_leaves_grown");
 
-        // Aether Redux
+        // -------------------- Aether Redux
         // Leaves
         addOptional("aether_redux:azure_fieldsproot_leaves", "_leaves", "aether_redux:block/natural/fieldsproot_leaves");
 
-        // Integrated Dynamics
+        // -------------------- Integrated Dynamics
         // Leaves
         addOptional("integrateddynamics:menril_leaves", "_leaves", "integrateddynamics:block/menril_leaves_fancy");
 
-        // Malum
+        // -------------------- Malum
         // Leaves
         addOptional("malum:budding_soulwood_leaves", "_leaves", "malum:block/soulwood/budding_soulwood_leaves");
         addOptional("malum:azure_runewood_leaves", "_leaves", "malum:block/runewood/azure_runewood_leaves");
 
-        // Oh The Biomes We've Gone
+        // -------------------- Oh The Biomes We've Gone
         // Leaves
         addOptional("biomeswevegone:aspen_leaves", "_leaves", "biomeswevegone:block/aspen/leaves");
         addOptional("biomeswevegone:baobab_leaves", "_leaves", "biomeswevegone:block/baobab/leaves");
@@ -232,7 +232,7 @@ public class CompatSpritesHelper {
         addOptional("biomeswevegone:witch_hazel_leaves", "_leaves", "biomeswevegone:block/witch_hazel/leaves");
         addOptional("biomeswevegone:zelkova_leaves", "_leaves", "biomeswevegone:block/zelkova/leaves");
 
-        // Eternal Tales
+        // -------------------- Eternal Tales
         addOptional("eternal_tales:khagris_log", "_side", "eternal_tales:block/khagris_log_new");
         addOptional("eternal_tales:khagris_log", "_top", "eternal_tales:block/edemlogtop");
         addOptional("eternal_tales:stripped_khagris_log", "_side", "eternal_tales:block/khagris_log_stripped_new");
@@ -254,32 +254,32 @@ public class CompatSpritesHelper {
         addOptional("eternal_tales:carved_pure_wood", "_side", "eternal_tales:block/pure_log_carved_side");
         addOptional("eternal_tales:carved_pure_wood", "_top", "eternal_tales:block/pure_log_carved_top");
 
-        // Biomes O' Plenty
+        // -------------------- Biomes O' Plenty
         // Leaves
         addOptional("biomesoplenty:null_leaves", "_leaves", "biomesoplenty:block/null_overlay");
         addOptional("biomesoplenty:snowblossom_leaves", "_leaves", "biomesoplenty:block/snowblossom_leaves");
 
-        // Environmental
+        // -------------------- Environmental
         addOptional("environmental:pink_wisteria_leaves", "_leaves", "environmental:block/pink_wisteria_leaves");
         addOptional("environmental:blue_wisteria_leaves", "_leaves", "environmental:block/blue_wisteria_leaves");
         addOptional("environmental:purple_wisteria_leaves", "_leaves", "environmental:block/purple_wisteria_leaves");
         addOptional("environmental:white_wisteria_leaves", "_leaves", "environmental:block/white_wisteria_leaves");
 
-        // Dawn Of The Time: Builder Edition
+        // -------------------- Dawn Of The Time: Builder Edition
         //REASON: the planks is actually being treated as a log instead of a planks
         addOptional("dawnoftimebuilder:waxed_oak_planks", "_side", "dawnoftimebuilder:block/waxed_oak_planks");
         addOptional("dawnoftimebuilder:waxed_oak_planks", "_top", "dawnoftimebuilder:block/waxed_oak_planks");
         addOptional("dawnoftimebuilder:charred_spruce_planks", "_side", "dawnoftimebuilder:block/charred_spruce_planks");
         addOptional("dawnoftimebuilder:charred_spruce_planks", "_top", "dawnoftimebuilder:block/charred_spruce_planks");
 
-        // Shadowlands
+        // -------------------- Shadowlands
         addOptional("shadowlands:vellium_log", "_side", "shadowlands:block/velliumlogside");
         addOptional("shadowlands:vellium_log", "_top", "shadowlands:block/log");
         addOptional("shadowlands:vellium_planks", "_all", "shadowlands:block/velliumplanks");
         // Leaves
         addOptional("shadowlands:vellium_leaves", "_top", "shadowlands:block/velliumleaves");
 
-        // The Midnight
+        // -------------------- The Midnight
         addOptional("midnight:bogshroom_stem", "_side", "midnight:block/bogshroom_cap");
         addOptional("midnight:bogshroom_stem", "_top", "midnight:block/bogshroom_cap");
         addOptional("midnight:moonshroom_stem", "_side", "midnight:block/moonshroom_cap");
@@ -291,50 +291,50 @@ public class CompatSpritesHelper {
         addOptional("midnight:dewshroom_stem", "_side", "midnight:block/dewshroom_cap");
         addOptional("midnight:dewshroom_stem", "_top", "midnight:block/dewshroom_cap");
 
-        // Advent Of Ascension
+        // -------------------- Advent Of Ascension
         addOptional("aoa3:stranglewood_log", "_side", "aoa3:block/stranglewood_log");
         addOptional("aoa3:stranglewood_log", "_top", "aoa3:block/stranglewood_log_top");
 
-        // Better End
+        // -------------------- Better End
         addOptional("betterend:lucernia_leaves", "_leaves", "betterend:block/lucernia_leaves_1");
 
-        // Better Nether
+        // -------------------- Better Nether
         addOptional("betternether:nether_mushroom", "_side", "betternether:block/nether_mushroom_stem_side");
 
-        // My Nether's Delight
+        // -------------------- My Nether's Delight
         addOptional("mynethersdelight:powdery_block", "_side", "mynethersdelight:block/powdery_block");
         addOptional("mynethersdelight:stripped_powdery_block", "_side", "mynethersdelight:block/stripped_powdery_block");
 
-        // Piglin Ruins
+        // -------------------- Piglin Ruins
         addOptional("piglin_ruins:ominous_stalk_block", "_side", "piglin_ruins:block/ominous_stalk_block_side");
         addOptional("piglin_ruins:ominous_stalk_block", "_top", "piglin_ruins:block/ominous_stalk_block_top");
         addOptional("piglin_ruins:stripped_ominous_stalk_block", "_side", "piglin_ruins:block/stripped_ominous_stalk_block_side");
         addOptional("piglin_ruins:stripped_ominous_stalk_block", "_top", "piglin_ruins:block/stripped_ominous_stalk_block_top");
 
-        // Unusual End
+        // -------------------- Unusual End
         addOptional("unusualend:chorus_cane_block", "_side", "unusualend:block/chorus_cane_block_side");
         addOptional("unusualend:chorus_cane_block", "_top", "unusualend:block/chorus_cane_block_top");
         addOptional("unusualend:stripped_chorus_cane_block", "_side", "unusualend:block/stripped_chorus_cane_block_side");
         addOptional("unusualend:stripped_chorus_cane_block", "_top", "unusualend:block/stripped_chorus_cane_block_top");
 
-        // Ad Astra
+        // -------------------- Ad Astra
         addOptional("ad_astra:strophar_stem", "_side", "ad_astra:block/strophar_stem");
         addOptional("ad_astra:strophar_stem", "_top", "ad_astra:block/strophar_stem");
         addOptional("ad_astra:aeronos_stem", "_side", "ad_astra:block/aeronos_stem");
         addOptional("ad_astra:aeronos_stem", "_top", "ad_astra:block/aeronos_stem");
 
-        // Terrestria
+        // -------------------- Terrestria
         addOptional("terrestria:sakura_log", "_top", "terrestria:block/sakura_log_section");
         addOptional("terrestria:yucca_palm_log", "_top", "terrestria:block/yucca_palm_log_section");
         addOptional("terrestria:stripped_yucca_palm_log", "_top", "terrestria:block/stripped_yucca_palm_log_section");
 
-        // The Abyss: The Other Side
+        // -------------------- The Abyss: The Other Side
         addOptional("theabyss:rena_log", "_top", "theabyss:block/rena_log");
         addOptional("theabyss:stripped_rena_log", "_top", "theabyss:block/rena_log");
         addOptional("theabyss:luna_log", "_top", "theabyss:block/luna_log");
         addOptional("theabyss:stripped_luna_log", "_top", "theabyss:block/luna_log");
 
-        // Dreamy Cottage
+        // -------------------- Dreamy Cottage
         addOptional("dreamy_cottage:strawberry_log", "_side", "dreamy_cottage:block/strawberrylogside");
         addOptional("dreamy_cottage:strawberry_log", "_top", "dreamy_cottage:block/strawberrylog");
         addOptional("dreamy_cottage:stripped_strawberry_log", "_side", "dreamy_cottage:block/strippedlogsidestrawberry");
@@ -349,7 +349,7 @@ public class CompatSpritesHelper {
         addOptional("dreamy_cottage:strawberry_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
         addOptional("dreamy_cottage:white_oak_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
 
-        // Feywild
+        // -------------------- Feywild
         addOptional("feywild:spring_tree_log", "_side", "feywild:block/spring_tree_wood");
         addOptional("feywild:spring_tree_log", "_top", "feywild:block/spring_tree_log");
         addOptional("feywild:summer_tree_log", "_side", "feywild:block/summer_tree_wood");
@@ -364,7 +364,7 @@ public class CompatSpritesHelper {
         addOptional("feywild:hexen_tree_log", "_top", "feywild:block/hexen_tree_log");
 
 
-        // Born In Chaos
+        // -------------------- Born In Chaos
         addOptional("born_in_chaos_v1:scorched_log", "_side", "born_in_chaos_v1:block/brievno");
         addOptional("born_in_chaos_v1:scorched_log", "_top", "born_in_chaos_v1:block/brievnovierkh1");
 
@@ -373,7 +373,7 @@ public class CompatSpritesHelper {
 
         addOptional("born_in_chaos_v1:scorched_planks", "_planks", "born_in_chaos_v1:block/opdosk");
 
-        // Nether Update Expanded
+        // -------------------- Nether Update Expanded
         addOptional("nue:dragon_stem", "_side", "nue:block/dragonstem");
         addOptional("nue:dragon_stem", "_top", "nue:block/dragonstemtop");
         addOptional("nue:stripped_dragon_stem", "_side", "nue:block/strippeddragonstem");
@@ -389,7 +389,7 @@ public class CompatSpritesHelper {
         addOptional("nue:stripped_frosted_stem", "_side", "nue:block/strippedfrozenstem");
         addOptional("nue:stripped_frosted_stem", "_top", "nue:block/strippedfrozenstemtop");
 
-        // Fruitful Fun
+        // -------------------- Fruitful Fun
         // Leaves
         addOptional("fruitfulfun:apple_leaves", "_leaves", "minecraft:block/oak_leaves");
         addOptional("fruitfulfun:cherry_leaves", "_leaves", "fruitfulfun:block/cherry_leaves_2");
@@ -403,7 +403,7 @@ public class CompatSpritesHelper {
         addOptional("fruitfulfun:redlove_leaves", "_leaves", "fruitfulfun:block/redlove_leaves");
         addOptional("fruitfulfun:tangerine_leaves", "_leaves", "fruitfulfun:block/tangerine_leaves");
 
-        // Extended Mushrooms
+        // -------------------- Extended Mushrooms
         addOptional("extendedmushrooms:glowshroom_stem", "_top", "extendedmushrooms:block/glowshroom_stem");
         addOptional("extendedmushrooms:glowshroom_stem_stripped", "_top", "extendedmushrooms:block/glowshroom_stem_stripped");
 
@@ -418,17 +418,17 @@ public class CompatSpritesHelper {
         addOptional("extendedmushrooms:honey_fungus_stem_stripped", "_side", "extendedmushrooms:block/honey_fungus_stem_stripped");
         addOptional("extendedmushrooms:honey_fungus_stem_stripped", "_top", "extendedmushrooms:block/honey_fungus_stem_stripped");
 
-        // Let's Do - Vinery
+        // -------------------- Let's Do - Vinery
         // Leaves
         addOptional("vinery:apple_leaves", "_leaves", "vinery:block/apple_leaves_0");
         addOptional("vinery:dark_cherry", "_leaves", "vinery:block/dark_cherry_leaves");
 
-        // The Twilight Forest
+        // -------------------- The Twilight Forest
         // Leaves
         addOptional("twilightforest:beanstalk_leaves", "_leaves", "minecraft:block/azalea_leaves");
         addOptional("twilightforest:thorn_leaves", "_leaves", "minecraft:block/oak_leaves");
 
-        // Regions Unexplored
+        // -------------------- Regions Unexplored
         addOptional("regions_unexplored:eucalyptus_log", "_side", EveryCompat.MOD_ID + ":block/regions_unexplored/eucalyptus_log");
 
         // Leaves
@@ -440,7 +440,7 @@ public class CompatSpritesHelper {
         addOptional("regions_unexplored:silver_birch_leaves", "_leaves", "regions_unexplored:item/silver_birch_leaves");
         addOptional("regions_unexplored:small_oak_leaves", "_leaves", "minecraft:block/oak_leaves");
 
-        // Endless Biomes
+        // -------------------- Endless Biomes
         addOptional("endlessbiomes:twisted_stem", "_side", "endlessbiomes:block/twistedlogsidetest");
         addOptional("endlessbiomes:twisted_stem", "_top", "endlessbiomes:block/twistedlogtoptest");
         addOptional("endlessbiomes:stripped_twisted_stem", "_side", "endlessbiomes:block/twistedstrippedlogsidetest");
@@ -451,17 +451,18 @@ public class CompatSpritesHelper {
         addOptional("endlessbiomes:stripped_penumbra_stem", "_side", "endlessbiomes:block/strippedpenumbralogsidenewest");
         addOptional("endlessbiomes:stripped_penumbra_stem", "_top", "endlessbiomes:block/strippedpenumbralogtopnewest");
 
-        // Gardens Of The Dead
+        // -------------------- Gardens Of The Dead
         addOptional("gardens_of_the_dead:whistlecane", "_side", "gardens_of_the_dead:block/whistlecane_block");
         addOptional("gardens_of_the_dead:whistlecane", "_top", "gardens_of_the_dead:block/whistlecane_block_top");
         addOptional("gardens_of_the_dead:stripped_soulblight_stem", "_side", "gardens_of_the_dead:block/stripped_soulblight_stem");
         addOptional("gardens_of_the_dead:stripped_soulblight_stem", "_top", "gardens_of_the_dead:block/stripped_soulblight_stem_top");
 
-        // L_Ender 's Cataclysm
+        // -------------------- L_Ender 's Cataclysm
         addOptional("cataclysm:chorus_stem", "_side", "cataclysm:block/chorus_stem");
         addOptional("cataclysm:chorus_stem", "_top", "cataclysm:block/chorus_stem");
 
-        // PFW Aesthetic Gems - Idk what happened because I disabled this and the texture files couldn't be found. Below is required to fix the missing textures
+        // -------------------- PFW Aesthetic Gems
+        // REASON: Idk what happened because I disabled this and the texture files couldn't be found. Below is required to fix the missing textures
         addOptional("pfw_aesthetic_gems:ice_blue_topaz_log", "_side", "pfw_aesthetic_gems:block/ice_blue_topaz_log");
         addOptional("pfw_aesthetic_gems:ice_blue_topaz_log", "_top", "pfw_aesthetic_gems:block/ice_blue_topaz_log_top");
         addOptional("pfw_aesthetic_gems:stripped_ice_blue_topaz_log", "_side", "pfw_aesthetic_gems:block/stripped_ice_blue_topaz_log");
