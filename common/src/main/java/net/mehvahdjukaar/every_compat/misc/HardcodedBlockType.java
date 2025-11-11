@@ -112,7 +112,7 @@ public class HardcodedBlockType {
         supportedMod = supportedModId;
         supportedBlockName = blockName;
 
-        String blockId = supportedModId + ":" + blockName;
+        String blockId = supportedModId +"/"+ leavesTypeFromMod +"/"+ blockName;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -120,7 +120,7 @@ public class HardcodedBlockType {
         if (LEAVES_TYPES_BLACKLIST.get().stream().anyMatch(leavesidentify::matches)) return true;
 
         // Exclude a specific LeavesType Block
-        if (BLOCKS_BLACKLIST.get().stream().anyMatch(blockName::matches)) return true;
+        if (BLOCKS_BLACKLIST.get().stream().anyMatch(blockId::matches)) return true;
 
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
