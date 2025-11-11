@@ -1,3 +1,90 @@
+
+<div style="text-align: center; margin-bottom: 10px; color: yellow">
+
+# SUPPORTED MODLIST
+
+</div>
+
+<details>
+
+<summary>ModList</summary>
+
+| **FABRIC**                         | STATUS | **COMMON**                                 | STATUS | **NEOFORGE**                         | STATUS |
+|------------------------------------|:------:|--------------------------------------------|:------:|--------------------------------------|:------:|
+| Beautify Refabricated              |   🟩   | Another Furniture                          |   ❔    | Abnormal's Boatload                  |   ❔    |
+| Bewitchment                        |   ❔    | Architect Pallette                         |   ❔    | Abnormal's Woodworks                 |   ❔    |
+| Clutter                            |   🟩   | MrCrayfish's Backpacked                    |   🟩   | Absent By Design                     |   ❔    |
+| Exline's Awning                    |   🟩   | Beauitful Campfires                        |   🟩   | Beautify                             |   🟩   |
+| Lightman's Currency Fabric         |   🟩   | Botany Pot                                 |   ❔    | Builder's Crafts & Additions         |   🟩   |
+| Red Bits                           |   🟩   | Building But Better                        |   ❔    | Builder's Delight                    |   ❔    |
+| Villagers Plus (FABRIC)            |   ❔    | Camp Chair                                 |   ❔    |                                      |        |
+| Wilder Wild                        |   🟩   | Chipped                                    |   🟩   | Corail Woodcutter                    |   🟩   |
+| Exline's Bark Carpet               |   🟩   | Dawn Of Time                               |   🟩   | Decoration Delight: Refurbished      |   ❔    |
+| Stylish Stiles                     |   🟩   | Decorative Blocks                          |   🟩   | Ex Nihilo Sequentia                  |   🟡   |
+| Variant Vanilla Blocks (XanthianZ) |   🟩   | Dramatic Doors                             |   🟩   | Functional Storage                   |   🟩   |
+| Excessive Building<br>             |   🟩   | Dramatic Doors' <br>Supported Macaw's Door |   🟩   | Graveyard (finallion)                |   ❔    |
+| Blockus                            |   🟩   | Farmer's Delight                           |   🟩   |                                      |        |
+|                                    |        | Friends & Foes                             |   🟩   | Market Crates                        |   ❔    |
+|                                    |        | Furnish                                    |   🟩   | LieOnLion's More Chest Variant       |   🟩   |
+|                                    |        | Handcrafted                                |   🟩   | More Crafting Table For Forge        |   🟩   |
+|                                    |        | Hearth And Home                            |   ❔    | Mosaic Carpentry                     |   ❔    |
+|                                    |        | Infinity Buttons                           |   ❔    | Oreberries Replanted                 |   🟩   |
+|                                    |        | Missing Wilds                              |   🟩   | Pokecube AIO                         |   ❔    |
+|                                    |        | LieOnLion's More Crafting Tables           |   🟩   | Premium Wood                         |   ❔    |
+|                                    |        | MrCrayfish's Mighty Mail                   |   🟩   | Productive Bees                      |   🟥   |
+|                                    |        | MrCrayfish's Refurbished Furniture         |   🟩   | Quark                                |   🟩   |
+|                                    |        | Regions Unexplored                         |   🟩   | Re: Deco                             |   ❔    |
+|                                    |        | Storage Drawers                            |   🟩   | Timber Frame                         |   ❔    |
+|                                    |        | The New Shutter aka Launch's Shutter       |   🟩   | Tropicraft                           |   🟩   |
+|                                    |        | The Twilight Foreset                       |   🟩   | Valhelsia Structure                  |   🟩   |
+|                                    |        | Top Table Crafting                         |   ❔    | Variant Crafting Tables (Kitteh6660) |   ❔    |
+|                                    |        | Twigs                                      |   ❔    | Villagers Plus (NEOFORGE)            |   ❔    |
+|                                    |        | Valhelsia Furniture                        |   🟩   | Woodster                             |   🟩   |
+|                                    |        | Macaw's Mods                               |   🟩   | Workshop For Handsome Adventure      |   🟩   |
+|                                    |        | Guita's Woodworks                          |   🟡   | Xerca Mod                            |   ❔    |
+|                                    |        | Carpentry & Chisels                        |   🟡   | Unusual Furniture                    |   🟩   |
+|                                    |        | Unusual End                                |   🟡   | Bibliocraft Legacy                   |   🟩   |
+|                                    |        | LieOnLion's More Chest Variant             |   🟩   | Just A Raft                          |   🟩   |
+|                                    |        | Coail Pillar                               |   🟩   | No Man's Land                        |   🟡   |
+
+</details>
+
+<details>
+
+<summary>LEGENDS</summary>
+
+## LEGENDS:
+- 🟩 - AVAILABLE
+- 🟥 - NOT AVAILABLE
+- 🟡 - Built-in Module within the mod, not Every Compat's
+- ❔ - Don't know when it will be update to 1.21.1
+
+- **Macaw's Mods:**
+  - Bridges
+  - Doors
+  - Fences & Walls
+  - Furniture
+  - Lights & Lamps
+  - Paths & Pavings
+  - Roofs
+  - Stairs
+  - Trapdoors
+  - Windows
+
+</details>
+
+---
+
+<div style="text-align: center; margin-bottom: 10px; color: yellow">
+
+# CHANGELOG
+
+</div>
+
+<details>
+
+<summary>LEGENDS</summary>
+
 <div style="text-align: center; border: 1px solid yellow; padding: 10px;">
 
 <div style="text-align: center; margin-bottom: 10px;">
@@ -19,6 +106,21 @@
 </div>
 
 </div>
+
+</details>
+
+------------------------------------------------------------------------------------------------------------------------
+
+### UPDATED: 
+- **Quark** (NF): Updated to support v4.1-467.3568 or newer
+  - <span style="color: YELLOW;">NOTE: Quark is currently in BETA and is not out on public yet.</span>
+- **Macaw's Furniture** (C): Added 6 new cabinet blocks 
+  - <span style="color: RED;">NOTE: is no longer supporting the older version than v3.4.0</span>
+- **Cobblemon's Legendary Monuments** (EXCLUDED): The WoodType, `legendarymonuments:distortion` is blacklisted because its texture is a 32x32
+
+---
+
+## v2.11.16
 
 ### UPDATED: 
 - **Unusual Furniture** (NF): Forgot to mark one method to be `OnlyIn(Dist.CLIENT)` - FIXED issue with SERVER not working properly
