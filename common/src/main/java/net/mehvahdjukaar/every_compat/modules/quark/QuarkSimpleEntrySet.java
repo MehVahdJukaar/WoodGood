@@ -57,7 +57,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
     @Override
     public void generateRecipes(SimpleModule module, ResourceManager manager, ResourceSink pack) {
         ZetaModule mod = zetaModule.get();
-        if (mod == null || mod.enabled) {
+        if (mod == null || mod.isEnabled()) {
             super.generateRecipes(module, manager, pack);
         }
     }
@@ -65,7 +65,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
     @Override
     public @Nullable Item getItemOf(T type) {
         ZetaModule mod = zetaModule.get();
-        if (mod == null || mod.enabled) {
+        if (mod == null || mod.isEnabled()) {
             var item = super.getItemOf(type);
             if (item instanceof IDisableable<?> d && !d.doesConditionApply()) {
                 return null;
