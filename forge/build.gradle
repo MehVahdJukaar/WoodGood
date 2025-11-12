@@ -108,20 +108,16 @@ dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
     String path = System.getenv('REPOS20_1')
-    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
-    print "isMyPc (FORGE): $usesMavenLocalML\n"
 
-        //- Repository LOCAL
+    //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        if (usesMavenLocalML) {
-            //- ~/forge/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_testVersion}") // LOCAL
-        } else {
-            modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-${moonlight_testVersion}-forge.jar"))
+        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-${moonlight_testVersion}-forge.jar"))
+    }
+    //+ MAVEN
+    else {
+        modApi("net.mehvahdjukaar:moonlight-forge:${moonlight_mavenVersion}"){
+            transitive = false
         }
-    } else {
-        //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-forge") // v2.16.13
     }
 
 //!! TOOLS ========================================================================================================== \\

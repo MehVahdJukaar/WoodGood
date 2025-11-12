@@ -110,18 +110,17 @@ dependencies {
     boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
     print "isMyPc (FABRIC): $usesMavenLocalML\n"
 
-        //- Repository LOCAL
+    //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        if (usesMavenLocalML) {
-            //- ~/fabric/mods LOCAL
-            modImplementation("net.mehvahdjukaar:moonlight-fabric:${project.moonlight_testVersion}") // LOCAL
-        } else {
-            modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${moonlight_testVersion}-fabric.jar"))
-        }
-    } else {
-        //+ MAVEN
-        modImplementation("maven.modrinth:moonlight:${moonlight_mavenVersion}-fabric") // v2.16.13
+        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-${moonlight_testVersion}-forge.jar"))
     }
+    //+ MAVEN
+    else {
+        modApi("net.mehvahdjukaar:moonlight-fabric:${moonlight_mavenVersion}"){
+            transitive = false
+        }
+    }
+
 
 //!! Supplementaries ================================================================================================ \\
 
