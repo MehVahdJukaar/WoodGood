@@ -17,7 +17,7 @@ import net.minecraft.world.level.material.MapColor;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 // SUPPORT: v3.4.0+
-public abstract class MacawFurnitureAbstractModule extends SimpleModule {
+public abstract class MacawFurnitureModuleAbstract extends SimpleModule {
 
     //TYPE: CABINET
     public final SimpleEntrySet<WoodType, Block> kitchen_cabinet,
@@ -100,7 +100,7 @@ public abstract class MacawFurnitureAbstractModule extends SimpleModule {
             strippedModernWardrobe,
             strippedWardrobe;
 
-    public MacawFurnitureAbstractModule(String modId) {
+    public MacawFurnitureModuleAbstract(String modId) {
         super(modId, "mcfur");
         ResourceLocation tab = (PlatHelper.getPlatform().isFabric())
                 ? MacawsFurniture.FURNITUREGROUP.location()
