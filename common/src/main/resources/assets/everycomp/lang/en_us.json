@@ -9,6 +9,9 @@
 
   "container.everycomp.chest.name": "%s Chest",
 
+
+  "block.everycomp.q.sniffed_out.hollow_vessel_log": "Hollow Vessel Stem",
+
   "block.everycomp.q.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
 
   "block.everycomp.q.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
@@ -65,6 +68,8 @@
   "block.everycomp.tf.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
 
   "block.everycomp.tf.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
+
+  "block.everycomp.tf.sniffed_out.hollow_vessel_log": "Hollow Vessel Stem",
 
 
   "wood_type.blocksplus.bamboo": "Green Bamboo",
@@ -1085,6 +1090,7 @@
   "block_type.unusual_furniture.open_riser_stairs": "%s Open Riser Stairs",
   "block_type.unusual_furniture.railing": "%s Railing",
   "block_type.unusual_furniture.beam": "%s Beam",
+  "block_type.unusual_furniture.shelf": "%s Shelf",
 
   "block_type.blockus.herringbone_planks": "Herringbone %s Planks",
   "block_type.blockus.mossy_planks": "Mossy %s Planks",

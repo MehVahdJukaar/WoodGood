@@ -1,14 +1,23 @@
 package net.mehvahdjukaar.every_compat.modules.forge.unusual_furniture;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.forge.unusual_furniture.compat_entity.*;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.toopa.unusualfurniture.block.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
@@ -27,9 +36,14 @@ public class UnusualFurnitureModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> open_riser_stairs;
     public final SimpleEntrySet<WoodType, Block> railing;
     public final SimpleEntrySet<WoodType, Block> beam;
+    public final SimpleEntrySet<WoodType, Block> shelf;
+
+    public static final Map<Block, ResourceLocation> BLOCK_TO_TEXTURE_MAP = new HashMap<>();
+    public final String shortenedId;
 
     public UnusualFurnitureModule(String modId) {
         super(modId, "uf");
+        this.shortenedId = shortenedId();
         ResourceLocation tab = modRes(modId);
 
         carved = SimpleEntrySet.builder(WoodType.class, "", "carved",
@@ -47,10 +61,11 @@ public class UnusualFurnitureModule extends SimpleModule {
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new OakTableBlock()
+                        CompatTableBlock::new //TOOD CHANGE
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
                 .requiresChildren(STRIPPED_LOG, SLAB) //REASON: recipes
+                .addTile(ufTableBlockEntity::new)
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/oak_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -63,10 +78,11 @@ public class UnusualFurnitureModule extends SimpleModule {
 
         coffee_table = SimpleEntrySet.builder(WoodType.class, "coffee_table",
                         getModBlock("oak_coffee_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new OakCoffeeTableBlock()
+                        CompatCoffeeTableBlock::new //TOOD CHANGE
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
                 .requiresChildren(STRIPPED_LOG, SLAB) //REASON: recipes
+                .addTile(ufCoffeeTableBlockEntity::new)
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/oak_coffee_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -109,9 +125,10 @@ public class UnusualFurnitureModule extends SimpleModule {
 
         ceiling_lamp = SimpleEntrySet.builder(WoodType.class, "celling_lamp",
                         getModBlock("oak_celling_lamp"), () -> VanillaWoodTypes.OAK,
-                        w -> new OakCellingLampBlock()
+                        CompatCellingLampBlock::new //TOOD CHANGE
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
+                .addTile(ufCellingLampBlockEntity::new)
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/oak_celling_lamp"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -123,10 +140,11 @@ public class UnusualFurnitureModule extends SimpleModule {
 
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
                         getModBlock("jungle_drawer"), () -> VanillaWoodTypes.JUNGLE,
-                        w -> new JungleDrawerBlock()
+                        CompatDrawerBlock::new //TOOD CHANGE
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
                 .requiresChildren(SLAB) //REASON: recipes
+                .addTile(ufDrawerBlockEntity::new)
                 //TEXTURES: carved_oak_top
                 .addTexture(modRes("block/jungle_drawer"))
                 .setTabKey(tab)
@@ -136,9 +154,10 @@ public class UnusualFurnitureModule extends SimpleModule {
 
         bench = SimpleEntrySet.builder(WoodType.class, "bench",
                         getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new OakBenchBlock()
+                        CompatBenchBlock::new //TOOD CHANGE
                 )
                 .requiresFromMap(carved.blocks) //REASON: textures
+                .addTile(ufBenchBlockEntity::new)
                 //TEXTURES: carved_oak
                 .addTexture(modRes("block/bench_oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -189,6 +208,145 @@ public class UnusualFurnitureModule extends SimpleModule {
                 .build();
         this.addEntry(beam);
 
+        shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
+                        getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
+                        w -> new OakShelfBlock()
+                )
+                .requiresFromMap(coffee_table.blocks) //REASON: textures
+                .requiresChildren(SLAB) //REASON: recipes
+                //TEXTURES: planks, oak_coffee_table
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
+                .addRecipe(modRes("oak_sheft_craft"))
+                .build();
+        this.addEntry(shelf);
+
     }
+
+    // ───────────────────────────────── Getblocktile ──────────────────────────────────
+    private BlockEntityType<? extends CompatTableBlockEntity> getTableTile() {
+        return table.getTile(CompatTableBlockEntity.class);
+    }
+
+    private BlockEntityType<? extends CompatCoffeeTableBlockEntity> getCoffeeTableTile() {
+        return coffee_table.getTile(CompatCoffeeTableBlockEntity.class);
+    }
+
+    private BlockEntityType<? extends CompatCellingLampBlockEntity> getCellingLampTile() {
+        return ceiling_lamp.getTile(CompatCellingLampBlockEntity.class);
+    }
+
+    private BlockEntityType<? extends CompatDrawerBlockEntity> getDrawerTile() {
+        return drawer.getTile(CompatDrawerBlockEntity.class);
+    }
+
+    private BlockEntityType<? extends CompatBenchBlockEntity> getBenchTile() {
+        return bench.getTile(CompatBenchBlockEntity.class);
+    }
+
+    // ───────────────────────────────── Compat Block ──────────────────────────────────
+    public class CompatTableBlock extends OakTableBlock {
+        public static WoodType woodType;
+
+        public CompatTableBlock(WoodType woodType) {
+            super();
+            CompatCoffeeTableBlock.woodType = woodType;
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new ufTableBlockEntity(pos, state);
+        }
+    }
+
+    public class CompatCoffeeTableBlock extends OakCoffeeTableBlock {
+        public static WoodType woodType;
+
+        public CompatCoffeeTableBlock(WoodType woodType) {
+            super();
+            CompatCoffeeTableBlock.woodType = woodType;
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new ufCoffeeTableBlockEntity(pos, state);
+        }
+    }
+
+    public class CompatCellingLampBlock extends OakCellingLampBlock {
+        public static WoodType woodType;
+
+        public CompatCellingLampBlock(WoodType woodType) {
+            super();
+            CompatCellingLampBlock.woodType = woodType;
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new ufCellingLampBlockEntity(pos, state);
+        }
+    }
+
+    public class CompatDrawerBlock extends JungleDrawerBlock {
+        public static WoodType woodType;
+
+        public CompatDrawerBlock(WoodType woodType) {
+            super();
+            CompatDrawerBlock.woodType = woodType;
+            BLOCK_TO_TEXTURE_MAP.put(this, ResourceLocation.parse(
+                    woodType.createFullIdWith(EveryCompat.MOD_ID, "textures/block",
+                            shortenedId, "java_drawer", ".png")
+            ));
+
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new ufDrawerBlockEntity(pos, state);
+        }
+    }
+
+    public class CompatBenchBlock extends OakBenchBlock {
+        public static WoodType woodType;
+
+        public CompatBenchBlock(WoodType woodType) {
+            super();
+            CompatBenchBlock.woodType = woodType;
+        }
+
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new ufBenchBlockEntity(pos, state);
+        }
+    }
+
+    // ─────────────────────────────── Compatblockentity ───────────────────────────────
+    public class ufTableBlockEntity extends CompatTableBlockEntity {
+        public ufTableBlockEntity(BlockPos position, BlockState state) {
+            super(position, state, getTableTile());
+        }
+    }
+
+    public class ufCoffeeTableBlockEntity extends CompatCoffeeTableBlockEntity {
+        public ufCoffeeTableBlockEntity(BlockPos position, BlockState state) {
+            super(position, state, getCoffeeTableTile());
+        }
+    }
+
+    public class ufCellingLampBlockEntity extends CompatCellingLampBlockEntity {
+        public ufCellingLampBlockEntity(BlockPos position, BlockState state) {
+            super(position, state, getCellingLampTile());
+        }
+    }
+
+    public class ufDrawerBlockEntity extends CompatDrawerBlockEntity {
+        public ufDrawerBlockEntity(BlockPos position, BlockState state) {
+            super(position, state, getDrawerTile());
+        }
+    }
+
+    public class ufBenchBlockEntity extends CompatBenchBlockEntity {
+        public ufBenchBlockEntity(BlockPos position, BlockState state) {
+            super(position, state, getBenchTile());
+        }
+    }
+
+// ─────────────────────────────────── Register ────────────────────────────────────
+
 
 }
