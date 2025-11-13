@@ -19,8 +19,6 @@ dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
     String path = System.getenv('REPOS20_1')
-    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
-    print "isMyPc (COMMON): $usesMavenLocalML\n"
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {

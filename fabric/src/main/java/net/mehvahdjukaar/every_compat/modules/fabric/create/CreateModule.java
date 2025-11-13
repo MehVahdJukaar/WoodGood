@@ -13,7 +13,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-// SUPPORT: v6.0.8+
+//SUPPORT: v6.0.8+
 public class CreateModule extends CreateModuleAbstract {
 
     public CreateModule(String modId) {
@@ -48,7 +48,7 @@ public class CreateModule extends CreateModuleAbstract {
                 String path = woodType.createFullIdWith("", "block", module.shortenedId(), "palettes/", "window");
 
                 CTSpriteShiftEntry spriteShift = CTSpriteShifter.getCT(AllCTTypes.VERTICAL,
-                        EveryCompat.res(path), EveryCompat.res(path + "_connected"));
+                        EveryCompat.res(path), EveryCompat.res(path.concat("_connected")));
 
                 CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(block),
                         model -> new CTModel(model, new HorizontalCTBehaviour(spriteShift)));
