@@ -14,11 +14,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 
 //SUPPORT: v3.0.7+
-public class ChippedAbstractModule extends SimpleModule {
+public class ChippedModuleAbstract extends SimpleModule {
 
     public static String tabPath = "main";
 
-    public ChippedAbstractModule(String modId) {
+    public ChippedModuleAbstract(String modId) {
         super(modId, "ch");
     }
 
