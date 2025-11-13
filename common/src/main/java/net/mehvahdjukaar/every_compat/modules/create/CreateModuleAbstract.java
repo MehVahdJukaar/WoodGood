@@ -14,12 +14,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 // SUPPORT: check for their supported version in FABRIC or FORGE
-public abstract class CreateAbstractModule extends SimpleModule {
+public abstract class CreateModuleAbstract extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
 
-    public CreateAbstractModule(String modId) {
+    public CreateModuleAbstract(String modId) {
         super(modId, "c");
         ResourceLocation tab = modRes("palettes");
 

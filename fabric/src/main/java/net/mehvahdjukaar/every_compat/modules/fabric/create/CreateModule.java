@@ -7,14 +7,14 @@ import com.simibubi.create.foundation.block.connected.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.modules.create.CreateAbstractModule;
+import net.mehvahdjukaar.every_compat.modules.create.CreateModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-// SUPPORT: v0.5.1+
-public class CreateModule extends CreateAbstractModule {
+// SUPPORT: v6.0.8+
+public class CreateModule extends CreateModuleAbstract {
 
     public CreateModule(String modId) {
         super(modId);

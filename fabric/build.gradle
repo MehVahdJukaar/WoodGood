@@ -107,8 +107,6 @@ dependencies {
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
     //- Repository LOCAL
     String path = System.getenv('REPOS20_1')
-    boolean usesMavenLocalML =  System.getenv().MY_PC == "1"
-    print "isMyPc (FABRIC): $usesMavenLocalML\n"
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
@@ -147,10 +145,11 @@ dependencies {
 //    modRuntimeOnly("curse.maven:owo-lib-532610:4749199") //v0.11.2 | Infinity-Buttons
 
             //- OTHER MAVENS
-//    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
 //    modRuntimeOnly("com.terraformersmc.terraform-api:terraform-wood-api-v1:7.0.3") // Blockus
 //    modRuntimeOnly("com.terraformersmc.terraform-api:terraform-shapes-api-v1:7.0.3") // Blockus
 //    modRuntimeOnly("com.terraformersmc:biolith:1.0.0-alpha.8") // Blockus
+//    modRuntimeOnly("dev.engine-room.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
+//    modRuntimeOnly("net.createmod.ponder:Ponder-Fabric-${minecraft_version}:${ponder_fabric_version}") // Create
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN fABRIC
     modCompileOnly("curse.maven:framework-549225:5911975") // v0.7.12 | Refurbished Furniture, Mighty Mail, Backpacked
@@ -225,7 +224,6 @@ dependencies {
     modCompileOnly("curse.maven:bewitchment-394915:5205373")
     modCompileOnly("curse.maven:building-but-better-989479:6803573")
     modCompileOnly("curse.maven:clutter-826060:5828924") //RML: Geckolib
-    modCompileOnly("curse.maven:create-fabric-624165:5982726") // Do not use for RunTime
     modCompileOnly("curse.maven:dramatic-doors-380617:6438745")
     modCompileOnly("curse.maven:excessive-building-845097:6051029") // Forge-Config-Api-Port
     modCompileOnly("curse.maven:exlines-awnings-526698:4668406")
@@ -240,7 +238,7 @@ dependencies {
 
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:wilder-wild:3.0.7-mc1.20.1") // FrozenLib
-//    modCompileOnly("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}:slim") { transitive = false }  // Registrate, Flywheel, Ponder //!! maven is outdated & not available
+    modCompileOnly("com.simibubi.create:create-fabric:${create_fabric_version}") { transitive = false }  // Registrate, Flywheel, Ponder
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 

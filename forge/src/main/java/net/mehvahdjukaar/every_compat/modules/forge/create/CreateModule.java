@@ -5,7 +5,7 @@ import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import com.simibubi.create.foundation.block.connected.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.modules.create.CreateAbstractModule;
+import net.mehvahdjukaar.every_compat.modules.create.CreateModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.world.level.block.Block;
@@ -13,8 +13,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-//SUPPORT: v6.0.0+
-public class CreateModule extends CreateAbstractModule {
+//SUPPORT: v6.0.8+
+public class CreateModule extends CreateModuleAbstract {
 
     public CreateModule(String modId) {
         super(modId);
