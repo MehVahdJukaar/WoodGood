@@ -64,4 +64,10 @@ public class FriendsAndFoesModule extends SimpleModule {
 
     }
 
+//    @Override
+//    public void onModSetup() {
+//        super.onModSetup();
+    /// Currently not working properly in FORGE, crashed upon creating a world or loading a world, cause is unknown
+//        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehives.blocks.values());
+//    }
 }
