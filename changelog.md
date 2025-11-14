@@ -1,12 +1,8 @@
 <div style="text-align: center; border: 1px solid yellow; padding: 10px;">
 
-<div style="text-align: center; margin-bottom: 10px;">
+<h2><div style="text-align: center; margin-bottom: 10px;">LEGENDS</div></h2>
 
-### LEGEND
-
-</div>
-
-<div style="text-align: baseTexture;">
+<div style="text-align: left;">
 
 * **(C)**: FORGE & FABRIC
 * **(FB)**: FABRIC
@@ -19,6 +15,29 @@
 </div>
 
 </div>
+
+### UPDATED: 
+- **Macaw's Trapdoor** (C): Added new trapdoor, whispering_trapdoor
+  - <span style="color: YELLOW;">NOTE: no longer supporting version older than **v1.1.4**</span>
+- **Macaw's Door** (C): Added new door, whispering_door (Ported from 1.21.1)
+  - <span style="color: YELLOW;">NOTE: no longer supporting version older than **v1.1.2**</span>
+- **Create** (**FB**): Updated to support v6.0.0+ - [#1114](https://github.com/MehVahdJukaar/WoodGood/issues/1114)
+- **Unusual Furniture** (NF): (Ported from 1.21.1)
+    - Fixed Railing & Drawer's missing textures - [#1107](https://github.com/MehVahdJukaar/WoodGood/issues/1107)
+    - Fixed the crash when placing table, coffee_table, and also other 3 blocks - [#1108](https://github.com/MehVahdJukaar/WoodGood/issues/1108) 
+- **Every Compat** (C): 
+  - Added a new config in `everycomp-hazardous.toml`, BLOCKS_BLACKLIST for blacklisting one or more EC's blocks
+  - **mods.toml** (F): Updated to allow **V-Minus** between v1.0.0 and v3.1.2 to be installed
+    - NOTE: v3.2.0 or newer have been tested and found to break recipe system 
+- **Cobblemon's Legendary Monuments** (EXCLUDED): The WoodType, `legendarymonuments:distortion` is blacklisted because its texture is a 32x32 
+- **Macaw's Furniture** (C): Added 6 new cabinet blocks
+    - <span style="color: RED;">NOTE: is no longer supporting the older version than v3.4.0</span>
+- **Building But Better** (C): Fixed the missing textures for some blocks with **Regions Unexplored** - [#1100](https://github.com/MehVahdJukaar/WoodGood/issues/1100)
+- **LANG** (ja_jp): Updated by @Hayakoh-WeldyAlin - [PR#1096](https://github.com/MehVahdJukaar/WoodGood/pull/1096)
+
+---
+
+## v2.9.9
 
 ### UPDATED:
 - **Boatload** (F): Fixed the missing textures for large_boat & furnace_boat
