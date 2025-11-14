@@ -2,10 +2,9 @@ package net.mehvahdjukaar.every_compat.common_classes;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
-import it.unimi.dsi.fastutil.ints.Int2IntFunction;
+import com.mojang.math.Axis;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.model.geom.ModelPart;
@@ -86,7 +85,7 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
             poseStack.pushPose();
             float f = (blockstate.getValue(ChestBlock.FACING)).toYRot();
             poseStack.translate(0.5F, 0.5F, 0.5F);
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(-f));
+            poseStack.mulPose(Axis.YP.rotationDegrees(-f));
             poseStack.translate(-0.5F, -0.5F, -0.5F);
             DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> neighborcombineresult;
             if (flag) {
@@ -122,7 +121,7 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
         bottomPart.render(poseStack, consumer, packedLight, packedOverlay);
     }
 
-    public static void register(ClientPlatformHelper.BlockEntityRendererEvent event, BlockEntityType<CompatChestBlockEntity> tile, String s) {
+    public static void register(ClientHelper.BlockEntityRendererEvent event, BlockEntityType<CompatChestBlockEntity> tile, String s) {
         event.register(tile, c -> new CompatChestBlockRenderer(c, s));
     }
 

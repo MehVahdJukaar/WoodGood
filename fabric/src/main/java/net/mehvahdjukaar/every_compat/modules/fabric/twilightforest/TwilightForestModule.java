@@ -13,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -45,8 +46,8 @@ public class TwilightForestModule extends SimpleModule {
                         TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
-                .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("banisters"), Registries.BLOCK)
+                .addTag(modRes("banisters"), Registries.BLOCK)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
                 .setTab(() -> TFItems.creativeTab)
@@ -60,7 +61,7 @@ public class TwilightForestModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(modRes("hollow_logs_horizontal"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .noItem()
@@ -78,7 +79,7 @@ public class TwilightForestModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(modRes("hollow_logs_vertical"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log_vertical"))
                 //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
@@ -94,7 +95,7 @@ public class TwilightForestModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: textures
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(modRes("hollow_logs_climbable"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
@@ -106,7 +107,7 @@ public class TwilightForestModule extends SimpleModule {
     @NotNull
     @SuppressWarnings({"removal", "unchecked"})
     private static<T extends Block> RegistryObject<T> makeRegObj(ResourceLocation id) {
-        return new RegistryObject<>(id, () ->(T) Registry.BLOCK.get(id), Registry.BLOCK_REGISTRY);
+        return new RegistryObject<>(id, () ->(T) Registry.BLOCK.get(id), Registries.BLOCK);
     }
 
     @Override

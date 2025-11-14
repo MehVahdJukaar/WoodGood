@@ -22,6 +22,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -33,6 +34,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -72,9 +74,9 @@ public class WoodworksModule extends SimpleModule {
                         w -> new BookshelfBlock(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.bookshelf()))
                 .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .copyParentDrop()
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.BOOKSHELVES, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Items.BOOKSHELVES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
+                .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .defaultRecipe()
                 .build();
@@ -84,7 +86,7 @@ public class WoodworksModule extends SimpleModule {
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_boards"))
                 .defaultRecipe()
                 .build();
@@ -95,9 +97,9 @@ public class WoodworksModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintLadderBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.ladder()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark:ladders"), Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("quark:ladders"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
+                .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
+                .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
                 .defaultRecipe()
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
@@ -108,8 +110,8 @@ public class WoodworksModule extends SimpleModule {
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .defaultRecipe()
                 .addTile(BlueprintBlockEntityTypes.BEEHIVE)
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
@@ -123,14 +125,14 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintChestBlock(EveryCompat.MOD_ID + ":" + w.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.GUARDED_BY_PIGLINS, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.CHESTS, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Items.CHESTS, Registry.ITEM_REGISTRY)
-                .addTag(Tags.Items.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
-                .addTag(BlueprintItemTags.BOATABLE_CHESTS, Registry.ITEM_REGISTRY)
-                .addTag(BlueprintItemTags.REVERTABLE_CHESTS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
+                .addTag(Tags.Items.CHESTS, Registries.ITEM)
+                .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
+                .addTag(BlueprintItemTags.BOATABLE_CHESTS, Registries.BLOCK)
+                .addTag(BlueprintItemTags.REVERTABLE_CHESTS, Registries.BLOCK)
                 .addTile(BlueprintChestBlockEntity::new)
                 .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(false), 300))
                 .defaultRecipe()
@@ -141,14 +143,14 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintTrappedChestBlock(EveryCompat.MOD_ID + ":" + w.getTypeName() + "_trapped", WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.GUARDED_BY_PIGLINS, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.CHESTS, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.CHESTS_WOODEN, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Blocks.CHESTS_TRAPPED, Registry.BLOCK_REGISTRY)
-                .addTag(Tags.Items.CHESTS, Registry.ITEM_REGISTRY)
-                .addTag(Tags.Items.CHESTS_TRAPPED, Registry.ITEM_REGISTRY)
-                .addTag(Tags.Items.CHESTS_WOODEN, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
+                .addTag(Tags.Items.CHESTS, Registries.BLOCK)
+                .addTag(Tags.Items.CHESTS_TRAPPED, Registries.BLOCK)
+                .addTag(Tags.Items.CHESTS_WOODEN, Registries.BLOCK)
                 .addTile(BlueprintTrappedChestBlockEntity::new)
                 .addCustomItem((w, b, p) -> new BEWLRFuelBlockItem(b, p, () -> () -> chestBEWLR(true), 300))
                 //RECIPE: it's manaully being created via addDynamicServerResources()
@@ -164,8 +166,8 @@ public class WoodworksModule extends SimpleModule {
                         })
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
-                .addTag(BlockTags.MINEABLE_WITH_HOE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("leaf_piles"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(modRes("leaf_piles"), Registries.BLOCK)
                 .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
                 .setRenderType(() -> RenderType::cutout)
                 .copyParentDrop()
@@ -195,7 +197,7 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    public void registerItemColors (ClientPlatformHelper.ItemColorEvent event){
+    public void registerItemColors (ClientHelper.ItemColorEvent event){
         leafPiles.blocks.forEach((t, b) -> {
             event.register((stack, tintIndex) -> event.getColor(new ItemStack(t.leaves), tintIndex), b.asItem());
             //blockColor.register((s, l, p, i) -> blockColor.getColor(bl.defaultBlockState(), l, p, i), b);

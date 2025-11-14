@@ -11,13 +11,13 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
-import net.minecraft.tags.TagBuilder;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -43,9 +43,9 @@ public class FriendsAndFoesModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
+                .setTab()
                 .addTile(() -> BlockEntityType.BEEHIVE)
                 .defaultRecipe()
                 .build();
@@ -56,7 +56,7 @@ public class FriendsAndFoesModule extends SimpleModule {
     protected final ResourceLocation POI_ID = EveryCompat.res("faf_beehive");
 
     private Supplier<PoiType> compatBeeHivePOI = RegHelper.register(POI_ID,
-            () -> new PoiType(getBeehives(), 1, 1), Registry.POINT_OF_INTEREST_TYPE);
+            () -> new PoiType(getBeehives(), 1, 1), Registries.POINT_OF_INTEREST_TYPE);
 
 
     private Set<BlockState> getBeehives() {

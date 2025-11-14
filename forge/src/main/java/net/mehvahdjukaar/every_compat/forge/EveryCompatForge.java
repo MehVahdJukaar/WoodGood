@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.forge;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-
 import net.mehvahdjukaar.every_compat.modules.forge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.forge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.forge.architect_palette.ArchitectsPaletteModule;
@@ -12,7 +11,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.beautify_decorate.BeautifyDe
 import net.mehvahdjukaar.every_compat.modules.forge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.forge.corail.CorailPillarModule;
-import net.mehvahdjukaar.every_compat.modules.forge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.forge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsMacawModule;
@@ -42,9 +40,10 @@ import net.mehvahdjukaar.every_compat.modules.forge.villagers_plus.VillagersPlus
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
-
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -99,7 +98,7 @@ public class EveryCompatForge extends EveryCompat {
 //        addModule("create", () -> CreateModule::new);
         addModule("dawnoftimebuilder", () -> DawnOfTimeModule::new);
         addModule("decoration_delight", () -> DecorationDelightModule::new);
-        if (PlatformHelper.isModLoaded("mcwdoors")) {
+        if (PlatHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
@@ -141,14 +140,14 @@ public class EveryCompatForge extends EveryCompat {
 
 
 // ===================================================== OTHERS ===================================================== \\
-        if (PlatformHelper.getEnv().isClient()) {
+        if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatClient.commonInit();
         }
 
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onRemap);
         MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::onDataSync);
-        if (PlatformHelper.isDev()) {
+        if (PlatHelper.isDev()) {
             MinecraftForge.EVENT_BUS.addListener(EveryCompatForge::itemTooltipEvent);
         }
 
@@ -173,14 +172,14 @@ public class EveryCompatForge extends EveryCompat {
 
     @SuppressWarnings("deprecation")
     public static void onRemap(MissingMappingsEvent event) {
-        for (var mapping : event.getMappings(Registry.BLOCK_ENTITY_TYPE_REGISTRY, EveryCompat.MOD_ID)) {
+        for (var mapping : event.getMappings(Registries.BLOCK_ENTITY_TYPE, EveryCompat.MOD_ID)) {
             ResourceLocation key = mapping.getKey();
             String path = key.getPath();
             for (var m : EveryCompat.ACTIVE_MODULES.values()) {
                 if (path.startsWith(m.shortenedId() + "_")) {
                     String newPath = path.substring((m.shortenedId() + "_").length());
                     ResourceLocation newId = new ResourceLocation(m.getModId(), newPath);
-                    Optional<BlockEntityType<?>> optional = Registry.BLOCK_ENTITY_TYPE.getOptional(newId);
+                    Optional<BlockEntityType<?>> optional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(newId);
                     optional.ifPresent(mapping::remap);
                     break;
                 }

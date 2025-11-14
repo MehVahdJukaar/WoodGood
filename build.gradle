@@ -7,7 +7,7 @@ plugins {
 }
 
 architectury {
-    minecraft = rootProject.minecraft_version
+    minecraft = minecraft_version
 }
 
 subprojects {
@@ -21,10 +21,10 @@ subprojects {
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        minecraft "com.mojang:minecraft:${minecraft_version}"
         // The following line declares the mojmap mappings, you may use other mappings as well
         mappings loom.layered() {
-            it.parchment("org.parchmentmc.data:parchment-${rootProject.parchment_version}")
+            it.parchment("org.parchmentmc.data:parchment-${parchment_version}")
             it.officialMojangMappings {
                 setNameSyntheticMembers(false)
             }
@@ -62,7 +62,7 @@ subprojects {
         curseforge {
             apiKey = env.CURSEFORGE_TOKEN
             project {
-                id = rootProject.project_id
+                id = rootProject.curseforge_id
                 changelogType = 'markdown'
                 changelog = changelogText
                 releaseType = 'release'

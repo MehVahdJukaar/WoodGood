@@ -120,8 +120,8 @@ dependencies {
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}-forge")
 
     //!! MAVEN
-    modImplementation("curse.maven:selene-499980:5567102") // v2.3.7
-//    modImplementation("maven.modrinth:moonlight:forge_${moonlight_version}") // v2.3.7 //!! Don't use it yet
+//    modImplementation("curse.maven:selene-499980:5567102")
+    modImplementation("maven.modrinth:moonlight:${minecraft_version}-${moonlight_version}-forge")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
 
@@ -137,7 +137,7 @@ dependencies {
     modCompileOnly("curse.maven:fusion-connected-textures-854949:5129280") // Dawn Of Time
 
     //!! ================================================= LOCAL ====================================================== \\
-    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}") // Create
+//    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}") // Create
     modCompileOnly("com.tynoxs.buildersdelight:buildersdelight-1.19.2-v.1.1")
     modCompileOnly("net.stehschnitzel.shutter:shutters-1.19.2-1.1.0")
 
@@ -189,7 +189,7 @@ dependencies {
     modCompileOnly("curse.maven:friends-and-foes-forge-602059:4429819")
     modCompileOnly("curse.maven:furnish-547069:4449620")
     modCompileOnly("curse.maven:habitat-422972:4594207")
-    modCompileOnly("curse.maven:handcrafted-538214:4437459")
+    modCompileOnly("curse.maven:handcrafted-538214:4438942")
     modCompileOnly("curse.maven:infinitybuttons-661902:5330366")
     modCompileOnly("curse.maven:lightmans-currency-472521:5793387")
     modCompileOnly("curse.maven:mighty-mail-902986:4750268")

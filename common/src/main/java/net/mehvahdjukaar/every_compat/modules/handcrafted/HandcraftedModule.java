@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.handcrafted;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import earth.terrarium.handcrafted.client.block.counter.ShelfRenderer;
 import earth.terrarium.handcrafted.common.block.ItemHoldingBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlock;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
@@ -13,7 +12,10 @@ import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlo
 import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.woodenbench.WoodenBenchBlock;
 import earth.terrarium.handcrafted.common.block.chair.woodenbench.WoodenBenchBlockEntity;
-import earth.terrarium.handcrafted.common.block.counter.*;
+import earth.terrarium.handcrafted.common.block.counter.CounterBlock;
+import earth.terrarium.handcrafted.common.block.counter.CupboardBlock;
+import earth.terrarium.handcrafted.common.block.counter.DrawerBlock;
+import earth.terrarium.handcrafted.common.block.counter.ShelfBlock;
 import earth.terrarium.handcrafted.common.block.fancybed.FancyBedBlock;
 import earth.terrarium.handcrafted.common.block.fancybed.FancyBedBlockEntity;
 import earth.terrarium.handcrafted.common.block.property.DirectionalBlockSide;
@@ -27,7 +29,10 @@ import earth.terrarium.handcrafted.common.block.table.table.TableBlock;
 import earth.terrarium.handcrafted.common.block.table.table.TableBlockEntity;
 import earth.terrarium.handcrafted.common.block.trim.CornerTrimBlock;
 import earth.terrarium.handcrafted.common.block.trim.TrimBlock;
-import earth.terrarium.handcrafted.common.item.*;
+import earth.terrarium.handcrafted.common.item.BoardItem;
+import earth.terrarium.handcrafted.common.item.HammerItem;
+import earth.terrarium.handcrafted.common.item.HammerableBlockItem;
+import earth.terrarium.handcrafted.common.item.ShelfBlockItem;
 import earth.terrarium.handcrafted.common.registry.ModBlocks;
 import earth.terrarium.handcrafted.common.registry.ModItems;
 import earth.terrarium.handcrafted.common.registry.ModTags;
@@ -45,14 +50,14 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -90,7 +95,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("DataFlowIssue")
-//SUPPORT: v2.0.6+
+//SUPPORT: v2.2.0+
 public class HandcraftedModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chair;
@@ -130,9 +135,9 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(CompatChairEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("chairs"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("chairs"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("chairs"), Registries.BLOCK)
+                .addTag(modRes("chairs"), Registries.ITEM)
                 .addTexture(modRes("block/chair/chair/oak_chair"))
                 .setTab(() -> tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.ChairItem(b, p))
@@ -146,10 +151,10 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(compatTableEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.TABLE_ATTACHMENTS, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tables"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.TABLE_ATTACHMENTS, Registries.BLOCK)
+                .addTag(modRes("tables"), Registries.BLOCK)
+                .addTag(modRes("tables"), Registries.ITEM)
                 .addTexture(modRes("block/table/table/oak_table"))
                 .setTab(() -> tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.TableItem(b, p))
@@ -163,9 +168,9 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(CompatBenchEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("benches"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("benches"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("benches"), Registries.BLOCK)
+                .addTag(modRes("benches"), Registries.ITEM)
                 .addTexture(modRes("block/chair/bench/oak_bench"))
                 .setTab(() -> tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.BenchItem(b, p))
@@ -179,9 +184,9 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(CompatCouchEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("couches"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("couches"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("couches"), Registries.BLOCK)
+                .addTag(modRes("couches"), Registries.ITEM)
                 .addTexture(modRes("block/chair/couch/oak_couch"))
                 .setTab(() -> tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.CouchItem(b, p))
@@ -194,10 +199,10 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatFancyBedBlock(Utils.copyPropertySafe(Blocks.WHITE_BED)))
                 .addTile(CompatFancyBedEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("fancy_beds"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("fancy_beds"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.BEDS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("fancy_beds"), Registries.BLOCK)
+                .addTag(modRes("fancy_beds"), Registries.ITEM)
+                .addTag(BlockTags.BEDS, Registries.ITEM)
                 .addTexture(modRes("block/bed/single/oak_fancy_bed"))
                 .addTexture(modRes("block/bed/double/oak_fancy_bed"))
                 .setTab(() -> tab)
@@ -213,9 +218,9 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(CompatDiningBenchEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("dining_benches"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("dining_benches"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("dining_benches"), Registries.BLOCK)
+                .addTag(modRes("dining_benches"), Registries.ITEM)
                 .addTexture(modRes("block/chair/dining_bench/oak_dining_bench"))
                 .setTab(() -> tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.DiningBenchItem(b, p))
@@ -229,10 +234,10 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(compatNightstandEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.TABLE_ATTACHMENTS, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nightstands"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nightstands"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.TABLE_ATTACHMENTS, Registries.BLOCK)
+                .addTag(modRes("nightstands"), Registries.BLOCK)
+                .addTag(modRes("nightstands"), Registries.ITEM)
                 .addTextureM(modRes("block/table/nightstand/oak_nightstand"), EveryCompat.res("block/hc/table/oak_nightstand_m"))
                 .setTab(() -> tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.NightstandItem(b, p))
@@ -247,10 +252,10 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(CompatDeskEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.TABLE_ATTACHMENTS, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("desks"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("desks"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.TABLE_ATTACHMENTS, Registries.BLOCK)
+                .addTag(modRes("desks"), Registries.BLOCK)
+                .addTag(modRes("desks"), Registries.ITEM)
                 .addTextureM(modRes("block/table/desk/oak_desk"), EveryCompat.res("block/hc/table/oak_desk_m"))
                 .setTab(() -> tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.DeskItem(b, p))
@@ -264,9 +269,9 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(CompatSideTableEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("side_tables"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("side_tables"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("side_tables"), Registries.BLOCK)
+                .addTag(modRes("side_tables"), Registries.ITEM)
                 .addTextureM(modRes("block/table/side_table/oak_side_table"), EveryCompat.res("block/hc/table/oak_side_table_m"))
                 .setTab(() -> tab)
                 .defaultRecipe()
@@ -279,8 +284,8 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatCounterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(compatCounterEntity::new)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("counters"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("counters"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/counter/oak_counter_1"), EveryCompat.res("block/hc/counter/oak_counter_1_m"))
                 .noItem()
                 .build();
@@ -291,8 +296,8 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatCounterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(counter_1.getTileHolder()::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("counters"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("counters"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/counter/oak_counter_2"), EveryCompat.res("block/hc/counter/oak_counter_2_m"))
                 .noItem()
                 .build();
@@ -303,8 +308,8 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatCounterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(counter_1.getTileHolder()::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("counters"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("counters"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/counter/oak_counter_3"), EveryCompat.res("block/hc/counter/oak_counter_3_m"))
                 .noItem()
                 .build();
@@ -312,9 +317,9 @@ public class HandcraftedModule extends SimpleModule {
 
         counter = ItemOnlyEntrySet.builder(WoodType.class, "counter",
                         ModItems.OAK_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new CompatModItems.CounterItem(counter_1.blocks.get(w), new Item.Properties().tab(tab))
+                        w -> new CompatModItems.CounterItem(counter_1.blocks.get(w), new Item.Properties())
                 )
-                .addTag(modRes("counters"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("counters"), Registries.ITEM)
                 .addCondition(counter_1.blocks::containsKey)
                 .addRecipe(modRes("oak_counter"))
                 .build();
@@ -325,8 +330,8 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(compatStorageEntity::new)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("cupboards"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("cupboards"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/cupboard/oak/cupboard_1"), EveryCompat.res("block/hc/cupboard/cupboard_1_m"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_back"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_side"))
@@ -340,8 +345,8 @@ public class HandcraftedModule extends SimpleModule {
                         ModBlocks.OAK_CUPBOARD_2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new compatCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTile(cupboard_1.getTileHolder()::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("cupboards"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("cupboards"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/cupboard/oak/cupboard_2"), EveryCompat.res("block/hc/cupboard/cupboard_2_m"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_back"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_side"))
@@ -353,9 +358,9 @@ public class HandcraftedModule extends SimpleModule {
 
         cupboard = ItemOnlyEntrySet.builder(WoodType.class, "cupboard",
                         ModItems.OAK_CUPBOARD, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new HammerableBlockItem(cupboard_1.blocks.get(w), new Item.Properties().tab(tab))
+                        w -> new HammerableBlockItem(cupboard_1.blocks.get(w), new Item.Properties())
                 )
-                .addTag(modRes("cupboards"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("cupboards"), Registries.ITEM)
                 .addCondition(cupboard_1.blocks::containsKey)
                 .addRecipe(modRes("oak_counter"))
                 .build();
@@ -366,8 +371,8 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatDrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(cupboard_1.getTileHolder()::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/drawer/oak/front_1/drawer_left"), EveryCompat.res("block/hc/drawer/drawer_1_left_m"))
                 .addTextureM(modRes("block/counter/drawer/oak/front_1/drawer_middle"), EveryCompat.res("block/hc/drawer/drawer_1_middle_m"))
                 .addTextureM(modRes("block/counter/drawer/oak/front_1/drawer_right"), EveryCompat.res("block/hc/drawer/drawer_1_right_m"))
@@ -382,8 +387,8 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatDrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(cupboard_1.getTileHolder()::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/drawer/oak/front_2/drawer_left"), EveryCompat.res("block/hc/drawer/drawer_2_left_m"))
                 .addTextureM(modRes("block/counter/drawer/oak/front_2/drawer_middle"), EveryCompat.res("block/hc/drawer/drawer_2_middle_m"))
                 .addTextureM(modRes("block/counter/drawer/oak/front_2/drawer_right"), EveryCompat.res("block/hc/drawer/drawer_2_right_m"))
@@ -403,8 +408,8 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatDrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(cupboard_1.getTileHolder()::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/drawer/oak/front_3/drawer_left"), EveryCompat.res("block/hc/drawer/drawer_3_left_m"))
                 .addTextureM(modRes("block/counter/drawer/oak/front_3/drawer_middle"), EveryCompat.res("block/hc/drawer/drawer_3_middle_m"))
                 .addTextureM(modRes("block/counter/drawer/oak/front_3/drawer_right"), EveryCompat.res("block/hc/drawer/drawer_3_right_m"))
@@ -424,8 +429,8 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new compatDrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .addTile(cupboard_1.getTileHolder()::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawers"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawers"), Registries.BLOCK)
                 .addTextureM(modRes("block/counter/drawer/oak/front_4/drawer"), EveryCompat.res("block/hc/drawer/drawer_4_m"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_back"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_bottom"))
@@ -439,9 +444,9 @@ public class HandcraftedModule extends SimpleModule {
 
         drawer = ItemOnlyEntrySet.builder(WoodType.class, "drawer",
                         ModItems.OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new HammerableBlockItem(drawer_1.blocks.get(w), new Item.Properties().tab(tab))
+                        w -> new HammerableBlockItem(drawer_1.blocks.get(w), new Item.Properties())
                 )
-                .addTag(modRes("drawers"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("drawers"), Registries.ITEM)
                 .addCondition(cupboard_1.blocks::containsKey)
                 .addRecipe(modRes("oak_drawer"))
                 .build();
@@ -453,8 +458,8 @@ public class HandcraftedModule extends SimpleModule {
                 )
                 .addTile(compatShelfEntity::new)
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("shelves"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("shelves"), Registries.BLOCK)
                 .addTexture(modRes("block/counter/shelf/oak/shelf_back"))
                 .addTexture(modRes("block/counter/shelf/oak/shelf_left"))
                 .addTexture(modRes("block/counter/shelf/oak/shelf_middle"))
@@ -470,9 +475,9 @@ public class HandcraftedModule extends SimpleModule {
 
         shelf = ItemOnlyEntrySet.builder(WoodType.class, "shelf",
                         ModItems.OAK_SHELF, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new ShelfBlockItem(shelf_1.blocks.get(w), new Item.Properties().tab(tab))
+                        w -> new ShelfBlockItem(shelf_1.blocks.get(w), new Item.Properties())
                 )
-                .addTag(modRes("shelves"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("shelves"), Registries.ITEM)
                 .addCondition(shelf_1.blocks::containsKey)
                 .addRecipe(modRes("oak_shelf"))
                 .build();
@@ -483,11 +488,11 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new TrimBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("trims"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wood_trims"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("trims"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("wood_trims"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("trims"), Registries.BLOCK)
+                .addTag(modRes("wood_trims"), Registries.BLOCK)
+                .addTag(modRes("trims"), Registries.ITEM)
+                .addTag(modRes("wood_trims"), Registries.ITEM)
                 .addTexture(modRes("block/trim/pillar/oak_pillar_trim"))
                 .addTexture(modRes("block/trim/pillar/oak_pillar_trim_2"))
                 .addTexture(modRes("block/trim/pillar/oak_thicc_pillar_trim"))
@@ -505,11 +510,11 @@ public class HandcraftedModule extends SimpleModule {
                         w -> new CornerTrimBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 .setRenderType(() -> RenderType::cutout)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("trims"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wood_trims"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("trims"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("wood_trims"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("trims"), Registries.BLOCK)
+                .addTag(modRes("wood_trims"), Registries.BLOCK)
+                .addTag(modRes("trims"), Registries.ITEM)
+                .addTag(modRes("wood_trims"), Registries.ITEM)
                 .addTexture(modRes("block/trim/corner/oak_corner_trim"))
                 .addTexture(modRes("block/trim/corner/oak_thicc_corner_trim"))
                 .addTexture(modRes("block/trim/corner/oak_thin_corner_trim"))
@@ -521,9 +526,9 @@ public class HandcraftedModule extends SimpleModule {
 
         board = ItemOnlyEntrySet.builder(WoodType.class, "board",
                         ModItems.OAK_BOARD, () -> WoodTypeRegistry.OAK_TYPE,
-                        w -> new BoardItem(new Item.Properties().tab(tab))
+                        w -> new BoardItem(new Item.Properties())
                 )
-                .addTag(ModTags.BOARDS, Registry.ITEM_REGISTRY)
+                .addTag(ModTags.BOARDS, Registries.ITEM)
                 .addTexture(modRes("item/board/oak_board"))
                 .addModelTransform(m -> m.addModifier((s, resLoc, w) -> s.replace(
             "\"handcrafted:item/board/oak_board\"",
@@ -597,7 +602,7 @@ public class HandcraftedModule extends SimpleModule {
             //==================================== CLOTHING | CUSHION ==================================================
                 // CLOTHING - used by TABLE, NIGHTSTAND, DESK, SIDE_TABLE
             for (var dye : DyeColor.values()) {
-                Item sheetItem = Registry.ITEM.get(this.modRes(dye.getName() + "_sheet"));
+                Item sheetItem = BuiltInRegistries.ITEM.get(this.modRes(dye.getName() + "_sheet"));
                 String dyeName = dye.getName() + "_sheet";
                 if (sheetItem != Items.AIR) {
                     var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, ignored ->
@@ -616,7 +621,7 @@ public class HandcraftedModule extends SimpleModule {
                 // CUSHION - used by CHAIR, BENCH, COUCH
             for (var dye : DyeColor.values()) {
                 String dyeName = dye.getName() + "_cushion";
-                Item cushionItem = Registry.ITEM.get(this.modRes(dyeName));
+                Item cushionItem = BuiltInRegistries.ITEM.get(this.modRes(dyeName));
 
                 if (cushionItem != Items.AIR) {
                     // CHAIR
@@ -652,7 +657,7 @@ public class HandcraftedModule extends SimpleModule {
                 // TABLE
             for (var t : table.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/table/table/" + s[2]));
@@ -663,7 +668,7 @@ public class HandcraftedModule extends SimpleModule {
                 // CHAIR
             for (var t : chair.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/chair/chair/" + s[2]));
@@ -674,7 +679,7 @@ public class HandcraftedModule extends SimpleModule {
                 // BENCH
             for (var t : bench.items.values()) {
                 var texture = OptimizedBenchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/chair/bench/" + s[2]));
@@ -685,7 +690,7 @@ public class HandcraftedModule extends SimpleModule {
                 // COUCH
             for (var t : couch.items.values()) {
                 var texture = OptimizedCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/chair/couch/" + s[2]));
@@ -696,7 +701,7 @@ public class HandcraftedModule extends SimpleModule {
                 // FANCY BED
             for (var t : fancyBed.items.values()) {
                 var singleBed = OptimizedFancyBedRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ignored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/bed/single/" + s[2]));
@@ -704,7 +709,7 @@ public class HandcraftedModule extends SimpleModule {
                 event.addSprite(singleBed.texture());
 
                 var doubleBed = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ignored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/bed/double/" + s[2]));
@@ -715,7 +720,7 @@ public class HandcraftedModule extends SimpleModule {
                 // DINING_BENCH
             for (var t : diningBench.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/chair/dining_bench/" + s[2]));
@@ -726,7 +731,7 @@ public class HandcraftedModule extends SimpleModule {
                 // NIGHTSTAND
             for (var t : nightstand.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/table/nightstand/" + s[2]));
@@ -737,7 +742,7 @@ public class HandcraftedModule extends SimpleModule {
                 // DESK
             for (var t : desk.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/table/desk/" + s[2]));
@@ -748,7 +753,7 @@ public class HandcraftedModule extends SimpleModule {
                 // SIDE_TABLE
             for (var t : sideTable.items.values()) {
                 var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = Registry.ITEM.getKey(t);
+                    var blockId = BuiltInRegistries.ITEM.getKey(t);
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
                             EveryCompat.res(hcFolder + s[1] + "/table/side_table/" + s[2]));
@@ -759,7 +764,7 @@ public class HandcraftedModule extends SimpleModule {
 
                 // COUNTER
             for (var entry : counter.items.entrySet()) {
-                ResourceLocation itemId = Registry.ITEM.getKey(entry.getValue());
+                ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(entry.getValue());
                 var itemTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(itemId, ignored -> {
                     var s = itemId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
@@ -769,7 +774,7 @@ public class HandcraftedModule extends SimpleModule {
             }
 
             for (var entry : counter_1.blocks.entrySet()) {
-                ResourceLocation blockId = Registry.BLOCK.getKey(entry.getValue());
+                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
                 var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
@@ -779,7 +784,7 @@ public class HandcraftedModule extends SimpleModule {
             }
 
             for (var entry : counter_2.blocks.entrySet()) {
-                ResourceLocation blockId = Registry.BLOCK.getKey(entry.getValue());
+                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
                 var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
@@ -789,7 +794,7 @@ public class HandcraftedModule extends SimpleModule {
             }
 
             for (var entry : counter_3.blocks.entrySet()) {
-                ResourceLocation blockId = Registry.BLOCK.getKey(entry.getValue());
+                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
                 var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
                     var s = blockId.getPath().split("/");
                     return new Material(TextureAtlas.LOCATION_BLOCKS,
@@ -820,7 +825,7 @@ public class HandcraftedModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new compatTableEntity(pos, state);
         }
     }
@@ -853,7 +858,7 @@ public class HandcraftedModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new CompatFancyBedEntity(pos, state);
         }
     }
@@ -864,7 +869,7 @@ public class HandcraftedModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new CompatDiningBenchEntity(pos, state);
         }
     }
@@ -875,7 +880,7 @@ public class HandcraftedModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new compatNightstandEntity(pos, state);
         }
     }
@@ -886,7 +891,7 @@ public class HandcraftedModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new CompatDeskEntity(pos, state);
         }
     }
@@ -897,7 +902,7 @@ public class HandcraftedModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new CompatSideTableEntity(pos, state);
         }
     }
@@ -908,14 +913,14 @@ public class HandcraftedModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new compatCounterEntity(pos, state);
         }
 
         @Override
         public @NotNull ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-            ResourceLocation id = Registry.BLOCK.getKey(state.getBlock());
-            return (Registry.ITEM.get(EveryCompat.res(
+            ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+            return (BuiltInRegistries.ITEM.get(EveryCompat.res(
                     id.getPath().substring(0, id.getPath().length() - 2)))).getDefaultInstance();
         }
     }
@@ -949,8 +954,8 @@ public class HandcraftedModule extends SimpleModule {
 
         @Override
         public @NotNull ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-            ResourceLocation id = Registry.BLOCK.getKey(state.getBlock());
-            return (Registry.ITEM.get(EveryCompat.res(
+            ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+            return (BuiltInRegistries.ITEM.get(EveryCompat.res(
                     id.getPath().substring(0, id.getPath().length() - 2)))).getDefaultInstance();
         }
     }
@@ -969,15 +974,15 @@ public class HandcraftedModule extends SimpleModule {
         @Override
         public void onHammer(Level level, BlockPos pos, BlockState state, Direction side, Player user, Vec3 hitPos) {
             Block block = state.getBlock();
-            ResourceLocation id = Registry.BLOCK.getKey(block);
-            Block replacement = Registry.BLOCK.get(new ResourceLocation(id.getNamespace(), id.getPath().replaceAll("\\d+",
+            ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
+            Block replacement = BuiltInRegistries.BLOCK.get(new ResourceLocation(id.getNamespace(), id.getPath().replaceAll("\\d+",
                     String.valueOf(Integer.parseInt(id.getPath().replaceAll("\\D+", "")) + 1))));
             CompoundTag tag = null;
             if (level.getBlockEntity(pos) instanceof compatStorageEntity storage) {
                 tag = storage.saveWithoutMetadata();
             }
             if (replacement == Blocks.AIR) {
-                level.setBlock(pos, Registry.BLOCK.get(new ResourceLocation(id.getNamespace(), id.getPath().replaceAll("\\d+", "1"))).defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(DrawerBlock.DRAWER_SHAPE, state.getValue(DrawerBlock.DRAWER_SHAPE)), Block.UPDATE_ALL);
+                level.setBlock(pos, BuiltInRegistries.BLOCK.get(new ResourceLocation(id.getNamespace(), id.getPath().replaceAll("\\d+", "1"))).defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(DrawerBlock.DRAWER_SHAPE, state.getValue(DrawerBlock.DRAWER_SHAPE)), Block.UPDATE_ALL);
             } else {
                 level.setBlock(pos, replacement.defaultBlockState()
                         .setValue(FACING, state.getValue(FACING)).setValue(DrawerBlock.DRAWER_SHAPE,
@@ -997,7 +1002,7 @@ public class HandcraftedModule extends SimpleModule {
         }
 
         @Override
-        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
             return new compatShelfEntity(pos, state);
         }
     }

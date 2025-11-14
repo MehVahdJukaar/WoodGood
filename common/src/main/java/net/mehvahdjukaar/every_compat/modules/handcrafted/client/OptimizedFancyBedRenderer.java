@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.handcrafted.client.block.fancybed.FancyBedModel;
 import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
 import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlock;
@@ -78,8 +78,8 @@ public class OptimizedFancyBedRenderer implements BlockEntityRenderer<FancyBedBl
                                  MultiBufferSource buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
-        poseStack.mulPose(Vector3f.YN.rotationDegrees(direction.getOpposite().toYRot()));
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YN.rotationDegrees(direction.getOpposite().toYRot()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
 
         model.getMain().getChild("sheets").visible = false;
         if (doubleBed == DirectionalBlockSide.SINGLE) {

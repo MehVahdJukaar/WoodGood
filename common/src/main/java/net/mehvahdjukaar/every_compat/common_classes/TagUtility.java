@@ -6,6 +6,7 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 
@@ -68,8 +69,8 @@ public class TagUtility {
 
         // Adding to the resources
         if (isTagFull) {
-            handler.dynamicPack.addTag(tagBuilder, Registry.BLOCK_REGISTRY);
-            handler.dynamicPack.addTag(tagBuilder, Registry.ITEM_REGISTRY);
+            handler.dynamicPack.addTag(tagBuilder, Registries.BLOCK);
+            handler.dynamicPack.addTag(tagBuilder, Registries.ITEM);
         }
 
         return isTagFull;

@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.handcrafted.client.block.table.table.TableModel;
 import earth.terrarium.handcrafted.common.block.property.SheetState;
 import earth.terrarium.handcrafted.common.block.property.TableState;
@@ -67,7 +67,7 @@ public class OptimizedTableRenderer implements BlockEntityRenderer<TableBlockEnt
         poseStack.pushPose();
 
         poseStack.translate(0.5, 1.5, 0.5);
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
         switch (tableState) {
             case SINGLE -> {
                 northeastLeg.visible = true;

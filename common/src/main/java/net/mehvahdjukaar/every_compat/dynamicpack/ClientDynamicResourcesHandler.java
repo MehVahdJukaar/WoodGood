@@ -4,23 +4,32 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
 import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicTexturePack;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
+public class ClientDynamicResourcesHandler extends DynClientResourcesGenerator {
 
-    public static final ClientDynamicResourcesHandler INSTANCE = new ClientDynamicResourcesHandler();
-    private static boolean init = false;
+    private static ClientDynamicResourcesHandler INSTANCE;
+
+    public static ClientDynamicResourcesHandler getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ClientDynamicResourcesHandler();
+        }
+        return INSTANCE;
+    }
+
+    private boolean firstInit = false;
 
     public ClientDynamicResourcesHandler() {
         super(new DynamicTexturePack(EveryCompat.res("generated_pack")));
         //since we place chests textures in its namespace to use its renderer
-        if (PlatformHelper.isModLoaded("quark")) getPack().addNamespaces("quark");
-        this.dynamicPack.generateDebugResources = PlatformHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get();
+        if (PlatHelper.isModLoaded("quark")) getPack().addNamespaces("quark");
+
+        this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || EarlyConfigs.DEBUG_RESOURCES.get());
     }
 
     @Override
@@ -42,9 +51,9 @@ public class ClientDynamicResourcesHandler extends DynClientResourcesProvider {
 
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
-        if (!init) {
+        if (!firstInit) {
             SpriteHelper.addHardcodedSprites();
-            init = true;
+            firstInit = true;
         }
         EveryCompat.forAllModules(m -> {
             try {

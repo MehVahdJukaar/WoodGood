@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.handcrafted.client.block.chair.diningbench.DiningBenchModel;
 import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlock;
 import earth.terrarium.handcrafted.common.block.chair.diningbench.DiningBenchBlockEntity;
@@ -53,8 +53,8 @@ public class OptimizedDiningBenchRenderer implements BlockEntityRenderer<DiningB
                                  MultiBufferSource buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
-        poseStack.mulPose(Vector3f.YN.rotationDegrees(direction.toYRot()));
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YN.rotationDegrees(direction.toYRot()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
 
         var blockTexture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.get(block);
         model.renderToBuffer(poseStack, blockTexture.buffer(buffer, RenderType::entityCutout),

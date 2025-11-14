@@ -25,6 +25,7 @@ import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 // LIB
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
@@ -35,14 +36,17 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -80,7 +84,7 @@ public abstract class EveryCompat {
         ACTIVE_MODULES.values().forEach(action);
     }
 
-    public static CreativeModeTab MOD_TAB = null;
+    public static ResourceKey<CreativeModeTab> MOD_TAB = null;
 
 
     protected void commonInit() {
@@ -89,8 +93,8 @@ public abstract class EveryCompat {
 
         ServerDynamicResourcesHandler.INSTANCE.register();
 
-        if (PlatformHelper.getEnv().isClient()) {
-            ClientDynamicResourcesHandler.INSTANCE.register();
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            ClientDynamicResourcesHandler.getInstance().register();
 
         }
 
@@ -150,14 +154,14 @@ public abstract class EveryCompat {
         BlockSetAPI.addDynamicBlockRegistration(this::registerWoodStuff, WoodType.class);
         BlockSetAPI.addDynamicBlockRegistration(this::registerLeavesStuff, LeavesType.class);
 
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, Registry.ITEM);
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, Registry.BLOCK_ENTITY_TYPE);
-        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, Registry.ENTITY_TYPE);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerItems(r), WoodType.class, BuiltInRegistries.ITEM);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerTiles(r), WoodType.class, BuiltInRegistries.BLOCK_ENTITY_TYPE);
+        BlockSetAPI.addDynamicRegistration((r, c) -> this.registerEntities(r), WoodType.class, BuiltInRegistries.ENTITY_TYPE);
 
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
-        Registry.BLOCK.getOptional(new ResourceLocation(blockId))
+        BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(blockId))
                 .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
     }
 
@@ -182,34 +186,39 @@ public abstract class EveryCompat {
     }
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatformHelper.isModLoaded(modId)) {
+        if (PlatHelper.isModLoaded(modId)) {
             var module = moduleFactory.get().apply(modId);
             EveryCompatAPI.registerModule(module);
         }
-    }
-
-    private void addTab() {
-        MOD_TAB = PlatformHelper.createModTab(res(MOD_ID), () -> ALL_WOODS.get().getDefaultInstance(),
-                true).setBackgroundSuffix("item_search.png");
     }
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
 
 
     public void commonSetup() {
-        if(PlatformHelper.isModLoaded("chipped")){
+        if(PlatHelper.isModLoaded("chipped")){
             EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
         }
         //log registered stuff size
-        int newSize = Registry.BLOCK.size();
+        int newSize = BuiltInRegistries.BLOCK.size();
         int am = newSize - prevRegSize;
         float p = (am / (float) newSize) * 100f;
         EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", am, String.format("%.2f", p));
         if (p > 33) {
-            CompatModule bloated = ACTIVE_MODULES.values().stream()
-                    .max(Comparator.comparing(CompatModule::bloatAmount)).get();
+            CompatModule bloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(CompatModule::bloatAmount)).get();
             EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
             EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModId().toUpperCase(Locale.ROOT), bloated.bloatAmount());
+        }
+        else {
+            String log = """
+                        \n#######################################################
+                        #                                                     #
+                        #     ATTENTION: No supported mods are installed.     #
+                        #   You dont need EveryCompat and should remove it.   #
+                        #                                                     #
+                        #######################################################
+                        """;
+            EveryCompat.LOGGER.error("\n{}", log);
         }
 
         forAllModules(CompatModule::onModSetup);
@@ -219,8 +228,8 @@ public abstract class EveryCompat {
 
     public void registerWoodStuff(Registrator<Block> event, Collection<WoodType> woods) {
         WoodConfigs.init(); // add wood stuff once its ready
-        if (EarlyConfigs.TAB_ENABLED.get()) this.addTab();
-        this.prevRegSize = Registry.BLOCK.size();
+//        if (EarlyConfigs.TAB_ENABLED.get()) this.addTab();
+        this.prevRegSize = BuiltInRegistries.BLOCK.size();
         LOGGER.info("Registering Compat Wood Blocks");
         forAllModules(m -> m.registerWoodBlocks(event, woods));
     }
@@ -317,11 +326,32 @@ public abstract class EveryCompat {
         }
     }
 
+    private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
+        if (EarlyConfigs.TAB_ENABLED.get()) {
+            Map<ResourceKey<CreativeModeTab>, Map<BlockType, List<Item>>> typeToEntrySet = new LinkedHashMap<>();
+            for (var r : BlockSetAPI.getRegistries()) {
+                for (var type : r.getValues()) {
+                    forAllModules(m -> {
+                        typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>())
+                                .computeIfAbsent(type, j -> new ArrayList<>())
+                                .addAll(m.getAllItemsOfType(type));
+                    });
+                }
+            }
+            for (var e : typeToEntrySet.entrySet()) {
+                for (var ee : e.getValue().values()) {
+                    event.add(e.getKey(), ee.toArray(ItemLike[]::new));
+                }
+            }
+        } else {
+            forAllModules(m -> m.registerItemsToExistingTabs(event));
+        }
+    }
 
     private static int lastInd = 0;
 
     public static void sendPacket(ServerPlayer s) {
-        if (EarlyConfigs.DEBUG_PACKET.get() || PlatformHelper.isDev()) {
+        if (EarlyConfigs.DEBUG_PACKET.get() || PlatHelper.isDev()) {
             lastInd = 0;
             LOGGER.warn("Starting Blockstate Map validity check:");
             while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {

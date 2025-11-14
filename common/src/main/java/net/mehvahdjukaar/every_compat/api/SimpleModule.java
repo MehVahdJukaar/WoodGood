@@ -5,7 +5,7 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -110,7 +110,7 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         getEntries().forEach(e -> e.registerEntityRenderers(this, event));
     }
 

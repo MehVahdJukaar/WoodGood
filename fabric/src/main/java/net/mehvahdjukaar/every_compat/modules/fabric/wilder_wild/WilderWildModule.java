@@ -19,6 +19,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -53,21 +54,21 @@ public class WilderWildModule extends SimpleModule {
                 // TEXTURE: using stripped_hollowed_oak_log from below
                 .setRenderType(() -> RenderType::cutout)
                 .setTab(() -> tab)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.LOGS_THAT_BURN, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.LOGS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)
+                .addTag(BlockTags.LOGS, Registries.BLOCK)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
                 .addTag(modRes("hollowed_logs"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("splits_coconut"), Registry.BLOCK_REGISTRY)
                 .addTag(modRes("hollowed_logs_that_burn"), Registry.BLOCK_REGISTRY)
                 //TAG: wilderwild:hollowed_<type>_logs
-                .addTag(modRes("hollowed_logs"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("hollowed_logs_that_burn"), Registry.ITEM_REGISTRY)
-                .addTag(ItemTags.LOGS_THAT_BURN, Registry.ITEM_REGISTRY)
-                .addTag(ItemTags.LOGS, Registry.ITEM_REGISTRY)
-                .addTag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL, Registry.ITEM_REGISTRY)
+                .addTag(modRes("hollowed_logs"), Registries.ITEM)
+                .addTag(modRes("hollowed_logs_that_burn"), Registries.ITEM)
+                .addTag(ItemTags.LOGS_THAT_BURN, Registries.ITEM)
+                .addTag(ItemTags.LOGS, Registries.ITEM)
+                .addTag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.ITEM)
                 .addRecipe(modRes("oak_wood_from_hollowed"))
                 // Below: Both logs doesn't have the standard 16x16, take a look. You'll get why. It will be excluded
                 .addCondition(w -> !(w.getId().toString().equals("terrestria:sakura") ||
@@ -98,11 +99,11 @@ public class WilderWildModule extends SimpleModule {
                 .addTag(WilderBlockTags.STRIPPED_HOLLOWED_LOGS, Registry.BLOCK_REGISTRY)
                 .addTag(WilderBlockTags.SPLITS_COCONUT, Registry.BLOCK_REGISTRY)
                 //TAG: wilderwild:hollowed_<type>_logs
-                .addTag(modRes("hollowed_logs"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("hollowed_logs_that_burn"), Registry.ITEM_REGISTRY)
-                .addTag(ItemTags.LOGS_THAT_BURN, Registry.ITEM_REGISTRY)
-                .addTag(ItemTags.LOGS, Registry.ITEM_REGISTRY)
-                .addTag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL, Registry.ITEM_REGISTRY)
+                .addTag(modRes("hollowed_logs"), Registries.ITEM)
+                .addTag(modRes("hollowed_logs_that_burn"), Registries.ITEM)
+                .addTag(ItemTags.LOGS_THAT_BURN, Registries.BLOCK)
+                .addTag(ItemTags.LOGS, Registries.BLOCK)
+                .addTag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK)
                 .addRecipe(modRes("stripped_oak_wood_from_hollowed"))
                 // Below: Both logs doesn't have the standard 16x16, take a look. You'll get why. It will be excluded
                 .addCondition(w -> !(w.getId().toString().equals("terrestria:sakura") ||

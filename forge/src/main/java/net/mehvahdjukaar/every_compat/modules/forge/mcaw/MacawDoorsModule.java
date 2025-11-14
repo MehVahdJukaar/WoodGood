@@ -63,7 +63,7 @@ public class MacawDoorsModule extends SimpleModule {
                         BlockInit.OAK_BARK_GLASS_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.BLOCK)
                 .setTab(() -> tab)
                 .copyParentDrop()
                 .defaultRecipe()
@@ -76,7 +76,7 @@ public class MacawDoorsModule extends SimpleModule {
                         BlockInit.OAK_BARN_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.BLOCK)
                 .setTab(() -> tab)
                 .copyParentDrop()
                 .defaultRecipe()
@@ -91,7 +91,7 @@ public class MacawDoorsModule extends SimpleModule {
                         BlockInit.OAK_BARN_GLASS_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.BLOCK)
                 .setTab(() -> tab)
                 .copyParentDrop()
                 .defaultRecipe()
@@ -106,7 +106,7 @@ public class MacawDoorsModule extends SimpleModule {
                         BlockInit.OAK_BEACH_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.BLOCK)
                 .setTab(() -> tab)
                 .copyParentDrop()
                 .defaultRecipe()
@@ -121,7 +121,7 @@ public class MacawDoorsModule extends SimpleModule {
                         BlockInit.SPRUCE_CLASSIC_DOOR, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.BLOCK)
                 .setTab(() -> tab)
                 .copyParentDrop()
                 .defaultRecipe()
@@ -136,7 +136,7 @@ public class MacawDoorsModule extends SimpleModule {
                         BlockInit.OAK_COTTAGE_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.BLOCK)
                 .setTab(() -> tab)
                 .copyParentDrop()
                 .defaultRecipe()
@@ -151,7 +151,7 @@ public class MacawDoorsModule extends SimpleModule {
                         BlockInit.OAK_FOUR_PANEL_DOOR, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new DoorBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
                 .addTag(BlockTags.WOODEN_DOORS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_DOORS, Registry.ITEM_REGISTRY)
+                .addTag(ItemTags.WOODEN_DOORS, Registries.BLOCK)
                 .setTab(() -> tab)
                 .copyParentDrop()
                 .defaultRecipe()

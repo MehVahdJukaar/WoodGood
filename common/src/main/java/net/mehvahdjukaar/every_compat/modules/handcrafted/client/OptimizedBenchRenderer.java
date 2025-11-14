@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.handcrafted.client.block.chair.woodenbench.WoodenBenchModel;
 import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
 import earth.terrarium.handcrafted.common.block.chair.woodenbench.WoodenBenchBlockEntity;
@@ -73,27 +73,27 @@ public class OptimizedBenchRenderer implements BlockEntityRenderer<WoodenBenchBl
         poseStack.translate(0.5, 1.5, 0.5);
         poseStack.mulPose(switch (direction) {
             case EAST -> switch (shape) {
-                case OUTER_LEFT, INNER_RIGHT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(90);
-                case INNER_LEFT -> Vector3f.YP.rotationDegrees(180);
-                case OUTER_RIGHT -> Vector3f.YP.rotationDegrees(0);
+                case OUTER_LEFT, INNER_RIGHT, MIDDLE, LEFT, RIGHT, SINGLE -> Axis.YP.rotationDegrees(90);
+                case INNER_LEFT -> Axis.YP.rotationDegrees(180);
+                case OUTER_RIGHT -> Axis.YP.rotationDegrees(0);
             };
             case SOUTH -> switch (shape) {
-                case OUTER_LEFT, INNER_RIGHT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(0);
-                case INNER_LEFT -> Vector3f.YP.rotationDegrees(90);
-                case OUTER_RIGHT -> Vector3f.YP.rotationDegrees(270);
+                case OUTER_LEFT, INNER_RIGHT, MIDDLE, LEFT, RIGHT, SINGLE -> Axis.YP.rotationDegrees(0);
+                case INNER_LEFT -> Axis.YP.rotationDegrees(90);
+                case OUTER_RIGHT -> Axis.YP.rotationDegrees(270);
             };
             case WEST -> switch (shape) {
-                case OUTER_LEFT, INNER_RIGHT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(270);
-                case INNER_LEFT -> Vector3f.YP.rotationDegrees(0);
-                case OUTER_RIGHT -> Vector3f.YP.rotationDegrees(180);
+                case OUTER_LEFT, INNER_RIGHT, MIDDLE, LEFT, RIGHT, SINGLE -> Axis.YP.rotationDegrees(270);
+                case INNER_LEFT -> Axis.YP.rotationDegrees(0);
+                case OUTER_RIGHT -> Axis.YP.rotationDegrees(180);
             };
             default -> switch (shape) {
-                case OUTER_LEFT, INNER_RIGHT, MIDDLE, LEFT, RIGHT, SINGLE -> Vector3f.YP.rotationDegrees(180);
-                case INNER_LEFT -> Vector3f.YP.rotationDegrees(270);
-                case OUTER_RIGHT -> Vector3f.YP.rotationDegrees(90);
+                case OUTER_LEFT, INNER_RIGHT, MIDDLE, LEFT, RIGHT, SINGLE -> Axis.YP.rotationDegrees(180);
+                case INNER_LEFT -> Axis.YP.rotationDegrees(270);
+                case OUTER_RIGHT -> Axis.YP.rotationDegrees(90);
             };
         });
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(180));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
 
         var texture = OBJECT_TO_TEXTURE.get(block);
 

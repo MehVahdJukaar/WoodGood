@@ -32,6 +32,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -91,8 +92,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_chair"))
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
                 .addTexture(modRes("block/oak_chair"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("general"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("general"), Registries.ITEM)
                 .build();
         this.addEntry(chairs);
 
@@ -105,9 +106,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
                 .addTexture(modRes("block/oak_table"))
                 .addTexture(modRes("block/oak_particle"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tuckable"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("general"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("tuckable"), Registries.BLOCK)
+                .addTag(modRes("general"), Registries.ITEM)
                 .build();
         this.addEntry(tables);
 
@@ -122,9 +123,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_dark_ceiling_fan"))
                 .addTile(CEILING_FAN::get)
 //                .setTab()
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("electronics"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("bedroom"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("electronics"), Registries.ITEM)
+                .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_dark_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .setRenderType(() -> RenderType::translucent)
@@ -141,9 +142,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_light_ceiling_fan"))
                 .addTile(CEILING_FAN::get)
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("electronics"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("bedroom"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("electronics"), Registries.ITEM)
+                .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTextureM(modRes("block/oak_light_ceiling_fan"),
                         EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .setRenderType(() -> RenderType::translucent)
@@ -160,9 +161,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
                 .addTile(CRATE::get)
                 .addTexture(modRes("block/oak_crate"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("outdoors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("storage"), Registries.ITEM)
+                .addTag(modRes("outdoors"), Registries.ITEM)
                 .build();
         this.addEntry(crates);
 
@@ -177,9 +178,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(MAIL_BOX::get)
                 .addTextureM(modRes("block/oak_mail_box"),
                         EveryCompat.res("block/rfm/oak_mail_box_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("outdoors"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("outdoors"), Registries.ITEM)
+                .addTag(modRes("storage"), Registries.ITEM)
                 .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(mailboxes);
@@ -194,9 +195,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(TOILET::get)
                 .addTextureM(modRes("block/oak_toilet"),
                         EveryCompat.res("block/rfm/oak_toilet_m"))
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_toilets"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("bathroom"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(modRes("wooden_toilets"), Registries.ITEM)
+                .addTag(modRes("bathroom"), Registries.ITEM)
                 .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(toilets);
@@ -211,9 +212,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(STORAGE_JAR::get)
                 .addTextureM(modRes("block/oak_storage_jar"),
                         EveryCompat.res("block/rfm/oak_storage_jar_m"))
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("kitchen"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(modRes("storage"), Registries.ITEM)
+                .addTag(modRes("kitchen"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(jars);
@@ -228,9 +229,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 //                .addTile(ModBlockEntities.STORAGE_CABINET::get)
                 .addTextureM(modRes("block/oak_kitchen_cabinetry"),
                         EveryCompat.res("block/rfm/oak_kitchen_cabinetry_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_kitchen_cabinetry"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("kitchen"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wooden_kitchen_cabinetry"), Registries.BLOCK)
+                .addTag(modRes("kitchen"), Registries.BLOCK)
                 .build();
         this.addEntry(kitchen_cabinetry);
 
@@ -244,10 +245,10 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(KITCHEN_DRAWER::get)
                 .addTextureM(modRes("block/oak_kitchen_drawer"),
                         EveryCompat.res("block/rfm/oak_kitchen_drawer_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("kitchen"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("wooden_kitchen_drawers"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("storage"), Registries.BLOCK)
+                .addTag(modRes("kitchen"), Registries.BLOCK)
+                .addTag(modRes("wooden_kitchen_drawers"), Registries.BLOCK)
                 .build();
         this.addEntry(kitchen_drawer);
 
@@ -261,10 +262,10 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(KITCHEN_SINK::get)
                 .addTextureM(modRes("block/oak_kitchen_sink"),
                         EveryCompat.res("block/rfm/oak_kitchen_sink_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_kitchen_sinks"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("kitchen"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wooden_kitchen_sinks"), Registries.BLOCK)
+                .addTag(modRes("kitchen"), Registries.BLOCK)
+                .addTag(modRes("storage"), Registries.BLOCK)
                 .build();
         this.addEntry(kitchen_sink);
 
@@ -278,10 +279,10 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(STORAGE_CABINET::get)
                 .addTextureM(modRes("block/oak_kitchen_storage_cabinet"),
                         EveryCompat.res("block/rfm/oak_kitchen_storage_cabinet_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_kitchen_storage_cabinets"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("kitchen"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wooden_kitchen_storage_cabinets"), Registries.BLOCK)
+                .addTag(modRes("kitchen"), Registries.BLOCK)
+                .addTag(modRes("storage"), Registries.BLOCK)
                 .build();
         this.addEntry(kitchen_storage_cabinet);
 
@@ -295,9 +296,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(STORAGE_CABINET::get)
                 .addTextureM(modRes("block/oak_storage_cabinet"),
                         EveryCompat.res("block/rfm/oak_storage_cabinet_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("general"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("bedroom"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("general"), Registries.BLOCK)
+                .addTag(modRes("bedroom"), Registries.BLOCK)
                 .addTag(modRes("kitchen"), Registry.ITEM_REGISTRY)
                 .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
                 .build();
@@ -313,7 +314,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(BASIN::get)
                 .addTextureM(modRes("block/oak_basin"),
                         EveryCompat.res("block/rfm/oak_basin_m"))
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("wooden_basins"), Registry.ITEM_REGISTRY)
                 .addTag(modRes("bathroom"), Registry.ITEM_REGISTRY)
                 .build();
@@ -329,7 +330,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(BATH::get)
                 .addTextureM(modRes("block/oak_bath"),
                         EveryCompat.res("block/rfm/oak_bath_m"))
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("bathroom"), Registry.ITEM_REGISTRY)
                 .addTag(modRes("wooden_baths"), Registry.ITEM_REGISTRY)
                 .build();
@@ -344,7 +345,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
                 .addTile(STORAGE_JAR::get)
                 .addTexture(modRes("block/oak_lattice_fence"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registry.BLOCK_REGISTRY)
                 .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
                 .addTag(modRes("outdoors"), Registry.ITEM_REGISTRY)

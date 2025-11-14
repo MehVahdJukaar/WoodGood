@@ -1,26 +1,20 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -30,7 +24,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
@@ -48,7 +43,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.*;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
 public class SimpleEntrySet<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet<T, B, Item> {
@@ -71,7 +65,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           Function<T, B> blockSupplier,
                           Supplier<@Nullable B> baseBlock,
                           Supplier<T> baseType,
-                          Supplier<CreativeModeTab> tab,
+                          Supplier<ResourceKey<CreativeModeTab>> tab,
                           LootTableMode lootMode,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
@@ -160,7 +154,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         for (T w : woodTypes) {
             String name = getBlockName(w);
             String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            if (module.isEntryAlreadyRegistered(name, w, Registry.BLOCK)) continue;
+            if (module.isEntryAlreadyRegistered(name, w, BuiltInRegistries.BLOCK)) continue;
 
             if(condition.test(w)) {
                 B block = blockFactory.apply(w);
@@ -195,17 +189,20 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public void registerItems(CompatModule module, Registrator<Item> registry) {
         blocks.forEach((w, value) -> {
             Item i;
-            CreativeModeTab tab = getTab(w, value);
 
             if (itemFactory != null) {
-                i = itemFactory.apply(w, value, new Item.Properties().tab(tab));
+                i = itemFactory.apply(w, value, new Item.Properties());
             } else {
-                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties().tab(tab), w);
+                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), w);
             }
             //for ones that don't have item
             if (i != null) {
                 this.items.put(w, i);
-                registry.register(Utils.getID(value), i);
+                ResourceLocation id = Utils.getID(value);
+                if (id.toString().equals("minecraft:air")) {
+                    throw new UnsupportedOperationException("Block of wood type " + w + " from module " + this + " has an invalid item name. How?");
+                }
+                registry.register(id, i);
             }
         });
     }
@@ -220,7 +217,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Override
-    public void registerEntityRenderers(CompatModule simpleModule, ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerEntityRenderers(CompatModule simpleModule, ClientHelper.BlockEntityRendererEvent event) {
         if (this.tileHolder != null) {
             //this.tileHolder.registerRenderer(event);
         }
@@ -238,7 +235,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public void setRenderLayer() {
         if (isDisabled()) return;
         if (renderType != null) {
-            blocks.values().forEach(t -> ClientPlatformHelper.registerRenderType(t, renderType.get().get()));
+            blocks.values().forEach(t -> ClientHelper.registerRenderType(t, renderType.get().get()));
         }
     }
 
@@ -259,7 +256,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     @Override
-    public void generateModels(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
+    public void generateModels(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
         if (isDisabled()) return;
         ResourcesUtils.addStandardResources(module.getModId(), manager, handler, blocks, baseType.get(), extraTransform);
     }
@@ -385,7 +382,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         public BlockEntityType<? extends H> createInstance(Block... blocks) {
             if (tile != null) throw new UnsupportedOperationException("tile has already been created");
-            this.tile = PlatformHelper.newBlockEntityType(tileFactory::apply, blocks);
+            this.tile = PlatHelper.newBlockEntityType(tileFactory::apply, blocks);
             return tile;
         }
     }

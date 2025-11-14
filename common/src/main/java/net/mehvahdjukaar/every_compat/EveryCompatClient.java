@@ -1,8 +1,12 @@
 package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
@@ -24,25 +28,26 @@ public class EveryCompatClient {
 
     public static void commonInit() {
         EveryCompat.forAllModules(CompatModule::onClientInit);
-        ClientPlatformHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
-        ClientPlatformHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
-        ClientPlatformHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
-        ClientPlatformHelper.addAtlasTextureCallback(TextureAtlas.LOCATION_BLOCKS, EveryCompatClient::registerTextures);
+        ClientHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
+        ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
+        ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
+//        ClientHelper.addAtlasTextureCallback(TextureAtlas.LOCATION_BLOCKS, EveryCompatClient::registerTextures);
+        ClientDynamicResourcesHandler.getInstance().register();
     }
 
     private static void registerTextures(ClientPlatformHelper.AtlasTextureEvent event){
         EveryCompat.forAllModules(m -> m.stitchAtlasTextures(event));
     }
 
-    private static void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
         EveryCompat.forAllModules(m -> m.registerBlockColors(event));
     }
 
-    private static void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
+    private static void registerItemColors(ClientHelper.ItemColorEvent event) {
         EveryCompat.forAllModules(m -> m.registerItemColors(event));
     }
 
-    private static void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    private static void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         EveryCompat.forAllModules(m -> m.registerBlockEntityRenderers(event));
     }
 
@@ -51,7 +56,7 @@ public class EveryCompatClient {
     }
 
     public static void onItemTooltip(ItemStack stack, TooltipFlag tooltipFlag, List<Component> components) {
-        if (PlatformHelper.isDev()) {
+        if (PlatHelper.isDev()) {
             Block blocked = Block.byItem(stack.getItem());
             // BLOCK TAGS
             if (blocked != Blocks.AIR) {

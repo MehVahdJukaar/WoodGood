@@ -1,15 +1,18 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.mehvahdjukaar.every_compat.ECRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -17,9 +20,12 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -34,13 +40,32 @@ import java.util.function.Supplier;
 public abstract class CompatModule {
 
     protected final String modId;
+    protected final String modName; //readable name
+
+    //EC or addon namespace
+    private final String myNamespace;
+
+    protected CompatModule(String modId, String myNamespace) {
+        this.modId = modId;
+        this.modName = PlatHelper.getModName(modId);
+        this.myNamespace = myNamespace;
+    }
 
     protected CompatModule(String modId) {
-        this.modId = modId;
+        this(modId, EveryCompat.MOD_ID);
     }
 
     public String getModId() {
         return modId;
+    }
+
+    public String getMyNamespace() {
+        return myNamespace;
+    }
+
+    // readable name
+    public String getModName() {
+        return modName;
     }
 
     public abstract String shortenedId();
@@ -62,15 +87,12 @@ public abstract class CompatModule {
     }
 
     public void onModSetup() {
-
     }
 
     public void onClientInit() {
-
     }
 
     public void onClientSetup() {
-
     }
 
     public void registerWoodBlocks(Registrator<Block> registry, Collection<WoodType> woodTypes) {
@@ -150,48 +172,51 @@ public abstract class CompatModule {
 
     }
 
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
 
     }
 
     public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
     }
 
-    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
     }
 
-    public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
+    }
+
+    public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
     }
 
     //utility functions
 
     @Nullable
     protected final <T extends Block> T getModBlock(String id, Class<T> blockClass) {
-        return (T) Registry.BLOCK.get(modRes(id));
+        return (T) BuiltInRegistries.BLOCK.get(modRes(id));
     }
 
     @Nullable
     protected final Block getModBlock(String id) {
-        return Registry.BLOCK.get(modRes(id));
+        return BuiltInRegistries.BLOCK.get(modRes(id));
     }
 
     @Nullable
     protected final Item getModItem(String id) {
-        return Registry.ITEM.get(modRes(id));
+        return BuiltInRegistries.ITEM.get(modRes(id));
     }
 
     @Nullable
     protected final <T extends BlockEntityType<?>> T getModTile(String id, Class<T> blockClass) {
-        return (T) Registry.BLOCK_ENTITY_TYPE.get(modRes(id));
+        return (T) BuiltInRegistries.BLOCK_ENTITY_TYPE.get(modRes(id));
     }
 
     @Nullable
     protected final BlockEntityType<?> getModTile(String id) {
-        return Registry.BLOCK_ENTITY_TYPE.get(modRes(id));
+        return BuiltInRegistries.BLOCK_ENTITY_TYPE.get(modRes(id));
     }
 
     //post process some textures. currently only ecologics azalea
-    public void addWoodTexture(WoodType wood, DynClientResourcesProvider handler, ResourceManager manager,
+    public void addWoodTexture(WoodType wood, DynClientResourcesGenerator handler, ResourceManager manager,
                                String path, Supplier<TextureImage> textureSupplier) {
         handler.addTextureIfNotPresent(manager, path, () -> {
             var t = textureSupplier.get();
@@ -341,9 +366,13 @@ public abstract class CompatModule {
         };
     }
 
+    public ResourceKey<CreativeModeTab> getDedicatedTab() {
+        return (ResourceKey<CreativeModeTab>) ECRegistry.MOD_TAB;
+    }
+
     //how much crap this module has registered
     public abstract int bloatAmount();
 
-    public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
+    public void stitchAtlasTextures(ClientHelper.AtlasTextureEvent event) {
     }
 }

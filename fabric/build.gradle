@@ -46,9 +46,6 @@ dependencies {
 
     modImplementation("com.tterrag.registrate_fabric:Registrate:1.1.50-MC1.19.2")
 
-// IMPORT SUPPLEMENTARIES (ONLY FOR TESTING PURPOSE)
-    // modImplementation ("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
-
         //SPECIAL DEPENDENCIES: TerraBlender(FABRIC), Framework - REQUIRES below
     implementation("com.electronwill.night-config:toml:3.6.4")
     implementation("com.electronwill.night-config:core:3.6.4")
@@ -62,7 +59,7 @@ dependencies {
 
     //!! MAVEN
     modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
-//    modImplementation("maven.modrinth:moonlight:fabric_${moonlight_version}") // v2.3.7 //!! Don't use it yet
+    modImplementation("maven.modrinth:moonlight:${minecraft_version}-${moonlight_version}-fabric")
 
 
 //!! =============================================== DEPENDENCIES =================================================== \\
@@ -122,7 +119,7 @@ dependencies {
     modCompileOnly("curse.maven:farmers-delight-fabric-482834:4111426")
     modCompileOnly("curse.maven:friends-and-foes-551364:4429816")
     modCompileOnly("curse.maven:furnish-547069:4449619")
-    modCompileOnly("curse.maven:handcrafted-538214:4437458")
+    modCompileOnly("curse.maven:handcrafted-538214:4438941")
     modCompileOnly("curse.maven:infinitybuttons-661902:5330408")
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544642")
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750267")

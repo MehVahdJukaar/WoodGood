@@ -9,7 +9,7 @@ import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
@@ -19,7 +19,6 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.core.recipe.ShapedRecipeTemplate;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -30,20 +29,21 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
+
+import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.function.Consumer;
 
 public class ResourcesUtils {
 
     public static <B extends Block, T extends BlockType> void addStandardResources(
-            String modId, ResourceManager manager, DynClientResourcesProvider pack, Map<T, B> blocks, T baseType) {
+            String modId, ResourceManager manager, DynClientResourcesGenerator pack, Map<T, B> blocks, T baseType) {
         addStandardResources(modId, manager, pack, blocks, baseType, null);
     }
 
     public static <B extends Block, T extends BlockType> void addStandardResources(
-            String modId, ResourceManager manager, DynClientResourcesProvider d,
+            String modId, ResourceManager manager, DynClientResourcesGenerator pack,
             Map<T, B> blocks, T baseType, @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
 
         if (blocks.isEmpty()) return;
@@ -55,7 +55,7 @@ public class ResourcesUtils {
         String baseBlockName = baseType.getTypeName();
 
         if (oakBlock == null) {
-            EveryCompat.LOGGER.error("Failed to generate some assets");
+            EveryCompat.LOGGER.error("Skipped generating some block assets because baseBlock is null for {}", Utils.getID(first.getValue()));
             return;
         }
         ResourceLocation oakId = Utils.getID(oakBlock);
@@ -73,7 +73,7 @@ public class ResourcesUtils {
 
         //if it has an item
         if (oakItem != Items.AIR) {
-            //item model
+            ///models/item
             try {
                 //we cant use this since it might override partent too. Custom textured items need a custom model added manually with addBlockResources
                 // modelModifier.replaceItemType(baseBlockName);
@@ -83,7 +83,7 @@ public class ResourcesUtils {
                 StaticResource oakItemModel = StaticResource.getOrFail(manager,
                         ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
 
-                JsonObject json = RPUtils.deserializeJson(oakItemModel.getInputStream());
+                JsonObject json = RPUtils.deserializeJson(new ByteArrayInputStream(oakItemModel.data));
                 //adds models referenced from here. not recursive
                 modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
 
@@ -99,22 +99,21 @@ public class ResourcesUtils {
                     try {
                         StaticResource newRes = itemModifier.transform(oakItemModel, id, w);
                         assert newRes.location != oakItemModel.location : "ids cant be the same";
-                        d.addResourceIfNotPresent(manager, newRes);
+                        pack.addResourceIfNotPresent(manager, newRes);
                     } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to add {} item model json file:", b, e);
+                        EveryCompat.LOGGER.error("Failed to add {} models/item json file:", b, e);
                     }
                 });
             } catch (Exception e) {
-                EveryCompat.LOGGER.error("Could not find item model for {}", oakBlock);
+                EveryCompat.LOGGER.error("Could not find block's models/item file for {}", oakBlock);
             }
-        } else {
         }
 
-        //blockstate
+        ///blockstate
         try {
             StaticResource oakBlockstate = StaticResource.getOrFail(manager, ResType.BLOCKSTATES.getPath(oakId));
             //models
-            JsonElement json = RPUtils.deserializeJson(oakBlockstate.getInputStream());
+            JsonElement json = RPUtils.deserializeJson(new ByteArrayInputStream(oakBlockstate.data));
 
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model")));
             List<StaticResource> oakModels = new ArrayList<>();
@@ -132,24 +131,24 @@ public class ResourcesUtils {
                 ResourceLocation id = Utils.getID(b);
                 try {
                     if (true || WoodConfigs.isEntryEnabled(w, b)) { //generating all the times otherwise we get log spam
-                        //creates blockstate
+                        ///creates blockstate
                         StaticResource newBlockState = modifier.transform(oakBlockstate, id, w);
                         assert newBlockState.location != oakBlockstate.location : "ids cant be the same";
-                        d.addResourceIfNotPresent(manager, newBlockState);
+                        pack.addResourceIfNotPresent(manager, newBlockState);
 
-                        //creates item model
+                        ///creates models/block
                         for (StaticResource model : oakModels) {
                             try {
                                 StaticResource newModel = modelModifier.transform(model, id, w);
                                 assert newModel.location != model.location : "ids cant be the same";
-                                d.addResourceIfNotPresent(manager, newModel);
+                                pack.addResourceIfNotPresent(manager, newModel);
                             } catch (Exception exception) {
                                 EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
                             }
                         }
                     } else {
                         //dummy blockstate so we don't generate models for this
-                        d.getPack().addJson(id, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
+                        pack.getPack().addJson(id, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
 
                 } catch (Exception e) {
@@ -165,7 +164,7 @@ public class ResourcesUtils {
 
     //same as above just with just item models. a bunch of copy paste here... ugly
     public static <I extends Item, T extends BlockType> void addItemModels(
-            String modId, ResourceManager manager, DynClientResourcesProvider d,
+            String modId, ResourceManager manager, DynClientResourcesGenerator d,
             Map<T, I> items, T baseType, @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform) {
 
         if (items.isEmpty()) return;
@@ -177,7 +176,7 @@ public class ResourcesUtils {
         String baseItemname = baseType.getTypeName();
 
         if (oakItem == null) {
-            EveryCompat.LOGGER.error("Failed to generate some assets");
+            EveryCompat.LOGGER.error("Skipped generating some item assets because baseItem is null for {}", Utils.getID(first.getValue()));
             return;
         }
         BlockTypeResTransformer<T> modifier = BlockTypeResTransformer.create(modId, manager);
@@ -188,7 +187,7 @@ public class ResourcesUtils {
 
         Set<String> modelsLoc = new HashSet<>();
 
-        //item model
+        ///item model
         try {
             //we cant use this since it might override partent too. Custom textured items need a custom model added manually with addBlockResources
             // modelModifier.replaceItemType(baseItemname);
@@ -198,7 +197,7 @@ public class ResourcesUtils {
             StaticResource oakItemModel = StaticResource.getOrFail(manager,
                     ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
 
-            JsonObject json = RPUtils.deserializeJson(oakItemModel.getInputStream());
+            JsonObject json = RPUtils.deserializeJson(new ByteArrayInputStream(oakItemModel.data));
             //adds models referenced from here. not recursive
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
 
@@ -220,7 +219,7 @@ public class ResourcesUtils {
                 }
             });
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Could not find item model for {}", oakItem);
+            EveryCompat.LOGGER.error("Could not find item's model file for {}", oakItem);
         }
 
 

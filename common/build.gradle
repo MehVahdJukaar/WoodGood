@@ -18,8 +18,8 @@ dependencies {
 //    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}") // LOCAL
 
     //!! MAVEN
-    modImplementation("curse.maven:selene-499980:5567103") // v2.3.7
-//    modImplementation("maven.modrinth:moonlight:fabric_${moonlight_version}") // v2.3.7 //!! Don't use it yet
+//    modImplementation("curse.maven:selene-499980:5567103")
+    modImplementation("maven.modrinth:moonlight:${minecraft_version}-${moonlight_version}-fabric")
 
 
 //!! ================================================== DEPENDENCIES ================================================ \\
@@ -39,7 +39,7 @@ dependencies {
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
     modCompileOnly("curse.maven:friends-and-foes-551364:4429816")
     modCompileOnly("curse.maven:furnish-547069:4449619")
-    modCompileOnly("curse.maven:handcrafted-538214:4437458")
+    modCompileOnly("curse.maven:handcrafted-538214:4438941")
     modCompileOnly("curse.maven:refurbished-furniture-897116:6186452")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5694015")
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094")

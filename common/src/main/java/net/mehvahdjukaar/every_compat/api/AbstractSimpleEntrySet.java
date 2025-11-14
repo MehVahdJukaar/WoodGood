@@ -8,7 +8,7 @@ import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -29,9 +29,11 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.ProviderNotFoundException;
 import java.util.*;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,7 +50,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Nullable
     public final String prefix;
 
-    protected final Supplier<CreativeModeTab> tab;
+    protected final Supplier<ResourceKey<CreativeModeTab>> tab;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
     protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
@@ -62,7 +64,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected AbstractSimpleEntrySet(Class<T> type,
                                   String name, @Nullable String prefix,
                                   Supplier<T> baseType,
-                                  Supplier<CreativeModeTab> tab,
+                                  Supplier<ResourceKey<CreativeModeTab>> tab,
                                   @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                                   @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                      Predicate<T> condition) {
@@ -119,7 +121,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         return null;
     }
 
-    protected CreativeModeTab getTab(T w, B b) {
+    protected ResourceKey<CreativeModeTab> getTab(T w, B b) {
         return WoodConfigs.isEntryEnabled(w, b) ?
                 (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : this.tab.get()) : null;
     }
@@ -157,7 +159,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     }
 
     @Override
-    public void generateTextures(CompatModule module, DynClientResourcesProvider handler, ResourceManager manager) {
+    public void generateTextures(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
         if (isDisabled()) return;
         if (textures.isEmpty()) return;
         List<TextureImage> images = new ArrayList<>();
@@ -260,13 +262,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected abstract Map<T, ? extends ItemLike> getMainEntryMap();
 
 
+    @SuppressWarnings("unchecked")
     protected static class Builder<BL extends Builder<BL, T, B, I>, T extends BlockType, B extends Block, I extends Item> {
         protected final Class<T> type;
         protected final Supplier<T> baseType;
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected Supplier<CreativeModeTab> tab = () -> CreativeModeTab.TAB_DECORATIONS;
+        protected Supplier<ResourceKey<CreativeModeTab>> tab = null;
         @Nullable
         protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
@@ -305,7 +308,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        public BL setTab(Supplier<CreativeModeTab> tab) {
+        public BL setTabKey(ResourceLocation res) {
+            ResourceKey<CreativeModeTab> key = ResourceKey.create(ResourceKey.createRegistryKey(new ResourceLocation("creative_mode_tab")), res);
+            this.tab = () -> key;
+            return (BL) this;
+        }
+
+        public BL setTab(Supplier<ResourceKey<CreativeModeTab>> tab) {
             this.tab = tab;
             return (BL) this;
         }

@@ -18,8 +18,8 @@ import net.minecraft.world.level.block.Blocks;
 
 public class CreateModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> windows;
-    public final SimpleEntrySet<WoodType, Block> windowPanes;
+//    public final SimpleEntrySet<WoodType, Block> windows;
+//    public final SimpleEntrySet<WoodType, Block> windowPanes;
 
 
     public CreateModule(String modId) {
@@ -65,8 +65,8 @@ public class CreateModule extends SimpleModule {
         CreateClientModule.onClientSetup(this);
     }
 
-    @Override
-    public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
-        CreateClientModule.onTextureStitch(event, this);
-    }
+//    @Override
+//    public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
+//        CreateClientModule.onTextureStitch(event, this);
+//    }
 }

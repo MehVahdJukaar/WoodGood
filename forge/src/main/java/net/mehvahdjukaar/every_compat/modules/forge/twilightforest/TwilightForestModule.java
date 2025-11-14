@@ -44,7 +44,7 @@ public class TwilightForestModule extends SimpleModule {
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
-                .addTag(modRes("banisters"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("banisters"), Registries.BLOCK)
                 .addTag(modRes("banisters"), Registry.ITEM_REGISTRY)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
