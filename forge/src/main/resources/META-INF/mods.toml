@@ -108,6 +108,7 @@ side="BOTH"
 [[dependencies.everycomp]] #optional
 modId="vminus"
 mandatory=false
-versionRange="[9-;  This mod is incompatible with Every-Compat & Go to VMinus#34 via GitHub for DETAILS  ;,]" #mandatory
+# 9-;  This mod is incompatible with Every-Compat & Go to VMinus#34 via GitHub for DETAILS  ;,
+versionRange="[1.0.0,3.1.2]" #mandatory
 ordering="NONE"
 side="BOTH"
