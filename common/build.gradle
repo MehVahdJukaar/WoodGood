@@ -48,7 +48,7 @@ dependencies {
 
     // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495") // ABSTRACT not created yet
-    modCompileOnly("curse.maven:macaws-doors-378646:4649888") // ABSTRACT not created yet
+//    modCompileOnly("curse.maven:macaws-doors-378646:6146455") //- It's fine without the import
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:6363061") // ABSTRACT not created yet
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450302") // ABSTRACT not created yet
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054857") // ABSTRACT not created yet
