@@ -53,7 +53,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450302") // ABSTRACT not created yet
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054857") // ABSTRACT not created yet
     modCompileOnly("curse.maven:macaws-roofs-352039:4590013") // ABSTRACT not created yet
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:4841534") // ABSTRACT not created yet
+//    modCompileOnly("curse.maven:macaws-trapdoors-400933:5977711") //- It's fine without the import
     modCompileOnly("curse.maven:macaws-windows-363569:4750644") // ABSTRACT not created yet
     modCompileOnly("curse.maven:macaws-furniture-359540:7197865")
     modCompileOnly("curse.maven:macaws-stairs-1119394:6155218") // ABSTRACT not created yet
