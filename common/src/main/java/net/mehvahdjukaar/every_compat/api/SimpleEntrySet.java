@@ -420,6 +420,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
+        /// This won't work because the baseBlock is not registered yet, best time to do this is right after the registering
         public Builder<T, B> defaultBlockTexture() {
             this.textures.add(TextureInfo.<T>of(Utils.getID(Objects.requireNonNull(this.baseBlock.get())).withPrefix("block/")).build());
             return this;
