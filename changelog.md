@@ -17,6 +17,13 @@
 </div>
 
 ### UPDATED: 
+- **Macaw's Door** (C): Fixed the whispering_door's missing item texture - [#1115](https://github.com/MehVahdJukaar/WoodGood/issues/1115)
+
+---
+
+## v2.9.10
+
+### UPDATED: 
 - **Macaw's Trapdoor** (C): Added new trapdoor, whispering_trapdoor
   - <span style="color: YELLOW;">NOTE: no longer supporting version older than **v1.1.4**</span>
 - **Macaw's Door** (C): Added new door, whispering_door (Ported from 1.21.1)
