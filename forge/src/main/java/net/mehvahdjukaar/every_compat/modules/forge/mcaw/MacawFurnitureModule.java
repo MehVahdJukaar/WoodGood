@@ -7,6 +7,7 @@ import com.mcwfurnitures.kikoz.objects.chairs.ModernChair;
 import com.mcwfurnitures.kikoz.objects.chairs.StripedChair;
 import com.mcwfurnitures.kikoz.objects.counters.Counter;
 import com.mcwfurnitures.kikoz.objects.counters.CupboardCounter;
+import com.mcwfurnitures.kikoz.objects.counters.SinkCounter;
 import com.mcwfurnitures.kikoz.objects.counters.StorageCounter;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawFurnitureModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -87,6 +88,11 @@ public class MacawFurnitureModule extends MacawFurnitureModuleAbstract {
     @Override
     public Block newCupboardCounter(WoodType woodType) {
         return new CupboardCounter(copyStandardProperties());
+    }
+
+    @Override
+    public Block newSinkCounter(WoodType woodType) {
+        return new SinkCounter(copyStandardProperties());
     }
 }
 
