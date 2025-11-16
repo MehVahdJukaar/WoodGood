@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.Blocks;
 import java.io.FileNotFoundException;
 import java.util.function.Consumer;
 
-//SUPPORT: v3.0.6+
+//SUPPORT: v4.0.2+
 public class HandcraftedModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> chair;
@@ -46,7 +46,7 @@ public class HandcraftedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> cornerTrim;
 
     public HandcraftedModule(String modId) {
-        super(modId, "hc");
+        super(modId, "hc", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("main");
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
@@ -56,8 +56,7 @@ public class HandcraftedModule extends SimpleModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/chair/oak_chair"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("chairs"), Registries.BLOCK)
-                .addTag(modRes("chairs"), Registries.ITEM)
+                .addTag(modRes("chairs"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
@@ -72,8 +71,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/table/table/oak_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModBlockTags.TABLE_CONNECTABLE, Registries.BLOCK)
-                .addTag(modRes("tables"), Registries.BLOCK)
-                .addTag(modRes("tables"), Registries.ITEM)
+                .addTag(modRes("tables"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
@@ -87,10 +85,8 @@ public class HandcraftedModule extends SimpleModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/bench/oak_bench"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("wooden_benches"), Registries.BLOCK)
-                .addTag(modRes("benches"), Registries.BLOCK)
-                .addTag(modRes("wooden_benches"), Registries.ITEM)
-                .addTag(modRes("benches"), Registries.ITEM)
+                .addTag(modRes("wooden_benches"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("benches"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
@@ -135,8 +131,7 @@ public class HandcraftedModule extends SimpleModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/dining_bench/oak_dining_bench"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("dining_benches"), Registries.BLOCK)
-                .addTag(modRes("dining_benches"), Registries.ITEM)
+                .addTag(modRes("dining_benches"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
