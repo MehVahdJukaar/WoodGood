@@ -18,16 +18,18 @@ import net.minecraft.world.level.material.MapColor;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 // SUPPORT: v3.4.0+
-public abstract class MacawFurnitureAbstractModule extends SimpleModule {
+public abstract class MacawFurnitureModuleAbstract extends SimpleModule {
 
     //TYPE: CABINET
     public final SimpleEntrySet<WoodType, Block> kitchen_cabinet,
             double_kitchen_cabinet,
-            glass_kitchen_cabinet;
+            glass_kitchen_cabinet,
+            kitchen_sink;
 
     public final SimpleEntrySet<WoodType, Block> stripped_kitchen_cabinet,
             stripped_double_kitchen_cabinet,
-            stripped_glass_kitchen_cabinet;
+            stripped_glass_kitchen_cabinet,
+            stripped_kitchen_sink;
 
     //TYPE: BOOKSHELF
     public final SimpleEntrySet<WoodType, Block> bookshelf,
@@ -101,9 +103,7 @@ public abstract class MacawFurnitureAbstractModule extends SimpleModule {
             strippedModernWardrobe,
             strippedWardrobe;
 
-
-
-    public MacawFurnitureAbstractModule(String modId) {
+    public MacawFurnitureModuleAbstract(String modId) {
         super(modId, "mcfur", EveryCompat.MOD_ID);
         ResourceLocation tab = (PlatHelper.getPlatform().isFabric())
                 ? MacawsFurniture.FURNITUREGROUP.location()
@@ -154,6 +154,18 @@ public abstract class MacawFurnitureAbstractModule extends SimpleModule {
                 .build();
         this.addEntry(glass_kitchen_cabinet);
 
+        kitchen_sink = SimpleEntrySet.builder(WoodType.class, "kitchen_sink",
+                        getModBlock("oak_kitchen_sink"), () -> VanillaWoodTypes.OAK,
+                        this::newSinkCounter
+                )
+                .requiresChildren(STRIPPED_LOG) //REASON: textures
+                //TEXTURES: log, stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("cabinet"), Registries.BLOCK)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .build();
+        this.addEntry(kitchen_sink);
 
         stripped_kitchen_cabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinet", "stripped",
                         getModBlock("stripped_oak_kitchen_cabinet"), () -> VanillaWoodTypes.OAK,
@@ -197,6 +209,18 @@ public abstract class MacawFurnitureAbstractModule extends SimpleModule {
                 .build();
         this.addEntry(stripped_glass_kitchen_cabinet);
 
+        stripped_kitchen_sink = SimpleEntrySet.builder(WoodType.class, "kitchen_sink", "stripped",
+                        getModBlock("stripped_oak_kitchen_sink"), () -> VanillaWoodTypes.OAK,
+                        this::newSinkCounter
+                )
+                .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
+                //TEXTURES: log, stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("cabinet"), Registries.BLOCK)
+                .setTabKey(tab)
+                .defaultRecipe()
+                .build();
+        this.addEntry(stripped_kitchen_sink);
 
         wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         getModBlock("oak_wardrobe"), () -> VanillaWoodTypes.OAK,
@@ -949,4 +973,5 @@ public abstract class MacawFurnitureAbstractModule extends SimpleModule {
     public abstract Block newCounter(WoodType woodType);
     public abstract Block newStorageCounter(WoodType woodType);
     public abstract Block newCupboardCounter(WoodType woodType);
+    public abstract Block newSinkCounter(WoodType woodType);
 }

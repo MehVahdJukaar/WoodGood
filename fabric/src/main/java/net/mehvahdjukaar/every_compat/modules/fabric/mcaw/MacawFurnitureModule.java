@@ -7,13 +7,14 @@ import net.kikoz.mcwfurnitures.objects.chairs.ModernChair;
 import net.kikoz.mcwfurnitures.objects.chairs.StripedChair;
 import net.kikoz.mcwfurnitures.objects.counters.Counter;
 import net.kikoz.mcwfurnitures.objects.counters.CupboardCounter;
+import net.kikoz.mcwfurnitures.objects.counters.SinkCounter;
 import net.kikoz.mcwfurnitures.objects.counters.StorageCounter;
-import net.mehvahdjukaar.every_compat.modules.macaw.MacawFurnitureAbstractModule;
+import net.mehvahdjukaar.every_compat.modules.macaw.MacawFurnitureModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.world.level.block.Block;
 
 //See MacawFurnitureAbstractModule's SUPPORTED VERSION
-public class MacawFurnitureModule extends MacawFurnitureAbstractModule {
+public class MacawFurnitureModule extends MacawFurnitureModuleAbstract {
 
     public MacawFurnitureModule(String modId) {
         super(modId);
@@ -87,5 +88,10 @@ public class MacawFurnitureModule extends MacawFurnitureAbstractModule {
     @Override
     public Block newCupboardCounter(WoodType woodType) {
         return new CupboardCounter(copyStandardProperties());
+    }
+
+    @Override
+    public Block newSinkCounter(WoodType woodType) {
+        return new SinkCounter(copyStandardProperties());
     }
 }
