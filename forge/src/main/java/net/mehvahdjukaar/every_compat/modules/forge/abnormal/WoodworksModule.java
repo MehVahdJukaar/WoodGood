@@ -48,6 +48,7 @@ import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.g
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 
 //SUPPORT: v3.0.0+
+@SuppressWarnings({"removal", "DataFlowIssue", "deprecation"})
 public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> chiseled_bookshelves;
@@ -210,21 +211,19 @@ public class WoodworksModule extends SimpleModule {
 
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesTypes.OAK,
-                        leavesType -> {
-                            if (leavesType.getWoodType() == null) return null;
-                            return new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
-                                    .strength(0.2F)
-                                    .ignitedByLava()
-                                    .pushReaction(PushReaction.DESTROY)
-                            );
-                        }
+                        leavesType -> new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
+                                .strength(0.2F)
+                                .ignitedByLava()
+                                .pushReaction(PushReaction.DESTROY)
+                        )
                 )
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .addCondition(l-> l.getAssociatedWoodType() != null)
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
+                .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .copyParentDrop()
                 .copyParentTint()
@@ -268,7 +267,7 @@ public class WoodworksModule extends SimpleModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
-        executor.accept((manager, sink) -> {
+        executor.accept((manager, sink) ->
             bookshelves.items.forEach((wood, item) -> {
                 // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
                 Item getLadder = ladders.items.get(wood);
@@ -314,8 +313,8 @@ public class WoodworksModule extends SimpleModule {
                         sink, manager, wood);
                 createRecipeIfNotNull("oak_stairs_from_oak_planks_sawing", false, "stairs",
                         sink, manager, wood);
-            });
-        });
+            })
+        );
     }
 
     public void createRecipeIfNotNull(String recipeName, boolean usingLog, String output,
@@ -372,7 +371,7 @@ public class WoodworksModule extends SimpleModule {
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 
-        executor.accept((manager, sink) -> {
+        executor.accept((manager, sink) ->
             trappedChests.blocks.forEach((wood, block) -> {
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood, block,
@@ -395,8 +394,8 @@ public class WoodworksModule extends SimpleModule {
                         EveryCompat.res("model/oak_chest_right_o"),
                         EveryCompat.res("model/trapped_chest_right")
                 );
-            });
-        });
+            })
+        );
     }
 
 }
