@@ -22,7 +22,7 @@ public class ChippedModuleAbstract extends SimpleModule {
         super(modId, "ch");
     }
 
-    protected void addCarpenterRecipe(ResourceSink pack, String identifier) {
+    protected void addCarpenterRecipe(ResourceSink sink, String identifier) {
         JsonArray arrayTags = new JsonArray();
 
         for (var woodType : WoodTypeRegistry.INSTANCE) {
@@ -66,15 +66,15 @@ public class ChippedModuleAbstract extends SimpleModule {
             }
 
             if (isTagCreated) {
-                pack.addTag(tagBuilder, Registries.ITEM);
-                pack.addTag(tagBuilder, Registries.BLOCK);
+                sink.addTag(tagBuilder, Registries.ITEM);
+                sink.addTag(tagBuilder, Registries.BLOCK);
                 arrayTags.add(tagBuilder.getId().toString());
             }
         }
         JsonObject jo = new JsonObject();
         jo.addProperty("type", "chipped:" + "carpenters_table");
         jo.add("tags", arrayTags);
-        pack.addJson(EveryCompat.res(shortenedId() + "/" + "carpenters_table" + "_" + identifier), jo, ResType.RECIPES);
+        sink.addJson(EveryCompat.res(shortenedId() + "/" + "carpenters_table" + "_" + identifier), jo, ResType.RECIPES);
 
     }
 }
