@@ -58,7 +58,7 @@ public class BuildersAdditionModule extends SimpleModule {
                 .addCondition(w -> !PlatHelper.isModLoaded("v_slab_compat"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("vertical_slab/oak_vertical_slab"))
-                //RECIPES: see addDynamicServerResources
+                //RECIPES: see addDynamicServerResources for vertical_slab/reverse/oak_vertical_slab
                 .setTabKey(tab)
                 .build();
         this.addEntry(verticalSlab);
@@ -287,11 +287,11 @@ public class BuildersAdditionModule extends SimpleModule {
                     ["PP"],
                     "key": {
                         "P": {
-                            "item": "[vertical_slab]"
+                            "item": "[VERTICAL_SLAB]"
                         }
                     },
                     "result":{
-                        "item": "[planks]",
+                        "item": "[PLANKS]",
                         "count": 1
                     }
                 }
@@ -302,10 +302,10 @@ public class BuildersAdditionModule extends SimpleModule {
 
             verticalSlab.items.forEach((woodType, item) -> {
                 // Editing JSON
-                String newRecipe = recipe.replace("[vertical_slab]", Utils.getID(item).toString())
-                        .replace("[planks]", Utils.getID(woodType.planks).toString());
+                String newRecipe = recipe.replace("[VERTICAL_SLAB]", Utils.getID(item).toString())
+                        .replace("[PLANKS]", Utils.getID(woodType.planks).toString());
                 // Adding finished recipe
-                sink.addBytes(EveryCompat.res(woodType.createPathWith(shortenedId(), "vertical_slab_reverse/","_vertical_slab")), recipe.getBytes(), ResType.RECIPES);
+                sink.addBytes(EveryCompat.res(woodType.createPathWith(shortenedId(), "vertical_slab_reverse/","_vertical_slab")), newRecipe.getBytes(), ResType.RECIPES);
             });
 
         });
