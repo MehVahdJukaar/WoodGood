@@ -58,7 +58,7 @@ import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCache
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-//SUPPORT: v4.0-435+
+//SUPPORT: v4.0-462+
 public class QuarkModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> verticalSlabs;
@@ -97,7 +97,7 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab"))
-                .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab_revert"))
+                //RECIPES: See addDynamicServerResources for oak_vertical_slab_revert
                 .addCondition(woodType -> !PlatHelper.isModLoaded("v_slab_compat"))
                 .copyParentDrop()
                 .build();
@@ -486,6 +486,9 @@ public class QuarkModule extends SimpleModule {
             hedges.blocks.forEach((leavesType, block) -> {
                 if (block != null) createHedgeRecipe(leavesType, block, sink, manager);
             });
+
+            verticalSlabs.blocks.forEach((woodType, block) ->
+                    createVertSlabRecipe(woodType, block, sink));
         });
     }
 
@@ -534,6 +537,43 @@ public class QuarkModule extends SimpleModule {
         }
         else
             EveryCompat.LOGGER.error("Hedge's LeavesType do not have associated WoodType for: {}. HOW??", leavesType.getId().toString());
+    }
+
+    //REASON: vertical_slab_revert are not being generated, this will have to do for now
+    public void createVertSlabRecipe(WoodType woodType, Block vertSlab, ResourceSink sink) {
+
+        String recipe = """
+                {
+                    "type": "minecraft:crafting_shapeless",
+                    "ingredients": [
+                        {
+                            "item": "[VERTICAL_SLAB]"
+                        }
+                    ],
+                        "result": {
+                        "item": "[SLAB]",
+                        "count": 1
+                    },
+                    "conditions": [
+                        {
+                            "type": "quark:flag",
+                            "flag": "vertical_slabs"
+                        }
+                    ]
+                }\s
+                """;
+
+        if (Objects.nonNull(woodType.getBlockOfThis(SLAB))) {
+            String newRecipe = recipe
+                    .replace("[SLAB]", Utils.getID(Objects.requireNonNull(woodType.getBlockOfThis(SLAB))).toString())
+                    .replace("[VERTICAL_SLAB]", Utils.getID(vertSlab).toString());
+
+            // Adding the finished recipe to ResourceLocation
+            sink.addBytes(EveryCompat.res(woodType.createPathWith(shortenedId(), "vertical_slab_revert")),
+                    newRecipe.getBytes(), ResType.RECIPES);
+        }
+        else
+            EveryCompat.LOGGER.warn("Skipped generating vertical_slab_revert recipe for: {} lacking SLAB.", woodType.getId().toString());
     }
 
 }
