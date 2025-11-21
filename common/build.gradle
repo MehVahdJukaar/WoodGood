@@ -36,7 +36,7 @@ dependencies {
     //+ REQUIRED - The modules access libaries from below
     modCompileOnly("curse.maven:framework-549225:5911975") // v0.7.12 | Furniture Refurbished
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
-    modCompileOnly("curse.maven:zeta-968868:5078215") // v1.0-13 | Quark
+    modCompileOnly("curse.maven:zeta-968868:6432578") // v1.0-30 | Quark
 
         //+ OTHER MAVENS
 
@@ -79,7 +79,7 @@ dependencies {
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476602") // Quad - LieOnLion
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969") // Quad - LieOnLion
     modCompileOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
-    modCompileOnly("curse.maven:quark-243121:5093415")
+    modCompileOnly("curse.maven:quark-243121:6427817")
     modCompileOnly("curse.maven:storage-drawers-223852:6994478")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819")
     modCompileOnly("curse.maven:twigs-496913:4605097")
