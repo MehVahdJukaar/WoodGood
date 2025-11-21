@@ -17,6 +17,15 @@
 </div>
 
 ### UPDATED: 
+- **Macaw's Furniture** (C): Added `oak_kitchen_sink`
+- **Quark** (C): Fixed the missing recipe, `vertical_slab_revert` as it was a recipe generation failure that somehow caused missing slab's recipe - [#1110](https://github.com/MehVahdJukaar/WoodGood/issues/1110)
+  - Possibly related issue: [#1103](https://github.com/MehVahdJukaar/WoodGood/issues/1103) - missing recipes from logs to planks
+
+---
+
+## v2.9.11
+
+### UPDATED: 
 - **Macaw's Door** (C): Fixed the whispering_door's missing item texture - [#1115](https://github.com/MehVahdJukaar/WoodGood/issues/1115)
 
 ---
