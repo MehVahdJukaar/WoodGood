@@ -17,6 +17,15 @@
 </div>
 
 ### UPDATED: 
+- **Macaw's Furniture** (C): Corrected the LANG for `kitchen_sink` & `stripped_kitchen_sink`
+- **Every Compat** (C): Added a new config, NO_MOD_CREATIVE_TAB in `everycomp-common.toml` - [#1113](https://github.com/MehVahdJukaar/WoodGood/issues/1113)
+  - NOTE: what it does is not adding items to Mod's own tab in Creative Mode if NO_MOD_CREATIVE_TAB is set to `true`
+
+---
+
+## v2.9.12
+
+### UPDATED: 
 - **Macaw's Furniture** (C): Added `oak_kitchen_sink`
 - **Quark** (C): Fixed the missing recipe, `vertical_slab_revert` as it was a recipe generation failure that somehow caused missing slab's recipe - [#1110](https://github.com/MehVahdJukaar/WoodGood/issues/1110)
   - Possibly related issue: [#1103](https://github.com/MehVahdJukaar/WoodGood/issues/1103) - missing recipes from logs to planks

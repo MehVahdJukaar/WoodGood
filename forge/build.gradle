@@ -157,7 +157,7 @@ dependencies {
 
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:fusion-connected-textures:1.2.7b-forge-mc${minecraft_version}") // Dawn-Of-Time, Timber-Frame, Rechiseled
-//    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
+    modRuntimeOnly("maven.modrinth:midnightlib:1.4.2-forge") // Building-But-Better
 //    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Ad-Astra
 //    forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3") // Ad-Astra
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
