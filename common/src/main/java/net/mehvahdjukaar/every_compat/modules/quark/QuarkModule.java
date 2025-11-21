@@ -40,7 +40,6 @@ import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -84,7 +83,7 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab"))
-                .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab_revert"))
+                //RECIPES: See addDynamicServerResources for oak_vertical_slab_revert
                 .addCondition(woodType -> !PlatHelper.isModLoaded("v_slab_compat"))
                 .copyParentDrop()
                 .build();
@@ -384,7 +383,6 @@ public class QuarkModule extends SimpleModule {
     // RECIPES, TAGS
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
-
         executor.accept((manager, sink) -> {
             if (PlatHelper.isModLoaded("botanypots")) {
                 hedges.items.forEach((leaves, item) -> {
@@ -394,18 +392,17 @@ public class QuarkModule extends SimpleModule {
             }
 
             // hedge's recipe & logs' tags
-            for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-                LeavesType leavesType = entry.getKey();
-                Block block = entry.getValue();
+            hedges.blocks.forEach((leavesType, block) -> {
+                if (block != null) createHedgeRecipe(leavesType, block, sink, manager);
+            });
 
-                // will generate if block is not null
-                if (block != null) generalHedgeRecipe(leavesType, block, sink, manager);
-            }
+            verticalSlabs.blocks.forEach((woodType, block) ->
+                    createVertSlabRecipe(woodType, block, sink));
         });
     }
 
     // Hedge's recipe has a tag as an ingredient
-    public void generalHedgeRecipe(LeavesType leavesType, Block hedge, ResourceSink sink, ResourceManager manager) {
+    public void createHedgeRecipe(LeavesType leavesType, Block hedge, ResourceSink sink, ResourceManager manager) {
 
         String recipe = """
                 {
@@ -449,6 +446,43 @@ public class QuarkModule extends SimpleModule {
                     ResType.RECIPES);
         } else
             EveryCompat.LOGGER.error("Hedge's LeavesType do not have associated WoodType for: {}. HOW??", leavesType.getId().toString());
+    }
+
+    //REASON: vertical_slab_revert are not being generated, this will have to do for now
+    public void createVertSlabRecipe(WoodType woodType, Block vertSlab, ResourceSink sink) {
+
+        String recipe = """
+                {
+                    "type": "minecraft:crafting_shapeless",
+                    "ingredients": [
+                        {
+                            "item": "[VERTICAL_SLAB]"
+                        }
+                    ],
+                    "result": {
+                        "id": "[SLAB]",
+                        "count": 1
+                    },
+                    "conditions": [
+                        {
+                            "type": "quark:flag",
+                            "flag": "vertical_slabs"
+                        }
+                    ]
+                }\s
+                """;
+
+        if (Objects.nonNull(woodType.getBlockOfThis(SLAB))) {
+            String newRecipe = recipe
+                    .replace("[SLAB]", Utils.getID(Objects.requireNonNull(woodType.getBlockOfThis(SLAB))).toString())
+                    .replace("[VERTICAL_SLAB]", Utils.getID(vertSlab).toString());
+
+            // Adding the finished recipe to ResourceLocation
+            sink.addBytes(EveryCompat.res(woodType.createPathWith(shortenedId(), "vertical_slab_revert")),
+                    newRecipe.getBytes(), ResType.RECIPES);
+        }
+        else
+            EveryCompat.LOGGER.warn("Skipped generating vertical_slab_revert recipe for: {} lacking SLAB.", woodType.getId().toString());
     }
 
 }
