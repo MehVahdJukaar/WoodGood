@@ -41,13 +41,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PokecubeLegendsModule extends SimpleModule {
+public class PokecubeAIOModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> distorticPlanks;
     public final SimpleEntrySet<WoodType, Block> distorticStairs;
     public final SimpleEntrySet<WoodType, Block> DISTORTICSLABS;
 
-    public PokecubeLegendsModule(String modId) {
+    public PokecubeAIOModule(String modId) {
         super(modId, "pcl");
         var tab = LegendsCreativeTabs.BUILDING_BLOCKS_TAB;
         TemplateRecipeManager.registerTemplate(modRes("legends_recipe"), MirrorRecipeTemplate::new);

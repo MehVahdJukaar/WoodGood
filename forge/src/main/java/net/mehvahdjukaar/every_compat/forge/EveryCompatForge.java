@@ -33,7 +33,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.forge.mrcrayfish.MrCrayfishFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.nosiphus.NosiphusFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.oreberries_replanted.OreberriesReplantedModule;
-import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
+import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeAIOModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
@@ -141,7 +141,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
             addIfLoaded("nfm", () -> NosiphusFurnitureModule::new);
             addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
-            addIfLoaded("pokecube_legends", () -> PokecubeLegendsModule::new);
+            addIfLoaded("pokecube_legends", () -> PokecubeAIOModule::new);
             addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
             addIfLoaded("redeco", () -> ReDecoModule::new);
             addIfLoaded("regions_unexplored", () -> RegionsUnexploredModule::new);
