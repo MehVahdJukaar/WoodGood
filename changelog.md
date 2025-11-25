@@ -16,6 +16,12 @@
 
 </div>
 
+
+## v2.11.19
+- added tags containing every block of each tags, optionally in the configs
+
+--
+
 ### UPDATED: 
 - **Macaw's Furniture** (C): Supporting 2 new blocks, `oak_kitchen_sink` & `stripped_oak_kitchen_sink`
 - - **Every Compat** (C): Added a new config, NO_MOD_CREATIVE_TAB in `everycomp-common.toml` - [#1113](https://github.com/MehVahdJukaar/WoodGood/issues/1113)

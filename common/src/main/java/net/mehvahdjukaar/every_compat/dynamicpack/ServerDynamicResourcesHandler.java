@@ -39,7 +39,9 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
         namespaces.add(EveryCompat.MOD_ID);
         /// Ensure the tags to be loaded first time into the world, not second time
         if (PlatHelper.isModLoaded("lolmcv")) namespaces.add("lieonstudio");
-
+        if (ECConfigs.GENERATE_WOOD_TAGS.get()) {
+            namespaces.addAll(EveryCompat.getDependencies());
+        }
         return namespaces;
     }
 

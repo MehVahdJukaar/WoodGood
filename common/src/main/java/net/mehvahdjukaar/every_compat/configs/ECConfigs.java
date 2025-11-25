@@ -85,7 +85,7 @@ public class ECConfigs {
                 .define("creative_tab", true);
         GENERATE_WOOD_TAGS = builder.comment("Generate wood tags for every wood type even if no compat blocks are added for them. Useful for datapack makers")
                 .gameRestart()
-                .define("generate_wood_tags", false);
+                .define("generate_wood_tags", true);
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")
                 .gameRestart()
                 .define("tab_item_search", true);
