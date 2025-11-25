@@ -7,9 +7,10 @@ import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.Map;
 
 public class ErrorMessageScreen extends Screen {
     private final Screen lastScreen;
@@ -36,9 +37,8 @@ public class ErrorMessageScreen extends Screen {
     @Override
     protected void init() {
         super.init();
-        this.exitButton = this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (pressed) -> {
-            onClose();
-        }).bounds((this.width - 150) / 2, this.height * 5 / 6, 150, 20).build());
+        this.exitButton = this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (pressed) ->
+                onClose()).bounds((this.width - 150) / 2, this.height * 5 / 6, 150, 20).build());
         this.exitButton.active = false;
 
         this.message = MultiLineLabel.create(this.font, text, this.width - 50);
@@ -67,17 +67,24 @@ public class ErrorMessageScreen extends Screen {
 
     @Override
     public void onClose() {
-        throw new RuntimeException("Every Compat encountered an error loading a module. Look at error below.");
+        throw new RuntimeException("Every Compat encountered an error loading a module. Look at error below: ");
     }
 
     // static stuff
     private static final Component TITLE = Component.translatable("gui.everycomp.error_screen.title")
             .withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
 
-    public static ErrorMessageScreen create(Screen screen, List<String> mods) {
+    public static ErrorMessageScreen create(Screen screen, Map<String, String> mods) {
+        MutableComponent errorMessage = Component.literal("\n");
+        mods.forEach((mod, error) -> {
+            MutableComponent line = Component.literal("- ")
+                    .append(Component.literal(mod).withStyle(ChatFormatting.GOLD))
+                    .append(Component.literal(" : ").withStyle(ChatFormatting.WHITE))
+                    .append(Component.literal(error).withStyle(ChatFormatting.RED));
+            errorMessage.append(line).append(Component.literal("\n"));
+        });
         return new ErrorMessageScreen(screen, 40, TITLE,
-                Component.translatable("gui.everycomp.error_screen.message",
-                        Component.literal(String.join(", ", mods)).withStyle(ChatFormatting.GOLD)));
+                Component.translatable("gui.everycomp.error_screen.message", errorMessage));
     }
 
 }

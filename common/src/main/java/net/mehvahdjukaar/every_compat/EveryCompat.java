@@ -55,7 +55,7 @@ public abstract class EveryCompat {
     private static final Set<Class<? extends BlockType>> AFFECTED_TYPES = new HashSet<>();
 
     static boolean canShowErrorScreen = PlatHelper.getPhysicalSide().isClient();
-    private static final Set<CompatModule> ERRORED = new HashSet<>();
+    private static final Map<CompatModule, Throwable> ERRORED = new HashMap<>();
 
     /// @return everycomp:path
     public static ResourceLocation res(String path) {
@@ -67,10 +67,10 @@ public abstract class EveryCompat {
             try {
                 action.accept(m);
             } catch (Throwable e) {
-                EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", m.getModName(), e);
+                EveryCompat.LOGGER.error("Module for the supported mod contains errors. This could mean that the mod has been recently updated & Every Compat needs updating (try downgrading the mod) or that you are using an older version. MAIN CAUSE: {} - {}", m.getModName(), e);
                 if (canShowErrorScreen) {
                     //if before first screen we can display an error screen
-                    ERRORED.add(m);
+                    ERRORED.put(m, e);
                 } else {
                     throw e;
                 }
@@ -301,8 +301,10 @@ public abstract class EveryCompat {
     }
 
 
-    public static List<String> getModulesThatErrored() {
-        return ERRORED.stream().map(CompatModule::getModName)
-                .toList();
+    public static Map<String, String> getModulesThatErrored() {
+        return ERRORED.entrySet().stream().collect(Collectors.toMap(
+                entry -> entry.getKey().getModName(),
+                entry -> entry.getValue().getMessage()
+        ));
     }
 }
