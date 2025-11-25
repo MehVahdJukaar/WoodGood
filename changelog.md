@@ -1,24 +1,41 @@
 <div style="text-align: center; border: 1px solid yellow; padding: 10px;">
 
-<div style="text-align: center; margin-bottom: 10px;">
-
-### LEGEND
-
-</div>
+<h2><div style="text-align: center; margin-bottom: 10px;">LEGENDS</div></h2>
 
 <div style="text-align: left;">
 
-*   (C) = FORGE & FABRIC
-*   (FB): FABRIC
-*   (NF): NEOFORGE
-*   (IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
-*   (COMPAT): Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod
-*   (INCLUDED): The block is not generated because a Wood Mod already have the same block as the supported mod will be generated
-*   (EXCLUDED): The block is generated BUT it shouldn't be generated for a reason
+* **(C)**: FORGE & FABRIC
+* **(FB)**: FABRIC
+* **(NF)**: NEOFORGE
+* **(IT)**: Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
+* **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod
+* **(INCLUDED)**: The block is not generated because a Wood Mod already have the same block as the supported mod will be generated
+* **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason
 
 </div>
 
 </div>
+
+### UPDATED: 
+- **Macaw's Furniture** (C): Supporting 2 new blocks, `oak_kitchen_sink` & `stripped_oak_kitchen_sink`
+- - **Every Compat** (C): Added a new config, NO_MOD_CREATIVE_TAB in `everycomp-common.toml` - [#1113](https://github.com/MehVahdJukaar/WoodGood/issues/1113)
+- NOTE: what it does is not adding items to Mod's own tab in Creative Mode if NO_MOD_CREATIVE_TAB is set to `true`
+
+---
+
+## v2.11.17
+
+### UPDATED: 
+- **Create** (C): Corrected the tab where EC's items are being added into
+- **Quark** (NF): Updated to support v4.1-467.3568 or newer
+  - <span style="color: YELLOW;">NOTE: Quark is currently in BETA and is not out on public yet.</span>
+- **Macaw's Furniture** (C): Added 6 new cabinet blocks 
+  - <span style="color: RED;">NOTE: is no longer supporting the older version than v3.4.0</span>
+- **Cobblemon's Legendary Monuments** (EXCLUDED): The WoodType, `legendarymonuments:distortion` is blacklisted because its texture is a 32x32
+
+---
+
+## v2.11.16
 
 ### UPDATED: 
 - **Unusual Furniture** (NF): Forgot to mark one method to be `OnlyIn(Dist.CLIENT)` - FIXED issue with SERVER not working properly

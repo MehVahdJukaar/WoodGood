@@ -5,26 +5,20 @@ import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECPlatformStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
-import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
-import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -39,22 +33,18 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import org.violetmoon.quark.base.QuarkClient;
 import org.violetmoon.quark.content.building.block.*;
-import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
 import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
-import org.violetmoon.zeta.client.SimpleWithoutLevelRenderer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
@@ -68,13 +58,10 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> verticalPlanks;
     public final SimpleEntrySet<WoodType, Block> ladders;
     public final SimpleEntrySet<WoodType, Block> hollowLogs;
-    public final SimpleEntrySet<WoodType, VariantChestBlock> chests;
-    public final SimpleEntrySet<WoodType, VariantTrappedChestBlock> trappedChests;
+    public final SimpleEntrySet<WoodType, Block> chests;
+    public final SimpleEntrySet<WoodType, Block> trappedChests;
     public final SimpleEntrySet<LeavesType, Block> hedges;
     public final SimpleEntrySet<LeavesType, Block> leafCarpets;
-
-    public static BlockEntityType<ChestBlockEntity> CHEST_TILE;
-    public static BlockEntityType<ChestBlockEntity> TRAPPED_CHEST_TILE;
 
     public QuarkModule(String modId) {
         super(modId, "q", EveryCompat.MOD_ID);
@@ -82,8 +69,7 @@ public class QuarkModule extends SimpleModule {
 
         verticalSlabs = QuarkSimpleEntrySet.builder(WoodType.class, "vertical_slab",
                         VerticalSlabsModule.class,
-                        getModBlock("oak_vertical_slab"),
-                        () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_vertical_slab"), () -> VanillaWoodTypes.OAK,
                         w -> new VerticalSlabBlock(() -> w.getBlockOfThis(SLAB),
                                 Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis(SLAB)))
                                         .sound(w.getSound())
@@ -97,7 +83,7 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab"))
-                .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab_revert"))
+                //RECIPES: See addDynamicServerResources for oak_vertical_slab_revert
                 .addCondition(woodType -> !PlatHelper.isModLoaded("v_slab_compat"))
                 .copyParentDrop()
                 .build();
@@ -110,23 +96,25 @@ public class QuarkModule extends SimpleModule {
                         w -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, w.canBurn(), w.getSound())
                 )
-                .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"), bookshelfPalette)
+                .addTextureM(EveryCompat.res("block/acacia_bookshelf"),
+                        EveryCompat.res("block/acacia_bookshelf_m"),
+                        bookshelfPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/crafting/acacia_bookshelf"))
+                .addRecipe(modRes("building/crafting/bookshelves/acacia_bookshelf"))
                 .copyParentDrop()
                 .build();
         this.addEntry(bookshelves);
 
         posts = QuarkSimpleEntrySet.builder(WoodType.class, "post",
                         WoodenPostsModule.class,
-                        getModBlock("oak_post"),
-                        () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_post"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             Block fence = w.getBlockOfThis("fence");
-                            return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/",
+                            return new WoodPostBlock(null, Objects.requireNonNull(fence),
+                                    shortenedId() + "/" + w.getNamespace() + "/",
                                     Objects.requireNonNull(fence).defaultBlockState().getSoundType());
                         })
                 .requiresChildren(FENCE, WOOD) //REASON: recipes
@@ -135,20 +123,20 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/crafting/oak_post"))
+                .addRecipe(modRes("building/crafting/posts/oak_post"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(posts);
 
         strippedPosts = QuarkSimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         WoodenPostsModule.class,
-                        getModBlock("stripped_oak_post"),
-                        () -> VanillaWoodTypes.OAK,
+                        getModBlock("stripped_oak_post"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             if (w.getNamespace().equals("malum") || w.getNamespace().equals("twigs")) return null;
                             Block fence = w.getBlockOfThis("fence");
                             // required stripped_log texture & fence as an ingredients
-                            return new WoodPostBlock(null, Objects.requireNonNull(fence), shortenedId() + "/" + w.getNamespace() + "/stripped_",
+                            return new WoodPostBlock(null, Objects.requireNonNull(fence),
+                                    shortenedId() + "/" + w.getNamespace() + "/stripped_",
                                     Objects.requireNonNull(fence).defaultBlockState().getSoundType());
                         })
                 .requiresChildren("fence", "stripped_log", "stripped_wood") //REASON: textures, recipes
@@ -157,15 +145,14 @@ public class QuarkModule extends SimpleModule {
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/crafting/stripped_oak_post"))
+                .addRecipe(modRes("building/crafting/posts/stripped_oak_post"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(strippedPosts);
 
         verticalPlanks = QuarkSimpleEntrySet.builder(WoodType.class, "planks", "vertical",
                         VerticalPlanksModule.class,
-                        getModBlock("vertical_oak_planks"),
-                        () -> VanillaWoodTypes.OAK,
+                        getModBlock("vertical_oak_planks"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
                             return new ZetaBlock(name, null,
@@ -199,15 +186,14 @@ public class QuarkModule extends SimpleModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
-                .addRecipe(modRes("building/crafting/spruce_ladder"))
+                .addRecipe(modRes("building/crafting/ladders/spruce_ladder"))
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .build();
         this.addEntry(ladders);
 
         hollowLogs = QuarkSimpleEntrySet.builder(WoodType.class, "log", "hollow",
                         HollowLogsModule.class,
-                        getModBlock("hollow_oak_log"),
-                        () -> VanillaWoodTypes.OAK,
+                        getModBlock("hollow_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new HollowLogBlock(shortenedId() + "/" + w.getAppendableId(),
                                 w.log, null, w.canBurn()))
                 .requiresChildren("stripped_log") // Texture
@@ -221,41 +207,41 @@ public class QuarkModule extends SimpleModule {
 
         chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
                         VariantChestsModule.class,
-                        getModBlock("oak_chest", VariantChestBlock.class),
-                        () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChestBlock(w,
-                                shortenedId() + "/" + w.getAppendableId(),
-                                Utils.copyPropertySafe(Blocks.CHEST)))
-                .setTabKey(tab)
-                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
+                        getModBlock("oak_chest"), () -> VanillaWoodTypes.OAK,
+                        w -> new CompatChestBlock(this::getChestTile, Utils.copyPropertySafe(Blocks.CHEST))
+                )
+                .addTile(qChestBlockEntity::new)
                 .addTag(ResourceLocation.parse("c:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("revertable_chests"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTile(CompatChestBlockTile::new)
+                .setTabKey(tab)
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
+                .addRecipe(modRes("building/chests/oak_chest"))
+                .addRecipe(modRes("building/chests/oak_chest_wood"))
+                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .excludeBlockTypes("twilightforest", "dark")
-                .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .build();
         this.addEntry(chests);
 
-        trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "trapped_chest",
+        trappedChests = QuarkSimpleEntrySet.builder(WoodType.class, "chest", "trapped",
                         VariantChestsModule.class,
-                        getModBlock("oak_trapped_chest", VariantTrappedChestBlock.class),
-                        () -> VanillaWoodTypes.OAK,
+                        getModBlock("trapped_oak_chest"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             boolean isNamespaceLoaded = w.getNamespace().equals("twilightforest")
                                     || w.getNamespace().equals("blue_skies");
                             if (!chests.blocks.containsKey(w) && !isNamespaceLoaded) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatTrappedChestBlock(w, name, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
+                            return new CompatTrappedChestBlock(this::getTrappedTile, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
                         })
-                .setTabKey(tab)
-                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
+                .addTile(qTrappedBlockEntity::new)
                 .addTag(ResourceLocation.parse("forge:chests/trapped"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("forge:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("revertable_trapped_chests"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTile(CompatTrappedChestBlockTile::new)
-                .addRecipe(modRes("building/crafting/chests/oak_trapped_chest"))
+                .setTabKey(tab)
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
+                .addRecipe(modRes("building/chests/trapped_oak_chest"))
+                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(trappedChests);
 
@@ -296,12 +282,34 @@ public class QuarkModule extends SimpleModule {
                 .addTag(ResourceLocation.parse("mynethersdelight:resurgent_soil_plant"), Registries.BLOCK)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/crafting/oak_leaf_carpet"))
+                .addRecipe(modRes("building/crafting/leafcarpet/oak_leaf_carpet"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentTint()
                 .build();
         this.addEntry(leafCarpets);
 
+    }
+
+    // GetTile -----------------------------------------------------------------------------------------------------------
+    private BlockEntityType<? extends ChestBlockEntity> getChestTile() {
+        return chests.getTile(CompatChestBlockEntity.class);
+    }
+
+    private BlockEntityType<? extends ChestBlockEntity> getTrappedTile() {
+        return trappedChests.getTile(CompatChestBlockEntity.class);
+    }
+
+    // BlockEntity -----------------------------------------------------------------------------------------------------------
+    private class qChestBlockEntity extends CompatChestBlockEntity {
+        public qChestBlockEntity(BlockPos pos, BlockState state) {
+            super(chests.getTile(), pos, state);
+        }
+    }
+
+    private class qTrappedBlockEntity extends CompatChestBlockEntity {
+        public qTrappedBlockEntity(BlockPos pos, BlockState state) {
+            super(trappedChests.getTile(), pos, state);
+        }
     }
 
     @Override
@@ -314,40 +322,16 @@ public class QuarkModule extends SimpleModule {
     }
 
     @Override
-    public void registerTiles(Registrator<BlockEntityType<?>> registry) {
-        super.registerTiles(registry);
-        CHEST_TILE = chests.getTile(ChestBlockEntity.class);
-        TRAPPED_CHEST_TILE = trappedChests.getTile(ChestBlockEntity.class);
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public void onClientSetup() {
-        super.onClientSetup();
-        QuarkClientModule.initClient(this);
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static class QuarkClientModule {
-        private static void initClient(QuarkModule module) {
-            for (var b : module.chests.blocks.values())
-                QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(CHEST_TILE, b.defaultBlockState()));
-            for (var b : module.trappedChests.blocks.values())
-                QuarkClient.ZETA_CLIENT.setBlockEntityWithoutLevelRenderer(b.asItem(), new SimpleWithoutLevelRenderer(TRAPPED_CHEST_TILE, b.defaultBlockState()));
-        }
-    }
-
-    @Override
     @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
-        event.register(CHEST_TILE, context -> new VariantChestRenderer(context, false));
-        event.register(TRAPPED_CHEST_TILE, context -> new VariantChestRenderer(context, true));
+        CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
+        CompatChestBlockRenderer.register(event, trappedChests.getTile(CompatChestBlockEntity.class), shortenedId());
     }
 
     public static final PaletteStrategy bookshelfPalette = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
-                    blockType, manager, PLANKS,null,
+                    blockType, manager, PLANKS, null,
                     p -> {
                         var l0 = p.getDarkest();
                         p.increaseDown();
@@ -360,142 +344,74 @@ public class QuarkModule extends SimpleModule {
     );
 
     @Override
+    // TEXTURES
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 
         //extra task
-        executor.accept((this::generateChestTextures));
+        executor.accept(this::generateChestTextures);
     }
 
-    private void generateChestTextures(ResourceManager manager, ResourceSink handler) {
-        try (TextureImage normal = TextureImage.open(manager, modRes("quark_variant_chests/oak/normal"));
-             TextureImage normal_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_m"));
-             TextureImage normal_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_normal_o"));
-             TextureImage left = TextureImage.open(manager, modRes("quark_variant_chests/oak/left"));
-             TextureImage left_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_m"));
-             TextureImage left_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_left_o"));
-             TextureImage right = TextureImage.open(manager, modRes("quark_variant_chests/oak/right"));
-             TextureImage right_m = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_m"));
-             TextureImage right_o = TextureImage.open(manager, EveryCompat.res("model/oak_chest_right_o"));
-             TextureImage left_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_left"));
-             TextureImage right_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_right"));
-             TextureImage normal_t = TextureImage.open(manager, EveryCompat.res("model/trapped_chest_normal"))
-        ) {
+    private void generateChestTextures(ResourceManager manager, ResourceSink sink) {
+        trappedChests.blocks.forEach((wood, block) -> {
 
-            Respriter respriterNormal = Respriter.masked(normal, normal_m);
-            Respriter respriterLeft = Respriter.masked(left, left_m);
-            Respriter respriterRight = Respriter.masked(right, right_m);
-
-            Respriter respriterNormalO = Respriter.of(normal_o);
-            Respriter respriterLeftO = Respriter.of(left_o);
-            Respriter respriterRightO = Respriter.of(right_o);
-
-            trappedChests.blocks.forEach((wood, block) -> {
-
-                CompatTrappedChestBlock b = (CompatTrappedChestBlock) block;
-
-                try (TextureImage plankTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
-
-                    List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
-                    var meta = plankTexture.getMcMeta();
-
-                    List<Palette> overlayPalette = new ArrayList<>();
-                    for (var p : targetPalette) {
-                        var d1 = p.getDarkest();
-                        p.remove(d1);
-                        var d2 = p.getDarkest();
-                        p.remove(d2);
-                        var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
-                        var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
-                        var pal = Palette.ofColors(List.of(n1, n2));
-                        overlayPalette.add(pal);
-                    }
-
-                    {
-                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/normal");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap");
-
-                            createChestTextures(handler, normal_t, respriterNormal, respriterNormalO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
-                    {
-                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/left");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_left");
-
-                            createChestTextures(handler, left_t, respriterLeft, respriterLeftO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
-                    {
-                        ResourceLocation res = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/right");
-                        if (!handler.alreadyHasTextureAtLocation(manager, res)) {
-                            ResourceLocation trappedRes = modRes(b.getTextureFolder() + "/" + b.getTexturePath() + "/trap_right");
-
-                            createChestTextures(handler, right_t, respriterRight, respriterRightO, meta, targetPalette, overlayPalette, res, trappedRes, wood);
-                        }
-                    }
-
-
-                } catch (Exception ex) {
-                    EveryCompat.LOGGER.error("Failed to generate Chest block texture for for {} : {}", b, ex);
-                }
-            });
-        } catch (Exception ex) {
-            EveryCompat.LOGGER.error("Could not generate any Chest block texture : ", ex);
-        }
-    }
-
-    private void createChestTextures(ResourceSink sink, TextureImage trappedOverlay,
-                                     Respriter respriterLeft, Respriter respriterLeftO,
-                                     McMetaFile baseMeta, List<Palette> basePalette,
-                                     List<Palette> overlayPalette, ResourceLocation res, ResourceLocation trappedRes,
-                                     WoodType wood) {
-
-        try (TextureImage recoloredBase = respriterLeft.recolorWithAnimation(basePalette, baseMeta);
-             TextureImage recoloredOverlay = respriterLeftO.recolorWithAnimation(overlayPalette, baseMeta)) {
-            TextureOps.applyOverlay(recoloredBase, recoloredOverlay);
-            try (TextureImage trapped = recoloredBase.makeCopy()) {
-
-                if (!wood.getNamespace().equals("blue_skies") || (wood.getNamespace().equals("blue_skies") && wood.getTypeName().equals("crystallized")))
-                    sink.addTexture(res, recoloredBase);
-
-                TextureOps.applyOverlay(trapped, trappedOverlay);
-                sink.addTexture(trappedRes, trapped);
-            }
-        }
+            // SINGLE
+            generateChestTexture(sink, manager, shortenedId(), wood, block,
+                    modRes("quark_variant_chests/oak/normal"),
+                    EveryCompat.res("model/oak_chest_normal_m"),
+                    EveryCompat.res("model/oak_chest_normal_o"),
+                    EveryCompat.res("model/trapped_chest_normal")
+            );
+            // LEFT
+            generateChestTexture(sink, manager, shortenedId(), wood, block,
+                    modRes("quark_variant_chests/oak/left"),
+                    EveryCompat.res("model/oak_chest_left_m"),
+                    EveryCompat.res("model/oak_chest_left_o"),
+                    EveryCompat.res("model/trapped_chest_left")
+            );
+            // RIGHT
+            generateChestTexture(sink, manager, shortenedId(), wood, block,
+                    modRes("quark_variant_chests/oak/right"),
+                    EveryCompat.res("model/oak_chest_right_m"),
+                    EveryCompat.res("model/oak_chest_right_o"),
+                    EveryCompat.res("model/trapped_chest_right")
+            );
+        });
     }
 
     @Override
     // RECIPES, TAGS
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
-
-        executor.accept((manager, handler) -> {
+        executor.accept((manager, sink) -> {
             if (PlatHelper.isModLoaded("botanypots")) {
                 hedges.items.forEach((leaves, item) -> {
                     var leavesItem = leaves.leaves.asItem();
-                    BotanyPotsHelper.cropQuarkHedgeRecipe(this, item, leavesItem, handler, manager, leaves);
+                    BotanyPotsHelper.cropQuarkHedgeRecipe(this, item, leavesItem, sink, manager, leaves);
                 });
             }
 
             // hedge's recipe & logs' tags
-            for (Map.Entry<LeavesType, Block> entry : hedges.blocks.entrySet()) {
-                LeavesType leavesType = entry.getKey();
-                Block block = entry.getValue();
+            hedges.blocks.forEach((leavesType, block) -> {
+                if (block != null) createHedgeRecipe(leavesType, block, sink, manager);
+            });
 
-                // will generate if block is not null
-                if (block != null) generalHedgeRecipe(leavesType, block, handler, manager);
-            }
+            verticalSlabs.blocks.forEach((woodType, block) ->
+                    createVertSlabRecipe(woodType, block, sink));
         });
     }
 
     // Hedge's recipe has a tag as an ingredient
-    public void generalHedgeRecipe(LeavesType leavesType, Block hedge, ResourceSink sink, ResourceManager manager) {
+    public void createHedgeRecipe(LeavesType leavesType, Block hedge, ResourceSink sink, ResourceManager manager) {
 
         String recipe = """
                 {
+                    "neoforge:conditions": [
+                        {
+                            "type": "zeta:flag",
+                            "flag": "hedges"
+                        }
+                    ],
                     "type": "minecraft:crafting_shaped",
                     "pattern": [
                         "L",
@@ -510,20 +426,14 @@ public class QuarkModule extends SimpleModule {
                         }
                     },
                     "result": {
-                        "item": "[HEDGE]",
+                        "id": "[HEDGE]",
                         "count": 2
-                    },
-                    "conditions": [
-                        {
-                            "type": "quark:flag",
-                            "flag": "hedges"
-                        }
-                    ]
+                    }
                 }\s
                 """;
 
         WoodType woodType = leavesType.getAssociatedWoodType();
-        if (Objects.nonNull(woodType)) { //why is this here? we already checked all leaves have an associated wood in hedge construction
+        if (Objects.nonNull(woodType)) {
             String newTag = getATagOrCreateANew("log", "cap", woodType, sink, manager).toString();
 
             String newRecipe = recipe.replace("[LEAVES]", Utils.getID(leavesType.leaves).toString())
@@ -531,11 +441,48 @@ public class QuarkModule extends SimpleModule {
                     .replace("[HEDGE]", Utils.getID(hedge).toString());
 
             // Adding the finished recipe to ResourceLocation
-            sink.addBytes(EveryCompat.res(leavesType.createPathWith(shortenedId(), "hedge")), newRecipe.getBytes(),
+            sink.addBytes(EveryCompat.res(leavesType.createPathWith(shortenedId(), "hedge")),
+                    newRecipe.getBytes(),
                     ResType.RECIPES);
+        } else
+            EveryCompat.LOGGER.error("Hedge's LeavesType do not have associated WoodType for: {}. HOW??", leavesType.getId().toString());
+    }
+
+    //REASON: vertical_slab_revert are not being generated, this will have to do for now
+    public void createVertSlabRecipe(WoodType woodType, Block vertSlab, ResourceSink sink) {
+
+        String recipe = """
+                {
+                    "type": "minecraft:crafting_shapeless",
+                    "ingredients": [
+                        {
+                            "item": "[VERTICAL_SLAB]"
+                        }
+                    ],
+                    "result": {
+                        "id": "[SLAB]",
+                        "count": 1
+                    },
+                    "conditions": [
+                        {
+                            "type": "quark:flag",
+                            "flag": "vertical_slabs"
+                        }
+                    ]
+                }\s
+                """;
+
+        if (Objects.nonNull(woodType.getBlockOfThis(SLAB))) {
+            String newRecipe = recipe
+                    .replace("[SLAB]", Utils.getID(Objects.requireNonNull(woodType.getBlockOfThis(SLAB))).toString())
+                    .replace("[VERTICAL_SLAB]", Utils.getID(vertSlab).toString());
+
+            // Adding the finished recipe to ResourceLocation
+            sink.addBytes(EveryCompat.res(woodType.createPathWith(shortenedId(), "vertical_slab_revert")),
+                    newRecipe.getBytes(), ResType.RECIPES);
         }
         else
-            EveryCompat.LOGGER.error("Hedge's LeavesType do not have associated WoodType for: {}. HOW??", leavesType.getId().toString());
+            EveryCompat.LOGGER.warn("Skipped generating vertical_slab_revert recipe for: {} lacking SLAB.", woodType.getId().toString());
     }
 
 }

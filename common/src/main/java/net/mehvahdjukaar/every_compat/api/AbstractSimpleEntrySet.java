@@ -41,6 +41,7 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static net.mehvahdjukaar.every_compat.configs.ECConfigs.NO_MOD_CREATIVE_TAB;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.addTagToAllBlocks;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
@@ -182,7 +183,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return;
         }
         ResourceKey<CreativeModeTab> tab = this.tab.get();
-        if (tab.location().equals(NO_TAB_MARKER)) {
+        if (tab.location().equals(NO_TAB_MARKER) || NO_MOD_CREATIVE_TAB.get()) {
             return;
         }
         //verify tab
@@ -484,6 +485,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return addTexture(TextureInfo.of(textureLocation, customTexturePath)
                     .mask(maskLocation)
                     .setPalette(palette));
+        }
+
+        /// Copy the texture as it is to EC's Resources
+        public BL copyTexture(ResourceLocation textureLocation) {
+            return addTexture(TextureInfo.of(textureLocation).copyTexture());
         }
 
         // adds a texture with automatic masking. Experimental

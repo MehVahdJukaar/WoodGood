@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.create;
 
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -21,7 +22,7 @@ public class CreateModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> windowPanes;
 
     public CreateModule(String modId) {
-        super(modId, "c");
+        super(modId, "c", EveryCompat.MOD_ID);
         ResourceLocation tab = modRes("palettes");
 
 /*

@@ -46,6 +46,9 @@ public class HardcodedBlockType {
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
         if (isKnownVanillaWood(woodType)) return true;
 
+        // The WoodType from Cobblemon's Legendary Monuments has a 32x32 texture
+        if (isWoodFrom("", "", "legendarymonuments:distortion", "")) return true;
+
         // Supported Mods that have supportedBlockId should be excluded due to FramedBlocks
         if (isWoodFrom("", "", "", "torch") && PlatHelper.isModLoaded("framedblocks")) return true;
 
@@ -109,7 +112,7 @@ public class HardcodedBlockType {
         supportedMod = supportedModId;
         supportedBlockName = blockName;
 
-        String blockId = supportedModId + ":" + blockName;
+        String blockId = supportedModId +"/"+ leavesTypeFromMod +"/"+ blockName;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -117,7 +120,7 @@ public class HardcodedBlockType {
         if (LEAVES_TYPES_BLACKLIST.get().stream().anyMatch(leavesidentify::matches)) return true;
 
         // Exclude a specific LeavesType Block
-        if (BLOCKS_BLACKLIST.get().stream().anyMatch(blockName::matches)) return true;
+        if (BLOCKS_BLACKLIST.get().stream().anyMatch(blockId::matches)) return true;
 
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;

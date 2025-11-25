@@ -35,6 +35,7 @@ public class ECConfigs {
 
     public static final Supplier<Boolean> TAB_ENABLED;
     public static final Supplier<Boolean> TAB_ITEM_SEARCH_ENABLED;
+    public static final Supplier<Boolean> NO_MOD_CREATIVE_TAB;
     public static final Supplier<Boolean> CHECK_PACKET;
     public static final Supplier<Boolean> DEBUG_PACKET;
     public static final Supplier<Boolean> BLOCK_TYPE_TOOLTIP;
@@ -88,6 +89,9 @@ public class ECConfigs {
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")
                 .gameRestart()
                 .define("tab_item_search", true);
+        NO_MOD_CREATIVE_TAB = builder.comment("If set to true, then all of the generated items will not be put into the mod's tab.")
+                .gameRestart()
+                .define("no_mod_creative_tab", false);
         // REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
         //        .define("remap_other_mods", false);
         // REMAP_OWN = builder.comment("Clears out and remaps all blocks registered by this mod belonging to uninstalled wood types to air or oak wood")

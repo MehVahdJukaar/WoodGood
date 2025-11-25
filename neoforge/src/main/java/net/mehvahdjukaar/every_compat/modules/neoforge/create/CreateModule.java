@@ -12,10 +12,8 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -29,7 +27,7 @@ public class CreateModule extends SimpleModule {
 
     public CreateModule(String modId) {
         super(modId, "c", EveryCompat.MOD_ID);
-        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
+        ResourceLocation tab = modRes("palettes");
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> VanillaWoodTypes.OAK,
