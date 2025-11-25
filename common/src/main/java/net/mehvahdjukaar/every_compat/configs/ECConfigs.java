@@ -42,6 +42,7 @@ public class ECConfigs {
     public static final Supplier<Boolean> TOOLTIPS_ADVANCED;
     public static final Supplier<GenMode> SERVER_GENERATION_MODE;
     public static final Supplier<GenMode> CLIENT_GENERATION_MODE;
+    public static final Supplier<Boolean> GENERATE_WOOD_TAGS;
 
 
     static {
@@ -81,6 +82,9 @@ public class ECConfigs {
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .gameRestart()
                 .define("creative_tab", true);
+        GENERATE_WOOD_TAGS = builder.comment("Generate wood tags for every wood type even if no compat blocks are added for them. Useful for datapack makers")
+                .gameRestart()
+                .define("generate_wood_tags", false);
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")
                 .gameRestart()
                 .define("tab_item_search", true);

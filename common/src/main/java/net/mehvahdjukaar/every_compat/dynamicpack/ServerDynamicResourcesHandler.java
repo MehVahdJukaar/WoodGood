@@ -2,13 +2,13 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
-import net.mehvahdjukaar.moonlight.api.misc.IProgressTracker;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicServerResourceProvider;
-import net.mehvahdjukaar.moonlight.api.resources.pack.GlobalCachedStrategy;
-import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.minecraft.server.packs.resources.ResourceManager;
+import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,6 +61,40 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
             executor.accept((resourceManager, resourceSink) -> {
                 for (ResourceGenTask task : subList) {
                     task.accept(resourceManager, resourceSink);
+                }
+            });
+        }
+
+        if (ECConfigs.GENERATE_WOOD_TAGS.get()) {
+            executor.accept((resourceManager, resourceSink) -> {
+                for (var r : BlockSetAPI.getRegistries()) {
+                    String typeName = r.typeName();
+                    for (var type : r.getValues()) {
+                        ResourceLocation id = type.getId().withPrefix(typeName + "/");
+                        SimpleTagBuilder itemTag = SimpleTagBuilder.of(id);
+                        SimpleTagBuilder blockTag = SimpleTagBuilder.of(id);
+                        boolean oneItem = false;
+                        boolean oneBlock = false;
+                        for (var c : type.getChildren()) {
+                            var key = c.getKey();
+                            var block = type.getBlockOfThis(key);
+                            if (block != null) {
+                                oneBlock = true;
+                                blockTag.addEntry(block);
+                            }
+                            var item = type.getItemOfThis(key);
+                            if (item != null) {
+                                oneItem = true;
+                                itemTag.addEntry(item);
+                            }
+                        }
+                        if (oneBlock) {
+                            resourceSink.addTag(blockTag, Registries.BLOCK);
+                        }
+                        if (oneItem) {
+                            resourceSink.addTag(itemTag, Registries.ITEM);
+                        }
+                    }
                 }
             });
         }
