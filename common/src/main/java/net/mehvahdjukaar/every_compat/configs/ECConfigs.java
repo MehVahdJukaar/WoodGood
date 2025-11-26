@@ -43,7 +43,7 @@ public class ECConfigs {
     public static final Supplier<Boolean> TOOLTIPS_ADVANCED;
     public static final Supplier<GenMode> SERVER_GENERATION_MODE;
     public static final Supplier<GenMode> CLIENT_GENERATION_MODE;
-    public static final Supplier<Boolean> GENERATE_WOOD_TAGS;
+    public static final Supplier<Boolean> GENERATE_BLOCKTYPE_TAGS;
 
 
     static {
@@ -89,9 +89,9 @@ public class ECConfigs {
         NO_MOD_CREATIVE_TAB = builder.comment("If set to true, then all of the generated items will not be put into the mod's tab.")
                 .gameRestart()
                 .define("no_mod_creative_tab", false);
-        GENERATE_WOOD_TAGS = builder.comment("Generate wood tags for every wood type even if no compat blocks are added for them. Useful for datapack makers")
+        GENERATE_BLOCKTYPE_TAGS = builder.comment("Generate blocktype tags for every block type. This will be applied to StoneZone & GemsRealm, too. Useful for datapack makers & Iris since v1.8 that can use tags for shaders.")
                 .gameRestart()
-                .define("generate_wood_tags", true);
+                .define("generate_blocktype_tags", true);
         // REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
         //        .define("remap_other_mods", false);
         // REMAP_OWN = builder.comment("Clears out and remaps all blocks registered by this mod belonging to uninstalled wood types to air or oak wood")
