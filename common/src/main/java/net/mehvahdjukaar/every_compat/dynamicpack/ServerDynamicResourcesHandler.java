@@ -4,13 +4,21 @@ import com.google.common.base.Stopwatch;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
@@ -56,20 +64,48 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
             var subList = tasks.subList(i, end);
             executor.accept((resourceManager, resourceSink) -> {
                 for (ResourceGenTask task : subList) {
-                    try {
-                        task.accept(resourceManager, resourceSink);
-                    } catch (Throwable e) {
-                        EveryCompat.LOGGER.error("Error while generating dynamic resource for task {}", task, e);
-                    }
+                    task.accept(resourceManager, resourceSink);
                 }
             });
         }
-    }
 
-    /// Will be added to DynamicPack if the mod is loaded - it's for tags stuff
-    public void addModToDynamicPack(String modId) {
-        if (PlatHelper.isModLoaded(modId)) {
-            getPack().addNamespaces(modId);
+        if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
+            executor.accept((resourceManager, resourceSink) -> {
+                for (var r : BlockSetAPI.getRegistries()) {
+                    String typeName = r.typeName();
+                    for (BlockType blockType : r.getValues()) {
+
+                        ResourceLocation tagId = blockType.getId().withPrefix(typeName + "/");
+                        SimpleTagBuilder itemTag = SimpleTagBuilder.of(tagId);
+                        SimpleTagBuilder blockTag = SimpleTagBuilder.of(tagId);
+                        boolean isItemAddedToTag = false;
+                        boolean isBlockAddedToTag = false;
+                        for (Map.Entry<String, Object> entrySet : blockType.getChildren()) {
+                            String key = entrySet.getKey();
+
+                            // Skip the vanilla blocks but will not skip blocks from Supported-Mods
+                            if (!key.contains(":") || key.contains("planks")) continue;
+
+                            Block block = blockType.getBlockOfThis(key);
+                            if (block != null) {
+                                isBlockAddedToTag = true;
+                                blockTag.addEntry(block);
+                            }
+                            Item item = blockType.getItemOfThis(key);
+                            if (item != null) {
+                                isItemAddedToTag = true;
+                                itemTag.addEntry(item);
+                            }
+                        }
+                        if (isBlockAddedToTag) {
+                            resourceSink.addTag(blockTag, Registries.BLOCK);
+                        }
+                        if (isItemAddedToTag) {
+                            resourceSink.addTag(itemTag, Registries.ITEM);
+                        }
+                    }
+                }
+            });
         }
     }
 
