@@ -71,29 +71,29 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
             executor.accept((resourceManager, resourceSink) -> {
                 for (var r : BlockSetAPI.getRegistries()) {
                     String typeName = r.typeName();
-                    for (var type : r.getValues()) {
-                        ResourceLocation id = type.getId().withPrefix(typeName + "/");
+                    for (var blockType : r.getValues()) {
+                        ResourceLocation id = blockType.getId().withPrefix(typeName + "/");
                         SimpleTagBuilder itemTag = SimpleTagBuilder.of(id);
                         SimpleTagBuilder blockTag = SimpleTagBuilder.of(id);
-                        boolean oneItem = false;
-                        boolean oneBlock = false;
-                        for (var c : type.getChildren()) {
+                        boolean isItemAddedToTag = false;
+                        boolean isBlockAddedToTag = false;
+                        for (var c : blockType.getChildren()) {
                             var key = c.getKey();
-                            var block = type.getBlockOfThis(key);
+                            var block = blockType.getBlockOfThis(key);
                             if (block != null) {
-                                oneBlock = true;
+                                isBlockAddedToTag = true;
                                 blockTag.addEntry(block);
                             }
-                            var item = type.getItemOfThis(key);
+                            var item = blockType.getItemOfThis(key);
                             if (item != null) {
-                                oneItem = true;
+                                isItemAddedToTag = true;
                                 itemTag.addEntry(item);
                             }
                         }
-                        if (oneBlock) {
+                        if (isBlockAddedToTag) {
                             resourceSink.addTag(blockTag, Registries.BLOCK);
                         }
-                        if (oneItem) {
+                        if (isItemAddedToTag) {
                             resourceSink.addTag(itemTag, Registries.ITEM);
                         }
                     }
