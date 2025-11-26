@@ -16,11 +16,14 @@
 
 </div>
 
+### UPDATED: 
+- **Every Compat** (C): Added a new config, GENERATE_BLOCKTYPE_TAGS in `everycomp-common.toml`
+  - NOTE: what it does is Generate a tag containing every blocktype with its children. It's Useful for datapack makers and Iris since 1.8 that can use tags for shaders
+  - it's on by default 
 
-## v2.11.19
-- added tags containing every block of each tags, optionally in the configs
+---
 
---
+## v2.11.18
 
 ### UPDATED: 
 - **Macaw's Furniture** (C): Supporting 2 new blocks, `oak_kitchen_sink` & `stripped_oak_kitchen_sink`
