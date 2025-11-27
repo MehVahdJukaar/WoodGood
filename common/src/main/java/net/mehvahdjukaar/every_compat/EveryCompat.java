@@ -56,9 +56,8 @@ public abstract class EveryCompat {
     private static final Set<String> DEPENDENCIES = new HashSet<>();
     private static final Set<String> ADDON_IDS = new HashSet<>();
 
-    private static final Set<CompatModule> ERRORED = new HashSet<>();
-
     static boolean canShowErrorScreen = PlatHelper.getPhysicalSide().isClient();
+    private static final Map<CompatModule, Throwable> ERRORED = new HashMap<>();
 
     /// @return everycomp:path
     public static ResourceLocation res(String path) {
@@ -147,10 +146,10 @@ public abstract class EveryCompat {
             try {
                 action.accept(m);
             } catch (Throwable e) {
-                EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", Objects.requireNonNull(m).getModName(), e);
+                EveryCompat.LOGGER.error("Module for the supported mod contains errors. This could mean that the mod has been recently updated & Every Compat needs updating (try downgrading the mod) or that you are using an older version. MAIN CAUSE: {} - {}", m.getModName(), e);
                 if (canShowErrorScreen) {
                     //if before first screen we can display an error screen
-                    ERRORED.add(m);
+                    ERRORED.put(m, e);
                 } else {
                     throw e;
                 }
@@ -165,7 +164,7 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", Objects.requireNonNull(module).getModName(), e);
             if (canShowErrorScreen) {
                 //if before first screen we can display an error screen
-                ERRORED.add(module);
+                ERRORED.put(module, e);
             } else {
                 throw e;
             }
@@ -230,7 +229,7 @@ public abstract class EveryCompat {
 
                 addModule(module);
             } catch (Throwable t) {
-                ERRORED.add(new CompatModule(modId, modId, "unknown") {
+                ERRORED.put(new CompatModule(modId, modId, "unknown") {
                     @Override
                     public int bloatAmount() {
                         return 0;
@@ -240,7 +239,7 @@ public abstract class EveryCompat {
                     public Collection<Class<? extends BlockType>> getAffectedTypes() {
                         return List.of();
                     }
-                });
+                }, t);
             }
         }
     }
@@ -309,9 +308,11 @@ public abstract class EveryCompat {
     }
 
 
-    public static List<String> getModulesThatErrored() {
-        return ERRORED.stream().map(CompatModule::getModName)
-                .toList();
+    public static Map<String, String> getModulesThatErrored() {
+        return ERRORED.entrySet().stream().collect(Collectors.toMap(
+                entry -> entry.getKey().getModName(),
+                entry -> entry.getValue().getMessage()
+        ));
     }
 
 
@@ -345,7 +346,7 @@ public abstract class EveryCompat {
                 CompatModule module = moduleFactory.get().apply(modId);
                 addModule(module);
             } catch (Throwable e) {
-                ERRORED.add(new CompatModule(modId, modId, "unknown") {
+                ERRORED.put(new CompatModule(modId, modId, "unknown") {
 
                     @Override
                     public int bloatAmount() {
@@ -356,7 +357,7 @@ public abstract class EveryCompat {
                     public Collection<Class<? extends BlockType>> getAffectedTypes() {
                         return List.of();
                     }
-                });
+                }, e);
             }
         }
     }

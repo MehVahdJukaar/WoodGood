@@ -213,8 +213,8 @@ public abstract class CompatModule {
                 return (T) reg.getOptional(modRes(id))
                         .orElseThrow();
             } catch (Throwable e) {
-                throw new IllegalStateException("Could not find " + id + " in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +
-                        "Either downgrade the mod " + this.modId + " or wait for an Every Compat update");
+                throw new IllegalStateException("Could not find \"" + id + "\" in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +
+                        "Is the mod, " + this.getModName().toUpperCase() + " up to date, if yes, then downgrade to the previous version & wait for an Every Compat update. Otherwise, update the mod to the latest version.");
             }
         });
     }
