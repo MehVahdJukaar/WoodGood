@@ -17,7 +17,15 @@
 </div>
 
 ### UPDATED: 
-- **Every Compat** (C): Added a new config, GENERATE_BLOCKTYPE_TAGS in `everycomp-common.toml`
+- **Every Compat** (C): Fixed an crash related to the config, `GENERATE_BLOCKTYPE_TAGS` in `everycomp-common.toml` - [#1135](https://github.com/MehVahdJukaar/WoodGood/issues/1135)
+    - ADDITIONAL-INFO: diagonal_fences won't be included in the tags
+
+---
+
+## v2.11.19
+
+### UPDATED: 
+- **Every Compat** (C): Added a new config, `GENERATE_BLOCKTYPE_TAGS` in `everycomp-common.toml`
   - NOTE: what it does is Generate a tag containing every blocktype with its children. It's Useful for datapack makers and Iris since 1.8 that can use tags for shaders
   - it's on by default 
 
@@ -27,7 +35,7 @@
 
 ### UPDATED: 
 - **Macaw's Furniture** (C): Supporting 2 new blocks, `oak_kitchen_sink` & `stripped_oak_kitchen_sink`
-- - **Every Compat** (C): Added a new config, NO_MOD_CREATIVE_TAB in `everycomp-common.toml` - [#1113](https://github.com/MehVahdJukaar/WoodGood/issues/1113)
+- - **Every Compat** (C): Added a new config, `NO_MOD_CREATIVE_TAB` in `everycomp-common.toml` - [#1113](https://github.com/MehVahdJukaar/WoodGood/issues/1113)
 - NOTE: what it does is not adding items to Mod's own tab in Creative Mode if NO_MOD_CREATIVE_TAB is set to `true`
 
 ---
