@@ -5,7 +5,7 @@
   "tooltip.everycomp.wood_type": "木の種類：%s",
   "tooltip.everycomp.leaf_type": "葉の種類：%s",
   "gui.everycomp.error_screen.title": "Every Compatでエラーが発生しました",
-  "gui.everycomp.error_screen.message": "以下の対応Modの「Every Compat」モジュールに読み込みエラーが発生しました。\nこれは通常、該当Modが最近互換性を損なう変更を含む更新を行ったため、今後の「Every Compat」の更新が必要となるか、いずれかのModのモジュールが古くなっていることを意味します。\nゲームは進行できませんが、これらの対応モッドを以前のバージョンにダウングレードし、更新を待つことができます: %s
+  "gui.everycomp.error_screen.message": "以下の対応Modの「Every Compat」モジュールに読み込みエラーが発生しました。\nこれは通常、該当Modが最近互換性を損なう変更を含む更新を行ったため、今後の「Every Compat」の更新が必要となるか、いずれかのModのモジュールが古くなっていることを意味します。\nゲームは進行できませんが、これらの対応モッドを以前のバージョンにダウングレードし、更新を待つことができます: %s",
 
   "everycomp.configuration.general": "一般",
   "everycomp.configuration.server_assets_generation_mode": "アセット生成モード",
