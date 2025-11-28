@@ -83,7 +83,7 @@ public class ECConfigs {
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .gameRestart()
                 .define("creative_tab", true);
-        GENERATE_WOOD_TAGS = builder.comment("Generate wood tags for every wood type even if no compat blocks are added for them. Useful for datapack makers")
+        GENERATE_WOOD_TAGS = builder.comment("Generate wood tags for every wood type even if no compat blocks are added for them. Useful for datapack makers. Can make pack a bit faster if its off. Turn off if you dont need it")
                 .gameRestart()
                 .define("generate_wood_tags", true);
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")

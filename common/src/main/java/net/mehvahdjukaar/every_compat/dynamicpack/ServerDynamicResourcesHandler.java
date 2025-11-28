@@ -79,6 +79,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
                         boolean oneBlock = false;
                         for (var c : type.getChildren()) {
                             var key = c.getKey();
+                            if (key.equals("diagonalfences:fence")) continue; //dumb. if these are tagged their mod crashes
                             var block = type.getBlockOfThis(key);
                             if (block != null) {
                                 oneBlock = true;
