@@ -83,16 +83,13 @@ public class ECConfigs {
         TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
                 .gameRestart()
                 .define("creative_tab", true);
-        GENERATE_WOOD_TAGS = builder.comment("Generate wood tags for every wood type even if no compat blocks are added for them. Useful for datapack makers. Can make pack a bit faster if its off. Turn off if you dont need it")
-                .gameRestart()
-                .define("generate_wood_tags", true);
         TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")
                 .gameRestart()
                 .define("tab_item_search", true);
         NO_MOD_CREATIVE_TAB = builder.comment("If set to true, then all of the generated items will not be put into the mod's tab.")
                 .gameRestart()
                 .define("no_mod_creative_tab", false);
-        GENERATE_BLOCKTYPE_TAGS = builder.comment("Generate blocktype tags for every block type. This will be applied to StoneZone & GemsRealm, too. Useful for datapack makers & Iris since v1.8 that can use tags for shaders.")
+        GENERATE_BLOCKTYPE_TAGS = builder.comment("Generate blocktype tags for every block type. This will be applied to all the mods that use the system not just EC. Can make pack a bit faster if its off. Turn off if you dont need it")
                 .gameRestart()
                 .define("generate_blocktype_tags", true);
         // REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
