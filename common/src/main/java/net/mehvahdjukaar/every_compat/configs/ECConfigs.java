@@ -89,7 +89,7 @@ public class ECConfigs {
         NO_MOD_CREATIVE_TAB = builder.comment("If set to true, then all of the generated items will not be put into the mod's tab.")
                 .gameRestart()
                 .define("no_mod_creative_tab", false);
-        GENERATE_BLOCKTYPE_TAGS = builder.comment("Generate blocktype tags for every block type. This will be applied to all the mods that use the system not just EC. Can make pack a bit faster if its off. Turn off if you dont need it")
+        GENERATE_BLOCKTYPE_TAGS = builder.comment("Generate blocktype tags for every block type. This will be applied to all the mods that use the system, not just Every Compat. Can make pack a bit faster if its off. Turn off if you dont need it")
                 .gameRestart()
                 .define("generate_blocktype_tags", true);
         // REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
