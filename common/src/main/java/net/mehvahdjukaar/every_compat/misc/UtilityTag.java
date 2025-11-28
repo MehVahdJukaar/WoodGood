@@ -125,7 +125,7 @@ public class UtilityTag {
      */
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
             Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId,
-            String tagResLoc, boolean includeBlock, boolean includeItem, ResourceSink pack,
+            String tagResLoc, boolean includeBlock, boolean includeItem, ResourceSink sink,
             @Nullable String regexBlockId
     ) {
         if (PlatHelper.isModLoaded(fromModId) || fromModId.isEmpty()) {
@@ -148,8 +148,8 @@ public class UtilityTag {
                 }
             }
             if (isTagCreated) {
-                if (includeBlock) pack.addTag(tagBuilder, Registries.BLOCK);
-                if (includeItem) pack.addTag(tagBuilder, Registries.ITEM);
+                if (includeBlock) sink.addTag(tagBuilder, Registries.BLOCK);
+                if (includeItem) sink.addTag(tagBuilder, Registries.ITEM);
             }
         }
     }
@@ -183,7 +183,7 @@ public class UtilityTag {
 
     @SuppressWarnings("SameParameterValue")
     /// @return c:tagPath for FABRIC or neoforge:tagPath for NEOFORGE
-    private static ResourceLocation platformTag(String tagPath) {
+    public static ResourceLocation platformTag(String tagPath) {
         return platformTag(tagPath, tagPath);
     }
 
@@ -196,9 +196,9 @@ public class UtilityTag {
         return ResourceLocation.fromNamespaceAndPath("c", tagPath);
     }
 
-    /// @return neoforge:tagPath
+    /// @return c:tagPath
     public static ResourceLocation neoforgeTag(String tagPath) {
-        return ResourceLocation.fromNamespaceAndPath("neoforge", tagPath);
+        return ResourceLocation.fromNamespaceAndPath("c", tagPath);
     }
 
 

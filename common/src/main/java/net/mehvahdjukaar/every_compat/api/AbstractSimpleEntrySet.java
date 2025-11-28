@@ -43,6 +43,7 @@ import java.util.regex.Pattern;
 
 import static net.mehvahdjukaar.every_compat.configs.ECConfigs.NO_MOD_CREATIVE_TAB;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.addTagToAllBlocks;
+import static net.mehvahdjukaar.every_compat.misc.UtilityTag.platformTag;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
 //@SuppressWarnings({"unused"})
@@ -252,6 +253,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)",
                 "regions_unexplored", "minecraft:non_flammable_wood",
                 false, true, sink);
+
+        /// Chests
+        addTagToAllBlocks(blocks, "\\w+_chest",
+                "", platformTag("chests/wooden").toString(),
+                true, true, sink);
 
     }
 

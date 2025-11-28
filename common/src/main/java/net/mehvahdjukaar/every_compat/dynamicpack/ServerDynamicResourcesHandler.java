@@ -7,12 +7,16 @@ import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicServerResourceProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider {
@@ -39,7 +43,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
         namespaces.add(EveryCompat.MOD_ID);
         /// Ensure the tags to be loaded first time into the world, not second time
         if (PlatHelper.isModLoaded("lolmcv")) namespaces.add("lieonstudio");
-        if (ECConfigs.GENERATE_WOOD_TAGS.get()) {
+        if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
             namespaces.addAll(EveryCompat.getDependencies());
         }
         return namespaces;
@@ -67,34 +71,36 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
             });
         }
 
-        if (ECConfigs.GENERATE_WOOD_TAGS.get()) {
+        if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
             executor.accept((resourceManager, resourceSink) -> {
                 for (var r : BlockSetAPI.getRegistries()) {
                     String typeName = r.typeName();
-                    for (var type : r.getValues()) {
-                        ResourceLocation id = type.getId().withPrefix(typeName + "/");
-                        SimpleTagBuilder itemTag = SimpleTagBuilder.of(id);
-                        SimpleTagBuilder blockTag = SimpleTagBuilder.of(id);
-                        boolean oneItem = false;
-                        boolean oneBlock = false;
-                        for (var c : type.getChildren()) {
-                            var key = c.getKey();
+                    for (BlockType blockType : r.getValues()) {
+
+                        ResourceLocation tagId = blockType.getId().withPrefix(typeName + "/");
+                        SimpleTagBuilder itemTag = SimpleTagBuilder.of(tagId);
+                        SimpleTagBuilder blockTag = SimpleTagBuilder.of(tagId);
+                        boolean isItemAddedToTag = false;
+                        boolean isBlockAddedToTag = false;
+                        for (Map.Entry<String, Object> entrySet : blockType.getChildren()) {
+                            String key = entrySet.getKey();
                             if (key.equals("diagonalfences:fence")) continue; //dumb. if these are tagged their mod crashes
-                            var block = type.getBlockOfThis(key);
+
+                            Block block = blockType.getBlockOfThis(key);
                             if (block != null) {
-                                oneBlock = true;
+                                isBlockAddedToTag = true;
                                 blockTag.addEntry(block);
                             }
-                            var item = type.getItemOfThis(key);
+                            Item item = blockType.getItemOfThis(key);
                             if (item != null) {
-                                oneItem = true;
+                                isItemAddedToTag = true;
                                 itemTag.addEntry(item);
                             }
                         }
-                        if (oneBlock) {
+                        if (isBlockAddedToTag) {
                             resourceSink.addTag(blockTag, Registries.BLOCK);
                         }
-                        if (oneItem) {
+                        if (isItemAddedToTag) {
                             resourceSink.addTag(itemTag, Registries.ITEM);
                         }
                     }
