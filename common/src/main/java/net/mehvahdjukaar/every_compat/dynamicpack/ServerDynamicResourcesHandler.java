@@ -82,9 +82,7 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
                         boolean isBlockAddedToTag = false;
                         for (Map.Entry<String, Object> entrySet : blockType.getChildren()) {
                             String key = entrySet.getKey();
-
-                            // Skip the vanilla blocks but will not skip blocks from Supported-Mods
-                            if (!key.contains(":") || key.contains("planks")) continue;
+                            if (key.equals("diagonalfences:fence")) continue; //dumb. if these are tagged their mod crashes
 
                             Block block = blockType.getBlockOfThis(key);
                             if (block != null) {
