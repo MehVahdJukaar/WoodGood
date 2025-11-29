@@ -39,6 +39,7 @@ allprojects {
         maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods
         maven { url = "https://maven.ladysnake.org/releases" } // Ladysnake mods
         maven { url = "https://maven.tterrag.com/" } // Flywheel, EnderIO
+        maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
         maven { url = "https://mvn.devos.one/releases/" } // Registrate, Porting Lib (releases)
         maven { url = "https://mvn.devos.one/snapshots/" } // Registrate, Porting Lib (snapshots)
         maven { url = "https://maven.terraformersmc.com/" } // TerraformersMC mods
