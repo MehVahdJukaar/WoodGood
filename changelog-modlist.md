@@ -43,6 +43,7 @@
 |                            |        |                                            |        | Woodster                               |   🟩   |
 |                            |        |                                            |        | Workshop For Handsome Adventure        |   🟩   |
 |                            |        |                                            |        | Xerca Mod                              |   🟩   |
+|                            |        |                                            |        | Youkai's Homecoming                    |   🟩   |
 
 ## LEGENDS:
 - 🟩 - AVAILABLE
