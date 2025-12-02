@@ -34,11 +34,9 @@
 
   "wood_type.blockus.legacy": "原初",
   "wood_type.blockus.white_oak": "ホワイトオーク",
-
   "leaves_type.blockus.legacy": "原初",
   "leaves_type.blockus.white_oak": "ホワイトオーク",
 
-  
   "leaves_type.chipped.apple_acacia": "リンゴのアカシア",
   "leaves_type.chipped.apple_birch": "リンゴのシラカバ",
   "leaves_type.chipped.apple_oak": "リンゴのオーク",
@@ -100,7 +98,6 @@
   "leaves_type.chipped.white_flower_oak": "白色の開花したオーク",
   "leaves_type.chipped.white_flower_spruce": "白色の開花したトウヒ",
 
-  
   "wood_type.natures_spirit.aspen": "ポプラ",
   "wood_type.natures_spirit.cedar": "ヒマラヤスギ",
   "wood_type.natures_spirit.coconut": "ココナッツ",
