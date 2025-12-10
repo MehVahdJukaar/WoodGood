@@ -94,10 +94,10 @@ dependencies {
     }
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("curse.maven:emi-580555:6420931") // v1.1.22
+    modRuntimeOnly("dev.emi:emi-neoforge:${emi_version}+${minecraft_version}")
+    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}")
     modRuntimeOnly("curse.maven:jei-238222:7057366") // v19.25.0.322
     modRuntimeOnly("curse.maven:jade-324717:6667790") // v15.10.1
-    modRuntimeOnly("curse.maven:crafttweaker-239197:6434161") // v21.0.27
 //    modRuntimeOnly("curse.maven:worldedit-225608:5830452")
 
     //+ REQUIRED

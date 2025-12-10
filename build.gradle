@@ -62,7 +62,7 @@ allprojects {
         maven { url = "https://maven.jamieswhiteshirt.com/libs-release";
             content { includeGroup("com.jamieswhiteshirt") } } // Reach Entity Attributes
         maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
-        maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" } // JEI
+        maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" } // JEI, CraftTweaker
         maven { name = "ModMaven"; url = "https://modmaven.dev" } // Botania & FALLBACK for JEI
         maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
         maven { url = "https://maven.firstdarkdev.xyz/snapshots" }
