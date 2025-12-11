@@ -5,7 +5,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
@@ -81,6 +80,7 @@ public abstract class EveryCompat {
 
     public static void setup() {
 
+
         String activeModulesString = ACTIVE_MODULES.keySet().stream()
                 .map(key -> {
                     int count = ACTIVE_MODULES.get(key).size();
@@ -139,6 +139,18 @@ public abstract class EveryCompat {
 
         forAllModules(CompatModule::onModSetup);
         canShowErrorScreen = true;
+
+        //add all namespaces. hack since the pack needs to know about those before hand if we generate the tags
+        if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
+            Set<String> modIdsThatHaveBlockSets = new HashSet<>();
+            for (var r : BlockSetAPI.getRegistries()) {
+                for (BlockType blockType : r.getValues()) {
+                    modIdsThatHaveBlockSets.add(blockType.getNamespace());
+                }
+            }
+            ServerDynamicResourcesHandler.getInstance()
+                    .addSupportedNamespaces(modIdsThatHaveBlockSets.toArray(String[]::new));
+        }
     }
 
     public static void forAllModules(Consumer<CompatModule> action) {

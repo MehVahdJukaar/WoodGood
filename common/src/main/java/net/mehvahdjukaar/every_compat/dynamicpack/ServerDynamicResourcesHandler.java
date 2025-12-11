@@ -35,7 +35,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
                 ECConfigs.SERVER_GENERATION_MODE.get().pickStrategy());
     }
 
-    //needs to be ready when constructor is called
+    //needs to be ready when constructor is called. dont call EC stuff from here
     @Override
     protected Collection<String> gatherSupportedNamespaces() {
         var namespaces = new ArrayList<String>();
@@ -43,9 +43,6 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
         namespaces.add(EveryCompat.MOD_ID);
         /// Ensure the tags to be loaded first time into the world, not second time
         if (PlatHelper.isModLoaded("lolmcv")) namespaces.add("lieonstudio");
-        if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
-            namespaces.addAll(EveryCompat.getDependencies());
-        }
         return namespaces;
     }
 
