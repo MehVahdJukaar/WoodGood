@@ -82,20 +82,20 @@ publishing {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    neoForge "net.neoforged:neoforge:${neo_version}"
+    neoForge "net.neoforged:neoforge:$neo_version"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':common', configuration: 'transformProductionNeoForge'))
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    modApi("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}"){
+    modApi("net.mehvahdjukaar:moonlight-neoforge:$moonlight_version"){
         transitive = false
     }
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("dev.emi:emi-neoforge:${emi_version}+${minecraft_version}")
-    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}")
+    modRuntimeOnly("dev.emi:emi-neoforge:$emi_version+$minecraft_version")
+    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-$minecraft_version:$crafttweaker_version")
     modRuntimeOnly("curse.maven:jei-238222:7057366") // v19.25.0.322
     modRuntimeOnly("curse.maven:jade-324717:6667790") // v15.10.1
 //    modRuntimeOnly("curse.maven:worldedit-225608:5830452")
