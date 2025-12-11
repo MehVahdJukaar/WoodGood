@@ -39,6 +39,7 @@ allprojects {
         maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods
         maven { url = "https://maven.ladysnake.org/releases" } // Ladysnake mods
         maven { url = "https://maven.tterrag.com/" } // Flywheel, EnderIO
+        maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
         maven { url = "https://mvn.devos.one/releases/" } // Registrate, Porting Lib (releases)
         maven { url = "https://mvn.devos.one/snapshots/" } // Registrate, Porting Lib (snapshots)
         maven { url = "https://maven.terraformersmc.com/" } // TerraformersMC mods
@@ -61,7 +62,7 @@ allprojects {
         maven { url = "https://maven.jamieswhiteshirt.com/libs-release";
             content { includeGroup("com.jamieswhiteshirt") } } // Reach Entity Attributes
         maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
-        maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" } // JEI
+        maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" } // JEI, CraftTweaker
         maven { name = "ModMaven"; url = "https://modmaven.dev" } // Botania & FALLBACK for JEI
         maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
         maven { url = "https://maven.firstdarkdev.xyz/snapshots" }

@@ -41,6 +41,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
         var namespaces = new ArrayList<String>();
         namespaces.add("minecraft");
         namespaces.add(EveryCompat.MOD_ID);
+        namespaces.add("c");
         /// Ensure the tags to be loaded first time into the world, not second time
         if (PlatHelper.isModLoaded("lolmcv")) namespaces.add("lieonstudio");
         return namespaces;

@@ -96,7 +96,8 @@ dependencies {
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("curse.maven:emi-580555:6420930") // v1.1.22
+    modRuntimeOnly("dev.emi:emi-fabric:${emi_version}+${minecraft_version}")
+    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-${minecraft_version}:${crafttweaker_version}")
     modRuntimeOnly("curse.maven:jade-324717:5884237") // v15.8.3
 //    modRuntimeOnly("curse.maven:worldedit-225608:5830452") // required loom 1.7.410
 

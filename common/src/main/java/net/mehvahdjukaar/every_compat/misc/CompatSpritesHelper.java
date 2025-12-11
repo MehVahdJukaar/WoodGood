@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.misc;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -64,6 +65,12 @@ public class CompatSpritesHelper {
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS"stripped_cactus_log_top", res("block/stripped_cactus_top"));
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
+
+        // -------------------- Ars Nouveau
+        if (!PlatHelper.isModLoaded("archwood_good")) {
+            addOptional("ars_nouveau:blue_archwood_log", "_side", "ars_nouveau:block/archwood_log");
+            addOptional("ars_nouveau:blue_archwood_log", "_top", "ars_nouveau:block/archwood_log_top");
+        } // Archwood-Good add archwood_log and 5 colored planks for logs from Ars-Nouveau & Ars-Elemental
 
         // -------------------- Frightful Winter
         // Leaves
