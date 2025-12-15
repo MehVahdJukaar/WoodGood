@@ -17,6 +17,20 @@
 </div>
 
 ### UPDATED: 
+- **Macaw's Furniture** (C): Fixed bookshelf & stripped_bookshelf not providing cnchantment to enchanting_table 
+- **Ars Nouveau** (IT): Changed the texture of blue_archwood_log to use archwood_log textures
+- **Every Compat** (C): 
+  - Fixed the tag with namespace "c:" like `#c:chests` not loaded first time into the world but is loaded second time into the world - [#1143](https://github.com/MehVahdJukaar/WoodGood/issues/1143)
+  - Fixed the tags via `GENERATE_BLOCKTYPE_TAGS` not being loaded first time into the world - Related to [#1119](https://github.com/MehVahdJukaar/WoodGood/issues/1119) and also above, too
+  - Added new config, USE_AN_EXTERNAL_RESOURCE_PACK to allow EC base off the textures using external Resource Pack instead of Mod's
+- **Chipped** (C): Cleanup & removed extra codes that aren't needed
+- **Macaw's Stairs** (C): Updated the drop method for oak_balcony, so the error via latset.log about not finding the oak_balcony's loot_table file won't show up  
+
+---
+
+## v2.11.20
+
+### UPDATED: 
 - **Every Compat** (C): Fixed an crash related to the config, `GENERATE_BLOCKTYPE_TAGS` in `everycomp-common.toml` - [#1135](https://github.com/MehVahdJukaar/WoodGood/issues/1135)
     - ADDITIONAL-INFO: diagonal_fences won't be included in the tags
 
