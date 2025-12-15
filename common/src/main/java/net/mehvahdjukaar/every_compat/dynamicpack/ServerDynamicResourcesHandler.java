@@ -48,6 +48,11 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
     }
 
     @Override
+    public boolean canUseExternalResourcePacks() {
+        return ECConfigs.SPEC != null && ECConfigs.USE_EXTERNAL_RESOURCE_PACK.get();
+    }
+
+    @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
 
         List<ResourceGenTask> tasks = new ArrayList<>();

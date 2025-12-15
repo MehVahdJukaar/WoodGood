@@ -44,6 +44,7 @@ public class ECConfigs {
     public static final Supplier<GenMode> SERVER_GENERATION_MODE;
     public static final Supplier<GenMode> CLIENT_GENERATION_MODE;
     public static final Supplier<Boolean> GENERATE_BLOCKTYPE_TAGS;
+    public static final Supplier<Boolean> USE_EXTERNAL_RESOURCE_PACK;
 
 
     static {
@@ -107,6 +108,13 @@ public class ECConfigs {
                 .define("block_type_enabled", true);
         TOOLTIPS_ADVANCED = builder.comment("Only show on advanced settings")
                 .define("show_on_advanced_tooltips", false);
+
+        USE_EXTERNAL_RESOURCE_PACK = builder.comment("""
+                        Enable Every-Compat to base textures off external Resource Packs rather than mod's default textures.
+                        ATTENTION: There are some Resource Packs that won't work well with Every-Compat, which is why this
+                        option is off by default. Disable if there are missing textures for blocks.
+                        """)
+                .define("use_external_resource_pack", false);
 
         builder.pop();
 
