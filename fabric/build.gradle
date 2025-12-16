@@ -73,13 +73,13 @@ publishing {
     }
 }
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
+    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:$project.cloth_version") {
         exclude group: 'net.fabricmc.fabric-api'
     }
 
@@ -88,7 +88,7 @@ dependencies {
         // modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
     }
 
-    modApi("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}"){
+    modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_version"){
         transitive = false
     }
 
@@ -96,8 +96,8 @@ dependencies {
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("dev.emi:emi-fabric:${emi_version}+${minecraft_version}")
-    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-${minecraft_version}:${crafttweaker_version}")
+    modRuntimeOnly("dev.emi:emi-fabric:$emi_version+$minecraft_version")
+    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-$minecraft_version:$crafttweaker_version")
     modRuntimeOnly("curse.maven:jade-324717:5884237") // v15.8.3
 //    modRuntimeOnly("curse.maven:worldedit-225608:5830452") // required loom 1.7.410
 
@@ -132,7 +132,7 @@ dependencies {
     modCompileOnly("maven.modrinth:frozenlib:1.9-mc1.21.1") // Wilder-Wild
 
         //+ OTHER MAVENS
-    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create, The-Twilight-Forest
+    modCompileOnly("com.tterrag.registrate_fabric:Registrate:$registrate_fabric_version") // Create, The-Twilight-Forest
 
             // Special dumb stuff required by TerraBlender
     modImplementation("com.terraformersmc:modmenu:11.0.3")
