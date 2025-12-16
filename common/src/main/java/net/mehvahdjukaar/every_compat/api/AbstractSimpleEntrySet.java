@@ -255,9 +255,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 false, true, sink);
 
         /// Chests
-        addTagToAllBlocks(blocks, "\\w+_chest",
+        addTagToAllBlocks(blocks, "",
                 "", platformTag("chests/wooden").toString(),
-                true, true, sink);
+                true, true, sink, "\\w+_chest");
 
     }
 
