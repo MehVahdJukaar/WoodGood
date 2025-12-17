@@ -211,7 +211,6 @@ public class QuarkModule extends SimpleModule {
                         w -> new CompatChestBlock(this::getChestTile, Utils.copyPropertySafe(Blocks.CHEST))
                 )
                 .addTile(qChestBlockEntity::new)
-                .addTag(ResourceLocation.parse("c:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("revertable_chests"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -234,8 +233,6 @@ public class QuarkModule extends SimpleModule {
                             return new CompatTrappedChestBlock(this::getTrappedTile, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
                         })
                 .addTile(qTrappedBlockEntity::new)
-                .addTag(ResourceLocation.parse("forge:chests/trapped"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("forge:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("revertable_trapped_chests"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)

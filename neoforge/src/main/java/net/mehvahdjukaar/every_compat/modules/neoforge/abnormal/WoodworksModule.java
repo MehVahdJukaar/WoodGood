@@ -183,7 +183,6 @@ public class WoodworksModule extends SimpleModule {
                         )
                 )
                 .addTile(abwwTrappedBlockEntity::new)
-                .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()

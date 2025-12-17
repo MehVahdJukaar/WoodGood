@@ -134,11 +134,9 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("chests"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("c:chests_wooden"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("c:chests"), Registries.BLOCK, Registries.ITEM)
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
-                .defaultRecipe()
                 .setTabKey(tab)
+                .defaultRecipe()
+                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(chests);
 
@@ -146,16 +144,16 @@ public class VariantVanillaBlocksModule extends SimpleModule {
                         getModBlock("acacia_chiseled_bookshelf"), () -> VanillaWoodTypes.ACACIA,
                         w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
+                .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_empty"))
                 .addTextureM(modRes("block/acacia_chiseled_bookshelf_occupied"), EveryCompat.res("block/vanilla_chiseled_bookshelf_occupied_m"))
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_side"))
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_top"))
-                .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
-                .copyParentDrop()
-                .defaultRecipe()
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
+                .defaultRecipe()
+                .copyParentDrop()
                 .build();
         this.addEntry(chiseledBookshelves);
 
