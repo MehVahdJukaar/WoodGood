@@ -17,6 +17,13 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C): Fixed the `#c:chests/wooden`'s tag generation issue - [#1145](https://github.com/MehVahdJukaar/WoodGood/issues/1145) & also related to [#1143](https://github.com/MehVahdJukaar/WoodGood/issues/1143)
+
+---
+
+## v2.11.21
+
+### UPDATED: 
 - **Macaw's Furniture** (C): Fixed bookshelf & stripped_bookshelf not providing cnchantment to enchanting_table 
 - **Ars Nouveau** (IT): Changed the texture of blue_archwood_log to use archwood_log textures
 - **Every Compat** (C): 
