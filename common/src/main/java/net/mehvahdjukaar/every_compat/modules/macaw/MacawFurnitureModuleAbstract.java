@@ -405,7 +405,8 @@ public abstract class MacawFurnitureModuleAbstract extends SimpleModule {
                         getModBlock("oak_covered_desk"), () -> VanillaWoodTypes.OAK,
                         this::newDesk
                 )
-                //TEXTURES: log
+                .requiresChildren(STRIPPED_LOG)
+                //TEXTURES: log, stripped_log
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
@@ -467,6 +468,7 @@ public abstract class MacawFurnitureModuleAbstract extends SimpleModule {
                         this::newTableHitbox
                 )
                 //TEXTURES: log
+                .requiresFromMap(endTable.blocks) //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
