@@ -32,6 +32,9 @@ public class HardcodedBlockType {
         // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
         if (isWoodFrom("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
 
+        // Chipped's glass & glass_panes has no Vanilla WoodTypes except OAK
+        if (isWoodFrom("chipped", "", "minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)", "\\w+_glass(_pane)?")) return false;
+
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude one WoodType from a Wood Mod
