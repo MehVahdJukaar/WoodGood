@@ -129,9 +129,8 @@ public class SimpleModule extends CompatModule {
                 if (PlatHelper.isDev()) throw ex;
             }
         }));
-        executor.accept((manager, sink) -> {
-            addDynamicServerResources(ServerDynamicResourcesHandler.INSTANCE, manager);
-        });
+        executor.accept((manager, sink) ->
+                addDynamicServerResources(ServerDynamicResourcesHandler.getInstance(), manager));
 
     }
 
