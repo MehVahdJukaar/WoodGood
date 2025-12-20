@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
-import com.google.common.base.Stopwatch;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -23,7 +22,14 @@ import java.util.function.Consumer;
 
 public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
 
-    public static final ServerDynamicResourcesHandler INSTANCE = new ServerDynamicResourcesHandler();
+    private static ServerDynamicResourcesHandler INSTANCE;
+
+    public static ServerDynamicResourcesHandler getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServerDynamicResourcesHandler();
+        }
+        return INSTANCE;
+    }
 
     public ServerDynamicResourcesHandler() {
         super(new DynamicDataPack(EveryCompat.res("generated_pack")));
@@ -31,10 +37,12 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
         /// Ensure the tags to be loaded first time into the world, not second time
         getPack().addNamespaces("minecraft");
         getPack().addNamespaces("forge");
+        getPack().addNamespaces("c");
         getPack().addNamespaces(EveryCompat.MOD_ID);
 
         if (PlatHelper.isModLoaded("lolmcv")) {
             getPack().addNamespaces("lieonstudio");
+            getPack().addNamespaces("quad");
         }
     }
 
@@ -47,7 +55,6 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         if (!ECConfigs.GENERATE_DYNAMIC_SERVER.get()) return;
 
-        Stopwatch stopwatch = Stopwatch.createStarted();
         this.dynamicPack.setGenerateDebugResources(PlatHelper.isDev() || ECConfigs.DEBUG_RESOURCES.get());
 
         List<ResourceGenTask> tasks = new ArrayList<>();

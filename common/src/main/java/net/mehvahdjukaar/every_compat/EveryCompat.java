@@ -67,7 +67,8 @@ public abstract class EveryCompat {
             try {
                 action.accept(m);
             } catch (Throwable e) {
-                EveryCompat.LOGGER.error("Module for the supported mod contains errors. This could mean that the mod has been recently updated & Every Compat needs updating (try downgrading the mod) or that you are using an older version. MAIN CAUSE: {} - {}", m.getModName(), e);
+                String modName = m != null ? m.getModName() : "NULL";
+                EveryCompat.LOGGER.error("Module for the supported mod contains errors. This could mean that the mod has been recently updated & Every Compat needs updating (try downgrading the mod) or that you are using an older version. MAIN CAUSE: {} - {}", modName, e);
                 if (canShowErrorScreen) {
                     //if before first screen we can display an error screen
                     ERRORED.put(m, e);
@@ -122,7 +123,7 @@ public abstract class EveryCompat {
         DEPENDENCIES.add(module.getModId());
         DEPENDENCIES.addAll(module.getAlreadySupportedMods());
 
-        ServerDynamicResourcesHandler.INSTANCE.getPack()
+        ServerDynamicResourcesHandler.getInstance().getPack()
                 .addNamespaces(module.getServerResourcesNamespaces());
         if (PlatHelper.getPhysicalSide().isClient()) {
             ClientDynamicResourcesHandler.getInstance().getPack()
@@ -163,7 +164,7 @@ public abstract class EveryCompat {
         ECNetworking.init();
         ECRegistry.init();
 
-        ServerDynamicResourcesHandler.INSTANCE.register();
+        ServerDynamicResourcesHandler.getInstance().register();
         RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
         PlatHelper.addCommonSetup(EveryCompat::setup);
 
@@ -233,6 +234,17 @@ public abstract class EveryCompat {
         forAllModules(CompatModule::onModSetup);
         canShowErrorScreen = true;
 
+        //add all namespaces. hack since the pack needs to know about those before hand if we generate the tags
+        if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
+            Set<String> modIdsThatHaveBlockSets = new HashSet<>();
+            for (var typeRegistry : BlockSetAPI.getRegistries()) {
+                for (BlockType blockType : typeRegistry.getValues()) {
+                    modIdsThatHaveBlockSets.add(blockType.getNamespace());
+                }
+            }
+            ServerDynamicResourcesHandler.getInstance().getPack()
+                    .addNamespaces(modIdsThatHaveBlockSets.toArray(String[]::new));
+        }
     }
 
     private static int prevRegSize = 0;
@@ -283,11 +295,10 @@ public abstract class EveryCompat {
             Map<ResourceKey<CreativeModeTab>, Map<BlockType, List<Item>>> typeToEntrySet = new LinkedHashMap<>();
             for (var r : BlockSetAPI.getRegistries()) {
                 for (var type : r.getValues()) {
-                    forAllModules(m -> {
-                        typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>())
-                                .computeIfAbsent(type, j -> new ArrayList<>())
-                                .addAll(m.getAllItemsOfType(type));
-                    });
+                    forAllModules(m ->
+                            typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>())
+                            .computeIfAbsent(type, j -> new ArrayList<>())
+                            .addAll(m.getAllItemsOfType(type)));
                 }
             }
             for (var e : typeToEntrySet.entrySet()) {
