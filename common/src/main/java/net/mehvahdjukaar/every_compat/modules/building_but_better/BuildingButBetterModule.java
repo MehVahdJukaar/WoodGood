@@ -69,7 +69,8 @@ public class BuildingButBetterModule extends SimpleModule {
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis(STRIPPED_LOG))))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
-                //TEXTURES: beam/oak, beam/oak_top (@balustrade)
+                .addTexture(modRes("block/beam/oak"), PaletteStrategies.PLANKS_LOW_CONTRAST)
+                .addTexture(modRes("block/beam/oak_top"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
