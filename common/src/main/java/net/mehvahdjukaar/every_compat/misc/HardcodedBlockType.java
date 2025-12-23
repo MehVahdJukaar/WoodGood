@@ -129,7 +129,7 @@ public class HardcodedBlockType {
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
 
         // Exclude all of Vanilla Types
-        if (leavesType.isVanilla()) return true;
+        if (isKnownVanillaLeaves(leavesType)) return true;
 
         // Traversable-Leaves' leaves is a testing item and should be excluded
         if (isLeavesFrom("", "", "traversable_leaves:dev_leaves", "")) return true;
@@ -229,8 +229,20 @@ public class HardcodedBlockType {
         return false;
     }
 
+    public static boolean isKnownVanillaLeaves(LeavesType leavesType){
+        var id = leavesType.getId();
+        if (id.getNamespace().equals("minecraft")) {
+            return VANILLA_LEAVES.contains(id.getPath());
+        }
+        return false;
+    }
+
     private static final Set<String> VANILLA_WOODS = Set.of(
             "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped"
+    );
+
+    private static final Set<String> VANILLA_LEAVES = Set.of(
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped", "azalea", "flowering_azalea"
     );
 
 }
