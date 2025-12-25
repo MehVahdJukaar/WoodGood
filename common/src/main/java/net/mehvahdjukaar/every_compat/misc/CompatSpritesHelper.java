@@ -71,7 +71,7 @@ public class CompatSpritesHelper {
 
         // -------------------- Frightful Winter
         // Leaves
-        addOptional("frightful_winter:snowy_pine_leaves", "_leaves", "frightful_winter:block/snowy_pine_leaves");
+        addOptional("frightful_winter", "snowy_pine_leaves", "_leaves", "block/snowy_pine_leaves");
 
         // -------------------- Macaw's Holiday
         addOptional("mcwholidays:snowy_oak_leaves", "_leaves", "mcwholidays:block/snowy_oak_leaves");
