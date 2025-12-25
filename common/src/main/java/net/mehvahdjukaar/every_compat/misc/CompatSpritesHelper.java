@@ -67,6 +67,10 @@ public class CompatSpritesHelper {
 
         // -------------------- Frightful Winter
         // Leaves
+        addOptional("natures_spirit", "joshua_leaves", "_leaves", "block/joshua_leaves"); // Was using joshua_ends.png
+
+        // -------------------- Frightful Winter
+        // Leaves
         addOptional("frightful_winter:snowy_pine_leaves", "_leaves", "frightful_winter:block/snowy_pine_leaves");
 
         // -------------------- Macaw's Holiday
@@ -478,6 +482,11 @@ public class CompatSpritesHelper {
     private static void addOptional(String blockId, String textureId, String texturePath) {
         BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(blockId))
                 .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
+    }
+
+    private static void addOptional(String modId, String blockPath, String textureId, String texturePath) {
+        BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(modId + ":" + blockPath))
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(modId + ":" + texturePath)));
     }
 
     // ┌──────────────────────────────────────────────────────────┐
