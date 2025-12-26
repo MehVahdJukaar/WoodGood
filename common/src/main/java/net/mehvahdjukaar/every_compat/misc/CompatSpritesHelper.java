@@ -72,6 +72,10 @@ public class CompatSpritesHelper {
             addOptional("ars_nouveau:blue_archwood_log", "_top", "ars_nouveau:block/archwood_log_top");
         } // Archwood-Good add archwood_log and 5 colored planks for logs from Ars-Nouveau & Ars-Elemental
 
+        // -------------------- Nature's Spirit
+        // Leaves
+        addOptional("natures_spirit", "joshua_leaves", "_leaves", "block/joshua_leaves"); // Was using joshua_ends.png
+
         // -------------------- Frightful Winter
         // Leaves
         addOptional("frightful_winter:snowy_pine_leaves", "_leaves", "frightful_winter:block/snowy_pine_leaves");
@@ -482,9 +486,14 @@ public class CompatSpritesHelper {
 
     }
 
-    private static void addOptional(String blockId, String textureId, String textureLocation) {
+    private static void addOptional(String blockId, String textureId, String texturePath) {
         BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(textureLocation)));
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(texturePath)));
+    }
+
+    private static void addOptional(String modId, String blockPath, String textureId, String texturePath) {
+        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(modId + ":" + blockPath))
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(modId + ":" + texturePath)));
     }
 
     // ┌──────────────────────────────────────────────────────────┐
