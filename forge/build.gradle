@@ -168,7 +168,7 @@ dependencies {
     modCompileOnly("curse.maven:blueprint-382216:5292242") // v7.10 | The-Outer-End, +Woodworks, Boatload, Sully Mod
     modCompileOnly("curse.maven:valhelsia-core-416935:5189548") // v1.1.2 | Valhelsia Structure, Valhelsia Furniture
     modCompileOnly("curse.maven:framework-549225:5911986") // v0.7.12 | Refurbished Furniture, +Mighty-Mail, Backpacked
-    modCompileOnly("curse.maven:quad-932715:5340148") // More Chest Variants, More Crafting Table
+    modCompileOnly("curse.maven:quad-932715:5900857") // v1.2.9 | More Chest Variants, More Crafting Table
     modCompileOnly("curse.maven:titanium-287342:5468426") // v3.8.32 | Functional-Storage
     modCompileOnly("curse.maven:zeta-968868:6432578") // v1.0-30 | Quark
 
@@ -272,7 +272,7 @@ dependencies {
             // OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:building-but-better:1.20.1-1.1.1") // MidnightLib
     modCompileOnly("curse.maven:building-but-better-989479:6803575") // MidnightLib, Architectury-API
-    modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false } // Registrate, Flywheel, Ponder
+    modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_version:slim") { transitive = false } // Registrate, Flywheel, Ponder
 
     //- ======================================= DISABLED FOR A REASON =============================================== \\
 //    modCompileOnly("curse.maven:alekiships-1068445:5963449") //!! NOT STARTED
@@ -297,6 +297,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore, ProductiveLib
     modRuntimeOnly("curse.maven:alexs-caves-924854:5848216") // Citadel
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784269") // Architectury-API
+//    modRuntimeOnly("curse.maven:natures-spirit-1044992:6962783") // tinted-textures
 //    modRuntimeOnly("curse.maven:rats-323596:5904296")
 //    modRuntimeOnly("curse.maven:mo-shiz-mod-62536:5587177")
 //    modRuntimeOnly("curse.maven:aether-255308:5889509") // Curios

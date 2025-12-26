@@ -85,16 +85,16 @@ publishing {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}")))
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:$mixin_extras_version")))
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
-    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}") {
+    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:$cloth_version") {
         exclude group: 'net.fabricmc.fabric-api'
     }
 
@@ -110,11 +110,11 @@ dependencies {
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-${moonlight_testVersion}-forge.jar"))
+        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-$moonlight_testVersion-forge.jar"))
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-fabric:${moonlight_mavenVersion}"){
+        modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_mavenVersion"){
             transitive = false
         }
     }
@@ -126,16 +126,16 @@ dependencies {
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("dev.emi:emi-fabric:${emi_version}+${minecraft_version}")
-    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-${minecraft_version}:${crafttweaker_version}")
+    modRuntimeOnly("dev.emi:emi-fabric:$emi_version+$minecraft_version")
+    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-$minecraft_version:$crafttweaker_version")
 //    modRuntimeOnly("curse.maven:jade-324717:5666690")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
-    modRuntimeOnly("com.github.glitchfiend:TerraBlender-fabric:${minecraft_version}-${terrablender_version}") // Biomes-O'-Plenty, Regions-Unexplored
-    modRuntimeOnly("com.github.glitchfiend:GlitchCore-fabric:${minecraft_version}-${glitchcore_version}") // Biomes-O'-Plenty
+    modRuntimeOnly("com.github.glitchfiend:TerraBlender-fabric:$minecraft_version-$terrablender_version") // Biomes-O'-Plenty, Regions-Unexplored
+    modRuntimeOnly("com.github.glitchfiend:GlitchCore-fabric:$minecraft_version-$glitchcore_version") // Biomes-O'-Plenty
 
-//    modRuntimeOnly("curse.maven:glitchcore-955399:5787838") // v0.0.1.1 | BOP
+//    modRuntimeOnly("curse.maven:ctm-267602:5983309") // Chipped
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | REI
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | REI, Garden-Of-The-Dead
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
@@ -148,8 +148,8 @@ dependencies {
 //    modRuntimeOnly("com.terraformersmc.terraform-api:terraform-shapes-api-v1:7.0.3") // Blockus
 //    modRuntimeOnly("com.terraformersmc:biolith:1.0.0-alpha.8") // Blockus
 //    modRuntimeOnly("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:8.0.2") // Regions-Unexplored, Chipped, Excessive-Building, Create
-//    modRuntimeOnly("dev.engine-room.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
-//    modRuntimeOnly("net.createmod.ponder:Ponder-Fabric-${minecraft_version}:${ponder_fabric_version}") // Create
+//    modRuntimeOnly("dev.engine-room.flywheel:flywheel-fabric-$minecraft_version:$flywheel_fabric_version") // Create
+//    modRuntimeOnly("net.createmod.ponder:Ponder-Fabric-$minecraft_version:$ponder_fabric_version") // Create
 //    modRuntimeOnly("io.github.tropheusj:milk-lib:1.3.61") // Create
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN fABRIC
@@ -159,7 +159,7 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
 
         //+ OTHER MAVENS
-    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}") // Create
+    modCompileOnly("com.tterrag.registrate_fabric:Registrate:$registrate_fabric_version") // Create
 
             // Special dumb stuff required by TerraBlender
     modImplementation("com.terraformersmc:modmenu:7.2.2")
@@ -198,6 +198,7 @@ dependencies {
 
         //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68")
+//    modRuntimeOnly("earth.terrarium.chipped:chipped-fabric-$minecraft_version:3.0.7") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: Forge-Config-Api-Port, ConnectedTexturesMod (CTM)
 
         //- ~/fabric/mods LOCAL
 //    modRuntimeOnly("com.arcanc.bc:beautifulcampfires-fabric-1.20.1-1.0.0")
@@ -239,7 +240,7 @@ dependencies {
 
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:wilder-wild:3.0.7-mc1.20.1") // FrozenLib
-    modCompileOnly("com.simibubi.create:create-fabric:${create_fabric_version}") { transitive = false }  // Registrate, Flywheel, Ponder, Forge-Config-Api-Port, Milk-Lib
+    modCompileOnly("com.simibubi.create:create-fabric:$create_fabric_version") { transitive = false }  // Registrate, Flywheel, Ponder, Forge-Config-Api-Port, Milk-Lib
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 
@@ -249,5 +250,6 @@ dependencies {
 
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
     modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6028853")
+//    modRuntimeOnly("curse.maven:natures-spirit-1044992:6962787")
 
 }
