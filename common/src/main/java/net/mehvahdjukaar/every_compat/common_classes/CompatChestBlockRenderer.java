@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.common_classes;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -29,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,11 +41,20 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
     private final Map<WoodType, Material> trapped = new HashMap<>();
     private final Map<WoodType, Material> trapped_left = new HashMap<>();
     private final Map<WoodType, Material> trapped_right = new HashMap<>();
+    public boolean isChristmas;
+    public String shortenedId;
 
     //assumes standard naming here. Generalize if needed
     public CompatChestBlockRenderer(BlockEntityRendererProvider.Context context, String shortenedId) {
         super(context);
-        for (WoodType w : WoodTypeRegistry.getTypes()) {
+
+        Calendar calendar = Calendar.getInstance();
+        if (calendar.get(2) + 1 == 12 && calendar.get(5) >= 24 && calendar.get(5) <= 26) {
+            this.isChristmas = true;
+            this.shortenedId = shortenedId;
+        }
+
+        for (WoodType w : WoodTypeRegistry.INSTANCE) {
             if (HardcodedBlockType.isKnownVanillaWood(w)) continue; // minecraft:pale_oak is from Perfect Parity: The Garden Awakens Edition
             String path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_chest";
             String trapped_path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_trapped_chest";
@@ -68,11 +77,19 @@ public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEnti
                 default -> trapped.get(w);
             };
         } else {
-            return switch (chestType) {
-                case LEFT -> left.get(w);
-                case RIGHT -> right.get(w);
-                default -> single.get(w);
-            };
+            if (isChristmas && shortenedId.equals("abnww")) {
+                return switch (chestType) {
+                    case LEFT -> Sheets.CHEST_XMAS_LOCATION_LEFT;
+                    case RIGHT -> Sheets.CHEST_XMAS_LOCATION_RIGHT;
+                    default -> Sheets.CHEST_XMAS_LOCATION;
+                };
+            } else {
+                return switch (chestType) {
+                    case LEFT -> left.get(w);
+                    case RIGHT -> right.get(w);
+                    default -> single.get(w);
+                };
+            }
         }
     }
 
