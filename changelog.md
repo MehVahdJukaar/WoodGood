@@ -16,16 +16,32 @@
 
 </div>
 
+Merry Christmas! - Xel'Bayria
+
 ### UPDATED: 
-- **Macaw's Furniture** (C): Corrected the LANG for `kitchen_sink` & `stripped_kitchen_sink`
-- **Every Compat** (C): Added a new config, NO_MOD_CREATIVE_TAB in `everycomp-common.toml` - [#1113](https://github.com/MehVahdJukaar/WoodGood/issues/1113)
-  - NOTE: what it does is not adding items to Mod's own tab in Creative Mode if NO_MOD_CREATIVE_TAB is set to `true`
+- **Every Compat** (C): Added a new config, GENERATE_BLOCKTYPE_TAGS in `everycomp-common.toml`
+    - NOTE: what it does is Generate a tag containing every blocktype with its children. It's Useful for datapack makers and Iris since 1.8 that can use tags for shaders
+    - it's on by default
+    - Added a Christmas texture to All of Woodworks' chests from Dec 24th to 26th - [#1150](https://github.com/MehVahdJukaar/WoodGood/issues/1150)
+- **LANG** (ja_jp): 
+  - Implemented the latest en_us's update, organized the content, & Corrected incorrect translation for handcrafted.pillar_trim - @HayaKoh-WeldyAlin & [PR#1134](https://github.com/MehVahdJukaar/WoodGood/pull/1134)
+  - Added support for Chipped -  @HayaKoh-WeldyAlin - [PR#1138](https://github.com/MehVahdJukaar/WoodGood/issues/1138)
+- **Quark** (F): Fixed the missing hedge for **Oh The Biomes We've Gone**'s palo_verde 
+- **Building But Better 2.0pre3** (C): Fixed the missing textures for other blocks when `bbb:balustrade` is blacklisted - [#1144](https://github.com/MehVahdJukaar/WoodGood/issues/1144)
+- **Macaw's Furniture** (C): Updated glass_table (require end_table) & covered_desk (require stripped_log) - [#1142](https://github.com/MehVahdJukaar/WoodGood/issues/1142)
+  - NOTE: **Moonlight lib v2.16.17** - Added `powdery`'s missing stripped_log from **My Nether's Delight**
+- **Chipped** (INCLUDED): 
+  - Vanilla WoodTypes except OAK - [#1136](https://github.com/MehVahdJukaar/WoodGood/issues/1136)
+  - Supported 11 new Blocks for LeavesType
 
 ---
 
 ## v2.9.12
 
 ### UPDATED: 
+- **Macaw's Furniture** (C): Corrected the LANG for `kitchen_sink` & `stripped_kitchen_sink`
+- **Every Compat** (C): Added a new config, NO_MOD_CREATIVE_TAB in `everycomp-common.toml` - [#1113](https://github.com/MehVahdJukaar/WoodGood/issues/1113)
+  - NOTE: what it does is not adding items to Mod's own tab in Creative Mode if NO_MOD_CREATIVE_TAB is set to `true`
 - **Macaw's Furniture** (C): Added `oak_kitchen_sink`
 - **Quark** (C): Fixed the missing recipe, `vertical_slab_revert` as it was a recipe generation failure that somehow caused missing slab's recipe - [#1110](https://github.com/MehVahdJukaar/WoodGood/issues/1110)
   - Possibly related issue: [#1103](https://github.com/MehVahdJukaar/WoodGood/issues/1103) - missing recipes from logs to planks
