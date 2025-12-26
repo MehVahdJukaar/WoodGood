@@ -17,6 +17,20 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C): Added a Christmas texture to All of Woodworks' chests from Dec 24th to 26th - [#1150](https://github.com/MehVahdJukaar/WoodGood/issues/1150) 
+- **Chipped** (INCLUDED):
+    - Vanilla WoodTypes except OAK - [#1136](https://github.com/MehVahdJukaar/WoodGood/issues/1136)
+    - Supported 11 new Blocks for LeavesType
+- **Quark** (NF): Fixed the missing hedge for **Oh The Biomes We've Gone**'s palo_verde
+
+### ADDED:
+- **Nature's Spirit** (IT): joshua_leaves' correct ResourceLocation
+
+---
+
+## v2.11.22
+
+### UPDATED: 
 - **Every Compat** (C): Fixed the `#c:chests/wooden`'s tag generation issue - [#1145](https://github.com/MehVahdJukaar/WoodGood/issues/1145) & also related to [#1143](https://github.com/MehVahdJukaar/WoodGood/issues/1143)
 
 ---
