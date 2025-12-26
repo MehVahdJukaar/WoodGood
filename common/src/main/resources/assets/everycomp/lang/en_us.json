@@ -285,6 +285,18 @@
   "block_type.chipped.stern_stripped_log": "Stern Stripped %s Log",
   "block_type.chipped.wise_stripped_log": "Wise Stripped %s Log",
 
+  "block_type.chipped.apple_leaves": "Apple %s Leaves",
+  "block_type.chipped.cherry_leaves": "Cherry %s Leaves",
+  "block_type.chipped.frosted_leaves": "Frosted %s Leaves",
+  "block_type.chipped.golden_apple_leaves": "Golden Apple %s Leaves",
+  "block_type.chipped.golden_cherry_leaves": "Golden Cherry %s Leaves",
+  "block_type.chipped.magenta_flower_leaves": "Magenta Flower %s Leaves",
+  "block_type.chipped.white_flower_leaves": "White Flower %s Leaves",
+  "block_type.chipped.dead_leaves": "Dead %s Leaves",
+  "block_type.chipped.golden_leaves": "Golden %s Leaves",
+  "block_type.chipped.orange_leaves": "Orange %s Leaves",
+  "block_type.chipped.red_leaves": "Red %s Leaves",
+
 
   "block_type.graveyard.coffin": "%s Coffin",
 

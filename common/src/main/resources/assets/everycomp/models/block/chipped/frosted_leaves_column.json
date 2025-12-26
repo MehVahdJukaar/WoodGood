@@ -1,0 +1,13 @@
+{
+  "parent": "everycomp:block/chipped/frosted_leaves_cube",
+  "textures": {
+    "particle": "#side",
+    "up": "#end",
+    "down": "#side",
+    "north": "#side",
+    "east": "#side",
+    "south": "#side",
+    "west": "#side",
+    "overlay": "#overlay"
+  }
+}

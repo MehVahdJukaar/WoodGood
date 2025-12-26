@@ -131,6 +131,9 @@ public class HardcodedBlockType {
         // Exclude all of Vanilla Types
         if (isKnownVanillaLeaves(leavesType)) return true;
 
+        // Chipped's LeavesType and its supported Block shouldn't be generated
+        if (isLeavesFrom("chipped", "chipped", "", "")) return true;
+
         // Traversable-Leaves' leaves is a testing item and should be excluded
         if (isLeavesFrom("", "", "traversable_leaves:dev_leaves", "")) return true;
 
