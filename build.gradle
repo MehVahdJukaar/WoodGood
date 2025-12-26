@@ -461,14 +461,15 @@ ext {
 
 
 tasks.register('buildAndPublishAll') {
-    dependsOn ':clean'
-    dependsOn ':build'
+    group 'build'
+    description 'Runs clean, build, and publish neoforge and fabric'
+
+    dependsOn ';clean'
+    dependsOn ';build'
     dependsOn ':neoforge:curseforge'
     dependsOn ':neoforge:modrinth'
     dependsOn ':fabric:curseforge'
     dependsOn ':fabric:modrinth'
     dependsOn ':publish'
 
-    group 'build'
-    description 'Runs clean, build, and publish forge and fabric'
 }
