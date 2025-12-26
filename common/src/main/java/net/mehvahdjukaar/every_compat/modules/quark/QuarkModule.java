@@ -249,7 +249,7 @@ public class QuarkModule extends SimpleModule {
                         () -> VanillaLeavesTypes.OAK,
                         leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
                 )
-                .addCondition(l -> l.getAssociatedWoodType() != null) // Reason: RECIPES
+                .addCondition(l-> l.getBlockOfThis(LOG) != null) // Reason: RECIPES. Yes leaves have log too.
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -259,6 +259,7 @@ public class QuarkModule extends SimpleModule {
                 .copyParentTint()
                 //RECIPES: Manually created below blc the recipe has a tag as an ingredient
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .copyParentTint()
                 .build();
         this.addEntry(hedges);
 
@@ -272,6 +273,7 @@ public class QuarkModule extends SimpleModule {
                             String name = shortenedId() + "/" + leavesType.getVariantId("%s_leaf_carpet");
                             return new LeafCarpetBlock(name, leavesType.leaves, null);
                         })
+                //RECIPES: leaves
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
