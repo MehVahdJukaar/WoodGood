@@ -471,5 +471,34 @@ tasks.register('buildAndPublishAll') {
     dependsOn ':fabric:curseforge'
     dependsOn ':fabric:modrinth'
     dependsOn ':publish'
+}
 
+tasks.register('cleanLogs', Delete) {
+    group "build"
+    description "Delete logs"
+
+    // Logs
+    delete fileTree(dir: "$rootDir/neoforge/run/logs", include: "**/*.gz")
+    delete fileTree(dir: "$rootDir/fabric/run/logs", include: "**/*.gz")
+}
+
+tasks.register('cleanFolders', Delete) {
+    group "build"
+    description "Clean logs & Delete folders of Debug, Dynamic Pack"
+
+    // Logs
+    delete fileTree(dir: "$rootDir/neoforge/run/logs", include: "**/*.gz")
+    delete fileTree(dir: "$rootDir/fabric/run/logs", include: "**/*.gz")
+
+    // Debug
+    delete "$rootDir/neoforge/run/debug"
+    delete "$rootDir/fabric/run/debug"
+
+    // Dynamic Data Pack Cache
+    delete "$rootDir/neoforge/run/dynamic-data-pack-cache"
+    delete "$rootDir/fabric/run/dynamic-data-pack-cache"
+
+    // Dynamic Resource Pack Cache
+    delete "$rootDir/neoforge/run/dynamic-resource-pack-cache"
+    delete "$rootDir/fabric/run/dynamic-resource-pack-cache"
 }
