@@ -68,6 +68,7 @@ allprojects {
         maven { url = "https://maven.firstdarkdev.xyz/snapshots" }
         maven { name = "TerraformersMC"; url = "https://maven.terraformersmc.com/" }
         maven { url = "https://raw.githubusercontent.com/moddingplayground/maven/main/" }
+        maven { name = "Xander Maven"; url = "https://maven.isxander.dev/releases" } // Yet-Another-Config-Lib
 
 
         maven { // Reach Entity Attributes
