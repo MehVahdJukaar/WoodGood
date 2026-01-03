@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -27,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
-import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.simpleAddBlocksToPOI;
 
 //SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
 public class VariantVanillaBlocksModule extends SimpleModule {
@@ -292,15 +292,18 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     @Override
     public void onModInit() {
         super.onModInit();
-        simpleAddBlocksToPOI(beehive, PoiTypes.BEEHIVE);
-        simpleAddBlocksToPOI(barrel, PoiTypes.FISHERMAN);
-        simpleAddBlocksToPOI(cartography, PoiTypes.CARTOGRAPHER);
-        simpleAddBlocksToPOI(composters, PoiTypes.FARMER);
-        simpleAddBlocksToPOI(fletchingTable, PoiTypes.FLETCHER);
-        simpleAddBlocksToPOI(grindstones, PoiTypes.WEAPONSMITH);
-        simpleAddBlocksToPOI(lectern, PoiTypes.LIBRARIAN);
-        simpleAddBlocksToPOI(smithingTable, PoiTypes.TOOLSMITH);
-        simpleAddBlocksToPOI(smoker, PoiTypes.BUTCHER);
+        RegHelper.addExtraPOIStatesRegistration(event -> {
+                    beehive.blocks.values().forEach(block -> event.addBlock(PoiTypes.BEEHIVE, block));
+                    barrel.blocks.values().forEach(block -> event.addBlock(PoiTypes.FISHERMAN, block));
+                    cartography.blocks.values().forEach(block -> event.addBlock(PoiTypes.CARTOGRAPHER, block));
+                    composters.blocks.values().forEach(block -> event.addBlock(PoiTypes.FARMER, block));
+                    fletchingTable.blocks.values().forEach(block -> event.addBlock(PoiTypes.FLETCHER, block));
+                    grindstones.blocks.values().forEach(block -> event.addBlock(PoiTypes.WEAPONSMITH, block));
+                    lectern.blocks.values().forEach(block -> event.addBlock(PoiTypes.LIBRARIAN, block));
+                    smithingTable.blocks.values().forEach(block -> event.addBlock(PoiTypes.TOOLSMITH, block));
+                    smoker.blocks.values().forEach(block -> event.addBlock(PoiTypes.BUTCHER, block));
+                }
+        );
     }
 
     // REGISTRY --------------------------------------------------------------------------------------------------------

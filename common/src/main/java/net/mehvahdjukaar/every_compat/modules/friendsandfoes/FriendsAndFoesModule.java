@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -15,9 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.simpleAddBlocksToPOI;
-
-//SUPPORT: v3.0.9+
+//SUPPORT: v4.0.0+
 public class FriendsAndFoesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> beehives;
@@ -47,7 +46,9 @@ public class FriendsAndFoesModule extends SimpleModule {
     @Override
     public void onModInit() {
         super.onModInit();
-        simpleAddBlocksToPOI(beehives, PoiTypes.BEEHIVE);
+        RegHelper.addExtraPOIStatesRegistration(event ->
+                beehives.blocks.values().forEach(block -> event.addBlock(PoiTypes.BEEHIVE, block))
+        );
     }
 
 }
