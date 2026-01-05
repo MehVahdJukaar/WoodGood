@@ -16,6 +16,14 @@
 
 </div>
 
+### UPDATED: 
+- **Every Compat** (C): Improved the logic for Item Tags & Fixed an error log in latest.log with **F-ing Loading My Tags** - [#1155](https://github.com/MehVahdJukaar/WoodGood/issues/1155) 
+- **Mosaic Carpentry** (F): Updated to support v1.3+
+
+---
+
+## v2.9.13
+
 Merry Christmas! - Xel'Bayria
 
 ### UPDATED: 
