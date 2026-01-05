@@ -234,7 +234,7 @@ dependencies {
     modCompileOnly("curse.maven:lightmans-currency-472521:6994457")
     modCompileOnly("curse.maven:mighty-mail-902986:4750272")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:4786212")
-    modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
+    modCompileOnly("curse.maven:mosaic-carpentry-690226:7325187")
     modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4602980")
     modCompileOnly("curse.maven:nosiphus-furniture-mod-593876:6169762") // MrCrayFish's-Furniture-Mod-(LEGACY)
     modCompileOnly("curse.maven:oreberries-replanted-454062:5138729")

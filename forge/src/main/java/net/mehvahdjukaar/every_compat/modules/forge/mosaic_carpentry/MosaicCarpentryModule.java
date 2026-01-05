@@ -1,20 +1,19 @@
 package net.mehvahdjukaar.every_compat.modules.forge.mosaic_carpentry;
 
-import caittastic.mosaiccarpentry.MosaicCarpentry;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 
-
+//SUPPORT: v1.3+
 public class MosaicCarpentryModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> mosaics;
@@ -23,7 +22,7 @@ public class MosaicCarpentryModule extends SimpleModule {
 
     public MosaicCarpentryModule(String modId) {
         super(modId, "mc");
-        CreativeModeTab tab = MosaicCarpentry.MOSAIC_CARPENTRY_TAB;
+        ResourceLocation tab = modRes("card_tab");
 
 
         mosaics = SimpleEntrySet.builder(WoodType.class, "mosaic",
@@ -33,7 +32,7 @@ public class MosaicCarpentryModule extends SimpleModule {
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTexture(modRes("block/spruce_mosaic"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
 
@@ -46,7 +45,7 @@ public class MosaicCarpentryModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_STAIRS, Registries.ITEM)
                 .addTexture(modRes("block/spruce_mosaic"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
 
@@ -59,7 +58,7 @@ public class MosaicCarpentryModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_SLABS, Registries.ITEM)
                 .addTexture(modRes("block/spruce_mosaic"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
 
