@@ -39,7 +39,7 @@
 |                            |        | Unusual End                                |   🟡   | Unusual Furniture                      |   🟩   |
 |                            |        | Valhelsia Furniture                        |   🟩   | Valhelsia Structure                    |   🟩   |
 |                            |        | Variant Vanilla Blocks (XanthianZ)         |   🟩   | Variant Crafting Tables (Kitteh6660)   |   🟩   |
-|                            |        |                                            |        | Villagers Plus (FORGE)                 |   🟩   |
+|                            |        | Shuttter Up!                               |   🟡   | Villagers Plus (FORGE)                 |   🟩   |
 |                            |        |                                            |        | Woodster                               |   🟩   |
 |                            |        |                                            |        | Workshop For Handsome Adventure        |   🟩   |
 |                            |        |                                            |        | Xerca Mod                              |   🟩   |
