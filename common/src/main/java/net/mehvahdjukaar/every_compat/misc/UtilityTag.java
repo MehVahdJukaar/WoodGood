@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
+@SuppressWarnings("UnusedReturnValue")
 public class UtilityTag {
 
     /**
@@ -125,15 +126,17 @@ public class UtilityTag {
      */
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
             Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId,
-            String tagResLoc, boolean includeBlock, boolean includeItem, ResourceSink sink,
+            String tagResLoc, boolean addToBlockTag, boolean addToItemTag, ResourceSink sink,
             @Nullable String regexBlockId
     ) {
         if (PlatHelper.isModLoaded(fromModId) || fromModId.isEmpty()) {
 
             if (!tagResLoc.contains(":")) tagResLoc = fromModId + ":" + tagResLoc;
 
-            boolean isTagCreated = false;
-            SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(new ResourceLocation(tagResLoc));
+            boolean isBlockTagCreated = false;
+            boolean isItemTagCreated = false;
+            SimpleTagBuilder blocktagBuilder = SimpleTagBuilder.of(new ResourceLocation(tagResLoc));
+            SimpleTagBuilder itemtagBuilder = SimpleTagBuilder.of(new ResourceLocation(tagResLoc));
             for (Map.Entry<T, B> entry : blocks.entrySet()) {
                 T blockType = entry.getKey();
                 B block = entry.getValue();
@@ -143,14 +146,23 @@ public class UtilityTag {
 
                 if ((blockType.getId().toString().matches(fromModId +":"+ nameBlockTypeOrRegEx) || fromModId.isEmpty())
                         && (regexBlockId == null || blockId.matches(regexBlockId))) {
-                    tagBuilder.addEntry(block);
-                    isTagCreated = true;
+                    // Block Tag
+                    if (addToBlockTag) {
+                        blocktagBuilder.addEntry(block);
+                        isBlockTagCreated = true;
+                    }
+
+                    // Item Tag
+                    if (addToItemTag && block.asItem() instanceof Item) {
+                        itemtagBuilder.addEntry(block.asItem());
+                        isItemTagCreated = true;
+                    }
                 }
             }
-            if (isTagCreated) {
-                if (includeBlock) sink.addTag(tagBuilder, Registries.BLOCK);
-                if (includeItem) sink.addTag(tagBuilder, Registries.ITEM);
-            }
+
+            if (addToBlockTag && isBlockTagCreated) sink.addTag(blocktagBuilder, Registries.BLOCK);
+            if (addToItemTag && isItemTagCreated) sink.addTag(itemtagBuilder, Registries.ITEM);
+
         }
     }
 
