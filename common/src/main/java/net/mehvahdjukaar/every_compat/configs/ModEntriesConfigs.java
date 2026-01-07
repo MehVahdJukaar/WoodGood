@@ -83,12 +83,22 @@ public class ModEntriesConfigs {
 
     public static <T extends BlockType> boolean isTypeEnabled(T w, @Nullable String childType) {
         if (!wasInit) initEarlyButNotSuperEarly();
-        try {
-            if (childType != null && !CHILD_CONFIGS.get(w.getClass()).getOrDefault(childType, () -> true).get())
-                return false;
-            return BLOCK_TYPE_CONFIGS.get(w.getClass()).get(w.getId().toString()).get();
-        } catch (Exception ignored) {
+        Class<T> woodClass = w.getClass();
+        Map<K, V> childConfigs = CHILD_CONFIGS.get(woodClass);
+        if (childConfigs == null) {
+            EveryCompat.LOGGER.warn("No config map found for block type: " + woodClass.getName());
+            return true;
         }
+        if (childType != null && !kvMap.getOrDefault(childType, () -> true).get()) {
+            return false;
+        }
+        var blockConfigs = BLOCK_TYPE_CONFIGS.get(woodClass);
+        if (blockConfigs == null) {
+            EveryCompat.LOGGER.warn("No config map found for block type: " + woodClass.getName());
+            return true;
+        }
+        return blockConfigs.get(w.getId().toString()).get();
+
         return true;
     }
 
