@@ -392,9 +392,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        /**
-         * As opposed to just dropping itself
-         */
+        /// As opposed to just dropping itself
         public Builder<T, B> copyParentDrop() {
             this.lootMode = LootTableMode.COPY_FROM_PARENT;
             return this;

@@ -7,7 +7,6 @@ import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.IProgressTracker;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicClientResourceProvider;
-import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.minecraft.server.packs.resources.ResourceManager;
 
@@ -55,6 +54,11 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
             firstInit = true;
         }
         super.reload(manager, reporter);
+    }
+
+    @Override
+    public boolean canUseExternalResourcePacks() {
+        return ECConfigs.SPEC != null && ECConfigs.USE_EXTERNAL_RESOURCE_PACK.get();
     }
 
     @Override

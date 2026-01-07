@@ -32,7 +32,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLAN
 // Mcmeta files are not copied from the base block
 
 //See ChippedAbstractModule's SUPPORTED VERSION
-public class ChippedMainModule extends ChippedAbstractModule {
+public class ChippedMainModule extends ChippedModuleAbstract {
 
     public final SimpleEntrySet<WoodType, Block> barrel,
             crate,

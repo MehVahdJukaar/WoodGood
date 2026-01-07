@@ -10,7 +10,6 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -40,11 +39,10 @@ public class MoreChestVariantsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> trappedChests;
 
     public MoreChestVariantsModule(String modID) {
-        super(modID, "mcv");
+        super(modID, "mcv", EveryCompat.MOD_ID);
         ResourceKey<CreativeModeTab> functionalTab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
         ResourceKey<CreativeModeTab> redstoneTab = CreativeModeTabs.REDSTONE_BLOCKS;
 
-        String namespace = (PlatHelper.getPlatform().isForge()) ? "forge" : "c";
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("oak_chest"), () -> VanillaWoodTypes.OAK,
@@ -61,8 +59,6 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/normal"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.fromNamespaceAndPath(namespace, "chests"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.fromNamespaceAndPath(namespace, "chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quad:cats_on_blocks/sit"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
                 .setTabKey(functionalTab)
@@ -85,8 +81,6 @@ public class MoreChestVariantsModule extends SimpleModule {
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/trapped"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.fromNamespaceAndPath(namespace, "chests"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.fromNamespaceAndPath(namespace, "chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
                 .setTabKey(redstoneTab)
                 .defaultRecipe()

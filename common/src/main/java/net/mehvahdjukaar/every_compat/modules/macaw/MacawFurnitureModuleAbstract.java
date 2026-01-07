@@ -272,6 +272,7 @@ public abstract class MacawFurnitureModuleAbstract extends SimpleModule {
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(modRes("bookshelf"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
@@ -635,6 +636,7 @@ public abstract class MacawFurnitureModuleAbstract extends SimpleModule {
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(modRes("bookshelf"), Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()

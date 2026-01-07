@@ -143,8 +143,8 @@ public abstract class EveryCompat {
         //add all namespaces. hack since the pack needs to know about those before hand if we generate the tags
         if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
             Set<String> modIdsThatHaveBlockSets = new HashSet<>();
-            for (var r : BlockSetAPI.getRegistries()) {
-                for (BlockType blockType : r.getValues()) {
+            for (var typeRegistry : BlockSetAPI.getRegistries()) {
+                for (BlockType blockType : typeRegistry.getValues()) {
                     modIdsThatHaveBlockSets.add(blockType.getNamespace());
                 }
             }

@@ -82,20 +82,20 @@ publishing {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    neoForge "net.neoforged:neoforge:${neo_version}"
+    neoForge "net.neoforged:neoforge:$neo_version"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowCommon(project(path: ':common', configuration: 'transformProductionNeoForge'))
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    modApi("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}"){
+    modApi("net.mehvahdjukaar:moonlight-neoforge:$moonlight_version"){
         transitive = false
     }
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("dev.emi:emi-neoforge:${emi_version}+${minecraft_version}")
-    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}")
+    modRuntimeOnly("dev.emi:emi-neoforge:$emi_version+$minecraft_version")
+    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-$minecraft_version:$crafttweaker_version")
     modRuntimeOnly("curse.maven:jei-238222:7057366") // v19.25.0.322
     modRuntimeOnly("curse.maven:jade-324717:6667790") // v15.10.1
 //    modRuntimeOnly("curse.maven:worldedit-225608:5830452")
@@ -113,7 +113,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:athena-841890:5629395") // v4.0.1 | Chipped
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | Required by: REI, Furnish
 //    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | Required by: REI
-//    modRuntimeOnly("curse.maven:resourceful-lib-570073:5793500")  // v3.0.11 | Chipped, Handcrafted, Cozy
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5679902") // v1.1.1a | Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5713682") // v1.1.17i | Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
@@ -131,6 +130,8 @@ dependencies {
 //    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Resourceful-Lib
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}") // Create
+//    modRuntimeOnly("dev.isxander:yet-another-config-lib:$yacl_version-neoforge") // Friends&Foes
+//    modRuntimeOnly("com.teamresourceful.resourcefullib:resourcefullib-neoforge-1.21:$resourcefullib_version") // Chipped, Handcrafted, Cozy, Friends&Foes
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     modCompileOnly("curse.maven:framework-549225:6531439") // v0.9.6 | Refurbished-Furniture, +Mighty-Mail, Backpacked
@@ -140,7 +141,7 @@ dependencies {
 
 
     //+ OTHER MAVENs
-    modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}") // Create, The-Twilight-Forest, Tropicraft
+    modCompileOnly("com.tterrag.registrate:Registrate:$registrate_version") // Create, The-Twilight-Forest, Tropicraft
     modCompileOnly("org.violetmoon.zeta:Zeta:1.1-33.147") // Quark - @ DNU
 
 //!! =================================================== IMPORTS ==================================================== \\
@@ -154,7 +155,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:decorative-blocks-reborn-1327768:6897419")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:farmersdelight-398521:6917256")
-//    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:6354619")
+//    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:6470209") // Yet-Another-Config-Lib-V3, ResourcefulLib
 //    modRuntimeOnly("curse.maven:furnish-547069:4821511") //!! 1.20.1 -> 1.21.1 Cannot remap access widener from namespace 'mojang'. Expected: 'intermediary'
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617252") // Resourceful-Lib
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:6302230")
@@ -230,7 +231,7 @@ dependencies {
 
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:zGMhmLYb") // v1.1.1 | MidnightLib //!! 1.20.1
-    modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false } // Registrate, Flywheel, Ponder
+    modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_version:slim") { transitive = false } // Registrate, Flywheel, Ponder
     modCompileOnly("org.violetmoon.quark:Quark:4.1-467.3568") //@ DNU
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
@@ -255,6 +256,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel //!! 1.20.1
 //    modRuntimeOnly("curse.maven:deeperdarker-659011:6463247")
 //    modRuntimeOnly("curse.maven:frightful-winter-1241289:6447798")
+//    modRuntimeOnly("curse.maven:natures-spirit-1044992:6962784") // Tinted LeavesType
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:7024199") // patchouli
 

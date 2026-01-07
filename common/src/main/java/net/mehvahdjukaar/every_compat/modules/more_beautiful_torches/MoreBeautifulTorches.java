@@ -45,7 +45,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
 
     public MoreBeautifulTorches(String modId) {
-        super(modId, "mbt");
+        super(modId, "mbt", EveryCompat.MOD_ID);
         ResourceLocation tab = (PlatHelper.Platform.FABRIC.isFabric())
                 ? modRes("goldenfoods_tab")
                 : modRes("morebeautifultorches_tab");

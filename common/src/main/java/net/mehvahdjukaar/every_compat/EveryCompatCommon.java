@@ -6,10 +6,7 @@ import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPalett
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
 import net.mehvahdjukaar.every_compat.modules.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
-import net.mehvahdjukaar.every_compat.modules.chipped.ChippedDoorModule;
-import net.mehvahdjukaar.every_compat.modules.chipped.ChippedGlassModule;
-import net.mehvahdjukaar.every_compat.modules.chipped.ChippedLogModule;
-import net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule;
+import net.mehvahdjukaar.every_compat.modules.chipped.*;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
@@ -110,7 +107,7 @@ public class EveryCompatCommon {
             addOptionalModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
             addOptionalModule("blockus", () -> BlockusModule.class);
             addOptionalModule("campchair", () -> CampChairModule.class);
-            addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class);
+            addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class, () -> ChippedLeavesModule.class);
             addOptionalModule("dawnoftimebuilder", () -> DawnOfTimeModule.class);
             addOptionalModule("decorative_blocks", () -> DecorativeBlocksModule.class);
             addOptionalModule("farmersdelight", () -> FarmersDelightModule.class);

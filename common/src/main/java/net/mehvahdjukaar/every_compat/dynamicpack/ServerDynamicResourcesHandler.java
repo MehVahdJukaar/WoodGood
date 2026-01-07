@@ -43,8 +43,16 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
         namespaces.add(EveryCompat.MOD_ID);
         namespaces.add("c");
         /// Ensure the tags to be loaded first time into the world, not second time
-        if (PlatHelper.isModLoaded("lolmcv")) namespaces.add("lieonstudio");
+        if (PlatHelper.isModLoaded("lolmcv")) {
+            namespaces.add("lieonstudio");
+            namespaces.add("quad");
+        }
         return namespaces;
+    }
+
+    @Override
+    public boolean canUseExternalResourcePacks() {
+        return ECConfigs.SPEC != null && ECConfigs.USE_EXTERNAL_RESOURCE_PACK.get();
     }
 
     @Override

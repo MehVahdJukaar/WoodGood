@@ -31,7 +31,7 @@ import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.d
 import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkerPalette;
 
 //See ChippedAbstractModule's SUPPORTED VERSION
-public class ChippedDoorModule extends ChippedAbstractModule {
+public class ChippedDoorModule extends ChippedModuleAbstract {
 
     public final SimpleEntrySet<WoodType, Block> barredDoor,
             beachDoor,

@@ -32,6 +32,9 @@ public class HardcodedBlockType {
         // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
         if (isWoodFrom("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
 
+        // Chipped's glass & glass_panes has no Vanilla WoodTypes except OAK
+        if (isWoodFrom("chipped", "", "minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)", "\\w+_glass(_pane)?")) return false;
+
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude one WoodType from a Wood Mod
@@ -126,7 +129,10 @@ public class HardcodedBlockType {
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
 
         // Exclude all of Vanilla Types
-        if (leavesType.isVanilla()) return true;
+        if (isKnownVanillaLeaves(leavesType)) return true;
+
+        // Chipped's LeavesType and its supported Block shouldn't be generated
+        if (isLeavesFrom("chipped", "chipped", "", "")) return true;
 
         // Traversable-Leaves' leaves is a testing item and should be excluded
         if (isLeavesFrom("", "", "traversable_leaves:dev_leaves", "")) return true;
@@ -226,8 +232,20 @@ public class HardcodedBlockType {
         return false;
     }
 
+    public static boolean isKnownVanillaLeaves(LeavesType leavesType){
+        var id = leavesType.getId();
+        if (id.getNamespace().equals("minecraft")) {
+            return VANILLA_LEAVES.contains(id.getPath());
+        }
+        return false;
+    }
+
     private static final Set<String> VANILLA_WOODS = Set.of(
             "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped"
+    );
+
+    private static final Set<String> VANILLA_LEAVES = Set.of(
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped", "azalea", "flowering_azalea"
     );
 
 }
