@@ -31,6 +31,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -604,5 +605,26 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         return EntrySet.super.getItemForECTab(type);
     }
+
+
+    @NotNull
+    protected String makeEntryName(T w) {
+        String name;
+        if (prefix != null) {
+            name = this.prefix + "_" + w.getTypeName();
+            if (!this.postfix.isEmpty()) name += "_" + this.postfix;
+        } else {
+            name = w.getTypeName() + "_" + this.postfix;
+        }
+        return name;
+    }
+
+
+    protected @NotNull ResourceLocation makeFullEntryID(SimpleModule module, T blockType) {
+        String name = makeEntryName(blockType);
+        String fullName = module.shortenedId() + "/" + blockType.getNamespace() + "/" + name;
+        return module.makeMyRes(fullName);
+    }
+
 }
 
