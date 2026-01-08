@@ -1,5 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import com.google.common.base.Preconditions;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -19,6 +21,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -82,14 +85,19 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
             if (condition.test(blockType)) {
                 I item = itemFactory.apply(blockType);
-                //for blocks that fail
                 if (item != null) {
-                    this.items.put(blockType, item);
+                    try {
+                        Preconditions.checkArgument(item != Items.AIR, "Item factory returned AIR item instance");
 
-                    registry.register(id, item);
+                        registry.register(id, item);
+                        this.items.put(blockType, item);
 
-                    blockType.addChild(childKey, item);
-                    totalChildren++;
+                        blockType.addChild(childKey, item);
+                        totalChildren++;
+                    }catch (Exception e){
+                        EveryCompat.LOGGER.error("Failed to create or register item {} for type {} in module {}", id, blockType.getTypeName(), module.modId);
+
+                    }
                 }
             }
         }

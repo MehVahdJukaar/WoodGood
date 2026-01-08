@@ -213,7 +213,7 @@ public class SimpleModule extends CompatModule {
         return l;
     }
 
-    @Deprecated(Removal = true)
+    @Deprecated(forRemoval = true)
     public boolean isEntryAlreadyRegistered(String entrySetId, String blockId, BlockType blockType, Registry<?> registry) {
         return isEntryAlreadyRegistered(entrySetId, new ResourceLocation(blockId), blockType, registry);
     }
