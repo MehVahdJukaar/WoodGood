@@ -140,15 +140,19 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
             if (condition.test(blockType)) {
                 B block = blockFactory.apply(blockType);
-                //for blocks that fail
-                if (block != null) {
-                    this.blocks.put(blockType, block);
+                if(block != null) {
+                    try {
+                        Preconditions.checkArgument(block != Blocks.AIR, "Block factory returned AIR block instance");
+                        registry.register(resourceLocation, block);
 
-                    registry.register(resourceLocation, block);
-                    blockType.addChild(childKey, block);
+                        this.blocks.put(blockType, block);
+                        blockType.addChild(childKey, block);
 
-                    if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
-                        SIMPLE_DROPS.add(block);
+                        if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
+                            SIMPLE_DROPS.add(block);
+                        }
+                    } catch (Exception e) {
+                        EveryCompat.LOGGER.error("Failed to create or register block {} for type {} in module {}", id, blockType.getTypeName(), module.modId);
                     }
                 }
             }
@@ -178,7 +182,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             }
         }
     }
-
 
 
     @Nullable
