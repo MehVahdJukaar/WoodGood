@@ -113,26 +113,25 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         String childKey = getChildKey(module);
         if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", "");
-        for (T w : types) {
-            String name = getBlockName(w);
-            String fullName = module.shortenedId() + "/" + w.getNamespace() + "/" + name;
-            String entrySetId = module.getModId() + ":" + this.typeName;
+        for (T blockType : types) {
+            String name = getBlockName(blockType);
+            String fullName = module.shortenedId() + "/" + blockType.getNamespace() + "/" + name;
 
-            if (module.isEntryAlreadyRegistered(entrySetId, name, w, BuiltInRegistries.BLOCK)) continue;
+            if (module.isEntryAlreadyRegistered(childKey, name, blockType, BuiltInRegistries.BLOCK)) continue;
 
-            if (condition.test(w)) {
-                B block = blockFactory.apply(w);
+            if (condition.test(blockType)) {
+                B block = blockFactory.apply(blockType);
                 //for blocks that fail
                 if (block != null) {
-                    this.blocks.put(w, block);
+                    this.blocks.put(blockType, block);
 
 
                     ResourceLocation resourceLocation = module.makeMyRes(fullName);
                     if (resourceLocation.toString().equals("minecraft:air")) {
-                        throw new UnsupportedOperationException("Attempted to register a Block of wood type " + w + " from module " + this + " has an invalid item name. How?");
+                        throw new UnsupportedOperationException("Attempted to register a Block of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey  + ". Check for another block with " + name);
                     }
                     registry.register(resourceLocation, block);
-                    w.addChild(childKey, block);
+                    blockType.addChild(childKey, block);
 
                     if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
                         SIMPLE_DROPS.add(block);
@@ -194,20 +193,22 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void registerItems(SimpleModule module, Registrator<Item> registry) {
-        blocks.forEach((w, value) -> {
+        blocks.forEach((blockType, value) -> {
             Item i;
+            String childKey = getChildKey(module);
+            String name = getBlockName(blockType);
 
             if (itemFactory != null) {
-                i = itemFactory.apply(w, value, new Item.Properties());
+                i = itemFactory.apply(blockType, value, new Item.Properties());
             } else {
-                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), w);
+                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), blockType);
             }
             //for ones that don't have item
             if (i != null) {
-                this.items.put(w, i);
+                this.items.put(blockType, i);
                 ResourceLocation id = Utils.getID(value);
                 if (id.toString().equals("minecraft:air")) {
-                    throw new UnsupportedOperationException("Block of wood type " + w + " from module " + this + " has an invalid item name. How?");
+                    throw new UnsupportedOperationException("Attempted to register a Item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". Check for another block with " + name);
                 }
                 registry.register(id, i);
             }
