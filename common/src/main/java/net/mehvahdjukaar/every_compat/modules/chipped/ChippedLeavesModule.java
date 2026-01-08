@@ -278,16 +278,6 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 
-/*        Set<String> leavesTypeName = Set.of(
-                "apple",
-                "cherry",
-//                "frosted",
-                "golden_apple",
-                "golden_cherry",
-                "magenta_flower",
-                "white_flower"
-        );*/
-
         Set<String> prefixes = Set.of(
                 "dead",
                 "golden",
@@ -297,46 +287,13 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         executor.accept((manager, sink) -> {
 
-//            for (String prefix : leavesTypeName) {
-//                applyOverlayAndGenerateTexture(EveryCompat.res("block/ch/oak_leaves/" + prefix + "_overlay"),
-//                        prefix, sink, manager);
-//            }
             for (String prefix : prefixes) {
                 generateLeaves(modRes("block/oak_leaves/" + prefix + "_oak_leaves"), sink, manager);
             }
 
             generateFrostedLeaves(modRes("block/oak_leaves/frosted_oak_leaves_top"), sink, manager);
-//            generateFrostedLeavesOverlay(modRes("block/oak_leaves/frosted_oak_leaves"), sink, manager);
 
         });
-    }
-
-    /// Apply an overlay over the Leaves' texture
-    public void applyOverlayAndGenerateTexture(ResourceLocation overlayTexture, String prefix,
-                                               ResourceSink sink, ResourceManager manager) {
-        for (LeavesType leavesType : LeavesTypeRegistry.INSTANCE) {
-
-            if (isKnownVanillaLeaves(leavesType) || leavesType.getNamespace().equals("chipped")) continue;
-
-            try (
-                    TextureImage leavesTexture = TextureImage.open(manager,
-                            RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves));
-                    TextureImage overlay = TextureImage.open(manager, overlayTexture)
-            ) {
-                String newPath = leavesType.createFullIdWith("", "block", shortenedId(),
-                        leavesType.getTypeName() + "_leaves/" + prefix + "_", "leaves");
-
-                // Adding to the resource
-                sink.addTextureIfNotPresent(manager, newPath, () -> {
-                    TextureImage mainTexture = leavesTexture.makeCopy();
-                    TextureOps.applyOverlay(mainTexture, overlay);
-                    return mainTexture;
-                });
-
-            } catch (Exception e) {
-                EveryCompat.LOGGER.error("Failed to generate texture with logOverlay: ", e);
-            }
-        }
     }
 
     /// Generate textures using opposite of standard texture generation
