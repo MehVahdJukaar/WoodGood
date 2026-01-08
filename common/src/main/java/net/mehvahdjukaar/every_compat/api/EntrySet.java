@@ -21,7 +21,7 @@ public interface EntrySet<T extends BlockType> {
     String getName();
 
     @NotNull
-    default String getChildKey(SimpleModule module) {
+    default String makeChildKey(SimpleModule module) {
         return module.getModId() + ":" + getName();
     }
 

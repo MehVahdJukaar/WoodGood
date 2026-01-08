@@ -38,7 +38,7 @@ public class SimpleModule extends CompatModule {
         super(modId, shortId, myNamespace);
     }
 
-    public ResourceLocation makeMyRes(String name) {
+    public final ResourceLocation makeMyRes(String name) {
         return ResourceLocation.fromNamespaceAndPath(getMyNamespace(), name);
     }
 
@@ -181,12 +181,18 @@ public class SimpleModule extends CompatModule {
         return l;
     }
 
-    //TODO: improve
+    @Deprecated(Removal = true)
     public boolean isEntryAlreadyRegistered(String entrySetId, String blockId, BlockType blockType, Registry<?> registry) {
-        ///NOTE: blockType is either: WoodType, LeavesType, StoneTYpe, or Other Types
+        return isEntryAlreadyRegistered(entrySetId, new ResourceLocation(blockId), blockType, registry);
+    }
 
+
+    //TODO: improve
+    public boolean isEntryAlreadyRegistered(String entrySetId, ResourceLocation blockId, BlockType blockType, Registry<?> registry) {
         // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
-        String blockName = blockId.substring(blockId.lastIndexOf("/") + 1);
+        String blockPath = blockId.getPath();
+        //short block name
+        String blockName = blockPath.substring(blockPath.lastIndexOf("/") + 1);
 
         String woodTypeFrom = blockType.getNamespace();
 

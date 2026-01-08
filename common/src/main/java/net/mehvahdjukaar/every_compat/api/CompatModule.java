@@ -50,7 +50,9 @@ public abstract class CompatModule {
         this.modName = PlatHelper.getModName(modId);
         this.myNamespace = myNamespace;
         this.shortId = shortId;
-
+        if (myNamespace.equals("minecraft")){
+            throw new AssertionError("Every Compat module namespace cannot be minecraft");
+        }
         //yeah, bad api but doesn't matter if we use wood or other types
         //called here so we get right bus since module construction is delegated
         BlockSetAPI.addDynamicRegistration(myNamespace, (r) -> {
@@ -85,16 +87,16 @@ public abstract class CompatModule {
 
     }
 
-    public String getModId() {
+    public final String getModId() {
         return modId;
     }
 
-    public String getMyNamespace() {
+    public final String getMyNamespace() {
         return myNamespace;
     }
 
     // readable name
-    public String getModName() {
+    public final String getModName() {
         return modName;
     }
 
