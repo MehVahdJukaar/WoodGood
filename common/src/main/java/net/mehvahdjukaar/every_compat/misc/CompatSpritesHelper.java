@@ -87,7 +87,7 @@ public class CompatSpritesHelper {
         addOptional("luminous_nether:stripped_withered_log", "_side", "luminous_nether:block/strippedwitheredlogside");
         addOptional("luminous_nether:stripped_withered_log", "_top", "luminous_nether:block/strippedwitheredlogtop");
         // Planks
-        addOptional("luminous_nether:withered_planks", "_top", "luminous_nether:block/ashplanks");
+        addOptional("luminous_nether:withered_planks", "all", "luminous_nether:block/ashplanks");
 
         // -------------------- golden_stem aka "mushroom"
         // log
