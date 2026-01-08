@@ -131,6 +131,10 @@ public class HardcodedBlockType {
         // Exclude all of Vanilla Types
         if (isKnownVanillaLeaves(leavesType)) return true;
 
+        // Productive-Trees' CHERRY_PLUM shouldn't be supported
+        // REASON: Productive Trees' CHERRY_PLUM & PLUM can caused crash & it's very tricky to fix, not worth it.
+        if (isLeavesFrom("chipped", "", "productivetrees:cherry_plum", "")) return true;
+
         // Chipped's LeavesType and its supported Block shouldn't be generated
         if (isLeavesFrom("chipped", "chipped", "", "")) return true;
 
@@ -138,6 +142,10 @@ public class HardcodedBlockType {
         if (isLeavesFrom("", "", "traversable_leaves:dev_leaves", "")) return true;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Prevent Productive-Trees' CHERRY_PLUM_LEAVES from being added to PLUM's children
+        if (isLeavesFrom("chipped", "", "productivetrees:plum", "cherry_plum_leaves")) return false;
+
         // Unrelated to Quark's ancient_leaves & Alex's Cave (ancient_leaves) should be included
         if (isLeavesFrom("quark", "", "alexscaves:ancient", "")) return false;
 
@@ -186,10 +194,10 @@ public class HardcodedBlockType {
 
 
     /**
-     * @param whichSupportedModId - Id of Supported Mods That EveryCompat is supporting
-     * @param leavestypeFromMod - Id of mod that LeavesType is from
-     * @param leavesTypeId - id of LeavesType, ex: "biomesoplenty:redwood"
-     * @param supportedBlockId - Id of block: "hedge" OR id with name of leavesType: "redwood_hedge"
+     * @param whichSupportedModId Id of Supported Mods That EveryCompat is supporting
+     * @param leavestypeFromMod Id of mod that LeavesType is from
+     * @param leavesTypeId id of LeavesType, ex: "biomesoplenty:redwood"
+     * @param supportedBlockId Id of block: "hedge" OR id with name of leavesType: "redwood_hedge"
      */
     public static Boolean isLeavesFrom(String whichSupportedModId, String leavestypeFromMod, String leavesTypeId,
                                        String supportedBlockId) {
