@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
@@ -371,6 +372,14 @@ public abstract class EveryCompat {
                     }
                 }, e);
             }
+        }
+    }
+
+    public static void crashIfInDev(String s) {
+        if (PlatHelper.isDev()) {
+            throw new AssertionError(s);
+        } else {
+            LOGGER.error(s);
         }
     }
 }
