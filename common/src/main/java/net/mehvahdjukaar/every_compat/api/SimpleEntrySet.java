@@ -133,6 +133,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = makeChildKey(module);
+        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", ""); // DO NOT remove this because it's a childKey for BlockType's children & Gems-Realm require it
         for (T blockType : types) {
             ResourceLocation id = makeFullEntryID(module, blockType);
 
@@ -143,7 +144,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 if(block != null) {
                     try {
                         Preconditions.checkArgument(block != Blocks.AIR, "Block factory returned AIR block instance");
-                        registry.register(resourceLocation, block);
+                        registry.register(id, block);
 
                         this.blocks.put(blockType, block);
                         blockType.addChild(childKey, block);
@@ -152,7 +153,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                             SIMPLE_DROPS.add(block);
                         }
                     } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to create or register block {} for type {} in module {}", id, blockType.getTypeName(), module.modId);
+                        EveryCompat.LOGGER.error("Failed to create or register block, the entryset is {} for type {}", childKey, blockType.getId());
                     }
                 }
             }
@@ -212,7 +213,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             if (itemFactory != null) {
                 i = itemFactory.apply(blockType, value, new Item.Properties());
             } else {
-                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), w);
+                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), blockType);
             }
             //for ones that don't have item
             if (i != null) {
