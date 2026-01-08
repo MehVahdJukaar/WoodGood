@@ -114,7 +114,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         String childKey = makeChildKey(module);
         for (T blockType : types) {
-            ResourceLocation id = makeFullBlockID(module, blockType);
+            ResourceLocation id = makeFullEntryID(module, blockType);
 
             if (module.isEntryAlreadyRegistered(childKey, id, blockType, BuiltInRegistries.BLOCK)) continue;
 
@@ -149,7 +149,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         var possibleNamespaces = alreadySupportedMods.toArray(String[]::new);
         for (var w : Objects.requireNonNull(BlockSetAPI.getTypeRegistry(this.getTypeClass())).getValues()) {
             if (!items.containsKey(w) && w.getChild(childKey) == null) {
-                String path = makeBlockName(w);
+                String path = makeEntryName(w);
                 Block block = getOptionalBlock(path, w.getNamespace());
                 if (block == null) block = getOptionalBlock(path, possibleNamespaces);
                 if (block != null && w.getChildKey(block) == null) {
@@ -177,29 +177,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return null;
     }
 
-
-    private @NotNull ResourceLocation makeFullBlockID(SimpleModule module, T blockType) {
-        String name = getBlockName(blockType);
-        String fullName = module.shortenedId() + "/" + blockType.getNamespace() + "/" + name;
-        return module.makeMyRes(fullName);
-    }
-
     @Deprecated(forRemoval = true)
     @NotNull
     public String getBlockName(T w) {
-        return makeBlockName(w);
-    }
-
-    @NotNull
-    public String makeBlockName(T w) {
-        String name;
-        if (prefix != null) {
-            name = this.prefix + "_" + w.getTypeName();
-            if (!this.postfix.isEmpty()) name += "_" + this.postfix;
-        } else {
-            name = w.getTypeName() + "_" + this.postfix;
-        }
-        return name;
+        return makeEntryName(w);
     }
 
     @Override
@@ -218,7 +199,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 this.items.put(blockType, i);
                 ResourceLocation id = Utils.getID(value);
                 if (id.toString().equals("minecraft:air")) {
-                    ResourceLocation expectedName = makeFullBlockID(module, blockType);
+                    ResourceLocation expectedName = makeFullEntryID(module, blockType);
                     throw new UnsupportedOperationException("Attempted to register a Item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". " +
                             "This means that the block with expected ID " + expectedName + " does not have an registry ID assigned");
                 }

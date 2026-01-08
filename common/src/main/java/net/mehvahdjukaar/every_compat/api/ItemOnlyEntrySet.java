@@ -66,27 +66,19 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     }
 
-    @NotNull
+    @Deprecated(forRemoval = true)
     public String getItemName(T w) {
-        String name;
-        if (prefix != null) {
-            name = this.prefix + "_" + w.getTypeName();
-            if (!this.postfix.isEmpty()) name += "_" + this.postfix;
-        } else {
-            name = w.getTypeName() + "_" + this.postfix;
-        }
-        return name;
+        return makeEntryName(w);
     }
 
     @Override
     public void registerItems(SimpleModule module, Registrator<Item> registry) {
         BlockTypeRegistry<T> typeRegistry = BlockSetAPI.getTypeRegistry(this.type);
         for (T blockType : Objects.requireNonNull(typeRegistry).getValues()) {
-            String name = getItemName(blockType);
-            String fullName = module.shortenedId() + "/" + blockType.getNamespace() + "/" + name;
-            String entrySetId = module.getModId() +":"+ this.typeName;
+            String childKey = makeChildKey(module);
+            ResourceLocation id = makeFullEntryID(module, blockType);
 
-            if (module.isEntryAlreadyRegistered(entrySetId, name, blockType, BuiltInRegistries.ITEM)) continue;
+            if (module.isEntryAlreadyRegistered(childKey, id, blockType, BuiltInRegistries.ITEM)) continue;
 
             if (condition.test(blockType)) {
                 I item = itemFactory.apply(blockType);
@@ -94,10 +86,8 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                 if (item != null) {
                     this.items.put(blockType, item);
 
-                    String childKey = getChildKey(module);
-                    if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", "");
+                    registry.register(id, item);
 
-                    registry.register(module.makeMyRes(fullName), item);
                     blockType.addChild(childKey, item);
                     totalChildren++;
                 }
@@ -106,6 +96,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         //populate default ones
     }
 
+
     @Override
     public void registerTiles(SimpleModule module, Registrator<BlockEntityType<?>> registry) {
         Item base = getBaseItem();
@@ -113,8 +104,8 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base Item cant be null (" + this.typeName + " for " + module.modId + " module)");
 
-        String childKey = getChildKey(module);
-        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", "");
+        String childKey = makeChildKey(module);
+
         baseType.get().addChild(childKey, base);
 
         //attempts adding all other children
