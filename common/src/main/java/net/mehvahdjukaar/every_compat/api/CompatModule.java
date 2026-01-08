@@ -43,22 +43,25 @@ public abstract class CompatModule {
         this.modId = modId;
         this.modName = PlatHelper.getModName(modId);
         this.myNamespace = myNamespace;
+        if (myNamespace.equals("minecraft")){
+            throw new AssertionError("Every Compat module namespace cannot be minecraft");
+        }
     }
 
     protected CompatModule(String modId) {
         this(modId, EveryCompat.MOD_ID);
     }
 
-    public String getModId() {
+    public final String getModId() {
         return modId;
     }
 
-    public String getMyNamespace() {
+    public final String getMyNamespace() {
         return myNamespace;
     }
 
     // readable name
-    public String getModName() {
+    public final String getModName() {
         return modName;
     }
 

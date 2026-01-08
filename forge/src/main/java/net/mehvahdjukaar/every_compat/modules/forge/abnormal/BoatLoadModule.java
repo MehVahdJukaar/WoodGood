@@ -28,7 +28,7 @@ public class BoatLoadModule extends SimpleModule {
     public BoatLoadModule(String modId) {
         super(modId, "abnbl");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.TOOLS_AND_UTILITIES;
-
+ForgeRegistry
         largeBoats = ItemOnlyEntrySet.builder(WoodType.class, "boat", "large",
                         getModItem("large_oak_boat"),
                         () -> VanillaWoodTypes.OAK,
