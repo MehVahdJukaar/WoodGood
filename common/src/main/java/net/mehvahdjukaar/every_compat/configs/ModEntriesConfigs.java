@@ -83,21 +83,25 @@ public class ModEntriesConfigs {
 
     public static <T extends BlockType> boolean isTypeEnabled(T blockType, @Nullable String childType) {
         if (!wasInit) initEarlyButNotSuperEarly();
-        Class<?> woodClass = blockType.getClass();
-        Map<String, Supplier<Boolean>> childConfigs = CHILD_CONFIGS.get(woodClass);
+        Class<? extends BlockType> typeClass = blockType.getClass();
+        Map<String, Supplier<Boolean>> childConfigs = CHILD_CONFIGS.get(typeClass);
         if (childConfigs == null) {
-            EveryCompat.LOGGER.warn("No config map found for block type: " + woodClass.getName());
+            EveryCompat.LOGGER.warn("No config map found for block type: {}", typeClass.getName());
             return true;
         }
         if (childType != null && !childConfigs.getOrDefault(childType, () -> true).get()) {
             return false;
         }
-        var blockConfigs = BLOCK_TYPE_CONFIGS.get(woodClass);
-        if (blockConfigs == null) {
-            EveryCompat.LOGGER.warn("No config map found for block type: " + woodClass.getName());
+        Map<String, Supplier<Boolean>> blocktypeConfigs = BLOCK_TYPE_CONFIGS.get(typeClass);
+        if (blocktypeConfigs == null) {
+            EveryCompat.LOGGER.warn("No config map found for block type: {}", typeClass.getName());
             return true;
         }
-        return blockConfigs.get(blockType.getId().toString()).get();
+
+        Supplier<Boolean> booleanSupplier = blocktypeConfigs.get(blockType.getId().toString());
+        if (booleanSupplier != null) return booleanSupplier.get();
+
+        return true; // Vanilla BlockTypes that will have null value in booleanSupplier
     }
 
 }

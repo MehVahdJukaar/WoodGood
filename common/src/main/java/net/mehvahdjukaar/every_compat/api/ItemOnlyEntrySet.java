@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Preconditions;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -85,6 +84,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     }
 
     @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link AbstractSimpleEntrySet#makeEntryName(BlockType)}
     public String getItemName(T w) {
         return makeEntryName(w);
     }
@@ -109,8 +109,8 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                         this.items.put(blockType, item);
 
                         blockType.addChild(childKey, item);
-                    }catch (Exception e){
-                        EveryCompat.LOGGER.error("Failed to create or register item, the entryset is {} for type {}", childKey, blockType.getTypeName(), module.modId);
+                    } catch (Exception e){
+                        throw new UnsupportedOperationException("Failed to create or register item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". ERROR: " + e);
                     }
                 }
             }

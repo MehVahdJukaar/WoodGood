@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.api;
 import com.google.common.base.Preconditions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
@@ -153,7 +152,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                             SIMPLE_DROPS.add(block);
                         }
                     } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to create or register block, the entryset is {} for type {}", childKey, blockType.getId());
+                        throw new UnsupportedOperationException("Failed to create or register block of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". ERROR: " + e);
                     }
                 }
             }
@@ -222,7 +221,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 if (id.toString().equals("minecraft:air")) {
                     ResourceLocation expectedName = makeFullEntryID(module, blockType);
                     throw new UnsupportedOperationException("Attempted to register a Item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". " +
-                            "This means that the block with expected ID " + expectedName + " does not have an registry ID assigned");
+                            "This means that the block with expected ID: " + expectedName + " does not have an registry ID assigned");
                 }
                 registry.register(id, i);
             }
