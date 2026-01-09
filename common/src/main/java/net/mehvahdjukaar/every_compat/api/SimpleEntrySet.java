@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.api;
 import com.google.common.base.Preconditions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
@@ -113,6 +112,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = makeChildKey(module);
+        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", ""); // DO NOT remove this because it's a childKey for BlockType's children & Gems-Realm require it
         for (T blockType : types) {
             ResourceLocation id = makeFullEntryID(module, blockType);
 
@@ -133,7 +133,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                         }
                         totalChildren++;
                     } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to create or register block {} for type {} in module {}", id, blockType.getTypeName(), module.modId);
+                        throw new UnsupportedOperationException("Failed to create or register block of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". ERROR: " + e);
                     }
                 }
             }
@@ -202,7 +202,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 if (id.toString().equals("minecraft:air")) {
                     ResourceLocation expectedName = makeFullEntryID(module, blockType);
                     throw new UnsupportedOperationException("Attempted to register a Item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". " +
-                            "This means that the block with expected ID " + expectedName + " does not have an registry ID assigned");
+                            "This means that the block with expected ID: " + expectedName + " does not have an registry ID assigned");
                 }
                 registry.register(id, i);
             }
@@ -301,13 +301,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                                                                                String name, String prefix, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
 
         return new Builder<>(type, name, prefix, baseType, baseBlock, blockSupplier);
-    }
-
-    @Environment(EnvType.CLIENT)
-    public void registerTileRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> renderer) {
-        if (tileHolder != null) {
-            tileHolder.registerRenderer(event, renderer);
-        }
     }
 
     //!! SUBCLASS

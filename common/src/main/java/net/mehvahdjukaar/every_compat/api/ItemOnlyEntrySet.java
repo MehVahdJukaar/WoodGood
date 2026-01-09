@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Preconditions;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -21,9 +20,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -70,6 +67,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     }
 
     @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link AbstractSimpleEntrySet#makeEntryName(BlockType)}
     public String getItemName(T w) {
         return makeEntryName(w);
     }
@@ -79,6 +77,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         BlockTypeRegistry<T> typeRegistry = BlockSetAPI.getTypeRegistry(this.type);
         for (T blockType : Objects.requireNonNull(typeRegistry).getValues()) {
             String childKey = makeChildKey(module);
+            if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", ""); // DO NOT remove this because it's a childKey for BlockType's children & Gems-Realm require it
             ResourceLocation id = makeFullEntryID(module, blockType);
 
             if (module.isEntryAlreadyRegistered(childKey, id, blockType, BuiltInRegistries.ITEM)) continue;
@@ -94,9 +93,8 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
                         blockType.addChild(childKey, item);
                         totalChildren++;
-                    }catch (Exception e){
-                        EveryCompat.LOGGER.error("Failed to create or register item {} for type {} in module {}", id, blockType.getTypeName(), module.modId);
-
+                    } catch (Exception e){
+                        throw new UnsupportedOperationException("Failed to create or register item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". ERROR: " + e);
                     }
                 }
             }
@@ -113,6 +111,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             throw new UnsupportedOperationException("Base Item cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         String childKey = makeChildKey(module);
+        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", ""); // DO NOT remove this because it's a childKey for BlockType's children & Gems-Realm require it
 
         baseType.get().addChild(childKey, base);
 

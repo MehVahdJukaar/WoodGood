@@ -115,7 +115,7 @@ public class HardcodedBlockType {
         supportedMod = supportedModId;
         supportedBlockName = blockName;
 
-        String blockId = supportedModId +"/"+ woodTypeFromMod +"/"+ blockName;
+        String blockId = supportedModId +"/"+ leavesTypeFromMod +"/"+ blockName;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
