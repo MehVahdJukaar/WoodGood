@@ -120,8 +120,6 @@ dependencies {
 
 //!! ================================================ DEPENDENCIES ================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
-//    modRuntimeOnly("curse.maven:terrablender-563928:5378180") // v3.0.1.7 | BOP, Regions-Unexplored
-//    modRuntimeOnly("curse.maven:glitchcore-955399:5787839") // v0.0.1.1 | BOP
     modRuntimeOnly("com.github.glitchfiend:TerraBlender-forge:${minecraft_version}-${terrablender_version}") // Biomes-O'-Plenty, Regions-Unexplored
     modRuntimeOnly("com.github.glitchfiend:GlitchCore-forge:${minecraft_version}-${glitchcore_version}") // Biomes-O'-Plenty
 //    modRuntimeOnly("curse.maven:athena-841890:5176879") //
@@ -145,6 +143,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:brewin-and-chewin-637808:6237884") // Smidgeon-O'-Bliss
 //    modRuntimeOnly("curse.maven:kotlin-for-forge-351264:5402061") // Adorn
 //    modRuntimeOnly("curse.maven:ctm-267602:5983309") // Chipped
+//    modRuntimeOnly("cy.jdkdigital.productivelib:productivelib-${minecraft_version}-0.0.4") // Don't bother use, idk why it's not working
 
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:fusion-connected-textures:1.2.7b-forge-mc${minecraft_version}") // Dawn-Of-Time, Timber-Frame, Rechiseled
@@ -285,7 +284,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705")
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api
 //    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6364065") // Terrablender, Glitchcore
-//    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore, ProductiveLib
+//    modRuntimeOnly("curse.maven:productivetrees-867074:5486574") // Terrablender, Glitchcore, ProductiveLib - Don't bother use, idk why it's not working
     modRuntimeOnly("curse.maven:alexs-caves-924854:5848216") // Citadel
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784269") // Architectury-API
 //    modRuntimeOnly("curse.maven:natures-spirit-1044992:6962783") // tinted-textures
