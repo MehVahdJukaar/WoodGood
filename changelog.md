@@ -17,6 +17,17 @@
 </div>
 
 ### UPDATED: 
+- **Chipped** (C): Fixed crash with **Productive Trees** (Ported from 1.20.1)
+- **Every Compat** (C): 
+  - Fixed an error log from latest.log with **F-ing Load My Tags** - [#1155](https://github.com/MehVahdJukaar/WoodGood/issues/1155)
+  - Improved some error loggings to make the debugging a unique crash much easier and clearer
+- **Regions Unexplored** (C): Updated to support v0.5.7 & Fixed the crash - [#1160](https://github.com/MehVahdJukaar/WoodGood/issues/1160)
+
+---
+
+## v2.11.23
+
+### UPDATED: 
 - **Every Compat** (C): Added a Christmas texture to All of Woodworks' chests from Dec 24th to 26th - [#1150](https://github.com/MehVahdJukaar/WoodGood/issues/1150) 
 - **Chipped** (INCLUDED):
     - Vanilla WoodTypes except OAK - [#1136](https://github.com/MehVahdJukaar/WoodGood/issues/1136)
