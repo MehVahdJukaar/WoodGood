@@ -17,6 +17,17 @@
 </div>
 
 ### UPDATED: 
+- **Macaw's Stairs** (C): Remove an error log in latest.log where loot_table for oak_balcony cannot be found (Backported from 1.21.1)
+- **Chipped** (C): Fixed crash with **Productive Trees**
+- **Every Comp** (C):
+  - Fixed an error log from latest.log with **F-ing Load My Tags** (Backported fixes from 1.21.1)  
+  - Improved some error loggings to make the debugging a unique crash much easier and clearer
+
+---
+
+## v2.9.14
+
+### UPDATED: 
 - **Every Compat** (C): Improved the logic for Item Tags & Fixed an error log in latest.log with **F-ing Loading My Tags** - [#1155](https://github.com/MehVahdJukaar/WoodGood/issues/1155) 
 - **Mosaic Carpentry** (F): Updated to support v1.3+
 
