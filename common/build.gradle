@@ -1,5 +1,5 @@
 architectury {
-    common(rootProject.enabled_platforms.split(","))
+    common(enabled_platforms.split(","))
 }
 
 loom {
@@ -7,8 +7,8 @@ loom {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    modApi "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
 
 
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
@@ -22,11 +22,11 @@ dependencies {
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-${moonlight_testVersion}-forge.jar"))
+        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-$moonlight_testVersion-forge.jar"))
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight:${moonlight_mavenVersion}"){
+        modApi("net.mehvahdjukaar:moonlight:$moonlight_mavenVersion"){
             transitive = false
         }
     }
