@@ -62,6 +62,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
     public ChippedLogModule(String modId) {
         super(modId);
         ResourceLocation tab = modRes(tabPath);
+        setBlockType("Log");
 
         BundledLog = SimpleEntrySet.builder(WoodType.class, "log", "bundled",
                         getModBlock("bundled_oak_log"), () -> VanillaWoodTypes.OAK,

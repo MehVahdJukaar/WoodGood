@@ -27,6 +27,7 @@ import java.util.function.Consumer;
 public class SimpleModule extends CompatModule {
 
     private final String shortId;
+    private String blockType = "";
     private final Map<String, EntrySet<?>> entries = new LinkedHashMap<>();
     private final Set<Class<? extends BlockType>> affectedTypes = new HashSet<>();
 
@@ -40,6 +41,10 @@ public class SimpleModule extends CompatModule {
     public SimpleModule(String modId, String shortId, String myNamespace) {
         super(modId, myNamespace);
         this.shortId = shortId;
+    }
+
+    public void setBlockType(String blockType) {
+        this.blockType = blockType;
     }
 
     public final ResourceLocation makeMyRes(String name) {
@@ -141,7 +146,8 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public String toString() {
-        return "[module: " + modId + "]";
+        String typeOrEmpty = (!blockType.isEmpty()) ? "'s " + blockType : "";
+        return "[module: " + modId + typeOrEmpty + "]";
     }
 
     @Override
