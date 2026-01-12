@@ -232,15 +232,16 @@ public class SimpleModule extends CompatModule {
 
     //TODO: improve
     public boolean isEntryAlreadyRegistered(String entrySetId, ResourceLocation blockId, BlockType blockType, Registry<?> registry) {
-        // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
 
         if (registry.containsKey(blockId)) {
-            EveryCompat.crashIfInDev("Attempted to register a block with id " + blockId + " that had another one already registered in registry " + registry.key().location() + "!");
+            EveryCompat.crashIfInDev("Attempted to register a block with id: (" + blockType.getClass().getSimpleName()
+                    + ")" + blockId + " that had another one already registered in registry via " + registry.key().location() + "!"
+            );
             return true;
         }
 
         String blockPath = blockId.getPath();
-        //short block name
+        //short block name - blockName: willow_table from the blockId: everycomp:tw/biomesoplenty/willow_table
         String blockName = blockPath.substring(blockPath.lastIndexOf("/") + 1);
 
         String woodTypeFrom = blockType.getNamespace();
