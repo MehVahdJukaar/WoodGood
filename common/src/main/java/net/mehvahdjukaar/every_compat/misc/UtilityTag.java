@@ -195,12 +195,12 @@ public class UtilityTag {
 
     @SuppressWarnings("SameParameterValue")
     /// @return c:tagPath for FABRIC or forge:tagPath for FORGE
-    private static ResourceLocation platformTag(String tagPath) {
+    public static ResourceLocation platformTag(String tagPath) {
         return platformTag(tagPath, tagPath);
     }
 
-    public static ResourceLocation platformTag(String fabric, String forge) {
-        return PlatHelper.getPlatform().isFabric() ? fabricTag(fabric) : forgeTag(forge);
+    public static ResourceLocation platformTag(String fabricPath, String forgePath) {
+        return PlatHelper.getPlatform().isFabric() ? fabricTag(fabricPath) : forgeTag(forgePath);
     }
 
     /// @return c:tagPath
