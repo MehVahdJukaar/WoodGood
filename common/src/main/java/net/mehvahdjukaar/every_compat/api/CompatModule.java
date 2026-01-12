@@ -65,11 +65,13 @@ public abstract class CompatModule {
         return modName;
     }
 
+    public abstract String getModNameAndBlockType();
+
     public abstract String shortenedId();
 
     @Override
     public String toString() {
-        return "WoodGood: " + LangBuilder.getReadableName(modId) + " Module";
+        return "Every Compat - " + LangBuilder.getReadableName(modId) + " Module";
     }
 
     public ResourceLocation modRes(String string) {

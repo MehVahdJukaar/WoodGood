@@ -6,7 +6,6 @@ import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
@@ -68,7 +67,7 @@ public abstract class EveryCompat {
             try {
                 action.accept(m);
             } catch (Throwable e) {
-                String modName = m != null ? m.getModName() : "NULL";
+                String modName = m != null ? m.getModNameAndBlockType() : "NULL";
                 EveryCompat.LOGGER.error("Module for the supported mod contains errors. This could mean that the mod has been recently updated & Every Compat needs updating (try downgrading the mod) or that you are using an older version. MAIN CAUSE: {} - {}", modName, e);
                 if (canShowErrorScreen) {
                     //if before first screen we can display an error screen

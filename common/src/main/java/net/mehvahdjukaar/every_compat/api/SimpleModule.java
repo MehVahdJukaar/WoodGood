@@ -9,6 +9,7 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -27,7 +28,7 @@ import java.util.function.Consumer;
 public class SimpleModule extends CompatModule {
 
     private final String shortId;
-    private String blockType = "";
+    protected String blockType = "";
     private final Map<String, EntrySet<?>> entries = new LinkedHashMap<>();
     private final Set<Class<? extends BlockType>> affectedTypes = new HashSet<>();
 
@@ -45,6 +46,12 @@ public class SimpleModule extends CompatModule {
 
     public void setBlockType(String blockType) {
         this.blockType = blockType;
+    }
+
+    public String getModNameAndBlockType() {
+        Optional<EntrySet<?>> entry = getEntries().stream().findFirst();
+        String blockType = entry.map(entrySet -> entrySet.getTypeClass().getSimpleName()).orElse("");
+        return modName + "'s " + blockType;
     }
 
     public final ResourceLocation makeMyRes(String name) {
@@ -100,9 +107,7 @@ public class SimpleModule extends CompatModule {
             }
         }
         bloat += blockCount;
-        if (blockCount > 0) {
-            EveryCompat.LOGGER.info("{}: registered {} {} blocks", this, blockCount, typeClass.getSimpleName());
-        }
+        if (blockCount > 0) EveryCompat.LOGGER.info("{}: registered {} {} blocks", this, blockCount, typeClass.getSimpleName());
     }
 
     @SuppressWarnings("unchecked")
@@ -147,7 +152,7 @@ public class SimpleModule extends CompatModule {
     @Override
     public String toString() {
         String typeOrEmpty = (!blockType.isEmpty()) ? "'s " + blockType : "";
-        return "[module: " + modId + typeOrEmpty + "]";
+        return "[WoodGood - " + LangBuilder.getReadableName(modId) + typeOrEmpty + " Module]";
     }
 
     @Override
