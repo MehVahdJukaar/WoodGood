@@ -149,7 +149,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6828158")
-//    modRuntimeOnly("curse.maven:backpacked-352835:5852971") //!! BETA
+//    modRuntimeOnly("curse.maven:backpacked-352835:7500600")
 //    modRuntimeOnly("curse.maven:blockus-312289:7060780")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579676") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:corail-pillar-266228:5613351")
