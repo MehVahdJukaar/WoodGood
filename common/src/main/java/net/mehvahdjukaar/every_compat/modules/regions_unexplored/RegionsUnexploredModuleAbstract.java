@@ -23,6 +23,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +34,11 @@ import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
+//SUPPORT: v0.5.7+
 public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
+    public final BlockBehaviour.Properties BRANCH_PROPERTIES = BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.MANGROVE_ROOTS).strength(1.0F, 1.5F).dynamicShape();
+    public final BlockBehaviour.Properties SHRUB_PROPERTIES = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ);
+
     public final SimpleEntrySet<WoodType, Block> branches;
     public final SimpleEntrySet<LeavesType, Block> shrubs;
 
@@ -147,16 +154,16 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
                     try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage logTop_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
-                        String resLocITEM = "item/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
-                        String resLocBLOCK = "block/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch";
+                        String resLocITEM = wood.createFullIdWith("", "item", shortenedId(), "", "branch");
+                        String resLocBLOCK = wood.createFullIdWith("", "block", shortenedId(), "", "branch");
 
                         List<Palette> list_logSide = Palette.fromAnimatedImage(logSide_texture);
                         List<Palette> list_logTop = Palette.fromAnimatedImage(logTop_texture);
 
                         // Block Texture
-                        sink.addTextureIfNotPresent(manager, resLocBLOCK, () -> respriterBlock.recolor(list_logSide));
+                        sink.addTextureIfNotPresent(manager, EveryCompat.res(resLocBLOCK), () -> respriterBlock.recolor(list_logSide));
                         // Item Texture
-                        sink.addTextureIfNotPresent(manager, resLocITEM, () -> {
+                        sink.addTextureIfNotPresent(manager, EveryCompat.res(resLocITEM), () -> {
                             TextureImage recoloredITEM = respriterSIDE.recolor(list_logSide);
                             try (TextureImage recoloredTOP = respriterTOP.recolor(list_logTop)) {
                                 TextureOps.applyOverlay(recoloredITEM, recoloredTOP);
@@ -201,12 +208,12 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
 
                         // Adding to the resource
                         String resLoc = "block/" + shrubPath;
-                        sink.addTextureIfNotPresent(manager, resLoc + "_bottom", () -> {
+                        sink.addTextureIfNotPresent(manager, EveryCompat.res(resLoc + "_bottom"), () -> {
                             // Recoloring the shrub's Bottom
                             return respriterBottom.recolor(logSidePalette);
                         });
 
-                        sink.addTextureIfNotPresent(manager, resLoc + "_top", () -> {
+                        sink.addTextureIfNotPresent(manager, EveryCompat.res(resLoc + "_top"), () -> {
                             // Recoloring the shrub's Top (the leaves part)
                             try (TextureImage recoloredShrubTop = respriterTop.recolor(leavesPalette)) {
                                 // Recoloring the shrub's Middle (the bark part)

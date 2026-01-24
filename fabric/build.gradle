@@ -149,7 +149,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6828158")
-//    modRuntimeOnly("curse.maven:backpacked-352835:5852971") //!! BETA
+//    modRuntimeOnly("curse.maven:backpacked-352835:7500600")
 //    modRuntimeOnly("curse.maven:blockus-312289:7060780")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579676") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:corail-pillar-266228:5613351")
@@ -210,7 +210,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:6273884") // Forge-Config-API-Port
+    modCompileOnly("curse.maven:regions-unexplored-659110:7434061") // Forge-Config-API-Port
 
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1") // Frozen-Lib
