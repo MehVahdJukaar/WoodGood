@@ -242,7 +242,7 @@ public abstract class EveryCompat {
 
                 addModule(module);
             } catch (Throwable t) {
-                ERRORED.put(new CompatModule(modId, modId, "unknown") {
+                ERRORED.put(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
                     @Override
                     public int bloatAmount() {
                         return 0;
@@ -359,7 +359,7 @@ public abstract class EveryCompat {
                 CompatModule module = moduleFactory.get().apply(modId);
                 addModule(module);
             } catch (Throwable e) {
-                ERRORED.put(new CompatModule(modId, modId, "unknown") {
+                ERRORED.put(new CompatModule(modId, modId,  EveryCompat.MOD_ID) {
 
                     @Override
                     public int bloatAmount() {

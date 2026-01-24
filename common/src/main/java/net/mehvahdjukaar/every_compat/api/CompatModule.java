@@ -24,6 +24,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Collection;
 import java.util.List;
@@ -173,7 +174,7 @@ public abstract class CompatModule {
     }
 
     //utility functions
-
+    @ApiStatus.Internal
     protected final <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
         return memorize(id, BuiltInRegistries.BLOCK);
     }
@@ -183,6 +184,7 @@ public abstract class CompatModule {
         return memorize(id, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
 
+    //internal use only. If you are a mod adding a module in your mod use by reference
     protected final Supplier<Block> getModBlock(String id) {
         return getModBlock(id, Block.class);
     }
