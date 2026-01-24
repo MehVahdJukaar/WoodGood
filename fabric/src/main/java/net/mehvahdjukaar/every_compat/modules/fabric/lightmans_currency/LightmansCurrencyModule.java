@@ -8,7 +8,6 @@ import io.github.lightman314.lightmanscurrency.common.core.ModBlockEntities;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;

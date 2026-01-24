@@ -5,7 +5,6 @@ import io.github.haykam821.woodenhoppers.block.WoodenHopperBlock;
 import io.github.haykam821.woodenhoppers.tag.WoodenHoppersBlockTags;
 import io.github.haykam821.woodenhoppers.tag.WoodenHoppersItemTags;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;

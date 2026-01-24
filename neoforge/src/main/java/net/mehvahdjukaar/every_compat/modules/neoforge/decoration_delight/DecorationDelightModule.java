@@ -5,7 +5,7 @@ import decor.delight.block.entity.OakCounterBlockEntity;
 import decor.delight.block.entity.OakCounterCornerBlockEntity;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;

@@ -3,7 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.variants;
 import kittehmod.vct.blocks.VCTCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;

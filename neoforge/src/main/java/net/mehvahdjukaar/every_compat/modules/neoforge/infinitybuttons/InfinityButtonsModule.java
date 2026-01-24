@@ -3,7 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.infinitybuttons;
 import net.larsmans.infinitybuttons.block.custom.button.WoodenButton;
 import net.larsmans.infinitybuttons.block.custom.secretbutton.PlankSecretButton;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;

@@ -6,7 +6,6 @@ import net.larsmans.infinitybuttons.block.custom.button.WoodenButton;
 import net.larsmans.infinitybuttons.block.custom.secretbutton.PlankSecretButton;
 import net.larsmans.infinitybuttons.item.InfinityButtonsItemGroups;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;

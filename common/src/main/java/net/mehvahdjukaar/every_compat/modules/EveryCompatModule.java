@@ -2,9 +2,7 @@ package net.mehvahdjukaar.every_compat.modules;
 
 import com.google.common.base.Suppliers;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.CreativeModeTab;
@@ -12,19 +10,18 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import org.jetbrains.annotations.Contract;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 // Module for every compat mod. Just has extra utilities so we can easily query external mods.
 // If you are an addon extend CompatModule instead (and just stuff in the API package)
 // Its fine to extend for our own addon mods I guess
+@SuppressWarnings("removal")
 public abstract class EveryCompatModule extends SimpleModule {
 
 
     public EveryCompatModule(String modId, String shortId) {
-        super(modId, shortId);
+        super(modId, shortId, EveryCompat.MOD_ID);
     }
 
     protected final  <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
@@ -56,8 +53,7 @@ public abstract class EveryCompatModule extends SimpleModule {
     private <T> Supplier<T> memor(String id, Registry<?> reg) {
         return Suppliers.memoize(() -> {
             try {
-                return (T) reg.getOptional(modRes(id))
-                        .orElseThrow();
+                return (T) reg.getOptional(modRes(id)).orElseThrow();
             } catch (Throwable e) {
                 throw new IllegalStateException("Could not find \"" + id + "\" in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +
                         "Is the mod, " + this.getModName().toUpperCase() + " up to date, if yes, then downgrade to the previous version & wait for an Every Compat update. Otherwise, update the mod to the latest version.");

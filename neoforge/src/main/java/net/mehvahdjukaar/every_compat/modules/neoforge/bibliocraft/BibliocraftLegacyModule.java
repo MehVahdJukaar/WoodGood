@@ -12,7 +12,7 @@ import com.github.minecraftschurlimods.bibliocraft.content.shelf.ShelfBlock;
 import com.github.minecraftschurlimods.bibliocraft.content.table.TableBlock;
 import com.github.minecraftschurlimods.bibliocraft.content.toolrack.ToolRackBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;

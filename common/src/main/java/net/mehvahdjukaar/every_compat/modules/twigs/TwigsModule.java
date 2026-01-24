@@ -1,7 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
 
 import com.ninni.twigs.block.TableBlock;
-import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.TabAddMode;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;

@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;

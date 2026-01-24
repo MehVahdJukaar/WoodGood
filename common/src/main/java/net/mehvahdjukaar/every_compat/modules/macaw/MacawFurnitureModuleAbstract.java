@@ -1,10 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.macaw;
 
 import net.kikoz.mcwfurnitures.MacawsFurniture;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;

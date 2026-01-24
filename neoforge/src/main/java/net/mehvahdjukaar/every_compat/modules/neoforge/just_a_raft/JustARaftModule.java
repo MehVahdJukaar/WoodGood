@@ -6,7 +6,7 @@ import com.mrbysco.justaraftmod.items.RaftItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;

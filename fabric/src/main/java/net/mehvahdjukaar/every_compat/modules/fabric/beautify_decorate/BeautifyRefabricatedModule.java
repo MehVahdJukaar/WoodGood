@@ -5,7 +5,6 @@ import io.github.suel_ki.beautify.common.block.PictureFrame;
 import io.github.suel_ki.beautify.common.block.Trellis;
 import io.github.suel_ki.beautify.core.init.BlockInit;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;

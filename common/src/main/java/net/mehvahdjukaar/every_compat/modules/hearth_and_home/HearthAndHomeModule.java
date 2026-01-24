@@ -4,7 +4,6 @@ import com.starfish_studios.hearth_and_home.HearthAndHome;
 import com.starfish_studios.hearth_and_home.block.LatticeBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
