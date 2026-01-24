@@ -16,12 +16,12 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: FABRIC-v1.2.8+ | NEOFORGE-v1.2.9+
-public class MoreCraftingTablesModule extends SimpleModule {
+public class MoreCraftingTablesModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;
 
     public MoreCraftingTablesModule(String modId) {
-        super(modId, "lolmct", EveryCompat.MOD_ID);
+        super(modId, "lolmct");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",

@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 
 
-public class MosaicCarpentryModule extends SimpleModule {
+public class MosaicCarpentryModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> mosaics;
     public final SimpleEntrySet<WoodType, Block> mosaicStairs;

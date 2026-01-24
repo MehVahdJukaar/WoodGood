@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.SoundType;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 //SUPPORT: v2.0.2+
-public class BeautifyDecorateModule extends SimpleModule {
+public class BeautifyDecorateModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> tellis;
     public final SimpleEntrySet<WoodType, Block> blinds;

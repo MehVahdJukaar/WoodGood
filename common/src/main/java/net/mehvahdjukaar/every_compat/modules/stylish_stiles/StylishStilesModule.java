@@ -14,7 +14,7 @@ import net.weaverfever.stylishstiles.block.custom.Stile;
 import java.util.function.Supplier;
 
 //SUPPORT: v1.1.1+
-public class StylishStilesModule extends SimpleModule {
+public class StylishStilesModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> STILE;
 
     public StylishStilesModule(String modId) {

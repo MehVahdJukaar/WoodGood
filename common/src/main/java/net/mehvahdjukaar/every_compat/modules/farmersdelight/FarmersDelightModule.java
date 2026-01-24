@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -37,12 +38,12 @@ import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCache
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 // SUPPORT: FABRIC-v3.2.0+ | NEOFORGE-v1.2.9+
-public class FarmersDelightModule extends SimpleModule {
+public class FarmersDelightModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> cabinets;
 
     public FarmersDelightModule(String modId) {
-        super(modId, "fd", EveryCompat.MOD_ID);
+        super(modId, "fd");
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,

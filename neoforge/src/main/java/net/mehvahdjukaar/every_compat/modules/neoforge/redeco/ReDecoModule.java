@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 //SUPPORT: v1.12.1+
-public class ReDecoModule extends SimpleModule {
+public class ReDecoModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> tables,
             side_tables,

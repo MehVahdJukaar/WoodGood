@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -31,7 +32,7 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.doChildrenExistFor
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
 //SUPPORT: v4.0+
-public class WilderWildModule extends SimpleModule {
+public class WilderWildModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, HollowedLogBlock> hollow_logs;
     public final SimpleEntrySet<WoodType, HollowedLogBlock> stripped_hollow_logs;

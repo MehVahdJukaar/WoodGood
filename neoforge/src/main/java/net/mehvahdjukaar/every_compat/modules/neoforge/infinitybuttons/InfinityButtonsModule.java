@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 
 //SUPPORT: //!! NOT AVAILABLE
-public class InfinityButtonsModule extends SimpleModule {
+public class InfinityButtonsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> largeButtons;
     public final SimpleEntrySet<WoodType, Block> plankSecretButtons;

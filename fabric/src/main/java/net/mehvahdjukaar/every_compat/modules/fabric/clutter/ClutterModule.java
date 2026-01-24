@@ -7,6 +7,7 @@ import net.emilsg.clutter.util.ModItemGroups;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -38,7 +39,7 @@ import java.util.HashMap;
 import java.util.function.ToIntFunction;
 
 //SUPPORT: v0.6.5+
-public class ClutterModule extends SimpleModule {
+public class ClutterModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> wall_bookshelves;
     public final SimpleEntrySet<WoodType, Block> window_sills;

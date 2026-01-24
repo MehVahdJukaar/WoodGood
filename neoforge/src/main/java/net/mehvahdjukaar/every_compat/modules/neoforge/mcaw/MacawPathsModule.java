@@ -13,7 +13,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT v1.0.4+
-public class MacawPathsModule extends SimpleModule {
+public class MacawPathsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> PLANKS_PATHS;
 

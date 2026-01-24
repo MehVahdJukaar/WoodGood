@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -18,7 +19,7 @@ import net.minecraft.world.level.material.MapColor;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 // SUPPORT: v3.4.0+
-public abstract class MacawFurnitureModuleAbstract extends SimpleModule {
+public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
 
     //TYPE: CABINET
     public final SimpleEntrySet<WoodType, Block> kitchen_cabinet,
@@ -104,7 +105,7 @@ public abstract class MacawFurnitureModuleAbstract extends SimpleModule {
             strippedWardrobe;
 
     public MacawFurnitureModuleAbstract(String modId) {
-        super(modId, "mcfur", EveryCompat.MOD_ID);
+        super(modId, "mcfur");
         ResourceLocation tab = (PlatHelper.getPlatform().isFabric())
                 ? MacawsFurniture.FURNITUREGROUP.location()
                 : modRes("furnitures");

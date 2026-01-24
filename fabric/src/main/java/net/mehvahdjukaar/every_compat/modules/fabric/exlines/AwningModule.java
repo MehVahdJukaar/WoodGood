@@ -5,6 +5,7 @@ import com.exline.exlineawnings.block.AwningBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.BlockPos;
@@ -15,7 +16,7 @@ import net.minecraft.world.level.material.MapColor;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STAIRS;
 
 //SUPPORT: v1.0.1+
-public class AwningModule extends SimpleModule {
+public class AwningModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, AwningBlock> awnings;
     public final SimpleEntrySet<WoodType, AwningBlock> awnings_log;

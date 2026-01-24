@@ -12,6 +12,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -35,7 +36,7 @@ import java.util.stream.Stream;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 
 //SUPPORT: v13.11.3+
-public class StorageDrawersModule extends SimpleModule {
+public class StorageDrawersModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, BlockStandardDrawers> FULL_DRAWERS_1;
     public final SimpleEntrySet<WoodType, BlockStandardDrawers> FULL_DRAWERS_2;
@@ -46,7 +47,7 @@ public class StorageDrawersModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, BlockTrim> TRIMS;
 
     public StorageDrawersModule(String modId) {
-        super(modId, "sd", EveryCompat.MOD_ID);
+        super(modId, "sd");
         ResourceLocation tab = modRes(ModConstants.MOD_ID);
 
         FULL_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "full_drawers_1",

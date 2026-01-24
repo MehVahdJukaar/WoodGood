@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -15,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: v3.0.1+
-public class AnotherFurnitureModule extends SimpleModule {
+public class AnotherFurnitureModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> tables;
     public final SimpleEntrySet<WoodType, Block> chairs;

@@ -31,7 +31,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v1.31.2+
-public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
+public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
     private static final ResourceLocation TAG_FORGE_WORKBENCH = ResourceLocation.fromNamespaceAndPath("c", "workbench");
     private static final ResourceLocation TAG_PACKINGTAPE_BLACKLIST = ResourceLocation.fromNamespaceAndPath("packingtape", "te_blacklist");
     public final SimpleEntrySet<WoodType, Block> double_bookshelves, open_double_bookshelves, min_bookshelves, open_min_bookshelves, lantern_bookshelves;
@@ -280,7 +280,7 @@ public class WorkshopForHandsomeAdventurerModule extends SimpleModule {
                     blacklist.add(MessageFormat.format("{0}:wfha/{1}/dual_table_top_left_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                     blacklist.add(MessageFormat.format("{0}:wfha/{1}/dual_table_top_right_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                     // we need to register things for the workstation placer item - so that it knows what blocks to use
-//                    ExternalWoodSupport.registerHostMod(w.getTypeName(), EveryCompat.MOD_ID);
+//                    ExternalWoodSupport.registerHostMod(w.getTypeName());
 //                    ExternalWoodSupport.registerPrefix(w.getTypeName(), "wfha/" + w.getNamespace() + "/");
                 }
             }

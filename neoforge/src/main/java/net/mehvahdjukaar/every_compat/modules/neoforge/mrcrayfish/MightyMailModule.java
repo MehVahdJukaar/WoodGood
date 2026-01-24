@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
 //SUPPORT: v1.0.14+
-public class MightyMailModule extends SimpleModule {
+public class MightyMailModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> mailboxes;
 

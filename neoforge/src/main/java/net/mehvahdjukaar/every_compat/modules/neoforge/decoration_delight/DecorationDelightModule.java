@@ -14,7 +14,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: v1.0.0
-public class DecorationDelightModule extends SimpleModule {
+public class DecorationDelightModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> COUNTER;
     public final SimpleEntrySet<WoodType, Block> COUNTER_CORNER;
     public final SimpleEntrySet<WoodType, Block> COUNTER_BEND;

@@ -26,7 +26,7 @@ import java.util.List;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 //SUPPORT: v1.5.4+
-public class BibliocraftLegacyModule extends SimpleModule {
+public class BibliocraftLegacyModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> bookcase;
     public final SimpleEntrySet<WoodType, Block> fancy_armor_stand;

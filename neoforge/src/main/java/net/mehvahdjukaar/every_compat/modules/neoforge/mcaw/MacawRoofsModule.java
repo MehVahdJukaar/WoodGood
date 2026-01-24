@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 //SUPPORT: v2.2.4+
-public class MacawRoofsModule extends SimpleModule {
+public class MacawRoofsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> ATTIC_ROOFS;
     public final SimpleEntrySet<WoodType, Block> LOWER_ROOFS;

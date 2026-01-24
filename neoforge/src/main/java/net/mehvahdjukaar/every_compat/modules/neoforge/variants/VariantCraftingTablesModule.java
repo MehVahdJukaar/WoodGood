@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.SoundType;
 import java.util.List;
 
 //SUPPORT: NOT_AVAILABLE (Kitteh6660)
-public class VariantCraftingTablesModule extends SimpleModule {
+public class VariantCraftingTablesModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;
 

@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -31,7 +32,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRI
 // FABRIC version of this module is already included in the mod. It's currently OUTDATED
 
 //SUPPORT: v1.0.2+
-public class BuildingButBetterModule extends SimpleModule {
+public class BuildingButBetterModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> layers;
     public final SimpleEntrySet<WoodType, Block> trims;

@@ -31,7 +31,7 @@ public class SimpleModule extends CompatModule {
 
     @Deprecated(forRemoval = true)
     public SimpleModule(String modId, String shortId) {
-        super(modId, shortId, EveryCompat.MOD_ID);
+        super(modId, shortId);
     }
 
     public SimpleModule(String modId, String shortId, String myNamespace) {

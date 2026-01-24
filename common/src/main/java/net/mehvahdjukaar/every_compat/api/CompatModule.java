@@ -19,9 +19,11 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.GravelBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.ApiStatus;
@@ -173,55 +175,6 @@ public abstract class CompatModule {
     public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
     }
 
-    //utility functions
-    @ApiStatus.Internal
-    protected final <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
-        return memorize(id, BuiltInRegistries.BLOCK);
-    }
-
-    @Deprecated(forRemoval = true)
-    protected final Supplier<CreativeModeTab> getModTab(String id) {
-        return memorize(id, BuiltInRegistries.CREATIVE_MODE_TAB);
-    }
-
-    //internal use only. If you are a mod adding a module in your mod use by reference
-    protected final Supplier<Block> getModBlock(String id) {
-        return getModBlock(id, Block.class);
-    }
-
-    protected final Supplier<Item> getModItem(String id) {
-        return memorize(id, BuiltInRegistries.ITEM);
-    }
-
-    protected final <B extends BlockEntity> Supplier<BlockEntityType<B>> getModTile(String id, Class<B> tileEntityClass) {
-        return memorize(id, BuiltInRegistries.BLOCK_ENTITY_TYPE);
-    }
-
-    protected final Supplier<BlockEntityType<BlockEntity>> getModTile(String id) {
-        return getModTile(id, BlockEntity.class);
-    }
-
-    //how much crap this module has registered
-    public abstract int bloatAmount();
-
-    //used for creative tabs
-    public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
-        return List.of();
-    }
-
-
-    @SuppressWarnings("unchecked")
-    public <T> Supplier<T> memorize(String id, Registry<?> reg) {
-        return Suppliers.memoize(() -> {
-            try {
-                return (T) reg.getOptional(modRes(id))
-                        .orElseThrow();
-            } catch (Throwable e) {
-                throw new IllegalStateException("Could not find \"" + id + "\" in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +
-                        "Is the mod, " + this.getModName().toUpperCase() + " up to date, if yes, then downgrade to the previous version & wait for an Every Compat update. Otherwise, update the mod to the latest version.");
-            }
-        });
-    }
 
     // Ec tab
     @SuppressWarnings("unchecked")
@@ -239,4 +192,63 @@ public abstract class CompatModule {
     public String[] getClientResourcesNamespaces() {
         return new String[]{myNamespace};
     }
+
+
+    //utility functions. TODO: remove all these
+    //Don't use these! Use by reference instead! that's the whole point of making a non EC-owned module!
+
+    @Deprecated(forRemoval = true)
+    protected <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
+        return memorize(id, BuiltInRegistries.BLOCK);
+    }
+
+    @Deprecated(forRemoval = true)
+    protected Supplier<CreativeModeTab> getModTab(String id) {
+        return memorize(id, BuiltInRegistries.CREATIVE_MODE_TAB);
+    }
+
+    //internal use only. If you are a mod adding a module in your mod use by reference
+    @Deprecated(forRemoval = true)
+    protected Supplier<Block> getModBlock(String id) {
+        return getModBlock(id, Block.class);
+    }
+
+    @Deprecated(forRemoval = true)
+    protected Supplier<Item> getModItem(String id) {
+        return memorize(id, BuiltInRegistries.ITEM);
+    }
+
+    @Deprecated(forRemoval = true)
+    protected <B extends BlockEntity> Supplier<BlockEntityType<B>> getModTile(String id, Class<B> tileEntityClass) {
+        return memorize(id, BuiltInRegistries.BLOCK_ENTITY_TYPE);
+    }
+
+    @Deprecated(forRemoval = true)
+    protected Supplier<BlockEntityType<BlockEntity>> getModTile(String id) {
+        return getModTile(id, BlockEntity.class);
+    }
+
+    //how much crap this module has registered
+    public abstract int bloatAmount();
+
+    //used for creative tabs
+    public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
+        return List.of();
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Deprecated(forRemoval = true)
+    public <T> Supplier<T> memorize(String id, Registry<?> reg) {
+        return Suppliers.memoize(() -> {
+            try {
+                return (T) reg.getOptional(modRes(id))
+                        .orElseThrow();
+            } catch (Throwable e) {
+                throw new IllegalStateException("Could not find \"" + id + "\" in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +
+                        "Is the mod, " + this.getModName().toUpperCase() + " up to date, if yes, then downgrade to the previous version & wait for an Every Compat update. Otherwise, update the mod to the latest version.");
+            }
+        });
+    }
+
 }

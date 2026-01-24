@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -30,7 +31,7 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.function.Consumer;
 
 // SUPPORT: v24+
-public class FurnishModule extends SimpleModule {
+public class FurnishModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> bedsideTable;
     public final SimpleEntrySet<WoodType, Block> bench;

@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -27,7 +28,7 @@ import java.util.function.Consumer;
 
 //SUPPORT: DramaticDoors v3.3.2+ | Macaw's Door v1.1.1+
 //NOTE: The library of FABRIC and FORGE are not the same, must be in separated folders
-public class DramaticDoorsMacawModule extends SimpleModule {
+public class DramaticDoorsMacawModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> tallBarkGlassDoors,
             tallBarnDoors,

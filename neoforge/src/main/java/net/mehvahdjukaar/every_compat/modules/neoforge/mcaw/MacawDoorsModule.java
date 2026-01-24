@@ -20,7 +20,7 @@ import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCache
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
 
 //SUPPORT: v1.1.2+
-public class MacawDoorsModule extends SimpleModule {
+public class MacawDoorsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> WaffleDoors,
             BarkGlassDoors,
@@ -46,7 +46,7 @@ public class MacawDoorsModule extends SimpleModule {
             WhisperingDoors;
 
     public MacawDoorsModule(String modId) {
-        super(modId, "mcd", EveryCompat.MOD_ID);
+        super(modId, "mcd");
         ResourceLocation tab = modRes(MacawsDoors.MOD_ID);
 
         WaffleDoors = SimpleEntrySet.builder(WoodType.class, "waffle_door",

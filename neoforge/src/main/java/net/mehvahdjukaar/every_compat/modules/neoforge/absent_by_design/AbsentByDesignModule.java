@@ -17,7 +17,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRI
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.WOOD;
 
 //SUPPORT: v1.8.0+
-public class AbsentByDesignModule extends SimpleModule {
+public class AbsentByDesignModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> fence_log;
     public final SimpleEntrySet<WoodType, Block> wall_log;

@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 //SUPPORT: v2.0+
-public class TimberFramesModule extends SimpleModule {
+public class TimberFramesModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> frame_alpha;
     public final SimpleEntrySet<WoodType, Block> frame_beta;

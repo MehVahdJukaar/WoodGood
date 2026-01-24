@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.TransparentBlock;
 
-public class PremiumWoodModule extends SimpleModule {
+public class PremiumWoodModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;
     public final SimpleEntrySet<WoodType, Block> bookshelf;

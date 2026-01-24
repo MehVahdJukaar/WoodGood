@@ -12,6 +12,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.misc.UtilityTag;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -37,7 +38,7 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.copyChildrenProper
 import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.doChildrenExistFor;
 
 //SUPPORT: v2.9.11+ (FABRIC)
-public class BlockusModule extends SimpleModule {
+public class BlockusModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> herringbone_planks;
     public final SimpleEntrySet<WoodType, Block> mossy_planks;
@@ -57,7 +58,7 @@ public class BlockusModule extends SimpleModule {
     public final SimpleEntrySet<LeavesType, Block> small_hedge;
 
     public BlockusModule(String modId) {
-        super(modId, "bus", EveryCompat.MOD_ID);
+        super(modId, "bus");
         ResourceLocation tab = modRes("blockus_building_blocks");
 
         herringbone_planks = SimpleEntrySet.builder(WoodType.class, "planks", "herringbone",

@@ -26,7 +26,7 @@ import java.util.Map;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //SUPPORT: v1.1.2+
-public class UnusualFurnitureModule extends SimpleModule {
+public class UnusualFurnitureModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> carved;
     public final SimpleEntrySet<WoodType, Block> table;
@@ -45,7 +45,7 @@ public class UnusualFurnitureModule extends SimpleModule {
     public final String shortenedId;
 
     public UnusualFurnitureModule(String modId) {
-        super(modId, "uf", EveryCompat.MOD_ID);
+        super(modId, "uf");
         this.shortenedId = shortenedId();
         ResourceLocation tab = modRes(modId);
 

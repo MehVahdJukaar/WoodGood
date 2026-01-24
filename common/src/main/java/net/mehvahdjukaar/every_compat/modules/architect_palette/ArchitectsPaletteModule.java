@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -23,7 +24,7 @@ import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCache
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
 
 //SUPPORT: v1.4.0-Beta.5+
-public class ArchitectsPaletteModule extends SimpleModule {
+public class ArchitectsPaletteModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> railings;
     public final SimpleEntrySet<WoodType, Block> boards;
@@ -32,7 +33,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> boardWalls;
 
     public ArchitectsPaletteModule(String modId) {
-        super(modId, "ap", EveryCompat.MOD_ID);
+        super(modId, "ap");
         ResourceLocation tab = modRes("architects_palette");
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",

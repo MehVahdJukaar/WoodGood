@@ -21,7 +21,7 @@ import java.util.Objects;
 
 //SUPPORT: v3.3.2+
 //NOTE: The library of FABRIC and FORGE are not the same, must be in separated folders
-public class DramaticDoorsModule extends SimpleModule {
+public class DramaticDoorsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> shortDoors;
     public final SimpleEntrySet<WoodType, Block> tallDoors;

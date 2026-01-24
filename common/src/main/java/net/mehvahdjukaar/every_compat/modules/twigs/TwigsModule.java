@@ -10,7 +10,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: v3.1.1+
-public class TwigsModule extends SimpleModule {
+public class TwigsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> tables;
 

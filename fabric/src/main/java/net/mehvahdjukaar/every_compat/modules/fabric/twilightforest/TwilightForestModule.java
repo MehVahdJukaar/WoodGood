@@ -4,6 +4,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -20,7 +21,7 @@ import java.util.function.Supplier;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: //!! NOT AVAILABLE
-public class TwilightForestModule extends SimpleModule {
+public class TwilightForestModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> banisters;
 //    public final SimpleEntrySet<WoodType, HollowLogVertical> hollowLogsVertical;

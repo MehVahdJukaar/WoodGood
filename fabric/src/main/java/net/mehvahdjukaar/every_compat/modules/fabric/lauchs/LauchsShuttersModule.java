@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -12,7 +13,7 @@ import net.minecraft.tags.BlockTags;
 import net.stehschnitzel.shutter.block.Shutter;
 
 //SUPPORT: v2.0.2+
-public class LauchsShuttersModule extends SimpleModule {
+public class LauchsShuttersModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Shutter> shutters;
 

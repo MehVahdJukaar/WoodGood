@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.camp_chair;
 import dlovin.smalls.campchair.core.blocks.CampChairBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
@@ -12,7 +13,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class CampChairModule extends SimpleModule {
+public class CampChairModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, CampChairBlock> campChairs;
 

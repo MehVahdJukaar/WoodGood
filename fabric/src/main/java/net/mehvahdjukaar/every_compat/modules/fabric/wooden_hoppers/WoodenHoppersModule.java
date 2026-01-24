@@ -6,6 +6,7 @@ import io.github.haykam821.woodenhoppers.tag.WoodenHoppersBlockTags;
 import io.github.haykam821.woodenhoppers.tag.WoodenHoppersItemTags;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -15,7 +16,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: v1.6.0+
-public class WoodenHoppersModule extends SimpleModule {
+public class WoodenHoppersModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> hoppers;
 

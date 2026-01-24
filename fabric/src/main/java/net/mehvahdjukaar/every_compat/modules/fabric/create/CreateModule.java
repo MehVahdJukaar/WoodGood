@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.UtilityTag;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -16,13 +17,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 // SUPPORT: v0.5.1+
-public class CreateModule extends SimpleModule {
+public class CreateModule extends EveryCompatModule {
 
 //    public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
 
     public CreateModule(String modId) {
-        super(modId, "c", EveryCompat.MOD_ID);
+        super(modId, "c");
         ResourceLocation tab = modRes("palettes");
 
 /*

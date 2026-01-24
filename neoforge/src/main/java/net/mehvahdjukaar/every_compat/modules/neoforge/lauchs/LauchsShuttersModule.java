@@ -15,7 +15,7 @@ import net.stehschnitzel.shutter.common.blocks.Shutter;
 import java.util.List;
 
 //SUPPORT: v2.0.2+
-public class LauchsShuttersModule extends SimpleModule {
+public class LauchsShuttersModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> shutters;
 

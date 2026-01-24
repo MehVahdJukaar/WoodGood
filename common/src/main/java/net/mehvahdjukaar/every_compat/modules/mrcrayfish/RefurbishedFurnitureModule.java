@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 //SUPPORT: v1.0.12+
-public class RefurbishedFurnitureModule extends SimpleModule {
+public class RefurbishedFurnitureModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> chairs;
     public final SimpleEntrySet<WoodType, Block> tables;
@@ -70,7 +70,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 
 
     public RefurbishedFurnitureModule(String modId) {
-        super(modId, "rfm", EveryCompat.MOD_ID);
+        super(modId, "rfm");
         ResourceLocation tab = modRes("creative_tab");
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",

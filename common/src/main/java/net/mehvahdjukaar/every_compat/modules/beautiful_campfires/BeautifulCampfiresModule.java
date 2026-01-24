@@ -44,13 +44,13 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew
 
 //SUPPORT: v1.0.2+
 //NOTE: The Project ID is 1085950
-public class BeautifulCampfiresModule extends SimpleModule {
+public class BeautifulCampfiresModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, CampfireBlock> campfires;
     public final SimpleEntrySet<WoodType, CampfireBlock> soul_campfires;
 
     public BeautifulCampfiresModule(String modId) {
-        super(modId, "bc", EveryCompat.MOD_ID);
+        super(modId, "bc");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         campfires = SimpleEntrySet.builder(WoodType.class, "campfire",

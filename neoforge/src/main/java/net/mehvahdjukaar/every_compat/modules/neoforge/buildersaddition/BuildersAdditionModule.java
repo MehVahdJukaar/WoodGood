@@ -37,7 +37,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LEAV
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v2.1.0+
-public class BuildersAdditionModule extends SimpleModule {
+public class BuildersAdditionModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> panels,
             tables,
@@ -64,7 +64,7 @@ public class BuildersAdditionModule extends SimpleModule {
     public final SimpleEntrySet<LeavesType, Block> hedges;
 
     public BuildersAdditionModule(String modId) {
-        super(modId, "bca", EveryCompat.MOD_ID);
+        super(modId, "bca");
         ResourceLocation tab = modRes("builders_addition_group");
 
 

@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -35,7 +36,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
 //SUPPORT: v0.5.7+
-public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
+public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule {
     public final BlockBehaviour.Properties BRANCH_PROPERTIES = BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.MANGROVE_ROOTS).strength(1.0F, 1.5F).dynamicShape();
     public final BlockBehaviour.Properties SHRUB_PROPERTIES = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ);
 
@@ -43,7 +44,7 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
     public final SimpleEntrySet<LeavesType, Block> shrubs;
 
     public RegionsUnexploredModuleAbstract(String modId) {
-        super(modId, "ru", EveryCompat.MOD_ID);
+        super(modId, "ru");
         ResourceLocation tab = (PlatHelper.getPlatform().isFabric()) ? modRes("main") : modRes("ru_main");
 
         branches = SimpleEntrySet.builder(WoodType.class, "branch",

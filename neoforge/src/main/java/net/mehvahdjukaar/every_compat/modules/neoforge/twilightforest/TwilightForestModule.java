@@ -28,7 +28,7 @@ import twilightforest.item.HollowLogItem;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v4.6.2790+
-public class TwilightForestModule extends SimpleModule {
+public class TwilightForestModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, BanisterBlock> banisters;
     public final SimpleEntrySet<WoodType, VerticalHollowLogBlock> hollowLogsVertical;

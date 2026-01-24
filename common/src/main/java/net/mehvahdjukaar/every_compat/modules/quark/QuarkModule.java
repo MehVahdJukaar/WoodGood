@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.every_compat.modules.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -49,7 +50,7 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //SUPPORT: v4.0-435+
-public class QuarkModule extends SimpleModule {
+public class QuarkModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> verticalSlabs;
     public final SimpleEntrySet<WoodType, Block> bookshelves;
@@ -64,7 +65,7 @@ public class QuarkModule extends SimpleModule {
     public final SimpleEntrySet<LeavesType, Block> leafCarpets;
 
     public QuarkModule(String modId) {
-        super(modId, "q", EveryCompat.MOD_ID);
+        super(modId, "q");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         verticalSlabs = QuarkSimpleEntrySet.builder(WoodType.class, "vertical_slab",

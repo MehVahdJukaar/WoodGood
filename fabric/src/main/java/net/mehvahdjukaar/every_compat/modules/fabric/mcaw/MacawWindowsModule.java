@@ -4,6 +4,7 @@ import net.kikoz.mcwwindows.MacawsWindows;
 import net.kikoz.mcwwindows.objects.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -18,7 +19,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLAN
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v2.2.1+
-public class MacawWindowsModule extends SimpleModule {
+public class MacawWindowsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> window;
     public final SimpleEntrySet<WoodType, Block> window2;
@@ -40,7 +41,7 @@ public class MacawWindowsModule extends SimpleModule {
 
 
     public MacawWindowsModule(String modId) {
-        super(modId, "mcw", EveryCompat.MOD_ID);
+        super(modId, "mcw");
         ResourceKey<CreativeModeTab> tab = MacawsWindows.WINDOWSGROUP;
 
         window = SimpleEntrySet.builder(WoodType.class, "window",

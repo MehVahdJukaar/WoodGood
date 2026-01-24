@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -33,13 +34,13 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
 //SUPPORT: FABRIC-v1.5.8+ | NEOFORGE-v1.5.9+
-public class MoreChestVariantsModule extends SimpleModule {
+public class MoreChestVariantsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> chests;
     public final SimpleEntrySet<WoodType, Block> trappedChests;
 
     public MoreChestVariantsModule(String modID) {
-        super(modID, "mcv", EveryCompat.MOD_ID);
+        super(modID, "mcv");
         ResourceKey<CreativeModeTab> functionalTab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
         ResourceKey<CreativeModeTab> redstoneTab = CreativeModeTabs.REDSTONE_BLOCKS;
 

@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 //SUPPORT: v0.5.2+
-public class OreberriesReplantedModule extends SimpleModule {
+public class OreberriesReplantedModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, VatBlock> vats;
 

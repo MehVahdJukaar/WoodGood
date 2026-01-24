@@ -12,7 +12,7 @@ import ovh.corail.corail_pillar.block.BlockPillar;
 import ovh.corail.corail_pillar.registry.ModTabs;
 
 //SUPPORT: v5.9.1+
-public class CorailPillarModule extends SimpleModule {
+public class CorailPillarModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> LOG_PILLAR;
     public final SimpleEntrySet<WoodType, Block> SMALL_LOG_PILLAR;
     public final SimpleEntrySet<WoodType, Block> PLANK_PILLAR;

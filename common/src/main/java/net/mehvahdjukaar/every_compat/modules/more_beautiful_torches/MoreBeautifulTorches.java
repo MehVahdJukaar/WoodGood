@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -20,7 +21,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRI
 
 
 //SUPPORT: v3.0.0+
-public class MoreBeautifulTorches extends SimpleModule {
+public class MoreBeautifulTorches extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> log_wall_torch,
                                                  log_torch;
@@ -45,7 +46,7 @@ public class MoreBeautifulTorches extends SimpleModule {
 
 
     public MoreBeautifulTorches(String modId) {
-        super(modId, "mbt", EveryCompat.MOD_ID);
+        super(modId, "mbt");
         ResourceLocation tab = (PlatHelper.Platform.FABRIC.isFabric())
                 ? modRes("goldenfoods_tab")
                 : modRes("morebeautifultorches_tab");

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 //SUPPORT: v1.3+
-public class BuildersDelightModule extends SimpleModule {
+public class BuildersDelightModule extends EveryCompatModule {
     //TYPE: ITEM
 /*
     public final ItemOnlyEntrySet<WoodType, Item> FURNITURE_KIT;

@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.SoundType;
 import java.util.List;
 
 //SUPPORT: v2.2.5.2+
-public class LightmansCurrencyModule extends SimpleModule {
+public class LightmansCurrencyModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> auction_stands;
     public final SimpleEntrySet<WoodType, Block> shelves;

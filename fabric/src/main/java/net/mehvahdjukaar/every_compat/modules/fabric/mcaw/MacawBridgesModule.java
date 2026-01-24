@@ -6,6 +6,7 @@ import net.kikoz.mcwbridges.objects.*;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -19,7 +20,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.FENC
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 // SUPPORT: v3.0.0+
-public class MacawBridgesModule extends SimpleModule {
+public class MacawBridgesModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> bridgePiers,
             bridgeMiddles,

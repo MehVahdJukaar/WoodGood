@@ -4,6 +4,7 @@ import me.ultrusmods.missingwilds.block.FallenLogBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -11,7 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT v4.0.0-BETA+
-public class MissingWildModule extends SimpleModule {
+public class MissingWildModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> fallenLogs;
 

@@ -16,7 +16,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLAN
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v2.2.1+
-public class MacawWindowsModule extends SimpleModule {
+public class MacawWindowsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> window;
     public final SimpleEntrySet<WoodType, Block> window2;
@@ -37,7 +37,7 @@ public class MacawWindowsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> louveredShutter;
 
     public MacawWindowsModule(String modId) {
-        super(modId, "mcw", EveryCompat.MOD_ID);
+        super(modId, "mcw");
         ResourceLocation tab = modRes(modId);
 
         window = SimpleEntrySet.builder(WoodType.class, "window",

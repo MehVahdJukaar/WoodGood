@@ -36,14 +36,14 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 //SUPPORT: v1.5.4+
-public class FunctionalStorageModule extends SimpleModule {
+public class FunctionalStorageModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, DrawerBlock> drawer_1;
     public final SimpleEntrySet<WoodType, DrawerBlock> drawer_2;
     public final SimpleEntrySet<WoodType, DrawerBlock> drawer_4;
 
     public FunctionalStorageModule(String modId) {
-        super(modId, "fs", EveryCompat.MOD_ID);
+        super(modId, "fs");
         ResourceLocation tab = modRes("main");
 
         drawer_1 = SimpleEntrySet.builder(WoodType.class, "1",

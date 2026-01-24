@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -29,7 +30,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //NAME: Decorative Blocks Reborn
 //SUPPORT: v6.0.1+
-public class DecorativeBlocksModule extends SimpleModule {
+public class DecorativeBlocksModule extends EveryCompatModule {
 
     public final Map<WoodType, net.minecraft.world.level.block.state.properties.WoodType> wtConversion = new HashMap<>();
     public final SimpleEntrySet<WoodType, Block> beams;
@@ -38,7 +39,7 @@ public class DecorativeBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> seats;
 
     public DecorativeBlocksModule(String modId) {
-        super(modId, "db", EveryCompat.MOD_ID);
+        super(modId, "db");
         ResourceLocation tab = modRes("general");
 
         beams = SimpleEntrySet.builder(WoodType.class, "beam",

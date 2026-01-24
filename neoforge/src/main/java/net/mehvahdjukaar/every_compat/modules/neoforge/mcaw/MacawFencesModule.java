@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 
 //SUPPORT v1.1.1+
-public class MacawFencesModule extends SimpleModule {
+public class MacawFencesModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> highleyGates,
             horseFences,

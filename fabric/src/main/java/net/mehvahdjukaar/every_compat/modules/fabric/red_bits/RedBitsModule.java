@@ -4,6 +4,7 @@ import net.darktree.redbits.RedBits;
 import net.darktree.redbits.blocks.LargeButtonBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.material.PushReaction;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.BUTTON;
 
 //SUPPORT v1.16.1+
-public class RedBitsModule extends SimpleModule {
+public class RedBitsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> large_buttons;
 

@@ -19,12 +19,12 @@ import java.util.List;
 
 // SUPPORT: v7.0.2+
 // NOTE: More Crafting Table for Forge! is developed by 852Duart/DaveDuart And is FORGE only
-public class MoreCraftingTablesForForgeModule extends SimpleModule {
+public class MoreCraftingTablesForForgeModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;
 
     public MoreCraftingTablesForForgeModule(String modId) {
-        super(modId, "mctb", EveryCompat.MOD_ID);
+        super(modId, "mctb");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",

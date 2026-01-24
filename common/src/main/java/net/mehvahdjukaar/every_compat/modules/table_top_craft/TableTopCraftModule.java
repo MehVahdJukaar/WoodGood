@@ -5,6 +5,7 @@ import andrews.table_top_craft.objects.blocks.ChessTimerBlock;
 import andrews.table_top_craft.objects.blocks.ConnectFourBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
@@ -13,7 +14,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: FORGE-v6.1.0+ | FABRIC-v5.0.0+
-public class TableTopCraftModule extends SimpleModule {
+public class TableTopCraftModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> chessBoards;
     public final SimpleEntrySet<WoodType, Block> chessTimers;

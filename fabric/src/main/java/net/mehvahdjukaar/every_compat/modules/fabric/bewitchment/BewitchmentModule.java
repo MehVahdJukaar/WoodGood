@@ -12,6 +12,7 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -34,7 +35,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //SUPPORT: v1.20-8
-public class BewitchmentModule extends SimpleModule {
+public class BewitchmentModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> poppet_shelf;
     public final ItemOnlyEntrySet<WoodType, Item> bark;

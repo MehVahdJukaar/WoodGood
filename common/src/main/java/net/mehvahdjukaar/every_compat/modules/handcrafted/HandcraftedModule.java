@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -27,7 +28,7 @@ import java.io.FileNotFoundException;
 import java.util.function.Consumer;
 
 //SUPPORT: v4.0.2+
-public class HandcraftedModule extends SimpleModule {
+public class HandcraftedModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> chair;
     public final SimpleEntrySet<WoodType, Block> table;
@@ -46,7 +47,7 @@ public class HandcraftedModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> cornerTrim;
 
     public HandcraftedModule(String modId) {
-        super(modId, "hc", EveryCompat.MOD_ID);
+        super(modId, "hc");
         ResourceLocation tab = modRes("main");
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",

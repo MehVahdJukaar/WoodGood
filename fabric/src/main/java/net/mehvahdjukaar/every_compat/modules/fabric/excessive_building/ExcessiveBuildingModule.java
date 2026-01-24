@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -22,7 +23,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB
 //SUPPORT: v3.3.10+
 // DIFFERENCE: The classes for blocks are not same in FABRIC & FORGE
 //             FABRIC do not have hollow_log & hollow_stripped_log
-public class ExcessiveBuildingModule extends SimpleModule {
+public class ExcessiveBuildingModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> vertical_stairs;
     public final SimpleEntrySet<WoodType, Block> mosaics;

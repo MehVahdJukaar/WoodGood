@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 
 //SUPPORT: DramaticDoors v3.3.2+ | Macaw's Door v1.1.1+
 //NOTE: The library of FABRIC and FORGE are not the same, must be in separated folders
-public class DramaticDoorsMacawModule extends SimpleModule {
+public class DramaticDoorsMacawModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> tallBarkGlassDoors,
             tallBarnDoors,

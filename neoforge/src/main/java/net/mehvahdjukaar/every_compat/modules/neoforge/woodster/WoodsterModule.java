@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 //SUPPORT: v2.0.1+
-public class WoodsterModule extends SimpleModule {
+public class WoodsterModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> chiseled_books;
     public final SimpleEntrySet<WoodType, Block> ladders;
 

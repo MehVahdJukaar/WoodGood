@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 
 //SUPPORT: v7.0.3+
-public class JustARaftModule extends SimpleModule {
+public class JustARaftModule extends EveryCompatModule {
 
     public final ItemOnlyEntrySet<WoodType, Item> rafts;
     public final Map<WoodType, RaftType> raftTypes = new HashMap<>();

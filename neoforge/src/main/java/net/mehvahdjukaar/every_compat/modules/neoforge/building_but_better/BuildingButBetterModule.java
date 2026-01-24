@@ -34,7 +34,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRI
 // The v1.1.1 is only available on Modrinth
 
 //SUPPORT: v1.1.1+
-public class BuildingButBetterModule extends SimpleModule {
+public class BuildingButBetterModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> layers;
     public final SimpleEntrySet<WoodType, Block> trims;

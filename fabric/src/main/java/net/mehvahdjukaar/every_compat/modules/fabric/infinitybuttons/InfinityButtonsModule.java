@@ -7,6 +7,7 @@ import net.larsmans.infinitybuttons.block.custom.secretbutton.PlankSecretButton;
 import net.larsmans.infinitybuttons.item.InfinityButtonsItemGroups;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 
-public class InfinityButtonsModule extends SimpleModule {
+public class InfinityButtonsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> largeButtons;
     public final SimpleEntrySet<WoodType, Block> plankSecretButtons;

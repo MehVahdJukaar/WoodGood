@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -30,7 +31,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
 //SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
-public class VariantVanillaBlocksModule extends SimpleModule {
+public class VariantVanillaBlocksModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> barrel;
     public final SimpleEntrySet<WoodType, Block> beehive;
@@ -47,7 +48,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> smoker;
 
     public VariantVanillaBlocksModule(String modId) {
-        super(modId, "vvb", EveryCompat.MOD_ID);
+        super(modId, "vvb");
         ResourceLocation tab = modRes(modId);
 
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",

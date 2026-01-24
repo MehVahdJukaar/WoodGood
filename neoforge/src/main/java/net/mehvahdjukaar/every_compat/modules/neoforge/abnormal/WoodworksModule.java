@@ -53,7 +53,7 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LOG;
 
 //SUPPORT: v4.0.2+
-public class WoodworksModule extends SimpleModule {
+public class WoodworksModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> chiseled_bookshelves;
     public final SimpleEntrySet<WoodType, Block> boards;
@@ -64,7 +64,7 @@ public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<LeavesType, Block> leafPiles;
 
     public WoodworksModule(String modId) {
-        super(modId, "abnww", EveryCompat.MOD_ID);
+        super(modId, "abnww");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",

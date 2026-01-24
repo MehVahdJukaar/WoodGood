@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 //SUPPORT: //!! NOT AVAILABLE
 // DIFFERENCE: The classes for blocks are not same in FABRIC & FORGE
 //             FABRIC do not have hollow_log & hollow_stripped_log
-public class ExcessiveBuildingModule extends SimpleModule {
+public class ExcessiveBuildingModule extends EveryCompatModule {
 
 //    public final SimpleEntrySet<WoodType, Block> vertical_stairs;
 //    public final SimpleEntrySet<WoodType, Block> mosaics;

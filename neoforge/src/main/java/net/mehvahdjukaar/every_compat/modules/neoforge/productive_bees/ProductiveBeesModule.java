@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.productive_bees;
 
 /*
-public class ProductiveBeesModule extends SimpleModule {
+public class ProductiveBeesModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> advancedBeehives;
     public final SimpleEntrySet<WoodType, Block> expansionBoxes;

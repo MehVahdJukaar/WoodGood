@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -20,7 +21,7 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v1.1.4+
-public class MacawTrapdoorsModule extends SimpleModule {
+public class MacawTrapdoorsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> BARK_TRAPDOORS;
     public final SimpleEntrySet<WoodType, Block> BARN_TRAPDOORS;
@@ -41,7 +42,7 @@ public class MacawTrapdoorsModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> WHISPERING_TRAPDOORS;
 
     public MacawTrapdoorsModule(String modId) {
-        super(modId, "mct", EveryCompat.MOD_ID);
+        super(modId, "mct");
         ResourceKey<CreativeModeTab> tab = MacawsTrapdoors.TRAPDOORSGROUP;
 
         BARK_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bark_trapdoor",

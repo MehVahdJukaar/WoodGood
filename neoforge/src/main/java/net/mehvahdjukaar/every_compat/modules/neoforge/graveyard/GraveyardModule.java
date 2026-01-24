@@ -22,7 +22,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-public class GraveyardModule extends SimpleModule {
+public class GraveyardModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> COFFINS;
 

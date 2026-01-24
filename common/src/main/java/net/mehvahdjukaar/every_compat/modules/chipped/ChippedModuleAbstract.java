@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
@@ -17,12 +18,12 @@ import net.minecraft.world.item.Item;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //SUPPORT: v4.0.2+
-public class ChippedModuleAbstract extends SimpleModule {
+public class ChippedModuleAbstract extends EveryCompatModule {
 
     public static String tabPath = "main";
 
     public ChippedModuleAbstract(String modId) {
-        super(modId, "ch", EveryCompat.MOD_ID);
+        super(modId, "ch");
     }
 
     @SuppressWarnings("SameParameterValue")

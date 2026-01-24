@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -15,12 +16,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: v3.0.0+
-public class BackpackedModule extends SimpleModule {
+public class BackpackedModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> shelves;
 
     public BackpackedModule(String modId) {
-        super(modId, "bp", EveryCompat.MOD_ID);
+        super(modId, "bp");
 
         shelves = SimpleEntrySet.builder(WoodType.class, "backpack_shelf",
                         ModBlocks.OAK_BACKPACK_SHELF::get, () -> VanillaWoodTypes.OAK,

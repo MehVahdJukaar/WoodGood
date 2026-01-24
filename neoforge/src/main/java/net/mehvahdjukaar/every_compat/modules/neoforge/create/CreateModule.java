@@ -20,13 +20,13 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.function.Function;
 
 // SUPPORT: v6.0.2+
-public class CreateModule extends SimpleModule {
+public class CreateModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
 
     public CreateModule(String modId) {
-        super(modId, "c", EveryCompat.MOD_ID);
+        super(modId, "c");
         ResourceLocation tab = modRes("palettes");
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",

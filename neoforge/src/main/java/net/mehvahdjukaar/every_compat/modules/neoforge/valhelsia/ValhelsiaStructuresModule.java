@@ -48,7 +48,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v1.1.2+
-public class ValhelsiaStructuresModule extends SimpleModule {
+public class ValhelsiaStructuresModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> strippedPosts;
     public final SimpleEntrySet<WoodType, Block> posts;
@@ -58,7 +58,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> bundledPosts;
 
     public ValhelsiaStructuresModule(String modId) {
-        super(modId, "vs", EveryCompat.MOD_ID);
+        super(modId, "vs");
         ResourceLocation tab = modRes("main");
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",

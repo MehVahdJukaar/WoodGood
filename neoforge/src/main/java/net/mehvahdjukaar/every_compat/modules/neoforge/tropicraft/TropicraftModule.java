@@ -26,7 +26,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 //SUPPORT: v9.6.3+
-public class TropicraftModule extends SimpleModule {
+public class TropicraftModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> boardwalks;
 

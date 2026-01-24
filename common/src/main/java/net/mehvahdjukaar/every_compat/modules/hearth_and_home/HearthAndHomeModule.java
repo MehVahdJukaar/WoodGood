@@ -5,6 +5,7 @@ import com.starfish_studios.hearth_and_home.block.LatticeBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -15,7 +16,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
 // SUPPORT v2.0.1
-public class HearthAndHomeModule extends SimpleModule {
+public class HearthAndHomeModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> sanded_wood;
     public final SimpleEntrySet<WoodType, Block> parquet;

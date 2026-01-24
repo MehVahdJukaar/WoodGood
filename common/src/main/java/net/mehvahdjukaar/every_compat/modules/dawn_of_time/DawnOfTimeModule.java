@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.dawn_of_time;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -26,7 +27,7 @@ import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCache
 
 
 //SUPPORT v1.6.3+
-public class DawnOfTimeModule extends SimpleModule {
+public class DawnOfTimeModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> BEAM;
     public final SimpleEntrySet<WoodType, Block> COUCH;
@@ -43,7 +44,7 @@ public class DawnOfTimeModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> WALL;
 
     public DawnOfTimeModule(String modId) {
-        super(modId, "dot", EveryCompat.MOD_ID);
+        super(modId, "dot");
         ResourceLocation tab = modRes("dot_tab");
 
         PLATE = SimpleEntrySet.builder(WoodType.class, "planks_plate",

@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 ///      ┌──────────────────────────────────────────────────────┐
 ///      │   WoodGoodModule example module. Use as a template   │
 ///      └──────────────────────────────────────────────────────┘
-public final class WoodGoodModuleExample extends SimpleModule {
+public final class WoodGoodModuleExample extends EveryCompatModule {
 
         /// For Blocks
         private final SimpleEntrySet<WoodType, Block> sampleBlock, sampleBlock_2;

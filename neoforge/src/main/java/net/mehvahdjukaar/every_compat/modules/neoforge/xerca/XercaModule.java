@@ -34,7 +34,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 
 //SUPPORT: NOT-AVAILABLE
-public class XercaModule extends SimpleModule {
+public class XercaModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> carved1;
     public final SimpleEntrySet<WoodType, Block> carved2;
@@ -46,7 +46,7 @@ public class XercaModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> carved8;
 
     public XercaModule(String modId) {
-        super(modId, "x", EveryCompat.MOD_ID);
+        super(modId, "x");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         carved1 = SimpleEntrySet.builder(WoodType.class, "1", "carved",

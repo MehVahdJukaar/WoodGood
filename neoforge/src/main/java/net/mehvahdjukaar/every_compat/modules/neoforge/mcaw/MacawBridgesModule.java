@@ -17,7 +17,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.FENC
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 // SUPPORT: v3.0.0+
-public class MacawBridgesModule extends SimpleModule {
+public class MacawBridgesModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> bridgePiers,
             bridgeMiddles,

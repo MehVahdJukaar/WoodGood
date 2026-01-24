@@ -26,7 +26,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.FENC
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 //SUPPORT: v1.1.0+
-public class MacawLightsModule extends SimpleModule {
+public class MacawLightsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> soul_tiki_torches;
     public final SimpleEntrySet<WoodType, Block> tiki_torches;

@@ -6,6 +6,7 @@ import io.github.suel_ki.beautify.common.block.Trellis;
 import io.github.suel_ki.beautify.core.init.BlockInit;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -20,7 +21,7 @@ import net.minecraft.world.level.material.PushReaction;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 //SUPPORT: v1.2.0+
-public class BeautifyRefabricatedModule extends SimpleModule {
+public class BeautifyRefabricatedModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Trellis> tellis;
     public final SimpleEntrySet<WoodType, Blinds> blinds;

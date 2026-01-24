@@ -45,7 +45,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
     public ChippedGlassModule(String modId) {
         super(modId);
-        //        super(modId, shortenedId, EveryCompat.MOD_ID);
+        //        super(modId, shortenedId);
         ResourceLocation tab = modRes(tabPath);
 
         circleGlass = SimpleEntrySet.builder(WoodType.class, "glass", "circle",
