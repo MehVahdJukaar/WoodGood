@@ -19,9 +19,13 @@ import java.util.function.Supplier;
 @SuppressWarnings("removal")
 public abstract class EveryCompatModule extends SimpleModule {
 
-
+    //DEFAULT: using EveryCompat.MOD_ID as myNamespace
     public EveryCompatModule(String modId, String shortId) {
         super(modId, shortId, EveryCompat.MOD_ID);
+    }
+
+    public EveryCompatModule(String modId, String shortId, String myNamespace) {
+        super(modId, shortId, myNamespace);
     }
 
     protected final  <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {

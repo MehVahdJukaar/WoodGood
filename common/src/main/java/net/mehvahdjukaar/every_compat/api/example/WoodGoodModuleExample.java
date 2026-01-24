@@ -38,12 +38,13 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             // an example of shortened ID for TerraFirmaCraft is "tfc", so one for Twigs is "tw"
             // note the "modId" is the mod that is being supported, myNamespace is the mod namespace under which the blocks will be registered
             // usually for addons both will match.
-            // You can change myNamespace to EveryCompat.MOD_ID if you want the blocks to be registered under Every Compat's namespace
-            super("awesome_mod_id", "abm");
+            // You can change myNamespace to your MOD_ID if you want the blocks to be registered under your mod's namespace
+            super("awesome_mod_id", "abm", "Twigs.MOD_ID");
+            ///DEFAULT: super("awesome_mod_id", "abm") -> myNamespace will be EveryCompat.MOD_ID
 
-            //  your mod's tab or minecraft's tab can be used for setTabKey() - it can use either ResourceKey or ResourceLocation
+            // your mod's tab or minecraft's tab can be used for setTabKey() - it can use either ResourceKey or ResourceLocation
             ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
-            //location of your tab with helper method
+            // location of your tab with helper method
             ResourceLocation yourModTab = modRes("mod_tab");
 
             // Here we create 2 simple entry sets. You are free to not use these or make your own entry set implementation
