@@ -51,7 +51,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             // Discover all the methods that these simple builders have by pressing "." and invoke what you need
             // after creating the entry set, don't forget to add it to the module via this.addEntry(entrySet);
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
-                    getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
+                            getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
                     woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     /// Similar setup as sampleBlock
@@ -81,7 +81,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
                     .addTag(modRes("tables"), Registries.BLOCK, Registries.ITEM)
 
                     ///OPTIONAL: If your block is glasses, then please take a look at below & Looking for // Common Tags which is at the bottom of the class
-            // https://github.com/MehVahdJukaar/WoodGood/blob/1.20/common/src/main/java/net/mehvahdjukaar/every_compat/common_classes/TagUtility.java#L186
+            // https://github.com/MehVahdJukaar/WoodGood/blob/79396eae711cee032635b52d957ddfe9eaa0121b/common/src/main/java/net/mehvahdjukaar/every_compat/misc/UtilityTag.java#L194
 
                     ///REQUIRED: Add block to your mod's tab or Minecraft's tab
                     .setTabKey(yourModTab)
