@@ -106,4 +106,7 @@ dependencies {
     modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1") //FABRIC
     modCompileOnly("org.violetmoon.quark:Quark:4.1-472-SNAPSHOT") //@ DNU - https://maven.blamejared.com/org/violetmoon/quark/Quark/
 
+    //+ LOCAL
+    modCompileOnly("copper-age-common:copperagebackport-fabric-1.21.1-0.1.4")
+
 }
