@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -162,7 +163,7 @@ public abstract class EveryCompat {
                 EveryCompat.LOGGER.error("Module for the supported mod contains errors. This could mean that the mod has been recently updated & Every Compat needs updating (try downgrading the mod) or that you are using an older version. MAIN CAUSE: {} - {}", m.getModName(), e);
                 if (canShowErrorScreen) {
                     //if before first screen we can display an error screen
-                    ERRORED.put(m, e);
+                    addError(m, e);
                 } else {
                     throw e;
                 }
@@ -177,7 +178,7 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", Objects.requireNonNull(module).getModName(), e);
             if (canShowErrorScreen) {
                 //if before first screen we can display an error screen
-                ERRORED.put(module, e);
+                addError(module, e);
             } else {
                 throw e;
             }
@@ -242,7 +243,7 @@ public abstract class EveryCompat {
 
                 addModule(module);
             } catch (Throwable t) {
-                ERRORED.put(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
+                addError(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
                     @Override
                     public int bloatAmount() {
                         return 0;
@@ -255,6 +256,11 @@ public abstract class EveryCompat {
                 }, t);
             }
         }
+    }
+
+    private static void addError(CompatModule module, Throwable t) {
+        ERRORED.put(Preconditions.checkNotNull(module, "Module cannot be null"),
+                Preconditions.checkNotNull(t, "Throwable cannot be null"));
     }
 
     @SafeVarargs
@@ -359,7 +365,7 @@ public abstract class EveryCompat {
                 CompatModule module = moduleFactory.get().apply(modId);
                 addModule(module);
             } catch (Throwable e) {
-                ERRORED.put(new CompatModule(modId, modId,  EveryCompat.MOD_ID) {
+                addError(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
 
                     @Override
                     public int bloatAmount() {
