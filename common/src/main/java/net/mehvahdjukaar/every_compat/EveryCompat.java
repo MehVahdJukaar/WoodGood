@@ -13,6 +13,7 @@ import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.OtherCompatMod;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
@@ -243,7 +244,7 @@ public abstract class EveryCompat {
 
                 addModule(module);
             } catch (Throwable t) {
-                addError(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
+                addError(new EveryCompatModule(modId, modId) {
                     @Override
                     public int bloatAmount() {
                         return 0;
@@ -259,6 +260,21 @@ public abstract class EveryCompat {
     }
 
     private static void addError(CompatModule module, Throwable t) {
+        if(module == null){
+            EveryCompat.LOGGER.error("Tried to log an error for a null module", t);
+            //add dummy module instead. idk how this could even happen but if it does i want a nice error screen still
+            module = new EveryCompatModule(EveryCompat.MOD_ID,"ec") {
+                @Override
+                public int bloatAmount() {
+                    return 0;
+                }
+
+                @Override
+                public Collection<Class<? extends BlockType>> getAffectedTypes() {
+                    return List.of();
+                }
+            };
+        }
         ERRORED.put(Preconditions.checkNotNull(module, "Module cannot be null"),
                 Preconditions.checkNotNull(t, "Throwable cannot be null"));
     }
