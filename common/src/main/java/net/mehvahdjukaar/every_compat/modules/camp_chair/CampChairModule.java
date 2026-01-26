@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.camp_chair;
 
 import dlovin.smalls.campchair.core.blocks.CampChairBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;

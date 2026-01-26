@@ -3,7 +3,6 @@ package net.mehvahdjukaar.every_compat.modules.fabric.red_bits;
 import net.darktree.redbits.RedBits;
 import net.darktree.redbits.blocks.LargeButtonBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;

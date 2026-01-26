@@ -1143,6 +1143,8 @@
   "block_type.blockus.post": "%s Post",
   "block_type.blockus.hedge": "%s Hedge",
 
+  "block_type.copperagebackport.shelf": "%s Shelf",
+
   "block_type.bibliocraft.bookcase": "%s Bookcase",
   "block_type.bibliocraft.fancy_armor_stand": "%s Fancy Armor Stand",
   "block_type.bibliocraft.fancy_clock": "%s Fancy Clock",

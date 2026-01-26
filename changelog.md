@@ -17,6 +17,22 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C): Improved classes & Made a few changes in API classes
+- **Quark** (NF): Fixed the missing recipe for CHESTS using PLANKS (in quark's version for 1.21.1, the recipe was moved to a different location) - [#1164](https://github.com/MehVahdJukaar/WoodGood/issues/1164) 
+- **MrCrayfish's Backpacked** (C): Updated to support v3.0.0+ - [#1165](https://github.com/MehVahdJukaar/WoodGood/issues/1165)
+  - Older than v3.0.0 will be no longer supported. That included the BETA version, too.
+
+### NEW:
+- **Copper Age Backport** (C)
+
+#### DEV:
+if your mod has a built-in module for Every Compat, change the superparent class from `SimpleModule` to `EveryCompatModule`
+
+---
+
+## v2.11.24
+
+### UPDATED: 
 - **Chipped** (C): Fixed crash with **Productive Trees** (Ported from 1.20.1)
 - **Every Compat** (C): 
   - Fixed an error log from latest.log with **F-ing Load My Tags** - [#1155](https://github.com/MehVahdJukaar/WoodGood/issues/1155)

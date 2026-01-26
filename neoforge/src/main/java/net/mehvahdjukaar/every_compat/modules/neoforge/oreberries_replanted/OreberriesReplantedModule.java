@@ -4,7 +4,7 @@ import com.mrbysco.oreberriesreplanted.block.OreBerryBushBlock;
 import com.mrbysco.oreberriesreplanted.block.VatBlock;
 import com.mrbysco.oreberriesreplanted.registry.OreBerryRegistry;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;

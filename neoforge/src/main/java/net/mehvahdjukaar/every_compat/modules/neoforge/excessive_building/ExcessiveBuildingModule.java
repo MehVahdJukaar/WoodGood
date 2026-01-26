@@ -1,6 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.excessive_building;
 
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.minecraft.resources.ResourceLocation;
 
 //SUPPORT: //!! NOT AVAILABLE

@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.client.CompatDrawerRenderer;
 import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.compat_entity.*;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;

@@ -216,7 +216,7 @@ public class QuarkModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
-                .addRecipe(modRes("building/chests/oak_chest"))
+                .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .addRecipe(modRes("building/chests/oak_chest_wood"))
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .excludeBlockTypes("twilightforest", "dark")

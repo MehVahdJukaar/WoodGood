@@ -142,7 +142,7 @@ dependencies {
 
     //+ OTHER MAVENs
     modCompileOnly("com.tterrag.registrate:Registrate:$registrate_version") // Create, The-Twilight-Forest, Tropicraft
-    modCompileOnly("org.violetmoon.zeta:Zeta:1.1-33.147") // Quark - @ DNU
+    modCompileOnly("org.violetmoon.zeta:Zeta:1.1-36-SNAPSHOT") // Quark - @ DNU - https://maven.blamejared.com/org/violetmoon/zeta/Zeta/
 
 //!! =================================================== IMPORTS ==================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
@@ -172,6 +172,9 @@ dependencies {
         //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK") //!! 1.20.1
 //    modRuntimeOnly("earth.terrarium.chipped:chipped-neoforge-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
+
+        //- LOCAL
+//    modRuntimeOnly("copper-age-neoforge:copperagebackport-neoforge-1.21.1-0.1.4")
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
         // ~/forge/mods LOCAL
@@ -232,7 +235,7 @@ dependencies {
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:zGMhmLYb") // v1.1.1 | MidnightLib //!! 1.20.1
     modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_version:slim") { transitive = false } // Registrate, Flywheel, Ponder
-    modCompileOnly("org.violetmoon.quark:Quark:4.1-467.3568") //@ DNU
+    modCompileOnly("org.violetmoon.quark:Quark:4.1-472-SNAPSHOT") // Zeta @ DNU - https://maven.blamejared.com/org/violetmoon/quark/Quark/
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
