@@ -30,6 +30,30 @@
   "container.everycomp.chest.name": "%sのチェスト",
 
 
+  "wood_type.minecraft.oak": "オーク",
+  "wood_type.minecraft.spruce": "トウヒ",
+  "wood_type.minecraft.birch": "シラカバ",
+  "wood_type.minecraft.jungle": "ジャングル",
+  "wood_type.minecraft.acacia": "アカシア",
+  "wood_type.minecraft.dark_oak": "ダークオーク",
+  "wood_type.minecraft.crimson": "真紅",
+  "wood_type.minecraft.warped": "歪んだ",
+  "wood_type.minecraft.mangrove": "マングローブ",
+  "wood_type.minecraft.cherry": "サクラ",
+  "wood_type.minecraft.bamboo": "竹",
+  "wood_type.minecraft.pale_oak": "ペールオーク",
+  "leaves_type.minecraft.oak": "オーク",
+  "leaves_type.minecraft.spruce": "トウヒ",
+  "leaves_type.minecraft.birch": "シラカバ",
+  "leaves_type.minecraft.jungle": "ジャングル",
+  "leaves_type.minecraft.acacia": "アカシア",
+  "leaves_type.minecraft.dark_oak": "ダークオーク",
+  "leaves_type.minecraft.azalea": "ツツジ",
+  "leaves_type.minecraft.flowering_azalea": "開花したツツジ",
+  "leaves_type.minecraft.mangrove": "マングローブ",
+  "leaves_type.minecraft.cherry": "サクラ",
+  "leaves_type.minecraft.pale_oak": "ペールオーク",
+
   "wood_type.azaleawood.azalea": "ツツジ",  
 
   "wood_type.blockus.legacy": "原初",
@@ -320,6 +344,17 @@
   "block_type.chipped.stern_stripped_log": "険しい樹皮を剥いだ%sの原木",
   "block_type.chipped.wise_stripped_log": "賢い樹皮を剥いだ%sの原木",
 
+  "block_type.chipped.apple_leaves": "リンゴの%sの葉",
+  "block_type.chipped.cherry_leaves": "サクランボの%sの葉",
+  "block_type.chipped.frosted_leaves": "霜の降りた%sの葉",
+  "block_type.chipped.golden_apple_leaves": "金のリンゴの%sの葉",
+  "block_type.chipped.golden_cherry_leaves": "金のサクランボの%sの葉",
+  "block_type.chipped.magenta_flower_leaves": "赤紫色の花の%sの葉",
+  "block_type.chipped.white_flower_leaves": "白色の花の%sの葉",
+  "block_type.chipped.dead_leaves": "枯れた%sの葉",
+  "block_type.chipped.golden_leaves": "金の%sの葉",
+  "block_type.chipped.orange_leaves": "橙色の%sの葉",
+  "block_type.chipped.red_leaves": "赤色の%sの葉",
 
   "block_type.graveyard.coffin": "%sの棺桶",
 
@@ -596,5 +631,7 @@
   "block_type.blockus.cross_timber_frame": "%sの斜め十字の木枠",
   "block_type.blockus.stripped_post": "樹皮を剥いだ%sの杭",
   "block_type.blockus.post": "%sの杭",
-  "block_type.blockus.hedge": "%sの生け垣"
+  "block_type.blockus.hedge": "%sの生け垣",
+
+  "block_type.copperagebackport.shelf": "%sの棚"
 }
