@@ -1,9 +1,9 @@
-package net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate;
+package net.mehvahdjukaar.every_compat.modules.neoforge.beautify_refoxed;
 
-import com.github.Pandarix.beautify.Beautify;
-import com.github.Pandarix.beautify.common.block.Blinds;
-import com.github.Pandarix.beautify.common.block.PictureFrame;
-import com.github.Pandarix.beautify.common.block.Trellis;
+import io.github.suel_ki.beautify.Beautify;
+import io.github.suel_ki.beautify.common.block.Blinds;
+import io.github.suel_ki.beautify.common.block.PictureFrame;
+import io.github.suel_ki.beautify.common.block.Trellis;
 import net.mehvahdjukaar.every_compat.modules.beautify.BeautifyModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -11,11 +11,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
-//SUPPORT: v2.0.2+
-//NOTE: Beautify Decorate is now renamed Beautify!
-public class BeautifyDecorateModule extends BeautifyModuleAbstract {
+//SUPPORT: v1.0.0+
+public class BeautifyRefoxedModule extends BeautifyModuleAbstract {
 
-    public BeautifyDecorateModule(String modId) {
+    public BeautifyRefoxedModule(String modId) {
         super(modId);
     }
 

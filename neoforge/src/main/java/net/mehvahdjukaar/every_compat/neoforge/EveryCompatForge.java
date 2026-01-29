@@ -9,6 +9,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate.BeautifyDecorateModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_refoxed.BeautifyRefoxedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
@@ -53,6 +54,7 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
 
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addOptionalModule;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
@@ -102,7 +104,6 @@ public class EveryCompatForge extends EveryCompatCommon {
 
             // ========================================= GENERAL ======================================================== \\
             addOptionalModule("absentbydesign", () -> AbsentByDesignModule.class);
-            addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
             addOptionalModule("bibliocraft", () -> BibliocraftLegacyModule.class);
             addOptionalModule("boatload", () -> BoatLoadModule.class);
             addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
@@ -136,6 +137,14 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("woodworks", () -> WoodworksModule.class);
             addOptionalModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class);
             addOptionalModule("xercamod", () -> XercaModule.class);
+
+            if (PlatHelper.isModLoaded("beautify")) {
+                if (Objects.requireNonNull(PlatHelper.getModVersion("beautify")).contains("2.0.2"))
+                    addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
+
+                if (Objects.requireNonNull(PlatHelper.getModVersion("beautify")).contains("1.0.0"))
+                    addOptionalModule("beautify", () -> BeautifyRefoxedModule.class);
+            }
 
             if (PlatHelper.isModLoaded("mcwdoors")) {
                 addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
