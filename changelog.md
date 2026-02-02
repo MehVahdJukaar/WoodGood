@@ -17,6 +17,15 @@
 </div>
 
 ### UPDATED: 
+- **Beautify! aka Beautify Decorate** (NF): Fixed an error on startup with another mod: **Beautify Refoxed**
+  - NOTE: **Beautify Refoxed** from v1.9.0 onward (according to DEV) will have a built-in modules for **Every Compat** for NEOFORGE & FABRIC
+    - **Beautify Refabricated (BRF)** from v2.0.0 onward - **Every Compat** will use **BRF**'s module instead of its own module 
+
+---
+
+## v2.11.25
+
+### UPDATED: 
 - **Every Compat** (C): Improved classes & Made a few changes in API classes
 - **Quark** (NF): Fixed the missing recipe for CHESTS using PLANKS (in quark's version for 1.21.1, the recipe was moved to a different location) - [#1164](https://github.com/MehVahdJukaar/WoodGood/issues/1164) 
 - **MrCrayfish's Backpacked** (C): Updated to support v3.0.0+ - [#1165](https://github.com/MehVahdJukaar/WoodGood/issues/1165)
