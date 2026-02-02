@@ -2,7 +2,7 @@
 
 | **FABRIC**                         | STATUS | **COMMON**                                 | STATUS | **NEOFORGE**                         | STATUS |
 |------------------------------------|:------:|--------------------------------------------|:------:|--------------------------------------|:------:|
-| Beautify Refabricated              |   🟦   | Another Furniture                          |   🟩   | Abnormal's Boatload                  |   🟩   |     
+| Beautify Refabricated              |   🟡   | Another Furniture                          |   🟩   | Abnormal's Boatload                  |   🟩   |     
 | Bewitchment                        |   ❔    | Architect's Palette                        |   🟩   | Abnormal's Woodworks                 |   🟩   |    
 | Blockus                            |   🟦   | Beauitful Campfires                        |   🟩   | Absent By Design                     |   ❔    |     
 | Clutter                            |   🟦   | Botany Pot                                 |   🟩   | Beautify! (Beautify Decorate)        |   🟩   |     

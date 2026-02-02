@@ -197,7 +197,6 @@ dependencies {
         //+ GENERAL
     modCompileOnly("curse.maven:absent-by-design-305840:4616702") //!! 1.20.1
     modCompileOnly("curse.maven:beautify-decorate-633252:5947973")
-    modCompileOnly("curse.maven:beautify-refoxed-1446138:7535100")
     modCompileOnly("curse.maven:bibliocraft-legacy-1122260:6533545")
     modCompileOnly("curse.maven:boatload-337396:6449892")
     modCompileOnly("curse.maven:buildersaddition-389697:5544431")

@@ -58,7 +58,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 
             // =============================================== GENERAL ================================================== \\
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
-            addOptionalModule("beautify", () -> BeautifyRefabricatedModule.class);
             addOptionalModule("bewitchment", () -> BewitchmentModule.class);
             addOptionalModule("clutter", () -> ClutterModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
@@ -72,6 +71,12 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addOptionalModule("shutter", () -> LauchsShuttersModule.class);
             addOptionalModule("wilderwild", () -> WilderWildModule.class);
             addOptionalModule("woodenhoppers", () -> WoodenHoppersModule.class);
+
+            /// Remove it in the next version: v2.11.27
+            if (PlatHelper.isModLoaded("beautify")) {
+                if (!PlatHelper.getModVersion("beautify").matches("2.0.\\d\\+1.21.1"))
+                    addOptionalModule("beautify", () -> BeautifyRefabricatedModule.class);
+            }
 
             if (PlatHelper.isModLoaded("mcwdoors")) {
                 addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);

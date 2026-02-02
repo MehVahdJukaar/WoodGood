@@ -9,7 +9,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate.BeautifyDecorateModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_refoxed.BeautifyRefoxedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
@@ -138,19 +137,22 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class);
             addOptionalModule("xercamod", () -> XercaModule.class);
 
+            //REASON: There are 2 mods with the same modId but has different group_id. only Beautify! (Beautify Decorate) is applied
+            // Beautify Refoxed has the built-in module
             if (PlatHelper.isModLoaded("beautify")) {
-                if (Objects.requireNonNull(PlatHelper.getModVersion("beautify")).contains("2.0.2"))
-                    addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
+                Class<?> modClass = null;
+                try {
+                    modClass = Class.forName("com.github.Pandarix.beautify.Beautify");
+                } catch (Exception ignored) {}
 
-                if (Objects.requireNonNull(PlatHelper.getModVersion("beautify")).contains("1.0.0"))
-                    addOptionalModule("beautify", () -> BeautifyRefoxedModule.class);
+                if (Objects.nonNull(modClass)) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
             }
 
             if (PlatHelper.isModLoaded("mcwdoors")) {
                 addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
             }
 
-            addOptionalModule("create", () -> CreateModule.class); //TEMP: DISABLED due to version difference
+            addOptionalModule("create", () -> CreateModule.class);
         }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
