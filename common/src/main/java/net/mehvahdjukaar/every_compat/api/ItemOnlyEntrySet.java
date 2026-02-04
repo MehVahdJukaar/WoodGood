@@ -220,7 +220,6 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                 this.modelConfig = ExtraModelConfiguration.createNew();
             }
             this.modelConfig.addModelsBlock(blockModels);
-//            GemsRealmModule.putInModelsToModify(blockModels);
             return this;
         }
 
