@@ -6,7 +6,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
-import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
+import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -46,7 +46,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
                                boolean mergedPalette,
                                boolean copyTint,
                                Predicate<T> condition,
-                               ModelConfiguration modelConfig
+                               ExtraModelConfiguration modelConfig
     ) {
         super(type, name, prefix, blockSupplier, baseBlock, baseType, tab, tabMode, tableMode, itemFactory,
                 tileFactory, renderType, paletteSupplier, extraTransform, mergedPalette, copyTint, condition, modelConfig);
@@ -114,7 +114,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
             var e = new QuarkSimpleEntrySet<>(type, name, prefix, quarkModule,
                     baseBlock, baseType, blockSupplier, tab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
-                    modelConfig
+                    extraModelConfig
             );
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);

@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Preconditions;
-import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
+import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -31,7 +31,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     protected final Supplier<@Nullable I> baseItem;
     protected final Function<T, @Nullable I> itemFactory;
-    protected ModelConfiguration modelConfig;
+    protected ExtraModelConfiguration modelConfig;
 
     public ItemOnlyEntrySet(Class<T> type,
                             String name, @Nullable String prefix,
@@ -44,7 +44,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                             @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                             boolean mergedPalette, boolean copyTint,
                             Predicate<T> condition,
-                            ModelConfiguration modelConfig
+                            ExtraModelConfiguration modelConfig
     ) {
         super(type, name, prefix, baseType, tab, tabMode, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         this.itemFactory = itemFactory;
@@ -191,7 +191,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     public static class Builder<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet.Builder<Builder<T, I>, T, Block, I> {
         protected final Supplier<@Nullable I> baseItem;
         protected final Function<T, I> itemFactory;
-        protected ModelConfiguration modelConfig = ModelConfiguration.EMPTY;
+        protected ExtraModelConfiguration modelConfig = ExtraModelConfiguration.EMPTY;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<I> baseItem, Function<T, I> itemFactory) {
             super(type, name, prefix, baseType);
@@ -216,20 +216,20 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
         /// Add models/block files so it can be generated - Only MINECRAFT's
         public Builder<T, I> generateBlockModels(ResourceLocation... blockModels) {
-            if (this.modelConfig == ModelConfiguration.EMPTY) {
-                this.modelConfig = ModelConfiguration.createNew();
+            if (this.modelConfig == ExtraModelConfiguration.EMPTY) {
+                this.modelConfig = ExtraModelConfiguration.createNew();
             }
-            this.modelConfig.addBlockModel(blockModels);
+            this.modelConfig.addModelsBlock(blockModels);
 //            GemsRealmModule.putInModelsToModify(blockModels);
             return this;
         }
 
         /// Add models/item files so it can be generated - Only MINECRAFT's
         public Builder<T, I> generateItemModels(ResourceLocation... itemModels) {
-            if (this.modelConfig == ModelConfiguration.EMPTY) {
-                this.modelConfig = ModelConfiguration.createNew();
+            if (this.modelConfig == ExtraModelConfiguration.EMPTY) {
+                this.modelConfig = ExtraModelConfiguration.createNew();
             }
-            this.modelConfig.addItemModel(itemModels);
+            this.modelConfig.addModelsItem(itemModels);
             return this;
         }
 

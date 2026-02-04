@@ -47,7 +47,7 @@ public class ResourcesUtils {
             Map<T, B> blocks, T baseType,
             BlockTypeResTransformer<T> modelTransformer,
             BlockTypeResTransformer<T> blockStateTransformer,
-            ModelConfiguration modelConfig
+            ExtraModelConfiguration modelConfig
     ) {
 
         if (blocks.isEmpty()) return;
@@ -116,7 +116,7 @@ public class ResourcesUtils {
 
     }
 
-    private static List<StaticResource> gatherNonVanillaModels(ResourceManager manager, Set<String> modelsLoc, ModelConfiguration modelConfig) {
+    private static List<StaticResource> gatherNonVanillaModels(ResourceManager manager, Set<String> modelsLoc, ExtraModelConfiguration modelConfig) {
         List<StaticResource> models = new ArrayList<>();
 
         for (var m : modelsLoc) {
@@ -142,7 +142,7 @@ public class ResourcesUtils {
     public static <I extends Item, T extends BlockType> void generateStandardItemModels(
             ResourceManager manager, ResourceSink sink,
             Map<T, I> items, T baseType, BlockTypeResTransformer<T> itemModelTransformer,
-            ModelConfiguration modelConfig
+            ExtraModelConfiguration modelConfig
     ) {
 
         if (items.isEmpty()) return;

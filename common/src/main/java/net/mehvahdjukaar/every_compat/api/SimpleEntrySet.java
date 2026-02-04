@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
-import net.mehvahdjukaar.every_compat.misc.ModelConfiguration;
+import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
@@ -54,7 +54,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     @Nullable
     protected final Object renderType;
 
-    protected ModelConfiguration modelConfiguration;
+    protected ExtraModelConfiguration modelConfiguration;
 
 
     public SimpleEntrySet(Class<T> type,
@@ -73,7 +73,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                           boolean mergedPalette, boolean copyTint,
                           Predicate<T> condition,
-                          ModelConfiguration modelConfig
+                          ExtraModelConfiguration modelConfig
     ) {
         super(type, name, prefix, baseType, tab, tabMode, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         this.blockFactory = blockSupplier;
@@ -316,7 +316,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         @Nullable
         protected Object renderType = null;
 
-        protected ModelConfiguration modelConfig = ModelConfiguration.EMPTY;
+        protected ExtraModelConfiguration extraModelConfig = ExtraModelConfiguration.EMPTY;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
             super(type, name, prefix, baseType);
@@ -330,7 +330,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             }
             var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
-                    this.modelConfig
+                    this.extraModelConfig
             );
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
@@ -420,39 +420,83 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
 
+        /// Include models/block files so it can be generated - Only MINECRAFT's
+        public Builder<T, B> includeModelsBlock(ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew();
+            }
+            this.extraModelConfig.addModelsBlock(resourceLocations);
+            return this;
+        }
+
+        /// Include models/block files to a List so it can be generated BUT Minecraft is excluded
+        public Builder<T, B> includeModelsBlock(boolean includeInGeneration, ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
+            }
+            this.extraModelConfig.addModelsBlock(resourceLocations);
+            return this;
+        }
+
+        /// Include models/item files so it can be generated - Only MINECRAFT's
+        public Builder<T, B> includeModelsItem(ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew();
+            }
+            this.extraModelConfig.addModelsItem(resourceLocations);
+            return this;
+        }
+
+        /// Include models/item files to a List so it can be generated BUT Minecraft is excluded
+        public Builder<T, B> includeModelsItem(boolean includeInGeneration, ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
+            }
+            this.extraModelConfig.addModelsItem(resourceLocations);
+            return this;
+        }
+
+        @Deprecated(forRemoval = true, since = "v2.11.27")
         /// Add models/block files so it can be generated - Only MINECRAFT's
-        public Builder<T, B> generateBlockModels(ResourceLocation... blockModels) {
-            if (this.modelConfig == ModelConfiguration.EMPTY) {
-                this.modelConfig = ModelConfiguration.createNew();
+        /// Use {@link Builder#addModelsBlock(ResourceLocation...)} & Will be removed in v2.11.27
+        public Builder<T, B> generateBlockModels(ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew();
             }
-            this.modelConfig.addBlockModel(blockModels);
+            this.extraModelConfig.addModelsBlock(resourceLocations);
             return this;
         }
 
+        @Deprecated(forRemoval = true, since = "v2.11.27")
         /// Add models/block files to a List so it can be generated BUT Minecraft is excluded
-        public Builder<T, B> generateBlockModels(boolean includeInGeneration, ResourceLocation... blockModels) {
-            if (this.modelConfig == ModelConfiguration.EMPTY) {
-                this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
+        /// Use {@link Builder#addModelsBlock(boolean, ResourceLocation...)} & Will be removed in v2.11.27
+        public Builder<T, B> generateBlockModels(boolean includeInGeneration, ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
             }
-            this.modelConfig.addBlockModel(blockModels);
+            this.extraModelConfig.addModelsBlock(resourceLocations);
             return this;
         }
 
+        @Deprecated(forRemoval = true, since = "v2.11.27")
         /// Add models/item files so it can be generated - Only MINECRAFT's
-        public Builder<T, B> generateItemModels(ResourceLocation... itemModels) {
-            if (this.modelConfig == ModelConfiguration.EMPTY) {
-                this.modelConfig = ModelConfiguration.createNew();
+        /// Use {@link Builder#addModelsItem(ResourceLocation...)} & Will be removed in v2.11.27
+        public Builder<T, B> generateItemModels(ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew();
             }
-            this.modelConfig.addItemModel(itemModels);
+            this.extraModelConfig.addModelsItem(resourceLocations);
             return this;
         }
 
+        @Deprecated(forRemoval = true, since = "v2.11.27")
         /// Add models/item files to a List so it can be generated BUT Minecraft is excluded
-        public Builder<T, B> generateItemModels(boolean includeInGeneration, ResourceLocation... itemModels) {
-            if (this.modelConfig == ModelConfiguration.EMPTY) {
-                this.modelConfig = ModelConfiguration.createNew(includeInGeneration);
+        /// Use {@link Builder#addModelsItem(boolean, ResourceLocation...)} & Will be removed in v2.11.27
+        public Builder<T, B> generateItemModels(boolean includeInGeneration, ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
             }
-            this.modelConfig.addItemModel(itemModels);
+            this.extraModelConfig.addModelsItem(resourceLocations);
             return this;
         }
     }
