@@ -101,11 +101,11 @@ dependencies {
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-$moonlight_testVersion-forge.jar"))
+        modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-$moonlight_testVersion-fabric.jar"))
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_mavenVersion"){
+        modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_mavenVersion:fabric"){
             transitive = false
         }
     }

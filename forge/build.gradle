@@ -85,15 +85,15 @@ publishing {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${forge_version}"
+    forge "net.minecraftforge:forge:$forge_version"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
-    implementation(include("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:$mixin_extras_version"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:$mixin_extras_version"))
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
@@ -101,18 +101,18 @@ dependencies {
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-${moonlight_testVersion}-forge.jar"))
+        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-$moonlight_testVersion-forge.jar"))
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-forge:${moonlight_mavenVersion}"){
+        modApi("net.mehvahdjukaar:moonlight-forge:$moonlight_mavenVersion:forge"){
             transitive = false
         }
     }
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("dev.emi:emi-forge:${emi_version}+${minecraft_version}")
-    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+    modRuntimeOnly("dev.emi:emi-forge:$emi_version+$minecraft_version")
+    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-forge-$minecraft_version:$crafttweaker_version")
     modRuntimeOnly("curse.maven:jade-324717:6106101") // v11.12.3
     modRuntimeOnly("curse.maven:configured-457570:5180902") // v2.2.3
     modRuntimeOnly("curse.maven:jei-238222:6600311") // v15.20.0.112
@@ -120,8 +120,8 @@ dependencies {
 
 //!! ================================================ DEPENDENCIES ================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
-    modRuntimeOnly("com.github.glitchfiend:TerraBlender-forge:${minecraft_version}-${terrablender_version}") // Biomes-O'-Plenty, Regions-Unexplored
-    modRuntimeOnly("com.github.glitchfiend:GlitchCore-forge:${minecraft_version}-${glitchcore_version}") // Biomes-O'-Plenty
+    modRuntimeOnly("com.github.glitchfiend:TerraBlender-forge:$minecraft_version-$terrablender_version") // Biomes-O'-Plenty, Regions-Unexplored
+    modRuntimeOnly("com.github.glitchfiend:GlitchCore-forge:$minecraft_version-$glitchcore_version") // Biomes-O'-Plenty
 //    modRuntimeOnly("curse.maven:athena-841890:5176879") //
 //    modRuntimeOnly("curse.maven:aeroblender-879879:4789008") // Aether
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973441") // v11.1.118 | REI, Infinity-Buttons
@@ -163,7 +163,7 @@ dependencies {
     modCompileOnly("curse.maven:zeta-968868:6432578") // v1.0-30 | Quark
 
             // OTHER MAVENS
-    modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}") // Create, The-Twilight-Forest, Tropicraft
+    modCompileOnly("com.tterrag.registrate:Registrate:$registrate_version") // Create, The-Twilight-Forest, Tropicraft
 
 //!! ================================================== IMPORTS ===================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
@@ -223,6 +223,7 @@ dependencies {
     modCompileOnly("curse.maven:beautify-decorate-633252:4781709")
     modCompileOnly("curse.maven:boatload-337396:5292325") // Blueprint
     modCompileOnly("curse.maven:buildersaddition-389697:4660499")
+//    modCompileOnly("curse.maven:copper-backport-1313101:7085403")
     modCompileOnly("curse.maven:corail-pillar-266228:5073954")
     modCompileOnly("curse.maven:decoration-delight-687475:5563942")
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
