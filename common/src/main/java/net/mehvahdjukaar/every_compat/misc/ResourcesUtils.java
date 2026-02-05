@@ -319,7 +319,7 @@ public class ResourcesUtils {
                     String newId = blockId.replace(target, modifiedRecipePath);
 
                     // matches() ensure the last word, [a-z]_[a-z] is not one word, CASE: lightman's currency
-                    if (!blockId.equals(newId) && newId.matches("\\w+:\\w+/\\w+/[a-z]_[a-z]")) {
+                    if (!blockId.equals(newId) && newId.matches("\\w+:\\w+/\\w+/\\w+_\\w+")) {
                         newR = template.createSimilar(fromType, w, w.mainChild().asItem(), newId);
                     }
                     else {
