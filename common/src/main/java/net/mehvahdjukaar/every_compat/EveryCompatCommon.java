@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.modules.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.*;
+import net.mehvahdjukaar.every_compat.modules.copper_age_backport.CopperAgeBackportModule;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
@@ -112,6 +113,7 @@ public class EveryCompatCommon {
             addIfLoaded("blockus", () -> BlockusModule::new);
             addIfLoaded("campchair", () -> CampChairModule::new);
             addMultipleIfLoaded("chipped", () -> ChippedMainModule::new, () -> ChippedLogModule::new, () -> ChippedDoorModule::new, () -> ChippedGlassModule::new, () -> ChippedLeavesModule::new);
+            addIfLoaded("copperagebackport", () -> CopperAgeBackportModule::new);
             addIfLoaded("dawnoftimebuilder", () -> DawnOfTimeModule::new);
             addIfLoaded("decorative_blocks", () -> DecorativeBlocksModule::new);
             addIfLoaded("farmersdelight", () -> FarmersDelightModule::new);

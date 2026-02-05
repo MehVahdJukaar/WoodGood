@@ -91,6 +91,9 @@ dependencies {
     //+ OTHER MAVENs
     modCompileOnly("maven.modrinth:stylish-stiles:zLlRqz68")
 
+    //+ LOCAL
+    modCompileOnly("copper-age-common:copperagebackport-fabric-1.20.1-0.1.4")
+
 //!! ========================================== DISABLED FOR A REASON =============================================== \\
 
 //    modCompileOnly("curse.maven:the-twilight-forest-227639:4653704") //!! NOT AVAILABLE
