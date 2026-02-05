@@ -23,6 +23,8 @@ import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModul
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
+import java.util.Objects;
+
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
@@ -63,7 +65,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
                 if (PlatHelper.getModVersion("bbb").contains("1.0.2"))
                     addIfLoaded("bbb", () -> BuildingButBetterModule::new);
             }
-            addIfLoaded("beautify", () -> BeautifyRefabricatedModule::new);
             addIfLoaded("bewitchment", () -> BewitchmentModule::new);
             addIfLoaded("clutter", () -> ClutterModule::new);
             addIfLoaded("create", () -> CreateModule::new);
@@ -79,6 +80,12 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addIfLoaded("shutter", () -> LauchsShuttersModule::new);
             addIfLoaded("wilderwild", () -> WilderWildModule::new);
             addIfLoaded("woodenhoppers", () -> WoodenHoppersModule::new);
+
+            /// Remove it in the next version: v2.9.17
+            if (PlatHelper.isModLoaded("beautify")) {
+                if (!Objects.requireNonNull(PlatHelper.getModVersion("beautify")).matches("2.0.\\d\\+1.20.1"))
+                    addIfLoaded("beautify", () -> BeautifyRefabricatedModule::new);
+            }
 
             if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
 
