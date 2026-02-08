@@ -16,10 +16,26 @@
 
 </div>
 
+<br>
+
+### UPDATED:
+- **Farmer's Delight**: Updated cabinet's textures with **Darker Depths**  - @Derp via Discord
+- **LANG**: Updated JA_JP by @HayaKoh-WeldyAlin - [#1169](https://github.com/MehVahdJukaar/WoodGood/pull/1169)
+- **Every Compat** (C): Improved error loggings further
+  - _previous changelog (v2.9.15):_ Improved some error loggings to make the debugging a unique crash much easier and clearer
+  - Fixed a bug in recipe generation that broke planks' recipe (from log to planks), this is related to **Building But Better** - [#1103](https://github.com/MehVahdJukaar/WoodGood/issues/1103)
+
+### NEW:
+- **Copper Age Backport** (C)
+
+---
+
+## v2.9.15
+
 ### UPDATED: 
 - **Macaw's Stairs** (C): Remove an error log in latest.log where loot_table for oak_balcony cannot be found (Backported from 1.21.1)
 - **Chipped** (C): Fixed crash with **Productive Trees**
-- **Every Comp** (C):
+- **Every Compat** (C):
   - Fixed an error log from latest.log with **F-ing Load My Tags** (Backported fixes from 1.21.1)  
   - Improved some error loggings to make the debugging a unique crash much easier and clearer
 
