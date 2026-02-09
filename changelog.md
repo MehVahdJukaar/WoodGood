@@ -18,6 +18,14 @@
 
 <br>
 
+### UPDATED: 
+- **Every Compat** (C): Backported a feature from 1.21 that ensure the Blockstate files get modified and pointing at the correct model files for the blocks - [#1177](https://github.com/MehVahdJukaar/WoodGood/issues/1177)
+  - Related to **Copper Age Backport**
+
+---
+
+## v2.9.16
+
 ### UPDATED:
 - **Farmer's Delight**: Updated cabinet's textures with **Darker Depths**  - @Derp via Discord
 - **LANG**: Updated JA_JP by @HayaKoh-WeldyAlin - [#1169](https://github.com/MehVahdJukaar/WoodGood/pull/1169)
