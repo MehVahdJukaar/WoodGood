@@ -253,7 +253,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void generateModels(SimpleModule module, ResourceManager manager, ResourceSink sink) {
-        ResourcesUtils.generateStandardBlockModels(manager, sink, blocks, baseType.get(),
+        ResourcesUtils.generateStandardBlockFiles(manager, sink, blocks, baseType.get(),
                 makeModelTransformer(module, manager), makeBlockStateTransformer(module, manager), this.modelConfiguration
         );
         ResourcesUtils.generateStandardItemModels(manager, sink, items, baseType.get(),
@@ -272,11 +272,14 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     protected BlockTypeResTransformer<T> makeBlockStateTransformer(SimpleModule module, ResourceManager manager) {
-        String baseBlockName = baseType.get().getTypeName();
-        return BlockTypeResTransformer.<T>create(module.modId, manager)
-                .replaceWithTextureFromChild("minecraft:block/" + baseBlockName + "_planks", "planks")
-                .replaceBlockType(baseBlockName)
-                .IDReplaceType(baseBlockName);
+        BlockTypeResTransformer<T> blockstateTransformer = BlockTypeResTransformer.<T>create(module.modId, manager);
+        String oldTypeName = baseType.get().getTypeName();
+        if (extraModelTransform != null) extraModelTransform.accept(blockstateTransformer);
+
+        return blockstateTransformer
+                .replaceWithTextureFromChild("minecraft:block/" + oldTypeName + "_planks", "planks")
+                .replaceBlockType(oldTypeName)
+                .IDReplaceType(oldTypeName);
     }
 
     protected BlockTypeResTransformer<T> makeLootTableTransformer(SimpleModule module, ResourceManager manager) {
