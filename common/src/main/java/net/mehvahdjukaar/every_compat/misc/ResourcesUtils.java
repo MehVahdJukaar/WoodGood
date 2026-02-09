@@ -40,14 +40,26 @@ import static java.util.Map.entry;
 @SuppressWarnings("unused")
 public class ResourcesUtils {
 
-
-    @SuppressWarnings("PointlessBooleanExpression")
+    @Deprecated(forRemoval = true)
+    /// @deprecated USE {@link ResourcesUtils#generateStandardBlockFiles(ResourceManager, ResourceSink, Map, BlockType, BlockTypeResTransformer, BlockTypeResTransformer, ExtraModelConfiguration)}
     public static <B extends Block, T extends BlockType> void generateStandardBlockModels(
             ResourceManager manager, ResourceSink sink,
             Map<T, B> blocks, T baseType,
             BlockTypeResTransformer<T> modelTransformer,
             BlockTypeResTransformer<T> blockStateTransformer,
-            ExtraModelConfiguration modelConfig
+            ExtraModelConfiguration extraModelConfig
+    ) {
+        generateStandardBlockFiles(manager, sink, blocks, baseType, modelTransformer, blockStateTransformer, extraModelConfig);
+    }
+
+    @SuppressWarnings("PointlessBooleanExpression")
+    /// Generate Blockstate & models/block files
+    public static <B extends Block, T extends BlockType> void generateStandardBlockFiles(
+            ResourceManager manager, ResourceSink sink,
+            Map<T, B> blocks, T baseType,
+            BlockTypeResTransformer<T> modelTransformer,
+            BlockTypeResTransformer<T> blockStateTransformer,
+            ExtraModelConfiguration extraModelConfig
     ) {
 
         if (blocks.isEmpty()) return;
@@ -73,7 +85,7 @@ public class ResourcesUtils {
 
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(insideBlockstates, s -> s.equals("model")));
 
-            List<StaticResource> oakBlockModels = gatherNonVanillaModels(manager, modelsLoc, modelConfig);
+            List<StaticResource> oakBlockModels = gatherNonVanillaModels(manager, modelsLoc, extraModelConfig);
 
             blocks.forEach((blockType, block) -> {
                 ResourceLocation blockId = Utils.getID(block);
