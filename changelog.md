@@ -17,6 +17,14 @@
 </div>
 
 ### UPDATED: 
+- **LANG**: Updated JA_JP by @HayaKoh-WeldyAlin - [#1179](https://github.com/MehVahdJukaar/WoodGood/pull/1179)
+- **Quark** (NF): Fixed chests' texture not using the custom textures
+
+---
+
+## v2.11.26
+
+### UPDATED: 
 - **Beautify! aka Beautify Decorate** (NF): Fixed an error on startup with another mod: **Beautify Refoxed**
   - NOTE: **Beautify Refoxed** from v1.9.0 onward (according to DEV) will have a built-in modules for **Every Compat** for NEOFORGE & FABRIC
     - **Beautify Refabricated (BRF)** from v2.0.0 onward - **Every Compat** will use **BRF**'s module instead of its own module 
