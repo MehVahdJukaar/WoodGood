@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.modules.chipped.*;
 import net.mehvahdjukaar.every_compat.modules.copper_age_backport.CopperAgeBackportModule;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
+import net.mehvahdjukaar.every_compat.modules.excessive_building.ExcessiveBuildingModule;
 import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
@@ -29,7 +30,6 @@ import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModul
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.variants.VariantVanillaBlocksModule;
-import net.mehvahdjukaar.every_compat.modules.villagers_plus.VillagersPlusModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 import java.util.List;
@@ -129,7 +129,12 @@ public class EveryCompatCommon {
             addOptionalModule("twigs", () -> TwigsModule.class);
             addOptionalModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
             addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
-            addOptionalModule("villagersplus", () -> VillagersPlusModule.class);
+
+            //REASON: v4.0.0+ is no longer supported because it no longer has variant blocks
+            if (PlatHelper.isModLoaded("excessive_building")) {
+                if (!PlatHelper.getModVersion("excessive_building").matches("4[.\\d]{4}"))
+                    addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);
+            }
 
 //!! =================================================== OTHERS ===================================================== \\
             forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));

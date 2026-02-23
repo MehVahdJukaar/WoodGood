@@ -9,7 +9,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.excessive_building.ExcessiveBuildingModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.exlines.AwningModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lauchs.LauchsShuttersModule;
@@ -61,7 +60,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addOptionalModule("bewitchment", () -> BewitchmentModule.class);
             addOptionalModule("clutter", () -> ClutterModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
-            addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);
             addOptionalModule("exlineawnings", () -> AwningModule.class);
             addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //!! Not maintained since 1.20.1
