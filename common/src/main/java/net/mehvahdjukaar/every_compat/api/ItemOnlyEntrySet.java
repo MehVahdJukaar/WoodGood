@@ -207,7 +207,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     public static class Builder<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet.Builder<Builder<T, I>, T, Block, I> {
         protected final Supplier<@Nullable I> baseItem;
         protected final Function<T, I> itemFactory;
-        protected ExtraModelConfiguration modelConfig = ExtraModelConfiguration.EMPTY;
+        protected ExtraModelConfiguration extraModelConfig = ExtraModelConfiguration.EMPTY;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<I> baseItem, Function<T, I> itemFactory) {
             super(type, name, prefix, baseType);
@@ -217,7 +217,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
         public ItemOnlyEntrySet<T, I> build() {
             var e = new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab, tabMode,
-                    palette, extraModelTransform, useMergedPalette, copyTint, condition, modelConfig);
+                    palette, extraModelTransform, useMergedPalette, copyTint, condition, extraModelConfig);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
@@ -229,22 +229,46 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             return this;
         }
 
-
-        /// Add models/block files so it can be generated - Only MINECRAFT's
-        public Builder<T, I> generateBlockModels(ResourceLocation... blockModels) {
-            if (this.modelConfig == ExtraModelConfiguration.EMPTY) {
-                this.modelConfig = ExtraModelConfiguration.createNew();
+        /// Include models/item files so it can be generated - Only MINECRAFT's
+        public Builder<T, I> includeModelsItem(ResourceLocation... itemModels) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew();
             }
-            this.modelConfig.addModelsBlock(blockModels);
+            this.extraModelConfig.addModelsItem(itemModels);
             return this;
         }
 
-        /// Add models/item files so it can be generated - Only MINECRAFT's
-        public Builder<T, I> generateItemModels(ResourceLocation... itemModels) {
-            if (this.modelConfig == ExtraModelConfiguration.EMPTY) {
-                this.modelConfig = ExtraModelConfiguration.createNew();
+        /// Include mod's models/item files to a List so it can be generated - REASON: Some files did not get generated
+        public Builder<T, I> includeModelsItem(boolean includeInGeneration, ResourceLocation... resourceLocations) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
             }
-            this.modelConfig.addModelsItem(itemModels);
+            this.extraModelConfig.addModelsItem(resourceLocations);
+            return this;
+        }
+
+//      ┌──────────────────────────────────────────────────────────┐
+//      │                    MARKED FOR REMOVAL                    │
+//      └──────────────────────────────────────────────────────────┘
+
+        @Deprecated(forRemoval = true, since = "v2.11.29")
+        /// Add models/block files so it can be generated - Only MINECRAFT's
+        public Builder<T, I> generateBlockModels(ResourceLocation... blockModels) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew();
+            }
+            this.extraModelConfig.addModelsBlock(blockModels);
+            return this;
+        }
+
+        @Deprecated(forRemoval = true, since = "v2.11.29")
+        /// Add models/item files so it can be generated - Only MINECRAFT's
+        /// Use {@link Builder#includeModelsItem(ResourceLocation...)} & Will be removed in v2.11.29
+        public Builder<T, I> generateItemModels(ResourceLocation... itemModels) {
+            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
+                this.extraModelConfig = ExtraModelConfiguration.createNew();
+            }
+            this.extraModelConfig.addModelsItem(itemModels);
             return this;
         }
 

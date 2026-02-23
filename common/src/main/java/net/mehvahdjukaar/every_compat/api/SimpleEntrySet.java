@@ -448,7 +448,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        /// Include models/block files to a List so it can be generated BUT Minecraft is excluded
+        /// Include mod's models/block files to a List so it can be generated - REASON: Some files did not get generated
         public Builder<T, B> includeModelsBlock(boolean includeInGeneration, ResourceLocation... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
@@ -466,7 +466,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        /// Include models/item files to a List so it can be generated BUT Minecraft is excluded
+        /// Include mod's models/item files to a List so it can be generated - REASON: Some files did not get generated
         public Builder<T, B> includeModelsItem(boolean includeInGeneration, ResourceLocation... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
@@ -475,9 +475,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        @Deprecated(forRemoval = true, since = "v2.11.27")
+        @Deprecated(forRemoval = true, since = "v2.11.29")
         /// Add models/block files so it can be generated - Only MINECRAFT's
-        /// Use {@link Builder#addModelsBlock(ResourceLocation...)} & Will be removed in v2.11.27
+        /// Use {@link Builder#includeModelsBlock(ResourceLocation...)} & Will be removed in v2.11.29
         public Builder<T, B> generateBlockModels(ResourceLocation... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew();
@@ -486,9 +486,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        @Deprecated(forRemoval = true, since = "v2.11.27")
-        /// Add models/block files to a List so it can be generated BUT Minecraft is excluded
-        /// Use {@link Builder#addModelsBlock(boolean, ResourceLocation...)} & Will be removed in v2.11.27
+        @Deprecated(forRemoval = true, since = "v2.11.29")
+        /// Add mod's models/block files to a List so it can be generated - REASON: Some files did not get generated
+        /// Use {@link Builder#includeModelsBlock(boolean, ResourceLocation...)} & Will be removed in v2.11.29
         public Builder<T, B> generateBlockModels(boolean includeInGeneration, ResourceLocation... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
@@ -497,9 +497,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        @Deprecated(forRemoval = true, since = "v2.11.27")
+        @Deprecated(forRemoval = true, since = "v2.11.29")
         /// Add models/item files so it can be generated - Only MINECRAFT's
-        /// Use {@link Builder#addModelsItem(ResourceLocation...)} & Will be removed in v2.11.27
+        /// Use {@link Builder#includeModelsItem(ResourceLocation...)} & Will be removed in v2.11.29
         public Builder<T, B> generateItemModels(ResourceLocation... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew();
@@ -508,9 +508,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        @Deprecated(forRemoval = true, since = "v2.11.27")
+        @Deprecated(forRemoval = true, since = "v2.11.29")
         /// Add models/item files to a List so it can be generated BUT Minecraft is excluded
-        /// Use {@link Builder#addModelsItem(boolean, ResourceLocation...)} & Will be removed in v2.11.27
+        /// Use {@link Builder#includeModelsItem(boolean, ResourceLocation...)} & Will be removed in v2.11.29
         public Builder<T, B> generateItemModels(boolean includeInGeneration, ResourceLocation... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
