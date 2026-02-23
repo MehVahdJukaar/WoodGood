@@ -904,6 +904,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         this::newCounter
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
+                .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("counter"), Registries.BLOCK)
