@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-// SUPPORT: v3.4.0+
+// SUPPORT: v3.4.1+
 public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
 
     //TYPE: CABINET
