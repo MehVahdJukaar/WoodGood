@@ -40,7 +40,7 @@
 |                                    |        | Twigs                                      |   🟩   | Workshop For Handsome Adventure      |   🟩   |     
 |                                    |        | Unusual End                                |   🟡   | Xerca Mod                            |   ❔    |     
 |                                    |        | Valhelsia Furniture                        |   🟩   |                                      |        |  
-|                                    |        |                                            |        |                                      |        |
+|                                    |        | \[Let's Do] Hearth & Timber                |   🟡   |                                      |        |
 
 ## LEGENDS:
 - 🟩 - AVAILABLE
