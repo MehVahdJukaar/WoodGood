@@ -88,8 +88,19 @@ dependencies {
         // modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
     }
 
-    modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_version"){
-        transitive = false
+//!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
+    //- Repository LOCAL
+    String path = System.getenv('REPOS21_1')
+
+    //- LOCAL
+    if (enable_moonlight_test.toBoolean()) {
+        modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-$moonlight_testVersion-fabric.jar"))
+    }
+    //+ MAVEN
+    else {
+        modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_version:fabric"){
+            transitive = false
+        }
     }
 
 //!! SUPPLEMENTARIES ------------------------------------------------------------------------------------------------ \\

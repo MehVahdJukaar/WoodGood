@@ -89,8 +89,19 @@ dependencies {
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-    modApi("net.mehvahdjukaar:moonlight-neoforge:$moonlight_version"){
-        transitive = false
+//!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
+    //- Repository LOCAL
+    String path = System.getenv('REPOS21_1')
+
+    //- LOCAL
+    if (enable_moonlight_test.toBoolean()) {
+        modImplementation(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-$moonlight_testVersion-neoforge.jar"))
+    }
+    //+ MAVEN
+    else {
+        modApi("net.mehvahdjukaar:moonlight-neoforge:$moonlight_version:neoforge"){
+            transitive = false
+        }
     }
 
 //!! TOOLS ========================================================================================================== \\

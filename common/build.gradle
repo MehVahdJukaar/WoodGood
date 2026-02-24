@@ -36,8 +36,19 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
     modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version"
 
-    modApi("net.mehvahdjukaar:moonlight:$moonlight_version"){
-        transitive = false
+//!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
+    //- Repository LOCAL
+    String path = System.getenv('REPOS21_1')
+
+    //- LOCAL
+    if (enable_moonlight_test.toBoolean()) {
+        modImplementation(files(path + "\\Moonlight\\common\\build\\libs\\moonlight-${moonlight_testVersion}.jar"))
+    }
+    //+ MAVEN
+    else {
+        modApi("net.mehvahdjukaar:moonlight:$moonlight_version"){
+            transitive = false
+        }
     }
 
 //!! ============================================= DEPENDENCIES ========================================================
