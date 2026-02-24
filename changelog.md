@@ -17,6 +17,17 @@
 </div>
 
 ### UPDATED: 
+- **Macaw's Furniture** (C): Added the missing BlockEntity to `strippedCounter` and its base block is `stripped_oak_counter`
+  - NOTE: this fix the crash when you place `strippedCounter` of any WoodType (this was reported via discord)
+- **Excessive Building** (FB): `v4.0.0` or newer will be no longer supported. only `v3.3.10` is still supported
+  - ANOTHER NOTE: Moved to COMMON, so it can be used with Sinytra-Connector on Neoforge
+- **EveryCompat** (C): Updated a deprecated method to use a new method related to Recipe Generation
+
+---
+
+## v2.11.27
+
+### UPDATED: 
 - **LANG**: Updated JA_JP by @HayaKoh-WeldyAlin - [#1179](https://github.com/MehVahdJukaar/WoodGood/pull/1179)
 - **Quark** (NF): Fixed chests' texture not using the custom textures
 
