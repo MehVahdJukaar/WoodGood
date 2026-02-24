@@ -24,7 +24,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -293,27 +292,32 @@ public class ResourcesUtils {
         addBlocksRecipes(manager, pack, blocks, ResourceLocation.fromNamespaceAndPath(modId, baseRecipe), fromType, 0);
     }
 
-    public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, ResourceSink pack,
+    public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, ResourceSink sink,
                                                                               Map<T, B> items, ResourceLocation baseRecipe, T fromType,
                                                                               int index) {
         Recipe<?> template = RPUtils.readRecipe(manager, baseRecipe);
-        items.forEach((w, i) -> {
+        items.forEach((blockType, i) -> {
 
-            if (ModEntriesConfigs.isEntryEnabled(w, i)) {
+            if (ModEntriesConfigs.isEntryEnabled(blockType, i)) {
                 try {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
-                    ResourceLocation id = RecipeBuilder.getDefaultRecipeId(i);
-                    RecipeHolder<?> newR;
-                    if (index != 0) {
-                        id = id.withSuffix("_" + index);
+                    ResourceLocation blockId = RecipeBuilder.getDefaultRecipeId(i);
+                    String baseRecipePath = baseRecipe.getPath();
+
+                    String modifiedRecipePath = baseRecipePath.substring(baseRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), blockType.getTypeName());
+                    String target = blockId.toString().substring(blockId.toString().lastIndexOf("/") + 1);
+
+                    // Replaced the [???] with modifiedRecipe: everycomp:q/biomesoplenty/ [fir_vertical_slab]
+                    String newId = blockId.toString().replace(target, modifiedRecipePath);
+
+                    // matches() ensure the last word, [a-z]_[a-z] is not one word, CASE: lightman's currency
+                    if (!blockId.toString().equals(newId) && newId.matches("\\w+:\\w+/\\w+/\\w+_\\w+")) {
+                        sink.addBlockTypeSwapRecipe(manager, baseRecipe, fromType, blockType, ResourceLocation.parse(newId));
                     }
-                    newR = RPUtils.makeSimilarRecipe(template, fromType, w, id);
+                    else {
+                        sink.addBlockTypeSwapRecipe(manager, baseRecipe, fromType, blockType, blockId);
+                    }
 
-                    //not even needed
-                    //newR = ForgeHelper.copyRecipeConditions(template, newR.value());
-
-                    // Adding to the resources
-                    pack.addRecipe(newR);
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate recipe @ {} for {}: {}", baseRecipe, i, e.getMessage());
                 }
