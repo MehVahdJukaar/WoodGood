@@ -66,6 +66,10 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // -------------------- [Let's Do] Meadow
+        // Leaves
+        addOptional("meadow:alpine_birch_leaves", "_leaves", "meadow:block/alpine_birch_leaves_top");
+
         // -------------------- Ars Nouveau
         if (!PlatHelper.isModLoaded("archwood_good")) {
             addOptional("ars_nouveau:blue_archwood_log", "_side", "ars_nouveau:block/archwood_log");
