@@ -371,6 +371,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves));
                     TextureImage targetTexture = TextureImage.open(manager, targetResLoc) // Using chipped's leaves' texture instead of leaves' texture
             ) {
+                int height = leavesTexture.imageHeight();
+                int width = leavesTexture.imageWidth();
+
+                if (!(leavesTexture.imageWidth() == 16) || !(leavesTexture.imageHeight() == 16))
+                    EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for {}", Utils.getID(leavesType.leaves), width, height, targetResLoc.getPath());
+
                 String path = targetResLoc.getPath();
                 String infix = shortenedId()+"/"+leavesType.getNamespace()+"/";
 
@@ -401,6 +407,13 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                     TextureImage targetTexture = TextureImage.open(manager, targetResLoc); // Using chipped's leaves' texture instead of leaves' texture
                     TextureImage bottomMask = TextureImage.open(manager, EveryCompat.res("block/ch/oak_leaves/frosted_oak_leaves_m"))
             ) {
+
+                int height = leavesTexture.imageHeight();
+                int width = leavesTexture.imageWidth();
+
+                if (!(width == 16) || !(height == 16))
+                    EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for frosted_oak_leaves_top", Utils.getID(leavesType.leaves), width, height);
+
                 String path = targetResLoc.getPath();
                 String infix = shortenedId()+"/"+leavesType.getNamespace()+"/";
 
