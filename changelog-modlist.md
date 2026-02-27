@@ -34,8 +34,7 @@
 |                            |        | The New Shutter aka Launch's Shutter       |   🟩   | Timber Frame                         |   🟩   |
 |                            |        | The Twilight Foreset                       |   🟩   | Tropicraft                           |   🟩   |
 |                            |        | Top Table Crafting (FORGE) or (FABRIC)     |   🟩   | Ultimate Car Mod                     |   🟩   |
-|                            |        | Twigs                                      |   🟩   | Unusual End                          |   🟡   |
-|                            |        | Unusual End                                |   🟡   | Unusual Furniture                    |   🟩   |
+|                            |        | Twigs                                      |   🟩   | Unusual Furniture                    |   🟩   |
 |                            |        | Valhelsia Furniture                        |   🟩   | Valhelsia Structure                  |   🟩   |
 |                            |        | Variant Vanilla Blocks (XanthianZ)         |   🟩   | Variant Crafting Tables (Kitteh6660) |   🟩   |
 |                            |        |                                            |        | Villagers Plus (FORGE)               |   🟩   |
