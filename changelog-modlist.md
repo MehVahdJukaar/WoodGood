@@ -6,13 +6,13 @@
 | Bewitchment                |   🟦   | Beauitful Campfires                        |   🟩   | Abnormal's Woodworks                 |   🟩   |
 | Blockus                    |   🟦   | Botany Pot                                 |   🟩   | Absent By Design                     |   🟩   |
 | Clutter                    |   🟦   | Building But Better                        |   🟩   | Architect's Palette                  |   🟩   |
-| Create Fabric              |   🟩   | Camp Chair                                 |   🟩   | Beautify                             |   🟩   |
+| Create Fabric (v0.5.1I)    |   🟩   | Camp Chair                                 |   🟩   | Beautify                             |   🟩   |
 | Exline's Awning            |   🟦   | Chipped                                    |   🟩   | Blocks +                             |   🟩   |
 | Exline's Bark Carpet       |   🟦   | Dawn Of Time                               |   🟩   | Builder's Crafts & Additions         |   🟩   |
 | Lightman's Currency Fabric |   🟩   | Decorative Blocks                          |   🟩   | Builder's Delight                    |   🟩   |
 | Red Bits                   |   🟦   | Dramatic Doors                             |   🟩   | Corail Pillar                        |   🟩   |
 | Villagers Plus (FABRIC)    |   🟩   | Dramatic Doors' <br>Supported Macaw's Door |   🟩   | Corail Woodcutter                    |   🟩   |
-| Wilder Wild                |   🟦   | Farmer's Delight                           |   🟩   | Create v6.0+                         |   🟩   |
+| Wilder Wild                |   🟦   | Farmer's Delight                           |   🟩   | Create (v0.5.1I)                     |   🟩   |
 | Wooden Hoppers             |   🟦   | Friends & Foes                             |   🟩   | Decoration Delight: Refurbished      |   🟩   |
 |                            |        | Furnish                                    |   🟩   | Excessive Building                   |   🟩   |
 |                            |        | Guita's Woodworks                          |   🟡   | Ex Nihilo Sequentia                  |   🟩   |
