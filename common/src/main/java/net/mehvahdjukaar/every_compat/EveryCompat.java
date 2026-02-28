@@ -344,10 +344,17 @@ public abstract class EveryCompat {
 
 
     public static Map<String, String> getModulesThatErrored() {
-        return ERRORED.entrySet().stream().collect(Collectors.toMap(
-                entry -> entry.getKey().getModName(),
-                entry -> entry.getValue().getMessage()
-        ));
+        return ERRORED.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> {
+                            var modName = entry.getKey().getModName();
+                            return modName != null ? modName : "UNKNOWN MOD";
+                        },
+                        entry -> {
+                            var message = entry.getValue().getMessage();
+                            return message != null ? message : "Failed to get error message");
+                        }
+                ));
     }
 
 

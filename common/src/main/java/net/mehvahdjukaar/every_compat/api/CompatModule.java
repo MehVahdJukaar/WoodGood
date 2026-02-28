@@ -47,7 +47,7 @@ public abstract class CompatModule {
 
     protected CompatModule(String modId, String shortId, String myNamespace) {
         this.modId = modId;
-        this.modName = PlatHelper.getModName(modId);
+        this.modName = Objects.requireNotNull(PlatHelper.getModName(modId), "Could not find mod name for " + modId));
         this.myNamespace = myNamespace;
         this.shortId = shortId;
         if (myNamespace.equals("minecraft")){
