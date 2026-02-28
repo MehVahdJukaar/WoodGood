@@ -122,8 +122,8 @@ dependencies {
     modRuntimeOnly("curse.maven:terrablender-neoforge-940057:5864140") // v4.0.0.2 | BOP, Regions-Unexplored
     modRuntimeOnly("curse.maven:glitchcore-955399:5660740") // v2.1.0.0 | BOP
 //    modRuntimeOnly("curse.maven:athena-841890:5629395") // v4.0.1 | Chipped
-//    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | Required by: REI, Furnish
-//    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | Required by: REI
+//    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | REI, Furnish, [Let's Do]-Meadow
+//    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | REI
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5679902") // v1.1.1a | Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5713682") // v1.1.17i | Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
