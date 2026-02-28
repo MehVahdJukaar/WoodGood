@@ -38,7 +38,7 @@ import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.ENTRY
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.MODULES_BLACKLIST;
 
 public abstract class EveryCompat {
-//TODO: figure out pack overlays to remove unneded textures when mods arent loaded
+    //TODO: figure out pack overlays to remove unneded textures when mods arent loaded
     public static final String MOD_ID = "everycomp";
     public static final Logger LOGGER = LogManager.getLogger("Every Compat");
 
@@ -145,9 +145,9 @@ public abstract class EveryCompat {
 
     @SafeVarargs
     public static void addMultipleIfLoaded(String modId, Supplier<Function<String, CompatModule>>... moduleFactories) {
-            for (var moduleFactory : moduleFactories) {
-                addIfLoaded(modId, moduleFactory);
-            }
+        for (var moduleFactory : moduleFactories) {
+            addIfLoaded(modId, moduleFactory);
+        }
     }
 
     public static Collection<CompatMod> getCompatMods() {
@@ -297,8 +297,8 @@ public abstract class EveryCompat {
                 for (var type : r.getValues()) {
                     forAllModules(m ->
                             typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>())
-                            .computeIfAbsent(type, j -> new ArrayList<>())
-                            .addAll(m.getAllItemsOfType(type)));
+                                    .computeIfAbsent(type, j -> new ArrayList<>())
+                                    .addAll(m.getAllItemsOfType(type)));
                 }
             }
             for (var e : typeToEntrySet.entrySet()) {
@@ -313,10 +313,17 @@ public abstract class EveryCompat {
 
 
     public static Map<String, String> getModulesThatErrored() {
-        return ERRORED.entrySet().stream().collect(Collectors.toMap(
-                entry -> entry.getKey().getModName(),
-                entry -> entry.getValue().getMessage()
-        ));
+        return ERRORED.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> {
+                            var modName = entry.getKey().getModName();
+                            return modName != null ? modName : "UNKNOWN MOD";
+                        },
+                        entry -> {
+                            var message = entry.getValue().getMessage();
+                            return message != null ? message : "Failed to get error message");
+                        }
+                ));
     }
 
     public static void crashIfInDev(String s) {

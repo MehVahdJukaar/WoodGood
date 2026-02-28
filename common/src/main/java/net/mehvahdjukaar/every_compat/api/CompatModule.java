@@ -41,7 +41,7 @@ public abstract class CompatModule {
 
     protected CompatModule(String modId, String myNamespace) {
         this.modId = modId;
-        this.modName = PlatHelper.getModName(modId);
+        this.modName = Objects.requireNotNull(PlatHelper.getModName(modId), "Could not find mod name for " + modId));
         this.myNamespace = myNamespace;
         if (myNamespace.equals("minecraft")){
             throw new AssertionError("Every Compat module namespace cannot be minecraft");
