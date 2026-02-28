@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -47,7 +48,7 @@ public abstract class CompatModule {
 
     protected CompatModule(String modId, String shortId, String myNamespace) {
         this.modId = modId;
-        this.modName = Objects.requireNotNull(PlatHelper.getModName(modId), "Could not find mod name for " + modId));
+        this.modName = Objects.requireNonNull(PlatHelper.getModName(modId), "Could not find mod name for " + modId);
         this.myNamespace = myNamespace;
         this.shortId = shortId;
         if (myNamespace.equals("minecraft")){
