@@ -194,10 +194,10 @@ public class HardcodedBlockType {
 
 
     /**
-     * @param whichSupportedModId - Id of Supported Mods That EveryCompat is supporting
-     * @param leavestypeFromMod - Id of mod that LeavesType is from
-     * @param leavesTypeId - id of LeavesType, ex: "biomesoplenty:redwood"
-     * @param supportedBlockId - Id of block: "hedge" OR id with name of leavesType: "redwood_hedge"
+     * @param whichSupportedModId Id of Supported Mods That EveryCompat is supporting
+     * @param leavestypeFromMod Id of mod that LeavesType is from
+     * @param leavesTypeId id of LeavesType, ex: "biomesoplenty:redwood"
+     * @param supportedBlockId Id of block: "hedge" OR id with name of leavesType: "redwood_hedge"
      */
     public static Boolean isLeavesFrom(String whichSupportedModId, String leavestypeFromMod, String leavesTypeId,
                                        String supportedBlockId) {
