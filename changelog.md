@@ -17,6 +17,17 @@
 </div>
 
 ### UPDATED: 
+- **Every Compat** (C): Updated 2 Classes: CompatModule.java & EveryCompat.java to fix the crash with **Gems Realm**  
+- **\[Let's Do] Meadow** (IT): Added `meadow:alpine_birch_leaves`'s ResourceLocation for the correct location
+  - NOTE: This fixed the error log and wrong texture on **Chipped**'s leaves  
+- **Macaw's Furniture** (C): Added the missing BlockEntity to `counter` and its base block is `oak_counter`
+    - NOTE: this fix the crash when you place `counter` of any WoodType (this was reported via discord)
+
+---
+
+## v2.11.28
+
+### UPDATED: 
 - **Macaw's Furniture** (C): Added the missing BlockEntity to `strippedCounter` and its base block is `stripped_oak_counter`
   - NOTE: this fix the crash when you place `strippedCounter` of any WoodType (this was reported via discord)
 - **Excessive Building** (FB): `v4.0.0` or newer will be no longer supported. only `v3.3.10` is still supported
