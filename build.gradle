@@ -451,7 +451,9 @@ ext {
 
             neo_version          : neo_version,
             neo_version_range    : neo_version_range,
-            loader_version_range : loader_version_range
+            loader_version_range : loader_version_range,
+
+            moonlight_required_version: moonlight_required_version
     ]
 }
 
