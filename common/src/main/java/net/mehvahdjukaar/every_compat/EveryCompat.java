@@ -321,7 +321,7 @@ public abstract class EveryCompat {
                         },
                         entry -> {
                             var message = entry.getValue().getMessage();
-                            return message != null ? message : "Failed to get error message");
+                            return message != null ? message : "Failed to get error message";
                         }
                 ));
     }
