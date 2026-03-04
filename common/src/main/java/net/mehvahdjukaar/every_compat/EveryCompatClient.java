@@ -4,7 +4,6 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
 import net.mehvahdjukaar.every_compat.misc.ErrorMessageScreen;
 import net.mehvahdjukaar.every_compat.misc.WoodTypeCycleItemRenderer;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
@@ -19,13 +18,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -80,9 +77,13 @@ public class EveryCompatClient {
             if (compatModule != null) {
                 if (blockTooltip) {
                     BlockType woodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
-                    if (woodType == null) woodType = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);
                     if (woodType != null) {
                         components.add(Component.translatable("tooltip.everycomp.wood_type", woodType.toString()).withStyle(ChatFormatting.DARK_GREEN));
+                    }
+
+                    BlockType leavesType = LeavesTypeRegistry.INSTANCE.getBlockTypeOf(item);
+                    if (leavesType != null) {
+                        components.add(Component.translatable("tooltip.everycomp.leaf_type", leavesType.toString()).withStyle(ChatFormatting.DARK_GREEN));
                     }
                 }
                 if (modTooltip)
