@@ -16,6 +16,18 @@
 
 </div>
 
+### CHANGES:
+- **Feywild** (IT): Removed the entries for all of logs' ResourceLocation for textures as it's no longer needed
+- **Every Compat** (C): 
+  - Corrected the wrong logic for `everycomp-hazardous.toml`'s module-blacklist or entryset-blacklist  (it wasn't working properly)
+  - Improved the logic for other blacklist config so blocks/items can get excluded.
+  - Improved error logging for debugging with **Stone Zone** or **Gems Realm** making it easy to know what's the cause
+- **Enderscape** (INCLUDED): WoodType-`murublight` with Supported_Mod-**Copper Age Backport** - [#1199](https://github.com/MehVahdJukaar/WoodGood/issues/1199)
+
+---
+
+## v2.11.29
+
 ### UPDATED: 
 - **Every Compat** (C): Updated 2 Classes: CompatModule.java & EveryCompat.java to fix the crash with **Gems Realm**  
 - **\[Let's Do] Meadow** (IT): Added `meadow:alpine_birch_leaves`'s ResourceLocation for the correct location
