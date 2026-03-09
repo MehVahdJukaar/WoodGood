@@ -28,7 +28,7 @@ public class HardcodedBlockType {
 
         String blockId = supportedModId +"/"+ woodTypeFromMod +"/"+ blockName;
 
-        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ CONFIG EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPECIAL EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude one WoodType from a Wood Mod
         if (WOOD_TYPES_BLACKLIST.get().stream().anyMatch(woodidentify::matches)) return true;
