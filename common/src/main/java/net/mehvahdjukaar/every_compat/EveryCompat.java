@@ -234,9 +234,9 @@ public abstract class EveryCompat {
     }
 
     public synchronized static void addOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
-        if (PlatHelper.isModLoaded(modId)
-                && !MODULES_BLACKLIST.get().contains(modId)
-                && !ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*")) {
+        boolean isModuleNotBlacklisted = !(MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*"));
+
+        if (PlatHelper.isModLoaded(modId) && isModuleNotBlacklisted) {
             try {
                 Class<? extends CompatModule> klazz = moduleClass.get();
 
@@ -259,6 +259,17 @@ public abstract class EveryCompat {
         }
     }
 
+    @SafeVarargs
+    public static void addMultipleOptional(String modId, Supplier<Class<? extends CompatModule>>... klazzes) {
+        boolean isModuleNotBlacklisted = !(MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*"));
+
+        if (PlatHelper.isModLoaded(modId) && isModuleNotBlacklisted) {
+            for (var klazz : klazzes) {
+                addOptionalModule(modId, klazz);
+            }
+        }
+    }
+
     private static void addError(CompatModule module, Throwable t) {
         if(module == null){
             EveryCompat.LOGGER.error("Tried to log an error for a null module", t);
@@ -277,13 +288,6 @@ public abstract class EveryCompat {
         }
         ERRORED.put(Preconditions.checkNotNull(module, "Module cannot be null"),
                 Preconditions.checkNotNull(t, "Throwable cannot be null"));
-    }
-
-    @SafeVarargs
-    public static void addMultipleOptional(String modId, Supplier<Class<? extends CompatModule>>... klazzes) {
-        for (var klazz : klazzes) {
-            addOptionalModule(modId, klazz);
-        }
     }
 
     private static @NotNull CompatModule instantiateModuleClass(String modId, Class<? extends CompatModule> klazz)
