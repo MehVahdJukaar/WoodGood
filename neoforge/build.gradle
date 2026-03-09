@@ -99,9 +99,8 @@ dependencies {
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-neoforge:$moonlight_version:neoforge"){
-            transitive = false
-        }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-neoforge")
+        else modApi("net.mehvahdjukaar:moonlight-neoforge:$moonlight_version:neoforge") { transitive = false }
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -208,7 +207,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:5977602")
     modCompileOnly("curse.maven:macaws-windows-363569:5592081")
     modCompileOnly("curse.maven:macaws-furniture-359540:7255584")
-    modCompileOnly("curse.maven:macaws-stairs-1119394:5802422")
+    modImplementation("curse.maven:macaws-stairs-1119394:5802422")
 
         //+ GENERAL
     modCompileOnly("curse.maven:absent-by-design-305840:4616702") //!! 1.20.1

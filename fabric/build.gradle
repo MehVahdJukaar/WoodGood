@@ -98,9 +98,8 @@ dependencies {
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_version:fabric"){
-            transitive = false
-        }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-fabric")
+        else modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_version:fabric") { transitive = false }
     }
 
 //!! SUPPLEMENTARIES ------------------------------------------------------------------------------------------------ \\
