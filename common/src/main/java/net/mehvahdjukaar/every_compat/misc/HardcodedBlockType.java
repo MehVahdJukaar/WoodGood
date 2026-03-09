@@ -28,14 +28,7 @@ public class HardcodedBlockType {
 
         String blockId = supportedModId +"/"+ woodTypeFromMod +"/"+ blockName;
 
-        /// ─────────────────────────── Include Vanilla Type ────────────────────────────
-        // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
-        if (isWoodFrom("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
-
-        // Chipped's glass & glass_panes has no Vanilla WoodTypes except OAK
-        if (isWoodFrom("chipped", "", "minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)", "\\w+_glass(_pane)?")) return false;
-
-        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ CONFIG EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude one WoodType from a Wood Mod
         if (WOOD_TYPES_BLACKLIST.get().stream().anyMatch(woodidentify::matches)) return true;
@@ -45,6 +38,16 @@ public class HardcodedBlockType {
 
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
+
+        /// ─────────────────────────── Include Vanilla Type ────────────────────────────
+
+        // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
+        if (isWoodFrom("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
+
+        // Chipped's glass & glass_panes has no Vanilla WoodTypes except OAK
+        if (isWoodFrom("chipped", "", "minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)", "\\w+_glass(_pane)?")) return false;
+
+        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
         if (isKnownVanillaWood(woodType)) return true;
