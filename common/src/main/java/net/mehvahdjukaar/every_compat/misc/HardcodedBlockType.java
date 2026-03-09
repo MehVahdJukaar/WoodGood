@@ -52,6 +52,9 @@ public class HardcodedBlockType {
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
         if (isKnownVanillaWood(woodType)) return true;
 
+        // MURUBLIGHT_SHELF from Enderscape is preventing SHELF from Copper-Age-Backport to be generated
+        if (isWoodFrom("copperagebackport", "", "enderscape:murublight", "")) return true;
+
         // The WoodType from Cobblemon's Legendary Monuments has a 32x32 texture
         if (isWoodFrom("", "", "legendarymonuments:distortion", "")) return true;
 
