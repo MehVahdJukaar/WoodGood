@@ -11,11 +11,13 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 
+@SuppressWarnings("LoggingSimilarMessage")
 public class UtilityTexture {
 
     /**
@@ -95,20 +97,28 @@ public class UtilityTexture {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (isKnownVanillaWood(woodType)) continue;
 
-                String newResLoc = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
+                String newPath = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
 
                 // Recoloring the baseTexture
                 try (
                         TextureImage logTexture = TextureImage.open(manager,
                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
+                    int height = logTexture.imageHeight();
+                    int width = logTexture.imageWidth();
+
+                    if (!(width == 16) || !(height == 16)) {
+                        EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), width, height, baseTextureLoc.getPath());
+                        sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
+                    }
+
                     var planksPalette = PaletteStrategies.PLANKS_REMOVE_DARKEST.getPaletteAndAnimation(woodType, manager);
 
                     TextureOps.applyMask(logTexture, planksMask);
                     TextureOps.applyOverlay(baseTexture, logTexture);
 
                     // Adding to the resource
-                    sink.addTextureIfNotPresent(manager, newResLoc, () -> {
+                    sink.addTextureIfNotPresent(manager, newPath, () -> {
                         /// Targetting planks
                         Respriter planksResprite = Respriter.masked(baseTexture, logMask);
                         return planksResprite.recolorWithAnimation(planksPalette.palette(), planksPalette.animation());
@@ -142,6 +152,14 @@ public class UtilityTexture {
                         TextureImage logTexture = TextureImage.open(manager,
                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
+                    int height = logTexture.imageHeight();
+                    int width = logTexture.imageWidth();
+
+                    if (!(width == 16) || !(height == 16)) {
+                        EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), width, height, baseTextureLoc.getPath());
+                        sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
+                    }
+
                     TextureImage mainTexture = baseTexture.makeCopy();
                     TextureImage logOverlay = logTexture.makeCopy();
                     TextureOps.applyMask(logOverlay, mask); // remove parts from texture for overlaying
