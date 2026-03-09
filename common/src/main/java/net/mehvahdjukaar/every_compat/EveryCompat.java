@@ -137,7 +137,9 @@ public abstract class EveryCompat {
     }
 
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatHelper.isModLoaded(modId) && !MODULES_BLACKLIST.get().contains(modId) && !ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*")) {
+        boolean isModuleNotBlacklisted = !(MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*"));
+
+        if (PlatHelper.isModLoaded(modId) && isModuleNotBlacklisted) {
             CompatModule module = moduleFactory.get().apply(modId);
             addModule(module);
         }
@@ -145,8 +147,12 @@ public abstract class EveryCompat {
 
     @SafeVarargs
     public static void addMultipleIfLoaded(String modId, Supplier<Function<String, CompatModule>>... moduleFactories) {
-        for (var moduleFactory : moduleFactories) {
-            addIfLoaded(modId, moduleFactory);
+        boolean isModuleNotBlacklisted = !(MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*"));
+
+        if (isModuleNotBlacklisted) {
+            for (var moduleFactory : moduleFactories) {
+                addIfLoaded(modId, moduleFactory);
+            }
         }
     }
 
@@ -321,7 +327,11 @@ public abstract class EveryCompat {
                         },
                         entry -> {
                             var message = entry.getValue().getMessage();
-                            return message != null ? message : "Failed to get error message";
+                            var cause = entry.getValue().getCause();
+
+                            if (message != null) return message;
+                            else if (cause != null) return cause.toString();
+                            else return "Failed to get error message";
                         }
                 ));
     }
