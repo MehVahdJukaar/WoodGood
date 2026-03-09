@@ -49,7 +49,7 @@ public class TextureGenHelper {
 
             Multimap<ResourceLocation, TextureInfo> infoPerTextures = ArrayListMultimap.create();
 
-            /// Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
+            ///STAGE-0: Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
             for (TextureInfo textureInfo : textureInfos) {
                 ResourceLocation textureId = textureInfo.texture();
 
@@ -100,10 +100,12 @@ public class TextureGenHelper {
                 }
             }
 
+            ///STAGE-1
             for (var e : partialRespriters.entrySet()) {
                 respriters.put(e.getKey(), Respriter.ofPalette(e.getValue(), globalPalette));
             }
-            /// Swapping out the old palettes of the texture with new palettes
+
+            ///STAGE-2A: Swapping out the old palettes of the texture with new palettes
             for (var entry : entries.entrySet()) {
                 Object block = entry.getValue();
                 T blockType = entry.getKey();
@@ -113,7 +115,7 @@ public class TextureGenHelper {
                 ResourceLocation blockId = Utils.getID(block);
 
 
-                /// Creating new Path to add the new textures via the resources
+                ///STAGE-2B: Creating new Path to add the new textures via the resources
                 for (var respriterSet : respriters.entrySet()) {
 
 
@@ -129,7 +131,7 @@ public class TextureGenHelper {
 
                     ResourceLocation newId;
 
-                    /// Adding the textures to the resource
+                    ///STAGE-2C: Generating the textures & Add it to the resource
                     for (var info : infoPerTextures.get(oldTextureId)) {
 
                         // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
