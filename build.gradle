@@ -28,7 +28,7 @@ allprojects {
         }
 
         // Our publishing repo
-        maven { url = "https://registry.somethingcatchy.net/repository/maven-releases/" }
+        if (!maven_backup.toBoolean()) maven { url = "https://registry.somethingcatchy.net/repository/maven-releases/" }
 
         maven { url = "https://maven.parchmentmc.org" }
 

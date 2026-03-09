@@ -101,13 +101,12 @@ dependencies {
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-$moonlight_testVersion-forge.jar"))
+        modApi(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-$moonlight_testVersion-forge.jar"))
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-forge:$moonlight_mavenVersion:forge"){
-            transitive = false
-        }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-forge")
+        else modApi("net.mehvahdjukaar:moonlight-forge:$moonlight_version:forge") { transitive = false }
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -192,7 +191,7 @@ dependencies {
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK")
 //    modRuntimeOnly("fuzs.diagonalblocks:diagonalblocks-forge:8.0.6")
-//    modRuntimeOnly("earth.terrarium.chipped:chipped-forge-${minecraft_version}:3.0.7") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: Bytecodecs, ConnectedTexturesMod (CTM)
+//    modRuntimeOnly("earth.terrarium.chipped:chipped-forge-$minecraft_version:3.0.7") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: Bytecodecs, ConnectedTexturesMod (CTM)
 
             //- LOCAL
 //    modRuntimeOnly("copper-age-neoforge:copperagebackport-forge-1.20.1-0.1.4")
