@@ -308,15 +308,24 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                     TextureImage targetTexture = TextureImage.open(manager, targetResLoc) // Using chipped's leaves' texture instead of leaves' texture
             ) {
                 String path = targetResLoc.getPath();
-                String infix = shortenedId()+"/"+leavesType.getNamespace()+"/";
+                String infix = shortenedId() + "/" + leavesType.getNamespace() + "/";
 
                 String newPath = path.substring(0, 6) + infix + path.substring(6);
                 newPath = newPath.replace("oak", leavesType.getTypeName());
 
-                sink.addTextureIfNotPresent(manager, newPath, () -> {
-                    Respriter respriter = Respriter.of(leavesTexture);
-                    return respriter.recolorWithAnimationOf(targetTexture);
-                });
+                int height = leavesTexture.imageHeight();
+                int width = leavesTexture.imageWidth();
+
+                if (!(width == 16) || !(height == 16)) {
+                    EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for {}", Utils.getID(leavesType.leaves), width, height, targetResLoc.getPath());
+                    sink.addTextureIfNotPresent(manager, newPath, leavesTexture::makeCopy);
+                }
+                else {
+                    sink.addTextureIfNotPresent(manager, newPath, () -> {
+                        Respriter respriter = Respriter.of(leavesTexture);
+                        return respriter.recolorWithAnimationOf(targetTexture);
+                    });
+                }
             } catch (Exception e) {
                 EveryCompat.LOGGER.error("Failed to generate Leave's texture for {} : {}", leavesType.getId(), e);
             }
@@ -346,18 +355,28 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 // block/ch/namespace/oak_leaves/frosted_oak_overlay
                 String overlayPath = topPath.replace("leaves_top", "overlay");
 
-                Respriter respriter = Respriter.of(leavesTexture);
-                TextureImage frostedTexture = respriter.recolorWithAnimationOf(targetTexture);
-                TextureImage overlayTexture = frostedTexture.makeCopy();
+                int height = leavesTexture.imageHeight();
+                int width = leavesTexture.imageWidth();
 
-                // Add top texture
-                sink.addTextureIfNotPresent(manager, topPath, () -> frostedTexture);
+                if (!(width == 16) || !(height == 16)) {
+                    EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for frosted_oak_leaves_top", Utils.getID(leavesType.leaves), width, height);
+                    sink.addTextureIfNotPresent(manager, topPath, targetTexture::makeCopy);
+                    sink.addTextureIfNotPresent(manager, overlayPath, leavesTexture::makeCopy);
+                }
+                else {
+                    Respriter respriter = Respriter.of(leavesTexture);
+                    TextureImage frostedTexture = respriter.recolorWithAnimationOf(targetTexture);
+                    TextureImage overlayTexture = frostedTexture.makeCopy();
 
-                // Add overlay texture
-                sink.addTextureIfNotPresent(manager, overlayPath, () -> {
-                    TextureOps.applyMask(overlayTexture, bottomMask);
-                    return overlayTexture;
-                });
+                    // Add top texture
+                    sink.addTextureIfNotPresent(manager, topPath, () -> frostedTexture);
+
+                    // Add overlay texture
+                    sink.addTextureIfNotPresent(manager, overlayPath, () -> {
+                        TextureOps.applyMask(overlayTexture, bottomMask);
+                        return overlayTexture;
+                    });
+                }
             } catch (Exception e) {
                 EveryCompat.LOGGER.error("Failed to generate Leave's texture for {} : {}", leavesType.getId(), e);
             }
