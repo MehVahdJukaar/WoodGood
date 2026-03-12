@@ -16,26 +16,104 @@ Check out [CurseForge](https://www.curseforge.com/minecraft/mc-mods/every-compat
 1. If your mod is multi-platform with blocks' class being in COMMON, then you can put the module in COMMON to support your mod
 2. If blocks' class is in FORGE and FABRIC, then you'll need to create 2 modules in both FABRIC & FORGE's folder
 
-**NOTE:**
+**ATTENTION:** if your mod is already supported heavily consider reaching out to incorporate some EC integration code in your mod itself for future proofing/stability
 
-if your mod is already supported heavily consider reaching out to incorporate some EC integration code in your mod itself for future proofing/stability
+---
 
 ### DEVELOPMENT: 
 
+#### REQUIRED DEPENDENCIES: 
+- `Moonlight Lib` - Has WoodType, LeavesType, and dynamic asset/data generation 
+- `Every Compat` - Has SimpleEntrySet, SimpleModule
 
-To import EveryCompat in your dev environment you can add the following gradle line
+<br>
 
-If you are using Loom:
-`modCompileOnly("every-compat-628539:[ec_version]")`
+#### Importing Dependencies --------------------------------------------------------------------------------------------
 
-If you are using ForgeGradle:
-`compileOnly fg.deobf("every-compat-628539:[ec_version]")`
+To import EveryCompat & Moonlight in your dev environment, There are 3 mavens that you can use from (RECOMMENDATION: SomethingCatchy.com)
 
-Where `ec_version` is the version number you can see in CurseForge after clicking on a particular file version. For example `6974680` is for 1.21.1-2.11.3-fabric
+###### MAVENS FOR EVERY COMPAT:
+
+LOADER: method(URL)
+
+- **SomethingCatchy.net**:
+    - FABRIC: `method("net.mehvahdjukaar:everycomp-fabric:${everycomp_version}:fabric") { transitive = false }`
+    - COMMON: `method("net.mehvahdjukaar:everycomp:${everycomp_version}") { transitive = false }`
+    - NEOFORGE: `method("net.mehvahdjukaar:everycomp-neoforge:${everycomp_version}:neoforge") { transitive = false }`
+
+- **CURSEFORGE**: 
+  - `method("every-compat-628539:${ec_version}")`
+
+- **MODRINTH**: 
+  - FABRIC: `method("maven.modrinth:every-compat:${everycomp_version}-fabric")`
+  - NEOFORGE: `method(maven.modrinth:every-compat:${everycomp_version}-neoforge)`
+
+###### MAVENS FOR MOONLIGHT LIB:
+
+- **SomethingCatchy.net**:
+  - FABRIC: `method("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}:fabric") { transitive = false }` 
+  - COMMON: `method("net.mehvahdjukaar:moonlight:${moonlight_version}") { transitive = false }`
+  - NEOFORGE: `method("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}:neoforge") { transitive = false }`
+
+- **CURSEFORGE**: 
+  - `method("curse.maven:selene-499980:${ml_version}")`
+
+- **MODRINTH**: 
+  - FABRIC: `method("maven.modrinth:moonlight:${moonlight_version}-fabric")`
+  - NEOFORGE: `method("maven.modrinth:moonlight:${moonlight_version}-neoforge")`
+
+EXAMPLE: `build.gradle`
+
+```
+repositories {
+    maven { url = "https://registry.somethingcatchy.net/repository/maven-releases/" } // EveryCompat, Moonlight
+
+// Assuming that you already have these in your build.gradle if you don't want to use above
+    maven { url = "https://api.modrinth.com/maven" }
+    maven { url = "https://www.cursemaven.com" }
+}
+
+dependencies {
+
+// NOTE: USING method(URL) above
+
+// If using Architectury-Loom
+    modApi(URL)
+      // Example
+    modApi("net.mehvahdjukaar:everycomp-neoforge:${everycomp_version}:neoforge") { transitive = false }`
+
+// If using ForgeGradle
+    compileOnly fg.deobf(URL)
+      // Example
+    compileOnly fg.deobf("net.mehvahdjukaar:everycomp-neoforge:${everycomp_version}:neoforge")
+    
+```
+
+NOTES: 
+
+    SomethingCatchy Version & Modrinth Version:
+
+where `${everycomp_version}` is version and you can find via URL below to get the latest version:
+
+MOONLIGHT: https://registry.somethingcatchy.net/#browse/search/generic=keyword%3Dmoonlight
+EVERYCOMPAT: https://registry.somethingcatchy.net/#browse/search/generic=keyword%3Deverycomp
+
+example: 
+- SomethingCatchy - `modCompileOnly("net.mehvahdjukaar:everycomp:1.21-2.11.26") { transitive = false }`
+- modrinth - modCompileOnly(maven.modrinth:every-compat:1.21-2.11.26-neoforge)
+
+<br>
+
+    Curseforge Version:
+
+Where `${ec_version}` is the version number you can see in CurseForge after clicking on a particular file version. For example `6974680` is for 1.21.1-2.11.3-fabric
 You can also click on "Curse Maven Snippet" in the files section of a particular file to get this same import line this way. Remember to use `modCompileOnly`
 
-example:  `modCompileOnly("every-compat-628539:6974680")`
+example: `modCompileOnly("every-compat-628539:6974680")`
 
+<br>
+
+#### CREATE YOUR MODULE and CLASS --------------------------------------------------------------------------------------
 
 Once you have done that, to interact with EveryCompat, all will happen through the Every Compat API class.
 
