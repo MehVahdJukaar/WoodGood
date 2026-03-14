@@ -137,11 +137,24 @@ public abstract class EveryCompat {
     }
 
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        boolean isModuleNotBlacklisted = !(MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*"));
+        if (PlatHelper.isModLoaded(modId)) {
+            try {
+                CompatModule module = moduleFactory.get().apply(modId);
+                addModule(module);
+            } catch (Throwable e) {
+                addError(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
 
-        if (PlatHelper.isModLoaded(modId) && isModuleNotBlacklisted) {
-            CompatModule module = moduleFactory.get().apply(modId);
-            addModule(module);
+                    @Override
+                    public int bloatAmount() {
+                        return 0;
+                    }
+
+                    @Override
+                    public Collection<Class<? extends BlockType>> getAffectedTypes() {
+                        return List.of();
+                    }
+                }, e);
+            }
         }
     }
 
