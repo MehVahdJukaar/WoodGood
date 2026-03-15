@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -11,6 +12,7 @@ import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -137,12 +139,14 @@ public abstract class EveryCompat {
     }
 
     public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatHelper.isModLoaded(modId)) {
+        boolean isModuleNotBlacklisted = !(MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*"));
+
+        if (PlatHelper.isModLoaded(modId) && isModuleNotBlacklisted) {
             try {
                 CompatModule module = moduleFactory.get().apply(modId);
                 addModule(module);
             } catch (Throwable e) {
-                addError(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
+                addError(new EveryCompatModule(modId, modId) {
 
                     @Override
                     public int bloatAmount() {
@@ -168,6 +172,27 @@ public abstract class EveryCompat {
             }
         }
     }
+
+    private static void addError(CompatModule module, Throwable t) {
+        if(module == null){
+            EveryCompat.LOGGER.error("Tried to log an error for a null module", t);
+            //add dummy module instead. idk how this could even happen but if it does i want a nice error screen still
+            module = new EveryCompatModule(EveryCompat.MOD_ID, "ec") {
+                @Override
+                public int bloatAmount() {
+                    return 0;
+                }
+
+                @Override
+                public Collection<Class<? extends BlockType>> getAffectedTypes() {
+                    return List.of();
+                }
+            };
+        }
+        ERRORED.put(Preconditions.checkNotNull(module, "Module cannot be null"),
+                Preconditions.checkNotNull(t, "Throwable cannot be null"));
+    }
+
 
     public static Collection<CompatMod> getCompatMods() {
         return COMPAT_MODS;

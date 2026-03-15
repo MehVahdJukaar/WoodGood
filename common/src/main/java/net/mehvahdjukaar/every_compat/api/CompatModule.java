@@ -11,8 +11,8 @@ import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -72,7 +72,7 @@ public abstract class CompatModule {
 
     @Override
     public String toString() {
-        return "Every Compat - " + LangBuilder.getReadableName(modId) + " Module";
+        return "module[ " + getModName() + " @ " + getMyNamespace() + " ]";
     }
 
     public ResourceLocation modRes(String string) {
@@ -93,6 +93,11 @@ public abstract class CompatModule {
     }
 
     public void onClientSetup() {
+    }
+
+    private <T extends BlockType> void registerBlocks(Class<T> type,
+                                                      Registrator<Block> registry) {
+        this.registerBlocks(type, registry, BlockSetAPI.getBlockSet(type).getValues());
     }
 
     public <T extends BlockType> void registerBlocks(Class<T> typeClass,
@@ -133,30 +138,45 @@ public abstract class CompatModule {
     public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
     }
 
-    //utility functions
 
-    protected final <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
+    // Ec tab
+    public ResourceKey<CreativeModeTab> getDedicatedTab() {
+        return ECRegistry.MOD_TAB.getKey();
+    }
+
+    public abstract Collection<Class<? extends BlockType>> getAffectedTypes();
+
+    //these have to be known in advance
+    public String[] getServerResourcesNamespaces() {
+        return new String[]{modId, myNamespace};
+    }
+
+    public String[] getClientResourcesNamespaces() {
+        return new String[]{myNamespace};
+    }
+
+    protected <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
         return memorize(id, BuiltInRegistries.BLOCK);
     }
 
     @Deprecated(forRemoval = true)
-    protected final Supplier<CreativeModeTab> getModTab(String id) {
+    protected Supplier<CreativeModeTab> getModTab(String id) {
         return memorize(id, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
 
-    protected final Supplier<Block> getModBlock(String id) {
+    protected Supplier<Block> getModBlock(String id) {
         return getModBlock(id, Block.class);
     }
 
-    protected final Supplier<Item> getModItem(String id) {
+    protected Supplier<Item> getModItem(String id) {
         return memorize(id, BuiltInRegistries.ITEM);
     }
 
-    protected final <B extends BlockEntity> Supplier<BlockEntityType<B>> getModTile(String id, Class<B> tileEntityClass) {
+    protected <B extends BlockEntity> Supplier<BlockEntityType<B>> getModTile(String id, Class<B> tileEntityClass) {
         return memorize(id, BuiltInRegistries.BLOCK_ENTITY_TYPE);
     }
 
-    protected final Supplier<BlockEntityType<BlockEntity>> getModTile(String id) {
+    protected Supplier<BlockEntityType<BlockEntity>> getModTile(String id) {
         return getModTile(id, BlockEntity.class);
     }
 
@@ -179,22 +199,6 @@ public abstract class CompatModule {
                         "Is the mod, " + this.getModName().toUpperCase() + " up to date, if yes, then downgrade to the previous version & wait for an Every Compat update. Otherwise, update the mod to the latest version.");
             }
         });
-    }
-
-    // Ec tab
-    public ResourceKey<CreativeModeTab> getDedicatedTab() {
-        return ECRegistry.MOD_TAB.getKey();
-    }
-
-    public abstract Collection<Class<? extends BlockType>> getAffectedTypes();
-
-    //these have to be known in advance
-    public String[] getServerResourcesNamespaces() {
-        return new String[]{modId, myNamespace};
-    }
-
-    public String[] getClientResourcesNamespaces() {
-        return new String[]{myNamespace};
     }
 
 }
