@@ -5,6 +5,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.*;
@@ -18,6 +19,54 @@ public class HardcodedBlockType {
     public static String leavesTypeFromMod;
     public static String supportedMod;
     public static String supportedBlockName;
+
+    public static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
+
+            // Slabs
+            "slab", "slab_edge", "slab_corner",
+            "divided_slab", "adj_double_slab", "adj_double_copycat_slab",
+            "centered_slab", "pyramid_slab", "checkered_slab",
+
+            // Stairs
+            "stairs", "double_stairs", "half_stairs",
+            "divided_stairs", "double_half_stairs", "sliced_stairs_panel",
+            "vertical_stairs", "vertical_double_stairs", "vertical_half_stairs",
+            "vertical_divided_stairs", "vertical_double_half_stairs", "vertical_sliced_stairs",
+            "sliced_stairs_slab", "vertical_sloped_stairs",
+
+            // Walls
+            "wall", "floor_board", "wall_board",
+
+            // Fences & Gates
+            "fence", "fence_gate", "gate", "iron_gate",
+
+            // Panels
+            "panel", "divided_panel_horizontal", "divided_panel_vertical", "centered_panel",
+
+            // Pillars & Posts
+            "pillar", "half_pillar", "post",
+            "corner_pillar", "threeway_corner_pillar", "double_threeway_corner_pillar",
+
+            // Doors & Trapdoors
+            "door", "trapdoor",
+
+            // Buttons, Levers & Plates
+            "pressure_plate", "large_button", "lever",
+
+            // Torches
+            "torch", "soul_torch", "redstone_torch",
+            "wall_torch", "soul_wall_torch", "redstone_wall_torch",
+
+            // Chests & Storage
+            "chest", "secret_storage",
+
+            // Misc blocks
+            "cube", "bouncy_cube", "glowing_cube",
+            "pyramid", "bookshelf", "chiseled_bookshelf",
+            "flower_pot", "item_frame", "glowing_item_frame",
+            "ladder", "bars", "pane",
+            "horizontal_pane"
+    );
 
     @Nullable
     public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String supportedModId) {
@@ -38,6 +87,9 @@ public class HardcodedBlockType {
 
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
+
+        // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
+        if (PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(suffix -> supportedBlockName.contains(suffix))) return true;
 
         /// ─────────────────────────── Include Vanilla Type ────────────────────────────
 
