@@ -51,13 +51,13 @@ public class UtilityRecipe {
         if (Objects.nonNull(newResult)) {
             try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipeLoc))
                     .orElseThrow(() -> new FileNotFoundException(recipeLoc.toString())).open()) {
-                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+                JsonObject recipeJson = RPUtils.deserializeJson(recipeStream);
 
                 // Editing the recipe
-                parseAndModifyRecipe(recipe, oldTagIngredient, newTagIngredient, Utils.getID(newResult).toString());
+                parseAndModifyRecipe(recipeJson, oldTagIngredient, newTagIngredient, Utils.getID(newResult).toString(), recipeLoc);
 
                 // Adding to the resources
-                sink.addJson(newRecipeLoc, recipe, ResType.RECIPES);
+                sink.addJson(newRecipeLoc, recipeJson, ResType.RECIPES);
 
             } catch (IOException e) {
                 EveryCompat.LOGGER.error("Failed to generate the recipe @ {} : {}", recipeLoc, e);
@@ -66,28 +66,37 @@ public class UtilityRecipe {
     }
 
     /// Parsing the recipe and modifying elements
-    public static void parseAndModifyRecipe(Object object, String oldIngredient, String newIngredien, String newResult) {
+    public static void parseAndModifyRecipe(Object object, String oldIngredient, String newIngredien, String newResult, ResourceLocation recipeId) {
 
         if (object instanceof JsonObject jsonObject) {
             for (String key : jsonObject.keySet()) {
                 switch (key) {
                     case "ingredients", "ingredient", "results" -> {
                         if (jsonObject.get(key).isJsonArray())
-                            parseAndModifyRecipe(jsonObject.getAsJsonArray(key), oldIngredient, newIngredien, newResult);
+                            parseAndModifyRecipe(jsonObject.getAsJsonArray(key), oldIngredient, newIngredien, newResult, recipeId);
+                        else if (jsonObject.get(key).isJsonObject())
+                            parseAndModifyRecipe(jsonObject.getAsJsonObject(key), oldIngredient, newIngredien, newResult, recipeId);
                         else
-                            parseAndModifyRecipe(jsonObject.getAsJsonObject(key), oldIngredient, newIngredien, newResult);
+                            EveryCompat.LOGGER.error("Failed to modify [ingredients, ingredient, or results] via recipe: {}", recipeId);
                     }
                     // modifying
-                    case "result" -> jsonObject.addProperty("result", newResult);
+                    case "result" -> {
+                        if (jsonObject.getAsJsonObject(key).has("id"))
+                            jsonObject.getAsJsonObject(key).addProperty("id", newResult);
+                        else
+                            EveryCompat.LOGGER.error("Failed to modify 'result' via recipe: {}", recipeId);
+                    }
                     case "tag" -> {
                         if (jsonObject.get("tag").getAsString().equals(oldIngredient))
                             jsonObject.addProperty("tag", newIngredien);
+                        else
+                            EveryCompat.LOGGER.error("Failed to modify 'tag' via recipe: {}", recipeId);
                     }
                     case "item" -> {
                         if (jsonObject.get("item").getAsString().equals(oldIngredient))
                             jsonObject.addProperty("item", newIngredien);
                         else
-                            jsonObject.addProperty("item", newResult);
+                            EveryCompat.LOGGER.error("Failed to modify 'item' via recipe: {}", recipeId);
                     }
                 }
             }
@@ -102,8 +111,8 @@ public class UtilityRecipe {
                 else if (jsonObject.has("item") && jsonObject.get("item").getAsString().equals(oldIngredient)) {
                     jsonObject.addProperty("item", newIngredien);
                 }
-                else if (jsonObject.has("item")) {
-                    jsonObject.addProperty("item", newResult);
+                else if (jsonObject.has("id")) {
+                    jsonObject.addProperty("id", newResult);
                 }
             }
         }
