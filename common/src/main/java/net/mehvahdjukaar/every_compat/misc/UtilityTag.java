@@ -186,9 +186,12 @@ public class UtilityTag {
 
     /// Checking if a tag exist for a block or an item
     private static boolean doTagExistFor(ResourceLocation resLoc, ResourceManager manager) {
-        boolean blockTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("blocks/"))).isPresent();
-        boolean itemTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
-        return blockTag || itemTag;
+        boolean blocksTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("blocks/"))).isPresent();
+        boolean blockTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("block/"))).isPresent();
+        boolean itemsTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
+        boolean itemTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("item/"))).isPresent();
+
+        return (blockTag || blocksTag) || (itemTag || itemsTag);
     }
 
     // Common tags
