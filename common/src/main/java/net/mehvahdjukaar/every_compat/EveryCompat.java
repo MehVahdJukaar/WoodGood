@@ -341,7 +341,9 @@ public abstract class EveryCompat {
                     event.add(e.getKey(), ee.toArray(ItemLike[]::new));
                 }
             }
-        } else {
+        }
+
+        if (!ECConfigs.NO_MOD_CREATIVE_TAB.get()) {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
     }
