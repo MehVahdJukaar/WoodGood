@@ -1,0 +1,60 @@
+name: Built-In Module Notification
+description: Notification for the DEV that a mod has the Every Compat (Wood Good) Module built-in
+title: "[📋]: "
+labels: ["Module"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Built-In-Module
+        
+  - type: markdown
+    attributes:
+      value: |
+        ## Please Read Before Submitting an Issue
+        This issue is a notification for DEV to add the mod that has the **Built-In Module** to Table containing supported mods
+        via Curseforge or Modrinth
+        
+        If you happened to notice that the Table doesn't contain the mod that is already supported by **Every Compat (Wood Good)
+        DEV of the mod could have forgot to provide notification. You can use this issue 
+
+  - type: checkboxes
+    id: code-of-conduct
+    attributes:
+      label: "Code Of Conduct"
+      options:
+        - label: "Ensure that Wood-Good doesn't support your mod, You can check Curseforge or Modrinth's page under Supported Mod"
+          required: true
+        - label: "The Module is all good to go"
+          required: true
+
+  - type: input
+    id: curseforge-normal
+    attributes:
+      label: Curseforge (Normal)
+      description: "The link for mod's Curseforge with Forge & Fabric"
+      placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/giacomos-bookshelf
+    validations:
+      required: true
+
+  - type: input
+    id: curseforge-fabric
+    attributes:
+      label: Curseforge-Fabric (Optional)
+      description: "If the mod has 2 Curseforge pages for Forge & Fabric, then use Fabric Link here"
+      placeholder: ex. https://www.curseforge.com/minecraft/mc-mods/giacomos-bookshelf
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: version-loader-availability
+    attributes:
+      label: Version Loader Availability
+      description: "Multiple Selection: which version & loader is your mod supporting Wood-Good in"
+      options:
+        - label: "1.19.2 | FABRIC"
+        - label: "1.20.1 | FABRIC"
+        - label: "1.21.1 | FABRIC"
+        - label: "1.19.2 | FORGE"
+        - label: "1.20.1 | FORGE"
+        - label: "1.21.1 | NEOFORGE"

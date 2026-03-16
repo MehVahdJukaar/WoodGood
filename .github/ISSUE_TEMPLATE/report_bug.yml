@@ -28,7 +28,7 @@ body:
       label: "Version - Loader (DO NOT FORGET TO SELECT THE CORRECT VERSION)"
       description: "What's the Minecraft version & loader"
       options:
-        - DO NOT FORGET the selected one is correct
+        - Unknown
         - 1.21.1 - FABRIC
         - 1.20.1 - FABRIC
         - 1.19.2 - FABRIC

@@ -1,0 +1,70 @@
+name: Undetected WoodType
+description: Did Every Compat fails to detect WoodType or LeavesType? Report it.
+title: "[🗃]: "
+labels: ["enhancement", "undetection", "Moonlight Lib"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        DETAILS
+
+  - type: checkboxes
+    id: code-of-conduct
+    attributes:
+      label: "Code of Conduct"
+      options:
+        - label: "Always check you are using the latest version of the mods and its dependencies"
+          required: true
+        - label: "The undetected WoodType must have 3 unique wordings as a name. Example: enlightened_end:void_shale_bricks"
+          required: true
+        - label: "Check the undetected WoodType for the sound, if it's not BASE_DRUM, then it's an issue on the WoodType's mod. Report it to the DEV"
+          required: true
+        - label: "Check whether there are a similar issue listed or not."
+          required: true
+        - label: "I HAVE READ ABOVE & CONFIRMED THEM."
+          required: true
+
+  - type: dropdown
+    id: version-loader
+    attributes:
+      label: "Version - Loader (DO NOT FORGET TO SELECT THE CORRECT VERSION)"
+      description: "What's the Minecraft version & loader"
+      options:
+        - Unknown
+        - 1.21.1 - FABRIC
+        - 1.20.1 - FABRIC
+        - 1.19.2 - FABRIC
+        - 1.21.1 - NEOFORGE
+        - 1.20.1 - FORGE
+        - 1.19.2 - FORGE
+        - 1.18.2 - FORGE
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: nameWoodMod
+    attributes:
+      label: Name of Wood Mod
+      description: Name of Wood Mod & modID
+      placeholder: ex. BetterNether (betternether)
+    validations:
+      required: true
+
+  - type: textarea
+    id: list_of_woods
+    attributes:
+      label: "List of Undetected WoodTypes"
+      description: "GemRealms failed to detect WoodTypes that should be included. The example below is an excellent to follow"
+      placeholder: "- [ ] modID:nameGemType \n- [ ] betternether:anchor_tree (stripped_log: stripped_bark_anchor_tree | planks: anchor_tree_planks)\n- [ ] betternether:stalagnate (stripped_log: stripped_bark_stalagnate | planks: stalagnate_planks)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: other_details
+    attributes:
+      label: "Other Details"
+      description: "Other Detail I should be aware of?"
+      placeholder: "All WoodType has the \"stripped_bark\" as prefix for all stripped_log"
+    validations:
+      required: false
