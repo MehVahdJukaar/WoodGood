@@ -124,9 +124,6 @@ public class HardcodedBlockType {
 
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // Makes it so the Guita's Branches block still registers if another mod adds a branch block/item
-        if (isWoodFrom("branches", "", "", "branch")) return false;
-
         // Minecraft's CHERRY prevent the generation of blocks with Terraqueous's CHERRY
         if (isWoodFrom("", "", "terraqueous:cherry", "")) return false;
 
