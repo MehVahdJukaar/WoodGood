@@ -61,12 +61,7 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
             this.initialize();
             this.initialized = true;
         }
-        ItemStack item;
-
-        if (getDisableCycleItemRenderer())
-            item = getItemIcon();
-        else
-            item = getAnyItem();
+        ItemStack item = getAnyItem();
 
         var itemRenderer = Minecraft.getInstance().getItemRenderer();
 
@@ -92,7 +87,7 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
         int tm = time % (size+1);
         if (tm != lastTime) {
 
-            ItemLike v = null;
+            ItemLike itemLike = null;
             do {
                 var l = (this.lastIndex + 1) % size;
                 // this.woodIndex = (this.woodIndex + 1);
@@ -101,17 +96,14 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
                 String key = childKeys.get(lastIndex);
                 var vv = moddedTypes.get(typeIndex % moddedTypes.size()).getChild(key);
                 if (vv instanceof ItemLike il) {
-                    v = il;
+                    itemLike = il;
                 }
-            } while (v == null);
+            } while (itemLike == null);
 
-            this.currentStack = v.asItem().getDefaultInstance();
+            this.currentStack = itemLike.asItem().getDefaultInstance();
         }
         this.lastTime = tm;
         return currentStack;
     }
 
-    public abstract ItemStack getItemIcon();
-
-    public abstract boolean getDisableCycleItemRenderer();
 }
