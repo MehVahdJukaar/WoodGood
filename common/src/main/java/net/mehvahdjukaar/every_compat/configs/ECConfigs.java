@@ -45,6 +45,8 @@ public class ECConfigs {
     public static final Supplier<GenMode> CLIENT_GENERATION_MODE;
     public static final Supplier<Boolean> GENERATE_BLOCKTYPE_TAGS;
     public static final Supplier<Boolean> USE_EXTERNAL_RESOURCE_PACK;
+    public static final Supplier<Boolean> DISABLE_CYCLE_ITEM_RENDERER;
+    public static final Supplier<String> CREATIVE_TAB_ICON;
 
 
     static {
@@ -81,18 +83,25 @@ public class ECConfigs {
                         - ALWAYS: Will always generate the assets & will be stored in memory. No cache is used. Unintuitively, this is often the fastest method as any disk access will be slow. \nTry and see what works best for you.""")
                 .worldReload()
                 .define("server_assets_generation_mode", GenMode.ALWAYS);
-        TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs")
+        TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs. Game Restart is required for this to take effect.")
                 .gameRestart()
                 .define("creative_tab", true);
-        TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible.")
+        TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible. Game Restart is required for this to take effect.")
                 .gameRestart()
                 .define("tab_item_search", true);
-        NO_MOD_CREATIVE_TAB = builder.comment("If set to true, then all of the generated items will not be put into the mod's tab.")
+        NO_MOD_CREATIVE_TAB = builder.comment("If set to true, then all of the generated items will not be put into the mod's tab. Game Restart is required for this to take effect.")
                 .gameRestart()
                 .define("no_mod_creative_tab", false);
-        GENERATE_BLOCKTYPE_TAGS = builder.comment("Generate blocktype tags for every block type. This will be applied to all the mods that use the system, not just Every Compat. Can make pack a bit faster if its off. Turn off if you dont need it")
+        GENERATE_BLOCKTYPE_TAGS = builder.comment("Generate blocktype tags for every block type. This will be applied to all the mods that use the system, not just Every Compat. Can make pack a bit faster if its off. Turn off if you dont need it. Game Restart is required for this to take effect.")
                 .gameRestart()
                 .define("generate_blocktype_tags", true);
+        DISABLE_CYCLE_ITEM_RENDERER = builder.comment("Disable creative-tab from showing the iteration of every item from Wood-Good. Only CREATIVE_TAB_ICON's one choosen item will be shown. Game Restart is required for this to take effect.")
+                .gameRestart()
+                .define("disable_cycle_item_renderer", false);
+        CREATIVE_TAB_ICON = builder.comment("You can choose a item to be Every-Compat's creative tab icon when Cycle Item Renderer is disabled. The value must be STRING like minecraft:oak_hanging_sign. Game Restart is required for this to take effect.")
+                .gameRestart()
+                .define("creative_tab_icon", "minecraft:barrier");
+
         // REMAP_COMPAT = builder.comment("Allows the mod to try to remap and convert other blocks and items from other compat mods that have been uninstalled from one world. This was made so one can uninstall such mods seamlessly having their blocks converted into Evety Compat counterparts")
         //        .define("remap_other_mods", false);
         // REMAP_OWN = builder.comment("Clears out and remaps all blocks registered by this mod belonging to uninstalled wood types to air or oak wood")

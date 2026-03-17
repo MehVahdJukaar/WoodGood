@@ -61,7 +61,12 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
             this.initialize();
             this.initialized = true;
         }
-        ItemStack item = getAnyItem();
+        ItemStack item;
+
+        if (getDisableCycleItemRenderer())
+            item = getItemIcon();
+        else
+            item = getAnyItem();
 
         var itemRenderer = Minecraft.getInstance().getItemRenderer();
 
@@ -105,4 +110,8 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
         this.lastTime = tm;
         return currentStack;
     }
+
+    public abstract ItemStack getItemIcon();
+
+    public abstract boolean getDisableCycleItemRenderer();
 }
