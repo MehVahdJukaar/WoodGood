@@ -17,6 +17,13 @@
 </div>
 
 ### CHANGES: 
+- **Every Compat** (C): Removed 2 configs due to a misunderstood request
+
+---
+
+## v2.11.31
+
+### CHANGES: 
 - **Every Compat** (C): Updated the logic to include Items into EC's tab and also mod's tab, too. 
   - NOTE: if you want to disable either EC's or Mod's. You can use `everycomp-common.toml` and find `creative_tab` for EC or `no_mod_creative_tab` for Mod
   - Updated a method for recipe generation to fix the missing recipe for **Gems Realm** with **Create** - [GemsRealm#54](https://github.com/Xelbayria/GemsRealm/issues/54)
