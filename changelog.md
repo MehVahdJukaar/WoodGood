@@ -16,6 +16,18 @@
 
 </div>
 
+### CHANGES: 
+- **Every Compat** (C): Updated the logic to include Items into EC's tab and also mod's tab, too. 
+  - NOTE: if you want to disable either EC's or Mod's. You can use `everycomp-common.toml` and find `creative_tab` for EC or `no_mod_creative_tab` for Mod
+  - Updated a method for recipe generation to fix the missing recipe for **Gems Realm** with **Create** - [GemsRealm#54](https://github.com/Xelbayria/GemsRealm/issues/54)
+  - Added 2 new configs: [#1203](https://github.com/MehVahdJukaar/WoodGood/issues/1203)
+    - `DISABLE_CYCLE_ITEM_RENDERER` - disable creative-tab from showing the iteration of every item from Wood-Good
+    - `CREATIVE_TAB_ICON` - Choose one item (can be from Wood-Good or Minecraft) to replace the icon instead of iterating every item from Wood-Good
+
+---
+
+## v2.11.30
+
 ### CHANGES:
 - **Feywild** (IT): Removed the entries for all of logs' ResourceLocation for textures as it's no longer needed
 - **Every Compat** (C): 
