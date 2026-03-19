@@ -47,9 +47,6 @@ public class HardcodedBlockType {
             "pillar", "half_pillar", "post",
             "corner_pillar", "threeway_corner_pillar", "double_threeway_corner_pillar",
 
-            // Doors & Trapdoors
-            "door", "trapdoor",
-
             // Buttons, Levers & Plates
             "pressure_plate", "large_button", "lever",
 
