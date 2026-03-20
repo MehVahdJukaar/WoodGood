@@ -17,7 +17,7 @@
 | Variant Vanilla Blocks (XanthianZ) |   🟦   | Dawn Of Time                               |   🟩   | Functional Storage                   |   🟩   |      
 | Villagers Plus (FABRIC)            |   ❔    | Decorative Blocks Reborn                   |   🟩   | Graveyard (finallion)                |   ❔    |      
 | Wilder Wild                        |   🟦   | Dramatic Doors                             |   🟩   | Just A Raft                          |   🟩   |      
-|                                    |        | Dramatic Doors' <br>Supported Macaw's Door |   🟩   | LieOnLion's More Chest Variant       |   🟩   |     
+| More Barrier Variants              |   🟡   | Dramatic Doors' <br>Supported Macaw's Door |   🟩   | LieOnLion's More Chest Variant       |   🟩   |     
 |                                    |        | Farmer's Delight                           |   🟩   | Market Crates                        |   ❔    |      
 |                                    |        | Friends & Foes                             |   🟩   | More Crafting Table For Forge        |   🟩   |     
 |                                    |        | Furnish                                    |   🟩   | Mosaic Carpentry                     |   ❔    |    
@@ -28,19 +28,20 @@
 |                                    |        | LieOnLion's More Crafting Tables           |   🟩   | Productive Bees                      |   🟥   |     
 |                                    |        | LieOnLion's More Chest Variant             |   🟩   | Quark                                |   🟩   |     
 |                                    |        | Macaw's Mods                               |   🟩   | Re: Deco                             |   ❔    |     
-|                                    |        | MOre Beautiful Torches                     |   🟩   | Timber Frame                         |   ❔    |     
-|                                    |        | MrCrayfish's Backpacked                    |   🟩   | Tropicraft                           |   🟩   |     
-|                                    |        | MrCrayfish's Mighty Mail                   |   🟩   | Ultimate Car Mod                     |   🔧   |    
-|                                    |        | MrCrayfish's Refurbished Furniture         |   🟩   | Unusual End                          |   🟡   |     
-|                                    |        | Regions Unexplored                         |   🟩   | Unusual Furniture                    |   🟩   |     
-|                                    |        | Storage Delight                            |   🔧   | Valhelsia Structure                  |   🟩   |     
-|                                    |        | Storage Drawers                            |   🟩   | Variant Crafting Tables (Kitteh6660) |   ❔    |     
-|                                    |        | The New Shutter aka Launch's Shutter       |   🟩   | Villagers Plus (NEOFORGE)            |   ❔    |     
-|                                    |        | The Twilight Foreset                       |   🟩   | Woodster                             |   🟩   |     
-|                                    |        | Top Table Crafting                         |   ❔    | Workshop For Handsome Adventure      |   🟩   |     
-|                                    |        | Twigs                                      |   🟩   | Xerca Mod                            |   ❔    |     
-|                                    |        | Unusual End                                |   🟡   |                                      |        |     
-|                                    |        | Valhelsia Furniture                        |   🟩   |                                      |        |  
+|                                    |        |                                            |        | Timber Frame                         |   ❔    |     
+|                                    |        | More Beautiful Torches                     |   🟩   | Tropicraft                           |   🟩   |     
+|                                    |        | MrCrayfish's Backpacked                    |   🟩   | Ultimate Car Mod                     |   🔧   |    
+|                                    |        | MrCrayfish's Mighty Mail                   |   🟩   | Unusual End                          |   🟡   |     
+|                                    |        | MrCrayfish's Refurbished Furniture         |   🟩   | Unusual Furniture                    |   🟩   |     
+|                                    |        | Regions Unexplored                         |   🟩   | Valhelsia Structure                  |   🟩   |     
+|                                    |        | Storage Delight                            |   🔧   | Variant Crafting Tables (Kitteh6660) |   ❔    |     
+|                                    |        | Storage Drawers                            |   🟩   | Villagers Plus (NEOFORGE)            |   ❔    |     
+|                                    |        | The New Shutter aka Launch's Shutter       |   🟩   | Woodster                             |   🟩   |     
+|                                    |        | The Twilight Foreset                       |   🟩   | Workshop For Handsome Adventure      |   🟩   |     
+|                                    |        | Top Table Crafting                         |   ❔    | Xerca Mod                            |   ❔    |     
+|                                    |        | Twigs                                      |   🟩   |                                      |        |     
+|                                    |        | Unusual End                                |   🟡   |                                      |        |  
+|                                    |        | Valhelsia Furniture                        |   🟩   |                                      |        |
 |                                    |        | \[Let's Do] Hearth & Timber                |   🟡   |                                      |        |
 
 ## LEGENDS:
