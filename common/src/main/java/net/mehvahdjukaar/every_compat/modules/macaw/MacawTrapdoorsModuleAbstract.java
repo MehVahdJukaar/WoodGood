@@ -17,7 +17,7 @@ import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.PLANKS_REMOVE
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 
-//SUPPORT: v1.1.4+
+///SUPPORT: v1.1.4+
 public abstract class MacawTrapdoorsModuleAbstract extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> BARK_TRAPDOORS,
