@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
-import net.kikoz.mcwfences.MacawsFences;
 import net.kikoz.mcwfences.objects.FenceHitbox;
 import net.kikoz.mcwfences.objects.WiredFence;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawFencesModuleAbstract;
@@ -21,7 +20,7 @@ public class MacawFencesModule extends MacawFencesModuleAbstract {
 
     @Override
     public ResourceLocation getTabKey() {
-        return MacawsFences.FENCESGROUP.location();
+        return modRes("fencesgroup");
     }
 
     @Override
