@@ -248,26 +248,36 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 BlockTags.SOUL_FIRE_BASE_BLOCKS.location().toString(), true, false, sink, regEx);
 
         /// Regions Unexplored
-        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)",
-                "regions_unexplored", BlockTags.STRIDER_WARM_BLOCKS.location().toString(),
+        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored",
+                BlockTags.STRIDER_WARM_BLOCKS.location().toString(),
                 true, false, sink);
-        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)",
-                "regions_unexplored", "minecraft:non_flammable_wood",
+        addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored",
+                "minecraft:non_flammable_wood",
                 false, true, sink);
 
         /// Chests
-        addTagToAllBlocks(blocks, "",
-                "", platformTag("chests/wooden").toString(),
+        addTagToAllBlocks(blocks, "", "",
+                platformTag("chests/wooden").toString(),
                 true, true, sink, "^(?!trapped_)\\w+(?<!_trapped)_chest$");
 
-        addTagToAllBlocks(blocks, "",
-                "", platformTag("chests").toString(),
+        addTagToAllBlocks(blocks, "", "",
+                platformTag("chests").toString(),
                 true, true, sink, "^(?!trapped_)\\w+(?<!_trapped)_chest$");
+
+        addTagToAllBlocks(blocks, "", "create", "chest_mounted_storage",
+                true, false, sink, "^(?!trapped_)\\w+(?<!_trapped)_chest$");
 
         /// Trapped_Chests
-        addTagToAllBlocks(blocks, "",
-                "", platformTag("chests/trapped").toString(),
+        addTagToAllBlocks(blocks, "", "",
+                platformTag("chests/wooden").toString(),
                 true, true, sink, "^(?:\\w+)?trapped(?:\\w+)?_chest$");
+
+        addTagToAllBlocks(blocks, "", "",
+                platformTag("chests/trapped").toString(),
+                true, true, sink, "^(?:\\w+)?trapped(?:\\w+)?_chest$");
+
+        addTagToAllBlocks(blocks, "", "create", "chest_mounted_storage",
+                true, false, sink, "^(?:\\w+)?trapped(?:\\w+)?_chest$");
 
     }
 
