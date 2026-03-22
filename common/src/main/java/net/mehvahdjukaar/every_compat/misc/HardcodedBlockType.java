@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import org.jetbrains.annotations.Nullable;
@@ -20,7 +19,7 @@ public class HardcodedBlockType {
     public static String supportedMod;
     public static String supportedBlockName;
 
-    private static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
+    public static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
 
             // Slabs
             "slab", "slab_edge", "slab_corner",
@@ -46,9 +45,6 @@ public class HardcodedBlockType {
             // Pillars & Posts
             "pillar", "half_pillar", "post",
             "corner_pillar", "threeway_corner_pillar", "double_threeway_corner_pillar",
-
-            // Doors & Trapdoors
-            "door", "trapdoor",
 
             // Buttons, Levers & Plates
             "pressure_plate", "large_button", "lever",
@@ -87,9 +83,6 @@ public class HardcodedBlockType {
 
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
-
-        // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
-        if (PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(suffix -> supportedBlockName.contains(suffix))) return true;
 
         /// ─────────────────────────── Include Vanilla Type ────────────────────────────
         // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants

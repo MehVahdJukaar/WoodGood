@@ -25,6 +25,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.*;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.FRAMED_BLOCKS_SUFFIX;
+
 public class SimpleModule extends CompatModule {
 
     private final String shortId;
@@ -248,6 +250,9 @@ public class SimpleModule extends CompatModule {
 
         String slashConvention = woodTypeFrom + "/" + blockName; // quark/blossom_chair
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
+
+        // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
+        if (PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(blockName::contains)) return true;
 
         // ugly hardcoded stuff
         if (blockType instanceof WoodType woodType) {
