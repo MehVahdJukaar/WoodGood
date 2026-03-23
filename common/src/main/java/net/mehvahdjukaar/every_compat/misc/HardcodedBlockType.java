@@ -85,9 +85,6 @@ public class HardcodedBlockType {
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
 
-        // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
-        if (PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(suffix -> supportedBlockName.contains(suffix))) return true;
-
         /// ─────────────────────────── Include Vanilla Type ────────────────────────────
 
         // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
