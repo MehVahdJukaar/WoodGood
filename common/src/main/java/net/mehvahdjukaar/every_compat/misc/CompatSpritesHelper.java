@@ -65,6 +65,10 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // -------------------- Marvelous Menagerie Paradoxical
+        addOptional("marvelous_menagerie", "calamites_log", "_side", "block/calamites_log"); // is a 8x8 log
+        addOptional("marvelous_menagerie", "calamites_log", "_top", "block/calamites_log"); // is a 8x8 log
+
         // -------------------- Frightful Winter
         // Leaves
         addOptional("natures_spirit", "joshua_leaves", "_leaves", "block/joshua_leaves"); // Was using joshua_ends.png
