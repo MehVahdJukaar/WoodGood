@@ -59,7 +59,7 @@ dependencies {
 
     //+ GENERAL
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
-    modCompileOnly("curse.maven:backpacked-352835:5401968")
+    modCompileOnly("curse.maven:backpacked-352835:7624223")
     modCompileOnly("curse.maven:beautiful-campfires-1085950:6162183")
     modCompileOnly("curse.maven:blockus-312289:6256096")
     modCompileOnly("curse.maven:building-but-better-989479:6803573")

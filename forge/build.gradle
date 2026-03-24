@@ -156,7 +156,7 @@ dependencies {
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // v7.10 | The-Outer-End, +Woodworks, Boatload, Sully Mod
     modCompileOnly("curse.maven:valhelsia-core-416935:5189548") // v1.1.2 | Valhelsia Structure, Valhelsia Furniture
-    modCompileOnly("curse.maven:framework-549225:5911986") // v0.7.12 | Refurbished Furniture, +Mighty-Mail, Backpacked
+    modCompileOnly("curse.maven:framework-549225:7573740") // v0.8 | Refurbished Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5900857") // v1.2.9 | More Chest Variants, More Crafting Table
     modCompileOnly("curse.maven:titanium-287342:5468426") // v3.8.32 | Functional-Storage
     modCompileOnly("curse.maven:zeta-968868:6432578") // v1.0-30 | Quark
@@ -167,7 +167,7 @@ dependencies {
 //!! ================================================== IMPORTS ===================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4034009") //WARNING: v2.1.2-1.19.2 -> 1.20.1: Cannot remap access widener from namespace 'srg'. Expected: 'intermediary'
-//    modRuntimeOnly("curse.maven:backpacked-352835:5401965")
+//    modRuntimeOnly("curse.maven:backpacked-352835:7624219") // Framework
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679")
 //    modCompileOnly("curse.maven:dawn-of-time-312359:6863591") // Fusion, YetAnotherConfigLib - NOTE: Test in production (PrismLauncher or others)
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:5089406")
