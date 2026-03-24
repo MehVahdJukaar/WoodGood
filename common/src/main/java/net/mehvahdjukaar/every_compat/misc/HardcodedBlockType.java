@@ -96,6 +96,9 @@ public class HardcodedBlockType {
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
         if (isKnownVanillaWood(woodType)) return true;
 
+        // Marvelous Menagerie Paradoxical's calamites_log is a 8x8 log and its texture won't work with supported-mod that directly use the textures
+        if (isWoodFrom("mcwfences|mcwstairs", "", "marvelous_menagerie:calamites", "")) return true;
+
         // The WoodType from Cobblemon's Legendary Monuments has a 32x32 texture
         if (isWoodFrom("", "", "legendarymonuments:distortion", "")) return true;
 
