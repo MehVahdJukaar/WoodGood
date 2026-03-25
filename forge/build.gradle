@@ -134,7 +134,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:rechiseled-558998:5286306") // Rechiseled @ ISN'T SUPPORTED YET
 //    modRuntimeOnly("curse.maven:curios-309927:6418456") // v5.14.1 | Malum, Aether, Ars-Nouveau
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum
-//    modRuntimeOnly("curse.maven:geckolib-388172:7025129") // v4.8.2 | Ars-Nouveau
     modRuntimeOnly("curse.maven:citadel-331936:6702068") // v2.6.2 | Alex's Cave, Rats
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modRuntimeOnly("curse.maven:patchouli-306770:6164575") // v84.1 | TFC, Timber-Frames
@@ -151,6 +150,8 @@ dependencies {
 //    forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3") // Ad-Astra
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}") // Create
+//    modRuntimeOnly("software.bernie.geckolib:geckolib-forge-$minecraft_version:4.8.3") // Ars-Nouveau
+//    forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20") // Geckolib
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN FORGE
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
@@ -311,5 +312,6 @@ dependencies {
 
     //!! OTHERS
 //    modRuntimeOnly("maven.modrinth:stone-zone:1.20-2.7.14") //REQUIRE: Stone Mods
+//    modRuntimeOnly("com.hollingsworth.ars_nouveau:ars_nouveau-$minecraft_version:4.9.0.165") // Get version @ https://maven.blamejared.com/com/hollingsworth/ars_nouveau/ars_nouveau-1.20.1/
 
 }
