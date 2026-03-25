@@ -493,7 +493,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
             textures.forEach(currentTextures -> {
                 if (currentTextures.logPaletteStrategy() == null)
-                    applyLogAndGenerateTexture(
+                    applyLogOverlay(
                             modRes(currentTextures.baseTexture()).withPrefix("block/oak_log/"),
                             EveryCompat.res(currentTextures.logMask()),
                             shortenedId(), "oak", sink, manager
@@ -509,7 +509,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                             sink, manager
                     );
                 else
-                    applyLogAndswapPlanksTexture(
+                    applyLogOverlayAndswapPlanks(
                             modRes(currentTextures.baseTexture()).withPrefix("block/oak_log/"),
                             EveryCompat.res(currentTextures.logMask()), EveryCompat.res(currentTextures.planksMask()),
                             shortenedId(), "oak",
