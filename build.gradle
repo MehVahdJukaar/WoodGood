@@ -162,6 +162,9 @@ subprojects {
                     if (modLoader == "fabric") {
                         displayName = mod_id + "-" + mod_version + "-fabric"
                     }
+                    else {
+                        displayName = mod_id + "-" + mod_version + "-forge"
+                    }
                 }
 
                 if (modLoader == "fabric") {
