@@ -22,10 +22,10 @@ allprojects {
     repositories {
 
         mavenLocal()
+        mavenCentral()
 
-        flatDir {
-            dirs 'mods'
-        }
+        // Flat directory for local mods
+        flatDir { dirs "mods" }
 
         // Our publishing repo
         if (!maven_backup.toBoolean()) maven { url = "https://registry.somethingcatchy.net/repository/maven-releases/" }
@@ -37,41 +37,36 @@ allprojects {
             allowInsecureProtocol = true
         }
         maven { url = "https://api.modrinth.com/maven" }
-
         maven { url = "https://mvn.devos.one/snapshots/" } // registrate_fabric & registrate
-
         maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
-
         maven { url = "https://maven.shedaniel.me/" } // Cloth Config
 
         // Required for Create
         maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
-
         maven { url = "https://maven.tterrag.com" } // Registrate
-
         maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config API Port
+        maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
+        maven { url = 'https://maven.ladysnake.org/releases' } // Unknown
+        maven { url = "https://maven.shedaniel.me" } // unknown
+        maven { url = "https://maven.blamejared.com/" } // JEI
+        maven { url = "https://modmaven.dev" } // Botania & FALLBACK for JEI
+        maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
+        maven { url = 'https://maven.minecraftforge.net/' } // Terrablender
+        maven { url = "https://maven.terraformersmc.com/" } // EMI
+        maven { url = "https://maven.terraformersmc.com/releases" }
 
         maven { // Reach Entity Attributes
             url = "https://maven.jamieswhiteshirt.com/libs-release"
             content { includeGroup("com.jamieswhiteshirt") }
         }
-        maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
 
-        maven { url = 'https://maven.ladysnake.org/releases' } // Unknown
-
-        maven { url = "https://maven.shedaniel.me" } // unknown
-
-        maven { url = "https://maven.blamejared.com/" } // JEI
-
-        maven { url = "https://modmaven.dev" } // Botania & FALLBACK for JEI
-
-        maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
-
-        maven { url = 'https://maven.minecraftforge.net/' } // Terrablender
-
-        maven { url = "https://maven.terraformersmc.com/" } // EMI
-
-        maven { url = "https://maven.terraformersmc.com/releases" }
+        maven { // Geckolib
+            url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+            content {
+                includeGroupByRegex("software\\.bernie.*")
+                includeGroup("com.eliotlash.mclib")
+            }
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {
