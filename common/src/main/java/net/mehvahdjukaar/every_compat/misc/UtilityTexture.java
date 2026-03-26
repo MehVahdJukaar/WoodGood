@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.misc;
 
+import com.mojang.blaze3d.platform.NativeImage;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
@@ -11,11 +12,15 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 
+import java.util.Objects;
+
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 
+@SuppressWarnings("LoggingSimilarMessage")
 public class UtilityTexture {
 
     /**
@@ -102,10 +107,28 @@ public class UtilityTexture {
                         TextureImage logTexture = TextureImage.open(manager,
                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
+                    TextureImage currentLogTexture;
+                    int height = logTexture.imageHeight();
+                    int width = logTexture.imageWidth();
+
+                    if (!(height == 16) && Objects.nonNull(logTexture.getMcMeta())) { // Shrink the texture to a 16x16
+                        NativeImage standardSize = new NativeImage(16, 16, false);
+                        standardSize.copyFrom(logTexture.getImage());
+                        currentLogTexture = TextureImage.of(standardSize);
+                        height = currentLogTexture.imageHeight();
+                    }
+                    else currentLogTexture = logTexture;
+
+                    if (!(width == 16) || !(height == 16)) {
+                        EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), width, height, baseTextureLoc.getPath());
+                        sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
+                        return;
+                    }
+
                     var planksPalette = PaletteStrategies.PLANKS_REMOVE_DARKEST.getPaletteAndAnimation(woodType, manager);
 
-                    TextureOps.applyMask(logTexture, planksMask);
-                    TextureOps.applyOverlay(baseTexture, logTexture);
+                    TextureOps.applyMask(currentLogTexture, planksMask);
+                    TextureOps.applyOverlay(baseTexture, currentLogTexture);
 
                     // Adding to the resource
                     sink.addTextureIfNotPresent(manager, newPath, () -> {
@@ -142,17 +165,35 @@ public class UtilityTexture {
                         TextureImage logTexture = TextureImage.open(manager,
                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
-                    TextureImage mainTexture = baseTexture.makeCopy();
-                    TextureImage logOverlay = logTexture.makeCopy();
-                    TextureOps.applyMask(logOverlay, mask); // remove parts from texture for overlaying
+                    int height = logTexture.imageHeight();
+                    int width = logTexture.imageWidth();
 
-                    TextureOps.applyOverlay(mainTexture, logOverlay);
+                    TextureImage currentLogOverlay;
+                    TextureImage mainTexture = baseTexture.makeCopy();
+
+                    // Shrink the texture to a 16x16
+                    if (!(height == 16) && Objects.nonNull(logTexture.getMcMeta())) {
+                        NativeImage standardSize = new NativeImage(16, 16, false);
+                        standardSize.copyFrom(logTexture.getImage());
+                        currentLogOverlay = TextureImage.of(standardSize);
+                        height = currentLogOverlay.imageHeight();
+                    }
+                    else currentLogOverlay = logTexture.makeCopy();
+
+                    if (!(width == 16) || !(height == 16)) {
+                        EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), width, height, baseTextureLoc.getPath());
+                        sink.addTextureIfNotPresent(manager, newResLoc, baseTexture::makeCopy);
+                        return;
+                    }
+
 
                     // Adding to the resource
-                    sink.addTextureIfNotPresent(manager, newResLoc, () -> mainTexture);
+                    sink.addTextureIfNotPresent(manager, newResLoc, () -> {
+                        TextureOps.applyMask(currentLogOverlay, mask); // remove parts from texture for overlaying
+                        TextureOps.applyOverlay(mainTexture, currentLogOverlay);
 
-                    mainTexture.close();
-                    logOverlay.close();
+                        return mainTexture;
+                    });
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to apply overlays to texture: {} for {} - {}",
