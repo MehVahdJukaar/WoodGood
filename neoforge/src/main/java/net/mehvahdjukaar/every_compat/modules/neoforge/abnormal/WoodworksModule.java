@@ -345,31 +345,31 @@ public class WoodworksModule extends EveryCompatModule {
     // TEXTURES
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
-        executor.accept((manager, sink) -> {
+        executor.accept((manager, sink) ->
             trappedChests.blocks.forEach((wood, block) -> {
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood, block,
                         modRes("entity/chest/oak/normal"),
-                        EveryCompat.res("model/oak_chest_normal_m"),
-                        EveryCompat.res("model/oak_chest_normal_o"),
-                        EveryCompat.res("model/trapped_chest_normal")
+                        EveryCompat.res("block/abnww/chest/oak/normal_m"),
+                        EveryCompat.res("block/abnww/chest/oak/normal_o"),
+                        EveryCompat.res("block/abnww/chest/oak/trapped_o")
                 );
                 // LEFT
                 generateChestTexture(sink, manager, shortenedId(), wood, block,
                         modRes("entity/chest/oak/normal_left"),
-                        EveryCompat.res("model/oak_chest_left_m"),
-                        EveryCompat.res("model/oak_chest_left_o"),
-                        EveryCompat.res("model/trapped_chest_left")
+                        EveryCompat.res("block/abnww/chest/oak/left_m"),
+                        EveryCompat.res("block/abnww/chest/oak/left_o"),
+                        EveryCompat.res("block/abnww/chest/oak/trapped_left_o")
                 );
                 // RIGHT
                 generateChestTexture(sink, manager, shortenedId(), wood, block,
                         modRes("entity/chest/oak/normal_right"),
-                        EveryCompat.res("model/oak_chest_right_m"),
-                        EveryCompat.res("model/oak_chest_right_o"),
-                        EveryCompat.res("model/trapped_chest_right")
+                        EveryCompat.res("block/abnww/chest/oak/right_m"),
+                        EveryCompat.res("block/abnww/chest/oak/right_o"),
+                        EveryCompat.res("block/abnww/chest/oak/trapped_right_o")
                 );
-            });
-        });
+        })
+        );
     }
 
 }

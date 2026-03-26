@@ -6,4 +6,5 @@ public class WoodTypeCycleItemRenderer extends BlockTypeCycleItemRenderer<WoodTy
     public WoodTypeCycleItemRenderer() {
         super(WoodType.class);
     }
+
 }

@@ -98,9 +98,8 @@ dependencies {
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_version:fabric"){
-            transitive = false
-        }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-fabric")
+        else modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_version:fabric") { transitive = false }
     }
 
 //!! SUPPLEMENTARIES ------------------------------------------------------------------------------------------------ \\
@@ -125,6 +124,9 @@ dependencies {
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | Required by: REI
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | Required by: REI, Garden-Of-The-Dead
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:5982384") //v21.1.3 | Regions-Unexplored
+//    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129312") // v1.1.1 | Rechiseled //!! 1.20
+//    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546988") // v1.1.8 | Rechiseled
+//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:7521829") // v1.1.20 | Rechiseled
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modRuntimeOnly("curse.maven:monolib-968432:6123972") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
@@ -169,7 +171,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4062547") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:farmers-delight-refabricated-993166:6955339")
-    modRuntimeOnly("curse.maven:friends-and-foes-551364:6470205")
+//    modRuntimeOnly("curse.maven:friends-and-foes-551364:6470205")
 //    modRuntimeOnly("curse.maven:furnish-547069:5683297")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617253")
 //    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
@@ -177,6 +179,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
+//    modRuntimeOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:6967726")
 //    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
 //    modRuntimeOnly("curse.maven:twigs-496913:4603805") //!! 1.20.1
@@ -196,7 +199,7 @@ dependencies {
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5465222")
     modCompileOnly("curse.maven:macaws-doors-378646:6146461")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442197")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308375")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5473592")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:7029506") // v1.1.1
     modCompileOnly("curse.maven:macaws-roofs-352039:5554934")

@@ -1,0 +1,32 @@
+name: EveryComp Enhancement
+description: Request a new feature to be implemented into Every Compat
+title: "[🗃]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        EveryComp Enhancement
+
+  - type: dropdown
+    id: version-loader
+    attributes:
+      label: Version - Loader
+      description: "What's the Minecraft version & loader"
+      options:
+        - Unknown
+        - 1.21.1 - FABRIC
+        - 1.20.1 - FABRIC
+        - 1.21.1 - NEOFORGE
+        - 1.20.1 - FORGE
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Details
+      description: |
+        What features does EveryCompat need & explain why it need to be implemented?
+    validations:
+      required: true

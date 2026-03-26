@@ -13,10 +13,13 @@ body:
     attributes:
       label: "Code Of Conduct"
       options:
+        - label: "STRONGLY CONSIDER requesting EC compatibility to the target mod. Adding direct EC support on their side is the preferreed way as to minimize maintenance and future proof the module. This can be done following the mod readme"
+          required: true
         - label: "See [EC Backlog](https://github.com/users/MehVahdJukaar/projects/1/views/1) if someone already suggested a mod that you are going to suggest."
           required: true
         - label: "The mod MUST contain variant WoodType: OAK or other vanilla WoodTypes for ITEM or BLOCK"
           required: true
+
 
   - type: input
     id: curseforge-normal

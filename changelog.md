@@ -16,6 +16,48 @@
 
 </div>
 
+### CHANGES: 
+- **Every Compat** (C): Removed 2 configs due to a misunderstood request
+
+---
+
+## v2.11.31
+
+### CHANGES: 
+- **Every Compat** (C): Updated the logic to include Items into EC's tab and also mod's tab, too. 
+  - NOTE: if you want to disable either EC's or Mod's. You can use `everycomp-common.toml` and find `creative_tab` for EC or `no_mod_creative_tab` for Mod
+  - Updated a method for recipe generation to fix the missing recipe for **Gems Realm** with **Create** - [GemsRealm#54](https://github.com/Xelbayria/GemsRealm/issues/54)
+  - Added 2 new configs: [#1203](https://github.com/MehVahdJukaar/WoodGood/issues/1203)
+    - `DISABLE_CYCLE_ITEM_RENDERER` - disable creative-tab from showing the iteration of every item from Wood-Good
+    - `CREATIVE_TAB_ICON` - Choose one item (can be from Wood-Good or Minecraft) to replace the icon instead of iterating every item from Wood-Good
+
+---
+
+## v2.11.30
+
+### CHANGES:
+- **Feywild** (IT): Removed the entries for all of logs' ResourceLocation for textures as it's no longer needed
+- **Every Compat** (C): 
+  - Corrected the wrong logic for `everycomp-hazardous.toml`'s module-blacklist or entryset-blacklist  (it wasn't working properly)
+  - Improved the logic for other blacklist config so blocks/items can get excluded.
+  - Improved error logging for debugging with **Stone Zone** or **Gems Realm** making it easy to know what's the cause
+- **Enderscape** (INCLUDED): WoodType-`murublight` with Supported_Mod-**Copper Age Backport** - [#1199](https://github.com/MehVahdJukaar/WoodGood/issues/1199)
+
+---
+
+## v2.11.29
+
+### UPDATED: 
+- **Every Compat** (C): Updated 2 Classes: CompatModule.java & EveryCompat.java to fix the crash with **Gems Realm**  
+- **\[Let's Do] Meadow** (IT): Added `meadow:alpine_birch_leaves`'s ResourceLocation for the correct location
+  - NOTE: This fixed the error log and wrong texture on **Chipped**'s leaves  
+- **Macaw's Furniture** (C): Added the missing BlockEntity to `counter` and its base block is `oak_counter`
+    - NOTE: this fix the crash when you place `counter` of any WoodType (this was reported via discord)
+
+---
+
+## v2.11.28
+
 ### UPDATED: 
 - **Macaw's Furniture** (C): Added the missing BlockEntity to `strippedCounter` and its base block is `stripped_oak_counter`
   - NOTE: this fix the crash when you place `strippedCounter` of any WoodType (this was reported via discord)

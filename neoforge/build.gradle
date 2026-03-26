@@ -99,9 +99,8 @@ dependencies {
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-neoforge:$moonlight_version:neoforge"){
-            transitive = false
-        }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-neoforge")
+        else modApi("net.mehvahdjukaar:moonlight-neoforge:$moonlight_version:neoforge") { transitive = false }
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -122,11 +121,11 @@ dependencies {
     modRuntimeOnly("curse.maven:terrablender-neoforge-940057:5864140") // v4.0.0.2 | BOP, Regions-Unexplored
     modRuntimeOnly("curse.maven:glitchcore-955399:5660740") // v2.1.0.0 | BOP
 //    modRuntimeOnly("curse.maven:athena-841890:5629395") // v4.0.1 | Chipped
-//    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | Required by: REI, Furnish
-//    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | Required by: REI
-//    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5679902") // v1.1.1a | Dawn of Time, Timber-Frame, Rechiseled
-//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5713682") // v1.1.17i | Rechiseled
+//    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | REI, Furnish, [Let's Do]-Meadow
+//    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | REI
+//    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:7471474") // v1.2.12 | Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
+//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:7521894") // v1.1.20 | Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:YeePowOJ") // v1.6.3 | Building-But-Better
     modRuntimeOnly("curse.maven:patchouli-306770:6842247") // v92 | TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design //!! 1.20.1
@@ -156,7 +155,9 @@ dependencies {
 
     //+ OTHER MAVENs
     modCompileOnly("com.tterrag.registrate:Registrate:$registrate_version") // Create, The-Twilight-Forest, Tropicraft
+
     modCompileOnly("org.violetmoon.zeta:Zeta:1.1-39-SNAPSHOT") // Quark - @ https://maven.blamejared.com/org/violetmoon/zeta/Zeta/
+    modCompileOnly("curse.maven:zeta-968868:7640154") // v1.1-39 | TEMP BACKUP MAVEN
 
 //!! =================================================== IMPORTS ==================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
@@ -177,6 +178,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5862569") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272849") // Framework
+//    modRuntimeOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:6967730")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") //!! 1.20.1
@@ -199,14 +201,14 @@ dependencies {
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5465228")
     modCompileOnly("curse.maven:macaws-doors-378646:6146345")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442175")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308338")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5473578")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:7029451") // v1.1.1
     modCompileOnly("curse.maven:macaws-roofs-352039:5554896")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:5977602")
     modCompileOnly("curse.maven:macaws-windows-363569:5592081")
     modCompileOnly("curse.maven:macaws-furniture-359540:7255584")
-    modCompileOnly("curse.maven:macaws-stairs-1119394:5802422")
+    modImplementation("curse.maven:macaws-stairs-1119394:5802422")
 
         //+ GENERAL
     modCompileOnly("curse.maven:absent-by-design-305840:4616702") //!! 1.20.1
@@ -249,7 +251,9 @@ dependencies {
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:zGMhmLYb") // v1.1.1 | MidnightLib //!! 1.20.1
     modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_version:slim") { transitive = false } // Registrate, Flywheel, Ponder
-    modCompileOnly("org.violetmoon.quark:Quark:4.1-475-SNAPSHOT") // Zeta, Biolith @ https://maven.blamejared.com/org/violetmoon/quark/Quark/
+
+//    modCompileOnly("org.violetmoon.quark:Quark:4.1-475-SNAPSHOT") // Zeta, Biolith @ https://maven.blamejared.com/org/violetmoon/quark/Quark/
+    modCompileOnly("curse.maven:quark-243121:7640331") // v4.1.474 | TEMP BACKUP MAVEN
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 //     modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
@@ -274,6 +278,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:deeperdarker-659011:6463247")
 //    modRuntimeOnly("curse.maven:frightful-winter-1241289:6447798")
 //    modRuntimeOnly("curse.maven:natures-spirit-1044992:6962784") // Tinted LeavesType
+//    modRuntimeOnly("curse.maven:lets-do-meadow-821483:7672847") // Architectury
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:7024199") // patchouli
 

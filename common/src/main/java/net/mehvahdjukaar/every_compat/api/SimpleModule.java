@@ -22,6 +22,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.*;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.FRAMED_BLOCKS_SUFFIX;
+
 public class SimpleModule extends CompatModule {
 
     private final Map<String, EntrySet<?>> entries = new LinkedHashMap<>();
@@ -189,21 +191,25 @@ public class SimpleModule extends CompatModule {
 
     //TODO: improve
     public boolean isEntryAlreadyRegistered(String entrySetId, ResourceLocation blockId, BlockType blockType, Registry<?> registry) {
-        // blockId: everycomp:twigs/biomesoplenty/willow_table | blockName: willow_table
 
         if (registry.containsKey(blockId)) {
-            EveryCompat.crashIfInDev("Attempted to register a block with id " + blockId + " that had another one already registered in registry " + registry.key().location() + "!");
+            EveryCompat.crashIfInDev("Attempted to register a block with id: (" + blockType.getClass().getSimpleName()
+                    + ")" + blockId + " that had another one already registered in registry via " + registry.key().location() + "!"
+            );
             return true;
         }
 
         String blockPath = blockId.getPath();
-        //short block name
+        //short block name - blockName: willow_table from the blockId: everycomp:tw/biomesoplenty/willow_table
         String blockName = blockPath.substring(blockPath.lastIndexOf("/") + 1);
 
         String woodTypeFrom = blockType.getNamespace();
 
         String slashConvention = woodTypeFrom + "/" + blockName; // quark/blossom_chair
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
+
+        // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
+        if (PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(blockName::contains)) return true;
 
         // ugly hardcoded stuff
         if (blockType instanceof WoodType woodType) {

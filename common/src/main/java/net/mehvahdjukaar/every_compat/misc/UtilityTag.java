@@ -112,10 +112,10 @@ public class UtilityTag {
 
     /// See {@link UtilityTag#addTagToAllBlocks(Map, String, String, String, boolean, boolean, ResourceSink, String)}'s javadoc
     public static <T extends BlockType, B extends Block>
-        void addTagToAllBlocks(Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId, String tagResLoc,
+        void addTagToAllBlocks(Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId, String tagPathOrResLoc,
                                boolean includeBlock, boolean includeItem, ResourceSink sink
     ) {
-        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, fromModId, tagResLoc, includeBlock, includeItem, sink, null);
+        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, fromModId, tagPathOrResLoc, includeBlock, includeItem, sink, null);
     }
 
     /**
@@ -126,17 +126,17 @@ public class UtilityTag {
      */
     public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
             Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId,
-            String tagResLoc, boolean addToBlockTag, boolean addToItemTag, ResourceSink sink,
+            String tagPathOrResLoc, boolean addToBlockTag, boolean addToItemTag, ResourceSink sink,
             @Nullable String regexBlockId
     ) {
         if (PlatHelper.isModLoaded(fromModId) || fromModId.isEmpty()) {
 
-            if (!tagResLoc.contains(":")) tagResLoc = fromModId + ":" + tagResLoc;
+            if (!tagPathOrResLoc.contains(":")) tagPathOrResLoc = fromModId + ":" + tagPathOrResLoc;
 
             boolean isBlockTagCreated = false;
             boolean isItemTagCreated = false;
-            SimpleTagBuilder blocktagBuilder = SimpleTagBuilder.of(ResourceLocation.parse(tagResLoc));
-            SimpleTagBuilder itemtagBuilder = SimpleTagBuilder.of(ResourceLocation.parse(tagResLoc));
+            SimpleTagBuilder blocktagBuilder = SimpleTagBuilder.of(ResourceLocation.parse(tagPathOrResLoc));
+            SimpleTagBuilder itemtagBuilder = SimpleTagBuilder.of(ResourceLocation.parse(tagPathOrResLoc));
             for (Map.Entry<T, B> entry : blocks.entrySet()) {
                 T blockType = entry.getKey();
                 B block = entry.getValue();
@@ -186,9 +186,12 @@ public class UtilityTag {
 
     /// Checking if a tag exist for a block or an item
     private static boolean doTagExistFor(ResourceLocation resLoc, ResourceManager manager) {
-        boolean blockTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("blocks/"))).isPresent();
-        boolean itemTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
-        return blockTag || itemTag;
+        boolean blocksTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("blocks/"))).isPresent();
+        boolean blockTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("block/"))).isPresent();
+        boolean itemsTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
+        boolean itemTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("item/"))).isPresent();
+
+        return (blockTag || blocksTag) || (itemTag || itemsTag);
     }
 
     // Common tags
