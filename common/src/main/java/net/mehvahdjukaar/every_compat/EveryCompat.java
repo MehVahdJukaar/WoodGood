@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
@@ -140,6 +141,15 @@ public abstract class EveryCompat {
             }
         }
 
+        forAllModules(m -> {
+            if (m instanceof SimpleModule sm) {
+                for (EntrySet e : sm.getEntries()) {
+                    //verify tabs existence and crash early if they aren't there
+                    if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) ae.getTab();
+                }
+            }
+        });
+
         forAllModules(CompatModule::onModSetup);
         canShowErrorScreen = true;
 
@@ -260,10 +270,10 @@ public abstract class EveryCompat {
     }
 
     private static void addError(CompatModule module, Throwable t) {
-        if(module == null){
+        if (module == null) {
             EveryCompat.LOGGER.error("Tried to log an error for a null module", t);
             //add dummy module instead. idk how this could even happen but if it does i want a nice error screen still
-            module = new EveryCompatModule(EveryCompat.MOD_ID,"ec") {
+            module = new EveryCompatModule(EveryCompat.MOD_ID, "ec") {
                 @Override
                 public int bloatAmount() {
                     return 0;

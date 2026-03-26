@@ -68,7 +68,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public final String prefix;
     protected final boolean mergePalette;
 
-    protected final Supplier<ResourceKey<CreativeModeTab>> tab;
+    protected final Supplier<Holder<CreativeModeTab>> tab;
     protected final TabAddMode tabMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
@@ -83,7 +83,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected AbstractSimpleEntrySet(Class<T> type,
                                      String name, @Nullable String prefix,
                                      Supplier<T> baseType,
-                                     Supplier<ResourceKey<CreativeModeTab>> tab,
+                                     Supplier<Holder<CreativeModeTab>> tab,
                                      TabAddMode tabMode,
                                      BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
@@ -111,10 +111,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             nameScheme = Pattern.compile("^(.+?)_" + postfix + "$");
         }
         this.condition = condition;
-
-        if (tab == null && PlatHelper.isDev()) {
-            throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString());
-        }
     }
 
     @Override
@@ -184,25 +180,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
             return;
         }
-        ResourceKey<CreativeModeTab> tab = this.tab.get();
-        if (tab.location().equals(NO_TAB_MARKER) || NO_MOD_CREATIVE_TAB.get()) {
+        Holder<CreativeModeTab> tabHolder = this.tab.get();
+        if (tabHolder == null || NO_MOD_CREATIVE_TAB.get()) {
             return;
         }
-        //verify tab
-        if (!BuiltInRegistries.CREATIVE_MODE_TAB.containsKey(tab)) {
-            throw new UnsupportedOperationException("Creative tab " + tab + " not registered found in the registries. " +
-                    "This means that the target mod must have changed its name. " +
-                    "You can either downgrade the mod" + tab.location().getNamespace() + " or wait for an Every Compat update");
-        }
+        var tabKey = tabHolder.unwrapKey();
         if (tabMode == TabAddMode.AFTER_ALL) {
-            event.add(tab, items.values().toArray(new Item[0]));
+            event.add(tabKey, items.values().toArray(new Item[0]));
         } else if (tabMode == TabAddMode.AFTER_SAME_WOOD) {
             var reg = BlockSetAPI.getBlockSet(type);
             for (var e : items.entrySet()) {
                 var item = e.getValue();
                 var wood = e.getKey();
                 //adds after first wooden block it finds. quite bad tbh
-                event.addAfter(tab, s -> reg.getBlockTypeOf(s.getItem()) == wood, item);
+                event.addAfter(tabKey, s -> reg.getBlockTypeOf(s.getItem()) == wood, item);
             }
         } else if (tabMode == TabAddMode.AFTER_SAME_TYPE) {
             var reg = BlockSetAPI.getBlockSet(type);
@@ -210,7 +201,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             Class<T> typeClass = this.getTypeClass();
             for (var e : items.entrySet()) {
                 var item = e.getValue();
-                event.addAfter(tab, s -> {
+                event.addAfter(tabKey, s -> {
                     T type = reg.getBlockTypeOf(s.getItem());
                     if (type == null) return false;
                     return type.getClass() == typeClass
@@ -271,6 +262,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     }
 
+    public Holder<CreativeModeTab> getTab(){
+        return tab.get();
+    }
+
     public Map<T, ?> getDefaultEntries() {
         return blocks;
     }
@@ -308,7 +303,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected Supplier<ResourceKey<CreativeModeTab>> tab = null;
+        protected Supplier<Holder<CreativeModeTab>> tab = null;
         protected TabAddMode tabMode = TabAddMode.AFTER_SAME_TYPE;
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
@@ -391,30 +386,31 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         public BL noTab() {
-            return setTabKey(NO_TAB_MARKER);
+            this.tab = null;
+            return (BL) this;
         }
 
+        @Deprecated(forRemoval = true)
         public BL setTabKey(ResourceLocation res) {
-            var key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
-            this.tab = () -> key;
+            ResourceKey<CreatieveModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
+            this.setTabKey(key);
             return (BL) this;
         }
 
         @Deprecated(forRemoval = true)
         public BL setTabKey(Supplier<ResourceKey<CreativeModeTab>> tab) {
-            this.tab = tab;
-            return (BL) this;
-        }
-
-        public BL setTabKey(ResourceKey<CreativeModeTab> key) {
-            this.tab = () -> key;
+            this.tab = Suppliers.memoize(() -> BuiltinRegistries.CREATIVE_MODE_TAB.getHolderOrThrow(tag.get()));
             return (BL) this;
         }
 
         @Deprecated(forRemoval = true)
-        @SuppressWarnings("OptionalGetWithoutIsPresent")
+        public BL setTabKey(ResourceKey<CreativeModeTab> key) {
+            this.setTabKey(() -> key);
+            return (BL) this;
+        }
+
         public BL setTab(Supplier<CreativeModeTab> tab) {
-            this.tab = Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab.get()).get());
+            this.tab = Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.wrapAsHolder(tab.get()).orElseThrow("Could not find ID for creative tab"));
             return (BL) this;
         }
 
@@ -521,6 +517,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
 
         //by default, they all use planks palette
+
         /// @deprecated Use {@link PaletteStrategies} to create a new strategies instead of setPalette()
         @Deprecated(forRemoval = true)
         public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteProvider) {
@@ -532,6 +529,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         //only works for oak type. Will fail if its used on leaves
+
         /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
         @Deprecated(forRemoval = true)
         public BL createPaletteFromPlanks(Consumer<Palette> paletteTransform) {
@@ -570,7 +568,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
          * the last parameter is PaletteStrategy<br>
          * Take a look at {@link PaletteStrategies} & Look for the FIELD which can be used as an argument for the last
          * parameter
-        **/
+         **/
         @Deprecated(forRemoval = true)
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, Predicate<String> whichSide) {
             return this.setPalette((blockType, m) -> {
@@ -585,16 +583,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Override
     //for null tab
     public Item getItemForECTab(T type) {
-        if (tab == null) {
-            if (PlatHelper.isDev()) {
-                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString());
-            }
-            EveryCompat.LOGGER.error("Creative tab cant be null. Found null one for entry set: {}", Utils.getID(this.getBaseType()).toString());
-            return null;
-        }
         try {
-            ResourceKey<CreativeModeTab> tagKey = tab.get();
-            if (tagKey.location().equals(NO_TAB_MARKER)) {
+            Holder<CreativeModeTab> tagKey = tab.get();
+            if (tagKey == null) {
                 return null;
             }
         } catch (Exception e) {
