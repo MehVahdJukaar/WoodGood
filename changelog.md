@@ -18,6 +18,19 @@
 
 <br>
 
+### CHANGES: 
+- **Feywild** (IT): Removed the entries for all of logs' ResourceLocation for textures as it's no longer needed
+- **Every Compat**
+  - (EXCLUDED): Excluded some blocks from supported mods if **Framed Blocks** is installed
+  - (OTHERS): Backported some codes from 1.21.1
+
+### FIXES
+- **Chipped** (C): Fixed the manual texture generation from failing to generate textures for blocks with **Productive Trees** - [#1995](https://github.com/MehVahdJukaar/WoodGood/issues/1995)
+
+---
+
+## v2.9.17
+
 ### UPDATED: 
 - **Every Compat** (C): Backported a feature from 1.21 that ensure the Blockstate files get modified and pointing at the correct model files for the blocks - [#1177](https://github.com/MehVahdJukaar/WoodGood/issues/1177)
   - Related to **Copper Age Backport**
