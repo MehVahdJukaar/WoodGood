@@ -401,23 +401,26 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
+        /// with EveryCompatModule#getTab(ResourceLocation)
         @Deprecated(forRemoval = true)
-        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier) }
         public BL setTabKey(ResourceLocation res) {
             ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
             this.setTabKey(key);
             return (BL) this;
         }
 
+        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
+        /// with EveryCompatModule#getTab(ResourceKey)
         @Deprecated(forRemoval = true)
-        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier) }
         public BL setTabKey(Supplier<ResourceKey<CreativeModeTab>> tab) {
             this.tab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getHolderOrThrow(tab.get());
             return (BL) this;
         }
 
+        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
+        /// with EveryCompatModule#getTab(ResourceKey)
         @Deprecated(forRemoval = true)
-        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier) }
         public BL setTabKey(ResourceKey<CreativeModeTab> key) {
             this.setTabKey(() -> key);
             return (BL) this;
@@ -425,11 +428,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         public BL setTab(Supplier<CreativeModeTab> tab) {
             this.tab = Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.wrapAsHolder(tab.get()));
-            return (BL) this;
-        }
-
-        public BL setTab(ResourceKey<CreativeModeTab> tab) {
-            this.tab = Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.wrapAsHolder(BuiltInRegistries.CREATIVE_MODE_TAB.get(tab)));
             return (BL) this;
         }
 
