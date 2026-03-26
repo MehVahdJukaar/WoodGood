@@ -38,7 +38,8 @@ public class GraveyardModule extends EveryCompatModule {
                 .addTile(CompatCoffinBlockTile::new)
                 .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("model/oak_coffin_m"))
                 .addTag(modRes("coffins"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(modRes("graveyard_group"))
+                .setTab(getModTab(
+"graveyard_group"))
                 .defaultRecipe()
                 .build();
         this.addEntry(COFFINS);

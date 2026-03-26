@@ -145,7 +145,9 @@ public abstract class EveryCompat {
             if (m instanceof SimpleModule sm) {
                 for (EntrySet e : sm.getEntries()) {
                     //verify tabs existence and crash early if they aren't there
-                    if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) ae.getTab();
+                    if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) {
+                        ae.getTab().unwrapKey().orElseThrow();
+                    }
                 }
             }
         });

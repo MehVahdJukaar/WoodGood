@@ -31,7 +31,8 @@ public class MightyMailModule extends EveryCompatModule {
                 .addTextureM(modRes("block/oak_mail_box"),
                         EveryCompat.res("block/mm/oak_mail_box_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(modRes("creative_tab"))
+                .setTab(getModTab(
+"creative_tab"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();

@@ -35,7 +35,7 @@ public class MoreCraftingTablesModule extends EveryCompatModule {
                 .addTag(UtilityTag.fabricTag("workbench"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:crafting_tables"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(craftingTable);

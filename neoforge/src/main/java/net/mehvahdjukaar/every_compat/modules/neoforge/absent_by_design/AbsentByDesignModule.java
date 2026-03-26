@@ -36,7 +36,7 @@ public class AbsentByDesignModule extends EveryCompatModule {
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ItemTags.FENCES, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(fence_log);
@@ -51,7 +51,7 @@ public class AbsentByDesignModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .addRecipe(modRes("wall_oak_log_sc"))
                 .build();
@@ -67,7 +67,7 @@ public class AbsentByDesignModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .addRecipe(modRes("wall_stripped_oak_log_sc"))
                 .build();
@@ -82,7 +82,7 @@ public class AbsentByDesignModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .addRecipe(modRes("wall_oak_planks_sc"))
                 .build();

@@ -60,7 +60,8 @@ public class FarmersDelightModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinets/wooden"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(modRes("farmersdelight"))
+                .setTab(getModTab(
+"farmersdelight"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .defaultRecipe()
                 .addCustomItem((w, block, p) -> new FuelBlockItem(block, ModItems.basicItem(), 300))

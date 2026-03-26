@@ -28,8 +28,7 @@ public class CampChairModule extends EveryCompatModule {
                                 .strength(2.0F, 3.0F).sound(SoundType.WOOD))
                 )
                 .addTag(modRes("camp_chairs"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
-                .defaultRecipe()
+                .setTab(getModTab(tab))                .defaultRecipe()
                 .build();
         this.addEntry(campChairs);
     }

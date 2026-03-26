@@ -36,7 +36,7 @@ public class LauchsShuttersModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_shutter_middle_big"))
                 .addTexture(modRes("item/oak_shutter"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(modRes("shutter_tab"))
+                .setTab(getModTab("shutter_tab"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();

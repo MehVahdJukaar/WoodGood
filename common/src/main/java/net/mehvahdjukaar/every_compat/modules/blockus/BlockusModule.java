@@ -70,7 +70,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTag(modRes("herringbone_planks_that_burn"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(herringbone_planks);
@@ -83,7 +83,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("all_mossy_planks"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("mossy_oak_planks_from_moss_block"))
                 .addRecipe(modRes("mossy_oak_planks_from_vine"))
                 .build();
@@ -98,7 +98,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .addTag(modRes("all_mossy_planks"), Registries.BLOCK)
                 .addTag(ItemTags.SLABS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mossy_slab);
@@ -114,7 +114,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(modRes("all_mossy_planks"), Registries.ITEM)
                 .addTag(ItemTags.STAIRS, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mossy_stairs);
@@ -132,7 +132,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_grate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_grates"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .build();
@@ -146,7 +146,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_lattice_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_lattices"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
@@ -161,7 +161,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTag(UtilityTag.fabricTag("planks_that_burn"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("all_wooden_mosaics"), Registries.BLOCK)
                 .addTag(modRes("wooden_mosaic_that_burn"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaic);
@@ -175,8 +175,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .addTag(modRes("all_wooden_mosaics"), Registries.ITEM)
                 .addTag(ItemTags.SLABS, Registries.ITEM)
-                .setTabKey(tab)
-                .defaultRecipe()
+                .setTab(getModTab(tab))                .defaultRecipe()
                 .build();
         this.addEntry(mosaic_slab);
 
@@ -191,7 +190,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(modRes("all_wooden_mosaics"), Registries.ITEM)
                 .addTag(ItemTags.STAIRS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaic_stairs);
@@ -210,7 +209,7 @@ public class BlockusModule extends EveryCompatModule {
                 .addTag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.ITEM)
                 .addTag(ItemTags.LOGS, Registries.ITEM)
                 .addTag(ItemTags.LOGS_THAT_BURN, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(small_logs);
@@ -223,7 +222,7 @@ public class BlockusModule extends EveryCompatModule {
                         res("block/bus/oak_timber_frame_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("timber_frames"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(timber_frame);
@@ -239,7 +238,7 @@ public class BlockusModule extends EveryCompatModule {
                         res("block/bus/oak_diagonal_timber_frame_right_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("timber_frames"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(diagonal_timber_frame);
@@ -253,7 +252,7 @@ public class BlockusModule extends EveryCompatModule {
                         res("block/bus/oak_cross_timber_frame_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("timber_frames"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(cross_timber_frame);
@@ -268,7 +267,7 @@ public class BlockusModule extends EveryCompatModule {
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_posts"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .addRecipe(modRes("oak_planks_from_stripped_oak_post"))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -282,7 +281,7 @@ public class BlockusModule extends EveryCompatModule {
                 //TEXTURES: log, log_top
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_posts"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .addRecipe(modRes("oak_planks_from_oak_post"))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -300,7 +299,7 @@ public class BlockusModule extends EveryCompatModule {
                 //TEXTURES: leaves
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("hedges"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentTint()
                 .build();

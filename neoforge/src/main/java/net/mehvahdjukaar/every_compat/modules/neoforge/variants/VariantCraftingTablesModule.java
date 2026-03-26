@@ -40,7 +40,7 @@ public class VariantCraftingTablesModule extends EveryCompatModule {
                 //TAG: #forge:workbench removed
                 .addTag(ResourceLocation.parse("charm:crafting_table"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(craftingTable);

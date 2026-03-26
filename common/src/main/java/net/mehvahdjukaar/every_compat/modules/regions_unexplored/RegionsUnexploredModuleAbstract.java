@@ -54,7 +54,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                 .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
                 .addTag(modRes("branches"), Registries.BLOCK)
                 .addTag(modRes("branches"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("oak_branch_from_oak_log"))
                 //RECIPE-GENERATED: stick_from_oak_branch
                 .build();
@@ -74,7 +74,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                 .addTag(modRes("shrubs"), Registries.BLOCK)
                 .addTag(modRes("shrub_can_survive_on"), Registries.BLOCK)
                 .addTag(modRes("shrubs"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .addRecipe(modRes("dark_oak_shrub"))
                 .copyParentDrop()

@@ -54,7 +54,7 @@ public class BewitchmentModule extends EveryCompatModule {
                 .addTile(() -> BWBlockEntityTypes.POPPET_SHELF)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(poppet_shelf);
 
@@ -65,7 +65,7 @@ public class BewitchmentModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) // Recipes
                 .addTexture(modRes("item/oak_bark"), PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTag(BWTags.BARKS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(bark);
 

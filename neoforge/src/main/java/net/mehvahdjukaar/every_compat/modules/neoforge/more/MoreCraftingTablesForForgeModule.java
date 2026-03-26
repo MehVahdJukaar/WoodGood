@@ -41,7 +41,7 @@ public class MoreCraftingTablesForForgeModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("forge:workbenches"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("charm:crafting_table"), Registries.ITEM)
                 .addTag(modRes("revertable_workbench"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(craftingTable);

@@ -64,7 +64,7 @@ public class ReDecoModule extends EveryCompatModule {
                 )
                 .addTexture(modRes("block/table/oak_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(tables);
@@ -77,7 +77,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTextureM(modRes("block/sidetable/oak_side_table"), EveryCompat.res("block/rd/oak_side_table_m"))
                 .addTextureM(modRes("block/drawer_oak"), EveryCompat.res("block/rd/drawer_oak_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(side_tables);
@@ -90,7 +90,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTextureM(modRes("block/drawers/oak_drawers"), EveryCompat.res("block/rd/oak_drawers_m"))
                 //TEXTURES: side_tables' drawer_oak (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(drawers);
@@ -101,7 +101,7 @@ public class ReDecoModule extends EveryCompatModule {
                 )
                 //TEXTURES: tables' oak_table (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(coffee_tables);
@@ -120,7 +120,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTexture(modRes("block/chair/oak_back_5"))
                 .addTexture(modRes("block/chair/oak_back_6"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: included the cushion
                 .build();
@@ -133,7 +133,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTile(getModTile("stool_block_entity"))
                 .addTexture(modRes("block/stool/oak_stool"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: included the cushion
                 .build();
@@ -146,7 +146,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTile(getModTile("bench_block_entity"))
                 .addTexture(modRes("block/bench/oak_bench"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: included the cushion
                 .build();
@@ -160,7 +160,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTexture(modRes("block/shelf/oak_shelf"))
                 .addTexture(modRes("block/shelf/oak_shelf_support"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(shelves);
@@ -173,7 +173,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTexture(modRes("block/crate/oak_crate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.UNCRATEABLE, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(crates);
@@ -186,7 +186,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTexture(modRes("block/displaycase/oak_display_case"))
                 .addTexture(modRes("block/displaycase/oak_inside"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: included the cushion
                 .build();
@@ -199,7 +199,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTile(getModTile("sword_mount_block_entity"))
                 .addTexture(modRes("block/swordmount/oak_sword_mount"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: included the cushion
                 .build();
@@ -212,7 +212,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTile(getModTile("pedestal_block_entity"))
                 .addTexture(modRes("block/pedestal/oak_pedestal"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: included the cushion
                 .build();
@@ -225,7 +225,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTexture(modRes("block/plankfence/oak_plank_fence"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(plank_fences);
@@ -237,7 +237,7 @@ public class ReDecoModule extends EveryCompatModule {
                 )
                 //TEXTURES: plank_fences' oak_plank_fence (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(plank_gates);
@@ -252,7 +252,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(lattices);
@@ -264,7 +264,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTextureM(modRes("block/counters/oak_counters"), EveryCompat.res("block/rd/oak_counters_m"))
                 //TEXTURES: polished_planks' polished_oak_planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(counters);
@@ -278,7 +278,7 @@ public class ReDecoModule extends EveryCompatModule {
                 //TEXTURES: drawers' drawer_oak (above)
                 //TEXTURES: polished_planks' polished_oak_planks -below
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(drawer_counters);
@@ -292,7 +292,7 @@ public class ReDecoModule extends EveryCompatModule {
                 //TEXTURES: polished_planks' polished_oak_planks -below
                 //TEXTURES: cabinets' cabinet_doors_oak -below
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(cabinet_counters);
@@ -305,7 +305,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTextureM(modRes("block/cabinet/oak_cabinet"), EveryCompat.res("block/rd/oak_cabinet_m"))
                 .addTextureM(modRes("block/cabinet_doors_oak"), EveryCompat.res("block/rd/cabinet_doors_oak_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(cabinets);
@@ -318,7 +318,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("oak_polished_planks"))
                 .build();
         this.addEntry(polished_planks);
@@ -333,7 +333,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
                 .addTag(ItemTags.STAIRS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_STAIRS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(polished_stairs);
@@ -348,7 +348,7 @@ public class ReDecoModule extends EveryCompatModule {
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
                 .addTag(ItemTags.SLABS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_SLABS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(polished_slabs);

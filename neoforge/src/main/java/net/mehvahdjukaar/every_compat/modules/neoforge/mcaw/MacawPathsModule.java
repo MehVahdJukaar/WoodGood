@@ -26,7 +26,8 @@ public class MacawPathsModule extends EveryCompatModule {
                 )
                 .addTexture(modRes("block/oak_planks_path"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(modRes("pathsitemgroup"))
+                .setTab(getModTab(
+"pathsitemgroup"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();

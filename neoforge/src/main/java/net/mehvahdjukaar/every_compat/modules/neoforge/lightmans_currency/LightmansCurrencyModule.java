@@ -42,7 +42,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(LCTags.Blocks.AUCTION_STAND, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.AUCTION_STAND, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("auction_stand/oak"))
                 .build();
         this.addEntry(auction_stands);
@@ -67,7 +67,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(LCTags.Items.TRADER_SHELF, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_NORMAL, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("traders/shelf/oak"))
                 .build();
         this.addEntry(shelves);
@@ -92,7 +92,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(LCTags.Items.TRADER_SHELF_2x2, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_NORMAL, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("traders/shelf2/oak"))
                 .build();
         this.addEntry(shelves_2x2);
@@ -116,7 +116,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(LCTags.Items.TRADER_SPECIALTY, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_SPECIALTY_BOOKSHELF, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("traders/bookshelf/oak"))
                 .build();
         this.addEntry(bookshelf_traders);

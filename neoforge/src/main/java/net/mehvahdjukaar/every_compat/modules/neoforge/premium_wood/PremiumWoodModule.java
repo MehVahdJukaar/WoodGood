@@ -39,7 +39,7 @@ public class PremiumWoodModule extends EveryCompatModule {
                 .addTexture(EveryCompat.res("block/tiger/tiger_crafting_table_top"))
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -52,7 +52,7 @@ public class PremiumWoodModule extends EveryCompatModule {
                 .addTextureM(modRes("block/tiger/tiger_bookshelf"), EveryCompat.res("block/pw/tiger_bookshelf_m"))
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -65,7 +65,7 @@ public class PremiumWoodModule extends EveryCompatModule {
                 .addTextureM(modRes("block/tiger/tiger_framed_glass"), EveryCompat.res("block/pw/tiger_framed_glass_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("framed_glass"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();

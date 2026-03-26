@@ -58,7 +58,7 @@ public class DecorativeBlocksModule extends EveryCompatModule {
                 .addTag(modRes("beams"), Registries.ITEM)
                 .addTag(modRes("beams_that_burn"), Registries.ITEM)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addTexture(modRes("block/oak_beam_end"), PaletteStrategies.SIGN_LIKE)
                 .addTexture(modRes("block/oak_beam_side"), PaletteStrategies.SIGN_LIKE)
                 .build();
@@ -79,7 +79,7 @@ public class DecorativeBlocksModule extends EveryCompatModule {
                 .addTag(modRes("palisades"), Registries.ITEM)
                 .addTag(modRes("palisades_that_burn"), Registries.ITEM)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addTexture(modRes("block/oak_palisade_end"), PaletteStrategies.SIGN_LIKE)
                 .addTexture(modRes("block/oak_palisade_side"), PaletteStrategies.SIGN_LIKE)
                 .build();
@@ -99,7 +99,7 @@ public class DecorativeBlocksModule extends EveryCompatModule {
                 .addTag(modRes("supports_that_burn"), Registries.ITEM)
                 .addCustomItem((w, b, p) -> new SupportItem(b, p))
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addTexture(modRes("block/oak_support_end"), PaletteStrategies.SIGN_LIKE)
                 .addTexture(modRes("block/oak_support_side"), PaletteStrategies.SIGN_LIKE)
                 .build();
@@ -119,7 +119,7 @@ public class DecorativeBlocksModule extends EveryCompatModule {
                 .addTag(modRes("seats"), Registries.BLOCK)
                 .addTag(modRes("seats"), Registries.ITEM)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addCustomItem((w, b, p) -> new SeatItem(b, p))
                 .build();
         this.addEntry(seats);

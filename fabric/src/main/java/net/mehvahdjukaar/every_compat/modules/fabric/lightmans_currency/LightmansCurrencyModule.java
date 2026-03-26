@@ -45,7 +45,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.SOLID)
                 .build();
@@ -68,7 +68,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(card_displays);

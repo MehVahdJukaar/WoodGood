@@ -33,7 +33,8 @@ public class LauchsShuttersModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_shutter_middle_big"))
                 .addTexture(modRes("item/oak_shutter"))
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(modRes(modId))
+                .setTab(getModTab(
+modId))
                 .defaultRecipe()
                 .build();
 

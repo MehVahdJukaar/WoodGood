@@ -26,7 +26,8 @@ public class BackpackedModule extends EveryCompatModule {
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)))
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(modRes("creative_tab"))
+                .setTab(getModTab(
+"creative_tab"))
                 .addRecipe(modRes("oak_backpack_shelf"))
                 .addTile(ModBlockEntities.BACKPACK_SHELF::get)
                 .setRenderType(RenderLayer.CUTOUT)

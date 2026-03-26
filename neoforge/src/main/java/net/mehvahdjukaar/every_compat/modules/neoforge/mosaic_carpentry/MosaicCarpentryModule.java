@@ -32,7 +32,7 @@ public class MosaicCarpentryModule extends EveryCompatModule {
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTexture(modRes("block/spruce_mosaic"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaics);
@@ -44,7 +44,7 @@ public class MosaicCarpentryModule extends EveryCompatModule {
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_STAIRS, Registries.ITEM)
                 .addTexture(modRes("block/spruce_mosaic"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaicStairs);
@@ -56,7 +56,7 @@ public class MosaicCarpentryModule extends EveryCompatModule {
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_SLABS, Registries.ITEM)
                 .addTexture(modRes("block/spruce_mosaic"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaicSlabs);

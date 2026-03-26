@@ -34,7 +34,7 @@ public class OreberriesReplantedModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTile(OreBerryRegistry.VAT_BLOCK_ENTITY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(vats);

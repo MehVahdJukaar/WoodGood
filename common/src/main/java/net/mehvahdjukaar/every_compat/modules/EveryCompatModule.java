@@ -5,6 +5,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -35,6 +37,15 @@ public abstract class EveryCompatModule extends SimpleModule {
     protected final Supplier<CreativeModeTab> getModTab(String id) {
         return memor(id, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
+
+    protected final Supplier<CreativeModeTab> getModTab(ResourceLocation id) {
+        return getModTab(id.getPath());  //Hack
+    }
+
+    protected final Supplier<CreativeModeTab> getModTab(ResourceKey<CreativeModeTab> id) {
+        return getModTab(id.location().getPath());  //Hack
+    }
+
 
     //internal use only. If you are a mod adding a module in your mod use by reference
     protected final Supplier<Block> getModBlock(String id) {

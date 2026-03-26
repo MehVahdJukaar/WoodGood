@@ -22,7 +22,8 @@ public class MissingWildModule extends EveryCompatModule {
                         getModBlock("fallen_acacia_log"), () -> VanillaWoodTypes.ACACIA,
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(modRes("fallen_logs"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(modRes("items"))
+                .setTab(getModTab(
+"items"))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //REASON: The top texture is not a standard 16x16. Take a look, you'll see why

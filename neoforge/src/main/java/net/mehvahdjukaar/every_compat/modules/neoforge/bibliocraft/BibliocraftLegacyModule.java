@@ -53,7 +53,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bookcases"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/bookcase"))
                 .build();
         this.addEntry(bookcase);
@@ -68,7 +68,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_armor_stands"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("fancy_armor_stands/wood"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/fancy_armor_stand"))
                 .build();
         this.addEntry(fancy_armor_stand);
@@ -82,7 +82,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_clocks"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/fancy_clock"))
                 .build();
         this.addEntry(fancy_clock);
@@ -95,7 +95,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_crafters"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/fancy_crafter"))
                 .build();
         this.addEntry(fancy_crafter);
@@ -108,7 +108,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 .addTile(getModTile("fancy_sign"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_signs"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/fancy_sign"))
                 .build();
         this.addEntry(fancy_sign);
@@ -122,7 +122,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 .addTile(getModTile("clock"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("grandfather_clocks"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/grandfather_clock"))
                 .build();
         this.addEntry(grandfather_clock);
@@ -136,7 +136,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("labels"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/label"))
                 .build();
         this.addEntry(label);
@@ -150,7 +150,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("potion_shelves"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/potion_shelf"))
                 .build();
         this.addEntry(potion_shelf);
@@ -164,7 +164,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shelves"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/shelf"))
                 .build();
         this.addEntry(shelf);
@@ -177,7 +177,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/table"))
                 .build();
         this.addEntry(table);
@@ -190,7 +190,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tool_racks"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("wood/oak/tool_rack"))
                 .build();
         this.addEntry(tool_rack);

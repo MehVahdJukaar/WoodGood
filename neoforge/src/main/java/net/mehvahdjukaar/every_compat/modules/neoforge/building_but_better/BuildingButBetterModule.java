@@ -62,7 +62,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(modRes("wooden_layers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BBBBlockTags.LAYERS, Registries.BLOCK)
                 .addTag(BBBItemTags.LAYERS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .copyParentDrop()
@@ -83,7 +83,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("trims"), Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(trims);
 
@@ -99,7 +99,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(modRes("beams"), Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(beams);
 
@@ -116,7 +116,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(beamStairs);
 
@@ -133,7 +133,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(beamSlabs);
 
@@ -146,7 +146,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("supports"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .build();
@@ -174,7 +174,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(ResourceLocation.fromNamespaceAndPath("create", "movable_empty_collider"), Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("frames"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .build();
@@ -188,7 +188,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("pallets"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .build();
@@ -205,7 +205,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(modRes("wooden_lanterns"), Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("lanterns"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .build();
@@ -231,7 +231,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addCustomItem((wood, block, properties) -> new DescriptionBlockItem(block, properties))
                 .defaultRecipe()
                 .build();
@@ -250,7 +250,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(walls);
     }

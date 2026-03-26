@@ -39,7 +39,8 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("terrace_stairs"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(setTab(getModTab(tabKey))
+
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.
@@ -56,7 +57,8 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("skyline_stairs"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(setTab(getModTab(tabKey))
+
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.
@@ -73,7 +75,8 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("compact_stairs"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(setTab(getModTab(tabKey))
+
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.
@@ -90,7 +93,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bulk_stairs"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.
@@ -107,7 +110,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("loft_stairs"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.
@@ -124,7 +127,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("balconies"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .noDrops() //REASON: Has no loot_table file so the block will self-drop just fine
                 .defaultRecipe()
@@ -143,7 +146,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("railings"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.
@@ -160,7 +163,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("platforms"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.

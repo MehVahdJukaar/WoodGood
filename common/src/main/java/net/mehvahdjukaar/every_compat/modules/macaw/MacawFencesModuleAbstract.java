@@ -37,7 +37,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
                 //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
@@ -54,7 +54,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
                 //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
@@ -72,7 +72,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
                 //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
@@ -89,7 +89,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
@@ -107,7 +107,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
                 //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
@@ -124,7 +124,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
                 //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
@@ -143,7 +143,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentTint()
                 .addModelTransform(m -> m.replaceWithTextureFromChild("mcwfences:block/oak_leaves",

@@ -108,7 +108,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
                     )
                     .addTexture(modRes("item/itemTexture"))
                     .addTag(modRes("tables"), Registries.ITEM)
-                    .setTabKey(tab)
+                    .setTab(getModTab(tab))
                     .defaultRecipe()
                     .addRecipe(modRes("path/to/recipeFile"))
                     .build();

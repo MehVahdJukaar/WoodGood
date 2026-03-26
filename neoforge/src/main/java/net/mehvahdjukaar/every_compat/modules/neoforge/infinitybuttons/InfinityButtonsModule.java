@@ -31,7 +31,7 @@ public class InfinityButtonsModule extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(modRes("wooden_large_buttons"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(largeButtons);
@@ -44,7 +44,7 @@ public class InfinityButtonsModule extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(modRes("wooden_secret_buttons"), Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(plankSecretButtons);

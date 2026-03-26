@@ -80,7 +80,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -102,7 +102,7 @@ public class WoodworksModule extends EveryCompatModule {
                         EveryCompat.res("block/acacia_chiseled_bookshelf_occupied_m"))
                 .addTexture(modRes("block/chiseled_acacia_bookshelf_side"))
                 .addTexture(modRes("block/chiseled_acacia_bookshelf_top"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -116,7 +116,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_boards"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(boards);
@@ -135,7 +135,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quark:ladders"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
@@ -155,7 +155,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(beehives);
@@ -170,7 +170,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
@@ -184,7 +184,7 @@ public class WoodworksModule extends EveryCompatModule {
                 )
                 .addTile(abwwTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
@@ -204,7 +204,7 @@ public class WoodworksModule extends EveryCompatModule {
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .copyParentTint()

@@ -120,7 +120,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 .copyTexture(modRes("block/oak_handle"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinet"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(kitchen_cabinet);
@@ -134,7 +134,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinet"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(double_kitchen_cabinet);
@@ -148,7 +148,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinet"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(glass_kitchen_cabinet);
@@ -161,7 +161,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinet"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(kitchen_sink);
@@ -175,7 +175,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinet"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(stripped_kitchen_cabinet);
@@ -189,7 +189,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinet"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(stripped_double_kitchen_cabinet);
@@ -203,7 +203,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinet"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(stripped_glass_kitchen_cabinet);
@@ -216,7 +216,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinet"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(stripped_kitchen_sink);
@@ -230,7 +230,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wardrobe"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(wardrobe);
@@ -244,7 +244,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("modern_wardrobe"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(modernWardrobe);
@@ -258,7 +258,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("double_wardrobe"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(doubleWardrobe);
@@ -273,7 +273,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(modRes("bookshelf"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(bookshelf);
@@ -287,7 +287,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("bookshelf_cupboard"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(cupboardBookshelf);
@@ -301,7 +301,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(drawer);
@@ -315,7 +315,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("double_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(doubleDrawer);
@@ -329,7 +329,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(bookshelfDrawer);
@@ -343,7 +343,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("lower_bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(lowerBookshelfDrawer);
@@ -357,7 +357,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("large_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(largeDrawer);
@@ -371,7 +371,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("lower_triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(lowerTripleDrawer);
@@ -385,7 +385,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(tripleDrawer);
@@ -397,7 +397,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("desk"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(desk);
@@ -409,7 +409,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(coveredDesk);
@@ -421,7 +421,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("modern_desk"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(modernDesk);
@@ -433,7 +433,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(table);
@@ -446,7 +446,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("end_table"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(endTable);
@@ -458,7 +458,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(coffeeTable);
@@ -471,7 +471,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(glassTable);
@@ -484,7 +484,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(chair);
@@ -497,7 +497,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(modernChair);
@@ -511,7 +511,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(stripedChair);
@@ -524,7 +524,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool_chair"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(stool);
@@ -538,7 +538,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("counter"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(counter);
@@ -552,7 +552,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped
                 .addTag(modRes("drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(drawerCounter);
@@ -566,7 +566,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped
                 .addTag(modRes("double_drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(doubleDrawerCounter);
@@ -581,7 +581,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("cupboard_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.SOLID)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(cupboardCounter);
@@ -595,7 +595,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wardrobe"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedWardrobe);
@@ -609,7 +609,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("modern_wardrobe"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedModernWardrobe);
@@ -623,7 +623,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("double_wardrobe"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedDoubleWardrobe);
@@ -638,7 +638,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(modRes("bookshelf"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedBookshelf);
@@ -652,7 +652,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("bookshelf_cupboard"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedCupboardBookshelf);
@@ -666,7 +666,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedDrawer);
@@ -680,7 +680,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("double_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedDoubleDrawer);
@@ -694,7 +694,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedBookshelfDrawer);
@@ -708,7 +708,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("lower_bookshelf_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedLowerBookshelfDrawer);
@@ -722,7 +722,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("large_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedLargeDrawer);
@@ -736,7 +736,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("lower_triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedLowerTripleDrawer);
@@ -750,7 +750,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("triple_drawer"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedTripleDrawer);
@@ -763,7 +763,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("desk"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedDesk);
@@ -776,7 +776,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedCoveredDesk);
@@ -789,7 +789,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("modern_desk"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedModernDesk);
@@ -802,7 +802,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedTable);
@@ -815,7 +815,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("end_table"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedEndTable);
@@ -828,7 +828,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedCoffeeTable);
@@ -841,7 +841,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -855,7 +855,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedChair);
@@ -868,7 +868,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedModernChair);
@@ -881,7 +881,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -895,7 +895,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool_chair"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedStool);
@@ -909,7 +909,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("counter"), Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedCounter);
@@ -923,7 +923,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedDrawerCounter);
@@ -937,7 +937,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("double_drawer_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedDoubleDrawerCounter);
@@ -951,7 +951,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("cupboard_counter"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
                 .build();

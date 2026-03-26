@@ -32,7 +32,7 @@ public class CreateModule extends EveryCompatModule {
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/c/palettes/oak_window_connected_m"), PaletteStrategies.WOOD_PLANKS_REMOVE_DARKEST)
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
                 .addTag(TagUtility.GLASS_TAG, Registries.BLOCK, Registries.ITEM)
-                //.setTabKey(tab)
+                //.setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
@@ -45,7 +45,7 @@ public class CreateModule extends EveryCompatModule {
                 )
 //                .requiresFromMap(windows.blocks) //REASON: textures
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentDrop() //REASON: ensure blocks' dropping when Diagonal Fences is installed

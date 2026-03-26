@@ -77,7 +77,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModBlockTags.C_BOOKSHELVES, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_bookshelves);
@@ -91,7 +91,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.WINDOW_SILLS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(window_sills);
@@ -105,7 +105,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.TABLES, Registries.BLOCK)
                 .addTag(ModBlockTags.STRIPPABLE_TABLES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 .excludeBlockTypes("deeperdarker", "bloom")
@@ -122,7 +122,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.TABLES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 .excludeBlockTypes("deeperdarker", "bloom")
@@ -140,7 +140,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.STRIPPABLE_CHAIRS, Registries.BLOCK)
                 .addTag(ModBlockTags.WOODEN_CHAIRS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 .excludeBlockTypes("deeperdarker", "bloom")
@@ -157,7 +157,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.WOODEN_CHAIRS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 .excludeBlockTypes("deeperdarker", "bloom")
@@ -177,7 +177,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.CUPBOARDS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(cupboards);
@@ -191,7 +191,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.CUPBOARDS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_cupboards);
@@ -204,7 +204,7 @@ public class ClutterModule extends EveryCompatModule {
                 //TEXTURES: log, planks
                 .addTag(ModBlockTags.SHELVES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 .excludeBlockTypes("deeperdarker", "bloom")
@@ -224,7 +224,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(trellises);
@@ -238,7 +238,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.BENCHES, Registries.BLOCK)
                 .addTag(ModBlockTags.STRIPPABLE_BENCHES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 .excludeBlockTypes("deeperdarker", "bloom")
@@ -255,7 +255,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.BENCHES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 .excludeBlockTypes("deeperdarker", "bloom")
@@ -271,7 +271,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
                 .addTag(ModBlockTags.WOODEN_MOSAICS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaic_planks);
@@ -288,7 +288,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(ModBlockTags.WOODEN_MOSAICS, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaic_stairs);
@@ -305,7 +305,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaic_slabs);

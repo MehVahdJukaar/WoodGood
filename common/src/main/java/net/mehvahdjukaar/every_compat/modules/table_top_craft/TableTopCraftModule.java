@@ -29,7 +29,7 @@ public class TableTopCraftModule extends EveryCompatModule {
                 .addTile(getModTile("chess"))
                 .addTag(modRes("chess_boards"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(chessBoards);
@@ -40,7 +40,7 @@ public class TableTopCraftModule extends EveryCompatModule {
                 .addTile(getModTile("chess_timer"))
                 .addTag(modRes("chess_timers"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(chessTimers);
@@ -51,7 +51,7 @@ public class TableTopCraftModule extends EveryCompatModule {
                 .addTile(getModTile("connect_four"))
                 .addTag(modRes("connect_four"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(connectFours);

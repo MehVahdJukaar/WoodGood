@@ -62,7 +62,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_table"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(table);
 
@@ -74,7 +74,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_square_table"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(squareTable);
 
@@ -86,7 +86,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_pedestal_table"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(pedestalTable);
 
@@ -99,7 +99,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_bedside_table"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(bedsideTable);
 
@@ -112,7 +112,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Furniture_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_kitchen_cabinet"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(kitchenCabinet);
 
@@ -127,7 +127,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTexture(modRes("block/birch_cabinet_door_right"))
                 .addTexture(modRes("block/birch_cabinet_door_left"))
                 .addRecipe(modRes("furniture_making/birch_cabinet"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(cabinet);
 
@@ -144,7 +144,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTexture(modRes("block/birch_wardrobe_door_top_right"))
                 .addTexture(modRes("block/birch_wardrobe_door_top_left"))
                 .addRecipe(modRes("furniture_making/birch_wardrobe"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(wardrobe);
 
@@ -156,7 +156,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_stool"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(stool);
 
@@ -169,7 +169,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_chair"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(chair);
 
@@ -182,7 +182,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_shutter"))
                 .addTexture(modRes("block/oak_shutter"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(shutter);
 
@@ -200,7 +200,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addRecipe(modRes("furniture_making/oak_crate"))
                 .addTexture(modRes("block/oak_crate_side"))
                 .addTexture(modRes("block/oak_crate_top"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addCustomItem((woodType, block, properties) -> new BlockItem(block, properties.stacksTo(1))
                 )
                 .copyParentDrop()
@@ -216,7 +216,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTile(FurnishRegistries.Shelf_BlockEntity)
                 .addRecipe(modRes("furniture_making/oak_shelf"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(shelf);
 
@@ -228,7 +228,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_bench"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(bench);
 
@@ -241,7 +241,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addRecipe(modRes("furniture_making/oak_log_bench"))
                 .addTexture(modRes("block/oak_log_bench_top"))
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(logBenches);
 
@@ -254,7 +254,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/oak_ladder"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(ladder);
 
@@ -266,7 +266,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addRecipe(modRes("furniture_making/jungle_coffin"))
                 .addTexture(modRes("block/jungle_coffin_sides"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(coffin);
 
@@ -289,7 +289,7 @@ public class FurnishModule extends EveryCompatModule {
                 .addTextureM(modRes("block/bookshelf/dark_oak_bookshelf_chest_sparse"),
                         EveryCompat.res("block/fur/dark_oak_bookshelf_chest_m"))
                 .addTile(FurnishRegistries.BookshelfChest_BlockEntity)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(bookshelfChest);
     }

@@ -69,7 +69,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(BundledLog);
 
@@ -79,7 +79,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(CenterCutLog);
 
@@ -90,8 +90,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/oak_log/damaged_oak_log_top"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .build();
+                .setTab(getModTab(tab))                .build();
         this.addEntry(DamagedLog);
 
         EdgeCutLog = SimpleEntrySet.builder(WoodType.class, "log", "edge_cut",
@@ -100,7 +99,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(EdgeCutLog);
 
@@ -110,7 +109,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 )
                 .addTexture(modRes("block/oak_log/firewood_oak_log"), LOG_SIDE_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(FirewoodLog);
 
@@ -123,7 +122,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTextureM(modRes("block/oak_log/flowering_oak_log_top"),
                         EveryCompat.res("block/common_log_top_outer_m"), PaletteStrategies.PLANKS_STANDARD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(FloweringLog);
 
@@ -133,7 +132,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 )
                 .addTexture(modRes("block/oak_log/mixed_oak_log"), LOG_SIDE_REMOVE_2_DARKEST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(MixedLog);
 
@@ -143,7 +142,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(NailedLog);
 
@@ -155,7 +154,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                         EveryCompat.res("block/ch/oak_logs/overgrown_oak_log_m"), PaletteStrategies.LOG_SIDE_STANDARD)
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(OvergrownLog);
 
@@ -165,7 +164,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(PlankedLog);
 
@@ -175,7 +174,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(ReinforcedLog);
 
@@ -189,7 +188,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carvedStrippedLog);
 
@@ -201,7 +200,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(ChippedStrippedLog);
 
@@ -213,7 +212,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(DSignStrippedLog);
 
@@ -225,7 +224,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(edgedStrippedLog);
 
@@ -237,7 +236,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(FSignStrippedLog);
 
@@ -249,7 +248,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(ISignStrippedLog);
 
@@ -261,7 +260,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(KSignStrippedLog);
 
@@ -273,7 +272,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(knottedStrippedLog);
 
@@ -285,7 +284,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(LSignStrippedLog);
 
@@ -297,7 +296,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(LayeredStrippedLog);
 
@@ -309,7 +308,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(LumpyStrippedLog);
 
@@ -321,7 +320,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(PatientStrippedLog);
 
@@ -335,7 +334,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                         STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/reinforced_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(ReinforcedStrippedLog);
 
@@ -347,7 +346,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(signStrippedLog);
 
@@ -359,7 +358,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(sternStrippedLog);
 
@@ -371,7 +370,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                 .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(wiseStrippedLog);
 

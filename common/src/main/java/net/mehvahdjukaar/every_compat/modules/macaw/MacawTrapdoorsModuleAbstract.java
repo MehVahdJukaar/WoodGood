@@ -53,7 +53,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("bark_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -70,7 +70,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("barn_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -87,7 +87,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("barred_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -104,7 +104,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("beach_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -121,7 +121,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("classic_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -137,7 +137,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("cottage_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .addTextureM(modRes("block/cottage/oak_cottage_trapdoor"), EveryCompat.res("block/mcw/trapdoors/oak_cottage_trapdoor_m"))
@@ -155,7 +155,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("four_panel_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -174,7 +174,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("glass_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -191,7 +191,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("bamboo_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -208,7 +208,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("mystic_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -227,7 +227,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("paper_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -245,7 +245,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("ranch_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -262,7 +262,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("swamp_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -280,7 +280,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("tropical_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -297,7 +297,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -315,7 +315,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("barrel_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -333,7 +333,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("whispering_trapdoors"), Registries.BLOCK)
                 .addTag(ItemTags.TRAPDOORS, Registries.ITEM)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();

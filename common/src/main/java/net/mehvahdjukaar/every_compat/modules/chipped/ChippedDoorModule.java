@@ -96,7 +96,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(barredDoor);
@@ -115,7 +115,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(beachDoor);
@@ -137,7 +137,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(boardedDoor);
@@ -159,7 +159,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(dualPaneledDoor);
@@ -181,7 +181,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(fortifiedDoor);
@@ -203,7 +203,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(gatedDoor);
@@ -219,7 +219,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(glassDoor);
@@ -241,7 +241,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(heavyDoor);
@@ -257,7 +257,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(overgrownDoor);
@@ -279,7 +279,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(paneledDoor);
@@ -301,7 +301,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(paperDoor);
@@ -323,7 +323,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(pressedDoor);
@@ -345,7 +345,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(screenDoor);
@@ -367,7 +367,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(secretDoor);
@@ -387,7 +387,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(shackDoor);
@@ -409,7 +409,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(slidingDoor);
@@ -431,7 +431,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(supportedDoor);
@@ -453,7 +453,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(tileWindowedDoor);
@@ -475,7 +475,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(tiledDoor);
@@ -497,7 +497,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .noDrops()
                 .build();
         this.addEntry(windowedDoor);
@@ -512,7 +512,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(airyTrapdoor);
 
@@ -525,7 +525,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(barredTrapdoor);
 
@@ -538,7 +538,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(checkeredTrapdoor);
 
@@ -551,7 +551,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(classicTrapdoor);
 
@@ -564,7 +564,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(classicWindowedTrapdoor);
 
@@ -577,7 +577,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(cobwebTrapdoor);
 
@@ -590,7 +590,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(distortedTrapdoor);
 
@@ -603,7 +603,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(fancyTrapdoor);
 
@@ -618,7 +618,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(goldenBarredTrapdoor);
 
@@ -632,7 +632,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(heavyTrapdoor);
 
@@ -647,7 +647,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(ironBarredTrapdoor);
 
@@ -660,7 +660,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(leafyTrapdoor);
 
@@ -673,7 +673,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(meshedTrapdoor);
 
@@ -686,7 +686,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(overgrownTrapdoor);
 
@@ -699,7 +699,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(pointlessTrapdoor);
 
@@ -712,7 +712,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(slottedTrapdoor);
 
@@ -725,7 +725,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(solidTrapdoor);
 
@@ -738,7 +738,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(suspiciousTrapdoor);
 
@@ -751,7 +751,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(twistedTrapdoor);
 
@@ -764,7 +764,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(vinedTrapdoor);
 
@@ -777,7 +777,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(wartedTrapdoor);
 
@@ -790,7 +790,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(windowedTrapdoor);
 
@@ -803,7 +803,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(wovenTrapdoor);
 

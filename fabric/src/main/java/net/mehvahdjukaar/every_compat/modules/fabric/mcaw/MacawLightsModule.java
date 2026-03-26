@@ -54,7 +54,7 @@ public class MacawLightsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(soul_tiki_torches);
 
@@ -72,7 +72,7 @@ public class MacawLightsModule extends EveryCompatModule {
                 .requiresChildren(FENCE) //REASON: recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -93,7 +93,7 @@ public class MacawLightsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(ceiling_fan_lights);
     }

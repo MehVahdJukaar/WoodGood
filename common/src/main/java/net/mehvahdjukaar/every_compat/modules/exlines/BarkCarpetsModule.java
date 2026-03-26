@@ -23,7 +23,7 @@ public class BarkCarpetsModule extends EveryCompatModule {
                         w -> new BarkCarpetBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .setTabKey(modRes("tab"))
+                .setTab(getModTab("tab"))
                 .defaultRecipe()
                 .build();
         this.addEntry(barkCarpets);

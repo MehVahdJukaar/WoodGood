@@ -39,7 +39,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 .addTag(modRes("banisters"), Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(banisters);
 
@@ -70,7 +70,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .noItem()
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .addRecipe(modRes("stonecutting/acacia_log/hollow_acacia_log"))
                 .build();
         this.addEntry(hollowLogsVertical);

@@ -58,7 +58,7 @@ public class XercaModule extends EveryCompatModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_1_side_abcd"), darkerPalette)
                 .addRecipe(modRes("carving/carved_warped_1_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_1_from_stripped_warped_log_carving"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carved1);
 
@@ -71,7 +71,7 @@ public class XercaModule extends EveryCompatModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_2_side_abcd"), darkestPalette)
                 .addRecipe(modRes("carving/carved_warped_2_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_2_from_stripped_warped_log_carving"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carved2);
 
@@ -84,7 +84,7 @@ public class XercaModule extends EveryCompatModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_3_side_abcd"), darkestPalette)
                 .addRecipe(modRes("carving/carved_warped_3_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_3_from_stripped_warped_log_carving"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carved3);
 
@@ -97,7 +97,7 @@ public class XercaModule extends EveryCompatModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_4_side_abcd"), darkestPalette)
                 .addRecipe(modRes("carving/carved_warped_4_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_4_from_stripped_warped_log_carving"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carved4);
 
@@ -111,7 +111,7 @@ public class XercaModule extends EveryCompatModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_5_side_cd"), darkestPalette)
                 .addRecipe(modRes("carving/carved_warped_5_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_5_from_stripped_warped_log_carving"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carved5);
 
@@ -128,7 +128,7 @@ public class XercaModule extends EveryCompatModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_6_side_d"), darkPalette)
                 .addRecipe(modRes("carving/carved_warped_6_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_6_from_stripped_warped_log_carving"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carved6);
 
@@ -142,7 +142,7 @@ public class XercaModule extends EveryCompatModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_7_side_bcd"), neutralPalette)
                 .addRecipe(modRes("carving/carved_warped_7_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_7_from_stripped_warped_log_carving"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carved7);
 
@@ -155,7 +155,7 @@ public class XercaModule extends EveryCompatModule {
                 .addTexture(modRes("block/carved_wood/carved_warped_8_side_abcd"), neutralPalette)
                 .addRecipe(modRes("carving/carved_warped_8_from_warped_log_carving"))
                 .addRecipe(modRes("carving/carved_warped_8_from_stripped_warped_log_carving"))
-                .setTabKey(tab)
+                .setTab(getModTab(tab))
                 .build();
         this.addEntry(carved8);
     }

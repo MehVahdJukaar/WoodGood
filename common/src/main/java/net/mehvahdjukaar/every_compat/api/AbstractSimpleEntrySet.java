@@ -20,6 +20,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -184,7 +185,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         if (tabHolder == null || NO_MOD_CREATIVE_TAB.get()) {
             return;
         }
-        var tabKey = tabHolder.unwrapKey();
+        var tabKey = tabHolder.unwrapKey().get();
         if (tabMode == TabAddMode.AFTER_ALL) {
             event.add(tabKey, items.values().toArray(new Item[0]));
         } else if (tabMode == TabAddMode.AFTER_SAME_WOOD) {
@@ -402,14 +403,14 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         @Deprecated(forRemoval = true)
         public BL setTabKey(ResourceLocation res) {
-            ResourceKey<CreatieveModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
+            ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
             this.setTabKey(key);
             return (BL) this;
         }
 
         @Deprecated(forRemoval = true)
         public BL setTabKey(Supplier<ResourceKey<CreativeModeTab>> tab) {
-            this.tab = Suppliers.memoize(() -> BuiltinRegistries.CREATIVE_MODE_TAB.getHolderOrThrow(tag.get()));
+            this.tab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getHolderOrThrow(tab.get());
             return (BL) this;
         }
 
@@ -420,7 +421,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         public BL setTab(Supplier<CreativeModeTab> tab) {
-            this.tab = Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.wrapAsHolder(tab.get()).orElseThrow("Could not find ID for creative tab"));
+            this.tab = Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.wrapAsHolder(tab.get()));
             return (BL) this;
         }
 
