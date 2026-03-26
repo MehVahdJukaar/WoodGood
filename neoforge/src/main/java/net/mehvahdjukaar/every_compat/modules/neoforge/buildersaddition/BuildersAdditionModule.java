@@ -73,7 +73,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(panels);
@@ -84,7 +84,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(tables);
@@ -96,7 +96,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(stools);
@@ -108,7 +108,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(chairs);
@@ -118,7 +118,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                         w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(counters);
@@ -130,7 +130,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(countersAndesite);
@@ -142,7 +142,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(countersDiorite);
@@ -154,7 +154,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(countersGranite);
@@ -166,7 +166,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(countersBlackstone);
@@ -178,7 +178,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(countersDeepslate);
@@ -190,7 +190,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(countersBasal);
@@ -201,7 +201,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 )
                 .requiresChildren(STRIPPED_LOG, "slab") //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(bookshelves);
@@ -214,7 +214,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .addTile(getModTile("shelf"))
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(shelves);
@@ -226,7 +226,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(cabinets);
@@ -239,7 +239,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("cupboard/cupboard_oak_left"))
                 .addRecipe(modRes("cupboard/cupboard_oak_right"))
                 .build();
@@ -252,7 +252,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(benches);
@@ -264,7 +264,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(supportBeams);
@@ -276,7 +276,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(bedsideTables);
@@ -288,7 +288,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(arcades);
@@ -300,7 +300,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(shopSigns);
@@ -312,7 +312,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(posts);
@@ -324,7 +324,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(stripped_fences);
@@ -343,7 +343,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK)
                 .addTag(ItemTags.LEAVES, Registries.ITEM)
                 .copyParentTint()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(hedges);

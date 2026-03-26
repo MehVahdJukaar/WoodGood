@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwwindows.MacawsWindows;
 import net.kikoz.mcwwindows.objects.*;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -52,7 +51,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -66,7 +65,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_two"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -80,7 +79,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_four"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -95,7 +94,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -110,7 +109,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_two"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -125,7 +124,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_four"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -139,7 +138,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -153,7 +152,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_two"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -167,7 +166,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("windows_four"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -181,7 +180,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -196,7 +195,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -210,7 +209,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(modRes("pane_windows"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -223,7 +222,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("parapets"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .build();
@@ -236,7 +235,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("parapets"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(plankParapet);
@@ -249,7 +248,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 //TEXTURES: log, stripped_log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("blinds"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(blinds);
@@ -261,7 +260,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_shutter"), shutterPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
@@ -274,7 +273,7 @@ public class MacawWindowsModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_louvered_shutter"), shutterPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();

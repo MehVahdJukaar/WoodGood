@@ -44,7 +44,7 @@ public class JustARaftModule extends EveryCompatModule {
                 .addTextureM(modRes("entity/raft/oak_raft"), EveryCompat.res("entity/raft/oak_raft_m"),
                         PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTag(modRes("rafts"), Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(rafts);
     }

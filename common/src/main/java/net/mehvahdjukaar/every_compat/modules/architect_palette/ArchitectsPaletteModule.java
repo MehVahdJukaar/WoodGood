@@ -40,7 +40,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(railings);
@@ -52,7 +52,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_boards"), customPalette)
                 .addTexture(modRes("block/oak_boards_odd"), customPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(boards);
@@ -66,7 +66,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .addTag(ItemTags.SLABS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -81,7 +81,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(ItemTags.STAIRS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(boardStairs);
@@ -95,7 +95,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(boardWalls);

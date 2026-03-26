@@ -62,7 +62,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(circleGlass);
 
@@ -84,7 +84,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK) //common tags
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(barredGlass);
 
@@ -106,7 +106,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(borderedGlass);
 
@@ -128,7 +128,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(diamondBorderedGlass);
 
@@ -150,7 +150,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(horizontalLinedGlass);
 
@@ -172,7 +172,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(largeDiamondGlass);
 
@@ -194,7 +194,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(lineBarredGlass);
 
@@ -216,7 +216,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(ornateBarredGlass);
 
@@ -234,7 +234,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(snowflakeGlass);
 
@@ -256,7 +256,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(wovenGlass);
 
@@ -278,7 +278,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(squareGlass);
 
@@ -298,7 +298,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(circleGlassPane);
 
@@ -317,7 +317,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(barredGlassPane);
 
@@ -336,7 +336,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(borderedGlassPane);
 
@@ -355,7 +355,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(diamondBorderedGlassPane);
 
@@ -374,7 +374,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(horizontalLinedGlassPane);
 
@@ -393,7 +393,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(largeDiamondGlassPane);
 
@@ -412,7 +412,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(lineBarredGlassPane);
 
@@ -431,7 +431,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(ornateBarredGlassPane);
 
@@ -450,7 +450,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(snowflakeGlassPane);
 
@@ -469,7 +469,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(wovenGlassPane);
 
@@ -488,7 +488,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.ITEM)
                 .setRenderType(RenderLayer.TRANSLUCENT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(squareGlassPane);
 

@@ -32,7 +32,7 @@ public class InfinityButtonsModule extends EveryCompatModule {
                                 .strength(0.5f).collidable(false).nonOpaque().sounds(SoundType.WOOD), true,
                                 w.canBurn()))
                 .addTag(modRes("wooden_large_buttons"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(largeButtons);
@@ -43,7 +43,7 @@ public class InfinityButtonsModule extends EveryCompatModule {
                                 .strength(2.0f, 3.0f)
                                 .noOcclusion().sound(SoundType.WOOD), w.planks))
                 .addTag(modRes("wooden_secret_buttons"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(plankSecretButtons);

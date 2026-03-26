@@ -91,7 +91,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(mosaicPlanks);
 
@@ -107,7 +107,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(panelPlanks);
 
@@ -119,7 +119,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(shavingsPlanks);
 
@@ -131,7 +131,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(basketWovenPlanks);
 
@@ -143,7 +143,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(boxedPlanks);
 
@@ -155,7 +155,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(brickBondPlanks);
 
@@ -167,7 +167,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(brickyPlanks);
 
@@ -183,7 +183,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(corneredPlanks);
 
@@ -199,7 +199,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(cratedPlanks);
 
@@ -211,7 +211,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(crossLacedPlanks);
 
@@ -223,7 +223,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(crossedPlanks);
 
@@ -235,7 +235,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(detailedPlanks);
 
@@ -247,7 +247,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(diagonalPlanks);
 
@@ -259,7 +259,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(diamondPlanks);
 
@@ -271,7 +271,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(doubleHerringbonePlanks);
 
@@ -287,7 +287,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(enclosedPlanks);
 
@@ -299,7 +299,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(finePlanks);
 
@@ -311,7 +311,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(fineVerticalPlanks);
 
@@ -327,7 +327,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(framedPlanks);
 
@@ -339,7 +339,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(herringbonePlanks);
 
@@ -351,7 +351,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(hewnPlanks);
 
@@ -363,7 +363,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(lacedPlanks);
 
@@ -375,7 +375,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(nailedPlanks);
 
@@ -391,7 +391,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(naturalPlanks);
 
@@ -407,7 +407,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(peggedPlanks);
 
@@ -419,7 +419,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(polishedPlanks);
 
@@ -431,7 +431,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(railedPlanks);
 
@@ -443,7 +443,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(shiftedPlanks);
 
@@ -455,7 +455,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(slantedPlanks);
 
@@ -467,7 +467,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(smoothPlanks);
 
@@ -479,7 +479,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(stackedPlanks);
 
@@ -491,7 +491,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(thinPlanks);
 
@@ -503,7 +503,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(tiledPlanks);
 
@@ -515,7 +515,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(versaillesPlanks);
 
@@ -527,7 +527,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(verticalPlanks);
 
@@ -539,7 +539,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(verticallyRailedPlanks);
 
@@ -555,7 +555,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(whirlwindPlanks);
 
@@ -567,7 +567,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(wickeredPlanks);
 
@@ -583,7 +583,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(modRes("barrel"), Registries.BLOCK)
                 .addTag(modRes("barrel"), Registries.ITEM)
                 .addTile(() -> BlockEntityType.BARREL)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(barrel);
 
@@ -597,7 +597,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(modRes("barrel"), Registries.BLOCK)
                 .addTag(modRes("barrel"), Registries.ITEM)
                 .addTile(() -> BlockEntityType.BARREL)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(crate);
 
@@ -611,7 +611,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(modRes("barrel"), Registries.BLOCK)
                 .addTag(modRes("barrel"), Registries.ITEM)
                 .addTile(() -> BlockEntityType.BARREL)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(reinforcedCrate);
 
@@ -622,7 +622,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTextureM(EveryCompat.res("block/torch/spruce_torch"), EveryCompat.res("block/ch/spruce_torch_m"))
                 .addTag(modRes("wall_torch"), Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .noItem()
                 .build();
         this.addEntry(wallTorch);
@@ -637,7 +637,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                 .addTag(modRes("torch"), Registries.BLOCK)
                 .addTag(modRes("torch"), Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(torch);
 

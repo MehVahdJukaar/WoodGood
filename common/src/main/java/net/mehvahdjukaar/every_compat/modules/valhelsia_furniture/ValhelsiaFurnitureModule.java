@@ -52,7 +52,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.TABLES, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(tables);
 
@@ -65,7 +65,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(chairs);
 
@@ -79,7 +79,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(hay_chairs);
 
@@ -92,7 +92,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.STOOLS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(stools);
 
@@ -111,7 +111,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
                 .addTag(ModTags.Items.DESKS, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(desks);
 
@@ -124,7 +124,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
                 .addTag(ModTags.Items.DESKS, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(desk_drawers);

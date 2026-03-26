@@ -30,7 +30,7 @@ public abstract class EveryCompatModule extends SimpleModule {
         super(modId, shortId, myNamespace);
     }
 
-    protected final  <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
+    protected final <T extends Block> Supplier<T> getModBlock(String id, Class<T> blockClass) {
         return memor(id, BuiltInRegistries.BLOCK);
     }
 
@@ -38,14 +38,13 @@ public abstract class EveryCompatModule extends SimpleModule {
         return memor(id, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
 
-    protected final Supplier<CreativeModeTab> getModTab(ResourceLocation id) {
-        return getModTab(id.getPath());  //Hack
+    protected final Supplier<CreativeModeTab> getTab(ResourceLocation id) {
+        return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.get(id));
     }
 
-    protected final Supplier<CreativeModeTab> getModTab(ResourceKey<CreativeModeTab> id) {
-        return getModTab(id.location().getPath());  //Hack
+    protected final Supplier<CreativeModeTab> getTab(ResourceKey<CreativeModeTab> id) {
+        return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.get(id));
     }
-
 
     //internal use only. If you are a mod adding a module in your mod use by reference
     protected final Supplier<Block> getModBlock(String id) {

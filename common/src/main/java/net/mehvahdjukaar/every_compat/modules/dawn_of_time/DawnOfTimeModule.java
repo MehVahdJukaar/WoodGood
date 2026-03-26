@@ -52,7 +52,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                         w -> new PlateBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(PLATE);
 
@@ -61,7 +61,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                         w -> new EdgeBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(EDGE);
 
@@ -72,7 +72,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(PERGOLA);
 
@@ -83,7 +83,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_lattice"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(LATTICE);
 
@@ -94,7 +94,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(BEAM);
 
@@ -109,7 +109,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTag(ItemTags.WALLS, Registries.ITEM)
                 .addTag(ItemTags.WALLS, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(WALL);
 
@@ -120,7 +120,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 //TEXTURES: ???
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(SUPPORT_BEAM);
 
@@ -131,7 +131,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 //TEXTURES: ???
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(SUPPORT_SLAB);
 
@@ -143,7 +143,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/birch_fancy_fence"))
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(FANCY_FENCE);
 
@@ -153,7 +153,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTextureM(modRes("block/birch_footstool"), EveryCompat.res("block/dot/birch_footstool_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(FOOTSTOOL);
 
@@ -164,7 +164,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTextureM(modRes("block/birch_couch"), EveryCompat.res("block/dot/birch_couch_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(COUCH);
 
@@ -176,7 +176,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTexture(modRes("block/spruce_low_table"), dullPalette)
                 .addTile(getModTile("displayer"))
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(LOW_TABLE);
 
@@ -188,7 +188,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                 .addTextureM(modRes("block/spruce_legless_chair"), EveryCompat.res("block/dot/spruce_legless_chair_m"), dullPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(LEGLESS_CHAIR);
     }

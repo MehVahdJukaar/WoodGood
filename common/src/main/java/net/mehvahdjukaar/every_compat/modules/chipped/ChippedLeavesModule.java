@@ -71,7 +71,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentTint()
                 .build();
         this.addEntry(apple);
@@ -102,7 +102,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentTint()
                 .build();
         this.addEntry(cherry);
@@ -136,7 +136,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentTint()
                 .build();
         this.addEntry(frosted);
@@ -167,7 +167,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentTint()
                 .build();
         this.addEntry(golden_apple);
@@ -198,7 +198,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentTint()
                 .build();
         this.addEntry(golden_cherry);
@@ -229,7 +229,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentTint()
                 .build();
         this.addEntry(magenta_flower);
@@ -260,7 +260,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentTint()
                 .build();
         this.addEntry(white_flower);
@@ -277,7 +277,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(dead);
 
@@ -293,7 +293,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(golden);
 
@@ -309,7 +309,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(orange);
 
@@ -325,7 +325,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(red);
 

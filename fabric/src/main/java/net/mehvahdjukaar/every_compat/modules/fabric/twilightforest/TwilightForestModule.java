@@ -39,7 +39,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 .addTag(modRes("banisters"), Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(banisters);
 

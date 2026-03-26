@@ -42,7 +42,7 @@ public class DramaticDoorsModule extends EveryCompatModule {
                 .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -59,7 +59,7 @@ public class DramaticDoorsModule extends EveryCompatModule {
                 .addTag(modRes("short_wooden_doors"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();

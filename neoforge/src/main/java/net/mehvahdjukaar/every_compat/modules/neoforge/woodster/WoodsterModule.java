@@ -40,7 +40,7 @@ public class WoodsterModule extends EveryCompatModule {
                 .addTexture(TextureInfo.of(modRes("block/everycomp_dark_oak_chiseled_bookshelf_top"), "block/dark_oak_chiseled_bookshelf_top"))
                 .addTexture(TextureInfo.of(modRes("block/everycomp_dark_oak_chiseled_bookshelf_0"), "block/dark_oak_chiseled_bookshelf_0"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .copyParentDrop()
                 .defaultRecipe()
                 .build();
@@ -58,7 +58,7 @@ public class WoodsterModule extends EveryCompatModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quill:ladders"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();

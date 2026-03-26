@@ -81,7 +81,7 @@ public class QuarkModule extends EveryCompatModule {
                 .addTag(modRes("wooden_vertical_slabs"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("vertical_slabs"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("vertical_slab"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab"))
                 //RECIPES: See addDynamicServerResources for oak_vertical_slab_revert
@@ -102,7 +102,7 @@ public class QuarkModule extends EveryCompatModule {
                         bookshelfPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/bookshelves/acacia_bookshelf"))
                 .copyParentDrop()
@@ -122,7 +122,7 @@ public class QuarkModule extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/posts/oak_post"))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -144,7 +144,7 @@ public class QuarkModule extends EveryCompatModule {
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/posts/stripped_oak_post"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -167,7 +167,7 @@ public class QuarkModule extends EveryCompatModule {
                         }
                 )
                 .addCondition(w -> !w.getId().toString().equals("gardens_of_the_dead:whistle_planks")) //REASON: The look is no different from a normal plank
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK, Registries.ITEM)
@@ -181,7 +181,7 @@ public class QuarkModule extends EveryCompatModule {
                         () -> VanillaWoodTypes.SPRUCE,
                         w -> new VariantLadderBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, Utils.copyPropertySafe(Blocks.LADDER).sound(w.getSound()), w.canBurn()))
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
@@ -198,7 +198,7 @@ public class QuarkModule extends EveryCompatModule {
                         w -> new HollowLogBlock(shortenedId() + "/" + w.getAppendableId(),
                                 w.log, null, w.canBurn()))
                 .requiresChildren("stripped_log") // Texture
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hollow_logs"), Registries.BLOCK, Registries.ITEM)
@@ -214,7 +214,7 @@ public class QuarkModule extends EveryCompatModule {
                 .addTile(qChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("revertable_chests"), Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .addRecipe(modRes("building/chests/oak_chest_wood"))
@@ -236,7 +236,7 @@ public class QuarkModule extends EveryCompatModule {
                 .addTile(qTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("revertable_trapped_chests"), Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/chests/trapped_oak_chest"))
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
@@ -255,7 +255,7 @@ public class QuarkModule extends EveryCompatModule {
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hedges"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .copyParentTint()
                 //RECIPES: Manually created below blc the recipe has a tag as an ingredient
@@ -280,7 +280,7 @@ public class QuarkModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("forge:mineable/sickle"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("mynethersdelight:resurgent_soil_plant"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/leafcarpet/oak_leaf_carpet"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

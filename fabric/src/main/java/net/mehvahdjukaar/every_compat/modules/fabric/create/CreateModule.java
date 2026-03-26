@@ -45,7 +45,7 @@ public class CreateModule extends EveryCompatModule {
                 )
 //                .requiresFromMap(windows.blocks) //REASON: textures
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentDrop() //REASON: ensure blocks' dropping when Diagonal Fences is installed

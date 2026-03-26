@@ -57,7 +57,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTexture(modRes("block/chair/oak_chair"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chairs"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -72,7 +72,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModBlockTags.TABLE_CONNECTABLE, Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -87,7 +87,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_benches"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("benches"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -101,7 +101,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTexture(modRes("block/couch/oak_couch"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("couches"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -117,7 +117,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("fancy_beds"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.BEDS, Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .copyParentDrop()
@@ -132,7 +132,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTexture(modRes("block/dining_bench/oak_dining_bench"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("dining_benches"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -148,7 +148,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModBlockTags.TABLE_CONNECTABLE, Registries.BLOCK)
                 .addTag(modRes("nightstands"), Registries.BLOCK,  Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .build();
@@ -164,7 +164,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModBlockTags.TABLE_CONNECTABLE, Registries.BLOCK)
                 .addTag(modRes("desks"), Registries.BLOCK,  Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .build();
@@ -179,7 +179,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTextureM(modRes("block/table/side_table/oak_side_table"), EveryCompat.res("block/hc/table/oak_side_table_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("side_tables"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -195,7 +195,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTextureM(modRes("block/counter/acacia_counter_3"), EveryCompat.res("block/hc/counter/oak_counter_3_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("counters"), Registries.BLOCK,  Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 //NOTE: the models/block files are modified below to correct the texture for "top"
@@ -214,7 +214,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTexture(modRes("block/cupboard/oak/cupboard_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cupboards"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -245,7 +245,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTexture(modRes("block/drawer/oak/drawer_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -266,7 +266,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTexture(modRes("block/shelf/oak/shelf_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shelves"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -287,7 +287,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar_trims"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("trims"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -304,7 +304,7 @@ public class HandcraftedModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("corner_trims"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("trims"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addCustomItem((w, b, p) -> new BlockItem(b, p))
                 .defaultRecipe()
                 .build();

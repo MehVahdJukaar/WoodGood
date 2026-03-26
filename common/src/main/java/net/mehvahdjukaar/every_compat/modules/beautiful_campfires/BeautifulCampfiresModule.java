@@ -62,7 +62,7 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
                 .addTextureM(modRes("item/acacia_soul_campfire"), EveryCompat.res("item/bc/campfire_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
-                .setTab(getModTab(tab))                //RECIPES: Manully created below
+                .setTab(getTab(tab))                //RECIPES: Manully created below
                 .build();
         this.addEntry(campfires);
 
@@ -81,7 +81,7 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
                 .addTag(BlockTags.PIGLIN_REPELLENTS, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 //RECIPES: Manully created below
                 .build();
         this.addEntry(soul_campfires);

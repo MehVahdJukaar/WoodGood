@@ -67,7 +67,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .addTag(modRes("stripped_posts"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedPosts);
@@ -79,7 +79,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                 //TEXTURES: manual-texture-generation
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(posts);
@@ -90,7 +90,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                         )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .addTag(modRes("cut_stripped_posts"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -101,7 +101,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                         getModBlock("cut_oak_post"), () -> VanillaWoodTypes.OAK,
                         woodType -> new StrippableCutPostBlock(woodType, cutPostProperties(woodType)))
                 .addTag(modRes("cut_posts"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -113,7 +113,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                         woodType -> new RotatedPillarBlock(bundledPostProperties(woodType))
                         )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(bundledStrippedPosts);
@@ -122,7 +122,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                         getModBlock("bundled_oak_posts"), () -> VanillaWoodTypes.OAK,
                         woodType -> new StrippableRotatedPillarBlock(() -> bundledStrippedPosts.blocks.get(woodType), bundledPostProperties(woodType)))
                 .requiresFromMap(bundledStrippedPosts.blocks)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(bundledPosts);

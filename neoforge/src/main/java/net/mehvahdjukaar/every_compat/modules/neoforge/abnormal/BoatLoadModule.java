@@ -32,7 +32,7 @@ public class BoatLoadModule extends EveryCompatModule {
                         getModItem("large_oak_boat"), () -> VanillaWoodTypes.OAK,
                         w -> new LargeBoatItem(getBoatType(w))
                 )
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .requiresChildren("boat") //REASON: recipes
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("large_boats"), Registries.ITEM)
@@ -47,7 +47,7 @@ public class BoatLoadModule extends EveryCompatModule {
                         getModItem("oak_furnace_boat"), () -> VanillaWoodTypes.OAK,
                         w -> new FurnaceBoatItem(getBoatType(w))
                 )
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .requiresChildren("boat") //REASON: recipes
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("furnace_boats"), Registries.ITEM)

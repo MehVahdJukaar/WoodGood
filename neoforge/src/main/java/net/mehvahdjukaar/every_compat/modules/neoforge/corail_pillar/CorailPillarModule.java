@@ -28,7 +28,7 @@ public class CorailPillarModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("stonecutting/pillar_oak_log"))
                 .build();
         this.addEntry(LOG_PILLAR);
@@ -40,7 +40,7 @@ public class CorailPillarModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("stonecutting/small_pillar_oak_log"))
                 .build();
         this.addEntry(SMALL_LOG_PILLAR);
@@ -52,7 +52,7 @@ public class CorailPillarModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(PLANK_PILLAR);
 
@@ -63,7 +63,7 @@ public class CorailPillarModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("pillar"), Registries.BLOCK)
                 .addTag(modRes("wooden_pillar"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("stonecutting/pillar_oak_planks"))
                 .build();
         this.addEntry(SMALL_PLANK_PILLAR);

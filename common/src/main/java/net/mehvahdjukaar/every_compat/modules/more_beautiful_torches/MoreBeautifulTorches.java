@@ -68,7 +68,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 //TEXTURES: wall_torch
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_wall_torch.blocks.get(w), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -93,7 +93,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 //TEXTURES: soul_wall_torch
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_soul_wall_torch.blocks.get(w), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -117,7 +117,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new RedstoneTorchBlock(Utils.copyPropertySafe(Blocks.REDSTONE_TORCH))
                 )
                 //TEXTURES: redstone_wall_torch
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_redstone_wall_torch.blocks.get(w), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -143,7 +143,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 //TEXTURES: planks_wall_torch
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, planks_wall_torch.blocks.get(s), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -168,7 +168,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 //TEXTURES: planks_soul_wall_torch
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, planks_soul_wall_torch.blocks.get(s), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -192,7 +192,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new RedstoneTorchBlock(Utils.copyPropertySafe(Blocks.REDSTONE_TORCH))
                 )
                 //TEXTURES: planks_redstone_wall_torch
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, planks_redstone_wall_torch.blocks.get(w), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -220,7 +220,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 //TEXTURES: stripped_wall_torch
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, stripped_wall_torch.blocks.get(s), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -247,7 +247,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 //TEXTURES: stripped_soul_wall_torch
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, stripped_soul_wall_torch.blocks.get(s), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -273,7 +273,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 //TEXTURES: stripped_redstone_wall_torch
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, stripped_redstone_wall_torch.blocks.get(w), p, Direction.DOWN))
                 .setRenderType(RenderLayer.CUTOUT)

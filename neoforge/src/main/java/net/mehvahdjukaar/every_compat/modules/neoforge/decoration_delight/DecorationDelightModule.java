@@ -39,7 +39,7 @@ public class DecorationDelightModule extends EveryCompatModule {
                 .addTextureM(EveryCompat.res("block/ddr/lighter_oak_counter"),
                         EveryCompat.res("block/ddr/lighter_oak_counter_m"))
                 .addTexture(EveryCompat.res("block/ddr/oak_planks"))
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("oak_counter_recipe"))
                 .addRecipe(modRes("oak_counter_recipe_2"))
                 .build();
@@ -58,7 +58,7 @@ public class DecorationDelightModule extends EveryCompatModule {
                 .addTextureM(EveryCompat.res("block/ddr/lighter_oak_counter_corner"),
                         EveryCompat.res("block/ddr/lighter_oak_counter_corner_m"))
                 .addTexture(EveryCompat.res("block/ddr/oak_planks"))
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("oak_counter_corner_recipe"))
                 .build();
         this.addEntry(COUNTER_CORNER);
@@ -74,7 +74,7 @@ public class DecorationDelightModule extends EveryCompatModule {
                 )
                 .addTexture(EveryCompat.res("block/ddr/lighter_oak_counter_bend"))
                 .addTexture(EveryCompat.res("block/ddr/oak_planks"))
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("oak_counter_bend_recipe"))
                 .build();
         this.addEntry(COUNTER_BEND);
@@ -88,7 +88,7 @@ public class DecorationDelightModule extends EveryCompatModule {
                         .replaceString("lighter_oak_countertop", "ddr/lighter_oak_countertop")
                 )
                 .addTexture(EveryCompat.res("block/ddr/lighter_oak_countertop"))
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("oak_countertop_recipe"))
                 .build();
         this.addEntry(COUNTER_TOP);
@@ -106,7 +106,7 @@ public class DecorationDelightModule extends EveryCompatModule {
                 .addTexture(EveryCompat.res("block/ddr/new_oak_stool"))
                 .addTexture(EveryCompat.res("block/ddr/oak_planks"))
                 .addTexture(EveryCompat.res("block/ddr/new_oak_stoolrealreal"))
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("oak_stool_recipe"))
                 .build();
         this.addEntry(STOOL);
@@ -120,7 +120,7 @@ public class DecorationDelightModule extends EveryCompatModule {
                         .replaceString("oakmosaic", "ddr/oak_mosaic")
                 )
                 .addTexture(EveryCompat.res("block/ddr/oak_mosaic"))
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("oak_mosaic_recipe"))
                 .build();
         this.addEntry(MOSAIC);

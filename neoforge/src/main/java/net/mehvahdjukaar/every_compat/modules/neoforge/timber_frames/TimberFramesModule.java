@@ -70,7 +70,7 @@ public class TimberFramesModule extends EveryCompatModule {
                         EveryCompat.res("block/tf/oak_timber_frame_x_m"))
                 .addTag(modRes("timber_frame"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("oak_timber_frame"))
                 .build();
         this.addEntry(frame_alpha);

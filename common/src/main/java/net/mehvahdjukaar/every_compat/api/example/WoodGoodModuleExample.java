@@ -84,7 +84,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             // https://github.com/MehVahdJukaar/WoodGood/blob/79396eae711cee032635b52d957ddfe9eaa0121b/common/src/main/java/net/mehvahdjukaar/every_compat/misc/UtilityTag.java#L194
 
                     ///REQUIRED: Add block to your mod's tab or Minecraft's tab
-                    .setTabKey(yourModTab)
+                    .setTab(yourModTab)
 
                     ///OPTIONAL: Creating recipes for the block
                     .defaultRecipe() // default: new ResourceLocation("twigs:oak_table") via recipes folder
@@ -108,7 +108,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
                     )
                     .addTexture(modRes("item/itemTexture"))
                     .addTag(modRes("tables"), Registries.ITEM)
-                    .setTab(getModTab(tab))
+                    .setTab(getTab(tab))
                     .defaultRecipe()
                     .addRecipe(modRes("path/to/recipeFile"))
                     .build();

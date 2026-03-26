@@ -60,7 +60,7 @@ public class FunctionalStorageModule extends EveryCompatModule {
                 .addTag(UtilityTag.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
                 .addTag(modRes("drawer_1x1"), Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
                 .build();
@@ -79,7 +79,7 @@ public class FunctionalStorageModule extends EveryCompatModule {
                 .addTag(UtilityTag.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
                 .addTag(modRes("drawer_1x2"), Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
                 .build();
@@ -98,7 +98,7 @@ public class FunctionalStorageModule extends EveryCompatModule {
                 .addTag(UtilityTag.neoforgeTag("relocation_not_supported"), Registries.BLOCK)
                 .addTag(modRes("drawer"), Registries.ITEM)
                 .addTag(modRes("drawer_2x2"), Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
                 .build();

@@ -66,7 +66,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTile(() -> BlockEntityType.BARREL)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(barrel);
 
@@ -84,7 +84,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTile(() -> BlockEntityType.BEEHIVE)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(beehive);
 
@@ -99,7 +99,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTextureM(modRes("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(bookshelves);
 
@@ -115,7 +115,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTextureM(modRes("block/oak_cartography_table_top"), EveryCompat.res("block/vanilla_cartography_table_top_m"))
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(cartography);
 
@@ -134,7 +134,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("chests"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
@@ -151,7 +151,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -168,7 +168,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_composter_top"))
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(composters);
 
@@ -186,7 +186,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(craftingTable);
 
@@ -202,7 +202,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTextureM(modRes("block/oak_fletching_table_top"), EveryCompat.res("block/vanilla_fletching_table_top_m"))
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(fletchingTable);
 
@@ -216,7 +216,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_grindstone_pivot"))
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(grindstones);
 
@@ -235,7 +235,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTile(() -> BlockEntityType.LECTERN)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(lectern);
 
@@ -251,7 +251,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTextureM(modRes("block/oak_smithing_table_side"), EveryCompat.res("block/vanilla_smithing_table_side_m"))
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(smithingTable);
 
@@ -270,7 +270,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTile(() -> BlockEntityType.SMOKER)
                 .copyParentDrop()
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(smoker);
 

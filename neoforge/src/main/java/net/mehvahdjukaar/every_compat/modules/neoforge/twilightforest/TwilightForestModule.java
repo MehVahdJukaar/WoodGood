@@ -48,7 +48,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 .addTag(modRes("banisters"), Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(banisters);
 
@@ -74,7 +74,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 //TEXTURES: stripped_log
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .noItem()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log"))
                 .build();
         this.addEntry(hollowLogsVertical);

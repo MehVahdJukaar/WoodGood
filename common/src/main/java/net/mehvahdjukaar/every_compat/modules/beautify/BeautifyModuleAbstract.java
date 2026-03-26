@@ -21,6 +21,8 @@ public abstract class BeautifyModuleAbstract extends EveryCompatModule {
     public BeautifyModuleAbstract(String modId) {
         super(modId, "bd");
 
+        var tab = getTab(getTabKey());
+
         tellis = SimpleEntrySet.builder(WoodType.class, "trellis",
                         getModBlock("oak_trellis"), () -> VanillaWoodTypes.OAK,
                         this::newTrellis
@@ -28,7 +30,7 @@ public abstract class BeautifyModuleAbstract extends EveryCompatModule {
                 //TEXTURES: logs
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .setTabKey(getTabKey())
+                .setTab(tab)
                 .defaultRecipe()
                 //REASON: take a look at their //TEXTURES, you'll see why.
                 .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
@@ -43,7 +45,7 @@ public abstract class BeautifyModuleAbstract extends EveryCompatModule {
                 .requiresChildren(SLAB) //REASON: recipes
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(getTabKey())
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(blinds);
@@ -54,7 +56,7 @@ public abstract class BeautifyModuleAbstract extends EveryCompatModule {
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTexture(modRes("block/oak_frame_texture"))
-                .setTabKey(getTabKey())
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(picture_frames);

@@ -34,7 +34,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
                 .addTag(modRes("sanded_wood"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/sanded_wood/oak"))
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(sanded_wood);
 
@@ -45,7 +45,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
                 .addTag(modRes("parquet"), Registries.BLOCK,  Registries.ITEM)
                 .addTexture(modRes("block/parquet/oak"))
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(parquet);
 
@@ -57,7 +57,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
                 .addTexture(modRes("block/trim/oak"))
                 .defaultRecipe()
                 .addRecipe(modRes("oak_trim_from_oak_vertical_trim"))
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(trim);
 
@@ -68,7 +68,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
                 .addTag(modRes("trims"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/trim/oak"))
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(vertical_trim);
 
@@ -81,7 +81,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
                 .addTexture(modRes("block/lattice/oak"))
                 .addTexture(modRes("block/lattice/oak_bar"))
                 .defaultRecipe()
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .build();
         this.addEntry(lattice);
     }

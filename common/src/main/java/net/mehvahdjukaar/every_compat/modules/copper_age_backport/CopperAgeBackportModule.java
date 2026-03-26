@@ -65,7 +65,7 @@ public class CopperAgeBackportModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.withDefaultNamespace("wooden_shelves"), Registries.BLOCK)
                 .addTag(modRes("wooden_shelves"), Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .addRecipe(ResourceLocation.withDefaultNamespace("oak_shelf"))
                 .build();
         this.addEntry(shelf);

@@ -50,7 +50,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(vertical_stairs);
@@ -62,7 +62,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTexture(modRes("block/oak_mosaic"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaics);
@@ -76,7 +76,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaic_stairs);
@@ -89,7 +89,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaic_slabs);
@@ -102,7 +102,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(mosaic_vertical_stairs);
@@ -115,7 +115,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTexture(modRes("block/chiseled_oak_planks_side"))
                 .addTexture(modRes("block/chiseled_oak_planks_top"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(chiseled_planks);
@@ -133,7 +133,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTextureM(modRes("block/oak_decorative_shelf5"), EveryCompat.res("block/eb/oak_decorative_shelf5_m"))
                 .addTextureM(modRes("block/oak_decorative_shelf6"), EveryCompat.res("block/eb/oak_decorative_shelf6_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(decorative_shelves);
@@ -150,7 +150,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/eb/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/eb/spruce_crafting_table_top_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(crafting_tables);
@@ -163,7 +163,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTextureM(modRes("block/spruce_bookshelf"), EveryCompat.res("block/eb/spruce_bookshelf_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(bookshelves);
@@ -179,7 +179,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
-                .setTab(getModTab(tab))
+                .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
         this.addEntry(ladders);
