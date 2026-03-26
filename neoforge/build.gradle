@@ -147,7 +147,7 @@ dependencies {
 //    modRuntimeOnly("com.teamresourceful.resourcefullib:resourcefullib-neoforge-1.21:$resourcefullib_version") // Chipped, Handcrafted, Cozy, Friends&Foes
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
-    modCompileOnly("curse.maven:framework-549225:6531439") // v0.9.6 | Refurbished-Furniture, +Mighty-Mail, Backpacked
+    modCompileOnly("curse.maven:framework-549225:7530361") // v0.13.11 | Refurbished-Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:titanium-287342:6875285") // v4.0.40 | Functional-Storage
     modCompileOnly("curse.maven:blueprint-382216:6965808") // v8.0.6 | The-Outer-End, Woodworks, Boatload, Upgrade-Aquatic
     modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // v1.1.5 | Valhelsia Structure, Valhelsia Furniture
