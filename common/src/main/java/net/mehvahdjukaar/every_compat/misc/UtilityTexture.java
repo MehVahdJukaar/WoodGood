@@ -1,12 +1,12 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import com.mojang.blaze3d.platform.NativeImage;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureCollager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -87,7 +87,7 @@ public class UtilityTexture {
     }
 
     /// Apply log's texture over the baseTexture's log parts & swap out the planks' part
-    public static void applyLogAndswapPlanksTexture(ResourceLocation baseTextureLoc,
+    public static void applyLogOverlayAndswapPlanks(ResourceLocation baseTextureLoc,
                                                     ResourceLocation logMaskLoc, ResourceLocation planksMaskLoc,
                                                     String shortenedId, String oldTypeName,
                                                     ResourceSink sink, ResourceManager manager) {
@@ -112,18 +112,15 @@ public class UtilityTexture {
                     int width = logTexture.imageWidth();
 
                     if (!(height == 16) && Objects.nonNull(logTexture.getMcMeta())) { // Shrink the texture to a 16x16
-                        NativeImage standardSize = new NativeImage(16, 16, false);
-                        standardSize.copyFrom(logTexture.getImage());
-                        currentLogTexture = TextureImage.of(standardSize);
+                        currentLogTexture = shrinkTextureTo16(logTexture);
                         height = currentLogTexture.imageHeight();
+                        if (!(width == 16) || !(height == 16)) {
+                            EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), logTexture.imageWidth(), logTexture.imageHeight(), baseTextureLoc.getPath());
+                            sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
+                            return;
+                        }
                     }
                     else currentLogTexture = logTexture;
-
-                    if (!(width == 16) || !(height == 16)) {
-                        EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), width, height, baseTextureLoc.getPath());
-                        sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
-                        return;
-                    }
 
                     var planksPalette = PaletteStrategies.PLANKS_REMOVE_DARKEST.getPaletteAndAnimation(woodType, manager);
 
@@ -148,10 +145,10 @@ public class UtilityTexture {
     }
 
     /// Apply log's texture over the baseTexture's log parts
-    public static void applyLogAndGenerateTexture(ResourceLocation baseTextureLoc,
-                                                  ResourceLocation maskLoc,
-                                                  String shortenedId, String oldTypeName,
-                                                  ResourceSink sink, ResourceManager manager) {
+    public static void applyLogOverlay(ResourceLocation baseTextureLoc,
+                                       ResourceLocation maskLoc,
+                                       String shortenedId, String oldTypeName,
+                                       ResourceSink sink, ResourceManager manager) {
         try (
                 TextureImage baseTexture = TextureImage.open(manager, baseTextureLoc);
                 TextureImage mask = TextureImage.open(manager, maskLoc)
@@ -173,19 +170,16 @@ public class UtilityTexture {
 
                     // Shrink the texture to a 16x16
                     if (!(height == 16) && Objects.nonNull(logTexture.getMcMeta())) {
-                        NativeImage standardSize = new NativeImage(16, 16, false);
-                        standardSize.copyFrom(logTexture.getImage());
-                        currentLogOverlay = TextureImage.of(standardSize);
+                        currentLogOverlay = shrinkTextureTo16(logTexture);
                         height = currentLogOverlay.imageHeight();
+
+                        if (!(width == 16) || !(height == 16)) {
+                            EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), logTexture.imageWidth(), logTexture.imageHeight(), baseTextureLoc.getPath());
+                            sink.addTextureIfNotPresent(manager, newResLoc, baseTexture::makeCopy);
+                            return;
+                        }
                     }
                     else currentLogOverlay = logTexture.makeCopy();
-
-                    if (!(width == 16) || !(height == 16)) {
-                        EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), width, height, baseTextureLoc.getPath());
-                        sink.addTextureIfNotPresent(manager, newResLoc, baseTexture::makeCopy);
-                        return;
-                    }
-
 
                     // Adding to the resource
                     sink.addTextureIfNotPresent(manager, newResLoc, () -> {
@@ -203,6 +197,25 @@ public class UtilityTexture {
         } catch (Exception e) {
             EveryCompat.LOGGER.error("Failed to generate texture with logOverlay: ", e);
         }
+    }
+
+    /// Shrink an animated texture to 16x16
+    public static TextureImage shrinkTextureTo16(TextureImage texture) {
+        return shrinkTextureTo(16, 16, texture);
+    }
+
+    /// Shrink an animated texture to width x height
+    public static TextureImage shrinkTextureTo(int widthSize, int heightSize, TextureImage texture) {
+
+        TextureImage image = TextureImage.createNew(widthSize, heightSize);
+        TextureCollager transformer = TextureCollager.builder(
+                texture.frameWidth(), texture.frameHeight(),
+                image.frameWidth(), image.frameHeight()).copyFrom(0, 0,
+                texture.frameWidth(), texture.frameHeight()).to(0, 0,
+                image.frameWidth(), image.frameHeight()
+        ).build();
+        transformer.apply(texture, image);
+        return image;
     }
 
 }

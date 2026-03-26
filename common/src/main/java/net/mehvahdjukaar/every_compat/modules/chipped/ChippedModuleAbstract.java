@@ -16,7 +16,7 @@ import net.minecraft.world.item.Item;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-//SUPPORT: v4.0.2+
+///SUPPORT: v4.0.2+
 public class ChippedModuleAbstract extends EveryCompatModule {
 
     public static String tabPath = "main";
