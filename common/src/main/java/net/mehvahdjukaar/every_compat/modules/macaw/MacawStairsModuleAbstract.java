@@ -39,8 +39,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("terrace_stairs"), Registries.BLOCK)
-                .setTab(getModTab(setTab(getModTab(tabKey))
-
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.
@@ -57,8 +56,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("skyline_stairs"), Registries.BLOCK)
-                .setTab(getModTab(setTab(getModTab(tabKey))
-
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.
@@ -75,8 +73,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("compact_stairs"), Registries.BLOCK)
-                .setTab(getModTab(setTab(getModTab(tabKey))
-
+                .setTab(getModTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 //REASON: take a look at their textures, you'll see why.

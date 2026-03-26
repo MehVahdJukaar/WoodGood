@@ -5,9 +5,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
@@ -143,7 +141,7 @@ public abstract class EveryCompat {
 
         forAllModules(m -> {
             if (m instanceof SimpleModule sm) {
-                for (EntrySet e : sm.getEntries()) {
+                for (EntrySet<?> e : sm.getEntries()) {
                     //verify tabs existence and crash early if they aren't there
                     if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) {
                         ae.getTab().unwrapKey().orElseThrow();
